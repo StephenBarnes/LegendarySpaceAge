@@ -1,0 +1,3 @@
+-- Biochemistry mod: change biofuel tech to require fish breeding and tree seeding. And fish comes after Gleba science, doesn't need tree seeding.
+--data.raw.technology["biofuel"].prerequisites = {"fish-breeding", "tree-seeding"}
+--data.raw.technology["fish-breeding"].prerequisites = {"agricultural-science-pack"}

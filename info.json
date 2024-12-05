@@ -14,7 +14,6 @@
 
 		, "cargo-pod-requires-research"
 
-		, "biochemistry"
 		, "behemoth-enemies"
 		, "large-storage-tank"
 
@@ -30,6 +29,8 @@
 		, "? factoryplanner"
 		, "? captains-log"
 		, "? recycling-factoriopedia"
+
+		, "! biochemistry"
 	],
 	"description": "Modpack for a longer, harder Space Age"
 }
