@@ -1,0 +1,35 @@
+{
+	"name": "LegendarySpaceAge",
+	"version": "1.0.0",
+	"title": "Legendary Space Age",
+	"author": "StephenB",
+	"factorio_version": "2.0",
+	"dependencies":
+		[ "base >= 2.0"
+		, "space-age"
+		, "quality"
+		, "elevated-rails"
+
+		, "Electric_flying_enemies"
+
+		, "cargo-pod-requires-research"
+
+		, "biochemistry"
+		, "behemoth-enemies"
+		, "large-storage-tank"
+
+		, "Rocs-Rusting-Iron"
+		, "? simpleadjustableinserters"
+
+		, "thruster-control-behavior"
+		, "PowerMultiplier"
+		, "CarLogistics"
+		, "spoiling-promethium"
+		, "NoLavaInPipes"
+
+		, "? factoryplanner"
+		, "? captains-log"
+		, "? recycling-factoriopedia"
+	],
+	"description": "Modpack for a longer, harder Space Age"
+}
