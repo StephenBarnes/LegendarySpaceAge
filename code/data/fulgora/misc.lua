@@ -1,3 +1,5 @@
+local Recipe = require("code.util.recipe")
+
 -- Change scrap recycling outputs.
 data.raw["recipe"]["scrap-recycling"].results = {
 	{ type = "item", name = "processing-unit",       amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
@@ -27,6 +29,9 @@ data.raw["recipe"]["scrap-recycling"].results = {
 	{ type = "item", name = "plastic-bar",          amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
 		-- Added.
 }
+
+-- For superconductors, require heavy oil instead of light oil, since water for cracking is scarce.
+Recipe.substituteIngredient("superconductor", "light-oil", "heavy-oil")
 
 -- TODO increase power consumption of EM plants dramatically.
 

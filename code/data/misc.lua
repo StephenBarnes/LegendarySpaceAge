@@ -1,3 +1,5 @@
+local Tech = require("code.util.tech")
+
 -- Nerf heating towers' efficiency, and reduce energy consumption.
 data.raw.reactor["heating-tower"].energy_source.effectivity = 1 -- 2.5 to 1
 data.raw.reactor["heating-tower"].consumption = "8MW"
@@ -16,3 +18,7 @@ data.raw.recipe["space-platform-foundation"].ingredients = {
 
 -- Remove the quality tooltip icon.
 data.raw.sprite["quality_info"].filename = "__LegendarySpaceAge__/graphics/misc/empty-quality-icon.png"
+
+-- Add electric energy distribution as prereq to Fulgora and Vulcanus, since you can't get wood for wooden poles there, and now you can't even research electric energy distribution there since you can't build labs.
+Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-fulgora")
+Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-vulcanus")

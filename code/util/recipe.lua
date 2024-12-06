@@ -16,20 +16,17 @@ Recipe.removeIngredient = function(recipeName, ingredientName)
 		)
 end
 
-Recipe.substituteIngredient = function(recipeName, ingredientName, newIngredientName)
+Recipe.substituteIngredient = function(recipeName, ingredientName, newIngredientName, newAmount)
 	for _, ingredient in pairs(data.raw.recipe[recipeName].ingredients) do
-		if ingredient.name ~= nil then
-			if ingredientName == ingredient.name then
-				ingredient.name = newIngredientName
-				return
+		if ingredientName == ingredient.name then
+			ingredient.name = newIngredientName
+			if newAmount ~= nil then
+				ingredient.amount = newAmount
 			end
-		elseif ingredient[1] ~= nil then
-			if ingredientName == ingredient[1] then
-				ingredient[1] = newIngredientName
-				return
-			end
+			return
 		end
 	end
+	log("Warning: ingredient not found: "..ingredientName.." in recipe "..recipeName)
 end
 
 Recipe.setIngredientFields = function(recipeName, ingredientName, fieldChanges)

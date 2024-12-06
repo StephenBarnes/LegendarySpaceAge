@@ -23,6 +23,15 @@ Tech.addRecipeToTech = function(recipeName, techName, index)
 	end
 end
 
+Tech.addSciencePack = function(techName, sciencePackName)
+	local tech = data.raw.technology[techName]
+	if tech == nil then
+		log("ERROR: Couldn't find tech "..techName.." to add science pack "..sciencePackName.." to.")
+		return
+	end
+	table.insert(tech.unit.ingredients, {sciencePackName, 1})
+end
+
 Tech.hideTech = function(techName)
 	local tech = data.raw.technology[techName]
 	if tech == nil then

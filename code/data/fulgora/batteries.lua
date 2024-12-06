@@ -4,9 +4,12 @@ local Table = require("code.util.table")
 
 -- Some code and graphics are copied from the Battery Powered mod by harag.
 
--- I'm using 1 charger and 1 discharger building. Charger runs at 5MW, discharger produces 5MW.
--- I'm making 2 types of batteries: normal battery is 10MJ and holmium battery is 200MJ.
--- Crafting speed of charger/discharger are 1. So charging the batteries needs to take 2 and 40 seconds respectively.
+-- I'm using 1 charger and 1 discharger building. Both run at 1MW.
+-- I'm making 2 types of batteries: normal battery is 2MJ and holmium battery is 20MJ.
+-- Crafting speed of charger/discharger are 1. So charging the batteries needs to take 2 and 20 seconds respectively.
+-- Compare to vanilla accumulators, which hold 5MJ and have max input/output of 300kW.
+-- So compared to accumulators, you need fewer chargers/dischargers, but a much more complex setup to load batteries into chargers/dischargers and return used ones, etc.
+
 
 -- Create recipe category for charging, fuel category for batteries.
 data:extend({
@@ -19,7 +22,7 @@ data:extend({
 local batteryItem = data.raw.item["battery"]
 batteryItem.icon = "__LegendarySpaceAge__/graphics/batteries/battery_short.png"
 batteryItem.stack_size = 200 -- Vanilla is 200. This carries through to other cloned batteries.
-batteryItem.weight = 1250 -- Vanilla is 2500 (so 400 per rocket). Increasing to 1.25 so 800 per rocket.
+batteryItem.weight = 1000 -- Vanilla is 2500 (so 400 per rocket). Setting to 1000, so 1000 per rocket.
 local chargedBatteryItem = table.deepcopy(batteryItem)
 chargedBatteryItem.name = "charged-battery"
 chargedBatteryItem.icon = "__LegendarySpaceAge__/graphics/batteries/battery_short_charged.png"
@@ -27,32 +30,31 @@ chargedBatteryItem.order = batteryItem.order .. '-2'
 chargedBatteryItem.burnt_result = "battery"
 chargedBatteryItem.fuel_category = "battery"
 chargedBatteryItem.fuel_emissions_multiplier = 0
-chargedBatteryItem.fuel_value = "10MJ"
+chargedBatteryItem.fuel_value = "2MJ"
 	-- Quick google says a real-life car battery is 4.3MJ.
-	-- So per stack of 200, it's 2GJ, and per rocket of 800, it's 8GJ.
-	-- Compared to 8GJ nuclear fuel, per stack of 50 is 400GJ and per rocket of 10 is 80GJ.
-	-- Compared to 12MJ solid fuel, per stack of 50 is 600MJ and per rocket of 1000 is 12GJ.
-chargedBatteryItem.spoil_ticks = 60 * 60 * 30
+	-- So per stack of 100, it's 200MJ, and per rocket of 1000, it's 2GJ.
+	-- Compared to 8GJ in one nuclear fuel, per stack of 50 is 400GJ and per rocket of 10 is 80GJ.
+	-- Compared to 12MJ solid fuel, per stack of 50 is 600MJ and per rocket of 1000 is 12GJ. Makes sense that solid fuel would be more per mass, I think.
+	-- Seems that in real life, lithium-ion batteries are ~1GJ/ton while solid fuels are ~50GJ/ton.
+chargedBatteryItem.spoil_ticks = 60 * 60 * 20
 chargedBatteryItem.spoil_result = "battery"
 local holmiumBatteryItem = table.deepcopy(batteryItem)
 holmiumBatteryItem.name = "holmium-battery"
 holmiumBatteryItem.icon = "__LegendarySpaceAge__/graphics/batteries/holmium_battery_short.png"
 holmiumBatteryItem.order = batteryItem.order .. '-3'
-holmiumBatteryItem.weight = 2500 -- So 400 per rocket, twice the weight of a normal battery.
+holmiumBatteryItem.weight = 1000 -- So 1000 per rocket, same as the weight of a normal battery.
 local chargedHolmiumBatteryItem = table.deepcopy(batteryItem)
 chargedHolmiumBatteryItem.name = "charged-holmium-battery"
 chargedHolmiumBatteryItem.icon = "__LegendarySpaceAge__/graphics/batteries/holmium_battery_short_charged.png"
 chargedHolmiumBatteryItem.order = batteryItem.order .. '-4'
-chargedHolmiumBatteryItem.weight = 2500
+chargedHolmiumBatteryItem.weight = 1000
 chargedHolmiumBatteryItem.burnt_result = "holmium-battery"
 chargedHolmiumBatteryItem.fuel_category = "battery"
 chargedHolmiumBatteryItem.fuel_emissions_multiplier = 0
---chargedHolmiumBatteryItem.spoil_ticks = 60 * 60 * 120
---chargedHolmiumBatteryItem.spoil_result = "holmium-battery"
-chargedHolmiumBatteryItem.fuel_value = "200MJ"
-	-- So 20x as much as a normal battery.
-	-- Per stack of 200, it's 40GJ, and per rocket of 200, it's 80GJ. Equivalent to nuclear fuel.
--- TODO check recycling recipe for charged batteries, maybe modify.
+chargedHolmiumBatteryItem.fuel_value = "20MJ"
+	-- So 10x as much as a normal battery.
+	-- Per stack of 200, it's 4GJ, and per rocket of 1000, it's 20GJ.
+	-- Compare to nuclear fuel which is 80GJ/rocket. But I'm going to reduce the weight of that since nuclear is late-game now.
 data:extend({chargedBatteryItem, holmiumBatteryItem, chargedHolmiumBatteryItem})
 
 -- Create recipe for holmium batteries.
@@ -70,7 +72,6 @@ holmiumBatteryRecipe.ingredients = {
 }
 --holmiumBatteryRecipe.surface_conditions = { { property = "magnetic-field", min = 99, max = 99 } }
 holmiumBatteryRecipe.category = "electromagnetics"
--- TODO check recycling recipe
 data:extend({holmiumBatteryRecipe})
 
 -- Create new tech for holmium battery. It gets unlocked after you've gotten science packs from both Fulgora and Vulcanus.
@@ -100,16 +101,22 @@ holmiumBatteryTech.icons = {
 	},
 }
 data:extend({holmiumBatteryTech})
+Tech.addSciencePack("holmium-battery", "metallurgic-science-pack")
 
 -- Change techs and recipes (advanced roboport, personal batteries, maybe more) to require holmium batteries.
 Tech.replacePrereq("battery-mk3-equipment", "electromagnetic-science-pack", "holmium-battery")
+Tech.addSciencePack("battery-mk3-equipment", "metallurgic-science-pack")
 Recipe.substituteIngredient("battery-mk3-equipment", "supercapacitor", "holmium-battery")
 Tech.replacePrereq("mech-armor", "electromagnetic-science-pack", "holmium-battery")
+Tech.addSciencePack("mech-armor", "metallurgic-science-pack")
 Tech.addTechDependency("metallurgic-science-pack", "mech-armor")
 Recipe.substituteIngredient("mech-armor", "supercapacitor", "holmium-battery")
 Recipe.substituteIngredient("mech-armor", "holmium-plate", "tungsten-plate")
 Tech.replacePrereq("personal-roboport-mk2-equipment", "electromagnetic-science-pack", "holmium-battery")
-Recipe.substituteIngredient("personal-roboport-mk2-equipment", "supercapacitor", "holmium-battery")
+Tech.addSciencePack("personal-roboport-mk2-equipment", "metallurgic-science-pack")
+Recipe.addIngredients("personal-roboport-mk2-equipment", {
+	{ type = "item", name = "holmium-battery", amount = 4 },
+})
 -- TODO more?
 
 
@@ -120,23 +127,25 @@ data:extend({
 		name = "battery-charger",
 		icon = "__LegendarySpaceAge__/graphics/batteries/from_battery_powered/icons/bp-battery-charger.png",
 		stack_size = 20,
-		subgroup = "energy",
-		order = "z-1",
+		--subgroup = "energy",
+		subgroup = "environmental-protection", -- Putting in this group so it's less crowded, and bc it feels like it fits with the lightning rods.
+		order = "a-1",
 	},
 	{
 		type = "item",
 		name = "battery-discharger",
 		icon = "__LegendarySpaceAge__/graphics/batteries/from_battery_powered/icons/bp-battery-discharger.png",
 		stack_size = 20,
-		subgroup = "energy",
-		order = "z-2",
+		--subgroup = "energy",
+		subgroup = "environmental-protection",
+		order = "a-2",
 	},
 	{
 		type = "recipe",
 		name = "battery-charger",
 		enabled = false,
 		ingredients = {
-			{ type = "item", name = "iron-plate", amount = 2 },
+			{ type = "item", name = "steel-plate", amount = 4 },
 			{ type = "item", name = "copper-cable", amount = 8 },
 			{ type = "item", name = "electronic-circuit", amount = 2 },
 		},
@@ -149,7 +158,7 @@ data:extend({
 		name = "battery-discharger",
 		enabled = false,
 		ingredients = {
-			{ type = "item", name = "iron-plate", amount = 8 },
+			{ type = "item", name = "steel-plate", amount = 8 },
 			{ type = "item", name = "copper-cable", amount = 4 },
 			{ type = "item", name = "electronic-circuit", amount = 2 },
 		},
@@ -310,7 +319,7 @@ data:extend({
 			animation = chargerAnimation,
         },
         water_reflection = table.deepcopy(accumulator.water_reflection),
-        vehicle_impact_sound = accumulator.vehicle_impact_sound,
+        impact_category = accumulator.impact_category,
         open_sound = accumulator.open_sound,
         close_sound = accumulator.close_sound,
         working_sound = {
@@ -366,7 +375,7 @@ data:extend({
 			animation = chargerAnimation,
         },
         water_reflection = table.deepcopy(accumulator.water_reflection),
-        vehicle_impact_sound = accumulator.vehicle_impact_sound,
+		impact_category = accumulator.impact_category,
         open_sound = accumulator.open_sound,
         close_sound = accumulator.close_sound,
 		working_sound = {
@@ -391,9 +400,10 @@ data:extend({
 		name = "charge-battery",
 		ingredients = { { type = "item", name = "battery", amount = 1 } },
 		results = { { type = "item", name = "charged-battery", amount = 1, probability = 0.95 } },
-		energy_required = 2, -- Charger uses 5MW, battery holds 10MJ. TODO check
+		energy_required = 2, -- Charger uses 1MW, battery holds 2MJ.
 		enabled = false,
 		category = "charging",
+		show_amount_in_title = false,
 		allowed_effects = {},
 	},
 	{
@@ -401,16 +411,55 @@ data:extend({
 		name = "charge-holmium-battery",
 		ingredients = { { type = "item", name = "holmium-battery", amount = 1 } },
 		results = { { type = "item", name = "charged-holmium-battery", amount = 1 } },
-		energy_required = 40, -- Charger uses 5MW, battery holds 200MJ. TODO check
+		energy_required = 20, -- Charger uses 1MW, battery holds 20MJ.
 		enabled = false,
 		category = "charging",
 		allowed_effects = {},
 	},
 })
-Tech.addRecipeToTech("charge-battery", "battery")
+Tech.addRecipeToTech("charge-battery", "battery", 2)
 Tech.addRecipeToTech("charge-holmium-battery", "holmium-battery")
 
--- Reduce efficiency of lightning rods.
--- TODO
+-- Remove accumulator tech from the game completely, since we're rather using batteries.
+Tech.hideTech("electric-energy-accumulators")
+Tech.removePrereq("planet-discovery-fulgora", "electric-energy-accumulators") -- Could add batteries, but it's already present indirectly through thrusters.
 
--- TODO ban efficiency modules and prod modules and quality modules, when charging batteries. Allow speed, probably.
+-- Remove accumulators from recipes.
+Recipe.hide("accumulator")
+Recipe.substituteIngredient("lightning-collector", "accumulator", "superconductor")
+Recipe.substituteIngredient("electromagnetic-science-pack", "accumulator", "charged-battery")
+Recipe.substituteIngredient("electromagnetic-science-pack", "supercapacitor", "superconductor", 4)
+
+-- Reduce efficiency of lightning rods.
+data.raw["lightning-attractor"]["lightning-rod"].efficiency = .1 -- Changing 20% to 10%.
+data.raw["lightning-attractor"]["lightning-collector"].efficiency = .3 -- Changing 40% to 30%.
+
+-- Make lightning rods and collectors quick-replaceable, by making collectors 1x1.
+data.raw["lightning-attractor"]["lightning-rod"].next_upgrade = "lightning-collector"
+data.raw["lightning-attractor"]["lightning-rod"].fast_replaceable_group = "lightning-rod"
+data.raw["lightning-attractor"]["lightning-collector"].fast_replaceable_group = "lightning-rod"
+data.raw["lightning-attractor"]["lightning-collector"].collision_box = data.raw["lightning-attractor"]["lightning-rod"].collision_box
+data.raw["lightning-attractor"]["lightning-collector"].selection_box = data.raw["lightning-attractor"]["lightning-rod"].selection_box
+data.raw["lightning-attractor"]["lightning-collector"].tile_width = 1
+data.raw["lightning-attractor"]["lightning-collector"].tile_height = 1
+-- Scale sprites so they look more natural.
+local function adjustLayers(pic, scale, shift, shiftShadow)
+	for _, layer in pairs(pic.layers) do
+		layer.scale = layer.scale * scale
+		if layer.draw_as_shadow then
+			layer.shift[1] = layer.shift[1] + shiftShadow[1]
+			layer.shift[2] = layer.shift[2] + shiftShadow[2]
+		else
+			layer.shift[1] = layer.shift[1] + shift[1]
+			layer.shift[2] = layer.shift[2] + shift[2]
+		end
+	end
+end
+local function adjustChargableGraphics(chargableGraphics, scale, shift, shiftShadow)
+	for _, key in pairs({"picture", "charge_animation", "discharge_animation"}) do
+		adjustLayers(chargableGraphics[key], scale, shift, shiftShadow)
+	end
+end
+adjustChargableGraphics(data.raw["lightning-attractor"]["lightning-collector"].chargable_graphics, .65, {0, 0.6}, {0, -0.1})
+--adjustChargableGraphics(data.raw["lightning-attractor"]["lightning-rod"].chargable_graphics, 1.2)
+-- TODO publish this as a separate mod.
