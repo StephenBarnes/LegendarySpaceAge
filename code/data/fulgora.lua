@@ -1,7 +1,105 @@
--- Create sludge fluid.
--- TODO
+local Tech = require("code.util.tech")
 
--- Create toxophage tech, recipe, item. (Mostly taken from Biochemistry mod.)
+-- Change scrap recycling outputs.
+data.raw["recipe"]["scrap-recycling"].results = {
+	{ type = "item", name = "processing-unit",       amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "advanced-circuit",      amount = 1, probability = 0.04, show_details_in_recipe_tooltip = false },
+		-- Increased 0.03 -> 0.04 for more plastic
+	{ type = "item", name = "low-density-structure", amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
+		-- Increased 0.01 -> 0.02 for more plastic
+	{ type = "item", name = "solid-fuel",            amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
+		-- Changed 0.07 -> 0.02
+	{ type = "item", name = "steel-plate",           amount = 1, probability = 0.04, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "concrete",              amount = 1, probability = 0.04, show_details_in_recipe_tooltip = false },
+		-- Reduced 0.06 -> 0.04, bc I'm adding stone bricks.
+	{ type = "item", name = "stone-brick",           amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
+		-- Added.
+	{ type = "item", name = "battery",               amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
+		-- Reduced 0.04 -> 0.02
+	--{ type = "item", name = "ice",                   amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false },
+		-- Removed this.
+	{ type = "item", name = "stone",                 amount = 1, probability = 0.04, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "holmium-ore",           amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false },
+		-- Reduced 0.01 -> 0.005, bc I'm adding holmium farming.
+	{ type = "item", name = "rocs-rusting-iron-iron-gear-wheel-rusty",       amount = 1, probability = 0.08, show_details_in_recipe_tooltip = false },
+		-- Changed to rusty variant, and reduced 0.20 -> 0.08.
+	{ type = "item", name = "rocs-rusting-iron-iron-stick-rusty",       amount = 1, probability = 0.08, show_details_in_recipe_tooltip = false },
+		-- Added.
+	{ type = "item", name = "copper-cable",          amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "plastic-bar",          amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
+		-- Added.
+}
+
+-- Create sludge fluid, and a recipe to separate it. Most of the code and sprites are taken from Fulgoran Sludge mod by Tatticky.
+data:extend({
+	{
+		type = "fluid",
+		name = "fulgoran-sludge",
+		icon = "__LegendarySpaceAge__/graphics/fulgoran-sludge.png",
+		base_color = { r = 0.24, g = 0.16, b = 0.16 },
+		flow_color = { r = 0.08, g = 0.08, b = 0.08 },
+		default_temperature = 5,
+		auto_barrel = false,
+	},
+	{
+		type = "recipe",
+		name = "fulgoran-sludge-filtration",
+		category = "chemistry",
+		icons = {
+			{
+				icon = "__LegendarySpaceAge__/graphics/fulgoran-sludge.png",
+				scale = 0.35,
+				shift = { 0, -4.8 }
+			},
+			{
+				icon = "__base__/graphics/icons/fluid/heavy-oil.png",
+				scale = 0.25,
+				shift = { -9, 7 }
+			},
+			{
+				icon = "__space-age__/graphics/icons/scrap-4.png",
+				scale = 0.25,
+				shift = { 9, 7 }
+			},
+		},
+		enabled = false,
+		energy_required = 2,
+		ingredients = {
+			{ type = "fluid", name = "fulgoran-sludge", amount = 100, fluidbox_multiplier = 10 }
+		},
+		results = {
+			{ type = "fluid", name = "heavy-oil", amount = 80 },
+			{ type = "item",  name = "stone",  amount = 1, probability = 0.04 },
+			{ type = "item",  name = "rocs-rusting-iron-iron-gear-wheel-rusty",  amount = 1, probability = 0.03 },
+			{ type = "item",  name = "rocs-rusting-iron-iron-stick-rusty",  amount = 1, probability = 0.03 },
+			--{ type = "item",  name = "steel-plate",  amount = 1, probability = 0.01 },
+			--{ type = "item",  name = "stone-brick",  amount = 1, probability = 0.01 },
+			--{ type = "item",  name = "battery",  amount = 1, probability = 0.01 },
+			{ type = "item",  name = "copper-cable",  amount = 1, probability = 0.04 },
+			{ type = "item",  name = "holmium-ore",  amount = 1, probability = 0.01 },
+			{ type = "item",  name = "plastic-bar",  amount = 1, probability = 0.01 },
+		},
+		subgroup = "fulgora-processes",
+		order = "b[holmium]-a[fulgoran-sludge-filtration]", -- Before the recipe for holmium solution.
+		allow_productivity = true,
+		maximum_productivity = 1,
+		auto_recycle = false,
+		crafting_machine_tint = {
+			primary = { r = 0.5, g = 0.4, b = 0.25, a = 1.000 },
+			secondary = { r = 0, g = 0, b = 0, a = 1.000 },
+			tertiary = { r = 0.75, g = 0.5, b = 0.5 },
+			quaternary = { r = 0.24, g = 0.16, b = 0.16 }
+		}
+	}
+})
+Tech.addRecipeToTech("fulgoran-sludge-filtration", "recycling")
+data.raw["tile"]["oil-ocean-shallow"].fluid = "fulgoran-sludge"
+data.raw["tile"]["oil-ocean-deep"].fluid = "fulgoran-sludge"
+
+-- Create toxophage tech, recipe, item. Mostly taken from Biochemistry mod by Tenebrais.
+-- Biochamber consumes 1 nutrient every 2 seconds, and 10 toxophages => 10 spoilage => 1 half-spoiled nutrient.
+-- And turning spoilage into nutrients also costs nutrients.
+-- So we need to make it fairly easy to replicate them, for the process to be nutrient-positive. And also expecting people to use efficiency modules.
 data:extend({
 	{
 		type = "technology",
@@ -45,11 +143,11 @@ data:extend({
 		allow_productivity = false,
 		ingredients = {
 			{type = "item", name = "toxophage", amount = 1},
-			--{type = "fluid", name = "sludge", amount = 5}, -- TODO
-			{type = "item", name = "scrap", amount = 1},
+			{type = "fluid", name = "fulgoran-sludge", amount = 40},
+			{type = "item", name = "plastic-bar", amount = 1},
 		},
 		results = {
-			{ type = "item", name = "toxophage", amount = 4 },
+			{ type = "item", name = "toxophage", amount = 10 },
 		},
 		crafting_machine_tint = { -- First tint is the main chamber, second tint is the small chamber on right side.
 			-- Colors from Biochemistry:
