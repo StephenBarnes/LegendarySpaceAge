@@ -28,6 +28,8 @@ data.raw["recipe"]["scrap-recycling"].results = {
 		-- Added.
 }
 
+-- TODO increase power consumption of EM plants dramatically.
+
 -- TODO in future, maybe allow mining and growing fulgorites?
 --table.insert(data.raw["simple-entity"]["fulgurite"].minable.results, { -- The ID is fulgurite with a U, but the name is fulgorite with an O.
 --table.insert(data.raw["simple-entity"]["fulgurite-small"].minable.results, {

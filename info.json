@@ -26,12 +26,14 @@
 		, "spoiling-promethium"
 		, "NoLavaInPipes"
 		, "oceandump"
+		, "no-quality"
 
 		, "? factoryplanner"
 		, "? captains-log"
 		, "? recycling-factoriopedia"
 
 		, "! biochemistry"
+		, "! battery-powered"
 	],
 	"description": "Modpack for a longer, harder Space Age"
 }

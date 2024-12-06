@@ -13,3 +13,6 @@ data.raw.recipe["space-platform-foundation"].ingredients = {
 	{ type = "item", name = "processing-unit", amount = 1 },
 		-- Effectively sulfuric acid + plastic + metals.
 }
+
+-- Remove the quality tooltip icon.
+data.raw.sprite["quality_info"].filename = "__LegendarySpaceAge__/graphics/misc/empty-quality-icon.png"
