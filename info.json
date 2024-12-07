@@ -28,12 +28,15 @@
 		, "oceandump"
 		, "no-quality"
 
-		, "? factoryplanner"
-		, "? captains-log"
-		, "? recycling-factoriopedia"
-
 		, "! biochemistry"
 		, "! battery-powered"
+
+		, "! everything-below-here-should-be-optional-on-release"
+		, "factoryplanner"
+		, "captains-log"
+		, "recycling-factoriopedia"
+		, "SpidertronEnhancements"
+		, "BeltRouter-lite"
 	],
 	"description": "Modpack for a longer, harder Space Age"
 }
