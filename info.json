@@ -18,7 +18,6 @@
 		, "large-storage-tank"
 
 		, "Rocs-Rusting-Iron"
-		, "? simpleadjustableinserters"
 
 		, "thruster-control-behavior"
 		, "PowerMultiplier"
@@ -37,6 +36,7 @@
 		, "recycling-factoriopedia"
 		, "SpidertronEnhancements"
 		, "BeltRouter-lite"
+		, "simpleadjustableinserters"
 	],
 	"description": "Modpack for a longer, harder Space Age"
 }

@@ -433,3 +433,41 @@ Recipe.substituteIngredient("electromagnetic-science-pack", "supercapacitor", "s
 -- Reduce efficiency of lightning rods.
 data.raw["lightning-attractor"]["lightning-rod"].efficiency = .1 -- Changing 20% to 10%.
 data.raw["lightning-attractor"]["lightning-collector"].efficiency = .3 -- Changing 40% to 30%.
+
+-- Since sulfuric acid is needed to make holmium solution now, and there's no water to make sulfuric acid, I also need to make sulfuric acid available somehow. So add recipe to extract it from batteries.
+data:extend({
+	{
+		type = "recipe",
+		name = "extract-sulfuric-acid-from-battery",
+		category = "chemistry-or-cryogenics",
+		icons = {
+			{
+				icon = "__LegendarySpaceAge__/graphics/batteries/battery_short.png",
+				scale = 0.45,
+				shift = { 4, 4 },
+			},
+			{
+				icon = "__base__/graphics/icons/battery.png",
+				scale = 0.35,
+				shift = { -6, -6 }
+			},
+		},
+		ingredients = {
+			{ type = "item", name = "battery", amount = 1 },
+		},
+		results = { -- Returns 25%, same as salvage, so should be fine.
+			{ type = "fluid", name = "sulfuric-acid", amount = 5 },
+			{ type = "item", name = "iron-plate", amount = 1, probability = 0.25 },
+			{ type = "item", name = "copper-plate", amount = 1, probability = 0.25 },
+		},
+		main_product = "sulfuric-acid",
+		order = data.raw.recipe["sulfuric-acid"].order .. "-b",
+		subgroup = data.raw.recipe["acid-neutralisation"].subgroup,
+		allow_as_intermediate = false,
+		allow_decomposition = false,
+		allow_productivity = false,
+		enabled = false,
+		crafting_machine_tint = data.raw.recipe["sulfuric-acid"].crafting_machine_tint,
+	},
+})
+Tech.addRecipeToTech("extract-sulfuric-acid-from-battery", "battery")

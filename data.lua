@@ -9,6 +9,6 @@ require("code.data.aquilo")
 
 require("code.data.fulgora.misc")
 require("code.data.fulgora.sludge")
-require("code.data.fulgora.toxophages")
+require("code.data.fulgora.electrophages")
 require("code.data.fulgora.enemies")
 require("code.data.fulgora.batteries")

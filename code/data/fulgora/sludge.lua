@@ -1,6 +1,11 @@
+-- Code and sprites are taken from Fulgoran Sludge mod by Tatticky.
+-- This file creates the sludge fluid and recipe to separate it.
+-- Since I'm making water scarce, heavy oil can't be cracked (that requires water). But you need light oil for rocket fuel. So I'm also making sludge filtration produce both heavy and light oil.
+-- Note I'm also adding the Ocean Dumping mod which lets you dump anything you don't want into the sea. So eg to get rid of excess heavy/light oil you can just turn it into solid fuel and dump it into the sea.
+
 local Tech = require("code.util.tech")
 
--- Create sludge fluid, and a recipe to separate it. Most of the code and sprites are taken from Fulgoran Sludge mod by Tatticky.
+-- Create sludge fluid, and a recipe to separate it.
 data:extend({
 	{
 		type = "fluid",
@@ -24,12 +29,17 @@ data:extend({
 			{
 				icon = "__base__/graphics/icons/fluid/heavy-oil.png",
 				scale = 0.25,
-				shift = { -9, 7 }
+				shift = { -9, 6 }
+			},
+			{
+				icon = "__base__/graphics/icons/fluid/light-oil.png",
+				scale = 0.25,
+				shift = { 0, 8 }
 			},
 			{
 				icon = "__space-age__/graphics/icons/scrap-4.png",
-				scale = 0.25,
-				shift = { 9, 7 }
+				scale = 0.3,
+				shift = { 9, 6 }
 			},
 		},
 		enabled = false,
@@ -38,14 +48,15 @@ data:extend({
 			{ type = "fluid", name = "fulgoran-sludge", amount = 100, fluidbox_multiplier = 10 }
 		},
 		results = {
-			{ type = "fluid", name = "heavy-oil", amount = 80 },
-			{ type = "item",  name = "stone",  amount = 1, probability = 0.04, show_details_in_recipe_tooltip = false },
-			{ type = "item",  name = "rocs-rusting-iron-iron-gear-wheel-rusty",  amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false },
-			{ type = "item",  name = "rocs-rusting-iron-iron-stick-rusty",  amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false },
+			{ type = "fluid", name = "heavy-oil", amount = 60 },
+			{ type = "fluid", name = "light-oil", amount = 20 },
+			{ type = "item",  name = "stone",  amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
+			{ type = "item",  name = "rocs-rusting-iron-iron-gear-wheel-rusty",  amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
+			{ type = "item",  name = "rocs-rusting-iron-iron-stick-rusty",  amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
 			--{ type = "item",  name = "steel-plate",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false },
 			--{ type = "item",  name = "stone-brick",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false },
 			--{ type = "item",  name = "battery",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false },
-			{ type = "item",  name = "copper-cable",  amount = 1, probability = 0.04, show_details_in_recipe_tooltip = false },
+			{ type = "item",  name = "copper-cable",  amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "holmium-ore",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "plastic-bar",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false },
 		},
