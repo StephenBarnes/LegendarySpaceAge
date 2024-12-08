@@ -405,6 +405,7 @@ data:extend({
 		category = "charging",
 		show_amount_in_title = false,
 		allowed_effects = {},
+		hidden_in_factoriopedia = true, -- Bc it's already shown in charged battery item.
 	},
 	{
 		type = "recipe",
@@ -415,6 +416,7 @@ data:extend({
 		enabled = false,
 		category = "charging",
 		allowed_effects = {},
+		hidden_in_factoriopedia = true,
 	},
 })
 Tech.addRecipeToTech("charge-battery", "battery", 2)
@@ -442,12 +444,12 @@ data:extend({
 		category = "chemistry-or-cryogenics",
 		icons = {
 			{
-				icon = "__LegendarySpaceAge__/graphics/batteries/battery_short.png",
+				icon = "__base__/graphics/icons/fluid/sulfuric-acid.png",
 				scale = 0.45,
 				shift = { 4, 4 },
 			},
 			{
-				icon = "__base__/graphics/icons/battery.png",
+				icon = "__LegendarySpaceAge__/graphics/batteries/battery_short.png",
 				scale = 0.35,
 				shift = { -6, -6 }
 			},
@@ -455,7 +457,7 @@ data:extend({
 		ingredients = {
 			{ type = "item", name = "battery", amount = 1 },
 		},
-		results = { -- Returns 25%, same as salvage, so should be fine.
+		results = { -- Returns 25%, same as recycling, so should be fine.
 			{ type = "fluid", name = "sulfuric-acid", amount = 5 },
 			{ type = "item", name = "iron-plate", amount = 1, probability = 0.25 },
 			{ type = "item", name = "copper-plate", amount = 1, probability = 0.25 },

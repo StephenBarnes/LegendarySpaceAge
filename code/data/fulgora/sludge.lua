@@ -15,6 +15,8 @@ data:extend({
 		flow_color = { r = 0.08, g = 0.08, b = 0.08 },
 		default_temperature = 5,
 		auto_barrel = false,
+		subgroup = "fluid",
+		order = "b[new-fluid]-c[fulgora]-aa[sludge]",
 	},
 	{
 		type = "recipe",
@@ -34,16 +36,16 @@ data:extend({
 			{
 				icon = "__base__/graphics/icons/fluid/light-oil.png",
 				scale = 0.25,
-				shift = { 0, 8 }
+				shift = { 9, 6 }
 			},
 			{
 				icon = "__space-age__/graphics/icons/scrap-4.png",
-				scale = 0.3,
-				shift = { 9, 6 }
+				scale = 0.2,
+				shift = { 0, 9 }
 			},
 		},
 		enabled = false,
-		energy_required = 2,
+		energy_required = 4,
 		ingredients = {
 			{ type = "fluid", name = "fulgoran-sludge", amount = 100, fluidbox_multiplier = 10 }
 		},
@@ -57,7 +59,7 @@ data:extend({
 			--{ type = "item",  name = "stone-brick",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false },
 			--{ type = "item",  name = "battery",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "copper-cable",  amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false },
-			{ type = "item",  name = "holmium-ore",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false },
+			{ type = "item",  name = "holmium-ore",  amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "plastic-bar",  amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false },
 		},
 		main_product = "heavy-oil",

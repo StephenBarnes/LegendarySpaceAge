@@ -65,7 +65,7 @@ data:extend({
 		result_is_always_fresh = true,
 		icon = "__LegendarySpaceAge__/graphics/from_biochemistry/electrophage-cultivation.png",
 		subgroup = "fulgora-processes",
-		order = "c[organics]-b[electrophage-cultivation]",
+		order = "c[organics]-c[electrophage-cultivation]",
 		allow_decomposition = false,
 	},
 	{
@@ -103,7 +103,7 @@ data:extend({
 			},
 		},
 		subgroup = "fulgora-processes",
-		order = "c[organics]-b[electrophage-cultivation]",
+		order = "c[organics]-c[electrophage-cultivation]",
 		allow_decomposition = false,
 	},
 	{
@@ -116,8 +116,8 @@ data:extend({
 			{ size = 64, filename = "__LegendarySpaceAge__/graphics/from_biochemistry/electrophage-2.png", scale = 0.5, mipmap_count = 4 },
 			{ size = 64, filename = "__LegendarySpaceAge__/graphics/from_biochemistry/electrophage-3.png", scale = 0.5, mipmap_count = 4 },
 		},
-		subgroup = "agriculture-processes",
-		order = "b[agriculture]-e[electrophage]",
+		subgroup = "fulgora-processes",
+		order = "c[organics]-b[electrophage]",
 		inventory_move_sound = data.raw.item["iron-bacteria"].inventory_move_sound,
 		pick_sound = data.raw.item["iron-bacteria"].pick_sound,
 		drop_sound = data.raw.item["iron-bacteria"].drop_sound,
@@ -138,8 +138,8 @@ local electrophageSources = {
 	[{"simple-entity", "fulgoran-ruin-huge"}] = {0, 0, .5},
 	[{"simple-entity", "fulgoran-ruin-colossal"}] = {0, 0, .8},
 	[{"simple-entity", "fulgoran-ruin-vault"}] = {2, 10, nil},
-	[{"simple-entity", "fulgurite-small"}] = {0, 0, .1},
-	[{"simple-entity", "fulgurite"}] = {0, 0, .5},
+	--[{"simple-entity", "fulgurite"}] = {0, 0, .5}, -- Rather don't produce from fulgurites - should need electrophage cultivation, not just fulgorite farming.
+	--[{"simple-entity", "fulgurite-small"}] = {0, 0, .1},
 	[{"lightning-attractor", "fulgoran-ruin-attractor"}] = {6, 12, nil},
 }
 for entTypeName, minMaxChance in pairs(electrophageSources) do
@@ -155,3 +155,4 @@ end
 -- Electrophages could spoil to spoilage or nutrients. I think to nutrients makes more sense, since there's not much other life on Fulgora to spoil the nutrients.
 -- But ideally we'd have a new type of nutrients that spoils to stone, or nothing.
 data.raw.item["electrophage"].spoil_result = "nutrients"
+-- TODO add new type of nutrients (something like "nutritive salts" or whatever) that spoils to stone.

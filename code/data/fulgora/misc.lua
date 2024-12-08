@@ -23,7 +23,8 @@ data.raw["recipe"]["scrap-recycling"].results = {
 		-- Removed this. I'm making water scarce, and adding ways to get light oil (for rocket fuel) and holmium solution without water.
 	{ type = "item", name = "stone",                 amount = 1, probability = 0.04, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "holmium-ore",           amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false },
-		-- Reduced 0.01 -> 0.005, bc I'm adding it as product of sludge filtration, and adding holmium farming. TODO
+		-- Reduced 0.01 -> 0.003, bc I'm adding it as product of sludge filtration, and adding holmium farming. Also adding fulgorite shards as product.
+	-- Rather don't produce fulgorite shards - should need to grow them to continue everything.
 	{ type = "item", name = "rocs-rusting-iron-iron-gear-wheel-rusty",       amount = 1, probability = 0.08, show_details_in_recipe_tooltip = false },
 		-- Changed to rusty variant, and reduced 0.20 -> 0.08.
 	{ type = "item", name = "rocs-rusting-iron-iron-stick-rusty",       amount = 1, probability = 0.08, show_details_in_recipe_tooltip = false },
