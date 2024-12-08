@@ -22,3 +22,7 @@ data.raw.sprite["quality_info"].filename = "__LegendarySpaceAge__/graphics/misc/
 -- Add electric energy distribution as prereq to Fulgora and Vulcanus, since you can't get wood for wooden poles there, and now you can't even research electric energy distribution there since you can't build labs.
 Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-fulgora")
 Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-vulcanus")
+
+-- TODO remove health techs.
+
+-- TODO make module recipes more complex -- maybe make tier 2 and tier 3 require stuff from separate planets!
