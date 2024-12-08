@@ -26,3 +26,5 @@ Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-vulca
 -- TODO remove health techs.
 
 -- TODO make module recipes more complex -- maybe make tier 2 and tier 3 require stuff from separate planets!
+
+-- TODO tech tree change - add nuclear science, move nuclear stuff to after first 3 planetary sciences, and then change all costs to include all science packs they're dependent on.

@@ -103,20 +103,18 @@ data:extend({labSubgroup})
 
 -- Modify recipes.
 -- Plain electric lab: 10 gears, 10 green circuits, 4 transport belts.
--- Gleba labs: changing to 25 steel plate, 10 blue circuits, 10 pentapod eggs, 25 refined concrete.
 data.raw.recipe.glebalab.ingredients = {
-	{ type = "item", name = "steel-plate", amount = 25 },
-	{ type = "item", name = "processing-unit", amount = 10 },
-	{ type = "item", name = "pentapod-egg", amount = 10 },
-	{ type = "item", name = "refined-concrete", amount = 25 },
+	{ type = "item", name = "steel-plate", amount = 10 },
+	{ type = "item", name = "processing-unit", amount = 5 },
+	{ type = "item", name = "pentapod-egg", amount = 5 },
+	{ type = "item", name = "refined-concrete", amount = 10 },
 }
--- Space biolabs: changing to 25 steel plate, 10 blue circuits, 10 nuclear fuel cell, 10 biter eggs, 25 refined concrete.
 data.raw.recipe.biolab.ingredients = {
-	{ type = "item", name = "steel-plate", amount = 25 },
+	{ type = "item", name = "steel-plate", amount = 20 },
 	{ type = "item", name = "processing-unit", amount = 10 },
-	{ type = "item", name = "uranium-fuel-cell", amount = 10 },
-	{ type = "item", name = "biter-egg", amount = 10 },
-	{ type = "item", name = "refined-concrete", amount = 25 },
+	{ type = "item", name = "uranium-fuel-cell", amount = 4 },
+	{ type = "item", name = "biter-egg", amount = 5 },
+	{ type = "item", name = "refined-concrete", amount = 20 },
 }
 
 -- Modify techs.
@@ -146,5 +144,6 @@ data:extend({
 Tech.replacePrereq("biolab", "uranium-processing", "nuclear-power")
 Tech.addTechDependency("pentapod-biolab", "biolab")
 
--- Remove extra description for Gleba biolab recipe.
+-- Remove extra description for Gleba biolab.
 data.raw.recipe.glebalab.localised_description = {"entity-description.glebalab"}
+data.raw.item.glebalab.localised_description = {"entity-description.glebalab"}
