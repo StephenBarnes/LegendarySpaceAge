@@ -162,5 +162,5 @@ polysaltItem.icon = "__LegendarySpaceAge__/graphics/polysalt.png"
 polysaltItem.subgroup = "fulgora-processes"
 polysaltItem.order = "c[organics]-b[polysalt]"
 polysaltItem.spoil_result = "stone"
-polysaltItem.spoil_ticks = 60 * 60 * 20
+polysaltItem.spoil_ticks = 60 * 60 * 60 -- 1 hour.
 data:extend({polysaltItem})

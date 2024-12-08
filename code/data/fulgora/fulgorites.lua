@@ -44,7 +44,7 @@ fulgoriteStarterItem.subgroup = "fulgora-processes"
 fulgoriteStarterItem.order = "c[organics]-d[fulgorite-starter]"
 fulgoriteStarterItem.place_result = "fulgorite-plant"
 fulgoriteStarterItem.localised_name = {"item-name.fulgorite-starter"} -- Otherwise it gets entity name.
-fulgoriteStarterItem.spoil_ticks = 60 * 60 * 20
+fulgoriteStarterItem.spoil_ticks = 60 * 60 * 30 -- 30 minutes.
 fulgoriteStarterItem.spoil_result = "stone"
 fulgoriteStarterItem.plant_result = "fulgorite-plant"
 fulgoriteStarterItem.pictures = nil -- Remove the holmium powder picture.
@@ -79,6 +79,7 @@ fulgoritePlant.variation_weights = nil
 fulgoritePlant.variations = nil
 fulgoritePlant.icon = data.raw["simple-entity"].fulgurite.icon
 data.raw["simple-entity"].fulgurite.hidden_in_factoriopedia = true -- Because we're rather adding the plant.
+data.raw["simple-entity"].fulgurite.factoriopedia_alternative = "fulgorite-plant" -- Redirect to the plant.
 --fulgoritePlant.factoriopedia_simulation = data.raw["simple-entity"].fulgurite.factoriopedia_simulation
 fulgoritePlant.factoriopedia_simulation = nil -- The simulation above looks stupid because it shows the tiny growing plant, not full-grown plant.
 fulgoritePlant.order = "a[tree]-b[fulgora]" -- Between Nauvis tree and Gleba trees.
@@ -97,7 +98,7 @@ fulgoritePlant.pictures = {
 fulgoritePlant.autoplace = table.deepcopy(data.raw["simple-entity"].fulgurite.autoplace)
 local growableFulgoraTiles = {"fulgoran-dust", "fulgoran-dunes", "fulgoran-sand", "fulgoran-rock", "fulgoran-walls", "fulgoran-paving", "fulgoran-conduit", "fulgoran-machinery"}
 fulgoritePlant.autoplace.tile_restriction = growableFulgoraTiles
-fulgoritePlant.growth_ticks = 60 * 60 * 30 -- Gleba plants are 5 minutes. Making this longer bc they can be planted anywhere.
+fulgoritePlant.growth_ticks = 60 * 60 * 20 -- Gleba plants are 5 minutes. Making this longer bc they can be planted anywhere, but not too much since yield is low.
 -- Fix mining sound and particles
 fulgoritePlant.mined_sound = nil
 fulgoritePlant.mining_sound = nil
@@ -106,6 +107,7 @@ data:extend({fulgoritePlant})
 
 -- Hide "fulgorite pieces" from Factoriopedia to not confuse people.
 data.raw["simple-entity"]["fulgurite-small"].hidden_in_factoriopedia = true
+data.raw["simple-entity"]["fulgurite-small"].factoriopedia_alternative = "fulgorite-plant"
 
 -- Create recipe for making fulgorite starters from electrophages plus fulgorite shards.
 local fulgoriteStarterRecipe = table.deepcopy(data.raw.recipe["electrophage-cultivation"])
