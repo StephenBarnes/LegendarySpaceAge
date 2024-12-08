@@ -399,7 +399,7 @@ data:extend({
 		type = "recipe",
 		name = "charge-battery",
 		ingredients = { { type = "item", name = "battery", amount = 1 } },
-		results = { { type = "item", name = "charged-battery", amount = 1, probability = 0.95 } },
+		results = { { type = "item", name = "charged-battery", amount = 1, probability = 0.98 } },
 		energy_required = 2, -- Charger uses 1MW, battery holds 2MJ.
 		enabled = false,
 		category = "charging",
