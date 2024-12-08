@@ -67,10 +67,23 @@ data.raw.recipe["copper-bacteria-cultivation"].surface_conditions = nil
 data.raw.recipe["agricultural-science-pack"].ingredients = {
 	{ type = "item", name = "nutrients", amount = 4 },
 	{ type = "item", name = "pentapod-egg", amount = 1 },
-	{ type = "item", name = "iron-bacteria", amount = 1 },
+	--{ type = "item", name = "iron-bacteria", amount = 1 },
 	{ type = "item", name = "copper-bacteria", amount = 1 },
+	{ type = "item", name = "slipstack-pearl", amount = 1 },
 }
 
 -- Reduce yields of jellystem and yumako, bc right now they're absurdly high, can run 1 rocket per minute off like 2 ag towers.
 data.raw.plant["yumako-tree"].minable.results = { {type = "item", name = "yumako", amount_min = 10, amount_max = 20 } }
 data.raw.plant["jellystem"].minable.results = { {type = "item", name = "jellynut", amount_min = 10, amount_max = 20 } }
+
+-- Make stromatolites give smaller yields bc right now it's insanely high, like 400 ore from 1 cluster of stromatolites.
+data.raw["simple-entity"]["iron-stromatolite"].minable.results = {
+	{ type = "item", name = "stone", amount_min = 3, amount_max = 7}, -- Unchanged
+	{ type = "item", name = "iron-ore", amount_min = 13, amount_max = 17}, -- Unchanged
+	{ type = "item", name = "iron-bacteria", amount_min = 3, amount_max = 7}, -- Changed 23-37 to 3-7.
+}
+data.raw["simple-entity"]["copper-stromatolite"].minable.results = {
+	{ type = "item", name = "stone", amount_min = 3, amount_max = 7}, -- Unchanged
+	{ type = "item", name = "copper-ore", amount_min = 13, amount_max = 17}, -- Unchanged
+	{ type = "item", name = "copper-bacteria", amount_min = 3, amount_max = 7}, -- Changed 23-37 to 3-7.
+}
