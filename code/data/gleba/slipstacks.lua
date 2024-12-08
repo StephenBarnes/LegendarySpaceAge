@@ -20,7 +20,7 @@ data.raw.tree["slipstack"].minable.results = slipstackMinableResults
 -- Could move the tech to after Gleba science. But rather incorporating it into early game.
 
 -- Change research icon to just be a slipstack.
-data.raw.technology["slipstack-propagation"].icon = "__LegendarySpaceAge__/graphics/slipstack-tech.png"
+data.raw.technology["slipstack-propagation"].icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-tech.png"
 
 -- Allow recipe in chem plant.
 data.raw.recipe["slipstack-seed"].category = "organic-or-chemistry"
@@ -39,7 +39,7 @@ pearlItem.order = "a[organic-processing]-da[slipstack-pearl]"
 pearlItem.subgroup = "agriculture-products"
 pearlItem.spoil_ticks = 60 * 60 * 20
 pearlItem.spoil_result = "spoilage"
-pearlItem.icon = "__LegendarySpaceAge__/graphics/slipstack-pearl.png"
+pearlItem.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png"
 data:extend({pearlItem})
 
 -- Remove the water-filtering recipe. Player can collect some pearls manually from mining slipstacks (or remotely), then replicate them via farming.
@@ -78,5 +78,8 @@ Recipe.addIngredients("bioplastic", {{type = "item", name = "slipstack-pearl", a
 
 -- Add slipstack agriculture as prereq to bioflux processing, since it's now needed for plastic, plus it'll be needed for science pack.
 Tech.addTechDependency("slipstack-propagation", "bioflux-processing")
+
+-- Change slipstack nests to use edited version of the icon from Slipstack Agriculture mod, to make the pearls more visible and match the color of my pearl icon.
+data.raw.item["slipstack-seed"].icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-nest.png"
 
 -- TODO nerf stone spawns on Gleba to encourage slipstack farming? I beat Space Age on the starter patch, without importing stuff to Gleba.
