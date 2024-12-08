@@ -52,7 +52,7 @@ data:extend({
 		},
 		results = {
 			{type = "item", name = "electrophage", amount = 4},
-			{type = "item", name = "battery", amount = 1, probability = 0.95},
+			{type = "item", name = "battery", amount = 1, probability = 0.95, show_details_in_recipe_tooltip = false},
 		},
 		crafting_machine_tint = { -- First tint is the main chamber, second tint is the small chamber on right side.
 			-- Colors from Biochemistry:
@@ -84,7 +84,7 @@ data:extend({
 		},
 		results = {
 			{type = "item", name = "electrophage", amount = 40},
-			{type = "item", name = "holmium-battery", amount = 1},
+			{type = "item", name = "holmium-battery", amount = 1, show_details_in_recipe_tooltip = false},
 		},
 		crafting_machine_tint = {
 			-- Using similar colors to before, but brighter and more pink (since it uses holmium).
@@ -152,7 +152,15 @@ for entTypeName, minMaxChance in pairs(electrophageSources) do
 	})
 end
 
--- Electrophages could spoil to spoilage or nutrients. I think to nutrients makes more sense, since there's not much other life on Fulgora to spoil the nutrients.
--- But ideally we'd have a new type of nutrients that spoils to stone, or nothing.
-data.raw.item["electrophage"].spoil_result = "nutrients"
--- TODO add new type of nutrients (something like "nutritive salts" or whatever) that spoils to stone.
+-- Electrophages could spoil to nutrients, or to spoilage (which you then turn into nutrients).
+-- But doesn't really fit, bc Fulgora has no ambient decomposition bacteria, so spoilage shouldn't really exist.
+-- So, making a new type of nutrients that lasts longer than Gleba nutrients, and spoils to stone.
+data.raw.item["electrophage"].spoil_result = "polysalt"
+local polysaltItem = table.deepcopy(data.raw.item["nutrients"])
+polysaltItem.name = "polysalt"
+polysaltItem.icon = "__LegendarySpaceAge__/graphics/polysalt.png"
+polysaltItem.subgroup = "fulgora-processes"
+polysaltItem.order = "c[organics]-b[polysalt]"
+polysaltItem.spoil_result = "stone"
+polysaltItem.spoil_ticks = 60 * 60 * 20
+data:extend({polysaltItem})
