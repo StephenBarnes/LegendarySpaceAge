@@ -8,10 +8,3 @@ require("code.data.aquilo")
 
 require("code.data.gleba.misc")
 require("code.data.gleba.slipstacks")
-
-require("code.data.fulgora.misc")
-require("code.data.fulgora.sludge")
-require("code.data.fulgora.electrophages")
-require("code.data.fulgora.enemies")
-require("code.data.fulgora.batteries")
-require("code.data.fulgora.fulgorites")

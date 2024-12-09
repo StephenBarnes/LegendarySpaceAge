@@ -1,2 +1,1 @@
-require("code.data.fulgora.batteries-dff")
-require("code.data.recycling-dff")
+require("code.data.final-fixes.recycling-dff")
