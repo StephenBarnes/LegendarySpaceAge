@@ -28,6 +28,7 @@
 		, "oceandump"
 		, "no-quality"
 		, "slipstacks"
+		, "diurnal-dynamics"
 
 		, "! biochemistry"
 		, "! battery-powered"
@@ -40,5 +41,5 @@
 		, "BeltRouter-lite"
 		, "simpleadjustableinserters"
 	],
-	"description": "Modpack for a longer, harder Space Age"
+	"description": "Modpack for Space Age veterans seeking a new challenge"
 }
