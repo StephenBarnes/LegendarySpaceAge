@@ -10,7 +10,7 @@ local Tech = require("code.util.tech")
 slipstackMinableResults = {
 	{type = "item", name = "spoilage", amount = 10 },
 	{type = "item", name = "stone", amount_min = 20, amount_max = 40 },
-	{type = "item", name = "slipstack-pearl", amount_min = 2, amount_max = 6}
+	{type = "item", name = "slipstack-pearl", amount_min = 5, amount_max = 15}
 }
 data.raw.plant["slipstack-plant"].minable.results = slipstackMinableResults
 data.raw.tree["slipstack"].minable.results = slipstackMinableResults
@@ -45,7 +45,7 @@ data:extend({pearlItem})
 -- Remove the water-filtering recipe. Player can collect some pearls manually from mining slipstacks (or remotely), then replicate them via farming.
 -- I'll leave the recipe, but rename it and change ingredients.
 data.raw.recipe["slipstack-seed"].ingredients = {
-	{ type = "item", name = "slipstack-pearl", amount = 4 },
+	{ type = "item", name = "slipstack-pearl", amount = 10 },
 	{ type = "item", name = "iron-ore", amount = 4 },
 	{ type = "item", name = "nutrients", amount = 2 },
 }
@@ -55,9 +55,9 @@ data.raw.recipe["slipstack-seed"].surface_conditions = nil -- Allow anywhere. Ca
 -- Make slipstacks absorb spores.
 -- A jellystem produces 15 spores per harvest, and grows 5m. Yumako is the same. So per second it's 15/(5*60) = 0.05.
 -- They also produce -0.001/s pollution (not spores), which is weird bc there's no pollution on Gleba.
--- Hm, let's just make it the same for slipstacks but a bit less, eg -0.02/s.
+-- Hm, making it -0.01/s so 5 slipstacks cancel out 1 jellystem or yumako tree.
 --data.raw.plant["slipstack-plant"].emissions_per_second = {spores = -(data.raw.plant["jellystem"].emissions_per_second.pollution/2)}
-data.raw.plant["slipstack-plant"].emissions_per_second = {spores = -0.02}
+data.raw.plant["slipstack-plant"].emissions_per_second = {spores = -0.01}
 
 -- Make the seeds non-burnable, since they're supposed to be mostly rock and there's no risk of having too many.
 data.raw.item["slipstack-seed"].fuel_category = nil
@@ -74,7 +74,7 @@ data.raw.recipe["slipstack-seed"].auto_recycle = true
 -- Also putting it in the science packs.
 -- Could also put it in carbon fiber, or biosulfur.
 --Recipe.addIngredients("biosulfur", {{type = "item", name = "slipstack-pearl", amount = 1}})
-Recipe.addIngredients("bioplastic", {{type = "item", name = "slipstack-pearl", amount = 2}})
+Recipe.addIngredients("bioplastic", {{type = "item", name = "slipstack-pearl", amount = 1}})
 
 -- Add slipstack agriculture as prereq to bioflux processing, since it's now needed for plastic, plus it'll be needed for science pack.
 Tech.addTechDependency("slipstack-propagation", "bioflux-processing")
