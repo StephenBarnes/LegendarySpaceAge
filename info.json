@@ -7,10 +7,9 @@
 	"dependencies":
 		[ "base >= 2.0"
 		, "space-age"
-		, "quality"
-		, "elevated-rails"
 
 		, "FulgoraLives"
+
 		, "Electric_flying_enemies"
 		, "gleba-lab"
 
@@ -30,9 +29,6 @@
 		, "no-quality"
 		, "slipstacks"
 		, "diurnal-dynamics"
-
-		, "! biochemistry"
-		, "! battery-powered"
 
 		, "! everything-below-here-should-be-optional-on-release"
 		, "factoryplanner"
