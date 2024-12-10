@@ -73,5 +73,18 @@ Recipe.hide = function(recipeName)
 	end
 end
 
+Recipe.copyIngredients = function(fromRecipeName, toRecipeName)
+	local fromRecipe = data.raw.recipe[fromRecipeName]
+	if fromRecipe == nil then
+		log("ERROR: Couldn't find recipe "..fromRecipeName.." to copy ingredients from.")
+		return
+	end
+	local toRecipe = data.raw.recipe[toRecipeName]
+	if toRecipe == nil then
+		log("ERROR: Couldn't find recipe "..toRecipeName.." to copy ingredients to.")
+		return
+	end
+	toRecipe.ingredients = table.deepcopy(fromRecipe.ingredients)
+end
 
 return Recipe

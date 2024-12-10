@@ -24,3 +24,7 @@ u.setDefaultOrForce("data-dd-dusk", "double", 0.25)
 u.setDefaultOrForce("data-dd-evening", "double", 0.35) -- Adjusted to be earlier, 0.45->0.35, for longer night.
 u.setDefaultOrForce("data-dd-morning", "double", 0.65) -- Adjusted to be later, 0.55->0.65, for longer night.
 u.setDefaultOrForce("data-dd-dawn", "double", 0.75)
+
+-- For Power Overload
+-- TODO set pole maxes
+-- TODO set transformer efficiency to 98% and hide it.

@@ -142,4 +142,69 @@ Tech.getRecursivePrereqs = function(rootTechId)
 	return foundPrereqs
 end
 
+Tech.reorderRecipeUnlocks = function(techId, recipeIds)
+	-- Reorders the recipe unlocks for a tech. Assumes all effects are recipes.
+	local tech = data.raw.technology[techId]
+	if tech == nil then
+		log("ERROR: Couldn't find tech "..techId.." to reorder recipe unlocks for.")
+		return
+	end
+	local unlocks = tech.effects
+	if unlocks == nil then
+		log("ERROR: Nil unlocks for tech "..techId..".")
+		return
+	end
+	if #unlocks ~= #recipeIds then
+		log("ERROR: Number of recipe unlocks for tech "..techId.." doesn't match number of recipe IDs given: "..#unlocks.." vs "..#recipeIds)
+		return
+	end
+	local recipeIdsSet = {}
+	for _, recipeId in pairs(recipeIds) do
+		recipeIdsSet[recipeId] = true
+	end
+	for _, unlock in pairs(unlocks) do
+		if unlock.type ~= "unlock-recipe" then
+			log("ERROR: Effect "..unlock.type.." for tech "..techId.." is not a recipe unlock.")
+			return
+		end
+		if recipeIdsSet[unlock.recipe] == nil then
+			log("ERROR: Unlock "..unlock.recipe.." for tech "..techId.." is not in recipe IDs.")
+			return
+		end
+	end
+	local newEffects = {}
+	for _, recipeId in pairs(recipeIds) do
+		table.insert(newEffects, {type = "unlock-recipe", recipe = recipeId})
+	end
+	tech.effects = newEffects
+end
+
+Tech.setPrereqs = function(techId, prereqs)
+	local tech = data.raw.technology[techId]
+	if tech == nil then
+		log("ERROR: Couldn't find tech "..techId.." to set prereqs for.")
+		return
+	end
+	tech.prerequisites = prereqs
+end
+
+---@param unit data.TechnologyUnit
+Tech.setUnit = function(techId, unit)
+	local tech = data.raw.technology[techId]
+	if tech == nil then
+		log("ERROR: Couldn't find tech "..techId.." to set unit for.")
+		return
+	end
+	tech.unit = unit
+end
+
+Tech.copyUnit = function(fromTechId, toTechId)
+	local fromTech = data.raw.technology[fromTechId]
+	if fromTech == nil then
+		log("ERROR: Couldn't find tech "..fromTechId.." to copy unit from.")
+		return
+	end
+	Tech.setUnit(toTechId, fromTech.unit)
+end
+
 return Tech

@@ -29,6 +29,7 @@
 		, "no-quality"
 		, "slipstacks"
 		, "diurnal-dynamics"
+		, "PowerOverload"
 
 		, "! everything-below-here-should-be-optional-on-release"
 		, "factoryplanner"
@@ -37,6 +38,7 @@
 		, "SpidertronEnhancements"
 		, "BeltRouter-lite"
 		, "simpleadjustableinserters"
+		, "show-max-underground-distance"
 	],
 	"description": "Modpack for Space Age veterans seeking a new challenge"
 }

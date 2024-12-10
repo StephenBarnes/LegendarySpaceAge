@@ -7,9 +7,10 @@ local Tech = require("code.util.tech")
 
 -- The mod changes slipstack's minable.results from 6 spoilage, 4 stone, to 50 spoilage, 100 stone.
 -- I'm reducing it, same as for yumako/jellystem plants.
+-- Also reducing it bc you might be doing this only for the pearls, and have to get rid of stone.
 slipstackMinableResults = {
 	{type = "item", name = "spoilage", amount = 10 },
-	{type = "item", name = "stone", amount_min = 20, amount_max = 40 },
+	{type = "item", name = "stone", amount_min = 5, amount_max = 15 },
 	{type = "item", name = "slipstack-pearl", amount_min = 5, amount_max = 15}
 }
 data.raw.plant["slipstack-plant"].minable.results = slipstackMinableResults
@@ -22,7 +23,7 @@ data.raw.tree["slipstack"].minable.results = slipstackMinableResults
 -- Change research icon to just be a slipstack.
 data.raw.technology["slipstack-propagation"].icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-tech.png"
 
--- Allow recipe in chem plant.
+-- Allow recipe in chem plant or biochamber.
 data.raw.recipe["slipstack-seed"].category = "organic-or-chemistry"
 
 -- Hide the tree.slipstack thing in the factoriopedia, rather redirect to the plant.

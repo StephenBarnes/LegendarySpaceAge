@@ -28,3 +28,7 @@ Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-vulca
 -- TODO make module recipes more complex -- maybe make tier 2 and tier 3 require stuff from separate planets!
 
 -- TODO tech tree change - add nuclear science, move nuclear stuff to after first 3 planetary sciences, and then change all costs to include all science packs they're dependent on.
+
+-- TODO change oil processing to require research, not trigger.
+
+-- TODO get rid of advanced combinators tech, rather move the selector combinator into the main combinators tech.
