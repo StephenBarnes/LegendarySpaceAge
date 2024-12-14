@@ -34,11 +34,11 @@
 		, "! everything-below-here-should-be-optional-on-release"
 		, "factoryplanner"
 		, "captains-log"
-		, "recycling-factoriopedia"
 		, "SpidertronEnhancements"
-		, "BeltRouter-lite"
 		, "simpleadjustableinserters"
 		, "show-max-underground-distance"
+		, "? recycling-factoriopedia"
+		, "? BeltRouter-lite"
 	],
 	"description": "Modpack for Space Age veterans seeking a new challenge"
 }

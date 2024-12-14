@@ -22,6 +22,7 @@ Item.multiplySpoilTime("copper-bacteria", 3)
 
 -- Gleba: create recipe for turning iron/copper bacteria into ore and fresh bacteria.
 -- Note these don't accept prod modules, but biochamber has +50% prod which does apply.
+-- TODO these were originally intended to make it feasible to keep a living stock of bacteria indefinitely when no ore is being used up; but now it doesn't work because the filtration recipe also produces ore. Need to fix this.
 local bacteriaFilterRecipes = {}
 for i, metal in pairs({"copper", "iron"}) do
 	local filterMetalRecipe = table.deepcopy(data.raw.recipe[metal.."-bacteria-cultivation"])
