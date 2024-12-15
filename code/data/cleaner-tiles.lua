@@ -1,7 +1,7 @@
 -- This file makes placed tiles (stone bricks, concrete) more likely to remove decoratives.
 
 local newProbs = {
-	["stone-brick"] = 0.65, -- Default was 0.15.
+	["stone-path"] = 0.65, -- Default was 0.15.
 
 	["concrete"] = .8, -- Default was 0.25.
 	["hazard-concrete-left"] = .8,
@@ -16,5 +16,9 @@ local newProbs = {
 	-- For landfill it's zero. Leaving as zero.
 }
 for name, prob in pairs(newProbs) do
-	data.raw.tile[name].decorative_removal_probability = prob
+	if not data.raw.tile[name] then
+		log("Error: No tile named " .. name .. " to change.")
+	else
+		data.raw.tile[name].decorative_removal_probability = prob
+	end
 end
