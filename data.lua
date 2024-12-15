@@ -11,3 +11,4 @@ require("code.data.gleba.misc")
 require("code.data.gleba.slipstacks")
 
 require("code.data.map-gen-preset")
+require("code.data.adamo-carbon")

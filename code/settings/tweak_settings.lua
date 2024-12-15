@@ -6,6 +6,7 @@ u.setDefaultOrForce("PowerMultiplier-burner", "double", 2)
 u.setDefaultOrForce("PowerMultiplier-nutrient", "double", 1)
 u.setDefaultOrForce("PowerMultiplier-heating", "double", 2)
 u.setDefaultOrForce("PowerMultiplier-solar", "double", 1)
+u.setDefaultOrForce("PowerMultiplier-blacklist", "string", "battery-charger,battery-discharger")
 
 -- Set options for Ocean Dumping mod.
 -- Makes logical sense on Fulgora and Aquilo. Makes less sense on Nauvis and Gleba, but I need it on Gleba (eg voiding extra stone from slipstacks) and I don't want Nauvis to be the only exception.
@@ -25,6 +26,18 @@ u.setDefaultOrForce("data-dd-dusk", "double", 0.25)
 u.setDefaultOrForce("data-dd-evening", "double", 0.35) -- Adjusted to be earlier, 0.45->0.35, for longer night.
 u.setDefaultOrForce("data-dd-morning", "double", 0.65) -- Adjusted to be later, 0.55->0.65, for longer night.
 u.setDefaultOrForce("data-dd-dawn", "double", 0.75)
+
+-- For Adamo's Carbon mod.
+u.setDefaultOrForce("adamo-carbon-methane", "bool", true)
+u.setDefaultOrForce("adamo-carbon-wellhead", "bool", true)
+u.setDefaultOrForce("adamo-carbon-coking", "bool", false)
+u.setDefaultOrForce("adamo-carbon-steam-processing", "bool", true) -- This changes water to steam in oil processing recipes.
+u.setDefaultOrForce("adamo-carbon-fluids-fuel", "bool", true)
+u.setDefaultOrForce("adamo-carbon-syngas", "string", "adamo-carbon-syngas")
+u.setDefaultOrForce("adamo-carbon-sulfur-burning", "bool", true)
+
+-- For Gas Furnace mod.
+-- TODO
 
 -- For Power Overload
 -- TODO set pole maxes

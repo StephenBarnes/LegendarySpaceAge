@@ -21,3 +21,5 @@ custom.basic_settings.autoplace_controls["fulgora_islands"] = {
 	size = 1/6, -- Scale 600%.
 	frequency = 1/6, -- Coverage 17%.
 }
+
+-- TODO add rail world preset settings.

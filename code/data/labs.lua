@@ -145,5 +145,6 @@ Tech.replacePrereq("biolab", "uranium-processing", "nuclear-power")
 Tech.addTechDependency("pentapod-biolab", "biolab")
 
 -- Remove extra description for Gleba biolab.
-data.raw.recipe.glebalab.localised_description = {"entity-description.glebalab"}
+data.raw.recipe.glebalab.localised_description = nil
 data.raw.item.glebalab.localised_description = {"entity-description.glebalab"}
+-- TODO check this worked
