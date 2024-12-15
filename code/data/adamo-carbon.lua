@@ -11,4 +11,5 @@ data.raw.furnace["adamo-carbon-gasifier"].fluid_boxes[2].filter = "adamo-carbon-
 
 -- TODO improve some recipe icons.
 
--- TODO lots more tweaks etc.
+-- TODO lots more tweaks
+-- TODO integrate with Boompuff Agriculture mod

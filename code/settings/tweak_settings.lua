@@ -37,7 +37,7 @@ u.setDefaultOrForce("adamo-carbon-syngas", "string", "adamo-carbon-syngas")
 u.setDefaultOrForce("adamo-carbon-sulfur-burning", "bool", true)
 
 -- For Gas Furnace mod.
--- TODO
+-- No settings.
 
 -- For Power Overload
 -- TODO set pole maxes
