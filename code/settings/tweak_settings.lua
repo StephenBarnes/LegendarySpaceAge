@@ -8,8 +8,9 @@ u.setDefaultOrForce("PowerMultiplier-heating", "double", 2)
 u.setDefaultOrForce("PowerMultiplier-solar", "double", 1)
 
 -- Set options for Ocean Dumping mod.
-u.setDefaultOrForce("enable-nauvis-dumping", "bool", false)
-u.setDefaultOrForce("enable-gleba-dumping", "bool", false)
+-- Makes logical sense on Fulgora and Aquilo. Makes less sense on Nauvis and Gleba, but I need it on Gleba (eg voiding extra stone from slipstacks) and I don't want Nauvis to be the only exception.
+u.setDefaultOrForce("enable-nauvis-dumping", "bool", true)
+u.setDefaultOrForce("enable-gleba-dumping", "bool", true)
 u.setDefaultOrForce("enable-fulgora-dumping", "bool", true)
 u.setDefaultOrForce("enable-aquilo-dumping", "bool", true)
 

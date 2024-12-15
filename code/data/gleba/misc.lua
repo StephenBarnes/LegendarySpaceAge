@@ -6,12 +6,6 @@ local Item = require("code.util.item")
 table.insert(data.raw.recipe["rocket-fuel-from-jelly"].ingredients,
 	{ type = "item", name = "carbon", amount = 2 })
 
--- Change Gleba biolubricant recipe to require water and bioflux.
-table.insert(data.raw.recipe["biolubricant"].ingredients,
-	{ type = "fluid", name = "water", amount = 10 })
-table.insert(data.raw.recipe["biolubricant"].ingredients,
-	{ type = "item", name = "bioflux", amount = 1 })
-
 -- Gleba: remove recipes for making iron/copper bacteria from jelly/mash.
 Tech.removeRecipeFromTech("iron-bacteria", "jellynut")
 Tech.removeRecipeFromTech("copper-bacteria", "yumako")

@@ -52,6 +52,8 @@ data.raw.recipe["slipstack-seed"].ingredients = {
 }
 data.raw.recipe["slipstack-seed"].results = {{type = "item", name = "slipstack-seed", amount = 1}}
 data.raw.recipe["slipstack-seed"].surface_conditions = nil -- Allow anywhere. Can't be planted anywhere else, though.
+data.raw.item["slipstack-seed"].spoil_ticks = 60 * 60 * 20
+data.raw.item["slipstack-seed"].spoil_result = "iron-ore"
 
 -- Make slipstacks absorb spores.
 -- A jellystem produces 15 spores per harvest, and grows 5m. Yumako is the same. So per second it's 15/(5*60) = 0.05.
@@ -77,10 +79,19 @@ data.raw.recipe["slipstack-seed"].auto_recycle = true
 --Recipe.addIngredients("biosulfur", {{type = "item", name = "slipstack-pearl", amount = 1}})
 Recipe.addIngredients("bioplastic", {{type = "item", name = "slipstack-pearl", amount = 1}})
 
+-- Change Gleba biolubricant recipe to require slipstack pearls.
+-- Base Space Age recipe is 60 jelly => 20 lubricant.
+data.raw.recipe["biolubricant"].ingredients = {
+	{ type = "fluid", name = "water", amount = 10 },
+	{ type = "item", name = "jelly", amount = 30 },
+	{ type = "item", name = "slipstack-pearl", amount = 5 },
+}
+
 -- Add slipstack agriculture as prereq to bioflux processing, since it's now needed for plastic, plus it'll be needed for science pack.
 Tech.addTechDependency("slipstack-propagation", "bioflux-processing")
 
 -- Change slipstack nests to use edited version of the icon from Slipstack Agriculture mod, to make the pearls more visible and match the color of my pearl icon.
 data.raw.item["slipstack-seed"].icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-nest.png"
 
--- TODO nerf stone spawns on Gleba to encourage slipstack farming? I beat Space Age on the starter patch, without importing stuff to Gleba.
+-- Note: mapgen preset reduces stone spawns on Gleba, partly to encourage slipstack farming. I beat Space Age on the starter patch, without importing stuff to Gleba.
+-- Note: we need some way to void stuff on Gleba, eg the stone produced by slipstacks, else you might only want to farm slipstacks for the pearls and then you have to dump the stone into chests somewhere.

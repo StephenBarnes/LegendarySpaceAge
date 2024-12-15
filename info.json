@@ -27,9 +27,12 @@
 		, "NoLavaInPipes"
 		, "oceandump"
 		, "no-quality"
-		, "slipstacks"
 		, "diurnal-dynamics"
 		, "PowerOverload"
+
+		, "slipstacks"
+		, "boompuff-agriculture"
+		, "fluroflux"
 
 		, "! everything-below-here-should-be-optional-on-release"
 		, "factoryplanner"
@@ -37,6 +40,7 @@
 		, "SpidertronEnhancements"
 		, "simpleadjustableinserters"
 		, "show-max-underground-distance"
+		, "visible-planets"
 		, "? recycling-factoriopedia"
 		, "? BeltRouter-lite"
 	],
