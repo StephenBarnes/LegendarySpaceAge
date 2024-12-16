@@ -25,3 +25,4 @@ gasFurnaceEnt.graphics_set.animation.layers[1].filename = "__LegendarySpaceAge__
 
 -- Tried to allow flipping it, but doesn't seem to work. So instead I'm just putting the 2 fluid connections in positions so that rotating the furnace is probably enough. Turns out that also makes it so flipping is allowed, for some reason.
 --gasFurnaceEnt.graphics_set_flipped = gasFurnaceEnt.graphics_set
+
