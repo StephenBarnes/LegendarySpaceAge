@@ -42,6 +42,12 @@ Table.overwriteInto = function(a, b)
 	end
 end
 
+Table.setFields = function(a, b)
+	for k, v in pairs(b) do
+		a[k] = v
+	end
+end
+
 Table.maybeGet = function(t, k)
 	-- Equivalent to the "?." operator.
 	if t == nil then return nil end

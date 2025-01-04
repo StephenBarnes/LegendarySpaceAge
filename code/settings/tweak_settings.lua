@@ -36,6 +36,10 @@ u.setDefaultOrForce("adamo-carbon-fluids-fuel", "bool", true)
 u.setDefaultOrForce("adamo-carbon-syngas", "string", "adamo-carbon-syngas")
 u.setDefaultOrForce("adamo-carbon-sulfur-burning", "bool", true)
 
+-- For Roc's Rusting Iron mod.
+u.setDefaultOrForce("rocs-rusting-iron-engines-rust", "bool", false)
+u.setDefaultOrForce("rocs-rusting-iron-time-minutes", "double", 20.)
+
 -- For Gas Furnace mod.
 -- No settings.
 

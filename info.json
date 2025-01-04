@@ -54,6 +54,9 @@
 		, "visible-planets"
 		, "? recycling-factoriopedia"
 		, "? BeltRouter-lite"
+
+		, "! everything-below-here-for-dev-only"
+		, "? no-graphics"
 	],
 	"description": "Modpack for Space Age veterans seeking a new challenge"
 }

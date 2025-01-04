@@ -1,4 +1,8 @@
 local Tech = require("code.util.tech")
+local Table = require("code.util.table")
+
+local ROCKET_MASS = 1000000
+local INGOT_COOLING_TIME = 60 * 60 * 10
 
 --[[
 Iron:
@@ -30,7 +34,7 @@ local metalTint = {
 	--iron = {r = 0.576, g = 0.576, b = 0.576, a=1},
 	--steel = {r = .91, g = .914, b = .902, a=1},
 	iron = {r = 0.7, g = 0.7, b = 0.7, a=1},
-	steel = {r = .955, g = .96, b = .97, a=1},
+	steel = {r = .955, g = .96, b = 1.0, a=1},
 }
 
 -- Make ingots and ingot-reheating recipes.
@@ -39,28 +43,33 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	local coldIngotName = "ingot-" .. metal .. "-cold"
 	local tint = metalTint[metal]
 
-	local hotIngot = table.deepcopy(data.raw.item["iron-plate"])
-	hotIngot.name = hotIngotName
-	hotIngot.icons = {
-		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", icon_size=64, scale=0.5},
-		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5, tint=tint},
-	}
-	hotIngot.icon = nil
-	hotIngot.icon_size = nil
-	hotIngot.spoil_ticks = 60 * 60 * 20
-	hotIngot.spoil_result = coldIngotName
-	hotIngot.order = "a[smelting]-0-" .. i
-	log(serpent.block(hotIngot))
+	local hotIngot = Table.copyAndEdit(data.raw.item["iron-plate"], {
+		name = hotIngotName,
+		icons = {
+			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", icon_size=64, scale=0.5},
+			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5, tint=tint},
+		},
+		icon = nil,
+		icon_size = nil,
+		spoil_ticks = INGOT_COOLING_TIME,
+		spoil_result = coldIngotName,
+		order = "a[smelting]-0-" .. i,
+		stack_size = 100,
+		weight = ROCKET_MASS / 500,
+	})
 	table.insert(newData, hotIngot)
 
-	local coldIngot = table.deepcopy(hotIngot)
-	coldIngot.name = coldIngotName
-	coldIngot.spoil_ticks = nil
-	coldIngot.spoil_result = nil
-	coldIngot.icons = {
-		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5, tint=tint},
-	}
-	coldIngot.order = "a[smelting]-1-" .. i
+	local coldIngot = Table.copyAndEdit(hotIngot, {
+		name = coldIngotName,
+		spoil_ticks = nil,
+		spoil_result = nil,
+		stack_size = 100,
+		weight = ROCKET_MASS / 500,
+		icons = {
+			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5, tint=tint},
+		},
+		order = "a[smelting]-1-" .. i,
+	})
 	table.insert(newData, coldIngot)
 
 	---@type data.RecipePrototype
@@ -87,101 +96,123 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 end
 
 -- Make recipe for iron ingot -> steel ingot.
-local steelIngotRecipe = table.deepcopy(data.raw.recipe["steel-plate"])
-steelIngotRecipe.name = "ingot-steel-hot"
-steelIngotRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=1}}
-steelIngotRecipe.results = {{type="item", name="ingot-steel-hot", amount=1}}
-steelIngotRecipe.energy_required = 20
+local steelIngotRecipe = Table.copyAndEdit(data.raw.recipe["steel-plate"], {
+	name = "ingot-steel-hot",
+	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
+	results = {{type="item", name="ingot-steel-hot", amount=1}},
+	energy_required = 20,
+})
 table.insert(newData, steelIngotRecipe)
 
 -- Make recipe for iron ore -> iron ingot.
-local ironIngotRecipe = table.deepcopy(steelIngotRecipe)
-ironIngotRecipe.name = "ingot-iron-hot"
-ironIngotRecipe.ingredients = {{type="item", name="iron-ore", amount=8}}
-ironIngotRecipe.results = {
-	{type="item", name="ingot-iron-hot", amount=1},
-	{type="item", name="stone", amount=1},
-}
-ironIngotRecipe.main_product = "ingot-iron-hot"
-ironIngotRecipe.energy_required = 6
-ironIngotRecipe.enabled = true
+local ironIngotRecipe = Table.copyAndEdit(steelIngotRecipe, {
+	name = "ingot-iron-hot",
+	ingredients = {{type="item", name="iron-ore", amount=8}},
+	results = {
+		{type="item", name="ingot-iron-hot", amount=1},
+		{type="item", name="stone", amount=1},
+	},
+	main_product = "ingot-iron-hot",
+	energy_required = 6,
+	enabled = true,
+})
 table.insert(newData, ironIngotRecipe)
 
 -- Make recipe for copper ore -> copper matte.
-local copperMatteRecipe = table.deepcopy(ironIngotRecipe)
-copperMatteRecipe.name = "copper-matte"
-copperMatteRecipe.ingredients = {{type="item", name="copper-ore", amount=4}}
-copperMatteRecipe.results = {
-	{type="item", name="copper-matte", amount=1},
-	{type="item", name="stone", amount=1},
-}
-copperMatteRecipe.main_product = "copper-matte"
-copperMatteRecipe.energy_required = 4
-copperMatteRecipe.enabled = true
+local copperMatteRecipe = Table.copyAndEdit(ironIngotRecipe, {
+	name = "copper-matte",
+	ingredients = {{type="item", name="copper-ore", amount=4}},
+	results = {
+		{type="item", name="copper-matte", amount=1},
+		{type="item", name="stone", amount=1},
+	},
+	main_product = "copper-matte",
+	energy_required = 4,
+	enabled = true,
+})
 table.insert(newData, copperMatteRecipe)
 
 -- Make recipe for copper matte -> copper ingot.
-local copperIngotRecipe = table.deepcopy(steelIngotRecipe)
-copperIngotRecipe.name = "ingot-copper-hot"
-copperIngotRecipe.ingredients = {{type="item", name="copper-matte", amount=2}}
-copperIngotRecipe.results = {
-	{type="item", name="ingot-copper-hot", amount=1},
-	{type="item", name="sulfur", amount=1},
-}
-copperIngotRecipe.category = "smelting"
-copperIngotRecipe.main_product = "ingot-copper-hot"
-copperIngotRecipe.energy_required = 4
-copperIngotRecipe.enabled = true
+local copperIngotRecipe = Table.copyAndEdit(steelIngotRecipe, {
+	name = "ingot-copper-hot",
+	ingredients = {{type="item", name="copper-matte", amount=2}},
+	results = {
+		{type="item", name="ingot-copper-hot", amount=1},
+		{type="item", name="sulfur", amount=1},
+	},
+	category = "smelting",
+	main_product = "ingot-copper-hot",
+	energy_required = 4,
+	enabled = true,
+})
 table.insert(newData, copperIngotRecipe)
 
 -- Make copper-matte item.
-local copperMatte = table.deepcopy(data.raw.item["copper-ore"])
-copperMatte.name = "copper-matte"
-copperMatte.icons = {
-	-- TODO make icons.
-	--{icon="__LegendarySpaceAge__/graphics/metallurgy/copper-matte.png", icon_size=64, scale=0.5},
-	{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5},
-}
+local copperMatte = Table.copyAndEdit(data.raw.item["copper-ore"], {
+	name = "copper-matte",
+	icons = {
+		-- TODO make icons.
+		--{icon="__LegendarySpaceAge__/graphics/metallurgy/copper-matte.png", icon_size=64, scale=0.5},
+		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5},
+	},
+})
 table.insert(newData, copperMatte)
 
 -- Adjust steel plate recipe.
-local steelPlateRecipe = data.raw.recipe["steel-plate"]
-steelPlateRecipe.ingredients = {{type="item", name="ingot-steel-hot", amount=1}}
-steelPlateRecipe.results = {{type="item", name="steel-plate", amount=2}}
-steelPlateRecipe.category = "crafting" -- TODO check -- should be category craftable by hand or assembler.
-steelPlateRecipe.energy_required = 2
+Table.setFields(data.raw.recipe["steel-plate"], {
+	ingredients = {{type="item", name="ingot-steel-hot", amount=1}},
+	results = {{type="item", name="steel-plate", amount=2}},
+	category = "crafting", -- Means it's craftable by hand or by assembler. (Unlike basegame's recipe for steel plate, which has category "smelting".)
+	energy_required = 2,
+})
 
 -- Adjust iron plate recipe.
-local ironPlateRecipe = data.raw.recipe["iron-plate"]
-ironPlateRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=1}}
-ironPlateRecipe.results = {{type="item", name="iron-plate", amount=8}}
-ironPlateRecipe.category = "crafting"
-ironPlateRecipe.energy_required = 4 -- TODO playtest
+Table.setFields(data.raw.recipe["iron-plate"], {
+	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
+	results = {{type="item", name="iron-plate", amount=8}},
+	category = "crafting",
+	energy_required = 4,
+})
 
 -- Adjust copper plate recipe.
-local copperPlateRecipe = data.raw.recipe["copper-plate"]
-copperPlateRecipe.ingredients = {{type="item", name="ingot-copper-hot", amount=1}}
-copperPlateRecipe.results = {{type="item", name="copper-plate", amount=8}}
-copperPlateRecipe.category = "crafting"
-copperPlateRecipe.energy_required = 4 -- TODO playtest
+Table.setFields(data.raw.recipe["copper-plate"], {
+	ingredients = {{type="item", name="ingot-copper-hot", amount=1}},
+	results = {{type="item", name="copper-plate", amount=8}},
+	category = "crafting",
+	energy_required = 4,
+})
 
--- Add new recipe for iron gears directly from ingots.
--- Or should we rather require making from ingots directly, not allow making from plates? TODO
-local newIronGearRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
-newIronGearRecipe.name = "iron-gear-wheel-from-ingot"
--- TODO
+-- Adjust iron gear recipe.
+Table.setFields(data.raw.recipe["iron-gear-wheel"], {
+	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
+	results = {{type="item", name="iron-gear-wheel", amount=4}},
+	energy_required = 2,
+})
 
 -- Adjust recipe for iron rods.
--- TODO
+Table.setFields(data.raw.recipe["iron-stick"], {
+	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
+	results = {{type="item", name="iron-stick", amount=16}},
+	energy_required = 4,
+})
 
 -- Adjust recipe for copper cables.
 -- TODO
+Table.setFields(data.raw.recipe["copper-cable"], {
+	ingredients = {{type="item", name="ingot-copper-hot", amount=1}},
+	results = {{type="item", name="copper-cable", amount=16}},
+	energy_required = 4,
+})
 
-
--- TODO add recipes to tech tree.
--- TODO orders for items and recipes.
-
--- TODO add rusting for cold iron ingots, and for iron items.
+-- Adjust recipe for low-density structures.
+-- Originally 20 copper plate, 2 steel plate, 5 plastic bar. Changing to 4 copper ingot, 1 steel ingot, 5 plastic bar.
+Table.setFields(data.raw.recipe["low-density-structure"], {
+	ingredients = {
+		{type="item", name="ingot-copper-hot", amount=4},
+		{type="item", name="ingot-steel-hot", amount=1},
+		{type="item", name="plastic-bar", amount=5},
+	},
+})
 
 -- Add new prototypes.
 data:extend(newData)
@@ -194,3 +225,13 @@ data.raw.recipe["heat-ingot-steel"].enabled = false
 -- Adjust tech unlock triggers.
 data.raw.technology["steam-power"].research_trigger.item = "ingot-iron-hot"
 data.raw.technology["electronics"].research_trigger.item = "ingot-copper-hot"
+
+-- Adjust stack sizes and rocket capacities of basic metal products.
+data.raw.item["iron-plate"].weight = ROCKET_MASS / 4000 -- Compare to 500 ingots = 4000 plates.
+data.raw.item["copper-plate"].weight = ROCKET_MASS / 4000
+data.raw.item["steel-plate"].weight = ROCKET_MASS / 1000 -- Compare to 500 ingots = 1000 plates.
+data.raw.item["iron-gear-wheel"].weight = ROCKET_MASS / 2000 -- Compare to 500 ingots = 2000 gears.
+data.raw.item["iron-stick"].weight = ROCKET_MASS / 8000 -- Compare to 500 ingots = 8000 rods.
+data.raw.item["copper-cable"].weight = ROCKET_MASS / 8000 -- Compare to 500 ingots = 8000 cables.
+
+-- TODO add rusting for cold iron ingots, and for iron items.
