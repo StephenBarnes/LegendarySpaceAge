@@ -14,3 +14,5 @@ require("code.data.map-gen-preset")
 
 require("code.data.petrochem.adamo-carbon")
 require("code.data.petrochem.adamo-gas-furnace")
+
+require("code.data.metallurgy")
