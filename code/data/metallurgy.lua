@@ -1,6 +1,8 @@
+local Tech = require("code.util.tech")
+
 --[[
 Iron:
-	In burner furnace: 8 iron ore -> 1 hot iron ingot + 1 stone (slag)
+	8 iron ore -> 1 hot iron ingot + 1 stone (slag)
 	Over 20 minutes, hot iron ingots spoil into cold iron ingots which must be reheated in a furnace.
 		In any furnace: 1 cold iron ingot -> 1 hot iron ingot
 	Hot iron ingots are hammered in assemblers, into plates or rods:
@@ -9,14 +11,13 @@ Iron:
 		Each hot iron ingot item converts into multiple plates and rods, so that there's some incentive to rather put ingots on the conveyor belt instead of plates/rods, since ingots are more compact on the belt. This is balanced by the incentive to turn ingots into plates/rods immediately to avoid having to reheat them.
 
 Steel:
-	In burner furnace, slow: 1 hot iron ingot -> 1 hot steel ingot
+	In furnace, slow: 1 hot iron ingot -> 1 hot steel ingot
 	In assembler: 1 hot steel ingot -> 2 steel plate
 
 Copper:
 	The system is similar to iron, but with an extra intermediate "copper matte" which is then turned into copper ingots.
-	In burner furnace:
+	In furnace:
 		4 copper ore -> 1 copper matte + 1 stone
-	In any furnace:
 		2 copper matte -> 1 hot copper ingot + 1 sulfur
 	Hot copper ingots cool down over time, and must then be reheated for working.
 	Hot copper ingots are converted into plates or cables in an assembler, same as iron ingots.
@@ -24,26 +25,12 @@ Copper:
 
 local newData = {}
 
--- Create crafting category for burner furnaces. (Recipes that require carbon as reducing agent can only be done in burner furnaces.)
-local burnerFurnaceCategory = table.deepcopy(data.raw["recipe-category"].smelting)
-burnerFurnaceCategory.name = "burner-smelting"
-table.insert(newData, burnerFurnaceCategory)
-
--- Add burner crafting category to furnaces.
-for _, furnaceName in pairs{"stone-furnace", "steel-furnace", "gas-furnace"} do
-	local furnace = data.raw.furnace[furnaceName]
-	if furnace then
-		table.insert(furnace.crafting_categories, "burner-smelting")
-	end
-end
-data.raw.furnace["electric-furnace"].crafting_categories = {"smelting"} -- Not sure why this is necessary; seems to be copying categories from the other furnaces somewhere? Maybe need to move this to data-updates.
-
 local metalTint = {
 	copper = {r = .831, g = .467, b = .361, a=1},
 	--iron = {r = 0.576, g = 0.576, b = 0.576, a=1},
 	--steel = {r = .91, g = .914, b = .902, a=1},
-	iron = {r = 0.75, g = 0.75, b = 0.75, a=1},
-	steel = {r = .955, g = .96, b = .95, a=1},
+	iron = {r = 0.7, g = 0.7, b = 0.7, a=1},
+	steel = {r = .955, g = .96, b = .97, a=1},
 }
 
 -- Make ingots and ingot-reheating recipes.
@@ -89,6 +76,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		energy_required = 2,
 		hide_from_player_crafting = true,
 		category = "smelting",
+		enabled = true,
 		icons = {
 			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", icon_size=64, scale=0.35, shift={5,-5}},
 			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.35, tint=tint, shift={5,-5}},
@@ -104,7 +92,6 @@ steelIngotRecipe.name = "ingot-steel-hot"
 steelIngotRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=1}}
 steelIngotRecipe.results = {{type="item", name="ingot-steel-hot", amount=1}}
 steelIngotRecipe.energy_required = 20
-steelIngotRecipe.category = "burner-smelting"
 table.insert(newData, steelIngotRecipe)
 
 -- Make recipe for iron ore -> iron ingot.
@@ -116,6 +103,8 @@ ironIngotRecipe.results = {
 	{type="item", name="stone", amount=1},
 }
 ironIngotRecipe.main_product = "ingot-iron-hot"
+ironIngotRecipe.energy_required = 6
+ironIngotRecipe.enabled = true
 table.insert(newData, ironIngotRecipe)
 
 -- Make recipe for copper ore -> copper matte.
@@ -127,6 +116,8 @@ copperMatteRecipe.results = {
 	{type="item", name="stone", amount=1},
 }
 copperMatteRecipe.main_product = "copper-matte"
+copperMatteRecipe.energy_required = 4
+copperMatteRecipe.enabled = true
 table.insert(newData, copperMatteRecipe)
 
 -- Make recipe for copper matte -> copper ingot.
@@ -139,6 +130,8 @@ copperIngotRecipe.results = {
 }
 copperIngotRecipe.category = "smelting"
 copperIngotRecipe.main_product = "ingot-copper-hot"
+copperIngotRecipe.energy_required = 4
+copperIngotRecipe.enabled = true
 table.insert(newData, copperIngotRecipe)
 
 -- Make copper-matte item.
@@ -190,4 +183,14 @@ newIronGearRecipe.name = "iron-gear-wheel-from-ingot"
 
 -- TODO add rusting for cold iron ingots, and for iron items.
 
+-- Add new prototypes.
 data:extend(newData)
+
+-- Add recipes to techs.
+Tech.addRecipeToTech("ingot-steel-hot", "steel-processing")
+Tech.addRecipeToTech("heat-ingot-steel", "steel-processing")
+data.raw.recipe["heat-ingot-steel"].enabled = false
+
+-- Adjust tech unlock triggers.
+data.raw.technology["steam-power"].research_trigger.item = "ingot-iron-hot"
+data.raw.technology["electronics"].research_trigger.item = "ingot-copper-hot"
