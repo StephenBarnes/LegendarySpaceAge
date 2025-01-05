@@ -15,34 +15,32 @@
 		[ "base >= 2.0"
 		, "space-age"
 
-		, "FulgoraLives"
-
-		, "Electric_flying_enemies"
 		, "gleba-lab"
-
-		, "cargo-pod-requires-research"
-
+		, "Rocs-Rusting-Iron"
 		, "behemoth-enemies"
 		, "large-storage-tank"
-
-		, "Rocs-Rusting-Iron"
-
-		, "thruster-control-behavior"
+		, "cargo-pod-requires-research"
 		, "PowerMultiplier"
+		, "PowerOverload"
+
+		, "Electric_flying_enemies"
+		, "thruster-control-behavior"
 		, "CarLogistics"
 		, "spoiling-promethium"
 		, "NoLavaInPipes"
 		, "oceandump"
 		, "no-quality"
 		, "diurnal-dynamics"
-		, "PowerOverload"
 
-		, "slipstacks"
-		, "boompuff-agriculture"
-		, "fluroflux"
 		, "gas-furnace"
 		, "gas-boiler"
 
+		, "! stuff-below-here-I-want-to-incorporate-and-mark-incompatible"
+		, "slipstacks"
+		, "boompuff-agriculture"
+		, "fluroflux"
+		, "FulgoraLives"
+		, "! other-mods-incompat-with-FulgoraLives"
 		, "! adamo-carbon"
 
 		, "! everything-below-here-should-be-optional-on-release"

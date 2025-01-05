@@ -1,5 +1,6 @@
 local Tech = require("code.util.tech")
 local Table = require("code.util.table")
+local Recipe = require("code.util.recipe")
 
 local ROCKET_MASS = 1000000
 local INGOT_COOLING_TIME = 60 * 60 * 10
@@ -178,6 +179,8 @@ Table.setFields(data.raw.recipe["steel-plate"], {
 	category = "crafting", -- Means it's craftable by hand or by assembler. (Unlike basegame's recipe for steel plate, which has category "smelting".)
 	energy_required = 2,
 	auto_recycle = true,
+	allow_as_intermediate = true,
+	allow_decomposition = true,
 })
 
 -- Adjust iron plate recipe.
@@ -187,6 +190,8 @@ Table.setFields(data.raw.recipe["iron-plate"], {
 	category = "crafting",
 	energy_required = 4,
 	auto_recycle = true,
+	allow_as_intermediate = true,
+	allow_decomposition = true,
 })
 
 -- Adjust copper plate recipe.
@@ -196,6 +201,8 @@ Table.setFields(data.raw.recipe["copper-plate"], {
 	category = "crafting",
 	energy_required = 4,
 	auto_recycle = true,
+	allow_as_intermediate = true,
+	allow_decomposition = true,
 })
 
 -- Adjust iron gear recipe.
@@ -232,6 +239,10 @@ Table.setFields(data.raw.recipe["low-density-structure"], {
 	},
 	auto_recycle = true,
 })
+
+-- Adjust chest recipes.
+data.raw.recipe["iron-chest"].ingredients = {{type="item", name="ingot-iron-hot", amount=2}}
+data.raw.recipe["steel-chest"].ingredients = {{type="item", name="ingot-steel-hot", amount=2}}
 
 -- Change rusting recipes to sometimes return stone (to reduce cost and increase complexity), and increase time.
 for _, recipeName in pairs{"rocs-rusting-iron-iron-plate-derusting", "rocs-rusting-iron-iron-gear-wheel-derusting", "rocs-rusting-iron-iron-stick-derusting"} do
@@ -274,13 +285,14 @@ table.insert(newData, derustIronIngotRecipe)
 data:extend(newData)
 
 -- Add recipes to techs.
-Tech.addRecipeToTech("ingot-steel-hot", "steel-processing")
-Tech.addRecipeToTech("heat-ingot-steel", "steel-processing")
+Tech.addRecipeToTech("ingot-steel-hot", "steel-processing", 1)
+Tech.addRecipeToTech("heat-ingot-steel", "steel-processing", 2)
 data.raw.recipe["heat-ingot-steel"].enabled = false
 
 -- Adjust tech unlock triggers.
 data.raw.technology["steam-power"].research_trigger.item = "ingot-iron-hot"
 data.raw.technology["electronics"].research_trigger.item = "ingot-copper-hot"
+data.raw.technology["steel-axe"].research_trigger.item = "ingot-steel-hot"
 
 -- Adjust stack sizes and rocket capacities of basic metal products.
 data.raw.item["copper-matte"].weight = ROCKET_MASS / 500 -- Compare to 500 ingots = 500 mattes.

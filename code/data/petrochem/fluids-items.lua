@@ -1,0 +1,85 @@
+local Table = require("code.util.table")
+local constants = require("code.data.petrochem.constants")
+
+local newData = {}
+
+-- Create natural gas fluid.
+local natgasFluid = Table.copyAndEdit(data.raw.fluid["crude-oil"], {
+	name = "natural-gas",
+	base_color = constants.natgasColor,
+	flow_color = constants.natgasColor,
+	icon = "nil",
+	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.natgasTint}},
+	order = "a[fluid]-b[oil]-aa[natgas]",
+})
+table.insert(newData, natgasFluid)
+
+-- Create dry gas fluid.
+local drygasFluid = Table.copyAndEdit(natgasFluid, {
+	name = "dry-gas",
+	base_color = constants.drygasColor,
+	flow_color = constants.drygasColor,
+	icon = "nil",
+	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.drygasColor}},
+	order = "a[fluid]-b[oil]-c[fractions]-4",
+})
+table.insert(newData, drygasFluid)
+
+-- Change petroleum gas to "rich gas".
+local richgasFluid = data.raw.fluid["petroleum-gas"]
+richgasFluid.order = "a[fluid]-b[oil]-c[fractions]-3"
+richgasFluid.base_color = constants.richgasColor
+richgasFluid.flow_color = constants.richgasColor
+richgasFluid.icon = nil
+richgasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.richgasColor}}
+richgasFluid.localised_name = {"fluid-name.rich-gas"} -- In case other languages are used, don't use that language's version of "petroleum gas".
+
+-- Create syngas fluid.
+local syngasFluid = Table.copyAndEdit(data.raw.fluid["heavy-oil"], {
+	name = "syngas",
+	base_color = constants.syngasColor,
+	flow_color = constants.syngasColor,
+	icon = "nil",
+	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.syngasColor}},
+	order = "a[fluid]-b[oil]-c[fractions]-6",
+})
+table.insert(newData, syngasFluid)
+
+-- Create tar fluid.
+local tarFluid = Table.copyAndEdit(data.raw.fluid["heavy-oil"], {
+	name = "tar",
+	base_color = constants.tarColor,
+	flow_color = constants.tarColor,
+	icon = "nil",
+	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64}},
+	order = "a[fluid]-b[oil]-c[fractions]-0",
+})
+table.insert(newData, tarFluid)
+
+-- Create pitch item.
+local pitchPictures = {}
+for i = 1, 3 do
+	table.insert(pitchPictures, {
+		filename = "__LegendarySpaceAge__/graphics/petrochem/pitch-" .. i .. ".png",
+		size = 64,
+		scale = 0.5,
+		mipmap_count = 4,
+	})
+end
+local pitchItem = Table.copyAndEdit(data.raw.item["carbon"], {
+	name = "pitch",
+	icons = {
+		{icon="__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size=64, scale=0.5},
+	},
+	pictures = pitchPictures,
+})
+table.insert(newData, pitchItem)
+
+------------------------------------------------------------------------
+-- Add new prototypes to the game.
+data:extend(newData)
+------------------------------------------------------------------------
+
+-- Fix ordering of the existing petro fractions.
+data.raw.fluid["heavy-oil"].order = "a[fluid]-b[oil]-c[fractions]-1"
+data.raw.fluid["light-oil"].order = "a[fluid]-b[oil]-c[fractions]-2"
