@@ -1,6 +1,7 @@
 -- Changes to Adamo's Carbon mod.
 -- NOTE there's a lot more changes in the "oil-refining.lua" file, which also changes other oil processing recipes.
 
+--[[
 -- Make the new fluids show up in the fluids tab in Factoriopedia.
 data.raw.fluid["adamo-carbon-natural-gas"].subgroup = "fluid"
 data.raw.fluid["adamo-carbon-methane"].subgroup = "fluid"
@@ -29,3 +30,6 @@ local methaneColor = {r = .714, g = .796, b = .259} -- yellow-green
 data.raw.fluid["adamo-carbon-methane"].base_color = methaneColor
 data.raw.fluid["adamo-carbon-methane"].flow_color = methaneColor
 data.raw.fluid["adamo-carbon-methane"].visualization_color = methaneColor
+]]
+
+-- TODO rewrite this to rather not depend on Adamo Carbon, bc I'm changing a lot more.

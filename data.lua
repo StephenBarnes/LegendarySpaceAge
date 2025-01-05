@@ -13,6 +13,7 @@ require("code.data.gleba.slipstacks")
 require("code.data.map-gen-preset")
 
 require("code.data.petrochem.adamo-carbon")
-require("code.data.petrochem.adamo-gas-furnace")
+require("code.data.petrochem.gas-furnace")
 
 require("code.data.metallurgy.metallurgy-d")
+require("code.data.petrochem.petrochem")
