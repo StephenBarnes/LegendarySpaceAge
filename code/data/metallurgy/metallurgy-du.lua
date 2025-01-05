@@ -1,17 +1,21 @@
--- Change recycling recipes so plates/gears/sticks give back cold ingots. (Otherwise there's no way to get ingots on Fulgora.)
---[[
-data.raw.recipe["iron-plate-recycling"].results = {{type = "item", name = "ingot-iron-cold", amount = 1, probability = 1 / (8 * 4)}} -- 1 ingot to 8 plates, and recycling gives 1/4th of that.
-data.raw.recipe["iron-stick-recycling"].results = {{type = "item", name = "ingot-iron-cold", amount = 1, probability = 1 / (16 * 4)}}
-data.raw.recipe["iron-gear-wheel-recycling"].results = {{type = "item", name = "ingot-iron-cold", amount = 1, probability = 1 / (4 * 4)}}
-data.raw.recipe["steel-plate-recycling"].results = {{type = "item", name = "ingot-steel-cold", amount = 1, probability = 1 / (2 * 4)}}
-data.raw.recipe["copper-plate-recycling"].results = {{type = "item", name = "ingot-copper-cold", amount = 1, probability = 1 / (8 * 4)}}
-data.raw.recipe["copper-cable-recycling"].results = {{type = "item", name = "ingot-copper-cold", amount = 1, probability = 1 / (16 * 4)}}
-data.raw.recipe["low-density-structure-recycling"].results = {
-	{type = "item", name = "ingot-copper-cold", amount = 1},
-	{type = "item", name = "ingot-steel-cold", amount = 1, probability = 1 / 4},
-	{type = "item", name = "plastic-bar", amount = 1, extra_count_fraction = 1/4},
+-- Look at all recycling recipes, and change hot ingot results to cold equivalents.
+local changes = {
+	["ingot-iron-hot"] = "ingot-iron-cold",
+	["ingot-steel-hot"] = "ingot-steel-cold",
+	["ingot-copper-hot"] = "ingot-copper-cold",
 }
-]]
--- TODO rather rewrite this to only substitute hot ingots (in recycling recipe results) with cold ingots. Then use the auto-recycle flag to make recycling recipes for plates etc output hot ingots.
+for _, recipe in pairs(data.raw.recipe) do
+	if recipe.category == "recycling" then
+		for _, result in pairs(recipe.results) do
+			if changes[result.name] then
+				result.name = changes[result.name]
+			end
+		end
+	end
+end
 
--- TODO add automatic check over all recycling recipes - none of them should give back hot ingots.
+-- For rusty items, make recycling recipes only delete the item.
+for _, item in pairs{"iron-gear-wheel", "iron-stick"} do
+	local recipe = data.raw.recipe["rocs-rusting-iron-"..item.."-rusty-recycling"]
+	recipe.results = {{type = "item", name = "rocs-rusting-iron-"..item.."-rusty", amount = 1, probability = .25}}
+end

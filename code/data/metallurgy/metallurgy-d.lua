@@ -90,9 +90,8 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		category = "smelting",
 		enabled = true,
 		icons = {
-			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", icon_size=64, scale=0.35, shift={5,-5}},
-			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.35, tint=tint, shift={5,-5}},
-			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.35, tint=tint, shift={-5,5}},
+			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", icon_size=64, scale=0.5},
+			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.4, tint=tint},
 		},
 	}
 	table.insert(newData, ingotHeatingRecipe)
@@ -178,6 +177,7 @@ Table.setFields(data.raw.recipe["steel-plate"], {
 	results = {{type="item", name="steel-plate", amount=2}},
 	category = "crafting", -- Means it's craftable by hand or by assembler. (Unlike basegame's recipe for steel plate, which has category "smelting".)
 	energy_required = 2,
+	auto_recycle = true,
 })
 
 -- Adjust iron plate recipe.
@@ -186,6 +186,7 @@ Table.setFields(data.raw.recipe["iron-plate"], {
 	results = {{type="item", name="iron-plate", amount=8}},
 	category = "crafting",
 	energy_required = 4,
+	auto_recycle = true,
 })
 
 -- Adjust copper plate recipe.
@@ -194,6 +195,7 @@ Table.setFields(data.raw.recipe["copper-plate"], {
 	results = {{type="item", name="copper-plate", amount=8}},
 	category = "crafting",
 	energy_required = 4,
+	auto_recycle = true,
 })
 
 -- Adjust iron gear recipe.
@@ -201,6 +203,7 @@ Table.setFields(data.raw.recipe["iron-gear-wheel"], {
 	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
 	results = {{type="item", name="iron-gear-wheel", amount=4}},
 	energy_required = 2,
+	auto_recycle = true,
 })
 
 -- Adjust recipe for iron rods.
@@ -208,6 +211,7 @@ Table.setFields(data.raw.recipe["iron-stick"], {
 	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
 	results = {{type="item", name="iron-stick", amount=16}},
 	energy_required = 4,
+	auto_recycle = true,
 })
 
 -- Adjust recipe for copper cables.
@@ -215,6 +219,7 @@ Table.setFields(data.raw.recipe["copper-cable"], {
 	ingredients = {{type="item", name="ingot-copper-hot", amount=1}},
 	results = {{type="item", name="copper-cable", amount=16}},
 	energy_required = 4,
+	auto_recycle = true,
 })
 
 -- Adjust recipe for low-density structures.
@@ -225,6 +230,7 @@ Table.setFields(data.raw.recipe["low-density-structure"], {
 		{type="item", name="ingot-steel-hot", amount=1},
 		{type="item", name="plastic-bar", amount=5},
 	},
+	auto_recycle = true,
 })
 
 -- Change rusting recipes to sometimes return stone (to reduce cost and increase complexity), and increase time.
@@ -260,7 +266,7 @@ local derustIronIngotRecipe = Table.copyAndEdit(data.raw.recipe["rocs-rusting-ir
 	main_product = "ingot-iron-cold",
 	icons = {{icon="__LegendarySpaceAge__/graphics/metallurgy/derusting-iron-ingot.png", icon_size=64, scale=0.5}},
 	enabled = true,
-	order = "e[derusting]-aa[derust-iron-ingot]",
+	order = "e[derusting]-0[derust-iron-ingot]",
 })
 table.insert(newData, derustIronIngotRecipe)
 
