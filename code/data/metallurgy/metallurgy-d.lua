@@ -38,6 +38,7 @@ local metalTint = {
 }
 
 -- Make ingots and ingot-reheating recipes.
+local ingotItems = {}
 for i, metal in pairs{"iron", "copper", "steel"} do
 	local hotIngotName = "ingot-" .. metal .. "-hot"
 	local coldIngotName = "ingot-" .. metal .. "-cold"
@@ -49,8 +50,8 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", icon_size=64, scale=0.5},
 			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5, tint=tint},
 		},
-		icon = nil,
-		icon_size = nil,
+		icon = "nil",
+		icon_size = "nil",
 		spoil_ticks = INGOT_COOLING_TIME,
 		spoil_result = coldIngotName,
 		order = "a[smelting]-0-" .. i,
@@ -58,11 +59,12 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		weight = ROCKET_MASS / 500,
 	})
 	table.insert(newData, hotIngot)
+	ingotItems[hotIngotName] = hotIngot
 
 	local coldIngot = Table.copyAndEdit(hotIngot, {
 		name = coldIngotName,
-		spoil_ticks = nil,
-		spoil_result = nil,
+		spoil_ticks = "nil",
+		spoil_result = "nil",
 		stack_size = 100,
 		weight = ROCKET_MASS / 500,
 		icons = {
@@ -71,6 +73,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		order = "a[smelting]-1-" .. i,
 	})
 	table.insert(newData, coldIngot)
+	ingotItems[coldIngotName] = coldIngot
 
 	---@type data.RecipePrototype
 	local ingotHeatingRecipe = {
@@ -110,7 +113,7 @@ local ironIngotRecipe = Table.copyAndEdit(steelIngotRecipe, {
 	ingredients = {{type="item", name="iron-ore", amount=8}},
 	results = {
 		{type="item", name="ingot-iron-hot", amount=1},
-		{type="item", name="stone", amount=1},
+		{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
 	},
 	main_product = "ingot-iron-hot",
 	energy_required = 6,
@@ -124,13 +127,35 @@ local copperMatteRecipe = Table.copyAndEdit(ironIngotRecipe, {
 	ingredients = {{type="item", name="copper-ore", amount=4}},
 	results = {
 		{type="item", name="copper-matte", amount=1},
-		{type="item", name="stone", amount=1},
+		{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
 	},
 	main_product = "copper-matte",
 	energy_required = 4,
 	enabled = true,
+	--factoriopedia_description = {"factoriopedia-description.copper-matte"}, -- Doesn't work, not sure why.
 })
 table.insert(newData, copperMatteRecipe)
+
+-- Make copper-matte item.
+local copperMattePictures = {}
+for i = 1, 12 do
+	table.insert(copperMattePictures, {
+		filename = "__LegendarySpaceAge__/graphics/metallurgy/matte/matte" .. i .. ".png",
+		size = 64,
+		scale = 0.5,
+		mipmap_count = 4,
+	})
+end
+local copperMatte = Table.copyAndEdit(data.raw.item["copper-ore"], {
+	name = "copper-matte",
+	icons = {
+		{icon="__LegendarySpaceAge__/graphics/metallurgy/matte/matte1.png", icon_size=64, scale=0.5},
+	},
+	pictures = copperMattePictures,
+	--factoriopedia_description = {"factoriopedia-description.copper-matte"}, -- Doesn't work, not sure why.
+	subgroup = "raw-material", -- So it groups with ingots, not ores, else recipe is alone in a row in player crafting menu.
+})
+table.insert(newData, copperMatte)
 
 -- Make recipe for copper matte -> copper ingot.
 local copperIngotRecipe = Table.copyAndEdit(steelIngotRecipe, {
@@ -138,7 +163,7 @@ local copperIngotRecipe = Table.copyAndEdit(steelIngotRecipe, {
 	ingredients = {{type="item", name="copper-matte", amount=2}},
 	results = {
 		{type="item", name="ingot-copper-hot", amount=1},
-		{type="item", name="sulfur", amount=1},
+		{type="item", name="sulfur", amount=1, show_details_in_recipe_tooltip=false},
 	},
 	category = "smelting",
 	main_product = "ingot-copper-hot",
@@ -146,17 +171,6 @@ local copperIngotRecipe = Table.copyAndEdit(steelIngotRecipe, {
 	enabled = true,
 })
 table.insert(newData, copperIngotRecipe)
-
--- Make copper-matte item.
-local copperMatte = Table.copyAndEdit(data.raw.item["copper-ore"], {
-	name = "copper-matte",
-	icons = {
-		-- TODO make icons.
-		--{icon="__LegendarySpaceAge__/graphics/metallurgy/copper-matte.png", icon_size=64, scale=0.5},
-		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5},
-	},
-})
-table.insert(newData, copperMatte)
 
 -- Adjust steel plate recipe.
 Table.setFields(data.raw.recipe["steel-plate"], {
@@ -197,7 +211,6 @@ Table.setFields(data.raw.recipe["iron-stick"], {
 })
 
 -- Adjust recipe for copper cables.
--- TODO
 Table.setFields(data.raw.recipe["copper-cable"], {
 	ingredients = {{type="item", name="ingot-copper-hot", amount=1}},
 	results = {{type="item", name="copper-cable", amount=16}},
@@ -214,6 +227,43 @@ Table.setFields(data.raw.recipe["low-density-structure"], {
 	},
 })
 
+-- Change rusting recipes to sometimes return stone (to reduce cost and increase complexity), and increase time.
+for _, recipeName in pairs{"rocs-rusting-iron-iron-plate-derusting", "rocs-rusting-iron-iron-gear-wheel-derusting", "rocs-rusting-iron-iron-stick-derusting"} do
+	local recipe = data.raw.recipe[recipeName]
+	table.insert(recipe.results, {type="item", name="stone", amount=1, probability=0.8, show_details_in_recipe_tooltip=false})
+	recipe.main_product = recipe.results[1].name
+	recipe.energy_required = 1 -- Increased 0.25 -> 1
+end
+
+-- Create item for rusted cold iron ingot.
+local rustedIronIngot = Table.copyAndEdit(ingotItems["ingot-iron-cold"], {
+	name = "ingot-iron-rusted",
+	icons = {
+		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-rusted.png", icon_size=64, scale=0.5},
+	},
+})
+table.insert(newData, rustedIronIngot)
+ingotItems["ingot-iron-cold"].spoil_ticks = 60 * 60 * 20
+ingotItems["ingot-iron-cold"].spoil_result = "ingot-iron-rusted"
+
+-- Add recipe to de-rust cold iron ingot.
+local derustIronIngotRecipe = Table.copyAndEdit(data.raw.recipe["rocs-rusting-iron-iron-stick-derusting"], {
+	name = "ingot-iron-derusting",
+	ingredients = {
+		{type="item", name="ingot-iron-rusted", amount=1},
+		{type="item", name="stone", amount=1},
+	},
+	results = {
+		{type="item", name="ingot-iron-cold", amount=1},
+		{type="item", name="stone", amount=1, probability=0.8, show_details_in_recipe_tooltip=false},
+	},
+	main_product = "ingot-iron-cold",
+	icons = {{icon="__LegendarySpaceAge__/graphics/metallurgy/derusting-iron-ingot.png", icon_size=64, scale=0.5}},
+	enabled = true,
+	order = "e[derusting]-aa[derust-iron-ingot]",
+})
+table.insert(newData, derustIronIngotRecipe)
+
 -- Add new prototypes.
 data:extend(newData)
 
@@ -227,11 +277,10 @@ data.raw.technology["steam-power"].research_trigger.item = "ingot-iron-hot"
 data.raw.technology["electronics"].research_trigger.item = "ingot-copper-hot"
 
 -- Adjust stack sizes and rocket capacities of basic metal products.
+data.raw.item["copper-matte"].weight = ROCKET_MASS / 500 -- Compare to 500 ingots = 500 mattes.
 data.raw.item["iron-plate"].weight = ROCKET_MASS / 4000 -- Compare to 500 ingots = 4000 plates.
 data.raw.item["copper-plate"].weight = ROCKET_MASS / 4000
 data.raw.item["steel-plate"].weight = ROCKET_MASS / 1000 -- Compare to 500 ingots = 1000 plates.
 data.raw.item["iron-gear-wheel"].weight = ROCKET_MASS / 2000 -- Compare to 500 ingots = 2000 gears.
 data.raw.item["iron-stick"].weight = ROCKET_MASS / 8000 -- Compare to 500 ingots = 8000 rods.
 data.raw.item["copper-cable"].weight = ROCKET_MASS / 8000 -- Compare to 500 ingots = 8000 cables.
-
--- TODO add rusting for cold iron ingots, and for iron items.

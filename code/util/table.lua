@@ -35,15 +35,11 @@ Table.stringProduct = function(strings1, strings2)
 	return result
 end
 
-Table.overwriteInto = function(a, b)
-	-- Given tables a and b, set b[.] to a[.] for all keys in b.
-	for k, v in pairs(a) do
-		b[k] = v
-	end
-end
-
 Table.setFields = function(a, b)
+	-- Given tables a and b, set a[.] to b[.] for all keys in b.
+	-- Uses string "nil" to represent nil values, else those don't work properly.
 	for k, v in pairs(b) do
+		if v == "nil" then v = nil end
 		a[k] = v
 	end
 end
@@ -75,8 +71,10 @@ end
 
 Table.copyAndEdit = function(t, edits)
 	-- Returns a copy of t, with edits applied.
+	-- Uses string "nil" to represent nil values, else those don't work properly.
 	local new = table.deepcopy(t)
 	for k, v in pairs(edits) do
+		if v == "nil" then v = nil end
 		new[k] = v
 	end
 	return new
