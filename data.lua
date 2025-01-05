@@ -15,3 +15,5 @@ require("code.data.map-gen-preset")
 require("code.data.metallurgy.metallurgy-d")
 
 require("code.data.petrochem.main")
+
+require("code.data.circuits")

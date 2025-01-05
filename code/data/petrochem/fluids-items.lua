@@ -1,4 +1,6 @@
 local Table = require("code.util.table")
+local Item = require("code.util.item")
+
 local constants = require("code.data.petrochem.constants")
 
 local newData = {}
@@ -68,12 +70,29 @@ for i = 1, 3 do
 end
 local pitchItem = Table.copyAndEdit(data.raw.item["carbon"], {
 	name = "pitch",
-	icons = {
-		{icon="__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size=64, scale=0.5},
-	},
+	icons = {pitchPictures[1]},
 	pictures = pitchPictures,
 })
+Item.copySoundsTo("plastic-bar", pitchItem)
 table.insert(newData, pitchItem)
+
+-- Create resin item.
+local resinPictures = {}
+for i = 1, 3 do
+	table.insert(resinPictures, {
+		filename = "__LegendarySpaceAge__/graphics/resin/resin-" .. i .. ".png",
+		size = 64,
+		scale = 0.5,
+		mipmap_count = 4,
+	})
+end
+local resinItem = Table.copyAndEdit(data.raw.item["plastic-bar"], {
+	name = "resin",
+	icons = {resinPictures[1]},
+	pictures = resinPictures,
+})
+Item.copySoundsTo(data.raw.capsule["bioflux"], resinItem)
+table.insert(newData, resinItem)
 
 ------------------------------------------------------------------------
 -- Add new prototypes to the game.

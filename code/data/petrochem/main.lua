@@ -5,7 +5,7 @@ require("code.data.petrochem.gas-furnace")
 require("code.data.petrochem.fluids-items")
 require("code.data.petrochem.recipes")
 
--- Add fluid output to refinery, so we can have recipes with 4 fluid outputs.
+-- Add another fluid output to refinery, so we can have recipes with 4 fluid outputs.
 local oilRefinery = data.raw["assembling-machine"]["oil-refinery"]
 local newFluidBox = Table.copyAndEdit(oilRefinery.fluid_boxes[5], {
 	pipe_connections = {
@@ -13,3 +13,6 @@ local newFluidBox = Table.copyAndEdit(oilRefinery.fluid_boxes[5], {
 	},
 })
 table.insert(oilRefinery.fluid_boxes, newFluidBox)
+
+-- TODO figure out what to put in the 2nd oil tech.
+-- TODO figure out what to do with the sulfur tech.

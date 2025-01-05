@@ -23,4 +23,26 @@ Item.multiplyWeight = function(itemName, multiplier, typeName)
 	item.weight = item.weight * multiplier
 end
 
+Item.copySoundsTo = function(a, b)
+	if type(a) == "string" then
+		a = data.raw.item[a]
+	end
+	if type(b) == "string" then
+		b = data.raw.item[b]
+	end
+	if a == nil then
+		log("ERROR: Couldn't find item a to copy sounds from.")
+		return
+	end
+	if b == nil then
+		log("ERROR: Couldn't find item b to copy sounds to.")
+		return
+	end
+	b.open_sound = a.open_sound
+	b.close_sound = a.close_sound
+	b.pick_sound = a.pick_sound
+	b.drop_sound = a.drop_sound
+	b.inventory_move_sound = a.inventory_move_sound
+end
+
 return Item

@@ -30,6 +30,7 @@ local oilFractionationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-p
 		{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
 	},
 	icon = "nil",
+	order = "a[oil-processing]-b1",
 })
 table.insert(newData, oilFractionationRecipe)
 local gasFractionationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-processing"], {
@@ -46,12 +47,94 @@ local gasFractionationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-p
 	},
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.27, shift={0, -4}, tint=constants.natgasTint},
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={-6, 4}, tint=constants.richgasColor},
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 4}, tint=constants.drygasColor},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={-6, 5}, tint=constants.richgasColor},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 5}, tint=constants.drygasColor},
 	},
 	icon = "nil",
+	order = "a[oil-processing]-b2",
 })
 table.insert(newData, gasFractionationRecipe)
+
+--[[ Edit existing cracking recipes, and add the new one.
+	100 heavy oil + 100 steam -> 100 light oil + 1 carbon + 1 sulfur
+	100 light oil + 100 steam -> 100 rich gas + 1 sulfur
+	100 rich gas + 100 steam -> 100 dry gas
+]]
+Table.setFields(data.raw.recipe["heavy-oil-cracking"], {
+	ingredients = {
+		{type = "fluid", name = "heavy-oil", amount = 100},
+		{type = "fluid", name = "steam", amount = 100},
+	},
+	results = {
+		{type = "fluid", name = "light-oil", amount = 100},
+		{type = "item", name = "carbon", amount = 1},
+		{type = "item", name = "sulfur", amount = 1},
+	},
+	icon = "nil",
+	icons = {
+		{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
+		{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={-6, 4}},
+		{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
+	},
+})
+Table.setFields(data.raw.recipe["light-oil-cracking"], {
+	ingredients = {
+		{type = "fluid", name = "light-oil", amount = 100},
+		{type = "fluid", name = "steam", amount = 100},
+	},
+	results = {
+		{type = "fluid", name = "petroleum-gas", amount = 100},
+		{type = "item", name = "sulfur", amount = 1},
+	},
+	icon = "nil",
+	icons = {
+		{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.2, shift={-6, 5}, tint=constants.richgasColor},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.2, shift={6, 5}, tint=constants.richgasColor},
+	},
+})
+local richGasCrackingRecipe = Table.copyAndEdit(data.raw.recipe["light-oil-cracking"], {
+	name = "rich-gas-cracking",
+	ingredients = {
+		{type = "fluid", name = "petroleum-gas", amount = 100},
+		{type = "fluid", name = "steam", amount = 100},
+	},
+	results = {
+		{type = "fluid", name = "dry-gas", amount = 100},
+	},
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.3, shift={0, -3}, tint=constants.richgasColor},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.2, shift={-6, 5}, tint=constants.drygasColor},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.2, shift={6, 5}, tint=constants.drygasColor},
+	},
+})
+table.insert(newData, richGasCrackingRecipe)
+
+--[[ Add recipe for tar distillation.
+	Tar distillation: 10 tar -> 3 pitch + 2 heavy oil + 1 light oil + 2 carbon + 1 sulfur
+		(No steam input because we want this to be usable on Fulgora for pitch, to make resin.)
+]]
+local tarDistillationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-processing"], {
+	name = "tar-distillation",
+	ingredients = {
+		{type = "fluid", name = "tar", amount = 100},
+	},
+	results = {
+		{type = "item", name = "pitch", amount = 3},
+		{type = "item", name = "carbon", amount = 2},
+		{type = "item", name = "sulfur", amount = 1},
+		{type = "fluid", name = "heavy-oil", amount = 20},
+		{type = "fluid", name = "light-oil", amount = 10},
+	},
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale=0.3, shift={0, -3}},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size = 64, scale=0.2, shift={-6, 4}},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size = 64, scale=0.2, shift={6, 4}},
+	},
+	icon = "nil",
+	order = "a[oil-processing]-b3",
+})
+table.insert(newData, tarDistillationRecipe)
 
 ------------------------------------------------------------------------
 -- Add new prototypes to the game.
@@ -61,3 +144,25 @@ data:extend(newData)
 -- Add new fractionation recipes to techs.
 Tech.addRecipeToTech("oil-fractionation", "oil-processing")
 Tech.addRecipeToTech("gas-fractionation", "oil-processing")
+
+-- Put all cracking recipes in the first oil tech.
+Tech.addRecipeToTech("heavy-oil-cracking", "oil-processing")
+Tech.addRecipeToTech("light-oil-cracking", "oil-processing")
+Tech.addRecipeToTech("rich-gas-cracking", "oil-processing")
+Tech.removeRecipeFromTech("heavy-oil-cracking", "advanced-oil-processing")
+Tech.removeRecipeFromTech("light-oil-cracking", "advanced-oil-processing")
+
+-- Add tar distillation to the 1st oil tech.
+Tech.addRecipeToTech("tar-distillation", "oil-processing")
+
+-- Hide old recipes, and remove from techs.
+data.raw.recipe["advanced-oil-processing"].hidden = true
+Tech.removeRecipeFromTech("advanced-oil-processing", "advanced-oil-processing")
+data.raw.recipe["basic-oil-processing"].hidden = true
+Tech.removeRecipeFromTech("basic-oil-processing", "oil-processing")
+data.raw.recipe["solid-fuel-from-petroleum-gas"].hidden = true
+Tech.removeRecipeFromTech("solid-fuel-from-petroleum-gas", "oil-processing")
+data.raw.recipe["solid-fuel-from-heavy-oil"].hidden = true
+Tech.removeRecipeFromTech("solid-fuel-from-heavy-oil", "advanced-oil-processing")
+data.raw.recipe["solid-fuel-from-light-oil"].hidden = true
+Tech.removeRecipeFromTech("solid-fuel-from-light-oil", "advanced-oil-processing")
