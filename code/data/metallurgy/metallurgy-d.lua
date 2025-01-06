@@ -282,8 +282,10 @@ local derustIronIngotRecipe = Table.copyAndEdit(data.raw.recipe["rocs-rusting-ir
 })
 table.insert(newData, derustIronIngotRecipe)
 
+------------------------------------------------------------------------
 -- Add new prototypes.
 data:extend(newData)
+------------------------------------------------------------------------
 
 -- Add recipes to techs.
 Tech.addRecipeToTech("ingot-steel-hot", "steel-processing", 1)
@@ -303,3 +305,11 @@ data.raw.item["steel-plate"].weight = ROCKET_MASS / 1000 -- Compare to 500 ingot
 data.raw.item["iron-gear-wheel"].weight = ROCKET_MASS / 2000 -- Compare to 500 ingots = 2000 gears.
 data.raw.item["iron-stick"].weight = ROCKET_MASS / 8000 -- Compare to 500 ingots = 8000 rods.
 data.raw.item["copper-cable"].weight = ROCKET_MASS / 8000 -- Compare to 500 ingots = 8000 cables.
+
+-- Move all rusty items to the subgroup for derusting (actually now the "rust" group).
+data.raw.item["ingot-iron-rusted"].subgroup = "derusting"
+data.raw.item["rocs-rusting-iron-iron-plate-rusty"].subgroup = "derusting"
+data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].subgroup = "derusting"
+data.raw.item["rocs-rusting-iron-iron-stick-rusty"].subgroup = "derusting"
+data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].order = data.raw.item["rocs-rusting-iron-iron-plate-rusty"].order .. "-1"
+data.raw.item["rocs-rusting-iron-iron-stick-rusty"].order = data.raw.item["rocs-rusting-iron-iron-plate-rusty"].order .. "-2"

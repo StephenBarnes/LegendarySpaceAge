@@ -70,8 +70,9 @@ for i = 1, 3 do
 end
 local pitchItem = Table.copyAndEdit(data.raw.item["carbon"], {
 	name = "pitch",
-	icons = {pitchPictures[1]},
+	icons = {{icon = pitchPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
 	pictures = pitchPictures,
+	order = "b[chemistry]-b[plastic-bar]-1",
 })
 Item.copySoundsTo("plastic-bar", pitchItem)
 table.insert(newData, pitchItem)
@@ -88,8 +89,9 @@ for i = 1, 3 do
 end
 local resinItem = Table.copyAndEdit(data.raw.item["plastic-bar"], {
 	name = "resin",
-	icons = {resinPictures[1]},
+	icons = {{icon = resinPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
 	pictures = resinPictures,
+	subgroup = "resin-and-boards",
 })
 Item.copySoundsTo(data.raw.capsule["bioflux"], resinItem)
 table.insert(newData, resinItem)

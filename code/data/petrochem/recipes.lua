@@ -121,20 +121,99 @@ local tarDistillationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-pr
 	},
 	results = {
 		{type = "item", name = "pitch", amount = 3},
-		{type = "item", name = "carbon", amount = 2},
+		--{type = "item", name = "carbon", amount = 2},
 		{type = "item", name = "sulfur", amount = 1},
 		{type = "fluid", name = "heavy-oil", amount = 20},
 		{type = "fluid", name = "light-oil", amount = 10},
 	},
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale=0.3, shift={0, -3}},
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size = 64, scale=0.2, shift={-6, 4}},
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size = 64, scale=0.2, shift={6, 4}},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size = 64, scale=0.2, shift={-6, 5}},
+		{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
 	},
 	icon = "nil",
 	order = "a[oil-processing]-b3",
 })
 table.insert(newData, tarDistillationRecipe)
+
+-- Create item subgroup for resin and circuit boards and circuits, since each of them has 3 alternative recipes.
+local resinAndBoardsSubgroup = {
+	type = "item-subgroup",
+	name = "resin-and-boards",
+	group = "intermediate-products",
+	order = "gd",
+}
+table.insert(newData, resinAndBoardsSubgroup)
+
+-- Create recipe subgroup for all complex oil recipes, meaning not just fractionation and cracking.
+-- TODO
+-- TODO add this group to other recipes.
+
+--[[ Add recipes for resin.
+	Wood-based resin (pyrolysis): 5 wood + 5 steam -> 2 resin + 3 carbon
+	Pitch-based resin: 2 pitch + 1 sulfuric acid + 1 carbon -> 4 resin
+	Rich-gas-based resin: 2 rich gas + 1 sulfuric acid + 1 carbon -> 2 resin
+	]]
+local woodResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
+	name = "wood-resin",
+	ingredients = {
+		{type = "item", name = "wood", amount = 5},
+		{type = "fluid", name = "steam", amount = 50},
+	},
+	results = {
+		{type = "item", name = "resin", amount = 2},
+		{type = "item", name = "carbon", amount = 3},
+	},
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale=0.45, shift={1, 1}},
+		{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale=0.32, shift={-5, -5}},
+	},
+	icon = "nil",
+	order = "a[basic-intermediate]-e[resin]-1",
+	subgroup = "resin-and-boards",
+	main_product = "resin",
+})
+table.insert(newData, woodResinRecipe)
+local pitchResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
+	name = "pitch-resin",
+	ingredients = {
+		{type = "item", name = "pitch", amount = 2},
+		{type = "fluid", name = "sulfuric-acid", amount = 10},
+		{type = "item", name = "carbon", amount = 1},
+	},
+	results = {
+		{type = "item", name = "resin", amount = 4},
+	},
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale=0.45, shift={1, 1}},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size = 64, scale=0.32, shift={-5, -5}},
+	},
+	icon = "nil",
+	order = "a[basic-intermediate]-e[resin]-2",
+	subgroup = "resin-and-boards",
+	main_product = "resin",
+})
+table.insert(newData, pitchResinRecipe)
+local richGasResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
+	name = "rich-gas-resin",
+	ingredients = {
+		{type = "fluid", name = "petroleum-gas", amount = 20},
+		{type = "fluid", name = "sulfuric-acid", amount = 10},
+		{type = "item", name = "carbon", amount = 1},
+	},
+	results = {
+		{type = "item", name = "resin", amount = 2},
+	},
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale=0.45, shift={1, 1}},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.32, shift={-5, -5}, tint=constants.richgasColor},
+	},
+	icon = "nil",
+	order = "a[basic-intermediate]-e[resin]-3",
+	subgroup = "resin-and-boards",
+	main_product = "resin",
+})
+table.insert(newData, richGasResinRecipe)
 
 ------------------------------------------------------------------------
 -- Add new prototypes to the game.
@@ -154,6 +233,12 @@ Tech.removeRecipeFromTech("light-oil-cracking", "advanced-oil-processing")
 
 -- Add tar distillation to the 1st oil tech.
 Tech.addRecipeToTech("tar-distillation", "oil-processing")
+
+-- Add resin recipes to the 1st oil tech.
+Tech.addRecipeToTech("wood-resin", "oil-processing")
+Tech.addRecipeToTech("pitch-resin", "oil-processing")
+Tech.addRecipeToTech("rich-gas-resin", "oil-processing")
+-- TODO need to figure out where these are in progression. First one needs chem plants, so need to unlock those. Maybe a resin tech in early game.
 
 -- Hide old recipes, and remove from techs.
 data.raw.recipe["advanced-oil-processing"].hidden = true
