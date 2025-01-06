@@ -1,6 +1,6 @@
 {
 	"name": "LegendarySpaceAge",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"title": "Legendary Space Age",
 	"author": "StephenB",
 	"factorio_version": "2.0",
@@ -17,44 +17,44 @@
 
 		, "gleba-lab"
 		, "Rocs-Rusting-Iron"
+		, "Electric_flying_enemies"
 		, "behemoth-enemies"
 		, "large-storage-tank"
 		, "cargo-pod-requires-research"
+		, "gas-furnace"
+		, "gas-boiler"
+
 		, "PowerMultiplier"
 		, "PowerOverload"
-
-		, "Electric_flying_enemies"
-		, "thruster-control-behavior"
-		, "CarLogistics"
 		, "spoiling-promethium"
 		, "NoLavaInPipes"
 		, "oceandump"
 		, "no-quality"
 		, "diurnal-dynamics"
 
-		, "gas-furnace"
-		, "gas-boiler"
+		, "!Flare Stack"
+		, "! adamo-carbon"
 
-		, "! stuff-below-here-I-want-to-incorporate-and-mark-incompatible"
+		, "? thruster-control-behavior"
+		, "? captains-log"
+		, "? visible-planets"
+		, "? SpidertronEnhancements"
+		, "? BeltRouter-lite"
+		, "? show-max-underground-distance"
+
+		, "! GROUP-to-incorporate-and-mark-incompatible"
 		, "slipstacks"
 		, "boompuff-agriculture"
 		, "fluroflux"
 		, "FulgoraLives"
 		, "! other-mods-incompat-with-FulgoraLives"
-		, "! adamo-carbon"
 
-		, "! everything-below-here-should-be-optional-on-release"
+		, "! GROUP-mark-optional-before-release"
 		, "factoryplanner"
-		, "captains-log"
-		, "SpidertronEnhancements"
 		, "simpleadjustableinserters"
-		, "show-max-underground-distance"
-		, "visible-planets"
-		, "? recycling-factoriopedia"
-		, "? BeltRouter-lite"
 
-		, "! everything-below-here-for-dev-only"
+		, "! GROUP-stuff-for-dev-only"
 		, "? no-graphics"
 	],
-	"description": "Modpack for Space Age veterans seeking a new challenge"
+	"description": "EARLY DEVELOPMENT, NOT PLAYABLE. Modpack for Space Age veterans seeking a new challenge."
 }

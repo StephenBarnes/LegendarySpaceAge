@@ -1,4 +1,6 @@
 This file is to keep track of other people's stuff that I've used.
 
-Unused Renders by Malcolm Riley:
-* Used as image style reference for generating copper matte pictures in Midjourney.
+* Unused Renders by Malcolm Riley.
+* AdamoCarbon by TODO - not using his mod or code, but stole several ideas for the petrochem system.
+* Flare Stack by GotLag, snouz, and others - used graphics and code.
+* Gleba crop mods by LordMiguel (slipstacks, boompuffs, stingfronds) - TODO.

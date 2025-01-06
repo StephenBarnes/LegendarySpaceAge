@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.0.0
-Date: TODO. 12. 2024
+Version: 0.1.0
+Date: 01. 01. 2025
   Features:
-    - Initial release.
+    - Initial release, still in early development.
