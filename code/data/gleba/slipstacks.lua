@@ -52,6 +52,7 @@ data.raw.recipe["slipstack-seed"].ingredients = {
 }
 data.raw.recipe["slipstack-seed"].results = {{type = "item", name = "slipstack-seed", amount = 1}}
 data.raw.recipe["slipstack-seed"].surface_conditions = nil -- Allow anywhere. Can't be planted anywhere else, though.
+data.raw.recipe["slipstack-seed"].category = "organic" -- In biochamber only.
 data.raw.item["slipstack-seed"].spoil_ticks = 60 * 60 * 20
 data.raw.item["slipstack-seed"].spoil_result = "iron-ore"
 

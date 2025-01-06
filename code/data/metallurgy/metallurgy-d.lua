@@ -241,8 +241,9 @@ Table.setFields(data.raw.recipe["low-density-structure"], {
 })
 
 -- Adjust chest recipes.
-data.raw.recipe["iron-chest"].ingredients = {{type="item", name="ingot-iron-hot", amount=2}}
-data.raw.recipe["steel-chest"].ingredients = {{type="item", name="ingot-steel-hot", amount=2}}
+-- Actually rather don't do this, bc then how do you make them from molten metals? Would need to add ingot casting or chest casting.
+--data.raw.recipe["iron-chest"].ingredients = {{type="item", name="ingot-iron-hot", amount=2}}
+--data.raw.recipe["steel-chest"].ingredients = {{type="item", name="ingot-steel-hot", amount=2}}
 
 -- Put basic metal intermediates in their own subgroup.
 for i, itemName in pairs{"iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate"} do

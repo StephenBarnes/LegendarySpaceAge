@@ -56,11 +56,17 @@ data:extend(newData)
 data.raw.recipe["steam-condensation"].order = "01"
 data.raw.recipe["ice-melting"].order = "02"
 
--- Move battery-salvage to complex recipes.
-data.raw.recipe["extract-sulfuric-acid-from-battery"].subgroup = "complex-fluid-recipes"
+-- Move battery-salvage.
+data.raw.recipe["extract-sulfuric-acid-from-battery"].subgroup = data.raw.item["battery"].subgroup
 
 -- Move batteries to intermediate-product instead of raw-material.
 data.raw.item["battery"].subgroup = "intermediate-product"
 data.raw.item["charged-battery"].subgroup = "intermediate-product"
 data.raw.item["holmium-battery"].subgroup = "intermediate-product"
 data.raw.item["charged-holmium-battery"].subgroup = "intermediate-product"
+
+-- Move rocket fuel to raw-material bc it makes more sense (sprite has canister, but no iron/steel ingredient) and balances subgroup populations better.
+data.raw.item["rocket-fuel"].subgroup = "raw-material"
+
+-- Move lubricant to complex-fluid-recipes.
+data.raw.recipe["lubricant"].subgroup = "complex-fluid-recipes"

@@ -138,6 +138,79 @@ local tarDistillationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-pr
 })
 table.insert(newData, tarDistillationRecipe)
 
+--[[ Add recipe for heavy oil coking.
+	Heavy oil coking: 10 heavy oil -> 5 tar + 3 carbon
+		If you intend to burn the heavy oil, you can get more heat by coking first and then burning the tar and carbon. (This is realistic, and rewards the player for the extra complexity.)
+		This recipe is also useful when the player needs more tar or carbon - usually those are byproducts.
+]]
+local heavyOilCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracking"], {
+	name = "heavy-oil-coking",
+	ingredients = {
+		{type = "fluid", name = "heavy-oil", amount = 100},
+	},
+	results = {
+		{type = "item", name = "carbon", amount = 3},
+		{type = "fluid", name = "tar", amount = 50},
+	},
+	icons = {
+		{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
+		{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale=0.2, shift={-6, 5}},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale=0.2, shift={6, 4}},
+	},
+	icon = "nil",
+	order = "a[oil-processing]-b4",
+	subgroup = "complex-fluid-recipes",
+	energy_required = 5,
+})
+table.insert(newData, heavyOilCokingRecipe)
+
+--[[ Add recipe for coal coking.
+	Coal coking: 10 coal -> 5 carbon + 2 tar + 1 sulfur
+		This offers a route from coal to carbon that's more direct than syngas liquefaction.
+]]
+local coalCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracking"], {
+	name = "coal-coking",
+	ingredients = {
+		{type = "item", name = "coal", amount = 10},
+	},
+	results = {
+		{type = "item", name = "carbon", amount = 5},
+		{type = "item", name = "sulfur", amount = 1},
+		{type = "fluid", name = "tar", amount = 20},
+	},
+	icons = {
+		{icon = "__base__/graphics/icons/coal.png", icon_size = 64, scale=0.25, shift={0, -3}},
+		{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale=0.2, shift={-6, 5}},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale=0.2, shift={6, 4}},
+	},
+	icon = "nil",
+	order = "a[oil-processing]-b5",
+	subgroup = "complex-fluid-recipes",
+	energy_required = 5,
+})
+table.insert(newData, coalCokingRecipe)
+
+--[[ Add recipe for solid fuel.
+	5 heavy oil + 2 tar -> 2 solid fuel + 1 light oil
+		This represents pet coke style briquettes. We tune the energy values so that this gives more heat per heavy oil than other forms of processing. (TODO)
+]]
+local solidFuelRecipe = Table.copyAndEdit(data.raw.recipe["solid-fuel-from-light-oil"], {
+	name = "solid-fuel",
+	ingredients = {
+		{type = "fluid", name = "heavy-oil", amount = 50},
+		{type = "fluid", name = "tar", amount = 20},
+	},
+	results = {
+		{type = "item", name = "solid-fuel", amount = 2},
+		{type = "fluid", name = "light-oil", amount = 10},
+	},
+	main_product = "solid-fuel",
+	icons = "nil",
+	icon = "nil",
+	energy_required = 2,
+})
+table.insert(newData, solidFuelRecipe)
+
 --[[ Add recipes for resin.
 	Wood-based resin (pyrolysis): 5 wood + 5 steam -> 2 resin + 3 carbon
 	Pitch-based resin: 2 pitch + 1 sulfuric acid + 1 carbon -> 4 resin
@@ -232,6 +305,68 @@ local syngasLiquefactionRecipe = Table.copyAndEdit(data.raw.recipe["coal-liquefa
 })
 table.insert(newData, syngasLiquefactionRecipe)
 
+--[[ Modify recipe for lubricant
+	10 heavy oil + 1 sulfuric acid -> 8 lubricant + 1 tar
+		Meant to resemble vacuum distillation - heavy oil is distilled, sulfuric acid is used for acid-washing impurities.
+]]
+Table.setFields(data.raw.recipe["lubricant"], {
+	ingredients = {
+		{type = "fluid", name = "heavy-oil", amount = 100},
+		{type = "fluid", name = "sulfuric-acid", amount = 10},
+	},
+	results = {
+		{type = "fluid", name = "lubricant", amount = 80},
+		{type = "fluid", name = "tar", amount = 10},
+	},
+	main_product = "lubricant",
+})
+
+--[[ Modify recipe for vehicle fuel (rocket-fuel).
+	10 light oil + 5 rich gas -> 4 vehicle fuel (items)
+		These are used both to fuel cars and tanks, and for rockets launched to space.
+		These 2 fractions are used so that the player can't make rocket fuel immediately after fractionating only oil or only gas - needs to fractionate both, or crack, or do syngas liquefaction.
+]]
+Table.setFields(data.raw.recipe["rocket-fuel"], {
+	ingredients = {
+		{type = "fluid", name = "light-oil", amount = 100},
+		{type = "fluid", name = "petroleum-gas", amount = 50},
+	},
+	results = {
+		{type = "item", name = "rocket-fuel", amount = 4},
+	},
+	category = "organic-or-chemistry",
+})
+
+--[[ Modify recipe for plastic-bar.
+	5 syngas + 2 carbon + 1 sulfuric acid -> 5 plastic bars
+		Syngas provides hydrogen, carbon is the backbone, and sulfuric acid helps drive polymerization.
+]]
+Table.setFields(data.raw.recipe["plastic-bar"], {
+	ingredients = {
+		{type = "item", name = "carbon", amount = 2},
+		{type = "fluid", name = "syngas", amount = 50},
+		{type = "fluid", name = "sulfuric-acid", amount = 10},
+	},
+	results = {
+		{type = "item", name = "plastic-bar", amount = 5},
+	},
+})
+
+--[[ Modify recipe for explosives.
+	5 light oil + 2 syngas + 1 sulfuric acid -> 3 explosives
+		Light oil is the hydrocarbon base, syngas provides nitrogen (hand-waving some ammonia/nitration step; syngas has nitrogen bc it's air-blown), and sulfuric acid is the catalyst.
+]]
+Table.setFields(data.raw.recipe["explosives"], {
+	ingredients = {
+		{type = "fluid", name = "light-oil", amount = 50},
+		{type = "fluid", name = "syngas", amount = 20},
+		{type = "fluid", name = "sulfuric-acid", amount = 10},
+	},
+	results = {
+		{type = "item", name = "explosives", amount = 3},
+	},
+})
+
 ------------------------------------------------------------------------
 -- Add new prototypes to the game.
 data:extend(newData)
@@ -279,3 +414,16 @@ Tech.removeRecipeFromTech("coal-synthesis", "rocket-turret")
 
 -- Add syngas liquefaction to tech.
 Tech.addRecipeToTech("syngas-liquefaction", "coal-liquefaction")
+
+-- Add heavy oil coking to advanced-oil-processing tech.
+Tech.addRecipeToTech("heavy-oil-coking", "advanced-oil-processing")
+
+-- Add coal coking to oil-processing tech.
+Tech.addRecipeToTech("coal-coking", "oil-processing")
+-- TODO figure out where this should go in progression.
+
+-- Remove default recipes for carbon, sulfur.
+Recipe.hide("sulfur")
+Recipe.hide("carbon")
+Tech.removeRecipeFromTech("sulfur", "sulfur-processing") -- TODO figure out what to do with that tech.
+Tech.removeRecipeFromTech("carbon", "tungsten-carbide") -- TODO check that tech
