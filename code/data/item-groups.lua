@@ -21,6 +21,33 @@ local complexFluidRecipesSubgroup = {
 }
 table.insert(newData, complexFluidRecipesSubgroup)
 
+-- Create subgroup for hot/cold ingots and ingot-heating recipes.
+local ingotSubgroup = {
+	type = "item-subgroup",
+	name = "ingots",
+	group = "intermediate-products",
+	order = "b1",
+}
+table.insert(newData, ingotSubgroup)
+
+-- Create subgroup for basic metal intermediates.
+local basicMetalSubgroup = {
+	type = "item-subgroup",
+	name = "basic-metal-intermediates",
+	group = "intermediate-products",
+	order = "b2",
+}
+table.insert(newData, basicMetalSubgroup)
+
+-- Create subgroup for circuits and advanced circuit intermediates (electronic components, silicon wafers, doped wafers).
+local complexCircuitIntermediatesSubgroup = {
+	type = "item-subgroup",
+	name = "complex-circuit-intermediates",
+	group = "intermediate-products",
+	order = "ge",
+}
+table.insert(newData, complexCircuitIntermediatesSubgroup)
+
 ------------------------------------------------------------------------
 data:extend(newData)
 ------------------------------------------------------------------------
@@ -31,3 +58,9 @@ data.raw.recipe["ice-melting"].order = "02"
 
 -- Move battery-salvage to complex recipes.
 data.raw.recipe["extract-sulfuric-acid-from-battery"].subgroup = "complex-fluid-recipes"
+
+-- Move batteries to intermediate-product instead of raw-material.
+data.raw.item["battery"].subgroup = "intermediate-product"
+data.raw.item["charged-battery"].subgroup = "intermediate-product"
+data.raw.item["holmium-battery"].subgroup = "intermediate-product"
+data.raw.item["charged-holmium-battery"].subgroup = "intermediate-product"

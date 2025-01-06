@@ -274,6 +274,8 @@ Recipe.hide("coal-liquefaction")
 Tech.removeRecipeFromTech("coal-liquefaction", "coal-liquefaction")
 Recipe.hide("acid-neutralisation")
 Tech.removeRecipeFromTech("acid-neutralisation", "calcite-processing")
+Recipe.hide("coal-synthesis")
+Tech.removeRecipeFromTech("coal-synthesis", "rocket-turret")
 
 -- Add syngas liquefaction to tech.
 Tech.addRecipeToTech("syngas-liquefaction", "coal-liquefaction")

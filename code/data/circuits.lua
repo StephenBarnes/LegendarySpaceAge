@@ -89,3 +89,8 @@ data:extend(newData)
 Tech.addRecipeToTech("wood-circuit-board", "electronics", 2)
 Tech.addRecipeToTech("plastic-circuit-board", "plastics")
 Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing")
+
+-- Move circuits to complex-circuit-intermediates subgroup.
+data.raw.item["electronic-circuit"].subgroup = "complex-circuit-intermediates"
+data.raw.item["advanced-circuit"].subgroup = "complex-circuit-intermediates"
+data.raw.item["processing-unit"].subgroup = "complex-circuit-intermediates"

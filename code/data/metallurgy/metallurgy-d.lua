@@ -59,6 +59,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		order = "a[smelting]-0-" .. i,
 		stack_size = 100,
 		weight = ROCKET_MASS / 500,
+		subgroup = "ingots",
 	})
 	table.insert(newData, hotIngot)
 	ingotItems[hotIngotName] = hotIngot
@@ -67,8 +68,6 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		name = coldIngotName,
 		spoil_ticks = "nil",
 		spoil_result = "nil",
-		stack_size = 100,
-		weight = ROCKET_MASS / 500,
 		icons = {
 			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5, tint=tint},
 		},
@@ -154,7 +153,7 @@ local copperMatte = Table.copyAndEdit(data.raw.item["copper-ore"], {
 	},
 	pictures = copperMattePictures,
 	--factoriopedia_description = {"factoriopedia-description.copper-matte"}, -- Doesn't work, not sure why.
-	subgroup = "raw-material", -- So it groups with ingots, not ores, else recipe is alone in a row in player crafting menu.
+	subgroup = "raw-material",
 })
 table.insert(newData, copperMatte)
 
@@ -244,6 +243,12 @@ Table.setFields(data.raw.recipe["low-density-structure"], {
 -- Adjust chest recipes.
 data.raw.recipe["iron-chest"].ingredients = {{type="item", name="ingot-iron-hot", amount=2}}
 data.raw.recipe["steel-chest"].ingredients = {{type="item", name="ingot-steel-hot", amount=2}}
+
+-- Put basic metal intermediates in their own subgroup.
+for i, itemName in pairs{"iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate"} do
+	data.raw.item[itemName].subgroup = "basic-metal-intermediates"
+	data.raw.item[itemName].order = ""..i
+end
 
 -- Change rusting recipes to sometimes return stone (to reduce cost and increase complexity), and increase time.
 for _, recipeName in pairs{"rocs-rusting-iron-iron-plate-derusting", "rocs-rusting-iron-iron-gear-wheel-derusting", "rocs-rusting-iron-iron-stick-derusting"} do
