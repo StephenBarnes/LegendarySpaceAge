@@ -208,6 +208,7 @@ local solidFuelRecipe = Table.copyAndEdit(data.raw.recipe["solid-fuel-from-light
 	icons = "nil",
 	icon = "nil",
 	energy_required = 2,
+	hide_from_player_crafting = false,
 })
 table.insert(newData, solidFuelRecipe)
 

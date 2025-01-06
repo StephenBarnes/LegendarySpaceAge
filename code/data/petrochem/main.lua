@@ -4,6 +4,7 @@ require("code.data.petrochem.adamo-carbon")
 require("code.data.petrochem.gas-furnace")
 require("code.data.petrochem.fluids-items")
 require("code.data.petrochem.recipes")
+require("code.data.petrochem.gasifier")
 
 -- Add 2 more fluid outputs to the refinery, so we can have recipes with 5 fluid outputs.
 -- Could get away with adding only 1 new output, but then it's asymmetric so we can't flip it.

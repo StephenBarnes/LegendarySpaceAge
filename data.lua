@@ -19,3 +19,5 @@ require("code.data.metallurgy.metallurgy-d")
 require("code.data.petrochem.main")
 
 require("code.data.circuits")
+
+require("code.data.gas-vent")

@@ -27,7 +27,7 @@ local woodCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 		{type = "item", name = "resin", amount = 1},
 	},
 	results = {
-		{type = "item", name = "circuit-board", amount = 4},
+		{type = "item", name = "circuit-board", amount = 8},
 	},
 	order = "b[circuits]-001",
 	subgroup = "resin-and-boards",
