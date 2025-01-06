@@ -1,5 +1,6 @@
 local Tech = require("code.util.tech")
 local Table = require("code.util.table")
+local Recipe = require("code.util.recipe")
 
 local constants = require("code.data.petrochem.constants")
 
@@ -89,8 +90,8 @@ Table.setFields(data.raw.recipe["light-oil-cracking"], {
 	icon = "nil",
 	icons = {
 		{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.2, shift={-6, 5}, tint=constants.richgasColor},
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.2, shift={6, 5}, tint=constants.richgasColor},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={-6, 6}, tint=constants.richgasColor},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 6}, tint=constants.richgasColor},
 	},
 })
 local richGasCrackingRecipe = Table.copyAndEdit(data.raw.recipe["light-oil-cracking"], {
@@ -103,9 +104,9 @@ local richGasCrackingRecipe = Table.copyAndEdit(data.raw.recipe["light-oil-crack
 		{type = "fluid", name = "dry-gas", amount = 100},
 	},
 	icons = {
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.3, shift={0, -3}, tint=constants.richgasColor},
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.2, shift={-6, 5}, tint=constants.drygasColor},
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.2, shift={6, 5}, tint=constants.drygasColor},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.27, shift={0, -4}, tint=constants.richgasColor},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={-6, 5}, tint=constants.drygasColor},
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 5}, tint=constants.drygasColor},
 	},
 })
 table.insert(newData, richGasCrackingRecipe)
@@ -133,21 +134,9 @@ local tarDistillationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-pr
 	},
 	icon = "nil",
 	order = "a[oil-processing]-b3",
+	subgroup = "complex-fluid-recipes",
 })
 table.insert(newData, tarDistillationRecipe)
-
--- Create item subgroup for resin and circuit boards and circuits, since each of them has 3 alternative recipes.
-local resinAndBoardsSubgroup = {
-	type = "item-subgroup",
-	name = "resin-and-boards",
-	group = "intermediate-products",
-	order = "gd",
-}
-table.insert(newData, resinAndBoardsSubgroup)
-
--- Create recipe subgroup for all complex oil recipes, meaning not just fractionation and cracking.
--- TODO
--- TODO add this group to other recipes.
 
 --[[ Add recipes for resin.
 	Wood-based resin (pyrolysis): 5 wood + 5 steam -> 2 resin + 3 carbon
@@ -215,6 +204,34 @@ local richGasResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 })
 table.insert(newData, richGasResinRecipe)
 
+--[[ Add syngas liquefaction.
+	10 syngas + 1 iron plate -> 2 heavy oil + 3 light oil + 3 rich gas + 2 dry gas + 1 water
+		(Named "syngas liquefaction" for the benefit of players already familiar with "coal liquefaction" in the base game, since this effectively replaces coal liquefaction.)
+]]
+local syngasLiquefactionRecipe = Table.copyAndEdit(data.raw.recipe["coal-liquefaction"], {
+	name = "syngas-liquefaction",
+	ingredients = {
+		{type = "fluid", name = "syngas", amount = 100},
+		{type = "item", name = "iron-plate", amount = 1},
+	},
+	results = {
+		{type = "fluid", name = "heavy-oil", amount = 20},
+		{type = "fluid", name = "light-oil", amount = 30},
+		{type = "fluid", name = "petroleum-gas", amount = 30},
+		{type = "fluid", name = "dry-gas", amount = 20},
+		{type = "fluid", name = "water", amount = 1},
+	},
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.27, shift={0, -4}, tint=constants.syngasColor},
+		{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.2, shift={-6, 4}},
+		{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
+	},
+	icon = "nil",
+	order = "a[coal-liquefaction]-b4",
+	subgroup = "complex-fluid-recipes",
+})
+table.insert(newData, syngasLiquefactionRecipe)
+
 ------------------------------------------------------------------------
 -- Add new prototypes to the game.
 data:extend(newData)
@@ -241,13 +258,22 @@ Tech.addRecipeToTech("rich-gas-resin", "oil-processing")
 -- TODO need to figure out where these are in progression. First one needs chem plants, so need to unlock those. Maybe a resin tech in early game.
 
 -- Hide old recipes, and remove from techs.
-data.raw.recipe["advanced-oil-processing"].hidden = true
-Tech.removeRecipeFromTech("advanced-oil-processing", "advanced-oil-processing")
-data.raw.recipe["basic-oil-processing"].hidden = true
+Recipe.hide("basic-oil-processing")
 Tech.removeRecipeFromTech("basic-oil-processing", "oil-processing")
-data.raw.recipe["solid-fuel-from-petroleum-gas"].hidden = true
-Tech.removeRecipeFromTech("solid-fuel-from-petroleum-gas", "oil-processing")
-data.raw.recipe["solid-fuel-from-heavy-oil"].hidden = true
+Recipe.hide("advanced-oil-processing")
+Tech.removeRecipeFromTech("advanced-oil-processing", "advanced-oil-processing")
+Recipe.hide("solid-fuel-from-heavy-oil")
 Tech.removeRecipeFromTech("solid-fuel-from-heavy-oil", "advanced-oil-processing")
-data.raw.recipe["solid-fuel-from-light-oil"].hidden = true
+Recipe.hide("solid-fuel-from-light-oil")
 Tech.removeRecipeFromTech("solid-fuel-from-light-oil", "advanced-oil-processing")
+Recipe.hide("solid-fuel-from-petroleum-gas")
+Tech.removeRecipeFromTech("solid-fuel-from-petroleum-gas", "oil-processing")
+Recipe.hide("simple-coal-liquefaction")
+Tech.removeRecipeFromTech("simple-coal-liquefaction", "calcite-processing")
+Recipe.hide("coal-liquefaction")
+Tech.removeRecipeFromTech("coal-liquefaction", "coal-liquefaction")
+Recipe.hide("acid-neutralisation")
+Tech.removeRecipeFromTech("acid-neutralisation", "calcite-processing")
+
+-- Add syngas liquefaction to tech.
+Tech.addRecipeToTech("syngas-liquefaction", "coal-liquefaction")

@@ -1,3 +1,5 @@
+require("code.data.item-groups")
+
 require("code.data.misc")
 require("code.data.labs")
 require("code.data.large-storage-tank")

@@ -13,6 +13,7 @@ local circuitBoardItem = Table.copyAndEdit(data.raw.item["electronic-circuit"], 
 	icon = "nil",
 	order = "b[circuits]-0",
 	subgroup = "resin-and-boards",
+	auto_recycle = false,
 })
 Item.copySoundsTo("copper-cable", circuitBoardItem)
 table.insert(newData, circuitBoardItem)
@@ -79,12 +80,12 @@ local calciteCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 })
 table.insert(newData, calciteCircuitBoardRecipe)
 
--- TODO add circuit board recipes
 -- TODO change circuit recipes to require circuit boards.
+-- TODO add circuit components etc.
 
 data:extend(newData)
 
 -- Add circuit board recipes to techs.
-Tech.addRecipeToTech("wood-circuit-board", "electronics")
+Tech.addRecipeToTech("wood-circuit-board", "electronics", 2)
 Tech.addRecipeToTech("plastic-circuit-board", "plastics")
 Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing")
