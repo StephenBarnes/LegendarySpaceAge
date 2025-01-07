@@ -80,6 +80,33 @@ local calciteCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 })
 table.insert(newData, calciteCircuitBoardRecipe)
 
+--[[ Add "improvised" circuit board recipe, only handcraftable.
+	Improvise circuit board: 1 stone + 1 carbon -> 1 circuit board
+		Needed because all ways of making circuit boards require resin, which can't be obtained on Aquilo without buildings that require electronic circuits, creating a circular dependency.
+]]
+local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electronic-circuit"], {
+	name = "improvised-circuit-board",
+	ingredients = {
+		{type = "item", name = "stone", amount = 1},
+		{type = "item", name = "carbon", amount = 1},
+	},
+	results = {
+		{type = "item", name = "circuit-board", amount = 1},
+	},
+	order = "b[circuits]-004",
+	subgroup = "resin-and-boards",
+	icon = "nil",
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/circuit-board-generic.png", icon_size = 64, scale = 0.5},
+		{icon = "__core__/graphics/icons/mip/slot-item-in-hand-black.png", icon_size = 64, mipmap_count = 2, scale = 0.4, shift = {5, 4}},
+		--{icon = "__core__/graphics/icons/mip/slot-item-in-hand.png", icon_size = 64, mipmap_count = 2, scale = 0.33, shift = {7, 6}},
+	},
+	enabled = false, -- TODO where in progression should this be unlocked?
+	energy_required = 2,
+	category = "recycling-or-hand-crafting", -- I don't think I can make a handcrafting-only category. But this built-in category (for scrap recycling) is handcraftable, plus recycling machines can't actually do it bc they only have 1 input slot.
+})
+table.insert(newData, improvisedCircuitBoardRecipe)
+
 -- TODO change circuit recipes to require circuit boards.
 -- TODO add circuit components etc.
 
@@ -89,6 +116,7 @@ data:extend(newData)
 Tech.addRecipeToTech("wood-circuit-board", "electronics", 2)
 Tech.addRecipeToTech("plastic-circuit-board", "plastics")
 Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing")
+Tech.addRecipeToTech("improvised-circuit-board", "planet-discovery-aquilo")
 
 -- Move circuits to complex-circuit-intermediates subgroup.
 data.raw.item["electronic-circuit"].subgroup = "complex-circuit-intermediates"

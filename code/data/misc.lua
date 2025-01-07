@@ -23,11 +23,20 @@ data.raw.sprite["quality_info"].filename = "__LegendarySpaceAge__/graphics/misc/
 Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-fulgora")
 Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-vulcanus")
 
+-- Make some recipe times more sane.
+data.raw.recipe["stone-brick"].energy_required = 4 -- Originally 3.2.
+for _, recipeName in pairs{"wooden-chest", "iron-chest", "steel-chest"} do
+	data.raw.recipe[recipeName].energy_required = 4 -- Originally 0.5.
+end
+for _, recipeName in pairs{"hazard-concrete", "refined-hazard-concrete"} do
+	data.raw.recipe[recipeName].energy_required = 10 -- Originally 0.25.
+end
+
 -- Make assembler 1 take fluid ingredients? TODO
 
 -- TODO remove health techs.
 
--- TODO make module recipes more complex -- maybe make tier 2 and tier 3 require stuff from separate planets!
+-- TODO make module recipes more complex -- add resin, and maybe make tier 2 and tier 3 require stuff from separate planets.
 
 -- TODO tech tree change - add nuclear science, move nuclear stuff to after first 3 planetary sciences, and then change all costs to include all science packs they're dependent on.
 

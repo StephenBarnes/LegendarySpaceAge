@@ -9,7 +9,7 @@ local INGOT_COOLING_TIME = 60 * 60 * 10
 Iron:
 	8 iron ore -> 1 hot iron ingot + 1 stone (slag)
 	Over 20 minutes, hot iron ingots spoil into cold iron ingots which must be reheated in a furnace.
-		In any furnace: 1 cold iron ingot -> 1 hot iron ingot
+		In furnace: 1 cold iron ingot -> 1 hot iron ingot
 	Hot iron ingots are hammered in assemblers, into plates or rods:
 		1 hot iron ingot -> 8 iron plate
 		1 hot iron ingot -> 16 iron rods
@@ -77,8 +77,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	ingotItems[coldIngotName] = coldIngot
 
 	---@type data.RecipePrototype
-	local ingotHeatingRecipe = {
-		type = "recipe",
+	local ingotHeatingRecipe = Table.copyAndEdit(data.raw.recipe["stone-brick"], {
 		name = "heat-ingot-" .. metal,
 		ingredients = {
 			{type="item", name=coldIngotName, amount=1},
@@ -94,7 +93,8 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", icon_size=64, scale=0.5},
 			{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.4, tint=tint},
 		},
-	}
+		result_is_always_fresh = true, -- So almost-rusted cold ingots don't turn into almost-cold hot ingots.
+	})
 	table.insert(newData, ingotHeatingRecipe)
 end
 
