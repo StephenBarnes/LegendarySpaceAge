@@ -165,7 +165,7 @@ local heavyOilCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracki
 table.insert(newData, heavyOilCokingRecipe)
 
 --[[ Add recipe for coal coking.
-	Coal coking: 10 coal -> 5 carbon + 2 tar + 1 sulfur
+	Coal coking: 10 coal -> 6 carbon + 1 sulfur
 		This offers a route from coal to carbon that's more direct than syngas liquefaction.
 ]]
 local coalCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracking"], {
@@ -174,19 +174,22 @@ local coalCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracking"]
 		{type = "item", name = "coal", amount = 10},
 	},
 	results = {
-		{type = "item", name = "carbon", amount = 5},
+		{type = "item", name = "carbon", amount = 6},
 		{type = "item", name = "sulfur", amount = 1},
-		{type = "fluid", name = "tar", amount = 20},
+		--{type = "fluid", name = "tar", amount = 20}, -- Removed bc it prevents handcrafting.
 	},
 	icons = {
 		{icon = "__base__/graphics/icons/coal.png", icon_size = 64, scale=0.25, shift={0, -3}},
 		{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale=0.2, shift={-6, 5}},
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale=0.2, shift={6, 4}},
+		{icon = "__base__/graphics/icons/sulfur.png", icon_size = 64, scale=0.2, shift={6, 5}},
 	},
 	icon = "nil",
 	order = "a[oil-processing]-b5",
 	subgroup = "complex-fluid-recipes",
+	category = "crafting",
+		-- TODO Rather make it craftable in chem plant or manually? And then move chem plants early in progression.
 	energy_required = 5,
+	enabled = true, -- TODO check where to put it in progression; should be early, since it's needed for yellow ammo mags.
 })
 table.insert(newData, coalCokingRecipe)
 
@@ -354,7 +357,7 @@ Table.setFields(data.raw.recipe["plastic-bar"], {
 })
 
 --[[ Modify recipe for explosives.
-	5 light oil + 2 syngas + 1 sulfuric acid -> 3 explosives
+	5 light oil + 2 syngas + 1 sulfuric acid + 1 gunpowder -> 3 explosives
 		Light oil is the hydrocarbon base, syngas provides nitrogen (hand-waving some ammonia/nitration step; syngas has nitrogen bc it's air-blown), and sulfuric acid is the catalyst.
 ]]
 Table.setFields(data.raw.recipe["explosives"], {
@@ -362,6 +365,7 @@ Table.setFields(data.raw.recipe["explosives"], {
 		{type = "fluid", name = "light-oil", amount = 50},
 		{type = "fluid", name = "syngas", amount = 20},
 		{type = "fluid", name = "sulfuric-acid", amount = 10},
+		{type = "item", name = "gunpowder", amount = 1},
 	},
 	results = {
 		{type = "item", name = "explosives", amount = 3},
@@ -418,10 +422,6 @@ Tech.addRecipeToTech("syngas-liquefaction", "coal-liquefaction")
 
 -- Add heavy oil coking to advanced-oil-processing tech.
 Tech.addRecipeToTech("heavy-oil-coking", "advanced-oil-processing")
-
--- Add coal coking to oil-processing tech.
-Tech.addRecipeToTech("coal-coking", "oil-processing")
--- TODO figure out where this should go in progression.
 
 -- Remove default recipes for carbon, sulfur.
 Recipe.hide("sulfur")

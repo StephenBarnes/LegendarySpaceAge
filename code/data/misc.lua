@@ -23,6 +23,8 @@ data.raw.sprite["quality_info"].filename = "__LegendarySpaceAge__/graphics/misc/
 Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-fulgora")
 Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-vulcanus")
 
+-- Make assembler 1 take fluid ingredients? TODO
+
 -- TODO remove health techs.
 
 -- TODO make module recipes more complex -- maybe make tier 2 and tier 3 require stuff from separate planets!
