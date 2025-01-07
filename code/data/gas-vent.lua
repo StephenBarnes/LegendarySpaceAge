@@ -15,7 +15,7 @@ local ventEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
 	name = "gas-vent",
 	icon = "nil",
 	icons = {{icon = GRAPHICS.."gas-vent-item.png", icon_size = 64}},
-	minable = {mining_time = 1, result = "gas-vent"},
+	minable = {mining_time = .5, result = "gas-vent"},
 	collision_box = {{-0.3, -0.3}, {0.3, 0.3}},
 	selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
 	crafting_categories = {"gas-venting"},
@@ -43,7 +43,7 @@ local ventEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
 						shift = {1.5, -1.59375}
 					},
 					{
-						filename = GRAPHICS.."entity/gas-vent-shadow.png",
+						filename = GRAPHICS.."entity/shadow.png",
 						priority = "high",
 						width = 320,
 						height = 320,

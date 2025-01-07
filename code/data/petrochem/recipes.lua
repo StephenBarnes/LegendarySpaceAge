@@ -187,7 +187,7 @@ local coalCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracking"]
 	order = "a[oil-processing]-b5",
 	subgroup = "complex-fluid-recipes",
 	category = "crafting",
-		-- TODO Rather make it craftable in chem plant or manually? And then move chem plants early in progression.
+		-- TODO Rather make it craftable in chem plant and manually? And then move chem plants early in progression.
 	energy_required = 5,
 	enabled = true, -- TODO check where to put it in progression; should be early, since it's needed for yellow ammo mags.
 })
