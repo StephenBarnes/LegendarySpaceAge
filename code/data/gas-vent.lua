@@ -76,33 +76,6 @@ local ventEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
 						},
 					},
 				},
-				--[[ Animations for fire and top glow -- use these for gasifier, not vent.
-				{
-					{
-						{
-							filename = entity .. "gas-vent-fire.png",
-							priority = "high",
-							frame_count = 29,
-							width = 48,
-							height = 105,
-							scale = 0.5,
-							shift = {0, -4.3},
-							draw_as_glow = true,
-							run_mode = "backward"
-						},
-						{
-							filename = entity .. "gas-vent-glow-top.png",
-							priority = "high",
-							repeat_count = 29,
-							width = 320,
-							height = 320,
-							scale = 0.5,
-							shift = {1.5, -1.59375},
-							draw_as_light = true,
-						},
-					}
-				},]]
-				--light = {intensity = 0.1, size = 5},
 				constant_speed = true,
 			}
 		}

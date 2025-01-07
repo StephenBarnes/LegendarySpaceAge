@@ -1,6 +1,8 @@
 -- Modifying the gas furnace, from Adamo's Gas Furnace mod.
 local gasFurnaceEnt = data.raw.furnace["gas-furnace"]
 
+local Tech = require("code.util.tech")
+
 -- Remove fluid inputs and outputs.
 gasFurnaceEnt.fluid_boxes = nil
 
@@ -23,6 +25,16 @@ gasFurnaceEnt.energy_usage = "200kW" -- default 100kW.
 gasFurnaceEnt.graphics_set.working_visualisations[3].animation.filename = "__LegendarySpaceAge__/graphics/from_gas_furnace/entity-working.png"
 gasFurnaceEnt.graphics_set.animation.layers[1].filename = "__LegendarySpaceAge__/graphics/from_gas_furnace/entity.png"
 
--- Tried to allow flipping it, but doesn't seem to work. So instead I'm just putting the 2 fluid connections in positions so that rotating the furnace is probably enough. Turns out that also makes it so flipping is allowed, for some reason.
+-- Tried to allow flipping it; there's some weird restriction where it seems you can only flip stuff if it has at least 1 axis of reflection symmetry, even if not flipping across that axis.
 --gasFurnaceEnt.graphics_set_flipped = gasFurnaceEnt.graphics_set
 
+-- Move recipe from fluid handling tech to furnace tech.
+Tech.removeRecipeFromTech("gas-furnace", "fluid-handling")
+Tech.addRecipeToTech("gas-furnace", "advanced-material-processing")
+
+-- Change recipe from 4 pipe + 2 pump + 1 steel furnace, to rather use steel furnace ingredients plus some pipes.
+data.raw.recipe["gas-furnace"].ingredients = {
+	{ type = "item", name = "steel-plate", amount = 6 },
+	{ type = "item", name = "stone-brick", amount = 10 },
+	{ type = "item", name = "pipe", amount = 4 },
+}

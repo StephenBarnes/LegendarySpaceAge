@@ -19,10 +19,15 @@
 		, "Rocs-Rusting-Iron"
 		, "Electric_flying_enemies"
 		, "behemoth-enemies"
-		, "large-storage-tank"
 		, "cargo-pod-requires-research"
 		, "gas-furnace"
 		, "gas-boiler"
+
+		, "large-storage-tank"
+		, "est-tiny-storage-tank"
+		, "! zithorian-extra-storage-tanks-port"
+		, "! est-steel-storage-tank"
+		, "! nco-SmallTank"
 
 		, "PowerMultiplier"
 		, "PowerOverload"

@@ -2,7 +2,6 @@ require("code.data.item-groups")
 
 require("code.data.misc")
 require("code.data.labs")
-require("code.data.large-storage-tank")
 require("code.data.advanced-logistics")
 require("code.data.nauvis")
 require("code.data.vulcanus")
@@ -23,3 +22,5 @@ require("code.data.petrochem.main")
 require("code.data.circuits")
 
 require("code.data.gas-vent")
+
+require("code.data.storage-tanks")

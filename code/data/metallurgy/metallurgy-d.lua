@@ -319,3 +319,8 @@ data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].subgroup = "derusting"
 data.raw.item["rocs-rusting-iron-iron-stick-rusty"].subgroup = "derusting"
 data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].order = data.raw.item["rocs-rusting-iron-iron-plate-rusty"].order .. "-1"
 data.raw.item["rocs-rusting-iron-iron-stick-rusty"].order = data.raw.item["rocs-rusting-iron-iron-plate-rusty"].order .. "-2"
+
+-- Add output slots to furnaces - otherwise some recipe products just disappear, apparently.
+for _, furnace in pairs{"stone-furnace", "steel-furnace", "gas-furnace", "electric-furnace"} do
+	data.raw.furnace[furnace].result_inventory_size = 2
+end

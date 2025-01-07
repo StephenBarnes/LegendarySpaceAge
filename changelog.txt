@@ -1,5 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 08. 01. 2025
+  Features:
+    - Added gasifier.
+    - Added gunpowder.
+    - Miscellaneous other changes.
+---------------------------------------------------------------------------------------------------
 Version: 0.1.0
-Date: 01. 01. 2025
+Date: 06. 01. 2025
   Features:
     - Initial release, still in early development.

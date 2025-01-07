@@ -25,4 +25,16 @@ Export.ifThenElse = function(condition, thenValue, elseValue)
 	end
 end
 
+---@param s nil | string
+---@param x number
+---@return nil | string
+Export.multWithUnits = function(s, x)
+	-- Given a string `s` with a number and units, eg "100kW" or "50J" or "0.5kW", multiplies only the number part by the given real number `x`.
+	-- Returns nil if the number is 0, so we can avoid changing 0 to 0 and thereby spamming the prototype change history.
+	if s == nil then return nil end
+	local num, units = s:match("^([%d.]+)([a-zA-Z]*)$")
+	if num == 0 then return nil end
+	return num * x .. units
+end
+
 return Export

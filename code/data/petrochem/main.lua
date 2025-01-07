@@ -1,6 +1,7 @@
 local Table = require("code.util.table")
 
 require("code.data.petrochem.gas-furnace")
+require("code.data.petrochem.gas-boiler")
 require("code.data.petrochem.fluids-items")
 require("code.data.petrochem.recipes")
 require("code.data.petrochem.gasifier")

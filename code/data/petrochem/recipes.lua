@@ -8,8 +8,8 @@ local newData = {}
 
 --[[ Create fractionation recipes.
 Fractionation recipes turn crude oil and natural gas into the 4 fractions: heavy oil, light oil, rich gas, dry gas.
-	Oil fractionation: 10 crude oil + 2 steam -> 4 heavy oil + 5 light oil + 2 sulfur + 2 carbon
-	Gas fractionation: 10 natural gas + 2 steam -> 5 rich gas + 5 dry gas + 1 sulfur
+	Oil fractionation: 10 crude oil + 2 steam -> 1 tar + 4 heavy oil + 5 light oil + 1 water + 2 sulfur + 2 carbon
+	Gas fractionation: 10 natural gas + 2 steam -> 5 rich gas + 5 dry gas + 1 water + 1 sulfur
 	]]
 local oilFractionationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-processing"], {
 	name = "oil-fractionation",
