@@ -46,6 +46,57 @@ chemPlant.fluid_boxes = {
 	chemPlant.fluid_boxes[4], -- output
 }
 
+--[[ Add fuel values. The fuel values were chosen so that the relative numbers are realistic, meaning things that are better for burning in the real world should have higher fuel value, so that the player is encouraged to use fuels that are realistic (e.g. "rich gas" / propane over crude oil).
+All fluids' values should be divided by 10, since 1 fluid is like 10 items.
+	crude oil 4 MJ
+	heavy oil 5 MJ
+	light oil 7 MJ
+	rich gas (propane/butane) 9 MJ
+	dry gas (methane/ethane) 8 MJ
+	natural gas (unprocessed) 8 MJ
+	syngas 4 MJ
+	tar 2 MJ
+	sulfur (solid item) 5 MJ
+	solid fuel (refined product) 12 MJ
+	pitch 3MJ
+	resin 4MJ
+]]
+local fluidFuelValues = {
+	["crude-oil"] = "400kJ",
+	["heavy-oil"] = "500kJ",
+	["light-oil"] = "700kJ",
+	["petroleum-gas"] = "900kJ",
+	["dry-gas"] = "800kJ",
+	["natural-gas"] = "800kJ",
+	["syngas"] = "400kJ",
+	["tar"] = "200kJ",
+}
+local itemFuelValues = {
+	["sulfur"] = "1MJ",
+	["solid-fuel"] = "12MJ",
+	["pitch"] = "3MJ",
+	["resin"] = "4MJ",
+}
+for fluidName, fuelValue in pairs(fluidFuelValues) do
+	data.raw.fluid[fluidName].fuel_value = fuelValue
+end
+for itemName, fuelValue in pairs(itemFuelValues) do
+	data.raw.item[itemName].fuel_value = fuelValue
+	data.raw.item[itemName].fuel_category = "chemical" -- Holds carbon-based fuels.
+end
+data.raw.item["sulfur"].fuel_category = "non-carbon"
+
+-- Create fuel category for non-carbon fuels like sulfur, which can't be used in some places where carbon is needed (eg furnaces need carbon as reducing agent).
+local nonCarbonFuelCategory = Table.copyAndEdit(data.raw["fuel-category"]["chemical"], {
+	name = "non-carbon",
+})
+data:extend{nonCarbonFuelCategory}
+
+-- Set fuel categories for some entities to allow sulfur as fuel.
+data.raw.reactor["heating-tower"].energy_source.fuel_categories = {"chemical", "non-carbon"}
+data.raw.boiler["boiler"].energy_source.fuel_categories = {"chemical", "non-carbon"}
+data.raw.inserter["burner-inserter"].energy_source.fuel_categories = {"chemical", "non-carbon"}
+
 -- TODO for recipes, define which fluid connections to use - shouldn't use these additional fluid connections if not necessary.
 
 -- TODO figure out what to put in the 2nd oil tech.
