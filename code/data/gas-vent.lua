@@ -89,7 +89,7 @@ local ventEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
 		{
 			production_type = "input",
 			pipe_covers = pipecoverspictures(), -- Seems to be already globally defined? TODO check
-			volume = 20, -- TODO check
+			volume = 240,
 			pipe_connections = { { flow_direction = "input", direction = defines.direction.south, position = {0, 0} } },
 		}
 	},
@@ -147,7 +147,7 @@ for _, gasAndEmissions in pairs(gasesAndEmissions) do
 		localised_name = {"recipe-name.gas-vent", {"fluid-name."..gasToVent}},
 		category = "gas-venting",
 		subgroup = "fluid",
-		ingredients = {{type = "fluid", name = gasToVent, amount = 20}},
+		ingredients = {{type = "fluid", name = gasToVent, amount = 120}},
 		results = {},
 		enabled = true,
 		hidden = false,
@@ -155,7 +155,7 @@ for _, gasAndEmissions in pairs(gasesAndEmissions) do
 		hide_from_player_crafting = true,
 		icons = {
 			gasIcon,
-			{icon = GRAPHICS.."no.png", icon_size = 64},
+			{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64},
 		},
 		energy_required = 1,
 		emissions_multiplier = emissionsMult,

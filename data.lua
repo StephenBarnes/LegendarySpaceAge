@@ -25,3 +25,5 @@ require("code.data.circuits")
 require("code.data.gas-vent")
 
 require("code.data.storage-tanks")
+
+require("code.data.waste-pump")
