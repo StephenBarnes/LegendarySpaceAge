@@ -25,6 +25,7 @@ local itemFuelValues = { -- Maps item name to fuel value, emissions multiplier, 
 	["carbon"] = {"2MJ", 0.8, 0.5, 0.5, "chemical"},
 	["wood"] = {"2MJ", 1.2, 0.5, 0.5, "chemical"},
 	["coal"] = {"4MJ", 1.4, 0.5, 0.5, "chemical"},
+	-- TODO really we should do all the other fuels in the game, eg seeds, so they also have bad vehicle stats.
 }
 for fluidName, fuelValues in pairs(fluidFuelValues) do
 	data.raw.fluid[fluidName].fuel_value = fuelValues[1]

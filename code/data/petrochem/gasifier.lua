@@ -1,5 +1,4 @@
 -- This file creates the gasifier entity, item, building.
--- TODO
 
 local Table = require("code.util.table")
 local Tech = require("code.util.tech")
@@ -118,14 +117,14 @@ local gasifierEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
 		{
 			production_type = "input",
 			pipe_covers = pipecoverspictures(), -- Seems to be already globally defined.
-			volume = 20, -- TODO check
+			volume = 20,
 			pipe_connections = { { flow_direction = "input", direction = defines.direction.west, position = {0, 0} } },
 			filter = "steam",
 		},
 		{
 			production_type = "output",
 			pipe_covers = pipecoverspictures(),
-			volume = 20, -- TODO check
+			volume = 20,
 			pipe_connections = { { flow_direction = "output", direction = defines.direction.east, position = {0, 0} } },
 			filter = "syngas",
 		},
