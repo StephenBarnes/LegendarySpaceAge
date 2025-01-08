@@ -79,13 +79,32 @@ Tech.removePrereq = function(techName, oldPrereq)
 	end
 end
 
-Tech.removeRecipeFromTech = function(recipeName, techName)
-	for i, effect in pairs(data.raw.technology[techName].effects) do
-		if effect.type == "unlock-recipe" and effect.recipe == recipeName then
-			table.remove(data.raw.technology[techName].effects, i)
-			return
+Tech.removeRecipesFromTechs = function(recipeList, techNames)
+	local recipeSet = Table.listToSet(recipeList)
+	for _, techName in pairs(techNames) do
+		local tech = data.raw.technology[techName]
+		if tech == nil then
+			log("Error: Couldn't find tech "..techName.." to remove recipes from.")
+		else
+			local anyChanges = false
+			local newEffects = {}
+			for _, effect in pairs(tech.effects) do
+				if effect.type ~= "unlock-recipe" or not recipeSet[effect.recipe] then
+					table.insert(newEffects, effect)
+				else
+					anyChanges = true
+				end
+			end
+			tech.effects = newEffects
+			if not anyChanges then
+				log("Warning: No recipes to remove from tech "..techName..".")
+			end
 		end
 	end
+end
+
+Tech.removeRecipeFromTech = function(recipeName, techName)
+	Tech.removeRecipesFromTechs({recipeName}, {techName})
 end
 
 Tech.disable = function(techName)

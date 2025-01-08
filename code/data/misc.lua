@@ -1,4 +1,5 @@
 local Tech = require("code.util.tech")
+local Recipe = require("code.util.recipe")
 
 -- Nerf heating towers' efficiency, and reduce energy consumption.
 data.raw.reactor["heating-tower"].energy_source.effectivity = 1 -- 2.5 to 1
@@ -32,7 +33,37 @@ for _, recipeName in pairs{"hazard-concrete", "refined-hazard-concrete"} do
 	data.raw.recipe[recipeName].energy_required = 10 -- Originally 0.25.
 end
 
--- Make assembler 1 take fluid ingredients? TODO
+-- Move iron rod to be enabled from the start, and remove it from techs.
+data.raw.recipe["iron-stick"].enabled = true
+data.raw.recipe["rocs-rusting-iron-iron-stick-derusting"].enabled = true
+Tech.removeRecipesFromTechs(
+	{"iron-stick", "rocs-rusting-iron-iron-stick-derusting"},
+	{"railway", "circuit-network", "electric-energy-distribution-1", "concrete"})
+-- And add iron rod as ingredient in some recipes.
+data.raw.recipe["burner-inserter"].ingredients = {
+	{ type = "item", name = "iron-stick", amount = 2 },
+	{ type = "item", name = "iron-gear-wheel", amount = 2 },
+}
+data.raw.recipe["inserter"].ingredients = {
+	{ type = "item", name = "iron-stick", amount = 2 },
+	{ type = "item", name = "iron-gear-wheel", amount = 2 },
+	{ type = "item", name = "electronic-circuit", amount = 1 },
+}
+data.raw.recipe["long-handed-inserter"].ingredients = {
+	{ type = "item", name = "iron-stick", amount = 2 },
+	{ type = "item", name = "iron-gear-wheel", amount = 2 },
+	{ type = "item", name = "inserter", amount = 1 },
+}
+data.raw.recipe["radar"].ingredients = {
+	{ type = "item", name = "iron-stick", amount = 5 },
+	{ type = "item", name = "iron-plate", amount = 10 },
+	{ type = "item", name = "iron-gear-wheel", amount = 5 },
+	{ type = "item", name = "electronic-circuit", amount = 5 },
+}
+
+
+
+-- Make assembler 1 take fluid ingredients? For latex. TODO
 
 -- TODO remove health techs.
 
