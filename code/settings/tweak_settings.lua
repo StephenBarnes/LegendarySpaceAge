@@ -27,15 +27,6 @@ u.setDefaultOrForce("data-dd-evening", "double", 0.35) -- Adjusted to be earlier
 u.setDefaultOrForce("data-dd-morning", "double", 0.65) -- Adjusted to be later, 0.55->0.65, for longer night.
 u.setDefaultOrForce("data-dd-dawn", "double", 0.75)
 
--- For Adamo's Carbon mod.
-u.setDefaultOrForce("adamo-carbon-methane", "bool", true)
-u.setDefaultOrForce("adamo-carbon-wellhead", "bool", true)
-u.setDefaultOrForce("adamo-carbon-coking", "bool", false)
-u.setDefaultOrForce("adamo-carbon-steam-processing", "bool", true) -- This changes water to steam in oil processing recipes.
-u.setDefaultOrForce("adamo-carbon-fluids-fuel", "bool", true)
-u.setDefaultOrForce("adamo-carbon-syngas", "string", "adamo-carbon-syngas")
-u.setDefaultOrForce("adamo-carbon-sulfur-burning", "bool", true)
-
 -- For Roc's Rusting Iron mod.
 u.setDefaultOrForce("rocs-rusting-iron-engines-rust", "bool", false)
 u.setDefaultOrForce("rocs-rusting-iron-time-minutes", "double", 20.)

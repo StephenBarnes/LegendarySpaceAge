@@ -11,6 +11,7 @@ local gasifierEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
 	type = "assembling-machine",
 	name = "gasifier",
 	fixed_recipe = "steam-gasification",
+	placeable_by = {item = "gasifier", count = 1},
 	icon = "nil",
 	icons = {{icon = GRAPHICS.."gasifier-item.png", icon_size = 64}},
 	minable = {mining_time = .5, result = "gasifier"},
@@ -25,7 +26,23 @@ local gasifierEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
 		emissions_per_minute = {pollution = 20}, -- For comparison, heating towers produce 100/m.
 		fuel_inventory_size = 2,
 		burnt_inventory_size = 1,
-		-- fuel_categories = {"carbon-fuel"}, -- TODO create that fuel category, to exclude sulfur.
+		smoke = {{
+			name = "smoke",
+			north_position = {0, -3.5},
+			south_position = {0, -3.5},
+			east_position = {0, -3.5},
+			west_position = {0, -3.5},
+			frequency = 1,
+			starting_vertical_speed = 0.11,
+			starting_frame_deviation = 60,
+			deviation = {0.075,0.075}
+		}},
+		light_flicker = {
+			color = {r=1,g=0.3,b=0.3},
+			minimum_light_size = 0.1,
+			light_intensity_to_size_coefficient = 0.6,
+			-- Sucks there's no way to move the light flicker up to the top of the sprite.
+		},
 	},
 	energy_usage = "2MW", -- TODO check for balance.
 	PowerMultiplier_ignore = true, -- For PowerMultiplier mod, disables power changes to this entity.
@@ -117,6 +134,32 @@ local gasifierEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
 })
 table.insert(newData, gasifierEnt)
 
+local fluidGasifierEnt = Table.copyAndEdit(gasifierEnt, {
+	name = "fluid-fuelled-gasifier",
+	energy_source = {
+		type = "fluid",
+		emissions_per_minute = gasifierEnt.energy_source.emissions_per_minute,
+		fluid_box = {
+			base_area = 1,
+			height = 1,
+			volume = 200,
+			pipe_picture = furnacepipepictures,
+			pipe_covers = pipecoverspictures(),
+			pipe_connections = {
+				{flow_direction = "input", position = { 0, 0}, direction = defines.direction.north},
+			},
+			secondary_draw_orders = draworders,
+			hide_connection_info = false,
+		},
+		burns_fluid = true,
+		scale_fluid_usage = true,
+		smoke = gasifierEnt.energy_source.smoke,
+		light_flicker = gasifierEnt.energy_source.light_flicker,
+	},
+	placeable_by = {item = "fluid-fuelled-gasifier", count = 1},
+})
+table.insert(newData, fluidGasifierEnt)
+
 local gasifierItem = Table.copyAndEdit(data.raw.item["steel-furnace"], {
 	type = "item",
 	name = "gasifier",
@@ -129,6 +172,17 @@ local gasifierItem = Table.copyAndEdit(data.raw.item["steel-furnace"], {
 })
 table.insert(newData, gasifierItem)
 
+local fluidGasifierItem = Table.copyAndEdit(gasifierItem, {
+	name = "fluid-fuelled-gasifier",
+	place_result = "fluid-fuelled-gasifier",
+	icons = {
+		{icon = GRAPHICS.."gasifier-item.png", icon_size = 64, scale = 0.5},
+		{icon = data.raw.fluid["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 5}, tint = data.raw.fluid["petroleum-gas"].icons[1].tint},
+	},
+	order = "zz",
+})
+table.insert(newData, fluidGasifierItem)
+
 local gasifierRecipe = Table.copyAndEdit(data.raw.recipe["steel-furnace"], {
 	type = "recipe",
 	name = "gasifier",
@@ -137,6 +191,12 @@ local gasifierRecipe = Table.copyAndEdit(data.raw.recipe["steel-furnace"], {
 	-- TODO decide on ingredients
 })
 table.insert(newData, gasifierRecipe)
+
+local fluidGasifierRecipe = Table.copyAndEdit(gasifierRecipe, {
+	name = "fluid-fuelled-gasifier",
+	results = {{type = "item", name = "fluid-fuelled-gasifier", amount = 1}},
+})
+table.insert(newData, fluidGasifierRecipe)
 
 local gasifierRecipeCategory = Table.copyAndEdit(data.raw["recipe-category"]["crafting"], {
 	name = "gasifier",
@@ -176,3 +236,4 @@ data:extend(newData)
 
 Tech.addRecipeToTech("steam-gasification", "coal-liquefaction", 1)
 Tech.addRecipeToTech("gasifier", "coal-liquefaction", 2)
+Tech.addRecipeToTech("fluid-fuelled-gasifier", "coal-liquefaction", 2)
