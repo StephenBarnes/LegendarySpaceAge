@@ -167,14 +167,20 @@ table.insert(newData, heavyOilCokingRecipe)
 --[[ Add recipe for coal coking.
 	Coal coking: 10 coal -> 6 carbon + 1 sulfur
 		This offers a route from coal to carbon that's more direct than syngas liquefaction.
+		For realism, this should slightly reduce total fuel energy.
+			But I'm rather making it slightly energy-positive but only if you burn the sulfur, since that's more interesting.
+				Options are now:
+					burn the coal
+					coke the coal, burn the carbon, dump the sulfur - needs more machines and dump route, creates less pollution, same energy minus assemblers
+					coke the coal, burn the carbon, burn the sulfur - needs machines, creates more pollution, gives more energy
 ]]
 local coalCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracking"], {
 	name = "coal-coking",
 	ingredients = {
-		{type = "item", name = "coal", amount = 10},
+		{type = "item", name = "coal", amount = 2},
 	},
 	results = {
-		{type = "item", name = "carbon", amount = 6},
+		{type = "item", name = "carbon", amount = 4},
 		{type = "item", name = "sulfur", amount = 1},
 		--{type = "fluid", name = "tar", amount = 20}, -- Removed bc it prevents handcrafting.
 	},
@@ -188,14 +194,15 @@ local coalCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracking"]
 	subgroup = "complex-fluid-recipes",
 	category = "crafting",
 		-- TODO Rather make it craftable in chem plant and manually? And then move chem plants early in progression.
-	energy_required = 5,
+	energy_required = 1,
 	enabled = true, -- TODO check where to put it in progression; should be early, since it's needed for yellow ammo mags.
 })
 table.insert(newData, coalCokingRecipe)
 
 --[[ Add recipe for solid fuel.
 	5 heavy oil + 2 tar -> 2 solid fuel + 1 light oil
-		This represents pet coke style briquettes. We tune the energy values so that this gives more heat per heavy oil than other forms of processing. (TODO)
+		This represents pet coke style briquettes. We tune the energy values so that this gives more heat per heavy oil than other forms of processing.
+	Currently 25MJ + 4MJ -> 24MJ + 7MJ, so on net this increases energy slightly.
 ]]
 local solidFuelRecipe = Table.copyAndEdit(data.raw.recipe["solid-fuel-from-light-oil"], {
 	name = "solid-fuel",
@@ -210,7 +217,7 @@ local solidFuelRecipe = Table.copyAndEdit(data.raw.recipe["solid-fuel-from-light
 	main_product = "solid-fuel",
 	icons = "nil",
 	icon = "nil",
-	energy_required = 2,
+	energy_required = 4,
 	hide_from_player_crafting = false,
 })
 table.insert(newData, solidFuelRecipe)

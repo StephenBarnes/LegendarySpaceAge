@@ -22,7 +22,7 @@ local gasifierEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
 	show_recipe_icon_on_map = true,
 	energy_source = {
 		type = "burner",
-		emissions_per_minute = {pollution = 4},
+		emissions_per_minute = {pollution = 20}, -- For comparison, heating towers produce 100/m.
 		fuel_inventory_size = 2,
 		burnt_inventory_size = 1,
 		-- fuel_categories = {"carbon-fuel"}, -- TODO create that fuel category, to exclude sulfur.

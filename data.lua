@@ -18,6 +18,7 @@ require("code.data.gunpowder")
 require("code.data.metallurgy.metallurgy-d")
 
 require("code.data.petrochem.main")
+require("code.data.fuel")
 
 require("code.data.circuits")
 
