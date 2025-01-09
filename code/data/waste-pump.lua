@@ -45,6 +45,7 @@ table.insert(newData, wastePumpCraftingCategory)
 local wastePumpRecipe = Table.copyAndEdit(data.raw.recipe["pump"], {
 	name = "waste-pump",
 	results = {{type = "item", name = "waste-pump", amount = 1}},
+	ingredients = table.deepcopy(data.raw.recipe["offshore-pump"].ingredients),
 })
 table.insert(newData, wastePumpRecipe)
 

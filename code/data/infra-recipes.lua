@@ -104,7 +104,6 @@ data.raw.recipe["pump"].ingredients = {
 	{type="item", name="engine-unit", amount=1},
 	{type="item", name="rubber", amount=2},
 }
-data.raw.recipe["waste-pump"].ingredients = data.raw.recipe["pump"].ingredients
 
 -- Chemical plant - shouldn't require steel, since we're moving it to automation 1.
 data.raw.recipe["chemical-plant"].ingredients = {
@@ -122,7 +121,7 @@ data.raw.recipe["lab"].ingredients = {
 	{type="item", name="electronic-circuit", amount=4},
 }
 
--- Stone in rail recipe represents the track ballast.
+-- Stone in rail recipe represents the track ballast; makes sense to crush/process stone before using as ballast.
 Recipe.substituteIngredient("rail", "stone", "sand")
 
 Recipe.substituteIngredient("holmium-solution", "stone", "sand")

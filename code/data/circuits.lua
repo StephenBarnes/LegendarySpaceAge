@@ -31,7 +31,7 @@ local newData = {}
 local circuitBoardItem = Table.copyAndEdit(data.raw.item["electronic-circuit"], {
 	name = "circuit-board",
 	icons = {
-		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/circuit-board-generic.png", icon_size = 64},
+		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/circuit-board-generic.png", icon_size = 64, scale = .5},
 	},
 	icon = "nil",
 	order = "b[circuits]-0",
@@ -57,7 +57,7 @@ local woodCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 	subgroup = "resin-and-boards",
 	icon = "nil",
 	icons = {
-		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board.png", icon_size = 64},
+		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board.png", icon_size = 64, scale = .5},
 	},
 })
 table.insert(newData, woodCircuitBoardRecipe)
@@ -78,7 +78,7 @@ local plasticCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 	subgroup = "resin-and-boards",
 	icon = "nil",
 	icons = {
-		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/plastic-circuit-board.png", icon_size = 64},
+		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/plastic-circuit-board.png", icon_size = 64, scale = .5},
 	},
 })
 table.insert(newData, plasticCircuitBoardRecipe)
@@ -98,9 +98,9 @@ local calciteCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 	subgroup = "resin-and-boards",
 	icon = "nil",
 	icons = {
-		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/ceramic-circuit-board.png", icon_size = 64},
+		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/ceramic-circuit-board.png", icon_size = 64, scale = .5},
 	},
-	category = "smelting",
+	category = "metallurgy",
 })
 table.insert(newData, calciteCircuitBoardRecipe)
 
@@ -127,7 +127,7 @@ local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electron
 	},
 	enabled = false,
 	energy_required = 2,
-	category = "recycling-or-hand-crafting", -- I don't think I can make a handcrafting-only category. But this built-in category (for scrap recycling) is handcraftable, plus recycling machines can't actually do it bc they only have 1 input slot.
+	category = "handcrafting-only",
 })
 table.insert(newData, improvisedCircuitBoardRecipe)
 

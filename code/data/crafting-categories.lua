@@ -28,3 +28,13 @@ data:extend({
 table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "chemistry-or-manual")
 table.insert(data.raw["god-controller"]["default"].crafting_categories, "chemistry-or-manual")
 table.insert(data.raw["character"]["character"].crafting_categories, "chemistry-or-manual")
+
+-- Create handcrafting-only category.
+data:extend({
+	{
+		type = "recipe-category",
+		name = "handcrafting-only",
+	},
+})
+table.insert(data.raw["god-controller"]["default"].crafting_categories, "handcrafting-only")
+table.insert(data.raw["character"]["character"].crafting_categories, "handcrafting-only")

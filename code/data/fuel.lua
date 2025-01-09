@@ -17,7 +17,7 @@ local fluidFuelValues = { -- Maps name to fuel value and emissions multiplier.
 	-- Not going to give hydrogen a fuel value, since we can't give fuel categories to fluid fuels, so I couldn't prevent it being used in a fluid-fuelled gasifier etc.
 }
 local itemFuelValues = { -- Maps item name to fuel value, emissions multiplier, vehicle speed mult, vehicle top-speed mult, category.
-	["sulfur"] = {"2MJ", 8, 0.5, 0.5, "non-carbon"},
+	["sulfur"] = {"4MJ", 8, 0.5, 0.5, "non-carbon"},
 	["solid-fuel"] = {"12MJ", 2, 0.7, 0.7, "chemical"},
 	["pitch"] = {"3MJ", 2.5, 0.5, 0.5, "chemical"},
 	["resin"] = {"4MJ", 2, 0.5, 0.5, "chemical"},

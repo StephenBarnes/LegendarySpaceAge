@@ -74,3 +74,10 @@ data.raw.recipe["lubricant"].subgroup = "complex-fluid-recipes"
 -- Reorder raw-materials line.
 data.raw.item["solid-fuel"].order = "c"
 data.raw.item["explosives"].order = "e"
+
+-- Move chem plant before refinery.
+data.raw.item["oil-refinery"].order = "e[refinery]"
+data.raw.item["chemical-plant"].order = "d[chemical-plant]"
+
+-- Sulfur near start of raw material line, since it now appears early in the game.
+data.raw.item["sulfur"].order = "a0"
