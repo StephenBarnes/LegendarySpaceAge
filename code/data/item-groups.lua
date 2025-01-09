@@ -70,3 +70,7 @@ data.raw.item["rocket-fuel"].subgroup = "raw-material"
 
 -- Move lubricant to complex-fluid-recipes.
 data.raw.recipe["lubricant"].subgroup = "complex-fluid-recipes"
+
+-- Reorder raw-materials line.
+data.raw.item["solid-fuel"].order = "c"
+data.raw.item["explosives"].order = "e"

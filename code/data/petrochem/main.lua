@@ -5,7 +5,6 @@ require("code.data.petrochem.gas-boiler")
 require("code.data.petrochem.fluids-items")
 require("code.data.petrochem.recipes")
 require("code.data.petrochem.gasifier")
-require("code.data.petrochem.fluid-boxes")
 require("code.data.petrochem.wellhead")
 require("code.data.petrochem.natural-gas-wells")
 

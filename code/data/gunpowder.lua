@@ -20,18 +20,18 @@ local gunpowderItem = Table.copyAndEdit(data.raw.item["sulfur"], {
 	pictures = gunpowderPictures,
 	subgroup = "ammo",
 	order = "0",
-	auto_recycle = false, -- Can't get sulfur/stone/carbon back.
+	auto_recycle = false, -- Can't get sulfur/sand/carbon back.
 })
 table.insert(newData, gunpowderItem)
 
 -- Create recipe for gunpowder.
--- 2 carbon + 1 sulfur + 1 stone -> 2 gunpowder
+-- 2 carbon + 1 sulfur + 1 sand -> 2 gunpowder
 local gunpowderRecipe = Table.copyAndEdit(data.raw.recipe["firearm-magazine"], {
 	name = "gunpowder",
 	ingredients = {
 		{type="item", name="carbon", amount=2},
 		{type="item", name="sulfur", amount=1},
-		{type="item", name="stone", amount=1},
+		{type="item", name="sand", amount=1},
 	},
 	results = {{type = "item", name = "gunpowder", amount = 2}},
 	enabled = true,

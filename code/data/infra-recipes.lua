@@ -1,5 +1,7 @@
 -- This file changes recipes for infrastructure (belts, vehicles, buildings, etc.)
 
+local Recipe = require("code.util.recipe")
+
 -- Vehicles
 data.raw.recipe["car"].ingredients = {
 	{type="item", name="engine-unit", amount=8},
@@ -119,3 +121,9 @@ data.raw.recipe["lab"].ingredients = {
 	{type="item", name="copper-cable", amount=4},
 	{type="item", name="electronic-circuit", amount=4},
 }
+
+-- Stone in rail recipe represents the track ballast.
+Recipe.substituteIngredient("rail", "stone", "sand")
+
+Recipe.substituteIngredient("holmium-solution", "stone", "sand")
+Recipe.substituteIngredient("electrolyte", "stone", "sand")

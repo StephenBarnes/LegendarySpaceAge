@@ -154,6 +154,7 @@ local copperMatte = Table.copyAndEdit(data.raw.item["copper-ore"], {
 	pictures = copperMattePictures,
 	--factoriopedia_description = {"factoriopedia-description.copper-matte"}, -- Doesn't work, not sure why.
 	subgroup = "raw-material",
+	order = "a1",
 })
 table.insert(newData, copperMatte)
 
@@ -251,10 +252,15 @@ for i, itemName in pairs{"iron-plate", "iron-gear-wheel", "iron-stick", "copper-
 	data.raw.item[itemName].order = ""..i
 end
 
--- Change rusting recipes to sometimes return stone (to reduce cost and increase complexity), and increase time.
+-- Change rusting recipes to use sand, and sometimes return sand (to reduce cost and increase complexity), and increase time.
 for _, recipeName in pairs{"rocs-rusting-iron-iron-plate-derusting", "rocs-rusting-iron-iron-gear-wheel-derusting", "rocs-rusting-iron-iron-stick-derusting"} do
 	local recipe = data.raw.recipe[recipeName]
-	table.insert(recipe.results, {type="item", name="stone", amount=1, probability=0.8, show_details_in_recipe_tooltip=false})
+	table.insert(recipe.results, {type="item", name="sand", amount=1, probability=0.8, show_details_in_recipe_tooltip=false})
+	for _, ingredient in pairs(recipe.ingredients) do
+		if ingredient.name == "stone" then
+			ingredient.name = "sand"
+		end
+	end
 	recipe.main_product = recipe.results[1].name
 	recipe.energy_required = 1 -- Increased 0.25 -> 1
 end
@@ -275,11 +281,11 @@ local derustIronIngotRecipe = Table.copyAndEdit(data.raw.recipe["rocs-rusting-ir
 	name = "ingot-iron-derusting",
 	ingredients = {
 		{type="item", name="ingot-iron-rusted", amount=1},
-		{type="item", name="stone", amount=1},
+		{type="item", name="sand", amount=1},
 	},
 	results = {
 		{type="item", name="ingot-iron-cold", amount=1},
-		{type="item", name="stone", amount=1, probability=0.8, show_details_in_recipe_tooltip=false},
+		{type="item", name="sand", amount=1, probability=0.8, show_details_in_recipe_tooltip=false},
 	},
 	main_product = "ingot-iron-cold",
 	icons = {{icon="__LegendarySpaceAge__/graphics/metallurgy/derusting-iron-ingot.png", icon_size=64, scale=0.5}},

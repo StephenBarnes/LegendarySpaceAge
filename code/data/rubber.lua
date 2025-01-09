@@ -23,6 +23,7 @@ local rubberItem = Table.copyAndEdit(data.raw.item["plastic-bar"], {
 	icon = "nil",
 	icons = {{icon = rubberIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
 	pictures = rubberIcons,
+	order = "b[chemistry]-a",
 })
 table.insert(newData, rubberItem)
 
