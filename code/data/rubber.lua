@@ -115,7 +115,7 @@ local naturalRubberTech = Table.copyAndEdit(data.raw.technology["plastics"], {
 	icons = {{icon = "__LegendarySpaceAge__/graphics/rubber/tech.png", icon_size = 256, scale=0.5, mipmap_count=4}},
 	localised_description = {"technology-description.rubber-1"},
 	prerequisites = {"automation"},
-	unit = data.raw.technology["engine"].unit,
+	unit = data.raw.technology["automation"].unit,
 })
 table.insert(newData, naturalRubberTech)
 

@@ -7,22 +7,22 @@ local INGOT_COOLING_TIME = 60 * 60 * 10
 
 --[[
 Iron:
-	8 iron ore -> 1 hot iron ingot + 1 stone (slag)
+	4 iron ore -> 1 hot iron ingot + 1 stone (slag)
 	Over 20 minutes, hot iron ingots spoil into cold iron ingots which must be reheated in a furnace.
 		In furnace: 1 cold iron ingot -> 1 hot iron ingot
 	Hot iron ingots are hammered in assemblers, into plates or rods:
-		1 hot iron ingot -> 8 iron plate
-		1 hot iron ingot -> 16 iron rods
+		1 hot iron ingot -> 4 iron plate
+		1 hot iron ingot -> 8 iron rods
 		Each hot iron ingot item converts into multiple plates and rods, so that there's some incentive to rather put ingots on the conveyor belt instead of plates/rods, since ingots are more compact on the belt. This is balanced by the incentive to turn ingots into plates/rods immediately to avoid having to reheat them.
 
 Steel:
 	In furnace, slow: 1 hot iron ingot -> 1 hot steel ingot
-	In assembler: 1 hot steel ingot -> 2 steel plate
+	In assembler: 1 hot steel ingot -> 1 steel plate
 
 Copper:
 	The system is similar to iron, but with an extra intermediate "copper matte" which is then turned into copper ingots.
 	In furnace:
-		4 copper ore -> 1 copper matte + 1 stone
+		2 copper ore -> 1 copper matte + 1 stone
 		2 copper matte -> 1 hot copper ingot + 1 sulfur
 	Hot copper ingots cool down over time, and must then be reheated for working.
 	Hot copper ingots are converted into plates or cables in an assembler, same as iron ingots.
@@ -85,7 +85,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		results = {
 			{type="item", name=hotIngotName, amount=1},
 		},
-		energy_required = 2,
+		energy_required = 1,
 		hide_from_player_crafting = true,
 		category = "smelting",
 		enabled = true,
@@ -110,13 +110,13 @@ table.insert(newData, steelIngotRecipe)
 -- Make recipe for iron ore -> iron ingot.
 local ironIngotRecipe = Table.copyAndEdit(steelIngotRecipe, {
 	name = "ingot-iron-hot",
-	ingredients = {{type="item", name="iron-ore", amount=8}},
+	ingredients = {{type="item", name="iron-ore", amount=4}},
 	results = {
 		{type="item", name="ingot-iron-hot", amount=1},
 		{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
 	},
 	main_product = "ingot-iron-hot",
-	energy_required = 6,
+	energy_required = 4,
 	enabled = true,
 })
 table.insert(newData, ironIngotRecipe)
@@ -124,13 +124,13 @@ table.insert(newData, ironIngotRecipe)
 -- Make recipe for copper ore -> copper matte.
 local copperMatteRecipe = Table.copyAndEdit(ironIngotRecipe, {
 	name = "copper-matte",
-	ingredients = {{type="item", name="copper-ore", amount=4}},
+	ingredients = {{type="item", name="copper-ore", amount=2}},
 	results = {
 		{type="item", name="copper-matte", amount=1},
 		{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
 	},
 	main_product = "copper-matte",
-	energy_required = 4,
+	energy_required = 2,
 	enabled = true,
 	--factoriopedia_description = {"factoriopedia-description.copper-matte"}, -- Doesn't work, not sure why.
 })
@@ -175,9 +175,9 @@ table.insert(newData, copperIngotRecipe)
 -- Adjust steel plate recipe.
 Table.setFields(data.raw.recipe["steel-plate"], {
 	ingredients = {{type="item", name="ingot-steel-hot", amount=1}},
-	results = {{type="item", name="steel-plate", amount=2}},
+	results = {{type="item", name="steel-plate", amount=1}},
 	category = "crafting", -- Means it's craftable by hand or by assembler. (Unlike basegame's recipe for steel plate, which has category "smelting".)
-	energy_required = 2,
+	energy_required = 1,
 	auto_recycle = true,
 	allow_as_intermediate = true,
 	allow_decomposition = true,
@@ -186,9 +186,9 @@ Table.setFields(data.raw.recipe["steel-plate"], {
 -- Adjust iron plate recipe.
 Table.setFields(data.raw.recipe["iron-plate"], {
 	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
-	results = {{type="item", name="iron-plate", amount=8}},
+	results = {{type="item", name="iron-plate", amount=4}},
 	category = "crafting",
-	energy_required = 4,
+	energy_required = 2,
 	auto_recycle = true,
 	allow_as_intermediate = true,
 	allow_decomposition = true,
@@ -197,9 +197,9 @@ Table.setFields(data.raw.recipe["iron-plate"], {
 -- Adjust copper plate recipe.
 Table.setFields(data.raw.recipe["copper-plate"], {
 	ingredients = {{type="item", name="ingot-copper-hot", amount=1}},
-	results = {{type="item", name="copper-plate", amount=8}},
+	results = {{type="item", name="copper-plate", amount=4}},
 	category = "crafting",
-	energy_required = 4,
+	energy_required = 2,
 	auto_recycle = true,
 	allow_as_intermediate = true,
 	allow_decomposition = true,
@@ -208,24 +208,24 @@ Table.setFields(data.raw.recipe["copper-plate"], {
 -- Adjust iron gear recipe.
 Table.setFields(data.raw.recipe["iron-gear-wheel"], {
 	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
-	results = {{type="item", name="iron-gear-wheel", amount=4}},
-	energy_required = 2,
+	results = {{type="item", name="iron-gear-wheel", amount=2}},
+	energy_required = 0.5, -- Making it fast, for early handcrafting.
 	auto_recycle = true,
 })
 
 -- Adjust recipe for iron rods.
 Table.setFields(data.raw.recipe["iron-stick"], {
 	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
-	results = {{type="item", name="iron-stick", amount=16}},
-	energy_required = 4,
+	results = {{type="item", name="iron-stick", amount=8}},
+	energy_required = 2,
 	auto_recycle = true,
 })
 
 -- Adjust recipe for copper cables.
 Table.setFields(data.raw.recipe["copper-cable"], {
 	ingredients = {{type="item", name="ingot-copper-hot", amount=1}},
-	results = {{type="item", name="copper-cable", amount=16}},
-	energy_required = 4,
+	results = {{type="item", name="copper-cable", amount=8}},
+	energy_required = 2,
 	auto_recycle = true,
 })
 
@@ -233,7 +233,7 @@ Table.setFields(data.raw.recipe["copper-cable"], {
 -- Originally 20 copper plate, 2 steel plate, 5 plastic bar. Changing to 4 copper ingot, 1 steel ingot, 5 plastic bar.
 Table.setFields(data.raw.recipe["low-density-structure"], {
 	ingredients = {
-		{type="item", name="ingot-copper-hot", amount=4},
+		{type="item", name="ingot-copper-hot", amount=2},
 		{type="item", name="ingot-steel-hot", amount=1},
 		{type="item", name="plastic-bar", amount=5},
 	},

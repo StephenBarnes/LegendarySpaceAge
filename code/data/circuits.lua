@@ -1,3 +1,26 @@
+--[[
+Green circuits:
+	1 wood + 0.2 resin -> 4 circuit boards
+	1 circuit board + 3 copper wire -> 1 green circuit
+
+Red circuits are made after the player has petrochem set up:
+	1 carbon + 1 plastic + 1 stone + 1 copper wire -> 1 electronic components
+		This represents resistors, capacitors, transistors, etc. that are large enough to pick up by hand.
+	1 circuit board + 2 copper wire + 2 electronic components -> 1 red circuit
+
+Blue circuits are made in the late stages of Nauvis part 1, and should have a significantly more complex production process:
+	2 stone + 10 sulfuric acid -> 1 silicon wafer
+	1 silicon wafer + 1 carbon + 1 plastic bar + 1 copper wire -> 1 doped wafer
+		Represents doping with carbon and packaging with wire/plastic.
+	1 doped wafer + 1 circuit board + 2 red circuit + 5 sulfuric acid -> 1 blue circuit
+		Acid is for final etching/cleaning; red circuits represent simpler control electronics on the advanced board; doped wafer is the new silicon IC.
+
+On Nauvis you first make "improvised" circuit boards, just stone+carbon. Then later you cut trees and put the wood in a wood-to-resin-and-rubber line and use the resin plus wood to make wooden circuit boards. There's early agricultural towers for bulk wood.
+When plastic is unlocked with petrochem, you unlock a recipe for circuit boards from plastic:
+	2 plastic bar + 1 resin + 1 rubber -> 8 circuit boards
+Generally on Nauvis and Gleba both wood and plastic circuit boards are viable. On Fulgora and Aquilo, only plastic circuit boards are viable. On Vulcanus there's another alternative recipe for ceramic circuit boards using calcite.
+]]
+
 local Tech = require("code.util.tech")
 local Table = require("code.util.table")
 local Item = require("code.util.item")
@@ -107,15 +130,14 @@ local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electron
 })
 table.insert(newData, improvisedCircuitBoardRecipe)
 
--- TODO change circuit recipes to require circuit boards.
--- TODO add circuit components etc.
+-- TODO create items and recipes for electronic components, wafer, doped wafer.
 
 data:extend(newData)
 
 -- Add circuit board recipes to techs.
 Tech.addRecipeToTech("wood-circuit-board", "automation")
-Tech.addRecipeToTech("plastic-circuit-board", "plastics")
-Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing")
+Tech.addRecipeToTech("plastic-circuit-board", "plastics") -- TODO rather make a separate tech for this, using plastic circuit board sprite.
+Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rather make a separate tech for this? Unlocked by mining like 10 calcite. Use the ceramic circuit board sprite.
 Tech.addRecipeToTech("improvised-circuit-board", "electronics", 2)
 
 -- Move circuits to complex-circuit-intermediates subgroup.

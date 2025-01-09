@@ -111,3 +111,11 @@ data.raw.recipe["chemical-plant"].ingredients = {
 	{type="item", name="electronic-circuit", amount=5},
 	{type="item", name="pipe", amount=5},
 }
+
+-- Lab should need fewer circuits since they have to be handcrafted early-game.
+data.raw.recipe["lab"].ingredients = {
+	{type="item", name="iron-gear-wheel", amount=8},
+	{type="item", name="iron-plate", amount=8},
+	{type="item", name="copper-cable", amount=4},
+	{type="item", name="electronic-circuit", amount=4},
+}

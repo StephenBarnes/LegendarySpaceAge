@@ -1,0 +1,3 @@
+-- This modpack renames "iron gear wheels" to "machine parts"; this file will change sprites to match that.
+-- Then this file will also create "advanced parts", which are made from like hot steel + rubber + plastic + bit of lubricant, and will generally replace steel plates in recipes for infra.
+-- TODO

@@ -63,3 +63,13 @@ Tech.setPrereqs("lubricant", {"chemical-science-pack"})
 -- Rubber-2 is needed to make rubber from petrochems on Vulcanus and Fulgora.
 Tech.addTechDependency("rubber-2", "planet-discovery-vulcanus")
 Tech.addTechDependency("rubber-2", "planet-discovery-fulgora")
+
+-- Electric mining drill shouldn't be affected by tech multiplier since it's very early-game, making it 250 science instead of 25 is just annoying because it's not high enough to justify setting up with burner miners.
+data.raw.technology["electric-mining-drill"].ignore_tech_cost_multiplier = true
+
+-- Fast inserter should go after green science.
+Tech.setPrereqs("fast-inserter", {"logistic-science-pack"})
+data.raw.technology["fast-inserter"].unit = {count = 30, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 15}
+
+
+-- TODO later, instead of using a tech multiplier in the map preset, rather just go through and set units (counts, times, ingredients) for all techs individually. Otherwise there's weird stuff like mismatches in science times (ie number of labs vs science assemblers), weird counts that don't make sense, etc.

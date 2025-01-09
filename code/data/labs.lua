@@ -148,3 +148,5 @@ Tech.addTechDependency("pentapod-biolab", "biolab")
 data.raw.recipe.glebalab.localised_description = nil
 data.raw.item.glebalab.localised_description = {"entity-description.glebalab"}
 -- TODO check this worked
+
+-- TODO don't allow advanced science packs in ordinary electric labs, rather stage them to pentapod labs and then space biolabs.
