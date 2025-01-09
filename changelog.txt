@@ -1,11 +1,13 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.0
-Date: 08. 01. 2025
+Date: 09. 01. 2025
   Features:
     - Added gasifier (copying Adamo Carbon mod) and fluid-fuelled gasifier.
     - Added gunpowder.
     - Added inline storage tank (from Tiny Storage Tanks mod).
     - Fuel values for fluids, sulfur, and other fuels.
+    - Added liquid waste pump.
+    - TODO Added rubber.
     - Miscellaneous other changes.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.0
