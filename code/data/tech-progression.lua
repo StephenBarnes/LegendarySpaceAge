@@ -20,7 +20,8 @@ Tech.removeRecipeFromTech("long-handed-inserter", "automation")
 Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
 
 -- Automation 1 should already unlock the chem plant. Especially since it's also usable for gunpowder and coal coking.
-Tech.addEffect("automation", {type = "unlock-recipe", recipe = "chemical-plant"}, 2)
+Tech.addRecipeToTech("chemical-plant", "automation", 2)
+Tech.removeRecipeFromTech("chemical-plant", "oil-processing")
 
 -- Coal liquefaction tech should be soon after oil processing.
 Tech.setPrereqs("coal-liquefaction", {"oil-processing"})
@@ -52,3 +53,13 @@ Tech.hideTech("oil-gathering")
 data.raw.technology["oil-processing"].unit = data.raw.technology["oil-gathering"].unit
 data.raw.technology["oil-processing"].research_trigger = nil
 data.raw.technology["oil-processing"].prerequisites = {"fluid-handling"}
+Tech.addRecipeToTech("pumpjack", "oil-processing", 2)
+-- TODO: add the wellhead here.
+
+-- Elimininate the now-pointless "advanced oil processing" tech.
+Tech.hideTech("advanced-oil-processing")
+Tech.setPrereqs("lubricant", {"chemical-science-pack"})
+
+-- Rubber-2 is needed to make rubber from petrochems on Vulcanus and Fulgora.
+Tech.addTechDependency("rubber-2", "planet-discovery-vulcanus")
+Tech.addTechDependency("rubber-2", "planet-discovery-fulgora")

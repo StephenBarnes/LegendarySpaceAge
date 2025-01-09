@@ -15,7 +15,7 @@ local wastePump = Table.copyAndEdit(data.raw["offshore-pump"]["offshore-pump"], 
 	energy_source = Table.copyAndEdit(data.raw.pump.pump.energy_source, {
 		emissions_per_minute = {pollution = 1}, -- This gets multiplied by the emissions multiplier for the specific venting recipe.
 	}),
-	energy_usage = "60kW", -- Energy used when crafting. Engine sets drain to 1/30 of this.
+	energy_usage = "59kW", -- Energy used when crafting. Adds 1kW for drain.
 	PowerMultiplier_ignore = true,
 	minable = Table.copyAndEdit(data.raw.pump.pump.minable, {
 		result = "waste-pump",

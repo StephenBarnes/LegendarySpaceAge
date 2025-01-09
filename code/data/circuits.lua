@@ -122,3 +122,11 @@ Tech.addRecipeToTech("improvised-circuit-board", "electronics", 2)
 data.raw.item["electronic-circuit"].subgroup = "complex-circuit-intermediates"
 data.raw.item["advanced-circuit"].subgroup = "complex-circuit-intermediates"
 data.raw.item["processing-unit"].subgroup = "complex-circuit-intermediates"
+
+-- Edit circuit ingredients.
+data.raw.recipe["electronic-circuit"].ingredients = {
+	{type = "item", name = "circuit-board", amount = 1},
+	{type = "item", name = "copper-cable", amount = 3},
+	-- TODO later will add circuit components here maybe
+}
+-- TODO adjust red and blue circuits.

@@ -7,7 +7,9 @@ Date: 09. 01. 2025
     - Added inline storage tank (from Tiny Storage Tanks mod).
     - Fuel values for fluids, sulfur, and other fuels.
     - Added liquid waste pump.
-    - TODO Added rubber.
+    - Added rubber.
+    - Adjusted early-game tech progression.
+    - Adjusted recipes for some infrastructure - belts, undergrounds, splitters, vehicles.
     - Miscellaneous other changes.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.0

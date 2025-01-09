@@ -18,12 +18,12 @@ local oilFractionationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-p
 		{type = "fluid", name = "steam", amount = 20},
 	},
 	results = {
-		{type = "fluid", name = "tar", amount = 10},
-		{type = "fluid", name = "heavy-oil", amount = 40},
-		{type = "fluid", name = "light-oil", amount = 50},
-		{type = "fluid", name = "water", amount = 1}, -- Game has water 10x denser than steam. So this gives half the steam back as water.
-		{type = "item", name = "sulfur", amount = 2},
-		{type = "item", name = "carbon", amount = 2},
+		{type = "fluid", name = "tar", amount = 10, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "heavy-oil", amount = 40, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "light-oil", amount = 50, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "water", amount = 1, show_details_in_recipe_tooltip = false}, -- Game has water 10x denser than steam. So this gives half the steam back as water.
+		{type = "item", name = "sulfur", amount = 2, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "carbon", amount = 2, show_details_in_recipe_tooltip = false},
 	},
 	icons = {
 		{icon = "__base__/graphics/icons/fluid/crude-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
@@ -41,10 +41,10 @@ local gasFractionationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-p
 		{type = "fluid", name = "steam", amount = 20},
 	},
 	results = {
-		{type = "fluid", name = "petroleum-gas", amount = 50},
-		{type = "fluid", name = "dry-gas", amount = 50},
-		{type = "fluid", name = "water", amount = 1},
-		{type = "item", name = "sulfur", amount = 1},
+		{type = "fluid", name = "petroleum-gas", amount = 50, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "dry-gas", amount = 50, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "water", amount = 1, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 	},
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.27, shift={0, -4}, tint=constants.natgasTint},
@@ -67,9 +67,9 @@ Table.setFields(data.raw.recipe["heavy-oil-cracking"], {
 		{type = "fluid", name = "steam", amount = 100},
 	},
 	results = {
-		{type = "fluid", name = "light-oil", amount = 100},
-		{type = "item", name = "carbon", amount = 1},
-		{type = "item", name = "sulfur", amount = 1},
+		{type = "fluid", name = "light-oil", amount = 100, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "carbon", amount = 1, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 	},
 	icon = "nil",
 	icons = {
@@ -84,8 +84,8 @@ Table.setFields(data.raw.recipe["light-oil-cracking"], {
 		{type = "fluid", name = "steam", amount = 100},
 	},
 	results = {
-		{type = "fluid", name = "petroleum-gas", amount = 100},
-		{type = "item", name = "sulfur", amount = 1},
+		{type = "fluid", name = "petroleum-gas", amount = 100, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 	},
 	icon = "nil",
 	icons = {
@@ -101,7 +101,7 @@ local richGasCrackingRecipe = Table.copyAndEdit(data.raw.recipe["light-oil-crack
 		{type = "fluid", name = "steam", amount = 100},
 	},
 	results = {
-		{type = "fluid", name = "dry-gas", amount = 100},
+		{type = "fluid", name = "dry-gas", amount = 100, show_details_in_recipe_tooltip = false},
 	},
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.27, shift={0, -4}, tint=constants.richgasColor},
@@ -121,11 +121,11 @@ local tarDistillationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-pr
 		{type = "fluid", name = "tar", amount = 100},
 	},
 	results = {
-		{type = "item", name = "pitch", amount = 3},
+		{type = "item", name = "pitch", amount = 3, show_details_in_recipe_tooltip = false},
 		--{type = "item", name = "carbon", amount = 2},
-		{type = "item", name = "sulfur", amount = 1},
-		{type = "fluid", name = "heavy-oil", amount = 20},
-		{type = "fluid", name = "light-oil", amount = 10},
+		{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "heavy-oil", amount = 20, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "light-oil", amount = 10, show_details_in_recipe_tooltip = false},
 	},
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale=0.3, shift={0, -3}},
@@ -149,8 +149,8 @@ local heavyOilCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracki
 		{type = "fluid", name = "heavy-oil", amount = 100},
 	},
 	results = {
-		{type = "item", name = "carbon", amount = 3},
-		{type = "fluid", name = "tar", amount = 50},
+		{type = "item", name = "carbon", amount = 3, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "tar", amount = 50, show_details_in_recipe_tooltip = false},
 	},
 	icons = {
 		{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
@@ -395,6 +395,9 @@ Tech.addRecipeToTech("rich-gas-cracking", "oil-processing")
 Tech.removeRecipeFromTech("heavy-oil-cracking", "advanced-oil-processing")
 Tech.removeRecipeFromTech("light-oil-cracking", "advanced-oil-processing")
 
+-- Add heavy oil coking to oil processing tech.
+Tech.addRecipeToTech("heavy-oil-coking", "oil-processing")
+
 -- Add tar distillation to the 1st oil tech.
 Tech.addRecipeToTech("tar-distillation", "oil-processing")
 
@@ -428,9 +431,6 @@ Tech.removeRecipeFromTech("coal-synthesis", "rocket-turret")
 
 -- Add syngas liquefaction to tech.
 Tech.addRecipeToTech("syngas-liquefaction", "coal-liquefaction")
-
--- Add heavy oil coking to advanced-oil-processing tech.
-Tech.addRecipeToTech("heavy-oil-coking", "advanced-oil-processing")
 
 -- Remove default recipes for carbon, sulfur.
 Recipe.hide("sulfur")

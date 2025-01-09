@@ -1,0 +1,2 @@
+-- This file will create natural gas wells, and make them autoplace on Nauvis (replacing some crude oil wells) and Aquilo (replacing all crude oil wells).
+-- TODO

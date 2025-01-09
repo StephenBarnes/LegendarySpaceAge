@@ -168,4 +168,4 @@ end
 
 data:extend(newData)
 
-Tech.addRecipeToTech("gas-vent", "oil-processing") -- TODO
+Tech.addRecipeToTech("gas-vent", "oil-processing", 3)
