@@ -103,3 +103,11 @@ data.raw.recipe["pump"].ingredients = {
 	{type="item", name="rubber", amount=2},
 }
 data.raw.recipe["waste-pump"].ingredients = data.raw.recipe["pump"].ingredients
+
+-- Chemical plant - shouldn't require steel, since we're moving it to automation 1.
+data.raw.recipe["chemical-plant"].ingredients = {
+	{type="item", name="iron-plate", amount=5},
+	{type="item", name="iron-gear-wheel", amount=5},
+	{type="item", name="electronic-circuit", amount=5},
+	{type="item", name="pipe", amount=5},
+}

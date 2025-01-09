@@ -156,6 +156,7 @@ local fluidGasifierEnt = Table.copyAndEdit(gasifierEnt, {
 		light_flicker = gasifierEnt.energy_source.light_flicker,
 	},
 	placeable_by = {item = "fluid-fuelled-gasifier", count = 1},
+	minable = {mining_time = .5, result = "fluid-fuelled-gasifier"},
 })
 table.insert(newData, fluidGasifierEnt)
 

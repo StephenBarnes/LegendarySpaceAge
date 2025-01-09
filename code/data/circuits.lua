@@ -101,7 +101,7 @@ local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electron
 		{icon = "__core__/graphics/icons/mip/slot-item-in-hand-black.png", icon_size = 64, mipmap_count = 2, scale = 0.4, shift = {5, 4}},
 		--{icon = "__core__/graphics/icons/mip/slot-item-in-hand.png", icon_size = 64, mipmap_count = 2, scale = 0.33, shift = {7, 6}},
 	},
-	enabled = false, -- TODO where in progression should this be unlocked?
+	enabled = false,
 	energy_required = 2,
 	category = "recycling-or-hand-crafting", -- I don't think I can make a handcrafting-only category. But this built-in category (for scrap recycling) is handcraftable, plus recycling machines can't actually do it bc they only have 1 input slot.
 })
@@ -113,10 +113,10 @@ table.insert(newData, improvisedCircuitBoardRecipe)
 data:extend(newData)
 
 -- Add circuit board recipes to techs.
-Tech.addRecipeToTech("wood-circuit-board", "electronics", 2)
+Tech.addRecipeToTech("wood-circuit-board", "automation")
 Tech.addRecipeToTech("plastic-circuit-board", "plastics")
 Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing")
-Tech.addRecipeToTech("improvised-circuit-board", "planet-discovery-aquilo")
+Tech.addRecipeToTech("improvised-circuit-board", "electronics", 2)
 
 -- Move circuits to complex-circuit-intermediates subgroup.
 data.raw.item["electronic-circuit"].subgroup = "complex-circuit-intermediates"

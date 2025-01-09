@@ -117,11 +117,12 @@ Tech.disable = function(techName)
 	tech.hidden = true
 end
 
-Tech.addEffect = function(tech, effect)
+Tech.addEffect = function(tech, effect, index)
+	if type(tech) == "string" then tech = data.raw.technology[tech] end
 	if not tech.effects then
 		tech.effects = {effect}
 	else
-		table.insert(tech.effects, effect)
+		table.insert(tech.effects, index, effect)
 	end
 end
 

@@ -39,18 +39,23 @@ chemPlant.fluid_boxes = {
 	chemPlant.fluid_boxes[3], -- output
 	chemPlant.fluid_boxes[4], -- output
 }
+chemPlant.fluid_boxes_off_when_no_fluid_recipe = true
 
 -- Also add an extra fluid input to biochambers, needed for synthetic rubber.
 local bioChamber = data.raw["assembling-machine"]["biochamber"]
-local newFluidBox2 = Table.copyAndEdit(bioChamber.fluid_boxes[1], {
+local newFluidBoxB = Table.copyAndEdit(bioChamber.fluid_boxes[1], {
 	pipe_connections = {
 		{position = {-1, 0}, direction = defines.direction.west, flow_direction = "input"},
 	},
 })
 bioChamber.fluid_boxes = {
 	bioChamber.fluid_boxes[1], -- input
-	newFluidBox2, -- Stick it between the other 2 outputs, so if a recipe has 2 fluid inputs they get distributed more conveniently.
+	newFluidBoxB, -- Stick it between the other 2 outputs, so if a recipe has 2 fluid inputs they get distributed more conveniently.
 	bioChamber.fluid_boxes[2], -- input
 	bioChamber.fluid_boxes[3], -- output
 	bioChamber.fluid_boxes[4], -- output
 }
+
+-- Add fluid input to the assembler 1, needed for some recipes.
+data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes = data.raw["assembling-machine"]["assembling-machine-2"].fluid_boxes
+data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes_off_when_no_fluid_recipe = true

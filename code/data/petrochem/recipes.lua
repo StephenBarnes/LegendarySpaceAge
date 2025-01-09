@@ -299,11 +299,11 @@ local syngasLiquefactionRecipe = Table.copyAndEdit(data.raw.recipe["coal-liquefa
 		{type = "item", name = "iron-plate", amount = 1},
 	},
 	results = {
-		{type = "fluid", name = "heavy-oil", amount = 20},
-		{type = "fluid", name = "light-oil", amount = 30},
-		{type = "fluid", name = "petroleum-gas", amount = 30},
-		{type = "fluid", name = "dry-gas", amount = 20},
-		{type = "fluid", name = "water", amount = 1},
+		{type = "fluid", name = "heavy-oil", amount = 20, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "light-oil", amount = 30, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "petroleum-gas", amount = 30, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "dry-gas", amount = 20, show_details_in_recipe_tooltip = false},
+		{type = "fluid", name = "water", amount = 1, show_details_in_recipe_tooltip = false},
 	},
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.27, shift={0, -4}, tint=constants.syngasColor},
@@ -398,8 +398,10 @@ Tech.removeRecipeFromTech("light-oil-cracking", "advanced-oil-processing")
 -- Add tar distillation to the 1st oil tech.
 Tech.addRecipeToTech("tar-distillation", "oil-processing")
 
--- Add resin recipes to the 1st oil tech.
-Tech.addRecipeToTech("wood-resin", "oil-processing")
+-- First resin recipe needed after automation 1.
+Tech.addRecipeToTech("wood-resin", "automation")
+
+-- Add other resin recipes to the 1st oil tech.
 Tech.addRecipeToTech("pitch-resin", "oil-processing")
 Tech.addRecipeToTech("rich-gas-resin", "oil-processing")
 -- TODO need to figure out where these are in progression. First one needs chem plants, so need to unlock those. Maybe a resin tech in early game.
