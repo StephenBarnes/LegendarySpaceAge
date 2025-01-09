@@ -6,7 +6,7 @@
 -- Some code taken from Spacesuit mod by ElAdamo.
 
 local insertStartingItems = function(control)
-	log("Trying to give starting equipment to " .. control.name .. ".")
+	log("Giving starting equipment to " .. control.name .. ".")
 	if control.can_insert{name = "construction-robot", count = 25} then
 		control.insert{name = "construction-robot", count = 25}
 		control.insert{name = "solar-panel-equipment", count = 8}

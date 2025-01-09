@@ -133,7 +133,7 @@ local tarDistillationRecipe = Table.copyAndEdit(data.raw.recipe["advanced-oil-pr
 		{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
 	},
 	icon = "nil",
-	order = "a[oil-processing]-b3",
+	order = "a[oil-processing]-b5",
 	subgroup = "complex-fluid-recipes",
 })
 table.insert(newData, tarDistillationRecipe)
@@ -190,7 +190,7 @@ local coalCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracking"]
 		{icon = "__base__/graphics/icons/sulfur.png", icon_size = 64, scale=0.2, shift={6, 5}},
 	},
 	icon = "nil",
-	order = "a[oil-processing]-b5",
+	order = "a[oil-processing]-b3",
 	subgroup = "complex-fluid-recipes",
 	category = "crafting",
 		-- TODO Rather make it craftable in chem plant and manually? And then move chem plants early in progression.

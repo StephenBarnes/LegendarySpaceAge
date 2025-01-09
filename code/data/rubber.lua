@@ -48,6 +48,7 @@ local latexRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 	results = {{type="fluid", name="latex", amount=50}},
 	category = "organic-or-chemistry",
 	subgroup = "complex-fluid-recipes",
+	order = "b[chemistry]-a1",
 })
 table.insert(newData, latexRecipe)
 
@@ -62,6 +63,7 @@ local rubberFromLatexRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], 
 	results = {{type="item", name="rubber", amount=5}},
 	category = "organic-or-chemistry",
 	subgroup = "complex-fluid-recipes",
+	order = "b[chemistry]-a2",
 	icon = "nil",
 	icons = {
 		rubberItem.icons[1],
@@ -86,6 +88,7 @@ local rubberFromPetrochemRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar
 	main_product = "rubber",
 	category = "organic-or-chemistry",
 	subgroup = "complex-fluid-recipes",
+	order = "b[chemistry]-a3",
 	icon = "nil",
 	icons = {
 		rubberItem.icons[1],

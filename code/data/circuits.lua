@@ -37,6 +37,7 @@ local circuitBoardItem = Table.copyAndEdit(data.raw.item["electronic-circuit"], 
 	order = "b[circuits]-0",
 	subgroup = "resin-and-boards",
 	auto_recycle = false,
+	weight = 1000000 / 4000,
 })
 Item.copySoundsTo("copper-cable", circuitBoardItem)
 table.insert(newData, circuitBoardItem)

@@ -9,7 +9,7 @@ local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 local gasifierEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
 	type = "assembling-machine",
 	name = "gasifier",
-	fixed_recipe = "steam-gasification",
+	fixed_recipe = "syngas",
 	placeable_by = {item = "gasifier", count = 1},
 	icon = "nil",
 	icons = {{icon = GRAPHICS.."gasifier-item.png", icon_size = 64}},
@@ -211,16 +211,16 @@ table.insert(newData, gasifierRecipeCategory)
 ]]
 local gasificationRecipe = Table.copyAndEdit(data.raw.recipe["solid-fuel-from-light-oil"], {
 	type = "recipe",
-	name = "steam-gasification",
+	name = "syngas",
 	enabled = false,
 	category = "gasifier",
 	ingredients = {
 		{type="fluid", name="steam", amount=100},
 	},
 	results = {
-		{type="fluid", name="syngas", amount=100},
-		{type="item", name="pitch", amount=1},
-		{type="item", name="sulfur", amount=1},
+		{type="fluid", name="syngas", amount=100, show_details_in_recipe_tooltip = true},
+		{type="item", name="pitch", amount=1, show_details_in_recipe_tooltip = false},
+		{type="item", name="sulfur", amount=1, show_details_in_recipe_tooltip = false},
 	},
 	main_result = "syngas",
 	energy_required = 10,
@@ -229,11 +229,22 @@ local gasificationRecipe = Table.copyAndEdit(data.raw.recipe["solid-fuel-from-li
 	allow_productivity = false,
 	allow_speed = false,
 	allow_consumption = false, -- No efficiency effects from beacons.
+	hidden = false,
+	hide_from_player_crafting = false,
+	subgroup = "complex-fluid-recipes",
+	order = "a[coal-liquefaction]-a",
 })
 table.insert(newData, gasificationRecipe)
 
 data:extend(newData)
 
-Tech.addRecipeToTech("steam-gasification", "coal-liquefaction", 1)
-Tech.addRecipeToTech("gasifier", "coal-liquefaction", 2)
-Tech.addRecipeToTech("fluid-fuelled-gasifier", "coal-liquefaction", 2)
+Tech.addRecipeToTech("syngas", "coal-liquefaction", 1)
+Tech.addRecipeToTech("gasifier", "coal-liquefaction")
+Tech.addRecipeToTech("fluid-fuelled-gasifier", "coal-liquefaction")
+
+-- Adjust pic for syngas tech, so it has a picture of the gasifier.
+data.raw.technology["coal-liquefaction"].icon = nil
+data.raw.technology["coal-liquefaction"].icons = {
+	{icon = "__LegendarySpaceAge__/graphics/gas-vent/tech.png", icon_size = 256, scale = 0.8, shift = {-24, 0}},
+	{icon = "__base__/graphics/technology/coal-liquefaction.png", icon_size = 256, scale = 0.5, shift = {24, 0}},
+}

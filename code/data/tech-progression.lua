@@ -71,5 +71,17 @@ data.raw.technology["electric-mining-drill"].ignore_tech_cost_multiplier = true
 Tech.setPrereqs("fast-inserter", {"logistic-science-pack"})
 data.raw.technology["fast-inserter"].unit = {count = 30, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 15}
 
+-- Remove tech for advanced combinators. And move selector combinator recipe, and change recipe to not need red circuits.
+Tech.hideTech("advanced-combinators")
+Tech.addRecipeToTech("selector-combinator", "circuit-network", 3)
+data.raw.recipe["selector-combinator"].ingredients = {
+	{type = "item", name = "electronic-circuit", amount = 2},
+	{type = "item", name = "decider-combinator", amount = 5},
+}
+
 
 -- TODO later, instead of using a tech multiplier in the map preset, rather just go through and set units (counts, times, ingredients) for all techs individually. Otherwise there's weird stuff like mismatches in science times (ie number of labs vs science assemblers), weird counts that don't make sense, etc.
+
+-- TODO should engines need rubber? If so, need to add rubber=>engine dependency.
+
+-- TODO write some code to toposort the whole tech tree and then assign order strings.

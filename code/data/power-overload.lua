@@ -18,6 +18,8 @@ Tech.reorderRecipeUnlocks("electric-energy-distribution-1",
 		"po-medium-electric-fuse",
 		"po-big-electric-fuse",
 		"po-transformer",
+		"iron-stick",
+		"rocs-rusting-iron-iron-stick-derusting",
 	})
 
 -- Make the pylons require blue circuits, since they depend on that.
