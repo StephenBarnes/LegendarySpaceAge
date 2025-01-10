@@ -157,6 +157,10 @@ local fluidGasifierEnt = Table.copyAndEdit(gasifierEnt, {
 	},
 	placeable_by = {item = "fluid-fuelled-gasifier", count = 1},
 	minable = {mining_time = .5, result = "fluid-fuelled-gasifier"},
+	icons = {
+		{icon = GRAPHICS.."gasifier-item.png", icon_size = 64, scale = 0.5, shift = {2, 0}},
+		{icon = data.raw.fluid["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = data.raw.fluid["petroleum-gas"].icons[1].tint},
+	},
 })
 table.insert(newData, fluidGasifierEnt)
 
@@ -175,10 +179,7 @@ table.insert(newData, gasifierItem)
 local fluidGasifierItem = Table.copyAndEdit(gasifierItem, {
 	name = "fluid-fuelled-gasifier",
 	place_result = "fluid-fuelled-gasifier",
-	icons = {
-		{icon = GRAPHICS.."gasifier-item.png", icon_size = 64, scale = 0.5},
-		{icon = data.raw.fluid["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 5}, tint = data.raw.fluid["petroleum-gas"].icons[1].tint},
-	},
+	icons = fluidGasifierEnt.icons,
 	order = "zz",
 })
 table.insert(newData, fluidGasifierItem)

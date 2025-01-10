@@ -19,11 +19,11 @@ local fluidHeatingTowerEnt = Table.copyAndEdit(data.raw.reactor["heating-tower"]
 			base_area = 1,
 			height = 1,
 			volume = 200,
-			pipe_picture = furnacepipepictures,
+			pipe_picture = assembler3pipepictures(),
 			pipe_covers = pipecoverspictures(),
 			pipe_connections = {
-				{flow_direction = "input-output", position = {0, -1}, direction = defines.direction.north},
-				{flow_direction = "input-output", position = {0, 1}, direction = defines.direction.south},
+				{flow_direction = "input-output", position = {1, 0}, direction = defines.direction.east},
+				{flow_direction = "input-output", position = {-1, 0}, direction = defines.direction.west},
 			},
 			secondary_draw_orders = draworders,
 			hide_connection_info = false,
@@ -33,29 +33,32 @@ local fluidHeatingTowerEnt = Table.copyAndEdit(data.raw.reactor["heating-tower"]
 		smoke = towerEnt.energy_source.smoke,
 		light_flicker = towerEnt.energy_source.light_flicker,
 	},
+	icon = "nil",
+	icons = {
+		{icon = "__space-age__/graphics/icons/heating-tower.png", icon_size = 64, scale = 0.5, shift = {2, 0}},
+		{icon = data.raw.fluid["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = data.raw.fluid["petroleum-gas"].icons[1].tint},
+	},
 })
 fluidHeatingTowerEnt.minable.result = "fluid-heating-tower"
--- Erase heat pipe connections to the north/south, since we're rather using fluid connections there.
-for _, tables in pairs{
-	{fluidHeatingTowerEnt.heat_buffer, "connections"},
-	--{fluidHeatingTowerEnt, "heat_connection_patches_connected"},
-	--{fluidHeatingTowerEnt, "heat_connection_patches_disconnected"},
-	--{fluidHeatingTowerEnt, "connection_patches_connected"},
-	--{fluidHeatingTowerEnt, "connection_patches_disconnected"},
-} do
-	log("ERROR "..serpent.block(tables[2]))
-	local parent = tables[1]
-	local list = parent[tables[2]]
-	log("BEFORE "..serpent.block(parent[tables[2]]))
-	parent[tables[2]] = {list[2], list[4]}
-	log("AFTER "..serpent.block(parent[tables[2]]))
-end
+-- Adjust heat pipes, since I want the fluid pipes to be where the side heat pipes used to be.
+fluidHeatingTowerEnt.heat_buffer.connections = {
+	---@diagnostic disable-next-line: assign-type-mismatch
+	{position = {0, -1}, direction = defines.direction.north},
+	---@diagnostic disable-next-line: assign-type-mismatch
+	{position = {1, -1}, direction = defines.direction.east},
+	---@diagnostic disable-next-line: assign-type-mismatch
+	{position = {0, 1}, direction = defines.direction.south},
+	---@diagnostic disable-next-line: assign-type-mismatch
+	{position = {-1, -1}, direction = defines.direction.west},
+}
 table.insert(newData, fluidHeatingTowerEnt)
 
 -- Create item for fluid heating tower
 local fluidHeatingTowerItem = Table.copyAndEdit(data.raw.item["heating-tower"], {
 	name = "fluid-heating-tower",
 	place_result = "fluid-heating-tower",
+	icons = fluidHeatingTowerEnt.icons,
+	order = data.raw.item["heating-tower"].order .. "-2",
 })
 table.insert(newData, fluidHeatingTowerItem)
 
@@ -63,11 +66,10 @@ table.insert(newData, fluidHeatingTowerItem)
 local fluidHeatingTowerRecipe = Table.copyAndEdit(data.raw.recipe["heating-tower"], {
 	name = "fluid-heating-tower",
 	results = {{type = "item", name = "fluid-heating-tower", amount = 1}},
-	enabled = true, -- TODO
 })
 table.insert(newData, fluidHeatingTowerRecipe)
 
 data:extend(newData)
 
 -- Add heating tower unlock to heating tower tech
--- TODO
+Tech.addRecipeToTech("fluid-heating-tower", "heating-tower", 2)
