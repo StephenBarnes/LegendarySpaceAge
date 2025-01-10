@@ -56,7 +56,7 @@ local glassRecipe = Table.copyAndEdit(data.raw.recipe["iron-plate"], {
 	results = {{type="item", name="glass", amount=1}},
 	category = "smelting-or-metallurgy",
 	subgroup = "raw-material",
-	enabled = true, -- TODO
+	enabled = false,
 })
 table.insert(newData, glassRecipe)
 

@@ -192,7 +192,7 @@ local coalCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracking"]
 	icon = "nil",
 	order = "a[oil-processing]-b3",
 	subgroup = "complex-fluid-recipes",
-	category = "chemistry-or-manual",
+	category = "chemistry-or-handcrafting",
 	energy_required = 1,
 	enabled = true, -- TODO check where to put it in progression; should be early, since it's needed for yellow ammo mags.
 })

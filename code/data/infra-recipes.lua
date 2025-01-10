@@ -126,3 +126,5 @@ Recipe.substituteIngredient("rail", "stone", "sand")
 
 Recipe.substituteIngredient("holmium-solution", "stone", "sand")
 Recipe.substituteIngredient("electrolyte", "stone", "sand")
+
+-- TODO look up concrete recipes; eg maybe require sand instead of stone bricks, or sand + stone; also maybe add liquid concrete as intermediate.
