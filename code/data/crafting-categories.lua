@@ -1,7 +1,7 @@
 -- Assembler 1 should be able to do fluid recipes.
 data.raw["assembling-machine"]["assembling-machine-1"].crafting_categories = data.raw["assembling-machine"]["assembling-machine-2"].crafting_categories
 
--- Create category for smelting or metallurgy, so that sand->glass can be done in both.
+-- Create crafting category for smelting or metallurgy, so that sand->glass can be done in both.
 data:extend({
 	{
 		type = "recipe-category",
@@ -18,7 +18,7 @@ for _, typeAndName in pairs{
 	table.insert(data.raw[typeAndName[1]][typeAndName[2]].crafting_categories, "smelting-or-metallurgy")
 end
 
--- Create crafting for chem plant or handcrafting - for coal coking, gunpowder, maybe more.
+-- Create crafting category for chem plant or handcrafting - for coal coking, gunpowder, maybe more.
 data:extend({
 	{
 		type = "recipe-category",

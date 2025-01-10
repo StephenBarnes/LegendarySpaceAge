@@ -83,6 +83,12 @@ data.raw.recipe["selector-combinator"].ingredients = {
 -- TODO do something better here, eg require it for optics which gives lamp and is prereq to solar panels and lasers.
 Tech.addTechDependency("glass", "automation-science-pack")
 
+-- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.
+
+-- TODO rather unlock automation 1 early, before red science. Then red science should take as ingredients machine parts + green circuits.
+
+
+
 
 -- TODO later, instead of using a tech multiplier in the map preset, rather just go through and set units (counts, times, ingredients) for all techs individually. Otherwise there's weird stuff like mismatches in science times (ie number of labs vs science assemblers), weird counts that don't make sense, etc.
 
