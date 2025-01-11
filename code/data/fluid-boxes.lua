@@ -7,11 +7,13 @@ local newFluidBox1 = Table.copyAndEdit(oilRefinery.fluid_boxes[5], {
 	pipe_connections = {
 		{position = {-2, 0}, direction = defines.direction.west, flow_direction = "output"},
 	},
+	pipe_picture = assembler3pipepictures(),
 })
 local newFluidBox2 = Table.copyAndEdit(oilRefinery.fluid_boxes[5], {
 	pipe_connections = {
 		{position = {2, 0}, direction = defines.direction.east, flow_direction = "output"},
 	},
+	pipe_picture = assembler3pipepictures(),
 })
 -- Add fluid boxes in order chosen so that our recipes have interesting and sensible positions for outputs.
 oilRefinery.fluid_boxes = {
@@ -31,6 +33,7 @@ local newFluidBox = Table.copyAndEdit(chemPlant.fluid_boxes[1], {
 	pipe_connections = {
 		{position = {1, 0}, direction = defines.direction.east, flow_direction = "input"},
 	},
+	pipe_picture = assembler3pipepictures(),
 })
 chemPlant.fluid_boxes = {
 	chemPlant.fluid_boxes[1], -- input
@@ -39,7 +42,7 @@ chemPlant.fluid_boxes = {
 	chemPlant.fluid_boxes[3], -- output
 	chemPlant.fluid_boxes[4], -- output
 }
-chemPlant.fluid_boxes_off_when_no_fluid_recipe = true
+chemPlant.fluid_boxes_off_when_no_fluid_recipe = false -- If this is true, they look weird when not used.
 
 -- Also add an extra fluid input to biochambers, needed for synthetic rubber.
 local bioChamber = data.raw["assembling-machine"]["biochamber"]
@@ -59,3 +62,26 @@ bioChamber.fluid_boxes = {
 -- Add fluid input to the assembler 1, needed for some recipes.
 data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes = data.raw["assembling-machine"]["assembling-machine-2"].fluid_boxes
 data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes_off_when_no_fluid_recipe = true
+
+-- Add extra fluid input and output to the foundry, needed for some recipes.
+local foundry = data.raw["assembling-machine"]["foundry"]
+local newFluidBoxF1 = Table.copyAndEdit(foundry.fluid_boxes[1], {
+	pipe_connections = {
+		{position = {-2, 0}, direction = defines.direction.west, flow_direction = "input"},
+	},
+	pipe_picture = assembler3pipepictures(),
+})
+local newFluidBoxF2 = Table.copyAndEdit(foundry.fluid_boxes[1], {
+	pipe_connections = {
+		{position = {2, 0}, direction = defines.direction.east, flow_direction = "output"},
+	},
+	pipe_picture = assembler3pipepictures(),
+})
+foundry.fluid_boxes = {
+	foundry.fluid_boxes[1], -- input
+	newFluidBoxF1, -- input
+	foundry.fluid_boxes[2], -- input
+	foundry.fluid_boxes[3], -- output
+	newFluidBoxF2, -- output
+	foundry.fluid_boxes[4], -- output
+}

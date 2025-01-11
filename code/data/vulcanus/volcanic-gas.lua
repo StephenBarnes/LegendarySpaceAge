@@ -43,8 +43,8 @@ local volcanicGasSeparationRecipe = Table.copyAndEdit(data.raw.recipe["steam-con
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/fluids/volcanic-gas.png", icon_size = 64, scale = 0.38, shift = {0, -5}},
 		{icon = "__base__/graphics/icons/sulfur.png", icon_size = 64, scale = 0.2, shift = {-8, 2}},
-		{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.24, shift = {8, 2}},
-		{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.2, shift = {0, 4}},
+		{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.2, shift = {8, 2}},
+		{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.24, shift = {0, 4}},
 	},
 })
 table.insert(newData, volcanicGasSeparationRecipe)
