@@ -409,7 +409,10 @@ Tech.addRecipeToTech("tungsten-heating", "tungsten-steel")
 Recipe.hide("tungsten-plate")
 Tech.removeRecipeFromTech("tungsten-plate", "tungsten-steel")
 
--- TODO reorder unlocks in foundry tech, currently stupid eg low-density structure is early.
+-- Reorder some of the unlocks in the foundry tech.
+Tech.removeRecipesFromTechs({"concrete-from-molten-iron", "casting-low-density-structure"}, {"foundry"})
+Tech.addRecipeToTech("casting-low-density-structure", "foundry")
+Tech.addRecipeToTech("concrete-from-molten-iron", "foundry")
 
 ------------------------------------------------------------------------
 data:extend(newData)

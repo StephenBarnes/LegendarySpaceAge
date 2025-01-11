@@ -29,12 +29,13 @@ local lavaWaterHeatingRecipe = Table.copyAndEdit(data.raw.recipe["steam-condensa
 		{type = "fluid", name = "water", amount = 50},
 	},
 	results = {
-		{type = "fluid", name = "steam", amount = 500, temperature = 500},
+		{type = "fluid", name = "steam", amount = 500, temperature = 500, ignored_by_productivity = 500},
 		{type = "item", name = "stone", amount = 4},
 	},
 	enabled = false,
 	allow_decomposition = false,
 	allow_as_intermediate = false,
+	allow_productivity = false,
 	icon = "nil",
 	icons = {
 		{icon = "__base__/graphics/icons/fluid/steam.png", icon_size = 64, scale = 0.5},
@@ -50,3 +51,9 @@ data.raw.recipe["metallurgic-science-pack"].ingredients = {
 	{type = "item", name = "tungsten-plate", amount = 2},
 	{type = "fluid", name = "lava", amount = 200},
 }
+
+-- Change Vulcanus tech triggers to need larger amounts.
+data.raw.technology["foundry"].research_trigger.count = 20 -- tungsten carbide
+data.raw.technology["big-mining-drill"].research_trigger.count = 4 -- foundries
+data.raw.technology["tungsten-steel"].research_trigger.count = 4 -- big mining drills
+data.raw.technology["metallurgic-science-pack"].research_trigger.count = 20 -- tungsten steel plates

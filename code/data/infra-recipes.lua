@@ -38,7 +38,7 @@ data.raw.recipe["fast-transport-belt"].ingredients = {
 }
 data.raw.recipe["express-transport-belt"].ingredients = {
 	{type="item", name="iron-plate", amount=1},
-	{type="item", name="iron-gear-wheel", amount=12},
+	{type="item", name="advanced-parts", amount=6},
 	{type="item", name="rubber", amount=1},
 	{type="fluid", name="lubricant", amount=20},
 }
@@ -46,7 +46,7 @@ data.raw.recipe["turbo-transport-belt"].ingredients = {
 	{type="fluid", name="lubricant", amount=40},
 	{type="item", name="tungsten-plate", amount=4},
 	{type="item", name="rubber", amount=1},
-	{type="item", name="iron-gear-wheel", amount=24},
+	{type="item", name="advanced-parts", amount=12},
 }
 -- Underground belts - remove nesting. For ingredients, require literally just the number of belts, plus some extra ingredients of that belt.
 data.raw.recipe["underground-belt"].ingredients = {
@@ -121,10 +121,32 @@ data.raw.recipe["lab"].ingredients = {
 	{type="item", name="electronic-circuit", amount=4},
 }
 
+-- Electric engine unit
+data.raw.recipe["electric-engine-unit"].ingredients = {
+	{type="fluid", name="lubricant", amount=15},
+	{type="item", name="advanced-parts", amount=5},
+	{type="item", name="advanced-circuit", amount=1},
+}
+
 -- Stone in rail recipe represents the track ballast; makes sense to crush/process stone before using as ballast.
 Recipe.substituteIngredient("rail", "stone", "sand")
 
 Recipe.substituteIngredient("holmium-solution", "stone", "sand")
 Recipe.substituteIngredient("electrolyte", "stone", "sand")
 
--- TODO look up concrete recipes; eg maybe require sand instead of stone bricks, or sand + stone; also maybe add liquid concrete as intermediate.
+-- Assembling machines
+data.raw.recipe["assembling-machine-2"].ingredients = {
+	{type="item", name="iron-gear-wheel", amount=5},
+	{type="item", name="rubber", amount=1},
+	{type="item", name="plastic-bar", amount=1},
+	{type="item", name="advanced-circuit", amount=2},
+}
+data.raw.recipe["assembling-machine-3"].ingredients = {
+	{type="item", name="advanced-parts", amount=12},
+	{type="item", name="electric-engine-unit", amount=2},
+	{type="item", name="speed-module", amount=4},
+	{type="fluid", name="lubricant", amount=20},
+}
+data.raw.recipe["assembling-machine-3"].category = "crafting-with-fluid"
+
+-- TODO look up real-world concrete recipes; eg maybe require sand instead of stone bricks, or sand + stone; also maybe add liquid concrete as intermediate. (And sulfur-based concrete on Vulcanus.)

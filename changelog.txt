@@ -3,11 +3,10 @@ Version: 0.3.0
 Date: 12. 01. 2025
   Features:
     - Added glass and sand.
-    - Added machine parts and advanced machine parts.
+    - Added machine parts and advanced parts.
     - Added fluid-fuelled heating tower.
-    - Added volcanic gas on Vulcanus.
-    - Revamped foundry smelting and casting recipes; added fluids for molten steel, molten tungsten.
-    - TODO Added early-game tree farming.
+    - For Vulcanus, added volcanic gas, volcanic gas condensation/separation, lava-water heat exchange.
+    - Revamped foundry smelting and casting recipes; added molten steel, molten tungsten, fluid heat puzzle.
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 09. 01. 2025

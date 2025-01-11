@@ -83,6 +83,9 @@ data.raw.recipe["selector-combinator"].ingredients = {
 -- TODO do something better here, eg require it for optics which gives lamp and is prereq to solar panels and lasers.
 Tech.addTechDependency("glass", "automation-science-pack")
 
+-- Add red circuit dependency to assembling machine 2, so we can add it as ingredient.
+Tech.setPrereqs("automation-2", {"advanced-circuit"})
+
 -- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.
 
 -- TODO rather unlock automation 1 early, before red science. Then red science should take as ingredients machine parts + green circuits.
