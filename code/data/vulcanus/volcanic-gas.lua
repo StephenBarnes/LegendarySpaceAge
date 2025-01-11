@@ -26,7 +26,7 @@ local volcanicGasSeparationRecipe = Table.copyAndEdit(data.raw.recipe["steam-con
 	localised_name = "nil",
 	category = "chemistry-or-cryogenics",
 	subgroup = "vulcanus-processes",
-	order = "0",
+	order = "02",
 	energy_required = 2,
 	ingredients = {
 		{type = "fluid", name = "volcanic-gas", amount = 100},
@@ -42,8 +42,8 @@ local volcanicGasSeparationRecipe = Table.copyAndEdit(data.raw.recipe["steam-con
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/fluids/volcanic-gas.png", icon_size = 64, scale = 0.38, shift = {0, -5}},
-		{icon = "__base__/graphics/icons/sulfur.png", icon_size = 64, scale = 0.2, shift = {-8, 2}},
-		{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.2, shift = {8, 2}},
+		{icon = "__base__/graphics/icons/sulfur.png", icon_size = 64, scale = 0.15, shift = {-8, 1}},
+		{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.15, shift = {8, 2}},
 		{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.24, shift = {0, 4}},
 	},
 })

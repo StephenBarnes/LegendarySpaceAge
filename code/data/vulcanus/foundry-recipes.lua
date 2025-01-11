@@ -145,7 +145,7 @@ Table.setFields(data.raw.recipe["casting-iron"], {
 	},
 	results = {
 		{type = "item", name = "iron-plate", amount = 2, percent_spoiled = .2},
-		{type = "fluid", name = "steam", amount = 10},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500},
 	},
 	main_product = "iron-plate",
 })
@@ -156,7 +156,7 @@ Table.setFields(data.raw.recipe["casting-copper"], {
 	},
 	results = {
 		{type = "item", name = "copper-plate", amount = 2},
-		{type = "fluid", name = "steam", amount = 10},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500},
 	},
 	main_product = "copper-plate",
 })
@@ -167,7 +167,7 @@ Table.setFields(data.raw.recipe["casting-steel"], {
 	},
 	results = {
 		{type = "item", name = "steel-plate", amount = 1},
-		{type = "fluid", name = "steam", amount = 10},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500},
 	},
 	main_product = "steel-plate",
 })
@@ -178,7 +178,7 @@ Table.setFields(data.raw.recipe["casting-iron-gear-wheel"], {
 	},
 	results = {
 		{type = "item", name = "iron-gear-wheel", amount = 1, percent_spoiled = .2},
-		{type = "fluid", name = "steam", amount = 10},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500},
 	},
 	main_product = "iron-gear-wheel",
 })
@@ -189,7 +189,7 @@ Table.setFields(data.raw.recipe["casting-iron-stick"], {
 	},
 	results = {
 		{type = "item", name = "iron-stick", amount = 4, percent_spoiled = .2},
-		{type = "fluid", name = "steam", amount = 10},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500},
 	},
 	main_product = "iron-stick",
 })
@@ -203,7 +203,7 @@ Table.setFields(data.raw.recipe["casting-low-density-structure"], {
 	},
 	results = {
 		{type = "item", name = "low-density-structure", amount = 1},
-		{type = "fluid", name = "steam", amount = 10},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500},
 	},
 	main_product = "low-density-structure",
 })
@@ -214,13 +214,37 @@ Table.setFields(data.raw.recipe["casting-copper-cable"], {
 	},
 	results = {
 		{type = "item", name = "copper-cable", amount = 8},
-		{type = "fluid", name = "steam", amount = 10},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500},
 	},
 	main_product = "copper-cable",
+})
+Table.setFields(data.raw.recipe["casting-pipe"], {
+	ingredients = {
+		{type = "fluid", name = "molten-iron", amount = 10},
+		{type = "fluid", name = "water", amount = 1},
+	},
+	results = {
+		{type = "item", name = "pipe", amount = 1},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+	},
+	main_product = "pipe",
+})
+Table.setFields(data.raw.recipe["casting-pipe-to-ground"], {
+	ingredients = {
+		{type = "item", name = "pipe", amount = 10},
+		{type = "fluid", name = "molten-iron", amount = 50},
+		{type = "fluid", name = "water", amount = 1},
+	},
+	results = {
+		{type = "item", name = "pipe-to-ground", amount = 2},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+	},
+	main_product = "pipe-to-ground",
 })
 
 -- Add recipe for casting advanced parts. (Bc can't make ingots from foundries.)
 local castingAdvancedPartsRecipe = Table.copyAndEdit(data.raw.recipe["casting-iron-gear-wheel"], {
+	name = "casting-advanced-parts",
 	ingredients = {
 		{type = "fluid", name = "molten-steel", amount = 80},
 		{type = "fluid", name = "water", amount = 1},
@@ -230,7 +254,7 @@ local castingAdvancedPartsRecipe = Table.copyAndEdit(data.raw.recipe["casting-ir
 	},
 	results = {
 		{type = "item", name = "advanced-parts", amount = 16},
-		{type = "fluid", name = "steam", amount = 10},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500},
 	},
 	main_product = "advanced-parts",
 	icon = "nil",
@@ -238,16 +262,15 @@ local castingAdvancedPartsRecipe = Table.copyAndEdit(data.raw.recipe["casting-ir
 		{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
 		{icon = "__space-age__/graphics/icons/fluid/molten-iron.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={4, -4}},
 	},
+	order = "b[casting]-f[casting-advanced-parts]",
 })
 table.insert(newData, castingAdvancedPartsRecipe)
+Tech.addRecipeToTech("casting-advanced-parts", "foundry")
 
 -- Make recipes for molten tungsten, tungsten steel, and tungsten carbide.
 -- TODO
 
 -- Add casting recipes for tungsten steel and tungsten carbide?
--- TODO
-
--- Add recipe for water heating with lava, in chem plant.
 -- TODO
 
 -- TODO reorder unlocks in foundry tech, currently stupid eg low-density structure is early.

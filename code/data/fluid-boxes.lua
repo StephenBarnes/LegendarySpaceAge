@@ -1,5 +1,7 @@
 local Table = require("code.util.table")
 
+-- TODO instead of assembler3pipepictures, make a new one that's like that but without the green tint. Use it for assembler 1 and for all of the fluid ports in this file.
+
 -- Add 2 more fluid outputs to the refinery, so we can have recipes with 5 fluid outputs.
 -- Could get away with adding only 1 new output, but then it's asymmetric so we can't flip it.
 local oilRefinery = data.raw["assembling-machine"]["oil-refinery"]
@@ -25,7 +27,6 @@ oilRefinery.fluid_boxes = {
 	oilRefinery.fluid_boxes[5],
 	newFluidBox1,
 }
--- TODO change the pipe covers so it doesn't look like it's hovering in mid-air. Could steal it from some other machine eg assembler mk2.
 
 -- Add 1 more fluid input to chem plant, so we can do explosives recipe.
 local chemPlant = data.raw["assembling-machine"]["chemical-plant"]
@@ -63,7 +64,7 @@ bioChamber.fluid_boxes = {
 data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes = data.raw["assembling-machine"]["assembling-machine-2"].fluid_boxes
 data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes_off_when_no_fluid_recipe = true
 
--- Add extra fluid input and output to the foundry, needed for some recipes.
+-- Add extra fluid input to the foundry, needed for some recipes.
 local foundry = data.raw["assembling-machine"]["foundry"]
 local newFluidBoxF1 = Table.copyAndEdit(foundry.fluid_boxes[1], {
 	pipe_connections = {
@@ -71,17 +72,10 @@ local newFluidBoxF1 = Table.copyAndEdit(foundry.fluid_boxes[1], {
 	},
 	pipe_picture = assembler3pipepictures(),
 })
-local newFluidBoxF2 = Table.copyAndEdit(foundry.fluid_boxes[1], {
-	pipe_connections = {
-		{position = {2, 0}, direction = defines.direction.east, flow_direction = "output"},
-	},
-	pipe_picture = assembler3pipepictures(),
-})
 foundry.fluid_boxes = {
 	foundry.fluid_boxes[1], -- input
-	newFluidBoxF1, -- input
 	foundry.fluid_boxes[2], -- input
+	newFluidBoxF1, -- input
 	foundry.fluid_boxes[3], -- output
-	newFluidBoxF2, -- output
 	foundry.fluid_boxes[4], -- output
 }

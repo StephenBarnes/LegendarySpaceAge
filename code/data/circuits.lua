@@ -88,11 +88,11 @@ table.insert(newData, plasticCircuitBoardRecipe)
 local calciteCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 	name = "calcite-circuit-board",
 	ingredients = {
-		{type = "item", name = "calcite", amount = 2},
+		{type = "item", name = "calcite", amount = 4},
 		{type = "item", name = "resin", amount = 1},
 	},
 	results = {
-		{type = "item", name = "circuit-board", amount = 4},
+		{type = "item", name = "circuit-board", amount = 8},
 	},
 	order = "b[circuits]-003",
 	subgroup = "resin-and-boards",
