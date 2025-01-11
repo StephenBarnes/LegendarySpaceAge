@@ -32,6 +32,7 @@ local wastePump = Table.copyAndEdit(data.raw["offshore-pump"]["offshore-pump"], 
 			},
 		},
 	},
+	surface_conditions = "nil",
 })
 table.insert(newData, wastePump)
 -- TODO allow placing in lava, and allow lava to enter it.

@@ -27,13 +27,18 @@ Molten steel recipes:
 	30 molten steel + 1 water -> 1 steel plate + 10 steam
 			Originally 30 molten iron -> 1 steel plate.
 
-Tungsten ore is only found on Vulcanus, and is also processed in foundries:
-	2 tungsten ore + 2 carbon -> 20 molten tungsten + 1 stone (representing slag)
-	10 molten tungsten + 1 molten steel -> 10 molten tungsten-steel
-	10 molten tungsten + 1 carbon -> 10 molten tungsten carbide
-	10 molten tungsten-steel + 0.2 water -> 1 tungsten-steel plate + 0.2 steam
-	10 molten tungsten carbide + 0.2 water -> 1 tungsten carbide plate + 0.2 steam
+Tungsten ore is only found on Vulcanus.
+In a foundry: 4 tungsten ore + 1 carbon + 10 sulfuric acid -> 40 molten tungsten (at 1500 degrees) + 1 stone
+	This represents acid leaching, high-temperature reduction, and foundry smelting. In gameplay terms, tungsten production is limited by carbon and water (for sulfuric acid), both of which are scarce.
+Molten tungsten is then converted into tungsten carbide and tungsten steel. We introduce a new challenge here by requiring the molten tungsten for carbide/steel to be in specific temperature ranges. It's produced at 1500 degrees, then we add a recipe to heat it to 2000 degrees; then the player must mix these different temperatures to get into the necessary ranges:
+	In foundry: 10 molten tungsten (any temperature) -> 10 molten tungsten (2000 degrees)
+	In foundry: 20 molten tungsten (1600-1800 degrees) + 1 carbon + 1 water -> 1 tungsten carbide + 10 steam
+	In foundry: 40 molten tungsten (1800-1900 degrees) + 10 molten steel + 1 water -> 1 tungsten-steel plate + 10 steam
+Note temp range of carbide is deliberately made to touch but not overlap with tungsten steel, since it allows more interesting feasible designs. (If they overlap, you can just heat up until both production lines are active. If they're disjoint then you need to build separate fluid systems for carbide vs steel. Touching but not overlapping means both approaches are sorta feasible.)
 Since tungsten carbide is needed to make foundries, to avoid circular dependency we also allow smelting tungsten ore directly to tungsten carbide in a furnace. This is simple but very inefficient, consuming a lot of carbon.
+Originally tungsten recipes were:
+	In assembler only: 2 tungsten ore + 1 carbon + 10 sulfuric acid -> 1 tungsten carbide (1 second)
+	In foundry: 4 tungsten ore + 10 molten iron -> 1 tungsten plate (10 seconds)
 
 Vulcanus unlocks a foundry recipe for concrete without water, using sulfur:
 	10 stone brick + 5 sulfur -> 10 concrete (representing sulfur concrete)
@@ -122,7 +127,10 @@ table.insert(newData, moltenSteelFluid)
 
 -- Make recipe for molten steel.
 local moltenSteelRecipe = Table.copyAndEdit(data.raw.recipe["molten-iron"], {
-	name = "molten-steel",
+	name = "molten-steel-making",
+		-- Not naming it the same as the fluid, so recipe shows up with the rest of them.
+		-- Seems the way it works is, recipe can show up in a different subgroup as the fluid if it either has multiple products, or a different name from the fluid.
+	localised_name = {"fluid-name.molten-steel"},
 	ingredients = {
 		{type = "fluid", name = "molten-iron", amount = 100},
 		{type = "item", name = "carbon", amount = 1},
@@ -135,99 +143,109 @@ local moltenSteelRecipe = Table.copyAndEdit(data.raw.recipe["molten-iron"], {
 	order = "a[melting]-d[molten-steel]",
 })
 table.insert(newData, moltenSteelRecipe)
-Tech.addRecipeToTech("molten-steel", "foundry", 8)
+Tech.addRecipeToTech("molten-steel-making", "foundry", 8)
 
 -- Adjust recipes for casting molten metals into items.
+-- Balanced so that they have the same molten metal costs, and all of them consume ~40/s molten metal and 1/s water. Note 40 molten metal is equivalent to 1 ingot. Foundry has speed 4.
+-- In base Space Age they do 30 molten iron -> 1 steel plate. But we're using the extra step of molten iron -> molten steel, with the +50% prod bonus, so let's not also do 30->1.
 Table.setFields(data.raw.recipe["casting-iron"], {
 	ingredients = {
-		{type = "fluid", name = "molten-iron", amount = 20},
+		{type = "fluid", name = "molten-iron", amount = 40},
 		{type = "fluid", name = "water", amount = 1},
 	},
 	results = {
-		{type = "item", name = "iron-plate", amount = 2, percent_spoiled = .2},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+		{type = "item", name = "iron-plate", amount = 4, percent_spoiled = .2},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 	},
 	main_product = "iron-plate",
+	energy_required = 4,
 })
 Table.setFields(data.raw.recipe["casting-copper"], {
 	ingredients = {
-		{type = "fluid", name = "molten-copper", amount = 20},
+		{type = "fluid", name = "molten-copper", amount = 40},
 		{type = "fluid", name = "water", amount = 1},
 	},
 	results = {
-		{type = "item", name = "copper-plate", amount = 2},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+		{type = "item", name = "copper-plate", amount = 4},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 	},
 	main_product = "copper-plate",
+	energy_required = 4,
 })
 Table.setFields(data.raw.recipe["casting-steel"], {
 	ingredients = {
-		{type = "fluid", name = "molten-steel", amount = 30},
+		{type = "fluid", name = "molten-steel", amount = 40},
 		{type = "fluid", name = "water", amount = 1},
 	},
 	results = {
 		{type = "item", name = "steel-plate", amount = 1},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 	},
 	main_product = "steel-plate",
+	energy_required = 4,
 })
 Table.setFields(data.raw.recipe["casting-iron-gear-wheel"], {
 	ingredients = {
-		{type = "fluid", name = "molten-iron", amount = 10},
+		{type = "fluid", name = "molten-iron", amount = 40},
 		{type = "fluid", name = "water", amount = 1},
 	},
 	results = {
-		{type = "item", name = "iron-gear-wheel", amount = 1, percent_spoiled = .2},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+		{type = "item", name = "iron-gear-wheel", amount = 2, percent_spoiled = .2},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 	},
 	main_product = "iron-gear-wheel",
+	energy_required = 4,
 })
 Table.setFields(data.raw.recipe["casting-iron-stick"], {
 	ingredients = {
-		{type = "fluid", name = "molten-iron", amount = 20},
+		{type = "fluid", name = "molten-iron", amount = 40},
 		{type = "fluid", name = "water", amount = 1},
 	},
 	results = {
-		{type = "item", name = "iron-stick", amount = 4, percent_spoiled = .2},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+		{type = "item", name = "iron-stick", amount = 8, percent_spoiled = .2},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 	},
 	main_product = "iron-stick",
+	energy_required = 4,
 })
 Table.setFields(data.raw.recipe["casting-low-density-structure"], {
 	-- Originally 5 plastic bar + 80 molten iron + 250 molten copper
 	ingredients = {
 		{type = "item", name = "plastic-bar", amount = 5},
-		{type = "fluid", name = "molten-steel", amount = 60},
+		{type = "fluid", name = "molten-steel", amount = 80},
 		{type = "fluid", name = "molten-copper", amount = 200},
-		{type = "fluid", name = "water", amount = 1},
+		{type = "fluid", name = "water", amount = 3},
 	},
 	results = {
 		{type = "item", name = "low-density-structure", amount = 1},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+		{type = "fluid", name = "steam", amount = 30, temperature = 500, ignored_by_productivity=30},
 	},
 	main_product = "low-density-structure",
+	energy_required = 12,
 })
 Table.setFields(data.raw.recipe["casting-copper-cable"], {
 	ingredients = {
-		{type = "fluid", name = "molten-copper", amount = 20},
+		{type = "fluid", name = "molten-copper", amount = 40},
 		{type = "fluid", name = "water", amount = 1},
 	},
 	results = {
 		{type = "item", name = "copper-cable", amount = 8},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 	},
 	main_product = "copper-cable",
+	energy_required = 4,
 })
 Table.setFields(data.raw.recipe["casting-pipe"], {
 	ingredients = {
-		{type = "fluid", name = "molten-iron", amount = 10},
+		{type = "fluid", name = "molten-iron", amount = 40},
 		{type = "fluid", name = "water", amount = 1},
 	},
 	results = {
-		{type = "item", name = "pipe", amount = 1},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+		{type = "item", name = "pipe", amount = 4},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 	},
 	main_product = "pipe",
+	energy_required = 4,
 })
 Table.setFields(data.raw.recipe["casting-pipe-to-ground"], {
 	ingredients = {
@@ -237,24 +255,25 @@ Table.setFields(data.raw.recipe["casting-pipe-to-ground"], {
 	},
 	results = {
 		{type = "item", name = "pipe-to-ground", amount = 2},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 	},
 	main_product = "pipe-to-ground",
+	energy_required = 4,
 })
 
 -- Add recipe for casting advanced parts. (Bc can't make ingots from foundries.)
 local castingAdvancedPartsRecipe = Table.copyAndEdit(data.raw.recipe["casting-iron-gear-wheel"], {
 	name = "casting-advanced-parts",
 	ingredients = {
-		{type = "fluid", name = "molten-steel", amount = 80},
-		{type = "fluid", name = "water", amount = 1},
-		{type = "item", name = "rubber", amount = 2},
-		{type = "item", name = "plastic-bar", amount = 4},
-		{type = "fluid", name = "lubricant", amount = 10},
+		{type = "fluid", name = "molten-steel", amount = 160},
+		{type = "fluid", name = "water", amount = 4},
+		{type = "item", name = "rubber", amount = 1},
+		{type = "item", name = "plastic-bar", amount = 2},
+		{type = "fluid", name = "lubricant", amount = 5},
 	},
 	results = {
-		{type = "item", name = "advanced-parts", amount = 16},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500},
+		{type = "item", name = "advanced-parts", amount = 4},
+		{type = "fluid", name = "steam", amount = 40, temperature = 500, ignored_by_productivity=40},
 	},
 	main_product = "advanced-parts",
 	icon = "nil",
@@ -263,15 +282,132 @@ local castingAdvancedPartsRecipe = Table.copyAndEdit(data.raw.recipe["casting-ir
 		{icon = "__space-age__/graphics/icons/fluid/molten-iron.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={4, -4}},
 	},
 	order = "b[casting]-f[casting-advanced-parts]",
+	energy_required = 16,
 })
 table.insert(newData, castingAdvancedPartsRecipe)
 Tech.addRecipeToTech("casting-advanced-parts", "foundry")
 
--- Make recipes for molten tungsten, tungsten steel, and tungsten carbide.
--- TODO
+-- Adjust the default tungsten-carbide recipe to be more expensive, to create more incentive for the foundry recipes.
+data.raw.recipe["tungsten-carbide"].ingredients = {
+	{type = "item", name = "tungsten-ore", amount = 2},
+	{type = "item", name = "carbon", amount = 8},
+	{type = "fluid", name = "sulfuric-acid", amount = 40},
+}
+data.raw.recipe["tungsten-carbide"].category = "chemistry"
+data.raw.recipe["tungsten-carbide"].energy_required = 8
 
--- Add casting recipes for tungsten steel and tungsten carbide?
--- TODO
+-- Create molten tungsten fluid.
+local moltenTungstenFluid = Table.copyAndEdit(data.raw.fluid["molten-iron"], {
+	name = "molten-tungsten",
+	icon = "nil",
+	icons = {{
+		icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png",
+		icon_size = 64,
+		scale = 0.5,
+	}},
+	order = "b[new-fluid]-b[vulcanus]-d[molten-tungsten]",
+	base_color = {.259, .239, .349}, -- Measured on ore
+	flow_color = {.635, .584, .741},
+	visualization_color = {.478, .191, .682}, -- Measured on ore and boosted saturation.
+})
+table.insert(newData, moltenTungstenFluid)
+
+-- Create recipe for molten tungsten.
+local moltenTungstenRecipe = Table.copyAndEdit(data.raw.recipe["molten-iron"], {
+	name = "molten-tungsten",
+	ingredients = {
+		{type = "item", name = "tungsten-ore", amount = 4},
+		{type = "item", name = "carbon", amount = 1},
+		{type = "fluid", name = "sulfuric-acid", amount = 10},
+	},
+	results = {
+		{type = "fluid", name = "molten-tungsten", amount = 40, temperature = 1500},
+		{type = "item", name = "stone", amount = 2},
+	},
+	main_product = "molten-tungsten",
+	order = "a[melting]-d[molten-tungsten]",
+	energy_required = 1,
+})
+table.insert(newData, moltenTungstenRecipe)
+Tech.addRecipeToTech("molten-tungsten", "tungsten-steel", 1)
+
+-- Edit tungsten steel tech's icon, bc I have the nice molten-tungsten icon anyway.
+data.raw.technology["tungsten-steel"].icon = nil
+data.raw.technology["tungsten-steel"].icons = {
+	{icon = "__space-age__/graphics/technology/tungsten-steel.png", icon_size = 256, scale = .6, shift={0, 50}},
+	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten-tech.png", icon_size = 256, scale = .6, shift = {0, -50}},
+}
+
+-- Make foundry recipes for tungsten carbide and tungsten steel. And recipe for heating molten tungsten.
+local tungstenCarbideFromMoltenRecipe = Table.copyAndEdit(data.raw.recipe["tungsten-plate"], {
+	name = "tungsten-carbide-from-molten",
+	ingredients = {
+		{type = "fluid", name = "molten-tungsten", amount = 40, minimum_temperature = 1600, maximum_temperature = 1800},
+		{type = "item", name = "carbon", amount = 1},
+		{type = "fluid", name = "water", amount = 1},
+	},
+	results = {
+		{type = "item", name = "tungsten-carbide", amount = 4},
+		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
+	},
+	main_product = "tungsten-carbide",
+	energy_required = 4,
+	icon = "nil",
+	icons = {
+		{icon = "__space-age__/graphics/icons/tungsten-carbide.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
+		{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
+	},
+})
+table.insert(newData, tungstenCarbideFromMoltenRecipe)
+Tech.addRecipeToTech("tungsten-carbide-from-molten", "tungsten-steel")
+local tungstenSteelRecipe = Table.copyAndEdit(data.raw.recipe["tungsten-plate"], {
+	name = "tungsten-steel-from-molten",
+		-- Again, can't name it "tungsten-steel" or it won't show separately from the item, which is a problem bc you can't see the temperature range requirement.
+	ingredients = {
+		{type = "fluid", name = "molten-tungsten", amount = 40, minimum_temperature = 1800, maximum_temperature = 1900},
+		{type = "fluid", name = "molten-steel", amount = 10},
+		{type = "fluid", name = "water", amount = 2},
+	},
+	results = {
+		{type = "item", name = "tungsten-plate", amount = 1},
+		{type = "fluid", name = "steam", amount = 20, temperature = 500, ignored_by_productivity=20},
+	},
+	main_product = "tungsten-plate",
+	energy_required = 8,
+	icon = "nil",
+	icons = {
+		{icon = "__space-age__/graphics/icons/tungsten-plate.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
+		{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
+	},
+})
+table.insert(newData, tungstenSteelRecipe)
+Tech.addRecipeToTech("tungsten-steel-from-molten", "tungsten-steel")
+local tungstenHeatingRecipe = Table.copyAndEdit(data.raw.recipe["molten-iron"], {
+	name = "tungsten-heating",
+	ingredients = {
+		{type = "fluid", name = "molten-tungsten", amount = 100, ignored_by_stats=100},
+	},
+	results = {
+		{type = "fluid", name = "molten-tungsten", amount = 100, temperature = 2000, ignored_by_stats=100, ignored_by_productivity=100},
+	},
+	main_product = "molten-tungsten",
+	order = "a[melting]-d[tungsten-heating]",
+	energy_required = 1,
+	icon = "nil",
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten-heating.png", icon_size = 64, scale=0.5, mipmap_count=4},
+	},
+	show_amount_in_title = false,
+	hide_from_stats = true,
+	allow_productivity = false,
+	max_productivity = 0,
+})
+table.insert(newData, tungstenHeatingRecipe)
+Tech.addRecipeToTech("tungsten-heating", "tungsten-steel")
+
+-- Hide default tungsten-steel recipe.
+Recipe.hide("tungsten-plate")
+Tech.removeRecipeFromTech("tungsten-plate", "tungsten-steel")
 
 -- TODO reorder unlocks in foundry tech, currently stupid eg low-density structure is early.
 

@@ -189,7 +189,7 @@ Table.setFields(data.raw.recipe["iron-plate"], {
 	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
 	results = {{type="item", name="iron-plate", amount=4}},
 	category = "crafting",
-	energy_required = 2,
+	energy_required = 1,
 	auto_recycle = true,
 	allow_as_intermediate = true,
 	allow_decomposition = true,
@@ -200,7 +200,7 @@ Table.setFields(data.raw.recipe["copper-plate"], {
 	ingredients = {{type="item", name="ingot-copper-hot", amount=1}},
 	results = {{type="item", name="copper-plate", amount=4}},
 	category = "crafting",
-	energy_required = 2,
+	energy_required = 1,
 	auto_recycle = true,
 	allow_as_intermediate = true,
 	allow_decomposition = true,
@@ -210,7 +210,7 @@ Table.setFields(data.raw.recipe["copper-plate"], {
 Table.setFields(data.raw.recipe["iron-gear-wheel"], {
 	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
 	results = {{type="item", name="iron-gear-wheel", amount=2}},
-	energy_required = 0.5, -- Making it fast, for early handcrafting.
+	energy_required = 1,
 	auto_recycle = true,
 })
 
@@ -218,7 +218,7 @@ Table.setFields(data.raw.recipe["iron-gear-wheel"], {
 Table.setFields(data.raw.recipe["iron-stick"], {
 	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
 	results = {{type="item", name="iron-stick", amount=8}},
-	energy_required = 2,
+	energy_required = 1,
 	auto_recycle = true,
 })
 
@@ -226,7 +226,7 @@ Table.setFields(data.raw.recipe["iron-stick"], {
 Table.setFields(data.raw.recipe["copper-cable"], {
 	ingredients = {{type="item", name="ingot-copper-hot", amount=1}},
 	results = {{type="item", name="copper-cable", amount=8}},
-	energy_required = 2,
+	energy_required = 1,
 	auto_recycle = true,
 })
 

@@ -6,7 +6,7 @@ Date: 12. 01. 2025
     - Added machine parts and advanced machine parts.
     - Added fluid-fuelled heating tower.
     - Added volcanic gas on Vulcanus.
-    - Revamped foundry smelting and casting recipes; added fluids for molten steel, tungsten, tungsten carbide, tungsten steel. TODO
+    - Revamped foundry smelting and casting recipes; added fluids for molten steel, molten tungsten.
     - TODO Added early-game tree farming.
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.0

@@ -78,6 +78,7 @@ local advancedPartsItem = Table.copyAndEdit(data.raw.item["iron-gear-wheel"], {
 	has_random_tint = true,
 	random_tint_color = {r = .955, g = .96, b = 1.0, a=1},
 	spoil_ticks = "nil",
+	order = "7",
 })
 table.insert(newData, advancedPartsItem)
 
@@ -90,9 +91,8 @@ local advancedPartsRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"]
 		{type="item", name="rubber", amount=1},
 		{type="fluid", name="lubricant", amount=5},
 	},
-	results = {{type="item", name="advanced-parts", amount=8}},
+	results = {{type="item", name="advanced-parts", amount=4}},
 	category = "crafting-with-fluid",
-	order = "7",
 	energy_required = 5,
 })
 table.insert(newData, advancedPartsRecipe)

@@ -43,3 +43,10 @@ local lavaWaterHeatingRecipe = Table.copyAndEdit(data.raw.recipe["steam-condensa
 })
 data:extend({lavaWaterHeatingRecipe})
 Tech.addRecipeToTech("lava-water-heating", "planet-discovery-vulcanus")
+
+-- Change the science pack to use lava.
+data.raw.recipe["metallurgic-science-pack"].ingredients = {
+	{type = "item", name = "tungsten-carbide", amount = 3},
+	{type = "item", name = "tungsten-plate", amount = 2},
+	{type = "fluid", name = "lava", amount = 200},
+}
