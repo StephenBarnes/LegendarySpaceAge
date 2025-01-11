@@ -4,7 +4,8 @@ Date: 12. 01. 2025
   Features:
     - Added glass and sand.
     - Added machine parts and advanced machine parts.
-    - TODO Added fluid-fuelled heating tower.
+    - Added fluid-fuelled heating tower.
+    - Added volcanic gas on Vulcanus.
     - TODO Added early-game tree farming.
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.0
