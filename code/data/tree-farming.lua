@@ -8,8 +8,7 @@ local Recipe = require("code.util.recipe")
 
 -- Move tree farming tech to early game.
 data.raw.technology["fish-breeding"].prerequisites = {"agricultural-science-pack"}
-data.raw.technology["tree-seeding"].prerequisites = {"automation"}
--- TODO here we should also make the ammonia tech a prereq, and then add fertilizer tree-seeding tech.
+data.raw.technology["tree-seeding"].prerequisites = {"ammonia-1"}
 data.raw.technology["tree-seeding"].unit = {
 	count = 10,
 	time = 30,
@@ -24,6 +23,9 @@ data.raw.technology["tree-seeding"].effects = {
 	},
 	-- TODO add unlocks for fertilizer item, and "tree planter" item (fertilizer+seeds).
 }
+
+-- Gleba needs ag tower.
+Tech.addTechDependency("tree-seeding", "planet-discovery-gleba")
 
 -- Hide the "wood processing" recipe. It converts wood to seeds; we're rather having trees directly yield seeds.
 Recipe.hide("wood-processing")
