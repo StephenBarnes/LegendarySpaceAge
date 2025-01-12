@@ -31,7 +31,7 @@ Tech.setUnit("coal-liquefaction", {count = 200, ingredients = {{"automation-scie
 Tech.addTechDependency("rubber-1", "electric-energy-distribution-1")
 
 -- Concrete no longer needs automation-2 since assembling machine 1 can handle fluids.
-Tech.setPrereqs("concrete", {"automation", "advanced-material-processing"})
+Tech.setPrereqs("concrete", {"advanced-material-processing"})
 -- Same for fluid-handling.
 Tech.setPrereqs("fluid-handling", {"engine", "rubber-1"})
 
@@ -85,6 +85,11 @@ Tech.addTechDependency("glass", "automation-science-pack")
 
 -- Add red circuit dependency to assembling machine 2, so we can add it as ingredient.
 Tech.setPrereqs("automation-2", {"advanced-circuit"})
+
+-- Ensure automation before green science.
+Tech.setPrereqs("logistic-science-pack", {"automation"})
+
+
 
 -- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.
 

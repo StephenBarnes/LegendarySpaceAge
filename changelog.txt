@@ -3,7 +3,13 @@ Version: 0.4.0
 Date: 13. 01. 2025
   Features:
     - Added cement fluid and sulfur-based concrete.
-    - TODO Moved tree farming and heating towers to early game.
+    - TODO Added water filters, and filtration of freshwater on Nauvis.
+    - TODO Added early ammonia.
+    - TODO Added niter for gunpowder, sourced from water filtration or via ammonia.
+    - TODO Added early tree farming and fertilizer.
+    - TODO Added barrelling tech.
+    - TODO Added gas canisters.
+    - TODO Moved heating towers to early game.
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.0
 Date: 11. 01. 2025
