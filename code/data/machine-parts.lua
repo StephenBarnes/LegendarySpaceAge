@@ -94,6 +94,7 @@ local advancedPartsRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"]
 	results = {{type="item", name="advanced-parts", amount=4}},
 	category = "crafting-with-fluid",
 	energy_required = 5,
+	enabled = false,
 })
 table.insert(newData, advancedPartsRecipe)
 

@@ -22,6 +22,7 @@ local cementMixFluid = Table.copyAndEdit(data.raw.fluid["lubricant"], {
 	name = "cement-mix",
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/fluids/cement-fluid.png", scale = .5, icon_size = 64}},
+	auto_barrel = false,
 })
 table.insert(newData, cementMixFluid)
 

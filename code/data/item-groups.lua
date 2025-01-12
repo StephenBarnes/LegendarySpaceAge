@@ -30,12 +30,15 @@ local ingotSubgroup = {
 }
 table.insert(newData, ingotSubgroup)
 
+-- Move derusting row (now also the rust-items row) to after ingots etc.
+data.raw["item-subgroup"]["derusting"].order = "b2"
+
 -- Create subgroup for basic metal intermediates.
 local basicMetalSubgroup = {
 	type = "item-subgroup",
 	name = "basic-metal-intermediates",
 	group = "intermediate-products",
-	order = "b2",
+	order = "b3",
 }
 table.insert(newData, basicMetalSubgroup)
 
@@ -81,3 +84,7 @@ data.raw.item["chemical-plant"].order = "d[chemical-plant]"
 
 -- Sulfur near start of raw material line, since it now appears early in the game.
 data.raw.item["sulfur"].order = "a0"
+
+-- Move fluid recipes to after raw materials like sulfur.
+data.raw["item-subgroup"]["fluid-recipes"].order = "d"
+data.raw["item-subgroup"]["complex-fluid-recipes"].order = "e"
