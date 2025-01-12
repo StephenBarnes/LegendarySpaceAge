@@ -41,7 +41,7 @@ for itemName, fuelValues in pairs(itemFuelValues) do
 		data.raw.item[itemName].fuel_glow_color = data.raw.item["coal"].fuel_glow_color
 	end
 end
-data.raw.item["sulfur"].fuel_glow_color = {r=1, g=1, b=0, a=1} -- Sulfur burns yellow?
+data.raw.item["sulfur"].fuel_glow_color = {r=.3, g=.3, b=1, a=.2} -- Sulfur burns blue in real life.
 
 -- Create fuel category for non-carbon fuels like sulfur, which can't be used in some places where carbon is needed (eg furnaces need carbon as reducing agent).
 -- Mostly this is to prevent using sulfur to make syngas in a gasifier, since that would create carbon out of nothing, which breaks Vulcanus.

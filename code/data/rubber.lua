@@ -9,7 +9,6 @@ Rubber is used in many recipes like belts, tires, engines, inserters, robots, an
 ]]
 
 local Table = require("code.util.table")
-local Tech = require("code.util.tech")
 
 local newData = {}
 

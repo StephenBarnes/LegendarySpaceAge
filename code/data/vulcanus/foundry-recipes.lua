@@ -412,7 +412,7 @@ Tech.removeRecipeFromTech("tungsten-plate", "tungsten-steel")
 -- Reorder some of the unlocks in the foundry tech.
 Tech.removeRecipesFromTechs({"concrete-from-molten-iron", "casting-low-density-structure"}, {"foundry"})
 Tech.addRecipeToTech("casting-low-density-structure", "foundry")
-Tech.addRecipeToTech("concrete-from-molten-iron", "foundry")
+-- Foundry concrete recipe will be added to new sulfur concrete tech, in concrete file.
 
 ------------------------------------------------------------------------
 data:extend(newData)
