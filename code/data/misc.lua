@@ -33,6 +33,10 @@ for _, recipeName in pairs{"hazard-concrete", "refined-hazard-concrete"} do
 	data.raw.recipe[recipeName].energy_required = 10 -- Originally 0.25.
 end
 
+-- Increase storage of starting base, so there's enough space for all starting items.
+data.raw.container["crash-site-spaceship"].inventory_size = 10
+data.raw.container["crash-site-spaceship-wreck-big-2"].inventory_size = 5
+data.raw.container["crash-site-spaceship-wreck-medium-1"].inventory_size = 5
 
 -- Make assembler 1 take fluid ingredients? For latex. TODO
 

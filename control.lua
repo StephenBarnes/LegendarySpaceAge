@@ -1,2 +1,3 @@
-local startingEquipment = require("code.control.starting-equipment")
-script.on_event(defines.events.on_player_created, startingEquipment.onPlayerCreated)
+local startingEquipment = require("code.control.starting-items")
+script.on_init(startingEquipment.onInit)
+script.on_configuration_changed(startingEquipment.onConfigurationChanged)

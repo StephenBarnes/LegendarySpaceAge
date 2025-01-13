@@ -3,6 +3,19 @@
 local Tech = require("code.util.tech")
 local Table = require("code.util.table")
 
+-- Early techs: basic electricity, then electronics, then red science, then automation, then filtration, then steam power.
+Tech.addTechDependency("basic-electricity", "electronics")
+Tech.addTechDependency("filtration-1", "steam-power")
+Tech.removePrereq("automation-science-pack", "steam-power")
+data.raw.technology["steam-power"].research_trigger = nil
+data.raw.technology["steam-power"].unit = data.raw.technology["automation"].unit
+
+-- Move pipe recipes from steam power to automation.
+Tech.removeRecipeFromTech("pipe", "steam-power")
+Tech.removeRecipeFromTech("pipe-to-ground", "steam-power")
+Tech.addRecipeToTech("pipe", "automation", 3)
+Tech.addRecipeToTech("pipe-to-ground", "automation", 4)
+
 -- Logistics 2 depends on rubber.
 Tech.addTechDependency("rubber-1", "logistics-2")
 

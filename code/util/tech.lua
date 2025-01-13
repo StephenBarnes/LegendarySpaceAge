@@ -81,6 +81,12 @@ end
 
 Tech.removeRecipesFromTechs = function(recipeList, techNames)
 	local recipeSet = Table.listToSet(recipeList)
+
+	local recipeHasBeenRemoved = {}
+	for _, recipe in pairs(recipeList) do
+		recipeHasBeenRemoved[recipe] = false
+	end
+
 	for _, techName in pairs(techNames) do
 		local tech = data.raw.technology[techName]
 		if tech == nil then
@@ -93,12 +99,19 @@ Tech.removeRecipesFromTechs = function(recipeList, techNames)
 					table.insert(newEffects, effect)
 				else
 					anyChanges = true
+					recipeHasBeenRemoved[effect.recipe] = true
 				end
 			end
 			tech.effects = newEffects
 			if not anyChanges then
 				log("Warning: No recipes to remove from tech "..techName..".")
 			end
+		end
+	end
+
+	for recipe, removed in pairs(recipeHasBeenRemoved) do
+		if not removed then
+			log("Warning: Recipe "..recipe.." was not removed from any techs.")
 		end
 	end
 end
