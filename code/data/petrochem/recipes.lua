@@ -362,19 +362,16 @@ Table.setFields(data.raw.recipe["plastic-bar"], {
 	},
 })
 
---[[ Modify recipe for explosives.
-	5 light oil + 2 syngas + 1 sulfuric acid + 1 gunpowder -> 3 explosives
-		Light oil is the hydrocarbon base, syngas provides nitrogen (hand-waving some ammonia/nitration step; syngas has nitrogen bc it's air-blown), and sulfuric acid is the catalyst.
-]]
+-- Modify recipe for explosives.
 Table.setFields(data.raw.recipe["explosives"], {
 	ingredients = {
-		{type = "fluid", name = "light-oil", amount = 50},
-		{type = "fluid", name = "syngas", amount = 20},
+		{type = "item", name = "niter", amount = 2},
+		{type = "fluid", name = "ammonia", amount = 20},
+		{type = "fluid", name = "light-oil", amount = 10},
 		{type = "fluid", name = "sulfuric-acid", amount = 10},
-		{type = "item", name = "gunpowder", amount = 1},
 	},
 	results = {
-		{type = "item", name = "explosives", amount = 3},
+		{type = "item", name = "explosives", amount = 2},
 	},
 })
 

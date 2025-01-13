@@ -65,6 +65,8 @@ table.insert(newData, wastePumpItem)
 -- Create fluid-venting recipes.
 local effluentFluidsAndPollution = {
 	{"water", 0},
+	{"lake-water", 0},
+	{"slime", 0},
 	{"crude-oil", 20},
 	{"tar", 30},
 	{"heavy-oil", 25},

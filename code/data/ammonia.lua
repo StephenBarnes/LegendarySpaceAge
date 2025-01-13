@@ -132,6 +132,4 @@ table.insert(newData, ammoniaSyngasRecipe)
 -- Aquilo should require ammonia 2 tech.
 Tech.addTechDependency("ammonia-2", "planet-discovery-aquilo")
 
--- TODO more.
-
 data:extend(newData)

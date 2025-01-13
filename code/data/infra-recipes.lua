@@ -149,4 +149,10 @@ data.raw.recipe["assembling-machine-3"].ingredients = {
 }
 data.raw.recipe["assembling-machine-3"].category = "crafting-with-fluid"
 
+-- Burner mining drill shouldn't need stone.
+data.raw.recipe["burner-mining-drill"].ingredients = {
+	{type="item", name="iron-gear-wheel", amount=4},
+	{type="item", name="iron-plate", amount=4},
+}
+
 -- TODO look up real-world concrete recipes; eg maybe require sand instead of stone bricks, or sand + stone; also maybe add liquid concrete as intermediate. (And sulfur-based concrete on Vulcanus.)

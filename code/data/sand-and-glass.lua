@@ -20,6 +20,7 @@ local sandItem = Table.copyAndEdit(data.raw.item["stone"], {
 	pictures = sandIcons,
 	subgroup = "raw-material",
 	order = "a2",
+	stack_size = 100, -- Increase 50->100 vs stone and ores. So it makes sense to crush stone before shipping.
 })
 table.insert(newData, sandItem)
 

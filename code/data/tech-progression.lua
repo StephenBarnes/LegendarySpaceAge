@@ -16,6 +16,9 @@ Tech.removeRecipeFromTech("pipe-to-ground", "steam-power")
 Tech.addRecipeToTech("pipe", "automation", 3)
 Tech.addRecipeToTech("pipe-to-ground", "automation", 4)
 
+-- Remove offshore pump recipe from steam power, will add to filtration.
+Tech.removeRecipeFromTech("offshore-pump", "steam-power")
+
 -- Logistics 2 depends on rubber.
 Tech.addTechDependency("rubber-1", "logistics-2")
 
@@ -54,17 +57,17 @@ Tech.addTechDependency("automation-2", "automation-3")
 -- Plastics need syngas.
 Tech.setPrereqs("plastics", {"coal-liquefaction"})
 
--- Explosives will need ammonia.
-Tech.addTechDependency("ammonia-1", "explosives")
-
 -- Sulfur tech unlocks sulfuric acid. So it needs fluid handling. But also we need sulfuric acid -> rubber-1 -> fluid-handling.
 -- Could solve this by moving sulfuric acid recipe to rubber tech, removing sulfur tech.
 -- But we also need sulfuric acid for eg fertilizer. So rather keep it as a separate tech.
-Tech.setPrereqs("chemical-science-pack", {"advanced-circuit"}) -- Previously also sulfur-processing; TODO later rewrite the recipe for this science pack completely.
-Tech.setPrereqs("explosives", {"coal-liquefaction"}) -- Previously sulfur-processing
 Tech.setPrereqs("sulfur-processing", {"filtration-1"})
-Tech.addTechDependency("steel-processing", "battery")
 data.raw.technology["sulfur-processing"].unit = data.raw.technology["filtration-1"].unit
+
+Tech.setPrereqs("explosives", {"coal-liquefaction", "ammonia-1"}) -- Previously sulfur-processing
+
+Tech.setPrereqs("chemical-science-pack", {"advanced-circuit"}) -- Previously also sulfur-processing; TODO later rewrite the recipe for this science pack completely.
+
+Tech.addTechDependency("steel-processing", "battery")
 
 -- Remove pointless "gas and oil gathering" tech, merge with petrochemistry 1.
 Tech.hideTech("oil-gathering")
@@ -106,6 +109,17 @@ Tech.setPrereqs("automation-2", {"advanced-circuit"})
 
 -- Ensure automation before green science.
 Tech.setPrereqs("logistic-science-pack", {"automation"})
+
+-- Make filtration-2 mandatory before biochambers.
+Tech.addTechDependency("filtration-2", "biochamber")
+
+-- Set science pack ingredients.
+data.raw.recipe["automation-science-pack"].ingredients = {
+	{type = "item", name = "iron-gear-wheel", amount = 1},
+	{type = "item", name = "electronic-circuit", amount = 1},
+	{type = "item", name = "glass", amount = 1},
+}
+-- TODO other science packs.
 
 
 

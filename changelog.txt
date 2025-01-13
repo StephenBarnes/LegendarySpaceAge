@@ -2,16 +2,18 @@
 Version: 0.4.0
 Date: 13. 01. 2025
   Features:
-    - Added cement fluid and sulfur-based concrete.
-    - Added water filters, and filtration of lake water on Nauvis.
+    - Added hand-crank for early electricity (via other mod, updated to 2.0).
+    - Added cement fluid for regular concrete, and molten-sulfur concrete for Vulcanus.
+    - Added water filters, and filterable lake water on Nauvis, and slime on Gleba.
     - Added ammonia production on Nauvis.
     - Added early tree farming.
     - Added fertilizer.
     - Added briefing on tips-and-tricks screen.
-    - Added niter for gunpowder, sourced from lake-water filtration or via ammonia.
+    - Added niter for gunpowder, sourced from boulders, lake-water filtration, or ammonia.
+    - Miscellaneous other changes.
     - TODO Added barrelling tech.
     - TODO Added gas canisters.
-    - TODO Moved heating towers to early game.
+    - TODO (Moved heating towers to early game.)
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.0
 Date: 11. 01. 2025

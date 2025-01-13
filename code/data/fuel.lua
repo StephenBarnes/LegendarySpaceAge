@@ -17,10 +17,10 @@ local fluidFuelValues = { -- Maps name to fuel value and emissions multiplier.
 	-- Not going to give hydrogen a fuel value, since we can't give fuel categories to fluid fuels, so I couldn't prevent it being used in a fluid-fuelled gasifier etc.
 }
 local itemFuelValues = { -- Maps item name to fuel value, emissions multiplier, vehicle speed mult, vehicle top-speed mult, category.
-	["sulfur"] = {"4MJ", 8, 0.5, 0.5, "non-carbon"},
+	["sulfur"] = {"3MJ", 8, 0.5, 0.5, "non-carbon"},
 	["solid-fuel"] = {"12MJ", 2, 0.7, 0.7, "chemical"},
 	["pitch"] = {"3MJ", 2.5, 0.5, 0.5, "chemical"},
-	["resin"] = {"4MJ", 2, 0.5, 0.5, "chemical"},
+	["resin"] = {"2MJ", 2, 0.5, 0.5, "chemical"},
 	["rocket-fuel"] = {"20MJ", 0.8, 1.8, 1.15, "chemical"}, -- Each one is 25 light oil, 12 rich gas, so that suggests 30MJ. Vanilla is 100MJ.
 	["carbon"] = {"2MJ", 0.8, 0.5, 0.5, "chemical"},
 	["wood"] = {"2MJ", 1.2, 0.5, 0.5, "chemical"},

@@ -31,11 +31,11 @@ data.raw.recipe["casting-iron-gear-wheel"].icons = {
 
 -- Update icons for rusted iron parts.
 data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].icon = nil
---[[data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].icons = {
-	{icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={-4, 4}},
-	{icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/spring-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={4, -5}},
-}]]
-data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].icons = {{icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png", icon_size = 64, scale=0.5, mipmap_count=4}}
+data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].icons = {
+	{icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={-3, 3}},
+	{icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/spring-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={3, -4}},
+}
+--data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].icons = {{icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png", icon_size = 64, scale=0.5, mipmap_count=4}}
 data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].pictures = {
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-1.png", size = 64, scale = 0.5, mipmap_count = 4},
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png", size = 64, scale = 0.5, mipmap_count = 4},

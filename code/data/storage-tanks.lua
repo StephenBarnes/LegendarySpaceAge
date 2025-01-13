@@ -21,5 +21,5 @@ data.raw.technology["tiny-storage-tanks"] = nil
 Tech.addRecipeToTech("tiny-inline-storage-tank", "fluid-handling", 1)
 data.raw.item["tiny-inline-storage-tank"].weight = data.raw.item["pump"].weight
 -- Move to pipe row, not storage row.
-data.raw.item["tiny-inline-storage-tank"].subgroup = "energy-pipe-distribution"
-data.raw.item["tiny-inline-storage-tank"].order = data.raw.item["pipe-to-ground"].order .. "-0"
+--data.raw.item["tiny-inline-storage-tank"].subgroup = "energy-pipe-distribution"
+data.raw.item["tiny-inline-storage-tank"].order = "b[fluid]-a[0]"

@@ -88,3 +88,6 @@ data.raw.item["sulfur"].order = "a0"
 -- Move fluid recipes to after raw materials like sulfur.
 data.raw["item-subgroup"]["fluid-recipes"].order = "d"
 data.raw["item-subgroup"]["complex-fluid-recipes"].order = "e"
+
+-- Move nuclear stuff close to the end, before Aquilo, since we're moving nuclear to "Nauvis part 2".
+data.raw["item-subgroup"]["uranium-processing"].order = "o2"

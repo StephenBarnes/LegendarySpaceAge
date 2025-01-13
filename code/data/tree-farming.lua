@@ -66,7 +66,7 @@ data:extend{
 		type = "item-subgroup",
 		name = "early-agriculture",
 		group = "intermediate-products",
-		order = "m1",
+		order = "g3",
 	},
 }
 data.raw["item-subgroup"]["agriculture-processes"].order = "m2"
@@ -88,6 +88,12 @@ local fertilizerItem = Table.copyAndEdit(data.raw.item["wood"], {
 	icon = "nil",
 	icons = {{icon = fertilizerIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
 	pictures = fertilizerIcons,
+
+	fuel_value = "nil",
+	fuel_acceleration_multiplier = "nil",
+	fuel_top_speed_multiplier = "nil",
+	fuel_emissions_multiplier = "nil",
+	fuel_glow_color = "nil",
 })
 data:extend{fertilizerItem}
 

@@ -24,29 +24,46 @@ local spentFilterItem = Table.copyAndEdit(data.raw.item["battery"], {
 })
 table.insert(newData, spentFilterItem)
 
--- Create filtration tech.
-local filtrationTech = Table.copyAndEdit(data.raw.technology["automation"], {
-	name = "filtration-1", -- TODO later filtration-2 on Gleba, then filtration-3 for the petrophages.
+-- Create filtration-1 tech.
+local filtration1Tech = Table.copyAndEdit(data.raw.technology["automation"], {
+	name = "filtration-1",
 	localised_description = {"technology-description.filtration-1"},
 	icon = "nil",
-	icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/tech.png", icon_size = 256}},
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/filtration/tech.png", icon_size = 256, scale = 0.5, shift = {-25, 0}},
+		{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water-tech.png", icon_size = 256, scale = 0.4, shift = {25, 0}},
+	},
 	prerequisites = {"automation"},
 	effects = {
-		{
-			type = "unlock-recipe",
-			recipe = "filter",
-		},
-		{
-			type = "unlock-recipe",
-			recipe = "filter-lake-water",
-		},
-		{
-			type = "unlock-recipe",
-			recipe = "clean-filter",
-		},
+		{type = "unlock-recipe", recipe = "offshore-pump"},
+		{type = "unlock-recipe", recipe = "filter"},
+		{type = "unlock-recipe", recipe = "filter-lake-water"},
+		{type = "unlock-recipe", recipe = "clean-filter"},
 	},
 })
-table.insert(newData, filtrationTech)
+table.insert(newData, filtration1Tech)
+
+-- Create filtration-2 tech.
+local filtration2Tech = Table.copyAndEdit(data.raw.technology["jellynut"], {
+	name = "filtration-2",
+	localised_description = {"technology-description.filtration-2"},
+	icon = "nil",
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/filtration/tech.png", icon_size = 256, scale = 0.5, shift = {-25, 0}},
+		{icon = "__LegendarySpaceAge__/graphics/filtration/slime-tech.png", icon_size = 256, scale = 0.4, shift = {25, 0}},
+	},
+	prerequisites = {"planet-discovery-gleba"},
+	effects = {
+		{type = "unlock-recipe", recipe = "filter-slime"},
+	},
+	research_trigger = {
+		type = "mine-entity",
+		entity = "iron-stromatolite",
+	},
+})
+table.insert(newData, filtration2Tech)
+
+-- TODO create filtration 3 tech.
 
 -- Create recipe to make filters.
 local filterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], {
@@ -80,8 +97,14 @@ local cleanFilterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], 
 	},
 	enabled = false,
 	subgroup = "fluid-recipes",
-	order = "04",
+	order = "05",
 	show_amount_in_title = false,
+	energy_required = 1,
+	crafting_machine_tint = {
+		primary = data.raw.fluid.water.base_color,
+		secondary = data.raw.fluid.water.flow_color,
+		tertiary = data.raw.fluid.water.visualization_color,
+	},
 })
 table.insert(newData, cleanFilterRecipe)
 
@@ -93,9 +116,10 @@ local filterLakeWaterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel
 		{type = "fluid", name = "lake-water", amount = 400},
 	},
 	results = {
-		{type = "fluid", name = "water", amount = 400},
+		{type = "fluid", name = "water", amount = 380},
 		{type = "item", name = "spent-filter", amount = 1},
-		{type = "item", name = "stone", amount_min = 0, amount_max = 5, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "sand", amount_min = 0, amount_max = 4, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "stone", amount_min = 0, amount_max = 2, show_details_in_recipe_tooltip = false},
 		{type = "item", name = "niter", amount_min = 0, amount_max = 2, show_details_in_recipe_tooltip = false},
 		{type = "item", name = "raw-fish", amount = 1, probability = .01, show_details_in_recipe_tooltip = false},
 	},
@@ -109,6 +133,12 @@ local filterLakeWaterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel
 		{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
 	},
 	enabled = false,
+	energy_required = 5,
+	crafting_machine_tint = {
+		primary = {.015, .631, .682},
+		secondary = data.raw.fluid.water.base_color,
+		tertiary = data.raw.fluid.water.flow_color,
+	},
 })
 table.insert(newData, filterLakeWaterRecipe)
 
@@ -119,8 +149,56 @@ local lakeWaterFluid = Table.copyAndEdit(data.raw.fluid["water"], {
 	icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64}},
 	auto_barrel = false,
 	order = "a[fluid]-a[water]-c",
+	visualization_color = {.015, .631, .682}, -- To differentiate from ordinary water.
 })
 table.insert(newData, lakeWaterFluid)
+
+-- Create slime fluid.
+local slimeFluid = Table.copyAndEdit(data.raw.fluid["water"], {
+	name = "slime",
+	icon = "nil",
+	icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64}},
+	auto_barrel = false,
+	order = "a[fluid]-a[water]-e",
+	base_color = {.176, .255, .200},
+	flow_color = {.393, .453, .333},
+	visualization_color = {.482, .745, .215},
+})
+table.insert(newData, slimeFluid)
+
+-- Create recipe to filter slime.
+local filterSlimeRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], {
+	name = "filter-slime",
+	ingredients = {
+		{type = "item", name = "filter", amount = 1},
+		{type = "fluid", name = "slime", amount = 400},
+	},
+	results = {
+		{type = "fluid", name = "water", amount = 200},
+		{type = "item", name = "spent-filter", amount = 1},
+		{type = "item", name = "spoilage", amount_min = 0, amount_max = 20, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "iron-bacteria", amount = 1, probability = .02, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "copper-bacteria", amount = 1, probability = .02, show_details_in_recipe_tooltip = false},
+		-- Could give eggs or fruits with some small probability. But rather not, since that makes it too easy to restart cycles.
+	},
+	main_product = "water",
+	category = "chemistry-or-crafting-with-fluid",
+	subgroup = "fluid-recipes",
+	order = "04",
+	icon = "nil",
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
+		{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
+	},
+	enabled = false,
+	energy_required = 6,
+	crafting_machine_tint = {
+		primary = {.176, .255, .200},
+		secondary = {.393, .453, .333},
+		tertiary = {.482, .745, .215},
+	},
+})
+table.insert(newData, filterSlimeRecipe)
 
 ------------------------------------------------------------------------
 data:extend(newData)
@@ -134,6 +212,21 @@ for _, tileName in pairs{
 	"water-shallow",
 	"water-mud",
 } do
-	local tile = data.raw.tile[tileName]
-	tile.fluid = "lake-water"
+	data.raw.tile[tileName].fluid = "lake-water"
+end
+
+-- Make Gleba water tiles yield slime.
+for _, tileName in pairs{
+	"gleba-deep-lake",
+	"wetland-blue-slime",
+	"wetland-light-green-slime",
+	"wetland-green-slime",
+	"wetland-light-dead-skin",
+	"wetland-dead-skin",
+	"wetland-pink-tentacle",
+	"wetland-red-tentacle",
+	"wetland-yumako",
+	"wetland-jellynut",
+} do
+	data.raw.tile[tileName].fluid = "slime"
 end
