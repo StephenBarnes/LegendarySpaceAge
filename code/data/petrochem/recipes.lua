@@ -400,9 +400,7 @@ Tech.addRecipeToTech("heavy-oil-coking", "oil-processing")
 -- Add tar distillation to the 1st oil tech.
 Tech.addRecipeToTech("tar-distillation", "oil-processing")
 
--- First resin recipe needed after automation 1.
-Tech.addRecipeToTech("wood-resin", "automation")
-
+-- First resin recipe will be placed in wood circuit boards tech.
 -- Add other resin recipes to the 1st oil tech.
 Tech.addRecipeToTech("pitch-resin", "oil-processing")
 Tech.addRecipeToTech("rich-gas-resin", "oil-processing")

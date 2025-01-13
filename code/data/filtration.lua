@@ -76,9 +76,12 @@ local cleanFilterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], 
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/filtration/spent-filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
-		{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {0, -3}},
+		{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.34, mipmap_count = 4, shift = {0, -4}},
 	},
 	enabled = false,
+	subgroup = "fluid-recipes",
+	order = "04",
+	show_amount_in_title = false,
 })
 table.insert(newData, cleanFilterRecipe)
 
@@ -103,7 +106,7 @@ local filterLakeWaterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
-		{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {0, -4}},
+		{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
 	},
 	enabled = false,
 })

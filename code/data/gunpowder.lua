@@ -31,9 +31,9 @@ local gunpowderRecipe = Table.copyAndEdit(data.raw.recipe["firearm-magazine"], {
 	ingredients = {
 		{type="item", name="carbon", amount=2},
 		{type="item", name="sulfur", amount=1},
-		{type="item", name="sand", amount=1},
+		{type="item", name="niter", amount=4},
 	},
-	results = {{type = "item", name = "gunpowder", amount = 2}},
+	results = {{type = "item", name = "gunpowder", amount = 8}},
 	enabled = true,
 	category = "chemistry-or-handcrafting",
 })

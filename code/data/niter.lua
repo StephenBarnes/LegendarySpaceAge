@@ -1,12 +1,6 @@
---[[ This file adds niter - item, tech, recipes.
-TODO
-]]
+-- This file adds the niter item. Niter recipe is in ammonia file.
 
 local Table = require("code.util.table")
-local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
-
-local newData = {}
 
 -- Create niter item
 local niterIcons = {}
@@ -19,10 +13,11 @@ local niterItem = Table.copyAndEdit(data.raw.item["sulfur"], {
 	icons = {{icon = niterIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
 	pictures = niterIcons,
 	order = "b[chemistry]-a",
+
+	fuel_value = "nil",
+	fuel_acceleration_multiplier = "nil",
+	fuel_top_speed_multiplier = "nil",
+	fuel_emissions_multiplier = "nil",
+	fuel_glow_color = "nil",
 })
-table.insert(newData, niterItem)
-
-------------------------------------------------------------------------
-data:extend(newData)
-
--- TODO add niter from mining boulders
+data:extend{niterItem}

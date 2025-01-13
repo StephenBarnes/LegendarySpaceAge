@@ -109,15 +109,11 @@ local naturalRubberTech = Table.copyAndEdit(data.raw.technology["plastics"], {
 			type = "unlock-recipe",
 			recipe = "rubber-from-latex",
 		},
-		{
-			type = "unlock-recipe",
-			recipe = "sulfuric-acid",
-		},
 	},
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/rubber/tech.png", icon_size = 256, scale=0.5, mipmap_count=4}},
 	localised_description = {"technology-description.rubber-1"},
-	prerequisites = {"filtration-1"},
+	prerequisites = {"sulfur-processing"},
 	unit = data.raw.technology["automation"].unit,
 })
 table.insert(newData, naturalRubberTech)

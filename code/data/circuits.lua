@@ -131,12 +131,25 @@ local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electron
 })
 table.insert(newData, improvisedCircuitBoardRecipe)
 
+-- Create tech for wood circuit boards.
+local woodCircuitBoardTech = Table.copyAndEdit(data.raw.technology["automation"], {
+	name = "wood-circuit-board",
+	effects = {
+		{type = "unlock-recipe", recipe = "wood-resin"},
+		{type = "unlock-recipe", recipe = "wood-circuit-board"},
+	},
+	icon = "nil",
+	icons = {{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board-tech.png", icon_size = 256, scale = 0.5, mipmap_count = 4}},
+	prerequisites = {"automation", "steam-power"},
+	ignore_tech_cost_multiplier = false,
+})
+table.insert(newData, woodCircuitBoardTech)
+
 -- TODO create items and recipes for electronic components, wafer, doped wafer.
 
 data:extend(newData)
 
 -- Add circuit board recipes to techs.
-Tech.addRecipeToTech("wood-circuit-board", "automation")
 Tech.addRecipeToTech("plastic-circuit-board", "plastics") -- TODO rather make a separate tech for this, using plastic circuit board sprite.
 Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rather make a separate tech for this? Unlocked by mining like 10 calcite. Use the ceramic circuit board sprite.
 Tech.addRecipeToTech("improvised-circuit-board", "electronics", 2)

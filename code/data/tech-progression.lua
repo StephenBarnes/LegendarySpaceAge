@@ -54,18 +54,23 @@ Tech.addTechDependency("automation-2", "automation-3")
 -- Plastics need syngas.
 Tech.setPrereqs("plastics", {"coal-liquefaction"})
 
+-- Explosives will need ammonia.
+Tech.addTechDependency("ammonia-1", "explosives")
+
 -- Sulfur tech unlocks sulfuric acid. So it needs fluid handling. But also we need sulfuric acid -> rubber-1 -> fluid-handling.
--- Solving this by moving sulfuric acid recipe to rubber tech, removing sulfur tech.
-Tech.hideTech("sulfur-processing")
-Tech.setPrereqs("battery", {"rubber-1"}) -- Previously sulfur-processing.
+-- Could solve this by moving sulfuric acid recipe to rubber tech, removing sulfur tech.
+-- But we also need sulfuric acid for eg fertilizer. So rather keep it as a separate tech.
 Tech.setPrereqs("chemical-science-pack", {"advanced-circuit"}) -- Previously also sulfur-processing; TODO later rewrite the recipe for this science pack completely.
 Tech.setPrereqs("explosives", {"coal-liquefaction"}) -- Previously sulfur-processing
+Tech.setPrereqs("sulfur-processing", {"filtration-1"})
+Tech.addTechDependency("steel-processing", "battery")
+data.raw.technology["sulfur-processing"].unit = data.raw.technology["filtration-1"].unit
 
 -- Remove pointless "gas and oil gathering" tech, merge with petrochemistry 1.
 Tech.hideTech("oil-gathering")
 data.raw.technology["oil-processing"].unit = data.raw.technology["oil-gathering"].unit
 data.raw.technology["oil-processing"].research_trigger = nil
-data.raw.technology["oil-processing"].prerequisites = {"fluid-handling"}
+data.raw.technology["oil-processing"].prerequisites = {"fluid-handling", "steam-power"}
 Tech.addRecipeToTech("pumpjack", "oil-processing", 2)
 -- TODO: add the wellhead here.
 

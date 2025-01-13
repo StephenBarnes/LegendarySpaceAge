@@ -17,14 +17,9 @@ local ammonia1Tech = Table.copyAndEdit(data.raw.technology["automation"], {
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/ammonia/tech.png", icon_size = 256}},
 	effects = {
-		{
-			type = "unlock-recipe",
-			recipe = "ammonia-from-spoilage",
-		},
-		{
-			type = "unlock-recipe",
-			recipe = "spoilage-from-wood",
-		},
+		{type = "unlock-recipe", recipe = "spoilage-from-wood"},
+		{type = "unlock-recipe", recipe = "ammonia-from-spoilage"},
+		{type = "unlock-recipe", recipe = "niter"},
 	},
 })
 table.insert(newData, ammonia1Tech)
@@ -66,7 +61,7 @@ local ammoniaRecipe = Table.copyAndEdit(data.raw.recipe["nutrients-from-spoilage
 		{type = "fluid", name = "ammonia", amount = 10},
 	},
 	category = "organic-or-chemistry",
-	subgroup = "raw-material",
+	subgroup = "early-agriculture",
 	order = "d2",
 	energy_required = 30,
 	icons = {
@@ -80,14 +75,14 @@ table.insert(newData, ammoniaRecipe)
 local woodSpoilageRecipe = Table.copyAndEdit(data.raw.recipe["nutrients-from-spoilage"], {
 	name = "spoilage-from-wood",
 	ingredients = {
-		{type = "item", name = "wood", amount = 10},
+		{type = "item", name = "wood", amount = 5},
 		{type = "fluid", name = "water", amount = 20},
 	},
 	results = {
 		{type = "item", name = "spoilage", amount = 5},
 	},
 	category = "organic-or-chemistry",
-	subgroup = "raw-material",
+	subgroup = "early-agriculture",
 	order = "d1",
 	energy_required = 30,
 	icons = {
@@ -96,6 +91,22 @@ local woodSpoilageRecipe = Table.copyAndEdit(data.raw.recipe["nutrients-from-spo
 	},
 })
 table.insert(newData, woodSpoilageRecipe)
+
+-- Create recipe for niter from ammonia and sand.
+local niterFromAmmoniaRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
+	name = "niter",
+	ingredients = {
+		{type = "fluid", name = "ammonia", amount = 5},
+		{type = "item", name = "sand", amount = 4},
+	},
+	results = {
+		{type = "item", name = "niter", amount = 8},
+	},
+	icon = "nil",
+	icons = "nil",
+	energy_required = 1,
+})
+table.insert(newData, niterFromAmmoniaRecipe)
 
 -- Create recipe for ammonia from syngas.
 local ammoniaSyngasRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {

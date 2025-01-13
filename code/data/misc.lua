@@ -49,3 +49,20 @@ data.raw.container["crash-site-spaceship-wreck-medium-1"].inventory_size = 5
 -- TODO change oil processing to require research, not trigger.
 
 -- TODO get rid of advanced combinators tech, rather move the selector combinator into the main combinators tech.
+
+-- Edit items from mining boulders - more niter, more stone, more coal.
+data.raw["simple-entity"]["huge-rock"].minable.results = {
+	{type = "item", name = "stone", amount_min = 25, amount_max = 75}, -- Was 24-50.
+	{type = "item", name = "coal", amount_min = 25, amount_max = 75}, -- Was 24-50.
+	{type = "item", name = "niter", amount_min = 0, amount_max = 20}, -- Added.
+}
+data.raw["simple-entity"]["big-rock"].minable.results = {
+	{type = "item", name = "stone", amount_min = 30, amount_max = 50}, -- Was 20.
+	{type = "item", name = "coal", amount_min = 0, amount_max = 30}, -- Added.
+	{type = "item", name = "niter", amount_min = 0, amount_max = 10}, -- Added.
+}
+data.raw["simple-entity"]["big-sand-rock"].minable.results = {
+	{type = "item", name = "stone", amount_min = 30, amount_max = 50}, -- Was 19-25.
+	{type = "item", name = "coal", amount_min = 0, amount_max = 20}, -- Added.
+	{type = "item", name = "niter", amount_min = 0, amount_max = 20}, -- Added.
+}
