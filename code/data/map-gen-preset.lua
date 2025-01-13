@@ -15,6 +15,7 @@ custom.advanced_settings.enemy_evolution.pollution_factor = 0.0000002 -- There's
 
 -- Reduce stone on Gleba - to encourage either slipstack cultivation or rail mining outposts, both of which are more interesting than just having a starting patch that's enough to win the game.
 custom.basic_settings.autoplace_controls["gleba_stone"] = {richness = 1/3}
+-- TODO also just delete the autoplace named-var for stone beyond the starting area.
 
 -- Fulgora: increase amount of water, make islands further apart but not much bigger.
 custom.basic_settings.autoplace_controls["fulgora_islands"] = {
@@ -23,3 +24,5 @@ custom.basic_settings.autoplace_controls["fulgora_islands"] = {
 }
 
 -- TODO add rail world preset settings.
+
+-- TODO increase size of starting area, to reduce chance of having to fight in very early game.

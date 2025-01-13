@@ -30,17 +30,17 @@ local ingotSubgroup = {
 }
 table.insert(newData, ingotSubgroup)
 
--- Move derusting row (now also the rust-items row) to after ingots etc.
-data.raw["item-subgroup"]["derusting"].order = "b2"
-
 -- Create subgroup for basic metal intermediates.
 local basicMetalSubgroup = {
 	type = "item-subgroup",
 	name = "basic-metal-intermediates",
 	group = "intermediate-products",
-	order = "b3",
+	order = "b2",
 }
 table.insert(newData, basicMetalSubgroup)
+
+-- Move derusting row (now also the rust-items row) to after ingots etc.
+data.raw["item-subgroup"]["derusting"].order = "b3"
 
 -- Create subgroup for circuits and advanced circuit intermediates (electronic components, silicon wafers, doped wafers).
 local complexCircuitIntermediatesSubgroup = {

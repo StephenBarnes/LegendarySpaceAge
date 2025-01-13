@@ -1,6 +1,6 @@
 {
 	"name": "LegendarySpaceAge",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"title": "Legendary Space Age",
 	"author": "StephenB",
 	"factorio_version": "2.0",
@@ -61,5 +61,5 @@
 		, "! GROUP-stuff-for-dev-only"
 		, "? no-graphics"
 	],
-	"description": "EARLY DEVELOPMENT, NOT PLAYABLE. Modpack for Space Age veterans seeking a new challenge."
+	"description": "EARLY DEVELOPMENT, NOT PLAYABLE. Overhaul modpack for Space Age veterans seeking a new challenge."
 }

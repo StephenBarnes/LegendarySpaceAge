@@ -24,3 +24,5 @@ table.insert(newData, niterItem)
 
 ------------------------------------------------------------------------
 data:extend(newData)
+
+-- TODO add niter from mining boulders
