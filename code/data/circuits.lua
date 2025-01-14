@@ -57,6 +57,7 @@ local woodCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board.png", icon_size = 64, scale = .5},
 	},
+	auto_recycle = false,
 })
 data:extend{woodCircuitBoardRecipe}
 
@@ -78,6 +79,7 @@ local plasticCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/plastic-circuit-board.png", icon_size = 64, scale = .5},
 	},
+	auto_recycle = false,
 })
 data:extend{plasticCircuitBoardRecipe}
 Tech.addRecipeToTech("plastic-circuit-board", "plastics") -- TODO rather make a separate tech for this, using plastic circuit board sprite.
@@ -100,6 +102,7 @@ local calciteCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/ceramic-circuit-board.png", icon_size = 64, scale = .5},
 	},
 	category = "metallurgy",
+	auto_recycle = false,
 })
 data:extend{calciteCircuitBoardRecipe}
 Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rather make a separate tech for this? Unlocked by mining like 10 calcite. Use the ceramic circuit board sprite.
@@ -128,6 +131,7 @@ local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electron
 	enabled = false,
 	energy_required = 2,
 	category = "handcrafting-only",
+	auto_recycle = false,
 })
 data:extend{improvisedCircuitBoardRecipe}
 Tech.addRecipeToTech("improvised-circuit-board", "electronics", 2)

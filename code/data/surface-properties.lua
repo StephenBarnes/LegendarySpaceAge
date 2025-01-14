@@ -28,7 +28,26 @@ for _, recipeName in pairs{
 	data.raw.recipe[recipeName].surface_conditions = nil
 end
 
--- Could allow spidertron construction on space platforms. But rather not, that seems like cheese.
-
 -- Aquilo should have less solar power in space, so you need a nuclear reactor.
 data.raw.planet.aquilo.solar_power_in_space = .05 -- Changed 60% -> 5%.
+
+-- Search for things requiring pressure 1000, change to 220. Those are supposed to be Nauvis-only.
+local function isNauvisOnly(conditions)
+	return conditions ~= nil
+		and #conditions == 1
+		and conditions[1].property == "pressure"
+		and conditions[1].min == 1000
+		and conditions[1].max == 1000
+end
+for _, typeName in pairs{
+	"recipe",
+	"assembling-machine",
+	"furnace",
+	"plant", -- Trees.
+} do
+	for _, thing in pairs(data.raw[typeName]) do
+		if isNauvisOnly(thing.surface_conditions) then
+			thing.surface_conditions = {{property = "pressure", min = 220, max = 220}}
+		end
+	end
+end

@@ -98,6 +98,7 @@ local filterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], {
 		{type = "item", name = "filter", amount = 1},
 	},
 	enabled = false,
+	auto_recycle = true,
 })
 table.insert(newData, filterRecipe)
 
@@ -127,6 +128,7 @@ local cleanFilterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], 
 		secondary = data.raw.fluid.water.flow_color,
 		tertiary = data.raw.fluid.water.visualization_color,
 	},
+	auto_recycle = false,
 })
 table.insert(newData, cleanFilterRecipe)
 
