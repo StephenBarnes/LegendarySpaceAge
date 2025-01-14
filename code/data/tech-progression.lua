@@ -5,19 +5,20 @@ local Table = require("code.util.table")
 
 -- Early techs: basic electricity, then electronics, then red science, then automation, then filtration, then steam power.
 Tech.addTechDependency("basic-electricity", "electronics")
-Tech.addTechDependency("filtration-1", "steam-power")
+Tech.addTechDependency("filtration-lake-water", "steam-power")
 Tech.removePrereq("automation-science-pack", "steam-power")
 data.raw.technology["steam-power"].research_trigger = nil
 data.raw.technology["steam-power"].unit = data.raw.technology["automation"].unit
 
 -- Move pipe recipes from steam power to automation.
-Tech.removeRecipeFromTech("pipe", "steam-power")
-Tech.removeRecipeFromTech("pipe-to-ground", "steam-power")
+-- Remove offshore pump recipe from steam power, will add to filtration.
+data.raw.technology["steam-power"].effects = {
+	{type = "unlock-recipe", recipe = "boiler"},
+	{type = "unlock-recipe", recipe = "gas-boiler"},
+	{type = "unlock-recipe", recipe = "steam-engine"},
+}
 Tech.addRecipeToTech("pipe", "automation", 3)
 Tech.addRecipeToTech("pipe-to-ground", "automation", 4)
-
--- Remove offshore pump recipe from steam power, will add to filtration.
-Tech.removeRecipeFromTech("offshore-pump", "steam-power")
 
 -- Logistics 2 depends on rubber.
 Tech.addTechDependency("rubber-1", "logistics-2")
@@ -60,8 +61,8 @@ Tech.setPrereqs("plastics", {"coal-liquefaction"})
 -- Sulfur tech unlocks sulfuric acid. So it needs fluid handling. But also we need sulfuric acid -> rubber-1 -> fluid-handling.
 -- Could solve this by moving sulfuric acid recipe to rubber tech, removing sulfur tech.
 -- But we also need sulfuric acid for eg fertilizer. So rather keep it as a separate tech.
-Tech.setPrereqs("sulfur-processing", {"filtration-1"})
-data.raw.technology["sulfur-processing"].unit = data.raw.technology["filtration-1"].unit
+Tech.setPrereqs("sulfur-processing", {"filtration-lake-water"})
+data.raw.technology["sulfur-processing"].unit = data.raw.technology["filtration-lake-water"].unit
 
 Tech.setPrereqs("explosives", {"coal-liquefaction", "ammonia-1"}) -- Previously sulfur-processing
 
@@ -109,9 +110,6 @@ Tech.setPrereqs("automation-2", {"advanced-circuit"})
 
 -- Logistic science after automation science.
 Tech.setPrereqs("logistic-science-pack", {"automation-science-pack"})
-
--- Make filtration-2 mandatory before biochambers.
-Tech.addTechDependency("filtration-2", "biochamber")
 
 -- Heating tower tech should be early.
 Tech.setPrereqs("heating-tower", {"steam-power", "concrete"})

@@ -64,3 +64,25 @@ data:extend({
 })
 table.insert(data.raw["god-controller"]["default"].crafting_categories, "handcrafting-only")
 table.insert(data.raw["character"]["character"].crafting_categories, "handcrafting-only")
+
+-- Create crafting category for chem plant or biochamber or handcrafting - for fulgorite shards to holmium powder.
+data:extend({
+	{
+		type = "recipe-category",
+		name = "chemistry-or-organic-or-handcrafting",
+	},
+})
+table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "chemistry-or-handcrafting")
+table.insert(data.raw["assembling-machine"]["biochamber"].crafting_categories, "chemistry-or-handcrafting")
+table.insert(data.raw["god-controller"]["default"].crafting_categories, "chemistry-or-handcrafting")
+table.insert(data.raw["character"]["character"].crafting_categories, "chemistry-or-handcrafting")
+
+-- Create crafting category for chem plant or electromagnetic plant.
+data:extend({
+	{
+		type = "recipe-category",
+		name = "chemistry-or-electronics",
+	},
+})
+table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "chemistry-or-electronics")
+table.insert(data.raw["assembling-machine"]["electromagnetic-plant"].crafting_categories, "chemistry-or-electronics")

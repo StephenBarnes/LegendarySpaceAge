@@ -20,8 +20,10 @@
 		, "Electric_flying_enemies"
 		, "behemoth-enemies"
 		, "cargo-pod-requires-research"
+
 		, "gas-furnace"
 		, "gas-boiler"
+		, "electricboiler"
 
 		, "eradicators-hand-crank-redux"
 		, "PersonalBurnerGenerator"
@@ -34,7 +36,6 @@
 
 		, "PowerMultiplier"
 		, "PowerOverload"
-		, "spoiling-promethium"
 		, "NoLavaInPipes"
 		, "no-quality"
 		, "diurnal-dynamics"
@@ -56,9 +57,6 @@
 
 		, "! GROUP-to-incorporate-and-mark-incompatible"
 		, "slipstacks"
-		, "boompuff-agriculture"
-		, "fluroflux"
-		, "! other-mods-incompat-with-FulgoraLives"
 
 		, "! GROUP-mark-optional-before-release"
 		, "factoryplanner"

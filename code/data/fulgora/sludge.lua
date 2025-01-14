@@ -9,7 +9,7 @@ data:extend({
 		type = "fluid",
 		name = "fulgoran-sludge",
 		icon = "__LegendarySpaceAge__/graphics/fulgora/sludge.png",
-		icon_size = 128,
+		icon_size = 64,
 		mipmap_count = 4,
 		base_color = { r = 0.24, g = 0.16, b = 0.16 },
 		flow_color = { r = 0.08, g = 0.08, b = 0.08 },
@@ -23,36 +23,17 @@ data:extend({
 		name = "fulgoran-sludge-filtration",
 		category = "chemistry",
 		icons = {
-			{
-				icon = "__LegendarySpaceAge__/graphics/fulgora/sludge.png",
-				icon_size = 128,
-				scale = 0.18,
-				shift = { 0, -4.8 }
-			},
-			{
-				icon = "__base__/graphics/icons/fluid/heavy-oil.png",
-				scale = 0.25,
-				shift = { -9, 6 }
-			},
-			{
-				icon = "__base__/graphics/icons/fluid/light-oil.png",
-				scale = 0.25,
-				shift = { 9, 6 }
-			},
-			{
-				icon = "__space-age__/graphics/icons/scrap-4.png",
-				scale = 0.2,
-				shift = { 0, 9 }
-			},
+			{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
+			{icon = "__LegendarySpaceAge__/graphics/fulgora/sludge.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
 		},
 		enabled = false,
 		energy_required = 4,
 		ingredients = {
-			{ type = "fluid", name = "filter", amount = 1},
+			{ type = "item", name = "filter", amount = 1},
 			{ type = "fluid", name = "fulgoran-sludge", amount = 100, fluidbox_multiplier = 10 },
 		},
 		results = {
-			{ type = "fluid", name = "spent-filter", amount = 1},
+			{ type = "item", name = "spent-filter", amount = 1},
 			{ type = "fluid", name = "heavy-oil", amount = 60 },
 			{ type = "fluid", name = "light-oil", amount = 20 },
 			{ type = "item", name = "ice", amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false },
@@ -72,7 +53,7 @@ data:extend({
 		maximum_productivity = 3,
 		---@diagnostic disable-next-line: assign-type-mismatch
 		auto_recycle = false,
-		crafting_machine_tint = {
+		crafting_machine_tint = { -- TODO check and maybe improve tints.
 			primary = { r = 0.5, g = 0.4, b = 0.25, a = 1.000 },
 			secondary = { r = 0, g = 0, b = 0, a = 1.000 },
 			tertiary = { r = 0.75, g = 0.5, b = 0.5 },
@@ -80,6 +61,6 @@ data:extend({
 		}
 	}
 })
-Tech.addRecipeToTech("fulgoran-sludge-filtration", "recycling")
+-- Recipe gets added to tech created in filtration.lua.
 data.raw["tile"]["oil-ocean-shallow"].fluid = "fulgoran-sludge"
 data.raw["tile"]["oil-ocean-deep"].fluid = "fulgoran-sludge"

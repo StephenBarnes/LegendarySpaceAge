@@ -1,5 +1,3 @@
-local Recipe = require("code.util.recipe")
-
 -- Change scrap recycling outputs.
 data.raw["recipe"]["scrap-recycling"].results = {
 	{ type = "item", name = "processing-unit",       amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false },
@@ -9,13 +7,14 @@ data.raw["recipe"]["scrap-recycling"].results = {
 	{ type = "item", name = "concrete",              amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "battery",               amount = 1, probability = 0.08, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "holmium-battery",       amount = 1, probability = 0.0005, show_details_in_recipe_tooltip = false },
-	{ type = "item", name = "stone",                 amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "ice",                   amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "stone",                 amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "holmium-ore",           amount = 1, probability = 0.004, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "rocs-rusting-iron-iron-gear-wheel-rusty", amount = 1, probability = 0.08, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "rocs-rusting-iron-iron-stick-rusty", amount = 1, probability = 0.08, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "copper-cable",          amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "plastic-bar",           amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "rubber",                amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false },
 	-- Rather don't produce fulgorite shards - should need to grow them to continue everything.
 }
 
@@ -26,7 +25,7 @@ data.raw.recipe["holmium-solution"].ingredients = {
 }
 
 -- Change electrolyte solution - previously stone, heavy oil, holmium solution.
-data.raw.recipe["electrolyte-solution"].ingredients = {
+data.raw.recipe["electrolyte"].ingredients = {
 	{type = "item", name = "sand", amount = 1},
 	{type = "fluid", name = "holmium-solution", amount = 10},
 	{type = "fluid", name = "water", amount = 10},

@@ -13,7 +13,7 @@ local ammonia1Tech = Table.copyAndEdit(data.raw.technology["automation"], {
 	name = "ammonia-1",
 	localised_name = {"technology-name.ammonia-1"},
 	localised_description = {"technology-description.ammonia-1"},
-	prerequisites = {"filtration-1"},
+	prerequisites = {"filtration-lake-water"},
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/ammonia/tech.png", icon_size = 256}},
 	effects = {

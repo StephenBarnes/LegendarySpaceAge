@@ -25,8 +25,6 @@ local Tech = require("code.util.tech")
 local Table = require("code.util.table")
 local Item = require("code.util.item")
 
-local newData = {}
-
 -- Add circuit board item.
 local circuitBoardItem = Table.copyAndEdit(data.raw.item["electronic-circuit"], {
 	name = "circuit-board",
@@ -40,7 +38,7 @@ local circuitBoardItem = Table.copyAndEdit(data.raw.item["electronic-circuit"], 
 	weight = 1000000 / 4000,
 })
 Item.copySoundsTo("copper-cable", circuitBoardItem)
-table.insert(newData, circuitBoardItem)
+data:extend{circuitBoardItem}
 
 -- Add recipe for circuit board from wood.
 -- 	1 wood + 1 resin -> 4 circuit boards
@@ -60,7 +58,7 @@ local woodCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board.png", icon_size = 64, scale = .5},
 	},
 })
-table.insert(newData, woodCircuitBoardRecipe)
+data:extend{woodCircuitBoardRecipe}
 
 -- Add recipe for circuit board from plastic.
 -- 	2 plastic bar + 1 resin + 0.2 rubber -> 8 circuit boards
@@ -81,7 +79,8 @@ local plasticCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/plastic-circuit-board.png", icon_size = 64, scale = .5},
 	},
 })
-table.insert(newData, plasticCircuitBoardRecipe)
+data:extend{plasticCircuitBoardRecipe}
+Tech.addRecipeToTech("plastic-circuit-board", "plastics") -- TODO rather make a separate tech for this, using plastic circuit board sprite.
 
 -- Add recipe for ceramic circuit board.
 -- 	4 calcite + 2 resin -> 8 circuit boards
@@ -102,7 +101,8 @@ local calciteCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 	},
 	category = "metallurgy",
 })
-table.insert(newData, calciteCircuitBoardRecipe)
+data:extend{calciteCircuitBoardRecipe}
+Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rather make a separate tech for this? Unlocked by mining like 10 calcite. Use the ceramic circuit board sprite.
 
 --[[ Add "improvised" circuit board recipe, only handcraftable.
 	Improvise circuit board: 1 stone + 1 carbon -> 1 circuit board
@@ -129,7 +129,8 @@ local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electron
 	energy_required = 2,
 	category = "handcrafting-only",
 })
-table.insert(newData, improvisedCircuitBoardRecipe)
+data:extend{improvisedCircuitBoardRecipe}
+Tech.addRecipeToTech("improvised-circuit-board", "electronics", 2)
 
 -- Create tech for wood circuit boards.
 local woodCircuitBoardTech = Table.copyAndEdit(data.raw.technology["automation"], {
@@ -143,26 +144,132 @@ local woodCircuitBoardTech = Table.copyAndEdit(data.raw.technology["automation"]
 	prerequisites = {"automation", "steam-power"},
 	ignore_tech_cost_multiplier = false,
 })
-table.insert(newData, woodCircuitBoardTech)
+data:extend{woodCircuitBoardTech}
 
--- TODO create items and recipes for electronic components, wafer, doped wafer.
+-- Create item for silicon (undoped wafers).
+local silicon = Table.copyAndEdit(data.raw.item["plastic-bar"], {
+	name = "silicon",
+	icon = "__LegendarySpaceAge__/graphics/circuit-chains/silicon.png",
+	icon_size = 64,
+	subgroup = "complex-circuit-intermediates",
+	order = "001",
+	stack_size = 200,
+})
+data:extend{silicon}
 
-data:extend(newData)
+-- Create recipe for silicon.
+local siliconRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
+	name = "silicon",
+	ingredients = {
+		{type = "item", name = "sand", amount = 2},
+		{type = "fluid", name = "sulfuric-acid", amount = 10},
+	},
+	results = {
+		{type = "item", name = "silicon", amount = 1},
+	},
+	subgroup = "nil",
+	icon = "nil",
+	icons = "nil",
+})
+data:extend{siliconRecipe}
+Tech.addRecipeToTech("silicon", "processing-unit", 1)
 
--- Add circuit board recipes to techs.
-Tech.addRecipeToTech("plastic-circuit-board", "plastics") -- TODO rather make a separate tech for this, using plastic circuit board sprite.
-Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rather make a separate tech for this? Unlocked by mining like 10 calcite. Use the ceramic circuit board sprite.
-Tech.addRecipeToTech("improvised-circuit-board", "electronics", 2)
+-- Create item for doped wafers.
+local dopedWafer = Table.copyAndEdit(data.raw.item["plastic-bar"], {
+	name = "doped-wafer",
+	icon = "__LegendarySpaceAge__/graphics/circuit-chains/doped-wafer.png",
+	icon_size = 64,
+	subgroup = "complex-circuit-intermediates",
+	order = "002",
+	stack_size = 200,
+})
+data:extend{dopedWafer}
+
+-- Create recipe for doped wafers.
+local dopedWaferRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
+	name = "doped-wafer",
+	ingredients = {
+		{type = "item", name = "silicon", amount = 1},
+		{type = "item", name = "carbon", amount = 1},
+		{type = "item", name = "plastic-bar", amount = 1},
+		{type = "item", name = "copper-cable", amount = 1},
+	},
+	results = {
+		{type = "item", name = "doped-wafer", amount = 1},
+	},
+	subgroup = "nil",
+	icon = "nil",
+	icons = "nil",
+	category = "chemistry-or-electronics",
+	energy_required = 10,
+})
+data:extend{dopedWaferRecipe}
+Tech.addRecipeToTech("doped-wafer", "processing-unit", 2)
+
+-- Edit recipe for blue circuits (processing-unit) to use doped wafers.
+-- 1 doped wafer + 1 circuit board + 2 red circuit + 5 sulfuric acid -> 1 blue circuit
+-- Original recipe was 5 sulfuric acid + 2 red circuit + 20 green circuit.
+data.raw.recipe["processing-unit"].ingredients = {
+	{type = "item", name = "circuit-board", amount = 1},
+	{type = "item", name = "doped-wafer", amount = 1},
+	{type = "item", name = "advanced-circuit", amount = 2},
+	{type = "fluid", name = "sulfuric-acid", amount = 5},
+}
+
+-- Create item for electronic components.
+local electronicComponents = Table.copyAndEdit(data.raw.item["advanced-circuit"], {
+	name = "electronic-components",
+	icon = "nil",
+	subgroup = "complex-circuit-intermediates",
+	order = "001",
+	stack_size = 200,
+	icons = {{icon = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/1.png", icon_size = 64, scale = 0.5}},
+	pictures = {
+		{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/1.png", size = 64, scale = 0.5},
+		{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/2.png", size = 64, scale = 0.5},
+		{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/3.png", size = 64, scale = 0.5},
+	},
+	energy_required = 6,
+})
+data:extend{electronicComponents}
+
+-- Create a recipe for electronic components.
+-- 1 carbon + 1 plastic + 1 sand + 1 copper wire -> 2 electronic components
+local electronicComponentsRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
+	name = "electronic-components",
+	ingredients = {
+		{type = "item", name = "carbon", amount = 1},
+		{type = "item", name = "plastic-bar", amount = 1},
+		{type = "item", name = "sand", amount = 1},
+		{type = "item", name = "copper-cable", amount = 1},
+	},
+	results = {
+		{type = "item", name = "electronic-components", amount = 2},
+	},
+	subgroup = "nil",
+	icon = "nil",
+	icons = "nil",
+	category = "electronics",
+})
+data:extend{electronicComponentsRecipe}
+Tech.addRecipeToTech("electronic-components", "advanced-circuit", 1)
+
+-- Edit recipe for red circuits.
+-- 1 circuit board + 2 copper cable + 2 electronic components -> 1 red circuit
+-- Originally 2 green circuits + 2 plastic bar + 4 copper cable.
+data.raw.recipe["advanced-circuit"].ingredients = {
+	{type = "item", name = "circuit-board", amount = 1},
+	{type = "item", name = "copper-cable", amount = 2},
+	{type = "item", name = "electronic-components", amount = 2},
+}
 
 -- Move circuits to complex-circuit-intermediates subgroup.
 data.raw.item["electronic-circuit"].subgroup = "complex-circuit-intermediates"
 data.raw.item["advanced-circuit"].subgroup = "complex-circuit-intermediates"
 data.raw.item["processing-unit"].subgroup = "complex-circuit-intermediates"
 
--- Edit circuit ingredients.
+-- Edit green circuit ingredients.
 data.raw.recipe["electronic-circuit"].ingredients = {
 	{type = "item", name = "circuit-board", amount = 1},
 	{type = "item", name = "copper-cable", amount = 3},
-	-- TODO later will add circuit components here maybe
 }
--- TODO adjust red and blue circuits.

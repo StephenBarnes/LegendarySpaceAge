@@ -24,10 +24,9 @@ local spentFilterItem = Table.copyAndEdit(data.raw.item["battery"], {
 })
 table.insert(newData, spentFilterItem)
 
--- Create filtration-1 tech.
-local filtration1Tech = Table.copyAndEdit(data.raw.technology["automation"], {
-	name = "filtration-1",
-	localised_description = {"technology-description.filtration-1"},
+-- Create filtration-lake-water tech.
+local filtrationLakeWaterTech = Table.copyAndEdit(data.raw.technology["automation"], {
+	name = "filtration-lake-water",
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/filtration/tech.png", icon_size = 256, scale = 0.5, shift = {-25, 0}},
@@ -41,12 +40,11 @@ local filtration1Tech = Table.copyAndEdit(data.raw.technology["automation"], {
 		{type = "unlock-recipe", recipe = "clean-filter"},
 	},
 })
-table.insert(newData, filtration1Tech)
+table.insert(newData, filtrationLakeWaterTech)
 
--- Create filtration-2 tech.
-local filtration2Tech = Table.copyAndEdit(data.raw.technology["jellynut"], {
-	name = "filtration-2",
-	localised_description = {"technology-description.filtration-2"},
+-- Create filtration-gleban-slime tech.
+local filtrationGlebanSlimeTech = Table.copyAndEdit(data.raw.technology["jellynut"], {
+	name = "filtration-gleban-slime",
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/filtration/tech.png", icon_size = 256, scale = 0.5, shift = {-25, 0}},
@@ -61,9 +59,33 @@ local filtration2Tech = Table.copyAndEdit(data.raw.technology["jellynut"], {
 		entity = "iron-stromatolite",
 	},
 })
-table.insert(newData, filtration2Tech)
+table.insert(newData, filtrationGlebanSlimeTech)
+-- Make filtration-gleban-sludge mandatory before biochambers.
+Tech.addTechDependency("filtration-gleban-slime", "biochamber")
 
--- TODO create filtration 3 tech.
+-- TODO create tech for advanced filtration of Gleban slime, producing petrophages.
+
+-- Create filtration-fulgoran-sludge tech.
+local filtrationFulgoranSludgeTech = Table.copyAndEdit(data.raw.technology["recycling"], {
+	name = "filtration-fulgoran-sludge",
+	icon = "nil",
+	icons = {
+		{icon = "__LegendarySpaceAge__/graphics/filtration/tech.png", icon_size = 256, scale = 0.5, shift = {-25, 0}},
+		{icon = "__LegendarySpaceAge__/graphics/fulgora/sludge-tech.png", icon_size = 256, scale = 0.4, shift = {25, 0}},
+	},
+	prerequisites = {"planet-discovery-fulgora"},
+	effects = {
+		{type = "unlock-recipe", recipe = "fulgoran-sludge-filtration"},
+	},
+	research_trigger = {
+		type = "craft-fluid",
+		fluid = "fulgoran-sludge",
+		amount = 100,
+	},
+})
+table.insert(newData, filtrationFulgoranSludgeTech)
+Tech.addTechDependency("filtration-fulgoran-sludge", "holmium-processing")
+data.raw.technology["holmium-processing"].research_trigger.count = 10
 
 -- Create recipe to make filters.
 local filterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], {

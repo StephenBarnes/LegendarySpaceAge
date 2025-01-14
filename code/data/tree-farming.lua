@@ -110,7 +110,7 @@ local saplingItem = Table.copyAndEdit(data.raw.item["tree-seed"], {
 	subgroup = "early-agriculture",
 	order = "004",
 	spoil_ticks = 60 * 60 * 10,
-	spoil_result = "spoilage",
+	spoil_result = "wood",
 	fuel_value = "nil",
 	icon = "nil",
 	icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}},

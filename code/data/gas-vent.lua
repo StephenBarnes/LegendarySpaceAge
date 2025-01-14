@@ -123,18 +123,42 @@ local ventRecipeCategory = Table.copyAndEdit(data.raw["recipe-category"]["crafti
 })
 table.insert(newData, ventRecipeCategory)
 
-local gasesAndEmissions = {
-	{"steam", 0},
-	{"natural-gas", 2},
-	{"petroleum-gas", 3},
-	{"dry-gas", 4},
-	{"syngas", 4},
-	{"ammonia", 10},
-	{"fluorine", 30},
+local ventableFluids = {
+	-- Table of fluid names, emissions mults, and bool for whether it's only ventable in space.
+
+	-- Gases - ventable anywhere.
+	{"steam", 0, false},
+	{"natural-gas", 2, false},
+	{"petroleum-gas", 3, false},
+	{"dry-gas", 4, false},
+	{"syngas", 4, false},
+	{"ammonia", 10, false},
+	{"fluorine", 30, false},
+
+	-- Liquids - only ventable in space.
+	{"water", 0, true},
+	{"crude-oil", 0, true},
+	{"tar", 0, true},
+	{"heavy-oil", 0, true},
+	{"light-oil", 0, true},
+	{"cement-mix", 0, true},
+	{"latex", 0, true},
+	{"lubricant", 0, true},
+	{"thruster-fuel", 0, true},
+	{"thruster-oxidizer", 0, true},
+	{"molten-iron", 0, true},
+	{"molten-copper", 0, true},
+	{"molten-steel", 0, true},
+	{"molten-tungsten", 0, true},
+	{"holmium-solution", 0, true},
+	{"electrolyte", 0, true},
+	{"fluoroketone-hot", 0, true},
+	{"fluoroketone-cold", 0, true},
 }
-for _, gasAndEmissions in pairs(gasesAndEmissions) do
-	local gasToVent = gasAndEmissions[1]
-	local emissionsMult = gasAndEmissions[2]
+for _, fluidData in pairs(ventableFluids) do
+	local gasToVent = fluidData[1]
+	local emissionsMult = fluidData[2]
+	local onlyInSpace = fluidData[3]
 	local fluid = data.raw.fluid[gasToVent]
 	local gasIcon
 	if fluid.icons then
@@ -163,6 +187,9 @@ for _, gasAndEmissions in pairs(gasesAndEmissions) do
 			primary = data.raw.fluid[gasToVent].flow_color,
 		},
 	})
+	if onlyInSpace then
+		thisGasVentRecipe.surface_conditions = {{property = "gravity", max = 0}}
+	end
 	table.insert(newData, thisGasVentRecipe)
 end
 

@@ -2,7 +2,11 @@
 Version: 0.5.0
 Date: 16. 01. 2025
   Features:
-    - TODO
+    - Gas vents in space can now also vent liquids.
+    - Fulgora now has zero partial pressure of oxygen, so burners can't be built.
+    - Added electric boiler (from other mod) for Fulgora.
+    - Added new recipe chain for blue circuits, with silicon and doped wafers.
+    - Added new recipe chain for red circuits, with "electronic components" intermediate.
   Changes:
     - Removed dependency on Fulgora Lives mod, rather incorporating into this mod.
 ---------------------------------------------------------------------------------------------------

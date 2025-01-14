@@ -215,4 +215,10 @@ data.raw.recipe["po-transformer"].ingredients = { -- Originally 5 iron plate + 5
 	{ type = "item", name = "electronic-circuit", amount = 2 },
 }
 
--- TODO look up real-world concrete recipes; eg maybe require sand instead of stone bricks, or sand + stone; also maybe add liquid concrete as intermediate. (And sulfur-based concrete on Vulcanus.)
+-- Solar panels.
+data.raw.recipe["solar-panel"].ingredients = {
+	{type = "item", name = "glass", amount = 10},
+	{type = "item", name = "electronic-circuit", amount = 10},
+	{type = "item", name = "steel-plate", amount = 5},
+	-- TODO later rather change this to require silicon wafers, since I'm adding those for blue circuits.
+}
