@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.0
-Date: 13. 01. 2025
+Date: 14. 01. 2025
   Features:
     - Added hand-crank for early electricity (via other mod, updated to 2.0).
     - Added cement fluid for regular concrete, and molten-sulfur concrete for Vulcanus.
@@ -11,9 +11,6 @@ Date: 13. 01. 2025
     - Added briefing on tips-and-tricks screen.
     - Added niter for gunpowder, sourced from boulders, lake-water filtration, or ammonia.
     - Miscellaneous other changes.
-    - TODO Added barrelling tech.
-    - TODO Added gas canisters.
-    - TODO (Moved heating towers to early game.)
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.0
 Date: 11. 01. 2025

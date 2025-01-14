@@ -54,5 +54,7 @@ local handCrankRecipe = Table.copyAndEdit(data.raw.recipe["assembling-machine-1"
 data:extend({handCrankRecipe})
 
 -- Make the offshore pump require electricity, since we have a way to generate electricity before offshore pump now.
-data.raw["offshore-pump"]["offshore-pump"].energy_usage = "30kW"
-data.raw["offshore-pump"]["offshore-pump"].energy_source = data.raw["assembling-machine"]["assembling-machine-1"].energy_source
+for _, name in pairs{"offshore-pump", "lava-pump"} do
+	data.raw["offshore-pump"][name].energy_usage = "30kW"
+	data.raw["offshore-pump"][name].energy_source = data.raw["assembling-machine"]["assembling-machine-1"].energy_source
+end

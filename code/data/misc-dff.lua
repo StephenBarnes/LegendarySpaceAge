@@ -7,24 +7,7 @@ data.raw.recipe["rocs-rusting-iron-iron-stick-derusting"].enabled = true
 Tech.removeRecipesFromTechs(
 	{"iron-stick", "rocs-rusting-iron-iron-stick-derusting"},
 	{"railway", "circuit-network", "electric-energy-distribution-1", "concrete"})
--- And add iron rod as ingredient in some recipes.
-data.raw.recipe["burner-inserter"].ingredients = {
-	{ type = "item", name = "iron-stick", amount = 2 },
-	{ type = "item", name = "iron-gear-wheel", amount = 2 },
-}
-data.raw.recipe["inserter"].ingredients = {
-	{ type = "item", name = "iron-stick", amount = 2 },
-	{ type = "item", name = "iron-gear-wheel", amount = 2 },
-	{ type = "item", name = "electronic-circuit", amount = 1 },
-}
-data.raw.recipe["long-handed-inserter"].ingredients = {
-	{ type = "item", name = "iron-stick", amount = 2 },
-	{ type = "item", name = "iron-gear-wheel", amount = 2 },
-	{ type = "item", name = "inserter", amount = 1 },
-}
-data.raw.recipe["radar"].ingredients = {
-	{ type = "item", name = "iron-stick", amount = 5 },
-	{ type = "item", name = "iron-plate", amount = 10 },
-	{ type = "item", name = "iron-gear-wheel", amount = 5 },
-	{ type = "item", name = "electronic-circuit", amount = 5 },
-}
+
+-- Move wooden-pole fuse recipe to electric-energy-distribution-1.
+Tech.removeRecipeFromTech("po-small-electric-fuse", "electric-energy-distribution-1")
+Tech.addRecipeToTech("po-small-electric-fuse", "electric-energy-distribution-1", 3)

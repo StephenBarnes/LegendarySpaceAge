@@ -1,6 +1,7 @@
 -- This file changes recipes for infrastructure (belts, vehicles, buildings, etc.)
 
 local Recipe = require("code.util.recipe")
+local Tech = require("code.util.tech")
 
 -- Vehicles
 data.raw.recipe["car"].ingredients = {
@@ -107,10 +108,10 @@ data.raw.recipe["pump"].ingredients = {
 
 -- Chemical plant - shouldn't require steel, since we're moving it to automation 1.
 data.raw.recipe["chemical-plant"].ingredients = {
-	{type="item", name="iron-plate", amount=5},
-	{type="item", name="iron-gear-wheel", amount=5},
-	{type="item", name="electronic-circuit", amount=5},
-	{type="item", name="pipe", amount=5},
+	{type="item", name="iron-gear-wheel", amount=4},
+	{type="item", name="electronic-circuit", amount=4},
+	{type="item", name="pipe", amount=6},
+	{type="item", name="glass", amount=2},
 }
 
 -- Lab should need fewer circuits since they have to be handcrafted early-game.
@@ -153,6 +154,68 @@ data.raw.recipe["assembling-machine-3"].category = "crafting-with-fluid"
 data.raw.recipe["burner-mining-drill"].ingredients = {
 	{type="item", name="iron-gear-wheel", amount=4},
 	{type="item", name="iron-plate", amount=4},
+}
+
+-- Ag tower shouldn't need steel, or landfill, or spoilage.
+data.raw.recipe["agricultural-tower"].ingredients = {
+	{type="item", name="iron-gear-wheel", amount=6},
+	{type="item", name="iron-stick", amount=8},
+	{type="item", name="electronic-circuit", amount=4},
+	{type="item", name="glass", amount=4},
+}
+
+-- Armour should be cheaper, and require rubber.
+data.raw.recipe["light-armor"].ingredients = { -- Originally 40 iron plate.
+	{type="item", name="iron-plate", amount=10},
+	{type="item", name="wood", amount=10},
+}
+data.raw.recipe["heavy-armor"].ingredients = { -- Originally 100 copper plate, 50 steel plate.
+	{type="item", name="steel-plate", amount=10},
+	{type="item", name="rubber", amount=20},
+}
+Tech.addTechDependency("rubber-1", "heavy-armor")
+data.raw.recipe["modular-armor"].ingredients = { -- Originally 50 steel plate, 30 advanced circuits.
+	{type="item", name="steel-plate", amount=20},
+	{type="item", name="advanced-circuit", amount=20},
+	{type="item", name="rubber", amount=20},
+}
+data.raw.recipe["power-armor"].ingredients = { -- Originally 40 steel plate, 20 electric engine unit, 40 processing unit.
+	{type="item", name="steel-plate", amount=20},
+	{type="item", name="processing-unit", amount=20},
+	{type="item", name="electric-engine-unit", amount=20},
+	{type="item", name="rubber", amount=20},
+}
+
+-- Inserter recipes - rod is now enabled from the start.
+data.raw.recipe["burner-inserter"].ingredients = {
+	{ type = "item", name = "iron-stick", amount = 2 },
+	{ type = "item", name = "iron-gear-wheel", amount = 2 },
+}
+data.raw.recipe["inserter"].ingredients = {
+	{ type = "item", name = "iron-stick", amount = 2 },
+	{ type = "item", name = "iron-gear-wheel", amount = 2 },
+	{ type = "item", name = "electronic-circuit", amount = 1 },
+}
+data.raw.recipe["long-handed-inserter"].ingredients = {
+	{ type = "item", name = "iron-stick", amount = 2 },
+	{ type = "item", name = "iron-gear-wheel", amount = 2 },
+	{ type = "item", name = "inserter", amount = 1 },
+}
+
+-- Radar.
+data.raw.recipe["radar"].ingredients = {
+	{ type = "item", name = "iron-stick", amount = 5 },
+	{ type = "item", name = "iron-plate", amount = 10 },
+	{ type = "item", name = "iron-gear-wheel", amount = 5 },
+	{ type = "item", name = "electronic-circuit", amount = 5 },
+}
+
+-- Transformer - add rubber.
+data.raw.recipe["po-transformer"].ingredients = { -- Originally 5 iron plate + 5 copper cable + 2 electronic circuit.
+	{ type = "item", name = "iron-plate", amount = 4 },
+	{ type = "item", name = "copper-cable", amount = 4 },
+	{ type = "item", name = "rubber", amount = 2 },
+	{ type = "item", name = "electronic-circuit", amount = 2 },
 }
 
 -- TODO look up real-world concrete recipes; eg maybe require sand instead of stone bricks, or sand + stone; also maybe add liquid concrete as intermediate. (And sulfur-based concrete on Vulcanus.)

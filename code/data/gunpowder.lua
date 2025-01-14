@@ -51,5 +51,11 @@ data.raw.recipe["piercing-rounds-magazine"].ingredients = {
 	{type="item", name="copper-plate", amount=4},
 	{type="item", name="gunpowder", amount=1},
 }
+data.raw.recipe["shotgun-shell"].ingredients = {
+	{type="item", name="steel-plate", amount=2},
+	{type="item", name="copper-plate", amount=2},
+	{type="item", name="gunpowder", amount=1},
+}
+data.raw.recipe["shotgun-shell"].results = {{type = "item", name = "shotgun-shell", amount = 2}}
 
 data:extend(newData)

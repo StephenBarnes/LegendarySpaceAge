@@ -107,11 +107,19 @@ Tech.addTechDependency("glass", "automation-science-pack")
 -- Add red circuit dependency to assembling machine 2, so we can add it as ingredient.
 Tech.setPrereqs("automation-2", {"advanced-circuit"})
 
--- Ensure automation before green science.
-Tech.setPrereqs("logistic-science-pack", {"automation"})
+-- Logistic science after automation science.
+Tech.setPrereqs("logistic-science-pack", {"automation-science-pack"})
 
 -- Make filtration-2 mandatory before biochambers.
 Tech.addTechDependency("filtration-2", "biochamber")
+
+-- Heating tower tech should be early.
+Tech.setPrereqs("heating-tower", {"steam-power", "concrete"})
+data.raw.technology["heating-tower"].unit = {count = 300, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 30}
+data.raw.technology["heating-tower"].research_trigger = nil
+
+-- Nuclear is going to post-triplets, and heating tower is early, so remove heating tower stuff fom nuclear tech.
+Tech.removeRecipesFromTechs({"heat-exchanger", "heat-pipe", "steam-turbine"}, {"nuclear-power"})
 
 -- Set science pack ingredients.
 data.raw.recipe["automation-science-pack"].ingredients = {
