@@ -132,9 +132,6 @@ data.raw.recipe["electric-engine-unit"].ingredients = {
 -- Stone in rail recipe represents the track ballast; makes sense to crush/process stone before using as ballast.
 Recipe.substituteIngredient("rail", "stone", "sand")
 
-Recipe.substituteIngredient("holmium-solution", "stone", "sand")
-Recipe.substituteIngredient("electrolyte", "stone", "sand")
-
 -- Assembling machines
 data.raw.recipe["assembling-machine-2"].ingredients = {
 	{type="item", name="iron-gear-wheel", amount=5},

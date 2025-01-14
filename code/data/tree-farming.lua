@@ -1,6 +1,4 @@
---[[ This file adjusts tree farming, adds recipes for fertilizer, etc.
-TODO
-]]
+-- This file adjusts tree farming, adds recipes for fertilizer, etc.
 
 local Table = require("code.util.table")
 local Tech = require("code.util.tech")
@@ -16,6 +14,9 @@ data.raw.technology["tree-seeding"].unit = {
 		{"automation-science-pack", 1},
 	},
 }
+
+-- Remove placement restrictions for agricultural tower.
+data.raw["agricultural-tower"]["agricultural-tower"].surface_conditions = nil
 
 -- Gleba needs ag tower.
 Tech.addTechDependency("tree-seeding", "planet-discovery-gleba")

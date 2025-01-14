@@ -118,7 +118,6 @@ Recipe.addIngredients("personal-roboport-mk2-equipment", {
 })
 -- TODO more?
 
-
 -- Create items and recipes for the charger/discharger buildings.
 data:extend({
 	{
@@ -427,7 +426,7 @@ Tech.addRecipeToTech("charge-holmium-battery", "holmium-battery")
 data.raw["lightning-attractor"]["lightning-rod"].efficiency = .1 -- Changing 20% to 10%.
 data.raw["lightning-attractor"]["lightning-collector"].efficiency = .3 -- Changing 40% to 30%.
 
--- Since sulfuric acid is needed to make holmium solution now, and there's no water to make sulfuric acid, I also need to make sulfuric acid available somehow. So add recipe to extract it from batteries.
+-- Add recipe to extract sulfuric acid from batteries - fits with the theme, plus water for sulfuric acid is scarce on Fulgora now.
 data:extend({
 	{
 		type = "recipe",

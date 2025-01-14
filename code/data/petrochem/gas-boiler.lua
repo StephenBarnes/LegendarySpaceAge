@@ -14,3 +14,6 @@ data.raw.recipe["boiler"].ingredients = {
 	{ type = "item", name = "stone-brick", amount = 10 },
 	{ type = "item", name = "pipe", amount = 4 },
 }
+
+-- Should only be able to place where there's oxygen.
+data.raw.boiler["gas-boiler"].surface_conditions = data.raw["mining-drill"]["burner-mining-drill"].surface_conditions

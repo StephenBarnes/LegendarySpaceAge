@@ -131,6 +131,3 @@ fulgoriteFarmingTech.prerequisites = {"electrophages"}
 fulgoriteFarmingTech.effects = {{type = "unlock-recipe", recipe = "fulgorite-starter"}}
 fulgoriteFarmingTech.icon = "__LegendarySpaceAge__/graphics/fulgora/fulgorite-stuff/tech.png"
 data:extend({fulgoriteFarmingTech})
-
--- Remove placement restrictions for agricultural tower.
-data.raw["agricultural-tower"]["agricultural-tower"].surface_conditions = nil

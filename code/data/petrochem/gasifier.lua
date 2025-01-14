@@ -129,7 +129,7 @@ local gasifierEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
 			filter = "syngas",
 		},
 	},
-	surface_conditions = "nil",
+	surface_conditions = data.raw["mining-drill"]["burner-mining-drill"].surface_conditions,
 })
 table.insert(newData, gasifierEnt)
 
