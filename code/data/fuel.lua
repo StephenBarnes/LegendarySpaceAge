@@ -62,6 +62,7 @@ for _, typeAndName in pairs{
 } do
 	data.raw[typeAndName[1]][typeAndName[2]].energy_source.fuel_categories = {"chemical", "non-carbon"}
 end
+data.raw["generator-equipment"]["personal-burner-generator"].burner.fuel_categories = {"chemical", "non-carbon"}
 
 -- Delete nuclear fuel, I don't like it, doesn't make sense. Even considering vehicles can use coal etc as fuel, so they have a heat engine rather than an ICE, they still wouldn't be able to run off a barely-critical lump of U-235 without radiation shielding, control rods, etc. which is basically a miniature nuclear reactor. I'd rather add a tech for nuclear tanks/cars/trains that only accept uranium fuel cells and are crafted using personal nuclear reactors.
 data.raw.item["nuclear-fuel"].hidden = true

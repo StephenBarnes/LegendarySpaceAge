@@ -8,13 +8,6 @@ u.setDefaultOrForce("PowerMultiplier-heating", "double", 1) -- Already making he
 u.setDefaultOrForce("PowerMultiplier-solar", "double", 1)
 u.setDefaultOrForce("PowerMultiplier-blacklist", "string", "battery-charger,battery-discharger")
 
--- Set options for Ocean Dumping mod.
--- Makes logical sense on Fulgora and Aquilo. Makes less sense on Nauvis and Gleba, but I need it on Gleba (eg voiding extra stone from slipstacks) and I don't want Nauvis to be the only exception.
-u.setDefaultOrForce("enable-nauvis-dumping", "bool", true)
-u.setDefaultOrForce("enable-gleba-dumping", "bool", true)
-u.setDefaultOrForce("enable-fulgora-dumping", "bool", true)
-u.setDefaultOrForce("enable-aquilo-dumping", "bool", true)
-
 -- Set options for the Diurnal Dynamics mod.
 u.setDefaultOrForce("data-dd-dark-perc", "double", 100.)
 u.setDefaultOrForce("data-dd-dark-platform", "bool", true)

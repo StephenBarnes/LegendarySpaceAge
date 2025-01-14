@@ -11,22 +11,11 @@ local handCrankTech = {
 	icon = "__eradicators-hand-crank-redux__/sprite/hcg-technology.png",
 	icon_size = 128,
 	effects = {
-		{
-			type = "unlock-recipe",
-			recipe = "copper-cable",
-		},
-		{
-			type = "unlock-recipe",
-			recipe = "er-hcg",
-		},
-		{
-			type = "unlock-recipe",
-			recipe = "small-electric-pole",
-		},
-		--[[{ Seems to not be necessary bc that mod adds it?
-			type = "unlock-recipe",
-			recipe = "po-small-electric-fuse",
-		},]]
+		{type = "unlock-recipe", recipe = "copper-cable"},
+		{type = "unlock-recipe", recipe = "er-hcg"},
+		{type = "unlock-recipe", recipe = "personal-burner-generator"},
+		{type = "unlock-recipe", recipe = "small-electric-pole"},
+		-- Power Overload notices that the small-electric-pole recipe is unlocked here, and adds the fuse recipe.
 	},
 	prerequisites = {},
 	research_trigger = {

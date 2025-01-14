@@ -1,0 +1,5 @@
+require("code.data.fulgora.misc")
+require("code.data.fulgora.sludge")
+require("code.data.fulgora.electrophages")
+require("code.data.fulgora.batteries")
+require("code.data.fulgora.fulgorites")

@@ -66,3 +66,6 @@ data.raw["simple-entity"]["big-sand-rock"].minable.results = {
 	{type = "item", name = "coal", amount_min = 0, amount_max = 20}, -- Added.
 	{type = "item", name = "niter", amount_min = 0, amount_max = 20}, -- Added.
 }
+
+-- Allow burner inserters to leech. Unclear why this is off by default.
+data.raw.inserter["burner-inserter"].allow_burner_leech = true

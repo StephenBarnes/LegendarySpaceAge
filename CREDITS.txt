@@ -1,6 +1,9 @@
 This file is to keep track of other people's stuff that I've used.
 
-* Unused Renders by Malcolm Riley.
-* AdamoCarbon by ElAdamo - not using his mod or code, but stole several ideas for the petrochem system.
-* Flare Stack by GotLag, snouz, and others - used graphics and code.
+* Malcolm Riley for graphics - https://github.com/malcolmriley/unused-renders - Used icons for polysalts and sludge.
+* AdamoCarbon by ElAdamo - not using the mod or code, but stole several ideas for the petrochem system.
+* Flare Stack by GotLag, snouz, and others - https://mods.factorio.com/mod/Flare%20Stack - Used graphics and code.
 * Gleba crop mods by LordMiguel (slipstacks, boompuffs, stingfronds) - TODO.
+* Battery Powered by harag - https://mods.factorio.com/mod/battery-powered - Charger/discharger graphics and animations, and ideas.
+* Biochemistry by Tenebrais - https://mods.factorio.com/mod/biochemistry - Electrophage graphics, and ideas.
+* Fulgoran Sludge by Tatticky - https://mods.factorio.com/mod/fulgoran-sludge - Sludge idea.

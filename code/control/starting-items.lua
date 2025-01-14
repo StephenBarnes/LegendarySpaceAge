@@ -25,10 +25,9 @@ local function setStartItems()
 		['firearm-magazine'] = 20,
 
 		['construction-robot'] = 25,
-		['solar-panel-equipment'] = 8,
 		['personal-roboport-equipment'] = 2,
-		['battery-mk2-equipment'] = 2,
-		-- TODO maybe balance batteries vs solar panels better.
+		['battery-equipment'] = 1,
+		-- Player has to make a personal burner generator to actually power the stuff.
 	}
 	remote.call('freeplay', 'set_debris_items', items)
 	remote.call('freeplay', 'set_created_items', items)
