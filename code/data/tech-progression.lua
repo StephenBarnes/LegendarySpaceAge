@@ -7,8 +7,12 @@ local Table = require("code.util.table")
 Tech.addTechDependency("basic-electricity", "electronics")
 Tech.addTechDependency("filtration-lake-water", "steam-power")
 Tech.removePrereq("automation-science-pack", "steam-power")
-data.raw.technology["steam-power"].research_trigger = nil
-data.raw.technology["steam-power"].unit = data.raw.technology["automation"].unit
+data.raw.technology["steam-power"].unit = nil
+data.raw.technology["steam-power"].research_trigger = {
+	type = "craft-fluid",
+	fluid = "water",
+	amount = 1000,
+}
 
 -- Move pipe recipes from steam power to automation.
 -- Remove offshore pump recipe from steam power, will add to filtration.
@@ -17,8 +21,9 @@ data.raw.technology["steam-power"].effects = {
 	{type = "unlock-recipe", recipe = "gas-boiler"},
 	{type = "unlock-recipe", recipe = "steam-engine"},
 }
-Tech.addRecipeToTech("pipe", "automation", 3)
-Tech.addRecipeToTech("pipe-to-ground", "automation", 4)
+Tech.addRecipeToTech("offshore-pump", "automation", 3)
+Tech.addRecipeToTech("pipe", "automation")
+Tech.addRecipeToTech("pipe-to-ground", "automation")
 
 -- Logistics 2 depends on rubber.
 Tech.addTechDependency("rubber-1", "logistics-2")
@@ -62,7 +67,7 @@ Tech.setPrereqs("plastics", {"coal-liquefaction"})
 -- Could solve this by moving sulfuric acid recipe to rubber tech, removing sulfur tech.
 -- But we also need sulfuric acid for eg fertilizer. So rather keep it as a separate tech.
 Tech.setPrereqs("sulfur-processing", {"filtration-lake-water"})
-data.raw.technology["sulfur-processing"].unit = data.raw.technology["filtration-lake-water"].unit
+data.raw.technology["sulfur-processing"].unit = data.raw.technology["automation"].unit
 
 Tech.setPrereqs("explosives", {"coal-liquefaction", "ammonia-1"}) -- Previously sulfur-processing
 

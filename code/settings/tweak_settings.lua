@@ -19,6 +19,9 @@ u.setDefaultOrForce("data-dd-dusk", "double", 0.25)
 u.setDefaultOrForce("data-dd-evening", "double", 0.35) -- Adjusted to be earlier, 0.45->0.35, for longer night.
 u.setDefaultOrForce("data-dd-morning", "double", 0.65) -- Adjusted to be later, 0.55->0.65, for longer night.
 u.setDefaultOrForce("data-dd-dawn", "double", 0.75)
+u.setDefaultOrForce("data-dd-enable-flares", "bool", false)
+u.setDefaultOrForce("data-dd-lampon", "double", 0.5)
+u.setDefaultOrForce("data-dd-lampoff", "double", 0.3)
 
 -- For Roc's Rusting Iron mod.
 u.setDefaultOrForce("rocs-rusting-iron-engines-rust", "bool", false)

@@ -177,6 +177,7 @@ local siliconRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 })
 data:extend{siliconRecipe}
 Tech.addRecipeToTech("silicon", "processing-unit", 1)
+Tech.addRecipeToTech("silicon", "solar-energy", 1)
 
 -- Create item for doped wafers.
 local dopedWafer = Table.copyAndEdit(data.raw.item["plastic-bar"], {
@@ -205,7 +206,7 @@ local dopedWaferRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 	icon = "nil",
 	icons = "nil",
 	category = "chemistry-or-electronics",
-	energy_required = 10,
+	energy_required = 24,
 })
 data:extend{dopedWaferRecipe}
 Tech.addRecipeToTech("doped-wafer", "processing-unit", 2)
@@ -219,6 +220,8 @@ data.raw.recipe["processing-unit"].ingredients = {
 	{type = "item", name = "advanced-circuit", amount = 2},
 	{type = "fluid", name = "sulfuric-acid", amount = 5},
 }
+-- Make blue circuit recipe slower, as compromise for making it cheaper in materials.
+data.raw.recipe["processing-unit"].energy_required = 24
 
 -- Create item for electronic components.
 local electronicComponents = Table.copyAndEdit(data.raw.item["advanced-circuit"], {
@@ -233,7 +236,6 @@ local electronicComponents = Table.copyAndEdit(data.raw.item["advanced-circuit"]
 		{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/2.png", size = 64, scale = 0.5},
 		{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/3.png", size = 64, scale = 0.5},
 	},
-	energy_required = 6,
 })
 data:extend{electronicComponents}
 
@@ -244,16 +246,16 @@ local electronicComponentsRecipe = Table.copyAndEdit(data.raw.recipe["plastic-ba
 	ingredients = {
 		{type = "item", name = "carbon", amount = 1},
 		{type = "item", name = "plastic-bar", amount = 1},
-		{type = "item", name = "sand", amount = 1},
 		{type = "item", name = "copper-cable", amount = 1},
 	},
 	results = {
-		{type = "item", name = "electronic-components", amount = 2},
+		{type = "item", name = "electronic-components", amount = 1},
 	},
 	subgroup = "nil",
 	icon = "nil",
 	icons = "nil",
 	category = "electronics",
+	energy_required = 6,
 })
 data:extend{electronicComponentsRecipe}
 Tech.addRecipeToTech("electronic-components", "advanced-circuit", 1)

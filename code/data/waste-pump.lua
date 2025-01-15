@@ -57,8 +57,9 @@ local wastePumpItem = Table.copyAndEdit(data.raw.item["pump"], {
 	icon = "nil",
 	icons = {
 		{icon = "__base__/graphics/icons/offshore-pump.png", icon_size = 64, scale = 0.5},
-		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.5},
+		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.3},
 	},
+	order = "b[pipe]-d",
 })
 table.insert(newData, wastePumpItem)
 

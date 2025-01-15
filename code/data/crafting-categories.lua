@@ -72,10 +72,10 @@ data:extend({
 		name = "chemistry-or-organic-or-handcrafting",
 	},
 })
-table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "chemistry-or-handcrafting")
-table.insert(data.raw["assembling-machine"]["biochamber"].crafting_categories, "chemistry-or-handcrafting")
-table.insert(data.raw["god-controller"]["default"].crafting_categories, "chemistry-or-handcrafting")
-table.insert(data.raw["character"]["character"].crafting_categories, "chemistry-or-handcrafting")
+table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "chemistry-or-organic-or-handcrafting")
+table.insert(data.raw["assembling-machine"]["biochamber"].crafting_categories, "chemistry-or-organic-or-handcrafting")
+table.insert(data.raw["god-controller"]["default"].crafting_categories, "chemistry-or-organic-or-handcrafting")
+table.insert(data.raw["character"]["character"].crafting_categories, "chemistry-or-organic-or-handcrafting")
 
 -- Create crafting category for chem plant or electromagnetic plant.
 data:extend({

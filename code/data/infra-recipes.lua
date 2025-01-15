@@ -218,7 +218,7 @@ data.raw.recipe["po-transformer"].ingredients = { -- Originally 5 iron plate + 5
 -- Solar panels.
 data.raw.recipe["solar-panel"].ingredients = {
 	{type = "item", name = "glass", amount = 10},
-	{type = "item", name = "electronic-circuit", amount = 10},
-	{type = "item", name = "steel-plate", amount = 5},
-	-- TODO later rather change this to require silicon wafers, since I'm adding those for blue circuits.
+	{type = "item", name = "silicon", amount = 10},
+	{type = "item", name = "electronic-circuit", amount = 2},
+	{type = "item", name = "steel-plate", amount = 4},
 }

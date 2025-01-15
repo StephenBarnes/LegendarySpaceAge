@@ -69,3 +69,7 @@ data.raw["simple-entity"]["big-sand-rock"].minable.results = {
 
 -- Allow burner inserters to leech. Unclear why this is off by default.
 data.raw.inserter["burner-inserter"].allow_burner_leech = true
+
+-- Diurnal Dynamics: hide flare from factoriopedia, since we're disabling it using mod setting.
+data.raw.capsule["data-dd-flare-capsule"].hidden_in_factoriopedia = true
+data.raw.recipe["data-dd-flare-capsule"].hidden_in_factoriopedia = true

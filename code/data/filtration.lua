@@ -34,11 +34,15 @@ local filtrationLakeWaterTech = Table.copyAndEdit(data.raw.technology["automatio
 	},
 	prerequisites = {"automation"},
 	effects = {
-		{type = "unlock-recipe", recipe = "offshore-pump"},
 		{type = "unlock-recipe", recipe = "filter"},
 		{type = "unlock-recipe", recipe = "filter-lake-water"},
 		{type = "unlock-recipe", recipe = "clean-filter"},
 	},
+	research_trigger = {
+		type = "build-entity",
+		entity = "offshore-pump",
+	},
+	unit = "nil",
 })
 table.insert(newData, filtrationLakeWaterTech)
 
@@ -137,10 +141,10 @@ local filterLakeWaterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel
 	name = "filter-lake-water",
 	ingredients = {
 		{type = "item", name = "filter", amount = 1},
-		{type = "fluid", name = "lake-water", amount = 400},
+		{type = "fluid", name = "lake-water", amount = 1200},
 	},
 	results = {
-		{type = "fluid", name = "water", amount = 380},
+		{type = "fluid", name = "water", amount = 1000},
 		{type = "item", name = "spent-filter", amount = 1},
 		{type = "item", name = "sand", amount_min = 0, amount_max = 4, show_details_in_recipe_tooltip = false},
 		{type = "item", name = "stone", amount_min = 0, amount_max = 2, show_details_in_recipe_tooltip = false},
