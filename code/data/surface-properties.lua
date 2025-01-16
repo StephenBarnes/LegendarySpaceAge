@@ -55,6 +55,8 @@ for _, typeName in pairs{
 	"assembling-machine",
 	"furnace",
 	"plant", -- Trees.
+	"lab",
+	"car",
 } do
 	for _, thing in pairs(data.raw[typeName]) do
 		local newPressure = getNewPressure(thing.surface_conditions)

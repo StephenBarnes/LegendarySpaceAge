@@ -88,18 +88,17 @@ for _, ents in pairs(data.raw) do
 	end
 end
 
--- Fix ordering of labs on menu
-data.raw.item.glebalab.order = data.raw.item.lab.order .. "-2"
-data.raw.item.biolab.order = data.raw.item.lab.order .. "-3"
-
 -- Move labs to a new row on the menu, bc right now it's overflowing by 1.
 local labSubgroup = table.deepcopy(data.raw["item-subgroup"]["production-machine"])
 labSubgroup.name = "labs"
 labSubgroup.order = labSubgroup.order .. "-2"
-data.raw.item.lab.subgroup = "labs"
-data.raw.item.glebalab.subgroup = "labs"
-data.raw.item.biolab.subgroup = "labs"
-data:extend({labSubgroup})
+data:extend{labSubgroup}
+for i, lab in pairs{"lab", "glebalab", "biolab"} do
+	for _, t in pairs{"lab", "recipe", "item"} do
+		data.raw[t][lab].order = "" .. i
+		data.raw[t][lab].subgroup = "labs"
+	end
+end
 
 -- Modify recipes.
 -- Plain electric lab: 10 gears, 10 green circuits, 4 transport belts.
@@ -110,7 +109,7 @@ data.raw.recipe.glebalab.ingredients = {
 	{ type = "item", name = "refined-concrete", amount = 10 },
 }
 data.raw.recipe.biolab.ingredients = {
-	{ type = "item", name = "steel-plate", amount = 20 },
+	{ type = "item", name = "low-density-structure", amount = 20 },
 	{ type = "item", name = "processing-unit", amount = 10 },
 	{ type = "item", name = "uranium-fuel-cell", amount = 4 },
 	{ type = "item", name = "biter-egg", amount = 5 },
