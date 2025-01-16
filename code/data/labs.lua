@@ -100,22 +100,6 @@ for i, lab in pairs{"lab", "glebalab", "biolab"} do
 	end
 end
 
--- Modify recipes.
--- Plain electric lab: 10 gears, 10 green circuits, 4 transport belts.
-data.raw.recipe.glebalab.ingredients = {
-	{ type = "item", name = "steel-plate", amount = 10 },
-	{ type = "item", name = "processing-unit", amount = 5 },
-	{ type = "item", name = "pentapod-egg", amount = 5 },
-	{ type = "item", name = "refined-concrete", amount = 10 },
-}
-data.raw.recipe.biolab.ingredients = {
-	{ type = "item", name = "low-density-structure", amount = 20 },
-	{ type = "item", name = "processing-unit", amount = 10 },
-	{ type = "item", name = "uranium-fuel-cell", amount = 4 },
-	{ type = "item", name = "biter-egg", amount = 5 },
-	{ type = "item", name = "refined-concrete", amount = 20 },
-}
-
 -- Modify techs.
 -- Move pentapod labs to a separate tech, instead of putting their recipe in bioflux tech.
 Tech.removeRecipeFromTech("glebalab", "bioflux")

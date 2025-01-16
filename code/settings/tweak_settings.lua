@@ -41,6 +41,18 @@ u.setDefaultOrForce("er-hcg-power-output-in-watts", "int", 200e3)
 -- Don't create the crank recipe or tech.
 u.setDefaultOrForce("er-hcg-recipe-enabled", "bool", false)
 
+-- Settings for Cargo Ships.
+u.setDefaultOrForce("offshore_oil_enabled", "bool", false) -- Disable the offshore oil and oil rig.
+u.setDefaultOrForce("oil_rig_capacity", "int", 100) -- Irrelevant bc no oil rigs.
+u.setDefaultOrForce("oil_rigs_require_external_power", "string", "disabled") -- Irrelevant bc no oil rigs.
+u.setDefaultOrForce("no_oil_for_oil_rig", "bool", false) -- Irrelevant bc no oil rigs.
+u.setDefaultOrForce("no_shallow_oil", "bool", false) -- Irrelevant bc no oil rigs.
+u.setDefaultOrForce("speed_modifier", "double", 1)
+u.setDefaultOrForce("fuel_modifier", "double", 2)
+u.setDefaultOrForce("tanker_capacity", "int", 250) -- Irrelevant, they're disabled.
+u.setDefaultOrForce("no_catching_fish", "bool", false) -- Allow catching fish. No fish on Aquilo anyway.
+u.setDefaultOrForce("use_dark_blue_waterways", "bool", false) -- Irrelevant, only for legacy waterways.
+
 -- For Gas Furnace mod.
 -- No settings.
 

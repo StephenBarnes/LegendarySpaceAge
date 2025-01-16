@@ -162,21 +162,21 @@ data.raw.recipe["agricultural-tower"].ingredients = {
 }
 
 -- Armour should be cheaper, and require rubber.
-data.raw.recipe["light-armor"].ingredients = { -- Originally 40 iron plate.
+data.raw.recipe["light-armor"].ingredients = {-- Originally 40 iron plate.
 	{type="item", name="iron-plate", amount=10},
 	{type="item", name="wood", amount=10},
 }
-data.raw.recipe["heavy-armor"].ingredients = { -- Originally 100 copper plate, 50 steel plate.
+data.raw.recipe["heavy-armor"].ingredients = {-- Originally 100 copper plate, 50 steel plate.
 	{type="item", name="steel-plate", amount=10},
 	{type="item", name="rubber", amount=20},
 }
 Tech.addTechDependency("rubber-1", "heavy-armor")
-data.raw.recipe["modular-armor"].ingredients = { -- Originally 50 steel plate, 30 advanced circuits.
+data.raw.recipe["modular-armor"].ingredients = {-- Originally 50 steel plate, 30 advanced circuits.
 	{type="item", name="steel-plate", amount=20},
 	{type="item", name="advanced-circuit", amount=20},
 	{type="item", name="rubber", amount=20},
 }
-data.raw.recipe["power-armor"].ingredients = { -- Originally 40 steel plate, 20 electric engine unit, 40 processing unit.
+data.raw.recipe["power-armor"].ingredients = {-- Originally 40 steel plate, 20 electric engine unit, 40 processing unit.
 	{type="item", name="steel-plate", amount=20},
 	{type="item", name="processing-unit", amount=20},
 	{type="item", name="electric-engine-unit", amount=20},
@@ -185,34 +185,34 @@ data.raw.recipe["power-armor"].ingredients = { -- Originally 40 steel plate, 20 
 
 -- Inserter recipes - rod is now enabled from the start.
 data.raw.recipe["burner-inserter"].ingredients = {
-	{ type = "item", name = "iron-stick", amount = 2 },
-	{ type = "item", name = "iron-gear-wheel", amount = 2 },
+	{type = "item", name = "iron-stick", amount = 2},
+	{type = "item", name = "iron-gear-wheel", amount = 2},
 }
 data.raw.recipe["inserter"].ingredients = {
-	{ type = "item", name = "iron-stick", amount = 2 },
-	{ type = "item", name = "iron-gear-wheel", amount = 2 },
-	{ type = "item", name = "electronic-circuit", amount = 1 },
+	{type = "item", name = "iron-stick", amount = 2},
+	{type = "item", name = "iron-gear-wheel", amount = 2},
+	{type = "item", name = "electronic-circuit", amount = 1},
 }
 data.raw.recipe["long-handed-inserter"].ingredients = {
-	{ type = "item", name = "iron-stick", amount = 2 },
-	{ type = "item", name = "iron-gear-wheel", amount = 2 },
-	{ type = "item", name = "inserter", amount = 1 },
+	{type = "item", name = "iron-stick", amount = 2},
+	{type = "item", name = "iron-gear-wheel", amount = 2},
+	{type = "item", name = "inserter", amount = 1},
 }
 
 -- Radar.
 data.raw.recipe["radar"].ingredients = {
-	{ type = "item", name = "iron-stick", amount = 5 },
-	{ type = "item", name = "iron-plate", amount = 10 },
-	{ type = "item", name = "iron-gear-wheel", amount = 5 },
-	{ type = "item", name = "electronic-circuit", amount = 5 },
+	{type = "item", name = "iron-stick", amount = 5},
+	{type = "item", name = "iron-plate", amount = 10},
+	{type = "item", name = "iron-gear-wheel", amount = 5},
+	{type = "item", name = "electronic-circuit", amount = 5},
 }
 
 -- Transformer - add rubber.
-data.raw.recipe["po-transformer"].ingredients = { -- Originally 5 iron plate + 5 copper cable + 2 electronic circuit.
-	{ type = "item", name = "iron-plate", amount = 4 },
-	{ type = "item", name = "copper-cable", amount = 4 },
-	{ type = "item", name = "rubber", amount = 2 },
-	{ type = "item", name = "electronic-circuit", amount = 2 },
+data.raw.recipe["po-transformer"].ingredients = {-- Originally 5 iron plate + 5 copper cable + 2 electronic circuit.
+	{type = "item", name = "iron-plate", amount = 4},
+	{type = "item", name = "copper-cable", amount = 4},
+	{type = "item", name = "rubber", amount = 2},
+	{type = "item", name = "electronic-circuit", amount = 2},
 }
 
 -- Solar panels.
@@ -221,4 +221,31 @@ data.raw.recipe["solar-panel"].ingredients = {
 	{type = "item", name = "silicon", amount = 10},
 	{type = "item", name = "electronic-circuit", amount = 2},
 	{type = "item", name = "steel-plate", amount = 4},
+}
+
+-- Small lamps.
+data.raw.recipe["small-lamp"].ingredients = {
+	{type = "item", name = "glass", amount = 2},
+	{type = "item", name = "iron-plate", amount = 2},
+	{type = "item", name = "copper-cable", amount = 2},
+}
+
+-- Labs
+data.raw.recipe.lab.ingredients = {
+	{type = "item", name = "iron-gear-wheel", amount = 8},
+	{type = "item", name = "electronic-circuit", amount = 4},
+	{type = "item", name = "glass", amount = 2},
+}
+data.raw.recipe.glebalab.ingredients = {
+	{type = "item", name = "steel-plate", amount = 10},
+	{type = "item", name = "processing-unit", amount = 5},
+	{type = "item", name = "pentapod-egg", amount = 5},
+	{type = "item", name = "refined-concrete", amount = 10},
+}
+data.raw.recipe.biolab.ingredients = {
+	{type = "item", name = "low-density-structure", amount = 20},
+	{type = "item", name = "processing-unit", amount = 10},
+	{type = "item", name = "uranium-fuel-cell", amount = 4},
+	{type = "item", name = "biter-egg", amount = 5},
+	{type = "item", name = "refined-concrete", amount = 20},
 }

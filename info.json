@@ -25,6 +25,9 @@
 		, "gas-boiler"
 		, "electricboiler"
 
+		, "cargo-ships"
+		, "AquiloTrenches"
+
 		, "eradicators-hand-crank-redux"
 		, "PersonalBurnerGenerator"
 

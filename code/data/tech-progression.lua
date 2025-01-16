@@ -4,14 +4,38 @@ local Tech = require("code.util.tech")
 local Table = require("code.util.table")
 
 -- Early techs: basic electricity, then electronics, then red science, then automation, then filtration, then steam power.
-Tech.addTechDependency("basic-electricity", "electronics")
+Tech.setPrereqs("electronics", {"basic-electricity"})
+Tech.setPrereqs("automation-science-pack", {"electronics", "glass"})
 Tech.addTechDependency("filtration-lake-water", "steam-power")
-Tech.removePrereq("automation-science-pack", "steam-power")
 data.raw.technology["steam-power"].unit = nil
 data.raw.technology["steam-power"].research_trigger = {
 	type = "craft-fluid",
 	fluid = "water",
 	amount = 1000,
+}
+
+-- Automation science should have trigger unlock with science packs.
+data.raw.technology["automation"].unit = nil
+data.raw.technology["automation"].research_trigger = {
+	type = "build-entity",
+	entity = "lab",
+}
+
+-- Red science tech should be unlocked by crafting circuits. And should unlock lab recipe.
+data.raw.technology["automation-science-pack"].unit = nil
+data.raw.technology["automation-science-pack"].research_trigger = {
+	type = "craft-item",
+	item = "electronic-circuit",
+	amount = 10,
+}
+Tech.removeRecipeFromTech("lab", "electronics")
+Tech.addRecipeToTech("lab", "automation-science-pack")
+
+-- Unlock electronics when a hand-crank is built.
+data.raw.technology["electronics"].unit = nil
+data.raw.technology["electronics"].research_trigger = {
+	type = "build-entity",
+	entity = "er-hcg",
 }
 
 -- Move pipe recipes from steam power to automation.
@@ -68,7 +92,7 @@ Tech.setPrereqs("plastics", {"coal-liquefaction"})
 -- Could solve this by moving sulfuric acid recipe to rubber tech, removing sulfur tech.
 -- But we also need sulfuric acid for eg fertilizer. So rather keep it as a separate tech.
 Tech.setPrereqs("sulfur-processing", {"filtration-lake-water"})
-data.raw.technology["sulfur-processing"].unit = data.raw.technology["automation"].unit
+data.raw.technology["sulfur-processing"].unit = data.raw.technology["electric-mining-drill"].unit
 
 Tech.setPrereqs("explosives", {"coal-liquefaction", "ammonia-1"}) -- Previously sulfur-processing
 
@@ -106,10 +130,6 @@ data.raw.recipe["selector-combinator"].ingredients = {
 	{type = "item", name = "electronic-circuit", amount = 2},
 	{type = "item", name = "decider-combinator", amount = 5},
 }
-
--- Glass before automation science.
--- TODO do something better here, eg require it for optics which gives lamp and is prereq to solar panels and lasers.
-Tech.addTechDependency("glass", "automation-science-pack")
 
 -- Add red circuit dependency to assembling machine 2, so we can add it as ingredient.
 Tech.setPrereqs("automation-2", {"advanced-circuit"})
