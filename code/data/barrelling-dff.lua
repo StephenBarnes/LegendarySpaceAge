@@ -56,6 +56,8 @@ for gasName, _ in pairs(gases) do
 	for _, ingredient in pairs(barrelRecipe.ingredients) do
 		if ingredient.name == "barrel" then
 			ingredient.name = "gas-tank"
+		else
+			ingredient.amount = 200
 		end
 	end
 
@@ -63,6 +65,8 @@ for gasName, _ in pairs(gases) do
 	for _, result in pairs(emptyRecipe.results) do
 		if result.name == "barrel" then
 			result.name = "gas-tank"
+		else
+			result.amount = 200
 		end
 	end
 

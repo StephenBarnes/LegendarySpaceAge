@@ -14,6 +14,14 @@ Tech.removeRecipeFromTech("copper-bacteria", "yumako")
 Item.multiplySpoilTime("iron-bacteria", 3)
 Item.multiplySpoilTime("copper-bacteria", 3)
 
+-- Artificial soil tech makes more sense after biochamber.
+Tech.setPrereqs("artificial-soil", {"biochamber"})
+
+-- Artificial soil recipes should be biochamber-only.
+for _, recipeName in pairs{"artificial-yumako-soil", "artificial-jellynut-soil", "overgrowth-yumako-soil", "overgrowth-jellynut-soil"} do
+	data.raw.recipe[recipeName].category = "organic"
+end
+
 -- Gleba: create recipe for turning iron/copper bacteria into ore and fresh bacteria.
 -- Note these don't accept prod modules, but biochamber has +50% prod which does apply.
 -- TODO these were originally intended to make it feasible to keep a living stock of bacteria indefinitely when no ore is being used up; but now it doesn't work because the filtration recipe also produces ore. Need to fix this.

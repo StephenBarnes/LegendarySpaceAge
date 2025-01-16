@@ -19,6 +19,7 @@ data.raw.technology["steam-power"].research_trigger = {
 data.raw.technology["steam-power"].effects = {
 	{type = "unlock-recipe", recipe = "boiler"},
 	{type = "unlock-recipe", recipe = "gas-boiler"},
+	{type = "unlock-recipe", recipe = "electric-boiler"},
 	{type = "unlock-recipe", recipe = "steam-engine"},
 }
 Tech.addRecipeToTech("offshore-pump", "automation", 3)

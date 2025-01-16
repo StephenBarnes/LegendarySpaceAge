@@ -24,6 +24,10 @@ for _, recipeName in pairs{
 	"lightning-collector",
 	"fusion-reactor",
 	"fusion-generator",
+	"turbo-transport-belt",
+	"turbo-underground-belt",
+	"turbo-splitter",
+	"fish-breeding",
 } do
 	data.raw.recipe[recipeName].surface_conditions = nil
 end
@@ -31,13 +35,20 @@ end
 -- Aquilo should have less solar power in space, so you need a nuclear reactor.
 data.raw.planet.aquilo.solar_power_in_space = .05 -- Changed 60% -> 5%.
 
--- Search for things requiring pressure 1000, change to 220. Those are supposed to be Nauvis-only.
-local function isNauvisOnly(conditions)
-	return conditions ~= nil
+-- Search for things requiring specific pressure (because they're meant to be only on one planet) and change condition to use new oxygen-pressure.
+local pressureChanges = {
+	[1000] = 220, -- Nauvis
+	[2000] = 260, -- Gleba
+	[4000] = 20, -- Vulcanus
+	[300] = 10, -- Aquilo
+}
+local function getNewPressure(conditions)
+	if (conditions ~= nil
 		and #conditions == 1
 		and conditions[1].property == "pressure"
-		and conditions[1].min == 1000
-		and conditions[1].max == 1000
+		and conditions[1].min == conditions[1].max) then
+			return pressureChanges[conditions[1].min]
+	end
 end
 for _, typeName in pairs{
 	"recipe",
@@ -46,8 +57,9 @@ for _, typeName in pairs{
 	"plant", -- Trees.
 } do
 	for _, thing in pairs(data.raw[typeName]) do
-		if isNauvisOnly(thing.surface_conditions) then
-			thing.surface_conditions = {{property = "pressure", min = 220, max = 220}}
+		local newPressure = getNewPressure(thing.surface_conditions)
+		if newPressure ~= nil then
+			thing.surface_conditions = {{property = "pressure", min = newPressure, max = newPressure}}
 		end
 	end
 end

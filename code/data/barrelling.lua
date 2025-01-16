@@ -45,7 +45,7 @@ local emptyGasTankRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 data:extend{emptyGasTankRecipe}
 
 -- Edit recipe for barrel - previously only 1 steel plate.
-data.raw.recipe["barrel"].ingredients = {{type = "item", name = "steel-plate", amount = 3}}
+data.raw.recipe["barrel"].ingredients = {{type = "item", name = "steel-plate", amount = 2}}
 
 -- Create subgroup for recipes filling and emptying gas tanks.
 data:extend{
@@ -66,8 +66,9 @@ data:extend{
 -- Hide fluid wagons.
 Tech.hideTech("fluid-wagon")
 Recipe.hide("fluid-wagon")
-data.raw["item-with-entity-data"]["fluid-wagon"].hidden = true
-data.raw["fluid-wagon"]["fluid-wagon"].hidden = true
+data.raw["item-with-entity-data"]["fluid-wagon"].hidden_in_factoriopedia = true
+data.raw["fluid-wagon"]["fluid-wagon"].hidden_in_factoriopedia = true
+-- Can't do .hidden = true because that crashes Factory Planner.
 
 -- TODO look through fluids, maybe add more barrelling recipes. Eg for Gleban slime.
 -- Allow more fluids in barrels and tanks.
