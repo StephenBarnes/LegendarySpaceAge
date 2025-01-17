@@ -4,7 +4,7 @@ This file is to keep track of other people's stuff that I've used.
 * AdamoCarbon by ElAdamo - not using the mod or code, but stole several ideas for the petrochem system.
 * Flare Stack by GotLag, snouz, and others - https://mods.factorio.com/mod/Flare%20Stack - Used graphics and code.
 * Snouz - Graphics for flare stack, silicon wafers.
-* Gleba crop mods by LordMiguel (slipstacks, boompuffs, stingfronds) - TODO.
+* Gleba crop mods by LordMiguel (slipstacks, boompuffs, stingfronds) - TODO, planning to use code from those mods to add farming for those 3 crops.
 * Battery Powered by harag - https://mods.factorio.com/mod/battery-powered - Charger/discharger graphics and animations, and ideas.
 * Biochemistry by Tenebrais - https://mods.factorio.com/mod/biochemistry - Electrophage graphics, and ideas.
 * Fulgoran Sludge by Tatticky - https://mods.factorio.com/mod/fulgoran-sludge - Sludge idea.

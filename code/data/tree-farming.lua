@@ -160,7 +160,7 @@ local saplingRecipe = Table.copyAndEdit(data.raw.recipe["wood-processing"], {
 	order = "006",
 	icon = "nil",
 	icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}},
-	surface_conditions = {{property = "pressure", min = 220, max = 220}}
+	surface_conditions = {{property = "oxygen-pressure", min = 220, max = 220}}
 })
 data:extend{saplingRecipe}
 

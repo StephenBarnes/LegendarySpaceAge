@@ -4,7 +4,7 @@ Date: 2025-01-17
   Features:
     - Added hotkey to toggle between offshore pump and waste pump, gasifier and fluid-fuelled gasifier, heating tower and fluid-fuelled heating tower. Removed separate items and recipes for the variants.
     - Gas vents in space can now also vent liquids.
-    - Fulgora now has zero partial pressure of oxygen, so burners can't be built. Water is no longer unobtainable.
+    - Fulgora now has zero free oxygen, so burners can't be built. Water is no longer unobtainable.
     - Removed dependency on Fulgora Lives mod, rather incorporating into this mod, with changes that don't make sense for that mod standalone.
     - Added pressurized tanks for storing gases and some liquids. Removed fluid train wagons.
     - Added electric boiler (from other mod), for Fulgora.
@@ -12,6 +12,7 @@ Date: 2025-01-17
     - Added new recipe chain for red circuits, with "electronic components" intermediate.
     - Adjusted early-game tech tree.
     - Many other small changes.
+    - Added some dependency mods.
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.0
 Date: 2025-01-14
