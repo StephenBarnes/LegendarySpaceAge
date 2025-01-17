@@ -2,7 +2,7 @@ local u = require("code.settings.util")
 
 -- Set power multipliers for PowerMultiplier mod.
 --u.setDefaultOrForce("PowerMultiplier-electrical", "double", 2)
-u.setDefaultOrForce("PowerMultiplier-electrical", "double", 1) -- TODO temporarily turning off, trying to fix glitch with bots.
+u.setDefaultOrForce("PowerMultiplier-electrical", "double", 2)
 u.setDefaultOrForce("PowerMultiplier-burner", "double", 2)
 u.setDefaultOrForce("PowerMultiplier-nutrient", "double", 1)
 u.setDefaultOrForce("PowerMultiplier-heating", "double", 1) -- Already making heating towers less efficient.

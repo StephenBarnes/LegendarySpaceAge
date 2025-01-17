@@ -184,7 +184,7 @@ for _, fluidData in pairs(ventableFluids) do
 		energy_required = 1,
 		emissions_multiplier = emissionsMult,
 		crafting_machine_tint = {
-			primary = data.raw.fluid[gasToVent].flow_color,
+			primary = data.raw.fluid[gasToVent].base_color,
 		},
 	})
 	if onlyInSpace then

@@ -1,5 +1,15 @@
+-- Files that create things needed in subsequent files.
 require("code.data.crafting-categories")
 require("code.data.fluid-boxes")
+-- TODO
+
+-- Files that create new protos.
+require("code.data.early-equipment-grids")
+-- TODO
+
+-- Files that make adjustments to protos, don't create protos.
+-- TODO
+
 
 require("code.data.misc")
 require("code.data.labs")
@@ -7,8 +17,6 @@ require("code.data.advanced-logistics")
 require("code.data.nauvis")
 require("code.data.vulcanus.main")
 require("code.data.fulgora.main")
-require("code.data.aquilo")
-require("code.data.early-equipment-grids")
 
 require("code.data.gleba.misc")
 require("code.data.gleba.slipstacks")
@@ -45,3 +53,4 @@ require("code.data.nauvis-part-two.nauvis-biotech")
 require("code.data.nauvis-part-two.nuclear")
 require("code.data.cargo-ships")
 require("code.data.toggle-key")
+require("code.data.aquilo.main")

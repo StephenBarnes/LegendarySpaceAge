@@ -1,11 +1,12 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.0
-Date: 17. 01. 2025
+Date: 2025-01-17
   Features:
     - Added hotkey to toggle between offshore pump and waste pump, gasifier and fluid-fuelled gasifier, heating tower and fluid-fuelled heating tower. Removed separate items and recipes for the variants.
     - Gas vents in space can now also vent liquids.
     - Fulgora now has zero partial pressure of oxygen, so burners can't be built. Water is no longer unobtainable.
     - Removed dependency on Fulgora Lives mod, rather incorporating into this mod, with changes that don't make sense for that mod standalone.
+    - Added pressurized tanks for storing gases and some liquids. Removed fluid train wagons.
     - Added electric boiler (from other mod), for Fulgora.
     - Added new recipe chain for blue circuits, with silicon and doped wafers.
     - Added new recipe chain for red circuits, with "electronic components" intermediate.
@@ -13,7 +14,7 @@ Date: 17. 01. 2025
     - Many other small changes.
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.0
-Date: 14. 01. 2025
+Date: 2025-01-14
   Features:
     - Added hand-crank for early electricity (via other mod, updated to 2.0).
     - Added cement fluid for regular concrete, and molten-sulfur concrete for Vulcanus.
@@ -26,7 +27,7 @@ Date: 14. 01. 2025
     - Miscellaneous other changes.
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.0
-Date: 11. 01. 2025
+Date: 2025-01-11
   Features:
     - Added glass and sand.
     - Added machine parts and advanced parts.
@@ -35,7 +36,7 @@ Date: 11. 01. 2025
     - Revamped foundry smelting and casting recipes; added molten steel, molten tungsten, fluid heat puzzle.
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.0
-Date: 09. 01. 2025
+Date: 2025-01-09
   Features:
     - Added gunpowder.
     - Added gasifier (copying Adamo Carbon mod) and fluid-fuelled gasifier.
@@ -48,6 +49,6 @@ Date: 09. 01. 2025
     - Miscellaneous other changes.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.0
-Date: 06. 01. 2025
+Date: 2025-01-06
   Features:
     - Initial release, still in early development.
