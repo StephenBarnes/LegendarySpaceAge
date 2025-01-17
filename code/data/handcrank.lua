@@ -38,6 +38,7 @@ local handCrankRecipe = Table.copyAndEdit(data.raw.recipe["assembling-machine-1"
 	results = {
 		{type = "item", name = "er-hcg", amount = 1},
 	},
+	order = "a",
 })
 data:extend({handCrankRecipe})
 

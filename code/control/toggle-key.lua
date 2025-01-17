@@ -1,6 +1,21 @@
 -- This file handles the new "toggle" hotkey that's added by this modpack.
 -- The toggle key can turn offshore pumps (or lava pumps) into waste pumps, gasifiers into fluid-fuelled gasifiers, heating towers into fluid-fuelled heating towers, and maybe other stuff later.
 
+-- Table of entity names that are replaced when toggle key is pressed.
+local simpleSwitches = {
+	["offshore-pump"] = "waste-pump",
+	["lava-pump"] = "waste-pump",
+	-- Waste pump switches to either offshore or lava, depending on planet.
+
+	["heating-tower"] = "fluid-heating-tower",
+	["fluid-heating-tower"] = "heating-tower",
+
+	["gasifier"] = "fluid-fuelled-gasifier",
+	["fluid-fuelled-gasifier"] = "gasifier",
+}
+
+---@param ent LuaEntity
+---@param newName string
 local function getInfoForReplace(ent, newName)
 	return {
 		name = newName,
@@ -11,7 +26,20 @@ local function getInfoForReplace(ent, newName)
 		player = ent.last_user,
 		orientation = ent.orientation,
 		direction = ent.direction,
+		mirroring = ent.mirroring,
 	}
+	-- Could copy over fluidbox contents, but it seems error-prone. Rather just waste 1000 steam sometimes.
+end
+
+---@param ent LuaEntity
+---@param newEntName string
+local function replaceEnt(ent, newEntName)
+	local info = getInfoForReplace(ent, newEntName)
+	local surface = ent.surface
+	ent.destroy()
+	local newEnt = surface.create_entity(info)
+	if newEnt == nil then return end
+	newEnt.mirroring = info.mirroring
 end
 
 ---@param event EventData.CustomInputEvent
@@ -29,26 +57,15 @@ local function onToggleEntity(event)
 	local surface = selected.surface
 	if surface == nil or not surface.valid then return end
 
-	if entName == "offshore-pump" or entName == "lava-pump" then
-		-- Create waste pump.
-		local info = getInfoForReplace(selected, "waste-pump")
-		selected.destroy()
-		surface.create_entity(info)
+	local simpleSwitchTarget = simpleSwitches[entName]
+	if simpleSwitchTarget ~= nil then
+		replaceEnt(selected, simpleSwitchTarget)
 	elseif entName == "waste-pump" then
-		-- Create offshore pump, or lava pump.
-		--   Here I'm assuming Vulcanus is always lava-pump, everywhere else is offshore-pump.
-		--   Could replace it with a smarter check, or make the NoLavaInPipes mod smarter so I can just do offshore-pump here and that mod will change it to lava pump when necessary.
 		local newPumpName = surface.planet.name == "vulcanus" and "lava-pump" or "offshore-pump"
-		local info = getInfoForReplace(selected, newPumpName)
-		selected.destroy()
-		surface.create_entity(info)
+		replaceEnt(selected, newPumpName)
 	end
-
-	-- TODO fluid-fuelled gasifier and heating tower
 end
 
 return {
 	onToggleEntity = onToggleEntity
 }
-
--- TODO add note about pump to descriptions of all 3 pumps.

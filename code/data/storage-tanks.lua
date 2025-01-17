@@ -23,3 +23,5 @@ data.raw.item["tiny-inline-storage-tank"].weight = data.raw.item["pump"].weight
 -- Move to pipe row, not storage row.
 --data.raw.item["tiny-inline-storage-tank"].subgroup = "energy-pipe-distribution"
 data.raw.item["tiny-inline-storage-tank"].order = "b[fluid]-a[0]"
+
+-- TODO actually let's add the 4way storage tank back in, but use the toggle hotkey for it.
