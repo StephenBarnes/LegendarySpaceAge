@@ -13,7 +13,6 @@ local handCrankTech = {
 	effects = {
 		{type = "unlock-recipe", recipe = "copper-cable"},
 		{type = "unlock-recipe", recipe = "er-hcg"},
-		{type = "unlock-recipe", recipe = "personal-burner-generator"},
 		{type = "unlock-recipe", recipe = "small-electric-pole"},
 		-- Power Overload notices that the small-electric-pole recipe is unlocked here, and adds the fuse recipe.
 	},

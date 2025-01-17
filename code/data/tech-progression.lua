@@ -63,7 +63,6 @@ data.raw.technology["steam-power"].effects = {
 	{type = "unlock-recipe", recipe = "steam-engine"},
 }
 Tech.addRecipeToTech("offshore-pump", "automation", 3)
-Tech.addRecipeToTech("waste-pump", "automation", 4) -- Should be at the same time as the offshore pump, so player can pump and filter for stone etc.
 Tech.addRecipeToTech("pipe", "automation")
 Tech.addRecipeToTech("pipe-to-ground", "automation")
 

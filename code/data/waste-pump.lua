@@ -17,8 +17,8 @@ local wastePump = Table.copyAndEdit(data.raw["offshore-pump"]["offshore-pump"], 
 	}),
 	energy_usage = "59kW", -- Energy used when crafting. Adds 1kW for drain.
 	PowerMultiplier_ignore = true,
-	minable = Table.copyAndEdit(data.raw.pump.pump.minable, {
-		result = "waste-pump",
+	minable = Table.copyAndEdit(data.raw["offshore-pump"]["offshore-pump"].minable, {
+		result = "offshore-pump",
 	}),
 	fluid_boxes = {
 		{
@@ -35,33 +35,35 @@ local wastePump = Table.copyAndEdit(data.raw["offshore-pump"]["offshore-pump"], 
 	surface_conditions = "nil",
 })
 table.insert(newData, wastePump)
--- TODO allow placing in lava, and allow lava to enter it.
 
 local wastePumpCraftingCategory = Table.copyAndEdit(data.raw["recipe-category"]["crafting"], {
 	name = "waste-pump",
 })
 table.insert(newData, wastePumpCraftingCategory)
 
--- Create recipe.
-local wastePumpRecipe = Table.copyAndEdit(data.raw.recipe["pump"], {
-	name = "waste-pump",
-	results = {{type = "item", name = "waste-pump", amount = 1}},
-	ingredients = table.deepcopy(data.raw.recipe["offshore-pump"].ingredients),
-})
-table.insert(newData, wastePumpRecipe)
+-- Code to crate recipe and item for waste pump. This is disabled, because I'm rather implementing a toggle hotkey. Can re-enable for testing.
+if false then
+	-- Create recipe.
+	local wastePumpRecipe = Table.copyAndEdit(data.raw.recipe["pump"], {
+		name = "waste-pump",
+		results = {{type = "item", name = "waste-pump", amount = 1}},
+		ingredients = table.deepcopy(data.raw.recipe["offshore-pump"].ingredients),
+	})
+	table.insert(newData, wastePumpRecipe)
 
--- Create item.
-local wastePumpItem = Table.copyAndEdit(data.raw.item["pump"], {
-	name = "waste-pump",
-	place_result = "waste-pump",
-	icon = "nil",
-	icons = {
-		{icon = "__base__/graphics/icons/offshore-pump.png", icon_size = 64, scale = 0.5},
-		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.3},
-	},
-	order = "b[pipe]-d",
-})
-table.insert(newData, wastePumpItem)
+	-- Create item.
+	local wastePumpItem = Table.copyAndEdit(data.raw.item["pump"], {
+		name = "waste-pump",
+		place_result = "waste-pump",
+		icon = "nil",
+		icons = {
+			{icon = "__base__/graphics/icons/offshore-pump.png", icon_size = 64, scale = 0.5},
+			{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.3},
+		},
+		order = "b[pipe]-d",
+	})
+	table.insert(newData, wastePumpItem)
+end
 
 -- Create fluid-venting recipes.
 local effluentFluidsAndPollution = {
