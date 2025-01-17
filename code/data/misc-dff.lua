@@ -9,7 +9,7 @@ Tech.removeRecipesFromTechs(
 	{"railway", "circuit-network", "electric-energy-distribution-1", "concrete"})
 
 -- Move wooden-pole fuse recipe to electric-energy-distribution-1.
-Tech.removeRecipeFromTech("po-small-electric-fuse", "electric-energy-distribution-1")
+Tech.removeRecipeFromTech("po-small-electric-fuse", "basic-electricity")
 Tech.addRecipeToTech("po-small-electric-fuse", "electric-energy-distribution-1", 3)
 
 -- Edit the spent-filter-recycling recipe to have the same results as filter-recycling.

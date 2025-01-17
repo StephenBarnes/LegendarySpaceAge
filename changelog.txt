@@ -1,8 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.0
-Date: 16. 01. 2025
+Date: 17. 01. 2025
   Features:
-    - TODO Added toggle hotkey to toggle between offshore pump and waste pump, gasifier and fluid-fuelled gasifier, heating tower and fluid-fuelled heating tower. Removed separate items and recipes for the variants.
+    - Added hotkey to toggle between offshore pump and waste pump, gasifier and fluid-fuelled gasifier, heating tower and fluid-fuelled heating tower. Removed separate items and recipes for the variants.
     - Gas vents in space can now also vent liquids.
     - Fulgora now has zero partial pressure of oxygen, so burners can't be built. Water is no longer unobtainable.
     - Removed dependency on Fulgora Lives mod, rather incorporating into this mod, with changes that don't make sense for that mod standalone.
