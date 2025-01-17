@@ -69,3 +69,7 @@ end
 return {
 	onToggleEntity = onToggleEntity
 }
+
+-- There's a problem: you can't pipette eg the fluid-fuelled gasifier, you get regular gasifier. Can't place fluid-fuelled gasifier directly.
+-- But you can copy-paste or blueprint it, and then bots build it fine.
+-- So, only an issue when manually building. So not worth adding a separate item and recipe just because of that.

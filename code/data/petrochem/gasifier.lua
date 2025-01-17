@@ -4,6 +4,7 @@ local Table = require("code.util.table")
 local Tech = require("code.util.tech")
 
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
+---@type data.AssemblingMachinePrototype
 local gasifierEnt = table.deepcopy(data.raw.furnace["steel-furnace"])
 gasifierEnt.type = "assembling-machine"
 gasifierEnt.name = "gasifier"
@@ -42,9 +43,9 @@ gasifierEnt.energy_source = {
 	},
 }
 gasifierEnt.energy_usage = "2MW" -- TODO check for balance.
+---@diagnostic disable-next-line: inject-field
 gasifierEnt.PowerMultiplier_ignore = true -- For PowerMultiplier mod, disables power changes to this entity.
-gasifierEnt.source_inventory_size = 0
-gasifierEnt.result_inventory_size = 0
+gasifierEnt.trash_inventory_size = 0
 gasifierEnt.stateless_visualisation = {
 	{
 		animation = {
@@ -74,6 +75,15 @@ gasifierEnt.stateless_visualisation = {
 }
 gasifierEnt.match_animation_speed_to_activity = false
 gasifierEnt.graphics_set = {
+	animation = { -- Needed or else the blueprint ghost doesn't have any graphics.
+		filename = GRAPHICS.."entity/gasifier.png",
+		priority = "high",
+		width = 320,
+		height = 320,
+		scale = 0.5,
+		frame_count = 1,
+		shift = {1.5, -1.59375}
+	},
 	working_visualisations = {
 		{
 			animation = {
@@ -130,7 +140,7 @@ gasifierEnt.fluid_boxes = {
 gasifierEnt.surface_conditions = data.raw["mining-drill"]["burner-mining-drill"].surface_conditions
 data:extend{gasifierEnt}
 
----@type data.FurnacePrototype
+---@type data.AssemblingMachinePrototype
 local fluidGasifierEnt = table.deepcopy(gasifierEnt)
 fluidGasifierEnt.name = "fluid-fuelled-gasifier"
 fluidGasifierEnt.energy_source = {

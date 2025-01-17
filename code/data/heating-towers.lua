@@ -6,6 +6,7 @@ local towerEnt = data.raw.reactor["heating-tower"]
 local fluidHeatingTowerEnt = table.deepcopy(data.raw.reactor["heating-tower"])
 fluidHeatingTowerEnt.name = "fluid-heating-tower"
 fluidHeatingTowerEnt.subgroup = "environmental-protection"
+fluidHeatingTowerEnt.placeable_by = {item = "heating-tower", count = 1}
 fluidHeatingTowerEnt.energy_source = {
 	type = "fluid",
 	emissions_per_minute = towerEnt.energy_source.emissions_per_minute,
