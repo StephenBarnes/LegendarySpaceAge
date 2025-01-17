@@ -121,4 +121,4 @@ end
 
 data:extend(newData)
 
-Tech.addRecipeToTech("waste-pump", "fluid-handling", 5)
+-- Will add to tech in tech-progression.lua.

@@ -66,6 +66,7 @@ data.raw["simple-entity"]["big-sand-rock"].minable.results = {
 	{type = "item", name = "coal", amount_min = 0, amount_max = 20}, -- Added.
 	{type = "item", name = "niter", amount_min = 0, amount_max = 20}, -- Added.
 }
+-- TODO also boulders etc in other places, eg Vulcanus needs niter.
 
 -- Allow burner inserters to leech. Unclear why this is off by default.
 data.raw.inserter["burner-inserter"].allow_burner_leech = true
@@ -73,3 +74,11 @@ data.raw.inserter["burner-inserter"].allow_burner_leech = true
 -- Diurnal Dynamics: hide flare from factoriopedia, since we're disabling it using mod setting.
 data.raw.capsule["data-dd-flare-capsule"].hidden_in_factoriopedia = true
 data.raw.recipe["data-dd-flare-capsule"].hidden_in_factoriopedia = true
+-- Also hide non-user-facing stuff from factoriopedia. (Shouldn't be created at all if flares are disabled.)
+data.raw.explosion["data-dd-explosion-flare"].hidden = true
+data.raw.projectile["data-dd-flare-capsule"].hidden = true
+data.raw["smoke-with-trigger"]["data-dd-flare-cloud"].hidden = true
+
+-- Reduce health of furnaces and pipes, to encourage building walls.
+data.raw.pipe.pipe.max_health = 35 -- Reduced from 100 to 35. Wall is 350.
+data.raw.furnace["stone-furnace"].max_health = 100 -- Reduced from 200 to 100.

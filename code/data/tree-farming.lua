@@ -135,6 +135,7 @@ local fertilizerRecipe = Table.copyAndEdit(data.raw.recipe["wood-processing"], {
 	results = {
 		{type="item", name="fertilizer", amount=2},
 	},
+	category = "organic-or-assembling",
 	subgroup = "early-agriculture",
 	order = "005",
 	fuel_value = "nil",

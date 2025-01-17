@@ -249,3 +249,14 @@ data.raw.recipe.biolab.ingredients = {
 	{type = "item", name = "biter-egg", amount = 5},
 	{type = "item", name = "refined-concrete", amount = 20},
 }
+
+-- Grenades: 8 gunpowder + 4 iron plate.
+data.raw.recipe["grenade"].ingredients = {
+	{type = "item", name = "iron-plate", amount = 4},
+	{type = "item", name = "gunpowder", amount = 8},
+}
+data.raw.recipe["poison-capsule"].ingredients = {
+	{type = "item", name = "iron-plate", amount = 4},
+	{type = "item", name = "gunpowder", amount = 8},
+}
+-- TODO poison capsule, slowdown capsule - shouldn't need coal.

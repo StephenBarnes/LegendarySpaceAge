@@ -32,12 +32,13 @@ end
 
 -- TODO add descriptions
 
--- Unlock personal burner generator from basic electricity, not modular armor.
+-- Unlock personal burner generator from electronics, not modular armor.
 Tech.removeRecipeFromTech("personal-burner-generator", "modular-armor")
--- Will add recipe to basic-electricity when that tech is created.
+Tech.addRecipeToTech("personal-burner-generator", "electronics")
 
 -- Edit personal burner generator's recipe so it's craftable early-game.
 data.raw.recipe["personal-burner-generator"].ingredients = {
 	{type = "item", name = "iron-plate", amount = 10},
 	{type = "item", name = "copper-cable", amount = 8},
+	{type = "item", name = "electronic-circuit", amount = 1},
 }

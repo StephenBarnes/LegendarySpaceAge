@@ -21,12 +21,28 @@ data.raw.technology["automation"].research_trigger = {
 	entity = "lab",
 }
 
+-- Techs that depend on red science should instead depend on automation, since you need to build a lab to unlock that.
+for _, techName in pairs{
+	"electric-mining-drill",
+	"logistics",
+	"gun-turret",
+	"lamp",
+	"repair-pack",
+	"military",
+	"steel-processing",
+	"radar",
+	"stone-wall",
+} do
+	Tech.replacePrereq(techName, "automation-science-pack", "automation")
+end
+Tech.setPrereqs("logistic-science-pack", {"automation"})
+
 -- Red science tech should be unlocked by crafting circuits. And should unlock lab recipe.
 data.raw.technology["automation-science-pack"].unit = nil
 data.raw.technology["automation-science-pack"].research_trigger = {
 	type = "craft-item",
-	item = "electronic-circuit",
-	amount = 10,
+	item = "personal-burner-generator",
+	amount = 1,
 }
 Tech.removeRecipeFromTech("lab", "electronics")
 Tech.addRecipeToTech("lab", "automation-science-pack")
@@ -47,6 +63,7 @@ data.raw.technology["steam-power"].effects = {
 	{type = "unlock-recipe", recipe = "steam-engine"},
 }
 Tech.addRecipeToTech("offshore-pump", "automation", 3)
+Tech.addRecipeToTech("waste-pump", "automation", 4) -- Should be at the same time as the offshore pump, so player can pump and filter for stone etc.
 Tech.addRecipeToTech("pipe", "automation")
 Tech.addRecipeToTech("pipe-to-ground", "automation")
 
@@ -133,9 +150,6 @@ data.raw.recipe["selector-combinator"].ingredients = {
 
 -- Add red circuit dependency to assembling machine 2, so we can add it as ingredient.
 Tech.setPrereqs("automation-2", {"advanced-circuit"})
-
--- Logistic science after automation science.
-Tech.setPrereqs("logistic-science-pack", {"automation-science-pack"})
 
 -- Heating tower tech should be early.
 Tech.setPrereqs("heating-tower", {"steam-power", "concrete"})
