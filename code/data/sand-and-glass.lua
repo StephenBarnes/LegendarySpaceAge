@@ -76,7 +76,7 @@ local glassTech = Table.copyAndEdit(data.raw.technology["logistics"], {
 	research_trigger = {
 		type = "craft-item",
 		item = "sand",
-		count = 5,
+		count = 1,
 	},
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/glass/tech.png", icon_size = 256, scale=0.5, mipmap_count = 4}},

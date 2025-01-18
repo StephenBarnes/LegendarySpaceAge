@@ -20,7 +20,7 @@ data.raw.recipe["tank"].ingredients = {
 data.raw.recipe["spidertron"].ingredients = {
 	{type="item", name="pentapod-egg", amount=1},
 	{type="item", name="rubber", amount=16},
-	{type="item", name="fission-reactor-equipment", amount=2},
+	--{type="item", name="fission-reactor-equipment", amount=2},
 	{type="item", name="exoskeleton-equipment", amount=4},
 	{type="item", name="radar", amount=2},
 	{type="item", name="rocket-turret", amount=1},
@@ -30,7 +30,7 @@ data.raw.recipe["spidertron"].ingredients = {
 -- I also want them to get more expensive per throughput (as in vanilla), and increase in complexity.
 data.raw.recipe["transport-belt"].ingredients = {
 	{type="item", name="iron-plate", amount=1},
-	{type="item", name="iron-gear-wheel", amount=2},
+	{type="item", name="iron-gear-wheel", amount=1},
 }
 data.raw.recipe["fast-transport-belt"].ingredients = {
 	{type="item", name="iron-plate", amount=1},

@@ -3,7 +3,7 @@ local Table = require("code.util.table")
 local Recipe = require("code.util.recipe")
 
 local ROCKET_MASS = 1000000
-local INGOT_COOLING_TIME = 60 * 60 * 2
+local INGOT_COOLING_TIME = 60 * 60 * 5
 
 --[[
 Iron:

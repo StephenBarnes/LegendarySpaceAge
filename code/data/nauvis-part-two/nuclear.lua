@@ -53,4 +53,3 @@ end
 
 -- Spidertron no longer requires nuclear techs first, or nuclear reactor as ingredient.
 Tech.removePrereq("spidertron", "fission-reactor-equipment")
-Recipe.removeIngredient("spidertron", "fission-reactor-equipment")

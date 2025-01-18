@@ -16,7 +16,7 @@ data:extend({
 		default_temperature = 5,
 		auto_barrel = false,
 		subgroup = "fluid",
-		order = "b[new-fluid]-c[fulgora]-aa[sludge]",
+		order = "b[new-fluid]-c[fulgora]-a[]",
 	},
 	{
 		type = "recipe",

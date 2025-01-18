@@ -78,6 +78,8 @@ inverseVulcanizationRecipe.results = {
 	{type = "item", name = "plastic-bar", amount = 3},
 	{type = "item", name = "resin", amount = 1},
 }
+inverseVulcanizationRecipe.main_product = "plastic-bar"
+inverseVulcanizationRecipe.order = "b[chemistry]-b2"
 inverseVulcanizationRecipe.icons = {
 	{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.5},
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale = 0.27, shift = {-6, -7}, mipmap_count=4},

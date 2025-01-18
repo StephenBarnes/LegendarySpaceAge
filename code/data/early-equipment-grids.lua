@@ -30,12 +30,6 @@ for _, equipmentTypeAndName in pairs{
 	table.insert(data.raw[equipmentTypeAndName[1]][equipmentTypeAndName[2]].categories, "early-armor")
 end
 
--- TODO add descriptions
-
--- Unlock personal burner generator from electronics, not modular armor.
-Tech.removeRecipeFromTech("personal-burner-generator", "modular-armor")
-Tech.addRecipeToTech("personal-burner-generator", "electronics")
-
 -- Edit personal burner generator's recipe so it's craftable early-game.
 data.raw.recipe["personal-burner-generator"].ingredients = {
 	{type = "item", name = "iron-plate", amount = 10},
@@ -43,6 +37,9 @@ data.raw.recipe["personal-burner-generator"].ingredients = {
 	{type = "item", name = "glass", amount = 1},
 	{type = "item", name = "electronic-circuit", amount = 1},
 }
+
+-- Unlock personal burner generator from its own tech, not modular armor.
+Tech.removeRecipeFromTech("personal-burner-generator", "modular-armor")
 
 -- Create a tech for personal burner generator.
 local personalBurnerGeneratorTech = table.deepcopy(data.raw.technology["electronics"])

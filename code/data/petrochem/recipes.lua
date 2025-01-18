@@ -180,9 +180,10 @@ local coalCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracking"]
 		{type = "item", name = "coal", amount = 2},
 	},
 	results = {
-		{type = "item", name = "carbon", amount = 4},
+		{type = "item", name = "carbon", amount = 2},
 		{type = "item", name = "sulfur", amount = 1},
-		--{type = "fluid", name = "tar", amount = 20}, -- Removed bc it prevents handcrafting.
+		{type = "item", name = "pitch", amount = 1},
+		--{type = "fluid", name = "tar", amount = 20}, -- Removed bc the player has no way to handle fluid waste yet, except waste pump I guess.
 	},
 	icons = {
 		{icon = "__base__/graphics/icons/coal.png", icon_size = 64, scale=0.25, shift={0, -3}},
@@ -192,9 +193,9 @@ local coalCokingRecipe = Table.copyAndEdit(data.raw.recipe["heavy-oil-cracking"]
 	icon = "nil",
 	order = "a[oil-processing]-b3",
 	subgroup = "complex-fluid-recipes",
-	category = "chemistry-or-handcrafting",
+	category = "chemistry",
 	energy_required = 1,
-	enabled = true, -- TODO check where to put it in progression; should be early, since it's needed for yellow ammo mags.
+	enabled = false, -- Unlocked by coal-coking tech, created in another file.
 })
 table.insert(newData, coalCokingRecipe)
 

@@ -9,7 +9,7 @@ local Recipe = require("code.util.recipe")
 local newData = {}
 
 -- Create ammonia 1 tech, for ammonia from spoilage and spoilage from wood.
-local ammonia1Tech = Table.copyAndEdit(data.raw.technology["automation"], {
+local ammonia1Tech = Table.copyAndEdit(data.raw.technology["logistics"], {
 	name = "ammonia-1",
 	localised_name = {"technology-name.ammonia-1"},
 	localised_description = {"technology-description.ammonia-1"},

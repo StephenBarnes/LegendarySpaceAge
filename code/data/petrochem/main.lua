@@ -7,6 +7,7 @@ require("code.data.petrochem.recipes")
 require("code.data.petrochem.gasifier")
 require("code.data.petrochem.wellhead")
 require("code.data.petrochem.natural-gas-wells")
+require("code.data.petrochem.coking-tech")
 
 -- Move rocket-fuel (vehicle fuel) earlier in progression
 Tech.setPrereqs("rocket-fuel", {"oil-processing"})

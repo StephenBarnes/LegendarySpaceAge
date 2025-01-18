@@ -22,9 +22,9 @@ local function setStartItems()
 		['stone-furnace'] = 1,
 
 		['pistol'] = 1,
-		['firearm-magazine'] = 20,
+		['firearm-magazine'] = 60,
 
-		['construction-robot'] = 25,
+		['construction-robot'] = 50,
 		['personal-roboport-equipment'] = 2,
 		['battery-equipment'] = 1,
 		-- Player has to make a personal burner generator to actually power the stuff.

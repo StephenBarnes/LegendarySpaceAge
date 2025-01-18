@@ -44,7 +44,7 @@ for _, machineType in pairs{
 	end
 end
 
--- Create crafting category for chem plant or handcrafting - for coal coking, gunpowder, maybe more.
+-- Create crafting category for chem plant or handcrafting - for gunpowder, maybe more.
 data:extend({
 	{
 		type = "recipe-category",

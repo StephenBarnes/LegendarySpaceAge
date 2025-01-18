@@ -34,7 +34,7 @@ local gunpowderRecipe = Table.copyAndEdit(data.raw.recipe["firearm-magazine"], {
 		{type="item", name="niter", amount=4},
 	},
 	results = {{type = "item", name = "gunpowder", amount = 8}},
-	enabled = true,
+	enabled = false, -- Enabled by coal coking tech.
 	category = "chemistry-or-handcrafting",
 })
 table.insert(newData, gunpowderRecipe)

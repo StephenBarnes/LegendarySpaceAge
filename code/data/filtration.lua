@@ -32,7 +32,7 @@ local filtrationLakeWaterTech = Table.copyAndEdit(data.raw.technology["automatio
 		{icon = "__LegendarySpaceAge__/graphics/filtration/tech.png", icon_size = 256, scale = 0.5, shift = {-25, 0}},
 		{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water-tech.png", icon_size = 256, scale = 0.4, shift = {25, 0}},
 	},
-	prerequisites = {"automation"},
+	prerequisites = {"coal-coking"}, -- Needs coking for carbon, to make filters.
 	effects = {
 		{type = "unlock-recipe", recipe = "filter"},
 		{type = "unlock-recipe", recipe = "filter-lake-water"},

@@ -15,7 +15,7 @@ Blue circuits are made in the late stages of Nauvis part 1, and should have a si
 	1 doped wafer + 1 circuit board + 2 red circuit + 5 sulfuric acid -> 1 blue circuit
 		Acid is for final etching/cleaning; red circuits represent simpler control electronics on the advanced board; doped wafer is the new silicon IC.
 
-On Nauvis you first make "improvised" circuit boards, just stone+carbon. Then later you cut trees and put the wood in a wood-to-resin-and-rubber line and use the resin plus wood to make wooden circuit boards. There's early agricultural towers for bulk wood.
+On Nauvis you first make "improvised" circuit boards, from just stone. Then later you cut trees and put the wood in a wood-to-resin-and-rubber line and use the resin plus wood to make wooden circuit boards. There's early agricultural towers for bulk wood.
 When plastic is unlocked with petrochem, you unlock a recipe for circuit boards from plastic:
 	2 plastic bar + 1 resin + 1 rubber -> 8 circuit boards
 Generally on Nauvis and Gleba both wood and plastic circuit boards are viable. On Fulgora and Aquilo, only plastic circuit boards are viable. On Vulcanus there's another alternative recipe for ceramic circuit boards using calcite.
@@ -108,14 +108,13 @@ data:extend{calciteCircuitBoardRecipe}
 Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rather make a separate tech for this? Unlocked by mining like 10 calcite. Use the ceramic circuit board sprite.
 
 --[[ Add "improvised" circuit board recipe, only handcraftable.
-	Improvise circuit board: 1 stone + 1 carbon -> 1 circuit board
-		Needed because all ways of making circuit boards require resin, which can't be obtained on Aquilo without buildings that require electronic circuits, creating a circular dependency.
+	Improvise circuit board: 2 stone -> 1 circuit board
+		Needed because all ways of making circuit boards require resin, which can't be obtained on Aquilo without buildings that require electronic circuits, creating a circular dependency. Also same on Nauvis at the start.
 ]]
 local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electronic-circuit"], {
 	name = "improvised-circuit-board",
 	ingredients = {
-		{type = "item", name = "stone", amount = 1},
-		{type = "item", name = "carbon", amount = 1},
+		{type = "item", name = "stone", amount = 2},
 	},
 	results = {
 		{type = "item", name = "circuit-board", amount = 1},
@@ -145,7 +144,7 @@ local woodCircuitBoardTech = Table.copyAndEdit(data.raw.technology["automation"]
 	},
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board-tech.png", icon_size = 256, scale = 0.5, mipmap_count = 4}},
-	prerequisites = {"automation", "steam-power"},
+	prerequisites = {"automation-science-pack", "steam-power"},
 	ignore_tech_cost_multiplier = false,
 })
 data:extend{woodCircuitBoardTech}

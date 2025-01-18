@@ -34,13 +34,11 @@ u.setDefaultOrForce("large-storage-tank-fluid-size", "int", 100000)
 u.setDefaultOrForce("tiny-storage-tank-volume", "int", 2000)
 
 -- For hand-crank mod.
-u.setDefaultOrForce("er-hcg-run-time-in-seconds", "int", 30)
-u.setDefaultOrForce("er-hcg-crank-delay-in-ticks", "int", 20)
-u.setDefaultOrForce("er-hcg-run-time-per-crank-in-seconds", "int", 10)
--- Default is 20kW, I'm increasing to 200kW.
-u.setDefaultOrForce("er-hcg-power-output-in-watts", "int", 200e3)
--- Don't create the crank recipe or tech.
-u.setDefaultOrForce("er-hcg-recipe-enabled", "bool", false)
+u.setDefaultOrForce("er-hcg-run-time-in-seconds", "int", 60)
+u.setDefaultOrForce("er-hcg-crank-delay-in-ticks", "int", 5)
+u.setDefaultOrForce("er-hcg-run-time-per-crank-in-seconds", "int", 20)
+u.setDefaultOrForce("er-hcg-power-output-in-watts", "int", 200e3) -- Default is 20kW, I'm increasing to 200kW.
+u.setDefaultOrForce("er-hcg-recipe-enabled", "bool", false) -- Don't create the crank recipe or tech.
 
 -- Settings for Cargo Ships.
 u.setDefaultOrForce("offshore_oil_enabled", "bool", false) -- Disable the offshore oil and oil rig.

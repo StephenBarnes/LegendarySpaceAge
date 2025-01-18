@@ -5,7 +5,7 @@ local Table = require("code.util.table")
 
 -- Early techs: basic electricity, then electronics, then personal burner generator, then red science, then automation, then filtration, then steam power.
 Tech.setPrereqs("electronics", {"basic-electricity"})
-Tech.setPrereqs("automation-science-pack", {"personal-burner-generator"})
+Tech.setPrereqs("automation", {"personal-burner-generator", "electric-mining-drill"})
 Tech.addTechDependency("filtration-lake-water", "steam-power")
 data.raw.technology["steam-power"].unit = nil
 data.raw.technology["steam-power"].research_trigger = {
@@ -14,32 +14,31 @@ data.raw.technology["steam-power"].research_trigger = {
 	amount = 1000,
 }
 
--- Automation science should have trigger unlock with science packs.
-data.raw.technology["automation"].unit = nil
-data.raw.technology["automation"].research_trigger = {
-	type = "build-entity",
-	entity = "lab",
-}
-
--- Techs that depend on red science should instead depend on automation, since you need to build a lab to unlock that.
-for _, techName in pairs{
-	"electric-mining-drill",
-	"logistics",
-	"gun-turret",
-	"lamp",
-	"repair-pack",
-	"military",
-	"steel-processing",
-	"radar",
-	"stone-wall",
-} do
-	Tech.replacePrereq(techName, "automation-science-pack", "automation")
-end
-Tech.setPrereqs("logistic-science-pack", {"automation"})
-
--- Red science tech should be unlocked by crafting circuits. And should unlock lab recipe.
+-- In the gap between automation and automation-science-pack, let's have the player scale up with basic tech until they can produce like 2000 iron ingots.
+data.raw.technology["automation-science-pack"].prerequisites = {"automation"}
 data.raw.technology["automation-science-pack"].unit = nil
 data.raw.technology["automation-science-pack"].research_trigger = {
+	type = "craft-item",
+	item = "ingot-iron-hot",
+	count = 1000,
+}
+
+-- Electric mining drill should be automatically unlocked after some iron is smelted.
+data.raw.technology["electric-mining-drill"].unit = nil
+data.raw.technology["electric-mining-drill"].research_trigger = {
+	type = "craft-item",
+	item = "electronic-circuit",
+	amount = 3, -- Need 3 to make an electric drill.
+}
+data.raw.technology["electric-mining-drill"].prerequisites = {"electronics"}
+
+-- Military 1 now depends on coal coking, for gunpowder. Also gun turrets.
+data.raw.technology["military"].prerequisites = {"coal-coking", "automation-science-pack"}
+data.raw.technology["gun-turret"].prerequisites = {"coal-coking", "automation-science-pack"}
+
+-- Red science tech should be unlocked by crafting circuits. And should unlock lab recipe.
+data.raw.technology["automation"].unit = nil
+data.raw.technology["automation"].research_trigger = {
 	type = "craft-item",
 	item = "personal-burner-generator",
 	amount = 1,
@@ -107,8 +106,8 @@ Tech.setPrereqs("plastics", {"coal-liquefaction"})
 -- Sulfur tech unlocks sulfuric acid. So it needs fluid handling. But also we need sulfuric acid -> rubber-1 -> fluid-handling.
 -- Could solve this by moving sulfuric acid recipe to rubber tech, removing sulfur tech.
 -- But we also need sulfuric acid for eg fertilizer. So rather keep it as a separate tech.
-Tech.setPrereqs("sulfur-processing", {"filtration-lake-water"})
-data.raw.technology["sulfur-processing"].unit = data.raw.technology["electric-mining-drill"].unit
+Tech.setPrereqs("sulfur-processing", {"filtration-lake-water", "automation-science-pack"})
+data.raw.technology["sulfur-processing"].unit = data.raw.technology["ammonia-1"].unit
 
 Tech.setPrereqs("explosives", {"coal-liquefaction", "ammonia-1"}) -- Previously sulfur-processing
 
