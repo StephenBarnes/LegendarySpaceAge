@@ -1,57 +1,54 @@
 -- Files that create things needed in subsequent files.
 require("code.data.crafting-categories")
 require("code.data.fluid-boxes")
--- TODO
 
 -- Files that create new protos.
 require("code.data.early-equipment-grids")
--- TODO
-
--- Files that make adjustments to protos, don't create protos.
--- TODO
-
-
-require("code.data.misc")
-require("code.data.labs")
-require("code.data.advanced-logistics")
-require("code.data.nauvis")
-require("code.data.vulcanus.main")
-require("code.data.fulgora.main")
-
-require("code.data.gleba.misc")
-require("code.data.gleba.slipstacks")
-
 require("code.data.map-gen-preset")
 require("code.data.gunpowder")
 require("code.data.rubber")
 require("code.data.heavy-cable")
 require("code.data.sand-and-glass")
+require("code.data.misc")
+require("code.data.labs")
 require("code.data.metallurgy.metallurgy-d")
 require("code.data.petrochem.main")
-require("code.data.fuel")
 require("code.data.concrete")
 require("code.data.circuits")
-require("code.data.gas-vent")
 require("code.data.filtration")
 require("code.data.ammonia")
 require("code.data.niter")
+require("code.data.briefing")
 require("code.data.tree-farming")
 require("code.data.storage-tanks")
-require("code.data.waste-pump")
 require("code.data.handcrank")
 require("code.data.heating-towers")
 require("code.data.electric-boiler")
 require("code.data.machine-parts")
-require("code.data.infra-recipes")
-require("code.data.tech-progression")
-require("code.data.briefing")
-require("code.data.surface-properties")
-require("code.data.ocean-dumping")
-require("code.data.barrelling")
-require("code.data.item-groups")
-require("code.data.nauvis-part-one.worldgen")
-require("code.data.nauvis-part-two.nauvis-biotech")
-require("code.data.nauvis-part-two.nuclear")
 require("code.data.cargo-ships")
 require("code.data.toggle-key")
+
+-- Planets
+require("code.data.nauvis-part-one.misc")
+require("code.data.nauvis-part-one.worldgen")
+require("code.data.vulcanus.main")
+require("code.data.fulgora.main")
+require("code.data.gleba.misc")
+require("code.data.gleba.slipstacks")
+require("code.data.nauvis-part-two.nauvis-biotech")
+require("code.data.nauvis-part-two.nuclear")
 require("code.data.aquilo.main")
+
+-- Files that create protos, and require previous protos.
+require("code.data.gas-vent")
+require("code.data.waste-pump")
+require("code.data.barrelling")
+require("code.data.fuel")
+
+-- Files that adjust protos
+require("code.data.item-groups")
+require("code.data.surface-properties")
+require("code.data.advanced-logistics")
+require("code.data.infra-recipes")
+require("code.data.tech-progression")
+require("code.data.ocean-dumping")

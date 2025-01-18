@@ -7,7 +7,6 @@ data:extend({mineralDustItem})
 
 -- Add heating energy to offshore pump and waste pump.
 data.raw["offshore-pump"]["offshore-pump"].heating_energy = "50kW"
-data.raw.furnace["waste-pump"].heating_energy = "50kW"
 
 -- Change autoplace control for Aquilo crude oil to one for natural gas wells.
 -- Leaving it with the same prototype name, so we don't need to disturb the autoplace expressions. Rather just change the autoplace control's name and rewire it to control natgas instead of oil wells.

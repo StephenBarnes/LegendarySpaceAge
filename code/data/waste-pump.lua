@@ -13,6 +13,7 @@ wastePump.energy_source = table.deepcopy(data.raw.pump.pump.energy_source)
 wastePump.energy_source.emissions_per_minute = {pollution = 1} -- This gets multiplied by the emissions multiplier for the specific venting recipe.
 wastePump.energy_source.drain = "0W"
 wastePump.energy_usage = "30kW"
+wastePump.heating_energy = "50kW"
 --wastePump.PowerMultiplier_ignore = true
 wastePump.minable = table.deepcopy(data.raw["offshore-pump"]["offshore-pump"].minable)
 wastePump.minable.result = "offshore-pump"
