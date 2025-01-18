@@ -164,7 +164,6 @@ data.raw.recipe["agricultural-tower"].ingredients = {
 -- Armour should be cheaper, and require rubber.
 data.raw.recipe["light-armor"].ingredients = {-- Originally 40 iron plate.
 	{type="item", name="iron-plate", amount=10},
-	{type="item", name="wood", amount=10},
 }
 data.raw.recipe["heavy-armor"].ingredients = {-- Originally 100 copper plate, 50 steel plate.
 	{type="item", name="steel-plate", amount=10},
@@ -260,3 +259,10 @@ data.raw.recipe["poison-capsule"].ingredients = {
 	{type = "item", name = "gunpowder", amount = 8},
 }
 -- TODO poison capsule, slowdown capsule - shouldn't need coal.
+
+-- Flying robot frames
+data.raw.recipe["flying-robot-frame"].ingredients = {
+	{type = "item", name = "advanced-parts", amount = 2},
+	{type = "item", name = "battery", amount = 2},
+	{type = "item", name = "electric-engine-unit", amount = 1},
+}

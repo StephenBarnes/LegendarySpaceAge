@@ -17,8 +17,7 @@ local ammonia1Tech = Table.copyAndEdit(data.raw.technology["automation"], {
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/ammonia/tech.png", icon_size = 256}},
 	effects = {
-		{type = "unlock-recipe", recipe = "spoilage-from-wood"},
-		{type = "unlock-recipe", recipe = "ammonia-from-spoilage"},
+		{type = "unlock-recipe", recipe = "ammonia-from-wood"},
 		{type = "unlock-recipe", recipe = "niter"},
 	},
 })
@@ -50,11 +49,11 @@ local ammonia2Tech = Table.copyAndEdit(data.raw.technology["coal-liquefaction"],
 })
 table.insert(newData, ammonia2Tech)
 
--- Create recipe for ammonia from spoilage.
+-- Create recipe for ammonia from wood
 local ammoniaRecipe = Table.copyAndEdit(data.raw.recipe["nutrients-from-spoilage"], {
-	name = "ammonia-from-spoilage",
+	name = "ammonia-from-wood",
 	ingredients = {
-		{type = "item", name = "spoilage", amount = 5},
+		{type = "item", name = "wood", amount = 5},
 		{type = "fluid", name = "water", amount = 20},
 	},
 	results = {
@@ -63,15 +62,16 @@ local ammoniaRecipe = Table.copyAndEdit(data.raw.recipe["nutrients-from-spoilage
 	category = "organic-or-chemistry",
 	subgroup = "early-agriculture",
 	order = "d2",
-	energy_required = 30,
+	energy_required = 60,
 	icons = {
 		{icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
-		{icon = "__space-age__/graphics/icons/spoilage.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
+		{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 	},
 })
 table.insert(newData, ammoniaRecipe)
 
 -- Create recipe for spoilage from wood.
+--[[ TODO not sure we want this recipe, at this stage. Increases the number of recipes and gives a way to fuel biochambers without imports from Gleba.
 local woodSpoilageRecipe = Table.copyAndEdit(data.raw.recipe["nutrients-from-spoilage"], {
 	name = "spoilage-from-wood",
 	ingredients = {
@@ -90,7 +90,7 @@ local woodSpoilageRecipe = Table.copyAndEdit(data.raw.recipe["nutrients-from-spo
 		{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 	},
 })
-table.insert(newData, woodSpoilageRecipe)
+table.insert(newData, woodSpoilageRecipe)]]
 
 -- Create recipe for niter from ammonia and sand.
 local niterFromAmmoniaRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
@@ -119,8 +119,8 @@ local ammoniaSyngasRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 		{type = "fluid", name = "ammonia", amount = 100},
 	},
 	category = "chemistry-or-cryogenics",
-	subgroup = "raw-material",
-	order = "d3",
+	subgroup = "complex-fluid-recipes",
+	order = "d1",
 	icons = {
 		{icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
 		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=require("code.data.petrochem.constants").syngasColor, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},

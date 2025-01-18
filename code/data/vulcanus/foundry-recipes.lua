@@ -211,7 +211,8 @@ Table.setFields(data.raw.recipe["casting-iron-stick"], {
 Table.setFields(data.raw.recipe["casting-low-density-structure"], {
 	-- Originally 5 plastic bar + 80 molten iron + 250 molten copper
 	ingredients = {
-		{type = "item", name = "plastic-bar", amount = 5},
+		{type = "item", name = "plastic-bar", amount = 3},
+		{type = "item", name = "resin", amount = 1},
 		{type = "fluid", name = "molten-steel", amount = 80},
 		{type = "fluid", name = "molten-copper", amount = 200},
 		{type = "fluid", name = "water", amount = 3},
@@ -244,6 +245,7 @@ Table.setFields(data.raw.recipe["casting-pipe"], {
 		{type = "item", name = "pipe", amount = 4},
 		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 	},
+	subgroup = "vulcanus-processes",
 	main_product = "pipe",
 	energy_required = 4,
 })
@@ -257,6 +259,7 @@ Table.setFields(data.raw.recipe["casting-pipe-to-ground"], {
 		{type = "item", name = "pipe-to-ground", amount = 2},
 		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 	},
+	subgroup = "vulcanus-processes",
 	main_product = "pipe-to-ground",
 	energy_required = 4,
 })

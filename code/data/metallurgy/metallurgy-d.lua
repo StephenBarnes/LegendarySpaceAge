@@ -231,12 +231,13 @@ Table.setFields(data.raw.recipe["copper-cable"], {
 })
 
 -- Adjust recipe for low-density structures.
--- Originally 20 copper plate, 2 steel plate, 5 plastic bar. Changing to 4 copper ingot, 1 steel ingot, 5 plastic bar.
+-- Originally 20 copper plate, 2 steel plate, 5 plastic bar. Changing to 5 copper ingot, 2 steel ingot, 5 plastic bar, 1 resin.
 Table.setFields(data.raw.recipe["low-density-structure"], {
 	ingredients = {
 		{type="item", name="ingot-copper-hot", amount=5},
 		{type="item", name="ingot-steel-hot", amount=2},
-		{type="item", name="plastic-bar", amount=5},
+		{type="item", name="plastic-bar", amount=3},
+		{type="item", name="resin", amount=1},
 	},
 	auto_recycle = true,
 })

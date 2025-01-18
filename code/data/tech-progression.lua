@@ -3,9 +3,9 @@
 local Tech = require("code.util.tech")
 local Table = require("code.util.table")
 
--- Early techs: basic electricity, then electronics, then red science, then automation, then filtration, then steam power.
+-- Early techs: basic electricity, then electronics, then personal burner generator, then red science, then automation, then filtration, then steam power.
 Tech.setPrereqs("electronics", {"basic-electricity"})
-Tech.setPrereqs("automation-science-pack", {"electronics", "glass"})
+Tech.setPrereqs("automation-science-pack", {"personal-burner-generator"})
 Tech.addTechDependency("filtration-lake-water", "steam-power")
 data.raw.technology["steam-power"].unit = nil
 data.raw.technology["steam-power"].research_trigger = {
