@@ -9,7 +9,7 @@ local newData = {}
 local natgasFluid = Table.copyAndEdit(data.raw.fluid["crude-oil"], {
 	name = "natural-gas",
 	base_color = constants.natgasColor,
-	flow_color = constants.natgasColor,
+	flow_color = constants.natgasFlowColor,
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.natgasTint}},
 	order = "a[fluid]-b[oil]-aa[natgas]",
@@ -20,7 +20,7 @@ table.insert(newData, natgasFluid)
 local drygasFluid = Table.copyAndEdit(natgasFluid, {
 	name = "dry-gas",
 	base_color = constants.drygasColor,
-	flow_color = constants.drygasColor,
+	flow_color = constants.drygasFlowColor,
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.drygasColor}},
 	order = "a[fluid]-b[oil]-c[fractions]-4",
@@ -31,7 +31,7 @@ table.insert(newData, drygasFluid)
 local richgasFluid = data.raw.fluid["petroleum-gas"]
 richgasFluid.order = "a[fluid]-b[oil]-c[fractions]-3"
 richgasFluid.base_color = constants.richgasColor
-richgasFluid.flow_color = constants.richgasColor
+richgasFluid.flow_color = constants.richgasFlowColor
 richgasFluid.icon = nil
 richgasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.richgasColor}}
 richgasFluid.localised_name = {"fluid-name.rich-gas"} -- In case other languages are used, don't use that language's version of "petroleum gas".
@@ -40,7 +40,7 @@ richgasFluid.localised_name = {"fluid-name.rich-gas"} -- In case other languages
 local syngasFluid = Table.copyAndEdit(data.raw.fluid["heavy-oil"], {
 	name = "syngas",
 	base_color = constants.syngasColor,
-	flow_color = constants.syngasColor,
+	flow_color = constants.syngasFlowColor,
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.syngasColor}},
 	order = "a[fluid]-b[oil]-c[fractions]-6",
@@ -51,7 +51,7 @@ table.insert(newData, syngasFluid)
 local tarFluid = Table.copyAndEdit(data.raw.fluid["heavy-oil"], {
 	name = "tar",
 	base_color = constants.tarColor,
-	flow_color = constants.tarColor,
+	flow_color = constants.tarFlowColor,
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64}},
 	order = "a[fluid]-b[oil]-c[fractions]-0",

@@ -5,6 +5,7 @@ require("code.data.fluid-boxes")
 -- Files that create new protos.
 require("code.data.early-equipment-grids")
 require("code.data.map-gen-preset")
+require("code.data.remove-mapgen-presets")
 require("code.data.gunpowder")
 require("code.data.rubber")
 require("code.data.heavy-cable")

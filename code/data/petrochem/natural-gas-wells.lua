@@ -1,8 +1,6 @@
 -- This file will create natural gas wells. Other files will make them autoplace on Nauvis (replacing some crude oil wells) and Aquilo (replacing all crude oil wells).
 -- Some code adapted from Adamo Carbon mod.
 
-local resource_autoplace = require("resource-autoplace") -- From base Factorio's code.
-
 local constants = require("code.data.petrochem.constants")
 
 local gasWell = table.deepcopy(data.raw.resource["crude-oil"])

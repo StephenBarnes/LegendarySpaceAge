@@ -1,6 +1,6 @@
 local presets = data.raw["map-gen-presets"]["default"]
 ---@type data.MapGenPreset
-local custom = {order = "aaa", basic_settings = {autoplace_controls = {}}, advanced_settings = {difficulty_settings = {}, enemy_evolution = {}, asteroids = {}}}
+local custom = {order = "aaa", basic_settings = {autoplace_controls = {}, property_expression_names = {}}, advanced_settings = {difficulty_settings = {}, enemy_evolution = {}, asteroids = {}}}
 presets["LegendarySpaceAge"] = custom
 
 -- Harder science
@@ -37,3 +37,10 @@ custom.basic_settings.autoplace_controls["fulgora_islands"] = {
 
 -- Increase size of starting area, to reduce chance of having to fight in very early game.
 custom.basic_settings.starting_area = 2
+
+-- Add custom elevation. TODO currently this is the same as the default, but still adding here so I can check they used the main LSA mapgen preset.
+custom.basic_settings.property_expression_names.elevation = "LSA-elevation"
+
+local lsaElevation = table.deepcopy(data.raw["noise-expression"]["elevation"])
+lsaElevation.name = "LSA-elevation"
+data:extend{lsaElevation}
