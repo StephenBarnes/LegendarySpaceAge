@@ -3,6 +3,8 @@ Version: 0.6.0
 Date: 2025-01-20
   Features:
     - Improved early-game tech tree.
+    - Added natural gas wells, using graphics from Adamo Carbon. They replace half the oil wells on Nauvis, and all the oil wells on Aquilo.
+    - Adjusted world-gen preset in several ways. Resource patch settings resemble the rail-world preset.
     - Added inverse vulcanization tech for cheaper plastic on Vulcanus after exporting science.
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.0

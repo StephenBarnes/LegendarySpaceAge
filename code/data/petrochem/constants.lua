@@ -2,6 +2,7 @@ local Export = {}
 
 Export.natgasColor = {r = .3, g = 0, b = .3, a = 1}
 Export.natgasTint = {r = .5, g = .1, b = .5, a = 1}
+Export.natgasSmokeTint = {r = .2, g = .04, b = .2, a = .4}
 Export.syngasColor = {r = .8, g = .4, b = .4, a = 1}
 Export.tarColor = {r = .2, g = .1, b = .071, a = 1}
 
