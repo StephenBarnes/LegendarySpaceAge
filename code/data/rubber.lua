@@ -32,9 +32,9 @@ local latexFluid = Table.copyAndEdit(data.raw.fluid["lubricant"], {
 	name = "latex",
 	icon = "__LegendarySpaceAge__/graphics/rubber/latex.png",
 	icon_size = 64,
-	flow_color = latexColor,
-	base_color = latexColor,
-	visualization_color = latexColor,
+	base_color = {r = .812, g = .761, b = .675, a=1},
+	flow_color = {r = .9, g = .8, b = .7, a=1},
+	visualization_color = {r = .812, g = .761, b = .675, a=1},
 })
 table.insert(newData, latexFluid)
 

@@ -59,6 +59,7 @@ local ammoniaRecipe = Table.copyAndEdit(data.raw.recipe["nutrients-from-spoilage
 	results = {
 		{type = "fluid", name = "ammonia", amount = 10},
 	},
+	show_amount_in_title = false,
 	category = "organic-or-chemistry",
 	subgroup = "early-agriculture",
 	order = "d2",
@@ -118,6 +119,7 @@ local ammoniaSyngasRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 	results = {
 		{type = "fluid", name = "ammonia", amount = 100},
 	},
+	show_amount_in_title = false,
 	category = "chemistry-or-cryogenics",
 	subgroup = "complex-fluid-recipes",
 	order = "d1",

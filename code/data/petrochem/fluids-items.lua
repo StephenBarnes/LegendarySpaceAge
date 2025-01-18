@@ -13,6 +13,7 @@ local natgasFluid = Table.copyAndEdit(data.raw.fluid["crude-oil"], {
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.natgasTint}},
 	order = "a[fluid]-b[oil]-aa[natgas]",
+	gas_temperature = 0,
 })
 table.insert(newData, natgasFluid)
 
@@ -21,9 +22,11 @@ local drygasFluid = Table.copyAndEdit(natgasFluid, {
 	name = "dry-gas",
 	base_color = constants.drygasColor,
 	flow_color = constants.drygasFlowColor,
+	visualization_color = constants.drygasColor,
 	icon = "nil",
-	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.drygasColor}},
+	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.drygasTint}},
 	order = "a[fluid]-b[oil]-c[fractions]-4",
+	gas_temperature = 0,
 })
 table.insert(newData, drygasFluid)
 
@@ -35,6 +38,7 @@ richgasFluid.flow_color = constants.richgasFlowColor
 richgasFluid.icon = nil
 richgasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.richgasColor}}
 richgasFluid.localised_name = {"fluid-name.rich-gas"} -- In case other languages are used, don't use that language's version of "petroleum gas".
+richgasFluid.gas_temperature = 0
 
 -- Create syngas fluid.
 local syngasFluid = Table.copyAndEdit(data.raw.fluid["heavy-oil"], {
@@ -44,6 +48,7 @@ local syngasFluid = Table.copyAndEdit(data.raw.fluid["heavy-oil"], {
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.syngasColor}},
 	order = "a[fluid]-b[oil]-c[fractions]-6",
+	gas_temperature = 0,
 })
 table.insert(newData, syngasFluid)
 
@@ -52,6 +57,7 @@ local tarFluid = Table.copyAndEdit(data.raw.fluid["heavy-oil"], {
 	name = "tar",
 	base_color = constants.tarColor,
 	flow_color = constants.tarFlowColor,
+	visualization_color = constants.tarColor,
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64}},
 	order = "a[fluid]-b[oil]-c[fractions]-0",

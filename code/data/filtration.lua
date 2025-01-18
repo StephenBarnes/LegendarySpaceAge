@@ -177,7 +177,9 @@ local lakeWaterFluid = Table.copyAndEdit(data.raw.fluid["water"], {
 	icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64}},
 	auto_barrel = false,
 	order = "a[fluid]-a[water]-c",
-	visualization_color = {.015, .631, .682}, -- To differentiate from ordinary water.
+	base_color = {0, .44, .6},
+	flow_color = {.7, .7, .7},
+	visualization_color = {.015, .681, .682}, -- To differentiate from ordinary water.
 })
 table.insert(newData, lakeWaterFluid)
 
@@ -187,7 +189,7 @@ local slimeFluid = Table.copyAndEdit(data.raw.fluid["water"], {
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64}},
 	auto_barrel = true,
-	order = "a[fluid]-a[water]-e",
+	order = "b[new-fluid]-c2[gleba]-a",
 	base_color = {.176, .255, .200},
 	flow_color = {.393, .453, .333},
 	visualization_color = {.482, .745, .215},
