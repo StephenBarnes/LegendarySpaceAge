@@ -409,6 +409,8 @@ Tech.addRecipeToTech("tungsten-heating", "tungsten-steel")
 Recipe.hide("tungsten-plate")
 Tech.removeRecipeFromTech("tungsten-plate", "tungsten-steel")
 
+-- TODO Create a recipe for casting stone bricks from cement mix? Or maybe sulfur.
+
 -- Reorder some of the unlocks in the foundry tech.
 Tech.removeRecipesFromTechs({"concrete-from-molten-iron", "casting-low-density-structure"}, {"foundry"})
 Tech.addRecipeToTech("casting-low-density-structure", "foundry")

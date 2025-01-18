@@ -135,7 +135,7 @@ local fertilizerRecipe = Table.copyAndEdit(data.raw.recipe["wood-processing"], {
 	results = {
 		{type="item", name="fertilizer", amount=2},
 	},
-	category = "organic-or-assembling",
+	category = "organic-or-chemistry",
 	subgroup = "early-agriculture",
 	order = "005",
 	fuel_value = "nil",
@@ -160,7 +160,7 @@ local saplingRecipe = Table.copyAndEdit(data.raw.recipe["wood-processing"], {
 	order = "006",
 	icon = "nil",
 	icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}},
-	surface_conditions = {{property = "oxygen-pressure", min = 220, max = 220}}
+	surface_conditions = {{property = "pressure", min = 1000, max = 1000}}
 })
 data:extend{saplingRecipe}
 

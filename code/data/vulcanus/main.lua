@@ -57,3 +57,29 @@ data.raw.technology["foundry"].research_trigger.count = 20 -- tungsten carbide
 data.raw.technology["big-mining-drill"].research_trigger.count = 4 -- foundries
 data.raw.technology["tungsten-steel"].research_trigger.count = 4 -- big mining drills
 data.raw.technology["metallurgic-science-pack"].research_trigger.count = 20 -- tungsten steel plates
+
+-- Add tech for inverse vulcanization, to make plastic cheaper on Vulcanus.
+local inverseVulcanizationTech = table.deepcopy(data.raw.technology["cliff-explosives"])
+inverseVulcanizationTech.name = "inverse-vulcanization"
+inverseVulcanizationTech.effects = {{type = "unlock-recipe", recipe = "inverse-vulcanization"}}
+inverseVulcanizationTech.prerequisites = {"metallurgic-science-pack"}
+inverseVulcanizationTech.icons = {
+	{icon = "__base__/graphics/technology/plastics.png", icon_size = 256, scale = 1},
+	{icon = "__base__/graphics/technology/sulfur-processing.png", icon_size = 256, scale = 0.6, shift = {32, 25}},
+}
+local inverseVulcanizationRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
+inverseVulcanizationRecipe.name = "inverse-vulcanization"
+inverseVulcanizationRecipe.subgroup = "raw-material"
+inverseVulcanizationRecipe.ingredients = {
+	{type = "item", name = "sulfur", amount = 5},
+	{type = "fluid", name = "tar", amount = 5},
+}
+inverseVulcanizationRecipe.results = {
+	{type = "item", name = "plastic-bar", amount = 3},
+	{type = "item", name = "resin", amount = 1},
+}
+inverseVulcanizationRecipe.icons = {
+	{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.5},
+	{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale = 0.27, shift = {-6, -7}, mipmap_count=4},
+}
+data:extend({inverseVulcanizationTech, inverseVulcanizationRecipe})
