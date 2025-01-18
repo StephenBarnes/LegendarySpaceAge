@@ -230,12 +230,12 @@ table.insert(newData, solidFuelRecipe)
 local woodResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 	name = "wood-resin",
 	ingredients = {
-		{type = "item", name = "wood", amount = 5},
+		{type = "item", name = "wood", amount = 2},
 		{type = "fluid", name = "steam", amount = 50},
 	},
 	results = {
 		{type = "item", name = "resin", amount = 2},
-		{type = "item", name = "carbon", amount = 3},
+		{type = "item", name = "carbon", amount = 2},
 	},
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale=0.45, shift={1, 1}},
@@ -398,11 +398,11 @@ Tech.addRecipeToTech("heavy-oil-coking", "oil-processing")
 -- Add tar distillation to the 1st oil tech.
 Tech.addRecipeToTech("tar-distillation", "oil-processing")
 
--- First resin recipe will be placed in wood circuit boards tech.
--- Add other resin recipes to the 1st oil tech.
+-- Wood resin recipe will be placed in wood circuit boards tech.
+-- Pitch resin could be unlocked with sulfur processing, since player already has pitch from coal coking. But fits better with petrochem.
+-- Rich-gas resin can be later - either petrochemistry or sth after that.
 Tech.addRecipeToTech("pitch-resin", "oil-processing")
-Tech.addRecipeToTech("rich-gas-resin", "oil-processing")
--- TODO need to figure out where these are in progression. First one needs chem plants, so need to unlock those. Maybe a resin tech in early game.
+Tech.addRecipeToTech("rich-gas-resin", "oil-processing") -- TODO need to figure out where this should be in progression.
 
 -- Hide old recipes, and remove from techs.
 Recipe.hide("basic-oil-processing")

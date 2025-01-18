@@ -19,7 +19,7 @@ data.raw.technology["automation-science-pack"].prerequisites = {"automation"}
 data.raw.technology["automation-science-pack"].unit = nil
 data.raw.technology["automation-science-pack"].research_trigger = {
 	type = "craft-item",
-	item = "ingot-iron-hot",
+	item = "electronic-circuit",
 	count = 1000,
 }
 

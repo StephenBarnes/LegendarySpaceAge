@@ -128,7 +128,7 @@ local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electron
 		--{icon = "__core__/graphics/icons/mip/slot-item-in-hand.png", icon_size = 64, mipmap_count = 2, scale = 0.33, shift = {7, 6}},
 	},
 	enabled = false,
-	energy_required = 2,
+	energy_required = 1,
 	category = "handcrafting-only",
 	auto_recycle = false,
 })
@@ -144,8 +144,14 @@ local woodCircuitBoardTech = Table.copyAndEdit(data.raw.technology["automation"]
 	},
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board-tech.png", icon_size = 256, scale = 0.5, mipmap_count = 4}},
-	prerequisites = {"automation-science-pack", "steam-power"},
+	prerequisites = {"steam-power"},
 	ignore_tech_cost_multiplier = false,
+	unit = "nil",
+	research_trigger = {
+		type = "craft-fluid",
+		fluid = "steam",
+		amount = 500,
+	},
 })
 data:extend{woodCircuitBoardTech}
 

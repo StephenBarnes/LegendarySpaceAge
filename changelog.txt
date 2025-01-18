@@ -2,7 +2,7 @@
 Version: 0.6.0
 Date: 2025-01-20
   Features:
-    - Changed early-game tech tree.
+    - Improved early-game tech tree.
     - Added inverse vulcanization tech for cheaper plastic on Vulcanus after exporting science.
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.0

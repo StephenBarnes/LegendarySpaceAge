@@ -26,7 +26,7 @@ local function setStartItems()
 
 		['construction-robot'] = 50,
 		['personal-roboport-equipment'] = 2,
-		['battery-equipment'] = 1,
+		['battery-equipment'] = 2,
 		-- Player has to make a personal burner generator to actually power the stuff.
 	}
 	remote.call('freeplay', 'set_debris_items', items)
