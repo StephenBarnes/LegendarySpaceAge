@@ -67,6 +67,17 @@ inverseVulcanizationTech.icons = {
 	{icon = "__base__/graphics/technology/plastics.png", icon_size = 256, scale = 1},
 	{icon = "__base__/graphics/technology/sulfur-processing.png", icon_size = 256, scale = 0.6, shift = {32, 25}},
 }
+inverseVulcanizationTech.unit = {
+	count = 50,
+	ingredients = {
+		{"automation-science-pack", 1},
+		{"logistic-science-pack", 1},
+		{"chemical-science-pack", 1},
+		{"space-science-pack", 1},
+		-- No metallurgic science pack - I want it to be unlockable on Nauvis, while you're still on Vulcanus.
+	},
+	time = 30,
+}
 local inverseVulcanizationRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
 inverseVulcanizationRecipe.name = "inverse-vulcanization"
 inverseVulcanizationRecipe.subgroup = "raw-material"

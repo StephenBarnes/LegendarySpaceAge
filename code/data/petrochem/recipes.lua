@@ -228,14 +228,15 @@ table.insert(newData, solidFuelRecipe)
 	Rich-gas-based resin: 2 rich gas + 1 sulfuric acid + 1 carbon -> 2 resin
 	]]
 local woodResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
+	-- This recipe should be very productive in resin-per-wood, because (1) at the start of the game you need a lot of circuit boards for first challenge, and (2) it should be a good idea to make resin from wood while making the rest of the circuit board from plastic or ceramic, once those are unlocked.
 	name = "wood-resin",
 	ingredients = {
-		{type = "item", name = "wood", amount = 2},
-		{type = "fluid", name = "steam", amount = 50},
+		{type = "item", name = "wood", amount = 1},
+		{type = "fluid", name = "steam", amount = 100},
 	},
 	results = {
-		{type = "item", name = "resin", amount = 2},
-		{type = "item", name = "carbon", amount = 2},
+		{type = "item", name = "resin", amount = 8},
+		{type = "item", name = "carbon", amount = 1},
 	},
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale=0.45, shift={1, 1}},
@@ -255,7 +256,7 @@ local pitchResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 		{type = "item", name = "carbon", amount = 1},
 	},
 	results = {
-		{type = "item", name = "resin", amount = 4},
+		{type = "item", name = "resin", amount = 2},
 	},
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale=0.45, shift={1, 1}},
@@ -275,7 +276,7 @@ local richGasResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 		{type = "item", name = "carbon", amount = 1},
 	},
 	results = {
-		{type = "item", name = "resin", amount = 2},
+		{type = "item", name = "resin", amount = 1},
 	},
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale=0.45, shift={1, 1}},
@@ -359,7 +360,7 @@ Table.setFields(data.raw.recipe["plastic-bar"], {
 		{type = "fluid", name = "sulfuric-acid", amount = 10},
 	},
 	results = {
-		{type = "item", name = "plastic-bar", amount = 5},
+		{type = "item", name = "plastic-bar", amount = 3},
 	},
 })
 
@@ -399,10 +400,7 @@ Tech.addRecipeToTech("heavy-oil-coking", "oil-processing")
 Tech.addRecipeToTech("tar-distillation", "oil-processing")
 
 -- Wood resin recipe will be placed in wood circuit boards tech.
--- Pitch resin could be unlocked with sulfur processing, since player already has pitch from coal coking. But fits better with petrochem.
--- Rich-gas resin can be later - either petrochemistry or sth after that.
-Tech.addRecipeToTech("pitch-resin", "oil-processing")
-Tech.addRecipeToTech("rich-gas-resin", "oil-processing") -- TODO need to figure out where this should be in progression.
+-- Pitch resin and rich-gas resin will be unlocked in a special "petroleum resin" tech, after blue science.
 
 -- Hide old recipes, and remove from techs.
 Recipe.hide("basic-oil-processing")

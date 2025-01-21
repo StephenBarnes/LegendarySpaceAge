@@ -39,7 +39,12 @@ local function isNormalTree(tree)
 		((tree.minable.results and #tree.minable.results == 1 and tree.minable.results[1].name == "wood" and tree.minable.results[1].amount == 4)
 		or (tree.minable.result and tree.minable.result == "wood" and tree.minable.count == 4))
 end
-local newMinableResults = {
+local function isDeadTree(tree)
+	return tree.minable and
+		((tree.minable.results and #tree.minable.results == 1 and tree.minable.results[1].name == "wood" and tree.minable.results[1].amount == 2)
+		or (tree.minable.result and tree.minable.result == "wood" and tree.minable.count == 2))
+end
+local newTreeMinableResults = {
 	{
 		type = "item",
 		name = "tree-seed",
@@ -48,18 +53,27 @@ local newMinableResults = {
 		--extra_count_fraction = 0.05,
 		-- Could make it very rarely give an extra seed, so you have to go harvest a ton of trees to set up big plantations.
 	},
+	{ -- Increase total wood yield, to reduce the number of trees you need to harvest to do the 1000-circuit challenge for red science.
+		type = "item",
+		name = "wood",
+		amount = 8,
+	},
+}
+local newDeadTreeMinableResults = {
 	{
 		type = "item",
 		name = "wood",
-		amount_min = 2, amount_max = 6,
+		amount = 4,
 	},
 }
 for _, tree in pairs(data.raw.tree) do
 	if isNormalTree(tree) then
-		tree.minable.results = newMinableResults
+		tree.minable.results = newTreeMinableResults
+	elseif isDeadTree(tree) then
+		tree.minable.results = newDeadTreeMinableResults
 	end
 end
-data.raw.plant["tree-plant"].minable.results = newMinableResults
+data.raw.plant["tree-plant"].minable.results = newTreeMinableResults
 
 -- Create item subgroup for "early agriculture".
 data:extend{

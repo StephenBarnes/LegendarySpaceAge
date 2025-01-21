@@ -28,7 +28,7 @@ data.raw.technology["electric-mining-drill"].unit = nil
 data.raw.technology["electric-mining-drill"].research_trigger = {
 	type = "craft-item",
 	item = "electronic-circuit",
-	amount = 3, -- Need 3 to make an electric drill.
+	count = 3, -- Need 3 to make an electric drill.
 }
 data.raw.technology["electric-mining-drill"].prerequisites = {"electronics"}
 
@@ -46,6 +46,10 @@ data.raw.technology["automation"].research_trigger = {
 Tech.removeRecipeFromTech("lab", "electronics")
 Tech.addRecipeToTech("lab", "automation-science-pack")
 
+-- Move electric inserter to automation tech.
+Tech.removeRecipeFromTech("inserter", "electronics")
+Tech.addRecipeToTech("inserter", "automation")
+
 -- Unlock electronics when a hand-crank is built.
 data.raw.technology["electronics"].unit = nil
 data.raw.technology["electronics"].research_trigger = {
@@ -61,9 +65,38 @@ data.raw.technology["steam-power"].effects = {
 	{type = "unlock-recipe", recipe = "electric-boiler"},
 	{type = "unlock-recipe", recipe = "steam-engine"},
 }
-Tech.addRecipeToTech("offshore-pump", "automation", 3)
-Tech.addRecipeToTech("pipe", "automation")
-Tech.addRecipeToTech("pipe-to-ground", "automation")
+
+-- Create tech for fluid handling 1, and rename other one to fluid handling 2.
+-- Note elsewhere in code we still interact with the effects of the tech "fluid-handling" but then we copy that to lsa-fluid-handling-2.
+local fluidHandling1Tech = table.deepcopy(data.raw.technology["fluid-handling"])
+fluidHandling1Tech.name = "lsa-fluid-handling-1"
+fluidHandling1Tech.unit = nil
+fluidHandling1Tech.localised_description = {"technology-description.lsa-fluid-handling-1"}
+fluidHandling1Tech.prerequisites = {"automation"}
+fluidHandling1Tech.research_trigger = {
+	type = "build-entity",
+	entity = "assembling-machine-1",
+}
+fluidHandling1Tech.effects = {
+	{type = "unlock-recipe", recipe = "chemical-plant"},
+	{type = "unlock-recipe", recipe = "offshore-pump"},
+	{type = "unlock-recipe", recipe = "pipe"},
+	{type = "unlock-recipe", recipe = "pipe-to-ground"},
+}
+local fluidHandling2Tech = table.deepcopy(data.raw.technology["fluid-handling"])
+fluidHandling2Tech.name = "lsa-fluid-handling-2"
+fluidHandling2Tech.localised_description = {"technology-description.lsa-fluid-handling-2"}
+table.insert(fluidHandling2Tech.prerequisites, "lsa-fluid-handling-1")
+table.insert(fluidHandling2Tech.prerequisites, "rubber-1")
+data:extend{fluidHandling1Tech, fluidHandling2Tech}
+Tech.hideTech("fluid-handling")
+-- TODO In checks script, run a check that no tech depends on fluid-handling any more. (Currently it's true, but might add mods that depend on it.) Actually check that no tech depends on a hidden tech.
+
+-- Remove dependency automation-2 => lsa-fluid-handling-2 to prevent cycle.
+Tech.removePrereq("lsa-fluid-handling-2", "automation-2")
+
+-- Tank ship shouldn't depend on Fluid handling 2. 
+Tech.setPrereqs("tank_ship", {"automated_water_transport"})
 
 -- Logistics 2 depends on rubber.
 Tech.addTechDependency("rubber-1", "logistics-2")
@@ -81,8 +114,7 @@ Tech.addTechDependency("logistics-2", "logistics-3")
 Tech.removeRecipeFromTech("long-handed-inserter", "automation")
 Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
 
--- Automation 1 should already unlock the chem plant. Especially since it's also usable for gunpowder and coal coking.
-Tech.addRecipeToTech("chemical-plant", "automation", 2)
+-- Move chem plant to early game, since it's needed for coal coking and gunpowder.
 Tech.removeRecipeFromTech("chemical-plant", "oil-processing")
 
 -- Coal liquefaction tech should be soon after oil processing.
@@ -119,7 +151,7 @@ Tech.addTechDependency("steel-processing", "battery")
 Tech.hideTech("oil-gathering")
 data.raw.technology["oil-processing"].unit = data.raw.technology["oil-gathering"].unit
 data.raw.technology["oil-processing"].research_trigger = nil
-data.raw.technology["oil-processing"].prerequisites = {"fluid-handling", "steam-power"}
+data.raw.technology["oil-processing"].prerequisites = {"lsa-fluid-handling-2", "steam-power"}
 Tech.addRecipeToTech("pumpjack", "oil-processing", 2)
 -- TODO: add the wellhead here.
 

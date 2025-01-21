@@ -216,7 +216,7 @@ local gasificationRecipe = Table.copyAndEdit(data.raw.recipe["solid-fuel-from-li
 		{type="item", name="sulfur", amount=1, show_details_in_recipe_tooltip = false},
 	},
 	main_result = "syngas",
-	energy_required = 10,
+	energy_required = 1,
 	icon = "nil",
 	icons = data.raw.fluid.syngas.icons,
 	allow_productivity = false,

@@ -8,6 +8,11 @@ local Recipe = require("code.util.recipe")
 Tech.hideTech("oversea-energy-distribution")
 Recipe.hide("floating-electric-pole")
 
--- TODO move around techs - ships should be unlocked after Aquilo.
+-- Remove tech and recipes for automated bridges.
+Tech.hideTech("automated_bridges")
+Recipe.hide("bridge_base")
+data.raw.item["bridge_base"].hidden = true
+
+-- TODO move around techs - ships should be unlocked on Aquilo, probably.
 
 -- TODO check how it interacts with the ocean-dumping stuff. Need to disable inserters when no ship docked. Although there are fluid tankers, could use those.

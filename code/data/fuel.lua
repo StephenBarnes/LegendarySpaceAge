@@ -20,9 +20,9 @@ local itemFuelValues = { -- Maps item name to fuel value, emissions multiplier, 
 	["sulfur"] = {"3MJ", 8, 0.5, 0.5, "non-carbon"},
 	["solid-fuel"] = {"12MJ", 2, 0.7, 0.7, "chemical"},
 	["pitch"] = {"3MJ", 2.5, 0.5, 0.5, "chemical"},
-	["resin"] = {"2MJ", 2, 0.5, 0.5, "chemical"},
+	["resin"] = {"1MJ", 2, 0.5, 0.5, "chemical"},
 	["rocket-fuel"] = {"20MJ", 0.8, 1.8, 1.15, "chemical"}, -- Each one is 25 light oil, 12 rich gas, so that suggests 30MJ. Vanilla is 100MJ.
-	["carbon"] = {"2MJ", 0.8, 0.5, 0.5, "chemical"},
+	["carbon"] = {"2MJ", 0.6, 0.5, 0.5, "chemical"},
 	["wood"] = {"2MJ", 1.2, 0.5, 0.5, "chemical"},
 	["coal"] = {"4MJ", 1.4, 0.5, 0.5, "chemical"},
 	-- TODO really we should do all the other fuels in the game, eg seeds, so they also have bad vehicle stats.
