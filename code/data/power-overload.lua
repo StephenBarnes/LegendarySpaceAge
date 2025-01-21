@@ -18,10 +18,53 @@ Tech.reorderRecipeUnlocks("electric-energy-distribution-1",
 		"po-medium-electric-fuse",
 		"po-big-electric-fuse",
 		"po-transformer",
-		"iron-stick",
-		"rocs-rusting-iron-iron-stick-derusting",
+		--"iron-stick",
+		--"rocs-rusting-iron-iron-stick-derusting",
 	})
 
+-- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive.
+Recipe.copyIngredients("po-huge-electric-pole", "po-huge-electric-fuse")
+Recipe.copyIngredients("medium-electric-pole", "po-medium-electric-fuse")
+Recipe.copyIngredients("big-electric-pole", "po-big-electric-fuse")
+Recipe.copyIngredients("small-electric-pole", "po-small-electric-fuse")
+
+-- Reorder pylon recipe to be after substation
+data.raw.recipe["po-huge-electric-pole"].order = "a[energy]-e[huge]"
+
+-- Using custom descriptions for techs.
+data.raw.technology["electric-energy-distribution-1"].localised_description = {"technology-description.electric-energy-distribution-1"}
+data.raw.technology["electric-energy-distribution-2"].localised_description = {"technology-description.electric-energy-distribution-2"}
+data.raw.technology["po-electric-energy-distribution-3"].localised_description = {"technology-description.po-electric-energy-distribution-3"}
+
+-- Change transformer and all the combinators to also be craftable in EM plants.
+for _, recipeName in pairs({"selector-combinator", "arithmetic-combinator", "decider-combinator", "constant-combinator", "power-switch", "programmable-speaker", "display-panel", "small-lamp", "po-transformer"}) do
+	local recipe = data.raw.recipe[recipeName]
+	if recipe == nil then
+		log("ERROR: Couldn't find recipe "..recipe.." to change to EM plants.")
+		return
+	end
+	recipe.category = "electronics"
+end
+
+-- Hide high-power interface in Factoriopedia since I'm removing it.
+data.raw["item"]["po-interface"].hidden_in_factoriopedia = true
+data.raw["electric-pole"]["po-interface"].hidden_in_factoriopedia = true
+-- Hide extra Factoriopedia entries.
+-- TODO remove the ones below since mod dev will probably do it.
+data.raw["electric-pole"]["po-interface-east"].hidden_in_factoriopedia = true
+data.raw["electric-pole"]["po-interface-north"].hidden_in_factoriopedia = true
+data.raw["electric-pole"]["po-interface-south"].hidden_in_factoriopedia = true
+
+-- Do we need the big pylons with 5GW power? Graphics are low-res, could upscale.
+-- Fusion reactor consumes 100MW fuel, 10MW electricity, and generates 100MW times neighbor bonus of maybe 600% max. Fusion generator produces 50MW.
+-- Big plant might be like 8 reactors? So 100MW * 7 * 8 = 5.6GW.
+-- Although, each generator only gives 50MW (assuming no quality) so it's still entirely doable with big poles around 500MW. Just need to connect one fusion power plant to multiple networks.
+-- So, let's remove the big pylons.
+Tech.hideTech("po-electric-energy-distribution-3")
+Recipe.hide("po-huge-electric-pole")
+Recipe.hide("po-huge-electric-fuse")
+
+--[[ Obsolete stuff, now that pylons are removed:
 -- Make the pylons require blue circuits, since they depend on that.
 --Recipe.substituteIngredient("po-huge-electric-pole", "advanced-circuit", "processing-unit")
 --Recipe.substituteIngredient("po-huge-electric-fuse", "advanced-circuit", "processing-unit")
@@ -39,36 +82,4 @@ Tech.copyUnit("lightning-collector", "po-electric-energy-distribution-3")
 -- Actually rather make them only buildable in EM plants.
 data.raw.recipe["po-huge-electric-pole"].category = "electromagnetics"
 data.raw.recipe["po-huge-electric-fuse"].category = "electromagnetics"
-
--- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive.
-Recipe.copyIngredients("po-huge-electric-pole", "po-huge-electric-fuse")
-Recipe.copyIngredients("medium-electric-pole", "po-medium-electric-fuse")
-Recipe.copyIngredients("big-electric-pole", "po-big-electric-fuse")
-Recipe.copyIngredients("small-electric-pole", "po-small-electric-fuse")
-
--- Reorder pylon recipe to be after substation
-data.raw.recipe["po-huge-electric-pole"].order = "a[energy]-e[huge]"
-
--- Using custom descriptions for techs.
-data.raw.technology["electric-energy-distribution-1"].localised_description = {"technology-description.electric-energy-distribution-1"}
-data.raw.technology["electric-energy-distribution-2"].localised_description = {"technology-description.electric-energy-distribution-2"}
-data.raw.technology["po-electric-energy-distribution-3"].localised_description = {"technology-description.po-electric-energy-distribution-3"}
-
--- Change transformer and all the combinators to also be craftable in EM plants.
-for _, recipe in pairs({"selector-combinator", "arithmetic-combinator", "decider-combinator", "constant-combinator", "power-switch", "programmable-speaker", "display-panel", "small-lamp", "po-transformer"}) do
-	local recipe = data.raw.recipe[recipe]
-	if recipe == nil then
-		log("ERROR: Couldn't find recipe "..recipe.." to change to EM plants.")
-		return
-	end
-	recipe.category = "electronics"
-end
-
--- Hide high-power interface in Factoriopedia since I'm removing it.
-data.raw["item"]["po-interface"].hidden_in_factoriopedia = true
-data.raw["electric-pole"]["po-interface"].hidden_in_factoriopedia = true
--- Hide extra Factoriopedia entries.
--- TODO remove the ones below since mod dev will probably do it.
-data.raw["electric-pole"]["po-interface-east"].hidden_in_factoriopedia = true
-data.raw["electric-pole"]["po-interface-north"].hidden_in_factoriopedia = true
-data.raw["electric-pole"]["po-interface-south"].hidden_in_factoriopedia = true
+]]

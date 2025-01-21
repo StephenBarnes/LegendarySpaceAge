@@ -64,7 +64,7 @@ table.insert(newData, gasFractionationRecipe)
 Table.setFields(data.raw.recipe["heavy-oil-cracking"], {
 	ingredients = {
 		{type = "fluid", name = "heavy-oil", amount = 100},
-		{type = "fluid", name = "steam", amount = 100},
+		{type = "fluid", name = "steam", amount = 50},
 	},
 	results = {
 		{type = "fluid", name = "light-oil", amount = 100, show_details_in_recipe_tooltip = false},
@@ -81,7 +81,7 @@ Table.setFields(data.raw.recipe["heavy-oil-cracking"], {
 Table.setFields(data.raw.recipe["light-oil-cracking"], {
 	ingredients = {
 		{type = "fluid", name = "light-oil", amount = 100},
-		{type = "fluid", name = "steam", amount = 100},
+		{type = "fluid", name = "steam", amount = 50},
 	},
 	results = {
 		{type = "fluid", name = "petroleum-gas", amount = 100, show_details_in_recipe_tooltip = false},
@@ -98,7 +98,7 @@ local richGasCrackingRecipe = Table.copyAndEdit(data.raw.recipe["light-oil-crack
 	name = "rich-gas-cracking",
 	ingredients = {
 		{type = "fluid", name = "petroleum-gas", amount = 100},
-		{type = "fluid", name = "steam", amount = 100},
+		{type = "fluid", name = "steam", amount = 50},
 	},
 	results = {
 		{type = "fluid", name = "dry-gas", amount = 100, show_details_in_recipe_tooltip = false},

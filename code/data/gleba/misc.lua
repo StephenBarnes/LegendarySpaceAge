@@ -30,11 +30,11 @@ for i, metal in pairs({"copper", "iron"}) do
 	local filterMetalRecipe = table.deepcopy(data.raw.recipe[metal.."-bacteria-cultivation"])
 	filterMetalRecipe.name = "filter-"..metal.."-bacteria"
 	filterMetalRecipe.ingredients = {
-		{ type = "item", name = metal.."-bacteria", amount = 6 },
+		{type = "item", name = metal.."-bacteria", amount = 6},
 	}
 	filterMetalRecipe.results = {
-		{ type = "item", name = metal.."-ore", amount = 2 },
-		{ type = "item", name = metal.."-bacteria", amount = 1,  },
+		{type = "item", name = metal.."-ore", amount = 2},
+		{type = "item", name = metal.."-bacteria", amount = 1},
 	}
 	filterMetalRecipe.result_is_always_fresh = true
 	filterMetalRecipe.main_product = metal.."-bacteria"
@@ -66,27 +66,30 @@ data.raw.recipe["copper-bacteria-cultivation"].surface_conditions = nil
 -- Decided against this bc it's already high, don't want to remove the incentive to set up toxophages etc.
 --Item.multiplyWeight("bioflux", 0.5, "capsule")
 
--- Gleba: Change ingredients of biological science pack.
+-- Change ingredients of biological science pack.
 data.raw.recipe["agricultural-science-pack"].ingredients = {
-	{ type = "item", name = "nutrients", amount = 4 },
-	{ type = "item", name = "pentapod-egg", amount = 1 },
-	--{ type = "item", name = "iron-bacteria", amount = 1 },
-	{ type = "item", name = "copper-bacteria", amount = 1 },
-	{ type = "item", name = "slipstack-pearl", amount = 1 },
+	{type = "item", name = "nutrients", amount = 4},
+	{type = "item", name = "pentapod-egg", amount = 1},
+	--{type = "item", name = "iron-bacteria", amount = 1},
+	{type = "item", name = "copper-bacteria", amount = 1},
+	{type = "item", name = "slipstack-pearl", amount = 1},
 }
 
 -- Reduce yields of jellystem and yumako, bc right now they're absurdly high, can run 1 rocket per minute off like 2 ag towers.
-data.raw.plant["yumako-tree"].minable.results = { {type = "item", name = "yumako", amount_min = 10, amount_max = 20 } }
-data.raw.plant["jellystem"].minable.results = { {type = "item", name = "jellynut", amount_min = 10, amount_max = 20 } }
+data.raw.plant["yumako-tree"].minable.results = {{type = "item", name = "yumako", amount_min = 10, amount_max = 20}}
+data.raw.plant["jellystem"].minable.results = {{type = "item", name = "jellynut", amount_min = 10, amount_max = 20}}
 
 -- Make stromatolites give smaller yields bc right now it's insanely high, like 400 ore from 1 cluster of stromatolites.
 data.raw["simple-entity"]["iron-stromatolite"].minable.results = {
-	{ type = "item", name = "stone", amount_min = 3, amount_max = 7}, -- Unchanged
-	{ type = "item", name = "iron-ore", amount_min = 13, amount_max = 17}, -- Unchanged
-	{ type = "item", name = "iron-bacteria", amount_min = 3, amount_max = 7}, -- Changed 23-37 to 3-7.
+	{type = "item", name = "stone", amount_min = 3, amount_max = 7}, -- Unchanged
+	{type = "item", name = "iron-ore", amount_min = 13, amount_max = 17}, -- Unchanged
+	{type = "item", name = "iron-bacteria", amount_min = 3, amount_max = 7}, -- Changed 23-37 to 3-7.
 }
 data.raw["simple-entity"]["copper-stromatolite"].minable.results = {
-	{ type = "item", name = "stone", amount_min = 3, amount_max = 7}, -- Unchanged
-	{ type = "item", name = "copper-ore", amount_min = 13, amount_max = 17}, -- Unchanged
-	{ type = "item", name = "copper-bacteria", amount_min = 3, amount_max = 7}, -- Changed 23-37 to 3-7.
+	{type = "item", name = "stone", amount_min = 3, amount_max = 7}, -- Unchanged
+	{type = "item", name = "copper-ore", amount_min = 13, amount_max = 17}, -- Unchanged
+	{type = "item", name = "copper-bacteria", amount_min = 3, amount_max = 7}, -- Changed 23-37 to 3-7.
 }
+
+-- Make spoilage spoil to nothing. From testing, you can simply not define spoil result or trigger, and it'll disappear.
+data.raw.item.spoilage.spoil_ticks = 60 * 60 * 20
