@@ -80,6 +80,7 @@ for gasName, _ in pairs(gases) do
 	emptyRecipe.icons = makeGasTankFillingIcons(fluid, false, {7,8})
 
 	-- Edit localised names
+	item.localised_name = {"item-name.filled-gas-tank", {"fluid-name."..gasName}}
 	barrelRecipe.localised_name = {"recipe-name.fill-gas-tank", {"fluid-name."..gasName}}
 	emptyRecipe.localised_name = {"recipe-name.empty-filled-gas-tank", {"fluid-name."..gasName}}
 

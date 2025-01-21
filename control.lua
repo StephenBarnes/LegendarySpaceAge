@@ -10,3 +10,6 @@ script.on_event(defines.events.on_chunk_generated, natGasWells.onChunkGenerated)
 
 local notifyIncorrectMapgenPreset = require("code.control.notify-incorrect-mapgen-preset")
 script.on_event(defines.events.on_player_created, notifyIncorrectMapgenPreset.onPlayerCreated)
+
+local techRateTriggers = require("code.control.tech-rate-triggers")
+script.on_nth_tick(60 * 10, techRateTriggers.onNthTick)

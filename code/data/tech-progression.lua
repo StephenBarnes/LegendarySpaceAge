@@ -17,11 +17,6 @@ data.raw.technology["steam-power"].research_trigger = {
 -- In the gap between automation and automation-science-pack, let's have the player scale up with basic tech until they can produce like 2000 iron ingots.
 data.raw.technology["automation-science-pack"].prerequisites = {"automation"}
 data.raw.technology["automation-science-pack"].unit = nil
-data.raw.technology["automation-science-pack"].research_trigger = {
-	type = "craft-item",
-	item = "electronic-circuit",
-	count = 1000,
-}
 
 -- Electric mining drill should be automatically unlocked after some iron is smelted.
 data.raw.technology["electric-mining-drill"].unit = nil

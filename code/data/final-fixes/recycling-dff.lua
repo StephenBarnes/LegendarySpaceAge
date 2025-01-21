@@ -1,5 +1,7 @@
 -- This file makes final edits to recycling recipes, in the data-final-fixes stage.
 
+local Recipe = require("code.util.recipe")
+
 -- For spoilable stuff, I don't want to give a way to store them permanently in the form of biochambers etc. Just going to remove them from outputs completely.
 -- But not all spoilable stuff, eg iron-plates are spoilable.
 local recyclingResultReplacements = {
@@ -88,3 +90,7 @@ for _, recipe in pairs(data.raw.recipe) do
 		end
 	end
 end
+
+-- Hide rate-trigger items' recycling recipes.
+-- Apparently hiding the recipe isn't enough, need to delete it.
+data.raw.recipe["ingot-iron-hot-per-minute-recycling"] = nil
