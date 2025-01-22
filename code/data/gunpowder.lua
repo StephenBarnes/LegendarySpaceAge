@@ -49,8 +49,9 @@ data.raw.recipe["firearm-magazine"].ingredients = {
 data.raw.recipe["piercing-rounds-magazine"].ingredients = {
 	{type="item", name="steel-plate", amount=1},
 	{type="item", name="copper-plate", amount=4},
-	{type="item", name="gunpowder", amount=1},
+	{type="item", name="gunpowder", amount=2},
 }
+data.raw.recipe["piercing-rounds-magazine"].results = {{type = "item", name = "piercing-rounds-magazine", amount = 2}}
 data.raw.recipe["shotgun-shell"].ingredients = {
 	{type="item", name="steel-plate", amount=2},
 	{type="item", name="copper-plate", amount=2},

@@ -2,7 +2,7 @@
 Version: 0.6.0
 Date: 2025-01-22
   Features:
-    - Added "production rate triggers" system, e.g. you need to produce 200 machine parts per minute to unlock red science. Added to red and green science, will add to the rest later. TODO blue science, military science
+    - Added "production rate triggers" system, e.g. you need to produce 200 machine parts per minute to unlock red science. Currently added to red, green, blue, and military science; other sciences will be added later.
     - Added natural gas wells, using modified graphics from Adamo Carbon. They replace half the oil wells on Nauvis, and all the oil wells on Aquilo.
     - Adjusted world-gen preset in several ways. Resource patch settings resemble the rail-world preset.
     - Added check and notification when wrong map preset is used.

@@ -94,9 +94,11 @@ end
 
 -- Hide rate-trigger items' recycling recipes.
 -- Apparently hiding the recipe isn't enough, need to delete it.
---data.raw.recipe["iron-gear-wheel-per-minute-recycling"] = nil
---data.raw.recipe["electronic-circuit-per-minute-recycling"] = nil
--- TODO check why this is necessary - there's no recipe, so why is this necessary?
+-- This happens bc the "quality" mod creates self-recycling recipes for all items that don't have recycling recipes.
+data.raw.recipe["iron-gear-wheel-per-minute-recycling"] = nil
+data.raw.recipe["electronic-circuit-per-minute-recycling"] = nil
+data.raw.recipe["plastic-bar-per-minute-recycling"] = nil
+data.raw.recipe["piercing-rounds-magazine-per-minute-recycling"] = nil
 
 -- Space biolabs should have recycling recipe.
 -- Actually, looks like there's a hard-coded exception for recipe named "biolab". So let's generate it ourselves.

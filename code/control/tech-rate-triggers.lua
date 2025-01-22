@@ -101,6 +101,8 @@ local function onNthTick(e)
 		if #force.players > 0 then
 			updateRateTech(force, "automation-science-pack", "iron-gear-wheel", nil, 3)
 			updateRateTech(force, "logistic-science-pack", "electronic-circuit", nil, 5)
+			updateRateTech(force, "chemical-science-pack", "plastic-bar", nil, 5)
+			updateRateTech(force, "military-science-pack", "piercing-rounds-magazine", nil, 5)
 		end
 	end
 end
