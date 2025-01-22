@@ -18,6 +18,25 @@ for _, typeAndName in pairs{
 	table.insert(data.raw[typeAndName[1]][typeAndName[2]].crafting_categories, "smelting-or-metallurgy")
 end
 
+-- Create crafting category for smelting or metallurgy or handcrafting, for the stone bricks recipe.
+data:extend({
+	{
+		type = "recipe-category",
+		name = "smelting-or-metallurgy-or-handcrafting",
+	},
+})
+for _, typeAndName in pairs{
+	{"furnace", "stone-furnace"},
+	{"furnace", "steel-furnace"},
+	{"furnace", "gas-furnace"},
+	{"furnace", "electric-furnace"},
+	{"assembling-machine", "foundry"},
+} do
+	table.insert(data.raw[typeAndName[1]][typeAndName[2]].crafting_categories, "smelting-or-metallurgy-or-handcrafting")
+end
+table.insert(data.raw["god-controller"]["default"].crafting_categories, "smelting-or-metallurgy-or-handcrafting")
+table.insert(data.raw["character"]["character"].crafting_categories, "smelting-or-metallurgy-or-handcrafting")
+
 -- Create crafting category for chemistry or crafting-with-fluid, so that water filter cleaning can be done in both.
 data:extend({
 	{

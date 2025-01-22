@@ -8,7 +8,7 @@ Tech.hideTech("electric-boiler")
 
 data.raw.recipe["electric-boiler"].ingredients = {
 	{type = "item", name = "iron-plate", amount = 8},
-	{type = "item", name = "stone-brick", amount = 4},
+	{type = "item", name = "stone-brick", amount = 6},
 	{type = "item", name = "electronic-circuit", amount = 4},
 }
 data.raw.recipe["electric-boiler"].energy_required = 5

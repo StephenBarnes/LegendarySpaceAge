@@ -105,10 +105,6 @@ Tech.setPrereqs("railway", {"engine"})
 -- Logistics chain 2->3
 Tech.addTechDependency("logistics-2", "logistics-3")
 
--- Move long inserter to logistics 2.
-Tech.removeRecipeFromTech("long-handed-inserter", "automation")
-Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
-
 -- Move chem plant to early game, since it's needed for coal coking and gunpowder.
 Tech.removeRecipeFromTech("chemical-plant", "oil-processing")
 
@@ -123,9 +119,6 @@ Tech.addTechDependency("rubber-1", "electric-energy-distribution-1")
 Tech.setPrereqs("concrete", {"advanced-material-processing"})
 -- Same for fluid-handling.
 Tech.setPrereqs("fluid-handling", {"engine", "rubber-1"})
-
--- Automation 3 should require automation 2.
-Tech.addTechDependency("automation-2", "automation-3")
 
 -- Plastics need syngas.
 Tech.setPrereqs("plastics", {"coal-liquefaction"})
@@ -161,9 +154,14 @@ Tech.addTechDependency("rubber-2", "planet-discovery-fulgora")
 -- Electric mining drill shouldn't be affected by tech multiplier since it's very early-game, making it 250 science instead of 25 is just annoying because it's not high enough to justify setting up with burner miners.
 data.raw.technology["electric-mining-drill"].ignore_tech_cost_multiplier = true
 
--- Fast inserter should go after green science.
-Tech.setPrereqs("fast-inserter", {"logistic-science-pack"})
+-- Move long inserter to logistics 2.
+Tech.removeRecipeFromTech("long-handed-inserter", "automation")
+Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
+-- Fast inserter should go after logistics 2.
+Tech.setPrereqs("fast-inserter", {"logistics-2"})
 data.raw.technology["fast-inserter"].unit = {count = 30, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 15}
+-- Bulk inserter should go after advanced parts / lubricant.
+Tech.setPrereqs("bulk-inserter", {"fast-inserter", "lubricant"})
 
 -- Remove tech for advanced combinators. And move selector combinator recipe, and change recipe to not need red circuits.
 Tech.hideTech("advanced-combinators")
@@ -175,6 +173,8 @@ data.raw.recipe["selector-combinator"].ingredients = {
 
 -- Add red circuit dependency to assembling machine 2, so we can add it as ingredient.
 Tech.setPrereqs("automation-2", {"advanced-circuit"})
+-- Add blue circuit dependency to assembling machine 3, so we can add it as ingredient.
+Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine", "processing-unit"})
 
 -- Heating tower tech should be early.
 Tech.setPrereqs("heating-tower", {"steam-power", "concrete"})
@@ -188,18 +188,12 @@ Tech.removeRecipesFromTechs({"heat-exchanger", "heat-pipe", "steam-turbine"}, {"
 data.raw.recipe["automation-science-pack"].ingredients = {
 	{type = "item", name = "iron-gear-wheel", amount = 1},
 	{type = "item", name = "electronic-circuit", amount = 1},
-	{type = "item", name = "glass", amount = 1},
 }
 -- TODO other science packs.
 
 
 
 -- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.
-
--- TODO rather unlock automation 1 early, before red science. Then red science should take as ingredients machine parts + green circuits.
-
-
-
 
 -- TODO later, instead of using a tech multiplier in the map preset, rather just go through and set units (counts, times, ingredients) for all techs individually. Otherwise there's weird stuff like mismatches in science times (ie number of labs vs science assemblers), weird counts that don't make sense, etc.
 

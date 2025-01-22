@@ -3,6 +3,6 @@ data:extend{
 	{
 		type = "custom-input",
 		name = "LSA-toggle-entity",
-		key_sequence = "R",
+		key_sequence = "SLASH",
 	},
 }

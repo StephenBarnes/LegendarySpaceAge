@@ -5,6 +5,7 @@ local Tech = require("code.util.tech")
 
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 ---@type data.AssemblingMachinePrototype
+---@diagnostic disable-next-line: assign-type-mismatch
 local gasifierEnt = table.deepcopy(data.raw.furnace["steel-furnace"])
 gasifierEnt.type = "assembling-machine"
 gasifierEnt.name = "gasifier"
@@ -21,7 +22,7 @@ gasifierEnt.show_recipe_icon = false -- Since there's only 1 recipe.
 gasifierEnt.show_recipe_icon_on_map = true
 gasifierEnt.energy_source = {
 	type = "burner",
-	emissions_per_minute = {pollution = 20}, -- For comparison, heating towers produce 100/m.
+	emissions_per_minute = {pollution = 100}, -- For comparison, heating towers consume 8MW and produce 100/m.
 	fuel_inventory_size = 2,
 	burnt_inventory_size = 1,
 	smoke = {{
@@ -42,7 +43,7 @@ gasifierEnt.energy_source = {
 		-- Sucks there's no way to move the light flicker up to the top of the sprite.
 	},
 }
-gasifierEnt.energy_usage = "2MW" -- TODO check for balance.
+gasifierEnt.energy_usage = "20MW" -- TODO check for balance.
 ---@diagnostic disable-next-line: inject-field
 gasifierEnt.PowerMultiplier_ignore = true -- For PowerMultiplier mod, disables power changes to this entity.
 gasifierEnt.trash_inventory_size = 0
@@ -126,6 +127,7 @@ gasifierEnt.fluid_boxes = {
 		production_type = "input",
 		pipe_covers = pipecoverspictures(), -- Seems to be already globally defined.
 		volume = 20,
+		---@diagnostic disable-next-line: assign-type-mismatch
 		pipe_connections = { { flow_direction = "input", direction = defines.direction.west, position = {0, 0} } },
 		filter = "steam",
 	},
@@ -133,6 +135,7 @@ gasifierEnt.fluid_boxes = {
 		production_type = "output",
 		pipe_covers = pipecoverspictures(),
 		volume = 20,
+		---@diagnostic disable-next-line: assign-type-mismatch
 		pipe_connections = { { flow_direction = "output", direction = defines.direction.east, position = {0, 0} } },
 		filter = "syngas",
 	},
@@ -153,6 +156,7 @@ fluidGasifierEnt.energy_source = {
 		pipe_picture = furnacepipepictures,
 		pipe_covers = pipecoverspictures(),
 		pipe_connections = {
+			---@diagnostic disable-next-line: assign-type-mismatch
 			{flow_direction = "input", position = { 0, 0}, direction = defines.direction.north},
 		},
 		secondary_draw_orders = draworders,

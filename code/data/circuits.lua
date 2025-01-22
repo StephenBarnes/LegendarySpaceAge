@@ -108,13 +108,13 @@ data:extend{calciteCircuitBoardRecipe}
 Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rather make a separate tech for this? Unlocked by mining like 10 calcite. Use the ceramic circuit board sprite.
 
 --[[ Add "improvised" circuit board recipe, only handcraftable.
-	Improvise circuit board: 2 stone -> 1 circuit board
+	Improvise circuit board: 1 stone brick -> 1 circuit board
 		Needed because all ways of making circuit boards require resin, which can't be obtained on Aquilo without buildings that require electronic circuits, creating a circular dependency. Also same on Nauvis at the start.
 ]]
 local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electronic-circuit"], {
 	name = "improvised-circuit-board",
 	ingredients = {
-		{type = "item", name = "stone", amount = 2},
+		{type = "item", name = "stone-brick", amount = 1},
 	},
 	results = {
 		{type = "item", name = "circuit-board", amount = 1},

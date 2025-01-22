@@ -22,6 +22,7 @@ ingotIronRateItem.hidden = true
 ingotIronRateItem.hidden_in_factoriopedia = true
 ingotIronRateItem.subgroup = nil
 ingotIronRateItem.factoriopedia_alternative = "ingot-iron-hot"
+---@diagnostic disable-next-line: inject-field
 ingotIronRateItem.auto_recycle = false
 ingotIronRateItem.spoil_ticks = nil
 ingotIronRateItem.spoil_result = nil

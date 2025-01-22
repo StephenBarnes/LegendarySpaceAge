@@ -62,7 +62,13 @@ data.raw["electric-pole"]["po-interface-south"].hidden_in_factoriopedia = true
 -- So, let's remove the big pylons.
 Tech.hideTech("po-electric-energy-distribution-3")
 Recipe.hide("po-huge-electric-pole")
+data.raw.item["po-huge-electric-pole"].hidden = true
+data.raw["electric-pole"]["po-huge-electric-pole"].hidden = true
+data.raw.recipe["po-huge-electric-pole-recycling"] = nil
 Recipe.hide("po-huge-electric-fuse")
+data.raw.item["po-huge-electric-fuse"].hidden = true
+data.raw["electric-pole"]["po-huge-electric-fuse"].hidden = true
+data.raw.recipe["po-huge-electric-fuse-recycling"] = nil
 
 --[[ Obsolete stuff, now that pylons are removed:
 -- Make the pylons require blue circuits, since they depend on that.

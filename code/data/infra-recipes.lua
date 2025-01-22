@@ -3,6 +3,10 @@
 local Recipe = require("code.util.recipe")
 local Tech = require("code.util.tech")
 
+-- Stone bricks - allowed in foundry and handcrafting, and required for stone furnaces.
+data.raw.recipe["stone-brick"].category = "smelting-or-metallurgy-or-handcrafting"
+data.raw.recipe["stone-furnace"].ingredients = {{type="item", name="stone-brick", amount=5}}
+
 -- Vehicles
 data.raw.recipe["car"].ingredients = {
 	{type="item", name="engine-unit", amount=8},
@@ -87,14 +91,14 @@ data.raw.recipe["fast-splitter"].ingredients = {
 }
 data.raw.recipe["express-splitter"].ingredients = {
 	{type="item", name="express-transport-belt", amount=2},
-	{type="item", name="rubber", amount=4},
+	{type="item", name="advanced-parts", amount=4},
 	{type="fluid", name="lubricant", amount=40},
 	{type="item", name="advanced-circuit", amount=2},
 }
 data.raw.recipe["turbo-splitter"].ingredients = {
 	{type="item", name="turbo-transport-belt", amount=2},
 	{type="item", name="tungsten-plate", amount=4},
-	{type="item", name="rubber", amount=4},
+	{type="item", name="advanced-parts", amount=8},
 	{type="fluid", name="lubricant", amount=40},
 	{type="item", name="processing-unit", amount=2},
 }
@@ -132,25 +136,50 @@ data.raw.recipe["electric-engine-unit"].ingredients = {
 -- Stone in rail recipe represents the track ballast; makes sense to crush/process stone before using as ballast.
 Recipe.substituteIngredient("rail", "stone", "sand")
 
+-- Rail signals should need some glass.
+data.raw.recipe["rail-signal"].ingredients = {
+	{type="item", name="iron-plate", amount=2},
+	{type="item", name="electronic-circuit", amount=1},
+	{type="item", name="glass", amount=1},
+}
+data.raw.recipe["rail-chain-signal"].ingredients = {
+	{type="item", name="iron-plate", amount=2},
+	{type="item", name="electronic-circuit", amount=2},
+	{type="item", name="glass", amount=1},
+}
+
 -- Assembling machines
+data.raw.recipe["assembling-machine-1"].ingredients = {
+	{type="item", name="iron-gear-wheel", amount=6},
+	{type="item", name="iron-plate", amount=6},
+	{type="item", name="electronic-circuit", amount=4},
+}
 data.raw.recipe["assembling-machine-2"].ingredients = {
-	{type="item", name="iron-gear-wheel", amount=5},
+	{type="item", name="iron-gear-wheel", amount=6},
+	{type="item", name="steel-plate", amount=6},
 	{type="item", name="rubber", amount=1},
-	{type="item", name="plastic-bar", amount=1},
-	{type="item", name="advanced-circuit", amount=2},
+	{type="item", name="advanced-circuit", amount=4},
 }
 data.raw.recipe["assembling-machine-3"].ingredients = {
-	{type="item", name="advanced-parts", amount=12},
+	{type="item", name="advanced-parts", amount=6},
 	{type="item", name="electric-engine-unit", amount=2},
-	{type="item", name="speed-module", amount=4},
-	{type="fluid", name="lubricant", amount=20},
+	{type="item", name="speed-module", amount=2},
+	{type="item", name="processing-unit", amount=4},
 }
 data.raw.recipe["assembling-machine-3"].category = "crafting-with-fluid"
 
+-- Mining drills
 -- Burner mining drill shouldn't need stone.
 data.raw.recipe["burner-mining-drill"].ingredients = {
 	{type="item", name="iron-gear-wheel", amount=4},
 	{type="item", name="iron-plate", amount=4},
+}
+data.raw.recipe["big-mining-drill"].ingredients = {
+	{type="item", name="electric-engine-unit", amount=10},
+	{type="item", name="processing-unit", amount=10},
+	{type="item", name="tungsten-carbide", amount=20},
+	{type="item", name="advanced-parts", amount=10},
+	{type="fluid", name="molten-steel", amount=200},
 }
 
 -- Ag tower shouldn't need steel, or landfill, or spoilage.
@@ -193,9 +222,29 @@ data.raw.recipe["inserter"].ingredients = {
 	{type = "item", name = "electronic-circuit", amount = 1},
 }
 data.raw.recipe["long-handed-inserter"].ingredients = {
+	{type = "item", name = "iron-stick", amount = 4},
+	{type = "item", name = "iron-gear-wheel", amount = 2},
+	{type = "item", name = "electronic-circuit", amount = 1},
+	{type = "item", name = "rubber", amount = 1},
+}
+data.raw.recipe["fast-inserter"].ingredients = {
 	{type = "item", name = "iron-stick", amount = 2},
 	{type = "item", name = "iron-gear-wheel", amount = 2},
-	{type = "item", name = "inserter", amount = 1},
+	{type = "item", name = "electronic-circuit", amount = 2},
+	{type = "item", name = "rubber", amount = 1},
+}
+data.raw.recipe["bulk-inserter"].ingredients = {
+	{type = "item", name = "iron-stick", amount = 4},
+	{type = "item", name = "advanced-parts", amount = 2},
+	{type = "item", name = "electronic-circuit", amount = 10},
+	{type = "item", name = "advanced-circuit", amount = 1},
+	{type = "item", name = "rubber", amount = 2},
+}
+data.raw.recipe["stack-inserter"].ingredients = {
+	{type = "item", name = "bulk-inserter", amount = 1},
+	{type = "item", name = "advanced-parts", amount = 4},
+	{type = "item", name = "processing-unit", amount = 1},
+	{type = "item", name = "carbon-fiber", amount = 2},
 }
 
 -- Radar.
@@ -266,3 +315,8 @@ data.raw.recipe["flying-robot-frame"].ingredients = {
 	{type = "item", name = "battery", amount = 2},
 	{type = "item", name = "electric-engine-unit", amount = 1},
 }
+
+-- Modules
+for _, moduleType in pairs{"speed", "efficiency", "productivity"} do
+	Recipe.addIngredients(moduleType.."-module", {{type = "item", name = "resin", amount = 1}})
+end

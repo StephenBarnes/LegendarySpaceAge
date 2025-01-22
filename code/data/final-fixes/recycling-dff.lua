@@ -1,6 +1,7 @@
 -- This file makes final edits to recycling recipes, in the data-final-fixes stage.
 
 local Recipe = require("code.util.recipe")
+local Recycling = require("__quality__.prototypes.recycling")
 
 -- For spoilable stuff, I don't want to give a way to store them permanently in the form of biochambers etc. Just going to remove them from outputs completely.
 -- But not all spoilable stuff, eg iron-plates are spoilable.
@@ -94,3 +95,7 @@ end
 -- Hide rate-trigger items' recycling recipes.
 -- Apparently hiding the recipe isn't enough, need to delete it.
 data.raw.recipe["ingot-iron-hot-per-minute-recycling"] = nil
+
+-- Space biolabs should have recycling recipe.
+-- Actually, looks like there's a hard-coded exception for recipe named "biolab". So let's generate it ourselves.
+Recycling.generate_recycling_recipe(data.raw.recipe.biolab, (function(_) return true end))
