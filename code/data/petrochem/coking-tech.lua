@@ -12,9 +12,8 @@ cokingTech.effects = {
 }
 cokingTech.unit = nil
 cokingTech.research_trigger = {
-	type = "craft-item",
-	item = "chemical-plant",
-	count = 1,
+	type = "build-entity",
+	entity = "assembling-machine-1",
 }
 data.raw.recipe["firearm-magazine"].enabled = false -- Don't enable from the start.
 data:extend{cokingTech}

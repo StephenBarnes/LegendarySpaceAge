@@ -147,16 +147,36 @@ data.raw.technology["heating-tower"].research_trigger = nil
 -- Nuclear is going to post-triplets, and heating tower is early, so remove heating tower stuff fom nuclear tech.
 Tech.removeRecipesFromTechs({"heat-exchanger", "heat-pipe", "steam-turbine"}, {"nuclear-power"})
 
--- Logistic science comes after steam and steel.
+-- Logistic (green) science needs steam, rubber.
 data.raw.recipe["logistic-science-pack"].ingredients = {
 	{type = "fluid", name = "steam", amount = 10},
 	{type = "item", name = "electronic-circuit", amount = 1},
-	{type = "item", name = "steel-plate", amount = 1},
-	{type = "item", name = "wood", amount = 1},
+	{type = "item", name = "rubber", amount = 1},
 }
 data.raw.recipe["logistic-science-pack"].category = "crafting-with-fluid"
-Tech.setPrereqs("logistic-science-pack", {"steam-power", "steel-processing"})
+Tech.setPrereqs("logistic-science-pack", {"steam-power", "rubber-1"})
 
+-- Chemical (blue) science comes after plastics.
+data.raw.technology["chemical-science-pack"].prerequisites = {"plastics"}
+
+-- Military stuff: move things around so military science pack can be made from poison/slowdown capsules, which now come earlier, while grenades come later.
+data.raw.technology["military-science-pack"].prerequisites = {"military-2"}
+data.raw.recipe["military-science-pack"].ingredients = {
+	{type = "item", name = "poison-capsule", amount = 1},
+	{type = "item", name = "slowdown-capsule", amount = 1},
+	{type = "item", name = "piercing-rounds-magazine", amount = 1},
+}
+Tech.removeRecipesFromTechs({"poison-capsule", "slowdown-capsule"}, {"military-3"})
+Tech.addRecipeToTech("poison-capsule", "military-2")
+Tech.addRecipeToTech("slowdown-capsule", "military-2")
+Tech.removeRecipeFromTech("grenade", "military-2")
+Tech.addRecipeToTech("grenade", "military-3")
+data.raw.technology["military-2"].prerequisites = {"military", "oil-processing"}
+Tech.addTechDependency("explosives", "military-3")
+Tech.removePrereq("military-4", "explosives")
+Tech.setPrereqs("stronger-explosives-1", {"military-3"})
+Tech.addSciencePack("stronger-explosives-1", "military-science-pack")
+Tech.setPrereqs("gate", {"stone-wall", "steel-processing", "logistic-science-pack"})
 
 -- TODO other science packs.
 

@@ -94,8 +94,9 @@ end
 
 -- Hide rate-trigger items' recycling recipes.
 -- Apparently hiding the recipe isn't enough, need to delete it.
-data.raw.recipe["ingot-iron-hot-per-minute-recycling"] = nil
-data.raw.recipe["electronic-circuit-per-minute-recycling"] = nil
+--data.raw.recipe["iron-gear-wheel-per-minute-recycling"] = nil
+--data.raw.recipe["electronic-circuit-per-minute-recycling"] = nil
+-- TODO check why this is necessary - there's no recipe, so why is this necessary?
 
 -- Space biolabs should have recycling recipe.
 -- Actually, looks like there's a hard-coded exception for recipe named "biolab". So let's generate it ourselves.

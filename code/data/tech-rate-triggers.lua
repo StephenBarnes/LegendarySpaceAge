@@ -5,9 +5,9 @@ Seems we can't use research_triggers, or else it resets research progress to zer
 
 data.raw.technology["automation-science-pack"].research_trigger = nil
 data.raw.technology["automation-science-pack"].unit = {
-	count = 120,
+	count = 200,
 	ingredients = {
-		{"ingot-iron-hot-per-minute", 1},
+		{"iron-gear-wheel-per-minute", 1},
 	},
 	time = 1,
 }
@@ -28,14 +28,14 @@ local function makeRateItem(itemName, backgroundIcons)
 	local rateItem = table.deepcopy(data.raw.item[itemName])
 	rateItem.type = "tool"
 	---@diagnostic disable-next-line: inject-field
-	rateItem.durability = 100
+	rateItem.durability = 1
 	rateItem.name = itemName .. "-per-minute"
 	rateItem.hidden = true
 	rateItem.hidden_in_factoriopedia = true
 	rateItem.subgroup = nil
 	rateItem.factoriopedia_alternative = itemName
 	---@diagnostic disable-next-line: inject-field
-	rateItem.auto_recycle = false
+	rateItem.auto_recycle = false -- TODO this doesn't do anything, also this goes in recipes not items; TODO check.
 	rateItem.spoil_ticks = nil
 	rateItem.spoil_result = nil
 	rateItem.localised_name = {"item-name.rate-item-per-minute", {"item-name." .. itemName}}
@@ -51,7 +51,7 @@ end
 
 -- Create rate items
 local rateItems = {
-	makeRateItem("ingot-iron-hot", table.deepcopy(data.raw.item["ingot-iron-hot"].icons)),
+	makeRateItem("iron-gear-wheel", table.deepcopy(data.raw.item["iron-gear-wheel"].icons)),
 	makeRateItem("electronic-circuit", {{icon = data.raw.item["electronic-circuit"].icon, icon_size = data.raw.item["electronic-circuit"].icon_size}}),
 }
 data:extend(rateItems)

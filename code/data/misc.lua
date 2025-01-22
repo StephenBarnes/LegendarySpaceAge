@@ -5,18 +5,6 @@ local Recipe = require("code.util.recipe")
 data.raw.reactor["heating-tower"].energy_source.effectivity = 1 -- 2.5 to 1
 data.raw.reactor["heating-tower"].consumption = "8MW"
 
--- Make space platform tiles more complex and expensive to produce.
--- Originally 20 steel plate + 20 copper cable.
-data.raw.recipe["space-platform-foundation"].ingredients = {
-	{ type = "item", name = "low-density-structure", amount = 10 },
-		-- Effectively 200 copper plate, 20 steel plate, 50 plastic.
-	{ type = "item", name = "copper-cable", amount = 10 },
-	{ type = "item", name = "electric-engine-unit", amount = 1 },
-		-- Effectively lubricant plus metals.
-	{ type = "item", name = "processing-unit", amount = 1 },
-		-- Effectively sulfuric acid + plastic + metals.
-}
-
 -- Remove the quality tooltip icon.
 data.raw.sprite["quality_info"].filename = "__LegendarySpaceAge__/graphics/misc/empty-quality-icon.png"
 
@@ -86,3 +74,6 @@ data.raw.furnace["stone-furnace"].max_health = 100 -- Reduced from 200 to 100.
 -- Make bots faster. This makes them a bit ridiculous at full +6 bot speed tech, but that's fine.
 data.raw["construction-robot"]["construction-robot"].speed = 0.12 -- Was 0.06
 data.raw["logistic-robot"]["logistic-robot"].speed = 0.10 -- Was 0.05
+
+-- Logistics 1 tech doesn't give "faster ways of transportation".
+data.raw.technology["logistics"].localised_description = {"technology-description.logistics-1"}

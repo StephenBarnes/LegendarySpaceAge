@@ -300,14 +300,31 @@ data.raw.recipe.biolab.ingredients = {
 
 -- Grenades: 8 gunpowder + 4 iron plate.
 data.raw.recipe["grenade"].ingredients = {
-	{type = "item", name = "iron-plate", amount = 4},
-	{type = "item", name = "gunpowder", amount = 8},
+	{type = "item", name = "iron-plate", amount = 2},
+	{type = "item", name = "explosives", amount = 1},
 }
+data.raw.recipe["cluster-grenade"].ingredients = {
+	{type = "item", name = "steel-plate", amount = 1},
+	{type = "item", name = "explosives", amount = 1},
+	{type = "item", name = "grenade", amount = 7},
+}
+
+-- 2 pitch + 5 ammonia + 5 sulfuric acid + 2 iron plate -> 1 poison capsule
 data.raw.recipe["poison-capsule"].ingredients = {
-	{type = "item", name = "iron-plate", amount = 4},
-	{type = "item", name = "gunpowder", amount = 8},
+	{type = "item", name = "iron-plate", amount = 2},
+	{type = "item", name = "pitch", amount = 2},
+	{type = "fluid", name = "ammonia", amount = 5},
+	{type = "fluid", name = "sulfuric-acid", amount = 5},
 }
--- TODO poison capsule, slowdown capsule - shouldn't need coal.
+data.raw.recipe["poison-capsule"].category = "chemistry"
+-- 2 resin + 5 tar + 5 water + 2 iron plate -> 1 slowdown capsule
+data.raw.recipe["slowdown-capsule"].ingredients = {
+	{type = "item", name = "iron-plate", amount = 2},
+	{type = "item", name = "resin", amount = 2},
+	{type = "fluid", name = "tar", amount = 5},
+	{type = "fluid", name = "water", amount = 5},
+}
+data.raw.recipe["slowdown-capsule"].category = "chemistry"
 
 -- Flying robot frames
 data.raw.recipe["flying-robot-frame"].ingredients = {
@@ -320,3 +337,14 @@ data.raw.recipe["flying-robot-frame"].ingredients = {
 for _, moduleType in pairs{"speed", "efficiency", "productivity"} do
 	Recipe.addIngredients(moduleType.."-module", {{type = "item", name = "resin", amount = 1}})
 end
+
+-- Make space platform tiles more complex and expensive to produce.
+-- Originally 20 steel plate + 20 copper cable.
+data.raw.recipe["space-platform-foundation"].ingredients = {
+	{ type = "item", name = "low-density-structure", amount = 4 },
+		-- Effectively 80 copper plate, 8 steel plate, 12 plastic, 4 resin.
+	{ type = "item", name = "electric-engine-unit", amount = 1 },
+		-- Effectively lubricant plus metals.
+	{ type = "item", name = "processing-unit", amount = 1 },
+		-- Effectively sulfuric acid + plastic + metals.
+}

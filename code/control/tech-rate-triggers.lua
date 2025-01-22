@@ -99,7 +99,7 @@ end
 local function onNthTick(e)
 	for _, force in pairs(game.forces) do
 		if #force.players > 0 then
-			updateRateTech(force, "automation-science-pack", "ingot-iron-hot", "ingot-iron-cold", 3)
+			updateRateTech(force, "automation-science-pack", "iron-gear-wheel", nil, 3)
 			updateRateTech(force, "logistic-science-pack", "electronic-circuit", nil, 5)
 		end
 	end
