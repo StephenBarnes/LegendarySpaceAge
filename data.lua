@@ -27,6 +27,7 @@ require("code.data.heating-towers")
 require("code.data.machine-parts")
 require("code.data.cargo-ships")
 require("code.data.toggle-key")
+require("code.data.stirling-generator")
 
 -- Planets
 require("code.data.nauvis-part-one.misc")
@@ -54,4 +55,3 @@ require("code.data.ocean-dumping")
 require("code.data.tech-progression")
 require("code.data.tech-rate-triggers")
 require("code.data.electric-boiler")
-require("code.data.stirling-generator")

@@ -59,6 +59,7 @@ for _, typeAndName in pairs{
 	{"car", "tank"},
 	{"locomotive", "locomotive"},
 	{"mining-drill", "burner-mining-drill"},
+	{"burner-generator", "stirling-generator"},
 } do
 	data.raw[typeAndName[1]][typeAndName[2]].energy_source.fuel_categories = {"chemical", "non-carbon"}
 end

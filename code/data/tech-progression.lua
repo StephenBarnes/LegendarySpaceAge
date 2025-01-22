@@ -5,7 +5,7 @@ local Table = require("code.util.table")
 
 -- Early techs: basic electricity, then electronics, then personal burner generator, then red science, then automation, then filtration, then steam power.
 Tech.setPrereqs("electronics", {"basic-electricity"})
-Tech.setPrereqs("automation", {"personal-burner-generator", "electric-mining-drill"})
+Tech.setPrereqs("automation", {"electric-mining-drill"})
 Tech.addTechDependency("filtration-lake-water", "steam-power")
 data.raw.technology["steam-power"].unit = nil
 data.raw.technology["steam-power"].research_trigger = {
@@ -34,9 +34,8 @@ data.raw.technology["gun-turret"].prerequisites = {"coal-coking", "automation-sc
 -- Red science tech should be unlocked by crafting circuits. And should unlock lab recipe.
 data.raw.technology["automation"].unit = nil
 data.raw.technology["automation"].research_trigger = {
-	type = "craft-item",
-	item = "personal-burner-generator",
-	amount = 1,
+	type = "build-entity",
+	entity = "electric-mining-drill",
 }
 Tech.removeRecipeFromTech("lab", "electronics")
 Tech.addRecipeToTech("lab", "automation-science-pack")
