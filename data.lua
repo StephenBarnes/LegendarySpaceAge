@@ -27,7 +27,6 @@ require("code.data.heating-towers")
 require("code.data.machine-parts")
 require("code.data.cargo-ships")
 require("code.data.toggle-key")
-require("code.data.stirling-generator")
 
 -- Planets
 require("code.data.nauvis-part-one.misc")

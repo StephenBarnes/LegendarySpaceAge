@@ -7,7 +7,7 @@ local Recipe = require("code.util.recipe")
 -- Create the new tech.
 local gasTankTech = Table.copyAndEdit(data.raw.technology["oil-processing"], {
 	name = "fluid-containers",
-	prerequisites = {"lsa-fluid-handling-2"},
+	prerequisites = {"fluid-handling"},
 	effects = {
 		{type = "unlock-recipe", recipe = "barrel"},
 		{type = "unlock-recipe", recipe = "gas-tank"},
@@ -79,3 +79,6 @@ data.raw.fluid["thruster-oxidizer"].auto_barrel = true
 data.raw.fluid["thruster-fuel"].auto_barrel = true
 data.raw.fluid["ammonia"].auto_barrel = true
 data.raw.fluid["fluorine"].auto_barrel = true
+
+-- Remove barrel from fluid handling.
+Tech.removeRecipeFromTech("barrel", "fluid-handling")

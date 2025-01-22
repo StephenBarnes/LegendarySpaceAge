@@ -32,18 +32,26 @@ local filtrationLakeWaterTech = Table.copyAndEdit(data.raw.technology["automatio
 		{icon = "__LegendarySpaceAge__/graphics/filtration/tech.png", icon_size = 256, scale = 0.5, shift = {-25, 0}},
 		{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water-tech.png", icon_size = 256, scale = 0.4, shift = {25, 0}},
 	},
-	prerequisites = {"coal-coking"}, -- Needs coking for carbon, to make filters.
+	prerequisites = {"coal-coking", "automation-science-pack"}, -- Needs coking for carbon, to make filters.
 	effects = {
+		{type = "unlock-recipe", recipe = "offshore-pump"},
+		{type = "unlock-recipe", recipe = "pipe"},
+		{type = "unlock-recipe", recipe = "pipe-to-ground"},
 		{type = "unlock-recipe", recipe = "filter"},
 		{type = "unlock-recipe", recipe = "filter-lake-water"},
 		{type = "unlock-recipe", recipe = "clean-filter"},
 	},
-	research_trigger = {
-		type = "build-entity",
-		entity = "offshore-pump",
-	},
 	unit = "nil",
 })
+filtrationLakeWaterTech.research_trigger = nil
+filtrationLakeWaterTech.unit = {
+	count = 10,
+	ingredients = {
+		{"automation-science-pack", 1},
+	},
+	time = 30,
+}
+filtrationLakeWaterTech.ignore_tech_cost_multiplier = true
 table.insert(newData, filtrationLakeWaterTech)
 
 -- Create filtration-gleban-slime tech.

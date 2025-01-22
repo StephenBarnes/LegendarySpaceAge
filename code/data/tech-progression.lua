@@ -5,7 +5,7 @@ local Table = require("code.util.table")
 
 -- Early techs: basic electricity, then electronics, then personal burner generator, then red science, then automation, then filtration, then steam power.
 Tech.setPrereqs("electronics", {"basic-electricity"})
-Tech.setPrereqs("automation", {"electric-mining-drill"})
+Tech.setPrereqs("automation", {"electronics"})
 Tech.addTechDependency("filtration-lake-water", "steam-power")
 data.raw.technology["steam-power"].unit = nil
 data.raw.technology["steam-power"].research_trigger = {
@@ -13,32 +13,23 @@ data.raw.technology["steam-power"].research_trigger = {
 	fluid = "water",
 	amount = 1000,
 }
-
--- In the gap between automation and automation-science-pack, let's have the player scale up with basic tech until they can produce like 2000 iron ingots.
-data.raw.technology["automation-science-pack"].prerequisites = {"automation"}
-data.raw.technology["automation-science-pack"].unit = nil
-
--- Electric mining drill should be automatically unlocked after some iron is smelted.
-data.raw.technology["electric-mining-drill"].unit = nil
-data.raw.technology["electric-mining-drill"].research_trigger = {
+data.raw.technology["automation"].unit = nil
+data.raw.technology["automation"].research_trigger = {
 	type = "craft-item",
 	item = "electronic-circuit",
-	count = 3, -- Need 3 to make an electric drill.
+	count = 1,
 }
-data.raw.technology["electric-mining-drill"].prerequisites = {"electronics"}
+
+-- In the gap between automation and automation-science-pack, player does production challenge of like 150 hot iron per minute.
+data.raw.technology["automation-science-pack"].prerequisites = {"automation", "glass"}
+data.raw.technology["automation-science-pack"].unit = nil
+Tech.removeRecipeFromTech("lab", "electronics")
+Tech.addRecipeToTech("lab", "automation-science-pack")
 
 -- Military 1 now depends on coal coking, for gunpowder. Also gun turrets.
 data.raw.technology["military"].prerequisites = {"coal-coking", "automation-science-pack"}
-data.raw.technology["gun-turret"].prerequisites = {"coal-coking", "automation-science-pack"}
-
--- Red science tech should be unlocked by crafting circuits. And should unlock lab recipe.
-data.raw.technology["automation"].unit = nil
-data.raw.technology["automation"].research_trigger = {
-	type = "build-entity",
-	entity = "electric-mining-drill",
-}
-Tech.removeRecipeFromTech("lab", "electronics")
-Tech.addRecipeToTech("lab", "automation-science-pack")
+data.raw.technology["gun-turret"].prerequisites = {"coal-coking"}
+data.raw.technology["gun-turret"].prerequisites = {"coal-coking"}
 
 -- Move electric inserter to automation tech.
 Tech.removeRecipeFromTech("inserter", "electronics")
@@ -59,35 +50,6 @@ data.raw.technology["steam-power"].effects = {
 	{type = "unlock-recipe", recipe = "electric-boiler"},
 	{type = "unlock-recipe", recipe = "steam-engine"},
 }
-
--- Create tech for fluid handling 1, and rename other one to fluid handling 2.
--- Note elsewhere in code we still interact with the effects of the tech "fluid-handling" but then we copy that to lsa-fluid-handling-2.
-local fluidHandling1Tech = table.deepcopy(data.raw.technology["fluid-handling"])
-fluidHandling1Tech.name = "lsa-fluid-handling-1"
-fluidHandling1Tech.unit = nil
-fluidHandling1Tech.localised_description = {"technology-description.lsa-fluid-handling-1"}
-fluidHandling1Tech.prerequisites = {"automation"}
-fluidHandling1Tech.research_trigger = {
-	type = "build-entity",
-	entity = "assembling-machine-1",
-}
-fluidHandling1Tech.effects = {
-	{type = "unlock-recipe", recipe = "chemical-plant"},
-	{type = "unlock-recipe", recipe = "offshore-pump"},
-	{type = "unlock-recipe", recipe = "pipe"},
-	{type = "unlock-recipe", recipe = "pipe-to-ground"},
-}
-local fluidHandling2Tech = table.deepcopy(data.raw.technology["fluid-handling"])
-fluidHandling2Tech.name = "lsa-fluid-handling-2"
-fluidHandling2Tech.localised_description = {"technology-description.lsa-fluid-handling-2"}
-table.insert(fluidHandling2Tech.prerequisites, "lsa-fluid-handling-1")
-table.insert(fluidHandling2Tech.prerequisites, "rubber-1")
-data:extend{fluidHandling1Tech, fluidHandling2Tech}
-Tech.hideTech("fluid-handling")
--- TODO In checks script, run a check that no tech depends on fluid-handling any more. (Currently it's true, but might add mods that depend on it.) Actually check that no tech depends on a hidden tech.
-
--- Remove dependency automation-2 => lsa-fluid-handling-2 to prevent cycle.
-Tech.removePrereq("lsa-fluid-handling-2", "automation-2")
 
 -- Tank ship shouldn't depend on Fluid handling 2. 
 Tech.setPrereqs("tank_ship", {"automated_water_transport"})
@@ -138,9 +100,8 @@ Tech.addTechDependency("steel-processing", "battery")
 Tech.hideTech("oil-gathering")
 data.raw.technology["oil-processing"].unit = data.raw.technology["oil-gathering"].unit
 data.raw.technology["oil-processing"].research_trigger = nil
-data.raw.technology["oil-processing"].prerequisites = {"lsa-fluid-handling-2", "steam-power"}
+data.raw.technology["oil-processing"].prerequisites = {"fluid-handling", "steam-power"}
 Tech.addRecipeToTech("pumpjack", "oil-processing", 2)
--- TODO: add the wellhead here.
 
 -- Elimininate the now-pointless "advanced oil processing" tech.
 Tech.hideTech("advanced-oil-processing")
