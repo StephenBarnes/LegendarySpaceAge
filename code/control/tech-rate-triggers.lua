@@ -44,25 +44,33 @@ local function productionOverLastNMinutes(force, itemName, numMinutes, category)
 end
 
 ---@param force LuaForce
-local function updateAutomationSciencePackTech(force)
-	local techName = "automation-science-pack"
-	if not techIsNext(force, techName) then return end
-	local itemName = "ingot-iron-hot"
-	local numMinutes = 3
-	local requiredCount = (prototypes.technology[techName].research_unit_count * .97) * numMinutes
-		-- Small fudge factor reducing the amount required, since we only check every 10 seconds.
-	local forceRate = productionOverLastNMinutes(force, itemName, numMinutes)
-	forceRate = forceRate - productionOverLastNMinutes(force, "ingot-iron-cold", 3, "output") -- Subtract out reheated iron ingots.
-	local progress = forceRate / requiredCount
-	--force.print("force rate: " .. forceRate .. ", required: " .. requiredCount .. ", progress: " .. progress)
+---@param techName string
+---@param progress number
+local function setProgress(force, techName, progress)
 	if progress < 0 then progress = 0 end
 	if progress > 1 then
-		force.research_progress = 1
-		--force.technologies[techName].researched = true -- This doesn't produce the usual popup text and sound.
+		force.technologies[techName].saved_progress = 0.999
+		if #force.research_queue == 0 then
+			force.add_research(techName)
+			force.research_progress = 1
+		elseif #force.research_queue > 0 and force.research_queue[1].name == techName then
+			-- The progress readout doesn't update unless we also set this.
+			force.research_progress = 1
+		else
+			local newResearchQueue = {techName}
+			for _, tech in pairs(force.research_queue) do
+				if tech.name ~= techName then
+					table.insert(newResearchQueue, tech.name)
+				end
+			end
+			force.research_queue = newResearchQueue
+			force.research_progress = 1
+		end
 	else
 		force.technologies[techName].saved_progress = progress
 		if #force.research_queue == 0 then
 			force.add_research(techName)
+			force.research_progress = progress
 		elseif #force.research_queue > 0 and force.research_queue[1].name == techName then
 			-- The progress readout doesn't update unless we also set this.
 			force.research_progress = progress
@@ -70,10 +78,29 @@ local function updateAutomationSciencePackTech(force)
 	end
 end
 
+---@param force LuaForce
+---@param techName string
+---@param producedItemName string
+---@param subtractInputItemName string|nil
+---@param numMinutes number
+local function updateRateTech(force, techName, producedItemName, subtractInputItemName, numMinutes)
+	if not techIsNext(force, techName) then return end
+	local requiredCount = (prototypes.technology[techName].research_unit_count * .97) * numMinutes
+		-- Small fudge factor reducing the amount required, since we only check every 10 seconds.
+	local forceRate = productionOverLastNMinutes(force, producedItemName, numMinutes)
+	if subtractInputItemName then
+		forceRate = forceRate - productionOverLastNMinutes(force, subtractInputItemName, numMinutes, "output") -- Subtract out e.g. reheated iron ingots.
+	end
+	local progress = forceRate / requiredCount
+	--force.print("force rate: " .. forceRate .. ", required: " .. requiredCount .. ", progress: " .. progress)
+	setProgress(force, techName, progress)
+end
+
 local function onNthTick(e)
 	for _, force in pairs(game.forces) do
 		if #force.players > 0 then
-			updateAutomationSciencePackTech(force)
+			updateRateTech(force, "automation-science-pack", "ingot-iron-hot", "ingot-iron-cold", 3)
+			updateRateTech(force, "logistic-science-pack", "electronic-circuit", nil, 5)
 		end
 	end
 end

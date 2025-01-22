@@ -152,6 +152,7 @@ data.raw.recipe["logistic-science-pack"].ingredients = {
 	{type = "fluid", name = "steam", amount = 10},
 	{type = "item", name = "electronic-circuit", amount = 1},
 	{type = "item", name = "steel-plate", amount = 1},
+	{type = "item", name = "wood", amount = 1},
 }
 data.raw.recipe["logistic-science-pack"].category = "crafting-with-fluid"
 Tech.setPrereqs("logistic-science-pack", {"steam-power", "steel-processing"})

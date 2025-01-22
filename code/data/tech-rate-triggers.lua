@@ -13,30 +13,55 @@ data.raw.technology["automation-science-pack"].unit = {
 }
 data.raw.technology["automation-science-pack"].ignore_tech_cost_multiplier = true
 
-local ingotIronRateItem = table.deepcopy(data.raw.item["ingot-iron-hot"])
-ingotIronRateItem.type = "tool"
----@diagnostic disable-next-line: inject-field
-ingotIronRateItem.durability = 100
-ingotIronRateItem.name = "ingot-iron-hot-per-minute"
-ingotIronRateItem.hidden = true
-ingotIronRateItem.hidden_in_factoriopedia = true
-ingotIronRateItem.subgroup = nil
-ingotIronRateItem.factoriopedia_alternative = "ingot-iron-hot"
----@diagnostic disable-next-line: inject-field
-ingotIronRateItem.auto_recycle = false
-ingotIronRateItem.spoil_ticks = nil
-ingotIronRateItem.spoil_result = nil
-table.insert(ingotIronRateItem.icons, {
-	icon = "__core__/graphics/clock-icon.png",
-	icon_size = 32,
-	scale = 0.5,
-	shift = {0, 0},
-})
-data:extend{ingotIronRateItem}
+data.raw.technology["logistic-science-pack"].research_trigger = nil
+data.raw.technology["logistic-science-pack"].unit = {
+	count = 400,
+	ingredients = {
+		{"electronic-circuit-per-minute", 1},
+	},
+	time = 1,
+}
+data.raw.technology["logistic-science-pack"].ignore_tech_cost_multiplier = true
+
+-- Function to make a dummy science-pack item.
+local function makeRateItem(itemName, backgroundIcons)
+	local rateItem = table.deepcopy(data.raw.item[itemName])
+	rateItem.type = "tool"
+	---@diagnostic disable-next-line: inject-field
+	rateItem.durability = 100
+	rateItem.name = itemName .. "-per-minute"
+	rateItem.hidden = true
+	rateItem.hidden_in_factoriopedia = true
+	rateItem.subgroup = nil
+	rateItem.factoriopedia_alternative = itemName
+	---@diagnostic disable-next-line: inject-field
+	rateItem.auto_recycle = false
+	rateItem.spoil_ticks = nil
+	rateItem.spoil_result = nil
+	rateItem.localised_name = {"item-name.rate-item-per-minute", {"item-name." .. itemName}}
+	rateItem.icons = backgroundIcons
+	table.insert(rateItem.icons, {
+		icon = "__core__/graphics/clock-icon.png",
+		icon_size = 32,
+		scale = 0.5,
+		shift = {0, 0},
+	})
+	return rateItem
+end
+
+-- Create rate items
+local rateItems = {
+	makeRateItem("ingot-iron-hot", table.deepcopy(data.raw.item["ingot-iron-hot"].icons)),
+	makeRateItem("electronic-circuit", {{icon = data.raw.item["electronic-circuit"].icon, icon_size = data.raw.item["electronic-circuit"].icon_size}}),
+}
+data:extend(rateItems)
 
 -- Create a dummy lab that accepts all these fake science packs, else there's an error.
 local dummyLab = table.deepcopy(data.raw.lab.lab)
 dummyLab.name = "rate-trigger-lab"
-dummyLab.inputs = {"ingot-iron-hot-per-minute"}
+dummyLab.inputs = {}
+for _, rateItem in pairs(rateItems) do
+	table.insert(dummyLab.inputs, rateItem.name)
+end
 dummyLab.hidden = true
 data:extend{dummyLab}
