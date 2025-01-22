@@ -25,11 +25,14 @@ data.raw.technology["automation-science-pack"].prerequisites = {"automation", "g
 data.raw.technology["automation-science-pack"].unit = nil
 Tech.removeRecipeFromTech("lab", "electronics")
 Tech.addRecipeToTech("lab", "automation-science-pack")
+data.raw.recipe["automation-science-pack"].ingredients = {
+	{type = "item", name = "iron-gear-wheel", amount = 1},
+	{type = "item", name = "glass", amount = 1},
+}
 
 -- Military 1 now depends on coal coking, for gunpowder. Also gun turrets.
 data.raw.technology["military"].prerequisites = {"coal-coking", "automation-science-pack"}
-data.raw.technology["gun-turret"].prerequisites = {"coal-coking"}
-data.raw.technology["gun-turret"].prerequisites = {"coal-coking"}
+data.raw.technology["gun-turret"].prerequisites = {"coal-coking", "automation-science-pack"}
 
 -- Move electric inserter to automation tech.
 Tech.removeRecipeFromTech("inserter", "electronics")
@@ -144,14 +147,17 @@ data.raw.technology["heating-tower"].research_trigger = nil
 -- Nuclear is going to post-triplets, and heating tower is early, so remove heating tower stuff fom nuclear tech.
 Tech.removeRecipesFromTechs({"heat-exchanger", "heat-pipe", "steam-turbine"}, {"nuclear-power"})
 
--- Set science pack ingredients.
-data.raw.recipe["automation-science-pack"].ingredients = {
-	{type = "item", name = "iron-gear-wheel", amount = 1},
+-- Logistic science comes after steam and steel.
+data.raw.recipe["logistic-science-pack"].ingredients = {
+	{type = "fluid", name = "steam", amount = 10},
 	{type = "item", name = "electronic-circuit", amount = 1},
+	{type = "item", name = "steel-plate", amount = 1},
 }
+data.raw.recipe["logistic-science-pack"].category = "crafting-with-fluid"
+Tech.setPrereqs("logistic-science-pack", {"steam-power", "steel-processing"})
+
+
 -- TODO other science packs.
-
-
 
 -- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.
 

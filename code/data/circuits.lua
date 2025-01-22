@@ -143,15 +143,21 @@ local woodCircuitBoardTech = Table.copyAndEdit(data.raw.technology["automation"]
 		{type = "unlock-recipe", recipe = "wood-circuit-board"},
 	},
 	icon = "nil",
-	icons = {{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board-tech.png", icon_size = 256, scale = 0.5, mipmap_count = 4}},
+	icons = {
+		--{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board-tech.png", icon_size = 256, scale = 0.8, mipmap_count = 4, shift = {10, -10}},
+		--{icon = "__LegendarySpaceAge__/graphics/resin/tech.png", icon_size = 256, scale = 0.4, mipmap_count = 4, shift = {-10, 10}},
+		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board-tech.png", icon_size = 256, mipmap_count = 4},
+	},
 	prerequisites = {"steam-power"},
 	ignore_tech_cost_multiplier = false,
-	unit = "nil",
-	research_trigger = {
-		type = "craft-fluid",
-		fluid = "steam",
-		amount = 500,
+	unit = {
+		count = 15,
+		ingredients = {
+			{"automation-science-pack", 1},
+		},
+		time = 15,
 	},
+	research_trigger = "nil",
 })
 data:extend{woodCircuitBoardTech}
 

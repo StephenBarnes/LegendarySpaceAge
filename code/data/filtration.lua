@@ -67,8 +67,9 @@ local filtrationGlebanSlimeTech = Table.copyAndEdit(data.raw.technology["jellynu
 		{type = "unlock-recipe", recipe = "filter-slime"},
 	},
 	research_trigger = {
-		type = "mine-entity",
-		entity = "iron-stromatolite",
+		type = "craft-fluid",
+		fluid = "slime",
+		amount = 100,
 	},
 })
 table.insert(newData, filtrationGlebanSlimeTech)

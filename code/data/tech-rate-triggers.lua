@@ -5,7 +5,7 @@ Seems we can't use research_triggers, or else it resets research progress to zer
 
 data.raw.technology["automation-science-pack"].research_trigger = nil
 data.raw.technology["automation-science-pack"].unit = {
-	count = 150,
+	count = 120,
 	ingredients = {
 		{"ingot-iron-hot-per-minute", 1},
 	},
