@@ -2,7 +2,7 @@
 Version: 0.7.0
 Date: 2025-01-25
   Features:
-    - TODO Added automatic progression debug script (for debugging; edit global-params.lua to enable).
+    - TODO Added automatic progression debug script, for debugging. This is disabled by default; edit global-params.lua to enable it.
     - TODO Added production rate triggers for all remaining science packs (except space science, which will be unlocked by building first space platform).
 ---------------------------------------------------------------------------------------------------
 Version: 0.6.0

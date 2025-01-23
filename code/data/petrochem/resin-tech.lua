@@ -13,6 +13,7 @@ resinTech.effects = {
 	{type = "unlock-recipe", recipe = "pitch-resin"},
 	{type = "unlock-recipe", recipe = "rich-gas-resin"},
 }
+resinTech.prerequisites = {"chemical-science-pack"}
 data:extend{resinTech}
 
 -- This should be required for Fulgora and Vulcanus.

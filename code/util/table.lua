@@ -104,4 +104,26 @@ Table.countIf = function(list, predicate)
 	return count
 end
 
+-- Given a table mapping keys to lists, adds newItem to the list at key, creating the list if there is none.
+---@generic Key
+---@generic ListItem
+---@param t table<Key, ListItem[]>
+---@param key Key
+---@param newItem ListItem
+Table.addToValList = function(t, key, newItem)
+	if t[key] == nil then
+		t[key] = {newItem}
+	else
+		table.insert(t[key], newItem)
+	end
+end
+
+Table.map = function(l, f)
+	local result = {}
+	for k, v in pairs(l) do
+		result[k] = f(v)
+	end
+	return result
+end
+
 return Table

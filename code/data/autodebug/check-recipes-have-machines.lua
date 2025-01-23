@@ -1,6 +1,6 @@
--- This file will run automated checks. For example, checking that when the player unlocks a recipe, he has the ingredients available.
+--- This file checks that each recipe is possible in all machines with matching crafting category.
+--- This catches bugs where e.g. some recipe produces 3 fluid outputs, but none of the machines with its category has 3+ fluid outputs.
 
-local GlobalParams = require("code.global-params")
 local Table = require("code.util.table")
 
 ---@param machine data.CraftingMachinePrototype
@@ -23,7 +23,7 @@ end
 ---@param recipe data.RecipePrototype
 ---@param machinesWithCategory data.CraftingMachinePrototype[]
 ---@return boolean
-local function checkRecipeDoable(recipe, machinesWithCategory)
+local function checkRecipeHasMachines(recipe, machinesWithCategory)
 	if not machinesWithCategory then
 		log("Legendary Space Age ERROR: recipe " .. recipe.name .. " has no machines with its category: " .. (recipe.category or "crafting"))
 		return false
@@ -46,7 +46,7 @@ end
 
 -- Check that all recipes are doable by all assembling-machines and furnaces with their recipe categories.
 ---@return boolean
-local function checkAllRecipesDoable()
+local function checkAllRecipesHaveMachines()
 	local success = true
 	-- Build a table from crafting category to list of machines.
 	local categoryToMachines = {}
@@ -71,28 +71,10 @@ local function checkAllRecipesDoable()
 	for _, recipe in pairs(data.raw.recipe) do
 		local recipeCategory = recipe.category or "crafting" -- "crafting" is default.
 		if recipeCategory ~= "parameters" then
-			success = checkRecipeDoable(recipe, categoryToMachines[recipeCategory]) and success
+			success = checkRecipeHasMachines(recipe, categoryToMachines[recipeCategory]) and success
 		end
 	end
 	return success
 end
 
-
--- TODO more
-
-local function runFullDebug()
-	log("Legendary Space Age: running full progression debug.")
-	local success = true
-	--success = toposortTechsAndCache() and success
-	--if not success then return end -- if we can't toposort the techs, many other checks won't work anyway.
-	success = checkAllRecipesDoable() and success
-	if success then
-		log("Legendary Space Age: full progression debug passed.")
-	else
-		log("Legendary Space Age ERROR: one or more progression debug checks failed.")
-	end
-end
-
-if GlobalParams.runProgressionChecks then
-	runFullDebug()
-end
+return checkAllRecipesHaveMachines

@@ -154,10 +154,13 @@ data.raw.recipe["logistic-science-pack"].ingredients = {
 	{type = "item", name = "rubber", amount = 1},
 }
 data.raw.recipe["logistic-science-pack"].category = "crafting-with-fluid"
-Tech.setPrereqs("logistic-science-pack", {"steam-power", "rubber-1"})
+-- Could make green science depend only on rubber and steam-power. But that's sorta guiding people in the direction of not automating circuit boards. Rather make it a prereq. That also lets us assume resin is available after green science.
+Tech.setPrereqs("logistic-science-pack", {"rubber-1", "wood-circuit-board"})
 
 -- Chemical (blue) science comes after plastics.
 data.raw.technology["chemical-science-pack"].prerequisites = {"plastics"}
+-- So then blue circuits also need a new dependency on red circuits.
+Tech.addTechDependency("advanced-circuit", "processing-unit")
 
 -- Military stuff: move things around so military science pack can be made from poison/slowdown capsules, which now come earlier, while grenades come later.
 data.raw.technology["military-science-pack"].prerequisites = {"military-2"}
