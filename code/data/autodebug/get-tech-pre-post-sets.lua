@@ -20,6 +20,7 @@ local VERBOSE = true
 local unlockedAtStart = Table.listToSet{
 	"planet:nauvis",
 	"nauvis:item:wood",
+	"nauvis:item:tree-seed",
 	"nauvis:item:iron-ore",
 	"nauvis:item:copper-ore",
 	"nauvis:item:coal",
@@ -39,7 +40,7 @@ local implicitUnlocks = {
 	-- Minable resources.
 	{{"planet:fulgora"}, {"fulgora:item:scrap"}},
 	{{"planet:gleba"}, {"gleba:item:wood", "gleba:item:wood", "gleba:item:yumako", "gleba:item:jellynut"}}, -- TODO more
-	{{"planet:vulcanus"}, {"vulcanus:item:iron-ore"}}, -- TODO more
+	{{"planet:vulcanus"}, {"vulcanus:item:iron-ore", "vulcanus:item:calcite"}}, -- TODO more
 	{{"planet:aquilo"}, {"aquilo:item:ice"}},
 	{{"space:item:asteroid-collector"}, {"space:item:metallic-asteroid-chunk", "space:item:carbonic-asteroid-chunk", "space:item:oxide-asteroid-chunk"}},
 
@@ -62,6 +63,15 @@ local implicitUnlocks = {
 local implicitUnlocksForAllPlanets = {
 	{{"fluid:water", "item:electric-boiler"}, {"fluid:steam"}},
 }
+-- Add spoilage rules.
+for itemType, _ in pairs(defines.prototypes.item) do
+	for _, item in pairs(data.raw[itemType] or {}) do
+		if item.spoil_result ~= nil then
+			table.insert(implicitUnlocksForAllPlanets, {{"item:"..item.name}, {"item:"..item.spoil_result}})
+		end
+	end
+end
+-- Expand these implicit unlocks on all planets to planet-specific sets.
 for _, unlock in pairs(implicitUnlocksForAllPlanets) do
 	for planetName, _ in pairs(Util.allPlanets) do
 		local planetUnlock = table.deepcopy(unlock)
@@ -78,7 +88,8 @@ end
 for _, planetName in pairs{"aquilo", "vulcanus", "fulgora", "gleba"} do
 	table.insert(implicitUnlocks, {{planetName..":item:rocket-silo", planetName..":item:rocket-part"}, {"exports:"..planetName}})
 end
--- Add implicit unlocks for minable rocks. TODO
+-- Add implicit unlocks for minable rocks, on each planet.
+-- TODO
 -- Build a table of these implicit unlocks indexed by item, for faster lookup.
 local implicitUnlocksByItem = {}
 for _, unlock in pairs(implicitUnlocks) do
@@ -99,8 +110,6 @@ implicitUnlocksByItem["fulgora:item:recycler"] = recyclingRecipes
 
 -- Table of things implicitly unlocked by techs.
 local unlockedImplicitlyByTech = {
-	-- Nothing yet.
-	-- TODO add atmospheric navigation techs.
 }
 -- Add implicit unlocks for planet discovery and atmospheric navigation techs.
 for _, planetName in pairs{"aquilo", "vulcanus", "fulgora", "gleba"} do

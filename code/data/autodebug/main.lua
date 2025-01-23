@@ -15,7 +15,7 @@ local function runFullDebug()
 
 	-- List with all techs' names, sorted so that all dependencies only go forwards.
 	local toposortedTechs = toposortTechs()
-	if not toposortedTechs then
+	if toposortedTechs == nil then
 		log("Legendary Space Age ERROR: toposorting techs failed.")
 		return false
 	end
@@ -31,12 +31,12 @@ local function runFullDebug()
 		return false
 	end
 
-	log("Available after space-science-pack:" .. serpent.block(postTechSets["space-science-pack"]))
-	-- TODO remove
+	--log("Available after space-science-pack:" .. serpent.block(postTechSets["space-science-pack"]))
+	-- TODO sanity-checks.
 
 	local success = true
 	success = checkAllRecipesHaveMachines() and success
-	success = checkAllRecipesHaveIngredients() and success
+	success = checkAllRecipesHaveIngredients(toposortedTechs, postTechSets) and success
 	-- TODO check all science packs required by techs are available before those techs.
 	-- TODO check that when a recipe is unlocked, at least one machine that can craft it has been unlocked.
 	-- TODO add more checks here

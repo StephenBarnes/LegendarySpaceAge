@@ -1,5 +1,6 @@
 local Tech = require("code.util.tech")
 
+---@return string[]?
 local function toposortTechs()
 	-- Topologically sort the techs, storing the result in toposortedTechs.
 	-- If there's a cycle, return false.
@@ -25,7 +26,7 @@ local function toposortTechs()
 				local prereqs = Tech.getPrereqList(tech)
 				if prereqs == nil or type(prereqs) ~= "table" then
 					log("ERROR: Tech "..techName.." has no prereqs.")
-					return false
+					return nil
 				end
 				for _, prereqName in pairs(prereqs or {}) do
 					if not techsAdded[prereqName] then
@@ -52,7 +53,7 @@ local function toposortTechs()
 				end
 			end
 			log("Techs added: "..serpent.block(techsAdded))
-			return false
+			return nil
 		end
 	end
 	return currToposortedTechs

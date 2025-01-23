@@ -114,7 +114,7 @@ data.raw.recipe["pump"].ingredients = {
 data.raw.recipe["chemical-plant"].ingredients = {
 	{type="item", name="iron-gear-wheel", amount=4},
 	{type="item", name="electronic-circuit", amount=4},
-	{type="item", name="pipe", amount=6},
+	{type="item", name="iron-plate", amount=4},
 	{type="item", name="glass", amount=2},
 }
 

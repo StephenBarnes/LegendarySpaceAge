@@ -3,7 +3,7 @@
 local cokingTech = table.deepcopy(data.raw.technology["lamp"])
 cokingTech.name = "coal-coking"
 cokingTech.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/coking-tech.png", icon_size = 256}}
-cokingTech.prerequisites = {"automation"}
+cokingTech.prerequisites = {"automation", "glass"}
 cokingTech.effects = {
 	{type = "unlock-recipe", recipe = "chemical-plant"},
 	{type = "unlock-recipe", recipe = "coal-coking"},

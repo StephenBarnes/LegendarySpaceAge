@@ -124,7 +124,7 @@ Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
 Tech.setPrereqs("fast-inserter", {"logistics-2"})
 data.raw.technology["fast-inserter"].unit = {count = 30, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 15}
 -- Bulk inserter should go after advanced parts / lubricant.
-Tech.setPrereqs("bulk-inserter", {"fast-inserter", "lubricant"})
+Tech.setPrereqs("bulk-inserter", {"fast-inserter", "lubricant", "advanced-circuit"})
 
 -- Remove tech for advanced combinators. And move selector combinator recipe, and change recipe to not need red circuits.
 Tech.hideTech("advanced-combinators")
@@ -137,7 +137,7 @@ data.raw.recipe["selector-combinator"].ingredients = {
 -- Add red circuit dependency to assembling machine 2, so we can add it as ingredient.
 Tech.setPrereqs("automation-2", {"advanced-circuit"})
 -- Add blue circuit dependency to assembling machine 3, so we can add it as ingredient.
-Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine", "processing-unit"})
+Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine", "processing-unit", "speed-module"})
 
 -- Heating tower tech should be early.
 Tech.setPrereqs("heating-tower", {"steam-power", "concrete"})
@@ -174,12 +174,17 @@ Tech.addRecipeToTech("poison-capsule", "military-2")
 Tech.addRecipeToTech("slowdown-capsule", "military-2")
 Tech.removeRecipeFromTech("grenade", "military-2")
 Tech.addRecipeToTech("grenade", "military-3")
-data.raw.technology["military-2"].prerequisites = {"military", "oil-processing"}
+data.raw.technology["military-2"].prerequisites = {"military", "oil-processing", "ammonia-1"}
 Tech.addTechDependency("explosives", "military-3")
 Tech.removePrereq("military-4", "explosives")
 Tech.setPrereqs("stronger-explosives-1", {"military-3"})
 Tech.addSciencePack("stronger-explosives-1", "military-science-pack")
 Tech.setPrereqs("gate", {"stone-wall", "steel-processing", "logistic-science-pack"})
+
+-- Add red circuit prereq to techs that need red circuits as ingredients.
+Tech.addTechDependency("advanced-circuit", "electric-energy-distribution-2")
+Tech.addTechDependency("advanced-circuit", "electric-engine")
+Tech.addTechDependency("advanced-circuit", "advanced-material-processing-2")
 
 -- TODO other science packs.
 
