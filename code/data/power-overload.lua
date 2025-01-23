@@ -18,8 +18,8 @@ Tech.reorderRecipeUnlocks("electric-energy-distribution-1",
 		"po-medium-electric-fuse",
 		"po-big-electric-fuse",
 		"po-transformer",
-		--"iron-stick",
-		--"rocs-rusting-iron-iron-stick-derusting",
+		"iron-stick",
+		"rocs-rusting-iron-iron-stick-derusting",
 	})
 
 -- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive.

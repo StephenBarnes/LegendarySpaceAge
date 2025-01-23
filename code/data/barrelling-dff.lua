@@ -120,4 +120,4 @@ for _, recipeGroup in pairs{barrellingRecipes, unbarrellingRecipes, gasFillingRe
 		table.insert(data.raw.technology["fluid-containers"].effects, {type = "unlock-recipe", recipe = recipeName})
 	end
 end
-Tech.removeRecipeFromTech("barrel", "lsa-fluid-handling-2")
+Tech.removeRecipeFromTech("barrel", "fluid-handling")

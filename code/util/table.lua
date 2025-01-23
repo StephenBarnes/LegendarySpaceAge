@@ -91,4 +91,17 @@ Table.filter = function(l, filter)
 	return result
 end
 
+---@param list table
+---@param predicate fun(item: any): boolean
+---@return number
+Table.countIf = function(list, predicate)
+	local count = 0
+	for _, item in pairs(list) do
+		if predicate(item) then
+			count = count + 1
+		end
+	end
+	return count
+end
+
 return Table

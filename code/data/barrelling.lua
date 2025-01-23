@@ -79,6 +79,3 @@ data.raw.fluid["thruster-oxidizer"].auto_barrel = true
 data.raw.fluid["thruster-fuel"].auto_barrel = true
 data.raw.fluid["ammonia"].auto_barrel = true
 data.raw.fluid["fluorine"].auto_barrel = true
-
--- Remove barrel from fluid handling.
-Tech.removeRecipeFromTech("barrel", "fluid-handling")

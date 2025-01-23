@@ -171,6 +171,7 @@ local saplingRecipe = Table.copyAndEdit(data.raw.recipe["wood-processing"], {
 		{type="item", name="sapling", amount=1},
 	},
 	subgroup = "early-agriculture",
+	category = "organic-or-assembling-with-fluid",
 	order = "006",
 	icon = "nil",
 	icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}},

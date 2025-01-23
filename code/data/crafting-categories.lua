@@ -1,3 +1,5 @@
+local Table = require("code.util.table")
+
 -- Assembler 1 should be able to do fluid recipes.
 data.raw["assembling-machine"]["assembling-machine-1"].crafting_categories = data.raw["assembling-machine"]["assembling-machine-2"].crafting_categories
 
@@ -105,3 +107,16 @@ data:extend({
 })
 table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "chemistry-or-electronics")
 table.insert(data.raw["assembling-machine"]["electromagnetic-plant"].crafting_categories, "chemistry-or-electronics")
+
+-- Create crafting category for organic or assembling-with-fluid.
+data:extend({
+	{
+		type = "recipe-category",
+		name = "organic-or-assembling-with-fluid",
+	},
+})
+for _, machine in pairs(data.raw["assembling-machine"]) do
+	if machine.crafting_categories and Table.hasEntry("organic-or-assembling", machine.crafting_categories) then
+		table.insert(machine.crafting_categories, "organic-or-assembling-with-fluid")
+	end
+end
