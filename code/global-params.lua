@@ -5,5 +5,5 @@ local DEBUGGING = true
 return {
 	notifyIncorrectMapgenPreset = true,
 
-	runProgressionChecks = DEBUGGING,
+	runProgressionChecks = false,
 }

@@ -223,7 +223,7 @@ local function extendToClosure(availableThings, thingToRecipes, recipeToPlanets)
 			log("Another round, last reason: "..anotherRoundReason)
 		end
 
-		if numRounds > 10 then
+		if numRounds > 30 then
 			error("Possibly-infinite loop in extendToClosure, availableThings: "..serpent.line(availableThings))
 			anotherRound = false
 		end

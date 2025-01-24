@@ -185,6 +185,7 @@ Tech.setPrereqs("gate", {"stone-wall", "steel-processing", "logistic-science-pac
 Tech.addTechDependency("advanced-circuit", "electric-energy-distribution-2")
 Tech.addTechDependency("advanced-circuit", "electric-engine")
 Tech.addTechDependency("advanced-circuit", "advanced-material-processing-2")
+Tech.addTechDependency("advanced-circuit", "tank")
 
 -- TODO other science packs.
 
