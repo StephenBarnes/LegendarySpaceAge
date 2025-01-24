@@ -162,8 +162,9 @@ polysaltItem.icon = "__LegendarySpaceAge__/graphics/fulgora/polysalts.png"
 polysaltItem.icon_size = 128
 polysaltItem.subgroup = "fulgora-processes"
 polysaltItem.order = "c[organics]-b[polysalt]"
-polysaltItem.spoil_result = "stone"
 polysaltItem.spoil_ticks = 60 * 60 * 60 -- 1 hour.
+polysaltItem.spoil_result = "sand"
+polysaltItem.burnt_result = "sand"
 -- Copy dry powder sounds from sulfur, instead of wet nutrient sounds.
 polysaltItem.drop_sound = data.raw.item["sulfur"].drop_sound
 polysaltItem.pick_sound = data.raw.item["sulfur"].pick_sound

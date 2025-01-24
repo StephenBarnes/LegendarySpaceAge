@@ -100,6 +100,9 @@ data.raw.recipe["electronic-circuit-per-minute-recycling"] = nil
 data.raw.recipe["plastic-bar-per-minute-recycling"] = nil
 data.raw.recipe["piercing-rounds-magazine-per-minute-recycling"] = nil
 
+-- Hide recycling recipes for items that are not recyclable.
+data.raw.recipe["assembled-rocket-part-recycling"] = nil
+
 -- Space biolabs should have recycling recipe.
 -- Actually, looks like there's a hard-coded exception for recipe named "biolab". So let's generate it ourselves.
 Recycling.generate_recycling_recipe(data.raw.recipe.biolab, (function(_) return true end))

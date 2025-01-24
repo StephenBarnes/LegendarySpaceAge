@@ -27,6 +27,7 @@ require("code.data.heating-towers")
 require("code.data.machine-parts")
 require("code.data.cargo-ships")
 require("code.data.toggle-key")
+require("code.data.rocket-parts-outside-silos")
 
 -- Planets
 require("code.data.nauvis-part-one.misc")

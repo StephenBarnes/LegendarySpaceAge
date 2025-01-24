@@ -89,6 +89,9 @@ for gasName, _ in pairs(gases) do
 	-- Edit subgroups.
 	barrelRecipe.subgroup = "fill-gas-tank"
 	emptyRecipe.subgroup = "empty-gas-tank"
+
+	-- Increase stack size for the gas tank. Barrels are 10, tanks at 20 seems reasonable.
+	item.stack_size = 20
 end
 
 -- Go through fluid handling tech, remove all barrelling recipes, add to new tech.
