@@ -1,6 +1,6 @@
 -- This script is to notify players that they forgot to use the correct mapgen preset.
 
-local globalParams = require("code.global-params")
+local Config = require("code.config")
 
 local function registerRepeatingMessage()
 	script.on_nth_tick(60 * 15, function(event)
@@ -9,7 +9,7 @@ local function registerRepeatingMessage()
 end
 
 local function onPlayerCreated(event)
-	if not globalParams.notifyIncorrectMapgenPreset then return end
+	if not Config.notifyIncorrectMapgenPreset then return end
 	local player = game.players[event.player_index]
 	local mapGen = player.surface.map_gen_settings
 

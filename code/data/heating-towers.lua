@@ -19,7 +19,9 @@ fluidHeatingTowerEnt.energy_source = {
 		pipe_picture = greyPipes(),
 		pipe_covers = pipecoverspictures(),
 		pipe_connections = {
+			---@diagnostic disable-next-line: assign-type-mismatch
 			{flow_direction = "input-output", position = {1, 0}, direction = defines.direction.east},
+			---@diagnostic disable-next-line: assign-type-mismatch
 			{flow_direction = "input-output", position = {-1, 0}, direction = defines.direction.west},
 		},
 		secondary_draw_orders = draworders,

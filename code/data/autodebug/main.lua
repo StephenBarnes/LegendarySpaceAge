@@ -1,6 +1,6 @@
 -- This file will run automated checks. For example, checking that when the player unlocks a recipe, he has the ingredients available.
 
-local GlobalParams = require("code.global-params")
+local Config = require("code.config")
 
 local toposortTechs = require("code.data.autodebug.toposort-techs")
 local getThingToRecipes = require("code.data.autodebug.get-thing-to-recipes")
@@ -43,7 +43,7 @@ local function runFullDebug()
 	return success
 end
 
-if GlobalParams.runProgressionChecks then
+if Config.runProgressionChecks then
 	if runFullDebug() then
 		log("Legendary Space Age: full progression debug passed.")
 	else

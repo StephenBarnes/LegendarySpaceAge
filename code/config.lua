@@ -1,4 +1,4 @@
--- Setting global vars that affect the behaviour of various scripts.
+-- Config options to affect how multiple parts of the mod behave.
 
 local DEBUGGING = true
 
