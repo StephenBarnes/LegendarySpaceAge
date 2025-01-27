@@ -22,21 +22,22 @@ for itemName, fuelValues in pairs(Const.itemFuelValues) do
 end
 data.raw.item["sulfur"].fuel_glow_color = {r=.3, g=.3, b=1, a=.2} -- Sulfur burns blue in real life.
 
--- Create fuel category for non-carbon fuels like sulfur, which can't be used in some places where carbon is needed (eg furnaces need carbon as reducing agent).
+-- Create fuel category for non-carbon fuels like soldReplicationRecipeulfur, which can't be used in some places where carbon is needed (eg furnaces need carbon as reducing agent).
 -- Mostly this is to prevent using sulfur to make syngas in a gasifier, since that would create carbon out of nothing, which breaks Vulcanus.
 local nonCarbonFuelCategory = Table.copyAndEdit(data.raw["fuel-category"]["chemical"], {
 	name = "non-carbon",
 })
 data:extend{nonCarbonFuelCategory}
 
--- Set fuel categories for some entities to allow sulfur as fuel.
+-- Set fuel categories for some entities to allow non-carbon-based fuels (sulfur, hydrogen).
+local expandedFuelCategories = {"chemical", "non-carbon"}
 for _, typeAndName in pairs{
 	{"reactor", "heating-tower"},
 	{"boiler", "boiler"},
 	{"inserter", "burner-inserter"},
 	{"mining-drill", "burner-mining-drill"},
 } do
-	data.raw[typeAndName[1]][typeAndName[2]].energy_source.fuel_categories = {"chemical", "non-carbon"}
+	data.raw[typeAndName[1]][typeAndName[2]].energy_source.fuel_categories = table.deepcopy(expandedFuelCategories)
 end
 for _, typeAll in pairs{ -- Handle all cars (including tanks, boats) and locomotives (including big cargo ships)
 	"car",
@@ -44,11 +45,31 @@ for _, typeAll in pairs{ -- Handle all cars (including tanks, boats) and locomot
 } do
 	for ent in pairs(data.raw[typeAll]) do
 		if ent.burner then
-			ent.burner.fuel_categories = {"chemical", "non-carbon"}
+			ent.burner.fuel_categories = table.deepcopy(expandedFuelCategories)
 		end
 	end
 end
-data.raw["generator-equipment"]["personal-burner-generator"].burner.fuel_categories = {"chemical", "non-carbon"}
+data.raw["generator-equipment"]["personal-burner-generator"].burner.fuel_categories = table.deepcopy(expandedFuelCategories)
+
+-- Since pentapod eggs and biter eggs are now in a different fuel category, but should count as carbon-based, we need to make them burnable in heating towers etc.
+local function addEggFuelsToBurner(burner)
+	if burner.fuel_categories ~= nil and Table.hasEntry("chemical", burner.fuel_categories) then
+		table.insert(burner.fuel_categories, "activated-pentapod-egg")
+		table.insert(burner.fuel_categories, "biter-egg")
+	end
+end
+local function addEggFuelsToEnt(ent)
+	if ent.energy_source ~= nil and ent.energy_source.type == "burner" then
+		addEggFuelsToBurner(ent.energy_source)
+	elseif ent.burner ~= nil then
+		addEggFuelsToBurner(ent.burner)
+	end
+end
+for _, ents in pairs(data.raw) do
+	for _, ent in pairs(ents) do
+		addEggFuelsToEnt(ent)
+	end
+end
 
 -- Delete nuclear fuel, I don't like it, doesn't make sense. Even considering vehicles can use coal etc as fuel, so they have a heat engine rather than an ICE, they still wouldn't be able to run off a barely-critical lump of U-235 without radiation shielding, control rods, etc. which is basically a miniature nuclear reactor. I'd rather add a tech for nuclear tanks/cars/trains that only accept uranium fuel cells and are crafted using personal nuclear reactors.
 data.raw.item["nuclear-fuel"].hidden = true

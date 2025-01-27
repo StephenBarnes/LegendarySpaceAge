@@ -58,16 +58,16 @@ data.raw.lab.biolab.science_pack_drain_rate_percent = 25
 data:extend({
 	{
 		type = "fuel-category",
-		name = "pentapod-egg",
+		name = "activated-pentapod-egg",
 	},
 	{
 		type = "fuel-category",
 		name = "biter-egg",
 	},
 })
-data.raw.item["pentapod-egg"].fuel_category = "pentapod-egg"
+-- Pentapod egg fuel category will be added to activated eggs in gleba/activated-eggs.lua.
 data.raw.item["biter-egg"].fuel_category = "biter-egg"
-data.raw.lab.glebalab.energy_source.fuel_categories = {"pentapod-egg"}
+data.raw.lab.glebalab.energy_source.fuel_categories = {"activated-pentapod-egg"}
 data.raw.lab.glebalab.energy_source.burner_usage = "food" -- Determines icons and tooltips - either fuel, nutrients, or food.
 data.raw.lab.glebalab.energy_usage = "500kW" -- A pentapod egg is 5MJ, so consumes 1 every 10 seconds. (Modules will probably reduce that to 1/50s.)
 data.raw.lab.biolab.energy_source.type = "burner"
@@ -75,18 +75,6 @@ data.raw.lab.biolab.energy_source.fuel_inventory_size = 1
 data.raw.lab.biolab.energy_source.fuel_categories = {"biter-egg"}
 data.raw.lab.biolab.energy_source.burner_usage = "food"
 data.raw.lab.biolab.energy_usage = "3MW" -- A biter egg is 6MJ, so consumes 1 every 2 seconds. (Modules will probably reduce that to 1/10s.)
-
--- Since pentapod eggs and biter eggs are now in a different fuel category, we need to make them burnable in heating towers etc.
-for _, ents in pairs(data.raw) do
-	for _, ent in pairs(ents) do
-		if ent.energy_source ~= nil and ent.energy_source.type == "burner" then
-			if ent.energy_source.fuel_categories ~= nil and Table.hasEntry("chemical", ent.energy_source.fuel_categories) then
-				table.insert(ent.energy_source.fuel_categories, "pentapod-egg")
-				table.insert(ent.energy_source.fuel_categories, "biter-egg")
-			end
-		end
-	end
-end
 
 -- Move labs to a new row on the menu, bc right now it's overflowing by 1.
 local labSubgroup = table.deepcopy(data.raw["item-subgroup"]["production-machine"])
