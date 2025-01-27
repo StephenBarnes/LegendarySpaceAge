@@ -22,42 +22,6 @@ for _, recipeName in pairs{"artificial-yumako-soil", "artificial-jellynut-soil",
 	data.raw.recipe[recipeName].category = "organic"
 end
 
--- Gleba: create recipe for turning iron/copper bacteria into ore and fresh bacteria.
--- Note these don't accept prod modules, but biochamber has +50% prod which does apply.
--- TODO these were originally intended to make it feasible to keep a living stock of bacteria indefinitely when no ore is being used up; but now it doesn't work because the filtration recipe also produces ore. Need to fix this.
-local bacteriaFilterRecipes = {}
-for i, metal in pairs({"copper", "iron"}) do
-	local filterMetalRecipe = table.deepcopy(data.raw.recipe[metal.."-bacteria-cultivation"])
-	filterMetalRecipe.name = "filter-"..metal.."-bacteria"
-	filterMetalRecipe.ingredients = {
-		{type = "item", name = metal.."-bacteria", amount = 6},
-	}
-	filterMetalRecipe.results = {
-		{type = "item", name = metal.."-ore", amount = 2},
-		{type = "item", name = metal.."-bacteria", amount = 1},
-	}
-	filterMetalRecipe.result_is_always_fresh = true
-	filterMetalRecipe.main_product = metal.."-bacteria"
-	filterMetalRecipe.order = "f-"..i
-	filterMetalRecipe.category = "organic"
-	filterMetalRecipe.surface_conditions = nil
-	filterMetalRecipe.icons = {
-		{
-			icon = "__space-age__/graphics/icons/"..metal.."-bacteria.png",
-			scale = 0.4,
-			shift = {0, 0},
-		},
-		{
-			icon = "__base__/graphics/icons/" .. metal .. "-ore.png",
-			scale = 0.25,
-			shift = {7, 7},
-		},
-	}
-	table.insert(bacteriaFilterRecipes, filterMetalRecipe)
-	Tech.addRecipeToTech(filterMetalRecipe.name, "bacteria-cultivation", i+2)
-end
-data:extend(bacteriaFilterRecipes)
-
 -- Allow bacteria cultivation on any surface.
 data.raw.recipe["iron-bacteria-cultivation"].surface_conditions = nil
 data.raw.recipe["copper-bacteria-cultivation"].surface_conditions = nil
