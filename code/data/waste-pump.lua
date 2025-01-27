@@ -90,8 +90,8 @@ local effluentFluidsAndPollution = {
 	{"heavy-oil", 25},
 	{"light-oil", 15},
 	{"lubricant", 20},
-	{"thruster-fuel", 0},
-	{"thruster-oxidizer", 0},
+	{"thruster-fuel", 0}, -- hydrogen
+	{"thruster-oxidizer", 0}, -- oxygen
 	{"lava", 0},
 	{"holmium-solution", 0},
 	{"fulgoran-sludge", 0},
@@ -101,6 +101,7 @@ local effluentFluidsAndPollution = {
 	{"fluoroketone-hot", 0}, -- TODO remove this later, will replace fluoroketone with refrigerant and liquid nitrogen
 	{"fluoroketone-cold", 0}, -- TODO remove this later, will replace fluoroketone with refrigerant and liquid nitrogen
 	{"lithium-brine", 0},
+	-- TODO check that all liquids are included here.
 }
 for _, effluentFluidAndPollution in pairs(effluentFluidsAndPollution) do
 	local effluentFluid = effluentFluidAndPollution[1]

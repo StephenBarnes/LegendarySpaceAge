@@ -11,7 +11,7 @@ local filterItem = Table.copyAndEdit(data.raw.item["battery"], {
 	name = "filter",
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64}},
-	order = "a[basic-intermediates]-e1",
+	order = "b[chemistry]-a4",
 })
 table.insert(newData, filterItem)
 
@@ -20,7 +20,7 @@ local spentFilterItem = Table.copyAndEdit(data.raw.item["battery"], {
 	name = "spent-filter",
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/spent-filter.png", icon_size = 64}},
-	order = "a[basic-intermediates]-e2",
+	order = "b[chemistry]-a5",
 })
 table.insert(newData, spentFilterItem)
 

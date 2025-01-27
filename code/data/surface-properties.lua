@@ -61,3 +61,67 @@ for _, typeName in pairs{
 		end
 	end
 end
+
+-- Create surface property for "surface stability"
+local surfaceStability = table.deepcopy(data.raw["surface-property"]["pressure"])
+surfaceStability.name = "surface-stability"
+surfaceStability.default_value = 100
+data:extend{surfaceStability}
+for planetName, stabilityPercent in pairs{
+	aquilo = 5,
+	vulcanus = 90,
+	gleba = 95,
+} do
+	data.raw.planet[planetName].surface_properties["surface-stability"] = stabilityPercent
+end
+
+-- Make rail only buildable where surface stability at least 80%.
+-- Seems it's copying or sharing surface conditions between all rail types, so adding it to each of them will actually add the same condition many times.
+-- Also it's being shared with cars and tanks, which I don't want.
+for _, stabilityTypeKey in pairs{
+	{"straight-rail", "straight-rail"},
+	{"elevated-straight-rail", "elevated-straight-rail"},
+
+	{"curved-rail-a", "curved-rail-a"},
+	{"curved-rail-b", "curved-rail-b"},
+	{"elevated-curved-rail-a", "elevated-curved-rail-a"},
+	{"elevated-curved-rail-b", "elevated-curved-rail-b"},
+
+	{"half-diagonal-rail", "half-diagonal-rail"},
+	{"elevated-half-diagonal-rail", "elevated-half-diagonal-rail"},
+
+	{"rail-ramp", "rail-ramp"},
+	{"rail-support", "rail-support"},
+
+	{"legacy-straight-rail", "legacy-straight-rail"},
+	{"legacy-curved-rail", "legacy-curved-rail"},
+
+	{"train-stop", "train-stop"},
+	{"rail-signal", "rail-signal"},
+	{"rail-chain-signal", "rail-chain-signal"},
+	{"locomotive", "locomotive"},
+	{"cargo-wagon", "cargo-wagon"},
+	{"artillery-wagon", "artillery-wagon"},
+} do
+	local ent = data.raw[stabilityTypeKey[1]][stabilityTypeKey[2]]
+	if ent.surface_conditions == nil then
+		ent.surface_conditions = {}
+	else
+		ent.surface_conditions = table.deepcopy(ent.surface_conditions) -- Get rid of shared conditions, so adding surface stability here doesn't mess up cars etc.
+	end
+	table.insert(ent.surface_conditions, {
+		property = "surface-stability",
+		min = 80,
+	})
+end
+
+-- Update solar power in atmosphere for planets. Generally reducing it to make solar power less OP on planets. Still leaving it powerful for space platforms.
+for planetName, solarInAtmosphere in pairs{
+	vulcanus = 200, -- 400 to 200
+	gleba = 25, -- 50 to 25
+	nauvis = 50, -- 100 to 50
+	fulgora = 10, -- 20 to 10
+	aquilo = 2, -- Increasing 1% to 2% so it's a bit easier to get started.
+} do
+	data.raw.planet[planetName].surface_properties["solar-power"] = solarInAtmosphere
+end

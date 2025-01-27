@@ -18,8 +18,8 @@ local gunpowderItem = Table.copyAndEdit(data.raw.item["sulfur"], {
 	name = "gunpowder",
 	icons = {{icon = gunpowderPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
 	pictures = gunpowderPictures,
-	subgroup = "ammo",
-	order = "0",
+	subgroup = "raw-material", -- Could put it with ammo, but it's really an intermediate.
+	order = "b[chemistry]-a2",
 	auto_recycle = false, -- Can't get sulfur/sand/carbon back.
 })
 table.insert(newData, gunpowderItem)

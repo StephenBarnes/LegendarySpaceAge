@@ -110,12 +110,12 @@ data.raw.recipe["pump"].ingredients = {
 	{type="item", name="rubber", amount=2},
 }
 
--- Chemical plant - shouldn't require steel, since we're moving it to automation 1.
+-- Chemical plant - shouldn't require steel bc we're moving it to automation 1. Also no pipe ingredients bc it comes before pipe tech. But it should cost more than assembler 1 since it's faster.
 data.raw.recipe["chemical-plant"].ingredients = {
 	{type="item", name="iron-gear-wheel", amount=4},
 	{type="item", name="electronic-circuit", amount=4},
-	{type="item", name="iron-plate", amount=4},
-	{type="item", name="glass", amount=2},
+	{type="item", name="iron-plate", amount=12},
+	{type="item", name="glass", amount=4},
 }
 
 -- Lab should need fewer circuits since they have to be handcrafted early-game.

@@ -127,7 +127,6 @@ gasifierEnt.fluid_boxes = {
 		production_type = "input",
 		pipe_covers = pipecoverspictures(), -- Seems to be already globally defined.
 		volume = 20,
-		---@diagnostic disable-next-line: assign-type-mismatch
 		pipe_connections = { { flow_direction = "input", direction = defines.direction.west, position = {0, 0} } },
 		filter = "steam",
 	},
@@ -135,7 +134,6 @@ gasifierEnt.fluid_boxes = {
 		production_type = "output",
 		pipe_covers = pipecoverspictures(),
 		volume = 20,
-		---@diagnostic disable-next-line: assign-type-mismatch
 		pipe_connections = { { flow_direction = "output", direction = defines.direction.east, position = {0, 0} } },
 		filter = "syngas",
 	},
@@ -156,7 +154,6 @@ fluidGasifierEnt.energy_source = {
 		pipe_picture = furnacepipepictures,
 		pipe_covers = pipecoverspictures(),
 		pipe_connections = {
-			---@diagnostic disable-next-line: assign-type-mismatch
 			{flow_direction = "input", position = { 0, 0}, direction = defines.direction.north},
 		},
 		secondary_draw_orders = draworders,

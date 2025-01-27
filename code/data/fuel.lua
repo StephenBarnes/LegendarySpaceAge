@@ -34,12 +34,19 @@ for _, typeAndName in pairs{
 	{"reactor", "heating-tower"},
 	{"boiler", "boiler"},
 	{"inserter", "burner-inserter"},
-	{"car", "car"},
-	{"car", "tank"},
-	{"locomotive", "locomotive"},
 	{"mining-drill", "burner-mining-drill"},
 } do
 	data.raw[typeAndName[1]][typeAndName[2]].energy_source.fuel_categories = {"chemical", "non-carbon"}
+end
+for _, typeAll in pairs{ -- Handle all cars (including tanks, boats) and locomotives (including big cargo ships)
+	"car",
+	"locomotive"
+} do
+	for ent in pairs(data.raw[typeAll]) do
+		if ent.burner then
+			ent.burner.fuel_categories = {"chemical", "non-carbon"}
+		end
+	end
 end
 data.raw["generator-equipment"]["personal-burner-generator"].burner.fuel_categories = {"chemical", "non-carbon"}
 

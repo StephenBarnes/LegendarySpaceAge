@@ -134,6 +134,8 @@ local ventableFluids = {
 	{"syngas", 4, false},
 	{"ammonia", 10, false},
 	{"fluorine", 30, false},
+	{"thruster-fuel", 0, true}, -- hydrogen
+	{"thruster-oxidizer", 0, true}, -- oxygen
 
 	-- Liquids - only ventable in space.
 	{"water", 0, true},
@@ -144,8 +146,6 @@ local ventableFluids = {
 	{"cement-mix", 0, true},
 	{"latex", 0, true},
 	{"lubricant", 0, true},
-	{"thruster-fuel", 0, true},
-	{"thruster-oxidizer", 0, true},
 	{"molten-iron", 0, true},
 	{"molten-copper", 0, true},
 	{"molten-steel", 0, true},

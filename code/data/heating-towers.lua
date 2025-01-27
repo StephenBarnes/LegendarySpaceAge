@@ -19,9 +19,7 @@ fluidHeatingTowerEnt.energy_source = {
 		pipe_picture = greyPipes(),
 		pipe_covers = pipecoverspictures(),
 		pipe_connections = {
-			---@diagnostic disable-next-line: assign-type-mismatch
 			{flow_direction = "input-output", position = {1, 0}, direction = defines.direction.east},
-			---@diagnostic disable-next-line: assign-type-mismatch
 			{flow_direction = "input-output", position = {-1, 0}, direction = defines.direction.west},
 		},
 		secondary_draw_orders = draworders,
@@ -42,13 +40,9 @@ fluidHeatingTowerEnt.factoriopedia_alternative = "heating-tower"
 
 -- Adjust heat pipes, since I want the fluid pipes to be where the side heat pipes used to be.
 fluidHeatingTowerEnt.heat_buffer.connections = {
-	---@diagnostic disable-next-line: assign-type-mismatch
 	{position = {0, -1}, direction = defines.direction.north},
-	---@diagnostic disable-next-line: assign-type-mismatch
 	{position = {1, -1}, direction = defines.direction.east},
-	---@diagnostic disable-next-line: assign-type-mismatch
 	{position = {0, 1}, direction = defines.direction.south},
-	---@diagnostic disable-next-line: assign-type-mismatch
 	{position = {-1, -1}, direction = defines.direction.west},
 }
 
