@@ -4,7 +4,7 @@ data:extend{{
     type = "tips-and-tricks-item",
     name = "legendary-space-age-briefing",
     indent = 0,
-    order = "[]",
+    order = "A",
     trigger = nil,
     skip_trigger = nil,
     simulation = nil,

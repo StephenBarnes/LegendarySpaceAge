@@ -6,6 +6,7 @@ local Tech = require("code.util.tech")
 
 local Const = require("code.util.constants")
 
+-- Set fuel values for fluids (for fluid-fuelled vehicles, gasifiers, heating towers, boilers)
 for fluidName, fuelValues in pairs(Const.fluidFuelValues) do
 	data.raw.fluid[fluidName].fuel_value = fuelValues[1]
 	data.raw.fluid[fluidName].emissions_multiplier = fuelValues[2]

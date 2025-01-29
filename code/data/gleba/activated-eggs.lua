@@ -1,16 +1,16 @@
 -- This file creates "activated eggs" item and makes some changes to recipes etc. to implement them.
 
 local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
 
 -- Create activated egg item.
 local activatedEggItem = table.deepcopy(data.raw.item["pentapod-egg"])
 activatedEggItem.name = "activated-pentapod-egg"
+local activatedEggGraphics = "__LegendarySpaceAge__/graphics/gleba/activated-pentapod-egg/"
 activatedEggItem.pictures = {
-	{filename = "__LegendarySpaceAge__/graphics/gleba/activated-pentapod-egg/main.png", size = 64, scale = 0.5},
-	{filename = "__LegendarySpaceAge__/graphics/gleba/activated-pentapod-egg/1.png", size = 64, scale = 0.5},
-	{filename = "__LegendarySpaceAge__/graphics/gleba/activated-pentapod-egg/2.png", size = 64, scale = 0.5},
-	{filename = "__LegendarySpaceAge__/graphics/gleba/activated-pentapod-egg/3.png", size = 64, scale = 0.5},
+	{filename = activatedEggGraphics.."main.png", size = 64, scale = 0.5},
+	{filename = activatedEggGraphics.."1.png", size = 64, scale = 0.5},
+	{filename = activatedEggGraphics.."2.png", size = 64, scale = 0.5},
+	{filename = activatedEggGraphics.."3.png", size = 64, scale = 0.5},
 }
 activatedEggItem.icons = nil
 activatedEggItem.icon = activatedEggItem.pictures[4].filename
@@ -60,15 +60,15 @@ local eggReplicationRecipe = table.deepcopy(data.raw.recipe["pentapod-egg"])
 eggReplicationRecipe.ingredients = {
 	{type = "item", name = "activated-pentapod-egg", amount = 1},
 	{type = "item", name = "bioflux", amount = 1},
-	{type = "fluid", name = "slime", amount = 30},
+	{type = "fluid", name = "slime", amount = 5},
 }
 eggReplicationRecipe.results = {
 	{type = "item", name = "pentapod-egg", amount = 2},
 	{type = "item", name = "activated-pentapod-egg", amount = 1, probability = .1},
 }
 eggReplicationRecipe.main_product = "pentapod-egg"
--- It needs slime, so it's not easy on other planets. But you can barrel slime, so it's possible.
 eggReplicationRecipe.surface_conditions = nil
+	-- Allow it anywhere, though it's only really useful on Gleba (since science pack can only be crafted on Gleba, and pentapod labs can only be placed on Gleba).
 -- Remove icons so it defaults to the egg icon.
 eggReplicationRecipe.icon = nil
 eggReplicationRecipe.icons = nil
