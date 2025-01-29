@@ -7,10 +7,10 @@ local activatedEggItem = table.deepcopy(data.raw.item["pentapod-egg"])
 activatedEggItem.name = "activated-pentapod-egg"
 local activatedEggGraphics = "__LegendarySpaceAge__/graphics/gleba/activated-pentapod-egg/"
 activatedEggItem.pictures = {
-	{filename = activatedEggGraphics.."main.png", size = 64, scale = 0.5},
-	{filename = activatedEggGraphics.."1.png", size = 64, scale = 0.5},
-	{filename = activatedEggGraphics.."2.png", size = 64, scale = 0.5},
-	{filename = activatedEggGraphics.."3.png", size = 64, scale = 0.5},
+	{filename = activatedEggGraphics.."main.png", size = 64, scale = 0.5, draw_as_glow = true},
+	{filename = activatedEggGraphics.."1.png", size = 64, scale = 0.5, draw_as_glow = true},
+	{filename = activatedEggGraphics.."2.png", size = 64, scale = 0.5, draw_as_glow = true},
+	{filename = activatedEggGraphics.."3.png", size = 64, scale = 0.5, draw_as_glow = true},
 }
 activatedEggItem.icons = nil
 activatedEggItem.icon = activatedEggItem.pictures[4].filename
