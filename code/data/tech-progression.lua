@@ -187,6 +187,15 @@ Tech.addTechDependency("advanced-circuit", "electric-engine")
 Tech.addTechDependency("advanced-circuit", "advanced-material-processing-2")
 Tech.addTechDependency("advanced-circuit", "tank")
 
+-- Gleba science pack
+data.raw.recipe["agricultural-science-pack"].ingredients = {
+	{type = "item", name = "slipstack-pearl", amount = 1},
+	{type = "item", name = "activated-pentapod-egg", amount = 1},
+	{type = "item", name = "stingfrond-sprout", amount = 1},
+		-- Want it to be tied to cyclosomes, not neurofibrils. And don't want to have to worry about the phase, so using sprout rather than cyclosomes.
+	-- TODO add boompuff thing here later
+}
+
 -- TODO other science packs.
 
 -- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.

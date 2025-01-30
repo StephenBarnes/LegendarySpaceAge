@@ -41,6 +41,16 @@ data:extend({stingfrondPlant})
 ------------------------------------------------------------------------
 --- Create items for products of stingfrond farming.
 
+-- Subgroup for stingfrond items and recipes.
+data:extend{
+	{
+		type = "item-subgroup",
+		name = "stingfrond-products",
+		group = "intermediate-products",
+		order = "n2",
+	},
+}
+
 -- Create cyclosomes
 ---@type data.Sprite[]
 local cyclosomePics = {} -- Picture variants
@@ -66,6 +76,7 @@ for i = 1, 5 do
 	local cyclosome = table.deepcopy(data.raw.item["tree-seed"])
 	cyclosome.name = "cyclosome-"..i
 	cyclosome.localised_name = nil
+	cyclosome.localised_description = {"item-description.cyclosome"}
 	cyclosome.pictures = table.deepcopy(cyclosomePics)
 	for _, pic in pairs(cyclosome.pictures) do
 		pic.tint = phaseTints[i]
@@ -75,6 +86,8 @@ for i = 1, 5 do
 	cyclosome.icon = nil
 	cyclosome.icons = {{icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/cyclosomes/"..i..".png", icon_size = 64, scale = 0.5, icon_mipmaps = 4, tint = phaseTints[i]}}
 		-- Give each one a different variant as main icon.
+	cyclosome.subgroup = "stingfrond-products"
+	cyclosome.order = "z"..i
 	cyclosomeItems[i] = cyclosome
 end
 data:extend(cyclosomeItems)
@@ -84,8 +97,9 @@ local stingfrondSprout = table.deepcopy(data.raw.item["tree-seed"])
 stingfrondSprout.name = "stingfrond-sprout"
 stingfrondSprout.localised_name = nil
 stingfrondSprout.plant_result = "stingfrond"
-stingfrondSprout.icon = nil
-stingfrondSprout.icons = {{icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/sprout.png", icon_size = 64, scale = 0.5, icon_mipmaps = 4}}
+stingfrondSprout.icon = "__space-age__/graphics/icons/stingfrond.png"
+stingfrondSprout.subgroup = "stingfrond-products"
+stingfrondSprout.order = "a"
 data:extend{stingfrondSprout}
 
 -- Create neurofibril item
@@ -102,7 +116,14 @@ neurofibril.fuel_category = "chemical"
 neurofibril.fuel_value = "1MJ"
 neurofibril.name = "neurofibril"
 neurofibril.pictures = neurofibrilPics
+neurofibril.icon = nil
+neurofibril.icons = {{icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/neurofibrils/1.png", icon_size = 64, scale = 0.5, icon_mipmaps = 4}}
+neurofibril.subgroup = "stingfrond-products"
+neurofibril.order = "b"
 data:extend{neurofibril}
+
+data.raw.item["carbon-fiber"].subgroup = "stingfrond-products"
+data.raw.item["carbon-fiber"].order = "c"
 
 ------------------------------------------------------------------------
 --[[ Create techs.
@@ -135,6 +156,7 @@ stingfrondTech2.prerequisites = {"stingfronds-1"}
 stingfrondTech2.research_trigger = {
 	type = "craft-item",
 	item = "stingfrond-sprout",
+	count = 20,
 }
 stingfrondTech2.effects = {
 	{
@@ -166,14 +188,25 @@ sproutRecipe.ingredients = {
 sproutRecipe.results = {
 	{type = "item", name = "stingfrond-sprout", amount = 1, probability = 0.2},
 }
+sproutRecipe.icon = nil
+sproutRecipe.subgroup = "stingfrond-products"
+sproutRecipe.order = "a"
+sproutRecipe.energy_required = 5
+sproutRecipe.crafting_machine_tint = {
+	primary = phaseTints[1],
+	secondary = phaseTints[2],
+}
 data:extend{sproutRecipe}
 
 -- 4 neurofibril -> 1 carbon fiber
 data.raw.recipe["carbon-fiber"].ingredients = {
 	{type = "item", name = "neurofibril", amount = 4},
 }
+data.raw.recipe["carbon-fiber"].subgroup = "stingfrond-products"
+data.raw.recipe["carbon-fiber"].order = "b"
 
--- Resynchronization: 5 cyclosome A + ... + 5 cyclosome E -> 30 cyclosome C
+-- Resynchronization: 5 cyclosome A + ... + 5 cyclosome E + 2 neurofibrils -> 50 cyclosome C
+-- The neurofibrils are in this recipe to ensure cyclosome amount is still limited by farms.
 local resyncRecipe = table.deepcopy(data.raw.recipe["bioflux"])
 resyncRecipe.name = "cyclosome-resynchronization"
 resyncRecipe.ingredients = {
@@ -182,19 +215,46 @@ resyncRecipe.ingredients = {
 	{type = "item", name = "cyclosome-3", amount = 5},
 	{type = "item", name = "cyclosome-4", amount = 5},
 	{type = "item", name = "cyclosome-5", amount = 5},
+	{type = "item", name = "neurofibril", amount = 2},
 }
 resyncRecipe.results = {
-	{type = "item", name = "cyclosome-3", amount = 50},
+	{type = "item", name = "cyclosome-3", amount = 50, show_details_in_recipe_tooltip = false},
 }
 resyncRecipe.main_product = "cyclosome-3"
+resyncRecipe.show_amount_in_title = false
 resyncRecipe.allow_productivity = false
 resyncRecipe.maximum_productivity = 0
--- TODO icon
+resyncRecipe.subgroup = "stingfrond-products"
+resyncRecipe.order = "c"
+resyncRecipe.energy_required = 10
+resyncRecipe.icon = nil
+local fifthRoots = { -- 5th roots of unity, forming a pentagon, used to make the icons of the cyclosome recipes.
+	{1, 0},
+	{0.3090169944, 0.9510565163},
+	{-0.8090169944, 0.5877852523},
+	{-0.8090169944, -0.5877852523},
+	{0.3090169944, -0.9510565163},
+}
+resyncRecipe.icons = {} -- The icons of the 5 cyclosome items, arranged in a pentagon.
+for i = 1, 5 do
+	table.insert(resyncRecipe.icons, {
+		icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/cyclosomes/"..i..".png",
+		icon_size = 64,
+		scale = 0.2,
+		shift = {fifthRoots[i][1] * 8, fifthRoots[i][2] * 8},
+		tint = phaseTints[i],
+	})
+end
+resyncRecipe.crafting_machine_tint = {
+	primary = phaseTints[1],
+	secondary = phaseTints[2],
+	tertiary = phaseTints[3],
+}
 data:extend{resyncRecipe}
 
 -- Explosive desynchronization: 10 cyclosome A + 1 explosives -> 0-3 cyclosome A + ... + 0-3 cyclosome E
 -- So total 0-15, mean 7.5.
-local desyncRecipe = table.deepcopy(data.raw.recipe["bioflux"])
+local desyncRecipe = table.deepcopy(resyncRecipe)
 desyncRecipe.name = "explosive-desynchronization"
 desyncRecipe.ingredients = {
 	{type = "item", name = "cyclosome-1", amount = 10},
@@ -207,7 +267,16 @@ desyncRecipe.results = {
 	{type = "item", name = "cyclosome-4", amount_min = 0, amount_max = 3, show_details_in_recipe_tooltip = false},
 	{type = "item", name = "cyclosome-5", amount_min = 0, amount_max = 3, show_details_in_recipe_tooltip = false},
 }
-desyncRecipe.allow_productivity = false
-desyncRecipe.maximum_productivity = 0
--- TODO icon
+desyncRecipe.order = "d"
+desyncRecipe.icons = table.deepcopy(resyncRecipe.icons)
+table.insert(desyncRecipe.icons, {
+	icon = "__base__/graphics/icons/explosives.png",
+	icon_size = 64,
+	scale = 0.28,
+})
+desyncRecipe.crafting_machine_tint = {
+	primary = phaseTints[1],
+	secondary = phaseTints[2],
+	tertiary = phaseTints[3],
+}
 data:extend{desyncRecipe}
