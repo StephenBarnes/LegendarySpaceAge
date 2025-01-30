@@ -177,13 +177,14 @@ table.insert(data.raw.technology["carbon-fiber"].prerequisites, "stingfronds-2")
 ------------------------------------------------------------------------
 --- Create recipes.
 
--- cyclosome 1 + 10 sulfuric acid + 10 water -> 20% stingfrond sprout
+-- cyclosome 1 + 10 water + 1 bioflux -> 20% stingfrond sprout
+-- So bioflux is needed, as for all "tier 2" crops, but the recipe otherwise isn't very expensive.
 local sproutRecipe = table.deepcopy(data.raw.recipe["bioflux"])
 sproutRecipe.name = "stingfrond-sprout"
 sproutRecipe.ingredients = {
 	{type = "item", name = "cyclosome-1", amount = 1},
-	{type = "fluid", name = "sulfuric-acid", amount = 10},
 	{type = "fluid", name = "water", amount = 10},
+	{type = "item", name = "bioflux", amount = 1},
 }
 sproutRecipe.results = {
 	{type = "item", name = "stingfrond-sprout", amount = 1, probability = 0.2},
