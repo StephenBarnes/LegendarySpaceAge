@@ -23,7 +23,7 @@ Tech.addTechDependency("tree-seeding", "planet-discovery-gleba")
 
 -- Cut out the agriculture tech on Gleba.
 Tech.hideTech("agriculture")
-for _, techName in pairs{"jellynut", "yumako", "slipstack-propagation"} do
+for _, techName in pairs{"jellynut", "yumako"} do
 	data.raw.technology[techName].prerequisites = {"planet-discovery-gleba"}
 end
 

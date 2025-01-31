@@ -1,83 +1,101 @@
--- This file has tweaks to the Slipstack mod by LordMiguel.
--- I'm renaming his "slipstack polyp" to "slipstack nest", and adding a recipe to create it from "slipstack pearls" which are the blobs that come out from the tops of slipstacks.
--- Also changing his water-filtration recipe to the recipe for making slipstack nests out of pearls and rocks.
+-- This file makes slipstacks a farmable crop, and creates items/techs/recipes for them.
+-- Some of the code might be copied from Slipstack Agriculture mod by LordMiguel. Originally that mod was a dependency of this modpack, but I decided to instead implement stuff separately.
+-- Note: the new mapgen preset reduces stone spawns on Gleba, partly to encourage slipstack farming.
 
-local Recipe = require("code.util.recipe")
-local Tech = require("code.util.tech")
+------------------------------------------------------------------------
+--- Change slipstack from type "tree" to type "plant", so it's farmable.
 
--- The mod changes slipstack's minable.results from 6 spoilage, 4 stone, to 50 spoilage, 100 stone.
--- I'm reducing it, same as for yumako/jellystem plants.
--- Also reducing it bc you might be doing this only for the pearls, and have to get rid of stone.
-slipstackMinableResults = {
-	{type = "item", name = "spoilage", amount = 10 },
+---@type data.PlantPrototype
+---@diagnostic disable-next-line: assign-type-mismatch
+local slipstackPlant = table.deepcopy(data.raw.tree.slipstack)
+slipstackPlant.type = "plant"
+
+slipstackPlant.growth_ticks = 60 * 60 * 10 -- 10 minutes; compare to yumako/jellystem at 5 minutes.
+slipstackPlant.placeable_by = {item = "slipstack-nest", count = 1}
+slipstackPlant.autoplace.tile_restriction = {
+	--"wetland-blue-slime",
+	"wetland-light-dead-skin",
+	"wetland-dead-skin",
+	"wetland-pink-tentacle",
+	"wetland-red-tentacle",
+}
+-- Make them visible on map. TODO change
+slipstackPlant.map_color = {200, 200, 200}
+-- Edit color shown in ag tower.
+slipstackPlant.agricultural_tower_tint = {
+	primary = {r = 0.15, g = 0.22, b = 0.38, a = 1},
+	secondary = {r = 0.361, g = 0.113, b = 0.308, a = 1},
+}
+
+-- Harvesting slipstacks produces stone and pearls.
+slipstackPlant.minable.results = {
 	{type = "item", name = "stone", amount_min = 5, amount_max = 15 },
 	{type = "item", name = "slipstack-pearl", amount_min = 5, amount_max = 15}
 }
-data.raw.plant["slipstack-plant"].minable.results = slipstackMinableResults
-data.raw.tree["slipstack"].minable.results = slipstackMinableResults
-
--- Grow time is 10 minutes. Jellystem/yumako is 5 minutes. Fulgorites 20 minutes. So I think it's fine.
-
--- Could move the tech to after Gleba science. But rather incorporating it into early game.
-
--- Change research icon to just be a slipstack.
-data.raw.technology["slipstack-propagation"].icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-tech.png"
-
--- Allow recipe in chem plant or biochamber.
-data.raw.recipe["slipstack-seed"].category = "organic-or-chemistry"
-
--- Hide the tree.slipstack thing in the factoriopedia, rather redirect to the plant.
-data.raw.tree["slipstack"].factoriopedia_alternative = "slipstack-plant"
-
--- Change the plant's icon in factoriopedia, bc it's currently jellystem.
-data.raw.plant["slipstack-plant"].icon = data.raw.tree["slipstack"].icon
-data.raw.plant["slipstack-plant"].icons = data.raw.tree["slipstack"].icons
-
--- Add a new item for slipstack pearls which aren't plantable themselves but get turned into seeds.
-local pearlItem = table.deepcopy(data.raw.item.spoilage)
-pearlItem.name = "slipstack-pearl"
-pearlItem.order = "a[organic-processing]-da[slipstack-pearl]"
-pearlItem.subgroup = "agriculture-products"
-pearlItem.spoil_ticks = 60 * 60 * 20
-pearlItem.spoil_result = "spoilage"
-pearlItem.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png"
-data:extend({pearlItem})
-
--- Remove the water-filtering recipe. Player can collect some pearls manually from mining slipstacks (or remotely), then replicate them via farming.
--- I'll leave the recipe, but rename it and change ingredients.
-data.raw.recipe["slipstack-seed"].ingredients = {
-	{ type = "item", name = "slipstack-pearl", amount = 10 },
-	{ type = "item", name = "iron-ore", amount = 4 },
-	{ type = "item", name = "nutrients", amount = 2 },
-}
-data.raw.recipe["slipstack-seed"].results = {{type = "item", name = "slipstack-seed", amount = 1}}
-data.raw.recipe["slipstack-seed"].surface_conditions = nil -- Allow anywhere. Can't be planted anywhere else, though.
-data.raw.recipe["slipstack-seed"].category = "organic" -- In biochamber only.
-data.raw.item["slipstack-seed"].spoil_ticks = 60 * 60 * 20
-data.raw.item["slipstack-seed"].spoil_result = "iron-ore"
-
 -- Make slipstacks absorb spores.
 -- A jellystem produces 15 spores per harvest, and grows 5m. Yumako is the same. So per second it's 15/(5*60) = 0.05.
 -- They also produce -0.001/s pollution (not spores), which is weird bc there's no pollution on Gleba.
 -- Hm, making it -0.01/s so 5 slipstacks cancel out 1 jellystem or yumako tree.
---data.raw.plant["slipstack-plant"].emissions_per_second = {spores = -(data.raw.plant["jellystem"].emissions_per_second.pollution/2)}
-data.raw.plant["slipstack-plant"].emissions_per_second = {spores = -0.01}
+slipstackPlant.emissions_per_second = {spores = -.01}
 
--- Make the seeds non-burnable, since they're supposed to be mostly rock and there's no risk of having too many.
-data.raw.item["slipstack-seed"].fuel_category = nil
-data.raw.item["slipstack-seed"].fuel_value = nil
--- Make the pearls burnable.
-data.raw.item["slipstack-pearl"].fuel_category = "chemical"
-data.raw.item["slipstack-pearl"].fuel_value = "1MJ" -- compared to spoilage 250kJ and wood 2MJ.
+-- Delete old slipstack tree, add new slipstack plant.
+data.raw.tree.slipstack = nil
+data:extend{slipstackPlant}
 
--- Trying: allow recycling slipstack nests to recover the pearls.
+------------------------------------------------------------------------
+--- Create items
+
+-- Create item for slipstack pearl
+local slipstackPearl = table.deepcopy(data.raw.item.spoilage)
+slipstackPearl.name = "slipstack-pearl"
+slipstackPearl.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png"
+slipstackPearl.order = "a[organic-processing]-da[slipstack-pearl]"
+slipstackPearl.subgroup = "agriculture-products"
+slipstackPearl.spoil_ticks = 60 * 60 * 20
+slipstackPearl.spoil_result = "spoilage"
+slipstackPearl.fuel_category = "chemical"
+slipstackPearl.fuel_value = "1MJ" -- Compared to spoilage 250kJ and wood 2MJ.
+data:extend{slipstackPearl}
+
+-- Create item for slipstack nest
+local slipstackNest = table.deepcopy(data.raw.item["iron-ore"])
+slipstackNest.name = "slipstack-nest"
+slipstackNest.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-nest.png"
+slipstackNest.order = "a[organic-processing]-da[slipstack-nest]"
+slipstackNest.subgroup = "agriculture-products"
+slipstackNest.spoil_ticks = 60 * 60 * 20
+slipstackNest.spoil_result = "stone"
+-- Make the nests non-burnable, since they're supposed to be mostly rock and there's no risk of having too many.
+slipstackNest.fuel_category = nil
+slipstackNest.fuel_value = nil
+slipstackNest.plant_result = "slipstack"
+data:extend{slipstackNest}
+
+------------------------------------------------------------------------
+--- Create recipes
+
+-- Recipe for making slipstack nest from pearls and rocks
+local slipstackNestRecipe = table.deepcopy(data.raw.recipe["bioflux"])
+slipstackNestRecipe.name = "slipstack-nest"
+slipstackNestRecipe.ingredients = {
+	{ type = "item", name = "slipstack-pearl", amount = 4 }, -- Requires less than it yields (10), so you don't need a prod bonus to make it sustainable.
+	{ type = "item", name = "stone", amount = 4 },
+	{ type = "item", name = "nutrients", amount = 2 },
+}
+slipstackNestRecipe.category = "organic-or-assembling"
+slipstackNestRecipe.results = {{type = "item", name = "slipstack-nest", amount = 1}}
+slipstackNestRecipe.surface_conditions = nil -- Allow anywhere. Can't be planted anywhere else, though.
 ---@diagnostic disable-next-line: inject-field
-data.raw.recipe["slipstack-seed"].auto_recycle = true
+slipstackNestRecipe.auto_recycle = true
+slipstackNestRecipe.icon = nil
+data:extend{slipstackNestRecipe}
 
--- Give slipstacks some applications: bioplastic.
--- Also putting it in the science packs.
--- Could also put it in carbon fiber, or biosulfur.
---Recipe.addIngredients("biosulfur", {{type = "item", name = "slipstack-pearl", amount = 1}})
+------------------------------------------------------------------------
+--- Adjust recipes for applications
+-- TODO actually all of these recipes should just be redefined wholesale, not like this.
+
+local Recipe = require("code.util.recipe")
+
 Recipe.addIngredients("bioplastic", {{type = "item", name = "slipstack-pearl", amount = 1}})
 
 -- Change Gleba biolubricant recipe to require slipstack pearls.
@@ -88,11 +106,24 @@ data.raw.recipe["biolubricant"].ingredients = {
 	{ type = "item", name = "slipstack-pearl", amount = 5 },
 }
 
+-- Could also put it in carbon fiber, or biosulfur.
+
+------------------------------------------------------------------------
+--- Create tech
+
+local slipstackTech = table.deepcopy(data.raw.technology["biochamber"])
+slipstackTech.name = "slipstack-propagation"
+slipstackTech.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-tech.png"
+slipstackTech.prerequisites = {"planet-discovery-gleba"}
+slipstackTech.research_trigger = {
+	type = "mine-entity",
+	entity = "slipstack",
+}
+slipstackTech.effects = {
+	{type = "unlock-recipe", recipe = "slipstack-nest"},
+}
+data:extend{slipstackTech}
+
 -- Add slipstack agriculture as prereq to bioflux processing, since it's now needed for plastic, plus it'll be needed for science pack.
+local Tech = require("code.util.tech")
 Tech.addTechDependency("slipstack-propagation", "bioflux-processing")
-
--- Change slipstack nests to use edited version of the icon from Slipstack Agriculture mod, to make the pearls more visible and match the color of my pearl icon.
-data.raw.item["slipstack-seed"].icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-nest.png"
-
--- Note: mapgen preset reduces stone spawns on Gleba, partly to encourage slipstack farming. I beat Space Age on the starter patch, without importing stuff to Gleba.
--- Note: we need some way to void stuff on Gleba, eg the stone produced by slipstacks, else you might only want to farm slipstacks for the pearls and then you have to dump the stone into chests somewhere.

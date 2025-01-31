@@ -32,12 +32,5 @@ gasFurnaceEnt.graphics_set.animation.layers[1].filename = "__LegendarySpaceAge__
 Tech.removeRecipeFromTech("gas-furnace", "fluid-handling")
 Tech.addRecipeToTech("gas-furnace", "advanced-material-processing")
 
--- Change recipe from 4 pipe + 2 pump + 1 steel furnace, to rather use steel furnace ingredients plus some pipes.
-data.raw.recipe["gas-furnace"].ingredients = {
-	{ type = "item", name = "steel-plate", amount = 6 },
-	{ type = "item", name = "stone-brick", amount = 10 },
-	{ type = "item", name = "pipe", amount = 4 },
-}
-
 -- Should only be able to place where there's oxygen.
 gasFurnaceEnt.surface_conditions = data.raw["mining-drill"]["burner-mining-drill"].surface_conditions

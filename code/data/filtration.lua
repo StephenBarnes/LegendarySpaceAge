@@ -13,6 +13,7 @@ local filterItem = Table.copyAndEdit(data.raw.item["battery"], {
 	icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64}},
 	order = "02-2",
 	subgroup = "fluid-recipes",
+	weight = 1000,
 })
 table.insert(newData, filterItem)
 
@@ -23,6 +24,7 @@ local spentFilterItem = Table.copyAndEdit(data.raw.item["battery"], {
 	icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/spent-filter.png", icon_size = 64}},
 	order = "02-2",
 	subgroup = "fluid-recipes",
+	weight = 1000,
 })
 table.insert(newData, spentFilterItem)
 
@@ -217,7 +219,7 @@ local filterSlimeRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], 
 	results = {
 		{type = "fluid", name = "water", amount = 300},
 		{type = "item", name = "spent-filter", amount = 1},
-		{type = "item", name = "spoilage", amount_min = 0, amount_max = 20, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "spoilage", amount = 10, show_details_in_recipe_tooltip = false},
 		--{type = "item", name = "iron-bacteria", amount = 1, probability = .01, show_details_in_recipe_tooltip = false},
 		--{type = "item", name = "copper-bacteria", amount = 1, probability = .01, show_details_in_recipe_tooltip = false},
 		-- Could give eggs or fruits with some small probability. But rather not, since that makes it too easy to restart cycles.

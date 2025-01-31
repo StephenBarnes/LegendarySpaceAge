@@ -37,15 +37,18 @@ data:extend{emptyGasTankItem}
 local emptyGasTankRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 	name = "gas-tank",
 	ingredients = {
-		{type = "item", name = "steel-plate", amount = 2},
-		{type = "item", name = "rubber", amount = 1},
+		{type = "item", name = "rigid-structure", amount = 1},
+		{type = "item", name = "fluid-fitting", amount = 2},
 	},
 	results = {{type = "item", name = "gas-tank", amount = 1}},
 })
 data:extend{emptyGasTankRecipe}
 
 -- Edit recipe for barrel - previously only 1 steel plate.
-data.raw.recipe["barrel"].ingredients = {{type = "item", name = "steel-plate", amount = 2}}
+data.raw.recipe["barrel"].ingredients = {
+	{type = "item", name = "rigid-structure", amount = 2},
+	{type = "item", name = "fluid-fitting", amount = 1},
+}
 
 -- Create subgroup for recipes filling and emptying gas tanks.
 data:extend{

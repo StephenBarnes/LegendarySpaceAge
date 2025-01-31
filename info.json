@@ -54,8 +54,8 @@
 		, "! any-planet-start"
 
 		, "! fluroflux"
-		, "! GROUP-to-incorporate-and-mark-incompatible"
-		, "slipstacks"
+		, "! slipstacks"
+		, "! boompuff-agriculture"
 
 		, "! GROUP-mark-optional-before-release"
 		, "factoryplanner"

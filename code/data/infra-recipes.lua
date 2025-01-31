@@ -7,6 +7,17 @@ local Tech = require("code.util.tech")
 data.raw.recipe["stone-brick"].category = "smelting-or-metallurgy-or-handcrafting"
 data.raw.recipe["stone-furnace"].ingredients = {{type="item", name="stone-brick", amount=5}}
 
+-- Furnaces
+data.raw.recipe["steel-furnace"].ingredients = {
+	{type="item", name="rigid-structure", amount=6},
+	{type="item", name="thermal-casing", amount=6},
+}
+data.raw.recipe["gas-furnace"].ingredients = {
+	{type="item", name="rigid-structure", amount=6},
+	{type="item", name="thermal-casing", amount=6},
+	{type="item", name="fluid-fitting", amount=8},
+}
+
 -- Vehicles
 data.raw.recipe["car"].ingredients = {
 	{type="item", name="engine-unit", amount=8},
