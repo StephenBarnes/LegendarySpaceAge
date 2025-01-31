@@ -61,14 +61,16 @@ data:extend{slipstackPearl}
 local slipstackNest = table.deepcopy(data.raw.item["iron-ore"])
 slipstackNest.name = "slipstack-nest"
 slipstackNest.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-nest.png"
+slipstackNest.pictures = nil
 slipstackNest.order = "a[organic-processing]-da[slipstack-nest]"
 slipstackNest.subgroup = "agriculture-products"
 slipstackNest.spoil_ticks = 60 * 60 * 20
 slipstackNest.spoil_result = "stone"
--- Make the nests non-burnable, since they're supposed to be mostly rock and there's no risk of having too many.
+-- Make the nests non-burnable, since thy're supposed to be mostly rock and there's no risk of having too many.
 slipstackNest.fuel_category = nil
 slipstackNest.fuel_value = nil
 slipstackNest.plant_result = "slipstack"
+slipstackNest.place_result = "slipstack"
 data:extend{slipstackNest}
 
 ------------------------------------------------------------------------

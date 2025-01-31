@@ -86,7 +86,7 @@ data:extend{
 		type = "item-subgroup",
 		name = "early-agriculture",
 		group = "intermediate-products",
-		order = "g3",
+		order = "gf",
 	},
 }
 data.raw["item-subgroup"]["agriculture-processes"].order = "m2"

@@ -6,12 +6,12 @@ Explanation for why these exist:
 	So this mod/modpack creates "intermediate factors" that have alternative recipes, and then those intermediate factors are used to make various kinds of infrastructure.
 	These intermediate factors "factor out" the alternative recipes (hence the name), effectively allowing multiple ways to make each end product, without needing 5 recipes for assemblers or whatever.
 	An intermediate factor is defined by its FUNCTION or PROPERTIES, rather than by its COMPOSITION.
-		For example, a "rigid structure" is a thing that is rigid enough to make buildings. It doesn't matter if it's made of wood, iron, or stone. But there's no recipe for making it from rubber, because rubber is not rigid.
+		For example, a "frame" is a framework that is rigid enough to make buildings. It doesn't matter if it's made of wood, iron, or steel. But there's no recipe for making it from rubber, because rubber is not rigid.
 	Note that the base game's "low-density structure" is named after its function/properties (low density). We hijack it as an intermediate factor, moving it to the early game.
 ]]
 
-require("code.data.intermediate-factors.rigid-structure")
-require("code.data.intermediate-factors.lightweight-structure")
+require("code.data.intermediate-factors.frame")
+require("code.data.intermediate-factors.cladding")
 require("code.data.intermediate-factors.fluid-fitting")
-require("code.data.intermediate-factors.thermal-casing")
+require("code.data.intermediate-factors.lightweight-structure")
 require("code.data.intermediate-factors.sensor")

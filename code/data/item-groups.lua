@@ -42,28 +42,28 @@ data:extend{
 		order = "ge",
 	},
 
-	-- Create subgroups for intermediate factors (rigid structure, etc.)
+	-- Create subgroups for intermediate factors
 	{
 		type = "item-subgroup",
-		name = "rigid-structure",
+		name = "frame",
 		group = "intermediate-products",
 		order = "c1",
 	},
 	{
 		type = "item-subgroup",
-		name = "lightweight-structure",
+		name = "cladding",
 		group = "intermediate-products",
 		order = "c2",
 	},
 	{
 		type = "item-subgroup",
-		name = "fluid-fitting",
+		name = "lightweight-structure",
 		group = "intermediate-products",
 		order = "c3",
 	},
 	{
 		type = "item-subgroup",
-		name = "thermal-casing",
+		name = "fluid-fitting",
 		group = "intermediate-products",
 		order = "c4",
 	},

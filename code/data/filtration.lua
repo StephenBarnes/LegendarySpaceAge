@@ -108,7 +108,7 @@ data.raw.technology["holmium-processing"].research_trigger.count = 10
 local filterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], {
 	name = "filter",
 	ingredients = {
-		{type = "item", name = "rigid-structure", amount = 1},
+		{type = "item", name = "frame", amount = 1},
 		{type = "item", name = "carbon", amount = 1},
 	},
 	results = {

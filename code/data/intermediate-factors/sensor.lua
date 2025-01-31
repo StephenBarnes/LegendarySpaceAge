@@ -14,7 +14,7 @@ basicRecipe.name = "sensor-from-basic"
 basicRecipe.ingredients = {
 	{type = "item", name = "electronic-circuit", amount = 2},
 	{type = "item", name = "glass", amount = 2},
-	{type = "item", name = "rigid-structure", amount = 1}
+	{type = "item", name = "frame", amount = 1}
 }
 basicRecipe.results = {{type = "item", name = "sensor", amount = 1}}
 basicRecipe.enabled = true

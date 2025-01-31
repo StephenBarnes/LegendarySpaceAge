@@ -9,13 +9,13 @@ data.raw.recipe["stone-furnace"].ingredients = {{type="item", name="stone-brick"
 
 -- Furnaces
 data.raw.recipe["steel-furnace"].ingredients = {
-	{type="item", name="rigid-structure", amount=6},
-	{type="item", name="thermal-casing", amount=6},
+	{type="item", name="frame", amount=4},
+	{type="item", name="cladding", amount=10},
 }
 data.raw.recipe["gas-furnace"].ingredients = {
-	{type="item", name="rigid-structure", amount=6},
-	{type="item", name="thermal-casing", amount=6},
-	{type="item", name="fluid-fitting", amount=8},
+	{type="item", name="frame", amount=4},
+	{type="item", name="cladding", amount=10},
+	{type="item", name="fluid-fitting", amount=4},
 }
 
 -- Vehicles

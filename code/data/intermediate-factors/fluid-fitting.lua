@@ -30,8 +30,8 @@ recipeFromCopper.energy_required = 6
 recipeFromCopper.icon = nil
 recipeFromCopper.icons = {
 	{icon = mainIcon, icon_size = 64, scale = 0.5},
-	{icon = "__base__/graphics/icons/copper-plate.png", icon_size = 64, scale = 0.2, shift = {-8, -8}},
-	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.2, shift = {8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.2, shift = {-8, -8}},
+	{icon = "__base__/graphics/icons/copper-plate.png", icon_size = 64, scale = 0.2, shift = {8, -8}},
 }
 data:extend{recipeFromCopper}
 
