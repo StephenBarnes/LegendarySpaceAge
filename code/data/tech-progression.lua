@@ -80,9 +80,9 @@ Tech.setUnit("coal-liquefaction", {count = 200, ingredients = {{"automation-scie
 Tech.addTechDependency("rubber-1", "electric-energy-distribution-1")
 
 -- Concrete no longer needs automation-2 since assembling machine 1 can handle fluids.
-Tech.setPrereqs("concrete", {"advanced-material-processing"})
+Tech.setPrereqs("concrete", {"cement", "steel-processing"})
 -- Same for fluid-handling.
-Tech.setPrereqs("fluid-handling", {"engine", "rubber-1"})
+Tech.setPrereqs("fluid-handling", {"steel-processing", "rubber-1", "logistic-science-pack"})
 
 -- Plastics need syngas.
 Tech.setPrereqs("plastics", {"coal-liquefaction"})
@@ -140,7 +140,7 @@ Tech.setPrereqs("automation-2", {"advanced-circuit"})
 Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine", "processing-unit", "speed-module"})
 
 -- Heating tower tech should be early.
-Tech.setPrereqs("heating-tower", {"steam-power", "concrete"})
+Tech.setPrereqs("heating-tower", {"concrete", "logistic-science-pack"})
 data.raw.technology["heating-tower"].unit = {count = 300, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 30}
 data.raw.technology["heating-tower"].research_trigger = nil
 

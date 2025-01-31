@@ -116,9 +116,9 @@ data.raw.recipe["turbo-splitter"].ingredients = {
 
 -- Pumps
 data.raw.recipe["pump"].ingredients = {
-	{type="item", name="pipe", amount=2},
-	{type="item", name="engine-unit", amount=1},
-	{type="item", name="rubber", amount=2},
+	{type="item", name="frame", amount=2},
+	{type="item", name="fluid-fitting", amount=2},
+	{type="item", name="iron-gear-wheel", amount=2}, -- TODO change to mechanism.
 }
 
 -- Chemical plant - shouldn't require steel bc we're moving it to automation 1. Also no pipe ingredients bc it comes before pipe tech. But it should cost more than assembler 1 since it's faster.

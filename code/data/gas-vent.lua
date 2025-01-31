@@ -143,7 +143,7 @@ local ventableFluids = {
 	{"tar", 0, true},
 	{"heavy-oil", 0, true},
 	{"light-oil", 0, true},
-	{"cement-mix", 0, true},
+	{"cement", 0, true},
 	{"latex", 0, true},
 	{"lubricant", 0, true},
 	{"molten-iron", 0, true},

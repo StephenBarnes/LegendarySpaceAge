@@ -1,8 +1,10 @@
---[[ This file modifies concrete production by adding "cement mix" fluid, and sulfur cement recipes.
-Main route, via cement mix (fluid):
-	5 stone + 5 sand + 100 water -> 100 cement mix
-	100 cement mix -> 10 concrete blocks
-	100 cement mix + 1 resin + 2 hot steel -> 10 refined concrete
+--[[ This file adds cement fluid, tech, and recipes. Cement is used to make concrete, refined concrete, shielding (with stone brick), etc.
+Also adds sulfur concrete recipes.
+Cement:
+	5 stone + 5 sand + 100 water -> 100 cement
+Main route to concrete:
+	100 cement -> 10 concrete blocks
+	100 cement + 1 resin + 2 hot steel -> 10 refined concrete
 And then there's alternative recipes using sulfur, and no water, in a foundry:
 	30 sulfur + 30 sand + -> 20 concrete
 	30 sulfur + 30 sand + 1 resin + 40 molten steel -> 20 refined concrete
@@ -17,9 +19,9 @@ local Recipe = require("code.util.recipe")
 
 local newData = {}
 
--- Create new "cement mix" fluid.
-local cementMixFluid = Table.copyAndEdit(data.raw.fluid["lubricant"], {
-	name = "cement-mix",
+-- Create new "cement" fluid.
+local cementFluid = Table.copyAndEdit(data.raw.fluid["lubricant"], {
+	name = "cement",
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/fluids/cement-fluid.png", scale = .5, icon_size = 64}},
 	auto_barrel = false,
@@ -27,12 +29,12 @@ local cementMixFluid = Table.copyAndEdit(data.raw.fluid["lubricant"], {
 	flow_color = {.6, .6, .6, 1},
 	visualization_color = {.43, .43, .43, 1},
 })
-table.insert(newData, cementMixFluid)
+table.insert(newData, cementFluid)
 
--- Create recipe for cement mix.
-local cementMixRecipe = Table.copyAndEdit(data.raw.recipe["lubricant"], {
-	name = "make-cement-mix", -- Must be different from cement-mix so it appears in factoriopedia correctly.
-	localised_name = {"fluid-name.cement-mix"},
+-- Create recipe for cement.
+local cementRecipe = Table.copyAndEdit(data.raw.recipe["lubricant"], {
+	name = "make-cement", -- Must be different from cement so it appears in factoriopedia correctly.
+	localised_name = {"fluid-name.cement"},
 	subgroup = "terrain",
 	order = "b[a]",
 	ingredients = {
@@ -41,24 +43,44 @@ local cementMixRecipe = Table.copyAndEdit(data.raw.recipe["lubricant"], {
 		{type = "fluid", name = "water", amount = 100},
 	},
 	results = {
-		{type = "fluid", name = "cement-mix", amount = 100},
+		{type = "fluid", name = "cement", amount = 100},
 	},
-	main_product = "cement-mix",
+	main_product = "cement",
 	auto_barrel = false,
 })
-table.insert(newData, cementMixRecipe)
+table.insert(newData, cementRecipe)
 
--- Add cement fluid recipe to concrete tech.
-Tech.addRecipeToTech("make-cement-mix", "concrete", 1)
+-- Create tech for cement.
+local cementTech = table.deepcopy(data.raw.technology.concrete)
+cementTech.name = "cement"
+cementTech.effects = {
+	{
+		type = "unlock-recipe",
+		recipe = "make-cement",
+	},
+}
+cementTech.prerequisites = {"filtration-lake-water"}
+cementTech.research_trigger = nil
+cementTech.unit = {
+	count = 15,
+	time = 30,
+	ingredients = {
+		{"automation-science-pack", 1},
+	},
+}
+cementTech.icon = "__LegendarySpaceAge__/graphics/fluids/cement-tech.png"
+data:extend{cementTech}
 
 -- Adjust recipes for concrete and refined concrete.
 data.raw.recipe["concrete"].ingredients = {
-	{type = "fluid", name = "cement-mix", amount = 100},
+	{type = "fluid", name = "cement", amount = 100},
+	{type = "item", name = "stone", amount = 8},
+	{type = "item", name = "iron-stick", amount = 4},
 }
 data.raw.recipe["refined-concrete"].ingredients = {
-	{type = "fluid", name = "cement-mix", amount = 100},
-	{type = "item", name = "resin", amount = 1},
-	{type = "item", name = "ingot-steel-hot", amount = 2},
+	{type = "fluid", name = "cement", amount = 100},
+	{type = "item", name = "resin", amount = 2},
+	{type = "item", name = "steel-plate", amount = 4},
 }
 
 -- Create sulfur concrete recipes for foundries.
