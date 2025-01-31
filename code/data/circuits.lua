@@ -109,7 +109,7 @@ Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rath
 
 --[[ Add "improvised" circuit board recipe, only handcraftable.
 	Improvise circuit board: 1 stone brick -> 1 circuit board
-		Needed because all ways of making circuit boards require resin, which can't be obtained on Aquilo without buildings that require electronic circuits, creating a circular dependency. Also same on Nauvis at the start.
+		Needed because all ways of making circuit boards require resin, which can't be obtained on Aquilo without buildings that require electronic circuits, creating a circular dependency.
 ]]
 local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electronic-circuit"], {
 	name = "improvised-circuit-board",
@@ -133,7 +133,7 @@ local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electron
 	auto_recycle = false,
 })
 data:extend{improvisedCircuitBoardRecipe}
-Tech.addRecipeToTech("improvised-circuit-board", "electronics", 2)
+Tech.addRecipeToTech("improvised-circuit-board", "planet-discovery-aquilo")
 
 -- Create tech for wood circuit boards.
 local woodCircuitBoardTech = Table.copyAndEdit(data.raw.technology["automation"], {
@@ -287,5 +287,6 @@ data.raw.item["processing-unit"].subgroup = "complex-circuit-intermediates"
 -- Edit green circuit ingredients.
 data.raw.recipe["electronic-circuit"].ingredients = {
 	{type = "item", name = "circuit-board", amount = 1},
-	{type = "item", name = "copper-cable", amount = 3},
+	{type = "item", name = "copper-cable", amount = 2},
+	{type = "item", name = "carbon", amount = 1},
 }

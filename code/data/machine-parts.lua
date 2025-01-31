@@ -87,8 +87,9 @@ local advancedPartsRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"]
 	name = "advanced-parts",
 	ingredients = {
 		{type="item", name="ingot-steel-hot", amount=4},
-		{type="item", name="plastic-bar", amount=2},
+		{type="item", name="plastic-bar", amount=1},
 		{type="item", name="rubber", amount=1},
+		{type="item", name="resin", amount=1},
 		{type="fluid", name="lubricant", amount=5},
 	},
 	results = {{type="item", name="advanced-parts", amount=4}},
