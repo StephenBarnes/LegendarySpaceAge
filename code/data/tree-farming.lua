@@ -131,6 +131,7 @@ local saplingItem = Table.copyAndEdit(data.raw.item["tree-seed"], {
 	spoil_ticks = 60 * 60 * 60, -- 1 hour
 	spoil_result = "wood",
 	fuel_value = "nil",
+	fuel_category = "nil",
 	icon = "nil",
 	icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}},
 	pictures = saplingPictures,
@@ -180,7 +181,8 @@ local saplingRecipe = Table.copyAndEdit(data.raw.recipe["wood-processing"], {
 	order = "006",
 	icon = "nil",
 	icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}},
-	surface_conditions = {{property = "pressure", min = 1000, max = 1000}}
+	surface_conditions = {{property = "pressure", min = 1000, max = 1000}},
+	energy_required = 30,
 })
 data:extend{saplingRecipe}
 

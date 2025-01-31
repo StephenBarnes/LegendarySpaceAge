@@ -47,6 +47,7 @@ local cementRecipe = Table.copyAndEdit(data.raw.recipe["lubricant"], {
 	},
 	main_product = "cement",
 	auto_barrel = false,
+	category = "crafting-with-fluid",
 })
 table.insert(newData, cementRecipe)
 

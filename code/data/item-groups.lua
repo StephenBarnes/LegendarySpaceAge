@@ -1,13 +1,17 @@
 -- This file makes item subgroups so we can organize stuff in the player crafting menu and Factoriopedia.
 -- Also reorganizes some recipes.
 
+-- Change the space tab's icon, from satellite to rocket silo, since it's now anything after Nauvis.
+data.raw["item-group"]["space"].icon = "__base__/graphics/technology/rocket-silo.png"
+data.raw["item-group"]["space"].icon_size = 256
+
 data:extend{
-	-- Create a new tab for "exotic intermediates" ie intermediates from other planets.
+	-- Create a new tab for "intermediate factors".
 	{
 		type = "item-group",
-		name = "exotic-intermediates",
+		name = "intermediate-factors",
 		order = "c2",
-		icon = "__base__/graphics/technology/rocket-silo.png",
+		icon = "__LegendarySpaceAge__/graphics/intermediate-factors/factors-tab.png",
 		icon_size = 256,
 	},
 
@@ -31,34 +35,38 @@ data:extend{
 	{
 		type = "item-subgroup",
 		name = "frame",
-		group = "intermediate-products",
+		group = "intermediate-factors",
 		order = "c1",
 	},
 	{
 		type = "item-subgroup",
 		name = "cladding",
-		group = "intermediate-products",
+		group = "intermediate-factors",
 		order = "c2",
 	},
 	{
 		type = "item-subgroup",
 		name = "fluid-fitting",
-		group = "intermediate-products",
+		group = "intermediate-factors",
 		order = "c3",
 	},
 	{
 		type = "item-subgroup",
 		name = "sensor",
-		group = "intermediate-products",
+		group = "intermediate-factors",
 		order = "c4",
 	},
-
-	-- Create item subgroup for resin and circuit boards and circuits, since each of them has 3 alternative recipes.
 	{
 		type = "item-subgroup",
-		name = "resin-and-boards",
-		group = "intermediate-products",
+		name = "resin",
+		group = "intermediate-factors",
 		order = "c5",
+	},
+	{
+		type = "item-subgroup",
+		name = "circuit-board",
+		group = "intermediate-factors",
+		order = "c6",
 	},
 
 	-- Create subgroup for circuits and advanced circuit intermediates (electronic components, silicon wafers, doped wafers).
@@ -66,7 +74,7 @@ data:extend{
 		type = "item-subgroup",
 		name = "complex-circuit-intermediates",
 		group = "intermediate-products",
-		order = "c6",
+		order = "c7",
 	},
 
 	-- Create item subgroup for all complex fluid recipes, meaning not just fractionation and cracking.
@@ -116,21 +124,28 @@ data.raw.item["sulfur"].order = "a0"
 -- Move fluid recipes to after raw materials like sulfur.
 data.raw["item-subgroup"]["fluid-recipes"].order = "d"
 
--- Move nuclear stuff close to the end, before Aquilo, since we're moving nuclear to "Nauvis part 2".
-data.raw["item-subgroup"]["uranium-processing"].order = "o2"
-
 -- Move biter egg to the right row.
 data.raw.item["biter-egg"].subgroup = "nauvis-agriculture"
 
--- Move intermediate subgroups to the exotic-intermediates group.
-for _, subgroupName in pairs{
-	"vulcanus-processes",
-	"fulgora-processes",
-	"agriculture-processes",
-	"agriculture-products",
-	"aquilo-processes",
-	"nauvis-agriculture", -- Advanced recipes - biter egg, etc.
-	"uranium-processing",
+-- Move intermediate subgroups to the space group.
+for subgroupName, order in pairs{
+	["vulcanus-processes"] = "01",
+	["fulgora-processes"] = "02",
+	["agriculture-processes"] = "031",
+	["agriculture-products"] = "032",
+	["nauvis-agriculture"] = "041", -- Advanced recipes - biter egg, etc.
+	["uranium-processing"] = "042",
+	["aquilo-processes"] = "05",
 } do
-	data.raw["item-subgroup"][subgroupName].group = "exotic-intermediates"
+	data.raw["item-subgroup"][subgroupName].group = "space"
+	data.raw["item-subgroup"][subgroupName].order = order
 end
+
+-- In space group, move space platform starter up so it's not wasting a row.
+data.raw["space-platform-starter-pack"]["space-platform-starter-pack"].subgroup = "space-interactors"
+
+-- Hide the new cargo pods from Cargo Pod Requires Research
+data.raw["temporary-container"]["breaking-cargo-pod-container"].hidden_in_factoriopedia = true
+data.raw["temporary-container"]["breaking-cargo-pod-container"].factoriopedia_alternative = "cargo-pod-container"
+data.raw["temporary-container"]["durable-cargo-pod-container"].hidden_in_factoriopedia = true
+data.raw["temporary-container"]["durable-cargo-pod-container"].factoriopedia_alternative = "cargo-pod-container"

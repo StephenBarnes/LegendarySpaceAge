@@ -97,7 +97,7 @@ local resinItem = Table.copyAndEdit(data.raw.item["plastic-bar"], {
 	name = "resin",
 	icons = {{icon = resinPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
 	pictures = resinPictures,
-	subgroup = "resin-and-boards",
+	subgroup = "resin",
 })
 Item.copySoundsTo(data.raw.capsule["bioflux"], resinItem)
 table.insert(newData, resinItem)

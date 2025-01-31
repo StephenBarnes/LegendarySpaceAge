@@ -33,7 +33,7 @@ local circuitBoardItem = Table.copyAndEdit(data.raw.item["electronic-circuit"], 
 	},
 	icon = "nil",
 	order = "b[circuits]-0",
-	subgroup = "resin-and-boards",
+	subgroup = "circuit-board",
 	auto_recycle = false,
 	weight = 1000000 / 4000,
 })
@@ -52,7 +52,7 @@ local woodCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 		{type = "item", name = "circuit-board", amount = 8},
 	},
 	order = "b[circuits]-001",
-	subgroup = "resin-and-boards",
+	subgroup = "circuit-board",
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board.png", icon_size = 64, scale = .5},
@@ -74,7 +74,7 @@ local plasticCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 		{type = "item", name = "circuit-board", amount = 8},
 	},
 	order = "b[circuits]-002",
-	subgroup = "resin-and-boards",
+	subgroup = "circuit-board",
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/plastic-circuit-board.png", icon_size = 64, scale = .5},
@@ -96,7 +96,7 @@ local calciteCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 		{type = "item", name = "circuit-board", amount = 8},
 	},
 	order = "b[circuits]-003",
-	subgroup = "resin-and-boards",
+	subgroup = "circuit-board",
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/ceramic-circuit-board.png", icon_size = 64, scale = .5},
@@ -120,7 +120,7 @@ local improvisedCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["electron
 		{type = "item", name = "circuit-board", amount = 1},
 	},
 	order = "b[circuits]-004",
-	subgroup = "resin-and-boards",
+	subgroup = "circuit-board",
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/circuit-board-generic.png", icon_size = 64, scale = 0.5},

@@ -16,6 +16,9 @@ Other intermediate factors considered but decided against:
 ]]
 
 require("code.data.intermediate-factors.frame")
+--require("code.data.intermediate-factors.panel")
+--require("code.data.intermediate-factors.structure")
 require("code.data.intermediate-factors.cladding")
 require("code.data.intermediate-factors.fluid-fitting")
+--require("code.data.intermediate-factors.mechanism")
 require("code.data.intermediate-factors.sensor")
