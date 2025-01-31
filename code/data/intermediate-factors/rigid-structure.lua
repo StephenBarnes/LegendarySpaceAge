@@ -9,6 +9,7 @@ rigidStructure.order = "01"
 data:extend{rigidStructure}
 
 -- Create recipe: 8 stone brick -> 1 rigid structure
+--[[ Removing this bc it doesn't quite make sense. Rigid structure is supposed to represent a kind of scaffolding / frame.
 local recipeFromStone = table.deepcopy(data.raw.recipe["stone-brick"])
 recipeFromStone.name = "rigid-structure-from-stone"
 recipeFromStone.ingredients = {{type = "item", name = "stone-brick", amount = 8}}
@@ -24,6 +25,7 @@ recipeFromStone.icons = {
 	{icon = "__base__/graphics/icons/stone-brick.png", icon_size = 64, scale = 0.29, shift = {-5, -5}},
 }
 data:extend{recipeFromStone}
+]]
 
 -- Create recipe: 2 wood + 2 iron rods -> 1 rigid structure
 local recipeFromWood = table.deepcopy(data.raw.recipe["iron-stick"])

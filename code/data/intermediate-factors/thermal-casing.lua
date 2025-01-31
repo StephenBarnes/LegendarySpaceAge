@@ -2,6 +2,8 @@
 
 -- TODO create some icons in Midjourney, maybe, so I can have variants.
 
+local Tech = require("code.util.tech")
+
 -- Create item.
 local thermalCasingItem = table.deepcopy(data.raw.item["stone-brick"])
 thermalCasingItem.name = "thermal-casing"
@@ -19,7 +21,7 @@ recipeFromStone.ingredients = {
 	{type = "item", name = "steel-plate", amount = 4}
 }
 recipeFromStone.results = {{type = "item", name = "thermal-casing", amount = 1}}
-recipeFromStone.enabled = true
+recipeFromStone.enabled = false
 recipeFromStone.subgroup = "thermal-casing"
 recipeFromStone.order = "02"
 recipeFromStone.energy_required = 8
@@ -31,5 +33,6 @@ recipeFromStone.icons = {
 	{icon = "__base__/graphics/icons/steel-plate.png", icon_size = 64, scale = 0.2, shift = {8, -8}},
 }
 data:extend{recipeFromStone}
+Tech.addRecipeToTech("thermal-casing-from-stone", "steel-processing") -- TODO maybe rather add to steel furnaces tech; check.
 
 -- TODO make more recipes, and add them to techs.

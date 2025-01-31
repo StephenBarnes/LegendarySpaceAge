@@ -138,7 +138,7 @@ There's 2 techs.
 local stingfrondTech1 = table.deepcopy(data.raw.technology["biochamber"])
 stingfrondTech1.name = "stingfronds-1"
 stingfrondTech1.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech1.png"
-stingfrondTech1.prerequisites = {"planet-discovery-gleba"}
+stingfrondTech1.prerequisites = {"bioflux"}
 stingfrondTech1.research_trigger = {
 	type = "mine-entity",
 	entity = "stingfrond",
