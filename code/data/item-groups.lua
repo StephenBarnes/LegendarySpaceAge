@@ -40,33 +40,57 @@ data:extend{
 	},
 	{
 		type = "item-subgroup",
-		name = "cladding",
+		name = "panel",
 		group = "intermediate-factors",
 		order = "c2",
 	},
 	{
 		type = "item-subgroup",
-		name = "fluid-fitting",
+		name = "structure",
 		group = "intermediate-factors",
 		order = "c3",
 	},
 	{
 		type = "item-subgroup",
-		name = "sensor",
+		name = "fluid-fitting",
 		group = "intermediate-factors",
 		order = "c4",
 	},
 	{
 		type = "item-subgroup",
-		name = "resin",
+		name = "shielding",
 		group = "intermediate-factors",
 		order = "c5",
 	},
 	{
 		type = "item-subgroup",
-		name = "circuit-board",
+		name = "lightweight-structure",
 		group = "intermediate-factors",
 		order = "c6",
+	},
+	{
+		type = "item-subgroup",
+		name = "mechanism",
+		group = "intermediate-factors",
+		order = "c7",
+	},
+	{
+		type = "item-subgroup",
+		name = "sensor",
+		group = "intermediate-factors",
+		order = "c8",
+	},
+	{
+		type = "item-subgroup",
+		name = "resin",
+		group = "intermediate-factors",
+		order = "c91",
+	},
+	{
+		type = "item-subgroup",
+		name = "circuit-board",
+		group = "intermediate-factors",
+		order = "c92",
 	},
 
 	-- Create subgroup for circuits and advanced circuit intermediates (electronic components, silicon wafers, doped wafers).

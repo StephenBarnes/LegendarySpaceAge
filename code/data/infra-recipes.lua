@@ -10,11 +10,11 @@ data.raw.recipe["stone-furnace"].ingredients = {{type="item", name="stone-brick"
 -- Furnaces
 data.raw.recipe["steel-furnace"].ingredients = {
 	{type="item", name="frame", amount=4},
-	{type="item", name="cladding", amount=10},
+	{type="item", name="shielding", amount=10},
 }
 data.raw.recipe["gas-furnace"].ingredients = {
 	{type="item", name="frame", amount=4},
-	{type="item", name="cladding", amount=10},
+	{type="item", name="shielding", amount=10},
 	{type="item", name="fluid-fitting", amount=4},
 }
 
