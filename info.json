@@ -26,7 +26,6 @@
 		, "electricboiler"
 
 		, "cargo-ships"
-		, "AquiloTrenches"
 
 		, "eradicators-hand-crank-redux"
 		, "PersonalBurnerGenerator"
@@ -42,6 +41,7 @@
 		, "NoLavaInPipes"
 		, "no-quality"
 		, "diurnal-dynamics"
+		, "Rocs-Improved-Platform-Drag"
 
 		, "!Flare Stack"
 		, "! adamo-carbon"
@@ -53,6 +53,7 @@
 
 		, "! any-planet-start"
 
+		, "! fluroflux"
 		, "! GROUP-to-incorporate-and-mark-incompatible"
 		, "slipstacks"
 
@@ -71,6 +72,7 @@
 
 		, "! GROUP-stuff-for-dev-only"
 		, "FastCheatInTestWorlds"
+		, "WriteRecipesByMod"
 		, "? no-graphics"
 	],
 	"description": "IN DEVELOPMENT. Overhaul modpack for Space Age veterans seeking a new challenge."

@@ -29,10 +29,12 @@ stingfrondPlant.agricultural_tower_tint = {
 
 -- Harvesting stingfronds produces wood, cyclosomes, and neurofibrils.
 stingfrondPlant.minable.results = {
-	{type = "item", name = "wood", amount = 4},
+	{type = "item", name = "wood", amount = 8},
 	{type = "item", name = "cyclosome-1", amount_min = 0, amount_max = 10},
 	{type = "item", name = "neurofibril", amount_min = 0, amount_max = 10},
 }
+-- Emits spores, same as yumako/jellystem. This gives a reason to use resync recipe, rather than just planting 2x more stingfronds.
+stingfrondPlant.harvest_emissions = { spores = 15 }
 
 -- Delete old stingfrond tree, add new stingfrond plant.
 data.raw.tree.stingfrond = nil
@@ -88,6 +90,7 @@ for i = 1, 5 do
 		-- Give each one a different variant as main icon.
 	cyclosome.subgroup = "stingfrond-products"
 	cyclosome.order = "z"..i
+	cyclosome.fuel_value = nil
 	cyclosomeItems[i] = cyclosome
 end
 data:extend(cyclosomeItems)
@@ -216,7 +219,7 @@ resyncRecipe.ingredients = {
 	{type = "item", name = "cyclosome-3", amount = 5},
 	{type = "item", name = "cyclosome-4", amount = 5},
 	{type = "item", name = "cyclosome-5", amount = 5},
-	{type = "item", name = "neurofibril", amount = 2},
+	{type = "item", name = "neurofibril", amount = 1},
 }
 resyncRecipe.results = {
 	{type = "item", name = "cyclosome-3", amount = 50, show_details_in_recipe_tooltip = false},
@@ -281,3 +284,5 @@ desyncRecipe.crafting_machine_tint = {
 	tertiary = phaseTints[3],
 }
 data:extend{desyncRecipe}
+
+-- TODO add recipes for stuff like rocket fuel, 

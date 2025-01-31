@@ -11,7 +11,8 @@ local filterItem = Table.copyAndEdit(data.raw.item["battery"], {
 	name = "filter",
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64}},
-	order = "b[chemistry]-a4",
+	order = "02-2",
+	subgroup = "fluid-recipes",
 })
 table.insert(newData, filterItem)
 
@@ -20,7 +21,8 @@ local spentFilterItem = Table.copyAndEdit(data.raw.item["battery"], {
 	name = "spent-filter",
 	icon = "nil",
 	icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/spent-filter.png", icon_size = 64}},
-	order = "b[chemistry]-a5",
+	order = "02-2",
+	subgroup = "fluid-recipes",
 })
 table.insert(newData, spentFilterItem)
 
@@ -104,7 +106,7 @@ data.raw.technology["holmium-processing"].research_trigger.count = 10
 local filterRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], {
 	name = "filter",
 	ingredients = {
-		{type = "item", name = "iron-plate", amount = 1},
+		{type = "item", name = "rigid-structure", amount = 1},
 		{type = "item", name = "carbon", amount = 1},
 	},
 	results = {

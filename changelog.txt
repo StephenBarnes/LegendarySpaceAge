@@ -2,8 +2,11 @@
 Version: 0.7.0
 Date: 2025-01-30
   Features:
+    - Added "intermediate factors": rigid structure, lightweight structure, fluid fitting, thermal casing, sensor. These are intermediate items with multiple alternative recipes, and replace ingredients in infrastructure recipes, effectively allowing you to e.g. make pipes out of copper or transport belts out of plastic. (TODO finish)
     - Added activated pentapod eggs.
-    - Added farmable stingfronds and node system. TODO
+    - Added farmable stingfronds and node system.
+    - TODO add farmable slipstacks without mod dependency.
+    - TODO add farmable boompuffs.
     - Added automatic progression debug script, for debugging. This is disabled by default; edit global-params.lua to enable it.
     - TODO Added production rate triggers for all remaining science packs (except space science, which will be unlocked by building first space platform).
     - Filled barrels and tanks are now usable as fuel. Oxygen is no longer usable as fluid fuel.

@@ -58,6 +58,11 @@ local newTreeMinableResults = {
 		name = "wood",
 		amount = 8,
 	},
+	{ -- Add resin, for early fluid fittings.
+		type = "item",
+		name = "resin",
+		amount = 1,
+	},
 }
 local newDeadTreeMinableResults = {
 	{
@@ -123,7 +128,7 @@ local saplingItem = Table.copyAndEdit(data.raw.item["tree-seed"], {
 	localised_description = "nil",
 	subgroup = "early-agriculture",
 	order = "004",
-	spoil_ticks = 60 * 60 * 10,
+	spoil_ticks = 60 * 60 * 60, -- 1 hour
 	spoil_result = "wood",
 	fuel_value = "nil",
 	icon = "nil",

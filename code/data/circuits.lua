@@ -6,7 +6,7 @@ Green circuits:
 Red circuits are made after the player has petrochem set up:
 	1 carbon + 1 plastic + 1 stone + 1 copper wire -> 1 electronic components
 		This represents resistors, capacitors, transistors, etc. that are large enough to pick up by hand.
-	1 circuit board + 2 copper wire + 2 electronic components -> 1 red circuit
+	1 green circuit + 2 copper wire + 2 electronic components -> 1 red circuit
 
 Blue circuits are made in the late stages of Nauvis part 1, and should have a significantly more complex production process:
 	2 stone + 10 sulfuric acid -> 1 silicon wafer
@@ -226,9 +226,8 @@ Tech.addRecipeToTech("doped-wafer", "processing-unit", 2)
 -- 1 doped wafer + 1 circuit board + 2 red circuit + 5 sulfuric acid -> 1 blue circuit
 -- Original recipe was 5 sulfuric acid + 2 red circuit + 20 green circuit.
 data.raw.recipe["processing-unit"].ingredients = {
-	{type = "item", name = "circuit-board", amount = 1},
+	{type = "item", name = "advanced-circuit", amount = 1},
 	{type = "item", name = "doped-wafer", amount = 1},
-	{type = "item", name = "advanced-circuit", amount = 2},
 	{type = "fluid", name = "sulfuric-acid", amount = 5},
 }
 -- Make blue circuit recipe slower, as compromise for making it cheaper in materials.
@@ -275,7 +274,7 @@ Tech.addRecipeToTech("electronic-components", "advanced-circuit", 1)
 -- 1 circuit board + 2 copper cable + 2 electronic components -> 1 red circuit
 -- Originally 2 green circuits + 2 plastic bar + 4 copper cable.
 data.raw.recipe["advanced-circuit"].ingredients = {
-	{type = "item", name = "circuit-board", amount = 1},
+	{type = "item", name = "electronic-circuit", amount = 1},
 	{type = "item", name = "copper-cable", amount = 2},
 	{type = "item", name = "electronic-components", amount = 2},
 }

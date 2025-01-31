@@ -44,6 +44,7 @@ require("code.data.gas-vent")
 require("code.data.waste-pump")
 require("code.data.barrelling")
 require("code.data.fuel")
+require("code.data.intermediate-factors.main")
 
 -- Files that adjust protos
 require("code.data.item-groups")

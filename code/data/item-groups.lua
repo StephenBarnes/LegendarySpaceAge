@@ -1,59 +1,84 @@
 -- This file makes item subgroups so we can organize stuff in the player crafting menu and Factoriopedia.
 -- Also reorganizes some recipes.
 
-local newData = {}
+data:extend{
+	-- Create item subgroup for resin and circuit boards and circuits, since each of them has 3 alternative recipes.
+	{
+		type = "item-subgroup",
+		name = "resin-and-boards",
+		group = "intermediate-products",
+		order = "gd",
+	},
 
--- Create item subgroup for resin and circuit boards and circuits, since each of them has 3 alternative recipes.
-local resinAndBoardsSubgroup = {
-	type = "item-subgroup",
-	name = "resin-and-boards",
-	group = "intermediate-products",
-	order = "gd",
-}
-table.insert(newData, resinAndBoardsSubgroup)
+	-- Create item subgroup for all complex fluid recipes, meaning not just fractionation and cracking.
+	{
+		type = "item-subgroup",
+		name = "complex-fluid-recipes",
+		group = "intermediate-products",
+		order = "a2",
+	},
 
--- Create item subgroup for all complex fluid recipes, meaning not just fractionation and cracking.
-local complexFluidRecipesSubgroup = {
-	type = "item-subgroup",
-	name = "complex-fluid-recipes",
-	group = "intermediate-products",
-	order = "a2",
-}
-table.insert(newData, complexFluidRecipesSubgroup)
+	-- Create subgroup for hot/cold ingots and ingot-heating recipes.
+	{
+		type = "item-subgroup",
+		name = "ingots",
+		group = "intermediate-products",
+		order = "b1",
+	},
 
--- Create subgroup for hot/cold ingots and ingot-heating recipes.
-local ingotSubgroup = {
-	type = "item-subgroup",
-	name = "ingots",
-	group = "intermediate-products",
-	order = "b1",
-}
-table.insert(newData, ingotSubgroup)
+	-- Create subgroup for basic metal intermediates.
+	{
+		type = "item-subgroup",
+		name = "basic-metal-intermediates",
+		group = "intermediate-products",
+		order = "b2",
+	},
 
--- Create subgroup for basic metal intermediates.
-local basicMetalSubgroup = {
-	type = "item-subgroup",
-	name = "basic-metal-intermediates",
-	group = "intermediate-products",
-	order = "b2",
+	-- Create subgroup for circuits and advanced circuit intermediates (electronic components, silicon wafers, doped wafers).
+	{
+		type = "item-subgroup",
+		name = "complex-circuit-intermediates",
+		group = "intermediate-products",
+		order = "ge",
+	},
+
+	-- Create subgroups for intermediate factors (rigid structure, etc.)
+	{
+		type = "item-subgroup",
+		name = "rigid-structure",
+		group = "intermediate-products",
+		order = "c1",
+	},
+	{
+		type = "item-subgroup",
+		name = "lightweight-structure",
+		group = "intermediate-products",
+		order = "c2",
+	},
+	{
+		type = "item-subgroup",
+		name = "fluid-fitting",
+		group = "intermediate-products",
+		order = "c3",
+	},
+	{
+		type = "item-subgroup",
+		name = "thermal-casing",
+		group = "intermediate-products",
+		order = "c4",
+	},
+	{
+		type = "item-subgroup",
+		name = "sensor",
+		group = "intermediate-products",
+		order = "c5",
+	},
 }
-table.insert(newData, basicMetalSubgroup)
+
+------------------------------------------------------------------------
 
 -- Move derusting row (now also the rust-items row) to after ingots etc.
 data.raw["item-subgroup"]["derusting"].order = "b3"
-
--- Create subgroup for circuits and advanced circuit intermediates (electronic components, silicon wafers, doped wafers).
-local complexCircuitIntermediatesSubgroup = {
-	type = "item-subgroup",
-	name = "complex-circuit-intermediates",
-	group = "intermediate-products",
-	order = "ge",
-}
-table.insert(newData, complexCircuitIntermediatesSubgroup)
-
-------------------------------------------------------------------------
-data:extend(newData)
-------------------------------------------------------------------------
 
 -- Put water condensation and melting at the start of simple fluid recipes group.
 data.raw.recipe["steam-condensation"].order = "01"
