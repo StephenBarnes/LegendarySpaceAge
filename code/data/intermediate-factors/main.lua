@@ -7,11 +7,15 @@ Explanation for why these exist:
 	These intermediate factors "factor out" the alternative recipes (hence the name), effectively allowing multiple ways to make each end product, without needing 5 recipes for assemblers or whatever.
 	An intermediate factor is defined by its FUNCTION or PROPERTIES, rather than by its COMPOSITION.
 		For example, a "frame" is a framework that is rigid enough to make buildings. It doesn't matter if it's made of wood, iron, or steel. But there's no recipe for making it from rubber, because rubber is not rigid.
-	Note that the base game's "low-density structure" is named after its function/properties (low density). We hijack it as an intermediate factor, moving it to the early game.
+Other intermediate factors considered but decided against:
+	Thermal casing, for furnaces etc; and armor-plating for turrets etc. - decided to rather just use one "cladding" item that represents both refractory / heat-resistant building material, and armor plating, and general plating eg for making barrels.
+	Low-density structure - could hijack this, add alternate recipes, make it an early-game item. But there's not many uses for it, so rather just leaving it as-is.
+	Flexible material - eg rubber and carbon fiber. Not enough uses; could use it for fluid stuff, but that's what the fluid fitting is for.
+	Mechanical parts - already have the machine-parts item (which is simple, just iron) and advanced-parts (which requires pulling together steel+rubber+plastic+lubricant), not really much room for alternate recipes.
+	Compute, and advanced compute - decided to rather just have sensors as ingredients, or the most advanced circuit available when a given item is available.
 ]]
 
 require("code.data.intermediate-factors.frame")
 require("code.data.intermediate-factors.cladding")
 require("code.data.intermediate-factors.fluid-fitting")
-require("code.data.intermediate-factors.lightweight-structure")
 require("code.data.intermediate-factors.sensor")

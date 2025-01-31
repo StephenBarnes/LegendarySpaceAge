@@ -2,20 +2,13 @@
 -- Also reorganizes some recipes.
 
 data:extend{
-	-- Create item subgroup for resin and circuit boards and circuits, since each of them has 3 alternative recipes.
+	-- Create a new tab for "exotic intermediates" ie intermediates from other planets.
 	{
-		type = "item-subgroup",
-		name = "resin-and-boards",
-		group = "intermediate-products",
-		order = "gd",
-	},
-
-	-- Create item subgroup for all complex fluid recipes, meaning not just fractionation and cracking.
-	{
-		type = "item-subgroup",
-		name = "complex-fluid-recipes",
-		group = "intermediate-products",
-		order = "a2",
+		type = "item-group",
+		name = "exotic-intermediates",
+		order = "c2",
+		icon = "__base__/graphics/technology/rocket-silo.png",
+		icon_size = 256,
 	},
 
 	-- Create subgroup for hot/cold ingots and ingot-heating recipes.
@@ -34,14 +27,6 @@ data:extend{
 		order = "b2",
 	},
 
-	-- Create subgroup for circuits and advanced circuit intermediates (electronic components, silicon wafers, doped wafers).
-	{
-		type = "item-subgroup",
-		name = "complex-circuit-intermediates",
-		group = "intermediate-products",
-		order = "ge",
-	},
-
 	-- Create subgroups for intermediate factors
 	{
 		type = "item-subgroup",
@@ -57,21 +42,39 @@ data:extend{
 	},
 	{
 		type = "item-subgroup",
-		name = "lightweight-structure",
+		name = "fluid-fitting",
 		group = "intermediate-products",
 		order = "c3",
 	},
 	{
 		type = "item-subgroup",
-		name = "fluid-fitting",
+		name = "sensor",
 		group = "intermediate-products",
 		order = "c4",
 	},
+
+	-- Create item subgroup for resin and circuit boards and circuits, since each of them has 3 alternative recipes.
 	{
 		type = "item-subgroup",
-		name = "sensor",
+		name = "resin-and-boards",
 		group = "intermediate-products",
 		order = "c5",
+	},
+
+	-- Create subgroup for circuits and advanced circuit intermediates (electronic components, silicon wafers, doped wafers).
+	{
+		type = "item-subgroup",
+		name = "complex-circuit-intermediates",
+		group = "intermediate-products",
+		order = "c6",
+	},
+
+	-- Create item subgroup for all complex fluid recipes, meaning not just fractionation and cracking.
+	{
+		type = "item-subgroup",
+		name = "complex-fluid-recipes",
+		group = "intermediate-products",
+		order = "e",
 	},
 }
 
@@ -112,10 +115,22 @@ data.raw.item["sulfur"].order = "a0"
 
 -- Move fluid recipes to after raw materials like sulfur.
 data.raw["item-subgroup"]["fluid-recipes"].order = "d"
-data.raw["item-subgroup"]["complex-fluid-recipes"].order = "e"
 
 -- Move nuclear stuff close to the end, before Aquilo, since we're moving nuclear to "Nauvis part 2".
 data.raw["item-subgroup"]["uranium-processing"].order = "o2"
 
 -- Move biter egg to the right row.
 data.raw.item["biter-egg"].subgroup = "nauvis-agriculture"
+
+-- Move intermediate subgroups to the exotic-intermediates group.
+for _, subgroupName in pairs{
+	"vulcanus-processes",
+	"fulgora-processes",
+	"agriculture-processes",
+	"agriculture-products",
+	"aquilo-processes",
+	"nauvis-agriculture", -- Advanced recipes - biter egg, etc.
+	"uranium-processing",
+} do
+	data.raw["item-subgroup"][subgroupName].group = "exotic-intermediates"
+end

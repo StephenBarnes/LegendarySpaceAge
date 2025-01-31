@@ -48,7 +48,7 @@ data:extend{
 	{
 		type = "item-subgroup",
 		name = "stingfrond-products",
-		group = "intermediate-products",
+		group = "exotic-intermediates",
 		order = "n2",
 	},
 }

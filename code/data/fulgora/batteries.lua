@@ -364,6 +364,7 @@ data:extend({
 				minimum_intensity = 0,
 				maximum_intensity = 0,
 			},
+			burner_usage = "discharge",
 		},
         drawing_box = {{-1, -1.5}, {1, 1}},
 		perceived_performance = { minimum = 1 }, -- So if it's running at all, animation plays at full speed.
@@ -386,12 +387,35 @@ data:extend({
 			fade_out_ticks = 20
 		},
 	},
+	{
+		type = "burner-usage",
+		name = "discharge",
+		empty_slot_sprite = {
+			filename = "__LegendarySpaceAge__/graphics/fulgora/batteries/empty-battery-slot.png",
+			priority = "extra-high-no-scale",
+			size = 64,
+			mipmap_count = 2,
+			flags = {"gui-icon"},
+		},
+		empty_slot_caption = {"gui.discharge"},
+		empty_slot_description = {"gui.discharge-description"},
+		icon = {
+			filename = "__LegendarySpaceAge__/graphics/fulgora/batteries/battery-icon-red.png",
+			priority = "extra-high-no-scale",
+			width = 64,
+			height = 64,
+			flags = {"icon"}
+		},
+		no_fuel_status = {"entity-status.no-batteries"},
+		accepted_fuel_key = "description.accepted-batteries",
+		burned_in_key = "discharged-by", -- factoriopedia
+	},
 })
 data.raw.item["battery-charger"].place_result = "battery-charger"
 data.raw.item["battery-discharger"].place_result = "battery-discharger"
 
 -- Quality shouldn't give the chargers greater charge speed, or you could make a loop for free energy, since their energy consumption isn't changed by quality.
--- Looks like there's no way to change this.
+-- TODO write control script to replace chargers on placement, and then remove no-quality mod as prereq.
 
 -- Create recipes for charging batteries.
 data:extend({

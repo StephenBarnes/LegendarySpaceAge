@@ -54,4 +54,7 @@ recipeFromSteel.icons = {
 data:extend{recipeFromSteel}
 Tech.addRecipeToTech("cladding-from-steel", "steel-processing")
 
+-- Create recipes for casting cladding from tungsten or steel.
+-- TODO
+
 -- TODO make more recipes, and add them to techs.

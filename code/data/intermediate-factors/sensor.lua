@@ -12,7 +12,7 @@ data:extend{sensorItem}
 local basicRecipe = table.deepcopy(data.raw.recipe["electronic-circuit"])
 basicRecipe.name = "sensor-from-basic"
 basicRecipe.ingredients = {
-	{type = "item", name = "electronic-circuit", amount = 2},
+	{type = "item", name = "electronic-circuit", amount = 4},
 	{type = "item", name = "glass", amount = 2},
 	{type = "item", name = "frame", amount = 1}
 }
