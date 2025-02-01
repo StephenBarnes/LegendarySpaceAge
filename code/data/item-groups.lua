@@ -31,6 +31,14 @@ data:extend{
 		order = "b2",
 	},
 
+	-- Create subgroup for fluid logistics items.
+	{
+		type = "item-subgroup",
+		name = "fluid-logistics",
+		group = "logistics",
+		order = "d2",
+	},
+
 	-- Create subgroups for intermediate factors
 	{
 		type = "item-subgroup",
@@ -179,3 +187,9 @@ data.raw["temporary-container"]["breaking-cargo-pod-container"].hidden_in_factor
 data.raw["temporary-container"]["breaking-cargo-pod-container"].factoriopedia_alternative = "cargo-pod-container"
 data.raw["temporary-container"]["durable-cargo-pod-container"].hidden_in_factoriopedia = true
 data.raw["temporary-container"]["durable-cargo-pod-container"].factoriopedia_alternative = "cargo-pod-container"
+
+-- Move fluid logistics stuff to that row.
+for _, item in pairs{"pipe", "pipe-to-ground", "pump"} do
+	data.raw.item[item].subgroup = "fluid-logistics"
+	data.raw.recipe[item].subgroup = "fluid-logistics"
+end

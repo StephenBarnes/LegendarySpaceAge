@@ -56,7 +56,7 @@ plasticRecipe.results = {{type = "item", name = "wiring", amount = 4}}
 plasticRecipe.order = "04"
 plasticRecipe.enabled = false
 data:extend{plasticRecipe}
-Tech.addRecipeToTech("wiring-from-plastic", "plastic")
+Tech.addRecipeToTech("wiring-from-plastic", "plastics")
 
 -- Create a recipe using neurofibrils: 8 neurofibril + 1 rubber -> 8 wiring
 local neurofibrilRecipe = table.deepcopy(resinRecipe)
@@ -69,5 +69,6 @@ neurofibrilRecipe.ingredients = {
 neurofibrilRecipe.results = {{type = "item", name = "wiring", amount = 8}}
 neurofibrilRecipe.order = "05"
 neurofibrilRecipe.enabled = false
+neurofibrilRecipe.allow_as_intermediate = false
 data:extend{neurofibrilRecipe}
 -- Will be added to the tech by stingfronds.lua.

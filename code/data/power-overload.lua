@@ -22,19 +22,18 @@ Tech.reorderRecipeUnlocks("electric-energy-distribution-1",
 		"rocs-rusting-iron-iron-stick-derusting",
 	})
 
--- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive.
-Recipe.copyIngredients("po-huge-electric-pole", "po-huge-electric-fuse")
-Recipe.copyIngredients("medium-electric-pole", "po-medium-electric-fuse")
-Recipe.copyIngredients("big-electric-pole", "po-big-electric-fuse")
-Recipe.copyIngredients("small-electric-pole", "po-small-electric-fuse")
-
--- Reorder pylon recipe to be after substation
-data.raw.recipe["po-huge-electric-pole"].order = "a[energy]-e[huge]"
+-- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive. Rather just the pole plus a wiring.
+for _, size in pairs{"small", "medium", "big"} do
+	data.raw.recipe["po-"..size.."-electric-fuse"].ingredients = {
+		{type = "item", name = "wiring", amount = 1},
+		{type = "item", name = size.."-electric-pole", amount = 1},
+	}
+end
 
 -- Using custom descriptions for techs.
 data.raw.technology["electric-energy-distribution-1"].localised_description = {"technology-description.electric-energy-distribution-1"}
 data.raw.technology["electric-energy-distribution-2"].localised_description = {"technology-description.electric-energy-distribution-2"}
-data.raw.technology["po-electric-energy-distribution-3"].localised_description = {"technology-description.po-electric-energy-distribution-3"}
+--data.raw.technology["po-electric-energy-distribution-3"].localised_description = {"technology-description.po-electric-energy-distribution-3"}
 
 -- Change transformer and all the combinators to also be craftable in EM plants.
 for _, recipeName in pairs({"selector-combinator", "arithmetic-combinator", "decider-combinator", "constant-combinator", "power-switch", "programmable-speaker", "display-panel", "small-lamp", "po-transformer"}) do
@@ -88,4 +87,7 @@ Tech.copyUnit("lightning-collector", "po-electric-energy-distribution-3")
 -- Actually rather make them only buildable in EM plants.
 data.raw.recipe["po-huge-electric-pole"].category = "electromagnetics"
 data.raw.recipe["po-huge-electric-fuse"].category = "electromagnetics"
+
+-- Reorder pylon recipe to be after substation
+data.raw.recipe["po-huge-electric-pole"].order = "a[energy]-e[huge]"
 ]]

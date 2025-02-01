@@ -102,7 +102,7 @@ local ventItem = Table.copyAndEdit(data.raw.item["steel-furnace"], {
 	name = "gas-vent",
 	icon = "nil",
 	icons = {{icon = GRAPHICS.."gas-vent-item.png", icon_size = 64}},
-	subgroup = "energy-pipe-distribution",
+	subgroup = "fluid-logistics",
 	order = "b[pipe]-e",
 	place_result = "gas-vent",
 	stack_size = 20,

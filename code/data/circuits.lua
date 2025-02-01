@@ -237,7 +237,7 @@ local microchipRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 	name = "microchip",
 	ingredients = {
 		{type = "item", name = "doped-wafer", amount = 1},
-		{type = "item", name = "copper-cable", amount = 1},
+		{type = "item", name = "wiring", amount = 1},
 		{type = "item", name = "plastic-bar", amount = 1},
 	},
 	results = {
@@ -286,7 +286,7 @@ local electronicComponentsRecipe = Table.copyAndEdit(data.raw.recipe["plastic-ba
 	ingredients = {
 		{type = "item", name = "carbon", amount = 1},
 		{type = "item", name = "plastic-bar", amount = 1},
-		{type = "item", name = "copper-cable", amount = 1},
+		{type = "item", name = "wiring", amount = 1},
 	},
 	results = {
 		{type = "item", name = "electronic-components", amount = 1},
@@ -305,7 +305,7 @@ Tech.addRecipeToTech("electronic-components", "advanced-circuit", 1)
 -- Originally 2 green circuits + 2 plastic bar + 4 copper cable.
 data.raw.recipe["advanced-circuit"].ingredients = {
 	{type = "item", name = "electronic-circuit", amount = 1},
-	{type = "item", name = "copper-cable", amount = 1},
+	{type = "item", name = "wiring", amount = 1},
 	{type = "item", name = "electronic-components", amount = 2},
 }
 
@@ -317,6 +317,6 @@ data.raw.item["processing-unit"].subgroup = "complex-circuit-intermediates"
 -- Edit green circuit ingredients.
 data.raw.recipe["electronic-circuit"].ingredients = {
 	{type = "item", name = "circuit-board", amount = 1},
-	{type = "item", name = "copper-cable", amount = 2},
+	{type = "item", name = "wiring", amount = 2},
 	{type = "item", name = "carbon", amount = 1},
 }

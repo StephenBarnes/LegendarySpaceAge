@@ -43,8 +43,8 @@ data.raw.recipe["express-transport-belt"].ingredients = {
 	{type="fluid", name="lubricant", amount=20},
 }
 data.raw.recipe["turbo-transport-belt"].ingredients = {
-	{type="item", name="advanced-parts", amount=4},
-	{type="item", name="mechanism", amount=4},
+	{type="item", name="advanced-parts", amount=2},
+	{type="item", name="mechanism", amount=2},
 	{type="item", name="tungsten-plate", amount=4},
 	{type="fluid", name="lubricant", amount=20},
 }
@@ -67,7 +67,7 @@ data.raw.recipe["turbo-underground-belt"].ingredients = {
 	{type="item", name="panel", amount=2},
 }
 data.raw.recipe["turbo-underground-belt"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
--- Splitters - remove nesting. For ingredients, require 2 belts of that tier, plus some sensor and mechanism, and advanced parts and lubricants for the later ones.
+-- Splitters - remove nesting. For ingredients, require 2 belts of that tier, plus sensor and mechanism. Nothing else, rather put it into the transport belt recipes.
 data.raw.recipe["splitter"].ingredients = {
 	{type="item", name="transport-belt", amount=2},
 	{type="item", name="mechanism", amount=1},
@@ -80,12 +80,12 @@ data.raw.recipe["fast-splitter"].ingredients = {
 }
 data.raw.recipe["express-splitter"].ingredients = {
 	{type="item", name="express-transport-belt", amount=2},
+	{type="item", name="mechanism", amount=1},
 	{type="item", name="sensor", amount=1},
-	{type="item", name="advanced-parts", amount=2},
 }
 data.raw.recipe["turbo-splitter"].ingredients = {
 	{type="item", name="turbo-transport-belt", amount=2},
-	{type="item", name="mechanism", amount=2},
+	{type="item", name="mechanism", amount=1},
 	{type="item", name="sensor", amount=1},
 }
 data.raw.recipe["turbo-splitter"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
@@ -123,6 +123,35 @@ data.raw.recipe["stack-inserter"].ingredients = {
 	{type = "item", name = "bulk-inserter", amount = 1},
 	{type = "item", name = "processing-unit", amount = 1},
 	{type = "item", name = "carbon-fiber", amount = 2},
+}
+
+-- Electric poles
+data.raw.recipe["small-electric-pole"].ingredients = {
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "wiring", amount = 1},
+}
+data.raw.recipe["medium-electric-pole"].ingredients = {
+	{type = "item", name = "frame", amount = 2},
+	{type = "item", name = "wiring", amount = 1},
+}
+data.raw.recipe["big-electric-pole"].ingredients = {
+	{type = "item", name = "frame", amount = 4},
+	{type = "item", name = "wiring", amount = 2},
+}
+data.raw.recipe["substation"].ingredients = {
+	{type = "item", name = "frame", amount = 2},
+	{type = "item", name = "wiring", amount = 4},
+	{type = "item", name = "advanced-circuit", amount = 4},
+}
+
+-- TODO stuff here
+
+-- Circuit stuff
+-- TODO more
+data.raw.recipe["power-switch"].ingredients = {
+	{type = "item", name = "frame", amount = 2},
+	{type = "item", name = "wiring", amount = 2},
+	{type = "item", name = "electronic-circuit", amount = 2},
 }
 
 
@@ -289,14 +318,6 @@ data.raw.recipe["radar"].ingredients = {
 	{type = "item", name = "iron-plate", amount = 10},
 	{type = "item", name = "iron-gear-wheel", amount = 5},
 	{type = "item", name = "electronic-circuit", amount = 5},
-}
-
--- Transformer - add rubber.
-data.raw.recipe["po-transformer"].ingredients = {-- Originally 5 iron plate + 5 copper cable + 2 electronic circuit.
-	{type = "item", name = "iron-plate", amount = 4},
-	{type = "item", name = "copper-cable", amount = 4},
-	{type = "item", name = "rubber", amount = 2},
-	{type = "item", name = "electronic-circuit", amount = 2},
 }
 
 -- Solar panels.
