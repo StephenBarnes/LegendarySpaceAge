@@ -38,15 +38,14 @@ data.raw.recipe["fast-transport-belt"].ingredients = {
 }
 data.raw.recipe["fast-transport-belt"].results = {{type="item", name="fast-transport-belt", amount=2}}
 data.raw.recipe["express-transport-belt"].ingredients = {
-	{type="item", name="advanced-parts", amount=4},
+	{type="item", name="mechanism", amount=2},
 	{type="item", name="rubber", amount=1},
 	{type="fluid", name="lubricant", amount=20},
 }
 data.raw.recipe["express-transport-belt"].allow_decomposition = true
 data.raw.recipe["express-transport-belt"].allow_as_intermediate = true
 data.raw.recipe["turbo-transport-belt"].ingredients = {
-	{type="item", name="advanced-parts", amount=2},
-	{type="item", name="mechanism", amount=2},
+	{type="item", name="electric-engine-unit", amount=2},
 	{type="item", name="tungsten-plate", amount=4},
 	{type="fluid", name="lubricant", amount=20},
 }
@@ -118,7 +117,7 @@ data.raw.recipe["fast-inserter"].ingredients = {
 data.raw.recipe["fast-inserter"].category = "crafting-with-fluid"
 data.raw.recipe["bulk-inserter"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "advanced-parts", amount = 4},
+	{type = "item", name = "electric-engine-unit", amount = 1},
 	{type = "item", name = "sensor", amount = 2},
 	{type = "fluid", name = "lubricant", amount = 20},
 }
@@ -230,13 +229,6 @@ data.raw.recipe["lab"].ingredients = {
 	{type="item", name="electronic-circuit", amount=4},
 }
 
--- Electric engine unit
-data.raw.recipe["electric-engine-unit"].ingredients = {
-	{type="fluid", name="lubricant", amount=15},
-	{type="item", name="advanced-parts", amount=5},
-	{type="item", name="advanced-circuit", amount=1},
-}
-
 -- Stone in rail recipe represents the track ballast; makes sense to crush/process stone before using as ballast.
 Recipe.substituteIngredient("rail", "stone", "sand")
 
@@ -265,7 +257,6 @@ data.raw.recipe["assembling-machine-2"].ingredients = {
 	{type="item", name="advanced-circuit", amount=4},
 }
 data.raw.recipe["assembling-machine-3"].ingredients = {
-	{type="item", name="advanced-parts", amount=6},
 	{type="item", name="electric-engine-unit", amount=2},
 	{type="item", name="speed-module", amount=2},
 	{type="item", name="processing-unit", amount=4},
@@ -279,10 +270,9 @@ data.raw.recipe["burner-mining-drill"].ingredients = {
 	{type="item", name="iron-plate", amount=4},
 }
 data.raw.recipe["big-mining-drill"].ingredients = {
-	{type="item", name="electric-engine-unit", amount=10},
+	{type="item", name="electric-engine-unit", amount=8},
 	{type="item", name="processing-unit", amount=10},
 	{type="item", name="tungsten-carbide", amount=20},
-	{type="item", name="advanced-parts", amount=10},
 	{type="fluid", name="molten-steel", amount=200},
 }
 
@@ -389,9 +379,8 @@ data.raw.recipe["slowdown-capsule"].category = "chemistry"
 
 -- Flying robot frames
 data.raw.recipe["flying-robot-frame"].ingredients = {
-	{type = "item", name = "advanced-parts", amount = 2},
 	{type = "item", name = "battery", amount = 2},
-	{type = "item", name = "electric-engine-unit", amount = 1},
+	{type = "item", name = "electric-engine-unit", amount = 2},
 }
 
 -- Modules
@@ -419,6 +408,5 @@ data.raw.recipe["gate"].ingredients = {
 	{type = "item", name = "sensor", amount = 1},
 	{type = "item", name = "mechanism", amount = 1},
 }
-data.raw.recipe["gate"].results = {
-	{type = "item", name = "gate", amount = 4},
-}
+data.raw.recipe["gate"].results = {{type = "item", name = "gate", amount = 4}}
+data.raw.recipe.gate.always_show_products = true

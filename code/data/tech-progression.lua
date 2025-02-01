@@ -122,7 +122,7 @@ Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
 -- Fast inserter should go after lubricant.
 Tech.setPrereqs("fast-inserter", {"lubricant"})
 data.raw.technology["fast-inserter"].unit = {count = 50, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
-Tech.setPrereqs("bulk-inserter", {"fast-inserter"})
+Tech.setPrereqs("bulk-inserter", {"fast-inserter", "electric-engine"})
 data.raw.technology["bulk-inserter"].unit = {count = 100, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 -- Inserter capacity techs should need more advanced science packs, since they're now after chem science.
 data.raw.technology["inserter-capacity-bonus-1"].unit = {count = 150, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}

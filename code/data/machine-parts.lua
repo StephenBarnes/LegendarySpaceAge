@@ -101,5 +101,5 @@ advancedPartsRecipe.allow_as_intermediate = true
 advancedPartsRecipe.enabled = false
 data:extend{advancedPartsRecipe}
 
--- Add advanced parts recipe to lubricant tech.
-Tech.addRecipeToTech("advanced-parts", "lubricant")
+-- Add advanced parts recipe to actuator tech.
+Tech.addRecipeToTech("advanced-parts", "electric-engine")

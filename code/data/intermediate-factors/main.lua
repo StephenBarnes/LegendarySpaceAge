@@ -28,6 +28,7 @@ When picking numbers for recipes etc:
 	We want the number of machines needed (for given output rate) to be lower for more advanced recipes, by reducing crafting times.
 ]]
 
+require("code.data.intermediate-factors.item-groups")
 require("code.data.intermediate-factors.wiring")
 require("code.data.intermediate-factors.frame")
 require("code.data.intermediate-factors.panel")
@@ -37,3 +38,4 @@ require("code.data.intermediate-factors.shielding")
 require("code.data.intermediate-factors.lightweight-structure")
 require("code.data.intermediate-factors.mechanism")
 require("code.data.intermediate-factors.sensor")
+require("code.data.intermediate-factors.actuator")

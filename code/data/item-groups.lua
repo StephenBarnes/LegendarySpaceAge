@@ -1,20 +1,13 @@
--- This file makes item subgroups so we can organize stuff in the player crafting menu and Factoriopedia.
--- Also reorganizes some recipes.
+--[[ This file makes item subgroups so we can organize stuff in the player crafting menu and Factoriopedia.
+Also reorganizes some recipes.
+Does not handle the tab or subgroups for intermediate factors - those are in intermediate-factors/item-groups.lua.
+]]
 
 -- Change the space tab's icon, from satellite to rocket silo, since it's now anything after Nauvis.
 data.raw["item-group"]["space"].icon = "__base__/graphics/technology/rocket-silo.png"
 data.raw["item-group"]["space"].icon_size = 256
 
 data:extend{
-	-- Create a new tab for "intermediate factors".
-	{
-		type = "item-group",
-		name = "intermediate-factors",
-		order = "c2",
-		icon = "__LegendarySpaceAge__/graphics/intermediate-factors/factors-tab.png",
-		icon_size = 256,
-	},
-
 	-- Create subgroup for hot/cold ingots and ingot-heating recipes.
 	{
 		type = "item-subgroup",
@@ -37,74 +30,6 @@ data:extend{
 		name = "fluid-logistics",
 		group = "logistics",
 		order = "d2",
-	},
-
-	-- Create subgroups for intermediate factors
-	{
-		type = "item-subgroup",
-		name = "resin",
-		group = "intermediate-factors",
-		order = "11",
-	},
-	{
-		type = "item-subgroup",
-		name = "wiring",
-		group = "intermediate-factors",
-		order = "12",
-	},
-	{
-		type = "item-subgroup",
-		name = "circuit-board",
-		group = "intermediate-factors",
-		order = "13",
-	},
-	{
-		type = "item-subgroup",
-		name = "panel",
-		group = "intermediate-factors",
-		order = "21",
-	},
-	{
-		type = "item-subgroup",
-		name = "frame",
-		group = "intermediate-factors",
-		order = "22",
-	},
-	{
-		type = "item-subgroup",
-		name = "structure",
-		group = "intermediate-factors",
-		order = "23",
-	},
-	{
-		type = "item-subgroup",
-		name = "fluid-fitting",
-		group = "intermediate-factors",
-		order = "24",
-	},
-	{
-		type = "item-subgroup",
-		name = "shielding",
-		group = "intermediate-factors",
-		order = "25",
-	},
-	{
-		type = "item-subgroup",
-		name = "lightweight-structure",
-		group = "intermediate-factors",
-		order = "26",
-	},
-	{
-		type = "item-subgroup",
-		name = "mechanism",
-		group = "intermediate-factors",
-		order = "31",
-	},
-	{
-		type = "item-subgroup",
-		name = "sensor",
-		group = "intermediate-factors",
-		order = "32",
 	},
 
 	-- Create subgroup for circuits and advanced circuit intermediates (electronic components, silicon wafers, doped wafers).
