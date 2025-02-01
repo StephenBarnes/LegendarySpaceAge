@@ -198,6 +198,11 @@ data.raw.recipe["agricultural-science-pack"].ingredients = {
 		-- Want it to be tied to cyclosomes, not neurofibrils. And don't want to have to worry about the phase, so using sprout rather than cyclosomes.
 	-- TODO add boompuff thing here later
 }
+data.raw.technology["agricultural-science-pack"].research_trigger = { -- TODO later this should be a rate trigger on bioflux.
+	type = "craft-item",
+	item = "bioflux",
+	count = 1000,
+}
 
 -- Make gate tech auto-unlock, otherwise I'm going to just forgo it.
 data.raw.technology["gate"].unit = nil

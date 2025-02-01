@@ -70,4 +70,4 @@ neurofibrilRecipe.results = {{type = "item", name = "wiring", amount = 8}}
 neurofibrilRecipe.order = "05"
 neurofibrilRecipe.enabled = false
 data:extend{neurofibrilRecipe}
-Tech.addRecipeToTech("wiring-from-neurofibril", "stingfronds-1")
+-- Will be added to the tech by stingfronds.lua.

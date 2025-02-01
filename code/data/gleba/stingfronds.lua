@@ -130,38 +130,56 @@ data.raw.item["carbon-fiber"].order = "c"
 
 ------------------------------------------------------------------------
 --[[ Create techs.
-There's 2 techs.
-	The 1st tech lets you make sprouts so you can actually farm stingfronds, and use cyclosomes to make science packs. You can burn the neurofibrils.
-	Then the 2nd tech lets you duplicate cyclosomes, and also make various products more efficiently from cyclosomes and neurofibrils. Then carbon fiber tech depends on that.
+There's 3 techs.
+	Neural-wiring tech gives you wiring from neurofibrils.
+	The 1st cultivation tech lets you make sprouts so you can actually farm stingfronds, and use cyclosomes to make science packs.
+	Then the 2nd cultivation tech lets you duplicate cyclosomes, and also make various products more efficiently from cyclosomes and neurofibrils. Then carbon fiber tech depends on that.
 --]]
 
-local stingfrondTech1 = table.deepcopy(data.raw.technology["biochamber"])
-stingfrondTech1.name = "stingfronds-1"
-stingfrondTech1.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech1.png"
-stingfrondTech1.prerequisites = {"bioflux"}
-stingfrondTech1.research_trigger = {
+local wiringTech = table.deepcopy(data.raw.technology["biochamber"])
+wiringTech.name = "neural-wiring"
+wiringTech.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech2.png"
+wiringTech.prerequisites = {"planet-discovery-gleba"}
+wiringTech.research_trigger = {
 	type = "mine-entity",
 	entity = "stingfrond",
 }
-stingfrondTech1.effects = {
+wiringTech.effects = {
+	{
+		type = "unlock-recipe",
+		recipe = "wiring-from-neurofibril",
+	},
+}
+data:extend{wiringTech}
+
+local cultivationTech1 = table.deepcopy(data.raw.technology["biochamber"])
+cultivationTech1.name = "stingfrond-cultivation-1"
+cultivationTech1.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech1.png"
+cultivationTech1.prerequisites = {"bioflux", "neural-wiring"}
+cultivationTech1.research_trigger = {
+	type = "craft-item",
+	item = "bioflux",
+	count = 100,
+}
+cultivationTech1.effects = {
 	{
 		type = "unlock-recipe",
 		recipe = "stingfrond-sprout",
 	},
 }
-stingfrondTech1.localised_description = {"technology-description.stingfronds-1"}
-data:extend{stingfrondTech1}
+cultivationTech1.localised_description = {"technology-description.stingfrond-cultivation-1"}
+data:extend{cultivationTech1}
 
-local stingfrondTech2 = table.deepcopy(data.raw.technology["biochamber"])
-stingfrondTech2.name = "stingfronds-2"
-stingfrondTech2.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech2.png"
-stingfrondTech2.prerequisites = {"stingfronds-1"}
-stingfrondTech2.research_trigger = {
+local cultivationTech2 = table.deepcopy(data.raw.technology["biochamber"])
+cultivationTech2.name = "stingfrond-cultivation-2"
+cultivationTech2.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech1.png"
+cultivationTech2.prerequisites = {"stingfrond-cultivation-1"}
+cultivationTech2.research_trigger = {
 	type = "craft-item",
 	item = "stingfrond-sprout",
 	count = 20,
 }
-stingfrondTech2.effects = {
+cultivationTech2.effects = {
 	{
 		type = "unlock-recipe",
 		recipe = "cyclosome-resynchronization",
@@ -171,11 +189,11 @@ stingfrondTech2.effects = {
 		recipe = "explosive-desynchronization",
 	},
 }
-stingfrondTech2.localised_description = {"technology-description.stingfronds-2"}
-data:extend{stingfrondTech2}
+cultivationTech2.localised_description = {"technology-description.stingfrond-cultivation-2"}
+data:extend{cultivationTech2}
 
-table.insert(data.raw.technology["agricultural-science-pack"].prerequisites, "stingfronds-1")
-table.insert(data.raw.technology["carbon-fiber"].prerequisites, "stingfronds-2")
+table.insert(data.raw.technology["agricultural-science-pack"].prerequisites, "stingfrond-cultivation-1")
+table.insert(data.raw.technology["carbon-fiber"].prerequisites, "stingfrond-cultivation-2")
 
 ------------------------------------------------------------------------
 --- Create recipes.
