@@ -92,9 +92,10 @@ local advancedPartsRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"]
 		{type="item", name="resin", amount=1},
 		{type="fluid", name="lubricant", amount=5},
 	},
-	results = {{type="item", name="advanced-parts", amount=4}},
+	results = {{type="item", name="advanced-parts", amount=8}},
 	category = "crafting-with-fluid",
 	energy_required = 5,
+	allow_decomposition = true,
 	enabled = false,
 })
 table.insert(newData, advancedPartsRecipe)

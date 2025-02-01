@@ -1,7 +1,136 @@
--- This file changes recipes for infrastructure (belts, vehicles, buildings, etc.)
+--[[ This file changes recipes for infrastructure (belts, vehicles, buildings, etc.)
+Going in order by group and subgroup.
+]]
 
 local Recipe = require("code.util.recipe")
 local Tech = require("code.util.tech")
+
+------------------------------------------------------------------------
+--- GROUP: LOGISTICS
+
+-- Remove chest recipes, instead only use the steel one, and make it from factor intermediates.
+for _, chestname in pairs{"wooden-chest", "iron-chest"} do
+	for _, t in pairs{"item", "recipe", "container"} do
+		data.raw[t][chestname].hidden = true
+		data.raw[t][chestname].hidden_in_factoriopedia = true
+	end
+end
+data.raw.recipe["steel-chest"].ingredients = {
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "panel", amount = 4},
+}
+
+-- Transport belts - remove the nesting in the recipes (each tier ingredient to the next), and add rubber, and change to factor intermediates.
+-- I also want them to get more expensive per throughput (as in vanilla), and increase in complexity.
+data.raw.recipe["transport-belt"].ingredients = {
+	-- Base game is 1 iron plate + 1 gear for 2 belts, so 1.5 iron plate per belt.
+	-- Changing it to 1 panel + 1 mechanism = 1 iron plate + 8 machine parts + 1 frame = 1 + 1 + 4 iron plates, so 6. So doubling amount produced to 4 belts.
+	{type="item", name="panel", amount=1},
+	{type="item", name="mechanism", amount=1},
+}
+data.raw.recipe["transport-belt"].results = {{type="item", name="transport-belt", amount=4}}
+data.raw.recipe["fast-transport-belt"].ingredients = {
+	{type="item", name="panel", amount=1},
+	{type="item", name="mechanism", amount=1},
+	{type="item", name="rubber", amount=1},
+}
+data.raw.recipe["fast-transport-belt"].results = {{type="item", name="fast-transport-belt", amount=2}}
+data.raw.recipe["express-transport-belt"].ingredients = {
+	{type="item", name="advanced-parts", amount=4},
+	{type="item", name="rubber", amount=1},
+	{type="fluid", name="lubricant", amount=20},
+}
+data.raw.recipe["turbo-transport-belt"].ingredients = {
+	{type="item", name="mechanism", amount=4},
+	{type="item", name="tungsten-plate", amount=4},
+	{type="fluid", name="lubricant", amount=40},
+}
+data.raw.recipe["turbo-transport-belt"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
+-- Underground belts - remove nesting. For ingredients, require literally just the number of belts, plus panels. So you can even craft them by hand, and eg turn green belts into green undergrounds off-Vulcanus.
+data.raw.recipe["underground-belt"].ingredients = {
+	{type="item", name="transport-belt", amount=6},
+	{type="item", name="panel", amount=2},
+}
+data.raw.recipe["fast-underground-belt"].ingredients = {
+	{type="item", name="fast-transport-belt", amount=8},
+	{type="item", name="panel", amount=2},
+}
+data.raw.recipe["express-underground-belt"].ingredients = {
+	{type="item", name="express-transport-belt", amount=10},
+	{type="item", name="panel", amount=2},
+}
+data.raw.recipe["turbo-underground-belt"].ingredients = {
+	{type="item", name="turbo-transport-belt", amount=12},
+	{type="item", name="panel", amount=2},
+}
+data.raw.recipe["turbo-underground-belt"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
+-- Splitters - remove nesting. For ingredients, require 2 belts of that tier, plus some sensor and mechanism, and advanced parts and lubricants for the later ones.
+data.raw.recipe["splitter"].ingredients = {
+	{type="item", name="transport-belt", amount=2},
+	{type="item", name="mechanism", amount=1},
+	{type="item", name="sensor", amount=1},
+}
+data.raw.recipe["fast-splitter"].ingredients = {
+	{type="item", name="fast-transport-belt", amount=2},
+	{type="item", name="mechanism", amount=1},
+	{type="item", name="sensor", amount=1},
+}
+data.raw.recipe["express-splitter"].ingredients = {
+	{type="item", name="express-transport-belt", amount=2},
+	{type="item", name="sensor", amount=1},
+	{type="item", name="advanced-parts", amount=2},
+}
+data.raw.recipe["turbo-splitter"].ingredients = {
+	{type="item", name="turbo-transport-belt", amount=2},
+	{type="item", name="mechanism", amount=2},
+	{type="item", name="sensor", amount=1},
+}
+data.raw.recipe["turbo-splitter"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
+
+-- Inserter recipes - rod is now enabled from the start.
+data.raw.recipe["burner-inserter"].ingredients = {
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "mechanism", amount = 1},
+}
+data.raw.recipe["inserter"].ingredients = {
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "mechanism", amount = 1},
+	{type = "item", name = "sensor", amount = 1},
+}
+data.raw.recipe["long-handed-inserter"].ingredients = {
+	{type = "item", name = "frame", amount = 2},
+	{type = "item", name = "mechanism", amount = 2},
+	{type = "item", name = "sensor", amount = 1},
+}
+data.raw.recipe["fast-inserter"].ingredients = {
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "mechanism", amount = 1},
+	{type = "item", name = "sensor", amount = 1},
+	{type = "fluid", name = "lubricant", amount = 20},
+}
+data.raw.recipe["fast-inserter"].category = "crafting-with-fluid"
+data.raw.recipe["bulk-inserter"].ingredients = {
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "advanced-parts", amount = 4},
+	{type = "item", name = "sensor", amount = 2},
+	{type = "fluid", name = "lubricant", amount = 20},
+}
+data.raw.recipe["bulk-inserter"].category = "crafting-with-fluid"
+data.raw.recipe["stack-inserter"].ingredients = {
+	{type = "item", name = "bulk-inserter", amount = 1},
+	{type = "item", name = "processing-unit", amount = 1},
+	{type = "item", name = "carbon-fiber", amount = 2},
+}
+
+
+------------------------------------------------------------------------
+--- UNSORTED, TODO SORT STUFF BELOW
+
+-- Repair pack
+data.raw.recipe["repair-pack"].ingredients = {
+	{type="item", name="mechanism", amount=1},
+	{type="item", name="sensor", amount=1},
+}
 
 -- Stone bricks - allowed in foundry and handcrafting, and required for stone furnaces.
 data.raw.recipe["stone-brick"].category = "smelting-or-metallurgy-or-handcrafting"
@@ -41,78 +170,6 @@ data.raw.recipe["spidertron"].ingredients = {
 	{type="item", name="rocket-turret", amount=1},
 }
 
--- Transport belts - add rubber, and remove the nesting in the recipes (each tier ingredient to the next).
--- I also want them to get more expensive per throughput (as in vanilla), and increase in complexity.
-data.raw.recipe["transport-belt"].ingredients = {
-	{type="item", name="iron-plate", amount=1},
-	{type="item", name="iron-gear-wheel", amount=1},
-}
-data.raw.recipe["fast-transport-belt"].ingredients = {
-	{type="item", name="iron-plate", amount=1},
-	{type="item", name="iron-gear-wheel", amount=6},
-	{type="item", name="rubber", amount=1},
-}
-data.raw.recipe["express-transport-belt"].ingredients = {
-	{type="item", name="iron-plate", amount=1},
-	{type="item", name="advanced-parts", amount=6},
-	{type="item", name="rubber", amount=1},
-	{type="fluid", name="lubricant", amount=20},
-}
-data.raw.recipe["turbo-transport-belt"].ingredients = {
-	{type="fluid", name="lubricant", amount=40},
-	{type="item", name="tungsten-plate", amount=4},
-	{type="item", name="rubber", amount=1},
-	{type="item", name="advanced-parts", amount=12},
-}
--- Underground belts - remove nesting. For ingredients, require literally just the number of belts, plus some extra ingredients of that belt.
-data.raw.recipe["underground-belt"].ingredients = {
-	{type="item", name="transport-belt", amount=6},
-	{type="item", name="iron-plate", amount=2},
-	{type="item", name="iron-gear-wheel", amount=2},
-}
-data.raw.recipe["fast-underground-belt"].ingredients = {
-	{type="item", name="fast-transport-belt", amount=8},
-	{type="item", name="iron-plate", amount=4},
-	{type="item", name="rubber", amount=1},
-}
-data.raw.recipe["express-underground-belt"].ingredients = {
-	{type="item", name="express-transport-belt", amount=10},
-	{type="item", name="iron-plate", amount=4},
-	{type="item", name="rubber", amount=2},
-	{type="fluid", name="lubricant", amount=20},
-}
-data.raw.recipe["turbo-underground-belt"].ingredients = {
-	{type="item", name="turbo-transport-belt", amount=12},
-	{type="item", name="tungsten-plate", amount=4},
-	{type="item", name="rubber", amount=2},
-	{type="fluid", name="lubricant", amount=40},
-}
--- Splitters - remove nesting. For ingredients, require 2 belts of that tier, plus some circuits and ingredients of that belt tier.
-data.raw.recipe["splitter"].ingredients = {
-	{type="item", name="transport-belt", amount=2},
-	{type="item", name="iron-plate", amount=2},
-	{type="item", name="iron-gear-wheel", amount=4},
-	{type="item", name="electronic-circuit", amount=2},
-}
-data.raw.recipe["fast-splitter"].ingredients = {
-	{type="item", name="fast-transport-belt", amount=2},
-	{type="item", name="iron-gear-wheel", amount=8},
-	{type="item", name="rubber", amount=1},
-	{type="item", name="electronic-circuit", amount=4},
-}
-data.raw.recipe["express-splitter"].ingredients = {
-	{type="item", name="express-transport-belt", amount=2},
-	{type="item", name="advanced-parts", amount=4},
-	{type="fluid", name="lubricant", amount=40},
-	{type="item", name="advanced-circuit", amount=2},
-}
-data.raw.recipe["turbo-splitter"].ingredients = {
-	{type="item", name="turbo-transport-belt", amount=2},
-	{type="item", name="tungsten-plate", amount=4},
-	{type="item", name="advanced-parts", amount=8},
-	{type="fluid", name="lubricant", amount=40},
-	{type="item", name="processing-unit", amount=2},
-}
 
 -- Pumps
 data.raw.recipe["pump"].ingredients = {
@@ -222,41 +279,6 @@ data.raw.recipe["power-armor"].ingredients = {-- Originally 40 steel plate, 20 e
 	{type="item", name="rubber", amount=20},
 }
 
--- Inserter recipes - rod is now enabled from the start.
-data.raw.recipe["burner-inserter"].ingredients = {
-	{type = "item", name = "iron-stick", amount = 2},
-	{type = "item", name = "iron-gear-wheel", amount = 2},
-}
-data.raw.recipe["inserter"].ingredients = {
-	{type = "item", name = "iron-stick", amount = 2},
-	{type = "item", name = "iron-gear-wheel", amount = 2},
-	{type = "item", name = "electronic-circuit", amount = 1},
-}
-data.raw.recipe["long-handed-inserter"].ingredients = {
-	{type = "item", name = "iron-stick", amount = 4},
-	{type = "item", name = "iron-gear-wheel", amount = 2},
-	{type = "item", name = "electronic-circuit", amount = 1},
-	{type = "item", name = "rubber", amount = 1},
-}
-data.raw.recipe["fast-inserter"].ingredients = {
-	{type = "item", name = "iron-stick", amount = 2},
-	{type = "item", name = "iron-gear-wheel", amount = 2},
-	{type = "item", name = "electronic-circuit", amount = 2},
-	{type = "item", name = "rubber", amount = 1},
-}
-data.raw.recipe["bulk-inserter"].ingredients = {
-	{type = "item", name = "iron-stick", amount = 4},
-	{type = "item", name = "advanced-parts", amount = 2},
-	{type = "item", name = "electronic-circuit", amount = 10},
-	{type = "item", name = "advanced-circuit", amount = 1},
-	{type = "item", name = "rubber", amount = 2},
-}
-data.raw.recipe["stack-inserter"].ingredients = {
-	{type = "item", name = "bulk-inserter", amount = 1},
-	{type = "item", name = "advanced-parts", amount = 4},
-	{type = "item", name = "processing-unit", amount = 1},
-	{type = "item", name = "carbon-fiber", amount = 2},
-}
 
 -- Radar.
 data.raw.recipe["radar"].ingredients = {
@@ -372,5 +394,3 @@ data.raw.recipe["gate"].ingredients = {
 data.raw.recipe["gate"].results = {
 	{type = "item", name = "gate", amount = 4},
 }
-
--- TODO remove all the chests, keep only the steel one, and make it from frame plus panel.

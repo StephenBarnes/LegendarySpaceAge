@@ -82,7 +82,7 @@ Tech.addTechDependency("rubber-1", "electric-energy-distribution-1")
 -- Concrete no longer needs automation-2 since assembling machine 1 can handle fluids.
 Tech.setPrereqs("concrete", {"cement", "steel-processing"})
 -- Same for fluid-handling.
-Tech.setPrereqs("fluid-handling", {"steel-processing", "rubber-1", "logistic-science-pack"})
+Tech.setPrereqs("fluid-handling", {"logistic-science-pack"})
 
 -- Plastics need syngas.
 Tech.setPrereqs("plastics", {"coal-liquefaction"})
@@ -103,7 +103,7 @@ Tech.addTechDependency("steel-processing", "battery")
 Tech.hideTech("oil-gathering")
 data.raw.technology["oil-processing"].unit = data.raw.technology["oil-gathering"].unit
 data.raw.technology["oil-processing"].research_trigger = nil
-data.raw.technology["oil-processing"].prerequisites = {"fluid-handling", "steam-power"}
+data.raw.technology["oil-processing"].prerequisites = {"fluid-handling", "steam-power", "cement"}
 Tech.addRecipeToTech("pumpjack", "oil-processing", 2)
 
 -- Elimininate the now-pointless "advanced oil processing" tech.
@@ -120,11 +120,14 @@ data.raw.technology["electric-mining-drill"].ignore_tech_cost_multiplier = true
 -- Move long inserter to logistics 2.
 Tech.removeRecipeFromTech("long-handed-inserter", "automation")
 Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
--- Fast inserter should go after logistics 2.
-Tech.setPrereqs("fast-inserter", {"logistics-2"})
-data.raw.technology["fast-inserter"].unit = {count = 30, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 15}
--- Bulk inserter should go after advanced parts / lubricant.
-Tech.setPrereqs("bulk-inserter", {"fast-inserter", "lubricant", "advanced-circuit"})
+-- Fast inserter should go after lubricant.
+Tech.setPrereqs("fast-inserter", {"lubricant"})
+data.raw.technology["fast-inserter"].unit = {count = 50, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
+Tech.setPrereqs("bulk-inserter", {"fast-inserter"})
+data.raw.technology["bulk-inserter"].unit = {count = 100, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
+-- Inserter capacity techs should need more advanced science packs, since they're now after chem science.
+data.raw.technology["inserter-capacity-bonus-1"].unit = {count = 150, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
+data.raw.technology["inserter-capacity-bonus-2"].unit = {count = 200, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 
 -- Remove tech for advanced combinators. And move selector combinator recipe, and change recipe to not need red circuits.
 Tech.hideTech("advanced-combinators")

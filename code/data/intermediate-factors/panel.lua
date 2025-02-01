@@ -18,7 +18,7 @@ recipeFromIron.ingredients = {
 recipeFromIron.results = {{type = "item", name = "panel", amount = 1}}
 recipeFromIron.enabled = true
 recipeFromIron.subgroup = "panel"
-recipeFromIron.order = "02"
+recipeFromIron.order = "03"
 recipeFromIron.energy_required = 6
 recipeFromIron.category = "crafting"
 recipeFromIron.icon = nil
@@ -27,6 +27,28 @@ recipeFromIron.icons = {
 	{icon = "__base__/graphics/icons/iron-plate.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
 data:extend{recipeFromIron}
+
+-- Create recipe: 1 copper plate -> 1 panel
+local recipeFromCopper = table.deepcopy(recipeFromIron)
+recipeFromCopper.name = "panel-from-copper"
+recipeFromCopper.ingredients = {
+	{type = "item", name = "copper-plate", amount = 1},
+}
+recipeFromCopper.order = "04"
+recipeFromCopper.icons[2] = {icon = "__base__/graphics/icons/copper-plate.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+data:extend{recipeFromCopper}
+
+-- Create recipe: 1 wood + 1 resin -> 1 panel
+local recipeFromWood = table.deepcopy(recipeFromIron)
+recipeFromWood.name = "panel-from-wood"
+recipeFromWood.ingredients = {
+	{type = "item", name = "wood", amount = 1},
+	{type = "item", name = "resin", amount = 1},
+}
+recipeFromWood.order = "02"
+recipeFromWood.icons[2] = {icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+data:extend{recipeFromWood}
+
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?

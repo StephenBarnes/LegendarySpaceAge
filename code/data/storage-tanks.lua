@@ -26,17 +26,17 @@ data.raw.item["tiny-inline-storage-tank"].weight = 1000000 / 100
 
 -- Adjust ingredients.
 data.raw.recipe["large-storage-tank"].ingredients = { -- Has 4x capacity of normal storage tank, so make cost less than 4x, so there's reason to use it.
-	{ type = "item", name = "iron-plate", amount = 50 },
-	{ type = "item", name = "steel-plate", amount = 10 },
-	{ type = "item", name = "glass", amount = 5 },
+	{type = "item", name = "pipe", amount = 8},
+	{type = "item", name = "fluid-fitting", amount = 4},
+	{type = "item", name = "panel", amount = 20},
 }
 data.raw.recipe["storage-tank"].ingredients = {
-	{ type = "item", name = "iron-plate", amount = 20 },
-	{ type = "item", name = "steel-plate", amount = 5 },
-	{ type = "item", name = "glass", amount = 2 },
+	{type = "item", name = "pipe", amount = 4},
+	{type = "item", name = "fluid-fitting", amount = 2},
+	{type = "item", name = "panel", amount = 10},
 }
 data.raw.recipe["tiny-inline-storage-tank"].ingredients = {
-	{ type = "item", name = "iron-plate", amount = 4 },
-	{ type = "item", name = "steel-plate", amount = 1 },
-	{ type = "item", name = "glass", amount = 1 },
+	{type = "item", name = "pipe", amount = 1},
+	{type = "item", name = "fluid-fitting", amount = 1},
+	{type = "item", name = "panel", amount = 2},
 }

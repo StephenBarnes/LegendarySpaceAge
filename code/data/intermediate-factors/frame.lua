@@ -33,7 +33,7 @@ data:extend{recipeFromWood}
 local recipeFromIron = table.deepcopy(data.raw.recipe["iron-stick"])
 recipeFromIron.name = "frame-from-iron"
 recipeFromIron.ingredients = {
-	{type = "item", name = "iron-stick", amount = 12}
+	{type = "item", name = "iron-stick", amount = 8}
 }
 recipeFromIron.results = {{type = "item", name = "frame", amount = 1}}
 recipeFromIron.enabled = true

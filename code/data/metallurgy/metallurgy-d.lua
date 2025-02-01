@@ -99,9 +99,10 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 end
 
 -- Make recipe for iron ingot -> steel ingot.
+-- This turns 2 ingots into 1.
 local steelIngotRecipe = Table.copyAndEdit(data.raw.recipe["steel-plate"], {
 	name = "ingot-steel-hot",
-	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
+	ingredients = {{type="item", name="ingot-iron-hot", amount=2}},
 	results = {{type="item", name="ingot-steel-hot", amount=1}},
 	energy_required = 20,
 })
@@ -176,7 +177,7 @@ table.insert(newData, copperIngotRecipe)
 -- Adjust steel plate recipe.
 Table.setFields(data.raw.recipe["steel-plate"], {
 	ingredients = {{type="item", name="ingot-steel-hot", amount=1}},
-	results = {{type="item", name="steel-plate", amount=1}},
+	results = {{type="item", name="steel-plate", amount=4}},
 	category = "crafting", -- Means it's craftable by hand or by assembler. (Unlike basegame's recipe for steel plate, which has category "smelting".)
 	energy_required = 1,
 	auto_recycle = true,
@@ -209,7 +210,7 @@ Table.setFields(data.raw.recipe["copper-plate"], {
 -- Adjust iron gear recipe.
 Table.setFields(data.raw.recipe["iron-gear-wheel"], {
 	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
-	results = {{type="item", name="iron-gear-wheel", amount=2}},
+	results = {{type="item", name="iron-gear-wheel", amount=8}},
 	energy_required = 1,
 	auto_recycle = true,
 })

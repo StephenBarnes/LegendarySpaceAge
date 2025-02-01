@@ -3,7 +3,7 @@ It yields different resources depending on the planet - on Gleba it gives chitin
 Can't be built on Aquilo or space platforms.
 There's a separate runtime script in control/deep-drill-recipe.lua that sets the recipe for the deep drill according to the surface it was built on.
 Graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
-Some code taken from Ancient Drill by RaulMoreau - https://github.com/GafarovMaxim/ancient-drill/blob/main/prototypes/entity.lua
+Some code taken from Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above.
 ]]
 
 local ent = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"])
@@ -17,9 +17,13 @@ ent.collision_box = {{-5.5, -5.5}, {5.5, 5.5}}
 ent.fluid_boxes = nil
 ent.vector_to_place_result = {6, 5}
 ent.ingredient_count = 0
+ent.energy_source.emissions_per_minute = {
+	pollution = 20,
+	spores = 10, -- For comparison, yumako tree is 15/harvest, and grows for 5m, so about 3/min spores.
+}
 ent.crafting_categories = {"deep-drill"}
 ent.surface_conditions = {{property = "surface-stability", min = 80}}
-ent.energy_usage = "10MW"
+ent.energy_usage = "5MW"
 ent.energy_source.drain = "200kW"
 ---@diagnostic disable-next-line: inject-field
 ent.PowerMultiplier_ignore = true
@@ -83,7 +87,7 @@ ent.graphics_set = {
 					{
 						filename = "__LegendarySpaceAge__/graphics/deep-drill/hr-emission-2.png",
 						width_in_frames = 8,
-						height_in_frames = 7, -- TODO
+						height_in_frames = 7,
 					},
 				},
 			},
@@ -105,10 +109,11 @@ data:extend{item}
 local recipe = table.deepcopy(data.raw.recipe["electric-mining-drill"])
 recipe.name = "deep-drill"
 recipe.results = {{type = "item", name = "deep-drill", amount = 1}}
+recipe.energy_required = 30
 recipe.ingredients = {
-	{type = "item", name = "frame", amount = 50},
-	{type = "item", name = "structure", amount = 100},
-	{type = "item", name = "mechanism", amount = 200},
+	{type = "item", name = "frame", amount = 20},
+	{type = "item", name = "structure", amount = 50},
+	{type = "item", name = "mechanism", amount = 20},
 }
 data:extend{recipe}
 
@@ -146,7 +151,7 @@ data:extend{nauvisDrillingRecipe}
 for i, planetData in pairs{
 	{"vulcanus", {{type = "item", name = "stone", amount = 8}, {type = "item", name = "carbon", amount = 2}}},
 		-- Drill consumes 10MJ for each recipe. Each carbon is 2MJ. So you get back 4MJ of fuel. With efficiency modules you could reduce energy cost to 2MJ, so 2MW profit.
-	{"gleba", {{type = "item", name = "spoilage", amount = 5}, {type = "item", name = "stone", amount = 5}}},
+	{"gleba", {{type = "item", name = "spoilage", amount = 6}, {type = "item", name = "stone", amount = 4}}},
 		-- TODO change stone to chitin
 	{"fulgora", {{type = "item", name = "stone", amount = 8}, {type = "item", name = "scrap", amount = 2}}},
 } do
@@ -179,7 +184,7 @@ tech.effects = {
 	{type = "unlock-recipe", recipe = "deep-drill-gleba"},
 	{type = "unlock-recipe", recipe = "deep-drill-fulgora"},
 }
-tech.prerequisites = {"electric-mining-drill", "cement", "chemical-science-pack"}
+tech.prerequisites = {"electric-mining-drill", "chemical-science-pack"}
 tech.icon = "__LegendarySpaceAge__/graphics/deep-drill/tech.png"
 tech.unit = {
 	count = 100,
