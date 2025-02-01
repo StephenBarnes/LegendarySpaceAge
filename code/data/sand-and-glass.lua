@@ -3,9 +3,6 @@ Stone can be crushed into sand in an assembling machine: 1 stone -> 1 sand
 Sand can then be smelted to glass in a furnace or foundry: 1 sand -> 1 glass
 ]]
 
-local Table = require("code.util.table")
-local Tech = require("code.util.tech")
-
 local newData = {}
 
 -- Create sand item.
@@ -13,15 +10,14 @@ local sandIcons = {}
 for i = 1, 3 do
 	table.insert(sandIcons, {filename = "__LegendarySpaceAge__/graphics/sand/sand-"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
-local sandItem = Table.copyAndEdit(data.raw.item["stone"], {
-	name = "sand",
-	icon = "nil",
-	icons = {{icon = sandIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
-	pictures = sandIcons,
-	subgroup = "raw-material",
-	order = "a2",
-	stack_size = 100, -- Increase 50->100 vs stone and ores. So it makes sense to crush stone before shipping.
-})
+local sandItem = table.deepcopy(data.raw.item["stone"])
+sandItem.name = "sand"
+sandItem.icon = nil
+sandItem.icons = {{icon = sandIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
+sandItem.pictures = sandIcons
+sandItem.subgroup = "raw-material"
+sandItem.order = "a2"
+sandItem.stack_size = 100 -- Increase 50->100 vs stone and ores. So it makes sense to crush stone before shipping.
 table.insert(newData, sandItem)
 
 -- Create glass item.
@@ -29,65 +25,61 @@ local glassIcons = {}
 for i = 1, 6 do
 	table.insert(glassIcons, {filename = "__LegendarySpaceAge__/graphics/glass/glass-"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
-local glassItem = Table.copyAndEdit(data.raw.item["iron-plate"], {
-	name = "glass",
-	icon = "nil",
-	icons = {{icon = glassIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
-	pictures = glassIcons,
-	subgroup = "raw-material",
-	order = "a3",
-})
+local glassItem = table.deepcopy(data.raw.item["iron-plate"])
+glassItem.name = "glass"
+glassItem.icon = nil
+glassItem.icons = {{icon = glassIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
+glassItem.pictures = glassIcons
+glassItem.subgroup = "raw-material"
+glassItem.order = "a3"
 table.insert(newData, glassItem)
 
 -- Create recipe for stone -> sand.
-local sandRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], {
-	name = "sand",
-	ingredients = {{type="item", name="stone", amount=1}},
-	results = {{type="item", name="sand", amount=1}},
-	category = "crafting",
-	subgroup = "raw-material",
-	enabled = true,
-	allow_decomposition = true,
-	allow_as_intermediate = true,
-	main_product = "sand",
-})
+local sandRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
+sandRecipe.name = "sand"
+sandRecipe.ingredients = {{type="item", name="stone", amount=1}}
+sandRecipe.results = {{type="item", name="sand", amount=1}}
+sandRecipe.category = "crafting"
+sandRecipe.subgroup = "raw-material"
+sandRecipe.enabled = true
+sandRecipe.allow_decomposition = true
+sandRecipe.allow_as_intermediate = true
+sandRecipe.main_product = "sand"
 table.insert(newData, sandRecipe)
 
 -- Create recipe for sand -> glass.
-local glassRecipe = Table.copyAndEdit(data.raw.recipe["iron-plate"], {
-	name = "glass",
-	ingredients = {{type="item", name="sand", amount=1}},
-	results = {{type="item", name="glass", amount=1}},
-	category = "smelting-or-metallurgy",
-	subgroup = "raw-material",
-	enabled = false,
-	energy_required = 2,
-	allow_decomposition = true,
-	allow_as_intermediate = true,
-	main_product = "glass",
-})
+local glassRecipe = table.deepcopy(data.raw.recipe["iron-plate"])
+glassRecipe.name = "glass"
+glassRecipe.ingredients = {{type="item", name="sand", amount=1}}
+glassRecipe.results = {{type="item", name="glass", amount=1}}
+glassRecipe.category = "smelting-or-metallurgy"
+glassRecipe.subgroup = "raw-material"
+glassRecipe.enabled = false
+glassRecipe.energy_required = 2
+glassRecipe.allow_decomposition = true
+glassRecipe.allow_as_intermediate = true
+glassRecipe.main_product = "glass"
 table.insert(newData, glassRecipe)
 
 -- Create tech for glass
-local glassTech = Table.copyAndEdit(data.raw.technology["logistics"], {
-	name = "glass",
-	effects = {
-		{
-			type = "unlock-recipe",
-			recipe = "glass",
-		},
+local glassTech = table.deepcopy(data.raw.technology["logistics"])
+glassTech.name = "glass"
+glassTech.effects = {
+	{
+		type = "unlock-recipe",
+		recipe = "glass",
 	},
-	prerequisites = {},
-	unit = "nil",
-	research_trigger = {
-		type = "craft-item",
-		item = "sand",
-		count = 1,
-	},
-	icon = "nil",
-	icons = {{icon = "__LegendarySpaceAge__/graphics/glass/tech.png", icon_size = 256, scale=0.5, mipmap_count = 4}},
-	order = "001",
-})
+}
+glassTech.prerequisites = {}
+glassTech.unit = nil
+glassTech.research_trigger = {
+	type = "craft-item",
+	item = "sand",
+	count = 1,
+}
+glassTech.icon = nil
+glassTech.icons = {{icon = "__LegendarySpaceAge__/graphics/glass/tech.png", icon_size = 256, scale=0.5, mipmap_count = 4}}
+glassTech.order = "001"
 table.insert(newData, glassTech)
 
 -- TODO Make the sand->glass recipe allowed in foundries.

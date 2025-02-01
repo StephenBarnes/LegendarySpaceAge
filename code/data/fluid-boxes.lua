@@ -5,18 +5,18 @@ local greyPipes = require("code.data.util.grey-pipes")
 -- Add 2 more fluid outputs to the refinery, so we can have recipes with 5 fluid outputs.
 -- Could get away with adding only 1 new output, but then it's asymmetric so we can't flip it.
 local oilRefinery = data.raw["assembling-machine"]["oil-refinery"]
-local newFluidBox1 = Table.copyAndEdit(oilRefinery.fluid_boxes[5], {
-	pipe_connections = {
-		{position = {-2, 0}, direction = defines.direction.west, flow_direction = "output"},
-	},
-	pipe_picture = greyPipes(),
-})
-local newFluidBox2 = Table.copyAndEdit(oilRefinery.fluid_boxes[5], {
-	pipe_connections = {
-		{position = {2, 0}, direction = defines.direction.east, flow_direction = "output"},
-	},
-	pipe_picture = greyPipes(),
-})
+local newFluidBox1 = table.deepcopy(oilRefinery.fluid_boxes[5])
+newFluidBox1.pipe_connections = {
+	{position = {-2, 0}, direction = defines.direction.west, flow_direction = "output"},
+}
+newFluidBox1.pipe_picture = greyPipes()
+
+local newFluidBox2 = table.deepcopy(oilRefinery.fluid_boxes[5])
+newFluidBox2.pipe_connections = {
+	{position = {2, 0}, direction = defines.direction.east, flow_direction = "output"},
+}
+newFluidBox2.pipe_picture = greyPipes()
+
 -- Add fluid boxes in order chosen so that our recipes have interesting and sensible positions for outputs.
 oilRefinery.fluid_boxes = {
 	oilRefinery.fluid_boxes[1], -- input
@@ -30,12 +30,11 @@ oilRefinery.fluid_boxes = {
 
 -- Add 1 more fluid input to chem plant, so we can do explosives recipe.
 local chemPlant = data.raw["assembling-machine"]["chemical-plant"]
-local newFluidBox = Table.copyAndEdit(chemPlant.fluid_boxes[1], {
-	pipe_connections = {
-		{position = {1, 0}, direction = defines.direction.east, flow_direction = "input"},
-	},
-	pipe_picture = greyPipes(),
-})
+local newFluidBox = table.deepcopy(chemPlant.fluid_boxes[1])
+newFluidBox.pipe_connections = {
+	{position = {1, 0}, direction = defines.direction.east, flow_direction = "input"},
+}
+newFluidBox.pipe_picture = greyPipes()
 chemPlant.fluid_boxes = {
 	chemPlant.fluid_boxes[1], -- input
 	newFluidBox, -- Stick it between the other 2 outputs, so if a recipe has 2 fluid inputs they get distributed more conveniently.
@@ -47,11 +46,10 @@ chemPlant.fluid_boxes_off_when_no_fluid_recipe = false -- If this is true, they 
 
 -- Also add an extra fluid input to biochambers, needed for synthetic rubber.
 local bioChamber = data.raw["assembling-machine"]["biochamber"]
-local newFluidBoxB = Table.copyAndEdit(bioChamber.fluid_boxes[1], {
-	pipe_connections = {
-		{position = {-1, 0}, direction = defines.direction.west, flow_direction = "input"},
-	},
-})
+local newFluidBoxB = table.deepcopy(bioChamber.fluid_boxes[1])
+newFluidBoxB.pipe_connections = {
+	{position = {-1, 0}, direction = defines.direction.west, flow_direction = "input"},
+}
 bioChamber.fluid_boxes = {
 	bioChamber.fluid_boxes[1], -- input
 	newFluidBoxB, -- Stick it between the other 2 outputs, so if a recipe has 2 fluid inputs they get distributed more conveniently.
@@ -69,12 +67,11 @@ end
 
 -- Add extra fluid input to the foundry, needed for some recipes.
 local foundry = data.raw["assembling-machine"]["foundry"]
-local newFluidBoxF1 = Table.copyAndEdit(foundry.fluid_boxes[1], {
-	pipe_connections = {
-		{position = {-2, 0}, direction = defines.direction.west, flow_direction = "input"},
-	},
-	pipe_picture = greyPipes(),
-})
+local newFluidBoxF1 = table.deepcopy(foundry.fluid_boxes[1])
+newFluidBoxF1.pipe_connections = {
+	{position = {-2, 0}, direction = defines.direction.west, flow_direction = "input"},
+}
+newFluidBoxF1.pipe_picture = greyPipes()
 foundry.fluid_boxes = {
 	foundry.fluid_boxes[1], -- input
 	foundry.fluid_boxes[2], -- input

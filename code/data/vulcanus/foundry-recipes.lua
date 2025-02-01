@@ -51,28 +51,27 @@ local Recipe = require("code.util.recipe")
 local newData = {}
 
 -- Make recipe for metals-from-lava.
-local metalsFromLavaRecipe = Table.copyAndEdit(data.raw.recipe["molten-iron-from-lava"], {
-	name = "metals-from-lava",
-	ingredients = {
-		{type = "fluid", name = "lava", amount = 500},
-		{type = "item", name = "calcite", amount = 1},
-		{type = "item", name = "carbon", amount = 1},
-	},
-	results = {
-		{type = "fluid", name = "molten-iron", amount = 250},
-		{type = "item", name = "copper-matte", amount = 10},
-		{type = "item", name = "stone", amount = 20},
-	},
-	enabled = false,
-	allow_decomposition = true,
-	allow_as_intermediate = true,
-	icon = "nil",
-	icons = {{
-		icon = "__LegendarySpaceAge__/graphics/vulcanus/metals-from-lava.png",
-		icon_size = 64,
-		scale = 0.5,
-	}},
-})
+local metalsFromLavaRecipe = table.deepcopy(data.raw.recipe["molten-iron-from-lava"])
+metalsFromLavaRecipe.name = "metals-from-lava"
+metalsFromLavaRecipe.ingredients = {
+	{type = "fluid", name = "lava", amount = 500},
+	{type = "item", name = "calcite", amount = 1},
+	{type = "item", name = "carbon", amount = 1},
+}
+metalsFromLavaRecipe.results = {
+	{type = "fluid", name = "molten-iron", amount = 250},
+	{type = "item", name = "copper-matte", amount = 10},
+	{type = "item", name = "stone", amount = 20},
+}
+metalsFromLavaRecipe.enabled = false
+metalsFromLavaRecipe.allow_decomposition = true
+metalsFromLavaRecipe.allow_as_intermediate = true
+metalsFromLavaRecipe.icon = nil
+metalsFromLavaRecipe.icons = {{
+	icon = "__LegendarySpaceAge__/graphics/vulcanus/metals-from-lava.png",
+	icon_size = 64,
+	scale = 0.5,
+}}
 table.insert(newData, metalsFromLavaRecipe)
 
 -- Hide old recipes for molten metals from lava, remove from tech, add new recipe to tech.
@@ -110,38 +109,36 @@ else
 end
 
 -- Make molten steel fluid.
-local moltenSteelFluid = Table.copyAndEdit(data.raw.fluid["molten-iron"], {
-	name = "molten-steel",
-	icon = "nil",
-	icons = {{
-		icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-steel.png",
-		icon_size = 64,
-		scale = 0.5,
-	}},
-	order = "b[new-fluid]-b[vulcanus]-c[molten-steel]",
-	base_color = {.3, .4, .4},
-	flow_color = {.5, .7, .7},
-	visualization_color = {.2, 1, 1}, -- Cyan for the diagram-like lines drawn on pipes.
-})
+local moltenSteelFluid = table.deepcopy(data.raw.fluid["molten-iron"])
+moltenSteelFluid.name = "molten-steel"
+moltenSteelFluid.icon = nil
+moltenSteelFluid.icons = {{
+	icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-steel.png",
+	icon_size = 64,
+	scale = 0.5,
+}}
+moltenSteelFluid.order = "b[new-fluid]-b[vulcanus]-c[molten-steel]"
+moltenSteelFluid.base_color = {.3, .4, .4}
+moltenSteelFluid.flow_color = {.5, .7, .7}
+moltenSteelFluid.visualization_color = {.2, 1, 1} -- Cyan for the diagram-like lines drawn on pipes.
 table.insert(newData, moltenSteelFluid)
 
 -- Make recipe for molten steel.
-local moltenSteelRecipe = Table.copyAndEdit(data.raw.recipe["molten-iron"], {
-	name = "molten-steel-making",
-		-- Not naming it the same as the fluid, so recipe shows up with the rest of them.
-		-- Seems the way it works is, recipe can show up in a different subgroup as the fluid if it either has multiple products, or a different name from the fluid.
-	localised_name = {"fluid-name.molten-steel"},
-	ingredients = {
-		{type = "fluid", name = "molten-iron", amount = 100},
-		{type = "item", name = "carbon", amount = 1},
-		{type = "item", name = "calcite", amount = 1},
-	},
-	results = {
-		{type = "fluid", name = "molten-steel", amount = 100},
-	},
-	main_product = "molten-steel",
-	order = "a[melting]-d[molten-steel]",
-})
+local moltenSteelRecipe = table.deepcopy(data.raw.recipe["molten-iron"])
+moltenSteelRecipe.name = "molten-steel-making"
+	-- Not naming it the same as the fluid, so recipe shows up with the rest of them.
+	-- Seems the way it works is, recipe can show up in a different subgroup as the fluid if it either has multiple products, or a different name from the fluid.
+moltenSteelRecipe.localised_name = {"fluid-name.molten-steel"}
+moltenSteelRecipe.ingredients = {
+	{type = "fluid", name = "molten-iron", amount = 100},
+	{type = "item", name = "carbon", amount = 1},
+	{type = "item", name = "calcite", amount = 1},
+}
+moltenSteelRecipe.results = {
+	{type = "fluid", name = "molten-steel", amount = 100},
+}
+moltenSteelRecipe.main_product = "molten-steel"
+moltenSteelRecipe.order = "a[melting]-d[molten-steel]"
 table.insert(newData, moltenSteelRecipe)
 Tech.addRecipeToTech("molten-steel-making", "foundry", 8)
 
@@ -265,28 +262,27 @@ Table.setFields(data.raw.recipe["casting-pipe-to-ground"], {
 })
 
 -- Add recipe for casting advanced parts. (Bc can't make ingots from foundries.)
-local castingAdvancedPartsRecipe = Table.copyAndEdit(data.raw.recipe["casting-iron-gear-wheel"], {
-	name = "casting-advanced-parts",
-	ingredients = {
-		{type = "fluid", name = "molten-steel", amount = 160},
-		{type = "fluid", name = "water", amount = 4},
-		{type = "item", name = "rubber", amount = 1},
-		{type = "item", name = "plastic-bar", amount = 2},
-		{type = "fluid", name = "lubricant", amount = 5},
-	},
-	results = {
-		{type = "item", name = "advanced-parts", amount = 4},
-		{type = "fluid", name = "steam", amount = 40, temperature = 500, ignored_by_productivity=40},
-	},
-	main_product = "advanced-parts",
-	icon = "nil",
-	icons = {
-		{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
-		{icon = "__space-age__/graphics/icons/fluid/molten-iron.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={4, -4}},
-	},
-	order = "b[casting]-f[casting-advanced-parts]",
-	energy_required = 16,
-})
+local castingAdvancedPartsRecipe = table.deepcopy(data.raw.recipe["casting-iron-gear-wheel"])
+castingAdvancedPartsRecipe.name = "casting-advanced-parts"
+castingAdvancedPartsRecipe.ingredients = {
+	{type = "fluid", name = "molten-steel", amount = 160},
+	{type = "fluid", name = "water", amount = 4},
+	{type = "item", name = "rubber", amount = 1},
+	{type = "item", name = "plastic-bar", amount = 2},
+	{type = "fluid", name = "lubricant", amount = 5},
+}
+castingAdvancedPartsRecipe.results = {
+	{type = "item", name = "advanced-parts", amount = 4},
+	{type = "fluid", name = "steam", amount = 40, temperature = 500, ignored_by_productivity=40},
+}
+castingAdvancedPartsRecipe.main_product = "advanced-parts"
+castingAdvancedPartsRecipe.icon = nil
+castingAdvancedPartsRecipe.icons = {
+	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
+	{icon = "__space-age__/graphics/icons/fluid/molten-iron.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={4, -4}},
+}
+castingAdvancedPartsRecipe.order = "b[casting]-f[casting-advanced-parts]"
+castingAdvancedPartsRecipe.energy_required = 16
 table.insert(newData, castingAdvancedPartsRecipe)
 Tech.addRecipeToTech("casting-advanced-parts", "foundry")
 
@@ -300,37 +296,35 @@ data.raw.recipe["tungsten-carbide"].category = "chemistry"
 data.raw.recipe["tungsten-carbide"].energy_required = 8
 
 -- Create molten tungsten fluid.
-local moltenTungstenFluid = Table.copyAndEdit(data.raw.fluid["molten-iron"], {
-	name = "molten-tungsten",
-	icon = "nil",
-	icons = {{
-		icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png",
-		icon_size = 64,
-		scale = 0.5,
-	}},
-	order = "b[new-fluid]-b[vulcanus]-d[molten-tungsten]",
-	base_color = {.259, .239, .349}, -- Measured on ore
-	flow_color = {.635, .584, .741},
-	visualization_color = {.478, .191, .682}, -- Measured on ore and boosted saturation.
-})
+local moltenTungstenFluid = table.deepcopy(data.raw.fluid["molten-iron"])
+moltenTungstenFluid.name = "molten-tungsten"
+moltenTungstenFluid.icon = nil
+moltenTungstenFluid.icons = {{
+	icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png",
+	icon_size = 64,
+	scale = 0.5,
+}}
+moltenTungstenFluid.order = "b[new-fluid]-b[vulcanus]-d[molten-tungsten]"
+moltenTungstenFluid.base_color = {.259, .239, .349} -- Measured on ore
+moltenTungstenFluid.flow_color = {.635, .584, .741}
+moltenTungstenFluid.visualization_color = {.478, .191, .682} -- Measured on ore and boosted saturation.
 table.insert(newData, moltenTungstenFluid)
 
 -- Create recipe for molten tungsten.
-local moltenTungstenRecipe = Table.copyAndEdit(data.raw.recipe["molten-iron"], {
-	name = "molten-tungsten",
-	ingredients = {
-		{type = "item", name = "tungsten-ore", amount = 4},
-		{type = "item", name = "carbon", amount = 1},
-		{type = "fluid", name = "sulfuric-acid", amount = 10},
-	},
-	results = {
-		{type = "fluid", name = "molten-tungsten", amount = 40, temperature = 1500},
-		{type = "item", name = "stone", amount = 2},
-	},
-	main_product = "molten-tungsten",
-	order = "a[melting]-d[molten-tungsten]",
-	energy_required = 1,
-})
+local moltenTungstenRecipe = table.deepcopy(data.raw.recipe["molten-iron"])
+moltenTungstenRecipe.name = "molten-tungsten"
+moltenTungstenRecipe.ingredients = {
+	{type = "item", name = "tungsten-ore", amount = 4},
+	{type = "item", name = "carbon", amount = 1},
+	{type = "fluid", name = "sulfuric-acid", amount = 10},
+}
+moltenTungstenRecipe.results = {
+	{type = "fluid", name = "molten-tungsten", amount = 40, temperature = 1500},
+	{type = "item", name = "stone", amount = 2},
+}
+moltenTungstenRecipe.main_product = "molten-tungsten"
+moltenTungstenRecipe.order = "a[melting]-d[molten-tungsten]"
+moltenTungstenRecipe.energy_required = 1
 table.insert(newData, moltenTungstenRecipe)
 Tech.addRecipeToTech("molten-tungsten", "tungsten-steel", 1)
 
@@ -342,69 +336,66 @@ data.raw.technology["tungsten-steel"].icons = {
 }
 
 -- Make foundry recipes for tungsten carbide and tungsten steel. And recipe for heating molten tungsten.
-local tungstenCarbideFromMoltenRecipe = Table.copyAndEdit(data.raw.recipe["tungsten-plate"], {
-	name = "tungsten-carbide-from-molten",
-	ingredients = {
-		{type = "fluid", name = "molten-tungsten", amount = 40, minimum_temperature = 1600, maximum_temperature = 1800},
-		{type = "item", name = "carbon", amount = 1},
-		{type = "fluid", name = "water", amount = 1},
-	},
-	results = {
-		{type = "item", name = "tungsten-carbide", amount = 4},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-	},
-	main_product = "tungsten-carbide",
-	energy_required = 4,
-	icon = "nil",
-	icons = {
-		{icon = "__space-age__/graphics/icons/tungsten-carbide.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
-		{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
-	},
-})
+local tungstenCarbideFromMoltenRecipe = table.deepcopy(data.raw.recipe["tungsten-plate"])
+tungstenCarbideFromMoltenRecipe.name = "tungsten-carbide-from-molten"
+tungstenCarbideFromMoltenRecipe.ingredients = {
+	{type = "fluid", name = "molten-tungsten", amount = 40, minimum_temperature = 1600, maximum_temperature = 1800},
+	{type = "item", name = "carbon", amount = 1},
+	{type = "fluid", name = "water", amount = 1},
+}
+tungstenCarbideFromMoltenRecipe.results = {
+	{type = "item", name = "tungsten-carbide", amount = 4},
+	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
+}
+tungstenCarbideFromMoltenRecipe.main_product = "tungsten-carbide"
+tungstenCarbideFromMoltenRecipe.energy_required = 4
+tungstenCarbideFromMoltenRecipe.icon = nil
+tungstenCarbideFromMoltenRecipe.icons = {
+	{icon = "__space-age__/graphics/icons/tungsten-carbide.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
+	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
+}
 table.insert(newData, tungstenCarbideFromMoltenRecipe)
 Tech.addRecipeToTech("tungsten-carbide-from-molten", "tungsten-steel")
-local tungstenSteelRecipe = Table.copyAndEdit(data.raw.recipe["tungsten-plate"], {
-	name = "tungsten-steel-from-molten",
-		-- Again, can't name it "tungsten-steel" or it won't show separately from the item, which is a problem bc you can't see the temperature range requirement.
-	ingredients = {
-		{type = "fluid", name = "molten-tungsten", amount = 40, minimum_temperature = 1800, maximum_temperature = 1900},
-		{type = "fluid", name = "molten-steel", amount = 10},
-		{type = "fluid", name = "water", amount = 2},
-	},
-	results = {
-		{type = "item", name = "tungsten-plate", amount = 1},
-		{type = "fluid", name = "steam", amount = 20, temperature = 500, ignored_by_productivity=20},
-	},
-	main_product = "tungsten-plate",
-	energy_required = 8,
-	icon = "nil",
-	icons = {
-		{icon = "__space-age__/graphics/icons/tungsten-plate.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
-		{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
-	},
-})
+local tungstenSteelRecipe = table.deepcopy(data.raw.recipe["tungsten-plate"])
+tungstenSteelRecipe.name = "tungsten-steel-from-molten"
+	-- Again, can't name it "tungsten-steel" or it won't show separately from the item, which is a problem bc you can't see the temperature range requirement.
+tungstenSteelRecipe.ingredients = {
+	{type = "fluid", name = "molten-tungsten", amount = 40, minimum_temperature = 1800, maximum_temperature = 1900},
+	{type = "fluid", name = "molten-steel", amount = 10},
+	{type = "fluid", name = "water", amount = 2},
+}
+tungstenSteelRecipe.results = {
+	{type = "item", name = "tungsten-plate", amount = 1},
+	{type = "fluid", name = "steam", amount = 20, temperature = 500, ignored_by_productivity=20},
+}
+tungstenSteelRecipe.main_product = "tungsten-plate"
+tungstenSteelRecipe.energy_required = 8
+tungstenSteelRecipe.icon = nil
+tungstenSteelRecipe.icons = {
+	{icon = "__space-age__/graphics/icons/tungsten-plate.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
+	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
+}
 table.insert(newData, tungstenSteelRecipe)
 Tech.addRecipeToTech("tungsten-steel-from-molten", "tungsten-steel")
-local tungstenHeatingRecipe = Table.copyAndEdit(data.raw.recipe["molten-iron"], {
-	name = "tungsten-heating",
-	ingredients = {
-		{type = "fluid", name = "molten-tungsten", amount = 100, ignored_by_stats=100},
-	},
-	results = {
-		{type = "fluid", name = "molten-tungsten", amount = 100, temperature = 2000, ignored_by_stats=100, ignored_by_productivity=100},
-	},
-	main_product = "molten-tungsten",
-	order = "a[melting]-d[tungsten-heating]",
-	energy_required = 1,
-	icon = "nil",
-	icons = {
-		{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten-heating.png", icon_size = 64, scale=0.5, mipmap_count=4},
-	},
-	show_amount_in_title = false,
-	hide_from_stats = true,
-	allow_productivity = false,
-	max_productivity = 0,
-})
+local tungstenHeatingRecipe = table.deepcopy(data.raw.recipe["molten-iron"])
+tungstenHeatingRecipe.name = "tungsten-heating"
+tungstenHeatingRecipe.ingredients = {
+	{type = "fluid", name = "molten-tungsten", amount = 100, ignored_by_stats=100},
+}
+tungstenHeatingRecipe.results = {
+	{type = "fluid", name = "molten-tungsten", amount = 100, temperature = 2000, ignored_by_stats=100, ignored_by_productivity=100},
+}
+tungstenHeatingRecipe.main_product = "molten-tungsten"
+tungstenHeatingRecipe.order = "a[melting]-d[tungsten-heating]"
+tungstenHeatingRecipe.energy_required = 1
+tungstenHeatingRecipe.icon = nil
+tungstenHeatingRecipe.icons = {
+	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten-heating.png", icon_size = 64, scale=0.5, mipmap_count=4},
+}
+tungstenHeatingRecipe.show_amount_in_title = false
+tungstenHeatingRecipe.hide_from_stats = true
+tungstenHeatingRecipe.allow_productivity = false
+tungstenHeatingRecipe.maximum_productivity = 0
 table.insert(newData, tungstenHeatingRecipe)
 Tech.addRecipeToTech("tungsten-heating", "tungsten-steel")
 

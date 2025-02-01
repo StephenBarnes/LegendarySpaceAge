@@ -223,26 +223,25 @@ data:extend{dopedWaferRecipe}
 Tech.addRecipeToTech("doped-wafer", "processing-unit", 2)
 
 -- Create recipe for microchips.
-local microchipRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
-	name = "microchip",
-	ingredients = {
-		{type = "item", name = "doped-wafer", amount = 1},
-		{type = "item", name = "wiring", amount = 1},
-		{type = "item", name = "plastic-bar", amount = 1},
-	},
-	results = {
-		{type = "item", name = "microchip", amount = 20},
-	},
-	subgroup = "nil",
-	icon = "nil",
-	icons = "nil",
-	category = "electronics",
-	energy_required = 12,
-	allow_decomposition = true,
-	allow_as_intermediate = true,
-	main_product = "microchip",
-	always_show_products = true,
-})
+local microchipRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
+microchipRecipe.name = "microchip"
+microchipRecipe.ingredients = {
+	{type = "item", name = "doped-wafer", amount = 1},
+	{type = "item", name = "wiring", amount = 1},
+	{type = "item", name = "plastic-bar", amount = 1},
+}
+microchipRecipe.results = {
+	{type = "item", name = "microchip", amount = 20},
+}
+microchipRecipe.subgroup = nil
+microchipRecipe.icon = nil
+microchipRecipe.icons = nil
+microchipRecipe.category = "electronics"
+microchipRecipe.energy_required = 12
+microchipRecipe.allow_decomposition = true
+microchipRecipe.allow_as_intermediate = true
+microchipRecipe.main_product = "microchip"
+microchipRecipe.always_show_products = true
 data:extend{microchipRecipe}
 Tech.addRecipeToTech("microchip", "processing-unit", 3)
 
@@ -260,43 +259,41 @@ data.raw.recipe["processing-unit"].main_product = "processing-unit"
 data.raw.recipe["processing-unit"].energy_required = 6
 
 -- Create item for electronic components.
-local electronicComponents = Table.copyAndEdit(data.raw.item["advanced-circuit"], {
-	name = "electronic-components",
-	icon = "nil",
-	subgroup = "complex-circuit-intermediates",
-	order = "001",
-	stack_size = 200,
-	icons = {{icon = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/1.png", icon_size = 64, scale = 0.5}},
-	pictures = {
-		{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/1.png", size = 64, scale = 0.5},
-		{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/2.png", size = 64, scale = 0.5},
-		{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/3.png", size = 64, scale = 0.5},
-	},
-})
+local electronicComponents = table.deepcopy(data.raw.item["advanced-circuit"])
+electronicComponents.name = "electronic-components"
+electronicComponents.icon = nil
+electronicComponents.subgroup = "complex-circuit-intermediates"
+electronicComponents.order = "001"
+electronicComponents.stack_size = 200
+electronicComponents.icons = {{icon = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/1.png", icon_size = 64, scale = 0.5}}
+electronicComponents.pictures = {
+	{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/1.png", size = 64, scale = 0.5},
+	{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/2.png", size = 64, scale = 0.5},
+	{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/3.png", size = 64, scale = 0.5},
+}
 data:extend{electronicComponents}
 
 -- Create a recipe for electronic components.
 -- 1 carbon + 1 plastic + 1 sand + 1 copper wire -> 2 electronic components
-local electronicComponentsRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
-	name = "electronic-components",
-	ingredients = {
-		{type = "item", name = "carbon", amount = 1},
-		{type = "item", name = "plastic-bar", amount = 1},
-		{type = "item", name = "wiring", amount = 1},
-	},
-	results = {
-		{type = "item", name = "electronic-components", amount = 4},
-	},
-	subgroup = "nil",
-	icon = "nil",
-	icons = "nil",
-	category = "electronics",
-	energy_required = 6,
-	allow_decomposition = true,
-	allow_as_intermediate = true,
-	main_product = "electronic-components",
-	always_show_products = true,
-})
+local electronicComponentsRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
+electronicComponentsRecipe.name = "electronic-components"
+electronicComponentsRecipe.ingredients = {
+	{type = "item", name = "carbon", amount = 1},
+	{type = "item", name = "plastic-bar", amount = 1},
+	{type = "item", name = "wiring", amount = 1},
+}
+electronicComponentsRecipe.results = {
+	{type = "item", name = "electronic-components", amount = 4},
+}
+electronicComponentsRecipe.subgroup = nil
+electronicComponentsRecipe.icon = nil
+electronicComponentsRecipe.icons = nil
+electronicComponentsRecipe.category = "electronics"
+electronicComponentsRecipe.energy_required = 6
+electronicComponentsRecipe.allow_decomposition = true
+electronicComponentsRecipe.allow_as_intermediate = true
+electronicComponentsRecipe.main_product = "electronic-components"
+electronicComponentsRecipe.always_show_products = true
 data:extend{electronicComponentsRecipe}
 Tech.addRecipeToTech("electronic-components", "advanced-circuit", 1)
 

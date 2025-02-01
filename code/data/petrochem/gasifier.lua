@@ -172,30 +172,27 @@ fluidGasifierEnt.hidden_in_factoriopedia = true
 fluidGasifierEnt.factoriopedia_alternative = "gasifier"
 data:extend{fluidGasifierEnt}
 
-local gasifierItem = Table.copyAndEdit(data.raw.item["steel-furnace"], {
-	type = "item",
-	name = "gasifier",
-	icon = "nil",
-	icons = {{icon = GRAPHICS.."gasifier-item.png", icon_size = 64}},
-	order = "z",
-	subgroup = data.raw.item["heating-tower"].subgroup,
-	place_result = "gasifier",
-	stack_size = 20,
-})
+local gasifierItem = table.deepcopy(data.raw.item["steel-furnace"])
+gasifierItem.type = "item"
+gasifierItem.name = "gasifier"
+gasifierItem.icon = nil
+gasifierItem.icons = {{icon = GRAPHICS.."gasifier-item.png", icon_size = 64}}
+gasifierItem.order = "z"
+gasifierItem.subgroup = data.raw.item["heating-tower"].subgroup
+gasifierItem.place_result = "gasifier"
+gasifierItem.stack_size = 20
 data:extend{gasifierItem}
 
-local gasifierRecipe = Table.copyAndEdit(data.raw.recipe["steel-furnace"], {
-	type = "recipe",
-	name = "gasifier",
-	enabled = false,
-	results = {{type = "item", name = "gasifier", amount = 1}},
-	-- TODO decide on ingredients
-})
+local gasifierRecipe = table.deepcopy(data.raw.recipe["steel-furnace"])
+gasifierRecipe.type = "recipe"
+gasifierRecipe.name = "gasifier"
+gasifierRecipe.enabled = false
+gasifierRecipe.results = {{type = "item", name = "gasifier", amount = 1}}
+-- TODO decide on ingredients
 data:extend{gasifierRecipe}
 
-local gasifierRecipeCategory = Table.copyAndEdit(data.raw["recipe-category"]["crafting"], {
-	name = "gasifier",
-})
+local gasifierRecipeCategory = table.deepcopy(data.raw["recipe-category"]["crafting"])
+gasifierRecipeCategory.name = "gasifier"
 data:extend{gasifierRecipeCategory}
 
 --[[ Steam gasification: 20 fuel + 10 steam -> 10 syngas + 1 pitch + 1 sulfur
@@ -203,31 +200,30 @@ data:extend{gasifierRecipeCategory}
 		However, it can't be sulfur (since that would burn to SO2, not CO).
 		We want to keep it so 1 unit of every petro fluid is roughly equivalent, so this recipe must produce less syngas+tar than the input fuel; it's a lossy conversion to avoid a loop that creates infinite free fluids.
 ]]
-local gasificationRecipe = Table.copyAndEdit(data.raw.recipe["solid-fuel-from-light-oil"], {
-	type = "recipe",
-	name = "syngas",
-	enabled = false,
-	category = "gasifier",
-	ingredients = {
-		{type="fluid", name="steam", amount=100},
-	},
-	results = {
-		{type="fluid", name="syngas", amount=100, show_details_in_recipe_tooltip = true},
-		{type="item", name="pitch", amount=1, show_details_in_recipe_tooltip = false},
-		{type="item", name="sulfur", amount=1, show_details_in_recipe_tooltip = false},
-	},
-	main_result = "syngas",
-	energy_required = 1,
-	icon = "nil",
-	icons = data.raw.fluid.syngas.icons,
-	allow_productivity = false,
-	allow_speed = false,
-	allow_consumption = false, -- No efficiency effects from beacons.
-	hidden = false,
-	hide_from_player_crafting = false,
-	subgroup = "complex-fluid-recipes",
-	order = "a[coal-liquefaction]-a",
-})
+local gasificationRecipe = table.deepcopy(data.raw.recipe["solid-fuel-from-light-oil"])
+gasificationRecipe.type = "recipe"
+gasificationRecipe.name = "syngas"
+gasificationRecipe.enabled = false
+gasificationRecipe.category = "gasifier"
+gasificationRecipe.ingredients = {
+	{type="fluid", name="steam", amount=100},
+}
+gasificationRecipe.results = {
+	{type="fluid", name="syngas", amount=100, show_details_in_recipe_tooltip = true},
+	{type="item", name="pitch", amount=1, show_details_in_recipe_tooltip = false},
+	{type="item", name="sulfur", amount=1, show_details_in_recipe_tooltip = false},
+}
+gasificationRecipe.main_product = "syngas"
+gasificationRecipe.energy_required = 1
+gasificationRecipe.icon = nil
+gasificationRecipe.icons = data.raw.fluid.syngas.icons
+gasificationRecipe.allow_productivity = false
+gasificationRecipe.allow_speed = false
+gasificationRecipe.allow_consumption = false -- No efficiency effects from beacons.
+gasificationRecipe.hidden = false
+gasificationRecipe.hide_from_player_crafting = false
+gasificationRecipe.subgroup = "complex-fluid-recipes"
+gasificationRecipe.order = "a[coal-liquefaction]-a"
 data:extend{gasificationRecipe}
 
 Tech.addRecipeToTech("syngas", "coal-liquefaction", 1)

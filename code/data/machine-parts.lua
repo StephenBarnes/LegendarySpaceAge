@@ -58,31 +58,30 @@ data.raw.recipe["rocs-rusting-iron-iron-gear-wheel-derusting"].icon = nil
 data.raw.recipe["rocs-rusting-iron-iron-gear-wheel-derusting"].icons = {{icon = "__LegendarySpaceAge__/graphics/parts-basic/derusting.png", icon_size = 64, scale=0.5, mipmap_count=4}}
 
 -- Create advanced parts item.
-local advancedPartsItem = Table.copyAndEdit(data.raw.item["iron-gear-wheel"], {
-	name = "advanced-parts",
-	icons = {
-		--[[
-		{icon = "__LegendarySpaceAge__/graphics/parts-advanced/flange-1.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={-6, 4}},
-		{icon = "__LegendarySpaceAge__/graphics/parts-advanced/gasket.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={6, 4}},
-		{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-1.png", icon_size = 64, scale=0.3, mipmap_count=4, shift={0, -6}},
-		]]
-		{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.5, mipmap_count=4},
-	},
-	pictures = {
-		{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-1.png", size = 64, scale = 0.5, mipmap_count = 4},
-		{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-2.png", size = 64, scale = 0.5, mipmap_count = 4},
-		{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-2.png", size = 64, scale = 0.5, mipmap_count = 4},
-		{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", size = 64, scale = 0.5, mipmap_count = 4},
-		{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", size = 64, scale = 0.5, mipmap_count = 4},
-		{filename = "__LegendarySpaceAge__/graphics/parts-advanced/flange-1.png", size = 64, scale = 0.36, mipmap_count = 4},
-		{filename = "__LegendarySpaceAge__/graphics/parts-advanced/flange-2.png", size = 64, scale = 0.36, mipmap_count = 4},
-		--{filename = "__LegendarySpaceAge__/graphics/parts-advanced/gasket.png", size = 64, scale = 0.36, mipmap_count = 4},
-	},
-	has_random_tint = true,
-	random_tint_color = {r = .955, g = .96, b = 1.0, a=1},
-	spoil_ticks = "nil",
-	order = "7",
-})
+local advancedPartsItem = table.deepcopy(data.raw.item["iron-gear-wheel"])
+advancedPartsItem.name = "advanced-parts"
+advancedPartsItem.icons = {
+	--[[
+	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/flange-1.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={-6, 4}},
+	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/gasket.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={6, 4}},
+	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-1.png", icon_size = 64, scale=0.3, mipmap_count=4, shift={0, -6}},
+	]]
+	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.5, mipmap_count=4},
+}
+advancedPartsItem.pictures = {
+	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-1.png", size = 64, scale = 0.5, mipmap_count = 4},
+	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-2.png", size = 64, scale = 0.5, mipmap_count = 4},
+	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-2.png", size = 64, scale = 0.5, mipmap_count = 4},
+	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", size = 64, scale = 0.5, mipmap_count = 4},
+	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", size = 64, scale = 0.5, mipmap_count = 4},
+	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/flange-1.png", size = 64, scale = 0.36, mipmap_count = 4},
+	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/flange-2.png", size = 64, scale = 0.36, mipmap_count = 4},
+	--{filename = "__LegendarySpaceAge__/graphics/parts-advanced/gasket.png", size = 64, scale = 0.36, mipmap_count = 4},
+}
+advancedPartsItem.has_random_tint = true
+advancedPartsItem.random_tint_color = {r = .955, g = .96, b = 1.0, a=1}
+advancedPartsItem.spoil_ticks = nil
+advancedPartsItem.order = "7"
 table.insert(newData, advancedPartsItem)
 
 -- Create recipe for advanced parts.

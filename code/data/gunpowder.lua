@@ -14,29 +14,28 @@ for i = 1, 3 do
 		mipmap_count = 4,
 	})
 end
-local gunpowderItem = Table.copyAndEdit(data.raw.item["sulfur"], {
-	name = "gunpowder",
-	icons = {{icon = gunpowderPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
-	pictures = gunpowderPictures,
-	subgroup = "raw-material", -- Could put it with ammo, but it's really an intermediate.
-	order = "b[chemistry]-a2",
-	auto_recycle = false, -- Can't get sulfur/sand/carbon back.
-})
+local gunpowderItem = table.deepcopy(data.raw.item["sulfur"])
+gunpowderItem.name = "gunpowder"
+gunpowderItem.icons = {{icon = gunpowderPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
+gunpowderItem.pictures = gunpowderPictures
+gunpowderItem.subgroup = "raw-material" -- Could put it with ammo, but it's really an intermediate.
+gunpowderItem.order = "b[chemistry]-a2"
+gunpowderItem.auto_recycle = false -- Can't get sulfur/sand/carbon back.
 table.insert(newData, gunpowderItem)
 
 -- Create recipe for gunpowder.
 -- 2 carbon + 1 sulfur + 1 sand -> 2 gunpowder
-local gunpowderRecipe = Table.copyAndEdit(data.raw.recipe["firearm-magazine"], {
-	name = "gunpowder",
-	ingredients = {
-		{type="item", name="carbon", amount=2},
-		{type="item", name="sulfur", amount=1},
-		{type="item", name="niter", amount=4},
-	},
-	results = {{type = "item", name = "gunpowder", amount = 8}},
-	enabled = false, -- Enabled by coal coking tech.
-	category = "chemistry-or-handcrafting",
-})
+local gunpowderRecipe = table.deepcopy(data.raw.recipe["firearm-magazine"])
+gunpowderRecipe.name = "gunpowder"
+gunpowderRecipe.ingredients = {
+	{type="item", name="carbon", amount=2},
+	{type="item", name="sulfur", amount=1},
+	{type="item", name="niter", amount=4},
+}
+gunpowderRecipe.results = {{type = "item", name = "gunpowder", amount = 8}}
+gunpowderRecipe.enabled = false -- Enabled by coal coking tech.
+gunpowderRecipe.category = "chemistry-or-handcrafting"
+gunpowderRecipe.auto_recycle = false
 table.insert(newData, gunpowderRecipe)
 
 -- Adjust ammo mag recipes

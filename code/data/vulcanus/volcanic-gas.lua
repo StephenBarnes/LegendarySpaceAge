@@ -7,61 +7,58 @@ local newData = {}
 
 -- Create the new fluid.
 local volcanicGasColor = {0.788, 0.627, 0.167}
-local volcanicGas = Table.copyAndEdit(data.raw.fluid["steam"], {
-	name = "volcanic-gas",
-	base_color = volcanicGasColor,
-	flow_color = volcanicGasColor,
-	visualization_color = volcanicGasColor,
-	icon = "nil",
-	icons = {
-		{icon = "__LegendarySpaceAge__/graphics/fluids/volcanic-gas.png", icon_size = 64, scale = 0.5},
-	},
-	order = "b[new-fluid]-b[vulcanus]-0[volcanic-gas]",
-})
+local volcanicGas = table.deepcopy(data.raw.fluid["steam"])
+volcanicGas.name = "volcanic-gas"
+volcanicGas.base_color = volcanicGasColor
+volcanicGas.flow_color = volcanicGasColor
+volcanicGas.visualization_color = volcanicGasColor
+volcanicGas.icon = nil
+volcanicGas.icons = {
+	{icon = "__LegendarySpaceAge__/graphics/fluids/volcanic-gas.png", icon_size = 64, scale = 0.5},
+}
+volcanicGas.order = "b[new-fluid]-b[vulcanus]-0[volcanic-gas]"
 table.insert(newData, volcanicGas)
 
 -- Create recipe for separating volcanic gas into water, sulfur, and carbon.
-local volcanicGasSeparationRecipe = Table.copyAndEdit(data.raw.recipe["steam-condensation"], {
-	name = "volcanic-gas-separation",
-	localised_name = "nil",
-	category = "chemistry-or-cryogenics",
-	subgroup = "vulcanus-processes",
-	order = "02",
-	energy_required = 2,
-	ingredients = {
-		{type = "fluid", name = "volcanic-gas", amount = 100},
-	},
-	results = {
-		{type = "item", name = "sulfur", amount = 2},
-		{type = "item", name = "carbon", amount = 1},
-		{type = "fluid", name = "water", amount = 20},
-	},
-	enabled = false,
-	allow_decomposition = false,
-	allow_as_intermediate = false,
-	icon = "nil",
-	icons = {
-		{icon = "__LegendarySpaceAge__/graphics/fluids/volcanic-gas.png", icon_size = 64, scale = 0.38, shift = {0, -5}},
-		{icon = "__base__/graphics/icons/sulfur.png", icon_size = 64, scale = 0.15, shift = {-8, 1}},
-		{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.15, shift = {8, 2}},
-		{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.24, shift = {0, 4}},
-	},
-})
+local volcanicGasSeparationRecipe = table.deepcopy(data.raw.recipe["steam-condensation"])
+volcanicGasSeparationRecipe.name = "volcanic-gas-separation"
+volcanicGasSeparationRecipe.localised_name = nil
+volcanicGasSeparationRecipe.category = "chemistry-or-cryogenics"
+volcanicGasSeparationRecipe.subgroup = "vulcanus-processes"
+volcanicGasSeparationRecipe.order = "02"
+volcanicGasSeparationRecipe.energy_required = 2
+volcanicGasSeparationRecipe.ingredients = {
+	{type = "fluid", name = "volcanic-gas", amount = 100},
+}
+volcanicGasSeparationRecipe.results = {
+	{type = "item", name = "sulfur", amount = 2},
+	{type = "item", name = "carbon", amount = 1},
+	{type = "fluid", name = "water", amount = 20},
+}
+volcanicGasSeparationRecipe.enabled = false
+volcanicGasSeparationRecipe.allow_decomposition = false
+volcanicGasSeparationRecipe.allow_as_intermediate = false
+volcanicGasSeparationRecipe.icon = nil
+volcanicGasSeparationRecipe.icons = {
+	{icon = "__LegendarySpaceAge__/graphics/fluids/volcanic-gas.png", icon_size = 64, scale = 0.38, shift = {0, -5}},
+	{icon = "__base__/graphics/icons/sulfur.png", icon_size = 64, scale = 0.15, shift = {-8, 1}},
+	{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.15, shift = {8, 2}},
+	{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.24, shift = {0, 4}},
+}
 table.insert(newData, volcanicGasSeparationRecipe)
 
 -- Create a tech for volcanic gas separation.
 ---@type data.TechnologyPrototype
-local volcanicGasSeparationTech = Table.copyAndEdit(data.raw.technology["tungsten-carbide"], {
-	name = "volcanic-gas-processing",
-	effects = {
-		{type = "unlock-recipe", recipe = "volcanic-gas-separation"},
-	},
-	icon = "nil",
-	icons = {{
-		icon = "__LegendarySpaceAge__/graphics/vulcanus/geyser-tech.png",
-		icon_size = 256,
-	}},
-})
+local volcanicGasSeparationTech = table.deepcopy(data.raw.technology["tungsten-carbide"])
+volcanicGasSeparationTech.name = "volcanic-gas-processing"
+volcanicGasSeparationTech.effects = {
+	{type = "unlock-recipe", recipe = "volcanic-gas-separation"},
+}
+volcanicGasSeparationTech.icon = nil
+volcanicGasSeparationTech.icons = {{
+	icon = "__LegendarySpaceAge__/graphics/vulcanus/geyser-tech.png",
+	icon_size = 256,
+}}
 volcanicGasSeparationTech.research_trigger.entity = "vulcanus-chimney"
 table.insert(newData, volcanicGasSeparationTech)
 table.insert(data.raw.technology["foundry"].prerequisites, "volcanic-gas-processing")

@@ -13,42 +13,37 @@ Original game recipes were:
 	8 iron rod + 1 steel plate + 20 concrete + 100 water -> 10 refined concrete
 ]]
 
-local Table = require("code.util.table")
-local Tech = require("code.util.tech")
 local Recipe = require("code.util.recipe")
 
 local newData = {}
 
 -- Create new "cement" fluid.
-local cementFluid = Table.copyAndEdit(data.raw.fluid["lubricant"], {
-	name = "cement",
-	icon = "nil",
-	icons = {{icon = "__LegendarySpaceAge__/graphics/fluids/cement-fluid.png", scale = .5, icon_size = 64}},
-	auto_barrel = false,
-	base_color = {.33, .33, .33, 1},
-	flow_color = {.6, .6, .6, 1},
-	visualization_color = {.43, .43, .43, 1},
-})
+local cementFluid = table.deepcopy(data.raw.fluid["lubricant"])
+cementFluid.name = "cement"
+cementFluid.icon = nil
+cementFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/fluids/cement-fluid.png", scale = .5, icon_size = 64}}
+cementFluid.auto_barrel = false
+cementFluid.base_color = {.33, .33, .33, 1}
+cementFluid.flow_color = {.6, .6, .6, 1}
+cementFluid.visualization_color = {.43, .43, .43, 1}
 table.insert(newData, cementFluid)
 
 -- Create recipe for cement.
-local cementRecipe = Table.copyAndEdit(data.raw.recipe["lubricant"], {
-	name = "make-cement", -- Must be different from cement so it appears in factoriopedia correctly.
-	localised_name = {"fluid-name.cement"},
-	subgroup = "terrain",
-	order = "b[a]",
-	ingredients = {
-		{type = "item", name = "stone", amount = 2},
-		{type = "item", name = "sand", amount = 2},
-		{type = "fluid", name = "water", amount = 40},
-	},
-	results = {
-		{type = "fluid", name = "cement", amount = 40},
-	},
-	main_product = "cement",
-	auto_barrel = false,
-	category = "crafting-with-fluid",
-})
+local cementRecipe = table.deepcopy(data.raw.recipe["lubricant"])
+cementRecipe.name = "make-cement" -- Must be different from cement so it appears in factoriopedia correctly.
+cementRecipe.localised_name = {"fluid-name.cement"}
+cementRecipe.subgroup = "terrain"
+cementRecipe.order = "b[a]"
+cementRecipe.ingredients = {
+	{type = "item", name = "stone", amount = 2},
+	{type = "item", name = "sand", amount = 2},
+	{type = "fluid", name = "water", amount = 40},
+}
+cementRecipe.results = {
+	{type = "fluid", name = "cement", amount = 40},
+}
+cementRecipe.main_product = "cement"
+cementRecipe.category = "crafting-with-fluid"
 table.insert(newData, cementRecipe)
 
 -- Create tech for cement.
@@ -86,81 +81,73 @@ data.raw.recipe["refined-concrete"].ingredients = {
 
 -- Create sulfur concrete recipes for foundries.
 -- TODO
-local concreteCastingRecipe = Table.copyAndEdit(data.raw.recipe["concrete-from-molten-iron"], {
-	name = "sulfur-concrete",
-	ingredients = {
-		{type = "item", name = "sulfur", amount = 30},
-		{type = "item", name = "sand", amount = 30},
-	},
-	results = {
-		{type = "item", name = "concrete", amount = 20},
-	},
-	icon = "nil",
-	icons = {
-		--[[
-		{icon = "__base__/graphics/icons/concrete.png", icon_size = 64, scale=0.5, mipmap_count=4},
-		{icon = "__space-age__/graphics/icons/fluid/lava.png", icon_size = 64, scale=0.27, mipmap_count=4, shift={-6, -7}},
-		{icon = "__base__/graphics/icons/sulfur.png", icon_size = 64, scale=0.3, mipmap_count=4, shift={6, -6}},
-		]]
-
-		{icon = "__base__/graphics/icons/concrete.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
-		{icon = "__LegendarySpaceAge__/graphics/vulcanus/sulfur-cast.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
-	},
-})
+local concreteCastingRecipe = table.deepcopy(data.raw.recipe["concrete-from-molten-iron"])
+concreteCastingRecipe.name = "sulfur-concrete"
+concreteCastingRecipe.ingredients = {
+	{type = "item", name = "sulfur", amount = 30},
+	{type = "item", name = "sand", amount = 30},
+}
+concreteCastingRecipe.results = {
+	{type = "item", name = "concrete", amount = 20},
+}
+concreteCastingRecipe.icon = nil
+concreteCastingRecipe.icons = {
+	{icon = "__base__/graphics/icons/concrete.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
+	{icon = "__LegendarySpaceAge__/graphics/vulcanus/sulfur-cast.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
+}
 table.insert(newData, concreteCastingRecipe)
-local refinedConcreteCastingRecipe = Table.copyAndEdit(data.raw.recipe["concrete-from-molten-iron"], {
-	name = "sulfur-refined-concrete",
-	ingredients = {
-		{type = "item", name = "sulfur", amount = 30},
-		{type = "item", name = "sand", amount = 30},
-		{type = "item", name = "resin", amount = 1},
-		{type = "fluid", name = "molten-steel", amount = 40},
-	},
-	results = {
-		{type = "item", name = "refined-concrete", amount = 20},
-	},
-	icon = "nil",
-	icons = {
-		{icon = "__base__/graphics/icons/refined-concrete.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
-		{icon = "__LegendarySpaceAge__/graphics/vulcanus/sulfur-cast.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
-	},
-})
+
+local refinedConcreteCastingRecipe = table.deepcopy(data.raw.recipe["concrete-from-molten-iron"])
+refinedConcreteCastingRecipe.name = "sulfur-refined-concrete"
+refinedConcreteCastingRecipe.ingredients = {
+	{type = "item", name = "sulfur", amount = 30},
+	{type = "item", name = "sand", amount = 30},
+	{type = "item", name = "resin", amount = 1},
+	{type = "fluid", name = "molten-steel", amount = 40},
+}
+refinedConcreteCastingRecipe.results = {
+	{type = "item", name = "refined-concrete", amount = 20},
+}
+refinedConcreteCastingRecipe.icon = nil
+refinedConcreteCastingRecipe.icons = {
+	{icon = "__base__/graphics/icons/refined-concrete.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
+	{icon = "__LegendarySpaceAge__/graphics/vulcanus/sulfur-cast.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
+}
 table.insert(newData, refinedConcreteCastingRecipe)
 
 -- Hide old concrete foundry recipe completely.
 Recipe.hide("concrete-from-molten-iron")
 
 -- Create sulfur concrete tech.
-local sulfurConcreteTech = Table.copyAndEdit(data.raw.technology["concrete"], {
-	name = "sulfur-concrete",
-	effects = {
-		{
-			type = "unlock-recipe",
-			recipe = "sulfur-concrete",
-		},
-		{
-			type = "unlock-recipe",
-			recipe = "sulfur-refined-concrete",
-		},
+local sulfurConcreteTech = table.deepcopy(data.raw.technology["concrete"])
+sulfurConcreteTech.name = "sulfur-concrete"
+sulfurConcreteTech.effects = {
+	{
+		type = "unlock-recipe",
+		recipe = "sulfur-concrete",
 	},
-	prerequisites = {
-		"foundry",
+	{
+		type = "unlock-recipe",
+		recipe = "sulfur-refined-concrete",
 	},
-	icon = "nil",
-	icons = {
-		{icon = "__base__/graphics/technology/concrete.png", icon_size = 256, scale = 1},
-		{icon = "__base__/graphics/technology/sulfur-processing.png", icon_size = 256, scale = 0.7, shift = {0, -40}},
+}
+sulfurConcreteTech.prerequisites = {
+	"foundry",
+}
+sulfurConcreteTech.icon = nil
+sulfurConcreteTech.icons = {
+	{icon = "__base__/graphics/technology/concrete.png", icon_size = 256, scale = 1},
+	{icon = "__base__/graphics/technology/sulfur-processing.png", icon_size = 256, scale = 0.7, shift = {0, -40}},
+}
+sulfurConcreteTech.unit = {
+	count = 250,
+	time = 30,
+	ingredients = {
+		{"automation-science-pack", 1},
+		{"logistic-science-pack", 1},
+		{"chemical-science-pack", 1},
 	},
-	unit = {
-		count = 250,
-		time = 30,
-		ingredients = {
-			{"automation-science-pack", 1},
-			{"logistic-science-pack", 1},
-			{"chemical-science-pack", 1},
-		},
-	},
-})
+}
 table.insert(newData, sulfurConcreteTech)
 
 data:extend(newData)

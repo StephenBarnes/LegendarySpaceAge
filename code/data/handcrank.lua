@@ -1,7 +1,6 @@
 -- This file creates "basic electricity" tech based on Eradicator's Hand Crank Deluxe mod.
 -- I disabled that mod's recipe and tech, going to create them again but different.
 
-local Table = require("code.util.table")
 local Tech = require("code.util.tech")
 
 -- Create tech.
@@ -28,18 +27,15 @@ data:extend({handCrankTech})
 Tech.removeRecipesFromTechs({"copper-cable", "small-electric-pole"}, {"electronics"})
 
 -- Create recipe.
-local handCrankRecipe = Table.copyAndEdit(data.raw.recipe["assembling-machine-1"], {
-	name = "er-hcg",
-	ingredients = {
-		{type = "item", name = "iron-plate", amount = 4},
-		{type = "item", name = "iron-gear-wheel", amount = 4},
-		{type = "item", name = "copper-cable", amount = 2},
-	},
-	results = {
-		{type = "item", name = "er-hcg", amount = 1},
-	},
-	order = "a",
-})
+local handCrankRecipe = table.deepcopy(data.raw.recipe["assembling-machine-1"])
+handCrankRecipe.name = "er-hcg"
+handCrankRecipe.ingredients = {
+	{type = "item", name = "iron-plate", amount = 4},
+	{type = "item", name = "iron-gear-wheel", amount = 4},
+	{type = "item", name = "copper-cable", amount = 2},
+}
+handCrankRecipe.results = {{type = "item", name = "er-hcg", amount = 1}}
+handCrankRecipe.order = "a"
 data:extend({handCrankRecipe})
 
 -- Make the offshore pump require electricity, since we have a way to generate electricity before offshore pump now.

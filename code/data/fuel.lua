@@ -25,9 +25,8 @@ data.raw.item["sulfur"].fuel_glow_color = {r=.3, g=.3, b=1, a=.2} -- Sulfur burn
 
 -- Create fuel category for non-carbon fuels like soldReplicationRecipeulfur, which can't be used in some places where carbon is needed (eg furnaces need carbon as reducing agent).
 -- Mostly this is to prevent using sulfur to make syngas in a gasifier, since that would create carbon out of nothing, which breaks Vulcanus.
-local nonCarbonFuelCategory = Table.copyAndEdit(data.raw["fuel-category"]["chemical"], {
-	name = "non-carbon",
-})
+local nonCarbonFuelCategory = table.deepcopy(data.raw["fuel-category"]["chemical"])
+nonCarbonFuelCategory.name = "non-carbon"
 data:extend{nonCarbonFuelCategory}
 
 -- Set fuel categories for some entities to allow non-carbon-based fuels (sulfur, hydrogen).

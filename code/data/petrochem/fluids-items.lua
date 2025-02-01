@@ -6,28 +6,26 @@ local constants = require("code.data.petrochem.constants")
 local newData = {}
 
 -- Create natural gas fluid.
-local natgasFluid = Table.copyAndEdit(data.raw.fluid["crude-oil"], {
-	name = "natural-gas",
-	base_color = constants.natgasColor,
-	flow_color = constants.natgasFlowColor,
-	icon = "nil",
-	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.natgasTint}},
-	order = "a[fluid]-b[oil]-aa[natgas]",
-	gas_temperature = 0,
-})
+local natgasFluid = table.deepcopy(data.raw.fluid["crude-oil"])
+natgasFluid.name = "natural-gas"
+natgasFluid.base_color = constants.natgasColor
+natgasFluid.flow_color = constants.natgasFlowColor
+natgasFluid.icon = nil
+natgasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.natgasTint}}
+natgasFluid.order = "a[fluid]-b[oil]-aa[natgas]"
+natgasFluid.gas_temperature = 0
 table.insert(newData, natgasFluid)
 
 -- Create dry gas fluid.
-local drygasFluid = Table.copyAndEdit(natgasFluid, {
-	name = "dry-gas",
-	base_color = constants.drygasColor,
-	flow_color = constants.drygasFlowColor,
-	visualization_color = constants.drygasColor,
-	icon = "nil",
-	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.drygasTint}},
-	order = "a[fluid]-b[oil]-c[fractions]-4",
-	gas_temperature = 0,
-})
+local drygasFluid = table.deepcopy(natgasFluid)
+drygasFluid.name = "dry-gas"
+drygasFluid.base_color = constants.drygasColor
+drygasFluid.flow_color = constants.drygasFlowColor
+drygasFluid.visualization_color = constants.drygasColor
+drygasFluid.icon = nil
+drygasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.drygasTint}}
+drygasFluid.order = "a[fluid]-b[oil]-c[fractions]-4"
+drygasFluid.gas_temperature = 0
 table.insert(newData, drygasFluid)
 
 -- Change petroleum gas to "rich gas".
@@ -41,27 +39,25 @@ richgasFluid.localised_name = {"fluid-name.rich-gas"} -- In case other languages
 richgasFluid.gas_temperature = 0
 
 -- Create syngas fluid.
-local syngasFluid = Table.copyAndEdit(data.raw.fluid["heavy-oil"], {
-	name = "syngas",
-	base_color = constants.syngasColor,
-	flow_color = constants.syngasFlowColor,
-	icon = "nil",
-	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.syngasColor}},
-	order = "a[fluid]-b[oil]-c[fractions]-6",
-	gas_temperature = 0,
-})
+local syngasFluid = table.deepcopy(data.raw.fluid["heavy-oil"])
+syngasFluid.name = "syngas"
+syngasFluid.base_color = constants.syngasColor
+syngasFluid.flow_color = constants.syngasFlowColor
+syngasFluid.icon = nil
+syngasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.syngasColor}}
+syngasFluid.order = "a[fluid]-b[oil]-c[fractions]-6"
+syngasFluid.gas_temperature = 0
 table.insert(newData, syngasFluid)
 
 -- Create tar fluid.
-local tarFluid = Table.copyAndEdit(data.raw.fluid["heavy-oil"], {
-	name = "tar",
-	base_color = constants.tarColor,
-	flow_color = constants.tarFlowColor,
-	visualization_color = constants.tarColor,
-	icon = "nil",
-	icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64}},
-	order = "a[fluid]-b[oil]-c[fractions]-0",
-})
+local tarFluid = table.deepcopy(data.raw.fluid["heavy-oil"])
+tarFluid.name = "tar"
+tarFluid.base_color = constants.tarColor
+tarFluid.flow_color = constants.tarFlowColor
+tarFluid.visualization_color = constants.tarColor
+tarFluid.icon = nil
+tarFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64}}
+tarFluid.order = "a[fluid]-b[oil]-c[fractions]-0"
 table.insert(newData, tarFluid)
 
 -- Create pitch item.
@@ -74,12 +70,11 @@ for i = 1, 3 do
 		mipmap_count = 4,
 	})
 end
-local pitchItem = Table.copyAndEdit(data.raw.item["carbon"], {
-	name = "pitch",
-	icons = {{icon = pitchPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
-	pictures = pitchPictures,
-	order = "b[chemistry]-b[plastic-bar]-1",
-})
+local pitchItem = table.deepcopy(data.raw.item["carbon"])
+pitchItem.name = "pitch"
+pitchItem.icons = {{icon = pitchPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
+pitchItem.pictures = pitchPictures
+pitchItem.order = "b[chemistry]-b[plastic-bar]-1"
 Item.copySoundsTo("plastic-bar", pitchItem)
 table.insert(newData, pitchItem)
 
@@ -93,12 +88,11 @@ for i = 1, 3 do
 		mipmap_count = 4,
 	})
 end
-local resinItem = Table.copyAndEdit(data.raw.item["plastic-bar"], {
-	name = "resin",
-	icons = {{icon = resinPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
-	pictures = resinPictures,
-	subgroup = "resin",
-})
+local resinItem = table.deepcopy(data.raw.item["plastic-bar"])
+resinItem.name = "resin"
+resinItem.icons = {{icon = resinPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
+resinItem.pictures = resinPictures
+resinItem.subgroup = "resin"
 Item.copySoundsTo(data.raw.capsule["bioflux"], resinItem)
 table.insert(newData, resinItem)
 

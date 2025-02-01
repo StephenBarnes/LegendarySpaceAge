@@ -19,4 +19,7 @@ defines.direction = {
 --- LSP doesn't recognize auto_recycle, so this fixes that:
 
 ---@class data.RecipePrototype
----@field auto_recycle boolean Whether the recipe should automatically create recycling recipes. Defaults to true.
+---@field auto_recycle boolean Whether the recipe should automatically create recycling recipes.
+
+---@class data.ItemPrototype
+---@field auto_recycle boolean Whether the item should automatically get recycling recipes.

@@ -17,31 +17,30 @@ data.raw.technology["calcite-processing"].icons = {{
 }}
 
 -- Add recipe for water heating with lava, in chem plant.
-local lavaWaterHeatingRecipe = Table.copyAndEdit(data.raw.recipe["steam-condensation"], {
-	name = "lava-water-heating",
-	category = "chemistry",
-	subgroup = "vulcanus-processes",
-	localised_name = "nil",
-	order = "01",
-	energy_required = 2,
-	ingredients = {
-		{type = "fluid", name = "lava", amount = 100},
-		{type = "fluid", name = "water", amount = 50},
-	},
-	results = {
-		{type = "fluid", name = "steam", amount = 500, temperature = 500, ignored_by_productivity = 500},
-		{type = "item", name = "stone", amount = 4},
-	},
-	enabled = false,
-	allow_decomposition = false,
-	allow_as_intermediate = false,
-	allow_productivity = false,
-	icon = "nil",
-	icons = {
-		{icon = "__base__/graphics/icons/fluid/steam.png", icon_size = 64, scale = 0.5},
-		{icon = "__space-age__/graphics/icons/fluid/lava.png", icon_size = 64, scale = 0.27, shift = {-6, -7}, mipmap_count=4},
-	},
-})
+local lavaWaterHeatingRecipe = table.deepcopy(data.raw.recipe["steam-condensation"])
+lavaWaterHeatingRecipe.name = "lava-water-heating"
+lavaWaterHeatingRecipe.category = "chemistry"
+lavaWaterHeatingRecipe.subgroup = "vulcanus-processes"
+lavaWaterHeatingRecipe.localised_name = nil
+lavaWaterHeatingRecipe.order = "01"
+lavaWaterHeatingRecipe.energy_required = 2
+lavaWaterHeatingRecipe.ingredients = {
+	{type = "fluid", name = "lava", amount = 100},
+	{type = "fluid", name = "water", amount = 50},
+}
+lavaWaterHeatingRecipe.results = {
+	{type = "fluid", name = "steam", amount = 500, temperature = 500, ignored_by_productivity = 500},
+	{type = "item", name = "stone", amount = 4},
+}
+lavaWaterHeatingRecipe.enabled = false
+lavaWaterHeatingRecipe.allow_decomposition = false
+lavaWaterHeatingRecipe.allow_as_intermediate = false
+lavaWaterHeatingRecipe.allow_productivity = false
+lavaWaterHeatingRecipe.icon = nil
+lavaWaterHeatingRecipe.icons = {
+	{icon = "__base__/graphics/icons/fluid/steam.png", icon_size = 64, scale = 0.5},
+	{icon = "__space-age__/graphics/icons/fluid/lava.png", icon_size = 64, scale = 0.27, shift = {-6, -7}, mipmap_count=4},
+}
 data:extend({lavaWaterHeatingRecipe})
 Tech.addRecipeToTech("lava-water-heating", "planet-discovery-vulcanus")
 

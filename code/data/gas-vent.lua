@@ -4,123 +4,118 @@
 
 -- This modpack has gas heating tower for burnable gases, gas vent for non-burnable gases, fluid dump for fluids, and tossing-into-sea for items.
 
-local Table = require("code.util.table")
 local Tech = require("code.util.tech")
 
 local newData = {}
 
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
-local ventEnt = Table.copyAndEdit(data.raw.furnace["steel-furnace"], {
-	type = "furnace",
-	name = "gas-vent",
-	icon = "nil",
-	icons = {{icon = GRAPHICS.."gas-vent-item.png", icon_size = 64}},
-	minable = {mining_time = .5, result = "gas-vent"},
-	collision_box = {{-0.3, -0.3}, {0.3, 0.3}},
-	selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
-	crafting_categories = {"gas-venting"},
-	crafting_speed = 1,
-	show_recipe_icon = false, -- Don't show the "void X" icon on the entity.
-	show_recipe_icon_on_map = false,
-	energy_source = {
-		type = "void",
-		emissions_per_minute = {pollution = 1}, -- This gets multiplied by the emissions multiplier for the specific venting recipe.
-	},
-	energy_usage = "1kW",
-	source_inventory_size = 0,
-	result_inventory_size = 0,
-	stateless_visualisation = {
+local ventEnt = table.deepcopy(data.raw.furnace["steel-furnace"])
+ventEnt.type = "furnace"
+ventEnt.name = "gas-vent"
+ventEnt.icon = nil
+ventEnt.icons = {{icon = GRAPHICS.."gas-vent-item.png", icon_size = 64}}
+ventEnt.minable = {mining_time = .5, result = "gas-vent"}
+ventEnt.collision_box = {{-0.3, -0.3}, {0.3, 0.3}}
+ventEnt.selection_box = {{-0.5, -0.5}, {0.5, 0.5}}
+ventEnt.crafting_categories = {"gas-venting"}
+ventEnt.crafting_speed = 1
+ventEnt.show_recipe_icon = false -- Don't show the "void X" icon on the entity.
+ventEnt.show_recipe_icon_on_map = false
+ventEnt.energy_source = {
+	type = "void",
+	emissions_per_minute = {pollution = 1}, -- This gets multiplied by the emissions multiplier for the specific venting recipe.
+}
+ventEnt.energy_usage = "1kW"
+ventEnt.source_inventory_size = 0
+ventEnt.result_inventory_size = 0
+ventEnt.stateless_visualisation = {
+	{
+		animation = {
+			layers = {
+				{
+					filename = GRAPHICS.."entity/gas-vent.png",
+					priority = "high",
+					width = 320,
+					height = 320,
+					scale = 0.5,
+					frame_count = 1,
+					shift = {1.5, -1.59375}
+				},
+				{
+					filename = GRAPHICS.."entity/shadow.png",
+					priority = "high",
+					width = 320,
+					height = 320,
+					scale = 0.5,
+					frame_count = 1,
+					shift = {1.5, -1.59375},
+					draw_as_shadow = true
+				},
+			}
+		}
+	}
+}
+ventEnt.match_animation_speed_to_activity = false
+ventEnt.graphics_set = {
+	working_visualisations = {
 		{
+			apply_recipe_tint = "primary", -- So it's tinted for the vented gas.
 			animation = {
 				layers = {
 					{
-						filename = GRAPHICS.."entity/gas-vent.png",
+						filename = GRAPHICS.."entity/vented-puff.png",
 						priority = "high",
-						width = 320,
-						height = 320,
+						frame_count = 29,
+						width = 48,
+						height = 105,
 						scale = 0.5,
-						frame_count = 1,
-						shift = {1.5, -1.59375}
-					},
-					{
-						filename = GRAPHICS.."entity/shadow.png",
-						priority = "high",
-						width = 320,
-						height = 320,
-						scale = 0.5,
-						frame_count = 1,
-						shift = {1.5, -1.59375},
-						draw_as_shadow = true
-					},
-				}
-			}
-		}
-	},
-	match_animation_speed_to_activity = false,
-	graphics_set = {
-		working_visualisations = {
-			{
-				apply_recipe_tint = "primary", -- So it's tinted for the vented gas.
-				animation = {
-					layers = {
-						{
-							filename = GRAPHICS.."entity/vented-puff.png",
-							priority = "high",
-							frame_count = 29,
-							width = 48,
-							height = 105,
-							scale = 0.5,
-							shift = {0, -4.3},
-							draw_as_glow = false, -- So it's not visible at night, TODO check
-							run_mode = "backward",
-						},
+						shift = {0, -4.3},
+						draw_as_glow = false, -- So it's not visible at night, TODO check
+						run_mode = "backward",
 					},
 				},
-				constant_speed = true,
-			}
+			},
+			constant_speed = true,
 		}
-	},
-	working_sound = {
-		sound = { filename = "__base__/sound/oil-refinery.ogg" },
-		idle_sound = { filename = "__base__/sound/idle1.ogg", volume = 0.6 },
-		apparent_volume = 2.5,
-	},
-	fluid_boxes = {
-		{
-			production_type = "input",
-			pipe_covers = pipecoverspictures(), -- Seems to be already globally defined? TODO check
-			volume = 240,
-			pipe_connections = { { flow_direction = "input", direction = defines.direction.south, position = {0, 0} } },
-		}
-	},
-	surface_conditions = "nil", -- Should be able to vent on space platforms too.
-})
+	}
+}
+ventEnt.working_sound = {
+	sound = { filename = "__base__/sound/oil-refinery.ogg" },
+	idle_sound = { filename = "__base__/sound/idle1.ogg", volume = 0.6 },
+	apparent_volume = 2.5,
+}
+ventEnt.fluid_boxes = {
+	{
+		production_type = "input",
+		pipe_covers = pipecoverspictures(), -- Seems to be already globally defined? TODO check
+		volume = 240,
+		pipe_connections = { { flow_direction = "input", direction = defines.direction.south, position = {0, 0} } },
+	}
+}
+ventEnt.surface_conditions = nil -- Should be able to vent on space platforms too.
 table.insert(newData, ventEnt)
 
-local ventItem = Table.copyAndEdit(data.raw.item["steel-furnace"], {
-	type = "item",
-	name = "gas-vent",
-	icon = "nil",
-	icons = {{icon = GRAPHICS.."gas-vent-item.png", icon_size = 64}},
-	subgroup = "fluid-logistics",
-	order = "b[pipe]-e",
-	place_result = "gas-vent",
-	stack_size = 20,
-})
+local ventItem = table.deepcopy(data.raw.item["steel-furnace"])
+ventItem.type = "item"
+ventItem.name = "gas-vent"
+ventItem.icon = nil
+ventItem.icons = {{icon = GRAPHICS.."gas-vent-item.png", icon_size = 64}}
+ventItem.subgroup = "fluid-logistics"
+ventItem.order = "b[pipe]-e"
+ventItem.place_result = "gas-vent"
+ventItem.stack_size = 20
 table.insert(newData, ventItem)
 
-local ventRecipe = Table.copyAndEdit(data.raw.recipe["steel-furnace"], {
-	type = "recipe",
-	name = "gas-vent",
-	enabled = false,
-	results = {{type = "item", name = "gas-vent", amount = 1}},
-	-- TODO decide on ingredients
-})
+local ventRecipe = table.deepcopy(data.raw.recipe["steel-furnace"])
+ventRecipe.type = "recipe"
+ventRecipe.name = "gas-vent"
+ventRecipe.enabled = false
+ventRecipe.results = {{type = "item", name = "gas-vent", amount = 1}}
+-- TODO decide on ingredients
 table.insert(newData, ventRecipe)
 
-local ventRecipeCategory = Table.copyAndEdit(data.raw["recipe-category"]["crafting"], {
-	name = "gas-venting",
-})
+local ventRecipeCategory = table.deepcopy(data.raw["recipe-category"]["crafting"])
+ventRecipeCategory.name = "gas-venting"
 table.insert(newData, ventRecipeCategory)
 
 local ventableFluids = {
@@ -166,27 +161,26 @@ for _, fluidData in pairs(ventableFluids) do
 	else
 		gasIcon = {icon = fluid.icon, icon_size = fluid.icon_size}
 	end
-	local thisGasVentRecipe = Table.copyAndEdit(ventRecipe, {
-		name = "gas-vent-"..gasToVent,
-		localised_name = {"recipe-name.gas-vent", {"fluid-name."..gasToVent}},
-		category = "gas-venting",
-		subgroup = "fluid",
-		ingredients = {{type = "fluid", name = gasToVent, amount = 120}},
-		results = {},
-		enabled = true,
-		hidden = false,
-		hidden_in_factoriopedia = true,
-		hide_from_player_crafting = true,
-		icons = {
-			gasIcon,
-			{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64},
-		},
-		energy_required = 1,
-		emissions_multiplier = emissionsMult,
-		crafting_machine_tint = {
-			primary = data.raw.fluid[gasToVent].base_color,
-		},
-	})
+	local thisGasVentRecipe = table.deepcopy(ventRecipe)
+	thisGasVentRecipe.name = "gas-vent-"..gasToVent
+	thisGasVentRecipe.localised_name = {"recipe-name.gas-vent", {"fluid-name."..gasToVent}}
+	thisGasVentRecipe.category = "gas-venting"
+	thisGasVentRecipe.subgroup = "fluid"
+	thisGasVentRecipe.ingredients = {{type = "fluid", name = gasToVent, amount = 120}}
+	thisGasVentRecipe.results = {}
+	thisGasVentRecipe.enabled = true
+	thisGasVentRecipe.hidden = false
+	thisGasVentRecipe.hidden_in_factoriopedia = true
+	thisGasVentRecipe.hide_from_player_crafting = true
+	thisGasVentRecipe.icons = {
+		gasIcon,
+		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64},
+	}
+	thisGasVentRecipe.energy_required = 1
+	thisGasVentRecipe.emissions_multiplier = emissionsMult
+	thisGasVentRecipe.crafting_machine_tint = {
+		primary = data.raw.fluid[gasToVent].base_color,
+	}
 	if onlyInSpace then
 		thisGasVentRecipe.surface_conditions = {{property = "gravity", max = 0}}
 	end
