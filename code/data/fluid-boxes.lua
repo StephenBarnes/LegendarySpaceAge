@@ -1,5 +1,3 @@
-local Table = require("code.util.table")
-
 local greyPipes = require("code.data.util.grey-pipes")
 
 -- Add 2 more fluid outputs to the refinery, so we can have recipes with 5 fluid outputs.

@@ -15,8 +15,6 @@ Original game recipes were:
 
 local Recipe = require("code.util.recipe")
 
-local newData = {}
-
 -- Create new "cement" fluid.
 local cementFluid = table.deepcopy(data.raw.fluid["lubricant"])
 cementFluid.name = "cement"
@@ -26,7 +24,7 @@ cementFluid.auto_barrel = false
 cementFluid.base_color = {.33, .33, .33, 1}
 cementFluid.flow_color = {.6, .6, .6, 1}
 cementFluid.visualization_color = {.43, .43, .43, 1}
-table.insert(newData, cementFluid)
+data:extend{cementFluid}
 
 -- Create recipe for cement.
 local cementRecipe = table.deepcopy(data.raw.recipe["lubricant"])
@@ -44,7 +42,7 @@ cementRecipe.results = {
 }
 cementRecipe.main_product = "cement"
 cementRecipe.category = "crafting-with-fluid"
-table.insert(newData, cementRecipe)
+data:extend{cementRecipe}
 
 -- Create tech for cement.
 local cementTech = table.deepcopy(data.raw.technology.concrete)
@@ -95,7 +93,7 @@ concreteCastingRecipe.icons = {
 	{icon = "__base__/graphics/icons/concrete.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
 	{icon = "__LegendarySpaceAge__/graphics/vulcanus/sulfur-cast.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
 }
-table.insert(newData, concreteCastingRecipe)
+data:extend{concreteCastingRecipe}
 
 local refinedConcreteCastingRecipe = table.deepcopy(data.raw.recipe["concrete-from-molten-iron"])
 refinedConcreteCastingRecipe.name = "sulfur-refined-concrete"
@@ -113,7 +111,7 @@ refinedConcreteCastingRecipe.icons = {
 	{icon = "__base__/graphics/icons/refined-concrete.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
 	{icon = "__LegendarySpaceAge__/graphics/vulcanus/sulfur-cast.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
 }
-table.insert(newData, refinedConcreteCastingRecipe)
+data:extend{refinedConcreteCastingRecipe}
 
 -- Hide old concrete foundry recipe completely.
 Recipe.hide("concrete-from-molten-iron")
@@ -148,6 +146,4 @@ sulfurConcreteTech.unit = {
 		{"chemical-science-pack", 1},
 	},
 }
-table.insert(newData, sulfurConcreteTech)
-
-data:extend(newData)
+data:extend{sulfurConcreteTech}

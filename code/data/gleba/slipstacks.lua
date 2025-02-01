@@ -87,7 +87,6 @@ slipstackNestRecipe.ingredients = {
 slipstackNestRecipe.category = "organic-or-assembling"
 slipstackNestRecipe.results = {{type = "item", name = "slipstack-nest", amount = 1}}
 slipstackNestRecipe.surface_conditions = nil -- Allow anywhere. Can't be planted anywhere else, though.
----@diagnostic disable-next-line: inject-field
 slipstackNestRecipe.auto_recycle = true
 slipstackNestRecipe.icon = nil
 data:extend{slipstackNestRecipe}

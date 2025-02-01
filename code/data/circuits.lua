@@ -21,7 +21,6 @@ Generally on Nauvis and Gleba both wood and plastic circuit boards are viable. O
 ]]
 
 local Tech = require("code.util.tech")
-local Table = require("code.util.table")
 local Item = require("code.util.item")
 
 -- Add circuit board item.

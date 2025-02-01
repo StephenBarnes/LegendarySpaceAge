@@ -1,9 +1,5 @@
 -- This file adds gunpowder item and recipes.
 
-local Table = require("code.util.table")
-
-local newData = {}
-
 -- Create gunpowder item.
 local gunpowderPictures = {}
 for i = 1, 3 do
@@ -21,7 +17,7 @@ gunpowderItem.pictures = gunpowderPictures
 gunpowderItem.subgroup = "raw-material" -- Could put it with ammo, but it's really an intermediate.
 gunpowderItem.order = "b[chemistry]-a2"
 gunpowderItem.auto_recycle = false -- Can't get sulfur/sand/carbon back.
-table.insert(newData, gunpowderItem)
+data:extend{gunpowderItem}
 
 -- Create recipe for gunpowder.
 -- 2 carbon + 1 sulfur + 1 sand -> 2 gunpowder
@@ -36,7 +32,7 @@ gunpowderRecipe.results = {{type = "item", name = "gunpowder", amount = 8}}
 gunpowderRecipe.enabled = false -- Enabled by coal coking tech.
 gunpowderRecipe.category = "chemistry-or-handcrafting"
 gunpowderRecipe.auto_recycle = false
-table.insert(newData, gunpowderRecipe)
+data:extend{gunpowderRecipe}
 
 -- Adjust ammo mag recipes
 -- 4 iron plate + 1 gunpowder -> 1 yellow mag
@@ -57,5 +53,3 @@ data.raw.recipe["shotgun-shell"].ingredients = { -- Originally 2 iron plate + 2 
 	{type="item", name="gunpowder", amount=1},
 }
 data.raw.recipe["shotgun-shell"].results = {{type = "item", name = "shotgun-shell", amount = 2}}
-
-data:extend(newData)

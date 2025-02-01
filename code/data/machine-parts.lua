@@ -1,10 +1,7 @@
 -- This modpack renames "iron gear wheels" to "machine parts"; this file changes sprites to match that.
 -- Then this file also creates "advanced parts", which are made from like hot steel + rubber + plastic + bit of lubricant, and will generally replace steel plates in recipes for infra.
 
-local Table = require("code.util.table")
 local Tech = require("code.util.tech")
-
-local newData = {}
 
 -- Show amount of machine parts produced by recipe.
 data.raw.recipe["iron-gear-wheel"].always_show_products = true
@@ -82,7 +79,7 @@ advancedPartsItem.has_random_tint = true
 advancedPartsItem.random_tint_color = {r = .955, g = .96, b = 1.0, a=1}
 advancedPartsItem.spoil_ticks = nil
 advancedPartsItem.order = "7"
-table.insert(newData, advancedPartsItem)
+data:extend{advancedPartsItem}
 
 -- Create recipe for advanced parts.
 local advancedPartsRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
@@ -102,9 +99,7 @@ advancedPartsRecipe.energy_required = 5
 advancedPartsRecipe.allow_decomposition = true
 advancedPartsRecipe.allow_as_intermediate = true
 advancedPartsRecipe.enabled = false
-table.insert(newData, advancedPartsRecipe)
+data:extend{advancedPartsRecipe}
 
 -- Add advanced parts recipe to lubricant tech.
 Tech.addRecipeToTech("advanced-parts", "lubricant")
-
-data:extend(newData)

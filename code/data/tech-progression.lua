@@ -1,7 +1,6 @@
 -- This file adjusts the overall progression, by moving techs around, changing dependencies, moving recipes between techs, etc.
 
 local Tech = require("code.util.tech")
-local Table = require("code.util.table")
 
 -- Early techs: basic electricity, then electronics, then personal burner generator, then red science, then automation, then filtration, then steam power.
 Tech.setPrereqs("electronics", {"basic-electricity"})

@@ -44,11 +44,8 @@ Vulcanus unlocks a foundry recipe for concrete without water, using sulfur:
 	10 stone brick + 5 sulfur -> 10 concrete (representing sulfur concrete)
 ]]
 
-local Table = require("code.util.table")
 local Tech = require("code.util.tech")
 local Recipe = require("code.util.recipe")
-
-local newData = {}
 
 -- Make recipe for metals-from-lava.
 local metalsFromLavaRecipe = table.deepcopy(data.raw.recipe["molten-iron-from-lava"])
@@ -72,7 +69,7 @@ metalsFromLavaRecipe.icons = {{
 	icon_size = 64,
 	scale = 0.5,
 }}
-table.insert(newData, metalsFromLavaRecipe)
+data:extend{metalsFromLavaRecipe}
 
 -- Hide old recipes for molten metals from lava, remove from tech, add new recipe to tech.
 Recipe.hide("molten-iron-from-lava")
@@ -121,7 +118,7 @@ moltenSteelFluid.order = "b[new-fluid]-b[vulcanus]-c[molten-steel]"
 moltenSteelFluid.base_color = {.3, .4, .4}
 moltenSteelFluid.flow_color = {.5, .7, .7}
 moltenSteelFluid.visualization_color = {.2, 1, 1} -- Cyan for the diagram-like lines drawn on pipes.
-table.insert(newData, moltenSteelFluid)
+data:extend{moltenSteelFluid}
 
 -- Make recipe for molten steel.
 local moltenSteelRecipe = table.deepcopy(data.raw.recipe["molten-iron"])
@@ -139,7 +136,7 @@ moltenSteelRecipe.results = {
 }
 moltenSteelRecipe.main_product = "molten-steel"
 moltenSteelRecipe.order = "a[melting]-d[molten-steel]"
-table.insert(newData, moltenSteelRecipe)
+data:extend{moltenSteelRecipe}
 Tech.addRecipeToTech("molten-steel-making", "foundry", 8)
 
 -- Adjust recipes for casting molten metals into items.
@@ -281,7 +278,7 @@ castingAdvancedPartsRecipe.icons = {
 }
 castingAdvancedPartsRecipe.order = "b[casting]-f[casting-advanced-parts]"
 castingAdvancedPartsRecipe.energy_required = 16
-table.insert(newData, castingAdvancedPartsRecipe)
+data:extend{castingAdvancedPartsRecipe}
 Tech.addRecipeToTech("casting-advanced-parts", "foundry")
 
 -- Adjust the default tungsten-carbide recipe to be more expensive, to create more incentive for the foundry recipes.
@@ -306,7 +303,7 @@ moltenTungstenFluid.order = "b[new-fluid]-b[vulcanus]-d[molten-tungsten]"
 moltenTungstenFluid.base_color = {.259, .239, .349} -- Measured on ore
 moltenTungstenFluid.flow_color = {.635, .584, .741}
 moltenTungstenFluid.visualization_color = {.478, .191, .682} -- Measured on ore and boosted saturation.
-table.insert(newData, moltenTungstenFluid)
+data:extend{moltenTungstenFluid}
 
 -- Create recipe for molten tungsten.
 local moltenTungstenRecipe = table.deepcopy(data.raw.recipe["molten-iron"])
@@ -323,7 +320,7 @@ moltenTungstenRecipe.results = {
 moltenTungstenRecipe.main_product = "molten-tungsten"
 moltenTungstenRecipe.order = "a[melting]-d[molten-tungsten]"
 moltenTungstenRecipe.energy_required = 1
-table.insert(newData, moltenTungstenRecipe)
+data:extend{moltenTungstenRecipe}
 Tech.addRecipeToTech("molten-tungsten", "tungsten-steel", 1)
 
 -- Edit tungsten steel tech's icon, bc I have the nice molten-tungsten icon anyway.
@@ -352,7 +349,7 @@ tungstenCarbideFromMoltenRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/tungsten-carbide.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
 	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
 }
-table.insert(newData, tungstenCarbideFromMoltenRecipe)
+data:extend{tungstenCarbideFromMoltenRecipe}
 Tech.addRecipeToTech("tungsten-carbide-from-molten", "tungsten-steel")
 local tungstenSteelRecipe = table.deepcopy(data.raw.recipe["tungsten-plate"])
 tungstenSteelRecipe.name = "tungsten-steel-from-molten"
@@ -373,7 +370,7 @@ tungstenSteelRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/tungsten-plate.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
 	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
 }
-table.insert(newData, tungstenSteelRecipe)
+data:extend{tungstenSteelRecipe}
 Tech.addRecipeToTech("tungsten-steel-from-molten", "tungsten-steel")
 local tungstenHeatingRecipe = table.deepcopy(data.raw.recipe["molten-iron"])
 tungstenHeatingRecipe.name = "tungsten-heating"
@@ -394,7 +391,7 @@ tungstenHeatingRecipe.show_amount_in_title = false
 tungstenHeatingRecipe.hide_from_stats = true
 tungstenHeatingRecipe.allow_productivity = false
 tungstenHeatingRecipe.maximum_productivity = 0
-table.insert(newData, tungstenHeatingRecipe)
+data:extend{tungstenHeatingRecipe}
 Tech.addRecipeToTech("tungsten-heating", "tungsten-steel")
 
 -- Hide default tungsten-steel recipe.
@@ -407,7 +404,3 @@ Tech.removeRecipeFromTech("tungsten-plate", "tungsten-steel")
 Tech.removeRecipesFromTechs({"concrete-from-molten-iron", "casting-low-density-structure"}, {"foundry"})
 Tech.addRecipeToTech("casting-low-density-structure", "foundry")
 -- Foundry concrete recipe will be added to new sulfur concrete tech, in concrete file.
-
-------------------------------------------------------------------------
-data:extend(newData)
-------------------------------------------------------------------------

@@ -52,7 +52,6 @@ data:extend({fulgoriteStarterItem})
 local crushFulgoriteShardRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
 crushFulgoriteShardRecipe.name = "holmium-ore" -- Naming it the same as holmium ore, so it doesn't get a separate entry in Factoriopedia etc.
 crushFulgoriteShardRecipe.category = "chemistry-or-organic-or-handcrafting"
----@diagnostic disable-next-line: inject-field
 crushFulgoriteShardRecipe.auto_recycle = false
 crushFulgoriteShardRecipe.results = {
 	{ type = "item", name = "holmium-ore", amount = 2 },

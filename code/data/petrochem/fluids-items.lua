@@ -1,9 +1,6 @@
-local Table = require("code.util.table")
 local Item = require("code.util.item")
 
 local constants = require("code.data.petrochem.constants")
-
-local newData = {}
 
 -- Create natural gas fluid.
 local natgasFluid = table.deepcopy(data.raw.fluid["crude-oil"])
@@ -14,7 +11,7 @@ natgasFluid.icon = nil
 natgasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.natgasTint}}
 natgasFluid.order = "a[fluid]-b[oil]-aa[natgas]"
 natgasFluid.gas_temperature = 0
-table.insert(newData, natgasFluid)
+data:extend{natgasFluid}
 
 -- Create dry gas fluid.
 local drygasFluid = table.deepcopy(natgasFluid)
@@ -26,7 +23,7 @@ drygasFluid.icon = nil
 drygasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.drygasTint}}
 drygasFluid.order = "a[fluid]-b[oil]-c[fractions]-4"
 drygasFluid.gas_temperature = 0
-table.insert(newData, drygasFluid)
+data:extend{drygasFluid}
 
 -- Change petroleum gas to "rich gas".
 local richgasFluid = data.raw.fluid["petroleum-gas"]
@@ -47,7 +44,7 @@ syngasFluid.icon = nil
 syngasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.syngasColor}}
 syngasFluid.order = "a[fluid]-b[oil]-c[fractions]-6"
 syngasFluid.gas_temperature = 0
-table.insert(newData, syngasFluid)
+data:extend{syngasFluid}
 
 -- Create tar fluid.
 local tarFluid = table.deepcopy(data.raw.fluid["heavy-oil"])
@@ -58,7 +55,7 @@ tarFluid.visualization_color = constants.tarColor
 tarFluid.icon = nil
 tarFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64}}
 tarFluid.order = "a[fluid]-b[oil]-c[fractions]-0"
-table.insert(newData, tarFluid)
+data:extend{tarFluid}
 
 -- Create pitch item.
 local pitchPictures = {}
@@ -76,7 +73,7 @@ pitchItem.icons = {{icon = pitchPictures[1].filename, icon_size = 64, scale=0.5,
 pitchItem.pictures = pitchPictures
 pitchItem.order = "b[chemistry]-b[plastic-bar]-1"
 Item.copySoundsTo("plastic-bar", pitchItem)
-table.insert(newData, pitchItem)
+data:extend{pitchItem}
 
 -- Create resin item.
 local resinPictures = {}
@@ -94,11 +91,8 @@ resinItem.icons = {{icon = resinPictures[1].filename, icon_size = 64, scale=0.5,
 resinItem.pictures = resinPictures
 resinItem.subgroup = "resin"
 Item.copySoundsTo(data.raw.capsule["bioflux"], resinItem)
-table.insert(newData, resinItem)
+data:extend{resinItem}
 
-------------------------------------------------------------------------
--- Add new prototypes to the game.
-data:extend(newData)
 ------------------------------------------------------------------------
 
 -- Fix ordering of the existing petro fractions.

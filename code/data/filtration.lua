@@ -1,9 +1,6 @@
 -- This file creates the water filter item, plus recipes to filter local water on Nauvis and Gleba.
 
 local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
-
-local newData = {}
 
 -- Create filter item.
 local filterItem = table.deepcopy(data.raw.item["battery"])
@@ -13,7 +10,7 @@ filterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/filter.pn
 filterItem.order = "02-2"
 filterItem.subgroup = "fluid-recipes"
 filterItem.weight = 1000
-table.insert(newData, filterItem)
+data:extend{filterItem}
 
 -- Create spent filter item.
 local spentFilterItem = table.deepcopy(data.raw.item["battery"])
@@ -23,7 +20,7 @@ spentFilterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/spen
 spentFilterItem.order = "02-2"
 spentFilterItem.subgroup = "fluid-recipes"
 spentFilterItem.weight = 1000
-table.insert(newData, spentFilterItem)
+data:extend{spentFilterItem}
 
 -- Create filtration-lake-water tech.
 local filtrationLakeWaterTech = table.deepcopy(data.raw.technology["automation"])
@@ -50,7 +47,7 @@ filtrationLakeWaterTech.unit = {
 	time = 30,
 }
 filtrationLakeWaterTech.ignore_tech_cost_multiplier = true
-table.insert(newData, filtrationLakeWaterTech)
+data:extend{filtrationLakeWaterTech}
 
 -- Create filtration-gleban-slime tech.
 local filtrationGlebanSlimeTech = table.deepcopy(data.raw.technology["jellynut"])
@@ -69,7 +66,7 @@ filtrationGlebanSlimeTech.research_trigger = {
 	fluid = "slime",
 	amount = 100,
 }
-table.insert(newData, filtrationGlebanSlimeTech)
+data:extend{filtrationGlebanSlimeTech}
 -- Make filtration-gleban-sludge mandatory before biochambers.
 Tech.addTechDependency("filtration-gleban-slime", "biochamber")
 
@@ -92,7 +89,7 @@ filtrationFulgoranSludgeTech.research_trigger = {
 	fluid = "fulgoran-sludge",
 	amount = 100,
 }
-table.insert(newData, filtrationFulgoranSludgeTech)
+data:extend{filtrationFulgoranSludgeTech}
 Tech.addTechDependency("filtration-fulgoran-sludge", "holmium-processing")
 data.raw.technology["holmium-processing"].research_trigger.count = 10
 
@@ -108,7 +105,7 @@ filterRecipe.results = {
 }
 filterRecipe.enabled = false
 filterRecipe.auto_recycle = true
-table.insert(newData, filterRecipe)
+data:extend{filterRecipe}
 
 -- Create recipe to clean filters.
 local cleanFilterRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
@@ -137,7 +134,7 @@ cleanFilterRecipe.crafting_machine_tint = {
 	tertiary = data.raw.fluid.water.visualization_color,
 }
 cleanFilterRecipe.auto_recycle = false
-table.insert(newData, cleanFilterRecipe)
+data:extend{cleanFilterRecipe}
 
 -- Create recipe to filter lake water.
 local filterLakeWaterRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
@@ -170,7 +167,7 @@ filterLakeWaterRecipe.crafting_machine_tint = {
 	secondary = data.raw.fluid.water.base_color,
 	tertiary = data.raw.fluid.water.flow_color,
 }
-table.insert(newData, filterLakeWaterRecipe)
+data:extend{filterLakeWaterRecipe}
 
 -- Create lake water fluid.
 local lakeWaterFluid = table.deepcopy(data.raw.fluid["water"])
@@ -182,7 +179,7 @@ lakeWaterFluid.order = "a[fluid]-a[water]-c"
 lakeWaterFluid.base_color = {0, .44, .6}
 lakeWaterFluid.flow_color = {.7, .7, .7}
 lakeWaterFluid.visualization_color = {.015, .681, .682} -- To differentiate from ordinary water.
-table.insert(newData, lakeWaterFluid)
+data:extend{lakeWaterFluid}
 
 -- Create slime fluid.
 local slimeFluid = table.deepcopy(data.raw.fluid["water"])
@@ -194,7 +191,7 @@ slimeFluid.order = "b[new-fluid]-c2[gleba]-a"
 slimeFluid.base_color = {.176, .255, .200}
 slimeFluid.flow_color = {.393, .453, .333}
 slimeFluid.visualization_color = {.482, .745, .215}
-table.insert(newData, slimeFluid)
+data:extend{slimeFluid}
 
 -- Create recipe to filter slime.
 local filterSlimeRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
@@ -227,10 +224,9 @@ filterSlimeRecipe.crafting_machine_tint = {
 	secondary = {.393, .453, .333},
 	tertiary = {.482, .745, .215},
 }
-table.insert(newData, filterSlimeRecipe)
+data:extend{filterSlimeRecipe}
 
 ------------------------------------------------------------------------
-data:extend(newData)
 
 -- Make Nauvis water tiles yield lake water.
 for _, tileName in pairs{

@@ -1,6 +1,5 @@
 -- This file adjusts tree farming, adds recipes for fertilizer, etc.
 
-local Table = require("code.util.table")
 local Tech = require("code.util.tech")
 local Recipe = require("code.util.recipe")
 

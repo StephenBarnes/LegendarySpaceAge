@@ -6,8 +6,6 @@
 
 local Tech = require("code.util.tech")
 
-local newData = {}
-
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 local ventEnt = table.deepcopy(data.raw.furnace["steel-furnace"])
 ventEnt.type = "furnace"
@@ -93,7 +91,7 @@ ventEnt.fluid_boxes = {
 	}
 }
 ventEnt.surface_conditions = nil -- Should be able to vent on space platforms too.
-table.insert(newData, ventEnt)
+data:extend{ventEnt}
 
 local ventItem = table.deepcopy(data.raw.item["steel-furnace"])
 ventItem.type = "item"
@@ -104,7 +102,7 @@ ventItem.subgroup = "fluid-logistics"
 ventItem.order = "b[pipe]-e"
 ventItem.place_result = "gas-vent"
 ventItem.stack_size = 20
-table.insert(newData, ventItem)
+data:extend{ventItem}
 
 local ventRecipe = table.deepcopy(data.raw.recipe["steel-furnace"])
 ventRecipe.type = "recipe"
@@ -112,11 +110,11 @@ ventRecipe.name = "gas-vent"
 ventRecipe.enabled = false
 ventRecipe.results = {{type = "item", name = "gas-vent", amount = 1}}
 -- TODO decide on ingredients
-table.insert(newData, ventRecipe)
+data:extend{ventRecipe}
 
 local ventRecipeCategory = table.deepcopy(data.raw["recipe-category"]["crafting"])
 ventRecipeCategory.name = "gas-venting"
-table.insert(newData, ventRecipeCategory)
+data:extend{ventRecipeCategory}
 
 local ventableFluids = {
 	-- Table of fluid names, emissions mults, and bool for whether it's only ventable in space.
@@ -184,9 +182,7 @@ for _, fluidData in pairs(ventableFluids) do
 	if onlyInSpace then
 		thisGasVentRecipe.surface_conditions = {{property = "gravity", max = 0}}
 	end
-	table.insert(newData, thisGasVentRecipe)
+	data:extend{thisGasVentRecipe}
 end
-
-data:extend(newData)
 
 Tech.addRecipeToTech("gas-vent", "oil-processing", 3)

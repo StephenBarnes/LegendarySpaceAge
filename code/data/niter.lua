@@ -1,7 +1,5 @@
 -- This file adds the niter item. Niter recipe is in ammonia file.
 
-local Table = require("code.util.table")
-
 -- Create niter item
 local niterIcons = {}
 for i = 1, 3 do

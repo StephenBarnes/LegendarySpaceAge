@@ -26,16 +26,15 @@ end
 
 -- Function to make a dummy science-pack item.
 local function makeRateItem(itemName, backgroundIcons, base)
+	---@type data.ToolPrototype
 	local rateItem = base or table.deepcopy(data.raw.item[itemName])
 	rateItem.type = "tool"
-	---@diagnostic disable-next-line: inject-field
 	rateItem.durability = 1
 	rateItem.name = itemName .. "-per-minute"
 	rateItem.hidden = true
 	rateItem.hidden_in_factoriopedia = true
 	rateItem.subgroup = nil
 	rateItem.factoriopedia_alternative = itemName
-	---@diagnostic disable-next-line: inject-field
 	rateItem.spoil_ticks = nil
 	rateItem.spoil_result = nil
 	rateItem.localised_name = {"item-name.rate-item-per-minute", {"item-name." .. itemName}}

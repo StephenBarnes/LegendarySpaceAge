@@ -1,10 +1,7 @@
 local Tech = require("code.util.tech")
-local Table = require("code.util.table")
 local Recipe = require("code.util.recipe")
 
 local constants = require("code.data.petrochem.constants")
-
-local newData = {}
 
 --[[ Create fractionation recipes.
 Fractionation recipes turn crude oil and natural gas into the 4 fractions: heavy oil, light oil, rich gas, dry gas.
@@ -32,7 +29,7 @@ oilFractionationRecipe.icons = {
 }
 oilFractionationRecipe.icon = nil
 oilFractionationRecipe.order = "a[oil-processing]-b1"
-table.insert(newData, oilFractionationRecipe)
+data:extend{oilFractionationRecipe}
 
 local gasFractionationRecipe = table.deepcopy(data.raw.recipe["advanced-oil-processing"])
 gasFractionationRecipe.name = "gas-fractionation"
@@ -53,7 +50,7 @@ gasFractionationRecipe.icons = {
 }
 gasFractionationRecipe.icon = nil
 gasFractionationRecipe.order = "a[oil-processing]-b2"
-table.insert(newData, gasFractionationRecipe)
+data:extend{gasFractionationRecipe}
 
 --[[ Edit existing cracking recipes, and add the new one.
 	100 heavy oil + 100 steam -> 100 light oil + 1 carbon + 1 sulfur
@@ -107,7 +104,7 @@ richGasCrackingRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 5}, tint=constants.drygasColor},
 }
 richGasCrackingRecipe.icon = nil
-table.insert(newData, richGasCrackingRecipe)
+data:extend{richGasCrackingRecipe}
 
 --[[ Add recipe for tar distillation.
 	Tar distillation: 10 tar -> 3 pitch + 2 heavy oil + 1 light oil + 2 carbon + 1 sulfur
@@ -133,7 +130,7 @@ tarDistillationRecipe.icons = {
 tarDistillationRecipe.icon = nil
 tarDistillationRecipe.order = "a[oil-processing]-b5"
 tarDistillationRecipe.subgroup = "complex-fluid-recipes"
-table.insert(newData, tarDistillationRecipe)
+data:extend{tarDistillationRecipe}
 
 --[[ Add recipe for heavy oil coking.
 	Heavy oil coking: 10 heavy oil -> 5 tar + 3 carbon
@@ -158,7 +155,7 @@ heavyOilCokingRecipe.icon = nil
 heavyOilCokingRecipe.order = "a[oil-processing]-b4"
 heavyOilCokingRecipe.subgroup = "complex-fluid-recipes"
 heavyOilCokingRecipe.energy_required = 5
-table.insert(newData, heavyOilCokingRecipe)
+data:extend{heavyOilCokingRecipe}
 
 --[[ Add recipe for coal coking.
 	Coal coking: 10 coal -> 6 carbon + 1 sulfur
@@ -192,7 +189,7 @@ coalCokingRecipe.subgroup = "complex-fluid-recipes"
 coalCokingRecipe.category = "chemistry"
 coalCokingRecipe.energy_required = 1
 coalCokingRecipe.enabled = false -- Unlocked by coal-coking tech, created in another file.
-table.insert(newData, coalCokingRecipe)
+data:extend{coalCokingRecipe}
 
 --[[ Add recipe for solid fuel.
 	5 heavy oil + 2 tar -> 2 solid fuel + 1 light oil
@@ -214,7 +211,7 @@ solidFuelRecipe.icons = nil
 solidFuelRecipe.icon = nil
 solidFuelRecipe.energy_required = 4
 solidFuelRecipe.hide_from_player_crafting = false
-table.insert(newData, solidFuelRecipe)
+data:extend{solidFuelRecipe}
 
 --[[ Add recipes for resin.
 	Wood-based resin (pyrolysis): 5 wood + 5 steam -> 2 resin + 3 carbon
@@ -240,7 +237,7 @@ woodResinRecipe.order = "a[basic-intermediate]-e[resin]-1"
 woodResinRecipe.subgroup = "resin"
 woodResinRecipe.main_product = "resin"
 woodResinRecipe.energy_required = 4
-table.insert(newData, woodResinRecipe)
+data:extend{woodResinRecipe}
 
 local pitchResinRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
 pitchResinRecipe.name = "pitch-resin"
@@ -261,7 +258,7 @@ pitchResinRecipe.order = "a[basic-intermediate]-e[resin]-2"
 pitchResinRecipe.subgroup = "resin"
 pitchResinRecipe.main_product = "resin"
 pitchResinRecipe.energy_required = 2
-table.insert(newData, pitchResinRecipe)
+data:extend{pitchResinRecipe}
 
 local richGasResinRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
 richGasResinRecipe.name = "rich-gas-resin"
@@ -282,7 +279,7 @@ richGasResinRecipe.order = "a[basic-intermediate]-e[resin]-3"
 richGasResinRecipe.subgroup = "resin"
 richGasResinRecipe.main_product = "resin"
 richGasResinRecipe.energy_required = 2
-table.insert(newData, richGasResinRecipe)
+data:extend{richGasResinRecipe}
 
 --[[ Add syngas liquefaction.
 	10 syngas + 1 iron plate -> 2 heavy oil + 3 light oil + 3 rich gas + 2 dry gas + 1 water
@@ -309,7 +306,7 @@ syngasLiquefactionRecipe.icons = {
 syngasLiquefactionRecipe.icon = nil
 syngasLiquefactionRecipe.order = "a[coal-liquefaction]-b4"
 syngasLiquefactionRecipe.subgroup = "complex-fluid-recipes"
-table.insert(newData, syngasLiquefactionRecipe)
+data:extend{syngasLiquefactionRecipe}
 
 --[[ Modify recipe for lubricant
 	10 heavy oil + 1 sulfuric acid -> 8 lubricant + 1 tar
@@ -365,9 +362,6 @@ explosivesRecipe.ingredients = {
 }
 explosivesRecipe.results = {{type = "item", name = "explosives", amount = 2}}
 
-------------------------------------------------------------------------
--- Add new prototypes to the game.
-data:extend(newData)
 ------------------------------------------------------------------------
 
 -- Add new fractionation recipes to techs.

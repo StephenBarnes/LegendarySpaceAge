@@ -1,10 +1,6 @@
 -- This file adds early ammonia tech and recipes, and later ammonia using syngas.
 
-local Table = require("code.util.table")
 local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
-
-local newData = {}
 
 -- Create ammonia 1 tech, for ammonia from spoilage and spoilage from wood.
 local ammonia1Tech = table.deepcopy(data.raw.technology["logistics"])
@@ -18,7 +14,7 @@ ammonia1Tech.effects = {
 	{type = "unlock-recipe", recipe = "ammonia-from-wood"},
 	{type = "unlock-recipe", recipe = "niter"},
 }
-table.insert(newData, ammonia1Tech)
+data:extend{ammonia1Tech}
 
 -- Create ammonia 2 tech, for ammonia from syngas.
 local ammonia2Tech = table.deepcopy(data.raw.technology["coal-liquefaction"])
@@ -40,7 +36,7 @@ ammonia2Tech.unit = {
 		{"chemical-science-pack", 1},
 	},
 }
-table.insert(newData, ammonia2Tech)
+data:extend{ammonia2Tech}
 
 -- Create recipe for ammonia from wood
 local ammoniaRecipe = table.deepcopy(data.raw.recipe["nutrients-from-spoilage"])
@@ -61,7 +57,7 @@ ammoniaRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
 	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
-table.insert(newData, ammoniaRecipe)
+data:extend{ammoniaRecipe}
 
 -- Create recipe for spoilage from wood.
 --[[ TODO not sure we want this recipe, at this stage. Increases the number of recipes and gives a way to fuel biochambers without imports from Gleba.
@@ -82,7 +78,8 @@ woodSpoilageRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/spoilage.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
 	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
-table.insert(newData, woodSpoilageRecipe)]]
+data:extend{woodSpoilageRecipe}
+]]
 
 -- Create recipe for niter from ammonia and sand.
 local niterFromAmmoniaRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
@@ -97,7 +94,7 @@ niterFromAmmoniaRecipe.results = {
 niterFromAmmoniaRecipe.icon = nil
 niterFromAmmoniaRecipe.icons = nil
 niterFromAmmoniaRecipe.energy_required = 1
-table.insert(newData, niterFromAmmoniaRecipe)
+data:extend{niterFromAmmoniaRecipe}
 
 -- Create recipe for ammonia from syngas.
 local ammoniaSyngasRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
@@ -118,9 +115,7 @@ ammoniaSyngasRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=require("code.data.petrochem.constants").syngasColor, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
 ammoniaSyngasRecipe.energy_required = 4
-table.insert(newData, ammoniaSyngasRecipe)
+data:extend{ammoniaSyngasRecipe}
 
 -- Aquilo should require ammonia 2 tech.
 Tech.addTechDependency("ammonia-2", "planet-discovery-aquilo")
-
-data:extend(newData)

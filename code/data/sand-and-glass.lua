@@ -3,8 +3,6 @@ Stone can be crushed into sand in an assembling machine: 1 stone -> 1 sand
 Sand can then be smelted to glass in a furnace or foundry: 1 sand -> 1 glass
 ]]
 
-local newData = {}
-
 -- Create sand item.
 local sandIcons = {}
 for i = 1, 3 do
@@ -18,7 +16,7 @@ sandItem.pictures = sandIcons
 sandItem.subgroup = "raw-material"
 sandItem.order = "a2"
 sandItem.stack_size = 100 -- Increase 50->100 vs stone and ores. So it makes sense to crush stone before shipping.
-table.insert(newData, sandItem)
+data:extend{sandItem}
 
 -- Create glass item.
 local glassIcons = {}
@@ -32,7 +30,7 @@ glassItem.icons = {{icon = glassIcons[1].filename, icon_size = 64, scale=0.5, mi
 glassItem.pictures = glassIcons
 glassItem.subgroup = "raw-material"
 glassItem.order = "a3"
-table.insert(newData, glassItem)
+data:extend{glassItem}
 
 -- Create recipe for stone -> sand.
 local sandRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
@@ -45,7 +43,7 @@ sandRecipe.enabled = true
 sandRecipe.allow_decomposition = true
 sandRecipe.allow_as_intermediate = true
 sandRecipe.main_product = "sand"
-table.insert(newData, sandRecipe)
+data:extend{sandRecipe}
 
 -- Create recipe for sand -> glass.
 local glassRecipe = table.deepcopy(data.raw.recipe["iron-plate"])
@@ -59,7 +57,7 @@ glassRecipe.energy_required = 2
 glassRecipe.allow_decomposition = true
 glassRecipe.allow_as_intermediate = true
 glassRecipe.main_product = "glass"
-table.insert(newData, glassRecipe)
+data:extend{glassRecipe}
 
 -- Create tech for glass
 local glassTech = table.deepcopy(data.raw.technology["logistics"])
@@ -80,8 +78,4 @@ glassTech.research_trigger = {
 glassTech.icon = nil
 glassTech.icons = {{icon = "__LegendarySpaceAge__/graphics/glass/tech.png", icon_size = 256, scale=0.5, mipmap_count = 4}}
 glassTech.order = "001"
-table.insert(newData, glassTech)
-
--- TODO Make the sand->glass recipe allowed in foundries.
-
-data:extend(newData)
+data:extend{glassTech}

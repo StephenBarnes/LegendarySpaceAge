@@ -8,10 +8,6 @@ Later, rubber can also be made from petrochems:
 Rubber is used in many recipes like belts, tires, engines, inserters, robots, and vehicles.
 ]]
 
-local Table = require("code.util.table")
-
-local newData = {}
-
 -- Create rubber item.
 local rubberIcons = {}
 for i = 1, 3 do
@@ -23,7 +19,7 @@ rubberItem.icon = nil
 rubberItem.icons = {{icon = rubberIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 rubberItem.pictures = rubberIcons
 rubberItem.order = "b[chemistry]-a3"
-table.insert(newData, rubberItem)
+data:extend{rubberItem}
 
 -- Create latex fluid.
 local latexColor = {r = .812, g = .761, b = .675, a=1}
@@ -34,7 +30,7 @@ latexFluid.icon_size = 64
 latexFluid.base_color = {r = .812, g = .761, b = .675, a=1}
 latexFluid.flow_color = {r = .9, g = .8, b = .7, a=1}
 latexFluid.visualization_color = {r = .812, g = .761, b = .675, a=1}
-table.insert(newData, latexFluid)
+data:extend{latexFluid}
 
 -- Create recipe for latex fluid.
 local latexRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
@@ -47,7 +43,7 @@ latexRecipe.results = {{type="fluid", name="latex", amount=50}}
 latexRecipe.category = "organic-or-chemistry"
 latexRecipe.subgroup = "complex-fluid-recipes"
 latexRecipe.order = "b[chemistry]-a1"
-table.insert(newData, latexRecipe)
+data:extend{latexRecipe}
 
 -- Create recipe for latex to rubber.
 local rubberFromLatexRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
@@ -66,7 +62,7 @@ rubberFromLatexRecipe.icons = {
 	rubberItem.icons[1],
 	{icon = latexFluid.icon, icon_size = 64, scale=0.27, mipmap_count=4, shift={-6, -7}},
 }
-table.insert(newData, rubberFromLatexRecipe)
+data:extend{rubberFromLatexRecipe}
 
 -- Create recipe for synthetic rubber.
 local rubberFromPetrochemRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
@@ -90,7 +86,7 @@ rubberFromPetrochemRecipe.icons = {
 	rubberItem.icons[1],
 	{icon = data.raw.fluid["light-oil"].icon, icon_size = 64, scale=0.27, mipmap_count=4, shift={-6, -7}},
 }
-table.insert(newData, rubberFromPetrochemRecipe)
+data:extend{rubberFromPetrochemRecipe}
 
 -- Create tech for natural rubber.
 local naturalRubberTech = table.deepcopy(data.raw.technology["plastics"])
@@ -110,7 +106,7 @@ naturalRubberTech.icons = {{icon = "__LegendarySpaceAge__/graphics/rubber/tech.p
 naturalRubberTech.localised_description = {"technology-description.rubber-1"}
 naturalRubberTech.prerequisites = {"sulfur-processing"}
 naturalRubberTech.unit = data.raw.technology["automation"].unit
-table.insert(newData, naturalRubberTech)
+data:extend{naturalRubberTech}
 
 -- Create tech for synthetic rubber.
 local syntheticRubberTech = table.deepcopy(data.raw.technology["plastics"])
@@ -125,6 +121,4 @@ syntheticRubberTech.icon = nil
 syntheticRubberTech.icons = {{icon = "__LegendarySpaceAge__/graphics/rubber/tech.png", icon_size = 256, scale=0.5, mipmap_count=4}}
 syntheticRubberTech.localised_description = {"technology-description.rubber-2"}
 syntheticRubberTech.prerequisites = {"oil-processing", "rubber-1"}
-table.insert(newData, syntheticRubberTech)
-
-data:extend(newData)
+data:extend{syntheticRubberTech}
