@@ -13,3 +13,7 @@ script.on_event(defines.events.on_player_created, notifyIncorrectMapgenPreset.on
 
 local techRateTriggers = require("code.control.tech-rate-triggers")
 script.on_nth_tick(60 * 10, techRateTriggers.onNthTick)
+
+local deepDrillRecipe = require("code.control.deep-drill-recipe")
+script.on_event(defines.events.on_built_entity, deepDrillRecipe.onBuiltEntity, {{filter = "name", name = "deep-drill"}})
+script.on_event(defines.events.on_robot_built_entity, deepDrillRecipe.onRobotBuiltEntity, {{filter = "name", name = "deep-drill"}})

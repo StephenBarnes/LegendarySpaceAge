@@ -117,8 +117,8 @@ data.raw.recipe["turbo-splitter"].ingredients = {
 -- Pumps
 data.raw.recipe["pump"].ingredients = {
 	{type="item", name="frame", amount=2},
-	{type="item", name="fluid-fitting", amount=2},
-	{type="item", name="iron-gear-wheel", amount=2}, -- TODO change to mechanism.
+	{type="item", name="fluid-fitting", amount=4},
+	{type="item", name="mechanism", amount=2},
 }
 
 -- Chemical plant - shouldn't require steel bc we're moving it to automation 1. Also no pipe ingredients bc it comes before pipe tech. But it should cost more than assembler 1 since it's faster.
@@ -359,3 +359,18 @@ data.raw.recipe["space-platform-foundation"].ingredients = {
 	{ type = "item", name = "processing-unit", amount = 1 },
 		-- Effectively sulfuric acid + plastic + metals.
 }
+
+-- Walls, gates
+data.raw.recipe["stone-wall"].ingredients = {
+	{type = "item", name = "structure", amount = 2},
+}
+data.raw.recipe["gate"].ingredients = {
+	{type = "item", name = "shielding", amount = 4},
+	{type = "item", name = "sensor", amount = 1},
+	{type = "item", name = "mechanism", amount = 1},
+}
+data.raw.recipe["gate"].results = {
+	{type = "item", name = "gate", amount = 4},
+}
+
+-- TODO remove all the chests, keep only the steel one, and make it from frame plus panel.

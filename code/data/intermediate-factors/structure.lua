@@ -1,5 +1,7 @@
 -- This file creates the "structure" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
+local Tech = require("code.util.tech")
+
 -- Create item.
 local structureItem = table.deepcopy(data.raw.item["steel-plate"])
 structureItem.name = "structure"
@@ -17,7 +19,7 @@ recipeFromStone.ingredients = {
 	{type = "fluid", name = "cement", amount = 20},
 }
 recipeFromStone.results = {{type = "item", name = "structure", amount = 1}}
-recipeFromStone.enabled = true
+recipeFromStone.enabled = false
 recipeFromStone.subgroup = "structure"
 recipeFromStone.order = "02"
 recipeFromStone.energy_required = 6
@@ -28,6 +30,8 @@ recipeFromStone.icons = {
 	{icon = "__base__/graphics/icons/stone-brick.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
 data:extend{recipeFromStone}
+Tech.addRecipeToTech("structure-from-stone", "cement")
+
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?

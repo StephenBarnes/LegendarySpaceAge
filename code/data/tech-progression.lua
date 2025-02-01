@@ -196,6 +196,18 @@ data.raw.recipe["agricultural-science-pack"].ingredients = {
 	-- TODO add boompuff thing here later
 }
 
+-- Make gate tech auto-unlock, otherwise I'm going to just forgo it.
+data.raw.technology["gate"].unit = nil
+data.raw.technology["gate"].research_trigger = {
+	type = "craft-item",
+	item = "stone-wall",
+	count = 100,
+}
+data.raw.technology["gate"].prerequisites = {"stone-wall"}
+
+-- Wall comes after cement, since it's needed for structure which is only unlocked with cement.
+Tech.setPrereqs("stone-wall", {"cement"})
+
 -- TODO other science packs.
 
 -- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.

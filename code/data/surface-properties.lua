@@ -74,6 +74,8 @@ for planetName, stabilityPercent in pairs{
 } do
 	data.raw.planet[planetName].surface_properties["surface-stability"] = stabilityPercent
 end
+-- Surface stability in space should be 10%.
+data.raw.surface["space-platform"].surface_properties["surface-stability"] = 10
 
 -- Make rail only buildable where surface stability at least 80%.
 -- Seems it's copying or sharing surface conditions between all rail types, so adding it to each of them will actually add the same condition many times.

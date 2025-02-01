@@ -12,3 +12,4 @@ This file is to keep track of other people's stuff that I've used.
 * Biochemistry by Tenebrais - mods.factorio.com/mod/biochemistry - Electrophage graphics, and ideas.
 * Fulgoran Sludge by Tatticky - mods.factorio.com/mod/fulgoran-sludge - Sludge idea.
 * RateBasedResearch by tomlee - mods.factorio.com/mod/RateBasedResearch - Idea of gating techs with production rates rather than amounts.
+* Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above. Copied deep drill, maybe more later.
