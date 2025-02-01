@@ -140,79 +140,72 @@ copperIngotRecipe.enabled = true
 table.insert(newData, copperIngotRecipe)
 
 -- Adjust steel plate recipe.
-Table.setFields(data.raw.recipe["steel-plate"], {
-	ingredients = {{type="item", name="ingot-steel-hot", amount=1}},
-	results = {{type="item", name="steel-plate", amount=4}},
-	category = "crafting",
-	energy_required = 1,
-	auto_recycle = true,
-	allow_as_intermediate = true,
-	allow_decomposition = true,
-	always_show_products = true,
-	main_product = "steel-plate",
-})
+local steelPlateRecipe = data.raw.recipe["steel-plate"]
+steelPlateRecipe.ingredients = {{type="item", name="ingot-steel-hot", amount=1}}
+steelPlateRecipe.results = {{type="item", name="steel-plate", amount=4}}
+steelPlateRecipe.category = "crafting"
+steelPlateRecipe.energy_required = 1
+steelPlateRecipe.auto_recycle = true
+steelPlateRecipe.allow_as_intermediate = true
+steelPlateRecipe.allow_decomposition = true
+steelPlateRecipe.always_show_products = true
+steelPlateRecipe.main_product = "steel-plate"
 
 -- Adjust iron plate recipe.
-Table.setFields(data.raw.recipe["iron-plate"], {
-	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
-	results = {{type="item", name="iron-plate", amount=4}},
-	category = "crafting",
-	energy_required = 1,
-	auto_recycle = true,
-	allow_as_intermediate = true,
-	allow_decomposition = true,
-	always_show_products = true,
-})
+local ironPlateRecipe = data.raw.recipe["iron-plate"]
+ironPlateRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=1}}
+ironPlateRecipe.results = {{type="item", name="iron-plate", amount=4}}
+ironPlateRecipe.category = "crafting"
+ironPlateRecipe.energy_required = 1
+ironPlateRecipe.auto_recycle = true
+ironPlateRecipe.allow_as_intermediate = true
+ironPlateRecipe.allow_decomposition = true
+ironPlateRecipe.always_show_products = true
 
 -- Adjust copper plate recipe.
-Table.setFields(data.raw.recipe["copper-plate"], {
-	ingredients = {{type="item", name="ingot-copper-hot", amount=1}},
-	results = {{type="item", name="copper-plate", amount=4}},
-	category = "crafting",
-	energy_required = 1,
-	auto_recycle = true,
-	allow_as_intermediate = true,
-	allow_decomposition = true,
-	always_show_products = true,
-})
+local copperPlateRecipe = data.raw.recipe["copper-plate"]
+copperPlateRecipe.ingredients = {{type="item", name="ingot-copper-hot", amount=1}}
+copperPlateRecipe.results = {{type="item", name="copper-plate", amount=4}}
+copperPlateRecipe.category = "crafting"
+copperPlateRecipe.energy_required = 1
+copperPlateRecipe.auto_recycle = true
+copperPlateRecipe.allow_as_intermediate = true
+copperPlateRecipe.allow_decomposition = true
+copperPlateRecipe.always_show_products = true
 
 -- Adjust iron gear recipe.
-Table.setFields(data.raw.recipe["iron-gear-wheel"], {
-	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
-	results = {{type="item", name="iron-gear-wheel", amount=2}},
-	energy_required = 1,
-	auto_recycle = true,
-	always_show_products = true,
-})
+local ironGearRecipe = data.raw.recipe["iron-gear-wheel"]
+ironGearRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=1}}
+ironGearRecipe.results = {{type="item", name="iron-gear-wheel", amount=2}}
+ironGearRecipe.energy_required = 1
+ironGearRecipe.auto_recycle = true
+ironGearRecipe.always_show_products = true
 
 -- Adjust recipe for iron rods.
-Table.setFields(data.raw.recipe["iron-stick"], {
-	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
-	results = {{type="item", name="iron-stick", amount=8}},
-	energy_required = 1,
-	auto_recycle = true,
-	always_show_products = true,
-})
+local ironStickRecipe = data.raw.recipe["iron-stick"]
+ironStickRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=1}}
+ironStickRecipe.results = {{type="item", name="iron-stick", amount=8}}
+ironStickRecipe.energy_required = 1
+ironStickRecipe.auto_recycle = true
+ironStickRecipe.always_show_products = true
 
 -- Adjust recipe for copper cables.
-Table.setFields(data.raw.recipe["copper-cable"], {
-	ingredients = {{type="item", name="ingot-copper-hot", amount=1}},
-	results = {{type="item", name="copper-cable", amount=8}},
-	energy_required = 1,
-	auto_recycle = true,
-	always_show_products = true,
-})
+local copperCableRecipe = data.raw.recipe["copper-cable"]
+copperCableRecipe.ingredients = {{type="item", name="ingot-copper-hot", amount=1}}
+copperCableRecipe.results = {{type="item", name="copper-cable", amount=8}}
+copperCableRecipe.energy_required = 1
+copperCableRecipe.auto_recycle = true
+copperCableRecipe.always_show_products = true
 
 -- Adjust recipe for low-density structures.
-Table.setFields(data.raw.recipe["low-density-structure"], {
-	ingredients = {
-		{type="item", name="ingot-copper-hot", amount=5},
-		{type="item", name="ingot-steel-hot", amount=2},
-		{type="item", name="plastic-bar", amount=3},
-		{type="item", name="resin", amount=1},
-	},
-	auto_recycle = true,
-})
+local lowDensityStructureRecipe = data.raw.recipe["low-density-structure"]
+lowDensityStructureRecipe.ingredients = {
+	{type="item", name="ingot-copper-hot", amount=5},
+	{type="item", name="ingot-steel-hot", amount=2},
+	{type="item", name="plastic-bar", amount=3},
+	{type="item", name="resin", amount=1},
+}
+lowDensityStructureRecipe.auto_recycle = true
 
 -- Put basic metal intermediates in their own subgroup.
 for i, itemName in pairs{"iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate"} do

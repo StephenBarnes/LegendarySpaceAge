@@ -145,131 +145,129 @@ Tech.addRecipeToTech("molten-steel-making", "foundry", 8)
 -- Adjust recipes for casting molten metals into items.
 -- Balanced so that they have the same molten metal costs, and all of them consume ~40/s molten metal and 1/s water. Note 40 molten metal is equivalent to 1 ingot. Foundry has speed 4.
 -- In base Space Age they do 30 molten iron -> 1 steel plate. But we're using the extra step of molten iron -> molten steel, with the +50% prod bonus, so let's not also do 30->1.
-Table.setFields(data.raw.recipe["casting-iron"], {
-	ingredients = {
-		{type = "fluid", name = "molten-iron", amount = 40},
-		{type = "fluid", name = "water", amount = 1},
-	},
-	results = {
-		{type = "item", name = "iron-plate", amount = 4, percent_spoiled = .2},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-	},
-	main_product = "iron-plate",
-	energy_required = 4,
-})
-Table.setFields(data.raw.recipe["casting-copper"], {
-	ingredients = {
-		{type = "fluid", name = "molten-copper", amount = 40},
-		{type = "fluid", name = "water", amount = 1},
-	},
-	results = {
-		{type = "item", name = "copper-plate", amount = 4},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-	},
-	main_product = "copper-plate",
-	energy_required = 4,
-})
-Table.setFields(data.raw.recipe["casting-steel"], {
-	ingredients = {
-		{type = "fluid", name = "molten-steel", amount = 40},
-		{type = "fluid", name = "water", amount = 1},
-	},
-	results = {
-		{type = "item", name = "steel-plate", amount = 1},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-	},
-	main_product = "steel-plate",
-	energy_required = 4,
-})
-Table.setFields(data.raw.recipe["casting-iron-gear-wheel"], {
-	ingredients = {
-		{type = "fluid", name = "molten-iron", amount = 40},
-		{type = "fluid", name = "water", amount = 1},
-	},
-	results = {
-		{type = "item", name = "iron-gear-wheel", amount = 2, percent_spoiled = .2},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-	},
-	main_product = "iron-gear-wheel",
-	energy_required = 4,
-})
-Table.setFields(data.raw.recipe["casting-iron-stick"], {
-	ingredients = {
-		{type = "fluid", name = "molten-iron", amount = 40},
-		{type = "fluid", name = "water", amount = 1},
-	},
-	results = {
-		{type = "item", name = "iron-stick", amount = 8, percent_spoiled = .2},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-	},
-	main_product = "iron-stick",
-	energy_required = 4,
-})
-Table.setFields(data.raw.recipe["casting-low-density-structure"], {
-	-- Originally 5 plastic bar + 80 molten iron + 250 molten copper
-	ingredients = {
-		{type = "item", name = "plastic-bar", amount = 3},
-		{type = "item", name = "resin", amount = 1},
-		{type = "fluid", name = "molten-steel", amount = 80},
-		{type = "fluid", name = "molten-copper", amount = 200},
-		{type = "fluid", name = "water", amount = 3},
-	},
-	results = {
-		{type = "item", name = "low-density-structure", amount = 1},
-		{type = "fluid", name = "steam", amount = 30, temperature = 500, ignored_by_productivity=30},
-	},
-	main_product = "low-density-structure",
-	energy_required = 12,
-})
-Table.setFields(data.raw.recipe["casting-copper-cable"], {
-	ingredients = {
-		{type = "fluid", name = "molten-copper", amount = 40},
-		{type = "fluid", name = "water", amount = 1},
-	},
-	results = {
-		{type = "item", name = "copper-cable", amount = 8},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-	},
-	main_product = "copper-cable",
-	energy_required = 4,
-})
-Table.setFields(data.raw.recipe["casting-pipe"], {
-	ingredients = {
-		{type = "fluid", name = "molten-iron", amount = 40},
-		{type = "fluid", name = "water", amount = 1},
-	},
-	results = {
-		{type = "item", name = "pipe", amount = 4},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-	},
-	subgroup = "vulcanus-processes",
-	main_product = "pipe",
-	energy_required = 4,
-})
-Table.setFields(data.raw.recipe["casting-pipe-to-ground"], {
-	ingredients = {
-		{type = "item", name = "pipe", amount = 10},
-		{type = "fluid", name = "molten-iron", amount = 50},
-		{type = "fluid", name = "water", amount = 1},
-	},
-	results = {
-		{type = "item", name = "pipe-to-ground", amount = 2},
-		{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-	},
-	subgroup = "vulcanus-processes",
-	main_product = "pipe-to-ground",
-	energy_required = 4,
-})
+local ironCastingRecipe = data.raw.recipe["casting-iron"]
+ironCastingRecipe.ingredients = {
+	{type = "fluid", name = "molten-iron", amount = 40},
+	{type = "fluid", name = "water", amount = 1},
+}
+ironCastingRecipe.results = {
+	{type = "item", name = "iron-plate", amount = 4, percent_spoiled = .2},
+	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
+}
+ironCastingRecipe.main_product = "iron-plate"
+ironCastingRecipe.energy_required = 4
+
+local copperCastingRecipe = data.raw.recipe["casting-copper"]
+copperCastingRecipe.ingredients = {
+	{type = "fluid", name = "molten-copper", amount = 40},
+	{type = "fluid", name = "water", amount = 1},
+}
+copperCastingRecipe.results = {
+	{type = "item", name = "copper-plate", amount = 4},
+	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
+}
+copperCastingRecipe.main_product = "copper-plate"
+copperCastingRecipe.energy_required = 4
+
+local steelCastingRecipe = data.raw.recipe["casting-steel"]
+steelCastingRecipe.ingredients = {
+	{type = "fluid", name = "molten-steel", amount = 40},
+	{type = "fluid", name = "water", amount = 1},
+}
+steelCastingRecipe.results = {
+	{type = "item", name = "steel-plate", amount = 1},
+	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
+}
+steelCastingRecipe.main_product = "steel-plate"
+steelCastingRecipe.energy_required = 4
+
+local ironGearWheelCastingRecipe = data.raw.recipe["casting-iron-gear-wheel"]
+ironGearWheelCastingRecipe.ingredients = {
+	{type = "fluid", name = "molten-iron", amount = 40},
+	{type = "fluid", name = "water", amount = 1},
+}
+ironGearWheelCastingRecipe.results = {
+	{type = "item", name = "iron-gear-wheel", amount = 2, percent_spoiled = .2},
+	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
+}
+ironGearWheelCastingRecipe.main_product = "iron-gear-wheel"
+ironGearWheelCastingRecipe.energy_required = 4
+
+local ironStickCastingRecipe = data.raw.recipe["casting-iron-stick"]
+ironStickCastingRecipe.ingredients = {
+	{type = "fluid", name = "molten-iron", amount = 40},
+	{type = "fluid", name = "water", amount = 1},
+}
+ironStickCastingRecipe.results = {
+	{type = "item", name = "iron-stick", amount = 8, percent_spoiled = .2},
+	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
+}
+ironStickCastingRecipe.main_product = "iron-stick"
+ironStickCastingRecipe.energy_required = 4
+local lowDensityStructureRecipe = data.raw.recipe["casting-low-density-structure"]
+-- Originally 5 plastic bar + 80 molten iron + 250 molten copper
+lowDensityStructureRecipe.ingredients = {
+	{ type = "item",  name = "plastic-bar",   amount = 3 },
+	{ type = "item",  name = "resin",         amount = 1 },
+	{ type = "fluid", name = "molten-steel",  amount = 80 },
+	{ type = "fluid", name = "molten-copper", amount = 200 },
+	{ type = "fluid", name = "water",         amount = 3 },
+}
+lowDensityStructureRecipe.results = {
+	{type = "item", name = "low-density-structure", amount = 1},
+	{type = "fluid", name = "steam", amount = 30, temperature = 500, ignored_by_productivity=30},
+}
+lowDensityStructureRecipe.main_product = "low-density-structure"
+lowDensityStructureRecipe.energy_required = 12
+
+local copperCableRecipe = data.raw.recipe["casting-copper-cable"]
+copperCableRecipe.ingredients = {
+	{type = "fluid", name = "molten-copper", amount = 40},
+	{type = "fluid", name = "water", amount = 1},
+}
+copperCableRecipe.results = {
+	{type = "item", name = "copper-cable", amount = 8},
+	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
+}
+copperCableRecipe.main_product = "copper-cable"
+copperCableRecipe.energy_required = 4
+
+local pipeRecipe = data.raw.recipe["casting-pipe"]
+pipeRecipe.ingredients = {
+	{type = "fluid", name = "molten-iron", amount = 40},
+	{type = "fluid", name = "water", amount = 1},
+}
+pipeRecipe.results = {
+	{type = "item", name = "pipe", amount = 4},
+	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
+}
+pipeRecipe.subgroup = "vulcanus-processes"
+pipeRecipe.main_product = "pipe"
+pipeRecipe.energy_required = 4
+
+local pipeToGroundRecipe = data.raw.recipe["casting-pipe-to-ground"]
+pipeToGroundRecipe.ingredients = {
+	{ type = "item",  name = "pipe",        amount = 10 },
+	{ type = "fluid", name = "molten-iron", amount = 50 },
+	{ type = "fluid", name = "water",       amount = 1 },
+}
+pipeToGroundRecipe.results = {
+	{type = "item", name = "pipe-to-ground", amount = 2},
+	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
+}
+pipeToGroundRecipe.subgroup = "vulcanus-processes"
+pipeToGroundRecipe.main_product = "pipe-to-ground"
+pipeToGroundRecipe.energy_required = 4
 
 -- Add recipe for casting advanced parts. (Bc can't make ingots from foundries.)
 local castingAdvancedPartsRecipe = table.deepcopy(data.raw.recipe["casting-iron-gear-wheel"])
 castingAdvancedPartsRecipe.name = "casting-advanced-parts"
 castingAdvancedPartsRecipe.ingredients = {
-	{type = "fluid", name = "molten-steel", amount = 160},
-	{type = "fluid", name = "water", amount = 4},
-	{type = "item", name = "rubber", amount = 1},
-	{type = "item", name = "plastic-bar", amount = 2},
-	{type = "fluid", name = "lubricant", amount = 5},
+	{ type = "fluid", name = "molten-steel", amount = 160 },
+	{ type = "fluid", name = "water",        amount = 4 },
+	{ type = "item",  name = "rubber",       amount = 1 },
+	{ type = "item",  name = "plastic-bar",  amount = 2 },
+	{ type = "fluid", name = "lubricant",    amount = 5 },
 }
 castingAdvancedPartsRecipe.results = {
 	{type = "item", name = "advanced-parts", amount = 4},

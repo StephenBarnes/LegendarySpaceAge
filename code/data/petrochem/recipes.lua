@@ -60,39 +60,38 @@ table.insert(newData, gasFractionationRecipe)
 	100 light oil + 100 steam -> 100 rich gas + 1 sulfur
 	100 rich gas + 100 steam -> 100 dry gas
 ]]
-Table.setFields(data.raw.recipe["heavy-oil-cracking"], {
-	ingredients = {
-		{type = "fluid", name = "heavy-oil", amount = 100},
-		{type = "fluid", name = "steam", amount = 50},
-	},
-	results = {
-		{type = "fluid", name = "light-oil", amount = 100, show_details_in_recipe_tooltip = false},
-		{type = "item", name = "carbon", amount = 1, show_details_in_recipe_tooltip = false},
-		{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
-	},
-	icon = "nil",
-	icons = {
-		{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
-		{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={-6, 4}},
-		{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
-	},
-})
-Table.setFields(data.raw.recipe["light-oil-cracking"], {
-	ingredients = {
-		{type = "fluid", name = "light-oil", amount = 100},
-		{type = "fluid", name = "steam", amount = 50},
-	},
-	results = {
-		{type = "fluid", name = "petroleum-gas", amount = 100, show_details_in_recipe_tooltip = false},
-		{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
-	},
-	icon = "nil",
-	icons = {
-		{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={-6, 6}, tint=constants.richgasColor},
-		{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 6}, tint=constants.richgasColor},
-	},
-})
+local heavyOilCrackingRecipe = data.raw.recipe["heavy-oil-cracking"]
+heavyOilCrackingRecipe.ingredients = {
+	{type = "fluid", name = "heavy-oil", amount = 100},
+	{type = "fluid", name = "steam", amount = 50},
+}
+heavyOilCrackingRecipe.results = {
+	{type = "fluid", name = "light-oil", amount = 100, show_details_in_recipe_tooltip = false},
+	{type = "item", name = "carbon", amount = 1, show_details_in_recipe_tooltip = false},
+	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
+}
+heavyOilCrackingRecipe.icon = nil
+heavyOilCrackingRecipe.icons = {
+	{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
+	{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={-6, 4}},
+	{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
+}
+
+local lightOilCrackingRecipe = data.raw.recipe["light-oil-cracking"]
+lightOilCrackingRecipe.ingredients = {
+	{type = "fluid", name = "light-oil", amount = 100},
+	{type = "fluid", name = "steam", amount = 50},
+}
+lightOilCrackingRecipe.results = {
+	{type = "fluid", name = "petroleum-gas", amount = 100, show_details_in_recipe_tooltip = false},
+	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
+}
+lightOilCrackingRecipe.icon = nil
+lightOilCrackingRecipe.icons = {
+	{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
+	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={-6, 6}, tint=constants.richgasColor},
+	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 6}, tint=constants.richgasColor},
+}
 local richGasCrackingRecipe = table.deepcopy(data.raw.recipe["light-oil-cracking"])
 richGasCrackingRecipe.name = "rich-gas-cracking"
 richGasCrackingRecipe.ingredients = {
@@ -296,11 +295,11 @@ syngasLiquefactionRecipe.ingredients = {
 	{type = "item", name = "iron-plate", amount = 1},
 }
 syngasLiquefactionRecipe.results = {
-	{type = "fluid", name = "heavy-oil", amount = 20, show_details_in_recipe_tooltip = false},
-	{type = "fluid", name = "light-oil", amount = 30, show_details_in_recipe_tooltip = false},
-	{type = "fluid", name = "petroleum-gas", amount = 30, show_details_in_recipe_tooltip = false},
-	{type = "fluid", name = "dry-gas", amount = 20, show_details_in_recipe_tooltip = false},
-	{type = "fluid", name = "water", amount = 1, show_details_in_recipe_tooltip = false},
+	{ type = "fluid", name = "heavy-oil",     amount = 20, show_details_in_recipe_tooltip = false },
+	{ type = "fluid", name = "light-oil",     amount = 30, show_details_in_recipe_tooltip = false },
+	{ type = "fluid", name = "petroleum-gas", amount = 30, show_details_in_recipe_tooltip = false },
+	{ type = "fluid", name = "dry-gas",       amount = 20, show_details_in_recipe_tooltip = false },
+	{ type = "fluid", name = "water",         amount = 1,  show_details_in_recipe_tooltip = false },
 }
 syngasLiquefactionRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.27, shift={0, -4}, tint=constants.syngasColor},
@@ -316,61 +315,55 @@ table.insert(newData, syngasLiquefactionRecipe)
 	10 heavy oil + 1 sulfuric acid -> 8 lubricant + 1 tar
 		Meant to resemble vacuum distillation - heavy oil is distilled, sulfuric acid is used for acid-washing impurities.
 ]]
-Table.setFields(data.raw.recipe["lubricant"], {
-	ingredients = {
-		{type = "fluid", name = "heavy-oil", amount = 100},
-		{type = "fluid", name = "sulfuric-acid", amount = 10},
-	},
-	results = {
-		{type = "fluid", name = "lubricant", amount = 80},
-		{type = "fluid", name = "tar", amount = 10},
-	},
-	main_product = "lubricant",
-})
+local lubricantRecipe = data.raw.recipe["lubricant"]
+lubricantRecipe.ingredients = {
+	{ type = "fluid", name = "heavy-oil",     amount = 100 },
+	{ type = "fluid", name = "sulfuric-acid", amount = 10 },
+}
+lubricantRecipe.results = {
+	{ type = "fluid", name = "lubricant", amount = 80 },
+	{ type = "fluid", name = "tar",       amount = 10 },
+}
+lubricantRecipe.main_product = "lubricant"
 
 --[[ Modify recipe for vehicle fuel (rocket-fuel).
 	10 light oil + 5 rich gas -> 4 vehicle fuel (items)
 		These are used both to fuel cars and tanks, and for rockets launched to space.
 		These 2 fractions are used so that the player can't make rocket fuel immediately after fractionating only oil or only gas - needs to fractionate both, or crack, or do syngas liquefaction.
 ]]
-Table.setFields(data.raw.recipe["rocket-fuel"], {
-	ingredients = {
-		{type = "fluid", name = "light-oil", amount = 100},
-		{type = "fluid", name = "petroleum-gas", amount = 50},
-	},
-	results = {
-		{type = "item", name = "rocket-fuel", amount = 4},
-	},
-	category = "organic-or-chemistry",
-})
+local rocketFuelRecipe = data.raw.recipe["rocket-fuel"]
+rocketFuelRecipe.ingredients = {
+	{ type = "fluid", name = "light-oil",     amount = 100 },
+	{ type = "fluid", name = "petroleum-gas", amount = 50 },
+}
+rocketFuelRecipe.results = {
+	{type = "item", name = "rocket-fuel", amount = 4},
+}
+rocketFuelRecipe.category = "organic-or-chemistry"
 
 --[[ Modify recipe for plastic-bar.
 	5 syngas + 2 carbon + 1 sulfuric acid -> 5 plastic bars
 		Syngas provides hydrogen, carbon is the backbone, and sulfuric acid helps drive polymerization.
 ]]
-Table.setFields(data.raw.recipe["plastic-bar"], {
-	ingredients = {
-		{type = "item", name = "carbon", amount = 2},
-		{type = "fluid", name = "syngas", amount = 50},
-		{type = "fluid", name = "sulfuric-acid", amount = 10},
-	},
-	results = {
-		{type = "item", name = "plastic-bar", amount = 3},
-	},
-})
+local plasticBarRecipe = data.raw.recipe["plastic-bar"]
+plasticBarRecipe.ingredients = {
+	{ type = "item",  name = "carbon",        amount = 2 },
+	{ type = "fluid", name = "syngas",        amount = 50 },
+	{ type = "fluid", name = "sulfuric-acid", amount = 10 },
+}
+plasticBarRecipe.results = {
+	{type = "item", name = "plastic-bar", amount = 3},
+}
 
 -- Modify recipe for explosives.
-Table.setFields(data.raw.recipe["explosives"], {
-	ingredients = {
-		{type = "item", name = "niter", amount = 2},
-		{type = "fluid", name = "ammonia", amount = 20},
-		{type = "fluid", name = "light-oil", amount = 10},
-		{type = "fluid", name = "sulfuric-acid", amount = 10},
-	},
-	results = {
-		{type = "item", name = "explosives", amount = 2},
-	},
-})
+local explosivesRecipe = data.raw.recipe["explosives"]
+explosivesRecipe.ingredients = {
+	{ type = "item",  name = "niter",         amount = 2 },
+	{ type = "fluid", name = "ammonia",       amount = 20 },
+	{ type = "fluid", name = "light-oil",     amount = 10 },
+	{ type = "fluid", name = "sulfuric-acid", amount = 10 },
+}
+explosivesRecipe.results = {{type = "item", name = "explosives", amount = 2}}
 
 ------------------------------------------------------------------------
 -- Add new prototypes to the game.
