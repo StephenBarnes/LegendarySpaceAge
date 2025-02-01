@@ -5,8 +5,7 @@ local panelItem = table.deepcopy(data.raw.item["steel-plate"])
 panelItem.name = "panel"
 panelItem.subgroup = "panel"
 panelItem.order = "01"
-panelItem.icon = nil
-panelItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel.png", icon_size = 64, scale = 0.5}}
+panelItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel/panel.png"
 data:extend{panelItem}
 
 -- Create recipe: 1 iron plate -> 1 panel
@@ -23,7 +22,7 @@ recipeFromIron.energy_required = 6
 recipeFromIron.category = "crafting"
 recipeFromIron.icon = nil
 recipeFromIron.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel.png", icon_size = 64, scale = 0.5},
+	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel/iron-panel.png", icon_size = 64, scale = 0.5},
 	{icon = "__base__/graphics/icons/iron-plate.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
 data:extend{recipeFromIron}
@@ -35,6 +34,7 @@ recipeFromCopper.ingredients = {
 	{type = "item", name = "copper-plate", amount = 1},
 }
 recipeFromCopper.order = "04"
+recipeFromCopper.icons[1] = {icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel/copper-panel.png", icon_size = 64, scale = 0.5}
 recipeFromCopper.icons[2] = {icon = "__base__/graphics/icons/copper-plate.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 data:extend{recipeFromCopper}
 
@@ -46,6 +46,7 @@ recipeFromWood.ingredients = {
 	{type = "item", name = "resin", amount = 1},
 }
 recipeFromWood.order = "02"
+recipeFromWood.icons[1] = {icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel/wooden-panel.png", icon_size = 64, scale = 0.5}
 recipeFromWood.icons[2] = {icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 data:extend{recipeFromWood}
 

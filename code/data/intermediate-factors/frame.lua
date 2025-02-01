@@ -3,7 +3,7 @@
 -- Create item.
 local frame = table.deepcopy(data.raw.item["steel-plate"])
 frame.name = "frame"
-frame.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/frame.png"
+frame.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/frame/frame.png"
 frame.subgroup = "frame"
 frame.order = "01"
 data:extend{frame}
@@ -23,9 +23,9 @@ recipeFromWood.energy_required = 6
 recipeFromWood.category = "crafting"
 recipeFromWood.icon = nil
 recipeFromWood.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/frame.png", icon_size = 64, scale = 0.5},
+	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/frame/wooden-frame.png", icon_size = 64, scale = 0.5},
 	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
+	--{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
 }
 data:extend{recipeFromWood}
 
@@ -43,8 +43,8 @@ recipeFromIron.energy_required = 4
 recipeFromIron.category = "crafting"
 recipeFromIron.icon = nil
 recipeFromIron.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/frame.png", icon_size = 64, scale = 0.5},
-	{icon = "__base__/graphics/icons/iron-stick.png", icon_size = 64, scale = 0.3, shift = {-5, -5}},
+	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/frame/frame.png", icon_size = 64, scale = 0.5},
+	{icon = "__base__/graphics/icons/iron-stick.png", icon_size = 64, scale = 0.27, shift = {-5, -5}},
 }
 data:extend{recipeFromIron}
 

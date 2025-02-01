@@ -1,0 +1,73 @@
+-- This file creates the "wiring" intermediate, and its multiple recipes. See main.lua in this folder for more info.
+
+local Tech = require "code.util.tech"
+
+-- Create item.
+local wiringItem = table.deepcopy(data.raw.item["copper-cable"])
+wiringItem.name = "wiring"
+wiringItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/wiring.png"
+wiringItem.subgroup = "wiring"
+wiringItem.order = "01"
+data:extend{wiringItem}
+
+-- Make recipe for wiring: 4 copper cable + 1 resin -> 4 wiring
+local resinRecipe = table.deepcopy(data.raw.recipe["copper-cable"])
+resinRecipe.name = "wiring-from-resin"
+resinRecipe.category = "crafting"
+resinRecipe.icon = nil
+resinRecipe.icons = {
+	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/wiring.png", icon_size = 64, scale = 0.5},
+	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
+}
+resinRecipe.ingredients = {
+	{type = "item", name = "copper-cable", amount = 1},
+	{type = "item", name = "resin", amount = 1},
+}
+resinRecipe.results = {{type = "item", name = "wiring", amount = 1}}
+resinRecipe.enabled = true
+resinRecipe.subgroup = "wiring"
+resinRecipe.order = "02"
+resinRecipe.energy_required = 6
+data:extend{resinRecipe}
+
+-- Create a recipe with rubber insulation: 8 copper cable + 1 rubber -> 8 wiring
+local rubberRecipe = table.deepcopy(resinRecipe)
+rubberRecipe.name = "wiring-from-rubber"
+rubberRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/rubber/rubber-2.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+rubberRecipe.ingredients = {
+	{type = "item", name = "copper-cable", amount = 8},
+	{type = "item", name = "rubber", amount = 1},
+}
+rubberRecipe.results = {{type = "item", name = "wiring", amount = 8}}
+rubberRecipe.order = "03"
+rubberRecipe.enabled = false
+data:extend{rubberRecipe}
+Tech.addRecipeToTech("wiring-from-rubber", "rubber-1")
+
+-- Create a recipe with plastic insulation: 4 copper cable + 1 plastic -> 4 wiring
+local plasticRecipe = table.deepcopy(resinRecipe)
+plasticRecipe.name = "wiring-from-plastic"
+plasticRecipe.icons[2] = {icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+plasticRecipe.ingredients = {
+	{type = "item", name = "copper-cable", amount = 4},
+	{type = "item", name = "plastic-bar", amount = 1},
+}
+plasticRecipe.results = {{type = "item", name = "wiring", amount = 4}}
+plasticRecipe.order = "04"
+plasticRecipe.enabled = false
+data:extend{plasticRecipe}
+Tech.addRecipeToTech("wiring-from-plastic", "plastic")
+
+-- Create a recipe using neurofibrils: 8 neurofibril + 1 rubber -> 8 wiring
+local neurofibrilRecipe = table.deepcopy(resinRecipe)
+neurofibrilRecipe.name = "wiring-from-neurofibril"
+neurofibrilRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/neurofibrils/4.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+neurofibrilRecipe.ingredients = {
+	{type = "item", name = "neurofibril", amount = 8},
+	{type = "item", name = "rubber", amount = 1},
+}
+neurofibrilRecipe.results = {{type = "item", name = "wiring", amount = 8}}
+neurofibrilRecipe.order = "05"
+neurofibrilRecipe.enabled = false
+data:extend{neurofibrilRecipe}
+Tech.addRecipeToTech("wiring-from-neurofibril", "stingfronds-1")

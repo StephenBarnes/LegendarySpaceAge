@@ -24,6 +24,7 @@ Other intermediate factors considered but decided against:
 	Compute, and advanced compute - decided to rather just use sensors and circuits as ingredients. Circuits have matryoshka recipes so players will have all of them available anyway.
 ]]
 
+require("code.data.intermediate-factors.wiring")
 require("code.data.intermediate-factors.frame")
 require("code.data.intermediate-factors.panel")
 require("code.data.intermediate-factors.structure")

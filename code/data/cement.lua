@@ -38,12 +38,12 @@ local cementRecipe = Table.copyAndEdit(data.raw.recipe["lubricant"], {
 	subgroup = "terrain",
 	order = "b[a]",
 	ingredients = {
-		{type = "item", name = "stone", amount = 5},
-		{type = "item", name = "sand", amount = 5},
-		{type = "fluid", name = "water", amount = 100},
+		{type = "item", name = "stone", amount = 2},
+		{type = "item", name = "sand", amount = 2},
+		{type = "fluid", name = "water", amount = 40},
 	},
 	results = {
-		{type = "fluid", name = "cement", amount = 100},
+		{type = "fluid", name = "cement", amount = 40},
 	},
 	main_product = "cement",
 	auto_barrel = false,

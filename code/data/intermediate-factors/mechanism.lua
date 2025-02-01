@@ -38,8 +38,8 @@ advancedRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1},
 }
 advancedRecipe.order = "03"
-advancedRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-8, -7}}
-advancedRecipe.icons[3] = {icon = "__LegendarySpaceAge__/graphics/parts-advanced/flange-2.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={-7, -8}}
+advancedRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}}
+advancedRecipe.icons[3] = nil
 data:extend{advancedRecipe}
 
 -- TODO make more recipes, and add them to techs.

@@ -6,14 +6,13 @@ Green circuits:
 Red circuits are made after the player has petrochem set up:
 	1 carbon + 1 plastic + 1 stone + 1 copper wire -> 1 electronic components
 		This represents resistors, capacitors, transistors, etc. that are large enough to pick up by hand.
-	1 green circuit + 2 copper wire + 2 electronic components -> 1 red circuit
+	1 green circuit + 1 copper wire + 2 electronic components -> 1 red circuit
 
 Blue circuits are made in the late stages of Nauvis part 1, and should have a significantly more complex production process:
 	2 stone + 10 sulfuric acid -> 1 silicon wafer
-	1 silicon wafer + 1 carbon + 1 plastic bar + 1 copper wire -> 1 doped wafer
-		Represents doping with carbon and packaging with wire/plastic.
-	1 doped wafer + 1 circuit board + 2 red circuit + 5 sulfuric acid -> 1 blue circuit
-		Acid is for final etching/cleaning; red circuits represent simpler control electronics on the advanced board; doped wafer is the new silicon IC.
+	1 silicon wafer + 1 carbon -> 1 doped wafer
+	1 doped wafer + 1 wire + 1 plastic bar -> 20 microchips
+	1 red circuit + 4 microchips + 5 sulfuric acid -> 1 blue circuit
 
 On Nauvis you first make "improvised" circuit boards, from just stone. Then later you cut trees and put the wood in a wood-to-resin-and-rubber line and use the resin plus wood to make wooden circuit boards. There's early agricultural towers for bulk wood.
 When plastic is unlocked with petrochem, you unlock a recipe for circuit boards from plastic:
@@ -56,6 +55,7 @@ local woodCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board.png", icon_size = 64, scale = .5},
+		{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 	},
 	auto_recycle = false,
 })
@@ -78,6 +78,7 @@ local plasticCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/plastic-circuit-board.png", icon_size = 64, scale = .5},
+		{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 	},
 	auto_recycle = false,
 })
@@ -100,6 +101,7 @@ local calciteCircuitBoardRecipe = Table.copyAndEdit(data.raw.recipe["barrel"], {
 	icon = "nil",
 	icons = {
 		{icon = "__LegendarySpaceAge__/graphics/circuit-boards/ceramic-circuit-board.png", icon_size = 64, scale = .5},
+		{icon = "__space-age__/graphics/icons/calcite.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 	},
 	category = "metallurgy",
 	auto_recycle = false,
@@ -197,9 +199,19 @@ local dopedWafer = Table.copyAndEdit(data.raw.item["plastic-bar"], {
 	icon_size = 64,
 	subgroup = "complex-circuit-intermediates",
 	order = "002",
-	stack_size = 200,
+	stack_size = 100,
 })
 data:extend{dopedWafer}
+
+-- Create item for microchips
+local microchip = table.deepcopy(data.raw.item["processing-unit"])
+microchip.name = "microchip"
+microchip.icon = "__LegendarySpaceAge__/graphics/circuit-chains/microchip.png"
+microchip.icon_size = 64
+microchip.subgroup = "complex-circuit-intermediates"
+microchip.order = "003"
+microchip.stack_size = 200
+data:extend{microchip}
 
 -- Create recipe for doped wafers.
 local dopedWaferRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
@@ -207,8 +219,6 @@ local dopedWaferRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 	ingredients = {
 		{type = "item", name = "silicon", amount = 1},
 		{type = "item", name = "carbon", amount = 1},
-		{type = "item", name = "plastic-bar", amount = 1},
-		{type = "item", name = "copper-cable", amount = 1},
 	},
 	results = {
 		{type = "item", name = "doped-wafer", amount = 1},
@@ -222,16 +232,36 @@ local dopedWaferRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 data:extend{dopedWaferRecipe}
 Tech.addRecipeToTech("doped-wafer", "processing-unit", 2)
 
+-- Create recipe for microchips.
+local microchipRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
+	name = "microchip",
+	ingredients = {
+		{type = "item", name = "doped-wafer", amount = 1},
+		{type = "item", name = "copper-cable", amount = 1},
+		{type = "item", name = "plastic-bar", amount = 1},
+	},
+	results = {
+		{type = "item", name = "microchip", amount = 20},
+	},
+	subgroup = "nil",
+	icon = "nil",
+	icons = "nil",
+	category = "electronics",
+	energy_required = 12,
+})
+data:extend{microchipRecipe}
+Tech.addRecipeToTech("microchip", "processing-unit", 3)
+
 -- Edit recipe for blue circuits (processing-unit) to use doped wafers.
--- 1 doped wafer + 1 circuit board + 2 red circuit + 5 sulfuric acid -> 1 blue circuit
+-- 1 red circuit + 4 microchips + 5 sulfuric acid -> 1 blue circuit
 -- Original recipe was 5 sulfuric acid + 2 red circuit + 20 green circuit.
 data.raw.recipe["processing-unit"].ingredients = {
 	{type = "item", name = "advanced-circuit", amount = 1},
-	{type = "item", name = "doped-wafer", amount = 1},
+	{type = "item", name = "microchip", amount = 4},
 	{type = "fluid", name = "sulfuric-acid", amount = 5},
 }
 -- Make blue circuit recipe slower, as compromise for making it cheaper in materials.
-data.raw.recipe["processing-unit"].energy_required = 24
+data.raw.recipe["processing-unit"].energy_required = 6
 
 -- Create item for electronic components.
 local electronicComponents = Table.copyAndEdit(data.raw.item["advanced-circuit"], {
@@ -275,7 +305,7 @@ Tech.addRecipeToTech("electronic-components", "advanced-circuit", 1)
 -- Originally 2 green circuits + 2 plastic bar + 4 copper cable.
 data.raw.recipe["advanced-circuit"].ingredients = {
 	{type = "item", name = "electronic-circuit", amount = 1},
-	{type = "item", name = "copper-cable", amount = 2},
+	{type = "item", name = "copper-cable", amount = 1},
 	{type = "item", name = "electronic-components", amount = 2},
 }
 

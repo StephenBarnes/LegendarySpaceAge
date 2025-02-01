@@ -19,6 +19,8 @@ data.raw.recipe["steel-chest"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "panel", amount = 4},
 }
+data.raw.recipe["steel-chest"].enabled = true
+Tech.removeRecipeFromTech("steel-chest", "steel-processing")
 
 -- Transport belts - remove the nesting in the recipes (each tier ingredient to the next), and add rubber, and change to factor intermediates.
 -- I also want them to get more expensive per throughput (as in vanilla), and increase in complexity.
@@ -41,9 +43,10 @@ data.raw.recipe["express-transport-belt"].ingredients = {
 	{type="fluid", name="lubricant", amount=20},
 }
 data.raw.recipe["turbo-transport-belt"].ingredients = {
+	{type="item", name="advanced-parts", amount=4},
 	{type="item", name="mechanism", amount=4},
 	{type="item", name="tungsten-plate", amount=4},
-	{type="fluid", name="lubricant", amount=40},
+	{type="fluid", name="lubricant", amount=20},
 }
 data.raw.recipe["turbo-transport-belt"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
 -- Underground belts - remove nesting. For ingredients, require literally just the number of belts, plus panels. So you can even craft them by hand, and eg turn green belts into green undergrounds off-Vulcanus.
