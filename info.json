@@ -16,16 +16,12 @@
 		, "space-age"
 
 		, "gleba-lab"
-		, "Rocs-Rusting-Iron"
-		, "Electric_flying_enemies"
-		, "behemoth-enemies"
-		, "cargo-pod-requires-research"
+		, "apprentice-assembler"
+		, "cargo-ships"
 
 		, "gas-furnace"
 		, "gas-boiler"
 		, "electricboiler"
-
-		, "cargo-ships"
 
 		, "eradicators-hand-crank-redux"
 		, "PersonalBurnerGenerator"
@@ -35,6 +31,13 @@
 		, "! zithorian-extra-storage-tanks-port"
 		, "! est-steel-storage-tank"
 		, "! nco-SmallTank"
+
+		, "Rocs-Rusting-Iron"
+
+		, "Electric_flying_enemies"
+		, "behemoth-enemies"
+
+		, "PlanetsLib"
 
 		, "PowerMultiplier"
 		, "PowerOverload"
@@ -71,7 +74,7 @@
 		, "show-max-underground-distance"
 
 		, "! GROUP-stuff-for-dev-only"
-		, "FastCheatInTestWorlds"
+		, "EditorExtensions"
 		, "WriteRecipesByMod"
 		, "? no-graphics"
 	],

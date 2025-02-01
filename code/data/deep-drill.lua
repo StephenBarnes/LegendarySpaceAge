@@ -111,9 +111,10 @@ recipe.name = "deep-drill"
 recipe.results = {{type = "item", name = "deep-drill", amount = 1}}
 recipe.energy_required = 30
 recipe.ingredients = {
-	{type = "item", name = "frame", amount = 20},
-	{type = "item", name = "structure", amount = 50},
+	{type = "item", name = "frame", amount = 40},
+	{type = "item", name = "structure", amount = 40},
 	{type = "item", name = "mechanism", amount = 20},
+	{type = "item", name = "electric-engine-unit", amount = 20},
 }
 data:extend{recipe}
 

@@ -182,12 +182,6 @@ end
 -- In space group, move space platform starter up so it's not wasting a row.
 data.raw["space-platform-starter-pack"]["space-platform-starter-pack"].subgroup = "space-interactors"
 
--- Hide the new cargo pods from Cargo Pod Requires Research
-data.raw["temporary-container"]["breaking-cargo-pod-container"].hidden_in_factoriopedia = true
-data.raw["temporary-container"]["breaking-cargo-pod-container"].factoriopedia_alternative = "cargo-pod-container"
-data.raw["temporary-container"]["durable-cargo-pod-container"].hidden_in_factoriopedia = true
-data.raw["temporary-container"]["durable-cargo-pod-container"].factoriopedia_alternative = "cargo-pod-container"
-
 -- Move fluid logistics stuff to that row.
 for _, item in pairs{"pipe", "pipe-to-ground", "pump"} do
 	data.raw.item[item].subgroup = "fluid-logistics"

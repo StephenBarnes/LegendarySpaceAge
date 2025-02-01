@@ -29,6 +29,7 @@ require("code.data.cargo-ships")
 require("code.data.toggle-key")
 require("code.data.rocket-parts-outside-silos")
 require("code.data.deep-drill")
+require("code.data.planet-drop-techs")
 
 -- Planets
 require("code.data.nauvis-part-one.misc")
