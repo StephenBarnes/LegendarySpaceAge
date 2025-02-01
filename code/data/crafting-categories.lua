@@ -36,7 +36,6 @@ for _, typeAndName in pairs{
 } do
 	table.insert(data.raw[typeAndName[1]][typeAndName[2]].crafting_categories, "smelting-or-metallurgy-or-handcrafting")
 end
-table.insert(data.raw["god-controller"]["default"].crafting_categories, "smelting-or-metallurgy-or-handcrafting")
 table.insert(data.raw["character"]["character"].crafting_categories, "smelting-or-metallurgy-or-handcrafting")
 
 -- Create crafting category for chemistry or crafting-with-fluid, so that water filter cleaning can be done in both.
@@ -73,7 +72,6 @@ data:extend({
 	},
 })
 table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "chemistry-or-handcrafting")
-table.insert(data.raw["god-controller"]["default"].crafting_categories, "chemistry-or-handcrafting")
 table.insert(data.raw["character"]["character"].crafting_categories, "chemistry-or-handcrafting")
 
 -- Create handcrafting-only category.
@@ -83,7 +81,6 @@ data:extend({
 		name = "handcrafting-only",
 	},
 })
-table.insert(data.raw["god-controller"]["default"].crafting_categories, "handcrafting-only")
 table.insert(data.raw["character"]["character"].crafting_categories, "handcrafting-only")
 
 -- Create crafting category for chem plant or biochamber or handcrafting - for fulgorite shards to holmium powder.
@@ -95,7 +92,6 @@ data:extend({
 })
 table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "chemistry-or-organic-or-handcrafting")
 table.insert(data.raw["assembling-machine"]["biochamber"].crafting_categories, "chemistry-or-organic-or-handcrafting")
-table.insert(data.raw["god-controller"]["default"].crafting_categories, "chemistry-or-organic-or-handcrafting")
 table.insert(data.raw["character"]["character"].crafting_categories, "chemistry-or-organic-or-handcrafting")
 
 -- Create crafting category for chem plant or electromagnetic plant.
@@ -119,4 +115,9 @@ for _, machine in pairs(data.raw["assembling-machine"]) do
 	if machine.crafting_categories and Table.hasEntry("organic-or-assembling", machine.crafting_categories) then
 		table.insert(machine.crafting_categories, "organic-or-assembling-with-fluid")
 	end
+end
+
+-- Let god-controller do all crafting categories.
+for name, _ in pairs(data.raw["recipe-category"]) do
+	table.insert(data.raw["god-controller"]["default"].crafting_categories, name)
 end

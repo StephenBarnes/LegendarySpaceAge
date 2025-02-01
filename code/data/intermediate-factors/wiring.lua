@@ -24,11 +24,13 @@ resinRecipe.ingredients = {
 	{type = "item", name = "resin", amount = 1},
 }
 resinRecipe.results = {{type = "item", name = "wiring", amount = 1}}
-resinRecipe.enabled = true
+resinRecipe.enabled = false
 resinRecipe.subgroup = "wiring"
 resinRecipe.order = "02"
 resinRecipe.energy_required = 6
+resinRecipe.allow_as_intermediate = true
 data:extend{resinRecipe}
+Tech.addRecipeToTech("wiring-from-resin", "basic-electricity")
 
 -- Create a recipe with rubber insulation: 8 copper cable + 1 rubber -> 8 wiring
 local rubberRecipe = table.deepcopy(resinRecipe)
@@ -41,6 +43,7 @@ rubberRecipe.ingredients = {
 rubberRecipe.results = {{type = "item", name = "wiring", amount = 8}}
 rubberRecipe.order = "03"
 rubberRecipe.enabled = false
+rubberRecipe.allow_as_intermediate = false
 data:extend{rubberRecipe}
 Tech.addRecipeToTech("wiring-from-rubber", "rubber-1")
 
@@ -55,6 +58,7 @@ plasticRecipe.ingredients = {
 plasticRecipe.results = {{type = "item", name = "wiring", amount = 4}}
 plasticRecipe.order = "04"
 plasticRecipe.enabled = false
+plasticRecipe.allow_as_intermediate = false
 data:extend{plasticRecipe}
 Tech.addRecipeToTech("wiring-from-plastic", "plastics")
 

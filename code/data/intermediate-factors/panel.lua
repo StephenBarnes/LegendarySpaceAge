@@ -18,13 +18,14 @@ recipeFromIron.results = {{type = "item", name = "panel", amount = 1}}
 recipeFromIron.enabled = true
 recipeFromIron.subgroup = "panel"
 recipeFromIron.order = "03"
-recipeFromIron.energy_required = 6
+recipeFromIron.energy_required = 1
 recipeFromIron.category = "crafting"
 recipeFromIron.icon = nil
 recipeFromIron.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel/iron-panel.png", icon_size = 64, scale = 0.5},
 	{icon = "__base__/graphics/icons/iron-plate.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
+recipeFromIron.allow_as_intermediate = true
 data:extend{recipeFromIron}
 
 -- Create recipe: 1 copper plate -> 1 panel
@@ -34,8 +35,10 @@ recipeFromCopper.ingredients = {
 	{type = "item", name = "copper-plate", amount = 1},
 }
 recipeFromCopper.order = "04"
+recipeFromCopper.allow_as_intermediate = false
 recipeFromCopper.icons[1] = {icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel/copper-panel.png", icon_size = 64, scale = 0.5}
 recipeFromCopper.icons[2] = {icon = "__base__/graphics/icons/copper-plate.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+recipeFromCopper.allow_as_intermediate = false
 data:extend{recipeFromCopper}
 
 -- Create recipe: 1 wood + 1 resin -> 1 panel
@@ -46,8 +49,10 @@ recipeFromWood.ingredients = {
 	{type = "item", name = "resin", amount = 1},
 }
 recipeFromWood.order = "02"
+recipeFromWood.allow_as_intermediate = false
 recipeFromWood.icons[1] = {icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel/wooden-panel.png", icon_size = 64, scale = 0.5}
 recipeFromWood.icons[2] = {icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+recipeFromWood.allow_as_intermediate = false
 data:extend{recipeFromWood}
 
 

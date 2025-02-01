@@ -29,6 +29,7 @@ recipeFromStone.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure.png", icon_size = 64, scale = 0.5},
 	{icon = "__base__/graphics/icons/stone-brick.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
+recipeFromStone.allow_as_intermediate = true
 data:extend{recipeFromStone}
 Tech.addRecipeToTech("structure-from-stone", "cement")
 

@@ -24,6 +24,7 @@ rocketPartAssemblyRecipe.results = {{type = "item", name = "assembled-rocket-par
 data:extend{rocketPartAssemblyRecipe}
 
 data.raw.recipe["rocket-part"].category = "crafting"
+data.raw.recipe["rocket-part"].always_show_made_in = true
 data.raw["rocket-silo"]["rocket-silo"].fixed_recipe = "assembled-rocket-part"
 
 Tech.addRecipeToTech("assembled-rocket-part", "rocket-silo", 3)

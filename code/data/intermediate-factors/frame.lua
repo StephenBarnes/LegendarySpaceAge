@@ -21,6 +21,7 @@ recipeFromWood.subgroup = "frame"
 recipeFromWood.order = "03"
 recipeFromWood.energy_required = 6
 recipeFromWood.category = "crafting"
+recipeFromWood.allow_as_intermediate = false
 recipeFromWood.icon = nil
 recipeFromWood.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/frame/wooden-frame.png", icon_size = 64, scale = 0.5},
@@ -41,6 +42,7 @@ recipeFromIron.subgroup = "frame"
 recipeFromIron.order = "04"
 recipeFromIron.energy_required = 4
 recipeFromIron.category = "crafting"
+recipeFromIron.allow_as_intermediate = true
 recipeFromIron.icon = nil
 recipeFromIron.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/frame/frame.png", icon_size = 64, scale = 0.5},

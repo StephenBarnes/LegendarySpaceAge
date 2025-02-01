@@ -102,19 +102,17 @@ local fertilizerIcons = {}
 for i = 1, 3 do
 	table.insert(fertilizerIcons, {filename = "__LegendarySpaceAge__/graphics/fertilizer/fertilizer-"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
-local fertilizerItem = Table.copyAndEdit(data.raw.item["wood"], {
-	name = "fertilizer",
-	order = "003",
-	icon = "nil",
-	icons = {{icon = fertilizerIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}},
-	pictures = fertilizerIcons,
-
-	fuel_value = "nil",
-	fuel_acceleration_multiplier = "nil",
-	fuel_top_speed_multiplier = "nil",
-	fuel_emissions_multiplier = "nil",
-	fuel_glow_color = "nil",
-})
+local fertilizerItem = table.deepcopy(data.raw.item["wood"])
+fertilizerItem.name = "fertilizer"
+fertilizerItem.order = "003"
+fertilizerItem.icon = nil
+fertilizerItem.icons = {{icon = fertilizerIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
+fertilizerItem.pictures = fertilizerIcons
+fertilizerItem.fuel_value = nil
+fertilizerItem.fuel_acceleration_multiplier = nil
+fertilizerItem.fuel_top_speed_multiplier = nil
+fertilizerItem.fuel_emissions_multiplier = nil
+fertilizerItem.fuel_glow_color = nil
 data:extend{fertilizerItem}
 
 -- Create new "sapling" item.
@@ -122,20 +120,19 @@ local saplingPictures = {}
 for _, i in pairs{"1", "2", "2-red", "3", "4", "5", "7", "8", "8-brown", "8-red", "9", "9-brown", "9-red"} do
 	table.insert(saplingPictures, {filename = "__base__/graphics/icons/tree-0"..i..".png", size = 64, scale=0.5, mipmap_count=4})
 end
-local saplingItem = Table.copyAndEdit(data.raw.item["tree-seed"], {
-	name = "sapling",
-	localised_name = {"item-name.sapling"}, -- Seems to be necessary, else it takes name from planted/placed thing.
-	localised_description = "nil",
-	subgroup = "early-agriculture",
-	order = "004",
-	spoil_ticks = 60 * 60 * 60, -- 1 hour
-	spoil_result = "wood",
-	fuel_value = "nil",
-	fuel_category = "nil",
-	icon = "nil",
-	icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}},
-	pictures = saplingPictures,
-})
+local saplingItem = table.deepcopy(data.raw.item["tree-seed"])
+saplingItem.name = "sapling"
+saplingItem.localised_name = {"item-name.sapling"} -- Seems to be necessary, else it takes name from planted/placed thing.
+saplingItem.localised_description = nil
+saplingItem.subgroup = "early-agriculture"
+saplingItem.order = "004"
+saplingItem.spoil_ticks = 60 * 60 * 60 -- 1 hour
+saplingItem.spoil_result = "wood"
+saplingItem.fuel_value = nil
+saplingItem.fuel_category = nil
+saplingItem.icon = nil
+saplingItem.icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}}
+saplingItem.pictures = saplingPictures
 data:extend{saplingItem}
 
 -- Can no longer plant seeds directly.
@@ -145,45 +142,45 @@ data.raw.item["tree-seed"].place_result = nil
 -- Create recipe for fertilizer.
 -- Currently 1 tree -> 4 wood, and 5 wood -> 5 spoilage -> 10 ammonia. So 10 ammonia -> 2 fertilizer allows growing total number of trees.
 -- And then once you get biochambers with the prod bonus, you can greatly increase wood production.
-local fertilizerRecipe = Table.copyAndEdit(data.raw.recipe["wood-processing"], {
-	name = "fertilizer",
-	ingredients = {
-		{type="item", name="niter", amount=1},
-		{type="fluid", name="sulfuric-acid", amount=5},
-		{type="fluid", name="ammonia", amount=10},
-	},
-	results = {
-		{type="item", name="fertilizer", amount=2},
-	},
-	category = "organic-or-chemistry",
-	subgroup = "early-agriculture",
-	order = "005",
-	fuel_value = "nil",
-	icon = "nil",
-	icons = "nil",
-	surface_conditions = "nil",
-})
+local fertilizerRecipe = table.deepcopy(data.raw.recipe["wood-processing"])
+fertilizerRecipe.name = "fertilizer"
+fertilizerRecipe.ingredients = {
+	{type="item", name="niter", amount=1},
+	{type="fluid", name="sulfuric-acid", amount=5},
+	{type="fluid", name="ammonia", amount=10},
+}
+fertilizerRecipe.results = {
+	{type="item", name="fertilizer", amount=2},
+}
+fertilizerRecipe.category = "organic-or-chemistry"
+fertilizerRecipe.subgroup = "early-agriculture"
+fertilizerRecipe.order = "005"
+fertilizerRecipe.icon = nil
+fertilizerRecipe.icons = nil
+fertilizerRecipe.surface_conditions = nil
+fertilizerRecipe.allow_decomposition = true
+fertilizerRecipe.always_show_products = true
 data:extend{fertilizerRecipe}
 
 -- Create recipe for saplings.
-local saplingRecipe = Table.copyAndEdit(data.raw.recipe["wood-processing"], {
-	name = "sapling",
-	ingredients = {
-		{type="item", name="tree-seed", amount=1},
-		{type="item", name="fertilizer", amount=1},
-		{type="fluid", name="water", amount=100},
-	},
-	results = {
-		{type="item", name="sapling", amount=1},
-	},
-	subgroup = "early-agriculture",
-	category = "organic-or-assembling-with-fluid",
-	order = "006",
-	icon = "nil",
-	icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}},
-	surface_conditions = {{property = "pressure", min = 1000, max = 1000}},
-	energy_required = 30,
-})
+local saplingRecipe = table.deepcopy(data.raw.recipe["wood-processing"])
+saplingRecipe.name = "sapling"
+saplingRecipe.ingredients = {
+	{type="item", name="tree-seed", amount=1},
+	{type="item", name="fertilizer", amount=1},
+	{type="fluid", name="water", amount=100},
+}
+saplingRecipe.results = {
+	{type="item", name="sapling", amount=1},
+}
+saplingRecipe.subgroup = "early-agriculture"
+saplingRecipe.category = "organic-or-assembling-with-fluid"
+saplingRecipe.order = "006"
+saplingRecipe.icon = nil
+saplingRecipe.icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}}
+saplingRecipe.surface_conditions = {{property = "pressure", min = 1000, max = 1000}}
+saplingRecipe.energy_required = 30
+saplingRecipe.allow_decomposition = true
 data:extend{saplingRecipe}
 
 -- Edit growth time of saplings.

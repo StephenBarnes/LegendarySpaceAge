@@ -20,7 +20,7 @@ basicRecipe.results = {{type = "item", name = "mechanism", amount = 1}}
 basicRecipe.enabled = true
 basicRecipe.subgroup = "mechanism"
 basicRecipe.order = "02"
-basicRecipe.energy_required = 6
+basicRecipe.energy_required = 4
 basicRecipe.category = "crafting"
 basicRecipe.icon = nil
 basicRecipe.icons = {
@@ -28,6 +28,7 @@ basicRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-2.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={-8, -7}},
 	{icon = "__LegendarySpaceAge__/graphics/parts-basic/plain/spring-2.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={-7, -8}},
 }
+basicRecipe.allow_as_intermediate = true
 data:extend{basicRecipe}
 
 -- Create recipe: 4 advanced parts + 1 frame -> 1 mechanism
@@ -38,8 +39,10 @@ advancedRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1},
 }
 advancedRecipe.order = "03"
+advancedRecipe.energy_required = 2
 advancedRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}}
 advancedRecipe.icons[3] = nil
+advancedRecipe.allow_as_intermediate = false
 data:extend{advancedRecipe}
 
 -- TODO make more recipes, and add them to techs.

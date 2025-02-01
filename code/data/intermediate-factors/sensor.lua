@@ -19,7 +19,7 @@ greenCircuitRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1}
 }
 greenCircuitRecipe.results = {{type = "item", name = "sensor", amount = 1}}
-greenCircuitRecipe.enabled = true
+greenCircuitRecipe.enabled = false
 greenCircuitRecipe.subgroup = "sensor"
 greenCircuitRecipe.order = "02"
 greenCircuitRecipe.energy_required = 6
@@ -28,7 +28,9 @@ greenCircuitRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/sensor.png", icon_size = 64, scale = 0.5},
 	{icon = "__base__/graphics/icons/electronic-circuit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
+greenCircuitRecipe.allow_as_intermediate = true
 data:extend{greenCircuitRecipe}
+Tech.addRecipeToTech("sensor-from-green-circuit", "automation")
 
 -- Create redCircuitRecipe: 2 red circuit + 1 glass + 1 frame -> 1 sensor
 local redCircuitRecipe = table.deepcopy(greenCircuitRecipe)
@@ -41,6 +43,8 @@ redCircuitRecipe.ingredients = {
 redCircuitRecipe.order = "03"
 redCircuitRecipe.enabled = false
 redCircuitRecipe.icons[2] = {icon = "__base__/graphics/icons/advanced-circuit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+redCircuitRecipe.allow_as_intermediate = false
+redCircuitRecipe.energy_required = 2
 data:extend{redCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-red-circuit", "advanced-circuit")
 
@@ -55,6 +59,8 @@ blueCircuitRecipe.ingredients = {
 blueCircuitRecipe.order = "04"
 blueCircuitRecipe.enabled = false
 blueCircuitRecipe.icons[2] = {icon = "__base__/graphics/icons/processing-unit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+blueCircuitRecipe.allow_as_intermediate = false
+blueCircuitRecipe.energy_required = 1
 data:extend{blueCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-blue-circuit", "processing-unit")
 

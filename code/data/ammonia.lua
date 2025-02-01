@@ -1,6 +1,4 @@
---[[ This file adds early ammonia tech and recipes, and later ammonia using syngas.
-TODO
-]]
+-- This file adds early ammonia tech and recipes, and later ammonia using syngas.
 
 local Table = require("code.util.table")
 local Tech = require("code.util.tech")

@@ -47,6 +47,9 @@ local sandRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], {
 	category = "crafting",
 	subgroup = "raw-material",
 	enabled = true,
+	allow_decomposition = true,
+	allow_as_intermediate = true,
+	main_product = "sand",
 })
 table.insert(newData, sandRecipe)
 
@@ -59,6 +62,9 @@ local glassRecipe = Table.copyAndEdit(data.raw.recipe["iron-plate"], {
 	subgroup = "raw-material",
 	enabled = false,
 	energy_required = 2,
+	allow_decomposition = true,
+	allow_as_intermediate = true,
+	main_product = "glass",
 })
 table.insert(newData, glassRecipe)
 

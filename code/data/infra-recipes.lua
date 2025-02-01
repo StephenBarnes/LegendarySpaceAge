@@ -42,12 +42,16 @@ data.raw.recipe["express-transport-belt"].ingredients = {
 	{type="item", name="rubber", amount=1},
 	{type="fluid", name="lubricant", amount=20},
 }
+data.raw.recipe["express-transport-belt"].allow_decomposition = true
+data.raw.recipe["express-transport-belt"].allow_as_intermediate = true
 data.raw.recipe["turbo-transport-belt"].ingredients = {
 	{type="item", name="advanced-parts", amount=2},
 	{type="item", name="mechanism", amount=2},
 	{type="item", name="tungsten-plate", amount=4},
 	{type="fluid", name="lubricant", amount=20},
 }
+data.raw.recipe["turbo-transport-belt"].allow_decomposition = true
+data.raw.recipe["turbo-transport-belt"].allow_as_intermediate = true
 data.raw.recipe["turbo-transport-belt"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
 -- Underground belts - remove nesting. For ingredients, require literally just the number of belts, plus panels. So you can even craft them by hand, and eg turn green belts into green undergrounds off-Vulcanus.
 data.raw.recipe["underground-belt"].ingredients = {

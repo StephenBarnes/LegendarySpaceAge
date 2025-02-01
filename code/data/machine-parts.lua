@@ -6,6 +6,9 @@ local Tech = require("code.util.tech")
 
 local newData = {}
 
+-- Show amount of machine parts produced by recipe.
+data.raw.recipe["iron-gear-wheel"].always_show_products = true
+
 -- Update icons for iron parts.
 data.raw.item["iron-gear-wheel"].icon = nil
 data.raw.item["iron-gear-wheel"].icons = {
@@ -83,21 +86,23 @@ local advancedPartsItem = Table.copyAndEdit(data.raw.item["iron-gear-wheel"], {
 table.insert(newData, advancedPartsItem)
 
 -- Create recipe for advanced parts.
-local advancedPartsRecipe = Table.copyAndEdit(data.raw.recipe["iron-gear-wheel"], {
-	name = "advanced-parts",
-	ingredients = {
-		{type="item", name="ingot-steel-hot", amount=4},
-		{type="item", name="plastic-bar", amount=1},
-		{type="item", name="rubber", amount=1},
-		{type="item", name="resin", amount=1},
-		{type="fluid", name="lubricant", amount=5},
-	},
-	results = {{type="item", name="advanced-parts", amount=8}},
-	category = "crafting-with-fluid",
-	energy_required = 5,
-	allow_decomposition = true,
-	enabled = false,
-})
+local advancedPartsRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
+advancedPartsRecipe.name = "advanced-parts"
+advancedPartsRecipe.ingredients = {
+	{type="item", name="ingot-steel-hot", amount=4},
+	{type="item", name="plastic-bar", amount=1},
+	{type="item", name="rubber", amount=1},
+	{type="item", name="resin", amount=1},
+	-- No lubricant here. Rather add lubricant in the recipe for gadgets.
+}
+advancedPartsRecipe.always_show_products = true
+advancedPartsRecipe.results = {{type="item", name="advanced-parts", amount=16}}
+advancedPartsRecipe.main_product = "advanced-parts"
+advancedPartsRecipe.category = "crafting"
+advancedPartsRecipe.energy_required = 5
+advancedPartsRecipe.allow_decomposition = true
+advancedPartsRecipe.allow_as_intermediate = true
+advancedPartsRecipe.enabled = false
 table.insert(newData, advancedPartsRecipe)
 
 -- Add advanced parts recipe to lubricant tech.

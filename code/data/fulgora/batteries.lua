@@ -71,6 +71,7 @@ holmiumBatteryRecipe.ingredients = {
 }
 --holmiumBatteryRecipe.surface_conditions = { { property = "magnetic-field", min = 99, max = 99 } }
 holmiumBatteryRecipe.category = "electromagnetics"
+holmiumBatteryRecipe.allow_decomposition = true
 data:extend({holmiumBatteryRecipe})
 
 -- Create new tech for holmium battery. It gets unlocked after you've gotten science packs from both Fulgora and Vulcanus.

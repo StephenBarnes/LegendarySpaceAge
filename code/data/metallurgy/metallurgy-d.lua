@@ -16,8 +16,8 @@ Iron:
 		Each hot iron ingot item converts into multiple plates and rods, so that there's some incentive to rather put ingots on the conveyor belt instead of plates/rods, since ingots are more compact on the belt. This is balanced by the incentive to turn ingots into plates/rods immediately to avoid having to reheat them.
 
 Steel:
-	In furnace, slow: 1 hot iron ingot -> 1 hot steel ingot
-	In assembler: 1 hot steel ingot -> 1 steel plate
+	In furnace, slow: 2 hot iron ingot -> 1 hot steel ingot
+	In assembler: 1 hot steel ingot -> 2 steel plate
 
 Copper:
 	The system is similar to iron, but with an extra intermediate "copper matte" which is then turned into copper ingots.
@@ -105,6 +105,8 @@ local steelIngotRecipe = Table.copyAndEdit(data.raw.recipe["steel-plate"], {
 	ingredients = {{type="item", name="ingot-iron-hot", amount=2}},
 	results = {{type="item", name="ingot-steel-hot", amount=1}},
 	energy_required = 20,
+	allow_decomposition = true,
+	main_product = "ingot-steel-hot",
 })
 table.insert(newData, steelIngotRecipe)
 
@@ -183,6 +185,8 @@ Table.setFields(data.raw.recipe["steel-plate"], {
 	auto_recycle = true,
 	allow_as_intermediate = true,
 	allow_decomposition = true,
+	always_show_products = true,
+	main_product = "steel-plate",
 })
 
 -- Adjust iron plate recipe.
@@ -194,6 +198,7 @@ Table.setFields(data.raw.recipe["iron-plate"], {
 	auto_recycle = true,
 	allow_as_intermediate = true,
 	allow_decomposition = true,
+	always_show_products = true,
 })
 
 -- Adjust copper plate recipe.
@@ -205,14 +210,16 @@ Table.setFields(data.raw.recipe["copper-plate"], {
 	auto_recycle = true,
 	allow_as_intermediate = true,
 	allow_decomposition = true,
+	always_show_products = true,
 })
 
 -- Adjust iron gear recipe.
 Table.setFields(data.raw.recipe["iron-gear-wheel"], {
 	ingredients = {{type="item", name="ingot-iron-hot", amount=1}},
-	results = {{type="item", name="iron-gear-wheel", amount=8}},
+	results = {{type="item", name="iron-gear-wheel", amount=2}},
 	energy_required = 1,
 	auto_recycle = true,
+	always_show_products = true,
 })
 
 -- Adjust recipe for iron rods.
@@ -221,6 +228,7 @@ Table.setFields(data.raw.recipe["iron-stick"], {
 	results = {{type="item", name="iron-stick", amount=8}},
 	energy_required = 1,
 	auto_recycle = true,
+	always_show_products = true,
 })
 
 -- Adjust recipe for copper cables.
@@ -229,6 +237,7 @@ Table.setFields(data.raw.recipe["copper-cable"], {
 	results = {{type="item", name="copper-cable", amount=8}},
 	energy_required = 1,
 	auto_recycle = true,
+	always_show_products = true,
 })
 
 -- Adjust recipe for low-density structures.

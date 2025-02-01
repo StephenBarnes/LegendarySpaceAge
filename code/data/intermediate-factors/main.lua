@@ -22,6 +22,10 @@ Factor intermediates and their meaning:
 Other intermediate factors considered but decided against:
 	Thermal/refractory casing separet from armor plating.
 	Compute, and advanced compute - decided to rather just use sensors and circuits as ingredients. Circuits have matryoshka recipes so players will have all of them available anyway.
+
+When picking numbers for recipes etc:
+	We want more advanced recipes to use fewer total raw materials, but more different kinds of raw materials.
+	We want the number of machines needed (for given output rate) to be lower for more advanced recipes, by reducing crafting times.
 ]]
 
 require("code.data.intermediate-factors.wiring")

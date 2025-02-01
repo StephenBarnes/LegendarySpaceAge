@@ -246,6 +246,7 @@ local woodResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 	order = "a[basic-intermediate]-e[resin]-1",
 	subgroup = "resin",
 	main_product = "resin",
+	energy_required = 4,
 })
 table.insert(newData, woodResinRecipe)
 local pitchResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
@@ -266,6 +267,7 @@ local pitchResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 	order = "a[basic-intermediate]-e[resin]-2",
 	subgroup = "resin",
 	main_product = "resin",
+	energy_required = 2,
 })
 table.insert(newData, pitchResinRecipe)
 local richGasResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
@@ -286,6 +288,7 @@ local richGasResinRecipe = Table.copyAndEdit(data.raw.recipe["plastic-bar"], {
 	order = "a[basic-intermediate]-e[resin]-3",
 	subgroup = "resin",
 	main_product = "resin",
+	energy_required = 2,
 })
 table.insert(newData, richGasResinRecipe)
 
