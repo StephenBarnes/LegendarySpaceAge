@@ -1,4 +1,4 @@
---[[ This file creates the "deep drill", a massive drill that can be built on any terrain (not on ores like regular drills).
+--[[ This file creates the "deep borehole drill", a massive drill that can be built on any terrain (not on ores like regular drills).
 It yields different resources depending on the planet - on Gleba it gives chitin (for making machine parts etc without metal), on Vulcanus it gives hydrocarbons, on Fulgora it gives sth, haven't decided. This is done by replacing it on build with a different entity for those planets.
 Can't be built on Aquilo or space platforms.
 There's a separate runtime script in control/deep-drill-recipe.lua that sets the recipe for the deep drill according to the surface it was built on.
@@ -6,21 +6,41 @@ Graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 Some code taken from Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above.
 ]]
 
+local greyPipes = require "code.data.util.grey-pipes"
+
 local ent = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"])
 ent.name = "deep-drill"
 ent.icon = "__LegendarySpaceAge__/graphics/deep-drill/item.png"
-ent.minable.result = "deep-drill"
-ent.minable.mining_time = 1
+ent.minable = {mining_time = 1, result = "deep-drill"}
 ent.crafting_speed = 1
 ent.selection_box = {{-5.5, -5.5}, {5.5, 5.5}}
-ent.collision_box = {{-5.5, -5.5}, {5.5, 5.5}}
-ent.fluid_boxes = nil
+ent.collision_box = {{-5.45, -5.45}, {5.45, 5.45}}
+ent.tile_height = 11
+ent.tile_width = 11
+ent.fluid_boxes = {
+	{
+		production_type = "output",
+		pipe_picture = greyPipes.pipeBlocksDeepDrill(),
+		pipe_covers = pipecoverspictures(),
+		base_area = 10,
+		base_level = 1,
+		volume = 200,
+		pipe_connections = {
+			{flow_direction = "input-output", position = {0, -5}, direction = defines.direction.north},
+			{flow_direction = "input-output", position = {0,  5}, direction = defines.direction.south},
+		},
+		secondary_draw_orders = draworders,
+		hide_connection_info = false,
+	},
+}
+ent.fluid_boxes_off_when_no_fluid_recipe = false
 ent.vector_to_place_result = {6, 5}
 ent.ingredient_count = 0
 ent.energy_source.emissions_per_minute = {
 	pollution = 20,
 	spores = 10, -- For comparison, yumako tree is 15/harvest, and grows for 5m, so about 3/min spores.
 }
+ent.ignore_output_full = false -- Stop mining when output reaches count 50.
 ent.crafting_categories = {"deep-drill"}
 ent.surface_conditions = {{property = "surface-stability", min = 80}}
 ent.energy_usage = "5MW"
@@ -70,8 +90,8 @@ ent.graphics_set = {
 			animation = {
 				priority = "high",
 				width = 704,
-				height = 400,
-				shift = util.by_pixel_hr(0, 92),
+				height = 704,
+				--shift = util.by_pixel_hr(0, 92),
 				frame_count = 120,
 				animation_speed = 0.5,
 				scale = 0.5,
@@ -94,9 +114,31 @@ ent.graphics_set = {
 	},
 	reset_animation_when_frozen = true,
 }
+local bigDrill = data.raw["mining-drill"]["big-mining-drill"]
+ent.working_sound = {
+	main_sounds = {
+		{
+			sound = {filename = "__space-age__/sound/entity/big-mining-drill/big-mining-drill-working-loop.ogg", volume = 0.6}, -- vs 0.3 for big drill
+			fade_in_ticks = 4,
+			fade_out_ticks = 30,
+		},
+		{
+			sound = {filename = "__space-age__/sound/entity/big-mining-drill/big-mining-drill-loop.ogg", volume = 1.2},
+			fade_in_ticks = 4,
+			fade_out_ticks = 30,
+		},
+	},
+	max_sounds_per_prototype = 2,
+}
+ent.build_sound = bigDrill.build_sound
+ent.open_sound = bigDrill.open_sound
+ent.close_sound = bigDrill.close_sound
+ent.corpse = "big-mining-drill-remnants"
+ent.dying_explosion = "big-mining-drill-explosion"
+ent.max_health = 1000
 data:extend{ent}
 
-local item = table.deepcopy(data.raw.item["electric-mining-drill"])
+local item = table.deepcopy(data.raw.item["big-mining-drill"])
 item.name = "deep-drill"
 item.icon = "__LegendarySpaceAge__/graphics/deep-drill/item.png"
 item.place_result = "deep-drill"
@@ -129,6 +171,8 @@ nauvisDrillingRecipe.name = "deep-drill-nauvis"
 nauvisDrillingRecipe.ingredients = {}
 nauvisDrillingRecipe.results = {
 	{type = "item", name = "stone", amount = 10},
+	{type = "fluid", name = "lake-water", amount = 10},
+		-- TODO rename this to "groundwater" or sth, maybe allow filtering it for water and stone or sth.
 }
 nauvisDrillingRecipe.category = "deep-drill"
 --nauvisDrillingRecipe.hidden = true
@@ -149,11 +193,21 @@ nauvisDrillingRecipe.icons = {
 data:extend{nauvisDrillingRecipe}
 -- Create drilling recipes for other planets
 for i, planetData in pairs{
-	{"vulcanus", {{type = "item", name = "stone", amount = 8}, {type = "item", name = "carbon", amount = 2}}},
-		-- Drill consumes 10MJ for each recipe. Each carbon is 2MJ. So you get back 4MJ of fuel. With efficiency modules you could reduce energy cost to 2MJ, so 2MW profit.
-	{"gleba", {{type = "item", name = "spoilage", amount = 6}, {type = "item", name = "stone", amount = 4}}},
+	{"vulcanus", {
+		--{type = "fluid", name = "lava", amount = 5}, -- Could make it produce lava, but then you could put lava in pipes.
+		{type = "item", name = "stone", amount = 8},
+		{type = "item", name = "carbon", amount = 2},
+			-- Drill consumes 10MJ for each recipe. Each carbon is 2MJ. So you get back 4MJ of fuel. With efficiency modules you could reduce energy cost to 2MJ, so 2MW profit.
+	}},
+	{"gleba", {
+		{type = "item", name = "spoilage", amount = 6},
+		{type = "item", name = "stone", amount = 4},
+	}},
 		-- TODO change stone to chitin
-	{"fulgora", {{type = "item", name = "stone", amount = 8}, {type = "item", name = "scrap", amount = 2}}},
+	{"fulgora", {
+		{type = "item", name = "stone", amount = 8},
+		{type = "item", name = "scrap", amount = 2},
+	}},
 } do
 	local planetName = planetData[1]
 	local drillingRecipe = table.deepcopy(nauvisDrillingRecipe)

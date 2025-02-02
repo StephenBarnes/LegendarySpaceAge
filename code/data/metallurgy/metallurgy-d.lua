@@ -22,6 +22,14 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", icon_size=64, scale=0.5},
 		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5, tint=tint},
 	}
+	hotIngot.pictures = {
+		{
+			layers = {
+				{filename = "__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", size=64, scale=0.5, draw_as_glow=true},
+				{filename = "__LegendarySpaceAge__/graphics/metallurgy/ingot.png", size=64, scale=0.5, tint=tint},
+			}
+		}
+	}
 	hotIngot.icon = nil
 	hotIngot.icon_size = nil
 	hotIngot.spoil_ticks = INGOT_COOLING_TIME

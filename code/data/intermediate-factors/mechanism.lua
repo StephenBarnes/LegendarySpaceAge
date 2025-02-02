@@ -1,5 +1,7 @@
 -- This file creates the "mechanism" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
+local Tech = require "code.util.tech"
+
 -- Create item.
 local mechanismItem = table.deepcopy(data.raw.item["steel-plate"])
 mechanismItem.name = "mechanism"
@@ -43,7 +45,9 @@ advancedRecipe.energy_required = 2
 advancedRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}}
 advancedRecipe.icons[3] = nil
 advancedRecipe.allow_as_intermediate = false
+advancedRecipe.enabled = false
 data:extend{advancedRecipe}
+Tech.addRecipeToTech("mechanism-from-advanced", "electric-engine")
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?

@@ -16,7 +16,7 @@ fluidHeatingTowerEnt.energy_source = {
 		base_area = 1,
 		height = 1,
 		volume = 200,
-		pipe_picture = greyPipes(),
+		pipe_picture = greyPipes.pipeBlocks(),
 		pipe_covers = pipecoverspictures(),
 		pipe_connections = {
 			{flow_direction = "input-output", position = {1, 0}, direction = defines.direction.east},
