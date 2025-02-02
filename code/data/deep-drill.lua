@@ -200,8 +200,8 @@ for i, planetData in pairs{
 			-- Drill consumes 10MJ for each recipe. Each carbon is 2MJ. So you get back 4MJ of fuel. With efficiency modules you could reduce energy cost to 2MJ, so 2MW profit.
 	}},
 	{"gleba", {
-		{type = "item", name = "spoilage", amount = 6},
-		{type = "item", name = "stone", amount = 4},
+		{type = "fluid", name = "geoplasm", amount = 10},
+		-- TODO add meat chunks and chitin chunks
 	}},
 		-- TODO change stone to chitin
 	{"fulgora", {
