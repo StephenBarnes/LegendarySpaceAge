@@ -15,13 +15,15 @@ local ORE_WEIGHT = ROCKET_MASS / 500
 
 
 local metalTint = {
-	copper = {r = .831, g = .467, b = .361, a=1},
+	--copper = {r = .831, g = .467, b = .361, a=1}, --too dull
+	--copper = {r = .839, g = .557, b = .435, a=1}, --too desaturated, and not light enough
+	--copper = {r = 1, g = .531, b = .329, a=1}, -- Almost right, but a bit too dark still.
+	copper = {r = 1, g = .639, b = .483, a=1},
 	iron = {r = 0.65, g = 0.65, b = 0.65, a=1},
 	steel = {r = .955, g = .96, b = 1.0, a=1},
 }
 
 -- Make ingots and ingot-reheating recipes.
-local ingotItems = {}
 for i, metal in pairs{"iron", "copper", "steel"} do
 	local hotIngotName = "ingot-" .. metal .. "-hot"
 	local coldIngotName = "ingot-" .. metal .. "-cold"
@@ -50,7 +52,6 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	hotIngot.weight = INGOT_WEIGHT
 	hotIngot.subgroup = "ingots"
 	data:extend{hotIngot}
-	ingotItems[hotIngotName] = hotIngot
 
 	local coldIngot = table.deepcopy(hotIngot)
 	coldIngot.name = coldIngotName
@@ -61,7 +62,6 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	}
 	coldIngot.order = "a[smelting]-1-" .. i
 	data:extend{coldIngot}
-	ingotItems[coldIngotName] = coldIngot
 
 	---@type data.RecipePrototype
 	local ingotHeatingRecipe = table.deepcopy(data.raw.recipe["stone-brick"])

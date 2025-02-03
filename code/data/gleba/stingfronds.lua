@@ -49,7 +49,7 @@ data:extend{
 		type = "item-subgroup",
 		name = "stingfrond-products",
 		group = "space",
-		order = "033",
+		order = "023",
 	},
 }
 

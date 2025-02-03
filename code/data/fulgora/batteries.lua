@@ -456,7 +456,7 @@ data:extend({
 	{
 		type = "recipe",
 		name = "extract-sulfuric-acid-from-battery",
-		category = "chemistry-or-cryogenics",
+		category = "chemistry",
 		icons = {
 			{
 				icon = "__base__/graphics/icons/fluid/sulfuric-acid.png",

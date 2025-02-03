@@ -8,7 +8,7 @@ data:extend{
 		type = "item-subgroup",
 		name = "gleba-non-agriculture",
 		group = "space",
-		order = "0311",
+		order = "0211",
 	}
 }
 
@@ -37,20 +37,23 @@ local marrowItem = table.deepcopy(data.raw.item["spoilage"])
 marrowItem.name = "marrow"
 local marrowDir = "__LegendarySpaceAge__/graphics/gleba/marrow/"
 marrowItem.icon = marrowDir.."pillar-2.png"
-marrowItem.pictures = {
-	{filename = marrowDir.."pillar-1.png", size = 64, scale = 0.5},
-	{filename = marrowDir.."pillar-2.png", size = 64, scale = 0.5},
-	{filename = marrowDir.."pillar-3.png", size = 64, scale = 0.5},
-	{filename = marrowDir.."pillar-4.png", size = 64, scale = 0.5},
-	{filename = marrowDir.."pillar-5.png", size = 64, scale = 0.5},
-	{filename = marrowDir.."roll-1.png", size = 64, scale = 0.5},
-	{filename = marrowDir.."roll-2.png", size = 64, scale = 0.5},
-	{filename = marrowDir.."roll-3.png", size = 64, scale = 0.5},
-	{filename = marrowDir.."roll-4.png", size = 64, scale = 0.5},
-	{filename = marrowDir.."roll-5.png", size = 64, scale = 0.5},
-	{filename = marrowDir.."steak-1.png", size = 64, scale = 0.5},
-	{filename = marrowDir.."steak-2.png", size = 64, scale = 0.5},
-}
+marrowItem.pictures = {}
+for _, picName in pairs{
+	"pillar-1",
+	"pillar-2",
+	"pillar-3",
+	"pillar-4",
+	"pillar-5",
+	"roll-1",
+	"roll-2",
+	"roll-3",
+	"roll-4",
+	"roll-5",
+	"steak-1",
+	"steak-2",
+} do
+	table.insert(marrowItem.pictures, {filename = marrowDir..picName..".png", size = 64, scale = 0.5})
+end
 marrowItem.subgroup = "gleba-non-agriculture"
 marrowItem.order = "02"
 marrowItem.spoil_ticks = nil
@@ -115,9 +118,10 @@ tubuleRecipe.ingredients = {
 	{type = "fluid", name = "chitin-broth", amount = 40},
 }
 tubuleRecipe.results = {
-	{type = "item", name = "slipstack-pearl", amount = 3, percent_spoiled = 0.8, ignored_by_productivity = 3},
 	{type = "item", name = "tubule", amount = 4},
-	-- {type = "fluid", name = "slime", amount = 20}, -- Could produce slime, but that just seems annoying.
+	{type = "fluid", name = "slime", amount = 20}, -- Kind of just an annoyance (have to pump it into a lake) but I like this aesthetically.
+	{type = "item", name = "slipstack-pearl", amount = 2, percent_spoiled = 0.8},
+		-- With productivity, this is 3 pearls.
 }
 tubuleRecipe.main_product = "tubule"
 tubuleRecipe.energy_required = 8
