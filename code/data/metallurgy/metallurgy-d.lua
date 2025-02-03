@@ -230,17 +230,25 @@ for i, itemName in pairs{"iron-plate", "iron-gear-wheel", "iron-stick", "copper-
 	data.raw.item[itemName].order = ""..i
 end
 
--- Change rusting recipes to use sand, and sometimes return sand (to reduce cost and increase complexity), and increase time.
-for _, recipeName in pairs{"rocs-rusting-iron-iron-plate-derusting", "rocs-rusting-iron-iron-gear-wheel-derusting", "rocs-rusting-iron-iron-stick-derusting"} do
-	local recipe = data.raw.recipe[recipeName]
-	table.insert(recipe.results, {type="item", name="sand", amount=1, probability=0.8, show_details_in_recipe_tooltip=false})
-	for _, ingredient in pairs(recipe.ingredients) do
-		if ingredient.name == "stone" then
-			ingredient.name = "sand"
-		end
-	end
-	recipe.main_product = recipe.results[1].name
-	recipe.energy_required = 1
+-- Change derusting recipes to use sand instead of stone, and sometimes return sand (to reduce cost and increase complexity), and increase time.
+-- Also change sulfuric acid derusting recipes.
+for _, rustyItem in pairs{"rocs-rusting-iron-iron-plate", "rocs-rusting-iron-iron-gear-wheel", "rocs-rusting-iron-iron-stick"} do
+	local recipe1 = data.raw.recipe[rustyItem.."-derusting"]
+	table.insert(recipe1.results, {type="item", name="sand", amount=1, probability=0.8, show_details_in_recipe_tooltip=false})
+	recipe1.ingredients = {
+		{type="item", name=rustyItem.."-rusty", amount=1},
+		{type="item", name="sand", amount=1},
+	}
+	recipe1.main_product = recipe1.results[1].name
+	recipe1.energy_required = 1
+
+	local recipe2 = data.raw.recipe[rustyItem.."-chemical-derusting"]
+	recipe2.ingredients = {
+		{type="item", name=rustyItem.."-rusty", amount=1},
+		{type="fluid", name="sulfuric-acid", amount=5},
+	}
+	recipe2.energy_required = 1
+	recipe2.order = "f-"..recipe2.order
 end
 
 -- Create item for rusted cold iron ingot.
@@ -253,22 +261,40 @@ data:extend{rustedIronIngot}
 ingotItems["ingot-iron-cold"].spoil_ticks = 60 * 60 * 20
 ingotItems["ingot-iron-cold"].spoil_result = "ingot-iron-rusted"
 
--- Add recipe to de-rust cold iron ingot.
-local derustIronIngotRecipe = table.deepcopy(data.raw.recipe["rocs-rusting-iron-iron-stick-derusting"])
-derustIronIngotRecipe.name = "ingot-iron-derusting"
-derustIronIngotRecipe.ingredients = {
+-- Add recipe to de-rust cold iron ingot using sand.
+local derustIngot1 = table.deepcopy(data.raw.recipe["rocs-rusting-iron-iron-stick-derusting"])
+derustIngot1.name = "ingot-iron-derusting"
+derustIngot1.ingredients = {
 	{type="item", name="ingot-iron-rusted", amount=1},
 	{type="item", name="sand", amount=1},
 }
-derustIronIngotRecipe.results = {
+derustIngot1.results = {
 	{type="item", name="ingot-iron-cold", amount=1},
 	{type="item", name="sand", amount=1, probability=0.8, show_details_in_recipe_tooltip=false},
 }
-derustIronIngotRecipe.main_product = "ingot-iron-cold"
-derustIronIngotRecipe.icons = {{icon="__LegendarySpaceAge__/graphics/metallurgy/derusting-iron-ingot.png", icon_size=64, scale=0.5}}
-derustIronIngotRecipe.enabled = true
-derustIronIngotRecipe.order = "e[derusting]-0[derust-iron-ingot]"
-data:extend{derustIronIngotRecipe}
+derustIngot1.main_product = "ingot-iron-cold"
+derustIngot1.icons = {{icon="__LegendarySpaceAge__/graphics/metallurgy/derusting-iron-ingot.png", icon_size=64, scale=0.5}}
+derustIngot1.enabled = true
+derustIngot1.order = "e[derusting]-0[derust-iron-ingot]"
+data:extend{derustIngot1}
+
+-- Add recipe to de-rust cold iron ingot using sulfuric acid.
+local derustIngot2 = table.deepcopy(data.raw.recipe["rocs-rusting-iron-iron-stick-chemical-derusting"])
+derustIngot2.name = "ingot-iron-chemical-derusting"
+derustIngot2.ingredients = {
+	{type="item", name="ingot-iron-rusted", amount=1},
+	{type="fluid", name="sulfuric-acid", amount=5},
+}
+derustIngot2.results = {
+	{type="item", name="ingot-iron-cold", amount=1},
+}
+derustIngot2.main_product = "ingot-iron-cold"
+derustIngot2.icons = {
+	{icon="__LegendarySpaceAge__/graphics/metallurgy/derusting-iron-ingot.png", icon_size=64, scale=0.5}
+}
+derustIngot2.enabled = true
+derustIngot2.order = "f-0"
+data:extend{derustIngot2}
 
 ------------------------------------------------------------------------
 

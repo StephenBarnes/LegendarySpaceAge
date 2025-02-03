@@ -44,26 +44,26 @@ cementRecipe.main_product = "cement"
 cementRecipe.category = "crafting-with-fluid"
 data:extend{cementRecipe}
 
--- Create tech for cement.
-local cementTech = table.deepcopy(data.raw.technology.concrete)
-cementTech.name = "cement"
-cementTech.effects = {
+-- Create tech for cement and brick structure.
+local tech = table.deepcopy(data.raw.technology.concrete)
+tech.name = "masonry"
+tech.effects = {
 	{
 		type = "unlock-recipe",
 		recipe = "make-cement",
 	},
 }
-cementTech.prerequisites = {"filtration-lake-water"}
-cementTech.research_trigger = nil
-cementTech.unit = {
+tech.prerequisites = {"filtration-lake-water"}
+tech.research_trigger = nil
+tech.unit = {
 	count = 15,
 	time = 30,
 	ingredients = {
 		{"automation-science-pack", 1},
 	},
 }
-cementTech.icon = "__LegendarySpaceAge__/graphics/fluids/cement-tech.png"
-data:extend{cementTech}
+tech.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/tech.png"
+data:extend{tech}
 
 -- Adjust recipes for concrete and refined concrete.
 data.raw.recipe["concrete"].ingredients = {

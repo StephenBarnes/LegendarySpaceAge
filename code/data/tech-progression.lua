@@ -79,7 +79,7 @@ Tech.setUnit("coal-liquefaction", {count = 200, ingredients = {{"automation-scie
 Tech.addTechDependency("rubber-1", "electric-energy-distribution-1")
 
 -- Concrete no longer needs automation-2 since assembling machine 1 can handle fluids.
-Tech.setPrereqs("concrete", {"cement", "steel-processing"})
+Tech.setPrereqs("concrete", {"masonry", "steel-processing"})
 -- Same for fluid-handling.
 Tech.setPrereqs("fluid-handling", {"logistic-science-pack"})
 
@@ -102,7 +102,7 @@ Tech.addTechDependency("steel-processing", "battery")
 Tech.hideTech("oil-gathering")
 data.raw.technology["oil-processing"].unit = data.raw.technology["oil-gathering"].unit
 data.raw.technology["oil-processing"].research_trigger = nil
-data.raw.technology["oil-processing"].prerequisites = {"fluid-handling", "steam-power", "cement"}
+data.raw.technology["oil-processing"].prerequisites = {"fluid-handling", "steam-power", "masonry"}
 Tech.addRecipeToTech("pumpjack", "oil-processing", 2)
 
 -- Elimininate the now-pointless "advanced oil processing" tech.
@@ -212,8 +212,8 @@ data.raw.technology["gate"].research_trigger = {
 }
 data.raw.technology["gate"].prerequisites = {"stone-wall"}
 
--- Wall comes after cement, since it's needed for structure which is only unlocked with cement.
-Tech.setPrereqs("stone-wall", {"cement"})
+-- Wall needs structures.
+Tech.setPrereqs("stone-wall", {"masonry"})
 
 -- TODO other science packs.
 

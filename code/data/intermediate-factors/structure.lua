@@ -8,7 +8,7 @@ structureItem.name = "structure"
 structureItem.subgroup = "structure"
 structureItem.order = "01"
 structureItem.icon = nil
-structureItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure.png", icon_size = 64, scale = 0.5}}
+structureItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5}}
 data:extend{structureItem}
 
 -- Create recipe: 8 stone brick + 20 cement -> 1 structure
@@ -26,12 +26,12 @@ recipeFromStone.energy_required = 6
 recipeFromStone.category = "crafting-with-fluid"
 recipeFromStone.icon = nil
 recipeFromStone.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure.png", icon_size = 64, scale = 0.5},
+	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5},
 	{icon = "__base__/graphics/icons/stone-brick.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
 recipeFromStone.allow_as_intermediate = true
 data:extend{recipeFromStone}
-Tech.addRecipeToTech("structure-from-stone", "cement")
+Tech.addRecipeToTech("structure-from-stone", "masonry")
 
 
 -- TODO make more recipes, and add them to techs.

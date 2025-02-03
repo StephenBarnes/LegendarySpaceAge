@@ -79,7 +79,7 @@
 
 		, "! GROUP-stuff-for-dev-only"
 		, "EditorExtensions"
-		, "WriteRecipesByMod"
+		, "? WriteRecipesByMod"
 		, "? no-graphics"
 	],
 	"description": "IN DEVELOPMENT. Overhaul modpack for Space Age veterans seeking a new challenge."
