@@ -144,7 +144,7 @@ data:extend{tubuleRecipe}
 local chitinBlockRecipe = table.deepcopy(data.raw.recipe["stone-brick"])
 chitinBlockRecipe.name = "chitin-block"
 chitinBlockRecipe.ingredients = {
-	{type = "item", name = "chitin-fragments", amount = 4},
+	{type = "item", name = "chitin-fragments", amount = 2},
 }
 chitinBlockRecipe.results = {{type = "item", name = "chitin-block", amount = 1}}
 chitinBlockRecipe.enabled = true -- TODO make tech

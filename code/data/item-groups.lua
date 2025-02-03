@@ -69,6 +69,9 @@ data:extend{
 	{ type = "item-subgroup", name = "gleba-fluids",     group = "fluids", order = "04" },
 	{ type = "item-subgroup", name = "fulgora-fluids",   group = "fluids", order = "05" },
 	{ type = "item-subgroup", name = "aquilo-fluids",    group = "fluids", order = "06" },
+
+	-- Subgroup for post-Nauvis science packs.
+	{ type = "item-subgroup", name = "alien-science-packs", group = "intermediate-products", order = "y2" },
 }
 
 ------------------------------------------------------------------------
@@ -87,10 +90,6 @@ for subgroup, fluids in pairs{
 		data.raw.fluid[fluid].order = "0" .. i
 	end
 end
-
--- Put water condensation and melting at the start of simple fluid recipes group.
-data.raw.recipe["steam-condensation"].order = "01"
-data.raw.recipe["ice-melting"].order = "02"
 
 -- Move battery-salvage.
 data.raw.recipe["extract-sulfuric-acid-from-battery"].subgroup = data.raw.item["battery"].subgroup
@@ -145,4 +144,16 @@ data.raw["space-platform-starter-pack"]["space-platform-starter-pack"].subgroup 
 for _, item in pairs{"pipe", "pipe-to-ground", "pump"} do
 	data.raw.item[item].subgroup = "fluid-logistics"
 	data.raw.recipe[item].subgroup = "fluid-logistics"
+end
+
+-- Move post-Nauvis science packs to the right row.
+for _, sciPackName in pairs{
+	"metallurgic-science-pack",
+	"agricultural-science-pack",
+	"electromagnetic-science-pack",
+	"nuclear-science-pack",
+	"cryogenic-science-pack",
+	"promethium-science-pack",
+} do
+	data.raw.tool[sciPackName].subgroup = "alien-science-packs"
 end

@@ -6,6 +6,8 @@ frame.name = "frame"
 frame.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/frame/frame.png"
 frame.subgroup = "frame"
 frame.order = "01"
+frame.stack_size = 50
+frame.weight = 1e6 / 500
 data:extend{frame}
 
 -- Create recipe: 2 wood + 1 resin -> 1 frame

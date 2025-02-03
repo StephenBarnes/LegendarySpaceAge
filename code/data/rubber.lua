@@ -27,36 +27,37 @@ local latexFluid = table.deepcopy(data.raw.fluid["lubricant"])
 latexFluid.name = "latex"
 latexFluid.icon = "__LegendarySpaceAge__/graphics/rubber/latex.png"
 latexFluid.icon_size = 64
-latexFluid.base_color = {r = .812, g = .761, b = .675, a=1}
+latexFluid.base_color = latexColor
 latexFluid.flow_color = {r = .9, g = .8, b = .7, a=1}
-latexFluid.visualization_color = {r = .812, g = .761, b = .675, a=1}
+latexFluid.visualization_color = latexColor
 data:extend{latexFluid}
 
 -- Create recipe for latex fluid.
 local latexRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
-latexRecipe.name = "latex"
+latexRecipe.name = "make-latex" -- Different name from the fluid, so it doesn't get combined in factoriopedia.
+latexRecipe.localised_name = {"fluid-name.latex"}
 latexRecipe.ingredients = {
 	{type="item", name="wood", amount=5},
 	{type="fluid", name="water", amount=20},
 }
 latexRecipe.results = {{type="fluid", name="latex", amount=50}}
 latexRecipe.category = "organic-or-chemistry"
-latexRecipe.subgroup = "complex-fluid-recipes"
-latexRecipe.order = "b[chemistry]-a1"
+latexRecipe.subgroup = "raw-material"
+latexRecipe.order = "a1"
 data:extend{latexRecipe}
 
 -- Create recipe for latex to rubber.
 local rubberFromLatexRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
 rubberFromLatexRecipe.name = "rubber-from-latex"
 rubberFromLatexRecipe.ingredients = {
-	{type="fluid", name="latex", amount=50},
-	{type="fluid", name="sulfuric-acid", amount=10},
-	{type="item", name="carbon", amount=1},
+	{ type = "fluid", name = "latex",         amount = 50 },
+	{ type = "fluid", name = "sulfuric-acid", amount = 10 },
+	{ type = "item",  name = "carbon",        amount = 1 },
 }
 rubberFromLatexRecipe.results = {{type="item", name="rubber", amount=5}}
 rubberFromLatexRecipe.category = "organic-or-chemistry"
-rubberFromLatexRecipe.subgroup = "complex-fluid-recipes"
-rubberFromLatexRecipe.order = "b[chemistry]-a2"
+rubberFromLatexRecipe.subgroup = "raw-material"
+rubberFromLatexRecipe.order = "a2"
 rubberFromLatexRecipe.icon = nil
 rubberFromLatexRecipe.icons = {
 	rubberItem.icons[1],
@@ -79,8 +80,8 @@ rubberFromPetrochemRecipe.results = {
 }
 rubberFromPetrochemRecipe.main_product = "rubber"
 rubberFromPetrochemRecipe.category = "organic-or-chemistry"
-rubberFromPetrochemRecipe.subgroup = "complex-fluid-recipes"
-rubberFromPetrochemRecipe.order = "b[chemistry]-a3"
+rubberFromPetrochemRecipe.subgroup = "raw-material"
+rubberFromPetrochemRecipe.order = "a3"
 rubberFromPetrochemRecipe.icon = nil
 rubberFromPetrochemRecipe.icons = {
 	rubberItem.icons[1],
@@ -94,7 +95,7 @@ naturalRubberTech.name = "rubber-1"
 naturalRubberTech.effects = {
 	{
 		type = "unlock-recipe",
-		recipe = "latex",
+		recipe = "make-latex",
 	},
 	{
 		type = "unlock-recipe",

@@ -2,13 +2,24 @@
 
 local Tech = require("code.util.tech")
 
+-- Create item-subgroup for filtration.
+local filtrationSubgroup = table.deepcopy(data.raw["item-subgroup"]["fluid-recipes"])
+filtrationSubgroup.name = "filtration"
+filtrationSubgroup.order = "c9"
+data:extend{filtrationSubgroup}
+-- Also move the other water recipes to that line.
+data.raw.recipe["steam-condensation"].subgroup = "filtration"
+data.raw.recipe["ice-melting"].subgroup = "filtration"
+data.raw.recipe["steam-condensation"].order = "05"
+data.raw.recipe["ice-melting"].order = "06"
+
 -- Create filter item.
 local filterItem = table.deepcopy(data.raw.item["battery"])
 filterItem.name = "filter"
 filterItem.icon = nil
 filterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64}}
-filterItem.order = "02-2"
-filterItem.subgroup = "fluid-recipes"
+filterItem.order = "01"
+filterItem.subgroup = "filtration"
 filterItem.weight = 1000
 data:extend{filterItem}
 
@@ -17,8 +28,8 @@ local spentFilterItem = table.deepcopy(data.raw.item["battery"])
 spentFilterItem.name = "spent-filter"
 spentFilterItem.icon = nil
 spentFilterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/spent-filter.png", icon_size = 64}}
-spentFilterItem.order = "02-2"
-spentFilterItem.subgroup = "fluid-recipes"
+spentFilterItem.order = "02"
+spentFilterItem.subgroup = "filtration"
 spentFilterItem.weight = 1000
 data:extend{spentFilterItem}
 
@@ -124,8 +135,8 @@ cleanFilterRecipe.icons = {
 	{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.34, mipmap_count = 4, shift = {0, -4}},
 }
 cleanFilterRecipe.enabled = false
-cleanFilterRecipe.subgroup = "fluid-recipes"
-cleanFilterRecipe.order = "05"
+cleanFilterRecipe.subgroup = "filtration"
+cleanFilterRecipe.order = "03"
 cleanFilterRecipe.show_amount_in_title = false
 cleanFilterRecipe.energy_required = 1
 cleanFilterRecipe.crafting_machine_tint = {
@@ -153,8 +164,8 @@ filterLakeWaterRecipe.results = {
 }
 filterLakeWaterRecipe.main_product = "water"
 filterLakeWaterRecipe.category = "chemistry-or-crafting-with-fluid"
-filterLakeWaterRecipe.subgroup = "fluid-recipes"
-filterLakeWaterRecipe.order = "03"
+filterLakeWaterRecipe.subgroup = "filtration"
+filterLakeWaterRecipe.order = "04"
 filterLakeWaterRecipe.icon = nil
 filterLakeWaterRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
@@ -214,8 +225,8 @@ filterSlimeRecipe.results = {
 }
 filterSlimeRecipe.main_product = "water"
 filterSlimeRecipe.category = "chemistry-or-crafting-with-fluid"
-filterSlimeRecipe.subgroup = "fluid-recipes"
-filterSlimeRecipe.order = "04"
+filterSlimeRecipe.subgroup = "gleba-non-agriculture"
+filterSlimeRecipe.order = "00"
 filterSlimeRecipe.icon = nil
 filterSlimeRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
