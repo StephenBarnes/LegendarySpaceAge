@@ -201,7 +201,7 @@ for i, planetData in pairs{
 	}},
 	{"gleba", {
 		{type = "fluid", name = "geoplasm", amount = 10},
-		{type = "item", name = "chitin", amount = 4},
+		{type = "item", name = "chitin-fragments", amount = 4},
 		{type = "item", name = "marrow", amount = 6},
 	}},
 		-- TODO change stone to chitin

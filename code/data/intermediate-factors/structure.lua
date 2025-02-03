@@ -30,9 +30,28 @@ recipeFromStone.icons = {
 	{icon = "__base__/graphics/icons/stone-brick.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
 recipeFromStone.allow_as_intermediate = true
+recipeFromStone.auto_recycle = false
 data:extend{recipeFromStone}
 Tech.addRecipeToTech("structure-from-stone", "masonry")
 
+-- Create recipe for structure from chitin block: 4 chitin block + 20 slime -> 1 structure
+local recipeFromChitin = table.deepcopy(recipeFromStone)
+recipeFromChitin.name = "structure-from-chitin"
+recipeFromChitin.ingredients = {
+	{type = "item", name = "chitin-block", amount = 4},
+	{type = "fluid", name = "slime", amount = 20},
+}
+recipeFromChitin.results = {{type = "item", name = "structure", amount = 1}}
+recipeFromChitin.enabled = true -- TODO make tech
+recipeFromChitin.order = "03"
+recipeFromChitin.category = "organic-or-assembling-with-fluid"
+recipeFromChitin.icons = {
+	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5},
+	{icon = "__LegendarySpaceAge__/graphics/gleba/chitin-block/1.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
+}
+recipeFromChitin.allow_as_intermediate = false
+data:extend{recipeFromChitin}
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?
