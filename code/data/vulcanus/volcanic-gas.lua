@@ -12,6 +12,8 @@ volcanicGas.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/fluids/volcanic-gas.png", icon_size = 64, scale = 0.5},
 }
 volcanicGas.order = "b[new-fluid]-b[vulcanus]-0[volcanic-gas]"
+volcanicGas.max_temperature = nil
+volcanicGas.heat_capacity = nil
 data:extend{volcanicGas}
 
 -- Create recipe for separating volcanic gas into water, sulfur, and carbon.

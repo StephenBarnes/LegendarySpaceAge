@@ -179,6 +179,8 @@ lakeWaterFluid.order = "a[fluid]-a[water]-c"
 lakeWaterFluid.base_color = {0, .44, .6}
 lakeWaterFluid.flow_color = {.7, .7, .7}
 lakeWaterFluid.visualization_color = {.015, .681, .682} -- To differentiate from ordinary water.
+lakeWaterFluid.max_temperature = nil
+lakeWaterFluid.heat_capacity = nil
 data:extend{lakeWaterFluid}
 
 -- Create slime fluid.
@@ -191,6 +193,8 @@ slimeFluid.order = "b[new-fluid]-c2[gleba]-a"
 slimeFluid.base_color = {.176, .255, .200}
 slimeFluid.flow_color = {.393, .453, .333}
 slimeFluid.visualization_color = {.482, .745, .215}
+slimeFluid.max_temperature = nil
+slimeFluid.heat_capacity = nil
 data:extend{slimeFluid}
 
 -- Create recipe to filter slime.

@@ -35,3 +35,9 @@ data.raw.recipe["electrolyte"].ingredients = {
 -- Increase power consumption of EM plants and recyclers.
 data.raw["assembling-machine"]["electromagnetic-plant"].energy_usage = "4MW" -- Doubling 2MW -> 4MW.
 data.raw["furnace"]["recycler"].energy_usage = "400kW" -- Increasing 180kW -> 400kW.
+
+-- Remove temperature stats from fluids (electrolyte and holmium-solution).
+data.raw.fluid["holmium-solution"].max_temperature = nil
+data.raw.fluid["holmium-solution"].heat_capacity = nil
+data.raw.fluid["electrolyte"].max_temperature = nil
+data.raw.fluid["electrolyte"].heat_capacity = nil

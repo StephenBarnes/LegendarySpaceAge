@@ -61,9 +61,32 @@ data:extend{
 		group = "intermediate-products",
 		order = "e",
 	},
+
+	-- Create subgroups for fluids by planet, etc.
+	{ type = "item-subgroup", name = "nauvis-fluids",    group = "fluids", order = "01" },
+	{ type = "item-subgroup", name = "petrochem-fluids", group = "fluids", order = "02" },
+	{ type = "item-subgroup", name = "vulcanus-fluids",  group = "fluids", order = "03" },
+	{ type = "item-subgroup", name = "gleba-fluids",     group = "fluids", order = "04" },
+	{ type = "item-subgroup", name = "fulgora-fluids",   group = "fluids", order = "05" },
+	{ type = "item-subgroup", name = "aquilo-fluids",    group = "fluids", order = "06" },
 }
 
 ------------------------------------------------------------------------
+
+-- Move all fluids to the right row.
+for subgroup, fluids in pairs{
+	nauvis = {"lake-water", "water", "steam", "latex", "cement", "sulfuric-acid", "lubricant", "thruster-fuel", "thruster-oxidizer"},
+	petrochem = {"crude-oil", "natural-gas", "tar", "heavy-oil", "light-oil", "petroleum-gas", "dry-gas", "syngas"},
+	vulcanus = {"lava", "volcanic-gas", "molten-iron", "molten-copper", "molten-steel", "molten-tungsten"},
+	fulgora = {"fulgoran-sludge", "electrolyte", "holmium-solution"},
+	gleba = {"slime", "geoplasm", "chitin-broth"},
+	aquilo = {"ammoniacal-solution", "ammonia", "fluorine", "fluoroketone-hot", "fluoroketone-cold", "lithium-brine", "fusion-plasma"},
+} do
+	for i, fluid in pairs(fluids) do
+		data.raw.fluid[fluid].subgroup = subgroup .. "-fluids"
+		data.raw.fluid[fluid].order = "0" .. i
+	end
+end
 
 -- Put water condensation and melting at the start of simple fluid recipes group.
 data.raw.recipe["steam-condensation"].order = "01"
@@ -104,9 +127,9 @@ data.raw.item["biter-egg"].subgroup = "nauvis-agriculture"
 -- Move intermediate subgroups to the space group.
 for subgroupName, order in pairs{
 	["vulcanus-processes"] = "01",
-	["fulgora-processes"] = "02",
-	["agriculture-processes"] = "031",
-	["agriculture-products"] = "032",
+	["agriculture-processes"] = "021",
+	["agriculture-products"] = "022",
+	["fulgora-processes"] = "03",
 	["nauvis-agriculture"] = "041", -- Advanced recipes - biter egg, etc.
 	["uranium-processing"] = "042",
 	["aquilo-processes"] = "05",
