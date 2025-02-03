@@ -1,6 +1,6 @@
 -- Change scrap recycling outputs.
 data.raw["recipe"]["scrap-recycling"].results = {
-	{ type = "item", name = "rocs-rusting-iron-iron-gear-wheel-rusty", amount = 1, probability = 0.10, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "rusty-iron-gear-wheel", amount = 1, probability = 0.10, show_details_in_recipe_tooltip = false },
 
 	{ type = "item", name = "low-density-structure", amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "advanced-circuit",      amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false },

@@ -12,8 +12,6 @@ local INGOT_WEIGHT = ROCKET_MASS / 200
 	-- 200 ingots per rocket. Each ingot is 4 plates, so 800 plates per rocket. Vanilla was 1000 plates per rocket.
 local ORE_WEIGHT = ROCKET_MASS / 500
 	-- Same as vanilla, 500 ore per rocket.
-local ORE_STACK_SIZE = 50
-local INGOT_STACK_SIZE = 100
 
 
 local metalTint = {
@@ -230,72 +228,6 @@ for i, itemName in pairs{"iron-plate", "iron-gear-wheel", "iron-stick", "copper-
 	data.raw.item[itemName].order = ""..i
 end
 
--- Change derusting recipes to use sand instead of stone, and sometimes return sand (to reduce cost and increase complexity), and increase time.
--- Also change sulfuric acid derusting recipes.
-for _, rustyItem in pairs{"rocs-rusting-iron-iron-plate", "rocs-rusting-iron-iron-gear-wheel", "rocs-rusting-iron-iron-stick"} do
-	local recipe1 = data.raw.recipe[rustyItem.."-derusting"]
-	table.insert(recipe1.results, {type="item", name="sand", amount=1, probability=0.8, show_details_in_recipe_tooltip=false})
-	recipe1.ingredients = {
-		{type="item", name=rustyItem.."-rusty", amount=1},
-		{type="item", name="sand", amount=1},
-	}
-	recipe1.main_product = recipe1.results[1].name
-	recipe1.energy_required = 1
-
-	local recipe2 = data.raw.recipe[rustyItem.."-chemical-derusting"]
-	recipe2.ingredients = {
-		{type="item", name=rustyItem.."-rusty", amount=1},
-		{type="fluid", name="sulfuric-acid", amount=5},
-	}
-	recipe2.energy_required = 1
-	recipe2.order = "f-"..recipe2.order
-end
-
--- Create item for rusted cold iron ingot.
-local rustedIronIngot = table.deepcopy(ingotItems["ingot-iron-cold"])
-rustedIronIngot.name = "ingot-iron-rusted"
-rustedIronIngot.icons = {
-	{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-rusted.png", icon_size=64, scale=0.5},
-}
-data:extend{rustedIronIngot}
-ingotItems["ingot-iron-cold"].spoil_ticks = 60 * 60 * 20
-ingotItems["ingot-iron-cold"].spoil_result = "ingot-iron-rusted"
-
--- Add recipe to de-rust cold iron ingot using sand.
-local derustIngot1 = table.deepcopy(data.raw.recipe["rocs-rusting-iron-iron-stick-derusting"])
-derustIngot1.name = "ingot-iron-derusting"
-derustIngot1.ingredients = {
-	{type="item", name="ingot-iron-rusted", amount=1},
-	{type="item", name="sand", amount=1},
-}
-derustIngot1.results = {
-	{type="item", name="ingot-iron-cold", amount=1},
-	{type="item", name="sand", amount=1, probability=0.8, show_details_in_recipe_tooltip=false},
-}
-derustIngot1.main_product = "ingot-iron-cold"
-derustIngot1.icons = {{icon="__LegendarySpaceAge__/graphics/metallurgy/derusting-iron-ingot.png", icon_size=64, scale=0.5}}
-derustIngot1.enabled = true
-derustIngot1.order = "e[derusting]-0[derust-iron-ingot]"
-data:extend{derustIngot1}
-
--- Add recipe to de-rust cold iron ingot using sulfuric acid.
-local derustIngot2 = table.deepcopy(data.raw.recipe["rocs-rusting-iron-iron-stick-chemical-derusting"])
-derustIngot2.name = "ingot-iron-chemical-derusting"
-derustIngot2.ingredients = {
-	{type="item", name="ingot-iron-rusted", amount=1},
-	{type="fluid", name="sulfuric-acid", amount=5},
-}
-derustIngot2.results = {
-	{type="item", name="ingot-iron-cold", amount=1},
-}
-derustIngot2.main_product = "ingot-iron-cold"
-derustIngot2.icons = {
-	{icon="__LegendarySpaceAge__/graphics/metallurgy/derusting-iron-ingot.png", icon_size=64, scale=0.5}
-}
-derustIngot2.enabled = true
-derustIngot2.order = "f-0"
-data:extend{derustIngot2}
-
 ------------------------------------------------------------------------
 
 -- Add recipes to techs.
@@ -316,14 +248,6 @@ data.raw.item["steel-plate"].weight = INGOT_WEIGHT / 4
 data.raw.item["iron-gear-wheel"].weight = ROCKET_MASS / 2000
 data.raw.item["iron-stick"].weight = ROCKET_MASS / 8000
 data.raw.item["copper-cable"].weight = ROCKET_MASS / 8000
-
--- Move all rusty items to the subgroup for derusting (actually now the "rust" group).
-data.raw.item["ingot-iron-rusted"].subgroup = "derusting"
-data.raw.item["rocs-rusting-iron-iron-plate-rusty"].subgroup = "derusting"
-data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].subgroup = "derusting"
-data.raw.item["rocs-rusting-iron-iron-stick-rusty"].subgroup = "derusting"
-data.raw.item["rocs-rusting-iron-iron-gear-wheel-rusty"].order = data.raw.item["rocs-rusting-iron-iron-plate-rusty"].order .. "-1"
-data.raw.item["rocs-rusting-iron-iron-stick-rusty"].order = data.raw.item["rocs-rusting-iron-iron-plate-rusty"].order .. "-2"
 
 -- Add output slots to furnaces - otherwise some recipe products just disappear, apparently.
 for _, furnace in pairs{"stone-furnace", "steel-furnace", "gas-furnace", "electric-furnace"} do

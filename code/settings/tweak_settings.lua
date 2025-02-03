@@ -24,10 +24,6 @@ u.setDefaultOrForce("data-dd-enable-flares", "bool", false)
 u.setDefaultOrForce("data-dd-lampon", "double", 0.5)
 u.setDefaultOrForce("data-dd-lampoff", "double", 0.3)
 
--- For Roc's Rusting Iron mod.
-u.setDefaultOrForce("rocs-rusting-iron-engines-rust", "bool", false)
-u.setDefaultOrForce("rocs-rusting-iron-time-minutes", "double", 20.)
-
 -- For Large Storage Tank and inline storage tanks.
 -- Regular 3x3 tank is 25k. Making large 5x5 tank 100k, and small 1x1 tank 2k.
 u.setDefaultOrForce("large-storage-tank-fluid-size", "int", 100000)

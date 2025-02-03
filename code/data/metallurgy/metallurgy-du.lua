@@ -13,9 +13,3 @@ for _, recipe in pairs(data.raw.recipe) do
 		end
 	end
 end
-
--- For rusty items, make recycling recipes only delete the item.
-for _, item in pairs{"iron-gear-wheel", "iron-stick"} do
-	local recipe = data.raw.recipe["rocs-rusting-iron-"..item.."-rusty-recycling"]
-	recipe.results = {{type = "item", name = "rocs-rusting-iron-"..item.."-rusty", amount = 1, probability = .25}}
-end

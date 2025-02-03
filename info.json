@@ -32,8 +32,6 @@
 		, "! est-steel-storage-tank"
 		, "! nco-SmallTank"
 
-		, "Rocs-Rusting-Iron"
-
 		, "Electric_flying_enemies"
 		, "behemoth-enemies"
 
@@ -46,6 +44,8 @@
 		, "diurnal-dynamics"
 		, "Rocs-Improved-Platform-Drag"
 
+		, "! any-planet-start"
+
 		, "!Flare Stack"
 		, "! adamo-carbon"
 
@@ -53,8 +53,7 @@
 		, "! battery-powered"
 		, "! biochemistry"
 		, "! fulgoran-sludge"
-
-		, "! any-planet-start"
+		, "! Rocs-Rusting-Iron"
 
 		, "! fluroflux"
 		, "! slipstacks"

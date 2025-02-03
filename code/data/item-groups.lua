@@ -24,6 +24,20 @@ data:extend{
 		order = "b2",
 	},
 
+	-- Create subgroups for rusted items and derusting.
+	{
+		type = "item-subgroup",
+		name = "rusty",
+		group = "intermediate-products",
+		order = "b3",
+	},
+	{
+		type = "item-subgroup",
+		name = "derusting",
+		group = "intermediate-products",
+		order = "b4",
+	},
+
 	-- Create subgroup for fluid logistics items.
 	{
 		type = "item-subgroup",
@@ -50,9 +64,6 @@ data:extend{
 }
 
 ------------------------------------------------------------------------
-
--- Move derusting row (now also the rust-items row) to after ingots etc.
-data.raw["item-subgroup"]["derusting"].order = "b3"
 
 -- Put water condensation and melting at the start of simple fluid recipes group.
 data.raw.recipe["steam-condensation"].order = "01"
