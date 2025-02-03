@@ -23,8 +23,8 @@ Turning molten metals into items, in a foundry:
 	Similar recipes for copper plates, iron rods, iron machine parts, copper cables, and possibly more.
 	Casting iron items makes them start 20% spoiled (from rust).
 Molten steel recipes:
-	100 molten iron + 1 carbon + 1 calcite -> 100 molten steel (in a foundry)
-	30 molten steel + 1 water -> 1 steel plate + 10 steam
+	100 molten iron + 1 calcite -> 100 molten steel + 1 stone (in a foundry)
+	40 molten steel + 1 water -> 2 steel plate + 10 steam
 			Originally 30 molten iron -> 1 steel plate.
 
 Tungsten ore is only found on Vulcanus.
@@ -128,11 +128,11 @@ moltenSteelRecipe.name = "molten-steel-making"
 moltenSteelRecipe.localised_name = {"fluid-name.molten-steel"}
 moltenSteelRecipe.ingredients = {
 	{type = "fluid", name = "molten-iron", amount = 100},
-	{type = "item", name = "carbon", amount = 1},
 	{type = "item", name = "calcite", amount = 1},
 }
 moltenSteelRecipe.results = {
 	{type = "fluid", name = "molten-steel", amount = 100},
+	{type = "item", name = "stone", amount = 1},
 }
 moltenSteelRecipe.main_product = "molten-steel"
 moltenSteelRecipe.order = "a[melting]-d[molten-steel]"
@@ -172,7 +172,7 @@ steelCastingRecipe.ingredients = {
 	{type = "fluid", name = "water", amount = 1},
 }
 steelCastingRecipe.results = {
-	{type = "item", name = "steel-plate", amount = 1},
+	{type = "item", name = "steel-plate", amount = 2},
 	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 }
 steelCastingRecipe.main_product = "steel-plate"
@@ -184,7 +184,7 @@ ironGearWheelCastingRecipe.ingredients = {
 	{type = "fluid", name = "water", amount = 1},
 }
 ironGearWheelCastingRecipe.results = {
-	{type = "item", name = "iron-gear-wheel", amount = 2, percent_spoiled = .2},
+	{type = "item", name = "iron-gear-wheel", amount = 4, percent_spoiled = .2},
 	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
 }
 ironGearWheelCastingRecipe.main_product = "iron-gear-wheel"
@@ -260,11 +260,10 @@ pipeToGroundRecipe.energy_required = 4
 local castingAdvancedPartsRecipe = table.deepcopy(data.raw.recipe["casting-iron-gear-wheel"])
 castingAdvancedPartsRecipe.name = "casting-advanced-parts"
 castingAdvancedPartsRecipe.ingredients = {
-	{ type = "fluid", name = "molten-steel", amount = 160 },
+	{ type = "fluid", name = "molten-steel", amount = 300 },
 	{ type = "fluid", name = "water",        amount = 4 },
 	{ type = "item",  name = "rubber",       amount = 1 },
 	{ type = "item",  name = "plastic-bar",  amount = 2 },
-	{ type = "fluid", name = "lubricant",    amount = 5 },
 }
 castingAdvancedPartsRecipe.results = {
 	{type = "item", name = "advanced-parts", amount = 4},

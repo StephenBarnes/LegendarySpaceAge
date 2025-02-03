@@ -47,6 +47,7 @@ require("code.data.waste-pump")
 require("code.data.barrelling")
 require("code.data.fuel")
 require("code.data.intermediate-factors.main")
+require("code.data.space.main")
 
 -- Files that adjust protos
 require("code.data.item-groups")
@@ -57,3 +58,4 @@ require("code.data.ocean-dumping")
 require("code.data.tech-progression")
 require("code.data.tech-rate-triggers")
 require("code.data.electric-boiler")
+require("code.data.stack-sizes")

@@ -3,6 +3,8 @@
 
 local Tech = require("code.util.tech")
 
+-- Recipe should make 4 machine parts.
+data.raw.recipe["iron-gear-wheel"].results = {{type="item", name="iron-gear-wheel", amount=4}}
 -- Show amount of machine parts produced by recipe.
 data.raw.recipe["iron-gear-wheel"].always_show_products = true
 

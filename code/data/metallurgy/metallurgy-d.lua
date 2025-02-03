@@ -1,7 +1,20 @@
+--[[
+8 iron ore -> 2 iron ingot (+2 stone) -> 1 steel ingot -> 4 steel plate
+4 iron ore -> 1 iron ingot (+1 stone) -> 4 iron plate OR 4 machine parts OR 8 iron rod
+4 copper ore -> 2 copper matte (+2 stone) -> 1 copper ingot (+1 sulfur) -> 4 copper plate
+]]
+
 local Tech = require("code.util.tech")
 
 local ROCKET_MASS = 1000000
 local INGOT_COOLING_TIME = 60 * 60 * 5
+local INGOT_WEIGHT = ROCKET_MASS / 200
+	-- 200 ingots per rocket. Each ingot is 4 plates, so 800 plates per rocket. Vanilla was 1000 plates per rocket.
+local ORE_WEIGHT = ROCKET_MASS / 500
+	-- Same as vanilla, 500 ore per rocket.
+local ORE_STACK_SIZE = 50
+local INGOT_STACK_SIZE = 100
+
 
 local metalTint = {
 	copper = {r = .831, g = .467, b = .361, a=1},
@@ -36,7 +49,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	hotIngot.spoil_result = coldIngotName
 	hotIngot.order = "a[smelting]-0-" .. i
 	hotIngot.stack_size = 100
-	hotIngot.weight = ROCKET_MASS / 500
+	hotIngot.weight = INGOT_WEIGHT
 	hotIngot.subgroup = "ingots"
 	data:extend{hotIngot}
 	ingotItems[hotIngotName] = hotIngot
@@ -270,10 +283,10 @@ data.raw.technology["electronics"].research_trigger.item = "ingot-copper-hot"
 data.raw.technology["steel-axe"].research_trigger.item = "ingot-steel-hot"
 
 -- Adjust stack sizes and rocket capacities of basic metal products.
-data.raw.item["copper-matte"].weight = ROCKET_MASS / 500
-data.raw.item["iron-plate"].weight = ROCKET_MASS / 4000
-data.raw.item["copper-plate"].weight = ROCKET_MASS / 4000
-data.raw.item["steel-plate"].weight = ROCKET_MASS / 1000
+data.raw.item["copper-matte"].weight = ORE_WEIGHT -- 2 ore becomes 1 copper matte and 1 sulfur
+data.raw.item["iron-plate"].weight = INGOT_WEIGHT / 4
+data.raw.item["copper-plate"].weight = INGOT_WEIGHT / 4
+data.raw.item["steel-plate"].weight = INGOT_WEIGHT / 4
 data.raw.item["iron-gear-wheel"].weight = ROCKET_MASS / 2000
 data.raw.item["iron-stick"].weight = ROCKET_MASS / 8000
 data.raw.item["copper-cable"].weight = ROCKET_MASS / 8000
@@ -290,3 +303,17 @@ data.raw.item["rocs-rusting-iron-iron-stick-rusty"].order = data.raw.item["rocs-
 for _, furnace in pairs{"stone-furnace", "steel-furnace", "gas-furnace", "electric-furnace"} do
 	data.raw.furnace[furnace].result_inventory_size = 2
 end
+
+--[[ Stack sizes and weights:
+Stack sizes of ores are 50, ingots 100, plates 100, machine parts 100, rods 100.
+So transporting ingots is 2 times better for stack size, times 4 times better from recipes, so 8x denser overall.
+]]
+data.raw.item["copper-matte"].weight = ORE_WEIGHT -- 2 ore becomes 1 copper matte and 1 sulfur.
+data.raw.item["iron-plate"].weight = INGOT_WEIGHT / 4
+data.raw.item["copper-plate"].weight = INGOT_WEIGHT / 4
+data.raw.item["steel-plate"].weight = INGOT_WEIGHT / 4
+data.raw.item["iron-gear-wheel"].weight = INGOT_WEIGHT / 4
+data.raw.item["iron-stick"].weight = INGOT_WEIGHT / 8
+data.raw.item["copper-cable"].weight = INGOT_WEIGHT / 8
+-- Iron rod stacks should be as dense as iron plate stacks.
+data.raw.item["iron-stick"].stack_size = 200
