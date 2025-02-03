@@ -12,43 +12,59 @@ structureItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-fact
 data:extend{structureItem}
 
 -- Create recipe: 8 stone brick + 20 cement -> 1 structure
-local recipeFromStone = table.deepcopy(data.raw.recipe["iron-stick"])
-recipeFromStone.name = "structure-from-stone"
-recipeFromStone.ingredients = {
+local recipeFromCement = table.deepcopy(data.raw.recipe["iron-stick"])
+recipeFromCement.name = "structure-from-cement"
+recipeFromCement.ingredients = {
 	{type = "item", name = "stone-brick", amount = 8},
 	{type = "fluid", name = "cement", amount = 20},
 }
-recipeFromStone.results = {{type = "item", name = "structure", amount = 1}}
-recipeFromStone.enabled = false
-recipeFromStone.subgroup = "structure"
-recipeFromStone.order = "02"
-recipeFromStone.energy_required = 6
-recipeFromStone.category = "crafting-with-fluid"
-recipeFromStone.icon = nil
-recipeFromStone.icons = {
+recipeFromCement.results = {{type = "item", name = "structure", amount = 1}}
+recipeFromCement.enabled = false
+recipeFromCement.subgroup = "structure"
+recipeFromCement.order = "03"
+recipeFromCement.energy_required = 6
+recipeFromCement.category = "crafting-with-fluid"
+recipeFromCement.icon = nil
+recipeFromCement.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5},
 	{icon = "__base__/graphics/icons/stone-brick.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/fluids/cement-fluid.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
 }
-recipeFromStone.allow_as_intermediate = true
-recipeFromStone.auto_recycle = false
-data:extend{recipeFromStone}
-Tech.addRecipeToTech("structure-from-stone", "masonry")
+recipeFromCement.allow_as_intermediate = false
+recipeFromCement.auto_recycle = false
+data:extend{recipeFromCement}
+Tech.addRecipeToTech("structure-from-cement", "cement")
+
+-- Create recipe for structure from resin: 8 stone brick + 4 resin -> 1 structure
+local recipeFromResin = table.deepcopy(recipeFromCement)
+recipeFromResin.name = "structure-from-resin"
+recipeFromResin.ingredients = {
+	{ type = "item", name = "stone-brick", amount = 8 },
+	{ type = "item", name = "resin",    amount = 4 },
+}
+recipeFromResin.enabled = true
+recipeFromResin.order = "02"
+recipeFromResin.energy_required = 6
+recipeFromResin.category = "crafting"
+recipeFromResin.icons[3].icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png"
+recipeFromResin.allow_as_intermediate = true
+data:extend{recipeFromResin}
 
 -- Create recipe for structure from chitin block: 4 chitin block + 20 slime -> 1 structure
-local recipeFromChitin = table.deepcopy(recipeFromStone)
+local recipeFromChitin = table.deepcopy(recipeFromCement)
 recipeFromChitin.name = "structure-from-chitin"
 recipeFromChitin.ingredients = {
-	{type = "item", name = "chitin-block", amount = 4},
+	{type = "item", name = "chitin-block", amount = 8},
 	{type = "fluid", name = "slime", amount = 20},
 }
 recipeFromChitin.results = {{type = "item", name = "structure", amount = 1}}
 recipeFromChitin.enabled = true -- TODO make tech
-recipeFromChitin.order = "03"
+recipeFromChitin.order = "04"
 recipeFromChitin.category = "organic-or-assembling-with-fluid"
 recipeFromChitin.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5},
 	{icon = "__LegendarySpaceAge__/graphics/gleba/chitin-block/1.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-	{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.20, shift = {8, -8}},
 }
 recipeFromChitin.allow_as_intermediate = false
 data:extend{recipeFromChitin}

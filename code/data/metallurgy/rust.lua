@@ -49,6 +49,7 @@ for i, itemName in pairs{
 	recipe1.auto_recycle = false
 	recipe1.localised_name = {"recipe-name.sand-derust-X", {"item-name.compound-"..itemName}}
 	recipe1.category = "crafting"
+	recipe1.allow_as_intermediate = false
 	data:extend{recipe1}
 
 	local recipe2 = table.deepcopy(recipe1)
@@ -83,5 +84,3 @@ data.raw.item["rusty-iron-gear-wheel"].pictures = {
 }
 data.raw.recipe["sand-derust-iron-gear-wheel"].icons[1].icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png"
 data.raw.recipe["acid-derust-iron-gear-wheel"].icons[1].icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png"
-
--- TODO check that rusty items recycle properly.

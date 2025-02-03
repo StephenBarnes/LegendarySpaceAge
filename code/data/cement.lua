@@ -46,7 +46,7 @@ data:extend{cementRecipe}
 
 -- Create tech for cement and brick structure.
 local tech = table.deepcopy(data.raw.technology.concrete)
-tech.name = "masonry"
+tech.name = "cement"
 tech.effects = {
 	{
 		type = "unlock-recipe",
@@ -62,7 +62,7 @@ tech.unit = {
 		{"automation-science-pack", 1},
 	},
 }
-tech.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/tech.png"
+tech.icon = "__LegendarySpaceAge__/graphics/fluids/cement-tech.png"
 data:extend{tech}
 
 -- Adjust recipes for concrete and refined concrete.

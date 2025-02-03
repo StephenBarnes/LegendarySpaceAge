@@ -167,18 +167,20 @@ data.raw.recipe["repair-pack"].ingredients = {
 	{type="item", name="sensor", amount=1},
 }
 
--- Stone bricks - allowed in foundry and handcrafting, and required for stone furnaces.
+-- Stone bricks - allowed in foundry and handcrafting.
 data.raw.recipe["stone-brick"].category = "smelting-or-metallurgy-or-handcrafting"
-data.raw.recipe["stone-furnace"].ingredients = {{type="item", name="stone-brick", amount=5}}
+
 
 -- Furnaces
+data.raw.recipe["stone-furnace"].ingredients = {{type="item", name="structure", amount=1}}
 data.raw.recipe["steel-furnace"].ingredients = {
-	{type="item", name="frame", amount=4},
-	{type="item", name="shielding", amount=10},
+	{type="item", name="frame", amount=2},
+	{type="item", name="structure", amount=2},
+	{type="item", name="shielding", amount=4},
 }
 data.raw.recipe["gas-furnace"].ingredients = {
-	{type="item", name="frame", amount=4},
-	{type="item", name="shielding", amount=10},
+	{type="item", name="frame", amount=2},
+	{type="item", name="shielding", amount=4},
 	{type="item", name="fluid-fitting", amount=4},
 }
 
@@ -401,7 +403,7 @@ data.raw.recipe["space-platform-foundation"].ingredients = {
 
 -- Walls, gates
 data.raw.recipe["stone-wall"].ingredients = {
-	{type = "item", name = "structure", amount = 2},
+	{type = "item", name = "structure", amount = 1},
 }
 data.raw.recipe["gate"].ingredients = {
 	{type = "item", name = "shielding", amount = 4},
