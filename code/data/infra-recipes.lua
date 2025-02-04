@@ -256,22 +256,26 @@ data.raw.recipe["rail-chain-signal"].ingredients = {
 
 -- Assembling machines
 data.raw.recipe["assembling-machine-1"].ingredients = {
-	{type="item", name="iron-gear-wheel", amount=6},
-	{type="item", name="iron-plate", amount=6},
-	{type="item", name="electronic-circuit", amount=4},
+	{type="item", name="frame", amount=1},
+	{type="item", name="panel", amount=4},
+	{type="item", name="mechanism", amount=2},
+	{type="item", name="sensor", amount=1},
+	{type="item", name="electronic-circuit", amount=2},
 }
 data.raw.recipe["assembling-machine-2"].ingredients = {
-	{type="item", name="iron-gear-wheel", amount=6},
-	{type="item", name="steel-plate", amount=6},
-	{type="item", name="rubber", amount=1},
-	{type="item", name="advanced-circuit", amount=4},
+	{type="item", name="frame", amount=1},
+	{type="item", name="panel", amount=4},
+	{type="item", name="mechanism", amount=4},
+	{type="item", name="sensor", amount=4},
+	{type="item", name="advanced-circuit", amount=2},
 }
 data.raw.recipe["assembling-machine-3"].ingredients = {
-	{type="item", name="electric-engine-unit", amount=2},
-	{type="item", name="speed-module", amount=2},
-	{type="item", name="processing-unit", amount=4},
+	{type="item", name="frame", amount=1},
+	{type="item", name="panel", amount=4},
+	{type="item", name="electric-engine-unit", amount=4},
+	{type="item", name="sensor", amount=4},
+	{type="item", name="processing-unit", amount=2},
 }
-data.raw.recipe["assembling-machine-3"].category = "crafting-with-fluid"
 
 -- Mining drills
 -- Burner mining drill shouldn't need stone.

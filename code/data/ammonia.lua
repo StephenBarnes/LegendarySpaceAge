@@ -117,5 +117,5 @@ ammoniaSyngasRecipe.icons = {
 ammoniaSyngasRecipe.energy_required = 4
 data:extend{ammoniaSyngasRecipe}
 
--- Aquilo should require ammonia 2 tech.
-Tech.addTechDependency("ammonia-2", "planet-discovery-aquilo")
+-- Aquilo should require ammonia 2 tech? Not really. Maybe if I later add tech to make fuel from ammonia, separate from the Aquilo discovery tech. TODO.
+--Tech.addTechDependency("ammonia-2", "planet-discovery-aquilo")

@@ -29,6 +29,7 @@ greenCircuitRecipe.icons = {
 	{icon = "__base__/graphics/icons/electronic-circuit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
 greenCircuitRecipe.allow_as_intermediate = true
+greenCircuitRecipe.allow_decomposition = true
 data:extend{greenCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-green-circuit", "automation")
 
@@ -44,6 +45,7 @@ redCircuitRecipe.order = "03"
 redCircuitRecipe.enabled = false
 redCircuitRecipe.icons[2] = {icon = "__base__/graphics/icons/advanced-circuit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 redCircuitRecipe.allow_as_intermediate = false
+redCircuitRecipe.allow_decomposition = false
 redCircuitRecipe.energy_required = 2
 data:extend{redCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-red-circuit", "advanced-circuit")
@@ -60,6 +62,7 @@ blueCircuitRecipe.order = "04"
 blueCircuitRecipe.enabled = false
 blueCircuitRecipe.icons[2] = {icon = "__base__/graphics/icons/processing-unit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 blueCircuitRecipe.allow_as_intermediate = false
+blueCircuitRecipe.allow_decomposition = false
 blueCircuitRecipe.energy_required = 1
 data:extend{blueCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-blue-circuit", "processing-unit")
