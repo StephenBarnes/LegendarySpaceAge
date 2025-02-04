@@ -42,6 +42,7 @@ cementRecipe.results = {
 }
 cementRecipe.main_product = "cement"
 cementRecipe.category = "crafting-with-fluid"
+cementRecipe.allow_decomposition = true
 data:extend{cementRecipe}
 
 -- Create tech for cement and brick structure.

@@ -16,7 +16,7 @@ local function setStartItems()
 	end
 	local items = {
 		['pistol'] = 1,
-		['firearm-magazine'] = 60,
+		['firearm-magazine'] = 52, -- plus 8 for some reason.
 
 		['construction-robot'] = 50,
 		['personal-roboport-equipment'] = 2,
@@ -26,7 +26,7 @@ local function setStartItems()
 		-- Prefer to give factors rather than raw materials. Seems more appropriate.
 		-- Give some structures etc, so player doesn't need to chop a lot of trees for resin.
 		['mechanism'] = 12,
-		['structure'] = 20,
+		['structure'] = 10,
 		['frame'] = 30,
 		['wiring'] = 10,
 		['panel'] = 20,

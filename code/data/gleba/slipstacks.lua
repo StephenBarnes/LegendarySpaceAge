@@ -2,6 +2,8 @@
 -- Some of the code might be copied from Slipstack Agriculture mod by LordMiguel. Originally that mod was a dependency of this modpack, but I decided to instead implement stuff separately.
 -- Note: the new mapgen preset reduces stone spawns on Gleba, partly to encourage slipstack farming.
 
+local Item = require("code.util.item")
+
 ------------------------------------------------------------------------
 --- Change slipstack from type "tree" to type "plant", so it's farmable.
 
@@ -53,15 +55,7 @@ slipstackPearl.order = "a[organic-processing]-da[slipstack-pearl]"
 slipstackPearl.subgroup = "agriculture-products"
 slipstackPearl.spoil_ticks = 60 * 60 * 5 -- 5 minutes.
 slipstackPearl.spoil_result = "spoilage"
-do
-	slipstackPearl.fuel_value = nil
-	slipstackPearl.fuel_acceleration_multiplier = nil
-	slipstackPearl.fuel_emissions_multiplier = nil
-	slipstackPearl.fuel_category = nil
-	slipstackPearl.fuel_top_speed_multiplier = nil
-	slipstackPearl.fuel_emissions_multiplier = nil
-	slipstackPearl.fuel_glow_color = nil
-end
+Item.clearFuel(slipstackPearl)
 data:extend{slipstackPearl}
 
 -- Create item for slipstack nest
@@ -75,8 +69,7 @@ slipstackNest.subgroup = "agriculture-products"
 slipstackNest.spoil_ticks = 60 * 60 * 20
 slipstackNest.spoil_result = "stone"
 -- Make the nests non-burnable, since thy're supposed to be mostly rock and there's no risk of having too many.
-slipstackNest.fuel_category = nil
-slipstackNest.fuel_value = nil
+Item.clearFuel(slipstackNest)
 slipstackNest.plant_result = "slipstack"
 slipstackNest.place_result = "slipstack"
 data:extend{slipstackNest}

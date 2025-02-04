@@ -1,5 +1,7 @@
 -- This file adds the niter item. Niter recipe is in ammonia file.
 
+local Item = require("code.util.item")
+
 -- Create niter item
 local niterIcons = {}
 for i = 1, 3 do
@@ -11,11 +13,5 @@ niterItem.icon = nil
 niterItem.icons = {{icon = niterIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 niterItem.pictures = niterIcons
 niterItem.order = "b[chemistry]-a"
-
-niterItem.fuel_value = nil
-niterItem.fuel_acceleration_multiplier = nil
-niterItem.fuel_top_speed_multiplier = nil
-niterItem.fuel_emissions_multiplier = nil
-niterItem.fuel_glow_color = nil
-
+Item.clearFuel(niterItem)
 data:extend{niterItem}

@@ -20,7 +20,9 @@ charFurnace.graphics_set.animation.layers[1].filename = "__LegendarySpaceAge__/g
 charFurnace.corpse = "char-furnace-remnants"
 charFurnace.allowed_effects = {"pollution"}
 charFurnace.PowerMultiplier_ignore = true
-charFurnace.icon = nil -- So it defaults to the item icon.
+charFurnace.icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png"
+charFurnace.show_recipe_icon = false
+charFurnace.show_recipe_icon_on_map = false
 data:extend{charFurnace}
 
 -- Create corpse.
@@ -62,7 +64,7 @@ charRecipe.name = "char-carbon"
 charRecipe.results = {{type = "item", name = "carbon", amount = 1}}
 charRecipe.ingredients = {}
 charRecipe.energy_required = 5
-charRecipe.enabled = true
+charRecipe.enabled = false
 charRecipe.subgroup = "raw-material"
 charRecipe.category = "char-furnace"
 charRecipe.icon = nil
@@ -71,3 +73,18 @@ charRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
 data:extend{charRecipe}
+
+-- Create tech called "char", unlocking the furnace and recipe.
+local charTech = table.deepcopy(data.raw.technology["automation"])
+charTech.name = "char"
+charTech.effects = {
+	{type = "unlock-recipe", recipe = "char-carbon"},
+}
+charTech.prerequisites = {}
+charTech.research_trigger = {
+	type = "build-entity",
+	entity = "char-furnace",
+}
+charTech.unit = nil
+charTech.icon = "__LegendarySpaceAge__/graphics/char-furnace/tech.png"
+data:extend{charTech}

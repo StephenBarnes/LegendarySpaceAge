@@ -35,7 +35,7 @@ pureCarbonFuelCategory.name = "pure-carbon"
 data:extend{pureCarbonFuelCategory}
 
 -- Set fuel categories for some entities to allow non-carbon-based fuels (sulfur, hydrogen).
-local expandedFuelCategories = {"chemical", "non-carbon", "pure-carbon"}
+local expandedFuelCategories = {"chemical", "non-carbon"}
 for _, typeAndName in pairs{
 	{"reactor", "heating-tower"},
 	{"boiler", "boiler"},
@@ -56,23 +56,34 @@ for _, typeAll in pairs{ -- Handle all cars (including tanks, boats) and locomot
 end
 data.raw["generator-equipment"]["personal-burner-generator"].burner.fuel_categories = table.deepcopy(expandedFuelCategories)
 
--- Since pentapod eggs and biter eggs are now in a different fuel category, but should count as carbon-based, we need to make them burnable in heating towers etc.
-local function addEggFuelsToBurner(burner)
+-- Since pentapod eggs and biter eggs and carbon are now in different fuel categories, but should count as carbon-based, we need to make them burnable in heating towers etc.
+local otherCarbonicFuels = {"activated-pentapod-egg", "biter-egg", "pure-carbon"}
+local function addOtherCarbonicFuelsToBurner(burner)
 	if burner.fuel_categories ~= nil and Table.hasEntry("chemical", burner.fuel_categories) then
-		table.insert(burner.fuel_categories, "activated-pentapod-egg")
-		table.insert(burner.fuel_categories, "biter-egg")
+		for _, fuel in pairs(otherCarbonicFuels) do
+			table.insert(burner.fuel_categories, fuel)
+		end
 	end
 end
-local function addEggFuelsToEnt(ent)
+local function addOtherCarbonicFuelsToEnt(ent)
 	if ent.energy_source ~= nil and ent.energy_source.type == "burner" then
-		addEggFuelsToBurner(ent.energy_source)
+		addOtherCarbonicFuelsToBurner(ent.energy_source)
 	elseif ent.burner ~= nil then
-		addEggFuelsToBurner(ent.burner)
+		addOtherCarbonicFuelsToBurner(ent.burner)
 	end
 end
 for _, ents in pairs(data.raw) do
 	for _, ent in pairs(ents) do
-		addEggFuelsToEnt(ent)
+		addOtherCarbonicFuelsToEnt(ent)
+	end
+end
+
+-- But, char furnace should only accept carbonic fuels except pure carbon.
+local charFurnace = data.raw["assembling-machine"]["char-furnace"]
+charFurnace.energy_source.fuel_categories = {"chemical"}
+for _, fuel in pairs(otherCarbonicFuels) do
+	if fuel ~= "pure-carbon" then
+		table.insert(charFurnace.energy_source.fuel_categories, fuel)
 	end
 end
 

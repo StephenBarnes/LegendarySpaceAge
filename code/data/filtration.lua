@@ -41,7 +41,7 @@ filtrationLakeWaterTech.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/filtration/tech.png", icon_size = 256, scale = 0.5, shift = {-25, 0}},
 	{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water-tech.png", icon_size = 256, scale = 0.4, shift = {25, 0}},
 }
-filtrationLakeWaterTech.prerequisites = {"coal-coking", "automation-science-pack"} -- Needs coking for carbon, to make filters.
+filtrationLakeWaterTech.prerequisites = {"automation-science-pack"}
 filtrationLakeWaterTech.effects = {
 	{type = "unlock-recipe", recipe = "offshore-pump"},
 	{type = "unlock-recipe", recipe = "pipe"},

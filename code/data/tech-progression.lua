@@ -3,8 +3,8 @@
 local Tech = require("code.util.tech")
 
 -- Early techs: basic electricity, then electronics, then personal burner generator, then red science, then automation, then filtration, then steam power.
-Tech.setPrereqs("electronics", {"basic-electricity"})
-Tech.setPrereqs("automation", {"electronics", "glass"})
+Tech.setPrereqs("electronics", {"basic-electricity", "char"})
+Tech.setPrereqs("automation", {"electronics", "lamp"})
 Tech.addTechDependency("filtration-lake-water", "steam-power")
 data.raw.technology["steam-power"].unit = nil
 data.raw.technology["steam-power"].research_trigger = {
@@ -20,7 +20,7 @@ data.raw.technology["automation"].research_trigger = {
 }
 
 -- In the gap between automation and automation-science-pack, player does production challenge of like 150 hot iron per minute.
-data.raw.technology["automation-science-pack"].prerequisites = {"automation", "glass"}
+data.raw.technology["automation-science-pack"].prerequisites = {"automation"}
 data.raw.technology["automation-science-pack"].unit = nil
 Tech.removeRecipeFromTech("lab", "electronics")
 Tech.addRecipeToTech("lab", "automation-science-pack")
@@ -30,8 +30,8 @@ data.raw.recipe["automation-science-pack"].ingredients = {
 }
 
 -- Military 1 now depends on coal coking, for gunpowder. Also gun turrets.
-data.raw.technology["military"].prerequisites = {"coal-coking", "automation-science-pack"}
-data.raw.technology["gun-turret"].prerequisites = {"coal-coking", "automation-science-pack"}
+data.raw.technology["military"].prerequisites = {"gunpowder", "automation-science-pack"}
+data.raw.technology["gun-turret"].prerequisites = {"gunpowder", "automation-science-pack"}
 
 -- Move electric inserter to automation tech.
 Tech.removeRecipeFromTech("inserter", "electronics")
@@ -214,6 +214,15 @@ data.raw.technology["gate"].prerequisites = {"stone-wall"}
 
 -- Wall needs red science.
 Tech.setPrereqs("stone-wall", {"automation-science-pack"})
+
+-- Lamp should be earlier.
+Tech.setPrereqs("lamp", {"basic-electricity", "glass"})
+data.raw.technology["lamp"].unit = nil
+data.raw.technology["lamp"].research_trigger = {
+	type = "craft-item",
+	item = "glass",
+	count = 1,
+}
 
 -- TODO other science packs.
 

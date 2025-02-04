@@ -54,3 +54,11 @@ personalBurnerGeneratorTech.research_trigger = {
 	amount = 1,
 }
 data:extend{personalBurnerGeneratorTech}
+
+-- Since we're adding a lot of starting items, it seems we don't get all of them because there's not enough space in crashed ship.
+data.raw.container["crash-site-spaceship"].inventory_size = 20 -- from 10; it refuses to put more stuff in the main spaceship.
+data.raw.container["crash-site-spaceship-wreck-medium-1"].inventory_size = 10 -- from 5
+data.raw.container["crash-site-spaceship-wreck-medium-2"].inventory_size = 5 -- from 1
+data.raw.container["crash-site-spaceship-wreck-medium-3"].inventory_size = 5 -- from 1
+data.raw.container["crash-site-spaceship-wreck-big-1"].inventory_size = 5 -- from 2
+data.raw.container["crash-site-spaceship-wreck-big-2"].inventory_size = 10 -- from 5

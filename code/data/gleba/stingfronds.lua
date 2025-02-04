@@ -1,6 +1,8 @@
 -- This file makes stingfronds a farmable crop, and creates recipes and items for them.
 -- Some of the code here was copied from "Fluroflux: Stingfrond Agriculture" mod by LordMiguel: https://mods.factorio.com/mod/fluroflux
 
+local Item = require("code.util.item")
+
 ------------------------------------------------------------------------
 --- Change stingfrond from type "tree" to type "plant", so it's farmable.
 
@@ -90,7 +92,7 @@ for i = 1, 5 do
 		-- Give each one a different variant as main icon.
 	cyclosome.subgroup = "stingfrond-products"
 	cyclosome.order = "z"..i
-	cyclosome.fuel_value = nil
+	Item.clearFuel(cyclosome)
 	cyclosomeItems[i] = cyclosome
 end
 data:extend(cyclosomeItems)
@@ -103,6 +105,7 @@ stingfrondSprout.plant_result = "stingfrond"
 stingfrondSprout.icon = "__space-age__/graphics/icons/stingfrond.png"
 stingfrondSprout.subgroup = "stingfrond-products"
 stingfrondSprout.order = "a"
+Item.clearFuel(stingfrondSprout)
 data:extend{stingfrondSprout}
 
 -- Create neurofibril item

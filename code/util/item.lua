@@ -45,4 +45,14 @@ Item.copySoundsTo = function(a, b)
 	b.inventory_move_sound = a.inventory_move_sound
 end
 
+Item.clearFuel = function(item)
+	item.fuel_value = nil
+	item.fuel_acceleration_multiplier = nil
+	item.fuel_emissions_multiplier = nil
+	item.fuel_category = nil
+	item.fuel_top_speed_multiplier = nil
+	item.fuel_emissions_multiplier = nil
+	item.fuel_glow_color = nil
+end
+
 return Item

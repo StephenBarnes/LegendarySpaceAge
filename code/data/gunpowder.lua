@@ -53,3 +53,20 @@ data.raw.recipe["shotgun-shell"].ingredients = { -- Originally 2 iron plate + 2 
 	{type="item", name="gunpowder", amount=1},
 }
 data.raw.recipe["shotgun-shell"].results = {{type = "item", name = "shotgun-shell", amount = 2}}
+
+-- Create tech.
+local tech = table.deepcopy(data.raw.technology["rocket-fuel"])
+tech.name = "gunpowder"
+tech.effects = {
+	{type = "unlock-recipe", recipe = "gunpowder"},
+	{type = "unlock-recipe", recipe = "firearm-magazine"},
+}
+tech.prerequisites = {"char"}
+tech.unit = nil
+tech.research_trigger = {
+	type = "craft-item",
+	item = "carbon",
+	count = 100,
+}
+tech.icon = "__LegendarySpaceAge__/graphics/gunpowder/tech.png"
+data:extend{tech}

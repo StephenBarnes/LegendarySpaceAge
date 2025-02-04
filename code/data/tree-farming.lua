@@ -2,6 +2,7 @@
 
 local Tech = require("code.util.tech")
 local Recipe = require("code.util.recipe")
+local Item = require("code.util.item")
 
 -- Move tree farming tech to early game.
 data.raw.technology["fish-breeding"].prerequisites = {"agricultural-science-pack"}
@@ -107,11 +108,7 @@ fertilizerItem.order = "003"
 fertilizerItem.icon = nil
 fertilizerItem.icons = {{icon = fertilizerIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 fertilizerItem.pictures = fertilizerIcons
-fertilizerItem.fuel_value = nil
-fertilizerItem.fuel_acceleration_multiplier = nil
-fertilizerItem.fuel_top_speed_multiplier = nil
-fertilizerItem.fuel_emissions_multiplier = nil
-fertilizerItem.fuel_glow_color = nil
+Item.clearFuel(fertilizerItem)
 data:extend{fertilizerItem}
 
 -- Create new "sapling" item.
@@ -127,8 +124,7 @@ saplingItem.subgroup = "early-agriculture"
 saplingItem.order = "004"
 saplingItem.spoil_ticks = 60 * 60 * 60 -- 1 hour
 saplingItem.spoil_result = "wood"
-saplingItem.fuel_value = nil
-saplingItem.fuel_category = nil
+Item.clearFuel(saplingItem)
 saplingItem.icon = nil
 saplingItem.icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}}
 saplingItem.pictures = saplingPictures

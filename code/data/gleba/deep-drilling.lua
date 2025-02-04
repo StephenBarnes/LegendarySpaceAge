@@ -2,6 +2,8 @@
 Also later recipes for them.
 ]]
 
+local Item = require("code.util.item")
+
 -- Make the subgroup
 data:extend{
 	{
@@ -67,15 +69,7 @@ for _, picName in pairs{
 end
 marrowItem.subgroup = "gleba-non-agriculture"
 marrowItem.spoil_ticks = nil
-do
-	marrowItem.fuel_value = nil
-	marrowItem.fuel_acceleration_multiplier = nil
-	marrowItem.fuel_emissions_multiplier = nil
-	marrowItem.fuel_category = nil
-	marrowItem.fuel_top_speed_multiplier = nil
-	marrowItem.fuel_emissions_multiplier = nil
-	marrowItem.fuel_glow_color = nil
-end
+Item.clearFuel(marrowItem)
 marrowItem.stack_size = 50
 marrowItem.weight = 1e6 / 500
 data:extend{marrowItem}

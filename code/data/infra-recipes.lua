@@ -161,6 +161,13 @@ data.raw.recipe["power-switch"].ingredients = {
 ------------------------------------------------------------------------
 --- UNSORTED, TODO SORT STUFF BELOW
 
+-- Lamp
+data.raw.recipe["small-lamp"].ingredients = {
+	{ type = "item", name = "glass",  amount = 1 },
+	{ type = "item", name = "wiring", amount = 1 },
+	{ type = "item", name = "frame",  amount = 1 },
+}
+
 -- Repair pack
 data.raw.recipe["repair-pack"].ingredients = {
 	{type="item", name="mechanism", amount=1},
@@ -172,6 +179,7 @@ data.raw.recipe["stone-brick"].category = "smelting-or-metallurgy-or-handcraftin
 
 
 -- Furnaces
+data.raw.recipe["char-furnace"].ingredients = {{type="item", name="structure", amount=1}}
 data.raw.recipe["stone-furnace"].ingredients = {{type="item", name="structure", amount=1}}
 data.raw.recipe["steel-furnace"].ingredients = {
 	{type="item", name="frame", amount=2},
@@ -322,13 +330,6 @@ data.raw.recipe["solar-panel"].ingredients = {
 	{type = "item", name = "silicon", amount = 10},
 	{type = "item", name = "electronic-circuit", amount = 2},
 	{type = "item", name = "steel-plate", amount = 4},
-}
-
--- Small lamps.
-data.raw.recipe["small-lamp"].ingredients = {
-	{type = "item", name = "glass", amount = 2},
-	{type = "item", name = "iron-plate", amount = 2},
-	{type = "item", name = "copper-cable", amount = 2},
 }
 
 -- Labs
