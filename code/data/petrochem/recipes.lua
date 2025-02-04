@@ -233,7 +233,7 @@ woodResinRecipe.icons = {
 	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale=0.32, shift={-5, -5}},
 }
 woodResinRecipe.icon = nil
-woodResinRecipe.order = "a[basic-intermediate]-e[resin]-1"
+woodResinRecipe.order = "01"
 woodResinRecipe.subgroup = "resin"
 woodResinRecipe.main_product = "resin"
 woodResinRecipe.energy_required = 4
@@ -254,7 +254,7 @@ pitchResinRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size = 64, scale=0.32, shift={-5, -5}},
 }
 pitchResinRecipe.icon = nil
-pitchResinRecipe.order = "a[basic-intermediate]-e[resin]-2"
+pitchResinRecipe.order = "02"
 pitchResinRecipe.subgroup = "resin"
 pitchResinRecipe.main_product = "resin"
 pitchResinRecipe.energy_required = 2
@@ -275,7 +275,7 @@ richGasResinRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.32, shift={-5, -5}, tint=constants.richgasColor},
 }
 richGasResinRecipe.icon = nil
-richGasResinRecipe.order = "a[basic-intermediate]-e[resin]-3"
+richGasResinRecipe.order = "03"
 richGasResinRecipe.subgroup = "resin"
 richGasResinRecipe.main_product = "resin"
 richGasResinRecipe.energy_required = 2

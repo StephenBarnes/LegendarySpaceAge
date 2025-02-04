@@ -98,10 +98,12 @@ pearlSmeltRecipe.name = "smelt-slipstack-pearl"
 pearlSmeltRecipe.ingredients = {{type = "item", name = "slipstack-pearl", amount = 1}}
 pearlSmeltRecipe.results = {{type = "item", name = "resin", amount = 1}}
 pearlSmeltRecipe.category = "smelting"
+pearlSmeltRecipe.subgroup = "resin"
+pearlSmeltRecipe.order = "04"
 pearlSmeltRecipe.icon = nil
 pearlSmeltRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.5},
-	{icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png", icon_size = 64, scale = 0.3, shift = {-8, -8}},
 }
 data:extend{pearlSmeltRecipe}
 

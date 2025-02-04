@@ -1,6 +1,6 @@
 --[[ This file adds the "char furnace", which is like a stone furnace but it has a fixed recipe that produces carbon. Runs on any carbon-based fuel except actual carbon.
 This allows the player to get carbon early-game, to make circuits.
-1 carbon is 2MJ, energy consumption will be 400kW, so for zero energy gain/loss it should produce 1 carbon every 5 seconds.
+1 carbon is 2MJ, energy consumption will be 400kW, so for zero energy gain/loss it should produce 1 carbon every 5 seconds. But make it every 6 seconds for a bit of inefficiency.
 ]]
 
 -- Create entity.
@@ -63,7 +63,7 @@ local charRecipe = table.deepcopy(data.raw.recipe["rocket-fuel"])
 charRecipe.name = "char-carbon"
 charRecipe.results = {{type = "item", name = "carbon", amount = 1}}
 charRecipe.ingredients = {}
-charRecipe.energy_required = 5
+charRecipe.energy_required = 6
 charRecipe.enabled = false
 charRecipe.subgroup = "raw-material"
 charRecipe.category = "char-furnace"
