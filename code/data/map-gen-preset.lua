@@ -25,10 +25,6 @@ custom.advanced_settings.asteroids.spawning_rate = 0.75
 custom.advanced_settings.enemy_evolution.time_factor = 0
 custom.advanced_settings.enemy_evolution.pollution_factor = 0.0000002 -- There's an extra factor of 0.0000001 for some reason. Default is 0.0000009 displayed as "9".
 
--- Reduce stone on Gleba - to encourage either slipstack cultivation or rail mining outposts, both of which are more interesting than just having a starting patch that's enough to win the game.
-custom.basic_settings.autoplace_controls["gleba_stone"] = {richness = 1/3}
--- TODO also just delete the autoplace named-var for stone beyond the starting area.
-
 -- Fulgora: increase amount of water, make islands further apart but not much bigger.
 custom.basic_settings.autoplace_controls["fulgora_islands"] = {
 	size = 1/6, -- Scale 600%.

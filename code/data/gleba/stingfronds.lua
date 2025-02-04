@@ -20,7 +20,7 @@ stingfrondPlant.autoplace.tile_restriction = {
 	--"highland-dark-rock-2",
 }
 -- Make them visible on map.
-stingfrondPlant.map_color = {102, 198, 207}
+stingfrondPlant.map_color = {.396, .667, .473}
 -- Edit color shown in ag tower.
 stingfrondPlant.agricultural_tower_tint = {
 	primary = {r = 0.47, g = 0.90, b = 0.94, a = 1},

@@ -19,8 +19,8 @@ slipstackPlant.autoplace.tile_restriction = {
 	"wetland-pink-tentacle",
 	"wetland-red-tentacle",
 }
--- Make them visible on map. TODO change
-slipstackPlant.map_color = {200, 200, 200}
+-- Make them visible on map. Color matches purple swamp.
+slipstackPlant.map_color = {.92, .525, .6}
 -- Edit color shown in ag tower.
 slipstackPlant.agricultural_tower_tint = {
 	primary = {r = 0.15, g = 0.22, b = 0.38, a = 1},
