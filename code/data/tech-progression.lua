@@ -102,7 +102,7 @@ Tech.addTechDependency("steel-processing", "battery")
 Tech.hideTech("oil-gathering")
 data.raw.technology["oil-processing"].unit = data.raw.technology["oil-gathering"].unit
 data.raw.technology["oil-processing"].research_trigger = nil
-data.raw.technology["oil-processing"].prerequisites = {"fluid-handling", "steam-power", "cement"}
+data.raw.technology["oil-processing"].prerequisites = {"fluid-handling"}
 Tech.addRecipeToTech("pumpjack", "oil-processing", 2)
 
 -- Elimininate the now-pointless "advanced oil processing" tech.

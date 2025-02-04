@@ -195,19 +195,20 @@ data:extend{nauvisDrillingRecipe}
 for i, planetData in pairs{
 	{"vulcanus", {
 		--{type = "fluid", name = "lava", amount = 5}, -- Could make it produce lava, but then you could put lava in pipes.
-		{type = "item", name = "stone", amount = 8},
-		{type = "item", name = "carbon", amount = 2},
-			-- Drill consumes 10MJ for each recipe. Each carbon is 2MJ. So you get back 4MJ of fuel. With efficiency modules you could reduce energy cost to 2MJ, so 2MW profit.
+		{ type = "fluid", name = "tar",    amount = 5 },
+		{ type = "item",  name = "stone",  amount = 5 },
+		{ type = "item",  name = "carbon", amount = 1 },
+		-- Drill consumes 10MJ for each recipe, which can be reduced to 2MJ with modules. Each carbon is 2MJ, each tar is 200kJ.
 	}},
 	{"gleba", {
-		{type = "fluid", name = "geoplasm", amount = 10},
-		{type = "item", name = "chitin-fragments", amount = 4},
-		{type = "item", name = "marrow", amount = 6},
+		{ type = "fluid", name = "geoplasm",         amount = 10 },
+		{ type = "item",  name = "chitin-fragments", amount = 4 },
+		{ type = "item",  name = "marrow",           amount = 6 },
 	}},
 		-- TODO change stone to chitin
 	{"fulgora", {
-		{type = "item", name = "stone", amount = 8},
-		{type = "item", name = "scrap", amount = 2},
+		{type = "item", name = "stone", amount = 7},
+		{type = "item", name = "scrap", amount = 3},
 	}},
 } do
 	local planetName = planetData[1]

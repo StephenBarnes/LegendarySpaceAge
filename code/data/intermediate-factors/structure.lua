@@ -47,6 +47,7 @@ recipeFromResin.order = "02"
 recipeFromResin.energy_required = 6
 recipeFromResin.category = "crafting"
 recipeFromResin.icons[3].icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png"
+recipeFromResin.icons[3].scale = 0.2
 recipeFromResin.allow_as_intermediate = true
 data:extend{recipeFromResin}
 
@@ -64,7 +65,7 @@ recipeFromChitin.category = "organic-or-assembling-with-fluid"
 recipeFromChitin.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5},
 	{icon = "__LegendarySpaceAge__/graphics/gleba/chitin-block/1.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-	{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.20, shift = {8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
 }
 recipeFromChitin.allow_as_intermediate = false
 data:extend{recipeFromChitin}

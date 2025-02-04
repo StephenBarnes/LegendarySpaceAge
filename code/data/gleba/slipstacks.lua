@@ -53,13 +53,21 @@ slipstackPearl.order = "a[organic-processing]-da[slipstack-pearl]"
 slipstackPearl.subgroup = "agriculture-products"
 slipstackPearl.spoil_ticks = 60 * 60 * 5 -- 5 minutes.
 slipstackPearl.spoil_result = "spoilage"
-slipstackPearl.fuel_category = "chemical"
-slipstackPearl.fuel_value = "1MJ" -- Compared to spoilage 250kJ and wood 2MJ.
+do
+	slipstackPearl.fuel_value = nil
+	slipstackPearl.fuel_acceleration_multiplier = nil
+	slipstackPearl.fuel_emissions_multiplier = nil
+	slipstackPearl.fuel_category = nil
+	slipstackPearl.fuel_top_speed_multiplier = nil
+	slipstackPearl.fuel_emissions_multiplier = nil
+	slipstackPearl.fuel_glow_color = nil
+end
 data:extend{slipstackPearl}
 
 -- Create item for slipstack nest
 local slipstackNest = table.deepcopy(data.raw.item["iron-ore"])
 slipstackNest.name = "slipstack-nest"
+slipstackNest.localised_name = {"item-name.slipstack-nest"}
 slipstackNest.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-nest.png"
 slipstackNest.pictures = nil
 slipstackNest.order = "a[organic-processing]-da[slipstack-nest]"
@@ -91,6 +99,19 @@ slipstackNestRecipe.auto_recycle = true
 slipstackNestRecipe.icon = nil
 data:extend{slipstackNestRecipe}
 
+-- Recipe for smelting slipstack pearls to resin
+local pearlSmeltRecipe = table.deepcopy(data.raw.recipe["bioplastic"])
+pearlSmeltRecipe.name = "smelt-slipstack-pearl"
+pearlSmeltRecipe.ingredients = {{type = "item", name = "slipstack-pearl", amount = 1}}
+pearlSmeltRecipe.results = {{type = "item", name = "resin", amount = 1}}
+pearlSmeltRecipe.category = "smelting"
+pearlSmeltRecipe.icon = nil
+pearlSmeltRecipe.icons = {
+	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.5},
+	{icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
+}
+data:extend{pearlSmeltRecipe}
+
 ------------------------------------------------------------------------
 --- Adjust recipes for applications
 -- TODO actually all of these recipes should just be redefined wholesale, not like this.
@@ -121,6 +142,7 @@ slipstackTech.research_trigger = {
 	entity = "slipstack",
 }
 slipstackTech.effects = {
+	{type = "unlock-recipe", recipe = "smelt-slipstack-pearl"},
 	{type = "unlock-recipe", recipe = "slipstack-nest"},
 }
 data:extend{slipstackTech}
