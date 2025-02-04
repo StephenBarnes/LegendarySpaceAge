@@ -5,7 +5,7 @@ local Gen = require("code.util.general")
 local Const = require("code.util.constants")
 
 local BARREL_FLUID_AMOUNT = 50 -- 50 fluid units per barrel, from vanilla.
-local GAS_TANK_FLUID_AMOUNT = 200 -- 200 fluid units per gas tank.
+local GAS_TANK_FLUID_AMOUNT = 80 -- 80 fluid units per gas tank. Setting it too high causes fuel density to be too high.
 
 -- Edit some of the barrelling recipes to instead have the icon for the gas tank, and use gas tank ingredient and result.
 local gases = Table.listToSet{
@@ -91,7 +91,8 @@ for gasName, _ in pairs(gases) do
 	emptyRecipe.subgroup = "empty-gas-tank"
 
 	-- Increase stack size for the gas tank. Barrels are 10, tanks at 20 seems reasonable.
-	item.stack_size = 20
+	--item.stack_size = 20
+	-- Actually rather not, since it increases energy density by a lot.
 end
 
 -- Go through fluid handling tech, remove all barrelling recipes, add to new tech.

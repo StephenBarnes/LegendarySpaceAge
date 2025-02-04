@@ -15,12 +15,6 @@ local function setStartItems()
 		return
 	end
 	local items = {
-		['iron-plate'] = 16,
-		['iron-gear-wheel'] = 8,
-
-		['burner-mining-drill'] = 1,
-		['stone-furnace'] = 1,
-
 		['pistol'] = 1,
 		['firearm-magazine'] = 60,
 
@@ -28,6 +22,15 @@ local function setStartItems()
 		['personal-roboport-equipment'] = 2,
 		['battery-equipment'] = 2,
 		-- Player has to make a personal burner generator to actually power the stuff.
+
+		-- Prefer to give factors rather than raw materials. Seems more appropriate.
+		-- Give some structures etc, so player doesn't need to chop a lot of trees for resin.
+		['mechanism'] = 12,
+		['structure'] = 20,
+		['frame'] = 30,
+		['wiring'] = 10,
+		['panel'] = 20,
+		['sensor'] = 5,
 	}
 	remote.call('freeplay', 'set_debris_items', items)
 	remote.call('freeplay', 'set_created_items', items)

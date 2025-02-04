@@ -195,10 +195,10 @@ data:extend{nauvisDrillingRecipe}
 for i, planetData in pairs{
 	{"vulcanus", {
 		--{type = "fluid", name = "lava", amount = 5}, -- Could make it produce lava, but then you could put lava in pipes.
-		{ type = "fluid", name = "tar",    amount = 5 },
-		{ type = "item",  name = "stone",  amount = 5 },
-		{ type = "item",  name = "carbon", amount = 1 },
-		-- Drill consumes 10MJ for each recipe, which can be reduced to 2MJ with modules. Each carbon is 2MJ, each tar is 200kJ.
+		{ type = "fluid", name = "tar",   amount = 5 },
+		{ type = "item",  name = "stone", amount = 5 },
+		{ type = "item",  name = "pitch", amount = 1 },
+		-- Drill consumes 10MJ for each recipe, which can be reduced to 2MJ with modules. Each pitch is 3MJ, each tar is 200kJ.
 	}},
 	{"gleba", {
 		{ type = "fluid", name = "geoplasm",         amount = 10 },

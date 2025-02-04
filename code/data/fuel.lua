@@ -29,8 +29,13 @@ local nonCarbonFuelCategory = table.deepcopy(data.raw["fuel-category"]["chemical
 nonCarbonFuelCategory.name = "non-carbon"
 data:extend{nonCarbonFuelCategory}
 
+-- Create fuel category for pure carbon. Because we want to allow char furnaces to use all carbon-based fuels except actual carbon.
+local pureCarbonFuelCategory = table.deepcopy(data.raw["fuel-category"]["chemical"])
+pureCarbonFuelCategory.name = "pure-carbon"
+data:extend{pureCarbonFuelCategory}
+
 -- Set fuel categories for some entities to allow non-carbon-based fuels (sulfur, hydrogen).
-local expandedFuelCategories = {"chemical", "non-carbon"}
+local expandedFuelCategories = {"chemical", "non-carbon", "pure-carbon"}
 for _, typeAndName in pairs{
 	{"reactor", "heating-tower"},
 	{"boiler", "boiler"},
@@ -89,3 +94,8 @@ for _, type in pairs{"car", "locomotive", "inserter", "furnace", "assembling-mac
 		end
 	end
 end
+
+-- Boost stack sizes of some fuels.
+data.raw.item["carbon"].stack_size = 100
+data.raw.item["solid-fuel"].stack_size = 100
+data.raw.item["rocket-fuel"].stack_size = 100

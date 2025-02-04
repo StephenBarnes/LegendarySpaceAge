@@ -3,6 +3,7 @@ require("code.data.crafting-categories")
 require("code.data.fluid-boxes")
 
 -- Files that create new protos.
+require("code.data.char-furnace")
 require("code.data.early-equipment-grids")
 require("code.data.map-gen-preset")
 require("code.data.remove-mapgen-presets")

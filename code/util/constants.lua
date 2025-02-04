@@ -21,7 +21,7 @@ Export.itemFuelValues = { -- Maps from fluid name to fuel value, pollution multi
 	["pitch"] = {"3MJ", 2.5, .5, .5, "chemical"},
 	["resin"] = {"1MJ", 2, .5, .5, "chemical"},
 	["rocket-fuel"] = {"25MJ", .8, 1.8, 1.15, "chemical"}, -- Each one is 25 light oil, 12 rich gas, so that suggests 30MJ. Vanilla is 100MJ.
-	["carbon"] = {"2MJ", .6, .7, .7, "chemical"},
+	["carbon"] = {"2MJ", .6, .7, .7, "pure-carbon"},
 	["wood"] = {"2MJ", 1.2, .4, .4, "chemical"},
 	["coal"] = {"4MJ", 1.4, .5, .5, "chemical"},
 	-- TODO really we should do all the other fuels in the game, eg seeds, so they also have bad vehicle stats.
