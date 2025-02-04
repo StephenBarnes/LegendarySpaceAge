@@ -9,7 +9,6 @@ for size, multiplier in pairs{
 	big = 3,
 	behemoth = 4,
 } do
-	log("Setting minable results for "..size.." stomper shell")
 	local shell = data.raw["simple-entity"][size.."-stomper-shell"]
 	shell.minable.results = {
 		{type = "item", name = "chitin-fragments", amount_min = 0, amount_max = 20 * multiplier},
@@ -28,11 +27,15 @@ But, currently when placed they also create the corpse. So we create no-corpse v
 
 Copying autoplaces from stromatolites, but modifying them.
 Gleba-select params: input, from, to, slope, min, max.
-Iron stromatolite is   gleba_select(gleba_aux, 0.6, 2.0, 0.1, -10, 1) - 1
-Copper stromatolite is gleba_select(gleba_aux,-1.0, 0.4, 0.1, -10, 1) - 1
 Iron stromatolite:   probability_expression = "gleba_select(gleba_iron_stromatolite   - clamp(gleba_decorative_knockout, 0, 1), 1.3, 2, 0.2, 0, 1)"
+	gleba_iron_stromatolite is   gleba_select(gleba_aux, 0.6, 2.0, 0.1, -10, 1) - 1
 Copper stromatolite: probability_expression = "gleba_select(gleba_copper_stromatolite - clamp(gleba_decorative_knockout, 0, 1), 1.3, 2, 0.2, 0, 1)"
-So, we use the same autoplace, but while copper is -1 to 0.4, and iron is 0.6 to 2.0, we use 0.2 to 0.8 for both.
+	gleba_copper_stromatolite is gleba_select(gleba_aux,-1.0, 0.4, 0.1, -10, 1) - 1
+Looks like the middle part of that (0.4 to 0.6) is the highland. -1 to 0.4 is green lowland, 0.6 to 2 is purple lowland.
+So, we use the same autoplace, but max those segments.
+That still doesn't really match stromatolite distribution - stromatolites are always in water, seems to be due to collision_mask.layers.ground_tile.
+	Tried adding that. Also have to 100x the probability multiplier or they become very rare.
+	On the whole, decided against it. Rather have stromatolites in the water, skulls on land.
 ]]
 
 local smallShellNoCorpse = table.deepcopy(data.raw["simple-entity"]["small-stomper-shell"])
@@ -40,12 +43,11 @@ smallShellNoCorpse.name = "small-stomper-shell-no-corpse"
 smallShellNoCorpse.localised_name = {"entity-name.small-stomper-shell"}
 smallShellNoCorpse.created_effect = nil -- Don't create a corpse.
 smallShellNoCorpse.autoplace = {
-	order = "b1",
+	order = "a1",
 	probability_expression = "multiplier * gleba_select(gleba_stomper_shell - clamp(gleba_decorative_knockout, 0, 1), 1.3, 2, 0.2, 0, 1)",
 	local_expressions = {
 		multiplier = 0.009,
-		gleba_stomper_shell = "region_box - gleba_scrub_noise",
-		region_box = "gleba_select(gleba_aux, 0.2, 0.8, 0.1, -10, 1) - 1",
+		gleba_stomper_shell = "max(gleba_iron_stromatolite, gleba_copper_stromatolite)",
 	}
 }
 -- Default: map_color = {129, 105, 78} - looks like cliffs.
@@ -58,7 +60,7 @@ mediumShellNoCorpse.name = "medium-stomper-shell-no-corpse"
 mediumShellNoCorpse.localised_name = {"entity-name.medium-stomper-shell"}
 mediumShellNoCorpse.created_effect = nil -- Don't create a corpse.
 mediumShellNoCorpse.autoplace = table.deepcopy(smallShellNoCorpse.autoplace)
-mediumShellNoCorpse.autoplace.order = "b2"
+mediumShellNoCorpse.autoplace.order = "a2"
 mediumShellNoCorpse.autoplace.local_expressions.multiplier = 0.004
 mediumShellNoCorpse.map_color = {174, 156, 136}
 data:extend{mediumShellNoCorpse}
