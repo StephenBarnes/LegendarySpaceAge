@@ -102,6 +102,14 @@ chitinBrothFluid.max_temperature = nil
 chitinBrothFluid.heat_capacity = nil
 data:extend{chitinBrothFluid}
 
+-- Create appendage item.
+local appendageItem = table.deepcopy(marrowItem)
+appendageItem.name = "appendage"
+-- TODO set icon and pictures later.
+data:extend{appendageItem}
+
+------------------------------------------------------------------------
+
 -- Create chitin-broth recipe: 10 chitin fragments + 100 water + 4 nutrients -> 100 chitin-broth.
 local chitinBrothRecipe = table.deepcopy(data.raw.recipe["lubricant"])
 chitinBrothRecipe.name = "making-chitin-broth" -- Different name from fluid, so it doesn't get combined in factoriopedia.
@@ -159,6 +167,7 @@ for i, itemName in pairs{
 	"chitin-fragments",
 	"chitin-block",
 	"tubule",
+	"appendage",
 } do
 	data.raw.item[itemName].order = string.format("%02d", i)
 end
