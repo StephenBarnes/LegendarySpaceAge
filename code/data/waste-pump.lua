@@ -84,15 +84,21 @@ end
 local effluentFluidsAndPollution = {
 	{"water", 0},
 	{"lake-water", 0},
-	{"slime", 0},
 	{"crude-oil", 20},
 	{"tar", 30},
 	{"heavy-oil", 25},
 	{"light-oil", 15},
 	{"lubricant", 20},
+	{"slime", 0},
+	{"geoplasm", 10},
+	{"chitin-broth", 0},
 	{"thruster-fuel", 0}, -- hydrogen
 	{"thruster-oxidizer", 0}, -- oxygen
 	{"lava", 0},
+	{"molten-iron", 20},
+	{"molten-copper", 20},
+	{"molten-steel", 20},
+	{"molten-tungsten", 20},
 	{"holmium-solution", 0},
 	{"fulgoran-sludge", 0},
 	{"electrolyte", 0},

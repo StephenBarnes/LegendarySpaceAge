@@ -67,4 +67,21 @@ blueCircuitRecipe.energy_required = 1
 data:extend{blueCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-blue-circuit", "processing-unit")
 
+-- Create sencytiumRecipe: 1 green circuit + 1 sencytium + 1 frame -> 1 sensor
+local sencytiumRecipe = table.deepcopy(greenCircuitRecipe)
+sencytiumRecipe.name = "sensor-from-sencytium"
+sencytiumRecipe.ingredients = {
+	{type = "item", name = "electronic-circuit", amount = 1},
+	{type = "item", name = "sencytium", amount = 1},
+	{type = "item", name = "frame", amount = 1}
+}
+sencytiumRecipe.results = {{type = "item", name = "sensor", amount = 1}}
+sencytiumRecipe.enabled = true -- TODO make tech
+sencytiumRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/sencytium/1.png", icon_size = 64, scale = 0.35, shift = {-8, -6}}
+sencytiumRecipe.allow_as_intermediate = false
+sencytiumRecipe.allow_decomposition = false
+sencytiumRecipe.energy_required = 2
+data:extend{sencytiumRecipe}
+
+
 -- TODO make more recipes, and add them to techs.

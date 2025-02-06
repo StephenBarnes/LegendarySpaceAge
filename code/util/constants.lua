@@ -14,6 +14,7 @@ Export.fluidFuelValues = { -- Maps from fluid name to fuel value, pollution mult
 	["tar"] = {"200kJ", 3, .5, .5, "chemical"},
 	["thruster-fuel"] = {"50kJ", 0, .5, .5, "non-carbon"}, -- Hydrogen
 	["thruster-oxidizer"] = {nil, nil, nil, nil, nil}, -- Oxygen. Originally 50kJ, setting it to zero, seems there's no issue doing that, thrusters still work. Don't want oxygen to be usable as fuel in fluid fuelled boilers etc.
+	["geoplasm"] = {"100kJ", 1, .5, .5, "chemical"},
 }
 Export.itemFuelValues = { -- Maps from fluid name to fuel value, pollution multiplier, vehicle acceleration mult, vehicle top-speed mult, and fuel category.
 	["sulfur"] = {"3MJ", 8, .5, .5, "non-carbon"},

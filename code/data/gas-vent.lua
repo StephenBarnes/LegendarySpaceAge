@@ -127,6 +127,7 @@ local ventableFluids = {
 	{"syngas", 4, false},
 	{"ammonia", 10, false},
 	{"fluorine", 30, false},
+	{"volcanic-gas", 0, false},
 	{"thruster-fuel", 0, true}, -- hydrogen
 	{"thruster-oxidizer", 0, true}, -- oxygen
 
@@ -139,6 +140,9 @@ local ventableFluids = {
 	{"cement", 0, true},
 	{"latex", 0, true},
 	{"lubricant", 0, true},
+	{"slime", 0, true},
+	{"geoplasm", 0, true},
+	{"chitin-broth", 0, true},
 	{"molten-iron", 0, true},
 	{"molten-copper", 0, true},
 	{"molten-steel", 0, true},

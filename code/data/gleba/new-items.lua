@@ -17,7 +17,11 @@ data:extend{
 local geoplasmFluid = table.deepcopy(data.raw.fluid["lubricant"])
 geoplasmFluid.name = "geoplasm"
 geoplasmFluid.icon = "__LegendarySpaceAge__/graphics/gleba/geoplasm.png"
--- TODO set colors
+local geoplasmPinkColor = {r=.8, g=.404, b=.388}
+local geoplasmGreenColor = {r=.345, g = .518, b = .098}
+geoplasmFluid.base_color = geoplasmPinkColor
+geoplasmFluid.flow_color = geoplasmGreenColor
+geoplasmFluid.visualization_color = geoplasmPinkColor
 data:extend{geoplasmFluid}
 
 -- Create chitin fragments item
@@ -89,7 +93,11 @@ data:extend{tubuleItem}
 local chitinBrothFluid = table.deepcopy(data.raw.fluid["water"])
 chitinBrothFluid.name = "chitin-broth"
 chitinBrothFluid.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-broth.png"
--- TODO set colors
+local chitinDarkColor = {r = .365, g = .263, b = .224}
+local chitinLightColor = {r = .663, g = .58, b = .482}
+chitinBrothFluid.base_color = chitinDarkColor
+chitinBrothFluid.flow_color = chitinLightColor
+chitinBrothFluid.visualization_color = chitinDarkColor
 -- Remove temperature stats from chitin-broth.
 chitinBrothFluid.max_temperature = nil
 chitinBrothFluid.heat_capacity = nil
@@ -140,6 +148,11 @@ chitinBrothRecipe.main_product = "chitin-broth"
 chitinBrothRecipe.energy_required = 2
 chitinBrothRecipe.enabled = true -- TODO make tech
 chitinBrothRecipe.subgroup = "gleba-non-agriculture"
+chitinBrothRecipe.crafting_machine_tint = {
+	primary = chitinLightColor,
+	secondary = chitinDarkColor,
+	tertiary = chitinLightColor,
+}
 data:extend{chitinBrothRecipe}
 -- TODO consider adding a recipe to cast structures out of chitin broth?
 
@@ -161,6 +174,8 @@ tubuleRecipe.main_product = "tubule"
 tubuleRecipe.energy_required = 8
 tubuleRecipe.enabled = true
 tubuleRecipe.icon = nil -- So it defaults to tubule icon.
+tubuleRecipe.subgroup = "gleba-non-agriculture"
+tubuleRecipe.crafting_machine_tint = table.deepcopy(chitinBrothRecipe.crafting_machine_tint)
 data:extend{tubuleRecipe}
 
 -- Create smelting recipe for chitin fragments to block.
@@ -172,6 +187,8 @@ chitinBlockRecipe.ingredients = {
 chitinBlockRecipe.results = {{type = "item", name = "chitin-block", amount = 1}}
 chitinBlockRecipe.enabled = true -- TODO make tech
 chitinBlockRecipe.auto_recycle = true
+chitinBlockRecipe.subgroup = "gleba-non-agriculture"
+chitinBlockRecipe.crafting_machine_tint = table.deepcopy(chitinBrothRecipe.crafting_machine_tint)
 data:extend{chitinBlockRecipe}
 
 -- Create recipe for appendages: 10 geoplasm + 1 tubule -> 1 appendage
@@ -185,6 +202,12 @@ appendageRecipe.results = {{type = "item", name = "appendage", amount = 1}}
 appendageRecipe.main_product = "appendage"
 appendageRecipe.energy_required = 4
 appendageRecipe.enabled = true -- TODO make tech
+appendageRecipe.subgroup = "gleba-non-agriculture"
+appendageRecipe.crafting_machine_tint = {
+	primary = geoplasmGreenColor,
+	secondary = geoplasmPinkColor,
+	tertiary = geoplasmGreenColor,
+}
 data:extend{appendageRecipe}
 
 -- Create recipe for sencytium: 20 geoplasm + 1 activated pentapod egg -> 1 sencytium
@@ -198,7 +221,9 @@ sencytiumRecipe.results = {{type = "item", name = "sencytium", amount = 1}}
 sencytiumRecipe.main_product = "sencytium"
 sencytiumRecipe.energy_required = 8
 sencytiumRecipe.enabled = true -- TODO make tech
+sencytiumRecipe.subgroup = "gleba-non-agriculture"
 sencytiumRecipe.icon = nil -- So it defaults to sencytium icon.
+sencytiumRecipe.crafting_machine_tint = table.deepcopy(appendageRecipe.crafting_machine_tint)
 data:extend{sencytiumRecipe}
 
 ------------------------------------------------------------------------
