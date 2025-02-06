@@ -106,18 +106,32 @@ for i = 1, 9 do
 end
 appendageItem.subgroup = "gleba-non-agriculture"
 appendageItem.icon = appendageDir.."1.png"
-appendageItem.spoil_ticks = 60 * 60 * 20
+appendageItem.spoil_ticks = 60 * 60 * 10
 appendageItem.spoil_result = "spoilage"
 data:extend{appendageItem}
 
+-- Create sencytium item.
+local sencytiumItem = table.deepcopy(appendageItem)
+sencytiumItem.name = "sencytium"
+local sencytiumDir = "__LegendarySpaceAge__/graphics/gleba/sencytium/"
+sencytiumItem.icon = sencytiumDir.."1.png"
+sencytiumItem.pictures = {}
+for i = 1, 11 do
+	sencytiumItem.pictures[i] = {filename = sencytiumDir..i..".png", size = 64, scale = 0.5}
+end
+sencytiumItem.subgroup = "gleba-non-agriculture"
+sencytiumItem.spoil_ticks = 60 * 60 * 10
+sencytiumItem.spoil_result = "spoilage"
+data:extend{sencytiumItem}
+
 ------------------------------------------------------------------------
 
--- Create chitin-broth recipe: 10 chitin fragments + 100 water + 4 nutrients -> 100 chitin-broth.
+-- Create chitin-broth recipe: 4 chitin fragments + 100 water + 4 nutrients -> 100 chitin-broth.
 local chitinBrothRecipe = table.deepcopy(data.raw.recipe["lubricant"])
 chitinBrothRecipe.name = "making-chitin-broth" -- Different name from fluid, so it doesn't get combined in factoriopedia.
 chitinBrothRecipe.category = "organic-or-chemistry"
 chitinBrothRecipe.ingredients = {
-	{ type = "item",  name = "chitin-fragments", amount = 10 },
+	{ type = "item",  name = "chitin-fragments", amount = 4 },
 	{ type = "item",  name = "nutrients",        amount = 4 },
 	{ type = "fluid", name = "water",            amount = 100 },
 }
@@ -173,6 +187,20 @@ appendageRecipe.energy_required = 4
 appendageRecipe.enabled = true -- TODO make tech
 data:extend{appendageRecipe}
 
+-- Create recipe for sencytium: 20 geoplasm + 1 activated pentapod egg -> 1 sencytium
+local sencytiumRecipe = table.deepcopy(appendageRecipe)
+sencytiumRecipe.name = "sencytium"
+sencytiumRecipe.ingredients = {
+	{type = "fluid", name = "geoplasm", amount = 20},
+	{type = "item", name = "activated-pentapod-egg", amount = 1},
+}
+sencytiumRecipe.results = {{type = "item", name = "sencytium", amount = 1}}
+sencytiumRecipe.main_product = "sencytium"
+sencytiumRecipe.energy_required = 8
+sencytiumRecipe.enabled = true -- TODO make tech
+sencytiumRecipe.icon = nil -- So it defaults to sencytium icon.
+data:extend{sencytiumRecipe}
+
 ------------------------------------------------------------------------
 
 -- Set orders for items. (TODO later recipes too?)
@@ -182,6 +210,7 @@ for i, itemName in pairs{
 	"chitin-block",
 	"tubule",
 	"appendage",
+	"sencytium",
 } do
 	data.raw.item[itemName].order = string.format("%02d", i)
 end
