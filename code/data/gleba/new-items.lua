@@ -201,7 +201,7 @@ appendageRecipe.ingredients = {
 appendageRecipe.results = {{type = "item", name = "appendage", amount = 1}}
 appendageRecipe.main_product = "appendage"
 appendageRecipe.energy_required = 4
-appendageRecipe.enabled = true -- TODO make tech
+appendageRecipe.enabled = false
 appendageRecipe.subgroup = "gleba-non-agriculture"
 appendageRecipe.crafting_machine_tint = {
 	primary = geoplasmGreenColor,
@@ -220,7 +220,7 @@ sencytiumRecipe.ingredients = {
 sencytiumRecipe.results = {{type = "item", name = "sencytium", amount = 1}}
 sencytiumRecipe.main_product = "sencytium"
 sencytiumRecipe.energy_required = 8
-sencytiumRecipe.enabled = true -- TODO make tech
+sencytiumRecipe.enabled = false
 sencytiumRecipe.subgroup = "gleba-non-agriculture"
 sencytiumRecipe.icon = nil -- So it defaults to sencytium icon.
 sencytiumRecipe.crafting_machine_tint = table.deepcopy(appendageRecipe.crafting_machine_tint)

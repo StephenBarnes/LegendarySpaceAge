@@ -212,16 +212,6 @@ copperCableRecipe.energy_required = 1
 copperCableRecipe.auto_recycle = true
 copperCableRecipe.always_show_products = true
 
--- Adjust recipe for low-density structures.
-local lowDensityStructureRecipe = data.raw.recipe["low-density-structure"]
-lowDensityStructureRecipe.ingredients = {
-	{type="item", name="ingot-copper-hot", amount=5},
-	{type="item", name="ingot-steel-hot", amount=2},
-	{type="item", name="plastic-bar", amount=3},
-	{type="item", name="resin", amount=1},
-}
-lowDensityStructureRecipe.auto_recycle = true
-
 -- Put basic metal intermediates in their own subgroup.
 for i, itemName in pairs{"iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate"} do
 	data.raw.item[itemName].subgroup = "basic-metal-intermediates"

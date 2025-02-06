@@ -22,7 +22,10 @@ gasifierEnt.show_recipe_icon = false -- Since there's only 1 recipe.
 gasifierEnt.show_recipe_icon_on_map = true
 gasifierEnt.energy_source = {
 	type = "burner",
-	emissions_per_minute = {pollution = 100}, -- For comparison, heating towers consume 8MW and produce 100/m.
+	emissions_per_minute = {
+		pollution = 100, -- For comparison, heating towers consume 8MW and produce 100/m.
+		spores = 10,
+	},
 	fuel_inventory_size = 2,
 	burnt_inventory_size = 1,
 	smoke = {{

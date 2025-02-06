@@ -196,7 +196,6 @@ cultivationTech2.localised_description = {"technology-description.stingfrond-cul
 data:extend{cultivationTech2}
 
 table.insert(data.raw.technology["agricultural-science-pack"].prerequisites, "stingfrond-cultivation-1")
-table.insert(data.raw.technology["carbon-fiber"].prerequisites, "stingfrond-cultivation-2")
 
 ------------------------------------------------------------------------
 --- Create recipes.
@@ -229,6 +228,7 @@ data.raw.recipe["carbon-fiber"].ingredients = {
 }
 data.raw.recipe["carbon-fiber"].subgroup = "stingfrond-products"
 data.raw.recipe["carbon-fiber"].order = "b"
+data.raw.recipe["carbon-fiber"].category = "organic-or-assembling"
 
 -- Resynchronization: 5 cyclosome A + ... + 5 cyclosome E + 2 neurofibrils -> 50 cyclosome C
 -- The neurofibrils are in this recipe to ensure cyclosome amount is still limited by farms.
