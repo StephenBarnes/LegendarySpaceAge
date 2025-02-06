@@ -52,5 +52,20 @@ recipeFromIron.icons = {
 }
 data:extend{recipeFromIron}
 
+-- Create recipe from tubules: 8 tubules + 20 slime -> 1 frame
+local recipeFromTubules = table.deepcopy(recipeFromIron)
+recipeFromTubules.name = "frame-from-tubules"
+recipeFromTubules.ingredients = {
+	{type = "item", name = "tubule", amount = 8},
+	{type = "fluid", name = "slime", amount = 20}
+}
+recipeFromTubules.enabled = false
+recipeFromTubules.order = "05"
+recipeFromTubules.energy_required = 4
+recipeFromTubules.category = "organic-or-assembling-with-fluid"
+recipeFromTubules.allow_as_intermediate = false
+recipeFromTubules.icons[2].icon = "__LegendarySpaceAge__/graphics/gleba/tubule/1.png"
+data:extend{recipeFromTubules}
+
 -- TODO create recipes for rigid structure
 -- TODO add recipes to techs

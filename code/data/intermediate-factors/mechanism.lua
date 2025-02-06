@@ -61,7 +61,7 @@ appendageRecipe.energy_required = 4
 appendageRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/appendage/1.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}}
 appendageRecipe.icons[3] = nil
 appendageRecipe.allow_as_intermediate = false
-appendageRecipe.enabled = true -- TODO make tech
+appendageRecipe.enabled = false
 appendageRecipe.category = "organic-or-assembling"
 data:extend{appendageRecipe}
 

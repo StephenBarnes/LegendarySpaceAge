@@ -76,7 +76,7 @@ sencytiumRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1}
 }
 sencytiumRecipe.results = {{type = "item", name = "sensor", amount = 1}}
-sencytiumRecipe.enabled = true -- TODO make tech
+sencytiumRecipe.enabled = false
 sencytiumRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/sencytium/1.png", icon_size = 64, scale = 0.35, shift = {-8, -6}}
 sencytiumRecipe.allow_as_intermediate = false
 sencytiumRecipe.allow_decomposition = false

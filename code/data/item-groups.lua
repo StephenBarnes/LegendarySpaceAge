@@ -78,12 +78,12 @@ data:extend{
 
 -- Move all fluids to the right row.
 for subgroup, fluids in pairs{
-	nauvis = {"lake-water", "water", "steam", "latex", "cement", "sulfuric-acid", "lubricant", "thruster-fuel", "thruster-oxidizer"},
+	nauvis = {"lake-water", "water", "steam", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant", "thruster-fuel", "thruster-oxidizer"},
 	petrochem = {"crude-oil", "natural-gas", "tar", "heavy-oil", "light-oil", "petroleum-gas", "dry-gas", "syngas"},
 	vulcanus = {"lava", "volcanic-gas", "molten-iron", "molten-copper", "molten-steel", "molten-tungsten"},
 	fulgora = {"fulgoran-sludge", "electrolyte", "holmium-solution"},
 	gleba = {"slime", "geoplasm", "chitin-broth"},
-	aquilo = {"ammoniacal-solution", "ammonia", "fluorine", "fluoroketone-hot", "fluoroketone-cold", "lithium-brine", "fusion-plasma"},
+	aquilo = {"ammoniacal-solution", "fluorine", "fluoroketone-hot", "fluoroketone-cold", "lithium-brine", "fusion-plasma"},
 } do
 	for i, fluid in pairs(fluids) do
 		data.raw.fluid[fluid].subgroup = subgroup .. "-fluids"

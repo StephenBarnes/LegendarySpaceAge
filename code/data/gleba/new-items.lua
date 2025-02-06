@@ -2,6 +2,7 @@
 ]]
 
 local Item = require("code.util.item")
+local Tech = require("code.util.tech")
 
 -- Make the subgroup
 data:extend{
@@ -146,7 +147,7 @@ chitinBrothRecipe.ingredients = {
 chitinBrothRecipe.results = {{type = "fluid", name = "chitin-broth", amount = 100}}
 chitinBrothRecipe.main_product = "chitin-broth"
 chitinBrothRecipe.energy_required = 2
-chitinBrothRecipe.enabled = true -- TODO make tech
+chitinBrothRecipe.enabled = false
 chitinBrothRecipe.subgroup = "gleba-non-agriculture"
 chitinBrothRecipe.crafting_machine_tint = {
 	primary = chitinLightColor,
@@ -156,23 +157,22 @@ chitinBrothRecipe.crafting_machine_tint = {
 data:extend{chitinBrothRecipe}
 -- TODO consider adding a recipe to cast structures out of chitin broth?
 
--- Create recipe for tubules: bioflux + 4 pearl + 40 chitin broth -> 3 pearls (20% fresh) + 4 tubules
+-- Create recipe for tubules: 4 pearl + 40 chitin broth -> 3 pearls (20% fresh) + 4 tubules
 local tubuleRecipe = table.deepcopy(data.raw.recipe["bioflux"])
 tubuleRecipe.name = "tubule"
 tubuleRecipe.ingredients = {
-	{type = "item", name = "bioflux", amount = 1},
 	{type = "item", name = "slipstack-pearl", amount = 4},
 	{type = "fluid", name = "chitin-broth", amount = 40},
 }
 tubuleRecipe.results = {
 	{type = "item", name = "tubule", amount = 4},
-	{type = "fluid", name = "slime", amount = 20}, -- Kind of just an annoyance (have to pump it into a lake) but I like this aesthetically.
+	{type = "fluid", name = "slime", amount = 10}, -- Kind of just an annoyance (have to pump it into a lake) but I like this aesthetically. Also it's exactly enough for making frames.
 	{type = "item", name = "slipstack-pearl", amount = 2, percent_spoiled = 0.8},
 		-- With productivity, this is 3 pearls.
 }
 tubuleRecipe.main_product = "tubule"
 tubuleRecipe.energy_required = 8
-tubuleRecipe.enabled = true
+tubuleRecipe.enabled = false
 tubuleRecipe.icon = nil -- So it defaults to tubule icon.
 tubuleRecipe.subgroup = "gleba-non-agriculture"
 tubuleRecipe.crafting_machine_tint = table.deepcopy(chitinBrothRecipe.crafting_machine_tint)
@@ -185,7 +185,7 @@ chitinBlockRecipe.ingredients = {
 	{type = "item", name = "chitin-fragments", amount = 2},
 }
 chitinBlockRecipe.results = {{type = "item", name = "chitin-block", amount = 1}}
-chitinBlockRecipe.enabled = true -- TODO make tech
+chitinBlockRecipe.enabled = false
 chitinBlockRecipe.auto_recycle = true
 chitinBlockRecipe.subgroup = "gleba-non-agriculture"
 chitinBlockRecipe.crafting_machine_tint = table.deepcopy(chitinBrothRecipe.crafting_machine_tint)
@@ -239,3 +239,59 @@ for i, itemName in pairs{
 } do
 	data.raw.item[itemName].order = string.format("%02d", i)
 end
+
+------------------------------------------------------------------------
+
+-- Create 2 techs for chitin processing.
+local chitinTech1 = table.deepcopy(data.raw.technology["jellynut"])
+chitinTech1.name = "chitin-processing-1"
+chitinTech1.effects = {
+	{type = "unlock-recipe", recipe = "chitin-block"},
+	{type = "unlock-recipe", recipe = "structure-from-chitin"},
+}
+chitinTech1.prerequisites = {"planet-discovery-gleba"}
+chitinTech1.research_trigger = {
+	type = "mine-entity",
+	entity = "small-stomper-shell-no-corpse",
+}
+chitinTech1.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-tech-1.png"
+chitinTech1.localised_description = {"technology-description.chitin-processing-1"}
+data:extend{chitinTech1}
+
+local chitinTech2 = table.deepcopy(chitinTech1)
+chitinTech2.name = "chitin-processing-2"
+chitinTech2.effects = {
+	{type = "unlock-recipe", recipe = "making-chitin-broth"},
+	{type = "unlock-recipe", recipe = "tubule"},
+	{type = "unlock-recipe", recipe = "frame-from-tubules"},
+}
+chitinTech2.prerequisites = {"chitin-processing-1", "biochamber"}
+chitinTech2.research_trigger = {
+	type = "craft-item",
+	item = "chitin-block",
+	count = 20,
+}
+chitinTech2.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-tech-2.png"
+chitinTech2.localised_description = {"technology-description.chitin-processing-2"}
+data:extend{chitinTech2}
+
+-- Create tech for geoplasm.
+local geoplasmTech = table.deepcopy(chitinTech1)
+geoplasmTech.name = "geoplasm"
+geoplasmTech.effects = {
+	{type = "unlock-recipe", recipe = "appendage"},
+	{type = "unlock-recipe", recipe = "sencytium"},
+	{type = "unlock-recipe", recipe = "mechanism-from-appendage"},
+	{type = "unlock-recipe", recipe = "sensor-from-sencytium"},
+	{type = "unlock-recipe", recipe = "actuator-from-appendage"},
+}
+geoplasmTech.prerequisites = {"chitin-processing-2"}
+geoplasmTech.research_trigger = {
+	type = "craft-fluid",
+	fluid = "geoplasm",
+	count = 100,
+}
+geoplasmTech.icon = "__LegendarySpaceAge__/graphics/gleba/geoplasm-tech.png"
+geoplasmTech.localised_description = nil
+data:extend{geoplasmTech}
+Tech.addTechDependency("geoplasm", "agricultural-science-pack")

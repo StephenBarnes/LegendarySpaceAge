@@ -59,7 +59,7 @@ recipeFromChitin.ingredients = {
 	{type = "fluid", name = "slime", amount = 20},
 }
 recipeFromChitin.results = {{type = "item", name = "structure", amount = 1}}
-recipeFromChitin.enabled = true -- TODO make tech
+recipeFromChitin.enabled = false
 recipeFromChitin.order = "04"
 recipeFromChitin.category = "organic-or-assembling-with-fluid"
 recipeFromChitin.icons = {
