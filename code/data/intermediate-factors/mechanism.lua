@@ -49,5 +49,21 @@ advancedRecipe.enabled = false
 data:extend{advancedRecipe}
 Tech.addRecipeToTech("mechanism-from-advanced", "electric-engine")
 
+-- Create recipe: 1 frame + 3 appendage -> 1 mechanism
+local appendageRecipe = table.deepcopy(basicRecipe)
+appendageRecipe.name = "mechanism-from-appendage"
+appendageRecipe.ingredients = {
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "appendage", amount = 3},
+}
+appendageRecipe.order = "04"
+appendageRecipe.energy_required = 4
+appendageRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/appendage/1.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}}
+appendageRecipe.icons[3] = nil
+appendageRecipe.allow_as_intermediate = false
+appendageRecipe.enabled = true -- TODO make tech
+appendageRecipe.category = "organic-or-assembling"
+data:extend{appendageRecipe}
+
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?

@@ -52,6 +52,9 @@ smallShellNoCorpse.autoplace = {
 }
 -- Default: map_color = {129, 105, 78} - looks like cliffs.
 smallShellNoCorpse.map_color = {174, 156, 136}
+smallShellNoCorpse.hidden = true
+smallShellNoCorpse.hidden_in_factoriopedia = true
+smallShellNoCorpse.factoriopedia_alternative = "small-stomper-shell"
 data:extend{smallShellNoCorpse}
 data.raw.planet.gleba.map_gen_settings.autoplace_settings.entity.settings["small-stomper-shell-no-corpse"] = {}
 
@@ -63,5 +66,8 @@ mediumShellNoCorpse.autoplace = table.deepcopy(smallShellNoCorpse.autoplace)
 mediumShellNoCorpse.autoplace.order = "a2"
 mediumShellNoCorpse.autoplace.local_expressions.multiplier = 0.004
 mediumShellNoCorpse.map_color = {174, 156, 136}
+mediumShellNoCorpse.hidden = true
+mediumShellNoCorpse.hidden_in_factoriopedia = true
+mediumShellNoCorpse.factoriopedia_alternative = "medium-stomper-shell"
 data:extend{mediumShellNoCorpse}
 data.raw.planet.gleba.map_gen_settings.autoplace_settings.entity.settings["medium-stomper-shell-no-corpse"] = {}

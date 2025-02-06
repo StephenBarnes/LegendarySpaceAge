@@ -1,5 +1,4 @@
---[[ This file creates products of borehole drills on Gleba - geoplasm, chitin, marrow.
-Also later recipes for them.
+--[[ This file creates new items and recipes, eg for products of borehole drills on Gleba - geoplasm, chitin, marrow.
 ]]
 
 local Item = require("code.util.item")
@@ -99,7 +98,16 @@ data:extend{chitinBrothFluid}
 -- Create appendage item.
 local appendageItem = table.deepcopy(marrowItem)
 appendageItem.name = "appendage"
--- TODO set icon and pictures later.
+local appendageDir = "__LegendarySpaceAge__/graphics/gleba/appendage/"
+appendageItem.icon = appendageDir.."1.png"
+appendageItem.pictures = {}
+for i = 1, 9 do
+	appendageItem.pictures[i] = {filename = appendageDir..i..".png", size = 64, scale = 0.5}
+end
+appendageItem.subgroup = "gleba-non-agriculture"
+appendageItem.icon = appendageDir.."1.png"
+appendageItem.spoil_ticks = 60 * 60 * 20
+appendageItem.spoil_result = "spoilage"
 data:extend{appendageItem}
 
 ------------------------------------------------------------------------
@@ -138,7 +146,6 @@ tubuleRecipe.results = {
 tubuleRecipe.main_product = "tubule"
 tubuleRecipe.energy_required = 8
 tubuleRecipe.enabled = true
-tubuleRecipe.subgroup = "gleba-non-agriculture"
 tubuleRecipe.icon = nil -- So it defaults to tubule icon.
 data:extend{tubuleRecipe}
 
@@ -152,6 +159,19 @@ chitinBlockRecipe.results = {{type = "item", name = "chitin-block", amount = 1}}
 chitinBlockRecipe.enabled = true -- TODO make tech
 chitinBlockRecipe.auto_recycle = true
 data:extend{chitinBlockRecipe}
+
+-- Create recipe for appendages: 10 geoplasm + 1 tubule -> 1 appendage
+local appendageRecipe = table.deepcopy(tubuleRecipe)
+appendageRecipe.name = "appendage"
+appendageRecipe.ingredients = {
+	{type = "fluid", name = "geoplasm", amount = 10},
+	{type = "item", name = "tubule", amount = 1},
+}
+appendageRecipe.results = {{type = "item", name = "appendage", amount = 1}}
+appendageRecipe.main_product = "appendage"
+appendageRecipe.energy_required = 4
+appendageRecipe.enabled = true -- TODO make tech
+data:extend{appendageRecipe}
 
 ------------------------------------------------------------------------
 
