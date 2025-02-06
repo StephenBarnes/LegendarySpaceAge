@@ -284,24 +284,52 @@ data.raw.recipe["spidertron"].ingredients = {
 	--{type="item", name="fission-reactor-equipment", amount=2}, -- Can't require this, because nuclear is now late-game.
 }
 
-
-
--- TODO continue here
+-- Robot network
+-- Recipes for logistic bots, construction bots, logistic chests are all fine.
+data.raw.recipe["roboport"].ingredients = {
+	{type="item", name="frame", amount=4},
+	{type="item", name="panel", amount=8},
+	{type="item", name="electric-engine-unit", amount=8},
+	{type="item", name="sensor", amount=8},
+	{type="item", name="wiring", amount=4},
+}
 
 -- Circuit stuff
--- TODO more
-data.raw.recipe["power-switch"].ingredients = data.raw.recipe["po-transformer"].ingredients
-
-
-------------------------------------------------------------------------
---- UNSORTED, TODO SORT STUFF BELOW
-
 -- Lamp
 data.raw.recipe["small-lamp"].ingredients = {
 	{ type = "item", name = "glass",  amount = 1 },
 	{ type = "item", name = "wiring", amount = 1 },
 	{ type = "item", name = "frame",  amount = 1 },
 }
+data.raw.recipe["arithmetic-combinator"].ingredients = {
+	{type="item", name="frame", amount=1},
+	{type="item", name="wiring", amount=2},
+	{type="item", name="electronic-circuit", amount=1},
+}
+data.raw.recipe["decider-combinator"].ingredients = data.raw.recipe["arithmetic-combinator"].ingredients
+data.raw.recipe["selector-combinator"].ingredients = {
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "wiring", amount = 4},
+	{type = "item", name = "electronic-circuit", amount = 4},
+}
+data.raw.recipe["constant-combinator"].ingredients = {
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "wiring", amount = 2},
+}
+data.raw.recipe["power-switch"].ingredients = data.raw.recipe["po-transformer"].ingredients
+data.raw.recipe["programmable-speaker"].ingredients = {
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "wiring", amount = 1},
+	{type = "item", name = "panel", amount = 1},
+}
+data.raw.recipe["display-panel"].ingredients = {
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "wiring", amount = 1},
+	{type = "item", name = "glass", amount = 1},
+}
+
+------------------------------------------------------------------------
+--- GROUP: PRODUCTION
 
 -- Repair pack
 data.raw.recipe["repair-pack"].ingredients = {
@@ -309,9 +337,7 @@ data.raw.recipe["repair-pack"].ingredients = {
 	{type="item", name="sensor", amount=1},
 }
 
--- Stone bricks - allowed in foundry and handcrafting.
-data.raw.recipe["stone-brick"].category = "smelting-or-metallurgy-or-handcrafting"
-
+-- TODO stuff here
 
 -- Furnaces
 data.raw.recipe["char-furnace"].ingredients = {{type="item", name="structure", amount=1}}
@@ -323,17 +349,32 @@ data.raw.recipe["steel-furnace"].ingredients = {
 }
 data.raw.recipe["gas-furnace"].ingredients = {
 	{type="item", name="frame", amount=2},
+	{type="item", name="structure", amount=2},
 	{type="item", name="shielding", amount=4},
 	{type="item", name="fluid-fitting", amount=4},
 }
 
+-- TODO stuff here
+
 -- Chemical plant - shouldn't require steel bc we're moving it to automation 1. Also no pipe ingredients bc it comes before pipe tech. But it should cost more than assembler 1 since it's faster.
 data.raw.recipe["chemical-plant"].ingredients = {
-	{type="item", name="iron-gear-wheel", amount=4},
-	{type="item", name="electronic-circuit", amount=4},
-	{type="item", name="iron-plate", amount=12},
-	{type="item", name="glass", amount=4},
+	{type="item", name="frame", amount=2},
+	{type="item", name="glass", amount=2},
+	{type="item", name="fluid-fitting", amount=8},
+	{type="item", name="sensor", amount=2},
+	{type="item", name="mechanism", amount=2},
 }
+
+------------------------------------------------------------------------
+--- UNSORTED, TODO SORT STUFF BELOW
+
+
+
+-- Stone bricks - allowed in foundry and handcrafting.
+data.raw.recipe["stone-brick"].category = "smelting-or-metallurgy-or-handcrafting"
+
+
+
 
 -- Lab should need fewer circuits since they have to be handcrafted early-game.
 data.raw.recipe["lab"].ingredients = {

@@ -30,9 +30,9 @@ Tech.removeRecipesFromTechs({"copper-cable", "small-electric-pole"}, {"electroni
 local handCrankRecipe = table.deepcopy(data.raw.recipe["assembling-machine-1"])
 handCrankRecipe.name = "er-hcg"
 handCrankRecipe.ingredients = {
-	{type = "item", name = "iron-plate", amount = 4},
-	{type = "item", name = "iron-gear-wheel", amount = 4},
-	{type = "item", name = "copper-cable", amount = 2},
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "wiring", amount = 1},
+	{type = "item", name = "mechanism", amount = 1},
 }
 handCrankRecipe.results = {{type = "item", name = "er-hcg", amount = 1}}
 handCrankRecipe.order = "a"

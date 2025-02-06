@@ -6,7 +6,7 @@ This file is to keep track of other people's stuff that I've used.
 * Flare Stack by GotLag, snouz, and others - mods.factorio.com/mod/Flare%20Stack - Used graphics and code.
 * Battery Powered by harag - mods.factorio.com/mod/battery-powered - Charger/discharger graphics, code, ideas.
 * Gleba crop mods by LordMiguel (slipstacks, boompuffs, stingfronds) - Took ideas and bits of code for the Gleba crops.
-* Industrial Revolution 3 by Deadlock989 - Stole several ideas such as the toggle hotkey, rubber, glass, ingots.
+* Industrial Revolution 3 by Deadlock989 - Stole several ideas such as the toggle hotkey, rubber, glass, ingots, char furnace.
 * Galdoc's Manufacturing - mods.factorio.com/mod/galdocs-manufacturing - Stole the idea of having intermediate factors with multiple recipes, though I'm simplifying it.
 * AdamoCarbon by ElAdamo - mods.factorio.com/mod/adamo-carbon - Stole several ideas for the petrochem system, plus some code and graphics.
 * Biochemistry by Tenebrais - mods.factorio.com/mod/biochemistry - Electrophage graphics, and ideas.

@@ -33,7 +33,7 @@ recipeFromCopper.icon = nil
 recipeFromCopper.icons = {
 	{icon = mainIcon, icon_size = 64, scale = 0.5},
 	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.2, shift = {-8, -8}},
-	{icon = "__base__/graphics/icons/copper-plate.png", icon_size = 64, scale = 0.2, shift = {8, -8}},
+	{icon = "__base__/graphics/icons/copper-plate.png", icon_size = 64, scale = 0.22, shift = {8, -8}},
 }
 -- TODO make a copper-colored sprite.
 data:extend{recipeFromCopper}
@@ -51,8 +51,11 @@ recipeFromPlastic.allow_as_intermediate = false
 recipeFromPlastic.allow_decomposition = false
 recipeFromPlastic.order = "03"
 recipeFromPlastic.energy_required = 4
-recipeFromPlastic.icons[2].icon = "__base__/graphics/icons/plastic-bar.png"
-recipeFromPlastic.icons[3].icon = "__LegendarySpaceAge__/graphics/rubber/rubber-1.png"
+recipeFromPlastic.icons = {
+	{icon = mainIcon, icon_size = 64, scale = 0.5},
+	{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.23, shift = {8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/rubber/rubber-1.png", icon_size = 64, scale = 0.22, shift = {-8, -8}},
+}
 -- TODO make white sprite.
 data:extend{recipeFromPlastic}
 Tech.addRecipeToTech("fluid-fitting-from-plastic", "plastics")
