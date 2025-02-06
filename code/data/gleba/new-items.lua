@@ -72,7 +72,8 @@ for _, picName in pairs{
 	table.insert(marrowItem.pictures, {filename = marrowDir..picName..".png", size = 64, scale = 0.5})
 end
 marrowItem.subgroup = "gleba-non-agriculture"
-marrowItem.spoil_ticks = nil
+marrowItem.spoil_ticks = 60 * 60 * 60 -- 1 hour
+marrowItem.spoil_result = "spoilage"
 Item.clearFuel(marrowItem)
 marrowItem.stack_size = 50
 marrowItem.weight = 1e6 / 500

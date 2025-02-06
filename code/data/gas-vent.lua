@@ -108,6 +108,10 @@ local ventRecipe = table.deepcopy(data.raw.recipe["steel-furnace"])
 ventRecipe.type = "recipe"
 ventRecipe.name = "gas-vent"
 ventRecipe.enabled = false
+ventRecipe.ingredients = {
+	{type = "item", name = "frame", amount = 2},
+	{type = "item", name = "fluid-fitting", amount = 1},
+}
 ventRecipe.results = {{type = "item", name = "gas-vent", amount = 1}}
 -- TODO decide on ingredients
 data:extend{ventRecipe}

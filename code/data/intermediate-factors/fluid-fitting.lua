@@ -1,5 +1,7 @@
 -- This file creates the "fluid fitting" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
+local Tech = require("code.util.tech")
+
 -- Create item.
 local fluidFittingPics = {}
 for i = 1, 7 do
@@ -33,6 +35,27 @@ recipeFromCopper.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.2, shift = {-8, -8}},
 	{icon = "__base__/graphics/icons/copper-plate.png", icon_size = 64, scale = 0.2, shift = {8, -8}},
 }
+-- TODO make a copper-colored sprite.
 data:extend{recipeFromCopper}
+
+-- Create recipe: 2 plastic-bar + 1 rubber -> 2 fluid fitting
+local recipeFromPlastic = table.deepcopy(recipeFromCopper)
+recipeFromPlastic.name = "fluid-fitting-from-plastic"
+recipeFromPlastic.ingredients = {
+	{type = "item", name = "plastic-bar", amount = 2},
+	{type = "item", name = "rubber", amount = 1}
+}
+recipeFromPlastic.results = {{type = "item", name = "fluid-fitting", amount = 2}}
+recipeFromPlastic.enabled = false
+recipeFromPlastic.allow_as_intermediate = false
+recipeFromPlastic.allow_decomposition = false
+recipeFromPlastic.order = "03"
+recipeFromPlastic.energy_required = 4
+recipeFromPlastic.icons[2].icon = "__base__/graphics/icons/plastic-bar.png"
+recipeFromPlastic.icons[3].icon = "__LegendarySpaceAge__/graphics/rubber/rubber-1.png"
+-- TODO make white sprite.
+data:extend{recipeFromPlastic}
+Tech.addRecipeToTech("fluid-fitting-from-plastic", "plastics")
+
 
 -- TODO make more recipes, and add them to techs.

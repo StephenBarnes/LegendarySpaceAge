@@ -1,5 +1,7 @@
 -- This file will add recipes for low-density structures (which we rename to "Lightweight structure").
 
+local Tech = require("code.util.tech")
+
 -- Move item and recipes into the subgroup.
 data.raw.item["low-density-structure"].subgroup = "lightweight-structure"
 data.raw.recipe["low-density-structure"].subgroup = "lightweight-structure"
@@ -21,6 +23,7 @@ recipeFromCopper.ingredients = {
 	{type="item", name="resin", amount=1},
 }
 recipeFromCopper.allow_as_intermediate = true
+recipeFromCopper.hide_from_player_crafting = false
 recipeFromCopper.icon = nil
 recipeFromCopper.icons = {
 	{icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64},
@@ -32,6 +35,7 @@ for _, icon in pairs(data.raw.item["ingot-copper-hot"].icons) do
 	table.insert(recipeFromCopper.icons, iconCopy)
 end
 data:extend{recipeFromCopper}
+Tech.addRecipeToTech("low-density-structure-standard", "low-density-structure")
 
 -- Hide default recipe.
 data.raw.recipe["low-density-structure"].hidden = true
@@ -58,6 +62,7 @@ recipeFromCarbonFiber.icon = nil
 recipeFromCarbonFiber.icons = {
 	{icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64},
 	{icon = "__space-age__/graphics/icons/carbon-fiber.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/gleba/chitin-broth.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={8, -8}},
 }
 data:extend{recipeFromCarbonFiber}
 

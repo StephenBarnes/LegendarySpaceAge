@@ -73,7 +73,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		{type="item", name=hotIngotName, amount=1},
 	}
 	ingotHeatingRecipe.energy_required = 1
-	ingotHeatingRecipe.hide_from_player_crafting = true
+	ingotHeatingRecipe.hide_from_player_crafting = false
 	ingotHeatingRecipe.category = "smelting"
 	ingotHeatingRecipe.enabled = true
 	ingotHeatingRecipe.icons = {

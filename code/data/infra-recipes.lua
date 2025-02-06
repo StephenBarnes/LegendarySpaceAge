@@ -146,16 +146,151 @@ data.raw.recipe["substation"].ingredients = {
 	{type = "item", name = "wiring", amount = 4},
 	{type = "item", name = "advanced-circuit", amount = 4},
 }
-
--- TODO stuff here
-
--- Circuit stuff
--- TODO more
-data.raw.recipe["power-switch"].ingredients = {
+data.raw.recipe["po-transformer"].ingredients = {
 	{type = "item", name = "frame", amount = 2},
 	{type = "item", name = "wiring", amount = 2},
 	{type = "item", name = "electronic-circuit", amount = 2},
 }
+
+-- Pipes
+data.raw.recipe["pipe"].ingredients = {
+	{type = "item", name = "fluid-fitting", amount = 1},
+	{type = "item", name = "panel", amount = 4},
+}
+data.raw.recipe["pipe"].results = {{type = "item", name = "pipe", amount = 4}}
+data.raw.recipe["pipe-to-ground"].ingredients = {
+	{type = "item", name = "pipe", amount = 12},
+}
+-- Pump
+data.raw.recipe["pump"].ingredients = {
+	{type="item", name="frame", amount=2},
+	{type="item", name="fluid-fitting", amount=4},
+	{type="item", name="mechanism", amount=2},
+}
+
+-- Rail stuff
+data.raw.recipe["rail"].ingredients = {
+	{type="item", name="structure", amount=1},
+	{type="item", name="frame", amount=1},
+	-- Stone in rail recipe represents the track ballast; makes sense to crush/process stone before using as ballast. So could have sand as ingredient here, but it doesn't quite work with Gleba.
+}
+data.raw.recipe["rail-ramp"].ingredients = {
+	{type="item", name="structure", amount=20},
+	{type="item", name="frame", amount=20},
+	{type="item", name="rail", amount=8},
+}
+data.raw.recipe["rail-support"].ingredients = {
+	{type="item", name="structure", amount=4},
+	{type="item", name="frame", amount=4},
+}
+-- Train stop: 4 frame + 2 small-lamp + 1 wiring + 2 electronic-circuit
+data.raw.recipe["train-stop"].ingredients = {
+	{type="item", name="frame", amount=4},
+	{type="item", name="small-lamp", amount=2},
+	{type="item", name="sensor", amount=1},
+}
+-- Rail signals should need some glass.
+data.raw.recipe["rail-signal"].ingredients = {
+	{type="item", name="frame", amount=1},
+	{type="item", name="sensor", amount=1},
+	{type="item", name="small-lamp", amount=1},
+}
+data.raw.recipe["rail-chain-signal"].ingredients = {
+	{type="item", name="frame", amount=1},
+	{type="item", name="sensor", amount=2},
+	{type="item", name="small-lamp", amount=1},
+}
+data.raw.recipe["locomotive"].ingredients = {
+	{type="item", name="engine-unit", amount=20},
+	{type="item", name="sensor", amount=4},
+	{type="item", name="shielding", amount=4},
+	{type="item", name="frame", amount=4},
+}
+data.raw.recipe["cargo-wagon"].ingredients = {
+	{type="item", name="frame", amount=4},
+	{type="item", name="mechanism", amount=4},
+	{type="item", name="panel", amount=8},
+}
+-- Artillery-wagon: 20 shielding + 20 engine-unit + 8 electric-engine-unit + 4 structure + 8 sensor
+data.raw.recipe["artillery-wagon"].ingredients = {
+	{type="item", name="shielding", amount=20},
+	{type="item", name="engine-unit", amount=20},
+	{type="item", name="electric-engine-unit", amount=8},
+	{type="item", name="structure", amount=4},
+	{type="item", name="sensor", amount=4},
+}
+
+-- Ports, signal buoys, cargo ships.
+-- Port: 1 frame + 1 small-lamp + 1 sensor
+data.raw.recipe["port"].ingredients = {
+	{type="item", name="frame", amount=1},
+	{type="item", name="small-lamp", amount=1},
+	{type="item", name="sensor", amount=1},
+}
+-- Buoy: 1 frame + 1 small-lamp + 1 sensor
+data.raw.recipe["buoy"].ingredients = {
+	{type="item", name="frame", amount=1},
+	{type="item", name="small-lamp", amount=1},
+	{type="item", name="sensor", amount=1},
+}
+-- Chain_buoy: 1 frame + 1 small-lamp + 2 sensor
+data.raw.recipe["chain_buoy"].ingredients = {
+	{type="item", name="frame", amount=1},
+	{type="item", name="small-lamp", amount=1},
+	{type="item", name="sensor", amount=2},
+}
+-- Boat: 10 engine-unit + 20 frame + 20 panel
+data.raw.recipe["boat"].ingredients = {
+	{type="item", name="engine-unit", amount=10},
+	{type="item", name="frame", amount=20},
+	{type="item", name="panel", amount=20},
+}
+-- Cargo ship: 40 engine-unit + 80 frame + 80 panel
+data.raw.recipe["cargo_ship"].ingredients = {
+	{type="item", name="engine-unit", amount=40},
+	{type="item", name="frame", amount=80},
+	{type="item", name="panel", amount=80},
+	{type="item", name="sensor", amount=4},
+}
+-- Oil_tanker: 40 engine-unit + 60 frame + 60 panel + 20 fluid-fitting + 10 storage-tank
+data.raw.recipe["oil_tanker"].ingredients = {
+	{type="item", name="engine-unit", amount=40},
+	{type="item", name="frame", amount=60},
+	{type="item", name="panel", amount=60},
+	{type="item", name="fluid-fitting", amount=20},
+	{type="item", name="storage-tank", amount=10},
+}
+
+-- Vehicles
+data.raw.recipe["car"].ingredients = {
+	{type="item", name="engine-unit", amount=8},
+	{type="item", name="rubber", amount=4},
+	{type="item", name="frame", amount=4},
+	{type="item", name="shielding", amount=4},
+}
+data.raw.recipe["tank"].ingredients = {
+	{type="item", name="engine-unit", amount=20},
+	{type="item", name="frame", amount=8},
+	{type="item", name="shielding", amount=20},
+	{type="item", name="advanced-circuit", amount=20},
+}
+data.raw.recipe["spidertron"].ingredients = {
+	{type="item", name="low-density-structure", amount=20},
+	{type="item", name="exoskeleton-equipment", amount=4},
+	{type="item", name="radar", amount=2},
+	{type="item", name="rocket-turret", amount=1},
+	{type="item", name="sensor", amount=8},
+	--{type="item", name="pentapod-egg", amount=1}, -- Makes sense lore-wise, but I'd rather not force players to build them on Gleba, it's a pain to ship them.
+	--{type="item", name="fission-reactor-equipment", amount=2}, -- Can't require this, because nuclear is now late-game.
+}
+
+
+
+-- TODO continue here
+
+-- Circuit stuff
+-- TODO more
+data.raw.recipe["power-switch"].ingredients = data.raw.recipe["po-transformer"].ingredients
 
 
 ------------------------------------------------------------------------
@@ -192,37 +327,6 @@ data.raw.recipe["gas-furnace"].ingredients = {
 	{type="item", name="fluid-fitting", amount=4},
 }
 
--- Vehicles
-data.raw.recipe["car"].ingredients = {
-	{type="item", name="engine-unit", amount=8},
-	{type="item", name="rubber", amount=4},
-	{type="item", name="iron-plate", amount=20},
-	{type="item", name="steel-plate", amount=20},
-}
-data.raw.recipe["tank"].ingredients = {
-	{type="item", name="engine-unit", amount=32},
-	{type="item", name="rubber", amount=16},
-	{type="item", name="iron-gear-wheel", amount=20},
-	{type="item", name="steel-plate", amount=60},
-	{type="item", name="advanced-circuit", amount=40},
-}
-data.raw.recipe["spidertron"].ingredients = {
-	{type="item", name="pentapod-egg", amount=1},
-	{type="item", name="rubber", amount=16},
-	--{type="item", name="fission-reactor-equipment", amount=2},
-	{type="item", name="exoskeleton-equipment", amount=4},
-	{type="item", name="radar", amount=2},
-	{type="item", name="rocket-turret", amount=1},
-}
-
-
--- Pumps
-data.raw.recipe["pump"].ingredients = {
-	{type="item", name="frame", amount=2},
-	{type="item", name="fluid-fitting", amount=4},
-	{type="item", name="mechanism", amount=2},
-}
-
 -- Chemical plant - shouldn't require steel bc we're moving it to automation 1. Also no pipe ingredients bc it comes before pipe tech. But it should cost more than assembler 1 since it's faster.
 data.raw.recipe["chemical-plant"].ingredients = {
 	{type="item", name="iron-gear-wheel", amount=4},
@@ -237,21 +341,6 @@ data.raw.recipe["lab"].ingredients = {
 	{type="item", name="iron-plate", amount=8},
 	{type="item", name="copper-cable", amount=4},
 	{type="item", name="electronic-circuit", amount=4},
-}
-
--- Stone in rail recipe represents the track ballast; makes sense to crush/process stone before using as ballast.
-Recipe.substituteIngredient("rail", "stone", "sand")
-
--- Rail signals should need some glass.
-data.raw.recipe["rail-signal"].ingredients = {
-	{type="item", name="iron-plate", amount=2},
-	{type="item", name="electronic-circuit", amount=1},
-	{type="item", name="glass", amount=1},
-}
-data.raw.recipe["rail-chain-signal"].ingredients = {
-	{type="item", name="iron-plate", amount=2},
-	{type="item", name="electronic-circuit", amount=2},
-	{type="item", name="glass", amount=1},
 }
 
 -- Assembling machines

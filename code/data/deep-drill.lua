@@ -205,7 +205,6 @@ for i, planetData in pairs{
 		{ type = "item",  name = "chitin-fragments", amount = 4 },
 		{ type = "item",  name = "marrow",           amount = 6 },
 	}},
-		-- TODO change stone to chitin
 	{"fulgora", {
 		{type = "item", name = "stone", amount = 7},
 		{type = "item", name = "scrap", amount = 3},

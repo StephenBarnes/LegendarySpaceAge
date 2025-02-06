@@ -81,6 +81,7 @@ sencytiumRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/sencyti
 sencytiumRecipe.allow_as_intermediate = false
 sencytiumRecipe.allow_decomposition = false
 sencytiumRecipe.energy_required = 2
+sencytiumRecipe.order = "05"
 data:extend{sencytiumRecipe}
 
 
