@@ -34,11 +34,6 @@ slipstackPlant.minable.results = {
 	{type = "item", name = "stone", amount_min = 5, amount_max = 15 },
 	{type = "item", name = "slipstack-pearl", amount_min = 5, amount_max = 15}
 }
--- Make slipstacks absorb spores.
--- A jellystem produces 15 spores per harvest, and grows 5m. Yumako is the same. So per second it's 15/(5*60) = 0.05.
--- They also produce -0.001/s pollution (not spores), which is weird bc there's no pollution on Gleba.
--- Hm, making it -0.01/s so 5 slipstacks cancel out 1 jellystem or yumako tree.
-slipstackPlant.emissions_per_second = {spores = -.01}
 
 -- Delete old slipstack tree, add new slipstack plant.
 data.raw.tree.slipstack = nil
@@ -52,7 +47,8 @@ local slipstackPearl = table.deepcopy(data.raw.item.spoilage)
 slipstackPearl.name = "slipstack-pearl"
 slipstackPearl.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png"
 slipstackPearl.order = "a[organic-processing]-da[slipstack-pearl]"
-slipstackPearl.subgroup = "agriculture-products"
+slipstackPearl.subgroup = "slipstacks-and-boompuffs"
+slipstackPearl.order = "01"
 slipstackPearl.spoil_ticks = 60 * 60 * 5 -- 5 minutes.
 slipstackPearl.spoil_result = "spoilage"
 Item.clearFuel(slipstackPearl)
@@ -65,7 +61,8 @@ slipstackNest.localised_name = {"item-name.slipstack-nest"}
 slipstackNest.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-nest.png"
 slipstackNest.pictures = nil
 slipstackNest.order = "a[organic-processing]-da[slipstack-nest]"
-slipstackNest.subgroup = "agriculture-products"
+slipstackNest.subgroup = "slipstacks-and-boompuffs"
+slipstackNest.order = "02"
 slipstackNest.spoil_ticks = 60 * 60 * 20
 slipstackNest.spoil_result = "stone"
 -- Make the nests non-burnable, since thy're supposed to be mostly rock and there's no risk of having too many.

@@ -1,5 +1,6 @@
 local Tech = require("code.util.tech")
 local Item = require("code.util.item")
+local Recipe = require("code.util.recipe")
 
 -- Change Gleba rocket fuel recipe to require carbon, produced from spoilage.
 -- Originally 2 bioflux + 30 jelly + water.
@@ -75,3 +76,7 @@ So, changing this to increase distance to them, by increasing the distance>500 p
 	The default of 500 is too close. Setting it to 5000 is too far. Setting it to 1000 is a bit too far. Using 900.
 ]]
 data.raw["noise-expression"]["gleba_spawner"].expression = "max(0.01 * gleba_starting_enemies, max(min(0.02, enemy_autoplace_base(0, 8)), min(0.001, gleba_fertile_spots_coastal * 5000 - gleba_biome_mask_green * 25000)) * (distance > 900 * gleba_starting_area_multiplier)) * gleba_above_deep_water_mask"
+
+-- Hide recipe for spoilage-to-carbon.
+Recipe.hide("burnt-spoilage")
+Tech.removeRecipeFromTech("burnt-spoilage", "biochamber")

@@ -13,6 +13,5 @@ tech.research_trigger = {
 table.insert(tech.effects, {type = "unlock-recipe", recipe = "lds-from-carbon-fiber"})
 
 -- Since carbon-fiber doesn't depend on ag science packs, things that depend on it and use ag science packs should get that dependency.
-Tech.addTechDependency("agricultural-science-pack", "rocket-turret")
 Tech.addTechDependency("agricultural-science-pack", "stack-inserter")
 Tech.addTechDependency("agricultural-science-pack", "toolbelt-equipment")

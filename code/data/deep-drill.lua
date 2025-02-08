@@ -6,6 +6,8 @@ Graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 Some code taken from Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above.
 ]]
 
+local Tech = require("code.util.tech")
+
 local greyPipes = require "code.data.util.grey-pipes"
 
 local ent = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"])
@@ -251,3 +253,6 @@ tech.unit = {
 	},
 }
 data:extend{tech}
+
+-- Gleba needs deep drill. Technically it's possible without that, but won't be fully self-sustaining.
+Tech.addTechDependency("deep-drill", "planet-discovery-gleba")

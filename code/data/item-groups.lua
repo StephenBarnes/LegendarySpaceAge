@@ -72,6 +72,9 @@ data:extend{
 
 	-- Subgroup for post-Nauvis science packs.
 	{ type = "item-subgroup", name = "alien-science-packs", group = "intermediate-products", order = "y2" },
+
+	-- Subgroup for slipstack and boompuff items/recipes.
+	{ type = "item-subgroup", name = "slipstacks-and-boompuffs", group = "space", order = "022" },
 }
 
 ------------------------------------------------------------------------

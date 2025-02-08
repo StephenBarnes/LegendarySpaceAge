@@ -39,25 +39,41 @@ ammonia2Tech.unit = {
 data:extend{ammonia2Tech}
 
 -- Create recipe for ammonia from wood
-local ammoniaRecipe = table.deepcopy(data.raw.recipe["nutrients-from-spoilage"])
-ammoniaRecipe.name = "ammonia-from-wood"
-ammoniaRecipe.ingredients = {
+local ammoniaFromWood = table.deepcopy(data.raw.recipe["nutrients-from-spoilage"])
+ammoniaFromWood.name = "ammonia-from-wood"
+ammoniaFromWood.ingredients = {
 	{type = "item", name = "wood", amount = 5},
 	{type = "fluid", name = "water", amount = 20},
 }
-ammoniaRecipe.results = {
+ammoniaFromWood.results = {
 	{type = "fluid", name = "ammonia", amount = 10},
 }
-ammoniaRecipe.show_amount_in_title = false
-ammoniaRecipe.category = "organic-or-chemistry"
-ammoniaRecipe.subgroup = "early-agriculture"
-ammoniaRecipe.order = "d2"
-ammoniaRecipe.energy_required = 60
-ammoniaRecipe.icons = {
+ammoniaFromWood.show_amount_in_title = false
+ammoniaFromWood.category = "organic-or-chemistry"
+ammoniaFromWood.subgroup = "early-agriculture"
+ammoniaFromWood.order = "d2"
+ammoniaFromWood.energy_required = 60
+ammoniaFromWood.icons = {
 	{icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
 	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
-data:extend{ammoniaRecipe}
+data:extend{ammoniaFromWood}
+
+-- Create recipe for ammonia from spoilage.
+local ammoniaFromSpoilage = table.deepcopy(ammoniaFromWood)
+ammoniaFromSpoilage.name = "ammonia-from-spoilage"
+ammoniaFromSpoilage.ingredients = {
+	{type = "item", name = "spoilage", amount = 5},
+	{type = "fluid", name = "water", amount = 20},
+}
+ammoniaFromSpoilage.order = "d3"
+ammoniaFromSpoilage.energy_required = 30
+ammoniaFromSpoilage.icons = {
+	{icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
+	{icon = "__space-age__/graphics/icons/spoilage.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
+}
+data:extend{ammoniaFromSpoilage}
+-- Will be unlocked by boompuff-cultivation tech.
 
 -- Create recipe for spoilage from wood.
 --[[ TODO not sure we want this recipe, at this stage. Increases the number of recipes and gives a way to fuel biochambers without imports from Gleba.
