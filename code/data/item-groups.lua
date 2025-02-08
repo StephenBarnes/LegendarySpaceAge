@@ -157,3 +157,11 @@ for _, sciPackName in pairs{
 } do
 	data.raw.tool[sciPackName].subgroup = "alien-science-packs"
 end
+
+-- Move rocket parts to space section.
+for _, k in pairs{"item", "recipe"} do
+	for i, item in pairs{"rocket-part", "assembled-rocket-part"} do
+		data.raw[k][item].subgroup = "space-interactors"
+		data.raw[k][item].order = "e" .. i
+	end
+end

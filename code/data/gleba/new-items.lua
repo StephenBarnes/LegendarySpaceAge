@@ -127,7 +127,7 @@ local sencytiumDir = "__LegendarySpaceAge__/graphics/gleba/sencytium/"
 sencytiumItem.icon = sencytiumDir.."1.png"
 sencytiumItem.pictures = {}
 for i = 1, 11 do
-	sencytiumItem.pictures[i] = {filename = sencytiumDir..i..".png", size = 64, scale = 0.5}
+	sencytiumItem.pictures[i] = {filename = sencytiumDir..i..".png", size = 64, scale = 0.5, draw_as_glow = true}
 end
 sencytiumItem.subgroup = "gleba-non-agriculture"
 sencytiumItem.spoil_ticks = 60 * 60 * 10
