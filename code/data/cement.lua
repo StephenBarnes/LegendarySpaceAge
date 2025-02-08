@@ -75,6 +75,7 @@ data.raw.recipe["concrete"].ingredients = {
 data.raw.recipe["refined-concrete"].ingredients = {
 	{type = "fluid", name = "cement", amount = 100},
 	{type = "item", name = "resin", amount = 2},
+	{type = "item", name = "ash", amount = 2},
 	{type = "item", name = "steel-plate", amount = 4},
 }
 

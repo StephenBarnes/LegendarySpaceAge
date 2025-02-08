@@ -24,3 +24,49 @@ for i = 1, 3 do
 end
 item.order = "0"
 data:extend{item}
+
+-- Create recipe for reprocessing ash.
+-- 4 ash + 5 water + 5 sulfuric acid -> 2 carbon + 1 sand + 20% sulfur + 20% 1 iron ore + 20% 1 copper ore.
+local ashRecipe = table.deepcopy(data.raw.recipe["rocket-fuel"])
+ashRecipe.name = "ash-reprocessing"
+ashRecipe.ingredients = {
+	{type = "item", name = "ash", amount = 4},
+	{type = "fluid", name = "water", amount = 5},
+	{type = "fluid", name = "sulfuric-acid", amount = 5},
+}
+ashRecipe.results = {
+	{type = "item", name = "carbon", amount = 1},
+	{type = "item", name = "sand", amount = 1},
+	{type = "item", name = "sulfur", amount = 1, probability = 0.2},
+	{type = "item", name = "iron-ore", amount = 1, probability = 0.2},
+	{type = "item", name = "copper-ore", amount = 1, probability = 0.2},
+}
+ashRecipe.allow_decomposition = false
+ashRecipe.allow_as_intermediate = false
+ashRecipe.main_product = "carbon"
+ashRecipe.icon = nil
+ashRecipe.icons = {
+	{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.5, mipmap_count = 4},
+	{icon = "__LegendarySpaceAge__/graphics/ash/1.png", icon_size = 64, scale = 0.25, mipmap_count = 4, shift = {-8, -8}},
+}
+ashRecipe.category = "organic-or-chemistry"
+ashRecipe.energy_required = 2
+ashRecipe.enabled = false
+data:extend{ashRecipe}
+
+-- Create tech for ash reprocessing.
+local tech = table.deepcopy(data.raw.technology["lamp"])
+tech.name = "ash-reprocessing"
+tech.effects = {
+	{type = "unlock-recipe", recipe = "ash-reprocessing"},
+}
+tech.prerequisites = {"sulfur-processing"}
+tech.unit = {
+	count = 30,
+	ingredients = {
+		{"automation-science-pack", 1},
+	},
+	time = 15,
+}
+tech.icon = "__LegendarySpaceAge__/graphics/ash/tech.png"
+data:extend{tech}

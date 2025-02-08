@@ -141,6 +141,7 @@ local fertilizerRecipe = table.deepcopy(data.raw.recipe["wood-processing"])
 fertilizerRecipe.name = "fertilizer"
 fertilizerRecipe.ingredients = {
 	{type="item", name="niter", amount=1},
+	{type="item", name="ash", amount=2},
 	{type="fluid", name="sulfuric-acid", amount=5},
 	{type="fluid", name="ammonia", amount=10},
 }
