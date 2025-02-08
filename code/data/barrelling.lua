@@ -15,6 +15,15 @@ gasTankTech.icon = nil
 gasTankTech.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/gas-tanks/tech.png", icon_size = 256, scale = 0.5},
 }
+gasTankTech.research_trigger = nil
+gasTankTech.unit = {
+	count = 50,
+	time = 15,
+	ingredients = {
+		{"automation-science-pack", 1},
+		{"logistic-science-pack", 1},
+	},
+}
 data:extend{gasTankTech}
 
 -- Create the new empty gas tank item.

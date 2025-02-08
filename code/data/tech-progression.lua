@@ -105,8 +105,17 @@ data.raw.technology["oil-processing"].research_trigger = nil
 data.raw.technology["oil-processing"].prerequisites = {"fluid-handling"}
 Tech.addRecipeToTech("pumpjack", "oil-processing", 2)
 
--- Elimininate the now-pointless "advanced oil processing" tech.
-Tech.hideTech("advanced-oil-processing")
+-- Move advanced-oil-processing to after oil-processing.
+Tech.setPrereqs("advanced-oil-processing", {"oil-processing"})
+data.raw.technology["advanced-oil-processing"].unit = {
+	count = 75,
+	time = 30,
+	ingredients = {
+		{"automation-science-pack", 1},
+		{"logistic-science-pack", 1},
+	},
+}
+
 Tech.setPrereqs("lubricant", {"chemical-science-pack"})
 
 -- Rubber-2 is needed to make rubber from petrochems on Vulcanus and Fulgora.
@@ -224,6 +233,9 @@ data.raw.technology["lamp"].research_trigger = {
 	item = "glass",
 	count = 1,
 }
+
+-- Add gas vent to fluid-handling tech.
+Tech.addRecipeToTech("gas-vent", "fluid-handling")
 
 -- TODO other science packs.
 

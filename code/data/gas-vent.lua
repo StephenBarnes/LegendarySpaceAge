@@ -4,8 +4,6 @@
 
 -- This modpack has gas heating tower for burnable gases, gas vent for non-burnable gases, fluid dump for fluids, and tossing-into-sea for items.
 
-local Tech = require("code.util.tech")
-
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 local ventEnt = table.deepcopy(data.raw.furnace["steel-furnace"])
 ventEnt.type = "furnace"
@@ -192,5 +190,3 @@ for _, fluidData in pairs(ventableFluids) do
 	end
 	data:extend{thisGasVentRecipe}
 end
-
-Tech.addRecipeToTech("gas-vent", "oil-processing", 3)

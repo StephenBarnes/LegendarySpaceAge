@@ -207,7 +207,7 @@ crushBoomnutRecipe.crafting_machine_tint = boompuffTint
 crushBoomnutRecipe.icon = nil
 crushBoomnutRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/niter/niter-1.png", icon_size = 64, scale = 0.5, mipmap_count = 4},
-	{icon = "__LegendarySpaceAge__/graphics/gleba/boompuffs/nut/1.png", icon_size = 64, scale = 0.25, mipmap_count = 4, shift = {-8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/gleba/boompuffs/nut/1.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
 crushBoomnutRecipe.subgroup = "slipstacks-and-boompuffs"
 crushBoomnutRecipe.order = "14"
@@ -231,7 +231,7 @@ boomsacDeflationRecipe.crafting_machine_tint = boompuffTint
 boomsacDeflationRecipe.icon = nil
 boomsacDeflationRecipe.icons = {
 	data.raw.fluid["natural-gas"].icons[1],
-	{icon = "__LegendarySpaceAge__/graphics/gleba/boompuffs/sac/6.png", icon_size = 64, scale = 0.25, mipmap_count = 4, shift = {-8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/gleba/boompuffs/sac/2.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
 boomsacDeflationRecipe.subgroup = "slipstacks-and-boompuffs"
 boomsacDeflationRecipe.order = "15"

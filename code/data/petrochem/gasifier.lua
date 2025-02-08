@@ -212,7 +212,8 @@ gasificationRecipe.ingredients = {
 }
 gasificationRecipe.results = {
 	{type="fluid", name="syngas", amount=100, show_details_in_recipe_tooltip = true},
-	{type="item", name="pitch", amount=1, show_details_in_recipe_tooltip = false},
+	--{type="item", name="pitch", amount=1, show_details_in_recipe_tooltip = false},
+		-- This is realistic, but makes it too easy to get heavy fractions on Gleba.
 	{type="item", name="sulfur", amount=1, show_details_in_recipe_tooltip = false},
 }
 gasificationRecipe.main_product = "syngas"

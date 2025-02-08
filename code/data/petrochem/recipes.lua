@@ -157,6 +157,30 @@ heavyOilCokingRecipe.subgroup = "complex-fluid-recipes"
 heavyOilCokingRecipe.energy_required = 5
 data:extend{heavyOilCokingRecipe}
 
+-- Add recipe for pitch processing: 10 pitch + 50 steam -> 10 heavy oil + 10 light oil + 10 tar + 1 carbon
+local pitchProcessingRecipe = table.deepcopy(heavyOilCokingRecipe)
+pitchProcessingRecipe.name = "pitch-processing"
+pitchProcessingRecipe.ingredients = {
+	{type = "item", name = "pitch", amount = 10},
+	{type = "fluid", name = "steam", amount = 50},
+}
+pitchProcessingRecipe.results = {
+	{ type = "fluid", name = "tar",       amount = 10, show_details_in_recipe_tooltip = false },
+	{ type = "fluid", name = "heavy-oil", amount = 20, show_details_in_recipe_tooltip = false },
+	{ type = "fluid", name = "light-oil", amount = 10, show_details_in_recipe_tooltip = false },
+}
+pitchProcessingRecipe.icons = {
+	{icon = "__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size = 64, scale=0.3, shift={0, -3}},
+	{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.2, shift={-6, 4}},
+	{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
+}
+pitchProcessingRecipe.icon = nil
+pitchProcessingRecipe.order = "a[oil-processing]-b6"
+pitchProcessingRecipe.subgroup = "complex-fluid-recipes"
+pitchProcessingRecipe.category = "oil-processing" -- Refinery.
+pitchProcessingRecipe.auto_recycle = false
+data:extend{pitchProcessingRecipe}
+
 --[[ Add recipe for coal coking.
 	Coal coking: 10 coal -> 6 carbon + 1 sulfur
 		This offers a route from coal to carbon that's more direct than syngas liquefaction.
@@ -375,11 +399,10 @@ Tech.addRecipeToTech("rich-gas-cracking", "oil-processing")
 Tech.removeRecipeFromTech("heavy-oil-cracking", "advanced-oil-processing")
 Tech.removeRecipeFromTech("light-oil-cracking", "advanced-oil-processing")
 
--- Add heavy oil coking to oil processing tech.
-Tech.addRecipeToTech("heavy-oil-coking", "oil-processing")
-
--- Add tar distillation to the 1st oil tech.
-Tech.addRecipeToTech("tar-distillation", "oil-processing")
+-- Add heavy oil coking, tar distillation, pitch processing to advanced oil processing.
+Tech.addRecipeToTech("heavy-oil-coking", "advanced-oil-processing")
+Tech.addRecipeToTech("tar-distillation", "advanced-oil-processing")
+Tech.addRecipeToTech("pitch-processing", "advanced-oil-processing")
 
 -- Wood resin recipe will be placed in wood circuit boards tech.
 -- Pitch resin and rich-gas resin will be unlocked in a special "petroleum resin" tech, after blue science.
