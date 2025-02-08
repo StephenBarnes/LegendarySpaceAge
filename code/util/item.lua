@@ -55,4 +55,13 @@ Item.clearFuel = function(item)
 	item.fuel_glow_color = nil
 end
 
+Item.hide = function(itemName)
+	local item = data.raw.item[itemName]
+	if item == nil then
+		log("ERROR: Couldn't find item "..itemName.." to hide.")
+		return
+	end
+	item.hidden = true
+	item.hidden_in_factoriopedia = true
+end
 return Item

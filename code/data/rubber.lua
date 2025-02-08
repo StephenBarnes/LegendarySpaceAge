@@ -34,8 +34,7 @@ data:extend{latexFluid}
 
 -- Create recipe for latex fluid.
 local latexRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
-latexRecipe.name = "make-latex" -- Different name from the fluid, so it doesn't get combined in factoriopedia.
-latexRecipe.localised_name = {"fluid-name.latex"}
+latexRecipe.name = "latex"
 latexRecipe.ingredients = {
 	{type="item", name="wood", amount=5},
 	{type="fluid", name="water", amount=20},
@@ -95,7 +94,7 @@ naturalRubberTech.name = "rubber-1"
 naturalRubberTech.effects = {
 	{
 		type = "unlock-recipe",
-		recipe = "make-latex",
+		recipe = "latex",
 	},
 	{
 		type = "unlock-recipe",

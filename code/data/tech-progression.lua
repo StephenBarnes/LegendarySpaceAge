@@ -200,11 +200,12 @@ Tech.addTechDependency("advanced-circuit", "tank")
 
 -- Gleba science pack
 data.raw.recipe["agricultural-science-pack"].ingredients = {
-	{type = "item", name = "slipstack-pearl", amount = 1},
+	--{type = "item", name = "slipstack-pearl", amount = 1},
 	{type = "item", name = "activated-pentapod-egg", amount = 1},
 	{type = "item", name = "stingfrond-sprout", amount = 1},
 		-- Want it to be tied to cyclosomes, not neurofibrils. And don't want to have to worry about the phase, so using sprout rather than cyclosomes.
 	{type = "item", name = "sprouted-boomnut", amount = 1},
+	{type = "item", name = "petrophage", amount = 1},
 }
 data.raw.technology["agricultural-science-pack"].research_trigger = { -- TODO later this should be a rate trigger on bioflux.
 	type = "craft-item",
@@ -236,6 +237,9 @@ data.raw.technology["lamp"].research_trigger = {
 
 -- Add gas vent to fluid-handling tech.
 Tech.addRecipeToTech("gas-vent", "fluid-handling")
+
+-- Gleba needs advanced oil processing, to get light oil for explosives etc.
+Tech.addTechDependency("advanced-oil-processing", "planet-discovery-gleba")
 
 -- TODO other science packs.
 

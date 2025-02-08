@@ -216,6 +216,7 @@ sproutRecipe.icon = nil
 sproutRecipe.subgroup = "stingfrond-products"
 sproutRecipe.order = "a"
 sproutRecipe.energy_required = 5
+sproutRecipe.always_show_products = true
 sproutRecipe.crafting_machine_tint = {
 	primary = phaseTints[1],
 	secondary = phaseTints[2],

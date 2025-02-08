@@ -219,8 +219,7 @@ filterSlimeRecipe.results = {
 	{type = "fluid", name = "water", amount = 300},
 	{type = "item", name = "spent-filter", amount = 1},
 	{type = "item", name = "spoilage", amount = 10, show_details_in_recipe_tooltip = false},
-	--{type = "item", name = "iron-bacteria", amount = 1, probability = .01, show_details_in_recipe_tooltip = false},
-	--{type = "item", name = "copper-bacteria", amount = 1, probability = .01, show_details_in_recipe_tooltip = false},
+	{type = "item", name = "petrophage", amount = 1, probability = .05, show_details_in_recipe_tooltip = false},
 	-- Could give eggs or fruits with some small probability. But rather not, since that makes it too easy to restart cycles.
 }
 filterSlimeRecipe.main_product = "water"

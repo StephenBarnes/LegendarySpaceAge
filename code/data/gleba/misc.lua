@@ -7,14 +7,6 @@ local Recipe = require("code.util.recipe")
 table.insert(data.raw.recipe["rocket-fuel-from-jelly"].ingredients,
 	{ type = "item", name = "carbon", amount = 2 })
 
--- Gleba: remove recipes for making iron/copper bacteria from jelly/mash.
-Tech.removeRecipeFromTech("iron-bacteria", "jellynut")
-Tech.removeRecipeFromTech("copper-bacteria", "yumako")
-
--- Gleba: increase spoilage time of iron/copper bacteria.
-Item.multiplySpoilTime("iron-bacteria", 3)
-Item.multiplySpoilTime("copper-bacteria", 3)
-
 -- Artificial soil tech makes more sense after biochamber.
 Tech.setPrereqs("artificial-soil", {"biochamber"})
 
@@ -22,10 +14,6 @@ Tech.setPrereqs("artificial-soil", {"biochamber"})
 for _, recipeName in pairs{"artificial-yumako-soil", "artificial-jellynut-soil", "overgrowth-yumako-soil", "overgrowth-jellynut-soil"} do
 	data.raw.recipe[recipeName].category = "organic"
 end
-
--- Allow bacteria cultivation on any surface.
-data.raw.recipe["iron-bacteria-cultivation"].surface_conditions = nil
-data.raw.recipe["copper-bacteria-cultivation"].surface_conditions = nil
 
 -- Double rocket capacity for bioflux
 -- Decided against this bc it's already high, don't want to remove the incentive to set up toxophages etc.
@@ -80,3 +68,17 @@ data.raw["noise-expression"]["gleba_spawner"].expression = "max(0.01 * gleba_sta
 -- Hide recipe for spoilage-to-carbon.
 Recipe.hide("burnt-spoilage")
 Tech.removeRecipeFromTech("burnt-spoilage", "biochamber")
+
+-- Hide recipe for biosulfur.
+Recipe.hide("biosulfur")
+Tech.removeRecipeFromTech("biosulfur", "bioflux-processing")
+
+-- Hide items and recipes for iron/copper bacteria.
+Item.hide("iron-bacteria")
+Item.hide("copper-bacteria")
+Recipe.hide("iron-bacteria-cultivation")
+Recipe.hide("copper-bacteria-cultivation")
+Tech.removeRecipeFromTech("iron-bacteria", "jellynut")
+Tech.removeRecipeFromTech("copper-bacteria", "yumako")
+Recipe.hide("iron-bacteria")
+Recipe.hide("copper-bacteria")
