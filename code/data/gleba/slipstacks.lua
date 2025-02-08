@@ -78,7 +78,7 @@ slipstackNestRecipe.name = "slipstack-nest"
 slipstackNestRecipe.ingredients = {
 	{ type = "item", name = "slipstack-pearl", amount = 4 }, -- Requires less than it yields (10), so you don't need a prod bonus to make it sustainable.
 	{ type = "item", name = "stone", amount = 4 },
-	{ type = "item", name = "nutrients", amount = 2 },
+	{ type = "item", name = "marrow", amount = 2 },
 }
 slipstackNestRecipe.category = "organic-or-assembling"
 slipstackNestRecipe.results = {{type = "item", name = "slipstack-nest", amount = 1}}

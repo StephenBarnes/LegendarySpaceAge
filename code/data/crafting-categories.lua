@@ -121,3 +121,7 @@ end
 for name, _ in pairs(data.raw["recipe-category"]) do
 	table.insert(data.raw["god-controller"]["default"].crafting_categories, name)
 end
+
+-- Add metallurgy-or-assembling (builtin category) to apprentice-assembler.
+table.insert(data.raw["assembling-machine"]["apprentice-assembler"].crafting_categories, "metallurgy-or-assembling")
+-- TODO I actually want to make apprentice-assembler effects apply to foundry, not assembler, and make it also affect prod bonus, etc.

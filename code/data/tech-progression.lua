@@ -206,7 +206,7 @@ data.raw.recipe["agricultural-science-pack"].ingredients = {
 		-- Want it to be tied to cyclosomes, not neurofibrils. And don't want to have to worry about the phase, so using sprout rather than cyclosomes.
 	--{type = "item", name = "sprouted-boomnut", amount = 1},
 	{type = "item", name = "petrophage", amount = 1},
-	{type = "item", name = "marrow", amount = 1},
+	--{type = "item", name = "marrow", amount = 1},
 }
 data.raw.technology["agricultural-science-pack"].research_trigger = { -- TODO later this should be a rate trigger on bioflux.
 	type = "craft-item",

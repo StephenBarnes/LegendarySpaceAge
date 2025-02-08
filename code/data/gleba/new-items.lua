@@ -72,7 +72,7 @@ for _, picName in pairs{
 	table.insert(marrowItem.pictures, {filename = marrowDir..picName..".png", size = 64, scale = 0.5})
 end
 marrowItem.subgroup = "gleba-non-agriculture"
-marrowItem.spoil_ticks = 60 * 60 * 60 -- 1 hour
+marrowItem.spoil_ticks = 60 * 60 * 20 -- 20 minutes
 marrowItem.spoil_result = "spoilage"
 Item.clearFuel(marrowItem)
 marrowItem.stack_size = 50
@@ -232,17 +232,36 @@ local nutrientsFromMarrowRecipe = table.deepcopy(data.raw.recipe["nutrients-from
 nutrientsFromMarrowRecipe.name = "nutrients-from-marrow"
 nutrientsFromMarrowRecipe.ingredients = {
 	{type = "item", name = "marrow", amount = 4},
+	{type = "item", name = "bioflux", amount = 1},
+		-- I like this since it links the bioflux-yumako-jellynut recipes to the borehole stuff.
 	{type = "fluid", name = "sulfuric-acid", amount = 10},
 }
-nutrientsFromMarrowRecipe.results = {{type = "item", name = "nutrients", amount = 10}}
+nutrientsFromMarrowRecipe.results = {{type = "item", name = "nutrients", amount = 30}}
 nutrientsFromMarrowRecipe.enabled = false
 nutrientsFromMarrowRecipe.subgroup = "gleba-non-agriculture"
 nutrientsFromMarrowRecipe.icons = {
 	{icon = marrowItem.icon, size = 64, scale = 0.35, shift = {-4, -4}},
-	{icon = "__space-age__/graphics/icons/nutrients.png", size = 64, scale = 0.43, shift = {4, 4}},
+	{icon = "__space-age__/graphics/icons/nutrients.png", size = 64, scale = 0.43, shift = {6, 6}},
 }
 nutrientsFromMarrowRecipe.crafting_machine_tint = table.deepcopy(data.raw.recipe["sulfuric-acid"].crafting_machine_tint)
 data:extend{nutrientsFromMarrowRecipe}
+
+-- Create recipe for landfill from chitin fragments.
+local landfillFromChitinRecipe = table.deepcopy(data.raw.recipe["landfill"])
+landfillFromChitinRecipe.name = "landfill-from-chitin"
+landfillFromChitinRecipe.ingredients = {
+	{type = "item", name = "marrow", amount = 20},
+	{type = "item", name = "chitin-fragments", amount = 20},
+}
+landfillFromChitinRecipe.icon = nil
+landfillFromChitinRecipe.icons = {
+	{icon = "__base__/graphics/icons/landfill.png", size = 64, scale = 0.4, shift = {0, 4}},
+	{icon = chitinDir.."3.png", size = 64, scale = 0.33, shift = {8, -8}},
+	{icon = marrowItem.icon, size = 64, scale = 0.3, shift = {-8, -8}},
+}
+landfillFromChitinRecipe.subgroup = "gleba-non-agriculture"
+landfillFromChitinRecipe.order = "d"
+data:extend{landfillFromChitinRecipe}
 
 ------------------------------------------------------------------------
 
@@ -266,6 +285,7 @@ chitinTech1.name = "chitin-processing-1"
 chitinTech1.effects = {
 	{type = "unlock-recipe", recipe = "chitin-block"},
 	{type = "unlock-recipe", recipe = "structure-from-chitin"},
+	{type = "unlock-recipe", recipe = "landfill-from-chitin"},
 }
 chitinTech1.prerequisites = {"planet-discovery-gleba"}
 chitinTech1.research_trigger = {

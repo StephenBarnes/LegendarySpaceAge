@@ -46,5 +46,23 @@ recipeFromSteel.enabled = false
 data:extend{recipeFromSteel}
 Tech.addRecipeToTech("shielding-from-steel", "steel-processing")
 
+-- Create recipe: 2 steel plate + 2 tungsten plate -> 2 shielding
+local recipeFromTungsten = table.deepcopy(recipeFromSteel)
+recipeFromTungsten.name = "shielding-from-tungsten"
+recipeFromTungsten.ingredients = {
+	{type = "item", name = "steel-plate", amount = 1},
+	{type = "item", name = "tungsten-plate", amount = 2},
+}
+recipeFromTungsten.results = {{type = "item", name = "shielding", amount = 4}}
+recipeFromTungsten.order = "04"
+recipeFromTungsten.energy_required = 2
+recipeFromTungsten.icons[2] = {icon = "__space-age__/graphics/icons/tungsten-plate.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+recipeFromTungsten.always_show_products = true
+recipeFromTungsten.category = "metallurgy-or-assembling"
+data:extend{recipeFromTungsten}
+Tech.addRecipeToTech("shielding-from-tungsten", "tungsten-steel")
+
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?
+
+-- TODO make sprites for shielding different for different recipes.

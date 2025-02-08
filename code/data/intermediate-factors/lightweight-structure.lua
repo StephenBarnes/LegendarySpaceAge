@@ -61,8 +61,8 @@ recipeFromCarbonFiber.subgroup = "lightweight-structure"
 recipeFromCarbonFiber.icon = nil
 recipeFromCarbonFiber.icons = {
 	{icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64},
-	{icon = "__space-age__/graphics/icons/carbon-fiber.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}},
-	{icon = "__LegendarySpaceAge__/graphics/gleba/chitin-broth.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/gleba/chitin-broth.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}},
+	{icon = "__space-age__/graphics/icons/carbon-fiber.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={8, -8}},
 }
 data:extend{recipeFromCarbonFiber}
 
