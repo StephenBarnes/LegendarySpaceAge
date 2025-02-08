@@ -241,6 +241,9 @@ Tech.addRecipeToTech("gas-vent", "fluid-handling")
 -- Gleba needs advanced oil processing, to get light oil for explosives etc.
 Tech.addTechDependency("advanced-oil-processing", "planet-discovery-gleba")
 
+-- Hide health techs.
+Tech.hideTech("health")
+
 -- TODO other science packs.
 
 -- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.

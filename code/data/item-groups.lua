@@ -73,8 +73,13 @@ data:extend{
 	-- Subgroup for post-Nauvis science packs.
 	{ type = "item-subgroup", name = "alien-science-packs", group = "intermediate-products", order = "y2" },
 
-	-- Subgroup for slipstack and boompuff items/recipes.
-	{ type = "item-subgroup", name = "slipstacks-and-boompuffs", group = "space", order = "022" },
+	-- Subgroups for Gleba.
+	{ type = "item-subgroup", name = "spoilage-and-nutrients", group = "space", order = "0200" },
+	{ type = "item-subgroup", name = "yumako-and-jellynut", group = "space", order = "0201" },
+	{ type = "item-subgroup", name = "slipstacks-and-boompuffs", group = "space", order = "022b" },
+
+	-- Subgroup for Fulgora biological processes.
+	{ type = "item-subgroup", name = "fulgora-agriculture", group = "space", order = "031" },
 }
 
 ------------------------------------------------------------------------
@@ -167,4 +172,58 @@ for _, k in pairs{"item", "recipe"} do
 		data.raw[k][item].subgroup = "space-interactors"
 		data.raw[k][item].order = "e" .. i
 	end
+end
+
+-- Populate Gleba subgroups: spoilage-and-nutrients, yumako-and-jellynut, slipstacks-and-boompuffs.
+for i, item in pairs{
+	"spoilage",
+	"nutrients",
+} do
+	data.raw.item[item].subgroup = "spoilage-and-nutrients"
+	data.raw.item[item].order = string.format("%02d", i)
+end
+for i, recipe in pairs{
+	"nutrients-from-spoilage",
+	"nutrients-from-yumako-mash",
+	"nutrients-from-bioflux",
+	"marrow-catabolysis",
+} do
+	data.raw.recipe[recipe].subgroup = "spoilage-and-nutrients"
+	data.raw.recipe[recipe].order = string.format("%02d", i)
+end
+for i, item in pairs{
+	{"item", "yumako-seed"},
+	{"item", "jellynut-seed"},
+	{"capsule", "yumako"},
+	{"capsule", "jellynut"},
+	{"capsule", "yumako-mash"},
+	{"capsule", "jelly"},
+} do
+	data.raw[item[1]][item[2]].subgroup = "yumako-and-jellynut"
+	data.raw[item[1]][item[2]].order = string.format("%02d", i)
+end
+for i, recipe in pairs{
+	"yumako-processing",
+	"jellynut-processing",
+} do
+	data.raw.recipe[recipe].subgroup = "yumako-and-jellynut"
+	data.raw.recipe[recipe].order = string.format("%02d", i)
+end
+
+-- Populate Fulgora agricultural processes.
+for i, item in pairs{
+	"fulgorite-shard",
+	"electrophage",
+	"polysalt",
+	"fulgorite-starter",
+} do
+	data.raw.item[item].subgroup = "fulgora-agriculture"
+	data.raw.item[item].order = string.format("%02d", i)
+end
+for i, recipe in pairs{
+	"electrophage-cultivation",
+	"electrophage-cultivation-holmium",
+} do
+	data.raw.recipe[recipe].subgroup = "fulgora-agriculture"
+	data.raw.recipe[recipe].order = string.format("%02d", i+10)
 end

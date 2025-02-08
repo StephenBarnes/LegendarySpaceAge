@@ -390,21 +390,18 @@ data.raw.recipe["assembling-machine-1"].ingredients = {
 	{type="item", name="panel", amount=4},
 	{type="item", name="mechanism", amount=2},
 	{type="item", name="sensor", amount=1},
-	{type="item", name="electronic-circuit", amount=2},
 }
 data.raw.recipe["assembling-machine-2"].ingredients = {
 	{type="item", name="frame", amount=1},
 	{type="item", name="panel", amount=4},
 	{type="item", name="mechanism", amount=4},
 	{type="item", name="sensor", amount=4},
-	{type="item", name="advanced-circuit", amount=2},
 }
 data.raw.recipe["assembling-machine-3"].ingredients = {
 	{type="item", name="frame", amount=1},
 	{type="item", name="panel", amount=4},
 	{type="item", name="electric-engine-unit", amount=4},
 	{type="item", name="sensor", amount=4},
-	{type="item", name="processing-unit", amount=2},
 }
 
 -- Mining drills

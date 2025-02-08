@@ -28,6 +28,8 @@ petrophage.spoil_ticks = 60 * 60 * 2 -- 2 minutes
 petrophage.spoil_result = "pitch"
 petrophage.hidden = false
 petrophage.hidden_in_factoriopedia = false
+petrophage.subgroup = "slipstacks-and-boompuffs"
+petrophage.order = "21"
 data:extend{petrophage}
 
 -- Create recipe for breeding petrophages.
@@ -51,6 +53,8 @@ cultivationRecipe.icons[1].shift = {-4, -4}
 cultivationRecipe.hidden = false
 cultivationRecipe.hidden_in_factoriopedia = false
 cultivationRecipe.surface_conditions = nil
+cultivationRecipe.subgroup = "slipstacks-and-boompuffs"
+cultivationRecipe.order = "22"
 data:extend{cultivationRecipe}
 
 -- Create recipe for refreshing petrophages.
@@ -65,6 +69,8 @@ refreshRecipe.results = {
 refreshRecipe.result_is_always_fresh = true
 refreshRecipe.icon = petrophageDir .. "refresh.png"
 refreshRecipe.icons = nil
+refreshRecipe.subgroup = "slipstacks-and-boompuffs"
+refreshRecipe.order = "23"
 data:extend{refreshRecipe}
 
 -- Adjust the bacteria-cultivation tech to include the new recipes.
