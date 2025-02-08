@@ -46,7 +46,6 @@ data:extend{slipstackPlant}
 local slipstackPearl = table.deepcopy(data.raw.item.spoilage)
 slipstackPearl.name = "slipstack-pearl"
 slipstackPearl.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png"
-slipstackPearl.order = "a[organic-processing]-da[slipstack-pearl]"
 slipstackPearl.subgroup = "slipstacks-and-boompuffs"
 slipstackPearl.order = "01"
 slipstackPearl.spoil_ticks = 60 * 60 * 5 -- 5 minutes.
@@ -60,7 +59,6 @@ slipstackNest.name = "slipstack-nest"
 slipstackNest.localised_name = {"item-name.slipstack-nest"}
 slipstackNest.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-nest.png"
 slipstackNest.pictures = nil
-slipstackNest.order = "a[organic-processing]-da[slipstack-nest]"
 slipstackNest.subgroup = "slipstacks-and-boompuffs"
 slipstackNest.order = "02"
 slipstackNest.spoil_ticks = 60 * 60 * 20
@@ -138,7 +136,3 @@ slipstackTech.effects = {
 	{type = "unlock-recipe", recipe = "slipstack-nest"},
 }
 data:extend{slipstackTech}
-
--- Add slipstack agriculture as prereq to bioflux processing, since it's now needed for plastic, plus it'll be needed for science pack.
-local Tech = require("code.util.tech")
-Tech.addTechDependency("slipstack-propagation", "bioflux-processing")

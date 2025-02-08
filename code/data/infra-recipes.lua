@@ -547,3 +547,15 @@ data.raw.recipe["gate"].ingredients = {
 }
 data.raw.recipe["gate"].results = {{type = "item", name = "gate", amount = 4}}
 data.raw.recipe.gate.always_show_products = true
+
+-- Missile turret.
+data.raw.recipe["rocket-turret"].ingredients = {
+	{type = "item", name = "shielding", amount = 4},
+	{type = "item", name = "sensor", amount = 4},
+	{type = "item", name = "rocket-launcher", amount = 4},
+}
+
+data.raw.recipe["flamethrower-ammo"].ingredients = {
+	{type = "item", name = "fluid-fitting", amount = 1},
+	{type = "fluid", name = "light-oil", amount = 20},
+}

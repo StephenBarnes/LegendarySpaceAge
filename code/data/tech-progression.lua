@@ -204,15 +204,15 @@ data.raw.recipe["agricultural-science-pack"].ingredients = {
 	{type = "item", name = "activated-pentapod-egg", amount = 1},
 	{type = "item", name = "stingfrond-sprout", amount = 1},
 		-- Want it to be tied to cyclosomes, not neurofibrils. And don't want to have to worry about the phase, so using sprout rather than cyclosomes.
-	{type = "item", name = "sprouted-boomnut", amount = 1},
+	--{type = "item", name = "sprouted-boomnut", amount = 1},
 	{type = "item", name = "petrophage", amount = 1},
+	{type = "item", name = "marrow", amount = 1},
 }
 data.raw.technology["agricultural-science-pack"].research_trigger = { -- TODO later this should be a rate trigger on bioflux.
 	type = "craft-item",
 	item = "bioflux",
 	count = 1000,
 }
-Tech.addTechDependency("boompuff-cultivation", "agricultural-science-pack")
 
 -- Make gate tech auto-unlock, otherwise I'm going to just forgo it.
 data.raw.technology["gate"].unit = nil

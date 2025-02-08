@@ -50,7 +50,7 @@ eggActivationRecipe.icon = nil
 eggActivationRecipe.icons = nil
 eggActivationRecipe.order = eggActivationRecipe.order .. "-2"
 data:extend{eggActivationRecipe}
-Tech.addRecipeToTech("activated-pentapod-egg", "biochamber")
+Tech.addRecipeToTech("activated-pentapod-egg", "bioflux")
 
 -- Create new recipe for replicating activated eggs using slime and bioflux.
 -- Sometimes produces activated eggs instead of regular eggs.
@@ -73,3 +73,5 @@ eggReplicationRecipe.surface_conditions = nil
 eggReplicationRecipe.icon = nil
 eggReplicationRecipe.icons = nil
 data.raw.recipe["pentapod-egg"] = eggReplicationRecipe
+Tech.addRecipeToTech("pentapod-egg", "bioflux")
+Tech.removeRecipeFromTech("pentapod-egg", "biochamber")

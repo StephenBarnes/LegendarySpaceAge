@@ -8,6 +8,13 @@ Tech.addTechDependency("rocketry", "planet-discovery-gleba")
 
 -- Unlock missile turrets early.
 local missileTurretTech = data.raw.technology["rocket-turret"]
--- TODO set research trigger to producing boompuff stuff.
+missileTurretTech.unit = nil
+missileTurretTech.research_trigger = {
+	type = "craft-item",
+	item = "sprouted-boomnut",
+	count = 10,
+}
+missileTurretTech.prerequisites = {"boompuff-cultivation"}
 
-Tech.addTechDependency("agricultural-science-pack", "rocket-turret") -- TODO change this
+-- Spidertron depended on missile turret, and bio science pack through that. So add that.
+Tech.addTechDependency("agricultural-science-pack", "spidertron")

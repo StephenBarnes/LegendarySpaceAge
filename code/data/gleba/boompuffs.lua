@@ -68,7 +68,6 @@ sproutItem.pictures = {}
 for i = 1, 3 do
 	sproutItem.pictures[i] = {filename = graphicsDir .. "sprout/" .. i .. ".png", size = 64, scale = 0.5}
 end
-sproutItem.order = "a[agriculture-products]-ba[sprouted-boomnut]"
 sproutItem.subgroup = "slipstacks-and-boompuffs"
 sproutItem.order = "12"
 sproutItem.plant_result = "boompuff"

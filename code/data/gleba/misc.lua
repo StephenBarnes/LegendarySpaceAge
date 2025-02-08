@@ -69,10 +69,6 @@ data.raw["noise-expression"]["gleba_spawner"].expression = "max(0.01 * gleba_sta
 Recipe.hide("burnt-spoilage")
 Tech.removeRecipeFromTech("burnt-spoilage", "biochamber")
 
--- Hide recipe for biosulfur.
-Recipe.hide("biosulfur")
-Tech.removeRecipeFromTech("biosulfur", "bioflux-processing")
-
 -- Hide items and recipes for iron/copper bacteria.
 Item.hide("iron-bacteria")
 Item.hide("copper-bacteria")
@@ -82,3 +78,23 @@ Tech.removeRecipeFromTech("iron-bacteria", "jellynut")
 Tech.removeRecipeFromTech("copper-bacteria", "yumako")
 Recipe.hide("iron-bacteria")
 Recipe.hide("copper-bacteria")
+
+-- Move the tech for bioflux-processing to after Gleba science. And remove recipes for biosulfur and rocket fuel - only allow lubricant and plastic.
+Recipe.hide("biosulfur")
+Tech.removeRecipeFromTech("biosulfur", "bioflux-processing")
+Recipe.hide("rocket-fuel-from-jelly")
+Tech.removeRecipeFromTech("rocket-fuel-from-jelly", "bioflux-processing")
+Tech.removePrereq("agricultural-science-pack", "bioflux-processing")
+Tech.setPrereqs("bioflux-processing", {"agricultural-science-pack", "slipstack-propagation"})
+data.raw.technology["bioflux-processing"].research_trigger = nil
+data.raw.technology["bioflux-processing"].unit = {
+	count = 300,
+	time = 60,
+	ingredients = {
+		{"automation-science-pack", 1},
+		{"logistic-science-pack", 1},
+		{"chemical-science-pack", 1},
+		{"space-science-pack", 1},
+		{"agricultural-science-pack", 1},
+	},
+}
