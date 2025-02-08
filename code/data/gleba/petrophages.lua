@@ -61,7 +61,7 @@ data:extend{cultivationRecipe}
 local refreshRecipe = table.deepcopy(cultivationRecipe)
 refreshRecipe.name = "refresh-petrophages"
 refreshRecipe.ingredients = {
-	{type="item", name="petrophage", amount=2},
+	{type="item", name="petrophage", amount=3},
 }
 refreshRecipe.results = {
 	{type="item", name="petrophage", amount=1, percent_spoiled = 0},

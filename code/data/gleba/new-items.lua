@@ -227,22 +227,22 @@ sencytiumRecipe.icon = nil -- So it defaults to sencytium icon.
 sencytiumRecipe.crafting_machine_tint = table.deepcopy(appendageRecipe.crafting_machine_tint)
 data:extend{sencytiumRecipe}
 
--- Create recipe for marrow catabolysis: 4 marrow + 10 sulfuric acid -> 20 nutrients.
-local marrowCatabolysisRecipe = table.deepcopy(data.raw.recipe["nutrients-from-bioflux"])
-marrowCatabolysisRecipe.name = "marrow-catabolysis"
-marrowCatabolysisRecipe.ingredients = {
+-- Create recipe for nutrients from marrow: 4 marrow + 10 sulfuric acid -> 20 nutrients.
+local nutrientsFromMarrowRecipe = table.deepcopy(data.raw.recipe["nutrients-from-bioflux"])
+nutrientsFromMarrowRecipe.name = "nutrients-from-marrow"
+nutrientsFromMarrowRecipe.ingredients = {
 	{type = "item", name = "marrow", amount = 4},
 	{type = "fluid", name = "sulfuric-acid", amount = 10},
 }
-marrowCatabolysisRecipe.results = {{type = "item", name = "nutrients", amount = 20}}
-marrowCatabolysisRecipe.enabled = false
-marrowCatabolysisRecipe.subgroup = "gleba-non-agriculture"
-marrowCatabolysisRecipe.icons = {
-	{icon = marrowItem.icon, size = 64, scale = 0.33, shift = {-4, -4}},
-	{icon = "__space-age__/graphics/icons/nutrients.png", size = 64, scale = 0.5, shift = {3, 3}},
+nutrientsFromMarrowRecipe.results = {{type = "item", name = "nutrients", amount = 10}}
+nutrientsFromMarrowRecipe.enabled = false
+nutrientsFromMarrowRecipe.subgroup = "gleba-non-agriculture"
+nutrientsFromMarrowRecipe.icons = {
+	{icon = marrowItem.icon, size = 64, scale = 0.35, shift = {-4, -4}},
+	{icon = "__space-age__/graphics/icons/nutrients.png", size = 64, scale = 0.43, shift = {4, 4}},
 }
-marrowCatabolysisRecipe.crafting_machine_tint = table.deepcopy(data.raw.recipe["sulfuric-acid"].crafting_machine_tint)
-data:extend{marrowCatabolysisRecipe}
+nutrientsFromMarrowRecipe.crafting_machine_tint = table.deepcopy(data.raw.recipe["sulfuric-acid"].crafting_machine_tint)
+data:extend{nutrientsFromMarrowRecipe}
 
 ------------------------------------------------------------------------
 
@@ -297,7 +297,7 @@ data:extend{chitinTech2}
 local geoplasmTech = table.deepcopy(chitinTech1)
 geoplasmTech.name = "geoplasm"
 geoplasmTech.effects = {
-	{type = "unlock-recipe", recipe = "marrow-catabolysis"},
+	{type = "unlock-recipe", recipe = "nutrients-from-marrow"},
 	{type = "unlock-recipe", recipe = "appendage"},
 	{type = "unlock-recipe", recipe = "sencytium"},
 	{type = "unlock-recipe", recipe = "mechanism-from-appendage"},

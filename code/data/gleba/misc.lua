@@ -28,10 +28,6 @@ data.raw.recipe["agricultural-science-pack"].ingredients = {
 	{type = "item", name = "slipstack-pearl", amount = 1},
 }
 
--- Reduce yields of jellystem and yumako, bc right now they're absurdly high, can run 1 rocket per minute off like 2 ag towers.
-data.raw.plant["yumako-tree"].minable.results = {{type = "item", name = "yumako", amount_min = 10, amount_max = 20}}
-data.raw.plant["jellystem"].minable.results = {{type = "item", name = "jellynut", amount_min = 10, amount_max = 20}}
-
 -- Make spoilage spoil to nothing. From testing, you can simply not define spoil result or trigger, and it'll disappear.
 data.raw.item.spoilage.spoil_ticks = 60 * 60 * 20
 

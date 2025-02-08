@@ -186,7 +186,7 @@ for i, recipe in pairs{
 	"nutrients-from-spoilage",
 	"nutrients-from-yumako-mash",
 	"nutrients-from-bioflux",
-	"marrow-catabolysis",
+	"nutrients-from-marrow",
 } do
 	data.raw.recipe[recipe].subgroup = "spoilage-and-nutrients"
 	data.raw.recipe[recipe].order = string.format("%02d", i)
@@ -194,6 +194,8 @@ end
 for i, item in pairs{
 	{"item", "yumako-seed"},
 	{"item", "jellynut-seed"},
+	{"item", "fertilized-yumako-seed"},
+	{"item", "fertilized-jellynut-seed"},
 	{"capsule", "yumako"},
 	{"capsule", "jellynut"},
 	{"capsule", "yumako-mash"},
