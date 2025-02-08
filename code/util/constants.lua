@@ -16,16 +16,38 @@ Export.fluidFuelValues = { -- Maps from fluid name to fuel value, pollution mult
 	["thruster-oxidizer"] = {nil, nil, nil, nil, nil}, -- Oxygen. Originally 50kJ, setting it to zero, seems there's no issue doing that, thrusters still work. Don't want oxygen to be usable as fuel in fluid fuelled boilers etc.
 	["geoplasm"] = {"100kJ", 1, .5, .5, "chemical"},
 }
-Export.itemFuelValues = { -- Maps from fluid name to fuel value, pollution multiplier, vehicle acceleration mult, vehicle top-speed mult, and fuel category.
-	["sulfur"] = {"3MJ", 8, .5, .5, "non-carbon"},
-	["solid-fuel"] = {"12MJ", 2, .8, .8, "chemical"},
-	["pitch"] = {"3MJ", 2.5, .5, .5, "chemical"},
-	["resin"] = {"1MJ", 2, .5, .5, "chemical"},
-	["rocket-fuel"] = {"25MJ", .8, 1.8, 1.15, "chemical"}, -- Each one is 25 light oil, 12 rich gas, so that suggests 30MJ. Vanilla is 100MJ.
-	["carbon"] = {"2MJ", .6, .7, .7, "pure-carbon"},
-	["wood"] = {"2MJ", 1.2, .4, .4, "chemical"},
-	["coal"] = {"4MJ", 1.4, .5, .5, "chemical"},
-	-- TODO really we should do all the other fuels in the game, eg seeds, so they also have bad vehicle stats.
+
+Export.itemFuelValues = { -- Maps from fluid name to fuel value, pollution multiplier, vehicle acceleration mult, vehicle top-speed mult, fuel category, whether it should produce ash, and type name.
+	["sulfur"] = {"3MJ", 8, .5, .5, "non-carbon", false, "item"},
+
+	["pitch"] = {"3MJ", 2.5, .5, .5, "chemical", false, "item"},
+	["resin"] = {"1MJ", 2, .5, .5, "chemical", false, "item"},
+
+	["solid-fuel"] = {"12MJ", 2, .8, .8, "chemical", false, "item"},
+	["rocket-fuel"] = {"25MJ", .8, 1.8, 1.15, "chemical", false, "item"}, -- Each one is 25 light oil, 12 rich gas, so that suggests 30MJ. Vanilla is 100MJ.
+
+	["carbon"] = {"2MJ", .6, .7, .7, "pure-carbon", false, "item"},
+
+	["coal"] = {"4MJ", 1, .5, .5, "chemical", true, "item"},
+	["wood"] = {"2MJ", 1, .4, .4, "chemical", true, "item"},
+	["tree-seed"] = {"100kJ", 1, .4, .4, "chemical", true, "item"},
+
+	["spoilage"] = {"250kJ", 1, .4, .4, "chemical", true, "item"},
+	["yumako-seed"] = {"4MJ", 1, .4, .4, "chemical", true, "item"},
+	["jellynut-seed"] = {"4MJ", 1, .4, .4, "chemical", true, "item"},
+
+	["yumako"] = {"2MJ", 1, .4, .4, "chemical", true, "capsule"},
+	["jellynut"] = {"10MJ", 1, .4, .4, "chemical", true, "capsule"},
+	["yumako-mash"] = {"1MJ", 1, .4, .4, "chemical", true, "capsule"},
+	["jelly"] = {"1MJ", 1, .4, .4, "chemical", true, "capsule"},
+
+	["neurofibril"] = {"2MJ", 1, .7, .7, "chemical", true, "item"},
+
+	["pentapod-egg"] = {"5MJ", 2, .4, .4, "chemical", true, "item"},
+	["activated-pentapod-egg"] = {"5MJ", 2, .4, .4, "activated-pentapod-egg", true, "item"},
+	["biter-egg"] = {"6MJ", 1, .4, .4, "biter-egg", true, "item"},
 }
+
+-- TODO check again later that all fuel items/fluids are here.
 
 return Export

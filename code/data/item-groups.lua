@@ -87,7 +87,7 @@ for subgroup, fluids in pairs{
 } do
 	for i, fluid in pairs(fluids) do
 		data.raw.fluid[fluid].subgroup = subgroup .. "-fluids"
-		data.raw.fluid[fluid].order = "0" .. i
+		data.raw.fluid[fluid].order = string.format("%02d", i)
 	end
 end
 

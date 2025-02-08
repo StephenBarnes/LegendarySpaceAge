@@ -16,7 +16,7 @@ activatedEggItem.icons = nil
 activatedEggItem.icon = activatedEggItem.pictures[4].filename
 activatedEggItem.spoil_ticks = 60 * 30 -- 30 seconds
 activatedEggItem.order = activatedEggItem.order .. "-2"
-activatedEggItem.fuel_category = "activated-pentapod-egg"
+-- activatedEggItem.fuel_category = "activated-pentapod-egg" -- Fuel category set in constants.lua.
 data:extend{activatedEggItem}
 
 -- Base Space Age gives eggs 4 variants, of which 4th shows egg in the middle of splitting.

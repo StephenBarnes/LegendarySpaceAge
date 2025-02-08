@@ -77,3 +77,8 @@ data.raw["logistic-robot"]["logistic-robot"].speed = 0.10 -- Was 0.05
 
 -- Logistics 1 tech doesn't give "faster ways of transportation".
 data.raw.technology["logistics"].localised_description = {"technology-description.logistics-1"}
+
+-- Spidertron Enhancements
+data.raw["character-corpse"]["spidertron-enhancements-corpse"].hidden_in_factoriopedia = true
+--data.raw["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].hidden_in_factoriopedia = true
+--data.raw["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].factoriopedia_alternative = "spidertron"

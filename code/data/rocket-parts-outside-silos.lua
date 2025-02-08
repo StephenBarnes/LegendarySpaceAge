@@ -18,7 +18,6 @@ data.raw.item["rocket-part"].hidden = false
 data:extend{assembledRocketPartItem}
 
 data.raw.recipe["rocket-part"].hide_from_player_crafting = false
-data.raw.recipe["rocket-part"].category = "crafting"
 data.raw.recipe["rocket-part"].always_show_made_in = true
 
 local rocketPartAssemblyRecipe = table.deepcopy(data.raw.recipe["rocket-part"])
@@ -26,8 +25,9 @@ rocketPartAssemblyRecipe.name = "assembled-rocket-part"
 rocketPartAssemblyRecipe.ingredients = {{type = "item", name = "rocket-part", amount = 1}}
 rocketPartAssemblyRecipe.results = {{type = "item", name = "assembled-rocket-part", amount = 1}}
 data:extend{rocketPartAssemblyRecipe}
-
 data.raw["rocket-silo"]["rocket-silo"].fixed_recipe = "assembled-rocket-part"
+
+data.raw.recipe["rocket-part"].category = "crafting"
 
 Tech.addRecipeToTech("assembled-rocket-part", "rocket-silo", 3)
 

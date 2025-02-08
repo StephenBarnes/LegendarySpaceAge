@@ -65,8 +65,7 @@ data:extend({
 		name = "biter-egg",
 	},
 })
--- Pentapod egg fuel category will be added to activated eggs in gleba/activated-eggs.lua.
-data.raw.item["biter-egg"].fuel_category = "biter-egg"
+-- Egg fuel categories will be added to eggs in constants.lua with fuel.lua.
 data.raw.lab.glebalab.energy_source.fuel_categories = {"activated-pentapod-egg"}
 data.raw.lab.glebalab.energy_source.burner_usage = "food" -- Determines icons and tooltips - either fuel, nutrients, or food.
 data.raw.lab.glebalab.energy_usage = "500kW" -- A pentapod egg is 5MJ, so consumes 1 every 10 seconds. (Modules will probably reduce that to 1/50s.)

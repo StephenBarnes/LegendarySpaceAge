@@ -11,14 +11,20 @@ for fluidName, fuelValues in pairs(Const.fluidFuelValues) do
 	data.raw.fluid[fluidName].fuel_value = fuelValues[1]
 	data.raw.fluid[fluidName].emissions_multiplier = fuelValues[2]
 end
+-- Set fuel values for items.
 for itemName, fuelValues in pairs(Const.itemFuelValues) do
-	data.raw.item[itemName].fuel_value = fuelValues[1]
-	data.raw.item[itemName].fuel_emissions_multiplier = fuelValues[2]
-	data.raw.item[itemName].fuel_acceleration_multiplier = fuelValues[3]
-	data.raw.item[itemName].fuel_top_speed_multiplier = fuelValues[4]
-	data.raw.item[itemName].fuel_category = fuelValues[5]
-	if data.raw.item[itemName].fuel_glow_color == nil then
-		data.raw.item[itemName].fuel_glow_color = data.raw.item["coal"].fuel_glow_color
+	local t = fuelValues[7]
+	local item = data.raw[t][itemName]
+	item.fuel_value = fuelValues[1]
+	item.fuel_emissions_multiplier = fuelValues[2]
+	item.fuel_acceleration_multiplier = fuelValues[3]
+	item.fuel_top_speed_multiplier = fuelValues[4]
+	item.fuel_category = fuelValues[5]
+	if fuelValues[6] then
+		item.burnt_result = "ash"
+	end
+	if item.fuel_glow_color == nil then
+		item.fuel_glow_color = data.raw.item["coal"].fuel_glow_color
 	end
 end
 data.raw.item["sulfur"].fuel_glow_color = {r=.3, g=.3, b=1, a=.2} -- Sulfur burns blue in real life.

@@ -41,7 +41,7 @@ for i, itemName in pairs{
 	recipe1.icon = nil
 	recipe1.icons = {
 		rustyItem.icons[1],
-		{icon = "__LegendarySpaceAge__/graphics/sand/sand-1.png", icon_size = 64, shift = {-8, -8}, scale = 0.25},
+		{icon = "__LegendarySpaceAge__/graphics/glass-etc/sand/1.png", icon_size = 64, shift = {-8, -8}, scale = 0.25},
 	}
 	recipe1.enabled = true
 	recipe1.subgroup = "derusting"
