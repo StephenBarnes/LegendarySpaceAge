@@ -42,7 +42,7 @@ latexRecipe.ingredients = {
 latexRecipe.results = {{type="fluid", name="latex", amount=50}}
 latexRecipe.category = "organic-or-chemistry"
 latexRecipe.subgroup = "raw-material"
-latexRecipe.order = "a1"
+latexRecipe.order = "f1"
 data:extend{latexRecipe}
 
 -- Create recipe for latex to rubber.
@@ -56,7 +56,7 @@ rubberFromLatexRecipe.ingredients = {
 rubberFromLatexRecipe.results = {{type="item", name="rubber", amount=5}}
 rubberFromLatexRecipe.category = "organic-or-chemistry"
 rubberFromLatexRecipe.subgroup = "raw-material"
-rubberFromLatexRecipe.order = "a2"
+rubberFromLatexRecipe.order = "f2"
 rubberFromLatexRecipe.icon = nil
 rubberFromLatexRecipe.icons = {
 	rubberItem.icons[1],
@@ -80,7 +80,7 @@ rubberFromPetrochemRecipe.results = {
 rubberFromPetrochemRecipe.main_product = "rubber"
 rubberFromPetrochemRecipe.category = "organic-or-chemistry"
 rubberFromPetrochemRecipe.subgroup = "raw-material"
-rubberFromPetrochemRecipe.order = "a3"
+rubberFromPetrochemRecipe.order = "f3"
 rubberFromPetrochemRecipe.icon = nil
 rubberFromPetrochemRecipe.icons = {
 	rubberItem.icons[1],

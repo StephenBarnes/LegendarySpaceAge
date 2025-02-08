@@ -255,9 +255,9 @@ landfillFromChitinRecipe.ingredients = {
 }
 landfillFromChitinRecipe.icon = nil
 landfillFromChitinRecipe.icons = {
-	{icon = "__base__/graphics/icons/landfill.png", size = 64, scale = 0.4, shift = {0, 4}},
-	{icon = chitinDir.."3.png", size = 64, scale = 0.33, shift = {8, -8}},
-	{icon = marrowItem.icon, size = 64, scale = 0.3, shift = {-8, -8}},
+	{icon = "__base__/graphics/icons/landfill.png", size = 64, scale = 0.4, shift = {0, 6}},
+	{icon = chitinDir.."3.png", size = 64, scale = 0.26, shift = {8, -8}},
+	{icon = marrowItem.icon, size = 64, scale = 0.24, shift = {-8, -8}},
 }
 landfillFromChitinRecipe.subgroup = "gleba-non-agriculture"
 landfillFromChitinRecipe.order = "d"

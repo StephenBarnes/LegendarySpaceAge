@@ -205,6 +205,8 @@ for i, item in pairs{
 	data.raw[item[1]][item[2]].order = string.format("%02d", i)
 end
 for i, recipe in pairs{
+	"fertilized-yumako-seed",
+	"fertilized-jellynut-seed",
 	"yumako-processing",
 	"jellynut-processing",
 } do
@@ -225,6 +227,7 @@ end
 for i, recipe in pairs{
 	"electrophage-cultivation",
 	"electrophage-cultivation-holmium",
+	"fulgorite-starter",
 } do
 	data.raw.recipe[recipe].subgroup = "fulgora-agriculture"
 	data.raw.recipe[recipe].order = string.format("%02d", i+10)

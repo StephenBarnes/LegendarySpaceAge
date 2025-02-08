@@ -81,6 +81,8 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.4, tint=tint},
 	}
 	ingotHeatingRecipe.result_is_always_fresh = true
+	ingotHeatingRecipe.subgroup = "ingots"
+	ingotHeatingRecipe.order = "a[smelting]-2-" .. i
 	data:extend{ingotHeatingRecipe}
 end
 
