@@ -347,21 +347,6 @@ lubricantRecipe.results = {
 }
 lubricantRecipe.main_product = "lubricant"
 
---[[ Modify recipe for vehicle fuel (rocket-fuel).
-	10 light oil + 5 rich gas -> 4 vehicle fuel (items)
-		These are used both to fuel cars and tanks, and for rockets launched to space.
-		These 2 fractions are used so that the player can't make rocket fuel immediately after fractionating only oil or only gas - needs to fractionate both, or crack, or do syngas liquefaction.
-]]
-local rocketFuelRecipe = data.raw.recipe["rocket-fuel"]
-rocketFuelRecipe.ingredients = {
-	{ type = "fluid", name = "light-oil",     amount = 100 },
-	{ type = "fluid", name = "petroleum-gas", amount = 50 },
-}
-rocketFuelRecipe.results = {
-	{type = "item", name = "rocket-fuel", amount = 4},
-}
-rocketFuelRecipe.category = "organic-or-chemistry"
-
 --[[ Modify recipe for plastic-bar.
 	5 syngas + 2 carbon + 1 sulfuric acid -> 5 plastic bars
 		Syngas provides hydrogen, carbon is the backbone, and sulfuric acid helps drive polymerization.

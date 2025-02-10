@@ -94,8 +94,6 @@ data.raw.technology["sulfur-processing"].unit = data.raw.technology["ammonia-1"]
 
 Tech.setPrereqs("explosives", {"coal-liquefaction", "ammonia-1"}) -- Previously sulfur-processing
 
-Tech.setPrereqs("chemical-science-pack", {"advanced-circuit"}) -- Previously also sulfur-processing; TODO later rewrite the recipe for this science pack completely.
-
 Tech.addTechDependency("steel-processing", "battery")
 
 -- Remove pointless "gas and oil gathering" tech, merge with petrochemistry 1.
@@ -168,11 +166,6 @@ data.raw.recipe["logistic-science-pack"].category = "crafting-with-fluid"
 -- Could make green science depend only on rubber and steam-power. But that's sorta guiding people in the direction of not automating circuit boards. Rather make it a prereq. That also lets us assume resin is available after green science.
 Tech.setPrereqs("logistic-science-pack", {"rubber-1", "wood-circuit-board"})
 
--- Chemical (blue) science comes after plastics.
-data.raw.technology["chemical-science-pack"].prerequisites = {"plastics"}
--- So then blue circuits also need a new dependency on red circuits.
-Tech.addTechDependency("advanced-circuit", "processing-unit")
-
 -- Military stuff: move things around so military science pack can be made from poison/slowdown capsules, which now come earlier, while grenades come later.
 data.raw.technology["military-science-pack"].prerequisites = {"military-2"}
 data.raw.recipe["military-science-pack"].ingredients = {
@@ -239,11 +232,32 @@ data.raw.technology["lamp"].research_trigger = {
 Tech.addRecipeToTech("waste-pump", "fluid-handling")
 Tech.addRecipeToTech("gas-vent", "fluid-handling")
 
--- Gleba needs advanced oil processing, to get light oil for explosives etc.
+-- Gleba needs advanced oil processing, to turn pitch (from petrophages) into light oil for explosives etc.
 Tech.addTechDependency("advanced-oil-processing", "planet-discovery-gleba")
 
 -- Hide health techs.
 Tech.hideTech("health")
+
+-- Rocket silo shouldn't depend on rocket fuel. Should depend on hydrogen/oxygen techs.
+Tech.removePrereq("rocket-silo", "rocket-fuel")
+-- TODO add hydrogen/oxygen techs.
+
+-- Remove rocket fuel from rocket part recipe. TODO later we should re-write this recipe completely maybe.
+data.raw.recipe["rocket-part"].ingredients = {
+	{type = "item", name = "processing-unit", amount = 1},
+	{type = "item", name = "low-density-structure", amount = 1},
+}
+
+-- Chemical science pack: 1 barrel diesel + 2 plastic -> 2 chemical science packs.
+data.raw.recipe["chemical-science-pack"].ingredients = {
+	{type = "item", name = "diesel-barrel", amount = 1},
+	{type = "item", name = "plastic-bar", amount = 2},
+}
+data.raw.technology["chemical-science-pack"].prerequisites = {"plastics", "diesel"}
+
+-- Blue circuits need a new dependency on red circuits.
+Tech.addTechDependency("advanced-circuit", "processing-unit")
+
 
 -- TODO other science packs.
 

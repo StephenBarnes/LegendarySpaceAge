@@ -9,9 +9,6 @@ require("code.data.petrochem.wellhead")
 require("code.data.petrochem.natural-gas-wells")
 require("code.data.petrochem.coking-tech")
 require("code.data.petrochem.resin-tech")
-
--- Move rocket-fuel (vehicle fuel) earlier in progression
-Tech.setPrereqs("rocket-fuel", {"oil-processing"})
-data.raw.technology["rocket-fuel"].unit = data.raw.technology["flammables"].unit
+require("code.data.petrochem.diesel")
 
 -- TODO check that there's no ability to create infinite loops using syngas to make petrochems using only steam/water input. Probably make automated checks by assigning a carbon content to every fluid and item and then checking all recipes. Including productivity if enabled for that recipe.
