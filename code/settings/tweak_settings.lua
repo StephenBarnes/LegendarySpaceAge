@@ -1,14 +1,5 @@
 local u = require("code.settings.util")
 
--- Set power multipliers for PowerMultiplier mod.
---u.setDefaultOrForce("PowerMultiplier-electrical", "double", 2)
-u.setDefaultOrForce("PowerMultiplier-electrical", "double", 2)
-u.setDefaultOrForce("PowerMultiplier-burner", "double", 2)
-u.setDefaultOrForce("PowerMultiplier-nutrient", "double", 1)
-u.setDefaultOrForce("PowerMultiplier-heating", "double", 1) -- Already making heating towers less efficient.
-u.setDefaultOrForce("PowerMultiplier-solar", "double", 1)
-u.setDefaultOrForce("PowerMultiplier-blacklist", "string", "battery-charger,battery-discharger")
-
 -- Set options for the Diurnal Dynamics mod.
 u.setDefaultOrForce("data-dd-dark-perc", "double", 100.)
 u.setDefaultOrForce("data-dd-dark-platform", "bool", true)

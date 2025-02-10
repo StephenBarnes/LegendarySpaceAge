@@ -19,7 +19,6 @@ charFurnace.crafting_categories = {"char-furnace"}
 charFurnace.graphics_set.animation.layers[1].filename = "__LegendarySpaceAge__/graphics/char-furnace/entity.png"
 charFurnace.corpse = "char-furnace-remnants"
 charFurnace.allowed_effects = {"pollution"}
-charFurnace.PowerMultiplier_ignore = true
 charFurnace.icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png"
 charFurnace.show_recipe_icon = false
 charFurnace.show_recipe_icon_on_map = false

@@ -14,7 +14,6 @@ wastePump.energy_source.emissions_per_minute = {pollution = 1} -- This gets mult
 wastePump.energy_source.drain = "0W"
 wastePump.energy_usage = "30kW"
 wastePump.heating_energy = "50kW"
-wastePump.PowerMultiplier_ignore = true
 wastePump.minable.result = "waste-pump"
 wastePump.placeable_by = {item = "waste-pump", count = 1}
 wastePump.show_recipe_icon = true -- Just so player can distinguish them from the non-waste pumps.

@@ -47,7 +47,6 @@ ent.crafting_categories = {"deep-drill"}
 ent.surface_conditions = {{property = "surface-stability", min = 80}}
 ent.energy_usage = "5MW"
 ent.energy_source.drain = "200kW"
-ent.PowerMultiplier_ignore = true
 ent.show_recipe_icon = false
 ent.show_recipe_icon_on_map = false
 ent.graphics_set = {

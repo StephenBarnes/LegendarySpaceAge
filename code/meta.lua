@@ -23,7 +23,3 @@ defines.direction = {
 
 ---@class data.ItemPrototype
 ---@field auto_recycle boolean Whether the item should automatically get recycling recipes.
-
---- LSP doesn't recognize PowerMultiplier_ignore
----@class data.EntityPrototype
----@field PowerMultiplier_ignore boolean Whether PowerMultiplier should ignore the entity.

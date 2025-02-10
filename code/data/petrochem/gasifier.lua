@@ -47,7 +47,6 @@ gasifierEnt.energy_source = {
 	},
 }
 gasifierEnt.energy_usage = "20MW" -- TODO check for balance.
-gasifierEnt.PowerMultiplier_ignore = true -- For PowerMultiplier mod, disables power changes to this entity.
 gasifierEnt.trash_inventory_size = 0
 gasifierEnt.stateless_visualisation = {
 	{

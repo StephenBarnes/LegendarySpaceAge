@@ -324,8 +324,6 @@ data:extend({
 			fade_in_ticks = 4,
 			fade_out_ticks = 20,
         },
-		---@diagnostic disable-next-line: assign-type-mismatch
-		PowerMultiplier_ignore = true, -- For PowerMultiplier mod, disables power changes to this entity.
 	},
 	{
 		type = "burner-generator",

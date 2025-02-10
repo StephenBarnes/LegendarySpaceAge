@@ -1,5 +1,6 @@
 --[[ This file changes recipes for infrastructure (belts, vehicles, buildings, etc.)
 Going in order by group and subgroup.
+Prefer to use numbers like: 1, 2, 5, 10, 0.5. Maybe also 4, 0.25, etc. Goal is to have the per-second rates always be simple numbers so people can do mental math easily.
 ]]
 
 local Recipe = require("code.util.recipe")
@@ -140,7 +141,8 @@ recipes["medium-electric-pole"].ingredients = {
 	{type = "item", name = "wiring", amount = 1},
 }
 recipes["big-electric-pole"].ingredients = {
-	{type = "item", name = "frame", amount = 4},
+	{type = "item", name = "structure", amount = 1},
+	{type = "item", name = "frame", amount = 3},
 	{type = "item", name = "wiring", amount = 2},
 }
 recipes["substation"].ingredients = {
@@ -444,7 +446,6 @@ recipes["foundry"].ingredients = {
 -- Chemical plant - shouldn't require steel bc we're moving it to automation 1. Also no pipe ingredients bc it comes before pipe tech. But it should cost more than assembler 1 since it's faster.
 recipes["chemical-plant"].ingredients = {
 	{type="item", name="frame", amount=2},
-	{type="item", name="glass", amount=2},
 	{type="item", name="fluid-fitting", amount=8},
 	{type="item", name="sensor", amount=2},
 	{type="item", name="mechanism", amount=2},

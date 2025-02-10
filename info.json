@@ -37,7 +37,6 @@
 
 		, "PlanetsLib"
 
-		, "PowerMultiplier"
 		, "PowerOverload"
 		, "NoLavaInPipes"
 		, "no-quality"
@@ -54,6 +53,7 @@
 		, "! biochemistry"
 		, "! fulgoran-sludge"
 		, "! Rocs-Rusting-Iron"
+		, "! PowerMultiplier"
 
 		, "! fluroflux"
 		, "! slipstacks"
