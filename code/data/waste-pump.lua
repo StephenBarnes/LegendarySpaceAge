@@ -14,10 +14,9 @@ wastePump.energy_source.emissions_per_minute = {pollution = 1} -- This gets mult
 wastePump.energy_source.drain = "0W"
 wastePump.energy_usage = "30kW"
 wastePump.heating_energy = "50kW"
---wastePump.PowerMultiplier_ignore = true
-wastePump.minable = table.deepcopy(data.raw["offshore-pump"]["offshore-pump"].minable)
-wastePump.minable.result = "offshore-pump"
-wastePump.placeable_by = {item = "offshore-pump", count = 1}
+wastePump.PowerMultiplier_ignore = true
+wastePump.minable.result = "waste-pump"
+wastePump.placeable_by = {item = "waste-pump", count = 1}
 wastePump.show_recipe_icon = true -- Just so player can distinguish them from the non-waste pumps.
 wastePump.fluid_boxes = {
 	{
@@ -32,8 +31,7 @@ wastePump.fluid_boxes = {
 	},
 }
 wastePump.surface_conditions = nil
-wastePump.hidden_in_factoriopedia = true
-wastePump.factoriopedia_alternative = "offshore-pump"
+wastePump.hidden_in_factoriopedia = false
 -- Now the colored bars shown in the pump (showing the fluid pumped) are gone. Those are offshorePump.graphics_set.fluid_animation, but for furnace we need furnace.graphics_set.working_visualisations.
 local workingVis = {
 	apply_recipe_tint = "primary", -- So it's tinted for the fluid, see recipes below.
@@ -58,27 +56,25 @@ local wastePumpCraftingCategory = table.deepcopy(data.raw["recipe-category"]["cr
 wastePumpCraftingCategory.name = "waste-pump"
 data:extend{wastePumpCraftingCategory}
 
--- Code to create recipe and item for waste pump. This is disabled, because I'm rather implementing a toggle hotkey. Can re-enable for testing.
-if false then
-	-- Create recipe.
-	local wastePumpRecipe = table.deepcopy(data.raw.recipe["pump"])
-	wastePumpRecipe.name = "waste-pump"
-	wastePumpRecipe.results = {{type = "item", name = "waste-pump", amount = 1}}
-	wastePumpRecipe.ingredients = table.deepcopy(data.raw.recipe["offshore-pump"].ingredients)
-	data:extend{wastePumpRecipe}
+-- Create recipe.
+local wastePumpRecipe = table.deepcopy(data.raw.recipe["pump"])
+wastePumpRecipe.name = "waste-pump"
+wastePumpRecipe.results = {{type = "item", name = "waste-pump", amount = 1}}
+wastePumpRecipe.ingredients = table.deepcopy(data.raw.recipe["offshore-pump"].ingredients)
+data:extend{wastePumpRecipe}
 
-	-- Create item.
-	local wastePumpItem = table.deepcopy(data.raw.item["pump"])
-	wastePumpItem.name = "waste-pump"
-	wastePumpItem.place_result = "waste-pump"
-	wastePumpItem.icon = "nil"
-	wastePumpItem.icons = {
-		{icon = "__base__/graphics/icons/offshore-pump.png", icon_size = 64, scale = 0.5},
-		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.3},
-	}
-	wastePumpItem.order = "b[pipe]-d"
-	data:extend{wastePumpItem}
-end
+-- Create item.
+local wastePumpItem = table.deepcopy(data.raw.item["pump"])
+wastePumpItem.name = "waste-pump"
+wastePumpItem.place_result = "waste-pump"
+wastePumpItem.icon = "nil"
+wastePumpItem.icons = {
+	{icon = "__base__/graphics/icons/offshore-pump.png", icon_size = 64, scale = 0.5},
+	{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.25, shift = {-8, 8}},
+}
+wastePumpItem.order = "b[pipe]-d"
+wastePumpItem.subgroup = "fluid-logistics"
+data:extend{wastePumpItem}
 
 -- Create fluid-venting recipes.
 local effluentFluidsAndPollution = {

@@ -149,9 +149,11 @@ end
 data.raw["space-platform-starter-pack"]["space-platform-starter-pack"].subgroup = "space-interactors"
 
 -- Move fluid logistics stuff to that row.
-for _, item in pairs{"pipe", "pipe-to-ground", "pump"} do
+for i, item in pairs{"pipe", "pipe-to-ground", "pump", "offshore-pump"} do
 	data.raw.item[item].subgroup = "fluid-logistics"
+	data.raw.item[item].order = string.format("%02d", i)
 	data.raw.recipe[item].subgroup = "fluid-logistics"
+	data.raw.recipe[item].order = string.format("%02d", i)
 end
 
 -- Move post-Nauvis science packs to the right row.

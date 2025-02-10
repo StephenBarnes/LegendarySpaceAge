@@ -22,8 +22,6 @@ data.raw.item["tiny-inline-storage-tank"].order = "b[fluid]-a[0]"
 data.raw.item["tiny-inline-storage-tank"].stack_size = 100
 data.raw.item["tiny-inline-storage-tank"].weight = 1000000 / 100
 
--- Could add the 4way storage tank back in, but use the toggle hotkey for it.
-
 -- Adjust ingredients.
 data.raw.recipe["large-storage-tank"].ingredients = { -- Has 4x capacity of normal storage tank, so make cost less than 4x, so there's reason to use it.
 	{type = "item", name = "pipe", amount = 8},

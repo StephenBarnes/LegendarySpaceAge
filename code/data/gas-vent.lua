@@ -95,7 +95,10 @@ local ventItem = table.deepcopy(data.raw.item["steel-furnace"])
 ventItem.type = "item"
 ventItem.name = "gas-vent"
 ventItem.icon = nil
-ventItem.icons = {{icon = GRAPHICS.."gas-vent-item.png", icon_size = 64}}
+ventItem.icons = {
+	{icon = GRAPHICS.."gas-vent-item.png", icon_size = 64},
+	{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.25, shift = {-8, 8}},
+}
 ventItem.subgroup = "fluid-logistics"
 ventItem.order = "b[pipe]-e"
 ventItem.place_result = "gas-vent"

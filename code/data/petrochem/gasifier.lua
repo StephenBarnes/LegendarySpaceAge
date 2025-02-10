@@ -146,6 +146,8 @@ data:extend{gasifierEnt}
 ---@type data.AssemblingMachinePrototype
 local fluidGasifierEnt = table.deepcopy(gasifierEnt)
 fluidGasifierEnt.name = "fluid-fuelled-gasifier"
+fluidGasifierEnt.minable.result = "fluid-fuelled-gasifier"
+fluidGasifierEnt.placeable_by = {item = "fluid-fuelled-gasifier", count = 1}
 fluidGasifierEnt.energy_source = {
 	type = "fluid",
 	emissions_per_minute = gasifierEnt.energy_source.emissions_per_minute,
@@ -170,8 +172,6 @@ fluidGasifierEnt.icons = {
 	{icon = GRAPHICS.."gasifier-item.png", icon_size = 64, scale = 0.5, shift = {2, 0}},
 	{icon = data.raw.fluid["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = data.raw.fluid["petroleum-gas"].icons[1].tint},
 }
-fluidGasifierEnt.hidden_in_factoriopedia = true
-fluidGasifierEnt.factoriopedia_alternative = "gasifier"
 data:extend{fluidGasifierEnt}
 
 local gasifierItem = table.deepcopy(data.raw.item["steel-furnace"])
@@ -185,6 +185,13 @@ gasifierItem.place_result = "gasifier"
 gasifierItem.stack_size = 20
 data:extend{gasifierItem}
 
+local fluidGasifierItem = table.deepcopy(gasifierItem)
+fluidGasifierItem.name = "fluid-fuelled-gasifier"
+fluidGasifierItem.place_result = "fluid-fuelled-gasifier"
+fluidGasifierItem.icons = fluidGasifierEnt.icons
+fluidGasifierItem.order = "zz"
+data:extend{fluidGasifierItem}
+
 local gasifierRecipe = table.deepcopy(data.raw.recipe["steel-furnace"])
 gasifierRecipe.type = "recipe"
 gasifierRecipe.name = "gasifier"
@@ -192,6 +199,11 @@ gasifierRecipe.enabled = false
 gasifierRecipe.results = {{type = "item", name = "gasifier", amount = 1}}
 -- TODO decide on ingredients
 data:extend{gasifierRecipe}
+
+local fluidGasifierRecipe = table.deepcopy(gasifierRecipe)
+fluidGasifierRecipe.name = "fluid-fuelled-gasifier"
+fluidGasifierRecipe.results = {{type = "item", name = "fluid-fuelled-gasifier", amount = 1}}
+data:extend{fluidGasifierRecipe}
 
 local gasifierRecipeCategory = table.deepcopy(data.raw["recipe-category"]["crafting"])
 gasifierRecipeCategory.name = "gasifier"
@@ -231,6 +243,7 @@ data:extend{gasificationRecipe}
 
 Tech.addRecipeToTech("syngas", "coal-liquefaction", 1)
 Tech.addRecipeToTech("gasifier", "coal-liquefaction")
+Tech.addRecipeToTech("fluid-fuelled-gasifier", "coal-liquefaction")
 
 -- Adjust pic for syngas tech, so it has a picture of the gasifier.
 data.raw.technology["coal-liquefaction"].icon = nil

@@ -235,7 +235,8 @@ data.raw.technology["lamp"].research_trigger = {
 	count = 1,
 }
 
--- Add gas vent to fluid-handling tech.
+-- Add gas vent and waste pump to fluid-handling tech.
+Tech.addRecipeToTech("waste-pump", "fluid-handling")
 Tech.addRecipeToTech("gas-vent", "fluid-handling")
 
 -- Gleba needs advanced oil processing, to get light oil for explosives etc.

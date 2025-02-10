@@ -1,15 +1,16 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.7.0
-Date: 2025-01-30
+Date: 2025-02-10
   Features:
-    - Added "factor intermediates" (frame, panel, structure, fluid fitting, shielding, mechanism, sensor). These are intermediate items with multiple alternative recipes, and replace ingredients in infrastructure recipes, effectively allowing you to e.g. make pipes out of copper or transport belts out of plastic. This will enable zero-metal Gleba. (TODO finish)
+    - Added "factor intermediates" (frame, panel, structure, fluid fitting, shielding, mechanism, sensor). These are intermediate items with multiple alternative recipes, and replace ingredients in infrastructure recipes, effectively allowing you to e.g. make pipes out of copper or transport belts out of plastic. This will enable zero-metal Gleba.
+    - Added lots of stuff to Gleba - farmable stingfronds with cyclosome system, farmable slipstacks, farmable boompuffs, activated pentapod eggs, seed fertilization, petrophages, chitin, appendages, etc.
     - Added deep mining drill, using graphics from Hurricane046.
-    - Added lots of stuff to Gleba - farmable stingfronds with cyclosome system, farmable slipstacks, farmable boompuffs, activated pentapod eggs, chitin, appendages, etc.
     - Added char furnace, and reorganized early-game tech tree.
     - Added automatic progression debug script, for debugging. This is disabled by default; edit global-params.lua to enable it. (TODO fix progression bugs)
     - TODO Added production rate triggers for all remaining science packs (except space science, which will be unlocked by building first space platform).
     - Filled barrels and tanks are now usable as fuel. Oxygen is no longer usable as fluid fuel.
     - Rails cannot be built on Aquilo.
+    - Removed toggle hotkey.
 ---------------------------------------------------------------------------------------------------
 Version: 0.6.0
 Date: 2025-01-22

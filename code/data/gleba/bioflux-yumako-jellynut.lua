@@ -116,12 +116,12 @@ fertilizedJellystemSeedRecipe.maximum_productivity = 0
 data:extend{fertilizedJellystemSeedRecipe}
 Tech.addRecipeToTech("fertilized-jellynut-seed", "jellynut")
 
--- Make the fruit processing recipes yield 90%-spoiled fertilized seeds. (Spoil timer is 10 minutes, so we make the fruits yield 95% spoiled seeds, so 30 seconds left.)
+-- Make the fruit processing recipes yield 90%-spoiled fertilized seeds. (Spoil timer is 10 minutes, so we make the fruits yield 90% spoiled seeds, so 60 seconds left.)
 data.raw.recipe["yumako-processing"].results = {
 	{type = "item", name = "yumako-mash", amount = 2},
-	{type = "item", name = "fertilized-yumako-seed", amount = 1, probability = .02, percent_spoiled = .95},
+	{type = "item", name = "fertilized-yumako-seed", amount = 1, probability = .02, percent_spoiled = .9},
 }
 data.raw.recipe["jellynut-processing"].results = {
 	{type = "item", name = "jelly", amount = 4},
-	{type = "item", name = "fertilized-jellynut-seed", amount = 1, probability = .02, percent_spoiled = .95},
+	{type = "item", name = "fertilized-jellynut-seed", amount = 1, probability = .02, percent_spoiled = .9},
 }

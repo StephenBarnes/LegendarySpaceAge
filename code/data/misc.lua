@@ -1,5 +1,6 @@
 local Tech = require("code.util.tech")
 local Recipe = require("code.util.recipe")
+local Item = require("code.util.item")
 
 -- Nerf heating towers' efficiency, and reduce energy consumption.
 data.raw.reactor["heating-tower"].energy_source.effectivity = 1 -- 2.5 to 1
@@ -82,3 +83,6 @@ data.raw.technology["logistics"].localised_description = {"technology-descriptio
 data.raw["character-corpse"]["spidertron-enhancements-corpse"].hidden_in_factoriopedia = true
 --data.raw["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].hidden_in_factoriopedia = true
 --data.raw["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].factoriopedia_alternative = "spidertron"
+
+-- Beacon interface should be hidden. TODO move to file for apprentice foundry.
+Item.hide("beacon-interface--beacon")
