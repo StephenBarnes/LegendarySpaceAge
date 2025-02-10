@@ -6,13 +6,26 @@ local Tech = require("code.util.tech")
 local Recipe = require("code.util.recipe")
 
 -- Create nuclear science pack.
-local nuclearSciencePackItem = table.deepcopy(data.raw.tool["agricultural-science-pack"])
-nuclearSciencePackItem.name = "nuclear-science-pack"
-nuclearSciencePackItem.order = "j2"
-nuclearSciencePackItem.spoil_ticks = 60 * 60 * 20 -- 20 minutes.
-nuclearSciencePackItem.spoil_result = "uranium-238"
-data:extend{nuclearSciencePackItem}
+local item = table.deepcopy(data.raw.tool["agricultural-science-pack"])
+item.name = "nuclear-science-pack"
+item.order = "j2"
+item.spoil_ticks = 60 * 60 * 20 -- 20 minutes.
+item.spoil_result = "uranium-238"
+data:extend{item}
 -- TODO add this to a tech, add new sprite, etc.
+
+-- Create recipe for nuclear science pack.
+local recipe = table.deepcopy(data.raw.recipe["automation-science-pack"])
+recipe.name = "nuclear-science-pack"
+recipe.ingredients = {
+	{type="item", name="uranium-235", amount=1},
+}
+recipe.results = {
+	{type="item", name="nuclear-science-pack", amount=2},
+}
+recipe.icon = nil
+-- TODO add to a tech, actually decide on ingredients, etc.
+data:extend{recipe}
 
 -- Allow nuclear science pack in labs.
 table.insert(data.raw.lab.lab.inputs, 11, "nuclear-science-pack")

@@ -75,18 +75,6 @@ data.raw.lab.biolab.energy_source.fuel_categories = {"biter-egg"}
 data.raw.lab.biolab.energy_source.burner_usage = "food"
 data.raw.lab.biolab.energy_usage = "3MW" -- A biter egg is 6MJ, so consumes 1 every 2 seconds. (Modules will probably reduce that to 1/10s.)
 
--- Move labs to a new row on the menu, bc right now it's overflowing by 1.
-local labSubgroup = table.deepcopy(data.raw["item-subgroup"]["production-machine"])
-labSubgroup.name = "labs"
-labSubgroup.order = labSubgroup.order .. "-2"
-data:extend{labSubgroup}
-for i, lab in pairs{"lab", "glebalab", "biolab"} do
-	for _, t in pairs{"lab", "recipe", "item"} do
-		data.raw[t][lab].order = "" .. i
-		data.raw[t][lab].subgroup = "labs"
-	end
-end
-
 -- Modify techs.
 -- Move pentapod labs to a separate tech, instead of putting their recipe in bioflux tech.
 Tech.removeRecipeFromTech("glebalab", "bioflux")

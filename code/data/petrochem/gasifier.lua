@@ -180,7 +180,7 @@ gasifierItem.name = "gasifier"
 gasifierItem.icon = nil
 gasifierItem.icons = {{icon = GRAPHICS.."gasifier-item.png", icon_size = 64}}
 gasifierItem.order = "z"
-gasifierItem.subgroup = data.raw.item["heating-tower"].subgroup
+gasifierItem.subgroup = "chemical-processing"
 gasifierItem.place_result = "gasifier"
 gasifierItem.stack_size = 20
 data:extend{gasifierItem}

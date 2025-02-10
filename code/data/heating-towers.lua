@@ -3,12 +3,13 @@
 local Tech = require("code.util.tech")
 local greyPipes = require("code.data.util.grey-pipes")
 
--- Create entity for fluid heating tower
 local towerEnt = data.raw.reactor["heating-tower"]
+towerEnt.subgroup = "energy"
+
+-- Create entity for fluid heating tower
 ---@type data.ReactorPrototype
-local fluidHeatingTowerEnt = table.deepcopy(data.raw.reactor["heating-tower"])
+local fluidHeatingTowerEnt = table.deepcopy(towerEnt)
 fluidHeatingTowerEnt.name = "fluid-heating-tower"
-fluidHeatingTowerEnt.subgroup = "environmental-protection"
 fluidHeatingTowerEnt.placeable_by = {item = "fluid-heating-tower", count = 1}
 fluidHeatingTowerEnt.minable.result = "fluid-heating-tower"
 fluidHeatingTowerEnt.energy_source = {
@@ -47,7 +48,10 @@ fluidHeatingTowerEnt.heat_buffer.connections = {
 }
 data:extend{fluidHeatingTowerEnt}
 
-local fluidHeatingTowerItem = table.deepcopy(data.raw.item["heating-tower"])
+local towerItem = data.raw.item["heating-tower"]
+towerItem.subgroup = "energy"
+
+local fluidHeatingTowerItem = table.deepcopy(towerItem)
 fluidHeatingTowerItem.name = "fluid-heating-tower"
 fluidHeatingTowerItem.place_result = "fluid-heating-tower"
 fluidHeatingTowerItem.icons = fluidHeatingTowerEnt.icons
@@ -59,5 +63,4 @@ local fluidHeatingTowerRecipe = table.deepcopy(data.raw.recipe["heating-tower"])
 fluidHeatingTowerRecipe.name = "fluid-heating-tower"
 fluidHeatingTowerRecipe.results = {{type = "item", name = "fluid-heating-tower", amount = 1}}
 data:extend{fluidHeatingTowerRecipe}
-
-Tech.addRecipeToTech("fluid-heating-tower", "heating-tower")
+Tech.addRecipeToTech("fluid-heating-tower", "heating-tower", 2)

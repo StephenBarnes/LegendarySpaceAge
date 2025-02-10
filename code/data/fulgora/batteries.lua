@@ -126,18 +126,14 @@ data:extend({
 		name = "battery-charger",
 		icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/from_battery_powered/icons/bp-battery-charger.png",
 		stack_size = 20,
-		--subgroup = "energy",
-		subgroup = "environmental-protection", -- Putting in this group so it's less crowded, and bc it feels like it fits with the lightning rods.
-		order = "a-1",
+		subgroup = "electricity-related",
 	},
 	{
 		type = "item",
 		name = "battery-discharger",
 		icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/from_battery_powered/icons/bp-battery-discharger.png",
 		stack_size = 20,
-		--subgroup = "energy",
-		subgroup = "environmental-protection",
-		order = "a-2",
+		subgroup = "electricity-related",
 	},
 	{
 		type = "recipe",

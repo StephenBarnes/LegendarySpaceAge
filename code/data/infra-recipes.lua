@@ -5,6 +5,8 @@ Going in order by group and subgroup.
 local Recipe = require("code.util.recipe")
 local Tech = require("code.util.tech")
 
+local recipes = data.raw.recipe
+
 ------------------------------------------------------------------------
 --- GROUP: LOGISTICS
 
@@ -15,206 +17,206 @@ for _, chestname in pairs{"wooden-chest", "iron-chest"} do
 		data.raw[t][chestname].hidden_in_factoriopedia = true
 	end
 end
-data.raw.recipe["steel-chest"].ingredients = {
+recipes["steel-chest"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "panel", amount = 4},
 }
-data.raw.recipe["steel-chest"].enabled = true
+recipes["steel-chest"].enabled = true
 Tech.removeRecipeFromTech("steel-chest", "steel-processing")
 
 -- Transport belts - remove the nesting in the recipes (each tier ingredient to the next), and add rubber, and change to factor intermediates.
 -- I also want them to get more expensive per throughput (as in vanilla), and increase in complexity.
-data.raw.recipe["transport-belt"].ingredients = {
+recipes["transport-belt"].ingredients = {
 	-- Base game is 1 iron plate + 1 gear for 2 belts, so 1.5 iron plate per belt.
 	-- Changing it to 1 panel + 1 mechanism = 1 iron plate + 8 machine parts + 1 frame = 1 + 1 + 4 iron plates, so 6. So doubling amount produced to 4 belts.
 	{type="item", name="panel", amount=1},
 	{type="item", name="mechanism", amount=1},
 }
-data.raw.recipe["transport-belt"].results = {{type="item", name="transport-belt", amount=4}}
-data.raw.recipe["fast-transport-belt"].ingredients = {
+recipes["transport-belt"].results = {{type="item", name="transport-belt", amount=4}}
+recipes["fast-transport-belt"].ingredients = {
 	{type="item", name="panel", amount=1},
 	{type="item", name="mechanism", amount=1},
 	{type="item", name="rubber", amount=1},
 }
-data.raw.recipe["fast-transport-belt"].results = {{type="item", name="fast-transport-belt", amount=2}}
-data.raw.recipe["express-transport-belt"].ingredients = {
+recipes["fast-transport-belt"].results = {{type="item", name="fast-transport-belt", amount=2}}
+recipes["express-transport-belt"].ingredients = {
 	{type="item", name="mechanism", amount=2},
 	{type="item", name="rubber", amount=1},
 	{type="fluid", name="lubricant", amount=20},
 }
-data.raw.recipe["express-transport-belt"].allow_decomposition = true
-data.raw.recipe["express-transport-belt"].allow_as_intermediate = true
-data.raw.recipe["turbo-transport-belt"].ingredients = {
+recipes["express-transport-belt"].allow_decomposition = true
+recipes["express-transport-belt"].allow_as_intermediate = true
+recipes["turbo-transport-belt"].ingredients = {
 	{type="item", name="electric-engine-unit", amount=2},
 	{type="item", name="tungsten-plate", amount=4},
 	{type="fluid", name="lubricant", amount=20},
 }
-data.raw.recipe["turbo-transport-belt"].allow_decomposition = true
-data.raw.recipe["turbo-transport-belt"].allow_as_intermediate = true
-data.raw.recipe["turbo-transport-belt"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
+recipes["turbo-transport-belt"].allow_decomposition = true
+recipes["turbo-transport-belt"].allow_as_intermediate = true
+recipes["turbo-transport-belt"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
 -- Underground belts - remove nesting. For ingredients, require literally just the number of belts, plus panels. So you can even craft them by hand, and eg turn green belts into green undergrounds off-Vulcanus.
-data.raw.recipe["underground-belt"].ingredients = {
+recipes["underground-belt"].ingredients = {
 	{type="item", name="transport-belt", amount=6},
 	{type="item", name="panel", amount=2},
 }
-data.raw.recipe["fast-underground-belt"].ingredients = {
+recipes["fast-underground-belt"].ingredients = {
 	{type="item", name="fast-transport-belt", amount=8},
 	{type="item", name="panel", amount=2},
 }
-data.raw.recipe["express-underground-belt"].ingredients = {
+recipes["express-underground-belt"].ingredients = {
 	{type="item", name="express-transport-belt", amount=10},
 	{type="item", name="panel", amount=2},
 }
-data.raw.recipe["turbo-underground-belt"].ingredients = {
+recipes["turbo-underground-belt"].ingredients = {
 	{type="item", name="turbo-transport-belt", amount=12},
 	{type="item", name="panel", amount=2},
 }
-data.raw.recipe["turbo-underground-belt"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
+recipes["turbo-underground-belt"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
 -- Splitters - remove nesting. For ingredients, require 2 belts of that tier, plus sensor and mechanism. Nothing else, rather put it into the transport belt recipes.
-data.raw.recipe["splitter"].ingredients = {
+recipes["splitter"].ingredients = {
 	{type="item", name="transport-belt", amount=2},
 	{type="item", name="mechanism", amount=1},
 	{type="item", name="sensor", amount=1},
 }
-data.raw.recipe["fast-splitter"].ingredients = {
+recipes["fast-splitter"].ingredients = {
 	{type="item", name="fast-transport-belt", amount=2},
 	{type="item", name="mechanism", amount=1},
 	{type="item", name="sensor", amount=1},
 }
-data.raw.recipe["express-splitter"].ingredients = {
+recipes["express-splitter"].ingredients = {
 	{type="item", name="express-transport-belt", amount=2},
 	{type="item", name="mechanism", amount=1},
 	{type="item", name="sensor", amount=1},
 }
-data.raw.recipe["turbo-splitter"].ingredients = {
+recipes["turbo-splitter"].ingredients = {
 	{type="item", name="turbo-transport-belt", amount=2},
 	{type="item", name="mechanism", amount=1},
 	{type="item", name="sensor", amount=1},
 }
-data.raw.recipe["turbo-splitter"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
+recipes["turbo-splitter"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
 
 -- Inserter recipes - rod is now enabled from the start.
-data.raw.recipe["burner-inserter"].ingredients = {
+recipes["burner-inserter"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "mechanism", amount = 1},
 }
-data.raw.recipe["inserter"].ingredients = {
+recipes["inserter"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "mechanism", amount = 1},
 	{type = "item", name = "sensor", amount = 1},
 }
-data.raw.recipe["long-handed-inserter"].ingredients = {
+recipes["long-handed-inserter"].ingredients = {
 	{type = "item", name = "frame", amount = 2},
 	{type = "item", name = "mechanism", amount = 2},
 	{type = "item", name = "sensor", amount = 1},
 }
-data.raw.recipe["fast-inserter"].ingredients = {
+recipes["fast-inserter"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "mechanism", amount = 1},
 	{type = "item", name = "sensor", amount = 1},
 	{type = "fluid", name = "lubricant", amount = 20},
 }
-data.raw.recipe["fast-inserter"].category = "crafting-with-fluid"
-data.raw.recipe["bulk-inserter"].ingredients = {
+recipes["fast-inserter"].category = "crafting-with-fluid"
+recipes["bulk-inserter"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "electric-engine-unit", amount = 1},
 	{type = "item", name = "sensor", amount = 2},
 	{type = "fluid", name = "lubricant", amount = 20},
 }
-data.raw.recipe["bulk-inserter"].category = "crafting-with-fluid"
-data.raw.recipe["stack-inserter"].ingredients = {
+recipes["bulk-inserter"].category = "crafting-with-fluid"
+recipes["stack-inserter"].ingredients = {
 	{type = "item", name = "bulk-inserter", amount = 1},
 	{type = "item", name = "processing-unit", amount = 1},
 	{type = "item", name = "carbon-fiber", amount = 2},
 }
 
 -- Electric poles
-data.raw.recipe["small-electric-pole"].ingredients = {
+recipes["small-electric-pole"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "wiring", amount = 1},
 }
-data.raw.recipe["medium-electric-pole"].ingredients = {
+recipes["medium-electric-pole"].ingredients = {
 	{type = "item", name = "frame", amount = 2},
 	{type = "item", name = "wiring", amount = 1},
 }
-data.raw.recipe["big-electric-pole"].ingredients = {
+recipes["big-electric-pole"].ingredients = {
 	{type = "item", name = "frame", amount = 4},
 	{type = "item", name = "wiring", amount = 2},
 }
-data.raw.recipe["substation"].ingredients = {
+recipes["substation"].ingredients = {
 	{type = "item", name = "frame", amount = 2},
 	{type = "item", name = "wiring", amount = 4},
 	{type = "item", name = "advanced-circuit", amount = 4},
 }
-data.raw.recipe["po-transformer"].ingredients = {
+recipes["po-transformer"].ingredients = {
 	{type = "item", name = "frame", amount = 2},
 	{type = "item", name = "wiring", amount = 2},
 	{type = "item", name = "electronic-circuit", amount = 2},
 }
 
 -- Pipes
-data.raw.recipe["pipe"].ingredients = {
+recipes["pipe"].ingredients = {
 	{type = "item", name = "fluid-fitting", amount = 1},
 	{type = "item", name = "panel", amount = 4},
 }
-data.raw.recipe["pipe"].results = {{type = "item", name = "pipe", amount = 4}}
-data.raw.recipe["pipe-to-ground"].ingredients = {
+recipes["pipe"].results = {{type = "item", name = "pipe", amount = 4}}
+recipes["pipe-to-ground"].ingredients = {
 	{type = "item", name = "pipe", amount = 12},
 }
 -- Pump
-data.raw.recipe["pump"].ingredients = {
+recipes["pump"].ingredients = {
 	{type="item", name="frame", amount=2},
 	{type="item", name="fluid-fitting", amount=4},
 	{type="item", name="mechanism", amount=2},
 }
 
 -- Rail stuff
-data.raw.recipe["rail"].ingredients = {
+recipes["rail"].ingredients = {
 	{type="item", name="structure", amount=1},
 	{type="item", name="frame", amount=1},
 	-- Stone in rail recipe represents the track ballast; makes sense to crush/process stone before using as ballast. So could have sand as ingredient here, but it doesn't quite work with Gleba.
 }
-data.raw.recipe["rail-ramp"].ingredients = {
+recipes["rail-ramp"].ingredients = {
 	{type="item", name="structure", amount=20},
 	{type="item", name="frame", amount=20},
 	{type="item", name="rail", amount=8},
 }
-data.raw.recipe["rail-support"].ingredients = {
+recipes["rail-support"].ingredients = {
 	{type="item", name="structure", amount=4},
 	{type="item", name="frame", amount=4},
 }
 -- Train stop: 4 frame + 2 small-lamp + 1 wiring + 2 electronic-circuit
-data.raw.recipe["train-stop"].ingredients = {
+recipes["train-stop"].ingredients = {
 	{type="item", name="frame", amount=4},
 	{type="item", name="small-lamp", amount=2},
 	{type="item", name="sensor", amount=1},
 }
 -- Rail signals should need some glass.
-data.raw.recipe["rail-signal"].ingredients = {
+recipes["rail-signal"].ingredients = {
 	{type="item", name="frame", amount=1},
 	{type="item", name="sensor", amount=1},
 	{type="item", name="small-lamp", amount=1},
 }
-data.raw.recipe["rail-chain-signal"].ingredients = {
+recipes["rail-chain-signal"].ingredients = {
 	{type="item", name="frame", amount=1},
 	{type="item", name="sensor", amount=2},
 	{type="item", name="small-lamp", amount=1},
 }
-data.raw.recipe["locomotive"].ingredients = {
-	{type="item", name="engine-unit", amount=20},
+recipes["locomotive"].ingredients = {
+	{type="item", name="engine-unit", amount=4},
 	{type="item", name="sensor", amount=4},
 	{type="item", name="shielding", amount=4},
 	{type="item", name="frame", amount=4},
 }
-data.raw.recipe["cargo-wagon"].ingredients = {
+recipes["cargo-wagon"].ingredients = {
 	{type="item", name="frame", amount=4},
 	{type="item", name="mechanism", amount=4},
 	{type="item", name="panel", amount=8},
 }
 -- Artillery-wagon: 20 shielding + 20 engine-unit + 8 electric-engine-unit + 4 structure + 8 sensor
-data.raw.recipe["artillery-wagon"].ingredients = {
+recipes["artillery-wagon"].ingredients = {
 	{type="item", name="shielding", amount=20},
-	{type="item", name="engine-unit", amount=20},
+	{type="item", name="engine-unit", amount=4},
 	{type="item", name="electric-engine-unit", amount=8},
 	{type="item", name="structure", amount=4},
 	{type="item", name="sensor", amount=4},
@@ -222,39 +224,39 @@ data.raw.recipe["artillery-wagon"].ingredients = {
 
 -- Ports, signal buoys, cargo ships.
 -- Port: 1 frame + 1 small-lamp + 1 sensor
-data.raw.recipe["port"].ingredients = {
+recipes["port"].ingredients = {
 	{type="item", name="frame", amount=1},
 	{type="item", name="small-lamp", amount=1},
 	{type="item", name="sensor", amount=1},
 }
 -- Buoy: 1 frame + 1 small-lamp + 1 sensor
-data.raw.recipe["buoy"].ingredients = {
+recipes["buoy"].ingredients = {
 	{type="item", name="frame", amount=1},
 	{type="item", name="small-lamp", amount=1},
 	{type="item", name="sensor", amount=1},
 }
 -- Chain_buoy: 1 frame + 1 small-lamp + 2 sensor
-data.raw.recipe["chain_buoy"].ingredients = {
+recipes["chain_buoy"].ingredients = {
 	{type="item", name="frame", amount=1},
 	{type="item", name="small-lamp", amount=1},
 	{type="item", name="sensor", amount=2},
 }
 -- Boat: 10 engine-unit + 20 frame + 20 panel
-data.raw.recipe["boat"].ingredients = {
-	{type="item", name="engine-unit", amount=10},
+recipes["boat"].ingredients = {
+	{type="item", name="engine-unit", amount=2},
 	{type="item", name="frame", amount=20},
 	{type="item", name="panel", amount=20},
 }
 -- Cargo ship: 40 engine-unit + 80 frame + 80 panel
-data.raw.recipe["cargo_ship"].ingredients = {
-	{type="item", name="engine-unit", amount=40},
+recipes["cargo_ship"].ingredients = {
+	{type="item", name="engine-unit", amount=8},
 	{type="item", name="frame", amount=80},
 	{type="item", name="panel", amount=80},
 	{type="item", name="sensor", amount=4},
 }
 -- Oil_tanker: 40 engine-unit + 60 frame + 60 panel + 20 fluid-fitting + 10 storage-tank
-data.raw.recipe["oil_tanker"].ingredients = {
-	{type="item", name="engine-unit", amount=40},
+recipes["oil_tanker"].ingredients = {
+	{type="item", name="engine-unit", amount=8},
 	{type="item", name="frame", amount=60},
 	{type="item", name="panel", amount=60},
 	{type="item", name="fluid-fitting", amount=20},
@@ -262,19 +264,19 @@ data.raw.recipe["oil_tanker"].ingredients = {
 }
 
 -- Vehicles
-data.raw.recipe["car"].ingredients = {
-	{type="item", name="engine-unit", amount=8},
+recipes["car"].ingredients = {
+	{type="item", name="engine-unit", amount=1},
 	{type="item", name="rubber", amount=4},
 	{type="item", name="frame", amount=4},
 	{type="item", name="shielding", amount=4},
 }
-data.raw.recipe["tank"].ingredients = {
-	{type="item", name="engine-unit", amount=20},
+recipes["tank"].ingredients = {
+	{type="item", name="engine-unit", amount=4},
 	{type="item", name="frame", amount=8},
 	{type="item", name="shielding", amount=20},
 	{type="item", name="advanced-circuit", amount=20},
 }
-data.raw.recipe["spidertron"].ingredients = {
+recipes["spidertron"].ingredients = {
 	{type="item", name="low-density-structure", amount=20},
 	{type="item", name="exoskeleton-equipment", amount=4},
 	{type="item", name="radar", amount=2},
@@ -286,7 +288,7 @@ data.raw.recipe["spidertron"].ingredients = {
 
 -- Robot network
 -- Recipes for logistic bots, construction bots, logistic chests are all fine.
-data.raw.recipe["roboport"].ingredients = {
+recipes["roboport"].ingredients = {
 	{type="item", name="frame", amount=4},
 	{type="item", name="panel", amount=8},
 	{type="item", name="electric-engine-unit", amount=8},
@@ -296,33 +298,33 @@ data.raw.recipe["roboport"].ingredients = {
 
 -- Circuit stuff
 -- Lamp
-data.raw.recipe["small-lamp"].ingredients = {
+recipes["small-lamp"].ingredients = {
 	{ type = "item", name = "glass",  amount = 1 },
 	{ type = "item", name = "wiring", amount = 1 },
 	{ type = "item", name = "frame",  amount = 1 },
 }
-data.raw.recipe["arithmetic-combinator"].ingredients = {
+recipes["arithmetic-combinator"].ingredients = {
 	{type="item", name="frame", amount=1},
 	{type="item", name="wiring", amount=2},
 	{type="item", name="electronic-circuit", amount=1},
 }
-data.raw.recipe["decider-combinator"].ingredients = data.raw.recipe["arithmetic-combinator"].ingredients
-data.raw.recipe["selector-combinator"].ingredients = {
+recipes["decider-combinator"].ingredients = data.raw.recipe["arithmetic-combinator"].ingredients
+recipes["selector-combinator"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "wiring", amount = 4},
 	{type = "item", name = "electronic-circuit", amount = 4},
 }
-data.raw.recipe["constant-combinator"].ingredients = {
+recipes["constant-combinator"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "wiring", amount = 2},
 }
-data.raw.recipe["power-switch"].ingredients = data.raw.recipe["po-transformer"].ingredients
-data.raw.recipe["programmable-speaker"].ingredients = {
+recipes["power-switch"].ingredients = data.raw.recipe["po-transformer"].ingredients
+recipes["programmable-speaker"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "wiring", amount = 1},
 	{type = "item", name = "panel", amount = 1},
 }
-data.raw.recipe["display-panel"].ingredients = {
+recipes["display-panel"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "wiring", amount = 1},
 	{type = "item", name = "glass", amount = 1},
@@ -332,37 +334,139 @@ data.raw.recipe["display-panel"].ingredients = {
 --- GROUP: PRODUCTION
 
 -- Repair pack
-data.raw.recipe["repair-pack"].ingredients = {
+recipes["repair-pack"].ingredients = {
 	{type="item", name="mechanism", amount=1},
 	{type="item", name="sensor", amount=1},
 }
 
+-- Boilers
+recipes["boiler"].ingredients = {
+	{type = "item", name = "structure", amount = 2},
+	{type = "item", name = "fluid-fitting", amount = 2},
+	{type = "item", name = "shielding", amount = 2},
+}
+recipes["electric-boiler"].ingredients = {
+	{type = "item", name = "structure", amount = 2},
+	{type = "item", name = "fluid-fitting", amount = 2},
+	{type = "item", name = "shielding", amount = 1},
+	{type = "item", name = "wiring", amount = 2},
+}
+recipes["gas-boiler"].ingredients = {
+	{type = "item", name = "structure", amount = 2},
+	{type = "item", name = "fluid-fitting", amount = 4},
+	{type = "item", name = "shielding", amount = 2},
+}
+recipes["boiler"].energy_required = 4
+recipes["electric-boiler"].energy_required = 4
+recipes["gas-boiler"].energy_required = 4
+
+recipes["steam-engine"].ingredients = {
+	{type = "item", name = "wiring", amount = 4},
+	{type = "item", name = "mechanism", amount = 4},
+	{type = "item", name = "fluid-fitting", amount = 2},
+}
+recipes["steam-engine"].energy_required = 4
+
+recipes["heating-tower"].ingredients = {
+	{type = "item", name = "structure", amount = 8},
+	{type = "item", name = "shielding", amount = 4},
+	{type = "item", name = "heat-pipe", amount = 4},
+}
+recipes["heating-tower"].energy_required = 8
+recipes["fluid-heating-tower"].ingredients = {
+	{type = "item", name = "structure", amount = 8},
+	{type = "item", name = "shielding", amount = 4},
+	{type = "item", name = "heat-pipe", amount = 4},
+	{type = "item", name = "fluid-fitting", amount = 2},
+}
+recipes["fluid-heating-tower"].energy_required = 8
+
+-- Heat pipe is originally 20 copper plate + 10 steel plate for 1. That seems very expensive for the size. Would make Aquilo and Gleba annoying. So I'll make it a lot cheaper.
+recipes["heat-pipe"].ingredients = {
+	{type = "item", name = "copper-plate", amount = 2},
+	{type = "item", name = "steel-plate", amount = 1},
+}
+recipes["heat-exchanger"].ingredients = {
+	{type = "item", name = "structure", amount = 2},
+	{type = "item", name = "shielding", amount = 2},
+	{type = "item", name = "fluid-fitting", amount = 2},
+	{type = "item", name = "heat-pipe", amount = 2},
+}
+recipes["heat-exchanger"].energy_required = 4
+recipes["steam-turbine"].ingredients = {
+	{type = "item", name = "wiring", amount = 8},
+	{type = "item", name = "mechanism", amount = 8},
+	{type = "item", name = "fluid-fitting", amount = 4},
+}
+recipes["steam-turbine"].energy_required = 4
+
+-- Solar panels.
+recipes["solar-panel"].ingredients = {
+	{type = "item", name = "glass", amount = 10},
+	{type = "item", name = "silicon", amount = 10},
+	{type = "item", name = "electronic-circuit", amount = 2},
+	{type = "item", name = "frame", amount = 2},
+}
+recipes["solar-panel"].energy_required = 8
+
 -- TODO stuff here
 
 -- Furnaces
-data.raw.recipe["char-furnace"].ingredients = {{type="item", name="structure", amount=1}}
-data.raw.recipe["stone-furnace"].ingredients = {{type="item", name="structure", amount=1}}
-data.raw.recipe["steel-furnace"].ingredients = {
+recipes["char-furnace"].ingredients = {{type="item", name="structure", amount=1}}
+recipes["stone-furnace"].ingredients = {{type="item", name="structure", amount=1}}
+recipes["steel-furnace"].ingredients = {
 	{type="item", name="frame", amount=2},
 	{type="item", name="structure", amount=2},
 	{type="item", name="shielding", amount=4},
 }
-data.raw.recipe["gas-furnace"].ingredients = {
+recipes["gas-furnace"].ingredients = {
 	{type="item", name="frame", amount=2},
 	{type="item", name="structure", amount=2},
 	{type="item", name="shielding", amount=4},
 	{type="item", name="fluid-fitting", amount=4},
 }
+recipes["electric-furnace"].ingredients = {
+	{type="item", name="frame", amount=4},
+	{type="item", name="structure", amount=4},
+	{type="item", name="shielding", amount=8},
+	{type="item", name="sensor", amount=2},
+}
+-- Foundry: 40 tungsten carbide + 40 shielding + 40 structure + 4 mechanism
+recipes["foundry"].ingredients = {
+	{type="item", name="tungsten-carbide", amount=40},
+	{type="item", name="shielding", amount=40},
+	{type="item", name="structure", amount=40},
+	{type="item", name="mechanism", amount=4},
+}
 
 -- TODO stuff here
 
 -- Chemical plant - shouldn't require steel bc we're moving it to automation 1. Also no pipe ingredients bc it comes before pipe tech. But it should cost more than assembler 1 since it's faster.
-data.raw.recipe["chemical-plant"].ingredients = {
+recipes["chemical-plant"].ingredients = {
 	{type="item", name="frame", amount=2},
 	{type="item", name="glass", amount=2},
 	{type="item", name="fluid-fitting", amount=8},
 	{type="item", name="sensor", amount=2},
 	{type="item", name="mechanism", amount=2},
+}
+
+
+------------------------------------------------------------------------
+--- GROUP: SIMPLE INTERMEDIATES
+
+-- TODO more
+
+--[[Engine units.
+Original recipe: 1 gear wheel + 1 steel plate + 2 pipe, which is around 2 + 5 + 2 = 9 iron plates.
+I want a bunch of intermediates including factor intermediates.
+New recipe: 1 shielding + 2 fluid fitting + 1 mechanism -> 1 engine.
+Using basic recipes for the factors, that's 32 metal plate + 4 resin. So it's  like 4x the cost.
+So, I've also reduced the number of engine units needed for other recipes to balance that. Which is more intuitively satisfying anyway, eg a car shouldn't need 8 combustion engines.
+]]
+recipes["engine-unit"].ingredients = {
+	{type = "item", name = "shielding", amount = 1},
+	{type = "item", name = "fluid-fitting", amount = 2},
+	{type = "item", name = "mechanism", amount = 1},
 }
 
 ------------------------------------------------------------------------
@@ -371,13 +475,13 @@ data.raw.recipe["chemical-plant"].ingredients = {
 
 
 -- Stone bricks - allowed in foundry and handcrafting.
-data.raw.recipe["stone-brick"].category = "smelting-or-metallurgy-or-handcrafting"
+recipes["stone-brick"].category = "smelting-or-metallurgy-or-handcrafting"
 
 
 
 
 -- Lab should need fewer circuits since they have to be handcrafted early-game.
-data.raw.recipe["lab"].ingredients = {
+recipes["lab"].ingredients = {
 	{type="item", name="iron-gear-wheel", amount=8},
 	{type="item", name="iron-plate", amount=8},
 	{type="item", name="copper-cable", amount=4},
@@ -385,19 +489,19 @@ data.raw.recipe["lab"].ingredients = {
 }
 
 -- Assembling machines
-data.raw.recipe["assembling-machine-1"].ingredients = {
+recipes["assembling-machine-1"].ingredients = {
 	{type="item", name="frame", amount=1},
 	{type="item", name="panel", amount=4},
 	{type="item", name="mechanism", amount=2},
 	{type="item", name="sensor", amount=1},
 }
-data.raw.recipe["assembling-machine-2"].ingredients = {
+recipes["assembling-machine-2"].ingredients = {
 	{type="item", name="frame", amount=1},
 	{type="item", name="panel", amount=4},
 	{type="item", name="mechanism", amount=4},
 	{type="item", name="sensor", amount=4},
 }
-data.raw.recipe["assembling-machine-3"].ingredients = {
+recipes["assembling-machine-3"].ingredients = {
 	{type="item", name="frame", amount=1},
 	{type="item", name="panel", amount=4},
 	{type="item", name="electric-engine-unit", amount=4},
@@ -406,11 +510,11 @@ data.raw.recipe["assembling-machine-3"].ingredients = {
 
 -- Mining drills
 -- Burner mining drill shouldn't need stone.
-data.raw.recipe["burner-mining-drill"].ingredients = {
+recipes["burner-mining-drill"].ingredients = {
 	{type="item", name="iron-gear-wheel", amount=4},
 	{type="item", name="iron-plate", amount=4},
 }
-data.raw.recipe["big-mining-drill"].ingredients = {
+recipes["big-mining-drill"].ingredients = {
 	{type="item", name="electric-engine-unit", amount=8},
 	{type="item", name="processing-unit", amount=10},
 	{type="item", name="tungsten-carbide", amount=20},
@@ -418,7 +522,7 @@ data.raw.recipe["big-mining-drill"].ingredients = {
 }
 
 -- Ag tower shouldn't need steel, or landfill, or spoilage.
-data.raw.recipe["agricultural-tower"].ingredients = {
+recipes["agricultural-tower"].ingredients = {
 	{type="item", name="iron-gear-wheel", amount=6},
 	{type="item", name="iron-stick", amount=8},
 	{type="item", name="electronic-circuit", amount=4},
@@ -426,20 +530,20 @@ data.raw.recipe["agricultural-tower"].ingredients = {
 }
 
 -- Armour should be cheaper, and require rubber.
-data.raw.recipe["light-armor"].ingredients = {-- Originally 40 iron plate.
+recipes["light-armor"].ingredients = {-- Originally 40 iron plate.
 	{type="item", name="iron-plate", amount=10},
 }
-data.raw.recipe["heavy-armor"].ingredients = {-- Originally 100 copper plate, 50 steel plate.
+recipes["heavy-armor"].ingredients = {-- Originally 100 copper plate, 50 steel plate.
 	{type="item", name="steel-plate", amount=10},
 	{type="item", name="rubber", amount=20},
 }
 Tech.addTechDependency("rubber-1", "heavy-armor")
-data.raw.recipe["modular-armor"].ingredients = {-- Originally 50 steel plate, 30 advanced circuits.
+recipes["modular-armor"].ingredients = {-- Originally 50 steel plate, 30 advanced circuits.
 	{type="item", name="steel-plate", amount=20},
 	{type="item", name="advanced-circuit", amount=20},
 	{type="item", name="rubber", amount=20},
 }
-data.raw.recipe["power-armor"].ingredients = {-- Originally 40 steel plate, 20 electric engine unit, 40 processing unit.
+recipes["power-armor"].ingredients = {-- Originally 40 steel plate, 20 electric engine unit, 40 processing unit.
 	{type="item", name="steel-plate", amount=20},
 	{type="item", name="processing-unit", amount=20},
 	{type="item", name="electric-engine-unit", amount=20},
@@ -448,34 +552,27 @@ data.raw.recipe["power-armor"].ingredients = {-- Originally 40 steel plate, 20 e
 
 
 -- Radar.
-data.raw.recipe["radar"].ingredients = {
+recipes["radar"].ingredients = {
 	{type = "item", name = "iron-stick", amount = 5},
 	{type = "item", name = "iron-plate", amount = 10},
 	{type = "item", name = "iron-gear-wheel", amount = 5},
 	{type = "item", name = "electronic-circuit", amount = 5},
 }
 
--- Solar panels.
-data.raw.recipe["solar-panel"].ingredients = {
-	{type = "item", name = "glass", amount = 10},
-	{type = "item", name = "silicon", amount = 10},
-	{type = "item", name = "electronic-circuit", amount = 2},
-	{type = "item", name = "steel-plate", amount = 4},
-}
 
 -- Labs
-data.raw.recipe.lab.ingredients = {
+recipes["lab"].ingredients = {
 	{type = "item", name = "iron-gear-wheel", amount = 8},
 	{type = "item", name = "electronic-circuit", amount = 4},
 	{type = "item", name = "glass", amount = 2},
 }
-data.raw.recipe.glebalab.ingredients = {
+recipes["glebalab"].ingredients = {
 	{type = "item", name = "steel-plate", amount = 10},
 	{type = "item", name = "processing-unit", amount = 5},
 	{type = "item", name = "pentapod-egg", amount = 5},
 	{type = "item", name = "refined-concrete", amount = 10},
 }
-data.raw.recipe.biolab.ingredients = {
+recipes["biolab"].ingredients = {
 	{type = "item", name = "low-density-structure", amount = 20},
 	{type = "item", name = "processing-unit", amount = 10},
 	{type = "item", name = "uranium-fuel-cell", amount = 4},
@@ -484,35 +581,35 @@ data.raw.recipe.biolab.ingredients = {
 }
 
 -- Grenades: 8 gunpowder + 4 iron plate.
-data.raw.recipe["grenade"].ingredients = {
+recipes["grenade"].ingredients = {
 	{type = "item", name = "iron-plate", amount = 2},
 	{type = "item", name = "explosives", amount = 1},
 }
-data.raw.recipe["cluster-grenade"].ingredients = {
+recipes["cluster-grenade"].ingredients = {
 	{type = "item", name = "steel-plate", amount = 1},
 	{type = "item", name = "explosives", amount = 1},
 	{type = "item", name = "grenade", amount = 7},
 }
 
 -- 2 pitch + 5 ammonia + 5 sulfuric acid + 2 iron plate -> 1 poison capsule
-data.raw.recipe["poison-capsule"].ingredients = {
+recipes["poison-capsule"].ingredients = {
 	{type = "item", name = "iron-plate", amount = 2},
 	{type = "item", name = "pitch", amount = 2},
 	{type = "fluid", name = "ammonia", amount = 5},
 	{type = "fluid", name = "sulfuric-acid", amount = 5},
 }
-data.raw.recipe["poison-capsule"].category = "chemistry"
+recipes["poison-capsule"].category = "chemistry"
 -- 2 resin + 5 tar + 5 water + 2 iron plate -> 1 slowdown capsule
-data.raw.recipe["slowdown-capsule"].ingredients = {
+recipes["slowdown-capsule"].ingredients = {
 	{type = "item", name = "iron-plate", amount = 2},
 	{type = "item", name = "resin", amount = 2},
 	{type = "fluid", name = "tar", amount = 5},
 	{type = "fluid", name = "water", amount = 5},
 }
-data.raw.recipe["slowdown-capsule"].category = "chemistry"
+recipes["slowdown-capsule"].category = "chemistry"
 
 -- Flying robot frames
-data.raw.recipe["flying-robot-frame"].ingredients = {
+recipes["flying-robot-frame"].ingredients = {
 	{type = "item", name = "battery", amount = 2},
 	{type = "item", name = "electric-engine-unit", amount = 2},
 }
@@ -524,7 +621,7 @@ end
 
 -- Make space platform tiles more complex and expensive to produce.
 -- Originally 20 steel plate + 20 copper cable.
-data.raw.recipe["space-platform-foundation"].ingredients = {
+recipes["space-platform-foundation"].ingredients = {
 	{ type = "item", name = "low-density-structure", amount = 4 },
 		-- Effectively 80 copper plate, 8 steel plate, 12 plastic, 4 resin.
 	{ type = "item", name = "electric-engine-unit", amount = 1 },
@@ -534,25 +631,25 @@ data.raw.recipe["space-platform-foundation"].ingredients = {
 }
 
 -- Walls, gates
-data.raw.recipe["stone-wall"].ingredients = {
+recipes["stone-wall"].ingredients = {
 	{type = "item", name = "structure", amount = 1},
 }
-data.raw.recipe["gate"].ingredients = {
+recipes["gate"].ingredients = {
 	{type = "item", name = "shielding", amount = 4},
 	{type = "item", name = "sensor", amount = 1},
 	{type = "item", name = "mechanism", amount = 1},
 }
-data.raw.recipe["gate"].results = {{type = "item", name = "gate", amount = 4}}
-data.raw.recipe.gate.always_show_products = true
+recipes["gate"].results = {{type = "item", name = "gate", amount = 4}}
+recipes["gate"].always_show_products = true
 
 -- Missile turret.
-data.raw.recipe["rocket-turret"].ingredients = {
+recipes["rocket-turret"].ingredients = {
 	{type = "item", name = "shielding", amount = 4},
 	{type = "item", name = "sensor", amount = 4},
 	{type = "item", name = "rocket-launcher", amount = 4},
 }
 
-data.raw.recipe["flamethrower-ammo"].ingredients = {
+recipes["flamethrower-ammo"].ingredients = {
 	{type = "item", name = "fluid-fitting", amount = 1},
 	{type = "fluid", name = "light-oil", amount = 20},
 }

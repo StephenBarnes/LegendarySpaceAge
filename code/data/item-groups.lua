@@ -62,6 +62,32 @@ data:extend{
 		order = "e",
 	},
 
+	-- Subgroups for production tab.
+	{
+		type = "item-subgroup",
+		name = "electricity-related",
+		group = "production",
+		order = "b2",
+	},
+	{
+		type = "item-subgroup",
+		name = "chemical-processing",
+		group = "production",
+		order = "e2",
+	},
+	{
+		type = "item-subgroup",
+		name = "planetary-special",
+		group = "production",
+		order = "e3",
+	},
+	{
+		type = "item-subgroup",
+		name = "labs",
+		group = "production",
+		order = "f",
+	},
+
 	-- Create subgroups for fluids by planet, etc.
 	{ type = "item-subgroup", name = "nauvis-fluids",    group = "fluids", order = "01" },
 	{ type = "item-subgroup", name = "petrochem-fluids", group = "fluids", order = "02" },
@@ -84,6 +110,19 @@ data:extend{
 
 ------------------------------------------------------------------------
 
+local function setSubgroupInOrder(subgroup, kind, things, prefix)
+	if prefix == nil then prefix = "" end
+	for i, thing in pairs(things) do
+		if data.raw[kind][thing] == nil then
+			error("Not found: data.raw[" .. kind .. "][" .. thing .. "]")
+		end
+		data.raw[kind][thing].subgroup = subgroup
+		data.raw[kind][thing].order = prefix .. string.format("%02d", i)
+	end
+end
+
+------------------------------------------------------------------------
+
 -- Move all fluids to the right row.
 for subgroup, fluids in pairs{
 	nauvis = {"lake-water", "water", "steam", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant", "thruster-fuel", "thruster-oxidizer"},
@@ -93,10 +132,7 @@ for subgroup, fluids in pairs{
 	gleba = {"slime", "geoplasm", "chitin-broth"},
 	aquilo = {"ammoniacal-solution", "fluorine", "fluoroketone-hot", "fluoroketone-cold", "lithium-brine", "fusion-plasma"},
 } do
-	for i, fluid in pairs(fluids) do
-		data.raw.fluid[fluid].subgroup = subgroup .. "-fluids"
-		data.raw.fluid[fluid].order = string.format("%02d", i)
-	end
+	setSubgroupInOrder(subgroup .. "-fluids", "fluid", fluids)
 end
 
 -- Move battery-salvage.
@@ -149,88 +185,44 @@ end
 data.raw["space-platform-starter-pack"]["space-platform-starter-pack"].subgroup = "space-interactors"
 
 -- Move fluid logistics stuff to that row.
-for i, item in pairs{"pipe", "pipe-to-ground", "pump", "offshore-pump"} do
-	data.raw.item[item].subgroup = "fluid-logistics"
-	data.raw.item[item].order = string.format("%02d", i)
-	data.raw.recipe[item].subgroup = "fluid-logistics"
-	data.raw.recipe[item].order = string.format("%02d", i)
-end
+local fluidLogistics = {"pipe", "pipe-to-ground", "pump", "offshore-pump"}
+setSubgroupInOrder("fluid-logistics", "item", fluidLogistics)
+setSubgroupInOrder("fluid-logistics", "recipe", fluidLogistics)
 
 -- Move post-Nauvis science packs to the right row.
-for _, sciPackName in pairs{
-	"metallurgic-science-pack",
-	"agricultural-science-pack",
-	"electromagnetic-science-pack",
-	"nuclear-science-pack",
-	"cryogenic-science-pack",
-	"promethium-science-pack",
-} do
-	data.raw.tool[sciPackName].subgroup = "alien-science-packs"
-end
+local sciencePacks = {"metallurgic-science-pack", "agricultural-science-pack", "electromagnetic-science-pack", "nuclear-science-pack", "cryogenic-science-pack", "promethium-science-pack"}
+setSubgroupInOrder("alien-science-packs", "tool", sciencePacks)
+setSubgroupInOrder("alien-science-packs", "recipe", sciencePacks)
 
 -- Move rocket parts to space section.
-for _, k in pairs{"item", "recipe"} do
-	for i, item in pairs{"rocket-part", "assembled-rocket-part"} do
-		data.raw[k][item].subgroup = "space-interactors"
-		data.raw[k][item].order = "e" .. i
-	end
-end
+local rocketParts = {"rocket-part", "assembled-rocket-part"}
+setSubgroupInOrder("space-interactors", "item", rocketParts, "e")
+setSubgroupInOrder("space-interactors", "recipe", rocketParts, "e")
 
 -- Populate Gleba subgroups: spoilage-and-nutrients, yumako-and-jellynut, slipstacks-and-boompuffs.
-for i, item in pairs{
-	"spoilage",
-	"nutrients",
-} do
-	data.raw.item[item].subgroup = "spoilage-and-nutrients"
-	data.raw.item[item].order = string.format("%02d", i)
-end
-for i, recipe in pairs{
-	"nutrients-from-spoilage",
-	"nutrients-from-yumako-mash",
-	"nutrients-from-bioflux",
-	"nutrients-from-marrow",
-} do
-	data.raw.recipe[recipe].subgroup = "spoilage-and-nutrients"
-	data.raw.recipe[recipe].order = string.format("%02d", i)
-end
-for i, item in pairs{
-	{"item", "yumako-seed"},
-	{"item", "jellynut-seed"},
-	{"item", "fertilized-yumako-seed"},
-	{"item", "fertilized-jellynut-seed"},
-	{"capsule", "yumako"},
-	{"capsule", "jellynut"},
-	{"capsule", "yumako-mash"},
-	{"capsule", "jelly"},
-} do
-	data.raw[item[1]][item[2]].subgroup = "yumako-and-jellynut"
-	data.raw[item[1]][item[2]].order = string.format("%02d", i)
-end
-for i, recipe in pairs{
-	"fertilized-yumako-seed",
-	"fertilized-jellynut-seed",
-	"yumako-processing",
-	"jellynut-processing",
-} do
-	data.raw.recipe[recipe].subgroup = "yumako-and-jellynut"
-	data.raw.recipe[recipe].order = string.format("%02d", i)
-end
+setSubgroupInOrder("spoilage-and-nutrients", "item", {"spoilage", "nutrients"})
+setSubgroupInOrder("spoilage-and-nutrients", "recipe", {"nutrients-from-spoilage", "nutrients-from-yumako-mash", "nutrients-from-bioflux", "nutrients-from-marrow"})
+setSubgroupInOrder("yumako-and-jellynut", "item", {"yumako-seed", "jellynut-seed", "fertilized-yumako-seed", "fertilized-jellynut-seed"}, "1")
+setSubgroupInOrder("yumako-and-jellynut", "capsule", {"yumako", "jellynut", "yumako-mash", "jelly"}, "2")
+setSubgroupInOrder("yumako-and-jellynut", "recipe", {"fertilized-yumako-seed", "fertilized-jellynut-seed", "yumako-processing", "jellynut-processing"}, "3")
 
 -- Populate Fulgora agricultural processes.
-for i, item in pairs{
-	"fulgorite-shard",
-	"electrophage",
-	"polysalt",
-	"fulgorite-starter",
-} do
-	data.raw.item[item].subgroup = "fulgora-agriculture"
-	data.raw.item[item].order = string.format("%02d", i)
-end
-for i, recipe in pairs{
-	"electrophage-cultivation",
-	"electrophage-cultivation-holmium",
-	"fulgorite-starter",
-} do
-	data.raw.recipe[recipe].subgroup = "fulgora-agriculture"
-	data.raw.recipe[recipe].order = string.format("%02d", i+10)
-end
+setSubgroupInOrder("fulgora-agriculture", "item", {"fulgorite-shard", "electrophage", "polysalt", "fulgorite-starter"}, "1")
+setSubgroupInOrder("fulgora-agriculture", "recipe", {"electrophage-cultivation", "electrophage-cultivation-holmium", "fulgorite-starter"}, "2")
+
+-- Reorganize production tab.
+local electricityRelated = {"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector"}
+setSubgroupInOrder("electricity-related", "item", electricityRelated)
+setSubgroupInOrder("electricity-related", "recipe", electricityRelated)
+local planetarySpecial = {"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge", "nuclear-reactor", "cryogenic-plant", "fusion-reactor", "fusion-generator"}
+setSubgroupInOrder("planetary-special", "item", planetarySpecial)
+setSubgroupInOrder("planetary-special", "recipe", planetarySpecial)
+local chemicalProcessing = {"chemical-plant", "oil-refinery", "gasifier", "fluid-fuelled-gasifier"}
+setSubgroupInOrder("chemical-processing", "item", chemicalProcessing)
+setSubgroupInOrder("chemical-processing", "recipe", chemicalProcessing)
+data.raw.item["agricultural-tower"].subgroup = "extraction-machine"
+data.raw.item["agricultural-tower"].order = "c"
+local labs = {"lab", "glebalab", "biolab"}
+setSubgroupInOrder("labs", "item", labs)
+setSubgroupInOrder("labs", "recipe", labs)
+setSubgroupInOrder("labs", "lab", labs)

@@ -75,9 +75,6 @@ Tech.removeRecipeFromTech("chemical-plant", "oil-processing")
 Tech.setPrereqs("coal-liquefaction", {"oil-processing"})
 Tech.setUnit("coal-liquefaction", {count = 200, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 30})
 
--- Dependency from rubber to electric power distribution 1, since we'll make the transformer need rubber for insulation.
-Tech.addTechDependency("rubber-1", "electric-energy-distribution-1")
-
 -- Concrete no longer needs automation-2 since assembling machine 1 can handle fluids.
 Tech.setPrereqs("concrete", {"cement", "steel-processing"})
 -- Same for fluid-handling.
@@ -93,8 +90,6 @@ Tech.setPrereqs("sulfur-processing", {"filtration-lake-water", "automation-scien
 data.raw.technology["sulfur-processing"].unit = data.raw.technology["ammonia-1"].unit
 
 Tech.setPrereqs("explosives", {"coal-liquefaction", "ammonia-1"}) -- Previously sulfur-processing
-
-Tech.addTechDependency("steel-processing", "battery")
 
 -- Remove pointless "gas and oil gathering" tech, merge with petrochemistry 1.
 Tech.hideTech("oil-gathering")
@@ -258,6 +253,11 @@ data.raw.technology["chemical-science-pack"].prerequisites = {"plastics", "diese
 -- Blue circuits need a new dependency on red circuits.
 Tech.addTechDependency("advanced-circuit", "processing-unit")
 
+-- Remove steel prereq from some techs that don't really need steel, due to our factor intermediate system.
+Tech.removePrereq("electric-energy-distribution-1", "steel-processing")
+Tech.removePrereq("engine", "steel-processing") -- TODO change engine recipe
+Tech.removePrereq("heavy-armor", "steel-processing") -- TODO change heavy armor recipe
+Tech.removePrereq("solar-energy", "steel-processing") -- TODO change solar panel recipe
 
 -- TODO other science packs.
 

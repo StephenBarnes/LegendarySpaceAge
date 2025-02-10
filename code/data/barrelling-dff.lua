@@ -5,7 +5,7 @@ local Gen = require("code.util.general")
 local Const = require("code.util.constants")
 
 local BARREL_FLUID_AMOUNT = 50 -- 50 fluid units per barrel, from vanilla.
-local GAS_TANK_FLUID_AMOUNT = 80 -- 80 fluid units per gas tank. Setting it too high causes fuel density to be too high.
+local GAS_TANK_FLUID_AMOUNT = 50 -- Considered having it higher, but doesn't really make sense realistically, and gas tanks aren't more expensive than barrels.
 
 -- Edit some of the barrelling recipes to instead have the icon for the gas tank, and use gas tank ingredient and result.
 local gases = Table.listToSet{
