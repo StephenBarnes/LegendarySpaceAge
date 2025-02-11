@@ -4,7 +4,7 @@ local Item = require("code.util.item")
 
 -- Nerf heating towers' efficiency, and reduce energy consumption.
 data.raw.reactor["heating-tower"].energy_source.effectivity = 1 -- 2.5 to 1
-data.raw.reactor["heating-tower"].consumption = "8MW"
+data.raw.reactor["heating-tower"].consumption = "10MW" -- Originally 40MW.
 
 -- Remove the quality tooltip icon.
 data.raw.sprite["quality_info"].filename = "__LegendarySpaceAge__/graphics/misc/empty-quality-icon.png"
@@ -14,10 +14,7 @@ Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-fulgo
 Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-vulcanus")
 
 -- Make some recipe times more sane.
-data.raw.recipe["stone-brick"].energy_required = 4 -- Originally 3.2.
-for _, recipeName in pairs{"wooden-chest", "iron-chest", "steel-chest"} do
-	data.raw.recipe[recipeName].energy_required = 4 -- Originally 0.5.
-end
+data.raw.recipe["stone-brick"].energy_required = 2 -- Originally 3.2.
 for _, recipeName in pairs{"hazard-concrete", "refined-hazard-concrete"} do
 	data.raw.recipe[recipeName].energy_required = 10 -- Originally 0.25.
 end

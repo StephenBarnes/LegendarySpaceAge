@@ -126,31 +126,9 @@ data:extend({
 		weight = data.raw.item["iron-bacteria"].weight,
 		spoil_ticks = 60 * 60 * 3, -- 3 minutes.
 		spoil_result = "spoilage",
+		--[{"simple-entity", "fulgurite"}] = {0, 0, .5}, -- Rather don't
 	},
 })
-
--- Scrap yields electrophages when mined, used as starter cultures.
-local electrophageSources = {
-	--[{"simple-entity", "fulgoran-ruin-small"}] = {0, .1},
-	--[{"simple-entity", "fulgoran-ruin-medium"}] = {0, .1},
-	[{"simple-entity", "fulgoran-ruin-stonehenge"}] = {0, 0, .2},
-	[{"simple-entity", "fulgoran-ruin-big"}] = {0, 0, .3},
-	[{"simple-entity", "fulgoran-ruin-huge"}] = {0, 0, .5},
-	[{"simple-entity", "fulgoran-ruin-colossal"}] = {0, 0, .8},
-	[{"simple-entity", "fulgoran-ruin-vault"}] = {2, 10, nil},
-	--[{"simple-entity", "fulgurite"}] = {0, 0, .5}, -- Rather don't produce from fulgurites - should need electrophage cultivation, not just fulgorite farming.
-	--[{"simple-entity", "fulgurite-small"}] = {0, 0, .1},
-	[{"lightning-attractor", "fulgoran-ruin-attractor"}] = {6, 12, nil},
-}
-for entTypeName, minMaxChance in pairs(electrophageSources) do
-	table.insert(data.raw[entTypeName[1]][entTypeName[2]].minable.results, {
-		type = "item",
-		name = "electrophage",
-		amount_min = minMaxChance[1],
-		amount_max = minMaxChance[2],
-		extra_count_fraction = minMaxChance[3],
-	})
-end
 
 -- Electrophages could spoil to nutrients, or to spoilage (which you then turn into nutrients).
 -- But doesn't really fit, bc Fulgora has no ambient decomposition bacteria, so spoilage shouldn't really exist.

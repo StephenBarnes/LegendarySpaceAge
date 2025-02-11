@@ -18,7 +18,7 @@ recipeFromIron.results = {{type = "item", name = "panel", amount = 1}}
 recipeFromIron.enabled = true
 recipeFromIron.subgroup = "panel"
 recipeFromIron.order = "03"
-recipeFromIron.energy_required = 1
+recipeFromIron.energy_required = 0.25
 recipeFromIron.category = "crafting"
 recipeFromIron.icon = nil
 recipeFromIron.icons = {

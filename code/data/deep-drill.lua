@@ -197,18 +197,19 @@ for i, planetData in pairs{
 	{"vulcanus", {
 		--{type = "fluid", name = "lava", amount = 5}, -- Could make it produce lava, but then you could put lava in pipes.
 		{ type = "fluid", name = "tar",   amount = 5 },
-		{ type = "item",  name = "stone", amount = 5 },
+		{ type = "item",  name = "stone", amount = 10 },
 		{ type = "item",  name = "pitch", amount = 1 },
 		-- Drill consumes 10MJ for each recipe, which can be reduced to 2MJ with modules. Each pitch is 3MJ, each tar is 200kJ.
 	}},
 	{"gleba", {
 		{ type = "fluid", name = "geoplasm",         amount = 10 },
-		{ type = "item",  name = "chitin-fragments", amount = 4 },
-		{ type = "item",  name = "marrow",           amount = 6 },
+		{ type = "item",  name = "chitin-fragments", amount = 5 },
+		{ type = "item",  name = "marrow",           amount = 5 },
 	}},
 	{"fulgora", {
 		{type = "item", name = "stone", amount = 7},
 		{type = "item", name = "scrap", amount = 3},
+		{type = "fluid", name = "fulgoran-sludge", amount = 10},
 	}},
 } do
 	local planetName = planetData[1]

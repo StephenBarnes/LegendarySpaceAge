@@ -15,14 +15,14 @@ local greenCircuitRecipe = table.deepcopy(data.raw.recipe["electronic-circuit"])
 greenCircuitRecipe.name = "sensor-from-green-circuit"
 greenCircuitRecipe.ingredients = {
 	{type = "item", name = "electronic-circuit", amount = 5},
-	{type = "item", name = "glass", amount = 2},
+	{type = "item", name = "glass", amount = 3},
 	{type = "item", name = "frame", amount = 1}
 }
 greenCircuitRecipe.results = {{type = "item", name = "sensor", amount = 1}}
 greenCircuitRecipe.enabled = false
 greenCircuitRecipe.subgroup = "sensor"
 greenCircuitRecipe.order = "02"
-greenCircuitRecipe.energy_required = 6
+greenCircuitRecipe.energy_required = 5
 greenCircuitRecipe.icon = nil
 greenCircuitRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/sensor.png", icon_size = 64, scale = 0.5},
@@ -46,11 +46,11 @@ redCircuitRecipe.enabled = false
 redCircuitRecipe.icons[2] = {icon = "__base__/graphics/icons/advanced-circuit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 redCircuitRecipe.allow_as_intermediate = false
 redCircuitRecipe.allow_decomposition = false
-redCircuitRecipe.energy_required = 2
+redCircuitRecipe.energy_required = 2.5
 data:extend{redCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-red-circuit", "advanced-circuit")
 
--- Create blueCircuitRecipe: 1 blue circuit + 1 glass + 1 frame -> 1 sensor
+-- Create blueCircuitRecipe: 1 blue circuit + 1 glass + 1 frame -> 2 sensors
 local blueCircuitRecipe = table.deepcopy(greenCircuitRecipe)
 blueCircuitRecipe.name = "sensor-from-blue-circuit"
 blueCircuitRecipe.ingredients = {
@@ -58,6 +58,8 @@ blueCircuitRecipe.ingredients = {
 	{type = "item", name = "glass", amount = 1},
 	{type = "item", name = "frame", amount = 1}
 }
+blueCircuitRecipe.results = {{type = "item", name = "sensor", amount = 2}}
+blueCircuitRecipe.always_show_products = true
 blueCircuitRecipe.order = "04"
 blueCircuitRecipe.enabled = false
 blueCircuitRecipe.icons[2] = {icon = "__base__/graphics/icons/processing-unit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}

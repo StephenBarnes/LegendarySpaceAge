@@ -6,6 +6,8 @@ data.raw["recipe"]["scrap-recycling"].results = {
 	{ type = "item", name = "advanced-circuit",      amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false },
 		-- No blue circuits, only reds - so you have to get circuit boards from the reds and spend stone and sulfuric acid to make blues.
 
+	{ type = "item", name = "resin",                 amount = 1, probability = 0.04, show_details_in_recipe_tooltip = false },
+
 	{ type = "item", name = "concrete",              amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "ice",                   amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false },
 
@@ -41,3 +43,70 @@ data.raw.fluid["holmium-solution"].max_temperature = nil
 data.raw.fluid["holmium-solution"].heat_capacity = nil
 data.raw.fluid["electrolyte"].max_temperature = nil
 data.raw.fluid["electrolyte"].heat_capacity = nil
+
+-- Adjust the ruins to just yield scrap. No need to yield stuff like cables, steel plate. And also yield electrophages.
+for _, vals in pairs{
+	{
+		name = "fulgoran-ruin-small",
+		scrapCount = 4,
+		electrophages = nil,
+	},
+	{
+		name = "fulgoran-ruin-medium",
+		scrapCount = 10,
+		electrophages = nil,
+	},
+	{
+		name = "fulgoran-ruin-stonehenge",
+		scrapCount = 20,
+		electrophages = {0, 0, .2},
+	},
+	{
+		name = "fulgoran-ruin-big",
+		scrapCount = 20,
+		electrophages = {0, 0, .3},
+	},
+	{
+		name = "fulgoran-ruin-huge",
+		scrapCount = 40,
+		electrophages = {0, 0, .5},
+	},
+	{
+		name = "fulgoran-ruin-colossal",
+		scrapCount = 60,
+		electrophages = {0, 0, .8},
+	},
+	{
+		name = "fulgoran-ruin-vault",
+		scrapCount = 200,
+		electrophages = {2, 10, nil},
+	},
+	{
+		name = "fulgoran-ruin-attractor",
+		type = "lightning-attractor",
+		scrapCount = 4,
+		electrophages = {6, 12, nil},
+	},
+} do
+	local ruin = data.raw[vals.type or "simple-entity"][vals.name]
+	assert(ruin ~= nil, "Fulgoran ruin " .. vals.name .. " not found")
+	local scrapHalf = math.floor(vals.scrapCount / 2)
+	local scrapMin = vals.scrapCount - scrapHalf
+	local scrapMax = vals.scrapCount + scrapHalf
+	assert(ruin.minable ~= nil, "Fulgoran ruin " .. vals.name .. " has no minable")
+	ruin.minable.results = {{
+		type = "item",
+		name = "scrap",
+		amount_min = scrapMin,
+		amount_max = scrapMax,
+	}}
+	if vals.electrophages then
+		table.insert(ruin.minable.results, {
+			type = "item",
+			name = "electrophage",
+			amount_min = vals.electrophages[1],
+			amount_max = vals.electrophages[2],
+			extra_count_fraction = vals.electrophages[3],
+		})
+	end
+end

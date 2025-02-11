@@ -48,7 +48,7 @@ local recipeFromAppendage = table.deepcopy(standardRecipe)
 recipeFromAppendage.name = "actuator-from-appendage"
 recipeFromAppendage.ingredients = {
 	{ type = "item",  name = "frame",            amount = 1 },
-	{ type = "item",  name = "appendage",        amount = 8 },
+	{ type = "item",  name = "appendage",        amount = 5 },
 	{ type = "item",  name = "sencytium",         amount = 1 },
 	{ type = "item",  name = "advanced-circuit", amount = 1 },
 }
@@ -56,6 +56,7 @@ recipeFromAppendage.icons[2].icon = "__LegendarySpaceAge__/graphics/gleba/append
 recipeFromAppendage.allow_as_intermediate = false
 recipeFromAppendage.enabled = false
 recipeFromAppendage.order = "03"
+recipeFromAppendage.category = "crafting"
 data:extend{recipeFromAppendage}
 
 -- TODO create more recipes

@@ -28,7 +28,7 @@ recipeFromCopper.results = {{type = "item", name = "fluid-fitting", amount = 1}}
 recipeFromCopper.enabled = true
 recipeFromCopper.subgroup = "fluid-fitting"
 recipeFromCopper.order = "02"
-recipeFromCopper.energy_required = 6
+recipeFromCopper.energy_required = 5
 recipeFromCopper.icon = nil
 recipeFromCopper.icons = {
 	{icon = mainIcon, icon_size = 64, scale = 0.5},
@@ -50,7 +50,7 @@ recipeFromPlastic.enabled = false
 recipeFromPlastic.allow_as_intermediate = false
 recipeFromPlastic.allow_decomposition = false
 recipeFromPlastic.order = "03"
-recipeFromPlastic.energy_required = 4
+recipeFromPlastic.energy_required = 5
 recipeFromPlastic.icons = {
 	{icon = mainIcon, icon_size = 64, scale = 0.5},
 	{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.23, shift = {8, -8}},

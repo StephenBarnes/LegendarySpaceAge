@@ -3,11 +3,6 @@
 
 local Tech = require("code.util.tech")
 
--- Recipe should make 4 machine parts.
-data.raw.recipe["iron-gear-wheel"].results = {{type="item", name="iron-gear-wheel", amount=4}}
--- Show amount of machine parts produced by recipe.
-data.raw.recipe["iron-gear-wheel"].always_show_products = true
-
 -- Update icons for iron parts.
 data.raw.item["iron-gear-wheel"].icon = nil
 data.raw.item["iron-gear-wheel"].icons = {
@@ -62,14 +57,14 @@ data:extend{advancedPartsItem}
 local advancedPartsRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
 advancedPartsRecipe.name = "advanced-parts"
 advancedPartsRecipe.ingredients = {
-	{type="item", name="ingot-steel-hot", amount=4},
+	{type="item", name="ingot-steel-hot", amount=5},
 	{type="item", name="plastic-bar", amount=1},
 	{type="item", name="rubber", amount=1},
 	{type="item", name="resin", amount=1},
 	-- No lubricant here. Rather add lubricant in the recipe for gadgets.
 }
 advancedPartsRecipe.always_show_products = true
-advancedPartsRecipe.results = {{type="item", name="advanced-parts", amount=16}}
+advancedPartsRecipe.results = {{type="item", name="advanced-parts", amount=20}}
 advancedPartsRecipe.main_product = "advanced-parts"
 advancedPartsRecipe.category = "crafting"
 advancedPartsRecipe.energy_required = 5

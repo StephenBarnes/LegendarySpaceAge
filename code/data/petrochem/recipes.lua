@@ -249,7 +249,7 @@ woodResinRecipe.ingredients = {
 	{type = "fluid", name = "steam", amount = 100},
 }
 woodResinRecipe.results = {
-	{type = "item", name = "resin", amount = 8},
+	{type = "item", name = "resin", amount = 10},
 	{type = "item", name = "carbon", amount = 1},
 }
 woodResinRecipe.icons = {
@@ -260,7 +260,7 @@ woodResinRecipe.icon = nil
 woodResinRecipe.order = "01"
 woodResinRecipe.subgroup = "resin"
 woodResinRecipe.main_product = "resin"
-woodResinRecipe.energy_required = 4
+woodResinRecipe.energy_required = 5
 data:extend{woodResinRecipe}
 
 local pitchResinRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
@@ -342,7 +342,7 @@ lubricantRecipe.ingredients = {
 	{ type = "fluid", name = "sulfuric-acid", amount = 10 },
 }
 lubricantRecipe.results = {
-	{ type = "fluid", name = "lubricant", amount = 80 },
+	{ type = "fluid", name = "lubricant", amount = 100 },
 	{ type = "fluid", name = "tar",       amount = 10 },
 }
 lubricantRecipe.main_product = "lubricant"

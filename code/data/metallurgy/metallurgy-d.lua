@@ -1,23 +1,48 @@
---[[
-8 iron ore -> 2 iron ingot (+2 stone) -> 1 steel ingot -> 4 steel plate
-4 iron ore -> 1 iron ingot (+1 stone) -> 4 iron plate OR 4 machine parts OR 8 iron rod
-4 copper ore -> 2 copper matte (+2 stone) -> 1 copper ingot (+1 sulfur) -> 4 copper plate
+--[[ This file creates ingot items and recipes.
+Ratios:
+	Iron:
+		5 iron ore -> 1 iron ingot (+1 stone)
+		1 iron ingot -> 5 iron plate OR 5 machine parts OR 5 iron rod
+		So 1 ore : 1 plate : 1 machine part : 1 rod.
+			(Vanilla is 2 ore : 2 plates : 1 gear : 4 sticks.)
+	Steel:
+		25 iron ore -> 5 iron ingot (+2 stone) -> 1 steel ingot -> 5 steel plate
+		So 5 iron ore : 1 steel plate, same as vanilla.
+	Copper:
+		5 copper ore -> 1 copper matte (+1 stone)
+		1 copper matte -> 1 copper ingot (+1 sulfur) -> 5 plates.
+		So 1 ore : 1 plate, same as vanilla.
+	We could simplify all of these ratios by just making ingots 1:1 with plates etc. But:
+		* The 5-to-1 ratio (plus rusting of plates) makes it much more efficient to ship ingots, but with some time pressure since they spoil to cold ingots.
+		* The 5-to-1 ratio makes it easier to reheat compared to having 5x as many ingots.
+		* The 5-to-1 ratio lets us have smaller amounts of stone/sulfur byproducts without probability results or bulk recipes.
+
+Re stack sizes:
+	Give ingots the same stack size as plates etc, so they're 5x more compact to transport.
+	For weights for rockets, rather use correct ratios, eg 1 ingot has the same weight as 5 plates.
 ]]
 
 local Tech = require("code.util.tech")
 
-local ROCKET_MASS = 1000000
-local INGOT_COOLING_TIME = 60 * 60 * 5
+local items = data.raw.item
+local recipes = data.raw.recipe
+local technologies = data.raw.technology
+
+local ROCKET_MASS = 1e6
+local INGOT_COOLING_TIME = 60 * 60 * 5 -- 5 minutes.
+
+local ORE_STACK_SIZE = 50
+local INGOT_STACK_SIZE = 100
+
 local INGOT_WEIGHT = ROCKET_MASS / 200
-	-- 200 ingots per rocket. Each ingot is 4 plates, so 800 plates per rocket. Vanilla was 1000 plates per rocket.
+	-- 200 ingots per rocket. Each ingot is 5 plates, so 1000 plates per rocket. Vanilla was 1000 plates per rocket.
 local ORE_WEIGHT = ROCKET_MASS / 500
 	-- Same as vanilla, 500 ore per rocket.
 
+local INGOT_TO_ITEM_SECONDS = 2.5
+	-- For recipes turning ingots into plates/machine parts/rods etc. They produce 5 output items, so this means assemblers are 1/s, 2/s, 4/s.
 
 local metalTint = {
-	--copper = {r = .831, g = .467, b = .361, a=1}, --too dull
-	--copper = {r = .839, g = .557, b = .435, a=1}, --too desaturated, and not light enough
-	--copper = {r = 1, g = .531, b = .329, a=1}, -- Almost right, but a bit too dark still.
 	copper = {r = 1, g = .639, b = .483, a=1},
 	iron = {r = 0.65, g = 0.65, b = 0.65, a=1},
 	steel = {r = .955, g = .96, b = 1.0, a=1},
@@ -29,7 +54,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	local coldIngotName = "ingot-" .. metal .. "-cold"
 	local tint = metalTint[metal]
 
-	local hotIngot = table.deepcopy(data.raw.item["iron-plate"])
+	local hotIngot = table.deepcopy(items["iron-plate"])
 	hotIngot.name = hotIngotName
 	hotIngot.icons = {
 		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", icon_size=64, scale=0.5},
@@ -48,7 +73,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	hotIngot.spoil_ticks = INGOT_COOLING_TIME
 	hotIngot.spoil_result = coldIngotName
 	hotIngot.order = "a[smelting]-0-" .. i
-	hotIngot.stack_size = 100
+	hotIngot.stack_size = INGOT_STACK_SIZE
 	hotIngot.weight = INGOT_WEIGHT
 	hotIngot.subgroup = "ingots"
 	data:extend{hotIngot}
@@ -64,7 +89,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	data:extend{coldIngot}
 
 	---@type data.RecipePrototype
-	local ingotHeatingRecipe = table.deepcopy(data.raw.recipe["stone-brick"])
+	local ingotHeatingRecipe = table.deepcopy(recipes["stone-brick"])
 	ingotHeatingRecipe.name = "heat-ingot-" .. metal
 	ingotHeatingRecipe.ingredients = {
 		{type="item", name=coldIngotName, amount=1},
@@ -87,11 +112,11 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 end
 
 -- Make recipe for iron ingot -> steel ingot.
-local steelIngotRecipe = table.deepcopy(data.raw.recipe["steel-plate"])
+local steelIngotRecipe = table.deepcopy(recipes["steel-plate"])
 steelIngotRecipe.name = "ingot-steel-hot"
-steelIngotRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=2}}
+steelIngotRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=5}}
 steelIngotRecipe.results = {{type="item", name="ingot-steel-hot", amount=1}}
-steelIngotRecipe.energy_required = 20
+steelIngotRecipe.energy_required = 10
 steelIngotRecipe.allow_decomposition = true
 steelIngotRecipe.main_product = "ingot-steel-hot"
 data:extend{steelIngotRecipe}
@@ -99,13 +124,13 @@ data:extend{steelIngotRecipe}
 -- Make recipe for iron ore -> iron ingot.
 local ironIngotRecipe = table.deepcopy(steelIngotRecipe)
 ironIngotRecipe.name = "ingot-iron-hot"
-ironIngotRecipe.ingredients = {{type="item", name="iron-ore", amount=4}}
+ironIngotRecipe.ingredients = {{type="item", name="iron-ore", amount=5}}
 ironIngotRecipe.results = {
 	{type="item", name="ingot-iron-hot", amount=1},
 	{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
 }
 ironIngotRecipe.main_product = "ingot-iron-hot"
-ironIngotRecipe.energy_required = 4
+ironIngotRecipe.energy_required = 5
 ironIngotRecipe.enabled = true
 data:extend{ironIngotRecipe}
 
@@ -113,13 +138,13 @@ data:extend{ironIngotRecipe}
 local copperMatteRecipe = table.deepcopy(ironIngotRecipe)
 copperMatteRecipe.name = "copper-matte"
 --copperMatteRecipe.factoriopedia_description = {"factoriopedia-description.copper-matte"}
-copperMatteRecipe.ingredients = {{type="item", name="copper-ore", amount=2}}
+copperMatteRecipe.ingredients = {{type="item", name="copper-ore", amount=5}}
 copperMatteRecipe.results = {
 	{type="item", name="copper-matte", amount=1},
 	{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
 }
 copperMatteRecipe.main_product = "copper-matte"
-copperMatteRecipe.energy_required = 2
+copperMatteRecipe.energy_required = 5
 copperMatteRecipe.enabled = true
 data:extend{copperMatteRecipe}
 
@@ -133,7 +158,7 @@ for i = 1, 12 do
 		mipmap_count = 4,
 	})
 end
-local copperMatte = table.deepcopy(data.raw.item["copper-ore"])
+local copperMatte = table.deepcopy(items["copper-ore"])
 copperMatte.name = "copper-matte"
 copperMatte.icons = {
 	{icon="__LegendarySpaceAge__/graphics/metallurgy/matte/matte1.png", icon_size=64, scale=0.5},
@@ -147,79 +172,52 @@ data:extend{copperMatte}
 -- Make recipe for copper matte -> copper ingot.
 local copperIngotRecipe = table.deepcopy(steelIngotRecipe)
 copperIngotRecipe.name = "ingot-copper-hot"
-copperIngotRecipe.ingredients = {{type="item", name="copper-matte", amount=2}}
+copperIngotRecipe.ingredients = {{type="item", name="copper-matte", amount=1}}
 copperIngotRecipe.results = {
 	{type="item", name="ingot-copper-hot", amount=1},
 	{type="item", name="sulfur", amount=1, show_details_in_recipe_tooltip=false},
 }
 copperIngotRecipe.category = "smelting"
 copperIngotRecipe.main_product = "ingot-copper-hot"
-copperIngotRecipe.energy_required = 4
+copperIngotRecipe.energy_required = 5
 copperIngotRecipe.enabled = true
 data:extend{copperIngotRecipe}
 
--- Adjust steel plate recipe.
-local steelPlateRecipe = data.raw.recipe["steel-plate"]
-steelPlateRecipe.ingredients = {{type="item", name="ingot-steel-hot", amount=1}}
-steelPlateRecipe.results = {{type="item", name="steel-plate", amount=4}}
-steelPlateRecipe.category = "crafting"
-steelPlateRecipe.energy_required = 1
-steelPlateRecipe.auto_recycle = true
-steelPlateRecipe.allow_as_intermediate = true
-steelPlateRecipe.allow_decomposition = true
-steelPlateRecipe.always_show_products = true
-steelPlateRecipe.main_product = "steel-plate"
+------------------------------------------------------------------------
 
--- Adjust iron plate recipe.
-local ironPlateRecipe = data.raw.recipe["iron-plate"]
-ironPlateRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=1}}
-ironPlateRecipe.results = {{type="item", name="iron-plate", amount=4}}
-ironPlateRecipe.category = "crafting"
-ironPlateRecipe.energy_required = 1
-ironPlateRecipe.auto_recycle = true
-ironPlateRecipe.allow_as_intermediate = true
-ironPlateRecipe.allow_decomposition = true
-ironPlateRecipe.always_show_products = true
+-- Adjust recipes for plates: steel, iron, copper.
+for _, metal in pairs{"steel", "iron", "copper"} do
+	local plateRecipe = recipes[metal .. "-plate"]
+	plateRecipe.ingredients = {{type="item", name="ingot-" .. metal .. "-hot", amount=1}}
+	plateRecipe.results = {{type="item", name=metal .. "-plate", amount=5}}
+	plateRecipe.energy_required = INGOT_TO_ITEM_SECONDS
+	plateRecipe.category = "crafting"
+	plateRecipe.auto_recycle = true -- Allowing it, so that on Fulgora you can unmake plates for cold ingots, then heat those, then make parts/rods/wires/etc.
+	plateRecipe.allow_as_intermediate = true
+	plateRecipe.allow_decomposition = true
+	plateRecipe.always_show_products = true
+end
 
--- Adjust copper plate recipe.
-local copperPlateRecipe = data.raw.recipe["copper-plate"]
-copperPlateRecipe.ingredients = {{type="item", name="ingot-copper-hot", amount=1}}
-copperPlateRecipe.results = {{type="item", name="copper-plate", amount=4}}
-copperPlateRecipe.category = "crafting"
-copperPlateRecipe.energy_required = 1
-copperPlateRecipe.auto_recycle = true
-copperPlateRecipe.allow_as_intermediate = true
-copperPlateRecipe.allow_decomposition = true
-copperPlateRecipe.always_show_products = true
-
--- Adjust iron gear recipe.
-local ironGearRecipe = data.raw.recipe["iron-gear-wheel"]
-ironGearRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=1}}
-ironGearRecipe.results = {{type="item", name="iron-gear-wheel", amount=2}}
-ironGearRecipe.energy_required = 1
-ironGearRecipe.auto_recycle = true
-ironGearRecipe.always_show_products = true
-
--- Adjust recipe for iron rods.
-local ironStickRecipe = data.raw.recipe["iron-stick"]
-ironStickRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=1}}
-ironStickRecipe.results = {{type="item", name="iron-stick", amount=8}}
-ironStickRecipe.energy_required = 1
-ironStickRecipe.auto_recycle = true
-ironStickRecipe.always_show_products = true
-
--- Adjust recipe for copper cables.
-local copperCableRecipe = data.raw.recipe["copper-cable"]
-copperCableRecipe.ingredients = {{type="item", name="ingot-copper-hot", amount=1}}
-copperCableRecipe.results = {{type="item", name="copper-cable", amount=8}}
-copperCableRecipe.energy_required = 1
-copperCableRecipe.auto_recycle = true
-copperCableRecipe.always_show_products = true
+-- Adjust recipes for other stuff made out of ingots: gears, rods, cables.
+for _, vals in pairs{
+	{"iron", "iron-gear-wheel", 5},
+	{"iron", "iron-stick", 5},
+	{"copper", "copper-cable", 10},
+} do
+	local metal, item, num = vals[1], vals[2], vals[3]
+	local recipe = recipes[item]
+	recipe.ingredients = {{type="item", name="ingot-" .. metal .. "-hot", amount=1}}
+	recipe.results = {{type="item", name=item, amount=num}}
+	recipe.energy_required = INGOT_TO_ITEM_SECONDS
+	recipe.auto_recycle = true
+	recipe.always_show_products = true
+	recipe.category = "crafting"
+end
 
 -- Put basic metal intermediates in their own subgroup.
 for i, itemName in pairs{"iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate"} do
-	data.raw.item[itemName].subgroup = "basic-metal-intermediates"
-	data.raw.item[itemName].order = ""..i
+	items[itemName].subgroup = "basic-metal-intermediates"
+	items[itemName].order = ""..i
 end
 
 ------------------------------------------------------------------------
@@ -227,37 +225,27 @@ end
 -- Add recipes to techs.
 Tech.addRecipeToTech("ingot-steel-hot", "steel-processing", 1)
 Tech.addRecipeToTech("heat-ingot-steel", "steel-processing", 2)
-data.raw.recipe["heat-ingot-steel"].enabled = false
+recipes["heat-ingot-steel"].enabled = false
 
 -- Adjust tech unlock triggers.
-data.raw.technology["steam-power"].research_trigger.item = "ingot-iron-hot"
-data.raw.technology["electronics"].research_trigger.item = "ingot-copper-hot"
-data.raw.technology["steel-axe"].research_trigger.item = "ingot-steel-hot"
+technologies["steam-power"].research_trigger.item = "ingot-iron-hot"
+technologies["electronics"].research_trigger.item = "ingot-copper-hot"
+technologies["steel-axe"].research_trigger.item = "ingot-steel-hot"
 
--- Adjust stack sizes and rocket capacities of basic metal products.
-data.raw.item["copper-matte"].weight = ORE_WEIGHT -- 2 ore becomes 1 copper matte and 1 sulfur
-data.raw.item["iron-plate"].weight = INGOT_WEIGHT / 4
-data.raw.item["copper-plate"].weight = INGOT_WEIGHT / 4
-data.raw.item["steel-plate"].weight = INGOT_WEIGHT / 4
-data.raw.item["iron-gear-wheel"].weight = ROCKET_MASS / 2000
-data.raw.item["iron-stick"].weight = ROCKET_MASS / 8000
-data.raw.item["copper-cable"].weight = ROCKET_MASS / 8000
+--[[ Adjust stack sizes and rocket capacities of basic metal products.
+Stack sizes of ores are 50, ingots 100, plates 100, machine parts 100, rods 100.
+So transporting ingots is 2 times better for stack size, times 4 times better from recipes, so 8x denser overall.
+]]
+items["copper-matte"].weight = ORE_WEIGHT -- 2 ore becomes 1 copper matte and 1 sulfur
+items["iron-plate"].weight = INGOT_WEIGHT / 5
+items["copper-plate"].weight = INGOT_WEIGHT / 5
+items["steel-plate"].weight = INGOT_WEIGHT / 5
+items["iron-gear-wheel"].weight = INGOT_WEIGHT / 5
+items["iron-stick"].weight = INGOT_WEIGHT / 5
+items["copper-cable"].weight = INGOT_WEIGHT / 10
+items["iron-stick"].stack_size = 200
 
 -- Add output slots to furnaces - otherwise some recipe products just disappear, apparently.
 for _, furnace in pairs{"stone-furnace", "steel-furnace", "gas-furnace", "electric-furnace"} do
 	data.raw.furnace[furnace].result_inventory_size = 2
 end
-
---[[ Stack sizes and weights:
-Stack sizes of ores are 50, ingots 100, plates 100, machine parts 100, rods 100.
-So transporting ingots is 2 times better for stack size, times 4 times better from recipes, so 8x denser overall.
-]]
-data.raw.item["copper-matte"].weight = ORE_WEIGHT -- 2 ore becomes 1 copper matte and 1 sulfur.
-data.raw.item["iron-plate"].weight = INGOT_WEIGHT / 4
-data.raw.item["copper-plate"].weight = INGOT_WEIGHT / 4
-data.raw.item["steel-plate"].weight = INGOT_WEIGHT / 4
-data.raw.item["iron-gear-wheel"].weight = INGOT_WEIGHT / 4
-data.raw.item["iron-stick"].weight = INGOT_WEIGHT / 8
-data.raw.item["copper-cable"].weight = INGOT_WEIGHT / 8
--- Iron rod stacks should be as dense as iron plate stacks.
-data.raw.item["iron-stick"].stack_size = 200

@@ -15,14 +15,14 @@ data:extend{structureItem}
 local recipeFromCement = table.deepcopy(data.raw.recipe["iron-stick"])
 recipeFromCement.name = "structure-from-cement"
 recipeFromCement.ingredients = {
-	{type = "item", name = "stone-brick", amount = 8},
+	{type = "item", name = "stone-brick", amount = 10},
 	{type = "fluid", name = "cement", amount = 20},
 }
 recipeFromCement.results = {{type = "item", name = "structure", amount = 1}}
 recipeFromCement.enabled = false
 recipeFromCement.subgroup = "structure"
 recipeFromCement.order = "03"
-recipeFromCement.energy_required = 6
+recipeFromCement.energy_required = 2
 recipeFromCement.category = "crafting-with-fluid"
 recipeFromCement.icon = nil
 recipeFromCement.icons = {
@@ -39,12 +39,12 @@ Tech.addRecipeToTech("structure-from-cement", "cement")
 local recipeFromResin = table.deepcopy(recipeFromCement)
 recipeFromResin.name = "structure-from-resin"
 recipeFromResin.ingredients = {
-	{ type = "item", name = "stone-brick", amount = 8 },
-	{ type = "item", name = "resin",    amount = 4 },
+	{ type = "item", name = "stone-brick", amount = 10 },
+	{ type = "item", name = "resin",    amount = 5 },
 }
 recipeFromResin.enabled = true
 recipeFromResin.order = "02"
-recipeFromResin.energy_required = 6
+recipeFromResin.energy_required = 5
 recipeFromResin.category = "crafting"
 recipeFromResin.icons[3].icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png"
 recipeFromResin.icons[3].scale = 0.2
@@ -55,7 +55,7 @@ data:extend{recipeFromResin}
 local recipeFromChitin = table.deepcopy(recipeFromCement)
 recipeFromChitin.name = "structure-from-chitin"
 recipeFromChitin.ingredients = {
-	{type = "item", name = "chitin-block", amount = 8},
+	{type = "item", name = "chitin-block", amount = 10},
 	{type = "fluid", name = "slime", amount = 20},
 }
 recipeFromChitin.results = {{type = "item", name = "structure", amount = 1}}
@@ -72,3 +72,5 @@ data:extend{recipeFromChitin}
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?
+
+-- TODO make a recipe with concrete and resin, for Fulgora.

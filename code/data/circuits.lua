@@ -12,11 +12,11 @@ Blue circuits are made in the late stages of Nauvis part 1, and should have a si
 	2 stone + 10 sulfuric acid -> 1 silicon wafer
 	1 silicon wafer + 1 carbon -> 1 doped wafer
 	1 doped wafer + 1 wire + 1 plastic bar -> 20 microchips
-	1 red circuit + 4 microchips + 5 sulfuric acid -> 1 blue circuit
+	1 red circuit + 5 microchips + 5 sulfuric acid -> 1 blue circuit
 
 On Nauvis you first make "makeshift" circuit boards, from just stone. Then later you cut trees and put the wood in a wood-to-resin-and-rubber line and use the resin plus wood to make wooden circuit boards. There's early agricultural towers for bulk wood.
 When plastic is unlocked with petrochem, you unlock a recipe for circuit boards from plastic:
-	2 plastic bar + 1 resin -> 8 circuit boards
+	2 plastic bar + 1 resin -> 10 circuit boards
 Generally on Nauvis and Gleba both wood and plastic circuit boards are viable. On Fulgora and Aquilo, only plastic circuit boards are viable. On Vulcanus there's another alternative recipe for ceramic circuit boards using calcite.
 ]]
 
@@ -45,7 +45,7 @@ woodCircuitBoardRecipe.ingredients = {
 	{type = "item", name = "resin", amount = 1},
 }
 woodCircuitBoardRecipe.results = {
-	{type = "item", name = "circuit-board", amount = 8},
+	{type = "item", name = "circuit-board", amount = 10},
 }
 woodCircuitBoardRecipe.order = "b[circuits]-001"
 woodCircuitBoardRecipe.subgroup = "circuit-board"
@@ -67,7 +67,7 @@ plasticCircuitBoardRecipe.ingredients = {
 	--{type = "item", name = "rubber", amount = 0.2}, -- TODO after adding rubber
 }
 plasticCircuitBoardRecipe.results = {
-	{type = "item", name = "circuit-board", amount = 8},
+	{type = "item", name = "circuit-board", amount = 10},
 }
 plasticCircuitBoardRecipe.order = "b[circuits]-002"
 plasticCircuitBoardRecipe.subgroup = "circuit-board"
@@ -85,11 +85,11 @@ Tech.addRecipeToTech("plastic-circuit-board", "plastics") -- TODO rather make a 
 local calciteCircuitBoardRecipe = table.deepcopy(data.raw.recipe["barrel"])
 calciteCircuitBoardRecipe.name = "calcite-circuit-board"
 calciteCircuitBoardRecipe.ingredients = {
-	{type = "item", name = "calcite", amount = 4},
+	{type = "item", name = "calcite", amount = 5},
 	{type = "item", name = "resin", amount = 1},
 }
 calciteCircuitBoardRecipe.results = {
-	{type = "item", name = "circuit-board", amount = 8},
+	{type = "item", name = "circuit-board", amount = 10},
 }
 calciteCircuitBoardRecipe.order = "b[circuits]-003"
 calciteCircuitBoardRecipe.subgroup = "circuit-board"
@@ -214,7 +214,7 @@ dopedWaferRecipe.subgroup = nil
 dopedWaferRecipe.icon = nil
 dopedWaferRecipe.icons = nil
 dopedWaferRecipe.category = "chemistry-or-electronics"
-dopedWaferRecipe.energy_required = 24
+dopedWaferRecipe.energy_required = 20
 dopedWaferRecipe.allow_decomposition = true
 dopedWaferRecipe.allow_as_intermediate = true
 dopedWaferRecipe.main_product = "doped-wafer"
@@ -236,7 +236,7 @@ microchipRecipe.subgroup = nil
 microchipRecipe.icon = nil
 microchipRecipe.icons = nil
 microchipRecipe.category = "electronics"
-microchipRecipe.energy_required = 12
+microchipRecipe.energy_required = 10
 microchipRecipe.allow_decomposition = true
 microchipRecipe.allow_as_intermediate = true
 microchipRecipe.main_product = "microchip"
@@ -249,13 +249,13 @@ Tech.addRecipeToTech("microchip", "processing-unit", 3)
 -- Original recipe was 5 sulfuric acid + 2 red circuit + 20 green circuit.
 data.raw.recipe["processing-unit"].ingredients = {
 	{type = "item", name = "advanced-circuit", amount = 1},
-	{type = "item", name = "microchip", amount = 4},
+	{type = "item", name = "microchip", amount = 5},
 	{type = "fluid", name = "sulfuric-acid", amount = 5},
 }
 data.raw.recipe["processing-unit"].allow_decomposition = true
 data.raw.recipe["processing-unit"].main_product = "processing-unit"
 -- Make blue circuit recipe slower, as compromise for making it cheaper in materials.
-data.raw.recipe["processing-unit"].energy_required = 6
+data.raw.recipe["processing-unit"].energy_required = 5
 
 -- Create item for electronic components.
 local electronicComponents = table.deepcopy(data.raw.item["advanced-circuit"])
@@ -282,13 +282,13 @@ electronicComponentsRecipe.ingredients = {
 	{type = "item", name = "wiring", amount = 1},
 }
 electronicComponentsRecipe.results = {
-	{type = "item", name = "electronic-components", amount = 4},
+	{type = "item", name = "electronic-components", amount = 5},
 }
 electronicComponentsRecipe.subgroup = nil
 electronicComponentsRecipe.icon = nil
 electronicComponentsRecipe.icons = nil
 electronicComponentsRecipe.category = "electronics"
-electronicComponentsRecipe.energy_required = 6
+electronicComponentsRecipe.energy_required = 5
 electronicComponentsRecipe.allow_decomposition = true
 electronicComponentsRecipe.allow_as_intermediate = true
 electronicComponentsRecipe.main_product = "electronic-components"
@@ -304,6 +304,7 @@ data.raw.recipe["advanced-circuit"].ingredients = {
 	{type = "item", name = "wiring", amount = 1},
 	{type = "item", name = "electronic-components", amount = 2},
 }
+data.raw.recipe["advanced-circuit"].energy_required = 2.5
 
 -- Move circuits to complex-circuit-intermediates subgroup.
 data.raw.item["electronic-circuit"].subgroup = "complex-circuit-intermediates"

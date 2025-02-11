@@ -21,7 +21,7 @@ recipeFromWood.results = {{type = "item", name = "frame", amount = 1}}
 recipeFromWood.enabled = true
 recipeFromWood.subgroup = "frame"
 recipeFromWood.order = "03"
-recipeFromWood.energy_required = 6
+recipeFromWood.energy_required = 10
 recipeFromWood.category = "crafting"
 recipeFromWood.allow_as_intermediate = false
 recipeFromWood.icon = nil
@@ -36,13 +36,13 @@ data:extend{recipeFromWood}
 local recipeFromIron = table.deepcopy(data.raw.recipe["iron-stick"])
 recipeFromIron.name = "frame-from-iron"
 recipeFromIron.ingredients = {
-	{type = "item", name = "iron-stick", amount = 8}
+	{type = "item", name = "iron-stick", amount = 10}
 }
 recipeFromIron.results = {{type = "item", name = "frame", amount = 1}}
 recipeFromIron.enabled = true
 recipeFromIron.subgroup = "frame"
 recipeFromIron.order = "04"
-recipeFromIron.energy_required = 4
+recipeFromIron.energy_required = 5
 recipeFromIron.category = "crafting"
 recipeFromIron.allow_as_intermediate = true
 recipeFromIron.icon = nil
@@ -56,12 +56,12 @@ data:extend{recipeFromIron}
 local recipeFromTubules = table.deepcopy(recipeFromIron)
 recipeFromTubules.name = "frame-from-tubules"
 recipeFromTubules.ingredients = {
-	{type = "item", name = "tubule", amount = 8},
+	{type = "item", name = "tubule", amount = 10},
 	{type = "fluid", name = "slime", amount = 20}
 }
 recipeFromTubules.enabled = false
 recipeFromTubules.order = "05"
-recipeFromTubules.energy_required = 4
+recipeFromTubules.energy_required = 5
 recipeFromTubules.category = "organic-or-assembling-with-fluid"
 recipeFromTubules.allow_as_intermediate = false
 recipeFromTubules.icons[2].icon = "__LegendarySpaceAge__/graphics/gleba/tubule/1.png"

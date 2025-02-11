@@ -15,14 +15,14 @@ data:extend{mechanismItem}
 local basicRecipe = table.deepcopy(data.raw.recipe["iron-stick"])
 basicRecipe.name = "mechanism-from-basic"
 basicRecipe.ingredients = {
-	{type = "item", name = "iron-gear-wheel", amount = 8},
+	{type = "item", name = "iron-gear-wheel", amount = 5},
 	{type = "item", name = "frame", amount = 1},
 }
 basicRecipe.results = {{type = "item", name = "mechanism", amount = 1}}
 basicRecipe.enabled = true
 basicRecipe.subgroup = "mechanism"
 basicRecipe.order = "02"
-basicRecipe.energy_required = 4
+basicRecipe.energy_required = 5
 basicRecipe.category = "crafting"
 basicRecipe.icon = nil
 basicRecipe.icons = {
@@ -37,11 +37,11 @@ data:extend{basicRecipe}
 local advancedRecipe = table.deepcopy(basicRecipe)
 advancedRecipe.name = "mechanism-from-advanced"
 advancedRecipe.ingredients = {
-	{type = "item", name = "advanced-parts", amount = 4},
+	{type = "item", name = "advanced-parts", amount = 5},
 	{type = "item", name = "frame", amount = 1},
 }
 advancedRecipe.order = "03"
-advancedRecipe.energy_required = 2
+advancedRecipe.energy_required = 2.5
 advancedRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}}
 advancedRecipe.icons[3] = nil
 advancedRecipe.allow_as_intermediate = false
@@ -57,7 +57,7 @@ appendageRecipe.ingredients = {
 	{type = "item", name = "appendage", amount = 3},
 }
 appendageRecipe.order = "04"
-appendageRecipe.energy_required = 4
+appendageRecipe.energy_required = 5
 appendageRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/appendage/1.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}}
 appendageRecipe.icons[3] = nil
 appendageRecipe.allow_as_intermediate = false

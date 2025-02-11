@@ -27,7 +27,7 @@ resinRecipe.results = {{type = "item", name = "wiring", amount = 1}}
 resinRecipe.enabled = false
 resinRecipe.subgroup = "wiring"
 resinRecipe.order = "02"
-resinRecipe.energy_required = 6
+resinRecipe.energy_required = 5
 resinRecipe.allow_as_intermediate = true
 data:extend{resinRecipe}
 Tech.addRecipeToTech("wiring-from-resin", "basic-electricity")
@@ -37,10 +37,10 @@ local rubberRecipe = table.deepcopy(resinRecipe)
 rubberRecipe.name = "wiring-from-rubber"
 rubberRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/rubber/rubber-2.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 rubberRecipe.ingredients = {
-	{type = "item", name = "copper-cable", amount = 8},
+	{type = "item", name = "copper-cable", amount = 10},
 	{type = "item", name = "rubber", amount = 1},
 }
-rubberRecipe.results = {{type = "item", name = "wiring", amount = 8}}
+rubberRecipe.results = {{type = "item", name = "wiring", amount = 10}}
 rubberRecipe.order = "03"
 rubberRecipe.enabled = false
 rubberRecipe.allow_as_intermediate = false
@@ -52,10 +52,10 @@ local plasticRecipe = table.deepcopy(resinRecipe)
 plasticRecipe.name = "wiring-from-plastic"
 plasticRecipe.icons[2] = {icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 plasticRecipe.ingredients = {
-	{type = "item", name = "copper-cable", amount = 4},
+	{type = "item", name = "copper-cable", amount = 5},
 	{type = "item", name = "plastic-bar", amount = 1},
 }
-plasticRecipe.results = {{type = "item", name = "wiring", amount = 4}}
+plasticRecipe.results = {{type = "item", name = "wiring", amount = 5}}
 plasticRecipe.order = "04"
 plasticRecipe.enabled = false
 plasticRecipe.allow_as_intermediate = false
@@ -67,10 +67,10 @@ local neurofibrilRecipe = table.deepcopy(resinRecipe)
 neurofibrilRecipe.name = "wiring-from-neurofibril"
 neurofibrilRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/neurofibrils/4.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 neurofibrilRecipe.ingredients = {
-	{type = "item", name = "neurofibril", amount = 8},
+	{type = "item", name = "neurofibril", amount = 10},
 	{type = "item", name = "rubber", amount = 1},
 }
-neurofibrilRecipe.results = {{type = "item", name = "wiring", amount = 8}}
+neurofibrilRecipe.results = {{type = "item", name = "wiring", amount = 10}}
 neurofibrilRecipe.order = "05"
 neurofibrilRecipe.enabled = false
 neurofibrilRecipe.allow_as_intermediate = false
