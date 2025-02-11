@@ -20,9 +20,10 @@ for _, chestname in pairs{"wooden-chest", "iron-chest"} do
 end
 recipes["steel-chest"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "panel", amount = 4},
+	{type = "item", name = "panel", amount = 5},
 }
 recipes["steel-chest"].enabled = true
+recipes["steel-chest"].energy_required = 2
 Tech.removeRecipeFromTech("steel-chest", "steel-processing")
 
 -- Transport belts - remove the nesting in the recipes (each tier ingredient to the next), and add rubber, and change to factor intermediates.
@@ -35,31 +36,30 @@ recipes["transport-belt"].ingredients = {
 }
 recipes["transport-belt"].results = {{type="item", name="transport-belt", amount=4}}
 recipes["fast-transport-belt"].ingredients = {
-	{type="item", name="panel", amount=1},
 	{type="item", name="mechanism", amount=1},
 	{type="item", name="rubber", amount=1},
 }
 recipes["fast-transport-belt"].results = {{type="item", name="fast-transport-belt", amount=2}}
 recipes["express-transport-belt"].ingredients = {
-	{type="item", name="mechanism", amount=2},
+	{type="item", name="mechanism", amount=1},
 	{type="item", name="rubber", amount=1},
 	{type="fluid", name="lubricant", amount=20},
 }
 recipes["express-transport-belt"].allow_decomposition = true
 recipes["express-transport-belt"].allow_as_intermediate = true
 recipes["turbo-transport-belt"].ingredients = {
-	{type="item", name="electric-engine-unit", amount=2},
-	{type="item", name="tungsten-plate", amount=4},
-	{type="fluid", name="lubricant", amount=20},
+	{type="item", name="electric-engine-unit", amount=1},
+	{type="item", name="tungsten-plate", amount=2},
 }
 recipes["turbo-transport-belt"].allow_decomposition = true
 recipes["turbo-transport-belt"].allow_as_intermediate = true
-recipes["turbo-transport-belt"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
+recipes["turbo-transport-belt"].category = "pressing"
 -- Underground belts - remove nesting. For ingredients, require literally just the number of belts, plus panels. So you can even craft them by hand, and eg turn green belts into green undergrounds off-Vulcanus.
 recipes["underground-belt"].ingredients = {
 	{type="item", name="transport-belt", amount=6},
 	{type="item", name="panel", amount=2},
 }
+recipes["underground-belt"].energy_required = 2
 recipes["fast-underground-belt"].ingredients = {
 	{type="item", name="fast-transport-belt", amount=8},
 	{type="item", name="panel", amount=2},
@@ -68,17 +68,19 @@ recipes["express-underground-belt"].ingredients = {
 	{type="item", name="express-transport-belt", amount=10},
 	{type="item", name="panel", amount=2},
 }
+recipes["express-underground-belt"].category = "pressing" -- Allow handcrafting, and foundries and assemblers.
 recipes["turbo-underground-belt"].ingredients = {
 	{type="item", name="turbo-transport-belt", amount=12},
 	{type="item", name="panel", amount=2},
 }
-recipes["turbo-underground-belt"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
+recipes["turbo-underground-belt"].category = "pressing"
 -- Splitters - remove nesting. For ingredients, require 2 belts of that tier, plus sensor and mechanism. Nothing else, rather put it into the transport belt recipes.
 recipes["splitter"].ingredients = {
 	{type="item", name="transport-belt", amount=2},
 	{type="item", name="mechanism", amount=1},
 	{type="item", name="sensor", amount=1},
 }
+recipes["splitter"].energy_required = 2
 recipes["fast-splitter"].ingredients = {
 	{type="item", name="fast-transport-belt", amount=2},
 	{type="item", name="mechanism", amount=1},
@@ -89,12 +91,13 @@ recipes["express-splitter"].ingredients = {
 	{type="item", name="mechanism", amount=1},
 	{type="item", name="sensor", amount=1},
 }
+recipes["express-splitter"].category = "pressing"
 recipes["turbo-splitter"].ingredients = {
 	{type="item", name="turbo-transport-belt", amount=2},
 	{type="item", name="mechanism", amount=1},
 	{type="item", name="sensor", amount=1},
 }
-recipes["turbo-splitter"].category = "crafting-with-fluid-or-metallurgy" -- Allow in non-foundry buildings.
+recipes["turbo-splitter"].category = "pressing"
 
 -- Inserter recipes - rod is now enabled from the start.
 recipes["burner-inserter"].ingredients = {
@@ -370,18 +373,18 @@ recipes["steam-engine"].ingredients = {
 recipes["steam-engine"].energy_required = 4
 
 recipes["heating-tower"].ingredients = {
-	{type = "item", name = "structure", amount = 8},
-	{type = "item", name = "shielding", amount = 4},
-	{type = "item", name = "heat-pipe", amount = 4},
+	{type = "item", name = "structure", amount = 20},
+	{type = "item", name = "shielding", amount = 20},
+	{type = "item", name = "heat-pipe", amount = 5},
 }
-recipes["heating-tower"].energy_required = 8
+recipes["heating-tower"].energy_required = 10
 recipes["fluid-heating-tower"].ingredients = {
-	{type = "item", name = "structure", amount = 8},
-	{type = "item", name = "shielding", amount = 4},
-	{type = "item", name = "heat-pipe", amount = 4},
+	{type = "item", name = "structure", amount = 20},
+	{type = "item", name = "shielding", amount = 20},
+	{type = "item", name = "heat-pipe", amount = 5},
 	{type = "item", name = "fluid-fitting", amount = 2},
 }
-recipes["fluid-heating-tower"].energy_required = 8
+recipes["fluid-heating-tower"].energy_required = 10
 
 -- Heat pipe is originally 20 copper plate + 10 steel plate for 1. That seems very expensive for the size. Would make Aquilo and Gleba annoying. So I'll make it a lot cheaper.
 recipes["heat-pipe"].ingredients = {

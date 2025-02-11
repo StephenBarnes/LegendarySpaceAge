@@ -112,6 +112,7 @@ data:extend{ironIngotRecipe}
 -- Make recipe for copper ore -> copper matte.
 local copperMatteRecipe = table.deepcopy(ironIngotRecipe)
 copperMatteRecipe.name = "copper-matte"
+--copperMatteRecipe.factoriopedia_description = {"factoriopedia-description.copper-matte"}
 copperMatteRecipe.ingredients = {{type="item", name="copper-ore", amount=2}}
 copperMatteRecipe.results = {
 	{type="item", name="copper-matte", amount=1},
@@ -140,6 +141,7 @@ copperMatte.icons = {
 copperMatte.pictures = copperMattePictures
 copperMatte.subgroup = "raw-material"
 copperMatte.order = "a1"
+--copperMatte.factoriopedia_description = {"factoriopedia-description.copper-matte"}
 data:extend{copperMatte}
 
 -- Make recipe for copper matte -> copper ingot.

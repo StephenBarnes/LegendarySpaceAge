@@ -144,7 +144,7 @@ Tech.setPrereqs("automation-2", {"advanced-circuit"})
 Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine", "processing-unit", "speed-module"})
 
 -- Heating tower tech should be early.
-Tech.setPrereqs("heating-tower", {"concrete", "logistic-science-pack"})
+Tech.setPrereqs("heating-tower", {"steel-processing", "logistic-science-pack"})
 data.raw.technology["heating-tower"].unit = {count = 300, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 30}
 data.raw.technology["heating-tower"].research_trigger = nil
 
