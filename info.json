@@ -31,6 +31,9 @@
 		, "! est-steel-storage-tank"
 		, "! nco-SmallTank"
 
+		, "aai-signal-transmission"
+		, "! aai-industry"
+
 		, "Electric_flying_enemies"
 		, "behemoth-enemies"
 

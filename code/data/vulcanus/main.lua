@@ -3,7 +3,6 @@ require("code.data.vulcanus.volcanic-gas")
 require("code.data.vulcanus.foundry-recipes")
 require("code.data.vulcanus.apprentice-foundry")
 
-local Table = require("code.util.table")
 local Tech = require("code.util.tech")
 
 -- Move steam-to-water to Vulcanus tech, not calcite processing.
@@ -96,3 +95,11 @@ inverseVulcanizationRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale = 0.27, shift = {-6, -7}, mipmap_count=4},
 }
 data:extend({inverseVulcanizationTech, inverseVulcanizationRecipe})
+
+-- Adjust stats of foundry.
+local foundry = data.raw["assembling-machine"]["foundry"]
+foundry.crafting_speed = 1 -- Instead of 4, we set it to base 1, increasing to 10.
+foundry.effect_receiver = nil -- Remove base productivity bonus.
+foundry.energy_source.emissions_per_minute = { pollution = 50 }
+foundry.energy_source.drain = "1MW"
+foundry.energy_usage = "9MW"

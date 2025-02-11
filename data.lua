@@ -55,8 +55,7 @@ require("code.data.space.main")
 require("code.data.item-groups")
 require("code.data.surface-properties")
 require("code.data.advanced-logistics")
-require("code.data.infra-recipes") -- TODO remove
-require("code.data.infra-numbers") -- TODO remove
+require("code.data.infra.infra-recipes-TODO-refactor") -- TODO remove
 require("code.data.infra.main")
 require("code.data.ocean-dumping")
 require("code.data.tech-progression")

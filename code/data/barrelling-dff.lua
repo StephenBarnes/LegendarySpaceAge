@@ -105,6 +105,7 @@ local newEffectsFluidHandling = {}
 for _, effect in pairs(fluidHandlingTech.effects) do
 	if effect.type == "unlock-recipe" then
 		local recipe = data.raw.recipe[effect.recipe]
+		assert(recipe ~= nil, "recipe "..effect.recipe.." not found")
 		if recipe.subgroup == "fill-barrel" then
 			table.insert(barrellingRecipes, effect.recipe)
 		elseif recipe.subgroup == "empty-barrel" then
