@@ -269,6 +269,3 @@ for i = 1, 3 do
 		end
 	end
 end
-log(serpent.block(data.raw.technology["mining-productivity-1"]))
-log(serpent.block(data.raw.technology["mining-productivity-2"]))
-log(serpent.block(data.raw.technology["mining-productivity-3"]))

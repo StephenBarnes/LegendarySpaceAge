@@ -16,7 +16,6 @@
 		, "space-age"
 
 		, "gleba-lab"
-		, "apprentice-assembler"
 		, "cargo-ships"
 
 		, "gas-furnace"
@@ -34,6 +33,8 @@
 
 		, "Electric_flying_enemies"
 		, "behemoth-enemies"
+
+		, "beacon-interface"
 
 		, "PlanetsLib"
 

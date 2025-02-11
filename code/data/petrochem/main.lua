@@ -1,11 +1,8 @@
-local Tech = require("code.util.tech")
-
 require("code.data.petrochem.gas-furnace")
 require("code.data.petrochem.gas-boiler")
 require("code.data.petrochem.fluids-items")
 require("code.data.petrochem.recipes")
 require("code.data.petrochem.gasifier")
-require("code.data.petrochem.wellhead")
 require("code.data.petrochem.natural-gas-wells")
 require("code.data.petrochem.coking-tech")
 require("code.data.petrochem.resin-tech")

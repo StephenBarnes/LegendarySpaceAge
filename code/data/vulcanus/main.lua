@@ -1,6 +1,7 @@
 require("code.data.vulcanus.worldgen")
 require("code.data.vulcanus.volcanic-gas")
 require("code.data.vulcanus.foundry-recipes")
+require("code.data.vulcanus.apprentice-foundry")
 
 local Table = require("code.util.table")
 local Tech = require("code.util.tech")

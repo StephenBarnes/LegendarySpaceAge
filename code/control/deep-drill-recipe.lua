@@ -1,7 +1,7 @@
 -- This file sets recipes of deep drills, when they're placed.
 
----@param e EventData.on_built_entity|EventData.on_robot_built_entity
-local function onBuiltEntity(e)
+---@param e EventData.on_built_entity|EventData.on_robot_built_entity|EventData.on_space_platform_built_entity|EventData.script_raised_built|EventData.script_raised_revive|EventData.on_entity_cloned
+local function onBuilt(e)
 	local entity = e.entity
 	if entity == nil or not entity.valid or entity.name ~= "deep-drill" then return end
 	entity.recipe_locked = true
@@ -28,6 +28,5 @@ local function onBuiltEntity(e)
 end
 
 return {
-	onBuiltEntity = onBuiltEntity,
-	onRobotBuiltEntity = onBuiltEntity,
+	onBuilt = onBuilt,
 }

@@ -26,6 +26,8 @@ recipes["steel-chest"].enabled = true
 recipes["steel-chest"].energy_required = 2
 Tech.removeRecipeFromTech("steel-chest", "steel-processing")
 
+-- TODO remove foundry recipes for transport belts - rather have fewer foundries since they now have overheads. Plus doesn't really make sense.
+
 -- Transport belts - remove the nesting in the recipes (each tier ingredient to the next), and add rubber, and change to factor intermediates.
 -- I also want them to get more expensive per throughput (as in vanilla), and increase in complexity.
 recipes["transport-belt"].ingredients = {
