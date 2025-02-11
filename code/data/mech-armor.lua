@@ -8,14 +8,13 @@ local Tech = require("code.util.tech")
 -- Create a "mech armor 2 tech".
 local newTech = table.deepcopy(data.raw.technology["mech-armor"])
 newTech.name = "mech-armor-2"
-newTech.prerequisites = {"mech-armor", "steel-axe"} -- Steel-axe prereq mostly just so players can easily see it.
+newTech.prerequisites = {"mech-armor", "tungsten-axe"} -- Steel-axe prereq mostly just so players can easily see it.
 newTech.unit = nil
 newTech.research_trigger = {
 	type = "craft-item",
 	item = "mech-armor",
 	count = 1,
 }
-newTech.localised_name = {"technology-name.mech-armor-2"}
 newTech.localised_description = {"technology-description.mech-armor-2"}
 newTech.effects = table.deepcopy(data.raw.technology["steel-axe"].effects)
 data:extend{newTech}

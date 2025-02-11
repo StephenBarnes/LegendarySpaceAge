@@ -2,6 +2,7 @@ require("code.data.vulcanus.worldgen")
 require("code.data.vulcanus.volcanic-gas")
 require("code.data.vulcanus.foundry-recipes")
 require("code.data.vulcanus.apprentice-foundry")
+require("code.data.vulcanus.tungsten-axe")
 
 local Tech = require("code.util.tech")
 

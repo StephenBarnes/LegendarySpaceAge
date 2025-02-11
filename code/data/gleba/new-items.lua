@@ -335,7 +335,7 @@ biomechanismsTech.prerequisites = {"marrow", "chitin-processing-2", "bioflux"}
 biomechanismsTech.research_trigger = {
 	type = "craft-item",
 	item = "biochamber",
-	count = 5,
+	count = 10,
 }
 biomechanismsTech.effects = {
 	{type = "unlock-recipe", recipe = "appendage"},

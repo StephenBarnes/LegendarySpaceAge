@@ -140,6 +140,9 @@ Handler.on_init = function()
 end
 
 Handler.on_configuration_changed = function()
+	if storage.structs == nil then
+		storage.structs = {}
+	end
 	for _, struct in pairs(storage.structs) do
 		struct.products_finished = struct.products_finished or 0
 		struct.last_idle_at = struct.last_idle_at or 0
