@@ -26,81 +26,6 @@ recipes["steel-chest"].enabled = true
 recipes["steel-chest"].energy_required = 2
 Tech.removeRecipeFromTech("steel-chest", "steel-processing")
 
--- TODO remove foundry recipes for transport belts - rather have fewer foundries since they now have overheads. Plus doesn't really make sense.
-
--- Transport belts - remove the nesting in the recipes (each tier ingredient to the next), and add rubber, and change to factor intermediates.
--- I also want them to get more expensive per throughput (as in vanilla), and increase in complexity.
-recipes["transport-belt"].ingredients = {
-	-- Base game is 1 iron plate + 1 gear for 2 belts, so 1.5 iron plate per belt.
-	-- Changing it to 1 panel + 1 mechanism = 1 iron plate + 8 machine parts + 1 frame = 1 + 1 + 4 iron plates, so 6. So doubling amount produced to 4 belts.
-	{type="item", name="panel", amount=1},
-	{type="item", name="mechanism", amount=1},
-}
-recipes["transport-belt"].results = {{type="item", name="transport-belt", amount=4}}
-recipes["fast-transport-belt"].ingredients = {
-	{type="item", name="mechanism", amount=1},
-	{type="item", name="rubber", amount=1},
-}
-recipes["fast-transport-belt"].results = {{type="item", name="fast-transport-belt", amount=2}}
-recipes["express-transport-belt"].ingredients = {
-	{type="item", name="mechanism", amount=1},
-	{type="item", name="rubber", amount=1},
-	{type="fluid", name="lubricant", amount=20},
-}
-recipes["express-transport-belt"].allow_decomposition = true
-recipes["express-transport-belt"].allow_as_intermediate = true
-recipes["turbo-transport-belt"].ingredients = {
-	{type="item", name="electric-engine-unit", amount=1},
-	{type="item", name="tungsten-plate", amount=2},
-}
-recipes["turbo-transport-belt"].allow_decomposition = true
-recipes["turbo-transport-belt"].allow_as_intermediate = true
-recipes["turbo-transport-belt"].category = "pressing"
--- Underground belts - remove nesting. For ingredients, require literally just the number of belts, plus panels. So you can even craft them by hand, and eg turn green belts into green undergrounds off-Vulcanus.
-recipes["underground-belt"].ingredients = {
-	{type="item", name="transport-belt", amount=6},
-	{type="item", name="panel", amount=2},
-}
-recipes["underground-belt"].energy_required = 2
-recipes["fast-underground-belt"].ingredients = {
-	{type="item", name="fast-transport-belt", amount=8},
-	{type="item", name="panel", amount=2},
-}
-recipes["express-underground-belt"].ingredients = {
-	{type="item", name="express-transport-belt", amount=10},
-	{type="item", name="panel", amount=2},
-}
-recipes["express-underground-belt"].category = "pressing" -- Allow handcrafting, and foundries and assemblers.
-recipes["turbo-underground-belt"].ingredients = {
-	{type="item", name="turbo-transport-belt", amount=12},
-	{type="item", name="panel", amount=2},
-}
-recipes["turbo-underground-belt"].category = "pressing"
--- Splitters - remove nesting. For ingredients, require 2 belts of that tier, plus sensor and mechanism. Nothing else, rather put it into the transport belt recipes.
-recipes["splitter"].ingredients = {
-	{type="item", name="transport-belt", amount=2},
-	{type="item", name="mechanism", amount=1},
-	{type="item", name="sensor", amount=1},
-}
-recipes["splitter"].energy_required = 2
-recipes["fast-splitter"].ingredients = {
-	{type="item", name="fast-transport-belt", amount=2},
-	{type="item", name="mechanism", amount=1},
-	{type="item", name="sensor", amount=1},
-}
-recipes["express-splitter"].ingredients = {
-	{type="item", name="express-transport-belt", amount=2},
-	{type="item", name="mechanism", amount=1},
-	{type="item", name="sensor", amount=1},
-}
-recipes["express-splitter"].category = "pressing"
-recipes["turbo-splitter"].ingredients = {
-	{type="item", name="turbo-transport-belt", amount=2},
-	{type="item", name="mechanism", amount=1},
-	{type="item", name="sensor", amount=1},
-}
-recipes["turbo-splitter"].category = "pressing"
-
 -- Inserter recipes - rod is now enabled from the start.
 recipes["burner-inserter"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
@@ -418,26 +343,6 @@ recipes["solar-panel"].energy_required = 8
 
 -- TODO stuff here
 
--- Furnaces
-recipes["char-furnace"].ingredients = {{type="item", name="structure", amount=1}}
-recipes["stone-furnace"].ingredients = {{type="item", name="structure", amount=1}}
-recipes["steel-furnace"].ingredients = {
-	{type="item", name="frame", amount=2},
-	{type="item", name="structure", amount=2},
-	{type="item", name="shielding", amount=4},
-}
-recipes["gas-furnace"].ingredients = {
-	{type="item", name="frame", amount=2},
-	{type="item", name="structure", amount=2},
-	{type="item", name="shielding", amount=4},
-	{type="item", name="fluid-fitting", amount=4},
-}
-recipes["electric-furnace"].ingredients = {
-	{type="item", name="frame", amount=4},
-	{type="item", name="structure", amount=4},
-	{type="item", name="shielding", amount=8},
-	{type="item", name="sensor", amount=2},
-}
 -- Foundry: 40 tungsten carbide + 40 shielding + 40 structure + 4 mechanism
 recipes["foundry"].ingredients = {
 	{type="item", name="tungsten-carbide", amount=40},
@@ -492,26 +397,6 @@ recipes["lab"].ingredients = {
 	{type="item", name="iron-plate", amount=8},
 	{type="item", name="copper-cable", amount=4},
 	{type="item", name="electronic-circuit", amount=4},
-}
-
--- Assembling machines
-recipes["assembling-machine-1"].ingredients = {
-	{type="item", name="frame", amount=1},
-	{type="item", name="panel", amount=4},
-	{type="item", name="mechanism", amount=2},
-	{type="item", name="sensor", amount=1},
-}
-recipes["assembling-machine-2"].ingredients = {
-	{type="item", name="frame", amount=1},
-	{type="item", name="panel", amount=4},
-	{type="item", name="mechanism", amount=4},
-	{type="item", name="sensor", amount=4},
-}
-recipes["assembling-machine-3"].ingredients = {
-	{type="item", name="frame", amount=1},
-	{type="item", name="panel", amount=4},
-	{type="item", name="electric-engine-unit", amount=4},
-	{type="item", name="sensor", amount=4},
 }
 
 -- Mining drills
