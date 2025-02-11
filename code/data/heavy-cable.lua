@@ -1,2 +1,0 @@
--- This file will add heavy cables, made from rubber and copper, used in some machines like radars and electric furnaces.
--- TODO

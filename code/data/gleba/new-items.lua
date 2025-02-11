@@ -227,16 +227,16 @@ sencytiumRecipe.icon = nil -- So it defaults to sencytium icon.
 sencytiumRecipe.crafting_machine_tint = table.deepcopy(appendageRecipe.crafting_machine_tint)
 data:extend{sencytiumRecipe}
 
--- Create recipe for nutrients from marrow: 4 marrow + 10 sulfuric acid -> 20 nutrients.
+-- Create recipe for nutrients from marrow: 5 marrow + 1 bioflux + 10 sulfuric acid -> 40 nutrients.
 local nutrientsFromMarrowRecipe = table.deepcopy(data.raw.recipe["nutrients-from-bioflux"])
 nutrientsFromMarrowRecipe.name = "nutrients-from-marrow"
 nutrientsFromMarrowRecipe.ingredients = {
-	{type = "item", name = "marrow", amount = 4},
+	{type = "item", name = "marrow", amount = 5},
 	{type = "item", name = "bioflux", amount = 1},
 		-- I like this since it links the bioflux-yumako-jellynut recipes to the borehole stuff.
 	{type = "fluid", name = "sulfuric-acid", amount = 10},
 }
-nutrientsFromMarrowRecipe.results = {{type = "item", name = "nutrients", amount = 30}}
+nutrientsFromMarrowRecipe.results = {{type = "item", name = "nutrients", amount = 40}}
 nutrientsFromMarrowRecipe.enabled = false
 nutrientsFromMarrowRecipe.subgroup = "gleba-non-agriculture"
 nutrientsFromMarrowRecipe.icons = {
@@ -285,7 +285,6 @@ chitinTech1.name = "chitin-processing-1"
 chitinTech1.effects = {
 	{type = "unlock-recipe", recipe = "chitin-block"},
 	{type = "unlock-recipe", recipe = "structure-from-chitin"},
-	{type = "unlock-recipe", recipe = "landfill-from-chitin"},
 }
 chitinTech1.prerequisites = {"planet-discovery-gleba"}
 chitinTech1.research_trigger = {
@@ -313,24 +312,38 @@ chitinTech2.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-tech-2.png"
 chitinTech2.localised_description = {"technology-description.chitin-processing-2"}
 data:extend{chitinTech2}
 
--- Create tech for geoplasm.
-local geoplasmTech = table.deepcopy(chitinTech1)
-geoplasmTech.name = "geoplasm"
-geoplasmTech.effects = {
+-- Create tech for marrow.
+local marrowTech = table.deepcopy(chitinTech1)
+marrowTech.name = "marrow"
+marrowTech.effects = {
 	{type = "unlock-recipe", recipe = "nutrients-from-marrow"},
+	{type = "unlock-recipe", recipe = "landfill-from-chitin"},
+}
+marrowTech.prerequisites = {"planet-discovery-gleba"}
+marrowTech.research_trigger = {
+	type = "craft-item",
+	item = "marrow",
+	count = 10,
+}
+marrowTech.icon = "__LegendarySpaceAge__/graphics/gleba/marrow-tech.png"
+marrowTech.localised_description = nil
+data:extend{marrowTech}
+
+local biomechanismsTech = table.deepcopy(marrowTech)
+biomechanismsTech.name = "biomechanisms"
+biomechanismsTech.prerequisites = {"marrow", "chitin-processing-2", "bioflux"}
+biomechanismsTech.research_trigger = {
+	type = "craft-item",
+	item = "biochamber",
+	count = 5,
+}
+biomechanismsTech.effects = {
 	{type = "unlock-recipe", recipe = "appendage"},
 	{type = "unlock-recipe", recipe = "sencytium"},
 	{type = "unlock-recipe", recipe = "mechanism-from-appendage"},
 	{type = "unlock-recipe", recipe = "sensor-from-sencytium"},
 	{type = "unlock-recipe", recipe = "actuator-from-appendage"},
 }
-geoplasmTech.prerequisites = {"chitin-processing-2"}
-geoplasmTech.research_trigger = {
-	type = "craft-fluid",
-	fluid = "geoplasm",
-	count = 100,
-}
-geoplasmTech.icon = "__LegendarySpaceAge__/graphics/gleba/geoplasm-tech.png"
-geoplasmTech.localised_description = nil
-data:extend{geoplasmTech}
-Tech.addTechDependency("geoplasm", "agricultural-science-pack")
+biomechanismsTech.icon = "__LegendarySpaceAge__/graphics/gleba/biomechanisms-tech.png"
+data:extend{biomechanismsTech}
+Tech.addTechDependency("biomechanisms", "agricultural-science-pack")

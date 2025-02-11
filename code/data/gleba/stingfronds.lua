@@ -161,8 +161,8 @@ cultivationTech1.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech1.
 cultivationTech1.prerequisites = {"bioflux", "neural-wiring"}
 cultivationTech1.research_trigger = {
 	type = "craft-item",
-	item = "bioflux",
-	count = 100,
+	item = "biochamber",
+	count = 5,
 }
 cultivationTech1.effects = {
 	{

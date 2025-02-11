@@ -1,6 +1,5 @@
 -- This file makes final edits to recycling recipes, in the data-final-fixes stage.
 
-local Recipe = require("code.util.recipe")
 local Recycling = require("__quality__.prototypes.recycling")
 
 -- For spoilable stuff, I don't want to give a way to store them permanently in the form of biochambers etc. Just going to remove them from outputs completely.
