@@ -8,8 +8,6 @@ Petrophage breeding increases the number of petrophages, but they keep spoilage 
 Pitch is 3MJ. Dry gas is 800kJ. Recipe 1 -> 2 is actually ->3 from biochamber, so produces 6MJ, so should consume 7.5 dry gas.
 ]]
 
-local Tech = require "code.util.tech"
-
 local petrophageDir = "__LegendarySpaceAge__/graphics/gleba/petrophages/"
 
 -- Create item.

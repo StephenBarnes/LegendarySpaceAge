@@ -210,6 +210,7 @@ crushBoomnutRecipe.icons = {
 }
 crushBoomnutRecipe.subgroup = "slipstacks-and-boompuffs"
 crushBoomnutRecipe.order = "14"
+crushBoomnutRecipe.allow_decomposition = false -- Otherwise it thinks spoilage comes from boomnut crushing by default.
 data:extend{crushBoomnutRecipe}
 
 -- Create recipe for boomsac-deflation: 1 boomsac + 10 water + 10 sulfuric acid -> 40 natural gas + 20 sulfuric acid + 1 sulfur

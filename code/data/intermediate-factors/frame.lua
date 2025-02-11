@@ -56,7 +56,7 @@ data:extend{recipeFromIron}
 local recipeFromTubules = table.deepcopy(recipeFromIron)
 recipeFromTubules.name = "frame-from-tubules"
 recipeFromTubules.ingredients = {
-	{type = "item", name = "tubule", amount = 10},
+	{type = "item", name = "tubule", amount = 5},
 	{type = "fluid", name = "slime", amount = 20}
 }
 recipeFromTubules.enabled = false

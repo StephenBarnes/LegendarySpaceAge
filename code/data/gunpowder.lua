@@ -26,9 +26,9 @@ gunpowderRecipe.name = "gunpowder"
 gunpowderRecipe.ingredients = {
 	{type="item", name="carbon", amount=2},
 	{type="item", name="sulfur", amount=1},
-	{type="item", name="niter", amount=4},
+	{type="item", name="niter", amount=5},
 }
-gunpowderRecipe.results = {{type = "item", name = "gunpowder", amount = 8}}
+gunpowderRecipe.results = {{type = "item", name = "gunpowder", amount = 10}}
 gunpowderRecipe.enabled = false -- Enabled by coal coking tech.
 gunpowderRecipe.category = "chemistry-or-handcrafting"
 gunpowderRecipe.auto_recycle = false
@@ -38,12 +38,12 @@ data:extend{gunpowderRecipe}
 -- 4 iron plate + 1 gunpowder -> 1 yellow mag
 -- 1 steel plate + 4 copper plate + 1 gunpowder -> 1 red mag (represents steel core and copper jacket)
 data.raw.recipe["firearm-magazine"].ingredients = {
-	{type="item", name="iron-plate", amount=4},
+	{type="item", name="iron-plate", amount=5},
 	{type="item", name="gunpowder", amount=1},
 }
 data.raw.recipe["piercing-rounds-magazine"].ingredients = {
 	{type="item", name="steel-plate", amount=1},
-	{type="item", name="copper-plate", amount=4},
+	{type="item", name="copper-plate", amount=5},
 	{type="item", name="gunpowder", amount=2},
 }
 data.raw.recipe["piercing-rounds-magazine"].results = {{type = "item", name = "piercing-rounds-magazine", amount = 2}}

@@ -136,13 +136,13 @@ data:extend{sencytiumItem}
 
 ------------------------------------------------------------------------
 
--- Create chitin-broth recipe: 4 chitin fragments + 100 water + 4 nutrients -> 100 chitin-broth.
+-- Create chitin-broth recipe: 5 chitin fragments + 100 water + 5 nutrients -> 100 chitin-broth.
 local chitinBrothRecipe = table.deepcopy(data.raw.recipe["lubricant"])
 chitinBrothRecipe.name = "making-chitin-broth" -- Different name from fluid, so it doesn't get combined in factoriopedia.
 chitinBrothRecipe.category = "organic-or-chemistry"
 chitinBrothRecipe.ingredients = {
-	{ type = "item",  name = "chitin-fragments", amount = 4 },
-	{ type = "item",  name = "nutrients",        amount = 4 },
+	{ type = "item",  name = "chitin-fragments", amount = 5 },
+	{ type = "item",  name = "nutrients",        amount = 5 },
 	{ type = "fluid", name = "water",            amount = 100 },
 }
 chitinBrothRecipe.results = {{type = "fluid", name = "chitin-broth", amount = 100}}
@@ -162,17 +162,17 @@ data:extend{chitinBrothRecipe}
 local tubuleRecipe = table.deepcopy(data.raw.recipe["bioflux"])
 tubuleRecipe.name = "tubule"
 tubuleRecipe.ingredients = {
-	{type = "item", name = "slipstack-pearl", amount = 4},
-	{type = "fluid", name = "chitin-broth", amount = 40},
+	{type = "item", name = "slipstack-pearl", amount = 5},
+	{type = "fluid", name = "chitin-broth", amount = 50},
 }
 tubuleRecipe.results = {
-	{type = "item", name = "tubule", amount = 4},
+	{type = "item", name = "tubule", amount = 5},
 	{type = "fluid", name = "slime", amount = 10}, -- Kind of just an annoyance (have to pump it into a lake) but I like this aesthetically. Also it's exactly enough for making frames.
-	{type = "item", name = "slipstack-pearl", amount = 2, percent_spoiled = 0.8},
+	{type = "item", name = "slipstack-pearl", amount = 3, percent_spoiled = 0.8},
 		-- With productivity, this is 3 pearls.
 }
 tubuleRecipe.main_product = "tubule"
-tubuleRecipe.energy_required = 8
+tubuleRecipe.energy_required = 10
 tubuleRecipe.enabled = false
 tubuleRecipe.icon = nil -- So it defaults to tubule icon.
 tubuleRecipe.subgroup = "gleba-non-agriculture"
@@ -201,7 +201,7 @@ appendageRecipe.ingredients = {
 }
 appendageRecipe.results = {{type = "item", name = "appendage", amount = 1}}
 appendageRecipe.main_product = "appendage"
-appendageRecipe.energy_required = 4
+appendageRecipe.energy_required = 5
 appendageRecipe.enabled = false
 appendageRecipe.subgroup = "gleba-non-agriculture"
 appendageRecipe.crafting_machine_tint = {
@@ -220,7 +220,7 @@ sencytiumRecipe.ingredients = {
 }
 sencytiumRecipe.results = {{type = "item", name = "sencytium", amount = 1}}
 sencytiumRecipe.main_product = "sencytium"
-sencytiumRecipe.energy_required = 8
+sencytiumRecipe.energy_required = 10
 sencytiumRecipe.enabled = false
 sencytiumRecipe.subgroup = "gleba-non-agriculture"
 sencytiumRecipe.icon = nil -- So it defaults to sencytium icon.
