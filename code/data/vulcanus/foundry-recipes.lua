@@ -322,13 +322,6 @@ moltenTungstenRecipe.energy_required = 1
 data:extend{moltenTungstenRecipe}
 Tech.addRecipeToTech("molten-tungsten", "tungsten-steel", 1)
 
--- Edit tungsten steel tech's icon, bc I have the nice molten-tungsten icon anyway.
-data.raw.technology["tungsten-steel"].icon = nil
-data.raw.technology["tungsten-steel"].icons = {
-	{icon = "__space-age__/graphics/technology/tungsten-steel.png", icon_size = 256, scale = .6, shift={0, 50}},
-	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten-tech.png", icon_size = 256, scale = .6, shift = {0, -50}},
-}
-
 -- Make foundry recipes for tungsten carbide and tungsten steel. And recipe for heating molten tungsten.
 local tungstenCarbideFromMoltenRecipe = table.deepcopy(data.raw.recipe["tungsten-plate"])
 tungstenCarbideFromMoltenRecipe.name = "tungsten-carbide-from-molten"

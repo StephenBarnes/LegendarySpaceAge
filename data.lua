@@ -31,6 +31,7 @@ require("code.data.machine-parts")
 require("code.data.cargo-ships")
 require("code.data.rocket-parts-outside-silos")
 require("code.data.deep-drill")
+require("code.data.mech-armor")
 require("code.data.planet-drop-techs")
 
 -- Planets
