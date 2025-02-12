@@ -5,7 +5,7 @@
 local oxygenPressure = copy(RAW["surface-property"]["pressure"])
 oxygenPressure.name = "oxygen-pressure"
 oxygenPressure.default_value = 0
-data:extend{oxygenPressure}
+extend{oxygenPressure}
 
 -- Pressure will be renamed to "oxygen pressure", represents partial pressure of oxygen in hPa.
 for planetName, hPa in pairs{
@@ -66,7 +66,7 @@ end
 local surfaceStability = copy(RAW["surface-property"]["pressure"])
 surfaceStability.name = "surface-stability"
 surfaceStability.default_value = 100
-data:extend{surfaceStability}
+extend{surfaceStability}
 for planetName, stabilityPercent in pairs{
 	aquilo = 5,
 	vulcanus = 90,

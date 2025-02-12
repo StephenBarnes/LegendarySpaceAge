@@ -13,7 +13,7 @@ fulgoriteShardItem.icon = ITEM["holmium-ore"].icon
 fulgoriteShardItem.subgroup = "fulgora-processes"
 fulgoriteShardItem.order = "a[raw-material]-b[fulgorite-shard]"
 fulgoriteShardItem.order = "c[organics]-c[fulgorite-shard]"
-data:extend({fulgoriteShardItem})
+extend({fulgoriteShardItem})
 
 -- Change holmium ore sprite to look like powder, since I'm renaming it to holmium powder.
 local holmiumPowderIcons = {}
@@ -44,7 +44,7 @@ fulgoriteStarterItem.spoil_ticks = 60 * 60 * 30 -- 30 minutes.
 fulgoriteStarterItem.spoil_result = "stone"
 fulgoriteStarterItem.plant_result = "fulgorite-plant"
 fulgoriteStarterItem.pictures = nil -- Remove the holmium powder picture.
-data:extend({fulgoriteStarterItem})
+extend({fulgoriteStarterItem})
 
 -- Create recipe to crush fulgorite shards for holmium powder.
 local crushFulgoriteShardRecipe = copy(RECIPE["plastic-bar"])
@@ -57,7 +57,7 @@ crushFulgoriteShardRecipe.results = {
 crushFulgoriteShardRecipe.ingredients = {
 	{ type = "item", name = "fulgorite-shard", amount = 1 },
 }
-data:extend({crushFulgoriteShardRecipe})
+extend({crushFulgoriteShardRecipe})
 Tech.addRecipeToTech("holmium-ore", "holmium-processing", 1)
 
 -- Create plant
@@ -98,7 +98,7 @@ fulgoritePlant.growth_ticks = 60 * 60 * 20 -- Gleba plants are 5 minutes. Making
 fulgoritePlant.mined_sound = nil
 fulgoritePlant.mining_sound = nil
 fulgoritePlant.minable.mining_particle = "stone-particle"
-data:extend({fulgoritePlant})
+extend({fulgoritePlant})
 
 -- Hide "fulgorite pieces" simple entity from Factoriopedia to not confuse people.
 RAW["simple-entity"]["fulgurite-small"].hidden_in_factoriopedia = true
@@ -118,7 +118,7 @@ fulgoriteStarterRecipe.results = {
 fulgoriteStarterRecipe.main_product = "fulgorite-starter"
 --fulgoriteStarterRecipe.hidden_in_factoriopedia = true
 fulgoriteStarterRecipe.icon = nil
-data:extend({fulgoriteStarterRecipe})
+extend({fulgoriteStarterRecipe})
 
 -- Create tech for fulgorite farming.
 local fulgoriteFarmingTech = copy(TECH["electrophages"])
@@ -126,4 +126,4 @@ fulgoriteFarmingTech.name = "fulgorite-farming"
 fulgoriteFarmingTech.prerequisites = {"electrophages"}
 fulgoriteFarmingTech.effects = {{type = "unlock-recipe", recipe = "fulgorite-starter"}}
 fulgoriteFarmingTech.icon = "__LegendarySpaceAge__/graphics/fulgora/fulgorite-stuff/tech.png"
-data:extend({fulgoriteFarmingTech})
+extend({fulgoriteFarmingTech})

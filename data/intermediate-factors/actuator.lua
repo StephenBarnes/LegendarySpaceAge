@@ -19,7 +19,7 @@ standardRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}},
 	{icon = "__base__/graphics/icons/advanced-circuit.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={8, -8}},
 }
-data:extend{standardRecipe}
+extend{standardRecipe}
 Tech.addRecipeToTech("actuator-standard", "electric-engine")
 
 -- Hide the default recipe.
@@ -38,7 +38,7 @@ advancedRecipe.ingredients = {
 }
 advancedRecipe.icons[3].icon = "__base__/graphics/icons/processing-unit.png"
 advancedRecipe.order = "02"
-data:extend{advancedRecipe}
+extend{advancedRecipe}
 Tech.addRecipeToTech("actuator-from-blue-circuit", "processing-unit")
 
 -- Create recipe: 1 frame + 8 appendage + 1 sencytium + 1 red circuit -> 1 actuator
@@ -55,6 +55,6 @@ recipeFromAppendage.allow_as_intermediate = false
 recipeFromAppendage.enabled = false
 recipeFromAppendage.order = "03"
 recipeFromAppendage.category = "crafting"
-data:extend{recipeFromAppendage}
+extend{recipeFromAppendage}
 
 -- TODO create more recipes

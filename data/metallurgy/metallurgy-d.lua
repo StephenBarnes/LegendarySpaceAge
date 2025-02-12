@@ -70,7 +70,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	hotIngot.stack_size = INGOT_STACK_SIZE
 	hotIngot.weight = INGOT_WEIGHT
 	hotIngot.subgroup = "ingots"
-	data:extend{hotIngot}
+	extend{hotIngot}
 
 	local coldIngot = copy(hotIngot)
 	coldIngot.name = coldIngotName
@@ -80,7 +80,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5, tint=tint},
 	}
 	coldIngot.order = "a[smelting]-1-" .. i
-	data:extend{coldIngot}
+	extend{coldIngot}
 
 	---@type data.RecipePrototype
 	local ingotHeatingRecipe = copy(RECIPE["stone-brick"])
@@ -102,7 +102,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	ingotHeatingRecipe.result_is_always_fresh = true
 	ingotHeatingRecipe.subgroup = "ingots"
 	ingotHeatingRecipe.order = "a[smelting]-2-" .. i
-	data:extend{ingotHeatingRecipe}
+	extend{ingotHeatingRecipe}
 end
 
 -- Make recipe for iron ingot -> steel ingot.
@@ -112,7 +112,7 @@ steelIngotRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=5}}
 steelIngotRecipe.results = {{type="item", name="ingot-steel-hot", amount=1}}
 steelIngotRecipe.energy_required = 10
 steelIngotRecipe.allow_decomposition = true
-data:extend{steelIngotRecipe}
+extend{steelIngotRecipe}
 
 -- Make recipe for iron ore -> iron ingot.
 local ironIngotRecipe = copy(steelIngotRecipe)
@@ -125,7 +125,7 @@ ironIngotRecipe.results = {
 ironIngotRecipe.main_product = "ingot-iron-hot"
 ironIngotRecipe.energy_required = 5
 ironIngotRecipe.enabled = true
-data:extend{ironIngotRecipe}
+extend{ironIngotRecipe}
 
 -- Make recipe for copper ore -> copper matte.
 local copperMatteRecipe = copy(ironIngotRecipe)
@@ -139,7 +139,7 @@ copperMatteRecipe.results = {
 copperMatteRecipe.main_product = "copper-matte"
 copperMatteRecipe.energy_required = 5
 copperMatteRecipe.enabled = true
-data:extend{copperMatteRecipe}
+extend{copperMatteRecipe}
 
 -- Make copper-matte item.
 local copperMattePictures = {}
@@ -160,7 +160,7 @@ copperMatte.pictures = copperMattePictures
 copperMatte.subgroup = "raw-material"
 copperMatte.order = "a1"
 --copperMatte.factoriopedia_description = {"factoriopedia-description.copper-matte"}
-data:extend{copperMatte}
+extend{copperMatte}
 
 -- Make recipe for copper matte -> copper ingot.
 local copperIngotRecipe = copy(steelIngotRecipe)
@@ -174,7 +174,7 @@ copperIngotRecipe.category = "smelting"
 copperIngotRecipe.main_product = "ingot-copper-hot"
 copperIngotRecipe.energy_required = 5
 copperIngotRecipe.enabled = true
-data:extend{copperIngotRecipe}
+extend{copperIngotRecipe}
 
 ------------------------------------------------------------------------
 

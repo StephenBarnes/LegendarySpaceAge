@@ -2,7 +2,7 @@
 local mineralDustItem = copy(ITEM.stone)
 mineralDustItem.name = "mineral-dust"
 mineralDustItem.order = (mineralDustItem.order or "") .. "-b"
-data:extend({mineralDustItem})
+extend({mineralDustItem})
 ]]
 
 -- Add heating energy to offshore pump and waste pump.

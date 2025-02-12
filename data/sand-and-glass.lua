@@ -17,7 +17,7 @@ sandItem.pictures = sandIcons
 sandItem.subgroup = "raw-material"
 sandItem.order = "a2"
 sandItem.stack_size = 100 -- Increase 50->100 vs stone and ores. So it makes sense to crush stone before shipping.
-data:extend{sandItem}
+extend{sandItem}
 
 -- Create glass batch item.
 local glassBatchIcons = {}
@@ -31,7 +31,7 @@ glassBatchItem.icons = {{icon = glassBatchIcons[1].filename, icon_size = 64, sca
 glassBatchItem.pictures = glassBatchIcons
 glassBatchItem.subgroup = "raw-material"
 glassBatchItem.order = "a3"
-data:extend{glassBatchItem}
+extend{glassBatchItem}
 
 -- Create glass item.
 local glassIcons = {}
@@ -45,7 +45,7 @@ glassItem.icons = {{icon = glassIcons[1].filename, icon_size = 64, scale=0.5, mi
 glassItem.pictures = glassIcons
 glassItem.subgroup = "raw-material"
 glassItem.order = "a4"
-data:extend{glassItem}
+extend{glassItem}
 
 -- Create recipe for stone -> sand.
 local sandRecipe = copy(RECIPE["iron-gear-wheel"])
@@ -57,7 +57,7 @@ sandRecipe.subgroup = "raw-material"
 sandRecipe.enabled = true
 sandRecipe.allow_decomposition = true
 sandRecipe.allow_as_intermediate = true
-data:extend{sandRecipe}
+extend{sandRecipe}
 
 -- Create recipe for sand + ash -> glass batch.
 local glassBatchRecipe = copy(RECIPE["iron-plate"])
@@ -70,7 +70,7 @@ glassBatchRecipe.enabled = false
 glassBatchRecipe.allow_decomposition = true
 glassBatchRecipe.allow_as_intermediate = true
 glassBatchRecipe.auto_recycle = true
-data:extend{glassBatchRecipe}
+extend{glassBatchRecipe}
 
 -- Create recipe for glass batch -> glass.
 local glassRecipe = copy(RECIPE["iron-plate"])
@@ -83,7 +83,7 @@ glassRecipe.enabled = false
 glassRecipe.energy_required = 2
 glassRecipe.allow_decomposition = true
 glassRecipe.allow_as_intermediate = true
-data:extend{glassRecipe}
+extend{glassRecipe}
 
 -- Create tech for glass
 local glassTech = copy(TECH["logistics"])
@@ -108,4 +108,4 @@ glassTech.research_trigger = {
 glassTech.icon = nil
 glassTech.icons = {{icon = "__LegendarySpaceAge__/graphics/glass-etc/tech.png", icon_size = 256, scale=0.5, mipmap_count = 4}}
 glassTech.order = "001"
-data:extend{glassTech}
+extend{glassTech}

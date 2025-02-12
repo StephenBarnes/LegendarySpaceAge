@@ -31,7 +31,7 @@ circuitBoardItem.order = "b[circuits]-0"
 circuitBoardItem.subgroup = "circuit-board"
 circuitBoardItem.weight = 1000000 / 4000
 Item.copySoundsTo("copper-cable", circuitBoardItem)
-data:extend{circuitBoardItem}
+extend{circuitBoardItem}
 
 -- Add recipe for circuit board from wood.
 -- 	1 wood + 1 resin -> 4 circuit boards
@@ -52,7 +52,7 @@ woodCircuitBoardRecipe.icons = {
 	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
 woodCircuitBoardRecipe.auto_recycle = false
-data:extend{woodCircuitBoardRecipe}
+extend{woodCircuitBoardRecipe}
 
 -- Add recipe for circuit board from plastic.
 -- 	2 plastic bar + 1 resin + 0.2 rubber -> 8 circuit boards
@@ -74,7 +74,7 @@ plasticCircuitBoardRecipe.icons = {
 	{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
 plasticCircuitBoardRecipe.auto_recycle = false
-data:extend{plasticCircuitBoardRecipe}
+extend{plasticCircuitBoardRecipe}
 Tech.addRecipeToTech("plastic-circuit-board", "plastics") -- TODO rather make a separate tech for this, using plastic circuit board sprite.
 
 -- Add recipe for ceramic circuit board.
@@ -97,7 +97,7 @@ calciteCircuitBoardRecipe.icons = {
 }
 calciteCircuitBoardRecipe.category = "metallurgy"
 calciteCircuitBoardRecipe.auto_recycle = false
-data:extend{calciteCircuitBoardRecipe}
+extend{calciteCircuitBoardRecipe}
 Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rather make a separate tech for this? Unlocked by mining like 10 calcite. Use the ceramic circuit board sprite.
 
 --[[ Add "makeshift" circuit board recipe, only handcraftable.
@@ -120,7 +120,7 @@ makeshiftBoardRecipe.enabled = false
 makeshiftBoardRecipe.energy_required = 1
 makeshiftBoardRecipe.category = "handcrafting-only"
 makeshiftBoardRecipe.auto_recycle = false
-data:extend{makeshiftBoardRecipe}
+extend{makeshiftBoardRecipe}
 Tech.addRecipeToTech("makeshift-circuit-board", "electronics", 2)
 
 -- Create tech for wood circuit boards.
@@ -146,7 +146,7 @@ woodCircuitBoardTech.unit = {
 	time = 15,
 }
 woodCircuitBoardTech.research_trigger = nil
-data:extend{woodCircuitBoardTech}
+extend{woodCircuitBoardTech}
 
 -- Create item for silicon (undoped wafers).
 local silicon = copy(ITEM["plastic-bar"])
@@ -156,7 +156,7 @@ silicon.icon_size = 64
 silicon.subgroup = "complex-circuit-intermediates"
 silicon.order = "001"
 silicon.stack_size = 200
-data:extend{silicon}
+extend{silicon}
 
 -- Create recipe for silicon.
 local siliconRecipe = copy(RECIPE["plastic-bar"])
@@ -173,7 +173,7 @@ siliconRecipe.icon = nil
 siliconRecipe.icons = nil
 siliconRecipe.allow_decomposition = true
 siliconRecipe.allow_as_intermediate = true
-data:extend{siliconRecipe}
+extend{siliconRecipe}
 Tech.addRecipeToTech("silicon", "processing-unit", 1)
 Tech.addRecipeToTech("silicon", "solar-energy", 1)
 
@@ -185,7 +185,7 @@ dopedWafer.icon_size = 64
 dopedWafer.subgroup = "complex-circuit-intermediates"
 dopedWafer.order = "002"
 dopedWafer.stack_size = 100
-data:extend{dopedWafer}
+extend{dopedWafer}
 
 -- Create item for microchips
 local microchip = copy(ITEM["processing-unit"])
@@ -195,7 +195,7 @@ microchip.icon_size = 64
 microchip.subgroup = "complex-circuit-intermediates"
 microchip.order = "003"
 microchip.stack_size = 200
-data:extend{microchip}
+extend{microchip}
 
 -- Create recipe for doped wafers.
 local dopedWaferRecipe = copy(RECIPE["plastic-bar"])
@@ -214,7 +214,7 @@ dopedWaferRecipe.category = "chemistry-or-electronics"
 dopedWaferRecipe.energy_required = 20
 dopedWaferRecipe.allow_decomposition = true
 dopedWaferRecipe.allow_as_intermediate = true
-data:extend{dopedWaferRecipe}
+extend{dopedWaferRecipe}
 Tech.addRecipeToTech("doped-wafer", "processing-unit", 2)
 
 -- Create recipe for microchips.
@@ -235,7 +235,7 @@ microchipRecipe.category = "electronics"
 microchipRecipe.energy_required = 10
 microchipRecipe.allow_decomposition = true
 microchipRecipe.allow_as_intermediate = true
-data:extend{microchipRecipe}
+extend{microchipRecipe}
 Tech.addRecipeToTech("microchip", "processing-unit", 3)
 
 -- Edit recipe for blue circuits (processing-unit) to use doped wafers.
@@ -263,7 +263,7 @@ electronicComponents.pictures = {
 	{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/2.png", size = 64, scale = 0.5},
 	{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/3.png", size = 64, scale = 0.5},
 }
-data:extend{electronicComponents}
+extend{electronicComponents}
 
 -- Create a recipe for electronic components.
 -- 1 carbon + 1 plastic + 1 sand + 1 copper wire -> 2 electronic components
@@ -284,7 +284,7 @@ electronicComponentsRecipe.category = "electronics"
 electronicComponentsRecipe.energy_required = 5
 electronicComponentsRecipe.allow_decomposition = true
 electronicComponentsRecipe.allow_as_intermediate = true
-data:extend{electronicComponentsRecipe}
+extend{electronicComponentsRecipe}
 Tech.addRecipeToTech("electronic-components", "advanced-circuit", 1)
 
 -- Edit recipe for red circuits.

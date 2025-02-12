@@ -137,7 +137,7 @@ gasifierEnt.fluid_boxes = {
 	},
 }
 gasifierEnt.surface_conditions = RAW["mining-drill"]["burner-mining-drill"].surface_conditions
-data:extend{gasifierEnt}
+extend{gasifierEnt}
 
 ---@type data.AssemblingMachinePrototype
 local fluidGasifierEnt = copy(gasifierEnt)
@@ -168,7 +168,7 @@ fluidGasifierEnt.icons = {
 	{icon = GRAPHICS.."gasifier-item.png", icon_size = 64, scale = 0.5, shift = {2, 0}},
 	{icon = FLUID["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = FLUID["petroleum-gas"].icons[1].tint},
 }
-data:extend{fluidGasifierEnt}
+extend{fluidGasifierEnt}
 
 local gasifierItem = copy(ITEM["steel-furnace"])
 gasifierItem.type = "item"
@@ -179,14 +179,14 @@ gasifierItem.order = "z"
 gasifierItem.subgroup = "chemical-processing"
 gasifierItem.place_result = "gasifier"
 gasifierItem.stack_size = 20
-data:extend{gasifierItem}
+extend{gasifierItem}
 
 local fluidGasifierItem = copy(gasifierItem)
 fluidGasifierItem.name = "fluid-fuelled-gasifier"
 fluidGasifierItem.place_result = "fluid-fuelled-gasifier"
 fluidGasifierItem.icons = fluidGasifierEnt.icons
 fluidGasifierItem.order = "zz"
-data:extend{fluidGasifierItem}
+extend{fluidGasifierItem}
 
 local gasifierRecipe = copy(RECIPE["steel-furnace"])
 gasifierRecipe.type = "recipe"
@@ -194,16 +194,16 @@ gasifierRecipe.name = "gasifier"
 gasifierRecipe.enabled = false
 gasifierRecipe.results = {{type = "item", name = "gasifier", amount = 1}}
 -- TODO decide on ingredients
-data:extend{gasifierRecipe}
+extend{gasifierRecipe}
 
 local fluidGasifierRecipe = copy(gasifierRecipe)
 fluidGasifierRecipe.name = "fluid-fuelled-gasifier"
 fluidGasifierRecipe.results = {{type = "item", name = "fluid-fuelled-gasifier", amount = 1}}
-data:extend{fluidGasifierRecipe}
+extend{fluidGasifierRecipe}
 
 local gasifierRecipeCategory = copy(RAW["recipe-category"]["crafting"])
 gasifierRecipeCategory.name = "gasifier"
-data:extend{gasifierRecipeCategory}
+extend{gasifierRecipeCategory}
 
 --[[ Steam gasification: 20 fuel + 10 steam -> 10 syngas + 1 pitch + 1 sulfur
 		This fuel can be coal, wood, spoilage, or burnable liquids like syngas or crude oil.
@@ -235,7 +235,7 @@ gasificationRecipe.hidden = false
 gasificationRecipe.hide_from_player_crafting = false
 gasificationRecipe.subgroup = "complex-fluid-recipes"
 gasificationRecipe.order = "a[coal-liquefaction]-a"
-data:extend{gasificationRecipe}
+extend{gasificationRecipe}
 
 Tech.addRecipeToTech("syngas", "coal-liquefaction", 1)
 Tech.addRecipeToTech("gasifier", "coal-liquefaction")

@@ -1,3 +1,3 @@
-RAW = data.raw
+require("util.globals")
 
 require("settings.tweak_settings")

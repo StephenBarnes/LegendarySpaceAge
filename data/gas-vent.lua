@@ -89,7 +89,7 @@ ventEnt.fluid_boxes = {
 	}
 }
 ventEnt.surface_conditions = nil -- Should be able to vent on space platforms too.
-data:extend{ventEnt}
+extend{ventEnt}
 
 local ventItem = copy(ITEM["steel-furnace"])
 ventItem.type = "item"
@@ -103,7 +103,7 @@ ventItem.subgroup = "fluid-logistics"
 ventItem.order = "b[pipe]-e"
 ventItem.place_result = "gas-vent"
 ventItem.stack_size = 20
-data:extend{ventItem}
+extend{ventItem}
 
 local ventRecipe = copy(RECIPE["steel-furnace"])
 ventRecipe.type = "recipe"
@@ -115,11 +115,11 @@ ventRecipe.ingredients = {
 }
 ventRecipe.results = {{type = "item", name = "gas-vent", amount = 1}}
 -- TODO decide on ingredients
-data:extend{ventRecipe}
+extend{ventRecipe}
 
 local ventRecipeCategory = copy(RAW["recipe-category"]["crafting"])
 ventRecipeCategory.name = "gas-venting"
-data:extend{ventRecipeCategory}
+extend{ventRecipeCategory}
 
 local ventableFluids = {
 	-- Table of fluid names, emissions mults, and bool for whether it's only ventable in space.
@@ -191,5 +191,5 @@ for _, fluidData in pairs(ventableFluids) do
 	if onlyInSpace then
 		thisGasVentRecipe.surface_conditions = {{property = "gravity", max = 0}}
 	end
-	data:extend{thisGasVentRecipe}
+	extend{thisGasVentRecipe}
 end

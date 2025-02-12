@@ -43,7 +43,7 @@ fluidHeatingTowerEnt.heat_buffer.connections = {
 	{position = {0, 1}, direction = defines.direction.south},
 	{position = {-1, -1}, direction = defines.direction.west},
 }
-data:extend{fluidHeatingTowerEnt}
+extend{fluidHeatingTowerEnt}
 
 local towerItem = ITEM["heating-tower"]
 towerItem.subgroup = "energy"
@@ -53,11 +53,11 @@ fluidHeatingTowerItem.name = "fluid-heating-tower"
 fluidHeatingTowerItem.place_result = "fluid-heating-tower"
 fluidHeatingTowerItem.icons = fluidHeatingTowerEnt.icons
 fluidHeatingTowerItem.order = ITEM["heating-tower"].order .. "-2"
-data:extend{fluidHeatingTowerItem}
+extend{fluidHeatingTowerItem}
 
 -- Create recipe for fluid heating tower
 local fluidHeatingTowerRecipe = copy(RECIPE["heating-tower"])
 fluidHeatingTowerRecipe.name = "fluid-heating-tower"
 fluidHeatingTowerRecipe.results = {{type = "item", name = "fluid-heating-tower", amount = 1}}
-data:extend{fluidHeatingTowerRecipe}
+extend{fluidHeatingTowerRecipe}
 Tech.addRecipeToTech("fluid-heating-tower", "heating-tower", 2)

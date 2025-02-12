@@ -39,4 +39,4 @@ custom.basic_settings.property_expression_names.elevation = "LSA-elevation"
 
 local lsaElevation = copy(RAW["noise-expression"]["elevation"])
 lsaElevation.name = "LSA-elevation"
-data:extend{lsaElevation}
+extend{lsaElevation}

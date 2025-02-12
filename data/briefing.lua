@@ -1,6 +1,6 @@
 -- This file adds a page to the tips-and-tricks page with some essential things to know.
 
-data:extend {
+extend {
     { -- Make category, to put it at the top.
         type = "tips-and-tricks-item-category",
         name = "Legendary-Space-Age",

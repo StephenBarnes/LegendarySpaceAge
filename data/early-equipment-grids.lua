@@ -1,6 +1,6 @@
 -- This file adds equipment grids to the light and heavy armor, which can only hold basic starting equipment (solar panels, batteries, and personal roboports). This is to allow copy-paste construction from earlier in the game, using equipment given in starting inventory.
 
-data:extend{
+extend{
 	{
 		type = "equipment-grid",
 		name = "early-armor-grid",
@@ -51,7 +51,7 @@ personalBurnerGeneratorTech.research_trigger = {
 	item = "light-armor",
 	amount = 1,
 }
-data:extend{personalBurnerGeneratorTech}
+extend{personalBurnerGeneratorTech}
 
 -- Since we're adding a lot of starting items, it seems we don't get all of them because there's not enough space in crashed ship.
 RAW.container["crash-site-spaceship"].inventory_size = 20 -- from 10; it refuses to put more stuff in the main spaceship.

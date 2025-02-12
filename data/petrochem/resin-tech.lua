@@ -12,7 +12,7 @@ resinTech.effects = {
 	{type = "unlock-recipe", recipe = "rich-gas-resin"},
 }
 resinTech.prerequisites = {"chemical-science-pack"}
-data:extend{resinTech}
+extend{resinTech}
 
 -- This should be required for Fulgora and Vulcanus.
 Tech.addTechDependency("petroleum-resin", "planet-discovery-fulgora")

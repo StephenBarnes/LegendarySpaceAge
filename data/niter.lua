@@ -12,4 +12,4 @@ niterItem.icons = {{icon = niterIcons[1].filename, icon_size = 64, scale=0.5, mi
 niterItem.pictures = niterIcons
 niterItem.order = "b[chemistry]-a"
 Item.clearFuel(niterItem)
-data:extend{niterItem}
+extend{niterItem}

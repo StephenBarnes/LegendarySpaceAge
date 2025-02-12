@@ -38,13 +38,13 @@ stingfrondPlant.harvest_emissions = { spores = 15 }
 
 -- Delete old stingfrond tree, add new stingfrond plant.
 RAW.tree.stingfrond = nil
-data:extend({stingfrondPlant})
+extend({stingfrondPlant})
 
 ------------------------------------------------------------------------
 --- Create items for products of stingfrond farming.
 
 -- Subgroup for stingfrond items and recipes.
-data:extend{
+extend{
 	{
 		type = "item-subgroup",
 		name = "stingfrond-products",
@@ -93,7 +93,7 @@ for i = 1, 5 do
 	Item.clearFuel(cyclosome)
 	cyclosomeItems[i] = cyclosome
 end
-data:extend(cyclosomeItems)
+extend(cyclosomeItems)
 
 -- Create sprout item
 local stingfrondSprout = copy(ITEM["tree-seed"])
@@ -104,7 +104,7 @@ stingfrondSprout.icon = "__space-age__/graphics/icons/stingfrond.png"
 stingfrondSprout.subgroup = "stingfrond-products"
 stingfrondSprout.order = "a"
 Item.clearFuel(stingfrondSprout)
-data:extend{stingfrondSprout}
+extend{stingfrondSprout}
 
 -- Create neurofibril item
 local neurofibrilPics = {}
@@ -124,7 +124,7 @@ neurofibril.icon = nil
 neurofibril.icons = {{icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/neurofibrils/1.png", icon_size = 64, scale = 0.5, icon_mipmaps = 4}}
 neurofibril.subgroup = "stingfrond-products"
 neurofibril.order = "b"
-data:extend{neurofibril}
+extend{neurofibril}
 
 ITEM["carbon-fiber"].subgroup = "stingfrond-products"
 ITEM["carbon-fiber"].order = "c"
@@ -151,7 +151,7 @@ wiringTech.effects = {
 		recipe = "wiring-from-neurofibril",
 	},
 }
-data:extend{wiringTech}
+extend{wiringTech}
 
 local cultivationTech1 = copy(TECH["biochamber"])
 cultivationTech1.name = "stingfrond-cultivation-1"
@@ -169,7 +169,7 @@ cultivationTech1.effects = {
 	},
 }
 cultivationTech1.localised_description = {"technology-description.stingfrond-cultivation-1"}
-data:extend{cultivationTech1}
+extend{cultivationTech1}
 
 local cultivationTech2 = copy(TECH["biochamber"])
 cultivationTech2.name = "stingfrond-cultivation-2"
@@ -191,7 +191,7 @@ cultivationTech2.effects = {
 	},
 }
 cultivationTech2.localised_description = {"technology-description.stingfrond-cultivation-2"}
-data:extend{cultivationTech2}
+extend{cultivationTech2}
 
 table.insert(TECH["agricultural-science-pack"].prerequisites, "stingfrond-cultivation-1")
 
@@ -218,7 +218,7 @@ sproutRecipe.crafting_machine_tint = {
 	primary = phaseTints[1],
 	secondary = phaseTints[2],
 }
-data:extend{sproutRecipe}
+extend{sproutRecipe}
 
 -- 4 neurofibril -> 1 carbon fiber
 RECIPE["carbon-fiber"].ingredients = {
@@ -272,7 +272,7 @@ resyncRecipe.crafting_machine_tint = {
 	secondary = phaseTints[2],
 	tertiary = phaseTints[3],
 }
-data:extend{resyncRecipe}
+extend{resyncRecipe}
 
 -- Explosive desynchronization: 10 cyclosome A + 1 explosives -> 0-3 cyclosome A + ... + 0-3 cyclosome E
 -- So total 0-15, mean 7.5.
@@ -301,6 +301,6 @@ desyncRecipe.crafting_machine_tint = {
 	secondary = phaseTints[2],
 	tertiary = phaseTints[3],
 }
-data:extend{desyncRecipe}
+extend{desyncRecipe}
 
 -- TODO add recipes for stuff like rocket fuel, 

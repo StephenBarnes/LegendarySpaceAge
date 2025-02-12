@@ -1,5 +1,5 @@
 -- Create electrophage tech, recipe, item. Mostly taken from Biochemistry mod by Tenebrais.
-data:extend({
+extend({
 	{
 		type = "technology",
 		name = "electrophages",
@@ -147,4 +147,4 @@ polysaltItem.burnt_result = "sand"
 polysaltItem.drop_sound = ITEM["sulfur"].drop_sound
 polysaltItem.pick_sound = ITEM["sulfur"].pick_sound
 polysaltItem.inventory_move_sound = ITEM["sulfur"].inventory_move_sound
-data:extend({polysaltItem})
+extend({polysaltItem})

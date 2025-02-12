@@ -49,7 +49,7 @@ advancedPartsItem.has_random_tint = true
 advancedPartsItem.random_tint_color = {r = .955, g = .96, b = 1.0, a=1}
 advancedPartsItem.spoil_ticks = nil
 advancedPartsItem.order = "7"
-data:extend{advancedPartsItem}
+extend{advancedPartsItem}
 
 -- Create recipe for advanced parts.
 local advancedPartsRecipe = copy(RECIPE["iron-gear-wheel"])
@@ -67,7 +67,7 @@ advancedPartsRecipe.energy_required = 5
 advancedPartsRecipe.allow_decomposition = true
 advancedPartsRecipe.allow_as_intermediate = true
 advancedPartsRecipe.enabled = false
-data:extend{advancedPartsRecipe}
+extend{advancedPartsRecipe}
 
 -- Add advanced parts recipe to actuator tech.
 Tech.addRecipeToTech("advanced-parts", "electric-engine")

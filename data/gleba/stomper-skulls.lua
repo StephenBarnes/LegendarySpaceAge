@@ -55,7 +55,7 @@ smallShellNoCorpse.map_color = {174, 156, 136}
 smallShellNoCorpse.hidden = true
 smallShellNoCorpse.hidden_in_factoriopedia = true
 smallShellNoCorpse.factoriopedia_alternative = "small-stomper-shell"
-data:extend{smallShellNoCorpse}
+extend{smallShellNoCorpse}
 RAW.planet.gleba.map_gen_settings.autoplace_settings.entity.settings["small-stomper-shell-no-corpse"] = {}
 
 local mediumShellNoCorpse = copy(RAW["simple-entity"]["medium-stomper-shell"])
@@ -69,5 +69,5 @@ mediumShellNoCorpse.map_color = {174, 156, 136}
 mediumShellNoCorpse.hidden = true
 mediumShellNoCorpse.hidden_in_factoriopedia = true
 mediumShellNoCorpse.factoriopedia_alternative = "medium-stomper-shell"
-data:extend{mediumShellNoCorpse}
+extend{mediumShellNoCorpse}
 RAW.planet.gleba.map_gen_settings.autoplace_settings.entity.settings["medium-stomper-shell-no-corpse"] = {}

@@ -1,3 +1,5 @@
+require("util.globals")
+
 local updates = {}
 local nextOrder = 0
 
@@ -18,4 +20,4 @@ end
 
 addSetting("remove-mapgen-presets", true, "bool", "startup")
 
-data:extend(updates)
+extend(updates)

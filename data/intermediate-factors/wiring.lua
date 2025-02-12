@@ -6,7 +6,7 @@ wiringItem.name = "wiring"
 wiringItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/wiring.png"
 wiringItem.subgroup = "wiring"
 wiringItem.order = "01"
-data:extend{wiringItem}
+extend{wiringItem}
 
 -- Make recipe for wiring: 4 copper cable + 1 resin -> 4 wiring
 local resinRecipe = copy(RECIPE["copper-cable"])
@@ -27,7 +27,7 @@ resinRecipe.subgroup = "wiring"
 resinRecipe.order = "02"
 resinRecipe.energy_required = 5
 resinRecipe.allow_as_intermediate = true
-data:extend{resinRecipe}
+extend{resinRecipe}
 Tech.addRecipeToTech("wiring-from-resin", "basic-electricity")
 
 -- Create a recipe with rubber insulation: 8 copper cable + 1 rubber -> 8 wiring
@@ -42,7 +42,7 @@ rubberRecipe.results = {{type = "item", name = "wiring", amount = 10}}
 rubberRecipe.order = "03"
 rubberRecipe.enabled = false
 rubberRecipe.allow_as_intermediate = false
-data:extend{rubberRecipe}
+extend{rubberRecipe}
 Tech.addRecipeToTech("wiring-from-rubber", "rubber-1")
 
 -- Create a recipe with plastic insulation: 4 copper cable + 1 plastic -> 4 wiring
@@ -57,7 +57,7 @@ plasticRecipe.results = {{type = "item", name = "wiring", amount = 5}}
 plasticRecipe.order = "04"
 plasticRecipe.enabled = false
 plasticRecipe.allow_as_intermediate = false
-data:extend{plasticRecipe}
+extend{plasticRecipe}
 Tech.addRecipeToTech("wiring-from-plastic", "plastics")
 
 -- Create a recipe using neurofibrils: 8 neurofibril + 1 rubber -> 8 wiring
@@ -72,5 +72,5 @@ neurofibrilRecipe.results = {{type = "item", name = "wiring", amount = 10}}
 neurofibrilRecipe.order = "05"
 neurofibrilRecipe.enabled = false
 neurofibrilRecipe.allow_as_intermediate = false
-data:extend{neurofibrilRecipe}
+extend{neurofibrilRecipe}
 -- Will be added to the tech by stingfronds.lua.

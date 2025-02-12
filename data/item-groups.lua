@@ -7,7 +7,7 @@ Does not handle the tab or subgroups for intermediate factors - those are in int
 RAW["item-group"]["space"].icon = "__base__/graphics/technology/rocket-silo.png"
 RAW["item-group"]["space"].icon_size = 256
 
-data:extend{
+extend{
 	-- Create subgroup for hot/cold ingots and ingot-heating recipes.
 	{
 		type = "item-subgroup",

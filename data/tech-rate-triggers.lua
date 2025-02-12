@@ -55,7 +55,7 @@ local rateItems = {
 	makeRateItem("plastic-bar", {{icon = ITEM["plastic-bar"].icon, icon_size = ITEM["plastic-bar"].icon_size}}),
 	makeRateItem("piercing-rounds-magazine", {{icon = RAW.ammo["piercing-rounds-magazine"].icon, icon_size = RAW.ammo["piercing-rounds-magazine"].icon_size}}, copy(RAW.ammo["piercing-rounds-magazine"])),
 }
-data:extend(rateItems)
+extend(rateItems)
 
 -- Create a dummy lab that accepts all these fake science packs, else there's an error.
 local dummyLab = copy(RAW.lab.lab)
@@ -65,4 +65,4 @@ for _, rateItem in pairs(rateItems) do
 	table.insert(dummyLab.inputs, rateItem.name)
 end
 dummyLab.hidden = true
-data:extend{dummyLab}
+extend{dummyLab}

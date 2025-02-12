@@ -77,7 +77,7 @@ end
 RAW.plant["tree-plant"].minable.results = newTreeMinableResults
 
 -- Create item subgroup for "early agriculture".
-data:extend{
+extend{
 	{
 		type = "item-subgroup",
 		name = "early-agriculture",
@@ -105,7 +105,7 @@ fertilizerItem.icon = nil
 fertilizerItem.icons = {{icon = fertilizerIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 fertilizerItem.pictures = fertilizerIcons
 Item.clearFuel(fertilizerItem)
-data:extend{fertilizerItem}
+extend{fertilizerItem}
 
 -- Create new "sapling" item.
 local saplingPictures = {}
@@ -124,7 +124,7 @@ Item.clearFuel(saplingItem)
 saplingItem.icon = nil
 saplingItem.icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}}
 saplingItem.pictures = saplingPictures
-data:extend{saplingItem}
+extend{saplingItem}
 
 -- Can no longer plant seeds directly.
 ITEM["tree-seed"].plant_result = nil
@@ -151,7 +151,7 @@ fertilizerRecipe.icon = nil
 fertilizerRecipe.icons = nil
 fertilizerRecipe.surface_conditions = nil
 fertilizerRecipe.allow_decomposition = true
-data:extend{fertilizerRecipe}
+extend{fertilizerRecipe}
 
 -- Create recipe for saplings.
 local saplingRecipe = copy(RECIPE["wood-processing"])
@@ -172,7 +172,7 @@ saplingRecipe.icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size 
 saplingRecipe.surface_conditions = {{property = "pressure", min = 1000, max = 1000}}
 saplingRecipe.energy_required = 30
 saplingRecipe.allow_decomposition = true
-data:extend{saplingRecipe}
+extend{saplingRecipe}
 
 -- Edit growth time of saplings.
 RAW.plant["tree-plant"].growth_ticks = 60 * 60 * 6 -- Originally 10 minutes.

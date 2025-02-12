@@ -9,7 +9,7 @@ natgasFluid.icon = nil
 natgasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.natgasTint}}
 natgasFluid.order = "a[fluid]-b[oil]-aa[natgas]"
 natgasFluid.gas_temperature = 0
-data:extend{natgasFluid}
+extend{natgasFluid}
 
 -- Create dry gas fluid.
 local drygasFluid = copy(natgasFluid)
@@ -21,7 +21,7 @@ drygasFluid.icon = nil
 drygasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.drygasTint}}
 drygasFluid.order = "a[fluid]-b[oil]-c[fractions]-4"
 drygasFluid.gas_temperature = 0
-data:extend{drygasFluid}
+extend{drygasFluid}
 
 -- Change petroleum gas to "rich gas".
 local richgasFluid = FLUID["petroleum-gas"]
@@ -42,7 +42,7 @@ syngasFluid.icon = nil
 syngasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.syngasColor}}
 syngasFluid.order = "a[fluid]-b[oil]-c[fractions]-6"
 syngasFluid.gas_temperature = 0
-data:extend{syngasFluid}
+extend{syngasFluid}
 
 -- Create tar fluid.
 local tarFluid = copy(FLUID["heavy-oil"])
@@ -53,7 +53,7 @@ tarFluid.visualization_color = constants.tarColor
 tarFluid.icon = nil
 tarFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64}}
 tarFluid.order = "a[fluid]-b[oil]-c[fractions]-0"
-data:extend{tarFluid}
+extend{tarFluid}
 
 -- Create pitch item.
 local pitchPictures = {}
@@ -71,7 +71,7 @@ pitchItem.icons = {{icon = pitchPictures[1].filename, icon_size = 64, scale=0.5,
 pitchItem.pictures = pitchPictures
 pitchItem.order = "b[chemistry]-b[plastic-bar]-1"
 Item.copySoundsTo("plastic-bar", pitchItem)
-data:extend{pitchItem}
+extend{pitchItem}
 
 -- Create resin item.
 local resinPictures = {}
@@ -89,7 +89,7 @@ resinItem.icons = {{icon = resinPictures[1].filename, icon_size = 64, scale=0.5,
 resinItem.pictures = resinPictures
 resinItem.subgroup = "resin"
 Item.copySoundsTo(RAW.capsule["bioflux"], resinItem)
-data:extend{resinItem}
+extend{resinItem}
 
 ------------------------------------------------------------------------
 

@@ -22,7 +22,7 @@ cementFluid.auto_barrel = false
 cementFluid.base_color = {.33, .33, .33, 1}
 cementFluid.flow_color = {.6, .6, .6, 1}
 cementFluid.visualization_color = {.43, .43, .43, 1}
-data:extend{cementFluid}
+extend{cementFluid}
 
 -- Create recipe for cement.
 local cementRecipe = copy(RECIPE["lubricant"])
@@ -41,7 +41,7 @@ cementRecipe.results = {
 cementRecipe.main_product = "cement"
 cementRecipe.category = "crafting-with-fluid"
 cementRecipe.allow_decomposition = true
-data:extend{cementRecipe}
+extend{cementRecipe}
 
 -- Create tech for cement and brick structure.
 local tech = copy(TECH.concrete)
@@ -62,7 +62,7 @@ tech.unit = {
 	},
 }
 tech.icon = "__LegendarySpaceAge__/graphics/fluids/cement-tech.png"
-data:extend{tech}
+extend{tech}
 
 -- Adjust recipes for concrete and refined concrete.
 RECIPE["concrete"].ingredients = {
@@ -93,7 +93,7 @@ concreteCastingRecipe.icons = {
 	{icon = "__base__/graphics/icons/concrete.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
 	{icon = "__LegendarySpaceAge__/graphics/vulcanus/sulfur-cast.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
 }
-data:extend{concreteCastingRecipe}
+extend{concreteCastingRecipe}
 
 local refinedConcreteCastingRecipe = copy(RECIPE["concrete-from-molten-iron"])
 refinedConcreteCastingRecipe.name = "sulfur-refined-concrete"
@@ -111,7 +111,7 @@ refinedConcreteCastingRecipe.icons = {
 	{icon = "__base__/graphics/icons/refined-concrete.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
 	{icon = "__LegendarySpaceAge__/graphics/vulcanus/sulfur-cast.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
 }
-data:extend{refinedConcreteCastingRecipe}
+extend{refinedConcreteCastingRecipe}
 
 -- Hide old concrete foundry recipe completely.
 Recipe.hide("concrete-from-molten-iron")
@@ -146,4 +146,4 @@ sulfurConcreteTech.unit = {
 		{"chemical-science-pack", 1},
 	},
 }
-data:extend{sulfurConcreteTech}
+extend{sulfurConcreteTech}

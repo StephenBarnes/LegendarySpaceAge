@@ -7,7 +7,7 @@ structureItem.subgroup = "structure"
 structureItem.order = "01"
 structureItem.icon = nil
 structureItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5}}
-data:extend{structureItem}
+extend{structureItem}
 
 -- Create recipe: 8 stone brick + 20 cement -> 1 structure
 local recipeFromCement = copy(RECIPE["iron-stick"])
@@ -30,7 +30,7 @@ recipeFromCement.icons = {
 }
 recipeFromCement.allow_as_intermediate = false
 recipeFromCement.auto_recycle = false
-data:extend{recipeFromCement}
+extend{recipeFromCement}
 Tech.addRecipeToTech("structure-from-cement", "cement")
 
 -- Create recipe for structure from resin: 8 stone brick + 4 resin -> 1 structure
@@ -47,7 +47,7 @@ recipeFromResin.category = "crafting"
 recipeFromResin.icons[3].icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png"
 recipeFromResin.icons[3].scale = 0.2
 recipeFromResin.allow_as_intermediate = true
-data:extend{recipeFromResin}
+extend{recipeFromResin}
 
 -- Create recipe for structure from chitin block: 4 chitin block + 20 slime -> 1 structure
 local recipeFromChitin = copy(recipeFromCement)
@@ -66,7 +66,7 @@ recipeFromChitin.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
 }
 recipeFromChitin.allow_as_intermediate = false
-data:extend{recipeFromChitin}
+extend{recipeFromChitin}
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?

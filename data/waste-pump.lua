@@ -49,18 +49,18 @@ for _, dir in pairs(wastePump.graphics_set.animation) do
 		layer.run_mode = "backward"
 	end
 end
-data:extend{wastePump}
+extend{wastePump}
 
 local wastePumpCraftingCategory = copy(RAW["recipe-category"]["crafting"])
 wastePumpCraftingCategory.name = "waste-pump"
-data:extend{wastePumpCraftingCategory}
+extend{wastePumpCraftingCategory}
 
 -- Create recipe.
 local wastePumpRecipe = copy(RECIPE["pump"])
 wastePumpRecipe.name = "waste-pump"
 wastePumpRecipe.results = {{type = "item", name = "waste-pump", amount = 1}}
 wastePumpRecipe.ingredients = copy(RECIPE["offshore-pump"].ingredients)
-data:extend{wastePumpRecipe}
+extend{wastePumpRecipe}
 
 -- Create item.
 local wastePumpItem = copy(ITEM["pump"])
@@ -73,7 +73,7 @@ wastePumpItem.icons = {
 }
 wastePumpItem.order = "b[pipe]-d"
 wastePumpItem.subgroup = "fluid-logistics"
-data:extend{wastePumpItem}
+extend{wastePumpItem}
 
 -- Create fluid-venting recipes.
 local effluentFluidsAndPollution = {
@@ -134,7 +134,7 @@ for _, effluentFluidAndPollution in pairs(effluentFluidsAndPollution) do
 		fluidIcon,
 		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64},
 	}
-	data:extend{effluentRecipe}
+	extend{effluentRecipe}
 end
 
 -- Will add to tech in tech-progression.lua.

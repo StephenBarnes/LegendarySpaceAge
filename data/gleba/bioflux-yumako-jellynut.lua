@@ -40,7 +40,7 @@ initialBiofluxRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/pentapod-egg.png", size = 64, scale = 0.35, shift = {-5, -5}},
 	{icon = "__space-age__/graphics/icons/bioflux.png", size = 64, scale = 0.35, shift = {5, 5}},
 }
-data:extend{initialBiofluxRecipe}
+extend{initialBiofluxRecipe}
 Tech.addRecipeToTech("bioflux-from-eggs", "bioflux", 1)
 
 -- Create items for fertilized seeds.
@@ -57,7 +57,7 @@ fertilizedYumakoSeedItem.spoil_result = "yumako-seed"
 fertilizedYumakoSeedItem.localised_name = {"item-name.fertilized-yumako-seed"}
 fertilizedYumakoSeedItem.localised_description = nil
 Item.clearFuel(fertilizedYumakoSeedItem)
-data:extend{fertilizedYumakoSeedItem}
+extend{fertilizedYumakoSeedItem}
 local fertilizedJellystemSeedItem = copy(ITEM["jellynut-seed"])
 fertilizedJellystemSeedItem.name = "fertilized-jellynut-seed"
 fertilizedJellystemSeedItem.icon = fertilizedDir .. "jellynut-seed.png"
@@ -70,7 +70,7 @@ fertilizedJellystemSeedItem.spoil_result = "jellynut-seed"
 fertilizedJellystemSeedItem.localised_name = {"item-name.fertilized-jellynut-seed"}
 fertilizedJellystemSeedItem.localised_description = nil
 Item.clearFuel(fertilizedJellystemSeedItem)
-data:extend{fertilizedJellystemSeedItem}
+extend{fertilizedJellystemSeedItem}
 
 -- Rewire so crops are planted by fertilized seeds, not ordinary seeds.
 ITEM["yumako-seed"].plant_result = nil
@@ -98,7 +98,7 @@ fertilizedYumakoSeedRecipe.icon = nil -- So it takes the icon of the fertilized 
 fertilizedYumakoSeedRecipe.result_is_always_fresh = true
 fertilizedYumakoSeedRecipe.maximum_productivity = 0
 fertilizedYumakoSeedRecipe.energy_required = 2
-data:extend{fertilizedYumakoSeedRecipe}
+extend{fertilizedYumakoSeedRecipe}
 Tech.addRecipeToTech("fertilized-yumako-seed", "yumako")
 
 local fertilizedJellystemSeedRecipe = copy(fertilizedYumakoSeedRecipe)
@@ -111,7 +111,7 @@ fertilizedJellystemSeedRecipe.ingredients = {
 fertilizedJellystemSeedRecipe.results = {{type = "item", name = "fertilized-jellynut-seed", amount = 1}}
 fertilizedJellystemSeedRecipe.result_is_always_fresh = true
 fertilizedJellystemSeedRecipe.maximum_productivity = 0
-data:extend{fertilizedJellystemSeedRecipe}
+extend{fertilizedJellystemSeedRecipe}
 Tech.addRecipeToTech("fertilized-jellynut-seed", "jellynut")
 
 -- Make the fruit processing recipes yield 90%-spoiled fertilized seeds. (Spoil timer is 10 minutes, so we make the fruits yield 90% spoiled seeds, so 60 seconds left.)

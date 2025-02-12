@@ -15,7 +15,7 @@ activatedEggItem.icon = activatedEggItem.pictures[4].filename
 activatedEggItem.spoil_ticks = 60 * 30 -- 30 seconds
 activatedEggItem.order = activatedEggItem.order .. "-2"
 -- activatedEggItem.fuel_category = "activated-pentapod-egg" -- Fuel category set in constants.lua.
-data:extend{activatedEggItem}
+extend{activatedEggItem}
 
 -- Base Space Age gives eggs 4 variants, of which 4th shows egg in the middle of splitting.
 -- So we edit this so regular eggs are always only a single egg, and activated eggs can also be the 4th variant.
@@ -47,7 +47,7 @@ eggActivationRecipe.surface_conditions = nil
 eggActivationRecipe.icon = nil
 eggActivationRecipe.icons = nil
 eggActivationRecipe.order = eggActivationRecipe.order .. "-2"
-data:extend{eggActivationRecipe}
+extend{eggActivationRecipe}
 Tech.addRecipeToTech("activated-pentapod-egg", "bioflux")
 
 -- Create new recipe for replicating activated eggs using slime and bioflux.

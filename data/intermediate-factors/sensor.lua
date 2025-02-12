@@ -6,7 +6,7 @@ sensorItem.name = "sensor"
 sensorItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/sensor.png"
 sensorItem.subgroup = "sensor"
 sensorItem.order = "01"
-data:extend{sensorItem}
+extend{sensorItem}
 
 -- Create recipe: 4 green circuit + 2 glass + 1 frame -> 1 sensor
 local greenCircuitRecipe = copy(RECIPE["electronic-circuit"])
@@ -28,7 +28,7 @@ greenCircuitRecipe.icons = {
 }
 greenCircuitRecipe.allow_as_intermediate = true
 greenCircuitRecipe.allow_decomposition = true
-data:extend{greenCircuitRecipe}
+extend{greenCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-green-circuit", "automation")
 
 -- Create redCircuitRecipe: 2 red circuit + 1 glass + 1 frame -> 1 sensor
@@ -45,7 +45,7 @@ redCircuitRecipe.icons[2] = {icon = "__base__/graphics/icons/advanced-circuit.pn
 redCircuitRecipe.allow_as_intermediate = false
 redCircuitRecipe.allow_decomposition = false
 redCircuitRecipe.energy_required = 2.5
-data:extend{redCircuitRecipe}
+extend{redCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-red-circuit", "advanced-circuit")
 
 -- Create blueCircuitRecipe: 1 blue circuit + 1 glass + 1 frame -> 2 sensors
@@ -63,7 +63,7 @@ blueCircuitRecipe.icons[2] = {icon = "__base__/graphics/icons/processing-unit.pn
 blueCircuitRecipe.allow_as_intermediate = false
 blueCircuitRecipe.allow_decomposition = false
 blueCircuitRecipe.energy_required = 1
-data:extend{blueCircuitRecipe}
+extend{blueCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-blue-circuit", "processing-unit")
 
 -- Create sencytiumRecipe: 1 green circuit + 1 sencytium + 1 frame -> 1 sensor
@@ -81,7 +81,7 @@ sencytiumRecipe.allow_as_intermediate = false
 sencytiumRecipe.allow_decomposition = false
 sencytiumRecipe.energy_required = 2
 sencytiumRecipe.order = "05"
-data:extend{sencytiumRecipe}
+extend{sencytiumRecipe}
 
 
 -- TODO make more recipes, and add them to techs.

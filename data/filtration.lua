@@ -4,7 +4,7 @@
 local filtrationSubgroup = copy(RAW["item-subgroup"]["fluid-recipes"])
 filtrationSubgroup.name = "filtration"
 filtrationSubgroup.order = "c9"
-data:extend{filtrationSubgroup}
+extend{filtrationSubgroup}
 -- Also move the other water recipes to that line.
 RECIPE["steam-condensation"].subgroup = "filtration"
 RECIPE["ice-melting"].subgroup = "filtration"
@@ -19,7 +19,7 @@ filterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/filter.pn
 filterItem.order = "01"
 filterItem.subgroup = "filtration"
 filterItem.weight = 1000
-data:extend{filterItem}
+extend{filterItem}
 
 -- Create spent filter item.
 local spentFilterItem = copy(ITEM["battery"])
@@ -29,7 +29,7 @@ spentFilterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/spen
 spentFilterItem.order = "02"
 spentFilterItem.subgroup = "filtration"
 spentFilterItem.weight = 1000
-data:extend{spentFilterItem}
+extend{spentFilterItem}
 
 -- Create filtration-lake-water tech.
 local filtrationLakeWaterTech = copy(TECH["automation"])
@@ -56,7 +56,7 @@ filtrationLakeWaterTech.unit = {
 	time = 30,
 }
 filtrationLakeWaterTech.ignore_tech_cost_multiplier = true
-data:extend{filtrationLakeWaterTech}
+extend{filtrationLakeWaterTech}
 
 -- Create filtration-gleban-slime tech.
 local filtrationGlebanSlimeTech = copy(TECH["jellynut"])
@@ -75,7 +75,7 @@ filtrationGlebanSlimeTech.research_trigger = {
 	fluid = "slime",
 	amount = 100,
 }
-data:extend{filtrationGlebanSlimeTech}
+extend{filtrationGlebanSlimeTech}
 -- Make filtration-gleban-sludge mandatory before biochambers.
 Tech.addTechDependency("filtration-gleban-slime", "biochamber")
 
@@ -98,7 +98,7 @@ filtrationFulgoranSludgeTech.research_trigger = {
 	fluid = "fulgoran-sludge",
 	amount = 100,
 }
-data:extend{filtrationFulgoranSludgeTech}
+extend{filtrationFulgoranSludgeTech}
 Tech.addTechDependency("filtration-fulgoran-sludge", "holmium-processing")
 TECH["holmium-processing"].research_trigger.count = 10
 
@@ -114,7 +114,7 @@ filterRecipe.results = {
 }
 filterRecipe.enabled = false
 filterRecipe.auto_recycle = true
-data:extend{filterRecipe}
+extend{filterRecipe}
 
 -- Create recipe to clean filters.
 local cleanFilterRecipe = copy(RECIPE["iron-gear-wheel"])
@@ -143,7 +143,7 @@ cleanFilterRecipe.crafting_machine_tint = {
 	tertiary = FLUID.water.visualization_color,
 }
 cleanFilterRecipe.auto_recycle = false
-data:extend{cleanFilterRecipe}
+extend{cleanFilterRecipe}
 
 -- Create recipe to filter lake water.
 local filterLakeWaterRecipe = copy(RECIPE["iron-gear-wheel"])
@@ -176,7 +176,7 @@ filterLakeWaterRecipe.crafting_machine_tint = {
 	secondary = FLUID.water.base_color,
 	tertiary = FLUID.water.flow_color,
 }
-data:extend{filterLakeWaterRecipe}
+extend{filterLakeWaterRecipe}
 
 -- Create lake water fluid.
 local lakeWaterFluid = copy(FLUID.water)
@@ -190,7 +190,7 @@ lakeWaterFluid.flow_color = {.7, .7, .7}
 lakeWaterFluid.visualization_color = {.015, .681, .682} -- To differentiate from ordinary water.
 lakeWaterFluid.max_temperature = nil
 lakeWaterFluid.heat_capacity = nil
-data:extend{lakeWaterFluid}
+extend{lakeWaterFluid}
 
 -- Create slime fluid.
 local slimeFluid = copy(FLUID["water"])
@@ -204,7 +204,7 @@ slimeFluid.flow_color = {.393, .453, .333}
 slimeFluid.visualization_color = {.482, .745, .215}
 slimeFluid.max_temperature = nil
 slimeFluid.heat_capacity = nil
-data:extend{slimeFluid}
+extend{slimeFluid}
 
 -- Create recipe to filter slime.
 local filterSlimeRecipe = copy(RECIPE["iron-gear-wheel"])
@@ -236,7 +236,7 @@ filterSlimeRecipe.crafting_machine_tint = {
 	secondary = {.393, .453, .333},
 	tertiary = {.482, .745, .215},
 }
-data:extend{filterSlimeRecipe}
+extend{filterSlimeRecipe}
 
 ------------------------------------------------------------------------
 

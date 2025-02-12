@@ -8,7 +8,7 @@ item.name = "nuclear-science-pack"
 item.order = "j2"
 item.spoil_ticks = 60 * 60 * 20 -- 20 minutes.
 item.spoil_result = "uranium-238"
-data:extend{item}
+extend{item}
 -- TODO add this to a tech, add new sprite, etc.
 
 -- Create recipe for nuclear science pack.
@@ -22,7 +22,7 @@ recipe.results = {
 }
 recipe.icon = nil
 -- TODO add to a tech, actually decide on ingredients, etc.
-data:extend{recipe}
+extend{recipe}
 
 -- Allow nuclear science pack in labs.
 table.insert(RAW.lab.lab.inputs, 11, "nuclear-science-pack")

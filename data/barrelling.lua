@@ -21,7 +21,7 @@ gasTankTech.unit = {
 		{"logistic-science-pack", 1},
 	},
 }
-data:extend{gasTankTech}
+extend{gasTankTech}
 
 -- Create the new empty gas tank item.
 local emptyGasTankTint = {.3, .3, .3}
@@ -34,7 +34,7 @@ emptyGasTankItem.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/gas-tanks/straight/overlay-top.png", icon_size = 64, scale = 0.5, tint = emptyGasTankTint},
 }
 emptyGasTankItem.order = ITEM["barrel"].order .. "-1"
-data:extend{emptyGasTankItem}
+extend{emptyGasTankItem}
 
 -- Create recipe for empty gas tank.
 local emptyGasTankRecipe = copy(RECIPE["barrel"])
@@ -44,7 +44,7 @@ emptyGasTankRecipe.ingredients = {
 	{type = "item", name = "fluid-fitting", amount = 1},
 }
 emptyGasTankRecipe.results = {{type = "item", name = "gas-tank", amount = 1}}
-data:extend{emptyGasTankRecipe}
+extend{emptyGasTankRecipe}
 
 -- Edit recipe for barrel - previously only 1 steel plate.
 RECIPE["barrel"].ingredients = {
@@ -53,7 +53,7 @@ RECIPE["barrel"].ingredients = {
 }
 
 -- Create subgroup for recipes filling and emptying gas tanks.
-data:extend{
+extend{
 	{
 		type = "item-subgroup",
 		name = "fill-gas-tank",

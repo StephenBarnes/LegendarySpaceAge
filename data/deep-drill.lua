@@ -133,7 +133,7 @@ ent.close_sound = bigDrill.close_sound
 ent.corpse = "big-mining-drill-remnants"
 ent.dying_explosion = "big-mining-drill-explosion"
 ent.max_health = 1000
-data:extend{ent}
+extend{ent}
 
 local item = copy(ITEM["big-mining-drill"])
 item.name = "deep-drill"
@@ -142,7 +142,7 @@ item.place_result = "deep-drill"
 item.stack_size = 10
 item.weight = 1e7 -- Too heavy for rocket.
 item.order = "a[items]-d"
-data:extend{item}
+extend{item}
 
 local recipe = copy(RECIPE["electric-mining-drill"])
 recipe.name = "deep-drill"
@@ -154,10 +154,10 @@ recipe.ingredients = {
 	{type = "item", name = "mechanism", amount = 20},
 	{type = "item", name = "electric-engine-unit", amount = 20},
 }
-data:extend{recipe}
+extend{recipe}
 
 -- Create recipe category for deep drilling. Can only be performed in deep drills. Recipe is auto-assigned by control script.
-data:extend{{
+extend{{
 	type = "recipe-category",
 	name = "deep-drill",
 }}
@@ -187,7 +187,7 @@ nauvisDrillingRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/deep-drill/item.png"},
 	{icon = "__base__/graphics/icons/nauvis.png", scale = 0.2, shift={-8,-8}},
 }
-data:extend{nauvisDrillingRecipe}
+extend{nauvisDrillingRecipe}
 -- Create drilling recipes for other planets
 for i, planetData in pairs{
 	{"vulcanus", {
@@ -216,11 +216,11 @@ for i, planetData in pairs{
 	drillingRecipe.localised_name[2][1] = "space-location-name."..planetName
 	drillingRecipe.localised_description[2][1] = "space-location-name."..planetName
 	drillingRecipe.icons[2].icon = "__space-age__/graphics/icons/"..planetName..".png"
-	data:extend{drillingRecipe}
+	extend{drillingRecipe}
 end
 
 -- Create a subgroup for the drilling recipes
-data:extend{{
+extend{{
 	type = "item-subgroup",
 	name = "deep-drilling",
 	group = "intermediate-products",
@@ -248,7 +248,7 @@ tech.unit = {
 		{"chemical-science-pack", 1},
 	},
 }
-data:extend{tech}
+extend{tech}
 
 -- Gleba needs deep drill. Technically it's possible without that, but won't be fully self-sustaining.
 Tech.addTechDependency("deep-drill", "planet-discovery-gleba")

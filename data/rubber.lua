@@ -19,7 +19,7 @@ rubberItem.icon = nil
 rubberItem.icons = {{icon = rubberIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 rubberItem.pictures = rubberIcons
 rubberItem.order = "b[chemistry]-a3"
-data:extend{rubberItem}
+extend{rubberItem}
 
 -- Create latex fluid.
 local latexColor = {r = .812, g = .761, b = .675, a=1}
@@ -30,7 +30,7 @@ latexFluid.icon_size = 64
 latexFluid.base_color = latexColor
 latexFluid.flow_color = {r = .9, g = .8, b = .7, a=1}
 latexFluid.visualization_color = latexColor
-data:extend{latexFluid}
+extend{latexFluid}
 
 -- Create recipe for latex fluid.
 local latexRecipe = copy(RECIPE["plastic-bar"])
@@ -43,7 +43,7 @@ latexRecipe.results = {{type="fluid", name="latex", amount=50}}
 latexRecipe.category = "chemistry"
 latexRecipe.subgroup = "raw-material"
 latexRecipe.order = "f1"
-data:extend{latexRecipe}
+extend{latexRecipe}
 
 -- Create recipe for latex to rubber.
 local rubberFromLatexRecipe = copy(RECIPE["plastic-bar"])
@@ -62,7 +62,7 @@ rubberFromLatexRecipe.icons = {
 	rubberItem.icons[1],
 	{icon = latexFluid.icon, icon_size = 64, scale=0.27, mipmap_count=4, shift={-6, -7}},
 }
-data:extend{rubberFromLatexRecipe}
+extend{rubberFromLatexRecipe}
 
 -- Create recipe for synthetic rubber.
 local rubberFromPetrochemRecipe = copy(RECIPE["plastic-bar"])
@@ -86,7 +86,7 @@ rubberFromPetrochemRecipe.icons = {
 	rubberItem.icons[1],
 	{icon = FLUID["light-oil"].icon, icon_size = 64, scale=0.27, mipmap_count=4, shift={-6, -7}},
 }
-data:extend{rubberFromPetrochemRecipe}
+extend{rubberFromPetrochemRecipe}
 
 -- Create tech for natural rubber.
 local naturalRubberTech = copy(TECH["plastics"])
@@ -106,7 +106,7 @@ naturalRubberTech.icons = {{icon = "__LegendarySpaceAge__/graphics/rubber/tech.p
 naturalRubberTech.localised_description = {"technology-description.rubber-1"}
 naturalRubberTech.prerequisites = {"sulfur-processing"}
 naturalRubberTech.unit = TECH["automation"].unit
-data:extend{naturalRubberTech}
+extend{naturalRubberTech}
 
 -- Create tech for synthetic rubber.
 local syntheticRubberTech = copy(TECH["plastics"])
@@ -121,4 +121,4 @@ syntheticRubberTech.icon = nil
 syntheticRubberTech.icons = {{icon = "__LegendarySpaceAge__/graphics/rubber/tech.png", icon_size = 256, scale=0.5, mipmap_count=4}}
 syntheticRubberTech.localised_description = {"technology-description.rubber-2"}
 syntheticRubberTech.prerequisites = {"oil-processing", "rubber-1"}
-data:extend{syntheticRubberTech}
+extend{syntheticRubberTech}

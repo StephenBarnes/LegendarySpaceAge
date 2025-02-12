@@ -13,7 +13,7 @@ fluidFitting.order = "01"
 fluidFitting.pictures = fluidFittingPics
 fluidFitting.icon = nil
 fluidFitting.icons = {{icon = mainIcon, icon_size = 64, scale = 0.5}}
-data:extend{fluidFitting}
+extend{fluidFitting}
 
 -- Create recipe: 2 copper plates + 2 resin -> 1 fluid fitting
 local recipeFromCopper = copy(RECIPE["iron-stick"])
@@ -34,7 +34,7 @@ recipeFromCopper.icons = {
 	{icon = "__base__/graphics/icons/copper-plate.png", icon_size = 64, scale = 0.22, shift = {8, -8}},
 }
 -- TODO make a copper-colored sprite.
-data:extend{recipeFromCopper}
+extend{recipeFromCopper}
 
 -- Create recipe: 2 plastic-bar + 1 rubber -> 2 fluid fitting
 local recipeFromPlastic = copy(recipeFromCopper)
@@ -55,7 +55,7 @@ recipeFromPlastic.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/rubber/rubber-1.png", icon_size = 64, scale = 0.22, shift = {-8, -8}},
 }
 -- TODO make white sprite.
-data:extend{recipeFromPlastic}
+extend{recipeFromPlastic}
 Tech.addRecipeToTech("fluid-fitting-from-plastic", "plastics")
 
 

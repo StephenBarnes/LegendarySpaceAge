@@ -66,7 +66,7 @@ metalsFromLavaRecipe.icons = {{
 	icon_size = 64,
 	scale = 0.5,
 }}
-data:extend{metalsFromLavaRecipe}
+extend{metalsFromLavaRecipe}
 
 -- Hide old recipes for molten metals from lava, remove from tech, add new recipe to tech.
 Recipe.hide("molten-iron-from-lava")
@@ -115,7 +115,7 @@ moltenSteelFluid.order = "b[new-fluid]-b[vulcanus]-c[molten-steel]"
 moltenSteelFluid.base_color = {.3, .4, .4}
 moltenSteelFluid.flow_color = {.5, .7, .7}
 moltenSteelFluid.visualization_color = {.2, 1, 1} -- Cyan for the diagram-like lines drawn on pipes.
-data:extend{moltenSteelFluid}
+extend{moltenSteelFluid}
 
 -- Make recipe for molten steel.
 local moltenSteelRecipe = copy(RECIPE["molten-iron"])
@@ -133,7 +133,7 @@ moltenSteelRecipe.results = {
 }
 moltenSteelRecipe.main_product = "molten-steel"
 moltenSteelRecipe.order = "a[melting]-d[molten-steel]"
-data:extend{moltenSteelRecipe}
+extend{moltenSteelRecipe}
 Tech.addRecipeToTech("molten-steel-making", "foundry", 8)
 
 -- Adjust recipes for casting molten metals into items.
@@ -253,7 +253,7 @@ castingAdvancedPartsRecipe.icons = {
 }
 castingAdvancedPartsRecipe.order = "b[casting]-f[casting-advanced-parts]"
 castingAdvancedPartsRecipe.energy_required = 16
-data:extend{castingAdvancedPartsRecipe}
+extend{castingAdvancedPartsRecipe}
 Tech.addRecipeToTech("casting-advanced-parts", "foundry")
 
 -- Adjust the default tungsten-carbide recipe to be more expensive, to create more incentive for the foundry recipes.
@@ -278,7 +278,7 @@ moltenTungstenFluid.order = "b[new-fluid]-b[vulcanus]-d[molten-tungsten]"
 moltenTungstenFluid.base_color = {.259, .239, .349} -- Measured on ore
 moltenTungstenFluid.flow_color = {.635, .584, .741}
 moltenTungstenFluid.visualization_color = {.478, .191, .682} -- Measured on ore and boosted saturation.
-data:extend{moltenTungstenFluid}
+extend{moltenTungstenFluid}
 
 -- Create recipe for molten tungsten.
 local moltenTungstenRecipe = copy(RECIPE["molten-iron"])
@@ -295,7 +295,7 @@ moltenTungstenRecipe.results = {
 moltenTungstenRecipe.main_product = "molten-tungsten"
 moltenTungstenRecipe.order = "a[melting]-d[molten-tungsten]"
 moltenTungstenRecipe.energy_required = 1
-data:extend{moltenTungstenRecipe}
+extend{moltenTungstenRecipe}
 Tech.addRecipeToTech("molten-tungsten", "tungsten-steel", 1)
 
 -- Make foundry recipes for tungsten carbide and tungsten steel. And recipe for heating molten tungsten.
@@ -317,7 +317,7 @@ tungstenCarbideFromMoltenRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/tungsten-carbide.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
 	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
 }
-data:extend{tungstenCarbideFromMoltenRecipe}
+extend{tungstenCarbideFromMoltenRecipe}
 Tech.addRecipeToTech("tungsten-carbide-from-molten", "tungsten-steel")
 local tungstenSteelRecipe = copy(RECIPE["tungsten-plate"])
 tungstenSteelRecipe.name = "tungsten-steel-from-molten"
@@ -338,7 +338,7 @@ tungstenSteelRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/tungsten-plate.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
 	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
 }
-data:extend{tungstenSteelRecipe}
+extend{tungstenSteelRecipe}
 Tech.addRecipeToTech("tungsten-steel-from-molten", "tungsten-steel")
 local tungstenHeatingRecipe = copy(RECIPE["molten-iron"])
 tungstenHeatingRecipe.name = "tungsten-heating"
@@ -359,7 +359,7 @@ tungstenHeatingRecipe.show_amount_in_title = false
 tungstenHeatingRecipe.hide_from_stats = true
 tungstenHeatingRecipe.allow_productivity = false
 tungstenHeatingRecipe.maximum_productivity = 0
-data:extend{tungstenHeatingRecipe}
+extend{tungstenHeatingRecipe}
 Tech.addRecipeToTech("tungsten-heating", "tungsten-steel")
 
 -- Hide default tungsten-steel recipe.

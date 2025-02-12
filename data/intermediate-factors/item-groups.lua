@@ -1,6 +1,6 @@
 -- This file creates item groups for intermediate factors.
 
-data:extend{
+extend{
 	-- Create a new tab for intermediate factors.
 	{
 		type = "item-group",
@@ -26,7 +26,7 @@ for i, factor in pairs{
 	"sensor",
 	"actuator",
 } do
-	data:extend{
+	extend{
 		{
 			type = "item-subgroup",
 			name = factor,

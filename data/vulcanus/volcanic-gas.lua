@@ -14,7 +14,7 @@ volcanicGas.icons = {
 volcanicGas.order = "b[new-fluid]-b[vulcanus]-0[volcanic-gas]"
 volcanicGas.max_temperature = nil
 volcanicGas.heat_capacity = nil
-data:extend{volcanicGas}
+extend{volcanicGas}
 
 -- Create recipe for separating volcanic gas into water, sulfur, and carbon.
 local separationRecipe = copy(RECIPE["steam-condensation"])
@@ -42,7 +42,7 @@ separationRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.15, shift = {8, 2}},
 	{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.24, shift = {0, 4}},
 }
-data:extend{separationRecipe}
+extend{separationRecipe}
 
 -- Create a tech for volcanic gas separation.
 ---@type data.TechnologyPrototype
@@ -57,7 +57,7 @@ volcanicGasSeparationTech.icons = {{
 	icon_size = 256,
 }}
 volcanicGasSeparationTech.research_trigger.entity = "vulcanus-chimney"
-data:extend{volcanicGasSeparationTech}
+extend{volcanicGasSeparationTech}
 table.insert(TECH["foundry"].prerequisites, "volcanic-gas-processing")
 -- TODO add lava as fluid type to the chem plants, since they're now doing the water boiling by lava recipe.
 

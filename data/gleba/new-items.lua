@@ -2,7 +2,7 @@
 ]]
 
 -- Make the subgroup
-data:extend{
+extend{
 	{
 		type = "item-subgroup",
 		name = "gleba-non-agriculture",
@@ -20,7 +20,7 @@ local geoplasmGreenColor = {r=.345, g = .518, b = .098}
 geoplasmFluid.base_color = geoplasmPinkColor
 geoplasmFluid.flow_color = geoplasmGreenColor
 geoplasmFluid.visualization_color = geoplasmPinkColor
-data:extend{geoplasmFluid}
+extend{geoplasmFluid}
 
 -- Create chitin fragments item
 local chitinFragments = copy(ITEM["calcite"])
@@ -32,7 +32,7 @@ for i = 1, 3 do
 	chitinFragments.pictures[i] = {filename = chitinDir..i..".png", size = 64, scale = 0.5}
 end
 chitinFragments.subgroup = "gleba-non-agriculture"
-data:extend{chitinFragments}
+extend{chitinFragments}
 
 -- Create chitin block item
 local chitinBlock = copy(ITEM["calcite"])
@@ -44,7 +44,7 @@ for i = 1, 3 do
 	chitinBlock.pictures[i] = {filename = chitinBlockDir..i..".png", size = 64, scale = 0.5}
 end
 chitinBlock.subgroup = "gleba-non-agriculture"
-data:extend{chitinBlock}
+extend{chitinBlock}
 
 -- Create marrow item
 local marrowItem = copy(ITEM["spoilage"])
@@ -74,7 +74,7 @@ marrowItem.spoil_result = "spoilage"
 Item.clearFuel(marrowItem)
 marrowItem.stack_size = 50
 marrowItem.weight = 1e6 / 500
-data:extend{marrowItem}
+extend{marrowItem}
 
 -- Create tubule item
 local tubuleItem = copy(ITEM["calcite"])
@@ -86,7 +86,7 @@ for i = 1, 3 do
 	tubuleItem.pictures[i] = {filename = tubuleDir..i..".png", size = 64, scale = 0.5}
 end
 tubuleItem.subgroup = "gleba-non-agriculture"
-data:extend{tubuleItem}
+extend{tubuleItem}
 
 -- Create chitin-broth fluid.
 local chitinBrothFluid = copy(FLUID["water"])
@@ -100,7 +100,7 @@ chitinBrothFluid.visualization_color = chitinDarkColor
 -- Remove temperature stats from chitin-broth.
 chitinBrothFluid.max_temperature = nil
 chitinBrothFluid.heat_capacity = nil
-data:extend{chitinBrothFluid}
+extend{chitinBrothFluid}
 
 -- Create appendage item.
 local appendageItem = copy(marrowItem)
@@ -115,7 +115,7 @@ appendageItem.subgroup = "gleba-non-agriculture"
 appendageItem.icon = appendageDir.."1.png"
 appendageItem.spoil_ticks = 60 * 60 * 10
 appendageItem.spoil_result = "spoilage"
-data:extend{appendageItem}
+extend{appendageItem}
 
 -- Create sencytium item.
 local sencytiumItem = copy(appendageItem)
@@ -129,7 +129,7 @@ end
 sencytiumItem.subgroup = "gleba-non-agriculture"
 sencytiumItem.spoil_ticks = 60 * 60 * 10
 sencytiumItem.spoil_result = "spoilage"
-data:extend{sencytiumItem}
+extend{sencytiumItem}
 
 ------------------------------------------------------------------------
 
@@ -152,7 +152,7 @@ chitinBrothRecipe.crafting_machine_tint = {
 	secondary = chitinDarkColor,
 	tertiary = chitinLightColor,
 }
-data:extend{chitinBrothRecipe}
+extend{chitinBrothRecipe}
 -- TODO consider adding a recipe to cast structures out of chitin broth?
 
 -- Create recipe for tubules: 4 pearl + 40 chitin broth -> 3 pearls (20% fresh) + 4 tubules
@@ -174,7 +174,7 @@ tubuleRecipe.enabled = false
 tubuleRecipe.icon = nil -- So it defaults to tubule icon.
 tubuleRecipe.subgroup = "gleba-non-agriculture"
 tubuleRecipe.crafting_machine_tint = copy(chitinBrothRecipe.crafting_machine_tint)
-data:extend{tubuleRecipe}
+extend{tubuleRecipe}
 
 -- Create recipe for compressing chitin fragments into blocks.
 local chitinBlockRecipe = copy(RECIPE["rail"])
@@ -187,7 +187,7 @@ chitinBlockRecipe.enabled = false
 chitinBlockRecipe.auto_recycle = true
 chitinBlockRecipe.subgroup = "gleba-non-agriculture"
 chitinBlockRecipe.crafting_machine_tint = copy(chitinBrothRecipe.crafting_machine_tint)
-data:extend{chitinBlockRecipe}
+extend{chitinBlockRecipe}
 
 -- Create recipe for appendages: 10 geoplasm + 1 tubule -> 1 appendage
 local appendageRecipe = copy(tubuleRecipe)
@@ -206,7 +206,7 @@ appendageRecipe.crafting_machine_tint = {
 	secondary = geoplasmPinkColor,
 	tertiary = geoplasmGreenColor,
 }
-data:extend{appendageRecipe}
+extend{appendageRecipe}
 
 -- Create recipe for sencytium: 20 geoplasm + 1 activated pentapod egg -> 1 sencytium
 local sencytiumRecipe = copy(appendageRecipe)
@@ -222,7 +222,7 @@ sencytiumRecipe.enabled = false
 sencytiumRecipe.subgroup = "gleba-non-agriculture"
 sencytiumRecipe.icon = nil -- So it defaults to sencytium icon.
 sencytiumRecipe.crafting_machine_tint = copy(appendageRecipe.crafting_machine_tint)
-data:extend{sencytiumRecipe}
+extend{sencytiumRecipe}
 
 -- Create recipe for nutrients from marrow: 5 marrow + 1 bioflux + 10 sulfuric acid -> 40 nutrients.
 local nutrientsFromMarrowRecipe = copy(RECIPE["nutrients-from-bioflux"])
@@ -241,7 +241,7 @@ nutrientsFromMarrowRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/nutrients.png", size = 64, scale = 0.43, shift = {6, 6}},
 }
 nutrientsFromMarrowRecipe.crafting_machine_tint = copy(RECIPE["sulfuric-acid"].crafting_machine_tint)
-data:extend{nutrientsFromMarrowRecipe}
+extend{nutrientsFromMarrowRecipe}
 
 -- Create recipe for landfill from chitin fragments.
 local landfillFromChitinRecipe = copy(RECIPE["landfill"])
@@ -258,7 +258,7 @@ landfillFromChitinRecipe.icons = {
 }
 landfillFromChitinRecipe.subgroup = "gleba-non-agriculture"
 landfillFromChitinRecipe.order = "d"
-data:extend{landfillFromChitinRecipe}
+extend{landfillFromChitinRecipe}
 
 ------------------------------------------------------------------------
 
@@ -290,7 +290,7 @@ chitinTech1.research_trigger = {
 }
 chitinTech1.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-tech-1.png"
 chitinTech1.localised_description = {"technology-description.chitin-processing-1"}
-data:extend{chitinTech1}
+extend{chitinTech1}
 
 local chitinTech2 = copy(chitinTech1)
 chitinTech2.name = "chitin-processing-2"
@@ -307,7 +307,7 @@ chitinTech2.research_trigger = {
 }
 chitinTech2.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-tech-2.png"
 chitinTech2.localised_description = {"technology-description.chitin-processing-2"}
-data:extend{chitinTech2}
+extend{chitinTech2}
 
 -- Create tech for marrow.
 local marrowTech = copy(chitinTech1)
@@ -324,7 +324,7 @@ marrowTech.research_trigger = {
 }
 marrowTech.icon = "__LegendarySpaceAge__/graphics/gleba/marrow-tech.png"
 marrowTech.localised_description = nil
-data:extend{marrowTech}
+extend{marrowTech}
 
 local biomechanismsTech = copy(marrowTech)
 biomechanismsTech.name = "biomechanisms"
@@ -342,5 +342,5 @@ biomechanismsTech.effects = {
 	{type = "unlock-recipe", recipe = "actuator-from-appendage"},
 }
 biomechanismsTech.icon = "__LegendarySpaceAge__/graphics/gleba/biomechanisms-tech.png"
-data:extend{biomechanismsTech}
+extend{biomechanismsTech}
 Tech.addTechDependency("biomechanisms", "agricultural-science-pack")

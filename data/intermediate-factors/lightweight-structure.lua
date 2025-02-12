@@ -32,7 +32,7 @@ for _, icon in pairs(ITEM["ingot-copper-hot"].icons) do
 	iconCopy.shift = {-8, -8}
 	table.insert(recipeFromCopper.icons, iconCopy)
 end
-data:extend{recipeFromCopper}
+extend{recipeFromCopper}
 Tech.addRecipeToTech("low-density-structure-standard", "low-density-structure")
 
 -- Hide default recipe.
@@ -62,6 +62,6 @@ recipeFromCarbonFiber.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/gleba/chitin-broth.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}},
 	{icon = "__space-age__/graphics/icons/carbon-fiber.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={8, -8}},
 }
-data:extend{recipeFromCarbonFiber}
+extend{recipeFromCarbonFiber}
 
 -- TODO create new recipes for lightweight-structure.

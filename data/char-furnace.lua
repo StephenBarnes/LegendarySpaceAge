@@ -22,7 +22,7 @@ charFurnace.allowed_effects = {"pollution"}
 charFurnace.icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png"
 charFurnace.show_recipe_icon = false
 charFurnace.show_recipe_icon_on_map = false
-data:extend{charFurnace}
+extend{charFurnace}
 
 -- Create corpse.
 local charFurnaceRemnants = copy(RAW.corpse["stone-furnace-remnants"])
@@ -37,25 +37,25 @@ charFurnaceRemnants.animation = make_rotated_animation_variations_from_sheet(1,
 		shift = util.by_pixel(0, 9.5),
 		scale = 0.5
 	})
-data:extend{charFurnaceRemnants}
+extend{charFurnaceRemnants}
 
 -- Create item.
 local charFurnaceItem = copy(ITEM["stone-furnace"])
 charFurnaceItem.name = "char-furnace"
 charFurnaceItem.place_result = "char-furnace"
 charFurnaceItem.icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png"
-data:extend{charFurnaceItem}
+extend{charFurnaceItem}
 
 -- Create recipe category.
 local charFurnaceRecipeCategory = copy(RAW["recipe-category"]["smelting"])
 charFurnaceRecipeCategory.name = "char-furnace"
-data:extend{charFurnaceRecipeCategory}
+extend{charFurnaceRecipeCategory}
 
 -- Create recipe.
 local charFurnaceRecipe = copy(RECIPE["stone-furnace"])
 charFurnaceRecipe.name = "char-furnace"
 charFurnaceRecipe.results = {{type = "item", name = "char-furnace", amount = 1}}
-data:extend{charFurnaceRecipe}
+extend{charFurnaceRecipe}
 
 -- Create recipe for char/carbon.
 local charRecipe = copy(RECIPE["rocket-fuel"])
@@ -71,7 +71,7 @@ charRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.5},
 	{icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
-data:extend{charRecipe}
+extend{charRecipe}
 
 -- Create tech called "char", unlocking the furnace and recipe.
 local charTech = copy(TECH["automation"])
@@ -86,4 +86,4 @@ charTech.research_trigger = {
 }
 charTech.unit = nil
 charTech.icon = "__LegendarySpaceAge__/graphics/char-furnace/tech.png"
-data:extend{charTech}
+extend{charTech}

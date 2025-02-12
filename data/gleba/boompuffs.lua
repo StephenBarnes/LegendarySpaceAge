@@ -51,7 +51,7 @@ boompuffPlant.remains_when_mined = nil
 
 -- Delete old boompuff tree, add new boompuff plant.
 RAW.tree.boompuff = nil
-data:extend({boompuffPlant})
+extend({boompuffPlant})
 
 ------------------------------------------------------------------------
 --- Create items for products of boompuff farming.
@@ -73,7 +73,7 @@ sproutItem.place_result = "boompuff"
 sproutItem.spoil_ticks = 60 * 60 * 60 -- 1 hour
 sproutItem.spoil_result = "spoilage"
 Item.clearFuel(sproutItem)
-data:extend{sproutItem}
+extend{sproutItem}
 
 -- Create boomnut item.
 local boomnutItem = copy(ITEM["tree-seed"])
@@ -89,7 +89,7 @@ for i = 1, 3 do
 	boomnutItem.pictures[i] = {filename = graphicsDir .. "nut/" .. i .. ".png", size = 64, scale = 0.5}
 end
 Item.clearFuel(boomnutItem)
-data:extend{boomnutItem}
+extend{boomnutItem}
 
 -- Create boomsac item.
 local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
@@ -146,7 +146,7 @@ boomsacItem.pictures = {}
 for i = 1, 8 do
 	boomsacItem.pictures[i] = {filename = graphicsDir .. "sac/" .. i .. ".png", size = 64, scale = 0.5}
 end
-data:extend{boomsacItem}
+extend{boomsacItem}
 
 ------------------------------------------------------------------------
 -- Create projectile for thrown boomsac.
@@ -167,7 +167,7 @@ boomsacProjectile.animation = { -- Graphics and idea copied from Boompuff Agricu
 	scale = 0.5,
 }
 boomsacProjectile.icon = graphicsDir .. "sac/6.png"
-data:extend{boomsacProjectile}
+extend{boomsacProjectile}
 
 ------------------------------------------------------------------------
 --- Create recipes.
@@ -185,7 +185,7 @@ sproutedBoomnutRecipe.category = "smelting"
 sproutedBoomnutRecipe.crafting_machine_tint = boompuffTint
 sproutedBoomnutRecipe.icon = nil
 sproutedBoomnutRecipe.show_amount_in_title = false
-data:extend{sproutedBoomnutRecipe}
+extend{sproutedBoomnutRecipe}
 
 -- Create recipe for crush-boomnut: 1 boomnut -> 1 niter + 1 spoilage
 local crushBoomnutRecipe = copy(RECIPE["bioflux"])
@@ -207,7 +207,7 @@ crushBoomnutRecipe.icons = {
 crushBoomnutRecipe.subgroup = "slipstacks-and-boompuffs"
 crushBoomnutRecipe.order = "14"
 crushBoomnutRecipe.allow_decomposition = false -- Otherwise it thinks spoilage comes from boomnut crushing by default.
-data:extend{crushBoomnutRecipe}
+extend{crushBoomnutRecipe}
 
 -- Create recipe for boomsac-deflation: 1 boomsac + 10 water + 10 sulfuric acid -> 40 natural gas + 20 sulfuric acid + 1 sulfur
 local boomsacDeflationRecipe = copy(RECIPE["bioflux"])
@@ -231,7 +231,7 @@ boomsacDeflationRecipe.icons = {
 }
 boomsacDeflationRecipe.subgroup = "slipstacks-and-boompuffs"
 boomsacDeflationRecipe.order = "15"
-data:extend{boomsacDeflationRecipe}
+extend{boomsacDeflationRecipe}
 
 ------------------------------------------------------------------------
 -- Create tech.
@@ -248,7 +248,7 @@ tech.research_trigger = {
 	entity = "boompuff",
 }
 tech.icon = graphicsDir .. "tech.png"
-data:extend{tech}
+extend{tech}
 
 ------------------------------------------------------------------------
 

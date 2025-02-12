@@ -35,7 +35,7 @@ slipstackPlant.minable.results = {
 
 -- Delete old slipstack tree, add new slipstack plant.
 RAW.tree.slipstack = nil
-data:extend{slipstackPlant}
+extend{slipstackPlant}
 
 ------------------------------------------------------------------------
 --- Create items
@@ -49,7 +49,7 @@ slipstackPearl.order = "01"
 slipstackPearl.spoil_ticks = 60 * 60 * 5 -- 5 minutes.
 slipstackPearl.spoil_result = "spoilage"
 Item.clearFuel(slipstackPearl)
-data:extend{slipstackPearl}
+extend{slipstackPearl}
 
 -- Create item for slipstack nest
 local slipstackNest = copy(ITEM["iron-ore"])
@@ -65,7 +65,7 @@ slipstackNest.spoil_result = "stone"
 Item.clearFuel(slipstackNest)
 slipstackNest.plant_result = "slipstack"
 slipstackNest.place_result = "slipstack"
-data:extend{slipstackNest}
+extend{slipstackNest}
 
 ------------------------------------------------------------------------
 --- Create recipes
@@ -83,7 +83,7 @@ slipstackNestRecipe.results = {{type = "item", name = "slipstack-nest", amount =
 slipstackNestRecipe.surface_conditions = nil -- Allow anywhere. Can't be planted anywhere else, though.
 slipstackNestRecipe.auto_recycle = true
 slipstackNestRecipe.icon = nil
-data:extend{slipstackNestRecipe}
+extend{slipstackNestRecipe}
 
 -- Recipe for smelting slipstack pearls to resin
 local pearlSmeltRecipe = copy(RECIPE["bioplastic"])
@@ -98,7 +98,7 @@ pearlSmeltRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.5},
 	{icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png", icon_size = 64, scale = 0.3, shift = {-8, -8}},
 }
-data:extend{pearlSmeltRecipe}
+extend{pearlSmeltRecipe}
 
 ------------------------------------------------------------------------
 --- Adjust recipes for applications
@@ -132,4 +132,4 @@ slipstackTech.effects = {
 	{type = "unlock-recipe", recipe = "smelt-slipstack-pearl"},
 	{type = "unlock-recipe", recipe = "slipstack-nest"},
 }
-data:extend{slipstackTech}
+extend{slipstackTech}

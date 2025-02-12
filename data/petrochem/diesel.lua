@@ -14,7 +14,7 @@ fluid.icon = "__LegendarySpaceAge__/graphics/petrochem/diesel.png"
 fluid.base_color = brightColor
 fluid.flow_color = darkColor
 fluid.visualization_color = brightColor
-data:extend{fluid}
+extend{fluid}
 
 -- Create diesel recipe: 100 light oil + 50 rich gas -> 100 diesel.
 local recipe = copy(RECIPE["rocket-fuel"])
@@ -30,7 +30,7 @@ recipe.subgroup = "complex-fluid-recipes"
 recipe.order = "e"
 recipe.energy_required = 2
 recipe.category = "chemistry-or-crafting-with-fluid"
-data:extend{recipe}
+extend{recipe}
 
 -- Create tech for diesel.
 local tech = copy(TECH["rocket-fuel"])
@@ -44,7 +44,7 @@ tech.unit.ingredients = {
 	{"automation-science-pack", 1},
 	{"logistic-science-pack", 1},
 }
-data:extend{tech}
+extend{tech}
 
 -- Hide rocket fuel stuff - recipe, item, tech.
 ITEM["rocket-fuel"].hidden = true

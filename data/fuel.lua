@@ -28,12 +28,12 @@ ITEM["sulfur"].fuel_glow_color = {r=.3, g=.3, b=1, a=.2} -- Sulfur burns blue in
 -- Mostly this is to prevent using sulfur to make syngas in a gasifier, since that would create carbon out of nothing, which breaks Vulcanus.
 local nonCarbonFuelCategory = copy(RAW["fuel-category"]["chemical"])
 nonCarbonFuelCategory.name = "non-carbon"
-data:extend{nonCarbonFuelCategory}
+extend{nonCarbonFuelCategory}
 
 -- Create fuel category for pure carbon. Because we want to allow char furnaces to use all carbon-based fuels except actual carbon.
 local pureCarbonFuelCategory = copy(RAW["fuel-category"]["chemical"])
 pureCarbonFuelCategory.name = "pure-carbon"
-data:extend{pureCarbonFuelCategory}
+extend{pureCarbonFuelCategory}
 
 -- Set fuel categories for some entities to allow non-carbon-based fuels (sulfur, hydrogen).
 local expandedFuelCategories = {"chemical", "non-carbon"}

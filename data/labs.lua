@@ -52,7 +52,7 @@ RAW.lab.biolab.science_pack_drain_rate_percent = 25
 
 
 -- Make the pentapod biolabs consume pentapod eggs, and space biolabs consume biter eggs.
-data:extend({
+extend({
 	{
 		type = "fuel-category",
 		name = "activated-pentapod-egg",
@@ -75,7 +75,7 @@ RAW.lab.biolab.energy_usage = "3MW" -- A biter egg is 6MJ, so consumes 1 every 2
 -- Modify techs.
 -- Move pentapod labs to a separate tech, instead of putting their recipe in bioflux tech.
 Tech.removeRecipeFromTech("glebalab", "bioflux")
-data:extend({
+extend({
 	{
 		type = "technology",
 		name = "pentapod-biolab",

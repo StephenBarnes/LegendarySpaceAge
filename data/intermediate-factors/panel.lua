@@ -6,7 +6,7 @@ panelItem.name = "panel"
 panelItem.subgroup = "panel"
 panelItem.order = "01"
 panelItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel/panel.png"
-data:extend{panelItem}
+extend{panelItem}
 
 -- Create recipe: 1 iron plate -> 1 panel
 local recipeFromIron = copy(RECIPE["iron-stick"])
@@ -26,7 +26,7 @@ recipeFromIron.icons = {
 	{icon = "__base__/graphics/icons/iron-plate.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 }
 recipeFromIron.allow_as_intermediate = true
-data:extend{recipeFromIron}
+extend{recipeFromIron}
 
 -- Create recipe: 1 copper plate -> 1 panel
 local recipeFromCopper = copy(recipeFromIron)
@@ -39,7 +39,7 @@ recipeFromCopper.allow_as_intermediate = false
 recipeFromCopper.icons[1] = {icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel/copper-panel.png", icon_size = 64, scale = 0.5}
 recipeFromCopper.icons[2] = {icon = "__base__/graphics/icons/copper-plate.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 recipeFromCopper.allow_as_intermediate = false
-data:extend{recipeFromCopper}
+extend{recipeFromCopper}
 
 -- Create recipe: 1 wood + 1 resin -> 1 panel
 local recipeFromWood = copy(recipeFromIron)
@@ -53,7 +53,7 @@ recipeFromWood.allow_as_intermediate = false
 recipeFromWood.icons[1] = {icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel/wooden-panel.png", icon_size = 64, scale = 0.5}
 recipeFromWood.icons[2] = {icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 recipeFromWood.allow_as_intermediate = false
-data:extend{recipeFromWood}
+extend{recipeFromWood}
 
 
 -- TODO make more recipes, and add them to techs.

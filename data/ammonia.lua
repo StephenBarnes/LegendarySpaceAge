@@ -12,7 +12,7 @@ ammonia1Tech.effects = {
 	{type = "unlock-recipe", recipe = "ammonia-from-wood"},
 	{type = "unlock-recipe", recipe = "niter"},
 }
-data:extend{ammonia1Tech}
+extend{ammonia1Tech}
 
 -- Create ammonia 2 tech, for ammonia from syngas.
 local ammonia2Tech = copy(TECH["coal-liquefaction"])
@@ -34,7 +34,7 @@ ammonia2Tech.unit = {
 		{"chemical-science-pack", 1},
 	},
 }
-data:extend{ammonia2Tech}
+extend{ammonia2Tech}
 
 -- Create recipe for ammonia from wood
 local ammoniaFromWood = copy(RECIPE["nutrients-from-spoilage"])
@@ -55,7 +55,7 @@ ammoniaFromWood.icons = {
 	{icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
 	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
-data:extend{ammoniaFromWood}
+extend{ammoniaFromWood}
 
 -- Create recipe for ammonia from spoilage.
 local ammoniaFromSpoilage = copy(ammoniaFromWood)
@@ -70,7 +70,7 @@ ammoniaFromSpoilage.icons = {
 	{icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
 	{icon = "__space-age__/graphics/icons/spoilage.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
-data:extend{ammoniaFromSpoilage}
+extend{ammoniaFromSpoilage}
 -- Will be unlocked by boompuff-cultivation tech.
 
 -- Create recipe for spoilage from wood.
@@ -92,7 +92,7 @@ woodSpoilageRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/spoilage.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
 	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
-data:extend{woodSpoilageRecipe}
+extend{woodSpoilageRecipe}
 ]]
 
 -- Create recipe for niter from ammonia and sand.
@@ -108,7 +108,7 @@ niterFromAmmoniaRecipe.results = {
 niterFromAmmoniaRecipe.icon = nil
 niterFromAmmoniaRecipe.icons = nil
 niterFromAmmoniaRecipe.energy_required = 1
-data:extend{niterFromAmmoniaRecipe}
+extend{niterFromAmmoniaRecipe}
 
 -- Create recipe for ammonia from syngas.
 local ammoniaSyngasRecipe = copy(RECIPE["plastic-bar"])
@@ -129,7 +129,7 @@ ammoniaSyngasRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=require("data.petrochem.constants").syngasColor, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
 ammoniaSyngasRecipe.energy_required = 4
-data:extend{ammoniaSyngasRecipe}
+extend{ammoniaSyngasRecipe}
 
 -- Aquilo should require ammonia 2 tech? Not really. Maybe if I later add tech to make fuel from ammonia, separate from the Aquilo discovery tech. TODO.
 --Tech.addTechDependency("ammonia-2", "planet-discovery-aquilo")

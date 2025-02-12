@@ -16,4 +16,4 @@ for i = 1, 3 do
 	})
 end
 item.pictures = sugarPics
-data:extend{item}
+extend{item}

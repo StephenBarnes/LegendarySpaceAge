@@ -1,22 +1,5 @@
--- Global shortcuts for indexing data.raw.
-RAW = data.raw
-RECIPE = RAW.recipe
-ITEM = RAW.item
-FLUID = RAW.fluid
-TECH = RAW.technology
-ASSEMBLER = RAW["assembling-machine"]
-FURNACE = RAW.furnace
-
--- Global utils
-Const = require "util.constants"
-Gen = require "util.general"
-Icon = require "util.icon"
-Item = require "util.item"
-Recipe = require "util.recipe"
-Table = require "util.table"
-Tech = require "util.tech"
-GreyPipes = require "util.grey-pipes"
-copy = table.deepcopy
+require("util.globals")
+require("util.data-globals")
 
 -- Files that create things needed in subsequent files.
 require("data.crafting-categories")

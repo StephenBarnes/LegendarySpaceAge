@@ -17,7 +17,7 @@ gunpowderItem.pictures = gunpowderPictures
 gunpowderItem.subgroup = "raw-material" -- Could put it with ammo, but it's really an intermediate.
 gunpowderItem.order = "b[chemistry]-a2"
 gunpowderItem.auto_recycle = true -- The item has auto_recycle (so it gets a recycling recipe), but the recipe doesn't, so quality mod doesn't see any recipe to reverse for recycling gunpowder, and therefore makes it recycle to itself.
-data:extend{gunpowderItem}
+extend{gunpowderItem}
 
 -- Create recipe for gunpowder.
 -- 2 carbon + 1 sulfur + 1 sand -> 2 gunpowder
@@ -32,7 +32,7 @@ gunpowderRecipe.results = {{type = "item", name = "gunpowder", amount = 10}}
 gunpowderRecipe.enabled = false -- Enabled by coal coking tech.
 gunpowderRecipe.category = "chemistry-or-handcrafting"
 gunpowderRecipe.auto_recycle = false
-data:extend{gunpowderRecipe}
+extend{gunpowderRecipe}
 
 -- Adjust ammo mag recipes
 -- 4 iron plate + 1 gunpowder -> 1 yellow mag
@@ -69,4 +69,4 @@ tech.research_trigger = {
 	count = 100,
 }
 tech.icon = "__LegendarySpaceAge__/graphics/gunpowder/tech.png"
-data:extend{tech}
+extend{tech}

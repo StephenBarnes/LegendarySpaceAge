@@ -26,7 +26,7 @@ oilFractionationRecipe.icons = {
 }
 oilFractionationRecipe.icon = nil
 oilFractionationRecipe.order = "a[oil-processing]-b1"
-data:extend{oilFractionationRecipe}
+extend{oilFractionationRecipe}
 
 local gasFractionationRecipe = copy(RECIPE["advanced-oil-processing"])
 gasFractionationRecipe.name = "gas-fractionation"
@@ -47,7 +47,7 @@ gasFractionationRecipe.icons = {
 }
 gasFractionationRecipe.icon = nil
 gasFractionationRecipe.order = "a[oil-processing]-b2"
-data:extend{gasFractionationRecipe}
+extend{gasFractionationRecipe}
 
 --[[ Edit existing cracking recipes, and add the new one.
 	100 heavy oil + 100 steam -> 100 light oil + 1 carbon + 1 sulfur
@@ -104,7 +104,7 @@ richGasCrackingRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 5}, tint=constants.drygasColor},
 }
 richGasCrackingRecipe.icon = nil
-data:extend{richGasCrackingRecipe}
+extend{richGasCrackingRecipe}
 
 --[[ Add recipe for tar distillation.
 	Tar distillation: 10 tar -> 3 pitch + 2 heavy oil + 1 light oil + 2 carbon + 1 sulfur
@@ -130,7 +130,7 @@ tarDistillationRecipe.icons = {
 tarDistillationRecipe.icon = nil
 tarDistillationRecipe.order = "a[oil-processing]-b5"
 tarDistillationRecipe.subgroup = "complex-fluid-recipes"
-data:extend{tarDistillationRecipe}
+extend{tarDistillationRecipe}
 
 --[[ Add recipe for heavy oil coking.
 	Heavy oil coking: 10 heavy oil -> 5 tar + 3 carbon
@@ -155,7 +155,7 @@ heavyOilCokingRecipe.icon = nil
 heavyOilCokingRecipe.order = "a[oil-processing]-b4"
 heavyOilCokingRecipe.subgroup = "complex-fluid-recipes"
 heavyOilCokingRecipe.energy_required = 5
-data:extend{heavyOilCokingRecipe}
+extend{heavyOilCokingRecipe}
 
 -- Add recipe for pitch processing: 10 pitch + 50 steam -> 10 heavy oil + 10 light oil + 10 tar + 1 carbon
 local pitchProcessingRecipe = copy(heavyOilCokingRecipe)
@@ -179,7 +179,7 @@ pitchProcessingRecipe.order = "a[oil-processing]-b6"
 pitchProcessingRecipe.subgroup = "complex-fluid-recipes"
 pitchProcessingRecipe.category = "oil-processing" -- Refinery.
 pitchProcessingRecipe.auto_recycle = false
-data:extend{pitchProcessingRecipe}
+extend{pitchProcessingRecipe}
 
 --[[ Add recipe for coal coking.
 	Coal coking: 10 coal -> 6 carbon + 1 sulfur
@@ -213,7 +213,7 @@ coalCokingRecipe.subgroup = "complex-fluid-recipes"
 coalCokingRecipe.category = "chemistry"
 coalCokingRecipe.energy_required = 1
 coalCokingRecipe.enabled = false -- Unlocked by coal-coking tech, created in another file.
-data:extend{coalCokingRecipe}
+extend{coalCokingRecipe}
 
 --[[ Add recipe for solid fuel.
 	5 heavy oil + 2 tar -> 2 solid fuel + 1 light oil
@@ -235,7 +235,7 @@ solidFuelRecipe.icons = nil
 solidFuelRecipe.icon = nil
 solidFuelRecipe.energy_required = 4
 solidFuelRecipe.hide_from_player_crafting = false
-data:extend{solidFuelRecipe}
+extend{solidFuelRecipe}
 
 --[[ Add recipes for resin.
 	Wood-based resin (pyrolysis): 5 wood + 5 steam -> 2 resin + 3 carbon
@@ -261,7 +261,7 @@ woodResinRecipe.order = "01"
 woodResinRecipe.subgroup = "resin"
 woodResinRecipe.main_product = "resin"
 woodResinRecipe.energy_required = 5
-data:extend{woodResinRecipe}
+extend{woodResinRecipe}
 
 local pitchResinRecipe = copy(RECIPE["plastic-bar"])
 pitchResinRecipe.name = "pitch-resin"
@@ -282,7 +282,7 @@ pitchResinRecipe.order = "02"
 pitchResinRecipe.subgroup = "resin"
 pitchResinRecipe.main_product = "resin"
 pitchResinRecipe.energy_required = 2
-data:extend{pitchResinRecipe}
+extend{pitchResinRecipe}
 
 local richGasResinRecipe = copy(RECIPE["plastic-bar"])
 richGasResinRecipe.name = "rich-gas-resin"
@@ -302,7 +302,7 @@ richGasResinRecipe.icon = nil
 richGasResinRecipe.order = "03"
 richGasResinRecipe.subgroup = "resin"
 richGasResinRecipe.energy_required = 2
-data:extend{richGasResinRecipe}
+extend{richGasResinRecipe}
 
 --[[ Add syngas liquefaction.
 	10 syngas + 1 iron plate -> 2 heavy oil + 3 light oil + 3 rich gas + 2 dry gas + 1 water
@@ -329,7 +329,7 @@ syngasLiquefactionRecipe.icons = {
 syngasLiquefactionRecipe.icon = nil
 syngasLiquefactionRecipe.order = "a[coal-liquefaction]-b4"
 syngasLiquefactionRecipe.subgroup = "complex-fluid-recipes"
-data:extend{syngasLiquefactionRecipe}
+extend{syngasLiquefactionRecipe}
 
 --[[ Modify recipe for lubricant
 	10 heavy oil + 1 sulfuric acid -> 8 lubricant + 1 tar

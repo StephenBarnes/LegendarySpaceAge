@@ -15,7 +15,7 @@ glebaTech.unit = {
 		{"agricultural-science-pack", 1},
 	},
 }
-data:extend{glebaTech}
+extend{glebaTech}
 
 local vulcanusTech = PlanetsLib.cargo_drops_technology_base("vulcanus", "__space-age__/graphics/technology/vulcanus.png", 256)
 vulcanusTech.prerequisites = {"metallurgic-science-pack"}
@@ -32,7 +32,7 @@ vulcanusTech.unit = {
 		{"metallurgic-science-pack", 1},
 	},
 }
-data:extend{vulcanusTech}
+extend{vulcanusTech}
 
 local fulgoraTech = PlanetsLib.cargo_drops_technology_base("fulgora", "__space-age__/graphics/technology/fulgora.png", 256)
 fulgoraTech.prerequisites = {"electromagnetic-science-pack"}
@@ -49,7 +49,7 @@ fulgoraTech.unit = {
 		{"electromagnetic-science-pack", 1},
 	},
 }
-data:extend{fulgoraTech}
+extend{fulgoraTech}
 
 local aquiloTech = PlanetsLib.cargo_drops_technology_base("aquilo", "__space-age__/graphics/technology/aquilo.png", 256)
 aquiloTech.prerequisites = {"cryogenic-science-pack"}
@@ -70,4 +70,4 @@ aquiloTech.unit = {
 		{"cryogenic-science-pack", 1},
 	},
 }
-data:extend{aquiloTech}
+extend{aquiloTech}

@@ -15,4 +15,4 @@ cokingTech.unit = {
 	time = 15,
 }
 RECIPE["firearm-magazine"].enabled = false -- Don't enable from the start.
-data:extend{cokingTech}
+extend{cokingTech}

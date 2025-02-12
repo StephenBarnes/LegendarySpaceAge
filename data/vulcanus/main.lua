@@ -40,7 +40,7 @@ lavaWaterHeatingRecipe.icons = {
 	{icon = "__base__/graphics/icons/fluid/steam.png", icon_size = 64, scale = 0.5},
 	{icon = "__space-age__/graphics/icons/fluid/lava.png", icon_size = 64, scale = 0.27, shift = {-6, -7}, mipmap_count=4},
 }
-data:extend({lavaWaterHeatingRecipe})
+extend({lavaWaterHeatingRecipe})
 Tech.addRecipeToTech("lava-water-heating", "planet-discovery-vulcanus")
 
 -- Change the science pack to use lava.
@@ -93,7 +93,7 @@ inverseVulcanizationRecipe.icons = {
 	{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.5},
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale = 0.27, shift = {-6, -7}, mipmap_count=4},
 }
-data:extend({inverseVulcanizationTech, inverseVulcanizationRecipe})
+extend({inverseVulcanizationTech, inverseVulcanizationRecipe})
 
 -- Adjust stats of foundry.
 local foundry = ASSEMBLER["foundry"]

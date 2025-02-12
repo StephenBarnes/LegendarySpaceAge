@@ -2,7 +2,7 @@
 -- Some code taken from Fulgoran Sludge mod by Tatticky.
 
 -- Create sludge fluid, and a recipe to separate it.
-data:extend({
+extend({
 	{
 		type = "fluid",
 		name = "fulgoran-sludge",

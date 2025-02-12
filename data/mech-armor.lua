@@ -15,6 +15,6 @@ newTech.research_trigger = {
 }
 newTech.localised_description = {"technology-description.mech-armor-2"}
 newTech.effects = copy(TECH["steel-axe"].effects)
-data:extend{newTech}
+extend{newTech}
 
 Tech.addTechDependency("mech-armor-2", "planet-discovery-aquilo")

@@ -21,7 +21,7 @@ local handCrankTech = {
 	},
 	order = "000",
 }
-data:extend({handCrankTech})
+extend({handCrankTech})
 Tech.removeRecipesFromTechs({"copper-cable", "small-electric-pole"}, {"electronics"})
 
 -- Create recipe.
@@ -34,7 +34,7 @@ handCrankRecipe.ingredients = {
 }
 handCrankRecipe.results = {{type = "item", name = "er-hcg", amount = 1}}
 handCrankRecipe.order = "a"
-data:extend({handCrankRecipe})
+extend({handCrankRecipe})
 
 -- Make the offshore pump require electricity, since we have a way to generate electricity before offshore pump now.
 for _, name in pairs{"offshore-pump", "lava-pump"} do

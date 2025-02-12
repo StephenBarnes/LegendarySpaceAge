@@ -7,7 +7,7 @@
 -- So compared to accumulators, you need fewer chargers/dischargers, but a much more complex setup to load batteries into chargers/dischargers and return used ones, etc.
 
 -- Create recipe category for charging, fuel category for batteries.
-data:extend({
+extend({
     { type = "recipe-category", name = "charging", },
     { type = "fuel-category",   name = "battery",  },
 })
@@ -50,7 +50,7 @@ chargedHolmiumBatteryItem.fuel_value = "100MJ"
 	-- So 10x as much as a normal battery.
 	-- Per stack of 200, it's 20GJ, and per rocket of 1000, it's 100GJ.
 	-- Compare to nuclear fuel which is 80GJ/rocket.
-data:extend({chargedBatteryItem, holmiumBatteryItem, chargedHolmiumBatteryItem})
+extend({chargedBatteryItem, holmiumBatteryItem, chargedHolmiumBatteryItem})
 
 -- Create recipe for holmium batteries.
 local holmiumBatteryRecipe = copy(RECIPE["battery"])
@@ -65,7 +65,7 @@ holmiumBatteryRecipe.ingredients = {
 --holmiumBatteryRecipe.surface_conditions = { { property = "magnetic-field", min = 99, max = 99 } }
 holmiumBatteryRecipe.category = "electromagnetics"
 holmiumBatteryRecipe.allow_decomposition = true
-data:extend({holmiumBatteryRecipe})
+extend({holmiumBatteryRecipe})
 
 -- Create new tech for holmium battery. It gets unlocked after you've gotten science packs from both Fulgora and Vulcanus.
 local holmiumBatteryTech = copy(TECH["battery-mk3-equipment"])
@@ -93,7 +93,7 @@ holmiumBatteryTech.icons = {
 		shift = {30, 15},
 	},
 }
-data:extend({holmiumBatteryTech})
+extend({holmiumBatteryTech})
 Tech.addSciencePack("holmium-battery", "metallurgic-science-pack")
 
 -- Change techs and recipes (advanced roboport, personal batteries, maybe more) to require holmium batteries.
@@ -113,7 +113,7 @@ Recipe.addIngredients("personal-roboport-mk2-equipment", {
 -- TODO more?
 
 -- Create items and recipes for the charger/discharger buildings.
-data:extend({
+extend({
 	{
 		type = "item",
 		name = "battery-charger",
@@ -271,7 +271,7 @@ local dischargerAnimation = {
 
 -- Create entities for charger and discharger buildings.
 local accumulator = RAW.accumulator.accumulator
-data:extend({
+extend({
 	{
 		type = "furnace",
 		name = "battery-charger",
@@ -406,7 +406,7 @@ ITEM["battery-discharger"].place_result = "battery-discharger"
 -- TODO write control script to replace chargers on placement, and then remove no-quality mod as prereq.
 
 -- Create recipes for charging batteries.
-data:extend({
+extend({
 	{
 		type = "recipe",
 		name = "charged-battery",
@@ -439,7 +439,7 @@ RAW["lightning-attractor"]["lightning-rod"].efficiency = .1 -- Changing 20% to 1
 RAW["lightning-attractor"]["lightning-collector"].efficiency = .3 -- Changing 40% to 30%.
 
 -- Add recipe to extract sulfuric acid from batteries - fits with the theme, plus water for sulfuric acid is scarce on Fulgora now.
-data:extend({
+extend({
 	{
 		type = "recipe",
 		name = "extract-sulfuric-acid-from-battery",

@@ -10,4 +10,4 @@ tungstenAxeTech.research_trigger = {
 }
 tungstenAxeTech.localised_description = {"technology-description.steel-axe"}
 tungstenAxeTech.icon = "__LegendarySpaceAge__/graphics/vulcanus/tungsten-axe-tech.png"
-data:extend{tungstenAxeTech}
+extend{tungstenAxeTech}

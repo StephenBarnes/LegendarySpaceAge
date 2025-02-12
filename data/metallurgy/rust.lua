@@ -21,7 +21,7 @@ for i, itemName in pairs{
 	rustyItem.localised_name = {"item-name.rusty-X", {"item-name.compound-"..itemName}}
 	rustyItem.subgroup = "rusty"
 	rustyItem.order = "a-"..i
-	data:extend{rustyItem}
+	extend{rustyItem}
 	baseItem.spoil_ticks = RUST_TIME
 	baseItem.spoil_result = "rusty-"..itemName
 
@@ -48,7 +48,7 @@ for i, itemName in pairs{
 	recipe1.localised_name = {"recipe-name.sand-derust-X", {"item-name.compound-"..itemName}}
 	recipe1.category = "crafting"
 	recipe1.allow_as_intermediate = false
-	data:extend{recipe1}
+	extend{recipe1}
 
 	local recipe2 = copy(recipe1)
 	recipe2.name = "acid-derust-"..itemName
@@ -64,7 +64,7 @@ for i, itemName in pairs{
 	recipe2.enabled = false
 	recipe2.localised_name = {"recipe-name.acid-derust-X", {"item-name.compound-"..itemName}}
 	recipe2.category = "chemistry"
-	data:extend{recipe2}
+	extend{recipe2}
 	Tech.addRecipeToTech(recipe2.name, "sulfur-processing")
 end
 

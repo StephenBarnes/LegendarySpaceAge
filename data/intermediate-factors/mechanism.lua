@@ -7,7 +7,7 @@ mechanismItem.subgroup = "mechanism"
 mechanismItem.order = "01"
 mechanismItem.icon = nil
 mechanismItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/mechanism.png", icon_size = 64, scale = 0.5}}
-data:extend{mechanismItem}
+extend{mechanismItem}
 
 -- Create recipe: 8 machine parts + 1 frame -> 1 mechanism
 local basicRecipe = copy(RECIPE["iron-stick"])
@@ -29,7 +29,7 @@ basicRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/parts-basic/plain/spring-2.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={-7, -8}},
 }
 basicRecipe.allow_as_intermediate = true
-data:extend{basicRecipe}
+extend{basicRecipe}
 
 -- Create recipe: 4 advanced parts + 1 frame -> 1 mechanism
 local advancedRecipe = copy(basicRecipe)
@@ -44,7 +44,7 @@ advancedRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/parts-advanced
 advancedRecipe.icons[3] = nil
 advancedRecipe.allow_as_intermediate = false
 advancedRecipe.enabled = false
-data:extend{advancedRecipe}
+extend{advancedRecipe}
 Tech.addRecipeToTech("mechanism-from-advanced", "electric-engine")
 
 -- Create recipe: 1 frame + 3 appendage -> 1 mechanism
@@ -61,7 +61,7 @@ appendageRecipe.icons[3] = nil
 appendageRecipe.allow_as_intermediate = false
 appendageRecipe.enabled = false
 appendageRecipe.category = "crafting"
-data:extend{appendageRecipe}
+extend{appendageRecipe}
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?

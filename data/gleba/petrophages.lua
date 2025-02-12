@@ -28,7 +28,7 @@ petrophage.hidden = false
 petrophage.hidden_in_factoriopedia = false
 petrophage.subgroup = "slipstacks-and-boompuffs"
 petrophage.order = "21"
-data:extend{petrophage}
+extend{petrophage}
 
 -- Create recipe for breeding petrophages.
 local cultivationRecipe = copy(RECIPE["iron-bacteria-cultivation"])
@@ -53,7 +53,7 @@ cultivationRecipe.hidden_in_factoriopedia = false
 cultivationRecipe.surface_conditions = nil
 cultivationRecipe.subgroup = "slipstacks-and-boompuffs"
 cultivationRecipe.order = "22"
-data:extend{cultivationRecipe}
+extend{cultivationRecipe}
 
 -- Create recipe for refreshing petrophages.
 local refreshRecipe = copy(cultivationRecipe)
@@ -69,7 +69,7 @@ refreshRecipe.icon = petrophageDir .. "refresh.png"
 refreshRecipe.icons = nil
 refreshRecipe.subgroup = "slipstacks-and-boompuffs"
 refreshRecipe.order = "23"
-data:extend{refreshRecipe}
+extend{refreshRecipe}
 
 -- Adjust the bacteria-cultivation tech to include the new recipes.
 local tech = TECH["bacteria-cultivation"]

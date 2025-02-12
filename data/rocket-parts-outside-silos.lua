@@ -13,7 +13,7 @@ assembledRocketPartItem.icons = {
 assembledRocketPartItem.order = ITEM["rocket-part"].order .. "-2"
 assembledRocketPartItem.hidden = false
 ITEM["rocket-part"].hidden = false
-data:extend{assembledRocketPartItem}
+extend{assembledRocketPartItem}
 
 RECIPE["rocket-part"].hide_from_player_crafting = false
 RECIPE["rocket-part"].always_show_made_in = true
@@ -22,7 +22,7 @@ local rocketPartAssemblyRecipe = copy(RECIPE["rocket-part"])
 rocketPartAssemblyRecipe.name = "assembled-rocket-part"
 rocketPartAssemblyRecipe.ingredients = {{type = "item", name = "rocket-part", amount = 1}}
 rocketPartAssemblyRecipe.results = {{type = "item", name = "assembled-rocket-part", amount = 1}}
-data:extend{rocketPartAssemblyRecipe}
+extend{rocketPartAssemblyRecipe}
 RAW["rocket-silo"]["rocket-silo"].fixed_recipe = "assembled-rocket-part"
 
 RECIPE["rocket-part"].category = "crafting"

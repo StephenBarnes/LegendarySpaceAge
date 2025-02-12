@@ -22,7 +22,7 @@ for i = 1, 3 do
 	item.pictures[i] = {filename = ashDir..i..".png", size = 64, scale = 0.5}
 end
 item.order = "0"
-data:extend{item}
+extend{item}
 
 -- Create recipe for reprocessing ash.
 -- 4 ash + 5 water + 5 sulfuric acid -> 2 carbon + 1 sand + 20% sulfur + 20% 1 iron ore + 20% 1 copper ore.
@@ -51,7 +51,7 @@ ashRecipe.icons = {
 ashRecipe.category = "chemistry"
 ashRecipe.energy_required = 2
 ashRecipe.enabled = false
-data:extend{ashRecipe}
+extend{ashRecipe}
 
 -- Create tech for ash reprocessing.
 local tech = copy(TECH["lamp"])
@@ -68,4 +68,4 @@ tech.unit = {
 	time = 15,
 }
 tech.icon = "__LegendarySpaceAge__/graphics/ash/tech.png"
-data:extend{tech}
+extend{tech}

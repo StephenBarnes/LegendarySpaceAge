@@ -23,4 +23,4 @@ gasWell.stateless_visualisation[1].animation.tint = constants.natgasSmokeTint
 gasWell.stateless_visualisation[2].animation.tint = constants.natgasSmokeTint
 gasWell.stateless_visualisation[3].animation.tint = constants.natgasSmokeTint
 gasWell.stateless_visualisation[4].animation.tint = constants.natgasSmokeTint
-data:extend{gasWell}
+extend{gasWell}

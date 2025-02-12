@@ -8,7 +8,7 @@ frame.subgroup = "frame"
 frame.order = "01"
 frame.stack_size = 50
 frame.weight = 1e6 / 500
-data:extend{frame}
+extend{frame}
 
 -- Create recipe: 2 wood + 1 resin -> 1 frame
 local recipeFromWood = copy(RECIPE["iron-stick"])
@@ -30,7 +30,7 @@ recipeFromWood.icons = {
 	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 	--{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
 }
-data:extend{recipeFromWood}
+extend{recipeFromWood}
 
 -- Create recipe: 12 iron rods -> 1 frame
 local recipeFromIron = copy(RECIPE["iron-stick"])
@@ -50,7 +50,7 @@ recipeFromIron.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/frame/frame.png", icon_size = 64, scale = 0.5},
 	{icon = "__base__/graphics/icons/iron-stick.png", icon_size = 64, scale = 0.27, shift = {-5, -5}},
 }
-data:extend{recipeFromIron}
+extend{recipeFromIron}
 
 -- Create recipe from tubules: 8 tubules + 20 slime -> 1 frame
 local recipeFromTubules = copy(recipeFromIron)
@@ -65,7 +65,7 @@ recipeFromTubules.energy_required = 5
 recipeFromTubules.category = "crafting-with-fluid"
 recipeFromTubules.allow_as_intermediate = false
 recipeFromTubules.icons[2].icon = "__LegendarySpaceAge__/graphics/gleba/tubule/1.png"
-data:extend{recipeFromTubules}
+extend{recipeFromTubules}
 
 -- TODO create recipes for rigid structure
 -- TODO add recipes to techs

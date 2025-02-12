@@ -7,7 +7,7 @@ shieldingItem.subgroup = "shielding"
 shieldingItem.order = "01"
 shieldingItem.icon = nil
 shieldingItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/shielding.png", icon_size = 64, scale = 0.5}}
-data:extend{shieldingItem}
+extend{shieldingItem}
 
 -- Create recipe: 10 iron plate + 10 stone brick + 10 iron rod -> 1 shielding
 local recipeFromIron = copy(RECIPE["iron-stick"])
@@ -30,7 +30,7 @@ recipeFromIron.icons = {
 	{icon = "__base__/graphics/icons/iron-plate.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
 	{icon = "__base__/graphics/icons/stone-brick.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
 }
-data:extend{recipeFromIron}
+extend{recipeFromIron}
 
 -- Create recipe: 4 steel plate + 2 iron rod -> 2 shielding
 local recipeFromSteel = copy(recipeFromIron)
@@ -46,7 +46,7 @@ recipeFromSteel.energy_required = 5
 recipeFromSteel.icons[2].icon = "__base__/graphics/icons/steel-plate.png"
 recipeFromSteel.icons[3].icon = "__base__/graphics/icons/iron-stick.png"
 recipeFromSteel.enabled = false
-data:extend{recipeFromSteel}
+extend{recipeFromSteel}
 Tech.addRecipeToTech("shielding-from-steel", "steel-processing")
 
 -- Create recipe: 2 steel plate + 2 tungsten plate -> 2 shielding
@@ -62,7 +62,7 @@ recipeFromTungsten.energy_required = 5
 recipeFromTungsten.icons[2].icon = "__base__/graphics/icons/steel-plate.png"
 recipeFromTungsten.icons[3].icon = "__space-age__/graphics/icons/tungsten-plate.png"
 recipeFromTungsten.category = "metallurgy-or-assembling"
-data:extend{recipeFromTungsten}
+extend{recipeFromTungsten}
 Tech.addRecipeToTech("shielding-from-tungsten", "tungsten-steel")
 
 -- TODO make more recipes, and add them to techs.
