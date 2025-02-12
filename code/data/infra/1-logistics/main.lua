@@ -8,8 +8,7 @@ require("rail")
 require("ships")
 require("vehicles")
 require("circuit-stuff")
-
-local recipes = data.raw.recipe
+require("bots")
 
 -- Stone bricks - allowed in foundry and handcrafting.
-recipes["stone-brick"].category = "smelting-or-metallurgy-or-handcrafting"
+RECIPE["stone-brick"].category = "smelting-or-metallurgy-or-handcrafting"

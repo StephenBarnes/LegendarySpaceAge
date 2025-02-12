@@ -1,3 +1,7 @@
+-- Globals
+RECIPE = data.raw.recipe
+ITEM = data.raw.item
+
 -- Files that create things needed in subsequent files.
 require("code.data.crafting-categories")
 require("code.data.fluid-boxes")

@@ -28,3 +28,12 @@ for _, recipe in pairs(data.raw.recipe) do
 	end
 end
 
+-- All recipes should always show buildings made in, since I'm changing that a lot, and creating new crafting categories, etc.
+for _, recipe in pairs(data.raw.recipe) do
+	if not recipe.parameter then
+		if recipe.always_show_made_in == false then
+			log("WARNING: recipe " .. recipe.name .. " has always_show_made_in set to false")
+		end
+		recipe.always_show_made_in = true
+	end
+end

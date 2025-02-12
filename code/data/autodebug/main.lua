@@ -9,6 +9,7 @@ local getTechPrePostSets = require("code.data.autodebug.get-tech-pre-post-sets")
 
 local checkAllRecipesHaveMachines = require("code.data.autodebug.check-recipes-have-machines")
 local checkAllRecipesHaveIngredients = require("code.data.autodebug.check-recipes-have-ingredients")
+local checkRoundNumbers = require("code.data.autodebug.check-round-numbers")
 
 local function runFullDebug()
 	log("Legendary Space Age: running full progression debug.")
@@ -37,6 +38,7 @@ local function runFullDebug()
 	local success = true
 	success = checkAllRecipesHaveMachines() and success
 	success = checkAllRecipesHaveIngredients(toposortedTechs, postTechSets) and success
+	success = checkRoundNumbers() and success
 	-- TODO check all science packs required by techs are available before those techs.
 	-- TODO check that when a recipe is unlocked, at least one machine that can craft it has been unlocked.
 	-- TODO add more checks here
