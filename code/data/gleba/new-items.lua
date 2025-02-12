@@ -168,7 +168,7 @@ tubuleRecipe.ingredients = {
 tubuleRecipe.results = {
 	{type = "item", name = "tubule", amount = 5},
 	{type = "fluid", name = "slime", amount = 10}, -- Kind of just an annoyance (have to pump it into a lake) but I like this aesthetically. Also it's exactly enough for making frames.
-	{type = "item", name = "slipstack-pearl", amount = 3, percent_spoiled = 0.8},
+	{type = "item", name = "slipstack-pearl", amount = 4, percent_spoiled = 0.8},
 		-- With productivity, this is 3 pearls.
 }
 tubuleRecipe.main_product = "tubule"
@@ -179,8 +179,8 @@ tubuleRecipe.subgroup = "gleba-non-agriculture"
 tubuleRecipe.crafting_machine_tint = table.deepcopy(chitinBrothRecipe.crafting_machine_tint)
 data:extend{tubuleRecipe}
 
--- Create smelting recipe for chitin fragments to block.
-local chitinBlockRecipe = table.deepcopy(data.raw.recipe["stone-brick"])
+-- Create recipe for compressing chitin fragments into blocks.
+local chitinBlockRecipe = table.deepcopy(data.raw.recipe["rail"])
 chitinBlockRecipe.name = "chitin-block"
 chitinBlockRecipe.ingredients = {
 	{type = "item", name = "chitin-fragments", amount = 2},

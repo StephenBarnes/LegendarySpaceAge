@@ -43,16 +43,16 @@ data:extend{emptyGasTankItem}
 local emptyGasTankRecipe = table.deepcopy(data.raw.recipe["barrel"])
 emptyGasTankRecipe.name = "gas-tank"
 emptyGasTankRecipe.ingredients = {
-	{type = "item", name = "panel", amount = 2},
-	{type = "item", name = "fluid-fitting", amount = 2},
+	{type = "item", name = "panel", amount = 1},
+	{type = "item", name = "fluid-fitting", amount = 1},
 }
 emptyGasTankRecipe.results = {{type = "item", name = "gas-tank", amount = 1}}
 data:extend{emptyGasTankRecipe}
 
 -- Edit recipe for barrel - previously only 1 steel plate.
 data.raw.recipe["barrel"].ingredients = {
-	{type = "item", name = "panel", amount = 3},
-	{type = "item", name = "fluid-fitting", amount = 1},
+	{type = "item", name = "panel", amount = 1},
+	{type = "item", name = "frame", amount = 1},
 }
 
 -- Create subgroup for recipes filling and emptying gas tanks.

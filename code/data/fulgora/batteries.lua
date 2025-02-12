@@ -416,7 +416,7 @@ data.raw.item["battery-discharger"].place_result = "battery-discharger"
 data:extend({
 	{
 		type = "recipe",
-		name = "charge-battery",
+		name = "charged-battery",
 		ingredients = { { type = "item", name = "battery", amount = 1 } },
 		results = { { type = "item", name = "charged-battery", amount = 1, probability = 0.98 } },
 		energy_required = 10, -- Charger uses 1MW, battery holds 10MJ.
@@ -424,22 +424,22 @@ data:extend({
 		category = "charging",
 		show_amount_in_title = false,
 		allowed_effects = {},
-		hidden_in_factoriopedia = true, -- Bc it's already shown in charged battery item.
+		hidden_in_factoriopedia = false,
 	},
 	{
 		type = "recipe",
-		name = "charge-holmium-battery",
+		name = "charged-holmium-battery",
 		ingredients = { { type = "item", name = "holmium-battery", amount = 1 } },
 		results = { { type = "item", name = "charged-holmium-battery", amount = 1 } },
 		energy_required = 100, -- Charger uses 1MW, battery holds 100MJ.
 		enabled = false,
 		category = "charging",
 		allowed_effects = {},
-		hidden_in_factoriopedia = true,
+		hidden_in_factoriopedia = false,
 	},
 })
-Tech.addRecipeToTech("charge-battery", "battery", 2)
-Tech.addRecipeToTech("charge-holmium-battery", "holmium-battery")
+Tech.addRecipeToTech("charged-battery", "battery", 2)
+Tech.addRecipeToTech("charged-holmium-battery", "holmium-battery")
 
 -- Reduce efficiency of lightning rods.
 data.raw["lightning-attractor"]["lightning-rod"].efficiency = .1 -- Changing 20% to 10%.
