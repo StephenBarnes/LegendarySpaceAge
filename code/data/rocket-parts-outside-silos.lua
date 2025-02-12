@@ -2,8 +2,6 @@
 Also we change the recipe for assembling them to require hydrogen and oxygen. No rocket fuel.
 This is better IMO since it lets you use inserters to put blue circuits and LDS into rocket silos for transport. --]]
 
-local Tech = require("code.util.tech")
-
 local assembledRocketPartItem = table.deepcopy(ITEM["rocket-part"])
 assembledRocketPartItem.name = "assembled-rocket-part"
 --assembledRocketPartItem.localised_name = {"item-name.assembled-rocket-part"}

@@ -1,7 +1,5 @@
 -- Modifying the gas boiler, from Adamo's Gas Furnace mod.
 
-local Tech = require("code.util.tech")
-
 local gasBoilerEnt = data.raw.boiler["gas-boiler"]
 
 -- Should only be able to place where there's oxygen.

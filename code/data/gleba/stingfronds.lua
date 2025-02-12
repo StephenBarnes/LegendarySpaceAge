@@ -1,8 +1,6 @@
 -- This file makes stingfronds a farmable crop, and creates recipes and items for them.
 -- Some of the code here was copied from "Fluroflux: Stingfrond Agriculture" mod by LordMiguel: https://mods.factorio.com/mod/fluroflux
 
-local Item = require("code.util.item")
-
 ------------------------------------------------------------------------
 --- Change stingfrond from type "tree" to type "plant", so it's farmable.
 

@@ -1,7 +1,5 @@
 -- This file adds early ammonia tech and recipes, and later ammonia using syngas.
 
-local Tech = require("code.util.tech")
-
 -- Create ammonia 1 tech, for ammonia from spoilage and spoilage from wood.
 local ammonia1Tech = table.deepcopy(TECH["logistics"])
 ammonia1Tech.name = "ammonia-1"

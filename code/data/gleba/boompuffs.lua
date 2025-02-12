@@ -1,8 +1,6 @@
 -- This file makes boompuffs a farmable crop, and creates recipes and items for them.
 -- Some code and graphics copied from Boompuff Agriculture mod by LordMiguel.
 
-local Item = require("code.util.item")
-
 local graphicsDir = "__LegendarySpaceAge__/graphics/gleba/boompuffs/"
 
 local boompuffTint = {

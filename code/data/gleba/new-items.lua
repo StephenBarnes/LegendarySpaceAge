@@ -1,9 +1,6 @@
 --[[ This file creates new items and recipes, eg for products of borehole drills on Gleba - geoplasm, chitin, marrow.
 ]]
 
-local Item = require("code.util.item")
-local Tech = require("code.util.tech")
-
 -- Make the subgroup
 data:extend{
 	{

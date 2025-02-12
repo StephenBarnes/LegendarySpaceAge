@@ -1,9 +1,5 @@
 -- This file adjusts tree farming, adds recipes for fertilizer, etc.
 
-local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
-local Item = require("code.util.item")
-
 -- Move tree farming tech to early game.
 TECH["fish-breeding"].prerequisites = {"agricultural-science-pack"}
 TECH["tree-seeding"].prerequisites = {"ammonia-1", "sulfur-processing"}

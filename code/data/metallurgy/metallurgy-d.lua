@@ -22,8 +22,6 @@ Re stack sizes:
 	For weights for rockets, rather use correct ratios, eg 1 ingot has the same weight as 5 plates.
 ]]
 
-local Tech = require("code.util.tech")
-
 local ROCKET_MASS = 1e6
 local INGOT_COOLING_TIME = 60 * 60 * 5 -- 5 minutes.
 

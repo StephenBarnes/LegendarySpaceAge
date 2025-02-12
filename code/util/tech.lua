@@ -1,7 +1,5 @@
 local Tech = {}
 
-local Table = require("code.util.table")
-
 Tech.addRecipeToTech = function(recipeName, techName, index)
 	local unlock = {
 		type = "unlock-recipe",

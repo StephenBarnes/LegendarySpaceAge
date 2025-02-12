@@ -2,9 +2,6 @@
 TODO
 ]]
 
-local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
-
 -- Create nuclear science pack.
 local item = table.deepcopy(data.raw.tool["agricultural-science-pack"])
 item.name = "nuclear-science-pack"

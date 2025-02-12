@@ -11,7 +11,6 @@ Uses of ash:
 		Produce carbon, plus small amounts of iron ore, copper ore, sand.
 ]]
 
-local Tech = require("code.util.tech")
 
 -- Create ash item.
 local item = table.deepcopy(ITEM["sulfur"])

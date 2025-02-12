@@ -1,5 +1,3 @@
-local Tech = require("code.util.tech")
-
 ---@return string[]?
 local function toposortTechs()
 	-- Topologically sort the techs, storing the result in toposortedTechs.

@@ -1,7 +1,3 @@
-local Tech = require("code.util.tech")
-local Item = require("code.util.item")
-local Recipe = require("code.util.recipe")
-
 -- Change Gleba rocket fuel recipe to require carbon, produced from spoilage.
 -- Originally 2 bioflux + 30 jelly + water.
 table.insert(RECIPE["rocket-fuel-from-jelly"].ingredients,

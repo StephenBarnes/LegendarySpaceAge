@@ -1,8 +1,5 @@
 --[[ This file creates a new techs for barrelling and gas tanks, moves barrelling recipes to the new tech, and creates gas tanks and their recipes, etc. Also adds fuel values to barrels and tanks. ]]
 
-local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
-
 -- Create the new tech.
 local gasTankTech = table.deepcopy(TECH["oil-processing"])
 gasTankTech.name = "fluid-containers"

@@ -4,8 +4,6 @@ require("code.data.vulcanus.foundry-recipes")
 require("code.data.vulcanus.apprentice-foundry")
 require("code.data.vulcanus.tungsten-axe")
 
-local Tech = require("code.util.tech")
-
 -- Move steam-to-water to Vulcanus tech, not calcite processing.
 Tech.removeRecipeFromTech("steam-condensation", "calcite-processing")
 Tech.addRecipeToTech("steam-condensation", "planet-discovery-vulcanus")

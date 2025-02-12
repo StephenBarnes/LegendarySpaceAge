@@ -1,5 +1,3 @@
-local Tech = require("code.util.tech")
-
 -- Move iron rod to be enabled from the start, and remove it from techs.
 -- Needs to be in data-final-fixes bc rust mod adds stick derusting in data-final-fixes.
 RECIPE["iron-stick"].enabled = true

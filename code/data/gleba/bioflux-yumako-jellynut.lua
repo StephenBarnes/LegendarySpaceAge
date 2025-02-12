@@ -15,9 +15,6 @@ For crops:
 	Jellystem recipes are the same as yumako, but swapping jelly/mash and jellynut/yumako fruit.
 ]]
 
-local Tech = require("code.util.tech")
-local Item = require("code.util.item")
-
 -- Change bioflux default recipe.
 local cultivationRecipe = RECIPE["bioflux"]
 cultivationRecipe.ingredients = {

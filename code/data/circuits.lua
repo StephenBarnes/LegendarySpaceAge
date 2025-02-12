@@ -20,9 +20,6 @@ When plastic is unlocked with petrochem, you unlock a recipe for circuit boards 
 Generally on Nauvis and Gleba both wood and plastic circuit boards are viable. On Fulgora and Aquilo, only plastic circuit boards are viable. On Vulcanus there's another alternative recipe for ceramic circuit boards using calcite.
 ]]
 
-local Tech = require("code.util.tech")
-local Item = require("code.util.item")
-
 -- Add circuit board item.
 local circuitBoardItem = table.deepcopy(ITEM["electronic-circuit"])
 circuitBoardItem.name = "circuit-board"

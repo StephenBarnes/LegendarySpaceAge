@@ -1,7 +1,5 @@
 -- This file creates the "shielding" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
-local Tech = require "code.util.tech"
-
 -- Create item.
 local shieldingItem = table.deepcopy(ITEM["steel-plate"])
 shieldingItem.name = "shielding"

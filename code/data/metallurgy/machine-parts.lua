@@ -1,8 +1,6 @@
 -- This modpack renames "iron gear wheels" to "machine parts"; this file changes sprites to match that.
 -- Then this file also creates "advanced parts", which are made from like hot steel + rubber + plastic + bit of lubricant, and will generally replace steel plates in recipes for infra.
 
-local Tech = require("code.util.tech")
-
 -- Update icons for iron parts.
 ITEM["iron-gear-wheel"].icon = nil
 ITEM["iron-gear-wheel"].icons = {

@@ -1,7 +1,5 @@
 -- This file will add recipes for low-density structures (which we rename to "Lightweight structure").
 
-local Tech = require("code.util.tech")
-
 -- Move item and recipes into the subgroup.
 ITEM["low-density-structure"].subgroup = "lightweight-structure"
 RECIPE["low-density-structure"].subgroup = "lightweight-structure"

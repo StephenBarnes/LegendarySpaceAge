@@ -1,9 +1,6 @@
 -- This file tweaks the Cargo Ships mod.
 -- TODO
 
-local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
-
 -- Remove the oversea energy distribution tech, and the floating electric pole - removes the Fulgora power challenge, and makes Aquilo boring.
 Tech.hideTech("oversea-energy-distribution")
 Recipe.hide("floating-electric-pole")

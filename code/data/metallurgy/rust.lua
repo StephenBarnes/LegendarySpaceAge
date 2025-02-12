@@ -1,7 +1,5 @@
 -- This file creates rusty versions of items, and adds derusting recipes.
 
-local Tech = require("code.util.tech")
-
 local RUST_TIME = 60 * 60 * 20
 
 -- Create rusty versions of items, and recipes for derusting them using sand or sulfuric acid.

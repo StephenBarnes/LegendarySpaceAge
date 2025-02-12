@@ -4,9 +4,14 @@ ITEM = data.raw.item
 TECH = data.raw.technology
 
 -- Global utils
-Tech = require "code.util.tech"
+Const = require "code.util.constants"
+Gen = require "code.util.general"
+Icon = require "code.util.icon"
+Item = require "code.util.item"
+Recipe = require "code.util.recipe"
 Table = require "code.util.table"
--- TODO more
+Tech = require "code.util.tech"
+GreyPipes = require "code.util.grey-pipes"
 
 -- Files that create things needed in subsequent files.
 require("code.data.crafting-categories")

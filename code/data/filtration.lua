@@ -1,7 +1,5 @@
 -- This file creates the water filter item, plus recipes to filter local water on Nauvis and Gleba.
 
-local Tech = require("code.util.tech")
-
 -- Create item-subgroup for filtration.
 local filtrationSubgroup = table.deepcopy(data.raw["item-subgroup"]["fluid-recipes"])
 filtrationSubgroup.name = "filtration"

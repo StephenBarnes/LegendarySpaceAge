@@ -1,7 +1,3 @@
-local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
-local Table = require("code.util.table")
-
 -- Some code and graphics are copied from the Battery Powered mod by harag.
 
 -- I'm using 1 charger and 1 discharger building. Chargers run at 1MW, generators at 2MW.

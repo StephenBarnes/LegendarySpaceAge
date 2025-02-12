@@ -1,7 +1,5 @@
 -- This file creates the "wiring" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
-local Tech = require "code.util.tech"
-
 -- Create item.
 local wiringItem = table.deepcopy(ITEM["copper-cable"])
 wiringItem.name = "wiring"

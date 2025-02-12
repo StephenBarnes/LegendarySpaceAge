@@ -1,5 +1,3 @@
-local Table = require("code.util.table")
-
 local Recipe = {}
 
 Recipe.addIngredients = function(recipeName, extraIngredients)

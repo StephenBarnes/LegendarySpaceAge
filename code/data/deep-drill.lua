@@ -6,10 +6,6 @@ Graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 Some code taken from Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above.
 ]]
 
-local Tech = require("code.util.tech")
-
-local greyPipes = require "code.data.util.grey-pipes"
-
 local ent = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"])
 ent.name = "deep-drill"
 ent.icon = "__LegendarySpaceAge__/graphics/deep-drill/item.png"
@@ -22,7 +18,7 @@ ent.tile_width = 11
 ent.fluid_boxes = {
 	{
 		production_type = "output",
-		pipe_picture = greyPipes.pipeBlocksDeepDrill(),
+		pipe_picture = GreyPipes.pipeBlocksDeepDrill(),
 		pipe_covers = pipecoverspictures(),
 		base_area = 10,
 		base_level = 1,

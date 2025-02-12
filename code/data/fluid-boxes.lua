@@ -1,4 +1,4 @@
-local greyPipes = require("code.data.util.grey-pipes")
+local greyPipes = require("code.util.grey-pipes")
 
 -- Add 2 more fluid outputs to the refinery, so we can have recipes with 5 fluid outputs.
 -- Could get away with adding only 1 new output, but then it's asymmetric so we can't flip it.

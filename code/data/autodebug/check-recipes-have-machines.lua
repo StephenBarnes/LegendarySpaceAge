@@ -1,8 +1,6 @@
 --- This file checks that each recipe is possible in all machines with matching crafting category.
 --- This catches bugs where e.g. some recipe produces 3 fluid outputs, but none of the machines with its category has 3+ fluid outputs.
 
-local Table = require("code.util.table")
-
 ---@param machine data.CraftingMachinePrototype
 ---@return number, number
 local function machineFluidInputsOutputs(machine)

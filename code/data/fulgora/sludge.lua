@@ -1,8 +1,6 @@
 -- This file creates the sludge fluid and recipe to separate it.
 -- Some code taken from Fulgoran Sludge mod by Tatticky.
 
-local Tech = require("code.util.tech")
-
 -- Create sludge fluid, and a recipe to separate it.
 data:extend({
 	{

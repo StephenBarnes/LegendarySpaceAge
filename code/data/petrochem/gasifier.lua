@@ -1,8 +1,5 @@
 -- This file creates the gasifier entity, item, building.
 
-local Table = require("code.util.table")
-local Tech = require("code.util.tech")
-
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 ---@type data.AssemblingMachinePrototype
 ---@diagnostic disable-next-line: assign-type-mismatch

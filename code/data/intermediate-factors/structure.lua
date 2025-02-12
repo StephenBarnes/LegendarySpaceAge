@@ -1,7 +1,5 @@
 -- This file creates the "structure" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
-local Tech = require("code.util.tech")
-
 -- Create item.
 local structureItem = table.deepcopy(ITEM["steel-plate"])
 structureItem.name = "structure"

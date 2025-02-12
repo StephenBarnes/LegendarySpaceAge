@@ -1,7 +1,5 @@
 -- This file creates "activated eggs" item and makes some changes to recipes etc. to implement them.
 
-local Tech = require("code.util.tech")
-
 -- Create activated egg item.
 local activatedEggItem = table.deepcopy(ITEM["pentapod-egg"])
 activatedEggItem.name = "activated-pentapod-egg"

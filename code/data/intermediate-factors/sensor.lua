@@ -1,7 +1,5 @@
 -- This file creates the "sensor" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
-local Tech = require("code.util.tech")
-
 -- Create item.
 local sensorItem = table.deepcopy(ITEM["electronic-circuit"])
 sensorItem.name = "sensor"

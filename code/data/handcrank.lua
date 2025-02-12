@@ -1,8 +1,6 @@
 -- This file creates "basic electricity" tech based on Eradicator's Hand Crank Deluxe mod.
 -- I disabled that mod's recipe and tech, going to create them again but different.
 
-local Tech = require("code.util.tech")
-
 -- Create tech.
 local handCrankTech = {
 	type = "technology",

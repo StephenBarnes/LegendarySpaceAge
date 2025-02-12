@@ -1,7 +1,5 @@
 -- This file adds fulgorite farming.
 
-local Tech = require("code.util.tech")
-
 -- Electrophages + 2 fulgorite shards => fulgorite starter
 -- Fulgorite starter grows into fulgorite
 -- Fulgorite gets harvested to produce 4-8 fulgorite shards

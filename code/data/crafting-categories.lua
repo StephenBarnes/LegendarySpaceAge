@@ -1,5 +1,3 @@
-local Table = require("code.util.table")
-
 -- Assembler 1 should be able to do fluid recipes.
 data.raw["assembling-machine"]["assembling-machine-1"].crafting_categories = data.raw["assembling-machine"]["assembling-machine-2"].crafting_categories
 

@@ -1,6 +1,3 @@
-local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
-
 local constants = require("code.data.petrochem.constants")
 
 --[[ Create fractionation recipes.

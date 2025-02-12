@@ -14,9 +14,6 @@
 --    Requires 1/2s biter eggs to run. (Modules will probably reduce that to 1/10s.)
 --    Built only in space. So you'll probably want to have a travelling space platform picking up sciences on all planets.
 
-local Table = require("code.util.table")
-local Tech = require("code.util.tech")
-
 -- Regular labs should only be buildable on Nauvis.
 data.raw.lab.lab.surface_conditions = table.deepcopy(data.raw.lab.biolab.surface_conditions)
 -- Pentapod biolabs should only be buildable on Gleba.

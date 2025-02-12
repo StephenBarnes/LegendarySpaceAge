@@ -1,8 +1,5 @@
 -- This file adjusts the Power Overload mod by Xorimuth.
 
-local Recipe = require("code.util.recipe")
-local Tech = require("code.util.tech")
-
 -- Hide the "high energy interface" since it's not needed for anything in this modpack.
 Recipe.hide("po-interface")
 Tech.removeRecipeFromTech("po-interface", "po-electric-energy-distribution-3")

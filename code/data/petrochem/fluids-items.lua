@@ -1,5 +1,3 @@
-local Item = require("code.util.item")
-
 local constants = require("code.data.petrochem.constants")
 
 -- Create natural gas fluid.

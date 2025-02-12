@@ -1,7 +1,5 @@
 -- This file creates the "fluid fitting" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
-local Tech = require("code.util.tech")
-
 -- Create item.
 local fluidFittingPics = {}
 for i = 1, 7 do

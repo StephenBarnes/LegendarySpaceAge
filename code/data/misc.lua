@@ -1,7 +1,3 @@
-local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
-local Item = require("code.util.item")
-
 -- Nerf heating towers' efficiency, and reduce energy consumption.
 data.raw.reactor["heating-tower"].energy_source.effectivity = 1 -- 2.5 to 1
 data.raw.reactor["heating-tower"].consumption = "10MW" -- Originally 40MW.

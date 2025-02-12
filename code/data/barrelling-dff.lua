@@ -1,8 +1,3 @@
-local Table = require("code.util.table")
-local Tech = require("code.util.tech")
-local Gen = require("code.util.general")
-
-local Const = require("code.util.constants")
 
 local BARREL_FLUID_AMOUNT = 50 -- 50 fluid units per barrel, from vanilla.
 local GAS_TANK_FLUID_AMOUNT = 50 -- Considered having it higher, but doesn't really make sense realistically, and gas tanks aren't more expensive than barrels.

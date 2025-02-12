@@ -1,7 +1,5 @@
 -- This file creates the tech for petroleum resin. It's like an optional addon after basic petrochemistry. Wood resin is cheaper on Nauvis, but this is needed for Vulcanus and Fulgora.
 
-local Tech = require("code.util.tech")
-
 local resinTech = table.deepcopy(TECH["lubricant"])
 resinTech.name = "petroleum-resin"
 resinTech.icons = {

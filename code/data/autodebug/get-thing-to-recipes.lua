@@ -1,6 +1,5 @@
 -- Makes a list of each thing (item or fluid) to recipes that use it as ingredient.
 
-local Table = require("code.util.table")
 local Util = require("code.data.autodebug.util")
 
 function getThingToRecipes()

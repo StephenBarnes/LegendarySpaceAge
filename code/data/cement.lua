@@ -13,8 +13,6 @@ Original game recipes were:
 	8 iron rod + 1 steel plate + 20 concrete + 100 water -> 10 refined concrete
 ]]
 
-local Recipe = require("code.util.recipe")
-
 -- Create new "cement" fluid.
 local cementFluid = table.deepcopy(data.raw.fluid["lubricant"])
 cementFluid.name = "cement"

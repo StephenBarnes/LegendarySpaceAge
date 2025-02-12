@@ -1,8 +1,6 @@
 --[[ This file adjusts missile stuff for Gleba. Specifically, since there's no renewable iron for conventional ammo, I want to unlock missile turrets early, for defense.
 ]]
 
-local Tech = require("code.util.tech")
-
 -- Require missile tech before Gleba.
 Tech.addTechDependency("rocketry", "planet-discovery-gleba")
 

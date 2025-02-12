@@ -1,8 +1,6 @@
 -- Modifying the gas furnace, from Adamo's Gas Furnace mod.
 local gasFurnaceEnt = data.raw.furnace["gas-furnace"]
 
-local Tech = require("code.util.tech")
-
 -- Remove fluid inputs and outputs.
 gasFurnaceEnt.fluid_boxes = nil
 

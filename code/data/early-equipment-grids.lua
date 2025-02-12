@@ -1,7 +1,5 @@
 -- This file adds equipment grids to the light and heavy armor, which can only hold basic starting equipment (solar panels, batteries, and personal roboports). This is to allow copy-paste construction from earlier in the game, using equipment given in starting inventory.
 
-local Tech = require("code.util.tech")
-
 data:extend{
 	{
 		type = "equipment-grid",

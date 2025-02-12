@@ -3,8 +3,6 @@ Then that tech also gives a mining speed bonus, since we can't give that to the 
 Also make that a prereq for Aquilo, since otherwise it's too easy to softlock yourself.
 ]]
 
-local Tech = require("code.util.tech")
-
 -- Create a "mech armor 2 tech".
 local newTech = table.deepcopy(TECH["mech-armor"])
 newTech.name = "mech-armor-2"

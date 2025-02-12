@@ -2,8 +2,6 @@
 -- Some of the code might be copied from Slipstack Agriculture mod by LordMiguel. Originally that mod was a dependency of this modpack, but I decided to instead implement stuff separately.
 -- Note: the new mapgen preset reduces stone spawns on Gleba, partly to encourage slipstack farming.
 
-local Item = require("code.util.item")
-
 ------------------------------------------------------------------------
 --- Change slipstack from type "tree" to type "plant", so it's farmable.
 
@@ -105,8 +103,6 @@ data:extend{pearlSmeltRecipe}
 ------------------------------------------------------------------------
 --- Adjust recipes for applications
 -- TODO actually all of these recipes should just be redefined wholesale, not like this.
-
-local Recipe = require("code.util.recipe")
 
 Recipe.addIngredients("bioplastic", {{type = "item", name = "slipstack-pearl", amount = 1}})
 

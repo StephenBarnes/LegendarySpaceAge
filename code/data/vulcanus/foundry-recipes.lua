@@ -44,9 +44,6 @@ Vulcanus unlocks a foundry recipe for concrete without water, using sulfur:
 	10 stone brick + 5 sulfur -> 10 concrete (representing sulfur concrete)
 ]]
 
-local Tech = require("code.util.tech")
-local Recipe = require("code.util.recipe")
-
 -- Make recipe for metals-from-lava.
 local metalsFromLavaRecipe = table.deepcopy(RECIPE["molten-iron-from-lava"])
 metalsFromLavaRecipe.name = "metals-from-lava"

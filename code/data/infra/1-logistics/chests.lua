@@ -1,5 +1,3 @@
-local Tech = require("code.util.tech")
-
 -- Remove chest recipes, instead only use the steel one, and make it from factor intermediates.
 for _, chestname in pairs{"wooden-chest", "iron-chest"} do
 	for _, t in pairs{"item", "recipe", "container"} do

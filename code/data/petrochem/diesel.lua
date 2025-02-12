@@ -4,8 +4,6 @@ Diesel is meant to be the only good fuel for trains, cars, tanks.
 Fuel values are set separately in fuel.lua reading from util/constants.lua.
 ]]
 
-local Tech = require("code.util.tech")
-
 local brightColor = {r = .667, g = .082, b = .094}
 local darkColor = {r = .361, g = .055, b = .11}
 

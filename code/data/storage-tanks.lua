@@ -1,5 +1,3 @@
-local General = require("code.util.general")
-local Tech = require("code.util.tech")
 
 -- For large storage tank: remove the tech, remove concrete from recipe.
 TECH["large-storage-tank"].hidden = true
@@ -7,7 +5,7 @@ table.insert(TECH["fluid-handling"].effects, 3, {
 	type = "unlock-recipe",
 	recipe = "large-storage-tank"
 })
-data.raw["storage-tank"]["large-storage-tank"].heating_energy = General.multWithUnits(data.raw["storage-tank"]["storage-tank"].heating_energy, 3)
+data.raw["storage-tank"]["large-storage-tank"].heating_energy = Gen.multWithUnits(data.raw["storage-tank"]["storage-tank"].heating_energy, 3)
 
 -- For inline storage tanks: remove the 4-way one, and remove the tech.
 data.raw["storage-tank"]["tiny-4way-storage-tank"] = nil
