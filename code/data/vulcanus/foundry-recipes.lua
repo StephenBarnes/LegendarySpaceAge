@@ -47,8 +47,10 @@ Vulcanus unlocks a foundry recipe for concrete without water, using sulfur:
 local Tech = require("code.util.tech")
 local Recipe = require("code.util.recipe")
 
+local recipes = data.raw.recipe
+
 -- Make recipe for metals-from-lava.
-local metalsFromLavaRecipe = table.deepcopy(data.raw.recipe["molten-iron-from-lava"])
+local metalsFromLavaRecipe = table.deepcopy(recipes["molten-iron-from-lava"])
 metalsFromLavaRecipe.name = "metals-from-lava"
 metalsFromLavaRecipe.ingredients = {
 	{type = "fluid", name = "lava", amount = 500},
@@ -78,7 +80,7 @@ Tech.removeRecipesFromTechs({"molten-iron-from-lava", "molten-copper-from-lava"}
 Tech.addRecipeToTech("metals-from-lava", "foundry", 3)
 
 -- Edit recipe for copper-ore-to-molten-copper to instead use copper matte.
-local matteMeltRecipe = data.raw.recipe["molten-copper"]
+local matteMeltRecipe = recipes["molten-copper"]
 matteMeltRecipe.ingredients = {{type = "item", name = "copper-matte", amount = 25}}
 matteMeltRecipe.results = {
 	{type = "fluid", name = "molten-copper", amount = 500},
@@ -86,7 +88,7 @@ matteMeltRecipe.results = {
 }
 
 -- Edit recipe for iron-ore-to-molten-iron.
-local ironOreMeltRecipe = data.raw.recipe["molten-iron"]
+local ironOreMeltRecipe = recipes["molten-iron"]
 ironOreMeltRecipe.ingredients = {
 	{type = "item", name = "iron-ore", amount = 50},
 	{type = "item", name = "calcite", amount = 1},
@@ -121,7 +123,7 @@ moltenSteelFluid.visualization_color = {.2, 1, 1} -- Cyan for the diagram-like l
 data:extend{moltenSteelFluid}
 
 -- Make recipe for molten steel.
-local moltenSteelRecipe = table.deepcopy(data.raw.recipe["molten-iron"])
+local moltenSteelRecipe = table.deepcopy(recipes["molten-iron"])
 moltenSteelRecipe.name = "molten-steel-making"
 	-- Not naming it the same as the fluid, so recipe shows up with the rest of them.
 	-- Seems the way it works is, recipe can show up in a different subgroup as the fluid if it either has multiple products, or a different name from the fluid.
@@ -142,7 +144,7 @@ Tech.addRecipeToTech("molten-steel-making", "foundry", 8)
 -- Adjust recipes for casting molten metals into items.
 -- Balanced so that they have the same molten metal costs, and all of them consume ~40/s molten metal and 1/s water. Note 40 molten metal is equivalent to 1 ingot. Foundry has speed 4.
 -- In base Space Age they do 30 molten iron -> 1 steel plate. But we're using the extra step of molten iron -> molten steel, with the +50% prod bonus, so let's not also do 30->1.
-local ironCastingRecipe = data.raw.recipe["casting-iron"]
+local ironCastingRecipe = recipes["casting-iron"]
 ironCastingRecipe.ingredients = {
 	{type = "fluid", name = "molten-iron", amount = 40},
 	{type = "fluid", name = "water", amount = 1},
@@ -154,7 +156,7 @@ ironCastingRecipe.results = {
 ironCastingRecipe.main_product = "iron-plate"
 ironCastingRecipe.energy_required = 4
 
-local copperCastingRecipe = data.raw.recipe["casting-copper"]
+local copperCastingRecipe = recipes["casting-copper"]
 copperCastingRecipe.ingredients = {
 	{type = "fluid", name = "molten-copper", amount = 40},
 	{type = "fluid", name = "water", amount = 1},
@@ -166,7 +168,7 @@ copperCastingRecipe.results = {
 copperCastingRecipe.main_product = "copper-plate"
 copperCastingRecipe.energy_required = 4
 
-local steelCastingRecipe = data.raw.recipe["casting-steel"]
+local steelCastingRecipe = recipes["casting-steel"]
 steelCastingRecipe.ingredients = {
 	{type = "fluid", name = "molten-steel", amount = 40},
 	{type = "fluid", name = "water", amount = 1},
@@ -178,7 +180,7 @@ steelCastingRecipe.results = {
 steelCastingRecipe.main_product = "steel-plate"
 steelCastingRecipe.energy_required = 4
 
-local ironGearWheelCastingRecipe = data.raw.recipe["casting-iron-gear-wheel"]
+local ironGearWheelCastingRecipe = recipes["casting-iron-gear-wheel"]
 ironGearWheelCastingRecipe.ingredients = {
 	{type = "fluid", name = "molten-iron", amount = 40},
 	{type = "fluid", name = "water", amount = 1},
@@ -190,7 +192,7 @@ ironGearWheelCastingRecipe.results = {
 ironGearWheelCastingRecipe.main_product = "iron-gear-wheel"
 ironGearWheelCastingRecipe.energy_required = 4
 
-local ironStickCastingRecipe = data.raw.recipe["casting-iron-stick"]
+local ironStickCastingRecipe = recipes["casting-iron-stick"]
 ironStickCastingRecipe.ingredients = {
 	{type = "fluid", name = "molten-iron", amount = 40},
 	{type = "fluid", name = "water", amount = 1},
@@ -201,7 +203,7 @@ ironStickCastingRecipe.results = {
 }
 ironStickCastingRecipe.main_product = "iron-stick"
 ironStickCastingRecipe.energy_required = 4
-local lowDensityStructureRecipe = data.raw.recipe["casting-low-density-structure"]
+local lowDensityStructureRecipe = recipes["casting-low-density-structure"]
 -- Originally 5 plastic bar + 80 molten iron + 250 molten copper
 lowDensityStructureRecipe.ingredients = {
 	{ type = "item",  name = "plastic-bar",   amount = 3 },
@@ -217,7 +219,7 @@ lowDensityStructureRecipe.results = {
 lowDensityStructureRecipe.main_product = "low-density-structure"
 lowDensityStructureRecipe.energy_required = 12
 
-local copperCableRecipe = data.raw.recipe["casting-copper-cable"]
+local copperCableRecipe = recipes["casting-copper-cable"]
 copperCableRecipe.ingredients = {
 	{type = "fluid", name = "molten-copper", amount = 40},
 	{type = "fluid", name = "water", amount = 1},
@@ -229,35 +231,14 @@ copperCableRecipe.results = {
 copperCableRecipe.main_product = "copper-cable"
 copperCableRecipe.energy_required = 4
 
-local pipeRecipe = data.raw.recipe["casting-pipe"]
-pipeRecipe.ingredients = {
-	{type = "fluid", name = "molten-iron", amount = 40},
-	{type = "fluid", name = "water", amount = 1},
-}
-pipeRecipe.results = {
-	{type = "item", name = "pipe", amount = 4},
-	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-}
-pipeRecipe.subgroup = "vulcanus-processes"
-pipeRecipe.main_product = "pipe"
-pipeRecipe.energy_required = 4
-
-local pipeToGroundRecipe = data.raw.recipe["casting-pipe-to-ground"]
-pipeToGroundRecipe.ingredients = {
-	{ type = "item",  name = "pipe",        amount = 10 },
-	{ type = "fluid", name = "molten-iron", amount = 50 },
-	{ type = "fluid", name = "water",       amount = 1 },
-}
-pipeToGroundRecipe.results = {
-	{type = "item", name = "pipe-to-ground", amount = 2},
-	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-}
-pipeToGroundRecipe.subgroup = "vulcanus-processes"
-pipeToGroundRecipe.main_product = "pipe-to-ground"
-pipeToGroundRecipe.energy_required = 4
+-- Hide recipes for casting pipes and pipe-to-ground.
+for _, recipe in pairs{"casting-pipe", "casting-pipe-to-ground"} do
+	Recipe.hide(recipe)
+	Tech.removeRecipeFromTech(recipe, "foundry")
+end
 
 -- Add recipe for casting advanced parts. (Bc can't make ingots from foundries.)
-local castingAdvancedPartsRecipe = table.deepcopy(data.raw.recipe["casting-iron-gear-wheel"])
+local castingAdvancedPartsRecipe = table.deepcopy(recipes["casting-iron-gear-wheel"])
 castingAdvancedPartsRecipe.name = "casting-advanced-parts"
 castingAdvancedPartsRecipe.ingredients = {
 	{ type = "fluid", name = "molten-steel", amount = 300 },
@@ -281,13 +262,13 @@ data:extend{castingAdvancedPartsRecipe}
 Tech.addRecipeToTech("casting-advanced-parts", "foundry")
 
 -- Adjust the default tungsten-carbide recipe to be more expensive, to create more incentive for the foundry recipes.
-data.raw.recipe["tungsten-carbide"].ingredients = {
+recipes["tungsten-carbide"].ingredients = {
 	{type = "item", name = "tungsten-ore", amount = 2},
 	{type = "item", name = "carbon", amount = 8},
 	{type = "fluid", name = "sulfuric-acid", amount = 40},
 }
-data.raw.recipe["tungsten-carbide"].category = "chemistry"
-data.raw.recipe["tungsten-carbide"].energy_required = 8
+recipes["tungsten-carbide"].category = "chemistry"
+recipes["tungsten-carbide"].energy_required = 8
 
 -- Create molten tungsten fluid.
 local moltenTungstenFluid = table.deepcopy(data.raw.fluid["molten-iron"])
@@ -305,7 +286,7 @@ moltenTungstenFluid.visualization_color = {.478, .191, .682} -- Measured on ore 
 data:extend{moltenTungstenFluid}
 
 -- Create recipe for molten tungsten.
-local moltenTungstenRecipe = table.deepcopy(data.raw.recipe["molten-iron"])
+local moltenTungstenRecipe = table.deepcopy(recipes["molten-iron"])
 moltenTungstenRecipe.name = "molten-tungsten"
 moltenTungstenRecipe.ingredients = {
 	{type = "item", name = "tungsten-ore", amount = 4},
@@ -323,7 +304,7 @@ data:extend{moltenTungstenRecipe}
 Tech.addRecipeToTech("molten-tungsten", "tungsten-steel", 1)
 
 -- Make foundry recipes for tungsten carbide and tungsten steel. And recipe for heating molten tungsten.
-local tungstenCarbideFromMoltenRecipe = table.deepcopy(data.raw.recipe["tungsten-plate"])
+local tungstenCarbideFromMoltenRecipe = table.deepcopy(recipes["tungsten-plate"])
 tungstenCarbideFromMoltenRecipe.name = "tungsten-carbide-from-molten"
 tungstenCarbideFromMoltenRecipe.ingredients = {
 	{type = "fluid", name = "molten-tungsten", amount = 40, minimum_temperature = 1600, maximum_temperature = 1800},
@@ -343,7 +324,7 @@ tungstenCarbideFromMoltenRecipe.icons = {
 }
 data:extend{tungstenCarbideFromMoltenRecipe}
 Tech.addRecipeToTech("tungsten-carbide-from-molten", "tungsten-steel")
-local tungstenSteelRecipe = table.deepcopy(data.raw.recipe["tungsten-plate"])
+local tungstenSteelRecipe = table.deepcopy(recipes["tungsten-plate"])
 tungstenSteelRecipe.name = "tungsten-steel-from-molten"
 	-- Again, can't name it "tungsten-steel" or it won't show separately from the item, which is a problem bc you can't see the temperature range requirement.
 tungstenSteelRecipe.ingredients = {
@@ -364,7 +345,7 @@ tungstenSteelRecipe.icons = {
 }
 data:extend{tungstenSteelRecipe}
 Tech.addRecipeToTech("tungsten-steel-from-molten", "tungsten-steel")
-local tungstenHeatingRecipe = table.deepcopy(data.raw.recipe["molten-iron"])
+local tungstenHeatingRecipe = table.deepcopy(recipes["molten-iron"])
 tungstenHeatingRecipe.name = "tungsten-heating"
 tungstenHeatingRecipe.ingredients = {
 	{type = "fluid", name = "molten-tungsten", amount = 100, ignored_by_stats=100},
