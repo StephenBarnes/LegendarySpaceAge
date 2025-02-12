@@ -239,8 +239,6 @@ microchipRecipe.category = "electronics"
 microchipRecipe.energy_required = 10
 microchipRecipe.allow_decomposition = true
 microchipRecipe.allow_as_intermediate = true
-microchipRecipe.main_product = "microchip"
-microchipRecipe.always_show_products = true
 data:extend{microchipRecipe}
 Tech.addRecipeToTech("microchip", "processing-unit", 3)
 
@@ -292,7 +290,6 @@ electronicComponentsRecipe.energy_required = 5
 electronicComponentsRecipe.allow_decomposition = true
 electronicComponentsRecipe.allow_as_intermediate = true
 electronicComponentsRecipe.main_product = "electronic-components"
-electronicComponentsRecipe.always_show_products = true
 data:extend{electronicComponentsRecipe}
 Tech.addRecipeToTech("electronic-components", "advanced-circuit", 1)
 

@@ -59,7 +59,6 @@ blueCircuitRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1}
 }
 blueCircuitRecipe.results = {{type = "item", name = "sensor", amount = 2}}
-blueCircuitRecipe.always_show_products = true
 blueCircuitRecipe.order = "04"
 blueCircuitRecipe.enabled = false
 blueCircuitRecipe.icons[2] = {icon = "__base__/graphics/icons/processing-unit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}

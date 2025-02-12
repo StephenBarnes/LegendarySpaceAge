@@ -187,7 +187,6 @@ sproutedBoomnutRecipe.main_product = "sprouted-boomnut"
 sproutedBoomnutRecipe.category = "smelting"
 sproutedBoomnutRecipe.crafting_machine_tint = boompuffTint
 sproutedBoomnutRecipe.icon = nil
-sproutedBoomnutRecipe.always_show_products = true
 sproutedBoomnutRecipe.show_amount_in_title = false
 data:extend{sproutedBoomnutRecipe}
 

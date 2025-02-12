@@ -26,7 +26,6 @@ cultivationRecipe.ingredients = {
 	{type = "item", name = "jelly", amount = 4},
 }
 cultivationRecipe.results = {{type = "item", name = "bioflux", amount = 2}}
-cultivationRecipe.always_show_products = true
 
 -- Create new recipe for initial bioflux.
 local initialBiofluxRecipe = table.deepcopy(cultivationRecipe)

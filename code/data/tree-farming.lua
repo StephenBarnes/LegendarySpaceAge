@@ -155,7 +155,6 @@ fertilizerRecipe.icon = nil
 fertilizerRecipe.icons = nil
 fertilizerRecipe.surface_conditions = nil
 fertilizerRecipe.allow_decomposition = true
-fertilizerRecipe.always_show_products = true
 data:extend{fertilizerRecipe}
 
 -- Create recipe for saplings.

@@ -63,7 +63,6 @@ recipeFromTungsten.order = "04"
 recipeFromTungsten.energy_required = 5
 recipeFromTungsten.icons[2].icon = "__base__/graphics/icons/steel-plate.png"
 recipeFromTungsten.icons[3].icon = "__space-age__/graphics/icons/tungsten-plate.png"
-recipeFromTungsten.always_show_products = true
 recipeFromTungsten.category = "metallurgy-or-assembling"
 data:extend{recipeFromTungsten}
 Tech.addRecipeToTech("shielding-from-tungsten", "tungsten-steel")

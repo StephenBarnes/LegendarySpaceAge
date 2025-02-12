@@ -63,7 +63,6 @@ advancedPartsRecipe.ingredients = {
 	{type="item", name="resin", amount=1},
 	-- No lubricant here. Rather add lubricant in the recipe for gadgets.
 }
-advancedPartsRecipe.always_show_products = true
 advancedPartsRecipe.results = {{type="item", name="advanced-parts", amount=20}}
 advancedPartsRecipe.main_product = "advanced-parts"
 advancedPartsRecipe.category = "crafting"

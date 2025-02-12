@@ -24,14 +24,14 @@ lavaWaterHeatingRecipe.category = "chemistry"
 lavaWaterHeatingRecipe.subgroup = "vulcanus-processes"
 lavaWaterHeatingRecipe.localised_name = nil
 lavaWaterHeatingRecipe.order = "01"
-lavaWaterHeatingRecipe.energy_required = 2
+lavaWaterHeatingRecipe.energy_required = 5
 lavaWaterHeatingRecipe.ingredients = {
 	{type = "fluid", name = "lava", amount = 100},
 	{type = "fluid", name = "water", amount = 50},
 }
 lavaWaterHeatingRecipe.results = {
 	{type = "fluid", name = "steam", amount = 500, temperature = 500, ignored_by_productivity = 500},
-	{type = "item", name = "stone", amount = 4},
+	{type = "item", name = "stone", amount = 5},
 }
 lavaWaterHeatingRecipe.enabled = false
 lavaWaterHeatingRecipe.allow_decomposition = false

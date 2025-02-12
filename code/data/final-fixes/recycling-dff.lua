@@ -10,7 +10,7 @@ local recyclingResultReplacements = {
 	["slipstack-pearl"] = "spoilage",
 	["raw-fish"] = "spoilage",
 	["jelly"] = "spoilage",
-	["biter-egg"] = "NOTHING",
+	["biter-egg"] = "spoilage",
 }
 local function recipeNeedsChanging(recipe)
 	for _, result in pairs(recipe.results) do

@@ -531,7 +531,6 @@ recipes["gate"].ingredients = {
 	{type = "item", name = "mechanism", amount = 1},
 }
 recipes["gate"].results = {{type = "item", name = "gate", amount = 4}}
-recipes["gate"].always_show_products = true
 
 -- Missile turret.
 recipes["rocket-turret"].ingredients = {

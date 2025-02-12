@@ -195,7 +195,6 @@ for _, metal in pairs{"steel", "iron", "copper"} do
 	plateRecipe.auto_recycle = true -- Allowing it, so that on Fulgora you can unmake plates for cold ingots, then heat those, then make parts/rods/wires/etc.
 	plateRecipe.allow_as_intermediate = true
 	plateRecipe.allow_decomposition = true
-	plateRecipe.always_show_products = true
 end
 
 -- Adjust recipes for other stuff made out of ingots: gears, rods, cables.
@@ -210,7 +209,6 @@ for _, vals in pairs{
 	recipe.results = {{type="item", name=item, amount=num}}
 	recipe.energy_required = INGOT_TO_ITEM_SECONDS
 	recipe.auto_recycle = true
-	recipe.always_show_products = true
 	recipe.category = "crafting"
 end
 

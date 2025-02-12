@@ -26,7 +26,6 @@ recipe.ingredients = {
 	{type = "fluid", name = "petroleum-gas", amount = 50},
 }
 recipe.results = {{type = "fluid", name = "diesel", amount = 100}}
-recipe.always_show_products = true
 recipe.main_product = "diesel"
 recipe.maximum_productivity = 0.2
 recipe.subgroup = "complex-fluid-recipes"
