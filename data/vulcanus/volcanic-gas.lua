@@ -2,7 +2,7 @@
 
 -- Create the new fluid.
 local volcanicGasColor = {0.788, 0.627, 0.167}
-local volcanicGas = table.deepcopy(data.raw.fluid["steam"])
+local volcanicGas = table.deepcopy(FLUID["steam"])
 volcanicGas.name = "volcanic-gas"
 volcanicGas.base_color = volcanicGasColor
 volcanicGas.flow_color = volcanicGasColor

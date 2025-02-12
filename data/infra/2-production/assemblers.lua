@@ -50,7 +50,7 @@ for _, vals in pairs{
 	recipe.ingredients = vals.ingredients
 	recipe.energy_required = 5
 
-	local ent = data.raw["assembling-machine"][vals.name]
+	local ent = ASSEMBLER[vals.name]
 	ent.crafting_speed = vals.speed
 	ent.energy_source.drain = vals.drainKW .. "kW"
 	ent.energy_usage = (vals.activeKW - vals.drainKW) .. "kW"

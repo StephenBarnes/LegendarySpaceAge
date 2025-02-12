@@ -3,7 +3,7 @@ I'm basically going to treat the biochamber as a separate crafting machine with 
 Also adding new mechanic where they get damaged when they're not being used.
 ]]
 
-local biochamber = data.raw["assembling-machine"]["biochamber"]
+local biochamber = ASSEMBLER["biochamber"]
 biochamber.crafting_speed = 1
 biochamber.effect_receiver = nil -- Remove base productivity bonus.
 

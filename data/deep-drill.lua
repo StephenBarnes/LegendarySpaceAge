@@ -6,7 +6,7 @@ Graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 Some code taken from Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above.
 ]]
 
-local ent = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"])
+local ent = table.deepcopy(ASSEMBLER["assembling-machine-3"])
 ent.name = "deep-drill"
 ent.icon = "__LegendarySpaceAge__/graphics/deep-drill/item.png"
 ent.minable = {mining_time = 1, result = "deep-drill"}

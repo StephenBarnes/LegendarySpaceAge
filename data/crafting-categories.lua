@@ -1,5 +1,5 @@
 -- Assembler 1 should be able to do fluid recipes.
-data.raw["assembling-machine"]["assembling-machine-1"].crafting_categories = data.raw["assembling-machine"]["assembling-machine-2"].crafting_categories
+ASSEMBLER["assembling-machine-1"].crafting_categories = ASSEMBLER["assembling-machine-2"].crafting_categories
 
 -- Create crafting category for smelting or metallurgy, so that sand->glass can be done in both.
 data:extend({
@@ -69,7 +69,7 @@ data:extend({
 		name = "chemistry-or-handcrafting",
 	},
 })
-table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "chemistry-or-handcrafting")
+table.insert(ASSEMBLER["chemical-plant"].crafting_categories, "chemistry-or-handcrafting")
 table.insert(data.raw["character"]["character"].crafting_categories, "chemistry-or-handcrafting")
 
 -- Create handcrafting-only category.
@@ -88,8 +88,8 @@ data:extend({
 		name = "chemistry-or-organic-or-handcrafting",
 	},
 })
-table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "chemistry-or-organic-or-handcrafting")
-table.insert(data.raw["assembling-machine"]["biochamber"].crafting_categories, "chemistry-or-organic-or-handcrafting")
+table.insert(ASSEMBLER["chemical-plant"].crafting_categories, "chemistry-or-organic-or-handcrafting")
+table.insert(ASSEMBLER["biochamber"].crafting_categories, "chemistry-or-organic-or-handcrafting")
 table.insert(data.raw["character"]["character"].crafting_categories, "chemistry-or-organic-or-handcrafting")
 
 -- Create crafting category for chem plant or electromagnetic plant.
@@ -99,8 +99,8 @@ data:extend({
 		name = "chemistry-or-electronics",
 	},
 })
-table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "chemistry-or-electronics")
-table.insert(data.raw["assembling-machine"]["electromagnetic-plant"].crafting_categories, "chemistry-or-electronics")
+table.insert(ASSEMBLER["chemical-plant"].crafting_categories, "chemistry-or-electronics")
+table.insert(ASSEMBLER["electromagnetic-plant"].crafting_categories, "chemistry-or-electronics")
 
 -- Create crafting category for organic or assembling-with-fluid.
 data:extend({
@@ -109,7 +109,7 @@ data:extend({
 		name = "organic-or-assembling-with-fluid",
 	},
 })
-for _, machine in pairs(data.raw["assembling-machine"]) do
+for _, machine in pairs(ASSEMBLER) do
 	if machine.crafting_categories and Table.hasEntry("organic-or-assembling", machine.crafting_categories) then
 		table.insert(machine.crafting_categories, "organic-or-assembling-with-fluid")
 	end

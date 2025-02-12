@@ -55,7 +55,7 @@ data.raw["smoke-with-trigger"]["data-dd-flare-cloud"].hidden = true
 
 -- Reduce health of furnaces and pipes, to encourage building walls.
 data.raw.pipe.pipe.max_health = 35 -- Reduced from 100 to 35. Wall is 350.
-data.raw.furnace["stone-furnace"].max_health = 100 -- Reduced from 200 to 100.
+FURNACE["stone-furnace"].max_health = 100 -- Reduced from 200 to 100.
 
 -- Make bots faster. This makes them a bit ridiculous at full +6 bot speed tech, but that's fine.
 data.raw["construction-robot"]["construction-robot"].speed = 0.12 -- Was 0.06

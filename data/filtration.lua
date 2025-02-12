@@ -138,9 +138,9 @@ cleanFilterRecipe.order = "03"
 cleanFilterRecipe.show_amount_in_title = false
 cleanFilterRecipe.energy_required = 1
 cleanFilterRecipe.crafting_machine_tint = {
-	primary = data.raw.fluid.water.base_color,
-	secondary = data.raw.fluid.water.flow_color,
-	tertiary = data.raw.fluid.water.visualization_color,
+	primary = FLUID.water.base_color,
+	secondary = FLUID.water.flow_color,
+	tertiary = FLUID.water.visualization_color,
 }
 cleanFilterRecipe.auto_recycle = false
 data:extend{cleanFilterRecipe}
@@ -173,13 +173,13 @@ filterLakeWaterRecipe.enabled = false
 filterLakeWaterRecipe.energy_required = 5
 filterLakeWaterRecipe.crafting_machine_tint = {
 	primary = {.015, .631, .682},
-	secondary = data.raw.fluid.water.base_color,
-	tertiary = data.raw.fluid.water.flow_color,
+	secondary = FLUID.water.base_color,
+	tertiary = FLUID.water.flow_color,
 }
 data:extend{filterLakeWaterRecipe}
 
 -- Create lake water fluid.
-local lakeWaterFluid = table.deepcopy(data.raw.fluid["water"])
+local lakeWaterFluid = table.deepcopy(FLUID.water)
 lakeWaterFluid.name = "lake-water"
 lakeWaterFluid.icon = nil
 lakeWaterFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64}}
@@ -193,7 +193,7 @@ lakeWaterFluid.heat_capacity = nil
 data:extend{lakeWaterFluid}
 
 -- Create slime fluid.
-local slimeFluid = table.deepcopy(data.raw.fluid["water"])
+local slimeFluid = table.deepcopy(FLUID["water"])
 slimeFluid.name = "slime"
 slimeFluid.icon = nil
 slimeFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64}}

@@ -43,7 +43,7 @@ cultivationRecipe.results = {
 cultivationRecipe.energy_required = 2
 cultivationRecipe.icon = nil
 cultivationRecipe.icons = {
-	table.deepcopy(data.raw.fluid["dry-gas"].icons[1]),
+	table.deepcopy(FLUID["dry-gas"].icons[1]),
 	{icon = petrophageDir .. "4.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={4, 4}},
 }
 cultivationRecipe.icons[1].scale = 0.4

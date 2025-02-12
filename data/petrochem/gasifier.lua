@@ -3,7 +3,7 @@
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 ---@type data.AssemblingMachinePrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
-local gasifierEnt = table.deepcopy(data.raw.furnace["steel-furnace"])
+local gasifierEnt = table.deepcopy(FURNACE["steel-furnace"])
 gasifierEnt.type = "assembling-machine"
 gasifierEnt.name = "gasifier"
 gasifierEnt.fixed_recipe = "syngas"
@@ -166,7 +166,7 @@ fluidGasifierEnt.energy_source = {
 }
 fluidGasifierEnt.icons = {
 	{icon = GRAPHICS.."gasifier-item.png", icon_size = 64, scale = 0.5, shift = {2, 0}},
-	{icon = data.raw.fluid["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = data.raw.fluid["petroleum-gas"].icons[1].tint},
+	{icon = FLUID["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = FLUID["petroleum-gas"].icons[1].tint},
 }
 data:extend{fluidGasifierEnt}
 
@@ -227,7 +227,7 @@ gasificationRecipe.results = {
 gasificationRecipe.main_product = "syngas"
 gasificationRecipe.energy_required = 1
 gasificationRecipe.icon = nil
-gasificationRecipe.icons = data.raw.fluid.syngas.icons
+gasificationRecipe.icons = FLUID.syngas.icons
 gasificationRecipe.allow_productivity = false
 gasificationRecipe.allow_speed = false
 gasificationRecipe.allow_consumption = false -- No efficiency effects from beacons.

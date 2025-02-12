@@ -77,10 +77,10 @@ data.raw["fluid-wagon"]["fluid-wagon"].hidden_in_factoriopedia = true
 
 -- TODO look through fluids, maybe add more barrelling recipes. Eg for Gleban slime.
 -- Allow more fluids in barrels and tanks.
-data.raw.fluid.steam.auto_barrel = true
-data.raw.fluid["holmium-solution"].auto_barrel = true
-data.raw.fluid["electrolyte"].auto_barrel = true
-data.raw.fluid["thruster-oxidizer"].auto_barrel = true
-data.raw.fluid["thruster-fuel"].auto_barrel = true
-data.raw.fluid["ammonia"].auto_barrel = true
-data.raw.fluid["fluorine"].auto_barrel = true
+FLUID.steam.auto_barrel = true
+FLUID["holmium-solution"].auto_barrel = true
+FLUID["electrolyte"].auto_barrel = true
+FLUID["thruster-oxidizer"].auto_barrel = true
+FLUID["thruster-fuel"].auto_barrel = true
+FLUID["ammonia"].auto_barrel = true
+FLUID["fluorine"].auto_barrel = true

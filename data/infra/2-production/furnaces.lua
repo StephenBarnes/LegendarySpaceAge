@@ -52,7 +52,7 @@ for _, vals in pairs{
 	recipe.ingredients = vals.ingredients
 	recipe.energy_required = vals.craft_time
 
-	local ent = data.raw.furnace[vals.name]
+	local ent = FURNACE[vals.name]
 	ent.energy_usage = vals.energy_usage
 	if vals.drain then
 		ent.energy_source.drain = vals.drain

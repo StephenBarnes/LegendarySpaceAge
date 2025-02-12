@@ -96,14 +96,14 @@ ironOreMeltRecipe.results = {
 
 -- Adjust molten iron icon, to differentiate it from molten steel.
 local ironFluidIcon = "__LegendarySpaceAge__/graphics/vulcanus/molten-iron.png"
-if data.raw.fluid["molten-iron"].icon then
-	data.raw.fluid["molten-iron"].icon = ironFluidIcon
+if FLUID["molten-iron"].icon then
+	FLUID["molten-iron"].icon = ironFluidIcon
 else
-	data.raw.fluid["molten-iron"].icons[1].icon = ironFluidIcon
+	FLUID["molten-iron"].icons[1].icon = ironFluidIcon
 end
 
 -- Make molten steel fluid.
-local moltenSteelFluid = table.deepcopy(data.raw.fluid["molten-iron"])
+local moltenSteelFluid = table.deepcopy(FLUID["molten-iron"])
 moltenSteelFluid.name = "molten-steel"
 moltenSteelFluid.icon = nil
 moltenSteelFluid.icons = {{
@@ -266,7 +266,7 @@ RECIPE["tungsten-carbide"].category = "chemistry"
 RECIPE["tungsten-carbide"].energy_required = 8
 
 -- Create molten tungsten fluid.
-local moltenTungstenFluid = table.deepcopy(data.raw.fluid["molten-iron"])
+local moltenTungstenFluid = table.deepcopy(FLUID["molten-iron"])
 moltenTungstenFluid.name = "molten-tungsten"
 moltenTungstenFluid.icon = nil
 moltenTungstenFluid.icons = {{

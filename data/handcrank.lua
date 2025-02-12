@@ -39,7 +39,7 @@ data:extend({handCrankRecipe})
 -- Make the offshore pump require electricity, since we have a way to generate electricity before offshore pump now.
 for _, name in pairs{"offshore-pump", "lava-pump"} do
 	data.raw["offshore-pump"][name].energy_usage = "30kW"
-	data.raw["offshore-pump"][name].energy_source = data.raw["assembling-machine"]["assembling-machine-1"].energy_source
+	data.raw["offshore-pump"][name].energy_source = ASSEMBLER["assembling-machine-1"].energy_source
 end
 
 -- Move to start of row.

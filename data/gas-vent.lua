@@ -5,7 +5,7 @@
 -- This modpack has gas heating tower for burnable gases, gas vent for non-burnable gases, fluid dump for fluids, and tossing-into-sea for items.
 
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
-local ventEnt = table.deepcopy(data.raw.furnace["steel-furnace"])
+local ventEnt = table.deepcopy(FURNACE["steel-furnace"])
 ventEnt.type = "furnace"
 ventEnt.name = "gas-vent"
 ventEnt.icon = nil
@@ -161,7 +161,7 @@ for _, fluidData in pairs(ventableFluids) do
 	local gasToVent = fluidData[1]
 	local emissionsMult = fluidData[2]
 	local onlyInSpace = fluidData[3]
-	local fluid = data.raw.fluid[gasToVent]
+	local fluid = FLUID[gasToVent]
 	local gasIcon
 	if fluid.icons then
 		gasIcon = fluid.icons[1]
@@ -186,7 +186,7 @@ for _, fluidData in pairs(ventableFluids) do
 	thisGasVentRecipe.energy_required = 1
 	thisGasVentRecipe.emissions_multiplier = emissionsMult
 	thisGasVentRecipe.crafting_machine_tint = {
-		primary = data.raw.fluid[gasToVent].base_color,
+		primary = FLUID[gasToVent].base_color,
 	}
 	if onlyInSpace then
 		thisGasVentRecipe.surface_conditions = {{property = "gravity", max = 0}}

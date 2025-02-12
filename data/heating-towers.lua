@@ -33,7 +33,7 @@ fluidHeatingTowerEnt.energy_source = {
 fluidHeatingTowerEnt.icon = nil
 fluidHeatingTowerEnt.icons = {
 	{icon = "__space-age__/graphics/icons/heating-tower.png", icon_size = 64, scale = 0.5, shift = {2, 0}},
-	{icon = data.raw.fluid["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = data.raw.fluid["petroleum-gas"].icons[1].tint},
+	{icon = FLUID["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = FLUID["petroleum-gas"].icons[1].tint},
 }
 fluidHeatingTowerEnt.hidden_in_factoriopedia = false
 -- Adjust heat pipes, since I want the fluid pipes to be where the side heat pipes used to be.

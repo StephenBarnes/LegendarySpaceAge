@@ -238,5 +238,5 @@ ITEM["iron-stick"].stack_size = 200
 
 -- Add output slots to furnaces - otherwise some recipe products just disappear, apparently.
 for _, furnace in pairs{"stone-furnace", "steel-furnace", "gas-furnace", "electric-furnace"} do
-	data.raw.furnace[furnace].result_inventory_size = 2
+	FURNACE[furnace].result_inventory_size = 2
 end

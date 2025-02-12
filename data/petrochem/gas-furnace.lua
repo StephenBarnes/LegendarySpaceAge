@@ -1,5 +1,5 @@
 -- Modifying the gas furnace, from Adamo's Gas Furnace mod.
-local gasFurnaceEnt = data.raw.furnace["gas-furnace"]
+local gasFurnaceEnt = FURNACE["gas-furnace"]
 
 -- Remove fluid inputs and outputs.
 gasFurnaceEnt.fluid_boxes = nil
@@ -14,7 +14,7 @@ gasFurnaceEnt.energy_source.fluid_box.pipe_connections = {
 gasFurnaceEnt.energy_source.fluid_box.hide_connection_info = false
 
 -- Prevent it from doing chem plant recipes.
-gasFurnaceEnt.crafting_categories = data.raw.furnace["electric-furnace"].crafting_categories
+gasFurnaceEnt.crafting_categories = FURNACE["electric-furnace"].crafting_categories
 
 -- Change energy usage. TODO balance.
 gasFurnaceEnt.energy_usage = "200kW" -- default 100kW.

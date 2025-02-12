@@ -14,7 +14,7 @@ Original game recipes were:
 ]]
 
 -- Create new "cement" fluid.
-local cementFluid = table.deepcopy(data.raw.fluid["lubricant"])
+local cementFluid = table.deepcopy(FLUID["lubricant"])
 cementFluid.name = "cement"
 cementFluid.icon = nil
 cementFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/fluids/cement-fluid.png", scale = .5, icon_size = 64}}

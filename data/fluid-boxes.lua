@@ -1,6 +1,6 @@
 -- Add 2 more fluid outputs to the refinery, so we can have recipes with 5 fluid outputs.
 -- Could get away with adding only 1 new output, but then it's asymmetric so we can't flip it.
-local oilRefinery = data.raw["assembling-machine"]["oil-refinery"]
+local oilRefinery = ASSEMBLER["oil-refinery"]
 local newFluidBox1 = table.deepcopy(oilRefinery.fluid_boxes[5])
 newFluidBox1.pipe_connections = {
 	{position = {-2, 1}, direction = defines.direction.west, flow_direction = "output"},
@@ -25,7 +25,7 @@ oilRefinery.fluid_boxes = {
 }
 
 -- Add 1 more fluid input to chem plant, so we can do explosives recipe.
-local chemPlant = data.raw["assembling-machine"]["chemical-plant"]
+local chemPlant = ASSEMBLER["chemical-plant"]
 local newFluidBox = table.deepcopy(chemPlant.fluid_boxes[1])
 newFluidBox.pipe_connections = {
 	{position = {1, 0}, direction = defines.direction.east, flow_direction = "input"},
@@ -41,7 +41,7 @@ chemPlant.fluid_boxes = {
 chemPlant.fluid_boxes_off_when_no_fluid_recipe = false -- If this is true, they look weird when not used.
 
 -- Also add an extra fluid input to biochambers, needed for synthetic rubber.
-local bioChamber = data.raw["assembling-machine"]["biochamber"]
+local bioChamber = ASSEMBLER["biochamber"]
 local newFluidBoxB = table.deepcopy(bioChamber.fluid_boxes[1])
 newFluidBoxB.pipe_connections = {
 	{position = {-1, 0}, direction = defines.direction.west, flow_direction = "input"},
@@ -55,14 +55,14 @@ bioChamber.fluid_boxes = {
 }
 
 -- Add fluid input to the assembler 1, needed for some recipes.
-data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes = data.raw["assembling-machine"]["assembling-machine-2"].fluid_boxes
-data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes_off_when_no_fluid_recipe = true
-for _, fluidBox in pairs(data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes) do
+ASSEMBLER["assembling-machine-1"].fluid_boxes = ASSEMBLER["assembling-machine-2"].fluid_boxes
+ASSEMBLER["assembling-machine-1"].fluid_boxes_off_when_no_fluid_recipe = true
+for _, fluidBox in pairs(ASSEMBLER["assembling-machine-1"].fluid_boxes) do
 	fluidBox.pipe_picture = GreyPipes.pipeBlocks()
 end
 
 -- Add extra fluid input to the foundry, needed for some recipes.
-local foundry = data.raw["assembling-machine"]["foundry"]
+local foundry = ASSEMBLER["foundry"]
 local newFluidBoxF1 = table.deepcopy(foundry.fluid_boxes[1])
 newFluidBoxF1.pipe_connections = {
 	{position = {-2, 1}, direction = defines.direction.west, flow_direction = "input"},

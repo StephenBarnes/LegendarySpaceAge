@@ -1,7 +1,10 @@
 -- Global shortcuts for indexing data.raw.
 RECIPE = data.raw.recipe
 ITEM = data.raw.item
+FLUID = data.raw.fluid
 TECH = data.raw.technology
+ASSEMBLER = data.raw["assembling-machine"]
+FURNACE = data.raw.furnace
 
 -- Global utils
 Const = require "util.constants"

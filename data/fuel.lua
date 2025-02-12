@@ -3,8 +3,8 @@
 
 -- Set fuel values for fluids (for fluid-fuelled vehicles, gasifiers, heating towers, boilers)
 for fluidName, fuelValues in pairs(Const.fluidFuelValues) do
-	data.raw.fluid[fluidName].fuel_value = fuelValues[1]
-	data.raw.fluid[fluidName].emissions_multiplier = fuelValues[2]
+	FLUID[fluidName].fuel_value = fuelValues[1]
+	FLUID[fluidName].emissions_multiplier = fuelValues[2]
 end
 -- Set fuel values for items.
 for itemName, fuelValues in pairs(Const.itemFuelValues) do
@@ -80,7 +80,7 @@ for _, ents in pairs(data.raw) do
 end
 
 -- But, char furnace should only accept carbonic fuels except pure carbon.
-local charFurnace = data.raw["assembling-machine"]["char-furnace"]
+local charFurnace = ASSEMBLER["char-furnace"]
 charFurnace.energy_source.fuel_categories = {"chemical"}
 for _, fuel in pairs(otherCarbonicFuels) do
 	if fuel ~= "pure-carbon" then

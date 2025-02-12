@@ -8,7 +8,7 @@ local brightColor = {r = .667, g = .082, b = .094}
 local darkColor = {r = .361, g = .055, b = .11}
 
 -- Create diesel fluid.
-local fluid = table.deepcopy(data.raw.fluid["light-oil"])
+local fluid = table.deepcopy(FLUID["light-oil"])
 fluid.name = "diesel"
 fluid.icon = "__LegendarySpaceAge__/graphics/petrochem/diesel.png"
 fluid.base_color = brightColor

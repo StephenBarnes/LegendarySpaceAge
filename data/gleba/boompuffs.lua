@@ -226,7 +226,7 @@ boomsacDeflationRecipe.category = "chemistry"
 boomsacDeflationRecipe.crafting_machine_tint = boompuffTint
 boomsacDeflationRecipe.icon = nil
 boomsacDeflationRecipe.icons = {
-	data.raw.fluid["natural-gas"].icons[1],
+	FLUID["natural-gas"].icons[1],
 	{icon = "__LegendarySpaceAge__/graphics/gleba/boompuffs/sac/2.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
 boomsacDeflationRecipe.subgroup = "slipstacks-and-boompuffs"

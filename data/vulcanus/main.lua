@@ -96,7 +96,7 @@ inverseVulcanizationRecipe.icons = {
 data:extend({inverseVulcanizationTech, inverseVulcanizationRecipe})
 
 -- Adjust stats of foundry.
-local foundry = data.raw["assembling-machine"]["foundry"]
+local foundry = ASSEMBLER["foundry"]
 foundry.crafting_speed = 1 -- Instead of 4, we set it to base 1, increasing to 10.
 foundry.effect_receiver = nil -- Remove base productivity bonus.
 foundry.energy_source.emissions_per_minute = { pollution = 50 }

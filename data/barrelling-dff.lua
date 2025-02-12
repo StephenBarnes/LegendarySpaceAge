@@ -51,7 +51,7 @@ for gasName, _ in pairs(gases) do
 	local barrelRecipe = RECIPE[gasName.."-barrel"]
 	local emptyRecipe = RECIPE["empty-"..gasName.."-barrel"]
 	local item = ITEM[gasName.."-barrel"]
-	local fluid = data.raw.fluid[gasName]
+	local fluid = FLUID[gasName]
 
 	-- Edit filling recipe's ingredients
 	for _, ingredient in pairs(barrelRecipe.ingredients) do

@@ -12,7 +12,7 @@ data:extend{
 }
 
 -- Create geoplasm fluid
-local geoplasmFluid = table.deepcopy(data.raw.fluid["lubricant"])
+local geoplasmFluid = table.deepcopy(FLUID["lubricant"])
 geoplasmFluid.name = "geoplasm"
 geoplasmFluid.icon = "__LegendarySpaceAge__/graphics/gleba/geoplasm.png"
 local geoplasmPinkColor = {r=.8, g=.404, b=.388}
@@ -89,7 +89,7 @@ tubuleItem.subgroup = "gleba-non-agriculture"
 data:extend{tubuleItem}
 
 -- Create chitin-broth fluid.
-local chitinBrothFluid = table.deepcopy(data.raw.fluid["water"])
+local chitinBrothFluid = table.deepcopy(FLUID["water"])
 chitinBrothFluid.name = "chitin-broth"
 chitinBrothFluid.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-broth.png"
 local chitinDarkColor = {r = .365, g = .263, b = .224}

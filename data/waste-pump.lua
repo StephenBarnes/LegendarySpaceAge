@@ -107,7 +107,7 @@ local effluentFluidsAndPollution = {
 for _, effluentFluidAndPollution in pairs(effluentFluidsAndPollution) do
 	local effluentFluid = effluentFluidAndPollution[1]
 	local effluentPollution = effluentFluidAndPollution[2]
-	local fluid = data.raw.fluid[effluentFluid]
+	local fluid = FLUID[effluentFluid]
 	local fluidIcon
 	if fluid.icons then
 		fluidIcon = fluid.icons[1]

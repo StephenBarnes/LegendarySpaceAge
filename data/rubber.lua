@@ -23,7 +23,7 @@ data:extend{rubberItem}
 
 -- Create latex fluid.
 local latexColor = {r = .812, g = .761, b = .675, a=1}
-local latexFluid = table.deepcopy(data.raw.fluid["lubricant"])
+local latexFluid = table.deepcopy(FLUID["lubricant"])
 latexFluid.name = "latex"
 latexFluid.icon = "__LegendarySpaceAge__/graphics/rubber/latex.png"
 latexFluid.icon_size = 64
@@ -84,7 +84,7 @@ rubberFromPetrochemRecipe.order = "f3"
 rubberFromPetrochemRecipe.icon = nil
 rubberFromPetrochemRecipe.icons = {
 	rubberItem.icons[1],
-	{icon = data.raw.fluid["light-oil"].icon, icon_size = 64, scale=0.27, mipmap_count=4, shift={-6, -7}},
+	{icon = FLUID["light-oil"].icon, icon_size = 64, scale=0.27, mipmap_count=4, shift={-6, -7}},
 }
 data:extend{rubberFromPetrochemRecipe}
 

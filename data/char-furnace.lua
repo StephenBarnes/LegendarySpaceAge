@@ -6,7 +6,7 @@ This allows the player to get carbon early-game, to make circuits.
 -- Create entity.
 ---@type data.AssemblingMachinePrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
-local charFurnace = table.deepcopy(data.raw.furnace["stone-furnace"])
+local charFurnace = table.deepcopy(FURNACE["stone-furnace"])
 charFurnace.type = "assembling-machine"
 charFurnace.fixed_recipe = "char-carbon"
 charFurnace.ingredient_count = 0

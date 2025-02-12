@@ -1,7 +1,7 @@
 local constants = require("data.petrochem.constants")
 
 -- Create natural gas fluid.
-local natgasFluid = table.deepcopy(data.raw.fluid["crude-oil"])
+local natgasFluid = table.deepcopy(FLUID["crude-oil"])
 natgasFluid.name = "natural-gas"
 natgasFluid.base_color = constants.natgasColor
 natgasFluid.flow_color = constants.natgasFlowColor
@@ -24,7 +24,7 @@ drygasFluid.gas_temperature = 0
 data:extend{drygasFluid}
 
 -- Change petroleum gas to "rich gas".
-local richgasFluid = data.raw.fluid["petroleum-gas"]
+local richgasFluid = FLUID["petroleum-gas"]
 richgasFluid.order = "a[fluid]-b[oil]-c[fractions]-3"
 richgasFluid.base_color = constants.richgasColor
 richgasFluid.flow_color = constants.richgasFlowColor
@@ -34,7 +34,7 @@ richgasFluid.localised_name = {"fluid-name.rich-gas"} -- In case other languages
 richgasFluid.gas_temperature = 0
 
 -- Create syngas fluid.
-local syngasFluid = table.deepcopy(data.raw.fluid["heavy-oil"])
+local syngasFluid = table.deepcopy(FLUID["heavy-oil"])
 syngasFluid.name = "syngas"
 syngasFluid.base_color = constants.syngasColor
 syngasFluid.flow_color = constants.syngasFlowColor
@@ -45,7 +45,7 @@ syngasFluid.gas_temperature = 0
 data:extend{syngasFluid}
 
 -- Create tar fluid.
-local tarFluid = table.deepcopy(data.raw.fluid["heavy-oil"])
+local tarFluid = table.deepcopy(FLUID["heavy-oil"])
 tarFluid.name = "tar"
 tarFluid.base_color = constants.tarColor
 tarFluid.flow_color = constants.tarFlowColor
@@ -94,5 +94,5 @@ data:extend{resinItem}
 ------------------------------------------------------------------------
 
 -- Fix ordering of the existing petro fractions.
-data.raw.fluid["heavy-oil"].order = "a[fluid]-b[oil]-c[fractions]-1"
-data.raw.fluid["light-oil"].order = "a[fluid]-b[oil]-c[fractions]-2"
+FLUID["heavy-oil"].order = "a[fluid]-b[oil]-c[fractions]-1"
+FLUID["light-oil"].order = "a[fluid]-b[oil]-c[fractions]-2"
