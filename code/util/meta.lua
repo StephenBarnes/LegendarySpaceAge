@@ -15,7 +15,6 @@ defines.direction = {
 	west = 12,
 }
 
-
 --- LSP doesn't recognize auto_recycle, so this fixes that:
 
 ---@class data.RecipePrototype

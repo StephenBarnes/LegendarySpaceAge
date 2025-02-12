@@ -1,6 +1,7 @@
 -- This file will run automated checks. For example, checking that when the player unlocks a recipe, he has the ingredients available.
 
-local Config = require("code.config")
+-- This controls whether to actually run the full debug.
+local RUN_FULL_DEBUG = false
 
 local toposortTechs = require("code.data.autodebug.toposort-techs")
 local getThingToRecipes = require("code.data.autodebug.get-thing-to-recipes")
@@ -45,7 +46,7 @@ local function runFullDebug()
 	return success
 end
 
-if Config.runProgressionChecks then
+if RUN_FULL_DEBUG then
 	if runFullDebug() then
 		log("Legendary Space Age: full progression debug passed.")
 	else
