@@ -1,5 +1,5 @@
 -- This file creates the tech for coal coking, soon after automation.
-local cokingTech = table.deepcopy(data.raw.technology["lamp"])
+local cokingTech = table.deepcopy(TECH["lamp"])
 cokingTech.name = "coal-coking"
 cokingTech.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/coking-tech.png", icon_size = 256}}
 cokingTech.prerequisites = {"automation-science-pack"}
@@ -14,5 +14,5 @@ cokingTech.unit = {
 	},
 	time = 15,
 }
-data.raw.recipe["firearm-magazine"].enabled = false -- Don't enable from the start.
+RECIPE["firearm-magazine"].enabled = false -- Don't enable from the start.
 data:extend{cokingTech}

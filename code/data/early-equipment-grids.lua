@@ -31,7 +31,7 @@ for _, equipmentTypeAndName in pairs{
 end
 
 -- Edit personal burner generator's recipe so it's craftable early-game.
-data.raw.recipe["personal-burner-generator"].ingredients = {
+RECIPE["personal-burner-generator"].ingredients = {
 	{type = "item", name = "iron-plate", amount = 10},
 	{type = "item", name = "copper-cable", amount = 8},
 	{type = "item", name = "glass", amount = 1},
@@ -41,7 +41,7 @@ data.raw.recipe["personal-burner-generator"].ingredients = {
 Tech.removeRecipeFromTech("personal-burner-generator", "modular-armor")
 
 -- Create a tech for personal burner generator.
-local personalBurnerGeneratorTech = table.deepcopy(data.raw.technology["electronics"])
+local personalBurnerGeneratorTech = table.deepcopy(TECH["electronics"])
 personalBurnerGeneratorTech.name = "personal-burner-generator"
 personalBurnerGeneratorTech.effects = {{type = "unlock-recipe", recipe = "personal-burner-generator"}}
 personalBurnerGeneratorTech.prerequisites = {"basic-electricity", "glass"}

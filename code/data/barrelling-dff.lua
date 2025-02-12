@@ -53,9 +53,9 @@ local function makeGasTankFillingIcons(fluid, straight, shift)
 	return icons
 end
 for gasName, _ in pairs(gases) do
-	local barrelRecipe = data.raw.recipe[gasName.."-barrel"]
-	local emptyRecipe = data.raw.recipe["empty-"..gasName.."-barrel"]
-	local item = data.raw.item[gasName.."-barrel"]
+	local barrelRecipe = RECIPE[gasName.."-barrel"]
+	local emptyRecipe = RECIPE["empty-"..gasName.."-barrel"]
+	local item = ITEM[gasName.."-barrel"]
 	local fluid = data.raw.fluid[gasName]
 
 	-- Edit filling recipe's ingredients
@@ -96,7 +96,7 @@ for gasName, _ in pairs(gases) do
 end
 
 -- Go through fluid handling tech, remove all barrelling recipes, add to new tech.
-local fluidHandlingTech = data.raw.technology["fluid-handling"]
+local fluidHandlingTech = TECH["fluid-handling"]
 local barrellingRecipes = {}
 local unbarrellingRecipes = {}
 local gasFillingRecipes = {}
@@ -104,7 +104,7 @@ local gasEmptyingRecipes = {}
 local newEffectsFluidHandling = {}
 for _, effect in pairs(fluidHandlingTech.effects) do
 	if effect.type == "unlock-recipe" then
-		local recipe = data.raw.recipe[effect.recipe]
+		local recipe = RECIPE[effect.recipe]
 		assert(recipe ~= nil, "recipe "..effect.recipe.." not found")
 		if recipe.subgroup == "fill-barrel" then
 			table.insert(barrellingRecipes, effect.recipe)
@@ -124,25 +124,25 @@ end
 fluidHandlingTech.effects = newEffectsFluidHandling
 for _, recipeGroup in pairs{barrellingRecipes, unbarrellingRecipes, gasFillingRecipes, gasEmptyingRecipes} do
 	for _, recipeName in pairs(recipeGroup) do
-		table.insert(data.raw.technology["fluid-containers"].effects, {type = "unlock-recipe", recipe = recipeName})
+		table.insert(TECH["fluid-containers"].effects, {type = "unlock-recipe", recipe = recipeName})
 	end
 end
 Tech.removeRecipeFromTech("barrel", "fluid-handling")
 
 -- Add fuel values for barrels and gas tanks.
 for fluidName, fuelValues in pairs(Const.fluidFuelValues) do
-	if data.raw.item[fluidName.."-barrel"] then
+	if ITEM[fluidName.."-barrel"] then
 		if fuelValues[1] ~= nil then
 			local isGas = gases[fluidName]
 			local fluidNumMult = Gen.ifThenElse(isGas, GAS_TANK_FLUID_AMOUNT, BARREL_FLUID_AMOUNT)
-			data.raw.item[fluidName.."-barrel"].fuel_value = Gen.multWithUnits(fuelValues[1], fluidNumMult)
-			data.raw.item[fluidName.."-barrel"].fuel_emissions_multiplier = fuelValues[2]
-			data.raw.item[fluidName.."-barrel"].fuel_acceleration_multiplier = fuelValues[3]
-			data.raw.item[fluidName.."-barrel"].fuel_top_speed_multiplier = fuelValues[4]
-			data.raw.item[fluidName.."-barrel"].fuel_category = fuelValues[5]
+			ITEM[fluidName.."-barrel"].fuel_value = Gen.multWithUnits(fuelValues[1], fluidNumMult)
+			ITEM[fluidName.."-barrel"].fuel_emissions_multiplier = fuelValues[2]
+			ITEM[fluidName.."-barrel"].fuel_acceleration_multiplier = fuelValues[3]
+			ITEM[fluidName.."-barrel"].fuel_top_speed_multiplier = fuelValues[4]
+			ITEM[fluidName.."-barrel"].fuel_category = fuelValues[5]
 			local remainingItem = Gen.ifThenElse(isGas, "gas-tank", "barrel")
-			data.raw.item[fluidName.."-barrel"].burnt_result = remainingItem
-			data.raw.item[fluidName.."-barrel"].fuel_glow_color = data.raw.item["coal"].fuel_glow_color
+			ITEM[fluidName.."-barrel"].burnt_result = remainingItem
+			ITEM[fluidName.."-barrel"].fuel_glow_color = ITEM["coal"].fuel_glow_color
 		end
 	else
 		log("WARNING: No item for "..fluidName.."-barrel")

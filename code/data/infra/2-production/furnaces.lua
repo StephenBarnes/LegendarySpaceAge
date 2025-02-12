@@ -48,7 +48,7 @@ for _, vals in pairs{
 		speed = 1,
 	},
 } do
-	local recipe = data.raw.recipe[vals.name]
+	local recipe = RECIPE[vals.name]
 	recipe.ingredients = vals.ingredients
 	recipe.energy_required = vals.craft_time
 
@@ -62,5 +62,5 @@ for _, vals in pairs{
 end
 
 -- Char furnace is technically an assembling machine.
-data.raw.recipe["char-furnace"].ingredients = {{type="item", name="structure", amount=1}}
-data.raw.recipe["char-furnace"].energy_required = 1
+RECIPE["char-furnace"].ingredients = {{type="item", name="structure", amount=1}}
+RECIPE["char-furnace"].energy_required = 1

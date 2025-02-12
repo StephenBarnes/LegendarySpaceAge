@@ -3,7 +3,7 @@
 local Tech = require "code.util.tech"
 
 -- Create item.
-local mechanismItem = table.deepcopy(data.raw.item["steel-plate"])
+local mechanismItem = table.deepcopy(ITEM["steel-plate"])
 mechanismItem.name = "mechanism"
 mechanismItem.subgroup = "mechanism"
 mechanismItem.order = "01"
@@ -12,7 +12,7 @@ mechanismItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-fact
 data:extend{mechanismItem}
 
 -- Create recipe: 8 machine parts + 1 frame -> 1 mechanism
-local basicRecipe = table.deepcopy(data.raw.recipe["iron-stick"])
+local basicRecipe = table.deepcopy(RECIPE["iron-stick"])
 basicRecipe.name = "mechanism-from-basic"
 basicRecipe.ingredients = {
 	{type = "item", name = "iron-gear-wheel", amount = 5},

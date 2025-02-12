@@ -10,7 +10,7 @@ for i = 1, 3 do
 		mipmap_count = 4,
 	})
 end
-local gunpowderItem = table.deepcopy(data.raw.item["sulfur"])
+local gunpowderItem = table.deepcopy(ITEM["sulfur"])
 gunpowderItem.name = "gunpowder"
 gunpowderItem.icons = {{icon = gunpowderPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 gunpowderItem.pictures = gunpowderPictures
@@ -21,7 +21,7 @@ data:extend{gunpowderItem}
 
 -- Create recipe for gunpowder.
 -- 2 carbon + 1 sulfur + 1 sand -> 2 gunpowder
-local gunpowderRecipe = table.deepcopy(data.raw.recipe["firearm-magazine"])
+local gunpowderRecipe = table.deepcopy(RECIPE["firearm-magazine"])
 gunpowderRecipe.name = "gunpowder"
 gunpowderRecipe.ingredients = {
 	{type="item", name="carbon", amount=2},
@@ -37,25 +37,25 @@ data:extend{gunpowderRecipe}
 -- Adjust ammo mag recipes
 -- 4 iron plate + 1 gunpowder -> 1 yellow mag
 -- 1 steel plate + 4 copper plate + 1 gunpowder -> 1 red mag (represents steel core and copper jacket)
-data.raw.recipe["firearm-magazine"].ingredients = {
+RECIPE["firearm-magazine"].ingredients = {
 	{type="item", name="iron-plate", amount=5},
 	{type="item", name="gunpowder", amount=1},
 }
-data.raw.recipe["piercing-rounds-magazine"].ingredients = {
+RECIPE["piercing-rounds-magazine"].ingredients = {
 	{type="item", name="steel-plate", amount=1},
 	{type="item", name="copper-plate", amount=5},
 	{type="item", name="gunpowder", amount=2},
 }
-data.raw.recipe["piercing-rounds-magazine"].results = {{type = "item", name = "piercing-rounds-magazine", amount = 2}}
-data.raw.recipe["shotgun-shell"].ingredients = { -- Originally 2 iron plate + 2 copper plate -> 1 shotgun shell; changing to add 1 gunpowder and produce 2 shells.
+RECIPE["piercing-rounds-magazine"].results = {{type = "item", name = "piercing-rounds-magazine", amount = 2}}
+RECIPE["shotgun-shell"].ingredients = { -- Originally 2 iron plate + 2 copper plate -> 1 shotgun shell; changing to add 1 gunpowder and produce 2 shells.
 	{type="item", name="iron-plate", amount=2},
 	{type="item", name="copper-plate", amount=2},
 	{type="item", name="gunpowder", amount=1},
 }
-data.raw.recipe["shotgun-shell"].results = {{type = "item", name = "shotgun-shell", amount = 2}}
+RECIPE["shotgun-shell"].results = {{type = "item", name = "shotgun-shell", amount = 2}}
 
 -- Create tech.
-local tech = table.deepcopy(data.raw.technology["rocket-fuel"])
+local tech = table.deepcopy(TECH["rocket-fuel"])
 tech.name = "gunpowder"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "gunpowder"},

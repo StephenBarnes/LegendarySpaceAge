@@ -28,7 +28,7 @@ local unlockedAtStart = Table.listToSet{
 	"nauvis:item:niter",
 }
 -- Add all recipes that are enabled at start.
-for recipeName, recipe in pairs(data.raw.recipe) do
+for recipeName, recipe in pairs(RECIPE) do
 	if (recipe.enabled == true or recipe.enabled == nil) and recipe.category ~= "recycling" then
 		unlockedAtStart["recipe:"..recipeName] = true
 	end
@@ -101,7 +101,7 @@ end
 -- For speed, could rather disable this. Just ignore recycling recipes for progression checks, since they don't make anything new available, except on Fulgora.
 -- Hm, but we need to check progression on Fulgora. So I'll pretend all recycling recipes are Fulgora-only, in the get-recipe-to-planets file.
 local recyclingRecipes = {}
-for _, recipe in pairs(data.raw.recipe) do
+for _, recipe in pairs(RECIPE) do
 	if recipe.category == "recycling" then
 		table.insert(recyclingRecipes, "recipe:"..recipe.name)
 	end
@@ -164,12 +164,12 @@ local function extendToClosure(availableThings, thingToRecipes, recipeToPlanets)
 			if availableThings["recipe:"..recipeName] then
 				for planetName, _ in pairs(recipePlanets) do
 					if availableThings["planet:"..planetName] then
-						if not allProductsAlreadyAvailable(data.raw.recipe[recipeName], availableThings, planetName) then
-							if allIngredientsAvailable(data.raw.recipe[recipeName], availableThings, planetName) then
+						if not allProductsAlreadyAvailable(RECIPE[recipeName], availableThings, planetName) then
+							if allIngredientsAvailable(RECIPE[recipeName], availableThings, planetName) then
 								-- TODO should also check that at least one of the machines are available, or it's handcraftable. Eg chem plants on Vulcanus.
 								anotherRound = true
 								anotherRoundReason = "Recipe: "..recipeName.." on planet "..planetName
-								for _, product in pairs(data.raw.recipe[recipeName].results) do
+								for _, product in pairs(RECIPE[recipeName].results) do
 									local productID = Util.getCanonicalName(product, planetName)
 									availableThings[productID] = true
 								end
@@ -244,7 +244,7 @@ local function getTechPrePostSets(toposortedTechs, thingToRecipes, recipeToPlane
 
 	-- Look through all techs in toposorted order, figuring out what's available before and after that tech.
 	for _, techName in pairs(toposortedTechs) do
-		local tech = data.raw.technology[techName]
+		local tech = TECH[techName]
 		local availableBeforeThisTech = {}
 		local techPrereqs = tech.prerequisites or {}
 
@@ -272,7 +272,7 @@ local function getTechPrePostSets(toposortedTechs, thingToRecipes, recipeToPlane
 		-- Add newly-unlocked recipes.
 		for _, effect in pairs(tech.effects or {}) do
 			if effect.type == "unlock-recipe" then
-				local recipe = data.raw.recipe[effect.recipe]
+				local recipe = RECIPE[effect.recipe]
 				assert(recipe ~= nil, effect.recipe)
 				availableAfterThisTech["recipe:"..recipe.name] = true
 				anythingAddedToPostTech = true

@@ -3,11 +3,11 @@
 local Tech = require "code.util.tech"
 
 -- Move item and recipes into the subgroup.
-data.raw.item["electric-engine-unit"].subgroup = "actuator"
-data.raw.item["electric-engine-unit"].order = "01"
+ITEM["electric-engine-unit"].subgroup = "actuator"
+ITEM["electric-engine-unit"].order = "01"
 
 -- Create recipe: 8 advanced parts + 1 frame + 1 red circuit + 20 lubricant -> 1 actuator
-local standardRecipe = table.deepcopy(data.raw.recipe["electric-engine-unit"])
+local standardRecipe = table.deepcopy(RECIPE["electric-engine-unit"])
 standardRecipe.name = "actuator-standard"
 standardRecipe.ingredients = {
 	{ type = "item",  name = "advanced-parts",   amount = 8 },
@@ -25,8 +25,8 @@ data:extend{standardRecipe}
 Tech.addRecipeToTech("actuator-standard", "electric-engine")
 
 -- Hide the default recipe.
-data.raw.recipe["electric-engine-unit"].hidden = true
-data.raw.recipe["electric-engine-unit"].hidden_in_factoriopedia = true
+RECIPE["electric-engine-unit"].hidden = true
+RECIPE["electric-engine-unit"].hidden_in_factoriopedia = true
 Tech.removeRecipeFromTech("electric-engine-unit", "electric-engine")
 
 -- Create recipe: 6 advanced parts + 1 frame + 1 blue circuit + 20 lubricant -> 1 actuator

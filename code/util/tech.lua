@@ -7,7 +7,7 @@ Tech.addRecipeToTech = function(recipeName, techName, index)
 		type = "unlock-recipe",
 		recipe = recipeName,
 	}
-	local tech = data.raw.technology[techName]
+	local tech = TECH[techName]
 	if tech == nil then
 		log("ERROR: Couldn't find tech "..techName.." to add recipe "..recipeName.." to.")
 		return
@@ -24,7 +24,7 @@ Tech.addRecipeToTech = function(recipeName, techName, index)
 end
 
 Tech.addSciencePack = function(techName, sciencePackName)
-	local tech = data.raw.technology[techName]
+	local tech = TECH[techName]
 	if tech == nil then
 		log("ERROR: Couldn't find tech "..techName.." to add science pack "..sciencePackName.." to.")
 		return
@@ -33,7 +33,7 @@ Tech.addSciencePack = function(techName, sciencePackName)
 end
 
 Tech.hideTech = function(techName)
-	local tech = data.raw.technology[techName]
+	local tech = TECH[techName]
 	if tech == nil then
 		log("Couldn't find tech "..techName.." to hide.")
 		return
@@ -43,7 +43,7 @@ Tech.hideTech = function(techName)
 end
 
 Tech.addTechDependency = function(firstTech, secondTech)
-	local secondTechData = data.raw.technology[secondTech]
+	local secondTechData = TECH[secondTech]
 	if secondTechData == nil then
 		log("ERROR: Couldn't find tech "..secondTech.." to add dependency "..firstTech.." to.")
 		return
@@ -56,24 +56,24 @@ Tech.addTechDependency = function(firstTech, secondTech)
 end
 
 Tech.tryAddTechDependency = function(firstTech, secondTech)
-	if data.raw.technology[secondTech] ~= nil and data.raw.technology[firstTech] ~= nil then
+	if TECH[secondTech] ~= nil and TECH[firstTech] ~= nil then
 		Tech.addTechDependency(firstTech, secondTech)
 	end
 end
 
 Tech.replacePrereq = function(techName, oldPrereq, newPrereq)
-	for i, prereq in pairs(data.raw.technology[techName].prerequisites) do
+	for i, prereq in pairs(TECH[techName].prerequisites) do
 		if prereq == oldPrereq then
-			data.raw.technology[techName].prerequisites[i] = newPrereq
+			TECH[techName].prerequisites[i] = newPrereq
 			return
 		end
 	end
 end
 
 Tech.removePrereq = function(techName, oldPrereq)
-	for i, prereq in pairs(data.raw.technology[techName].prerequisites) do
+	for i, prereq in pairs(TECH[techName].prerequisites) do
 		if prereq == oldPrereq then
-			table.remove(data.raw.technology[techName].prerequisites, i)
+			table.remove(TECH[techName].prerequisites, i)
 			return
 		end
 	end
@@ -88,7 +88,7 @@ Tech.removeRecipesFromTechs = function(recipeList, techNames)
 	end
 
 	for _, techName in pairs(techNames) do
-		local tech = data.raw.technology[techName]
+		local tech = TECH[techName]
 		if tech == nil then
 			log("Error: Couldn't find tech "..techName.." to remove recipes from.")
 		else
@@ -121,7 +121,7 @@ Tech.removeRecipeFromTech = function(recipeName, techName)
 end
 
 Tech.disable = function(techName)
-	local tech = data.raw.technology[techName]
+	local tech = TECH[techName]
 	if tech == nil then
 		log("Couldn't find tech "..techName.." to disable.")
 		return
@@ -131,7 +131,7 @@ Tech.disable = function(techName)
 end
 
 Tech.addEffect = function(tech, effect, index)
-	if type(tech) == "string" then tech = data.raw.technology[tech] end
+	if type(tech) == "string" then tech = TECH[tech] end
 	if not tech.effects then
 		tech.effects = {effect}
 	else
@@ -150,7 +150,7 @@ Tech.getRecursivePrereqs = function(rootTechId)
 	local foundPrereqs = {} -- Set of prereqs, mapped to true.
 	local frontier = {} -- List of tech IDs to check.
 	-- Add initial prereqs
-	for _, prereq in pairs(Tech.getPrereqList(data.raw.technology[rootTechId])) do
+	for _, prereq in pairs(Tech.getPrereqList(TECH[rootTechId])) do
 		table.insert(frontier, prereq)
 	end
 	local loops = 0 -- To prevent infinite loops.
@@ -167,7 +167,7 @@ Tech.getRecursivePrereqs = function(rootTechId)
 		end
 		if not foundPrereqs[techId] then
 			foundPrereqs[techId] = true
-			for _, prereq in pairs(Tech.getPrereqList(data.raw.technology[techId])) do
+			for _, prereq in pairs(Tech.getPrereqList(TECH[techId])) do
 				table.insert(frontier, prereq)
 			end
 		end
@@ -177,7 +177,7 @@ end
 
 Tech.reorderRecipeUnlocks = function(techId, recipeIds)
 	-- Reorders the recipe unlocks for a tech. Assumes all effects are recipes.
-	local tech = data.raw.technology[techId]
+	local tech = TECH[techId]
 	if tech == nil then
 		log("ERROR: Couldn't find tech "..techId.." to reorder recipe unlocks for.")
 		return
@@ -213,7 +213,7 @@ Tech.reorderRecipeUnlocks = function(techId, recipeIds)
 end
 
 Tech.setPrereqs = function(techId, prereqs)
-	local tech = data.raw.technology[techId]
+	local tech = TECH[techId]
 	if tech == nil then
 		log("ERROR: Couldn't find tech "..techId.." to set prereqs for.")
 		return
@@ -223,7 +223,7 @@ end
 
 ---@param unit data.TechnologyUnit
 Tech.setUnit = function(techId, unit)
-	local tech = data.raw.technology[techId]
+	local tech = TECH[techId]
 	if tech == nil then
 		log("ERROR: Couldn't find tech "..techId.." to set unit for.")
 		return
@@ -232,7 +232,7 @@ Tech.setUnit = function(techId, unit)
 end
 
 Tech.copyUnit = function(fromTechId, toTechId)
-	local fromTech = data.raw.technology[fromTechId]
+	local fromTech = TECH[fromTechId]
 	if fromTech == nil then
 		log("ERROR: Couldn't find tech "..fromTechId.." to copy unit from.")
 		return

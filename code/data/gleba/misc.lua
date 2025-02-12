@@ -4,7 +4,7 @@ local Recipe = require("code.util.recipe")
 
 -- Change Gleba rocket fuel recipe to require carbon, produced from spoilage.
 -- Originally 2 bioflux + 30 jelly + water.
-table.insert(data.raw.recipe["rocket-fuel-from-jelly"].ingredients,
+table.insert(RECIPE["rocket-fuel-from-jelly"].ingredients,
 	{ type = "item", name = "carbon", amount = 2 })
 
 -- Artificial soil tech makes more sense after biochamber.
@@ -12,7 +12,7 @@ Tech.setPrereqs("artificial-soil", {"biochamber"})
 
 -- Artificial soil recipes should be biochamber-only.
 for _, recipeName in pairs{"artificial-yumako-soil", "artificial-jellynut-soil", "overgrowth-yumako-soil", "overgrowth-jellynut-soil"} do
-	data.raw.recipe[recipeName].category = "organic"
+	RECIPE[recipeName].category = "organic"
 end
 
 -- Double rocket capacity for bioflux
@@ -20,7 +20,7 @@ end
 --Item.multiplyWeight("bioflux", 0.5, "capsule")
 
 -- Change ingredients of biological science pack.
-data.raw.recipe["agricultural-science-pack"].ingredients = {
+RECIPE["agricultural-science-pack"].ingredients = {
 	{type = "item", name = "nutrients", amount = 4},
 	{type = "item", name = "pentapod-egg", amount = 1},
 	--{type = "item", name = "iron-bacteria", amount = 1},
@@ -29,7 +29,7 @@ data.raw.recipe["agricultural-science-pack"].ingredients = {
 }
 
 -- Make spoilage spoil to nothing. From testing, you can simply not define spoil result or trigger, and it'll disappear.
-data.raw.item.spoilage.spoil_ticks = 60 * 60 * 20
+ITEM.spoilage.spoil_ticks = 60 * 60 * 20
 
 -- Remove stone spawns from Gleba.
 data.raw.planet.gleba.map_gen_settings.autoplace_settings.entity.settings.stone = nil
@@ -80,8 +80,8 @@ Recipe.hide("rocket-fuel-from-jelly")
 Tech.removeRecipeFromTech("rocket-fuel-from-jelly", "bioflux-processing")
 Tech.removePrereq("agricultural-science-pack", "bioflux-processing")
 Tech.setPrereqs("bioflux-processing", {"agricultural-science-pack", "slipstack-propagation"})
-data.raw.technology["bioflux-processing"].research_trigger = nil
-data.raw.technology["bioflux-processing"].unit = {
+TECH["bioflux-processing"].research_trigger = nil
+TECH["bioflux-processing"].unit = {
 	count = 300,
 	time = 60,
 	ingredients = {

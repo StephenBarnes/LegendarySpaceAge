@@ -27,7 +27,7 @@ cementFluid.visualization_color = {.43, .43, .43, 1}
 data:extend{cementFluid}
 
 -- Create recipe for cement.
-local cementRecipe = table.deepcopy(data.raw.recipe["lubricant"])
+local cementRecipe = table.deepcopy(RECIPE["lubricant"])
 cementRecipe.name = "make-cement" -- Must be different from cement so it appears in factoriopedia correctly.
 cementRecipe.localised_name = {"fluid-name.cement"}
 cementRecipe.subgroup = "terrain"
@@ -46,7 +46,7 @@ cementRecipe.allow_decomposition = true
 data:extend{cementRecipe}
 
 -- Create tech for cement and brick structure.
-local tech = table.deepcopy(data.raw.technology.concrete)
+local tech = table.deepcopy(TECH.concrete)
 tech.name = "cement"
 tech.effects = {
 	{
@@ -67,12 +67,12 @@ tech.icon = "__LegendarySpaceAge__/graphics/fluids/cement-tech.png"
 data:extend{tech}
 
 -- Adjust recipes for concrete and refined concrete.
-data.raw.recipe["concrete"].ingredients = {
+RECIPE["concrete"].ingredients = {
 	{type = "fluid", name = "cement", amount = 100},
 	{type = "item", name = "stone", amount = 8},
 	{type = "item", name = "iron-stick", amount = 4},
 }
-data.raw.recipe["refined-concrete"].ingredients = {
+RECIPE["refined-concrete"].ingredients = {
 	{type = "fluid", name = "cement", amount = 100},
 	{type = "item", name = "resin", amount = 2},
 	{type = "item", name = "ash", amount = 2},
@@ -81,7 +81,7 @@ data.raw.recipe["refined-concrete"].ingredients = {
 
 -- Create sulfur concrete recipes for foundries.
 -- TODO
-local concreteCastingRecipe = table.deepcopy(data.raw.recipe["concrete-from-molten-iron"])
+local concreteCastingRecipe = table.deepcopy(RECIPE["concrete-from-molten-iron"])
 concreteCastingRecipe.name = "sulfur-concrete"
 concreteCastingRecipe.ingredients = {
 	{type = "item", name = "sulfur", amount = 30},
@@ -97,7 +97,7 @@ concreteCastingRecipe.icons = {
 }
 data:extend{concreteCastingRecipe}
 
-local refinedConcreteCastingRecipe = table.deepcopy(data.raw.recipe["concrete-from-molten-iron"])
+local refinedConcreteCastingRecipe = table.deepcopy(RECIPE["concrete-from-molten-iron"])
 refinedConcreteCastingRecipe.name = "sulfur-refined-concrete"
 refinedConcreteCastingRecipe.ingredients = {
 	{type = "item", name = "sulfur", amount = 30},
@@ -119,7 +119,7 @@ data:extend{refinedConcreteCastingRecipe}
 Recipe.hide("concrete-from-molten-iron")
 
 -- Create sulfur concrete tech.
-local sulfurConcreteTech = table.deepcopy(data.raw.technology["concrete"])
+local sulfurConcreteTech = table.deepcopy(TECH["concrete"])
 sulfurConcreteTech.name = "sulfur-concrete"
 sulfurConcreteTech.effects = {
 	{

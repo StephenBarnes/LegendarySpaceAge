@@ -79,7 +79,7 @@ local function fixRecyclingRecipe(recipe)
 	recipe.results = newResults
 	--log("changed results of "..recipe.name .. " to "..serpent.block(recipe.results))
 end
-for _, recipe in pairs(data.raw.recipe) do
+for _, recipe in pairs(RECIPE) do
 	if recipe.category == "recycling" then
 		if recipe.results ~= nil and #recipe.results > 0 then
 			fixRecyclingRecipe(recipe)
@@ -94,14 +94,14 @@ end
 -- Hide rate-trigger items' recycling recipes.
 -- Apparently hiding the recipe isn't enough, need to delete it.
 -- This happens bc the "quality" mod creates self-recycling recipes for all items that don't have recycling recipes.
-data.raw.recipe["iron-gear-wheel-per-minute-recycling"] = nil
-data.raw.recipe["electronic-circuit-per-minute-recycling"] = nil
-data.raw.recipe["plastic-bar-per-minute-recycling"] = nil
-data.raw.recipe["piercing-rounds-magazine-per-minute-recycling"] = nil
+RECIPE["iron-gear-wheel-per-minute-recycling"] = nil
+RECIPE["electronic-circuit-per-minute-recycling"] = nil
+RECIPE["plastic-bar-per-minute-recycling"] = nil
+RECIPE["piercing-rounds-magazine-per-minute-recycling"] = nil
 
 -- Hide recycling recipes for items that are not recyclable.
-data.raw.recipe["assembled-rocket-part-recycling"] = nil
+RECIPE["assembled-rocket-part-recycling"] = nil
 
 -- Space biolabs should have recycling recipe.
 -- Actually, looks like there's a hard-coded exception for recipe named "biolab". So let's generate it ourselves.
-Recycling.generate_recycling_recipe(data.raw.recipe.biolab, (function(_) return true end))
+Recycling.generate_recycling_recipe(RECIPE.biolab, (function(_) return true end))

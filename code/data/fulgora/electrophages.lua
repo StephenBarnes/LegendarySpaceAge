@@ -118,12 +118,12 @@ data:extend({
 		},
 		subgroup = "fulgora-processes",
 		order = "c[organics]-b[electrophage]",
-		inventory_move_sound = data.raw.item["battery"].inventory_move_sound,
-		pick_sound = data.raw.item["battery"].pick_sound,
-		drop_sound = data.raw.item["battery"].drop_sound,
-		stack_size = data.raw.item["iron-bacteria"].stack_size,
+		inventory_move_sound = ITEM["battery"].inventory_move_sound,
+		pick_sound = ITEM["battery"].pick_sound,
+		drop_sound = ITEM["battery"].drop_sound,
+		stack_size = ITEM["iron-bacteria"].stack_size,
 		default_import_location = "fulgora",
-		weight = data.raw.item["iron-bacteria"].weight,
+		weight = ITEM["iron-bacteria"].weight,
 		spoil_ticks = 60 * 60 * 3, -- 3 minutes.
 		spoil_result = "spoilage",
 		--[{"simple-entity", "fulgurite"}] = {0, 0, .5}, -- Rather don't
@@ -133,8 +133,8 @@ data:extend({
 -- Electrophages could spoil to nutrients, or to spoilage (which you then turn into nutrients).
 -- But doesn't really fit, bc Fulgora has no ambient decomposition bacteria, so spoilage shouldn't really exist.
 -- So, making a new type of nutrients that lasts longer than Gleba nutrients, and spoils to stone.
-data.raw.item["electrophage"].spoil_result = "polysalt"
-local polysaltItem = table.deepcopy(data.raw.item["nutrients"])
+ITEM["electrophage"].spoil_result = "polysalt"
+local polysaltItem = table.deepcopy(ITEM["nutrients"])
 polysaltItem.name = "polysalt"
 polysaltItem.icon = "__LegendarySpaceAge__/graphics/fulgora/polysalts.png"
 polysaltItem.icon_size = 128
@@ -144,7 +144,7 @@ polysaltItem.spoil_ticks = 60 * 60 * 60 -- 1 hour.
 polysaltItem.spoil_result = "sand"
 polysaltItem.burnt_result = "sand"
 -- Copy dry powder sounds from sulfur, instead of wet nutrient sounds.
-polysaltItem.drop_sound = data.raw.item["sulfur"].drop_sound
-polysaltItem.pick_sound = data.raw.item["sulfur"].pick_sound
-polysaltItem.inventory_move_sound = data.raw.item["sulfur"].inventory_move_sound
+polysaltItem.drop_sound = ITEM["sulfur"].drop_sound
+polysaltItem.pick_sound = ITEM["sulfur"].pick_sound
+polysaltItem.inventory_move_sound = ITEM["sulfur"].inventory_move_sound
 data:extend({polysaltItem})

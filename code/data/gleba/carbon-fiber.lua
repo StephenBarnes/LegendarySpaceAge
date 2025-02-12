@@ -2,7 +2,7 @@
 
 local Tech = require("code.util.tech")
 
-local tech = data.raw.technology["carbon-fiber"]
+local tech = TECH["carbon-fiber"]
 tech.prerequisites = {"stingfrond-cultivation-2", "chitin-processing-2"}
 tech.unit = nil
 tech.research_trigger = {

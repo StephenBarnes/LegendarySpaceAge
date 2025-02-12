@@ -20,5 +20,5 @@ biochamber.repair_speed_modifier = 0.5 -- 50% slower repair. Seems they added th
 
 -- Fruit processing is crafting recipe, not biology recipe.
 for _, recipeName in pairs{"yumako-processing", "jellynut-processing"} do
-	data.raw.recipe[recipeName].category = "crafting"
+	RECIPE[recipeName].category = "crafting"
 end

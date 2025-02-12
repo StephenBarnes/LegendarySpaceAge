@@ -59,7 +59,7 @@ data:extend({boompuffPlant})
 --- Create items for products of boompuff farming.
 
 -- Create sprouted-boomnut item.
-local sproutItem = table.deepcopy(data.raw.item["tree-seed"])
+local sproutItem = table.deepcopy(ITEM["tree-seed"])
 sproutItem.name = "sprouted-boomnut"
 sproutItem.localised_name = {"item-name.sprouted-boomnut"}
 sproutItem.localised_description = {"item-description.sprouted-boomnut"}
@@ -78,7 +78,7 @@ Item.clearFuel(sproutItem)
 data:extend{sproutItem}
 
 -- Create boomnut item.
-local boomnutItem = table.deepcopy(data.raw.item["tree-seed"])
+local boomnutItem = table.deepcopy(ITEM["tree-seed"])
 boomnutItem.name = "boomnut"
 boomnutItem.localised_name = {"item-name.boomnut"}
 boomnutItem.place_result = nil
@@ -175,7 +175,7 @@ data:extend{boomsacProjectile}
 --- Create recipes.
 
 -- Create recipe for sprouted-boomnut: 1 boomnut -> 40% chance for 1 sprouted-boomnut.
-local sproutedBoomnutRecipe = table.deepcopy(data.raw.recipe["bioflux"])
+local sproutedBoomnutRecipe = table.deepcopy(RECIPE["bioflux"])
 sproutedBoomnutRecipe.name = "sprouted-boomnut"
 sproutedBoomnutRecipe.ingredients = {
 	{type = "item", name = "boomnut", amount = 1},
@@ -190,7 +190,7 @@ sproutedBoomnutRecipe.show_amount_in_title = false
 data:extend{sproutedBoomnutRecipe}
 
 -- Create recipe for crush-boomnut: 1 boomnut -> 1 niter + 1 spoilage
-local crushBoomnutRecipe = table.deepcopy(data.raw.recipe["bioflux"])
+local crushBoomnutRecipe = table.deepcopy(RECIPE["bioflux"])
 crushBoomnutRecipe.name = "crush-boomnut"
 crushBoomnutRecipe.ingredients = {
 	{type = "item", name = "boomnut", amount = 1},
@@ -212,7 +212,7 @@ crushBoomnutRecipe.allow_decomposition = false -- Otherwise it thinks spoilage c
 data:extend{crushBoomnutRecipe}
 
 -- Create recipe for boomsac-deflation: 1 boomsac + 10 water + 10 sulfuric acid -> 40 natural gas + 20 sulfuric acid + 1 sulfur
-local boomsacDeflationRecipe = table.deepcopy(data.raw.recipe["bioflux"])
+local boomsacDeflationRecipe = table.deepcopy(RECIPE["bioflux"])
 boomsacDeflationRecipe.name = "boomsac-deflation"
 boomsacDeflationRecipe.ingredients = {
 	{type = "item", name = "boomsac", amount = 1},
@@ -237,7 +237,7 @@ data:extend{boomsacDeflationRecipe}
 
 ------------------------------------------------------------------------
 -- Create tech.
-local tech = table.deepcopy(data.raw.technology["jellynut"])
+local tech = table.deepcopy(TECH["jellynut"])
 tech.name = "boompuff-cultivation"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "sprouted-boomnut"},

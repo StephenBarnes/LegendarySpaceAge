@@ -8,13 +8,13 @@ filtrationSubgroup.name = "filtration"
 filtrationSubgroup.order = "c9"
 data:extend{filtrationSubgroup}
 -- Also move the other water recipes to that line.
-data.raw.recipe["steam-condensation"].subgroup = "filtration"
-data.raw.recipe["ice-melting"].subgroup = "filtration"
-data.raw.recipe["steam-condensation"].order = "05"
-data.raw.recipe["ice-melting"].order = "06"
+RECIPE["steam-condensation"].subgroup = "filtration"
+RECIPE["ice-melting"].subgroup = "filtration"
+RECIPE["steam-condensation"].order = "05"
+RECIPE["ice-melting"].order = "06"
 
 -- Create filter item.
-local filterItem = table.deepcopy(data.raw.item["battery"])
+local filterItem = table.deepcopy(ITEM["battery"])
 filterItem.name = "filter"
 filterItem.icon = nil
 filterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64}}
@@ -24,7 +24,7 @@ filterItem.weight = 1000
 data:extend{filterItem}
 
 -- Create spent filter item.
-local spentFilterItem = table.deepcopy(data.raw.item["battery"])
+local spentFilterItem = table.deepcopy(ITEM["battery"])
 spentFilterItem.name = "spent-filter"
 spentFilterItem.icon = nil
 spentFilterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/spent-filter.png", icon_size = 64}}
@@ -34,7 +34,7 @@ spentFilterItem.weight = 1000
 data:extend{spentFilterItem}
 
 -- Create filtration-lake-water tech.
-local filtrationLakeWaterTech = table.deepcopy(data.raw.technology["automation"])
+local filtrationLakeWaterTech = table.deepcopy(TECH["automation"])
 filtrationLakeWaterTech.name = "filtration-lake-water"
 filtrationLakeWaterTech.icon = nil
 filtrationLakeWaterTech.icons = {
@@ -61,7 +61,7 @@ filtrationLakeWaterTech.ignore_tech_cost_multiplier = true
 data:extend{filtrationLakeWaterTech}
 
 -- Create filtration-gleban-slime tech.
-local filtrationGlebanSlimeTech = table.deepcopy(data.raw.technology["jellynut"])
+local filtrationGlebanSlimeTech = table.deepcopy(TECH["jellynut"])
 filtrationGlebanSlimeTech.name = "filtration-gleban-slime"
 filtrationGlebanSlimeTech.icon = nil
 filtrationGlebanSlimeTech.icons = {
@@ -84,7 +84,7 @@ Tech.addTechDependency("filtration-gleban-slime", "biochamber")
 -- TODO create tech for advanced filtration of Gleban slime, producing petrophages.
 
 -- Create filtration-fulgoran-sludge tech.
-local filtrationFulgoranSludgeTech = table.deepcopy(data.raw.technology["recycling"])
+local filtrationFulgoranSludgeTech = table.deepcopy(TECH["recycling"])
 filtrationFulgoranSludgeTech.name = "filtration-fulgoran-sludge"
 filtrationFulgoranSludgeTech.icon = nil
 filtrationFulgoranSludgeTech.icons = {
@@ -102,10 +102,10 @@ filtrationFulgoranSludgeTech.research_trigger = {
 }
 data:extend{filtrationFulgoranSludgeTech}
 Tech.addTechDependency("filtration-fulgoran-sludge", "holmium-processing")
-data.raw.technology["holmium-processing"].research_trigger.count = 10
+TECH["holmium-processing"].research_trigger.count = 10
 
 -- Create recipe to make filters.
-local filterRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
+local filterRecipe = table.deepcopy(RECIPE["iron-gear-wheel"])
 filterRecipe.name = "filter"
 filterRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1},
@@ -119,7 +119,7 @@ filterRecipe.auto_recycle = true
 data:extend{filterRecipe}
 
 -- Create recipe to clean filters.
-local cleanFilterRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
+local cleanFilterRecipe = table.deepcopy(RECIPE["iron-gear-wheel"])
 cleanFilterRecipe.name = "clean-filter"
 cleanFilterRecipe.ingredients = {
 	{type = "item", name = "spent-filter", amount = 1},
@@ -148,7 +148,7 @@ cleanFilterRecipe.auto_recycle = false
 data:extend{cleanFilterRecipe}
 
 -- Create recipe to filter lake water.
-local filterLakeWaterRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
+local filterLakeWaterRecipe = table.deepcopy(RECIPE["iron-gear-wheel"])
 filterLakeWaterRecipe.name = "filter-lake-water"
 filterLakeWaterRecipe.ingredients = {
 	{type = "item", name = "filter", amount = 1},
@@ -209,7 +209,7 @@ slimeFluid.heat_capacity = nil
 data:extend{slimeFluid}
 
 -- Create recipe to filter slime.
-local filterSlimeRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
+local filterSlimeRecipe = table.deepcopy(RECIPE["iron-gear-wheel"])
 filterSlimeRecipe.name = "filter-slime"
 filterSlimeRecipe.ingredients = {
 	{type = "item", name = "filter", amount = 1},

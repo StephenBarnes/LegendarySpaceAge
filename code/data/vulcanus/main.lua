@@ -11,14 +11,14 @@ Tech.removeRecipeFromTech("steam-condensation", "calcite-processing")
 Tech.addRecipeToTech("steam-condensation", "planet-discovery-vulcanus")
 
 -- Change icon for calcite processing tech to show the circuit.
-data.raw.technology["calcite-processing"].icon = nil
-data.raw.technology["calcite-processing"].icons = {{
+TECH["calcite-processing"].icon = nil
+TECH["calcite-processing"].icons = {{
 	icon = "__LegendarySpaceAge__/graphics/vulcanus/ceramic-board-tech.png",
 	icon_size = 256,
 }}
 
 -- Add recipe for water heating with lava, in chem plant.
-local lavaWaterHeatingRecipe = table.deepcopy(data.raw.recipe["steam-condensation"])
+local lavaWaterHeatingRecipe = table.deepcopy(RECIPE["steam-condensation"])
 lavaWaterHeatingRecipe.name = "lava-water-heating"
 lavaWaterHeatingRecipe.category = "chemistry"
 lavaWaterHeatingRecipe.subgroup = "vulcanus-processes"
@@ -46,20 +46,20 @@ data:extend({lavaWaterHeatingRecipe})
 Tech.addRecipeToTech("lava-water-heating", "planet-discovery-vulcanus")
 
 -- Change the science pack to use lava.
-data.raw.recipe["metallurgic-science-pack"].ingredients = {
+RECIPE["metallurgic-science-pack"].ingredients = {
 	{type = "item", name = "tungsten-carbide", amount = 3},
 	{type = "item", name = "tungsten-plate", amount = 2},
 	{type = "fluid", name = "lava", amount = 200},
 }
 
 -- Change Vulcanus tech triggers to need larger amounts.
-data.raw.technology["foundry"].research_trigger.count = 20 -- tungsten carbide
-data.raw.technology["big-mining-drill"].research_trigger.count = 4 -- foundries
-data.raw.technology["tungsten-steel"].research_trigger.count = 4 -- big mining drills
-data.raw.technology["metallurgic-science-pack"].research_trigger.count = 20 -- tungsten steel plates
+TECH["foundry"].research_trigger.count = 20 -- tungsten carbide
+TECH["big-mining-drill"].research_trigger.count = 4 -- foundries
+TECH["tungsten-steel"].research_trigger.count = 4 -- big mining drills
+TECH["metallurgic-science-pack"].research_trigger.count = 20 -- tungsten steel plates
 
 -- Add tech for inverse vulcanization, to make plastic cheaper on Vulcanus.
-local inverseVulcanizationTech = table.deepcopy(data.raw.technology["cliff-explosives"])
+local inverseVulcanizationTech = table.deepcopy(TECH["cliff-explosives"])
 inverseVulcanizationTech.name = "inverse-vulcanization"
 inverseVulcanizationTech.effects = {{type = "unlock-recipe", recipe = "inverse-vulcanization"}}
 inverseVulcanizationTech.prerequisites = {"metallurgic-science-pack"}
@@ -78,7 +78,7 @@ inverseVulcanizationTech.unit = {
 	},
 	time = 30,
 }
-local inverseVulcanizationRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
+local inverseVulcanizationRecipe = table.deepcopy(RECIPE["plastic-bar"])
 inverseVulcanizationRecipe.name = "inverse-vulcanization"
 inverseVulcanizationRecipe.subgroup = "raw-material"
 inverseVulcanizationRecipe.ingredients = {
@@ -90,7 +90,7 @@ inverseVulcanizationRecipe.results = {
 	{type = "item", name = "resin", amount = 1},
 }
 inverseVulcanizationRecipe.main_product = "plastic-bar"
-inverseVulcanizationRecipe.order = data.raw.item["plastic-bar"].order.."-2"
+inverseVulcanizationRecipe.order = ITEM["plastic-bar"].order.."-2"
 inverseVulcanizationRecipe.icons = {
 	{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.5},
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale = 0.27, shift = {-6, -7}, mipmap_count=4},

@@ -24,10 +24,10 @@ for itemName, fuelValues in pairs(Const.itemFuelValues) do
 		item.burnt_result = "ash"
 	end
 	if item.fuel_glow_color == nil then
-		item.fuel_glow_color = data.raw.item["coal"].fuel_glow_color
+		item.fuel_glow_color = ITEM["coal"].fuel_glow_color
 	end
 end
-data.raw.item["sulfur"].fuel_glow_color = {r=.3, g=.3, b=1, a=.2} -- Sulfur burns blue in real life.
+ITEM["sulfur"].fuel_glow_color = {r=.3, g=.3, b=1, a=.2} -- Sulfur burns blue in real life.
 
 -- Create fuel category for non-carbon fuels like soldReplicationRecipeulfur, which can't be used in some places where carbon is needed (eg furnaces need carbon as reducing agent).
 -- Mostly this is to prevent using sulfur to make syngas in a gasifier, since that would create carbon out of nothing, which breaks Vulcanus.
@@ -94,8 +94,8 @@ for _, fuel in pairs(otherCarbonicFuels) do
 end
 
 -- Delete nuclear fuel, I don't like it, doesn't make sense. Even considering vehicles can use coal etc as fuel, so they have a heat engine rather than an ICE, they still wouldn't be able to run off a barely-critical lump of U-235 without radiation shielding, control rods, etc. which is basically a miniature nuclear reactor. I'd rather add a tech for nuclear tanks/cars/trains that only accept uranium fuel cells and are crafted using personal nuclear reactors.
-data.raw.item["nuclear-fuel"].hidden = true
-data.raw.recipe["nuclear-fuel"].hidden = true
+ITEM["nuclear-fuel"].hidden = true
+RECIPE["nuclear-fuel"].hidden = true
 Tech.removeRecipeFromTech("nuclear-fuel", "kovarex-enrichment-process")
 
 -- Add spent fuel slots to everything.
@@ -113,6 +113,6 @@ for _, type in pairs{"car", "locomotive", "inserter", "furnace", "assembling-mac
 end
 
 -- Boost stack sizes of some fuels.
-data.raw.item["carbon"].stack_size = 100
-data.raw.item["solid-fuel"].stack_size = 100
-data.raw.item["rocket-fuel"].stack_size = 100
+ITEM["carbon"].stack_size = 100
+ITEM["solid-fuel"].stack_size = 100
+ITEM["rocket-fuel"].stack_size = 100

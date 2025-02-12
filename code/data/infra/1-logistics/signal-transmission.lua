@@ -1,13 +1,13 @@
 -- This file edits tech/recipes for the AAI Signal Transmission mod.
 
 -- Recipes.
-data.raw.recipe["aai-signal-sender"].ingredients = {
+RECIPE["aai-signal-sender"].ingredients = {
 	{type = "item", name = "frame", amount = 50},
 	{type = "item", name = "panel", amount = 50},
 	{type = "item", name = "electric-engine-unit", amount = 20},
 	{type = "item", name = "processing-unit", amount = 20},
 }
-data.raw.recipe["aai-signal-receiver"].ingredients = {
+RECIPE["aai-signal-receiver"].ingredients = {
 	{type = "item", name = "frame", amount = 100},
 	{type = "item", name = "panel", amount = 100},
 	{type = "item", name = "mechanism", amount = 10},

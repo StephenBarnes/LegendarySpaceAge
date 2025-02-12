@@ -28,7 +28,7 @@ local function checkAllRecipesHaveIngredients(toposortedTechs, postTechSets)
 	}
 	-- Add the barrelling/unbarrelling recipes.
 	local ignoreRecipeSubgroups = Table.listToSet{"fill-barrel", "empty-barrel", "fill-gas-tank", "empty-gas-tank"}
-	for _, recipe in pairs(data.raw.recipe) do
+	for _, recipe in pairs(RECIPE) do
 		if ignoreRecipeSubgroups[recipe.subgroup] then
 			ignoreRecipes[recipe.name] = true
 		end
@@ -38,11 +38,11 @@ local function checkAllRecipesHaveIngredients(toposortedTechs, postTechSets)
 	for _, techName in pairs(toposortedTechs) do
 		local availablePostTech = postTechSets[techName]
 		assert(availablePostTech ~= nil, techName)
-		for _, effect in pairs(data.raw.technology[techName].effects or {}) do
+		for _, effect in pairs(TECH[techName].effects or {}) do
 			if effect.type == "unlock-recipe" then
 				local recipeName = effect.recipe
 				if not ignoreRecipes[recipeName] then
-					local recipe = data.raw.recipe[recipeName]
+					local recipe = RECIPE[recipeName]
 					assert(recipe ~= nil, recipeName)
 
 					local missingIngredients = {}

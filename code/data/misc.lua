@@ -14,9 +14,9 @@ Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-fulgo
 Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-vulcanus")
 
 -- Make some recipe times more sane.
-data.raw.recipe["stone-brick"].energy_required = 2 -- Originally 3.2.
+RECIPE["stone-brick"].energy_required = 2 -- Originally 3.2.
 for _, recipeName in pairs{"hazard-concrete", "refined-hazard-concrete"} do
-	data.raw.recipe[recipeName].energy_required = 10 -- Originally 0.25.
+	RECIPE[recipeName].energy_required = 10 -- Originally 0.25.
 end
 
 -- Increase storage of starting base, so there's enough space for all starting items.
@@ -51,7 +51,7 @@ data.raw.inserter["burner-inserter"].allow_burner_leech = true
 
 -- Diurnal Dynamics: hide flare from factoriopedia, since we're disabling it using mod setting.
 data.raw.capsule["data-dd-flare-capsule"].hidden_in_factoriopedia = true
-data.raw.recipe["data-dd-flare-capsule"].hidden_in_factoriopedia = true
+RECIPE["data-dd-flare-capsule"].hidden_in_factoriopedia = true
 -- Also hide non-user-facing stuff from factoriopedia. (Shouldn't be created at all if flares are disabled.)
 data.raw.explosion["data-dd-explosion-flare"].hidden = true
 data.raw.projectile["data-dd-flare-capsule"].hidden = true
@@ -66,7 +66,7 @@ data.raw["construction-robot"]["construction-robot"].speed = 0.12 -- Was 0.06
 data.raw["logistic-robot"]["logistic-robot"].speed = 0.10 -- Was 0.05
 
 -- Logistics 1 tech doesn't give "faster ways of transportation".
-data.raw.technology["logistics"].localised_description = {"technology-description.logistics-1"}
+TECH["logistics"].localised_description = {"technology-description.logistics-1"}
 
 -- Spidertron Enhancements
 data.raw["character-corpse"]["spidertron-enhancements-corpse"].hidden_in_factoriopedia = true

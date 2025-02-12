@@ -67,7 +67,7 @@ for i = 1, 3 do
 		mipmap_count = 4,
 	})
 end
-local pitchItem = table.deepcopy(data.raw.item["carbon"])
+local pitchItem = table.deepcopy(ITEM["carbon"])
 pitchItem.name = "pitch"
 pitchItem.icons = {{icon = pitchPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 pitchItem.pictures = pitchPictures
@@ -85,7 +85,7 @@ for i = 1, 3 do
 		mipmap_count = 4,
 	})
 end
-local resinItem = table.deepcopy(data.raw.item["plastic-bar"])
+local resinItem = table.deepcopy(ITEM["plastic-bar"])
 resinItem.name = "resin"
 resinItem.icons = {{icon = resinPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 resinItem.pictures = resinPictures

@@ -4,7 +4,7 @@ local Tech = require("code.util.tech")
 local Recipe = require("code.util.recipe")
 
 -- Create the new tech.
-local gasTankTech = table.deepcopy(data.raw.technology["oil-processing"])
+local gasTankTech = table.deepcopy(TECH["oil-processing"])
 gasTankTech.name = "fluid-containers"
 gasTankTech.prerequisites = {"fluid-handling"}
 gasTankTech.effects = {
@@ -28,7 +28,7 @@ data:extend{gasTankTech}
 
 -- Create the new empty gas tank item.
 local emptyGasTankTint = {.3, .3, .3}
-local emptyGasTankItem = table.deepcopy(data.raw.item["barrel"])
+local emptyGasTankItem = table.deepcopy(ITEM["barrel"])
 emptyGasTankItem.name = "gas-tank"
 emptyGasTankItem.icon = nil
 emptyGasTankItem.icons = {
@@ -36,11 +36,11 @@ emptyGasTankItem.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/gas-tanks/straight/overlay-side.png", icon_size = 64, scale = 0.5, tint = emptyGasTankTint},
 	{icon = "__LegendarySpaceAge__/graphics/gas-tanks/straight/overlay-top.png", icon_size = 64, scale = 0.5, tint = emptyGasTankTint},
 }
-emptyGasTankItem.order = data.raw.item["barrel"].order .. "-1"
+emptyGasTankItem.order = ITEM["barrel"].order .. "-1"
 data:extend{emptyGasTankItem}
 
 -- Create recipe for empty gas tank.
-local emptyGasTankRecipe = table.deepcopy(data.raw.recipe["barrel"])
+local emptyGasTankRecipe = table.deepcopy(RECIPE["barrel"])
 emptyGasTankRecipe.name = "gas-tank"
 emptyGasTankRecipe.ingredients = {
 	{type = "item", name = "panel", amount = 1},
@@ -50,7 +50,7 @@ emptyGasTankRecipe.results = {{type = "item", name = "gas-tank", amount = 1}}
 data:extend{emptyGasTankRecipe}
 
 -- Edit recipe for barrel - previously only 1 steel plate.
-data.raw.recipe["barrel"].ingredients = {
+RECIPE["barrel"].ingredients = {
 	{type = "item", name = "panel", amount = 1},
 	{type = "item", name = "frame", amount = 1},
 }

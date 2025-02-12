@@ -59,13 +59,13 @@ for _, vals in pairs{
 	local undergroundEnt = data.raw["underground-belt"][undergroundName]
 	local splitterEnt = data.raw["splitter"][splitterName]
 
-	local beltItem = data.raw.item[beltName]
-	local undergroundItem = data.raw.item[undergroundName]
-	local splitterItem = data.raw.item[splitterName]
+	local beltItem = ITEM[beltName]
+	local undergroundItem = ITEM[undergroundName]
+	local splitterItem = ITEM[splitterName]
 
-	local beltRecipe = data.raw.recipe[beltName]
-	local undergroundRecipe = data.raw.recipe[undergroundName]
-	local splitterRecipe = data.raw.recipe[splitterName]
+	local beltRecipe = RECIPE[beltName]
+	local undergroundRecipe = RECIPE[undergroundName]
+	local splitterRecipe = RECIPE[splitterName]
 
 	-- Set speeds.
 	for _, ent in pairs{beltEnt, undergroundEnt, splitterEnt} do

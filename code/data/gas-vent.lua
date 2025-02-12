@@ -91,7 +91,7 @@ ventEnt.fluid_boxes = {
 ventEnt.surface_conditions = nil -- Should be able to vent on space platforms too.
 data:extend{ventEnt}
 
-local ventItem = table.deepcopy(data.raw.item["steel-furnace"])
+local ventItem = table.deepcopy(ITEM["steel-furnace"])
 ventItem.type = "item"
 ventItem.name = "gas-vent"
 ventItem.icon = nil
@@ -105,7 +105,7 @@ ventItem.place_result = "gas-vent"
 ventItem.stack_size = 20
 data:extend{ventItem}
 
-local ventRecipe = table.deepcopy(data.raw.recipe["steel-furnace"])
+local ventRecipe = table.deepcopy(RECIPE["steel-furnace"])
 ventRecipe.type = "recipe"
 ventRecipe.name = "gas-vent"
 ventRecipe.enabled = false

@@ -11,7 +11,7 @@ for i, itemName in pairs{
 	"iron-gear-wheel",
 	"iron-stick",
 } do
-	local baseItem = data.raw.item[itemName]
+	local baseItem = ITEM[itemName]
 	local rustyItem = table.deepcopy(baseItem)
 	rustyItem.name = "rusty-"..itemName
 	rustyItem.icon = nil
@@ -27,7 +27,7 @@ for i, itemName in pairs{
 	baseItem.spoil_ticks = RUST_TIME
 	baseItem.spoil_result = "rusty-"..itemName
 
-	local recipe1 = table.deepcopy(data.raw.recipe["iron-stick"])
+	local recipe1 = table.deepcopy(RECIPE["iron-stick"])
 	recipe1.name = "sand-derust-"..itemName
 	recipe1.ingredients = {
 		{type="item", name="rusty-"..itemName, amount=1},
@@ -75,8 +75,8 @@ local rustyGearIcons = {
 	{icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={-3, 3}},
 	{icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/spring-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={3, -4}},
 }
-data.raw.item["rusty-iron-gear-wheel"].icons = rustyGearIcons
-data.raw.item["rusty-iron-gear-wheel"].pictures = {
+ITEM["rusty-iron-gear-wheel"].icons = rustyGearIcons
+ITEM["rusty-iron-gear-wheel"].pictures = {
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-1.png", size = 64, scale = 0.5, mipmap_count = 4},
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png", size = 64, scale = 0.5, mipmap_count = 4},
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-3.png", size = 64, scale = 0.5, mipmap_count = 4},
@@ -84,7 +84,7 @@ data.raw.item["rusty-iron-gear-wheel"].pictures = {
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/spring-2.png", size = 64, scale = 0.5, mipmap_count = 4},
 }
 for _, sandOrAcid in pairs{"sand", "acid"} do
-	local recipe = data.raw.recipe[sandOrAcid.."-derust-iron-gear-wheel"]
+	local recipe = RECIPE[sandOrAcid.."-derust-iron-gear-wheel"]
 	local newIcons = table.deepcopy(rustyGearIcons)
 	table.insert(newIcons, recipe.icons[2])
 	recipe.icons = newIcons

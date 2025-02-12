@@ -36,7 +36,7 @@ for _, recipeName in pairs{
 	"turbo-splitter",
 	"fish-breeding",
 } do
-	data.raw.recipe[recipeName].surface_conditions = nil
+	RECIPE[recipeName].surface_conditions = nil
 end
 
 -- Aquilo should have less solar power in space, so you need a nuclear reactor.

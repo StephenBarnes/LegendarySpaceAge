@@ -1,6 +1,6 @@
 -- This file creates "tungsten axe" tech analogous to steel axe tech. It increases manual mining speed.
 
-local tungstenAxeTech = table.deepcopy(data.raw.technology["steel-axe"])
+local tungstenAxeTech = table.deepcopy(TECH["steel-axe"])
 tungstenAxeTech.name = "tungsten-axe"
 tungstenAxeTech.prerequisites = {"tungsten-steel", "steel-axe"}
 tungstenAxeTech.research_trigger = {

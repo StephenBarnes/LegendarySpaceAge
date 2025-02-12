@@ -48,18 +48,18 @@ fluidHeatingTowerEnt.heat_buffer.connections = {
 }
 data:extend{fluidHeatingTowerEnt}
 
-local towerItem = data.raw.item["heating-tower"]
+local towerItem = ITEM["heating-tower"]
 towerItem.subgroup = "energy"
 
 local fluidHeatingTowerItem = table.deepcopy(towerItem)
 fluidHeatingTowerItem.name = "fluid-heating-tower"
 fluidHeatingTowerItem.place_result = "fluid-heating-tower"
 fluidHeatingTowerItem.icons = fluidHeatingTowerEnt.icons
-fluidHeatingTowerItem.order = data.raw.item["heating-tower"].order .. "-2"
+fluidHeatingTowerItem.order = ITEM["heating-tower"].order .. "-2"
 data:extend{fluidHeatingTowerItem}
 
 -- Create recipe for fluid heating tower
-local fluidHeatingTowerRecipe = table.deepcopy(data.raw.recipe["heating-tower"])
+local fluidHeatingTowerRecipe = table.deepcopy(RECIPE["heating-tower"])
 fluidHeatingTowerRecipe.name = "fluid-heating-tower"
 fluidHeatingTowerRecipe.results = {{type = "item", name = "fluid-heating-tower", amount = 1}}
 data:extend{fluidHeatingTowerRecipe}

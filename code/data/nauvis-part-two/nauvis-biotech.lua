@@ -3,5 +3,5 @@
 
 -- Make biology recipes biochamber-only, not in chem plants.
 for _, recipeName in pairs{"fish-breeding", "nutrients-from-fish", "nutrients-from-biter-egg"} do
-	data.raw.recipe[recipeName].category = "organic"
+	RECIPE[recipeName].category = "organic"
 end

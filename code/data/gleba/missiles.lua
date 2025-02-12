@@ -7,7 +7,7 @@ local Tech = require("code.util.tech")
 Tech.addTechDependency("rocketry", "planet-discovery-gleba")
 
 -- Unlock missile turrets early.
-local missileTurretTech = data.raw.technology["rocket-turret"]
+local missileTurretTech = TECH["rocket-turret"]
 missileTurretTech.unit = nil
 missileTurretTech.research_trigger = {
 	type = "craft-item",

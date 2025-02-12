@@ -39,10 +39,10 @@ data.raw.lab.biolab.surface_conditions = {
 data.raw.lab.biolab.energy_source.emissions_per_minute = nil
 
 -- Set stack sizes and rocket capacities.
-data.raw.item.glebalab.stack_size = 10
-data.raw.item.biolab.stack_size = 10
-data.raw.item.glebalab.weight = 10000
-data.raw.item.biolab.weight = 10000
+ITEM.glebalab.stack_size = 10
+ITEM.biolab.stack_size = 10
+ITEM.glebalab.weight = 10000
+ITEM.biolab.weight = 10000
 
 -- Set module slots.
 data.raw.lab.biolab.module_slots = 8
@@ -95,7 +95,7 @@ data:extend({
 			},
 		},
 		prerequisites = {"agricultural-science-pack"},
-		unit = table.deepcopy(data.raw.technology["carbon-fiber"].unit),
+		unit = table.deepcopy(TECH["carbon-fiber"].unit),
 	},
 })
 -- Space biolabs go after nuclear fuel cells.
@@ -103,8 +103,8 @@ Tech.replacePrereq("biolab", "uranium-processing", "nuclear-power")
 Tech.addTechDependency("pentapod-biolab", "biolab")
 
 -- Remove extra description for Gleba biolab.
-data.raw.recipe.glebalab.localised_description = nil
-data.raw.item.glebalab.localised_description = {"entity-description.glebalab"}
+RECIPE.glebalab.localised_description = nil
+ITEM.glebalab.localised_description = {"entity-description.glebalab"}
 -- TODO check this worked
 
 -- TODO don't allow advanced science packs in ordinary electric labs, rather stage them to pentapod labs and then space biolabs.

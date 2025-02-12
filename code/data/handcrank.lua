@@ -27,7 +27,7 @@ data:extend({handCrankTech})
 Tech.removeRecipesFromTechs({"copper-cable", "small-electric-pole"}, {"electronics"})
 
 -- Create recipe.
-local handCrankRecipe = table.deepcopy(data.raw.recipe["assembling-machine-1"])
+local handCrankRecipe = table.deepcopy(RECIPE["assembling-machine-1"])
 handCrankRecipe.name = "er-hcg"
 handCrankRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1},
@@ -45,4 +45,4 @@ for _, name in pairs{"offshore-pump", "lava-pump"} do
 end
 
 -- Move to start of row.
-data.raw.item["er-hcg"].order = "a1"
+ITEM["er-hcg"].order = "a1"

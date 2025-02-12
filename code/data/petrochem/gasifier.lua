@@ -173,7 +173,7 @@ fluidGasifierEnt.icons = {
 }
 data:extend{fluidGasifierEnt}
 
-local gasifierItem = table.deepcopy(data.raw.item["steel-furnace"])
+local gasifierItem = table.deepcopy(ITEM["steel-furnace"])
 gasifierItem.type = "item"
 gasifierItem.name = "gasifier"
 gasifierItem.icon = nil
@@ -191,7 +191,7 @@ fluidGasifierItem.icons = fluidGasifierEnt.icons
 fluidGasifierItem.order = "zz"
 data:extend{fluidGasifierItem}
 
-local gasifierRecipe = table.deepcopy(data.raw.recipe["steel-furnace"])
+local gasifierRecipe = table.deepcopy(RECIPE["steel-furnace"])
 gasifierRecipe.type = "recipe"
 gasifierRecipe.name = "gasifier"
 gasifierRecipe.enabled = false
@@ -213,7 +213,7 @@ data:extend{gasifierRecipeCategory}
 		However, it can't be sulfur (since that would burn to SO2, not CO).
 		We want to keep it so 1 unit of every petro fluid is roughly equivalent, so this recipe must produce less syngas+tar than the input fuel; it's a lossy conversion to avoid a loop that creates infinite free fluids.
 ]]
-local gasificationRecipe = table.deepcopy(data.raw.recipe["solid-fuel-from-light-oil"])
+local gasificationRecipe = table.deepcopy(RECIPE["solid-fuel-from-light-oil"])
 gasificationRecipe.type = "recipe"
 gasificationRecipe.name = "syngas"
 gasificationRecipe.enabled = false
@@ -245,8 +245,8 @@ Tech.addRecipeToTech("gasifier", "coal-liquefaction")
 Tech.addRecipeToTech("fluid-fuelled-gasifier", "coal-liquefaction")
 
 -- Adjust pic for syngas tech, so it has a picture of the gasifier.
-data.raw.technology["coal-liquefaction"].icon = nil
-data.raw.technology["coal-liquefaction"].icons = {
+TECH["coal-liquefaction"].icon = nil
+TECH["coal-liquefaction"].icons = {
 	{icon = "__LegendarySpaceAge__/graphics/gas-vent/tech.png", icon_size = 256, scale = 0.8, shift = {-24, 0}},
 	{icon = "__base__/graphics/technology/coal-liquefaction.png", icon_size = 256, scale = 0.5, shift = {24, 0}},
 }

@@ -1,7 +1,7 @@
 local Item = {}
 
 Item.multiplySpoilTime = function(itemName, multiplier)
-	local item = data.raw.item[itemName]
+	local item = ITEM[itemName]
 	if item == nil then
 		log("ERROR: Couldn't find item "..itemName.." to multiply spoil time of.")
 		return
@@ -25,10 +25,10 @@ end
 
 Item.copySoundsTo = function(a, b)
 	if type(a) == "string" then
-		a = data.raw.item[a]
+		a = ITEM[a]
 	end
 	if type(b) == "string" then
-		b = data.raw.item[b]
+		b = ITEM[b]
 	end
 	if a == nil then
 		log("ERROR: Couldn't find item a to copy sounds from.")
@@ -56,7 +56,7 @@ Item.clearFuel = function(item)
 end
 
 Item.hide = function(itemName)
-	local item = data.raw.item[itemName]
+	local item = ITEM[itemName]
 	if item == nil then
 		log("ERROR: Couldn't find item "..itemName.." to hide.")
 		return

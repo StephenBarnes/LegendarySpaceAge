@@ -8,7 +8,7 @@ for i = 1, 7 do
 	table.insert(fluidFittingPics, {filename = "__LegendarySpaceAge__/graphics/intermediate-factors/fluid-fitting/"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
 local mainIcon = fluidFittingPics[1].filename
-local fluidFitting = table.deepcopy(data.raw.item["plastic-bar"])
+local fluidFitting = table.deepcopy(ITEM["plastic-bar"])
 fluidFitting.name = "fluid-fitting"
 fluidFitting.subgroup = "fluid-fitting"
 fluidFitting.order = "01"
@@ -18,7 +18,7 @@ fluidFitting.icons = {{icon = mainIcon, icon_size = 64, scale = 0.5}}
 data:extend{fluidFitting}
 
 -- Create recipe: 2 copper plates + 2 resin -> 1 fluid fitting
-local recipeFromCopper = table.deepcopy(data.raw.recipe["iron-stick"])
+local recipeFromCopper = table.deepcopy(RECIPE["iron-stick"])
 recipeFromCopper.name = "fluid-fitting-from-copper"
 recipeFromCopper.ingredients = {
 	{type = "item", name = "copper-plate", amount = 2},

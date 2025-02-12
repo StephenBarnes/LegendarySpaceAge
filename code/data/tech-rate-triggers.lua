@@ -12,7 +12,7 @@ for _, rateTech in pairs{
 	local techName = rateTech[1]
 	local producedItemName = rateTech[2]
 	local requiredCount = rateTech[3]
-	local tech = data.raw.technology[techName]
+	local tech = TECH[techName]
 	tech.research_trigger = nil
 	tech.unit = {
 		count = requiredCount,
@@ -27,7 +27,7 @@ end
 -- Function to make a dummy science-pack item.
 local function makeRateItem(itemName, backgroundIcons, base)
 	---@type data.ToolPrototype
-	local rateItem = base or table.deepcopy(data.raw.item[itemName])
+	local rateItem = base or table.deepcopy(ITEM[itemName])
 	rateItem.type = "tool"
 	rateItem.durability = 1
 	rateItem.name = itemName .. "-per-minute"
@@ -50,9 +50,9 @@ end
 
 -- Create rate items
 local rateItems = {
-	makeRateItem("iron-gear-wheel", table.deepcopy(data.raw.item["iron-gear-wheel"].icons)),
-	makeRateItem("electronic-circuit", {{icon = data.raw.item["electronic-circuit"].icon, icon_size = data.raw.item["electronic-circuit"].icon_size}}),
-	makeRateItem("plastic-bar", {{icon = data.raw.item["plastic-bar"].icon, icon_size = data.raw.item["plastic-bar"].icon_size}}),
+	makeRateItem("iron-gear-wheel", table.deepcopy(ITEM["iron-gear-wheel"].icons)),
+	makeRateItem("electronic-circuit", {{icon = ITEM["electronic-circuit"].icon, icon_size = ITEM["electronic-circuit"].icon_size}}),
+	makeRateItem("plastic-bar", {{icon = ITEM["plastic-bar"].icon, icon_size = ITEM["plastic-bar"].icon_size}}),
 	makeRateItem("piercing-rounds-magazine", {{icon = data.raw.ammo["piercing-rounds-magazine"].icon, icon_size = data.raw.ammo["piercing-rounds-magazine"].icon_size}}, table.deepcopy(data.raw.ammo["piercing-rounds-magazine"])),
 }
 data:extend(rateItems)

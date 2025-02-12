@@ -8,7 +8,7 @@ local function toposortTechs()
 	local techsAdded = {} -- maps tech name to true/false for whether it's been added yet
 	local numTechs = 0
 	local numTechsAdded = 0
-	for techName, tech in pairs(data.raw.technology) do
+	for techName, tech in pairs(TECH) do
 		if tech.enabled ~= false and not tech.hidden then
 			techsAdded[techName] = false
 			numTechs = numTechs + 1
@@ -22,7 +22,7 @@ local function toposortTechs()
 		for techName, beenAdded in pairs(techsAdded) do
 			if not beenAdded then
 				local allPrereqsAdded = true
-				local tech = data.raw.technology[techName]
+				local tech = TECH[techName]
 				local prereqs = Tech.getPrereqList(tech)
 				if prereqs == nil or type(prereqs) ~= "table" then
 					log("ERROR: Tech "..techName.." has no prereqs.")
@@ -47,7 +47,7 @@ local function toposortTechs()
 			log("ERROR: Cycle or unreachable tech detected in tech dependency graph. This shouldn't happen.")
 			for techName, beenAdded in pairs(techsAdded) do
 				if not beenAdded then
-					local tech = data.raw.technology[techName]
+					local tech = TECH[techName]
 					local prereqs = Tech.getPrereqList(tech)
 					log("Could not reach tech "..techName..", which has prereqs: "..serpent.line(prereqs))
 				end

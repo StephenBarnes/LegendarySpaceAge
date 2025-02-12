@@ -3,7 +3,7 @@
 local Tech = require "code.util.tech"
 
 -- Create item.
-local wiringItem = table.deepcopy(data.raw.item["copper-cable"])
+local wiringItem = table.deepcopy(ITEM["copper-cable"])
 wiringItem.name = "wiring"
 wiringItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/wiring.png"
 wiringItem.subgroup = "wiring"
@@ -11,7 +11,7 @@ wiringItem.order = "01"
 data:extend{wiringItem}
 
 -- Make recipe for wiring: 4 copper cable + 1 resin -> 4 wiring
-local resinRecipe = table.deepcopy(data.raw.recipe["copper-cable"])
+local resinRecipe = table.deepcopy(RECIPE["copper-cable"])
 resinRecipe.name = "wiring-from-resin"
 resinRecipe.category = "crafting"
 resinRecipe.icon = nil

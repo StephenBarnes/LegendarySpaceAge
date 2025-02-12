@@ -136,36 +136,36 @@ for subgroup, fluids in pairs{
 end
 
 -- Move battery-salvage.
-data.raw.recipe["extract-sulfuric-acid-from-battery"].subgroup = data.raw.item["battery"].subgroup
+RECIPE["extract-sulfuric-acid-from-battery"].subgroup = ITEM["battery"].subgroup
 
 -- Move batteries to intermediate-product instead of raw-material.
-data.raw.item["battery"].subgroup = "intermediate-product"
-data.raw.item["charged-battery"].subgroup = "intermediate-product"
-data.raw.item["holmium-battery"].subgroup = "intermediate-product"
-data.raw.item["charged-holmium-battery"].subgroup = "intermediate-product"
+ITEM["battery"].subgroup = "intermediate-product"
+ITEM["charged-battery"].subgroup = "intermediate-product"
+ITEM["holmium-battery"].subgroup = "intermediate-product"
+ITEM["charged-holmium-battery"].subgroup = "intermediate-product"
 
 -- Move rocket fuel to raw-material bc it makes more sense (sprite has canister, but no iron/steel ingredient) and balances subgroup populations better.
-data.raw.item["rocket-fuel"].subgroup = "raw-material"
+ITEM["rocket-fuel"].subgroup = "raw-material"
 
 -- Move lubricant to complex-fluid-recipes.
-data.raw.recipe["lubricant"].subgroup = "complex-fluid-recipes"
+RECIPE["lubricant"].subgroup = "complex-fluid-recipes"
 
 -- Reorder raw-materials line.
-data.raw.item["solid-fuel"].order = "c"
-data.raw.item["explosives"].order = "e"
+ITEM["solid-fuel"].order = "c"
+ITEM["explosives"].order = "e"
 
 -- Move chem plant before refinery.
-data.raw.item["oil-refinery"].order = "e[refinery]"
-data.raw.item["chemical-plant"].order = "d[chemical-plant]"
+ITEM["oil-refinery"].order = "e[refinery]"
+ITEM["chemical-plant"].order = "d[chemical-plant]"
 
 -- Sulfur near start of raw material line, since it now appears early in the game.
-data.raw.item["sulfur"].order = "a0"
+ITEM["sulfur"].order = "a0"
 
 -- Move fluid recipes to after raw materials like sulfur.
 data.raw["item-subgroup"]["fluid-recipes"].order = "d"
 
 -- Move biter egg to the right row.
-data.raw.item["biter-egg"].subgroup = "nauvis-agriculture"
+ITEM["biter-egg"].subgroup = "nauvis-agriculture"
 
 -- Move intermediate subgroups to the space group.
 for subgroupName, order in pairs{
@@ -220,8 +220,8 @@ setSubgroupInOrder("planetary-special", "recipe", planetarySpecial)
 local chemicalProcessing = {"chemical-plant", "oil-refinery", "gasifier", "fluid-fuelled-gasifier"}
 setSubgroupInOrder("chemical-processing", "item", chemicalProcessing)
 setSubgroupInOrder("chemical-processing", "recipe", chemicalProcessing)
-data.raw.item["agricultural-tower"].subgroup = "extraction-machine"
-data.raw.item["agricultural-tower"].order = "c"
+ITEM["agricultural-tower"].subgroup = "extraction-machine"
+ITEM["agricultural-tower"].order = "c"
 local labs = {"lab", "glebalab", "biolab"}
 setSubgroupInOrder("labs", "item", labs)
 setSubgroupInOrder("labs", "recipe", labs)

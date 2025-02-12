@@ -3,7 +3,7 @@
 local Tech = require("code.util.tech")
 
 -- Create item.
-local sensorItem = table.deepcopy(data.raw.item["electronic-circuit"])
+local sensorItem = table.deepcopy(ITEM["electronic-circuit"])
 sensorItem.name = "sensor"
 sensorItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/sensor.png"
 sensorItem.subgroup = "sensor"
@@ -11,7 +11,7 @@ sensorItem.order = "01"
 data:extend{sensorItem}
 
 -- Create recipe: 4 green circuit + 2 glass + 1 frame -> 1 sensor
-local greenCircuitRecipe = table.deepcopy(data.raw.recipe["electronic-circuit"])
+local greenCircuitRecipe = table.deepcopy(RECIPE["electronic-circuit"])
 greenCircuitRecipe.name = "sensor-from-green-circuit"
 greenCircuitRecipe.ingredients = {
 	{type = "item", name = "electronic-circuit", amount = 5},

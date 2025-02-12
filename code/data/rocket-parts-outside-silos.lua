@@ -4,7 +4,7 @@ This is better IMO since it lets you use inserters to put blue circuits and LDS 
 
 local Tech = require("code.util.tech")
 
-local assembledRocketPartItem = table.deepcopy(data.raw.item["rocket-part"])
+local assembledRocketPartItem = table.deepcopy(ITEM["rocket-part"])
 assembledRocketPartItem.name = "assembled-rocket-part"
 --assembledRocketPartItem.localised_name = {"item-name.assembled-rocket-part"}
 assembledRocketPartItem.icon = nil
@@ -12,22 +12,22 @@ assembledRocketPartItem.icons = {
 	{icon = "__base__/graphics/icons/rocket-part.png", icon_size = 64},
 	{icon = "__core__/graphics/icons/mip/recipe-arrow.png", icon_size = 32, shift = {0, 10}},
 }
-assembledRocketPartItem.order = data.raw.item["rocket-part"].order .. "-2"
+assembledRocketPartItem.order = ITEM["rocket-part"].order .. "-2"
 assembledRocketPartItem.hidden = false
-data.raw.item["rocket-part"].hidden = false
+ITEM["rocket-part"].hidden = false
 data:extend{assembledRocketPartItem}
 
-data.raw.recipe["rocket-part"].hide_from_player_crafting = false
-data.raw.recipe["rocket-part"].always_show_made_in = true
+RECIPE["rocket-part"].hide_from_player_crafting = false
+RECIPE["rocket-part"].always_show_made_in = true
 
-local rocketPartAssemblyRecipe = table.deepcopy(data.raw.recipe["rocket-part"])
+local rocketPartAssemblyRecipe = table.deepcopy(RECIPE["rocket-part"])
 rocketPartAssemblyRecipe.name = "assembled-rocket-part"
 rocketPartAssemblyRecipe.ingredients = {{type = "item", name = "rocket-part", amount = 1}}
 rocketPartAssemblyRecipe.results = {{type = "item", name = "assembled-rocket-part", amount = 1}}
 data:extend{rocketPartAssemblyRecipe}
 data.raw["rocket-silo"]["rocket-silo"].fixed_recipe = "assembled-rocket-part"
 
-data.raw.recipe["rocket-part"].category = "crafting"
+RECIPE["rocket-part"].category = "crafting"
 
 Tech.addRecipeToTech("assembled-rocket-part", "rocket-silo", 3)
 

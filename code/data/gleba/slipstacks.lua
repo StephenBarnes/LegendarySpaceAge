@@ -43,7 +43,7 @@ data:extend{slipstackPlant}
 --- Create items
 
 -- Create item for slipstack pearl
-local slipstackPearl = table.deepcopy(data.raw.item.spoilage)
+local slipstackPearl = table.deepcopy(ITEM.spoilage)
 slipstackPearl.name = "slipstack-pearl"
 slipstackPearl.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png"
 slipstackPearl.subgroup = "slipstacks-and-boompuffs"
@@ -54,7 +54,7 @@ Item.clearFuel(slipstackPearl)
 data:extend{slipstackPearl}
 
 -- Create item for slipstack nest
-local slipstackNest = table.deepcopy(data.raw.item["iron-ore"])
+local slipstackNest = table.deepcopy(ITEM["iron-ore"])
 slipstackNest.name = "slipstack-nest"
 slipstackNest.localised_name = {"item-name.slipstack-nest"}
 slipstackNest.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-nest.png"
@@ -73,7 +73,7 @@ data:extend{slipstackNest}
 --- Create recipes
 
 -- Recipe for making slipstack nest from pearls and rocks
-local slipstackNestRecipe = table.deepcopy(data.raw.recipe["bioflux"])
+local slipstackNestRecipe = table.deepcopy(RECIPE["bioflux"])
 slipstackNestRecipe.name = "slipstack-nest"
 slipstackNestRecipe.ingredients = {
 	{ type = "item", name = "slipstack-pearl", amount = 4 }, -- Requires less than it yields (10), so you don't need a prod bonus to make it sustainable.
@@ -88,7 +88,7 @@ slipstackNestRecipe.icon = nil
 data:extend{slipstackNestRecipe}
 
 -- Recipe for smelting slipstack pearls to resin
-local pearlSmeltRecipe = table.deepcopy(data.raw.recipe["bioplastic"])
+local pearlSmeltRecipe = table.deepcopy(RECIPE["bioplastic"])
 pearlSmeltRecipe.name = "smelt-slipstack-pearl"
 pearlSmeltRecipe.ingredients = {{type = "item", name = "slipstack-pearl", amount = 1}}
 pearlSmeltRecipe.results = {{type = "item", name = "resin", amount = 1}}
@@ -112,19 +112,19 @@ Recipe.addIngredients("bioplastic", {{type = "item", name = "slipstack-pearl", a
 
 -- Change Gleba biolubricant recipe to require slipstack pearls.
 -- Base Space Age recipe is 60 jelly => 20 lubricant.
-data.raw.recipe["biolubricant"].ingredients = {
+RECIPE["biolubricant"].ingredients = {
 	{ type = "fluid", name = "water", amount = 10 },
 	{ type = "item", name = "jelly", amount = 20 },
 	{ type = "item", name = "slipstack-pearl", amount = 5 },
 }
-data.raw.recipe["biolubricant"].energy_required = 5
+RECIPE["biolubricant"].energy_required = 5
 
 -- Could also put it in carbon fiber, or biosulfur.
 
 ------------------------------------------------------------------------
 --- Create tech
 
-local slipstackTech = table.deepcopy(data.raw.technology["biochamber"])
+local slipstackTech = table.deepcopy(TECH["biochamber"])
 slipstackTech.name = "slipstack-propagation"
 slipstackTech.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-tech.png"
 slipstackTech.prerequisites = {"planet-discovery-gleba"}

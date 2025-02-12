@@ -8,11 +8,11 @@ ent.surface_conditions = {{
 }}
 
 -- Block launching in rockets.
-data.raw.item["cargo-bay"].weight = 1e7
+ITEM["cargo-bay"].weight = 1e7
 
 -- Should be next to landing pad in menus.
-data.raw.item["cargo-bay"].subgroup = "space-interactors"
-data.raw.item["cargo-bay"].order = "b[cargo-landing-pad]-a"
+ITEM["cargo-bay"].subgroup = "space-interactors"
+ITEM["cargo-bay"].order = "b[cargo-landing-pad]-a"
 
 --[[ Make the space platform hub receive cargo faster - since you can't build cargo expansions, and it's best to not have too many platforms.
 Note this stuff isn't documented anywhere, aren't even set in Wube's Lua code, so TODO test that this actually works.

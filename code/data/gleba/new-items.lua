@@ -26,7 +26,7 @@ geoplasmFluid.visualization_color = geoplasmPinkColor
 data:extend{geoplasmFluid}
 
 -- Create chitin fragments item
-local chitinFragments = table.deepcopy(data.raw.item["calcite"])
+local chitinFragments = table.deepcopy(ITEM["calcite"])
 chitinFragments.name = "chitin-fragments"
 local chitinDir = "__LegendarySpaceAge__/graphics/gleba/chitin-fragments/"
 chitinFragments.icon = chitinDir.."3.png"
@@ -38,7 +38,7 @@ chitinFragments.subgroup = "gleba-non-agriculture"
 data:extend{chitinFragments}
 
 -- Create chitin block item
-local chitinBlock = table.deepcopy(data.raw.item["calcite"])
+local chitinBlock = table.deepcopy(ITEM["calcite"])
 chitinBlock.name = "chitin-block"
 local chitinBlockDir = "__LegendarySpaceAge__/graphics/gleba/chitin-block/"
 chitinBlock.icon = chitinBlockDir.."3.png"
@@ -50,7 +50,7 @@ chitinBlock.subgroup = "gleba-non-agriculture"
 data:extend{chitinBlock}
 
 -- Create marrow item
-local marrowItem = table.deepcopy(data.raw.item["spoilage"])
+local marrowItem = table.deepcopy(ITEM["spoilage"])
 marrowItem.name = "marrow"
 local marrowDir = "__LegendarySpaceAge__/graphics/gleba/marrow/"
 marrowItem.icon = marrowDir.."pillar-2.png"
@@ -80,7 +80,7 @@ marrowItem.weight = 1e6 / 500
 data:extend{marrowItem}
 
 -- Create tubule item
-local tubuleItem = table.deepcopy(data.raw.item["calcite"])
+local tubuleItem = table.deepcopy(ITEM["calcite"])
 tubuleItem.name = "tubule"
 local tubuleDir = "__LegendarySpaceAge__/graphics/gleba/tubule/"
 tubuleItem.icon = tubuleDir.."1.png"
@@ -137,7 +137,7 @@ data:extend{sencytiumItem}
 ------------------------------------------------------------------------
 
 -- Create chitin-broth recipe: 5 chitin fragments + 100 water + 5 nutrients -> 100 chitin-broth.
-local chitinBrothRecipe = table.deepcopy(data.raw.recipe["lubricant"])
+local chitinBrothRecipe = table.deepcopy(RECIPE["lubricant"])
 chitinBrothRecipe.name = "making-chitin-broth" -- Different name from fluid, so it doesn't get combined in factoriopedia.
 chitinBrothRecipe.category = "chemistry"
 chitinBrothRecipe.ingredients = {
@@ -159,7 +159,7 @@ data:extend{chitinBrothRecipe}
 -- TODO consider adding a recipe to cast structures out of chitin broth?
 
 -- Create recipe for tubules: 4 pearl + 40 chitin broth -> 3 pearls (20% fresh) + 4 tubules
-local tubuleRecipe = table.deepcopy(data.raw.recipe["bioflux"])
+local tubuleRecipe = table.deepcopy(RECIPE["bioflux"])
 tubuleRecipe.name = "tubule"
 tubuleRecipe.ingredients = {
 	{type = "item", name = "slipstack-pearl", amount = 5},
@@ -180,7 +180,7 @@ tubuleRecipe.crafting_machine_tint = table.deepcopy(chitinBrothRecipe.crafting_m
 data:extend{tubuleRecipe}
 
 -- Create recipe for compressing chitin fragments into blocks.
-local chitinBlockRecipe = table.deepcopy(data.raw.recipe["rail"])
+local chitinBlockRecipe = table.deepcopy(RECIPE["rail"])
 chitinBlockRecipe.name = "chitin-block"
 chitinBlockRecipe.ingredients = {
 	{type = "item", name = "chitin-fragments", amount = 2},
@@ -228,7 +228,7 @@ sencytiumRecipe.crafting_machine_tint = table.deepcopy(appendageRecipe.crafting_
 data:extend{sencytiumRecipe}
 
 -- Create recipe for nutrients from marrow: 5 marrow + 1 bioflux + 10 sulfuric acid -> 40 nutrients.
-local nutrientsFromMarrowRecipe = table.deepcopy(data.raw.recipe["nutrients-from-bioflux"])
+local nutrientsFromMarrowRecipe = table.deepcopy(RECIPE["nutrients-from-bioflux"])
 nutrientsFromMarrowRecipe.name = "nutrients-from-marrow"
 nutrientsFromMarrowRecipe.ingredients = {
 	{type = "item", name = "marrow", amount = 5},
@@ -243,11 +243,11 @@ nutrientsFromMarrowRecipe.icons = {
 	{icon = marrowItem.icon, size = 64, scale = 0.35, shift = {-4, -4}},
 	{icon = "__space-age__/graphics/icons/nutrients.png", size = 64, scale = 0.43, shift = {6, 6}},
 }
-nutrientsFromMarrowRecipe.crafting_machine_tint = table.deepcopy(data.raw.recipe["sulfuric-acid"].crafting_machine_tint)
+nutrientsFromMarrowRecipe.crafting_machine_tint = table.deepcopy(RECIPE["sulfuric-acid"].crafting_machine_tint)
 data:extend{nutrientsFromMarrowRecipe}
 
 -- Create recipe for landfill from chitin fragments.
-local landfillFromChitinRecipe = table.deepcopy(data.raw.recipe["landfill"])
+local landfillFromChitinRecipe = table.deepcopy(RECIPE["landfill"])
 landfillFromChitinRecipe.name = "landfill-from-chitin"
 landfillFromChitinRecipe.ingredients = {
 	{type = "item", name = "marrow", amount = 20},
@@ -274,13 +274,13 @@ for i, itemName in pairs{
 	"appendage",
 	"sencytium",
 } do
-	data.raw.item[itemName].order = string.format("%02d", i)
+	ITEM[itemName].order = string.format("%02d", i)
 end
 
 ------------------------------------------------------------------------
 
 -- Create 2 techs for chitin processing.
-local chitinTech1 = table.deepcopy(data.raw.technology["jellynut"])
+local chitinTech1 = table.deepcopy(TECH["jellynut"])
 chitinTech1.name = "chitin-processing-1"
 chitinTech1.effects = {
 	{type = "unlock-recipe", recipe = "chitin-block"},

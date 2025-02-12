@@ -40,7 +40,7 @@ charFurnaceRemnants.animation = make_rotated_animation_variations_from_sheet(1,
 data:extend{charFurnaceRemnants}
 
 -- Create item.
-local charFurnaceItem = table.deepcopy(data.raw.item["stone-furnace"])
+local charFurnaceItem = table.deepcopy(ITEM["stone-furnace"])
 charFurnaceItem.name = "char-furnace"
 charFurnaceItem.place_result = "char-furnace"
 charFurnaceItem.icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png"
@@ -52,13 +52,13 @@ charFurnaceRecipeCategory.name = "char-furnace"
 data:extend{charFurnaceRecipeCategory}
 
 -- Create recipe.
-local charFurnaceRecipe = table.deepcopy(data.raw.recipe["stone-furnace"])
+local charFurnaceRecipe = table.deepcopy(RECIPE["stone-furnace"])
 charFurnaceRecipe.name = "char-furnace"
 charFurnaceRecipe.results = {{type = "item", name = "char-furnace", amount = 1}}
 data:extend{charFurnaceRecipe}
 
 -- Create recipe for char/carbon.
-local charRecipe = table.deepcopy(data.raw.recipe["rocket-fuel"])
+local charRecipe = table.deepcopy(RECIPE["rocket-fuel"])
 charRecipe.name = "char-carbon"
 charRecipe.results = {{type = "item", name = "carbon", amount = 1}}
 charRecipe.ingredients = {}
@@ -74,7 +74,7 @@ charRecipe.icons = {
 data:extend{charRecipe}
 
 -- Create tech called "char", unlocking the furnace and recipe.
-local charTech = table.deepcopy(data.raw.technology["automation"])
+local charTech = table.deepcopy(TECH["automation"])
 charTech.name = "char"
 charTech.effects = {
 	{type = "unlock-recipe", recipe = "char-carbon"},

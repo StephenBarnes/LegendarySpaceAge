@@ -68,7 +68,7 @@ local function checkAllRecipesHaveMachines()
 		table.insert(categoryToMachines[category], dummyMachine)
 	end
 	-- Check all recipes.
-	for _, recipe in pairs(data.raw.recipe) do
+	for _, recipe in pairs(RECIPE) do
 		local recipeCategory = recipe.category or "crafting" -- "crafting" is default.
 		if recipeCategory ~= "parameters" then
 			success = checkRecipeHasMachines(recipe, categoryToMachines[recipeCategory]) and success

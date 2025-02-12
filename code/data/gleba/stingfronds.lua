@@ -77,7 +77,7 @@ local phaseTints = { -- Tints for the 5 phases of cyclosomes.
 }
 local cyclosomeItems = {}
 for i = 1, 5 do
-	local cyclosome = table.deepcopy(data.raw.item["tree-seed"])
+	local cyclosome = table.deepcopy(ITEM["tree-seed"])
 	cyclosome.name = "cyclosome-"..i
 	cyclosome.localised_name = nil
 	cyclosome.localised_description = {"item-description.cyclosome"}
@@ -98,7 +98,7 @@ end
 data:extend(cyclosomeItems)
 
 -- Create sprout item
-local stingfrondSprout = table.deepcopy(data.raw.item["tree-seed"])
+local stingfrondSprout = table.deepcopy(ITEM["tree-seed"])
 stingfrondSprout.name = "stingfrond-sprout"
 stingfrondSprout.localised_name = nil
 stingfrondSprout.plant_result = "stingfrond"
@@ -117,7 +117,7 @@ for i = 1, 6 do
 		scale = 0.5,
 	}
 end
-local neurofibril = table.deepcopy(data.raw.item["wood"])
+local neurofibril = table.deepcopy(ITEM["wood"])
 neurofibril.fuel_category = "chemical"
 neurofibril.fuel_value = "1MJ"
 neurofibril.name = "neurofibril"
@@ -128,8 +128,8 @@ neurofibril.subgroup = "stingfrond-products"
 neurofibril.order = "b"
 data:extend{neurofibril}
 
-data.raw.item["carbon-fiber"].subgroup = "stingfrond-products"
-data.raw.item["carbon-fiber"].order = "c"
+ITEM["carbon-fiber"].subgroup = "stingfrond-products"
+ITEM["carbon-fiber"].order = "c"
 
 ------------------------------------------------------------------------
 --[[ Create techs.
@@ -139,7 +139,7 @@ There's 3 techs.
 	Then the 2nd cultivation tech lets you duplicate cyclosomes, and also make various products more efficiently from cyclosomes and neurofibrils. Then carbon fiber tech depends on that.
 --]]
 
-local wiringTech = table.deepcopy(data.raw.technology["biochamber"])
+local wiringTech = table.deepcopy(TECH["biochamber"])
 wiringTech.name = "neural-wiring"
 wiringTech.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech2.png"
 wiringTech.prerequisites = {"planet-discovery-gleba"}
@@ -155,7 +155,7 @@ wiringTech.effects = {
 }
 data:extend{wiringTech}
 
-local cultivationTech1 = table.deepcopy(data.raw.technology["biochamber"])
+local cultivationTech1 = table.deepcopy(TECH["biochamber"])
 cultivationTech1.name = "stingfrond-cultivation-1"
 cultivationTech1.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech1.png"
 cultivationTech1.prerequisites = {"bioflux", "neural-wiring"}
@@ -173,7 +173,7 @@ cultivationTech1.effects = {
 cultivationTech1.localised_description = {"technology-description.stingfrond-cultivation-1"}
 data:extend{cultivationTech1}
 
-local cultivationTech2 = table.deepcopy(data.raw.technology["biochamber"])
+local cultivationTech2 = table.deepcopy(TECH["biochamber"])
 cultivationTech2.name = "stingfrond-cultivation-2"
 cultivationTech2.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech1.png"
 cultivationTech2.prerequisites = {"stingfrond-cultivation-1"}
@@ -195,14 +195,14 @@ cultivationTech2.effects = {
 cultivationTech2.localised_description = {"technology-description.stingfrond-cultivation-2"}
 data:extend{cultivationTech2}
 
-table.insert(data.raw.technology["agricultural-science-pack"].prerequisites, "stingfrond-cultivation-1")
+table.insert(TECH["agricultural-science-pack"].prerequisites, "stingfrond-cultivation-1")
 
 ------------------------------------------------------------------------
 --- Create recipes.
 
 -- cyclosome 1 + 10 water + 1 bioflux -> 20% stingfrond sprout
 -- So bioflux is needed, as for all "tier 2" crops, but the recipe otherwise isn't very expensive.
-local sproutRecipe = table.deepcopy(data.raw.recipe["bioflux"])
+local sproutRecipe = table.deepcopy(RECIPE["bioflux"])
 sproutRecipe.name = "stingfrond-sprout"
 sproutRecipe.ingredients = {
 	{type = "item", name = "cyclosome-1", amount = 1},
@@ -223,16 +223,16 @@ sproutRecipe.crafting_machine_tint = {
 data:extend{sproutRecipe}
 
 -- 4 neurofibril -> 1 carbon fiber
-data.raw.recipe["carbon-fiber"].ingredients = {
+RECIPE["carbon-fiber"].ingredients = {
 	{type = "item", name = "neurofibril", amount = 4},
 }
-data.raw.recipe["carbon-fiber"].subgroup = "stingfrond-products"
-data.raw.recipe["carbon-fiber"].order = "b"
-data.raw.recipe["carbon-fiber"].category = "crafting"
+RECIPE["carbon-fiber"].subgroup = "stingfrond-products"
+RECIPE["carbon-fiber"].order = "b"
+RECIPE["carbon-fiber"].category = "crafting"
 
 -- Resynchronization: 5 cyclosome A + ... + 5 cyclosome E + 2 neurofibrils -> 50 cyclosome C
 -- The neurofibrils are in this recipe to ensure cyclosome amount is still limited by farms.
-local resyncRecipe = table.deepcopy(data.raw.recipe["bioflux"])
+local resyncRecipe = table.deepcopy(RECIPE["bioflux"])
 resyncRecipe.name = "cyclosome-resynchronization"
 resyncRecipe.ingredients = {
 	{type = "item", name = "cyclosome-1", amount = 5},

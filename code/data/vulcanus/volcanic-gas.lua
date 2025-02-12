@@ -17,7 +17,7 @@ volcanicGas.heat_capacity = nil
 data:extend{volcanicGas}
 
 -- Create recipe for separating volcanic gas into water, sulfur, and carbon.
-local separationRecipe = table.deepcopy(data.raw.recipe["steam-condensation"])
+local separationRecipe = table.deepcopy(RECIPE["steam-condensation"])
 separationRecipe.name = "volcanic-gas-separation"
 separationRecipe.localised_name = nil
 separationRecipe.category = "chemistry-or-cryogenics"
@@ -46,7 +46,7 @@ data:extend{separationRecipe}
 
 -- Create a tech for volcanic gas separation.
 ---@type data.TechnologyPrototype
-local volcanicGasSeparationTech = table.deepcopy(data.raw.technology["tungsten-carbide"])
+local volcanicGasSeparationTech = table.deepcopy(TECH["tungsten-carbide"])
 volcanicGasSeparationTech.name = "volcanic-gas-processing"
 volcanicGasSeparationTech.effects = {
 	{type = "unlock-recipe", recipe = "volcanic-gas-separation"},
@@ -58,7 +58,7 @@ volcanicGasSeparationTech.icons = {{
 }}
 volcanicGasSeparationTech.research_trigger.entity = "vulcanus-chimney"
 data:extend{volcanicGasSeparationTech}
-table.insert(data.raw.technology["foundry"].prerequisites, "volcanic-gas-processing")
+table.insert(TECH["foundry"].prerequisites, "volcanic-gas-processing")
 -- TODO add lava as fluid type to the chem plants, since they're now doing the water boiling by lava recipe.
 
 ------------------------------------------------------------------------

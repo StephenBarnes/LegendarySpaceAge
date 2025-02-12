@@ -52,7 +52,7 @@ end
 -- Make a table mapping each recipe to a set of planets (and "space") where it's permitted.
 local function getRecipesToPlanets()
 	local result = {}
-	for _, recipe in pairs(data.raw.recipe) do
+	for _, recipe in pairs(RECIPE) do
 		if not recipe.parameter then
 			if recipe.category == "recycling" then 
 				-- Special case for recycling recipes: only consider them on Fulgora. Because they only matter for progression on Fulgora.

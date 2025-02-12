@@ -9,9 +9,9 @@ local Tech = require("code.util.tech")
 
 -- Create item for fulgorite shards.
 -- I'm changing the holmium ore item to be called "holmium powder". Then using the holmium ore graphic for fulgorite shards.
-local fulgoriteShardItem = table.deepcopy(data.raw.item["holmium-ore"])
+local fulgoriteShardItem = table.deepcopy(ITEM["holmium-ore"])
 fulgoriteShardItem.name = "fulgorite-shard"
-fulgoriteShardItem.icon = data.raw.item["holmium-ore"].icon
+fulgoriteShardItem.icon = ITEM["holmium-ore"].icon
 fulgoriteShardItem.subgroup = "fulgora-processes"
 fulgoriteShardItem.order = "a[raw-material]-b[fulgorite-shard]"
 fulgoriteShardItem.order = "c[organics]-c[fulgorite-shard]"
@@ -22,20 +22,20 @@ local holmiumPowderIcons = {}
 for _, a in pairs{"a", "b"} do for _, b in pairs{"0", "90", "180", "270"} do
 	table.insert(holmiumPowderIcons, {filename = "__LegendarySpaceAge__/graphics/fulgora/fulgorite-stuff/holmium-powder-"..a.."-"..b..".png", size = 64, mipmap_count = 4, scale = 0.65})
 end end
-data.raw.item["holmium-ore"].pictures = holmiumPowderIcons
-data.raw.item["holmium-ore"].icon = holmiumPowderIcons[1].filename
+ITEM["holmium-ore"].pictures = holmiumPowderIcons
+ITEM["holmium-ore"].icon = holmiumPowderIcons[1].filename
 
 -- Change holmium powder sounds so it sounds like a powder instead of rock.
-data.raw.item["holmium-ore"].drop_sound = data.raw.item["sulfur"].drop_sound
-data.raw.item["holmium-ore"].pick_sound = data.raw.item["sulfur"].pick_sound
-data.raw.item["holmium-ore"].inventory_move_sound = data.raw.item["sulfur"].inventory_move_sound
+ITEM["holmium-ore"].drop_sound = ITEM["sulfur"].drop_sound
+ITEM["holmium-ore"].pick_sound = ITEM["sulfur"].pick_sound
+ITEM["holmium-ore"].inventory_move_sound = ITEM["sulfur"].inventory_move_sound
 
 -- Fulgorite should yield fulgorite shard on mining, not holmium powder or stone or electrophages.
 data.raw["simple-entity"]["fulgurite"].minable.results = { {type = "item", name = "fulgorite-shard", amount_min = 4, amount_max = 8} }
 data.raw["simple-entity"]["fulgurite-small"].minable.results = { {type = "item", name = "fulgorite-shard", amount_min = 2, amount_max = 4} }
 
 -- Create item for fulgorite starter.
-local fulgoriteStarterItem = table.deepcopy(data.raw.item["holmium-ore"])
+local fulgoriteStarterItem = table.deepcopy(ITEM["holmium-ore"])
 fulgoriteStarterItem.name = "fulgorite-starter"
 fulgoriteStarterItem.icon = "__LegendarySpaceAge__/graphics/fulgora/fulgorite-stuff/fulgorite-starter.png"
 fulgoriteStarterItem.subgroup = "fulgora-processes"
@@ -49,7 +49,7 @@ fulgoriteStarterItem.pictures = nil -- Remove the holmium powder picture.
 data:extend({fulgoriteStarterItem})
 
 -- Create recipe to crush fulgorite shards for holmium powder.
-local crushFulgoriteShardRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
+local crushFulgoriteShardRecipe = table.deepcopy(RECIPE["plastic-bar"])
 crushFulgoriteShardRecipe.name = "holmium-ore" -- Naming it the same as holmium ore, so it doesn't get a separate entry in Factoriopedia etc.
 crushFulgoriteShardRecipe.category = "chemistry-or-handcrafting"
 crushFulgoriteShardRecipe.auto_recycle = false
@@ -107,7 +107,7 @@ data.raw["simple-entity"]["fulgurite-small"].hidden_in_factoriopedia = true
 data.raw["simple-entity"]["fulgurite-small"].factoriopedia_alternative = "fulgorite-plant"
 
 -- Create recipe for making fulgorite starters from electrophages plus fulgorite shards.
-local fulgoriteStarterRecipe = table.deepcopy(data.raw.recipe["electrophage-cultivation"])
+local fulgoriteStarterRecipe = table.deepcopy(RECIPE["electrophage-cultivation"])
 fulgoriteStarterRecipe.name = "fulgorite-starter"
 fulgoriteStarterRecipe.ingredients = {
 	{ type = "item", name = "fulgorite-shard", amount = 2 },
@@ -123,7 +123,7 @@ fulgoriteStarterRecipe.icon = nil
 data:extend({fulgoriteStarterRecipe})
 
 -- Create tech for fulgorite farming.
-local fulgoriteFarmingTech = table.deepcopy(data.raw.technology["electrophages"])
+local fulgoriteFarmingTech = table.deepcopy(TECH["electrophages"])
 fulgoriteFarmingTech.name = "fulgorite-farming"
 fulgoriteFarmingTech.prerequisites = {"electrophages"}
 fulgoriteFarmingTech.effects = {{type = "unlock-recipe", recipe = "fulgorite-starter"}}

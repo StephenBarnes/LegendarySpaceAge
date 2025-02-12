@@ -1,6 +1,12 @@
--- Globals
+-- Global shortcuts for indexing data.raw.
 RECIPE = data.raw.recipe
 ITEM = data.raw.item
+TECH = data.raw.technology
+
+-- Global utils
+Tech = require "code.util.tech"
+Table = require "code.util.table"
+-- TODO more
 
 -- Files that create things needed in subsequent files.
 require("code.data.crafting-categories")

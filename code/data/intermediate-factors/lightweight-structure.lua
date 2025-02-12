@@ -3,18 +3,18 @@
 local Tech = require("code.util.tech")
 
 -- Move item and recipes into the subgroup.
-data.raw.item["low-density-structure"].subgroup = "lightweight-structure"
-data.raw.recipe["low-density-structure"].subgroup = "lightweight-structure"
-data.raw.recipe["low-density-structure"].order = "02"
-data.raw.recipe["low-density-structure"].auto_recycle = false
-data.raw.recipe["casting-low-density-structure"].subgroup = "lightweight-structure"
-data.raw.recipe["casting-low-density-structure"].order = "03"
+ITEM["low-density-structure"].subgroup = "lightweight-structure"
+RECIPE["low-density-structure"].subgroup = "lightweight-structure"
+RECIPE["low-density-structure"].order = "02"
+RECIPE["low-density-structure"].auto_recycle = false
+RECIPE["casting-low-density-structure"].subgroup = "lightweight-structure"
+RECIPE["casting-low-density-structure"].order = "03"
 
 -- Reduce weight of low-density structure.
-data.raw.item["low-density-structure"].weight = 500
+ITEM["low-density-structure"].weight = 500
 
 -- Create recipe from copper and steel, copying the default recipe.
-local recipeFromCopper = table.deepcopy(data.raw.recipe["low-density-structure"])
+local recipeFromCopper = table.deepcopy(RECIPE["low-density-structure"])
 recipeFromCopper.name = "low-density-structure-standard"
 recipeFromCopper.ingredients = {
 	{type="item", name="ingot-copper-hot", amount=5},
@@ -28,7 +28,7 @@ recipeFromCopper.icon = nil
 recipeFromCopper.icons = {
 	{icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64},
 }
-for _, icon in pairs(data.raw.item["ingot-copper-hot"].icons) do
+for _, icon in pairs(ITEM["ingot-copper-hot"].icons) do
 	local iconCopy = table.deepcopy(icon)
 	iconCopy.scale = 0.25
 	iconCopy.shift = {-8, -8}
@@ -38,8 +38,8 @@ data:extend{recipeFromCopper}
 Tech.addRecipeToTech("low-density-structure-standard", "low-density-structure")
 
 -- Hide default recipe.
-data.raw.recipe["low-density-structure"].hidden = true
-data.raw.recipe["low-density-structure"].hidden_in_factoriopedia = true
+RECIPE["low-density-structure"].hidden = true
+RECIPE["low-density-structure"].hidden_in_factoriopedia = true
 
 -- Create a new recipe for LDS from carbon fiber.
 local recipeFromCarbonFiber = table.deepcopy(recipeFromCopper)

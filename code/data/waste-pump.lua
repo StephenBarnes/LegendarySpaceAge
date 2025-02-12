@@ -56,14 +56,14 @@ wastePumpCraftingCategory.name = "waste-pump"
 data:extend{wastePumpCraftingCategory}
 
 -- Create recipe.
-local wastePumpRecipe = table.deepcopy(data.raw.recipe["pump"])
+local wastePumpRecipe = table.deepcopy(RECIPE["pump"])
 wastePumpRecipe.name = "waste-pump"
 wastePumpRecipe.results = {{type = "item", name = "waste-pump", amount = 1}}
-wastePumpRecipe.ingredients = table.deepcopy(data.raw.recipe["offshore-pump"].ingredients)
+wastePumpRecipe.ingredients = table.deepcopy(RECIPE["offshore-pump"].ingredients)
 data:extend{wastePumpRecipe}
 
 -- Create item.
-local wastePumpItem = table.deepcopy(data.raw.item["pump"])
+local wastePumpItem = table.deepcopy(ITEM["pump"])
 wastePumpItem.name = "waste-pump"
 wastePumpItem.place_result = "waste-pump"
 wastePumpItem.icon = "nil"
@@ -114,7 +114,7 @@ for _, effluentFluidAndPollution in pairs(effluentFluidsAndPollution) do
 	else
 		fluidIcon = {icon = fluid.icon, icon_size = fluid.icon_size}
 	end
-	local effluentRecipe = table.deepcopy(data.raw.recipe["offshore-pump"])
+	local effluentRecipe = table.deepcopy(RECIPE["offshore-pump"])
 	effluentRecipe.name = "vent-" .. effluentFluid
 	effluentRecipe.localised_name = {"recipe-name.waste-pumping", {"fluid-name."..effluentFluid}}
 	effluentRecipe.enabled = true

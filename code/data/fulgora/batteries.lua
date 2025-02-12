@@ -18,7 +18,7 @@ data:extend({
 
 -- Create items for batteries, with holmium and charged variants.
 -- Using a new shorter icon for the battery, so we can put the charge outline around it.
-local batteryItem = data.raw.item["battery"]
+local batteryItem = ITEM["battery"]
 batteryItem.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/battery_short.png"
 batteryItem.stack_size = 200 -- Vanilla is 200. This carries through to other cloned batteries.
 batteryItem.weight = 1000 -- Vanilla is 2500 (so 400 per rocket). Setting to 1000, so 1000 per rocket.
@@ -57,7 +57,7 @@ chargedHolmiumBatteryItem.fuel_value = "100MJ"
 data:extend({chargedBatteryItem, holmiumBatteryItem, chargedHolmiumBatteryItem})
 
 -- Create recipe for holmium batteries.
-local holmiumBatteryRecipe = table.deepcopy(data.raw.recipe["battery"])
+local holmiumBatteryRecipe = table.deepcopy(RECIPE["battery"])
 holmiumBatteryRecipe.name = "holmium-battery"
 holmiumBatteryRecipe.results = {{type = "item", name = "holmium-battery", amount = 1}}
 holmiumBatteryRecipe.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/holmium_battery_short.png"
@@ -72,7 +72,7 @@ holmiumBatteryRecipe.allow_decomposition = true
 data:extend({holmiumBatteryRecipe})
 
 -- Create new tech for holmium battery. It gets unlocked after you've gotten science packs from both Fulgora and Vulcanus.
-local holmiumBatteryTech = table.deepcopy(data.raw.technology["battery-mk3-equipment"])
+local holmiumBatteryTech = table.deepcopy(TECH["battery-mk3-equipment"])
 holmiumBatteryTech.name = "holmium-battery"
 holmiumBatteryTech.prerequisites = {"electromagnetic-science-pack", "metallurgic-science-pack"}
 holmiumBatteryTech.effects = {
@@ -403,8 +403,8 @@ data:extend({
 		burned_in_key = "discharged-by", -- factoriopedia
 	},
 })
-data.raw.item["battery-charger"].place_result = "battery-charger"
-data.raw.item["battery-discharger"].place_result = "battery-discharger"
+ITEM["battery-charger"].place_result = "battery-charger"
+ITEM["battery-discharger"].place_result = "battery-discharger"
 
 -- Quality shouldn't give the chargers greater charge speed, or you could make a loop for free energy, since their energy consumption isn't changed by quality.
 -- TODO write control script to replace chargers on placement, and then remove no-quality mod as prereq.
@@ -469,13 +469,13 @@ data:extend({
 			{ type = "item", name = "copper-plate", amount = 1, probability = 0.25, show_details_in_recipe_tooltip = false },
 		},
 		main_product = "sulfuric-acid",
-		order = data.raw.recipe["sulfuric-acid"].order .. "-b",
-		subgroup = data.raw.recipe["acid-neutralisation"].subgroup,
+		order = RECIPE["sulfuric-acid"].order .. "-b",
+		subgroup = RECIPE["acid-neutralisation"].subgroup,
 		allow_as_intermediate = false,
 		allow_decomposition = false,
 		allow_productivity = false,
 		enabled = false,
-		crafting_machine_tint = data.raw.recipe["sulfuric-acid"].crafting_machine_tint,
+		crafting_machine_tint = RECIPE["sulfuric-acid"].crafting_machine_tint,
 	},
 })
 Tech.addRecipeToTech("extract-sulfuric-acid-from-battery", "battery")

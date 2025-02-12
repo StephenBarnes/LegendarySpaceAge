@@ -3,7 +3,7 @@
 local Tech = require("code.util.tech")
 
 -- Create item.
-local structureItem = table.deepcopy(data.raw.item["steel-plate"])
+local structureItem = table.deepcopy(ITEM["steel-plate"])
 structureItem.name = "structure"
 structureItem.subgroup = "structure"
 structureItem.order = "01"
@@ -12,7 +12,7 @@ structureItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-fact
 data:extend{structureItem}
 
 -- Create recipe: 8 stone brick + 20 cement -> 1 structure
-local recipeFromCement = table.deepcopy(data.raw.recipe["iron-stick"])
+local recipeFromCement = table.deepcopy(RECIPE["iron-stick"])
 recipeFromCement.name = "structure-from-cement"
 recipeFromCement.ingredients = {
 	{type = "item", name = "stone-brick", amount = 10},

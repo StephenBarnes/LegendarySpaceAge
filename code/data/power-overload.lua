@@ -23,20 +23,20 @@ Tech.reorderRecipeUnlocks("electric-energy-distribution-1",
 
 -- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive. Rather just the pole plus a wiring.
 for _, size in pairs{"small", "medium", "big"} do
-	data.raw.recipe["po-"..size.."-electric-fuse"].ingredients = {
+	RECIPE["po-"..size.."-electric-fuse"].ingredients = {
 		{type = "item", name = "wiring", amount = 1},
 		{type = "item", name = size.."-electric-pole", amount = 1},
 	}
 end
 
 -- Using custom descriptions for techs.
-data.raw.technology["electric-energy-distribution-1"].localised_description = {"technology-description.electric-energy-distribution-1"}
-data.raw.technology["electric-energy-distribution-2"].localised_description = {"technology-description.electric-energy-distribution-2"}
---data.raw.technology["po-electric-energy-distribution-3"].localised_description = {"technology-description.po-electric-energy-distribution-3"}
+TECH["electric-energy-distribution-1"].localised_description = {"technology-description.electric-energy-distribution-1"}
+TECH["electric-energy-distribution-2"].localised_description = {"technology-description.electric-energy-distribution-2"}
+--TECH["po-electric-energy-distribution-3"].localised_description = {"technology-description.po-electric-energy-distribution-3"}
 
 -- Change transformer and all the combinators to also be craftable in EM plants.
 for _, recipeName in pairs({"selector-combinator", "arithmetic-combinator", "decider-combinator", "constant-combinator", "power-switch", "programmable-speaker", "display-panel", "small-lamp", "po-transformer"}) do
-	local recipe = data.raw.recipe[recipeName]
+	local recipe = RECIPE[recipeName]
 	if recipe == nil then
 		log("ERROR: Couldn't find recipe "..recipe.." to change to EM plants.")
 		return
@@ -60,13 +60,13 @@ data.raw["electric-pole"]["po-interface-south"].hidden_in_factoriopedia = true
 -- So, let's remove the big pylons.
 Tech.hideTech("po-electric-energy-distribution-3")
 Recipe.hide("po-huge-electric-pole")
-data.raw.item["po-huge-electric-pole"].hidden = true
+ITEM["po-huge-electric-pole"].hidden = true
 data.raw["electric-pole"]["po-huge-electric-pole"].hidden = true
-data.raw.recipe["po-huge-electric-pole-recycling"] = nil
+RECIPE["po-huge-electric-pole-recycling"] = nil
 Recipe.hide("po-huge-electric-fuse")
-data.raw.item["po-huge-electric-fuse"].hidden = true
+ITEM["po-huge-electric-fuse"].hidden = true
 data.raw["electric-pole"]["po-huge-electric-fuse"].hidden = true
-data.raw.recipe["po-huge-electric-fuse-recycling"] = nil
+RECIPE["po-huge-electric-fuse-recycling"] = nil
 
 --[[ Obsolete stuff, now that pylons are removed:
 -- Make the pylons require blue circuits, since they depend on that.
@@ -81,12 +81,12 @@ Tech.setPrereqs("po-electric-energy-distribution-3", {"electromagnetic-science-p
 Tech.copyUnit("lightning-collector", "po-electric-energy-distribution-3")
 
 -- Set pylons' crafting category same as the others, so it can be made in EM plants.
---data.raw.recipe["po-huge-electric-pole"].category = data.raw.recipe["big-electric-pole"].category
---data.raw.recipe["po-huge-electric-fuse"].category = data.raw.recipe["big-electric-pole"].category
+--RECIPE["po-huge-electric-pole"].category = RECIPE["big-electric-pole"].category
+--RECIPE["po-huge-electric-fuse"].category = RECIPE["big-electric-pole"].category
 -- Actually rather make them only buildable in EM plants.
-data.raw.recipe["po-huge-electric-pole"].category = "electromagnetics"
-data.raw.recipe["po-huge-electric-fuse"].category = "electromagnetics"
+RECIPE["po-huge-electric-pole"].category = "electromagnetics"
+RECIPE["po-huge-electric-fuse"].category = "electromagnetics"
 
 -- Reorder pylon recipe to be after substation
-data.raw.recipe["po-huge-electric-pole"].order = "a[energy]-e[huge]"
+RECIPE["po-huge-electric-pole"].order = "a[energy]-e[huge]"
 ]]

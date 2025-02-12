@@ -11,7 +11,7 @@ Pitch is 3MJ. Dry gas is 800kJ. Recipe 1 -> 2 is actually ->3 from biochamber, s
 local petrophageDir = "__LegendarySpaceAge__/graphics/gleba/petrophages/"
 
 -- Create item.
-local petrophage = table.deepcopy(data.raw.item["iron-bacteria"])
+local petrophage = table.deepcopy(ITEM["iron-bacteria"])
 petrophage.name = "petrophage"
 petrophage.icon = petrophageDir .. "1.png"
 petrophage.pictures = {}
@@ -31,7 +31,7 @@ petrophage.order = "21"
 data:extend{petrophage}
 
 -- Create recipe for breeding petrophages.
-local cultivationRecipe = table.deepcopy(data.raw.recipe["iron-bacteria-cultivation"])
+local cultivationRecipe = table.deepcopy(RECIPE["iron-bacteria-cultivation"])
 cultivationRecipe.name = "petrophage-cultivation"
 cultivationRecipe.ingredients = {
 	{type="fluid", name="dry-gas", amount=10},
@@ -72,7 +72,7 @@ refreshRecipe.order = "23"
 data:extend{refreshRecipe}
 
 -- Adjust the bacteria-cultivation tech to include the new recipes.
-local tech = data.raw.technology["bacteria-cultivation"]
+local tech = TECH["bacteria-cultivation"]
 tech.effects = {
 	{type = "unlock-recipe", recipe = "petrophage-cultivation"},
 	{type = "unlock-recipe", recipe = "refresh-petrophages"},

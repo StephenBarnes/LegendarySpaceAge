@@ -139,7 +139,7 @@ ent.dying_explosion = "big-mining-drill-explosion"
 ent.max_health = 1000
 data:extend{ent}
 
-local item = table.deepcopy(data.raw.item["big-mining-drill"])
+local item = table.deepcopy(ITEM["big-mining-drill"])
 item.name = "deep-drill"
 item.icon = "__LegendarySpaceAge__/graphics/deep-drill/item.png"
 item.place_result = "deep-drill"
@@ -148,7 +148,7 @@ item.weight = 1e7 -- Too heavy for rocket.
 item.order = "a[items]-d"
 data:extend{item}
 
-local recipe = table.deepcopy(data.raw.recipe["electric-mining-drill"])
+local recipe = table.deepcopy(RECIPE["electric-mining-drill"])
 recipe.name = "deep-drill"
 recipe.results = {{type = "item", name = "deep-drill", amount = 1}}
 recipe.energy_required = 30
@@ -167,7 +167,7 @@ data:extend{{
 }}
 
 -- Create deep drill recipe for Nauvis: no ingredients => 10 stone
-local nauvisDrillingRecipe = table.deepcopy(data.raw.recipe["deep-drill"])
+local nauvisDrillingRecipe = table.deepcopy(RECIPE["deep-drill"])
 nauvisDrillingRecipe.name = "deep-drill-nauvis"
 nauvisDrillingRecipe.ingredients = {}
 nauvisDrillingRecipe.results = {
@@ -232,7 +232,7 @@ data:extend{{
 }}
 
 -- Create tech for the deep drill recipe.
-local tech = table.deepcopy(data.raw.technology["electric-mining-drill"])
+local tech = table.deepcopy(TECH["electric-mining-drill"])
 tech.name = "deep-drill"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "deep-drill"},
@@ -259,7 +259,7 @@ Tech.addTechDependency("deep-drill", "planet-discovery-gleba")
 
 -- Make the mining productivity techs also affect deep drills.
 for i = 1, 3 do
-	local tech = data.raw.technology["mining-productivity-"..i]
+	local tech = TECH["mining-productivity-"..i]
 	if tech then
 		for _, planet in pairs{"nauvis", "gleba", "vulcanus", "fulgora"} do
 			table.insert(tech.effects, {

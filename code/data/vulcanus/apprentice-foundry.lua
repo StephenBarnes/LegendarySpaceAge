@@ -2,7 +2,7 @@
 data:extend{{
 	type = "planet",
 	name = "apprentice-foundry",
-	icon = data.raw.item.foundry.icon,
+	icon = ITEM.foundry.icon,
 
 	distance = 0,
 	orientation = 0,

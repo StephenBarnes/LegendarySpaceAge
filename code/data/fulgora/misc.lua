@@ -22,13 +22,13 @@ data.raw["recipe"]["scrap-recycling"].results = {
 }
 
 -- Change holmium solution recipe to require sulfuric acid instead of water.
-data.raw.recipe["holmium-solution"].ingredients = {
+RECIPE["holmium-solution"].ingredients = {
 	{type = "fluid", name = "sulfuric-acid", amount = 10},
 	{type = "item", name = "holmium-ore", amount = 2},
 }
 
 -- Change electrolyte solution - previously stone, heavy oil, holmium solution.
-data.raw.recipe["electrolyte"].ingredients = {
+RECIPE["electrolyte"].ingredients = {
 	{type = "item", name = "sand", amount = 1},
 	{type = "fluid", name = "holmium-solution", amount = 10},
 	{type = "fluid", name = "water", amount = 10},

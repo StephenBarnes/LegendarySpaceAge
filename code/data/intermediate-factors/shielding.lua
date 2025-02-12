@@ -3,7 +3,7 @@
 local Tech = require "code.util.tech"
 
 -- Create item.
-local shieldingItem = table.deepcopy(data.raw.item["steel-plate"])
+local shieldingItem = table.deepcopy(ITEM["steel-plate"])
 shieldingItem.name = "shielding"
 shieldingItem.subgroup = "shielding"
 shieldingItem.order = "01"
@@ -12,7 +12,7 @@ shieldingItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-fact
 data:extend{shieldingItem}
 
 -- Create recipe: 10 iron plate + 10 stone brick + 10 iron rod -> 1 shielding
-local recipeFromIron = table.deepcopy(data.raw.recipe["iron-stick"])
+local recipeFromIron = table.deepcopy(RECIPE["iron-stick"])
 recipeFromIron.name = "shielding-from-iron"
 recipeFromIron.ingredients = {
 	{type = "item", name = "iron-plate", amount = 10},

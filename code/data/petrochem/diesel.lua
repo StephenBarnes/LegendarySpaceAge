@@ -19,7 +19,7 @@ fluid.visualization_color = brightColor
 data:extend{fluid}
 
 -- Create diesel recipe: 100 light oil + 50 rich gas -> 100 diesel.
-local recipe = table.deepcopy(data.raw.recipe["rocket-fuel"])
+local recipe = table.deepcopy(RECIPE["rocket-fuel"])
 recipe.name = "make-diesel" -- Not just "diesel" bc that merges it with the fluid in factoriopedia.
 recipe.ingredients = {
 	{type = "fluid", name = "light-oil", amount = 100},
@@ -35,7 +35,7 @@ recipe.category = "chemistry-or-crafting-with-fluid"
 data:extend{recipe}
 
 -- Create tech for diesel.
-local tech = table.deepcopy(data.raw.technology["rocket-fuel"])
+local tech = table.deepcopy(TECH["rocket-fuel"])
 tech.name = "diesel"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "make-diesel"},
@@ -49,9 +49,9 @@ tech.unit.ingredients = {
 data:extend{tech}
 
 -- Hide rocket fuel stuff - recipe, item, tech.
-data.raw.item["rocket-fuel"].hidden = true
-data.raw.recipe["rocket-fuel"].hidden = true
-data.raw.technology["rocket-fuel"].hidden = true
-data.raw.technology["rocket-fuel-productivity"].hidden = true
-data.raw.recipe["ammonia-rocket-fuel"].hidden = true
+ITEM["rocket-fuel"].hidden = true
+RECIPE["rocket-fuel"].hidden = true
+TECH["rocket-fuel"].hidden = true
+TECH["rocket-fuel-productivity"].hidden = true
+RECIPE["ammonia-rocket-fuel"].hidden = true
 Tech.removeRecipeFromTech("ammonia-rocket-fuel", "planet-discovery-aquilo")

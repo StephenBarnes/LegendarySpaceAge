@@ -24,10 +24,6 @@ Re stack sizes:
 
 local Tech = require("code.util.tech")
 
-local items = data.raw.item
-local recipes = data.raw.recipe
-local technologies = data.raw.technology
-
 local ROCKET_MASS = 1e6
 local INGOT_COOLING_TIME = 60 * 60 * 5 -- 5 minutes.
 
@@ -54,7 +50,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	local coldIngotName = "ingot-" .. metal .. "-cold"
 	local tint = metalTint[metal]
 
-	local hotIngot = table.deepcopy(items["iron-plate"])
+	local hotIngot = table.deepcopy(ITEM["iron-plate"])
 	hotIngot.name = hotIngotName
 	hotIngot.icons = {
 		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", icon_size=64, scale=0.5},
@@ -89,7 +85,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	data:extend{coldIngot}
 
 	---@type data.RecipePrototype
-	local ingotHeatingRecipe = table.deepcopy(recipes["stone-brick"])
+	local ingotHeatingRecipe = table.deepcopy(RECIPE["stone-brick"])
 	ingotHeatingRecipe.name = "heat-ingot-" .. metal
 	ingotHeatingRecipe.ingredients = {
 		{type="item", name=coldIngotName, amount=1},
@@ -112,7 +108,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 end
 
 -- Make recipe for iron ingot -> steel ingot.
-local steelIngotRecipe = table.deepcopy(recipes["steel-plate"])
+local steelIngotRecipe = table.deepcopy(RECIPE["steel-plate"])
 steelIngotRecipe.name = "ingot-steel-hot"
 steelIngotRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=5}}
 steelIngotRecipe.results = {{type="item", name="ingot-steel-hot", amount=1}}
@@ -157,7 +153,7 @@ for i = 1, 12 do
 		mipmap_count = 4,
 	})
 end
-local copperMatte = table.deepcopy(items["copper-ore"])
+local copperMatte = table.deepcopy(ITEM["copper-ore"])
 copperMatte.name = "copper-matte"
 copperMatte.icons = {
 	{icon="__LegendarySpaceAge__/graphics/metallurgy/matte/matte1.png", icon_size=64, scale=0.5},
@@ -186,7 +182,7 @@ data:extend{copperIngotRecipe}
 
 -- Adjust recipes for plates: steel, iron, copper.
 for _, metal in pairs{"steel", "iron", "copper"} do
-	local plateRecipe = recipes[metal .. "-plate"]
+	local plateRecipe = RECIPE[metal .. "-plate"]
 	plateRecipe.ingredients = {{type="item", name="ingot-" .. metal .. "-hot", amount=1}}
 	plateRecipe.results = {{type="item", name=metal .. "-plate", amount=5}}
 	plateRecipe.energy_required = INGOT_TO_ITEM_SECONDS
@@ -203,7 +199,7 @@ for _, vals in pairs{
 	{"copper", "copper-cable", 10},
 } do
 	local metal, item, num = vals[1], vals[2], vals[3]
-	local recipe = recipes[item]
+	local recipe = RECIPE[item]
 	recipe.ingredients = {{type="item", name="ingot-" .. metal .. "-hot", amount=1}}
 	recipe.results = {{type="item", name=item, amount=num}}
 	recipe.energy_required = INGOT_TO_ITEM_SECONDS
@@ -213,8 +209,8 @@ end
 
 -- Put basic metal intermediates in their own subgroup.
 for i, itemName in pairs{"iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate"} do
-	items[itemName].subgroup = "basic-metal-intermediates"
-	items[itemName].order = ""..i
+	ITEM[itemName].subgroup = "basic-metal-intermediates"
+	ITEM[itemName].order = ""..i
 end
 
 ------------------------------------------------------------------------
@@ -222,25 +218,25 @@ end
 -- Add recipes to techs.
 Tech.addRecipeToTech("ingot-steel-hot", "steel-processing", 1)
 Tech.addRecipeToTech("heat-ingot-steel", "steel-processing", 2)
-recipes["heat-ingot-steel"].enabled = false
+RECIPE["heat-ingot-steel"].enabled = false
 
 -- Adjust tech unlock triggers.
-technologies["steam-power"].research_trigger.item = "ingot-iron-hot"
-technologies["electronics"].research_trigger.item = "ingot-copper-hot"
-technologies["steel-axe"].research_trigger.item = "ingot-steel-hot"
+TECH["steam-power"].research_trigger.item = "ingot-iron-hot"
+TECH["electronics"].research_trigger.item = "ingot-copper-hot"
+TECH["steel-axe"].research_trigger.item = "ingot-steel-hot"
 
 --[[ Adjust stack sizes and rocket capacities of basic metal products.
 Stack sizes of ores are 50, ingots 100, plates 100, machine parts 100, rods 100.
 So transporting ingots is 2 times better for stack size, times 4 times better from recipes, so 8x denser overall.
 ]]
-items["copper-matte"].weight = ORE_WEIGHT -- 2 ore becomes 1 copper matte and 1 sulfur
-items["iron-plate"].weight = INGOT_WEIGHT / 5
-items["copper-plate"].weight = INGOT_WEIGHT / 5
-items["steel-plate"].weight = INGOT_WEIGHT / 5
-items["iron-gear-wheel"].weight = INGOT_WEIGHT / 5
-items["iron-stick"].weight = INGOT_WEIGHT / 5
-items["copper-cable"].weight = INGOT_WEIGHT / 10
-items["iron-stick"].stack_size = 200
+ITEM["copper-matte"].weight = ORE_WEIGHT -- 2 ore becomes 1 copper matte and 1 sulfur
+ITEM["iron-plate"].weight = INGOT_WEIGHT / 5
+ITEM["copper-plate"].weight = INGOT_WEIGHT / 5
+ITEM["steel-plate"].weight = INGOT_WEIGHT / 5
+ITEM["iron-gear-wheel"].weight = INGOT_WEIGHT / 5
+ITEM["iron-stick"].weight = INGOT_WEIGHT / 5
+ITEM["copper-cable"].weight = INGOT_WEIGHT / 10
+ITEM["iron-stick"].stack_size = 200
 
 -- Add output slots to furnaces - otherwise some recipe products just disappear, apparently.
 for _, furnace in pairs{"stone-furnace", "steel-furnace", "gas-furnace", "electric-furnace"} do

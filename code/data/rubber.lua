@@ -13,7 +13,7 @@ local rubberIcons = {}
 for i = 1, 3 do
 	table.insert(rubberIcons, {filename = "__LegendarySpaceAge__/graphics/rubber/rubber-"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
-local rubberItem = table.deepcopy(data.raw.item["plastic-bar"])
+local rubberItem = table.deepcopy(ITEM["plastic-bar"])
 rubberItem.name = "rubber"
 rubberItem.icon = nil
 rubberItem.icons = {{icon = rubberIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
@@ -33,7 +33,7 @@ latexFluid.visualization_color = latexColor
 data:extend{latexFluid}
 
 -- Create recipe for latex fluid.
-local latexRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
+local latexRecipe = table.deepcopy(RECIPE["plastic-bar"])
 latexRecipe.name = "latex"
 latexRecipe.ingredients = {
 	{type="item", name="wood", amount=5},
@@ -46,7 +46,7 @@ latexRecipe.order = "f1"
 data:extend{latexRecipe}
 
 -- Create recipe for latex to rubber.
-local rubberFromLatexRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
+local rubberFromLatexRecipe = table.deepcopy(RECIPE["plastic-bar"])
 rubberFromLatexRecipe.name = "rubber-from-latex"
 rubberFromLatexRecipe.ingredients = {
 	{ type = "fluid", name = "latex",         amount = 50 },
@@ -65,7 +65,7 @@ rubberFromLatexRecipe.icons = {
 data:extend{rubberFromLatexRecipe}
 
 -- Create recipe for synthetic rubber.
-local rubberFromPetrochemRecipe = table.deepcopy(data.raw.recipe["plastic-bar"])
+local rubberFromPetrochemRecipe = table.deepcopy(RECIPE["plastic-bar"])
 rubberFromPetrochemRecipe.name = "rubber-from-oil"
 rubberFromPetrochemRecipe.ingredients = {
 	{type="fluid", name="light-oil", amount=50},
@@ -89,7 +89,7 @@ rubberFromPetrochemRecipe.icons = {
 data:extend{rubberFromPetrochemRecipe}
 
 -- Create tech for natural rubber.
-local naturalRubberTech = table.deepcopy(data.raw.technology["plastics"])
+local naturalRubberTech = table.deepcopy(TECH["plastics"])
 naturalRubberTech.name = "rubber-1"
 naturalRubberTech.effects = {
 	{
@@ -105,11 +105,11 @@ naturalRubberTech.icon = nil
 naturalRubberTech.icons = {{icon = "__LegendarySpaceAge__/graphics/rubber/tech.png", icon_size = 256, scale=0.5, mipmap_count=4}}
 naturalRubberTech.localised_description = {"technology-description.rubber-1"}
 naturalRubberTech.prerequisites = {"sulfur-processing"}
-naturalRubberTech.unit = data.raw.technology["automation"].unit
+naturalRubberTech.unit = TECH["automation"].unit
 data:extend{naturalRubberTech}
 
 -- Create tech for synthetic rubber.
-local syntheticRubberTech = table.deepcopy(data.raw.technology["plastics"])
+local syntheticRubberTech = table.deepcopy(TECH["plastics"])
 syntheticRubberTech.name = "rubber-2"
 syntheticRubberTech.effects = {
 	{

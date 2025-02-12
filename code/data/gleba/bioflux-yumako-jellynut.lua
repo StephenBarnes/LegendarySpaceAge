@@ -19,7 +19,7 @@ local Tech = require("code.util.tech")
 local Item = require("code.util.item")
 
 -- Change bioflux default recipe.
-local cultivationRecipe = data.raw.recipe["bioflux"]
+local cultivationRecipe = RECIPE["bioflux"]
 cultivationRecipe.ingredients = {
 	{type = "item", name = "bioflux", amount = 1},
 	{type = "item", name = "yumako-mash", amount = 5},
@@ -48,7 +48,7 @@ Tech.addRecipeToTech("bioflux-from-eggs", "bioflux", 1)
 
 -- Create items for fertilized seeds.
 local fertilizedDir = "__LegendarySpaceAge__/graphics/gleba/fertilized-seeds/"
-local fertilizedYumakoSeedItem = table.deepcopy(data.raw.item["yumako-seed"])
+local fertilizedYumakoSeedItem = table.deepcopy(ITEM["yumako-seed"])
 fertilizedYumakoSeedItem.name = "fertilized-yumako-seed"
 fertilizedYumakoSeedItem.icon = fertilizedDir .. "yumako-seed.png"
 fertilizedYumakoSeedItem.pictures = {}
@@ -61,7 +61,7 @@ fertilizedYumakoSeedItem.localised_name = {"item-name.fertilized-yumako-seed"}
 fertilizedYumakoSeedItem.localised_description = nil
 Item.clearFuel(fertilizedYumakoSeedItem)
 data:extend{fertilizedYumakoSeedItem}
-local fertilizedJellystemSeedItem = table.deepcopy(data.raw.item["jellynut-seed"])
+local fertilizedJellystemSeedItem = table.deepcopy(ITEM["jellynut-seed"])
 fertilizedJellystemSeedItem.name = "fertilized-jellynut-seed"
 fertilizedJellystemSeedItem.icon = fertilizedDir .. "jellynut-seed.png"
 fertilizedJellystemSeedItem.pictures = {}
@@ -76,10 +76,10 @@ Item.clearFuel(fertilizedJellystemSeedItem)
 data:extend{fertilizedJellystemSeedItem}
 
 -- Rewire so crops are planted by fertilized seeds, not ordinary seeds.
-data.raw.item["yumako-seed"].plant_result = nil
-data.raw.item["yumako-seed"].place_result = nil
-data.raw.item["jellynut-seed"].plant_result = nil
-data.raw.item["jellynut-seed"].place_result = nil
+ITEM["yumako-seed"].plant_result = nil
+ITEM["yumako-seed"].place_result = nil
+ITEM["jellynut-seed"].plant_result = nil
+ITEM["jellynut-seed"].place_result = nil
 data.raw.plant["jellystem"].placeable_by = {item = "fertilized-jellynut-seed", count = 1}
 data.raw.plant["yumako-tree"].placeable_by = {item = "fertilized-yumako-seed", count = 1}
 
@@ -89,7 +89,7 @@ data.raw.plant["yumako-tree"].minable.results = {{type = "item", name = "yumako"
 data.raw.plant["jellystem"].minable.results = {{type = "item", name = "jellynut", amount_min = 20, amount_max = 40}}
 
 -- Create recipes for fertilized seeds.
-local fertilizedYumakoSeedRecipe = table.deepcopy(data.raw.recipe["bioflux"])
+local fertilizedYumakoSeedRecipe = table.deepcopy(RECIPE["bioflux"])
 fertilizedYumakoSeedRecipe.name = "fertilized-yumako-seed"
 fertilizedYumakoSeedRecipe.ingredients = {
 	{type = "item", name = "yumako-seed", amount = 1},
@@ -119,11 +119,11 @@ Tech.addRecipeToTech("fertilized-jellynut-seed", "jellynut")
 
 -- Make the fruit processing recipes yield 90%-spoiled fertilized seeds. (Spoil timer is 10 minutes, so we make the fruits yield 90% spoiled seeds, so 60 seconds left.)
 -- Also, increase seed output, since biochambers no longer have a prod bonus.
-data.raw.recipe["yumako-processing"].results = {
+RECIPE["yumako-processing"].results = {
 	{type = "item", name = "yumako-mash", amount = 2},
 	{type = "item", name = "fertilized-yumako-seed", amount = 1, probability = .025, percent_spoiled = .9},
 }
-data.raw.recipe["jellynut-processing"].results = {
+RECIPE["jellynut-processing"].results = {
 	{type = "item", name = "jelly", amount = 4},
 	{type = "item", name = "fertilized-jellynut-seed", amount = 1, probability = .025, percent_spoiled = .9},
 }

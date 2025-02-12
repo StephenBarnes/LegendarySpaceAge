@@ -6,47 +6,47 @@ local Tech = require("code.util.tech")
 Tech.setPrereqs("electronics", {"basic-electricity", "char"})
 Tech.setPrereqs("automation", {"electronics", "lamp"})
 Tech.addTechDependency("filtration-lake-water", "steam-power")
-data.raw.technology["steam-power"].unit = nil
-data.raw.technology["steam-power"].research_trigger = {
+TECH["steam-power"].unit = nil
+TECH["steam-power"].research_trigger = {
 	type = "craft-fluid",
 	fluid = "water",
 	amount = 1000,
 }
-data.raw.technology["automation"].unit = nil
-data.raw.technology["automation"].research_trigger = {
+TECH["automation"].unit = nil
+TECH["automation"].research_trigger = {
 	type = "craft-item",
 	item = "electronic-circuit",
 	count = 1,
 }
 
 -- In the gap between automation and automation-science-pack, player does production challenge of like 150 hot iron per minute.
-data.raw.technology["automation-science-pack"].prerequisites = {"automation"}
-data.raw.technology["automation-science-pack"].unit = nil
+TECH["automation-science-pack"].prerequisites = {"automation"}
+TECH["automation-science-pack"].unit = nil
 Tech.removeRecipeFromTech("lab", "electronics")
 Tech.addRecipeToTech("lab", "automation-science-pack")
-data.raw.recipe["automation-science-pack"].ingredients = {
+RECIPE["automation-science-pack"].ingredients = {
 	{type = "item", name = "iron-gear-wheel", amount = 1},
 	{type = "item", name = "glass", amount = 1},
 }
 
 -- Military 1 now depends on coal coking, for gunpowder. Also gun turrets.
-data.raw.technology["military"].prerequisites = {"gunpowder", "automation-science-pack"}
-data.raw.technology["gun-turret"].prerequisites = {"gunpowder", "automation-science-pack"}
+TECH["military"].prerequisites = {"gunpowder", "automation-science-pack"}
+TECH["gun-turret"].prerequisites = {"gunpowder", "automation-science-pack"}
 
 -- Move electric inserter to automation tech.
 Tech.removeRecipeFromTech("inserter", "electronics")
 Tech.addRecipeToTech("inserter", "automation")
 
 -- Unlock electronics when a hand-crank is built.
-data.raw.technology["electronics"].unit = nil
-data.raw.technology["electronics"].research_trigger = {
+TECH["electronics"].unit = nil
+TECH["electronics"].research_trigger = {
 	type = "build-entity",
 	entity = "er-hcg",
 }
 
 -- Move pipe recipes from steam power to automation.
 -- Remove offshore pump recipe from steam power, will add to filtration.
-data.raw.technology["steam-power"].effects = {
+TECH["steam-power"].effects = {
 	{type = "unlock-recipe", recipe = "boiler"},
 	{type = "unlock-recipe", recipe = "gas-boiler"},
 	{type = "unlock-recipe", recipe = "electric-boiler"},
@@ -87,20 +87,20 @@ Tech.setPrereqs("plastics", {"coal-liquefaction"})
 -- Could solve this by moving sulfuric acid recipe to rubber tech, removing sulfur tech.
 -- But we also need sulfuric acid for eg fertilizer. So rather keep it as a separate tech.
 Tech.setPrereqs("sulfur-processing", {"filtration-lake-water", "automation-science-pack"})
-data.raw.technology["sulfur-processing"].unit = data.raw.technology["ammonia-1"].unit
+TECH["sulfur-processing"].unit = TECH["ammonia-1"].unit
 
 Tech.setPrereqs("explosives", {"coal-liquefaction", "ammonia-1"}) -- Previously sulfur-processing
 
 -- Remove pointless "gas and oil gathering" tech, merge with petrochemistry 1.
 Tech.hideTech("oil-gathering")
-data.raw.technology["oil-processing"].unit = data.raw.technology["oil-gathering"].unit
-data.raw.technology["oil-processing"].research_trigger = nil
-data.raw.technology["oil-processing"].prerequisites = {"fluid-handling"}
+TECH["oil-processing"].unit = TECH["oil-gathering"].unit
+TECH["oil-processing"].research_trigger = nil
+TECH["oil-processing"].prerequisites = {"fluid-handling"}
 Tech.addRecipeToTech("pumpjack", "oil-processing", 2)
 
 -- Move advanced-oil-processing to after oil-processing.
 Tech.setPrereqs("advanced-oil-processing", {"oil-processing"})
-data.raw.technology["advanced-oil-processing"].unit = {
+TECH["advanced-oil-processing"].unit = {
 	count = 75,
 	time = 30,
 	ingredients = {
@@ -116,24 +116,24 @@ Tech.addTechDependency("rubber-2", "planet-discovery-vulcanus")
 Tech.addTechDependency("rubber-2", "planet-discovery-fulgora")
 
 -- Electric mining drill shouldn't be affected by tech multiplier since it's very early-game, making it 250 science instead of 25 is just annoying because it's not high enough to justify setting up with burner miners.
-data.raw.technology["electric-mining-drill"].ignore_tech_cost_multiplier = true
+TECH["electric-mining-drill"].ignore_tech_cost_multiplier = true
 
 -- Move long inserter to logistics 2.
 Tech.removeRecipeFromTech("long-handed-inserter", "automation")
 Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
 -- Fast inserter should go after lubricant.
 Tech.setPrereqs("fast-inserter", {"lubricant"})
-data.raw.technology["fast-inserter"].unit = {count = 50, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
+TECH["fast-inserter"].unit = {count = 50, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 Tech.setPrereqs("bulk-inserter", {"fast-inserter", "electric-engine"})
-data.raw.technology["bulk-inserter"].unit = {count = 100, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
+TECH["bulk-inserter"].unit = {count = 100, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 -- Inserter capacity techs should need more advanced science packs, since they're now after chem science.
-data.raw.technology["inserter-capacity-bonus-1"].unit = {count = 150, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
-data.raw.technology["inserter-capacity-bonus-2"].unit = {count = 200, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
+TECH["inserter-capacity-bonus-1"].unit = {count = 150, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
+TECH["inserter-capacity-bonus-2"].unit = {count = 200, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 
 -- Remove tech for advanced combinators. And move selector combinator recipe, and change recipe to not need red circuits.
 Tech.hideTech("advanced-combinators")
 Tech.addRecipeToTech("selector-combinator", "circuit-network", 4)
-data.raw.recipe["selector-combinator"].ingredients = {
+RECIPE["selector-combinator"].ingredients = {
 	{type = "item", name = "electronic-circuit", amount = 2},
 	{type = "item", name = "decider-combinator", amount = 5},
 }
@@ -145,25 +145,25 @@ Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "ele
 
 -- Heating tower tech should be early.
 Tech.setPrereqs("heating-tower", {"steel-processing", "logistic-science-pack"})
-data.raw.technology["heating-tower"].unit = {count = 300, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 30}
-data.raw.technology["heating-tower"].research_trigger = nil
+TECH["heating-tower"].unit = {count = 300, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 30}
+TECH["heating-tower"].research_trigger = nil
 
 -- Nuclear is going to post-triplets, and heating tower is early, so remove heating tower stuff fom nuclear tech.
 Tech.removeRecipesFromTechs({"heat-exchanger", "heat-pipe", "steam-turbine"}, {"nuclear-power"})
 
 -- Logistic (green) science needs steam, rubber.
-data.raw.recipe["logistic-science-pack"].ingredients = {
+RECIPE["logistic-science-pack"].ingredients = {
 	{type = "fluid", name = "steam", amount = 10},
 	{type = "item", name = "electronic-circuit", amount = 1},
 	{type = "item", name = "rubber", amount = 1},
 }
-data.raw.recipe["logistic-science-pack"].category = "crafting-with-fluid"
+RECIPE["logistic-science-pack"].category = "crafting-with-fluid"
 -- Could make green science depend only on rubber and steam-power. But that's sorta guiding people in the direction of not automating circuit boards. Rather make it a prereq. That also lets us assume resin is available after green science.
 Tech.setPrereqs("logistic-science-pack", {"rubber-1", "wood-circuit-board"})
 
 -- Military stuff: move things around so military science pack can be made from poison/slowdown capsules, which now come earlier, while grenades come later.
-data.raw.technology["military-science-pack"].prerequisites = {"military-2"}
-data.raw.recipe["military-science-pack"].ingredients = {
+TECH["military-science-pack"].prerequisites = {"military-2"}
+RECIPE["military-science-pack"].ingredients = {
 	{type = "item", name = "poison-capsule", amount = 1},
 	{type = "item", name = "slowdown-capsule", amount = 1},
 	{type = "item", name = "piercing-rounds-magazine", amount = 1},
@@ -173,7 +173,7 @@ Tech.addRecipeToTech("poison-capsule", "military-2")
 Tech.addRecipeToTech("slowdown-capsule", "military-2")
 Tech.removeRecipeFromTech("grenade", "military-2")
 Tech.addRecipeToTech("grenade", "military-3")
-data.raw.technology["military-2"].prerequisites = {"military", "oil-processing", "ammonia-1"}
+TECH["military-2"].prerequisites = {"military", "oil-processing", "ammonia-1"}
 Tech.addTechDependency("explosives", "military-3")
 Tech.removePrereq("military-4", "explosives")
 Tech.setPrereqs("stronger-explosives-1", {"military-3"})
@@ -187,7 +187,7 @@ Tech.addTechDependency("advanced-circuit", "advanced-material-processing-2")
 Tech.addTechDependency("advanced-circuit", "tank")
 
 -- Gleba science pack
-data.raw.recipe["agricultural-science-pack"].ingredients = {
+RECIPE["agricultural-science-pack"].ingredients = {
 	--{type = "item", name = "slipstack-pearl", amount = 1},
 	{type = "item", name = "activated-pentapod-egg", amount = 1},
 	{type = "item", name = "stingfrond-sprout", amount = 1},
@@ -196,28 +196,28 @@ data.raw.recipe["agricultural-science-pack"].ingredients = {
 	{type = "item", name = "petrophage", amount = 1},
 	--{type = "item", name = "marrow", amount = 1},
 }
-data.raw.technology["agricultural-science-pack"].research_trigger = { -- TODO later this should be a rate trigger on bioflux.
+TECH["agricultural-science-pack"].research_trigger = { -- TODO later this should be a rate trigger on bioflux.
 	type = "craft-item",
 	item = "bioflux",
 	count = 1000,
 }
 
 -- Make gate tech auto-unlock, otherwise I'm going to just forgo it.
-data.raw.technology["gate"].unit = nil
-data.raw.technology["gate"].research_trigger = {
+TECH["gate"].unit = nil
+TECH["gate"].research_trigger = {
 	type = "craft-item",
 	item = "stone-wall",
 	count = 100,
 }
-data.raw.technology["gate"].prerequisites = {"stone-wall"}
+TECH["gate"].prerequisites = {"stone-wall"}
 
 -- Wall needs red science.
 Tech.setPrereqs("stone-wall", {"automation-science-pack"})
 
 -- Lamp should be earlier.
 Tech.setPrereqs("lamp", {"basic-electricity", "glass"})
-data.raw.technology["lamp"].unit = nil
-data.raw.technology["lamp"].research_trigger = {
+TECH["lamp"].unit = nil
+TECH["lamp"].research_trigger = {
 	type = "craft-item",
 	item = "glass",
 	count = 1,
@@ -238,17 +238,17 @@ Tech.removePrereq("rocket-silo", "rocket-fuel")
 -- TODO add hydrogen/oxygen techs.
 
 -- Remove rocket fuel from rocket part recipe. TODO later we should re-write this recipe completely maybe.
-data.raw.recipe["rocket-part"].ingredients = {
+RECIPE["rocket-part"].ingredients = {
 	{type = "item", name = "processing-unit", amount = 1},
 	{type = "item", name = "low-density-structure", amount = 1},
 }
 
 -- Chemical science pack: 1 barrel diesel + 2 plastic -> 2 chemical science packs.
-data.raw.recipe["chemical-science-pack"].ingredients = {
+RECIPE["chemical-science-pack"].ingredients = {
 	{type = "item", name = "diesel-barrel", amount = 1},
 	{type = "item", name = "plastic-bar", amount = 2},
 }
-data.raw.technology["chemical-science-pack"].prerequisites = {"plastics", "diesel"}
+TECH["chemical-science-pack"].prerequisites = {"plastics", "diesel"}
 
 -- Blue circuits need a new dependency on red circuits.
 Tech.addTechDependency("advanced-circuit", "processing-unit")

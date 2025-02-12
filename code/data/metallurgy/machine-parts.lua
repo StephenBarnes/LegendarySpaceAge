@@ -4,30 +4,30 @@
 local Tech = require("code.util.tech")
 
 -- Update icons for iron parts.
-data.raw.item["iron-gear-wheel"].icon = nil
-data.raw.item["iron-gear-wheel"].icons = {
+ITEM["iron-gear-wheel"].icon = nil
+ITEM["iron-gear-wheel"].icons = {
 	{icon = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={-3, 3}},
 	{icon = "__LegendarySpaceAge__/graphics/parts-basic/plain/spring-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={3, -4}},
 }
-data.raw.item["iron-gear-wheel"].pictures = {
+ITEM["iron-gear-wheel"].pictures = {
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-1.png", size = 64, scale = 0.5, mipmap_count = 4},
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-2.png", size = 64, scale = 0.5, mipmap_count = 4},
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-3.png", size = 64, scale = 0.5, mipmap_count = 4},
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/spring-1.png", size = 64, scale = 0.5, mipmap_count = 4},
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/spring-2.png", size = 64, scale = 0.5, mipmap_count = 4},
 }
-data.raw.item["iron-gear-wheel"].has_random_tint = true
-data.raw.item["iron-gear-wheel"].random_tint_color = data.raw.item["iron-plate"].random_tint_color
+ITEM["iron-gear-wheel"].has_random_tint = true
+ITEM["iron-gear-wheel"].random_tint_color = ITEM["iron-plate"].random_tint_color
 
 -- Update icon for casting recipe.
-data.raw.recipe["casting-iron-gear-wheel"].icon = nil
-data.raw.recipe["casting-iron-gear-wheel"].icons = {
+RECIPE["casting-iron-gear-wheel"].icon = nil
+RECIPE["casting-iron-gear-wheel"].icons = {
 	{icon = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-2.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
 	{icon = "__space-age__/graphics/icons/fluid/molten-iron.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={4, -4}},
 }
 
 -- Create advanced parts item.
-local advancedPartsItem = table.deepcopy(data.raw.item["iron-gear-wheel"])
+local advancedPartsItem = table.deepcopy(ITEM["iron-gear-wheel"])
 advancedPartsItem.name = "advanced-parts"
 advancedPartsItem.icons = {
 	--[[
@@ -54,7 +54,7 @@ advancedPartsItem.order = "7"
 data:extend{advancedPartsItem}
 
 -- Create recipe for advanced parts.
-local advancedPartsRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
+local advancedPartsRecipe = table.deepcopy(RECIPE["iron-gear-wheel"])
 advancedPartsRecipe.name = "advanced-parts"
 advancedPartsRecipe.ingredients = {
 	{type="item", name="ingot-steel-hot", amount=5},

@@ -9,7 +9,7 @@ local sandIcons = {}
 for i = 1, 3 do
 	table.insert(sandIcons, {filename = "__LegendarySpaceAge__/graphics/glass-etc/sand/"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
-local sandItem = table.deepcopy(data.raw.item["stone"])
+local sandItem = table.deepcopy(ITEM["stone"])
 sandItem.name = "sand"
 sandItem.icon = nil
 sandItem.icons = {{icon = sandIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
@@ -24,7 +24,7 @@ local glassBatchIcons = {}
 for i = 1, 3 do
 	table.insert(glassBatchIcons, {filename = "__LegendarySpaceAge__/graphics/glass-etc/batch/"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
-local glassBatchItem = table.deepcopy(data.raw.item["sulfur"])
+local glassBatchItem = table.deepcopy(ITEM["sulfur"])
 glassBatchItem.name = "glass-batch"
 glassBatchItem.icon = nil
 glassBatchItem.icons = {{icon = glassBatchIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
@@ -38,7 +38,7 @@ local glassIcons = {}
 for i = 1, 6 do
 	table.insert(glassIcons, {filename = "__LegendarySpaceAge__/graphics/glass-etc/glass/"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
-local glassItem = table.deepcopy(data.raw.item["iron-plate"])
+local glassItem = table.deepcopy(ITEM["iron-plate"])
 glassItem.name = "glass"
 glassItem.icon = nil
 glassItem.icons = {{icon = glassIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
@@ -48,7 +48,7 @@ glassItem.order = "a4"
 data:extend{glassItem}
 
 -- Create recipe for stone -> sand.
-local sandRecipe = table.deepcopy(data.raw.recipe["iron-gear-wheel"])
+local sandRecipe = table.deepcopy(RECIPE["iron-gear-wheel"])
 sandRecipe.name = "sand"
 sandRecipe.ingredients = {{type="item", name="stone", amount=1}}
 sandRecipe.results = {{type="item", name="sand", amount=1}}
@@ -60,7 +60,7 @@ sandRecipe.allow_as_intermediate = true
 data:extend{sandRecipe}
 
 -- Create recipe for sand + ash -> glass batch.
-local glassBatchRecipe = table.deepcopy(data.raw.recipe["iron-plate"])
+local glassBatchRecipe = table.deepcopy(RECIPE["iron-plate"])
 glassBatchRecipe.name = "glass-batch"
 glassBatchRecipe.ingredients = {{type="item", name="sand", amount=1}, {type="item", name="ash", amount=1}}
 glassBatchRecipe.results = {{type="item", name="glass-batch", amount=1}}
@@ -73,7 +73,7 @@ glassBatchRecipe.auto_recycle = true
 data:extend{glassBatchRecipe}
 
 -- Create recipe for glass batch -> glass.
-local glassRecipe = table.deepcopy(data.raw.recipe["iron-plate"])
+local glassRecipe = table.deepcopy(RECIPE["iron-plate"])
 glassRecipe.name = "glass"
 glassRecipe.ingredients = {{type="item", name="glass-batch", amount=1}}
 glassRecipe.results = {{type="item", name="glass", amount=1}}
@@ -86,7 +86,7 @@ glassRecipe.allow_as_intermediate = true
 data:extend{glassRecipe}
 
 -- Create tech for glass
-local glassTech = table.deepcopy(data.raw.technology["logistics"])
+local glassTech = table.deepcopy(TECH["logistics"])
 glassTech.name = "glass"
 glassTech.effects = {
 	{

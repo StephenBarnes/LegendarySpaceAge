@@ -5,9 +5,9 @@ local Recipe = require("code.util.recipe")
 local Item = require("code.util.item")
 
 -- Move tree farming tech to early game.
-data.raw.technology["fish-breeding"].prerequisites = {"agricultural-science-pack"}
-data.raw.technology["tree-seeding"].prerequisites = {"ammonia-1", "sulfur-processing"}
-data.raw.technology["tree-seeding"].unit = {
+TECH["fish-breeding"].prerequisites = {"agricultural-science-pack"}
+TECH["tree-seeding"].prerequisites = {"ammonia-1", "sulfur-processing"}
+TECH["tree-seeding"].unit = {
 	count = 10,
 	time = 30,
 	ingredients = {
@@ -24,12 +24,12 @@ Tech.addTechDependency("tree-seeding", "planet-discovery-gleba")
 -- Cut out the agriculture tech on Gleba.
 Tech.hideTech("agriculture")
 for _, techName in pairs{"jellynut", "yumako"} do
-	data.raw.technology[techName].prerequisites = {"planet-discovery-gleba"}
+	TECH[techName].prerequisites = {"planet-discovery-gleba"}
 end
 
 -- Nutrients-from-spoilage recipe should be only in biochambers, and then put it in biochamber tech. (It was in agriculture tech, which we're hiding.)
 Tech.addRecipeToTech("nutrients-from-spoilage", "biochamber", 3)
-data.raw.recipe["nutrients-from-spoilage"].category = "organic"
+RECIPE["nutrients-from-spoilage"].category = "organic"
 
 -- Edit results from mining the living trees. They should give seeds directly, then we add recipe for seed -> sapling using fertilizer.
 -- There's a lot of different types of trees, so I'm just going to look through everything in data.raw.tree and check if it's minable is exactly 4 wood and nothing else.
@@ -92,17 +92,17 @@ data:extend{
 data.raw["item-subgroup"]["agriculture-processes"].order = "m2"
 
 -- Organize agriculture row.
-data.raw.item["wood"].subgroup = "early-agriculture"
-data.raw.item["wood"].order = "001"
-data.raw.item["tree-seed"].subgroup = "early-agriculture"
-data.raw.item["tree-seed"].order = "002"
+ITEM["wood"].subgroup = "early-agriculture"
+ITEM["wood"].order = "001"
+ITEM["tree-seed"].subgroup = "early-agriculture"
+ITEM["tree-seed"].order = "002"
 
 -- Create fertilizer item.
 local fertilizerIcons = {}
 for i = 1, 3 do
 	table.insert(fertilizerIcons, {filename = "__LegendarySpaceAge__/graphics/fertilizer/fertilizer-"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
-local fertilizerItem = table.deepcopy(data.raw.item["wood"])
+local fertilizerItem = table.deepcopy(ITEM["wood"])
 fertilizerItem.name = "fertilizer"
 fertilizerItem.order = "003"
 fertilizerItem.icon = nil
@@ -116,7 +116,7 @@ local saplingPictures = {}
 for _, i in pairs{"1", "2", "2-red", "3", "4", "5", "7", "8", "8-brown", "8-red", "9", "9-brown", "9-red"} do
 	table.insert(saplingPictures, {filename = "__base__/graphics/icons/tree-0"..i..".png", size = 64, scale=0.5, mipmap_count=4})
 end
-local saplingItem = table.deepcopy(data.raw.item["tree-seed"])
+local saplingItem = table.deepcopy(ITEM["tree-seed"])
 saplingItem.name = "sapling"
 saplingItem.localised_name = {"item-name.sapling"} -- Seems to be necessary, else it takes name from planted/placed thing.
 saplingItem.localised_description = nil
@@ -131,13 +131,13 @@ saplingItem.pictures = saplingPictures
 data:extend{saplingItem}
 
 -- Can no longer plant seeds directly.
-data.raw.item["tree-seed"].plant_result = nil
-data.raw.item["tree-seed"].place_result = nil
+ITEM["tree-seed"].plant_result = nil
+ITEM["tree-seed"].place_result = nil
 
 -- Create recipe for fertilizer.
 -- Currently 1 tree -> 4 wood, and 5 wood -> 5 spoilage -> 10 ammonia. So 10 ammonia -> 2 fertilizer allows growing total number of trees.
 -- And then once you get biochambers with the prod bonus, you can greatly increase wood production.
-local fertilizerRecipe = table.deepcopy(data.raw.recipe["wood-processing"])
+local fertilizerRecipe = table.deepcopy(RECIPE["wood-processing"])
 fertilizerRecipe.name = "fertilizer"
 fertilizerRecipe.ingredients = {
 	{type="item", name="niter", amount=1},
@@ -158,7 +158,7 @@ fertilizerRecipe.allow_decomposition = true
 data:extend{fertilizerRecipe}
 
 -- Create recipe for saplings.
-local saplingRecipe = table.deepcopy(data.raw.recipe["wood-processing"])
+local saplingRecipe = table.deepcopy(RECIPE["wood-processing"])
 saplingRecipe.name = "sapling"
 saplingRecipe.ingredients = {
 	{type="item", name="tree-seed", amount=1},
@@ -182,7 +182,7 @@ data:extend{saplingRecipe}
 data.raw.plant["tree-plant"].growth_ticks = 60 * 60 * 6 -- Originally 10 minutes.
 
 -- Add recipes to tree-seeding tech.
-data.raw.technology["tree-seeding"].effects = {
+TECH["tree-seeding"].effects = {
 	{type = "unlock-recipe", recipe = "agricultural-tower"},
 	{type = "unlock-recipe", recipe = "fertilizer"},
 	{type = "unlock-recipe", recipe = "sapling"},
