@@ -9,7 +9,7 @@ We also have IDs for recipes like "recipe:iron-plate".
 We also have IDs for player being able to land on a planet like "planet:nauvis", and imports to a planet like "imports:nauvis", and exports from a planet like "exports:nauvis". Note "exports:gleba" means we can launch a rocket carrying stuff from Gleba, while "imports:gleba" means we can import to Gleba, which requires a tech.
 ]]
 
-local Util = require("code.data.autodebug.util")
+local Util = require("data.autodebug.util")
 local VERBOSE = true
 
 ------------------------------------------------------------------------

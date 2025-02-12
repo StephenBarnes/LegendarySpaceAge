@@ -1,4 +1,4 @@
-require("code.data.power-overload")
-require("code.data.cleaner-tiles")
+require("data.power-overload")
+require("data.cleaner-tiles")
 
-require("code.data.metallurgy.metallurgy-du")
+require("data.metallurgy.metallurgy-du")

@@ -1,4 +1,4 @@
-local constants = require("code.data.petrochem.constants")
+local constants = require("data.petrochem.constants")
 
 --[[ Create fractionation recipes.
 Fractionation recipes turn crude oil and natural gas into the 4 fractions: heavy oil, light oil, rich gas, dry gas.

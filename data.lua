@@ -4,74 +4,74 @@ ITEM = data.raw.item
 TECH = data.raw.technology
 
 -- Global utils
-Const = require "code.util.constants"
-Gen = require "code.util.general"
-Icon = require "code.util.icon"
-Item = require "code.util.item"
-Recipe = require "code.util.recipe"
-Table = require "code.util.table"
-Tech = require "code.util.tech"
-GreyPipes = require "code.util.grey-pipes"
+Const = require "util.constants"
+Gen = require "util.general"
+Icon = require "util.icon"
+Item = require "util.item"
+Recipe = require "util.recipe"
+Table = require "util.table"
+Tech = require "util.tech"
+GreyPipes = require "util.grey-pipes"
 
 -- Files that create things needed in subsequent files.
-require("code.data.crafting-categories")
-require("code.data.fluid-boxes")
+require("data.crafting-categories")
+require("data.fluid-boxes")
 
 -- Files that create new protos.
-require("code.data.char-furnace")
-require("code.data.early-equipment-grids")
-require("code.data.map-gen-preset")
-require("code.data.remove-mapgen-presets")
-require("code.data.gunpowder")
-require("code.data.rubber")
-require("code.data.sand-and-glass")
-require("code.data.ash")
-require("code.data.misc")
-require("code.data.labs")
-require("code.data.metallurgy.metallurgy-d")
-require("code.data.metallurgy.rust")
-require("code.data.petrochem.main")
-require("code.data.cement")
-require("code.data.circuits")
-require("code.data.filtration")
-require("code.data.ammonia")
-require("code.data.niter")
-require("code.data.briefing")
-require("code.data.tree-farming")
-require("code.data.storage-tanks")
-require("code.data.handcrank")
-require("code.data.heating-towers")
-require("code.data.metallurgy.machine-parts")
-require("code.data.cargo-ships")
-require("code.data.rocket-parts-outside-silos")
-require("code.data.deep-drill")
-require("code.data.mech-armor")
-require("code.data.planet-drop-techs")
+require("data.char-furnace")
+require("data.early-equipment-grids")
+require("data.map-gen-preset")
+require("data.remove-mapgen-presets")
+require("data.gunpowder")
+require("data.rubber")
+require("data.sand-and-glass")
+require("data.ash")
+require("data.misc")
+require("data.labs")
+require("data.metallurgy.metallurgy-d")
+require("data.metallurgy.rust")
+require("data.petrochem.main")
+require("data.cement")
+require("data.circuits")
+require("data.filtration")
+require("data.ammonia")
+require("data.niter")
+require("data.briefing")
+require("data.tree-farming")
+require("data.storage-tanks")
+require("data.handcrank")
+require("data.heating-towers")
+require("data.metallurgy.machine-parts")
+require("data.cargo-ships")
+require("data.rocket-parts-outside-silos")
+require("data.deep-drill")
+require("data.mech-armor")
+require("data.planet-drop-techs")
 
 -- Planets
-require("code.data.nauvis-part-one.misc")
-require("code.data.nauvis-part-one.worldgen")
-require("code.data.vulcanus.main")
-require("code.data.fulgora.main")
-require("code.data.gleba.main")
-require("code.data.nauvis-part-two.nauvis-biotech")
-require("code.data.nauvis-part-two.nuclear")
-require("code.data.aquilo.main")
+require("data.nauvis-part-one.misc")
+require("data.nauvis-part-one.worldgen")
+require("data.vulcanus.main")
+require("data.fulgora.main")
+require("data.gleba.main")
+require("data.nauvis-part-two.nauvis-biotech")
+require("data.nauvis-part-two.nuclear")
+require("data.aquilo.main")
 
 -- Files that create protos, and require previous protos.
-require("code.data.gas-vent")
-require("code.data.waste-pump")
-require("code.data.barrelling")
-require("code.data.fuel")
-require("code.data.intermediate-factors.main")
-require("code.data.space.main")
+require("data.gas-vent")
+require("data.waste-pump")
+require("data.barrelling")
+require("data.fuel")
+require("data.intermediate-factors.main")
+require("data.space.main")
 
 -- Files that adjust protos
-require("code.data.item-groups")
-require("code.data.surface-properties")
-require("code.data.advanced-logistics")
-require("code.data.infra.main")
-require("code.data.ocean-dumping")
-require("code.data.tech-progression")
-require("code.data.tech-rate-triggers")
-require("code.data.stack-sizes")
+require("data.item-groups")
+require("data.surface-properties")
+require("data.advanced-logistics")
+require("data.infra.main")
+require("data.ocean-dumping")
+require("data.tech-progression")
+require("data.tech-rate-triggers")
+require("data.stack-sizes")

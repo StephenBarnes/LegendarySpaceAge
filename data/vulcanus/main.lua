@@ -1,8 +1,8 @@
-require("code.data.vulcanus.worldgen")
-require("code.data.vulcanus.volcanic-gas")
-require("code.data.vulcanus.foundry-recipes")
-require("code.data.vulcanus.apprentice-foundry")
-require("code.data.vulcanus.tungsten-axe")
+require("data.vulcanus.worldgen")
+require("data.vulcanus.volcanic-gas")
+require("data.vulcanus.foundry-recipes")
+require("data.vulcanus.apprentice-foundry")
+require("data.vulcanus.tungsten-axe")
 
 -- Move steam-to-water to Vulcanus tech, not calcite processing.
 Tech.removeRecipeFromTech("steam-condensation", "calcite-processing")

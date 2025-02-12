@@ -1,4 +1,4 @@
-require("code.data.fulgora.batteries-dff")
+require("data.fulgora.batteries-dff")
 
 -- Change concrete recycling to give back stone. (Ingredient is fluid, but it solidifies.)
 RECIPE["concrete-recycling"].results = {

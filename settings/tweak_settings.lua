@@ -1,4 +1,4 @@
-local u = require("code.settings.util")
+local u = require("settings.util")
 
 -- Set options for the Diurnal Dynamics mod.
 u.setDefaultOrForce("data-dd-dark-perc", "double", 100.)

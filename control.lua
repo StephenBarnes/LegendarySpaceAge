@@ -1,10 +1,10 @@
-local startingEquipment = require("code.control.starting-items")
-local natGasWells = require("code.control.natural-gas-wells")
-local notifyIncorrectMapgenPreset = require("code.control.notify-incorrect-mapgen-preset")
-local deepDrillRecipe = require("code.control.deep-drill-recipe")
-local apprenticeFoundry = require("code.control.apprentice-foundry")
+local startingEquipment = require("control.starting-items")
+local natGasWells = require("control.natural-gas-wells")
+local notifyIncorrectMapgenPreset = require("control.notify-incorrect-mapgen-preset")
+local deepDrillRecipe = require("control.deep-drill-recipe")
+local apprenticeFoundry = require("control.apprentice-foundry")
 
-local techRateTriggers = require("code.control.tech-rate-triggers")
+local techRateTriggers = require("control.tech-rate-triggers")
 script.on_nth_tick(60 * 10, techRateTriggers.onNthTick)
 
 script.on_init(function()

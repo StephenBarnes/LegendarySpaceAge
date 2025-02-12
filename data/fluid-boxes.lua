@@ -1,5 +1,3 @@
-local greyPipes = require("code.util.grey-pipes")
-
 -- Add 2 more fluid outputs to the refinery, so we can have recipes with 5 fluid outputs.
 -- Could get away with adding only 1 new output, but then it's asymmetric so we can't flip it.
 local oilRefinery = data.raw["assembling-machine"]["oil-refinery"]
@@ -7,13 +5,13 @@ local newFluidBox1 = table.deepcopy(oilRefinery.fluid_boxes[5])
 newFluidBox1.pipe_connections = {
 	{position = {-2, 1}, direction = defines.direction.west, flow_direction = "output"},
 }
-newFluidBox1.pipe_picture = greyPipes.pipeBlocksShortWest()
+newFluidBox1.pipe_picture = GreyPipes.pipeBlocksShortWest()
 
 local newFluidBox2 = table.deepcopy(oilRefinery.fluid_boxes[5])
 newFluidBox2.pipe_connections = {
 	{position = {2, 1}, direction = defines.direction.east, flow_direction = "output"},
 }
-newFluidBox2.pipe_picture = greyPipes.pipeBlocksShortWest()
+newFluidBox2.pipe_picture = GreyPipes.pipeBlocksShortWest()
 
 -- Add fluid boxes in order chosen so that our recipes have interesting and sensible positions for outputs.
 oilRefinery.fluid_boxes = {
@@ -32,7 +30,7 @@ local newFluidBox = table.deepcopy(chemPlant.fluid_boxes[1])
 newFluidBox.pipe_connections = {
 	{position = {1, 0}, direction = defines.direction.east, flow_direction = "input"},
 }
-newFluidBox.pipe_picture = greyPipes.pipeBlocksShortNorthWest()
+newFluidBox.pipe_picture = GreyPipes.pipeBlocksShortNorthWest()
 chemPlant.fluid_boxes = {
 	chemPlant.fluid_boxes[1], -- input
 	newFluidBox, -- Stick it between the other 2 outputs, so if a recipe has 2 fluid inputs they get distributed more conveniently.
@@ -60,7 +58,7 @@ bioChamber.fluid_boxes = {
 data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes = data.raw["assembling-machine"]["assembling-machine-2"].fluid_boxes
 data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes_off_when_no_fluid_recipe = true
 for _, fluidBox in pairs(data.raw["assembling-machine"]["assembling-machine-1"].fluid_boxes) do
-	fluidBox.pipe_picture = greyPipes.pipeBlocks()
+	fluidBox.pipe_picture = GreyPipes.pipeBlocks()
 end
 
 -- Add extra fluid input to the foundry, needed for some recipes.
@@ -69,7 +67,7 @@ local newFluidBoxF1 = table.deepcopy(foundry.fluid_boxes[1])
 newFluidBoxF1.pipe_connections = {
 	{position = {-2, 1}, direction = defines.direction.west, flow_direction = "input"},
 }
-newFluidBoxF1.pipe_picture = greyPipes.pipeBlocks()
+newFluidBoxF1.pipe_picture = GreyPipes.pipeBlocks()
 foundry.fluid_boxes = {
 	foundry.fluid_boxes[1], -- input
 	foundry.fluid_boxes[2], -- input

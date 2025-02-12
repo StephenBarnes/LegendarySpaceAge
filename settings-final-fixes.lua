@@ -1,1 +1,1 @@
-require("code.settings.tweak_settings")
+require("settings.tweak_settings")

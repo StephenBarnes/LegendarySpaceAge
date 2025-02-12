@@ -126,7 +126,7 @@ ammoniaSyngasRecipe.subgroup = "complex-fluid-recipes"
 ammoniaSyngasRecipe.order = "d1"
 ammoniaSyngasRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=require("code.data.petrochem.constants").syngasColor, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
+	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=require("data.petrochem.constants").syngasColor, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
 }
 ammoniaSyngasRecipe.energy_required = 4
 data:extend{ammoniaSyngasRecipe}

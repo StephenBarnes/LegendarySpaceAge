@@ -3,14 +3,14 @@
 -- This controls whether to actually run the full debug.
 local RUN_FULL_DEBUG = false
 
-local toposortTechs = require("code.data.autodebug.toposort-techs")
-local getThingToRecipes = require("code.data.autodebug.get-thing-to-recipes")
-local getRecipeToPlanets = require("code.data.autodebug.get-recipe-to-planets")
-local getTechPrePostSets = require("code.data.autodebug.get-tech-pre-post-sets")
+local toposortTechs = require("data.autodebug.toposort-techs")
+local getThingToRecipes = require("data.autodebug.get-thing-to-recipes")
+local getRecipeToPlanets = require("data.autodebug.get-recipe-to-planets")
+local getTechPrePostSets = require("data.autodebug.get-tech-pre-post-sets")
 
-local checkAllRecipesHaveMachines = require("code.data.autodebug.check-recipes-have-machines")
-local checkAllRecipesHaveIngredients = require("code.data.autodebug.check-recipes-have-ingredients")
-local checkRoundNumbers = require("code.data.autodebug.check-round-numbers")
+local checkAllRecipesHaveMachines = require("data.autodebug.check-recipes-have-machines")
+local checkAllRecipesHaveIngredients = require("data.autodebug.check-recipes-have-ingredients")
+local checkRoundNumbers = require("data.autodebug.check-round-numbers")
 
 local function runFullDebug()
 	log("Legendary Space Age: running full progression debug.")

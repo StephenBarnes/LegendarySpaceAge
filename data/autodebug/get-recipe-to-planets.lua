@@ -1,6 +1,6 @@
 -- This file exports a function to generate a table mapping each recipe to a set of planets (and "space") where it's permitted.
 
-local Util = require("code.data.autodebug.util")
+local Util = require("data.autodebug.util")
 
 -- Get surface properties for planet, or "space".
 local function getSurfaceProperties(planetName)

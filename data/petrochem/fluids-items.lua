@@ -1,4 +1,4 @@
-local constants = require("code.data.petrochem.constants")
+local constants = require("data.petrochem.constants")
 
 -- Create natural gas fluid.
 local natgasFluid = table.deepcopy(data.raw.fluid["crude-oil"])

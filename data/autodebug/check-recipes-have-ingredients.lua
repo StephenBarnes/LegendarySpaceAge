@@ -1,7 +1,7 @@
 --- This file checks that for every recipe unlocked by a tech, the ingredients are available once that tech is unlocked.
 --- This catches bugs where e.g. we unlock a recipe requiring rubber, before there are any recipes to produce rubber.
 
-local Util = require("code.data.autodebug.util")
+local Util = require("data.autodebug.util")
 
 local function availableOnAnyPlanet(postTechSets, item)
 	for planetName, _ in pairs(Util.allPlanets) do
