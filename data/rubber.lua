@@ -9,15 +9,10 @@ Rubber is used in many recipes like belts, tires, engines, inserters, robots, an
 ]]
 
 -- Create rubber item.
-local rubberIcons = {}
-for i = 1, 3 do
-	table.insert(rubberIcons, {filename = "__LegendarySpaceAge__/graphics/rubber/rubber-"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
-end
 local rubberItem = copy(ITEM["plastic-bar"])
 rubberItem.name = "rubber"
-rubberItem.icon = nil
-rubberItem.icons = {{icon = rubberIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
-rubberItem.pictures = rubberIcons
+Icon.variants(rubberItem, "LSA/rubber/rubber-%", 3)
+Icon.set(rubberItem, "LSA/rubber/1")
 rubberItem.order = "b[chemistry]-a3"
 extend{rubberItem}
 
@@ -25,8 +20,7 @@ extend{rubberItem}
 local latexColor = {r = .812, g = .761, b = .675, a=1}
 local latexFluid = copy(FLUID["lubricant"])
 latexFluid.name = "latex"
-latexFluid.icon = "__LegendarySpaceAge__/graphics/rubber/latex.png"
-latexFluid.icon_size = 64
+Icon.set(latexFluid, "LSA/rubber/latex")
 latexFluid.base_color = latexColor
 latexFluid.flow_color = {r = .9, g = .8, b = .7, a=1}
 latexFluid.visualization_color = latexColor
@@ -57,11 +51,7 @@ rubberFromLatexRecipe.results = {{type="item", name="rubber", amount=5}}
 rubberFromLatexRecipe.category = "chemistry"
 rubberFromLatexRecipe.subgroup = "raw-material"
 rubberFromLatexRecipe.order = "f2"
-rubberFromLatexRecipe.icon = nil
-rubberFromLatexRecipe.icons = {
-	rubberItem.icons[1],
-	{icon = latexFluid.icon, icon_size = 64, scale=0.27, mipmap_count=4, shift={-6, -7}},
-}
+Icon.set(rubberFromLatexRecipe, {"rubber", "latex"})
 extend{rubberFromLatexRecipe}
 
 -- Create recipe for synthetic rubber.
@@ -81,11 +71,7 @@ rubberFromPetrochemRecipe.main_product = "rubber"
 rubberFromPetrochemRecipe.category = "chemistry"
 rubberFromPetrochemRecipe.subgroup = "raw-material"
 rubberFromPetrochemRecipe.order = "f3"
-rubberFromPetrochemRecipe.icon = nil
-rubberFromPetrochemRecipe.icons = {
-	rubberItem.icons[1],
-	{icon = FLUID["light-oil"].icon, icon_size = 64, scale=0.27, mipmap_count=4, shift={-6, -7}},
-}
+Icon.set(rubberFromPetrochemRecipe, {"rubber", "light-oil"})
 extend{rubberFromPetrochemRecipe}
 
 -- Create tech for natural rubber.
@@ -101,8 +87,7 @@ naturalRubberTech.effects = {
 		recipe = "rubber-from-latex",
 	},
 }
-naturalRubberTech.icon = nil
-naturalRubberTech.icons = {{icon = "__LegendarySpaceAge__/graphics/rubber/tech.png", icon_size = 256, scale=0.5, mipmap_count=4}}
+Icon.set(naturalRubberTech, "LSA/rubber/tech")
 naturalRubberTech.localised_description = {"technology-description.rubber-1"}
 naturalRubberTech.prerequisites = {"sulfur-processing"}
 naturalRubberTech.unit = TECH["automation"].unit
@@ -117,8 +102,7 @@ syntheticRubberTech.effects = {
 		recipe = "rubber-from-oil",
 	},
 }
-syntheticRubberTech.icon = nil
-syntheticRubberTech.icons = {{icon = "__LegendarySpaceAge__/graphics/rubber/tech.png", icon_size = 256, scale=0.5, mipmap_count=4}}
+Icon.set(syntheticRubberTech, "LSA/rubber/tech")
 syntheticRubberTech.localised_description = {"technology-description.rubber-2"}
 syntheticRubberTech.prerequisites = {"oil-processing", "rubber-1"}
 extend{syntheticRubberTech}

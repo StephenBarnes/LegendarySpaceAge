@@ -89,10 +89,7 @@ inverseVulcanizationRecipe.results = {
 }
 inverseVulcanizationRecipe.main_product = "plastic-bar"
 inverseVulcanizationRecipe.order = ITEM["plastic-bar"].order.."-2"
-inverseVulcanizationRecipe.icons = {
-	{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.5},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale = 0.27, shift = {-6, -7}, mipmap_count=4},
-}
+Icon.set(inverseVulcanizationRecipe, {"plastic-bar", "tar"})
 extend({inverseVulcanizationTech, inverseVulcanizationRecipe})
 
 -- Adjust stats of foundry.

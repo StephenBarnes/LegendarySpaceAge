@@ -69,11 +69,7 @@ for i, itemName in pairs{
 end
 
 -- Gears actually use different rusty sprites.
-local rustyGearIcons = {
-	{icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={-3, 3}},
-	{icon = "__LegendarySpaceAge__/graphics/parts-basic/rusty/spring-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={3, -4}},
-}
-ITEM["rusty-iron-gear-wheel"].icons = rustyGearIcons
+Icon.set("rusty-iron-gear-wheel", "LSA/parts-basic/rusty/pair-item")
 ITEM["rusty-iron-gear-wheel"].pictures = {
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-1.png", size = 64, scale = 0.5, mipmap_count = 4},
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png", size = 64, scale = 0.5, mipmap_count = 4},
@@ -81,9 +77,5 @@ ITEM["rusty-iron-gear-wheel"].pictures = {
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/spring-1.png", size = 64, scale = 0.5, mipmap_count = 4},
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/spring-2.png", size = 64, scale = 0.5, mipmap_count = 4},
 }
-for _, sandOrAcid in pairs{"sand", "acid"} do
-	local recipe = RECIPE[sandOrAcid.."-derust-iron-gear-wheel"]
-	local newIcons = copy(rustyGearIcons)
-	table.insert(newIcons, recipe.icons[2])
-	recipe.icons = newIcons
-end
+Icon.set("sand-derust-iron-gear-wheel", {"LSA/parts-basic/rusty/pair-item", "sand"})
+Icon.set("acid-derust-iron-gear-wheel", {"LSA/parts-basic/rusty/pair-item", "sulfuric-acid"})

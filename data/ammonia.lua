@@ -6,8 +6,7 @@ ammonia1Tech.name = "ammonia-1"
 ammonia1Tech.localised_name = {"technology-name.ammonia-1"}
 ammonia1Tech.localised_description = {"technology-description.ammonia-1"}
 ammonia1Tech.prerequisites = {"filtration-lake-water"}
-ammonia1Tech.icon = nil
-ammonia1Tech.icons = {{icon = "__LegendarySpaceAge__/graphics/ammonia/tech.png", icon_size = 256}}
+Icon.set(ammonia1Tech, "LSA/ammonia/tech")
 ammonia1Tech.effects = {
 	{type = "unlock-recipe", recipe = "ammonia-from-wood"},
 	{type = "unlock-recipe", recipe = "niter"},
@@ -20,8 +19,7 @@ ammonia2Tech.name = "ammonia-2"
 ammonia2Tech.localised_name = {"technology-name.ammonia-2"}
 ammonia2Tech.localised_description = {"technology-description.ammonia-2"}
 ammonia2Tech.prerequisites = {"ammonia-1", "chemical-science-pack"}
-ammonia2Tech.icon = nil
-ammonia2Tech.icons = {{icon = "__LegendarySpaceAge__/graphics/ammonia/tech.png", icon_size = 256}}
+Icon.set(ammonia2Tech, "LSA/ammonia/tech")
 ammonia2Tech.effects = {
 	{type = "unlock-recipe", recipe = "ammonia-from-syngas"},
 }

@@ -25,9 +25,9 @@ for _, rateTech in pairs{
 end
 
 -- Function to make a dummy science-pack item.
-local function makeRateItem(itemName, backgroundIcons, base)
+local function makeRateItem(itemName, base)
 	---@type data.ToolPrototype
-	local rateItem = base or copy(ITEM[itemName])
+	local rateItem = copy(base or ITEM[itemName])
 	rateItem.type = "tool"
 	rateItem.durability = 1
 	rateItem.name = itemName .. "-per-minute"
@@ -38,22 +38,26 @@ local function makeRateItem(itemName, backgroundIcons, base)
 	rateItem.spoil_ticks = nil
 	rateItem.spoil_result = nil
 	rateItem.localised_name = {"item-name.rate-item-per-minute", {"item-name." .. itemName}}
-	rateItem.icons = backgroundIcons
-	table.insert(rateItem.icons, {
-		icon = "__core__/graphics/clock-icon.png",
-		icon_size = 32,
-		scale = 0.5,
-		shift = {0, 0},
-	})
+	assert(rateItem.icon ~= nil, "Rate item " .. itemName .. " has no icon")
+	rateItem.icons = {
+		{icon = rateItem.icon, icon_size = rateItem.icon_size},
+		{
+			icon = "__core__/graphics/clock-icon.png",
+			icon_size = 32,
+			scale = 0.5,
+			shift = {0, 0},
+		},
+	}
+	rateItem.icon = nil
 	return rateItem
 end
 
 -- Create rate items
 local rateItems = {
-	makeRateItem("iron-gear-wheel", copy(ITEM["iron-gear-wheel"].icons)),
-	makeRateItem("electronic-circuit", {{icon = ITEM["electronic-circuit"].icon, icon_size = ITEM["electronic-circuit"].icon_size}}),
-	makeRateItem("plastic-bar", {{icon = ITEM["plastic-bar"].icon, icon_size = ITEM["plastic-bar"].icon_size}}),
-	makeRateItem("piercing-rounds-magazine", {{icon = RAW.ammo["piercing-rounds-magazine"].icon, icon_size = RAW.ammo["piercing-rounds-magazine"].icon_size}}, copy(RAW.ammo["piercing-rounds-magazine"])),
+	makeRateItem("iron-gear-wheel"),
+	makeRateItem("electronic-circuit"),
+	makeRateItem("plastic-bar"),
+	makeRateItem("piercing-rounds-magazine", RAW.ammo["piercing-rounds-magazine"]),
 }
 extend(rateItems)
 

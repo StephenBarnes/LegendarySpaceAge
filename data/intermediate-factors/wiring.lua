@@ -33,7 +33,7 @@ Tech.addRecipeToTech("wiring-from-resin", "basic-electricity")
 -- Create a recipe with rubber insulation: 8 copper cable + 1 rubber -> 8 wiring
 local rubberRecipe = copy(resinRecipe)
 rubberRecipe.name = "wiring-from-rubber"
-rubberRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/rubber/rubber-2.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+Icon.set(rubberRecipe, {"wiring", "rubber"})
 rubberRecipe.ingredients = {
 	{type = "item", name = "copper-cable", amount = 10},
 	{type = "item", name = "rubber", amount = 1},

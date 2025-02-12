@@ -43,11 +43,7 @@ ashRecipe.results = {
 ashRecipe.allow_decomposition = false
 ashRecipe.allow_as_intermediate = false
 ashRecipe.main_product = "carbon"
-ashRecipe.icon = nil
-ashRecipe.icons = {
-	{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.5, mipmap_count = 4},
-	{icon = "__LegendarySpaceAge__/graphics/ash/1.png", icon_size = 64, scale = 0.25, mipmap_count = 4, shift = {-8, -8}},
-}
+Icon.set(ashRecipe, {"carbon", "ash"})
 ashRecipe.category = "chemistry"
 ashRecipe.energy_required = 2
 ashRecipe.enabled = false
@@ -67,5 +63,5 @@ tech.unit = {
 	},
 	time = 15,
 }
-tech.icon = "__LegendarySpaceAge__/graphics/ash/tech.png"
+Icon.set(tech, "LSA/ash/tech")
 extend{tech}

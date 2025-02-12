@@ -2,11 +2,7 @@
 -- Then this file also creates "advanced parts", which are made from like hot steel + rubber + plastic + bit of lubricant, and will generally replace steel plates in recipes for infra.
 
 -- Update icons for iron parts.
-ITEM["iron-gear-wheel"].icon = nil
-ITEM["iron-gear-wheel"].icons = {
-	{icon = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={-3, 3}},
-	{icon = "__LegendarySpaceAge__/graphics/parts-basic/plain/spring-2.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={3, -4}},
-}
+Icon.set("iron-gear-wheel", "LSA/parts-basic/plain/pair-item")
 ITEM["iron-gear-wheel"].pictures = {
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-1.png", size = 64, scale = 0.5, mipmap_count = 4},
 	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-2.png", size = 64, scale = 0.5, mipmap_count = 4},

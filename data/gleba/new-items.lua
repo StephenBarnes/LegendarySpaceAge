@@ -236,12 +236,14 @@ nutrientsFromMarrowRecipe.ingredients = {
 nutrientsFromMarrowRecipe.results = {{type = "item", name = "nutrients", amount = 40}}
 nutrientsFromMarrowRecipe.enabled = false
 nutrientsFromMarrowRecipe.subgroup = "gleba-non-agriculture"
-nutrientsFromMarrowRecipe.icons = {
-	{icon = marrowItem.icon, size = 64, scale = 0.35, shift = {-4, -4}},
-	{icon = "__space-age__/graphics/icons/nutrients.png", size = 64, scale = 0.43, shift = {6, 6}},
-}
+Icon.set(nutrientsFromMarrowRecipe, {"nutrients", "marrow"})
 nutrientsFromMarrowRecipe.crafting_machine_tint = copy(RECIPE["sulfuric-acid"].crafting_machine_tint)
 extend{nutrientsFromMarrowRecipe}
+
+-- Use the same icon function for built-in recipes, so they look the same.
+Icon.set(RECIPE["nutrients-from-spoilage"], {"nutrients", "spoilage"})
+Icon.set(RECIPE["nutrients-from-bioflux"], {"nutrients", "bioflux"})
+Icon.set(RECIPE["nutrients-from-yumako-mash"], {"nutrients", "yumako-mash"})
 
 -- Create recipe for landfill from chitin fragments.
 local landfillFromChitinRecipe = copy(RECIPE["landfill"])

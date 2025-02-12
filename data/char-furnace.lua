@@ -43,7 +43,7 @@ extend{charFurnaceRemnants}
 local charFurnaceItem = copy(ITEM["stone-furnace"])
 charFurnaceItem.name = "char-furnace"
 charFurnaceItem.place_result = "char-furnace"
-charFurnaceItem.icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png"
+Icon.set(charFurnaceItem, "LSA/char-furnace/item")
 extend{charFurnaceItem}
 
 -- Create recipe category.
@@ -66,11 +66,7 @@ charRecipe.energy_required = 5
 charRecipe.enabled = false
 charRecipe.subgroup = "raw-material"
 charRecipe.category = "char-furnace"
-charRecipe.icon = nil
-charRecipe.icons = {
-	{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.5},
-	{icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-}
+Icon.set(charRecipe, {"carbon", "char-furnace"})
 extend{charRecipe}
 
 -- Create tech called "char", unlocking the furnace and recipe.
@@ -85,5 +81,5 @@ charTech.research_trigger = {
 	entity = "char-furnace",
 }
 charTech.unit = nil
-charTech.icon = "__LegendarySpaceAge__/graphics/char-furnace/tech.png"
+Icon.set(charTech, "LSA/char-furnace/tech")
 extend{charTech}

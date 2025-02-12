@@ -52,7 +52,7 @@ recipeFromPlastic.energy_required = 5
 recipeFromPlastic.icons = {
 	{icon = mainIcon, icon_size = 64, scale = 0.5},
 	{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.23, shift = {8, -8}},
-	{icon = "__LegendarySpaceAge__/graphics/rubber/rubber-1.png", icon_size = 64, scale = 0.22, shift = {-8, -8}},
+	{icon = "__LegendarySpaceAge__/graphics/rubber/1.png", icon_size = 64, scale = 0.22, shift = {-8, -8}},
 }
 -- TODO make white sprite.
 extend{recipeFromPlastic}
