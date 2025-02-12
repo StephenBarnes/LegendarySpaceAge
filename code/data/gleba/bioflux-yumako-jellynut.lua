@@ -26,6 +26,7 @@ cultivationRecipe.ingredients = {
 	{type = "item", name = "jelly", amount = 4},
 }
 cultivationRecipe.results = {{type = "item", name = "bioflux", amount = 2}}
+cultivationRecipe.energy_required = 5
 
 -- Create new recipe for initial bioflux.
 local initialBiofluxRecipe = table.deepcopy(cultivationRecipe)
@@ -36,6 +37,7 @@ initialBiofluxRecipe.ingredients = {
 	{type = "item", name = "jelly", amount = 4},
 }
 initialBiofluxRecipe.results = {{type = "item", name = "bioflux", amount = 1}}
+initialBiofluxRecipe.order = "a[organic-products]-a"
 initialBiofluxRecipe.icon = nil
 initialBiofluxRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/pentapod-egg.png", size = 64, scale = 0.35, shift = {-5, -5}},

@@ -40,6 +40,7 @@ cultivationRecipe.ingredients = {
 cultivationRecipe.results = {
 	{type="item", name="petrophage", amount=2},
 }
+cultivationRecipe.energy_required = 2
 cultivationRecipe.icon = nil
 cultivationRecipe.icons = {
 	table.deepcopy(data.raw.fluid["dry-gas"].icons[1]),

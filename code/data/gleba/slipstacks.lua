@@ -114,9 +114,10 @@ Recipe.addIngredients("bioplastic", {{type = "item", name = "slipstack-pearl", a
 -- Base Space Age recipe is 60 jelly => 20 lubricant.
 data.raw.recipe["biolubricant"].ingredients = {
 	{ type = "fluid", name = "water", amount = 10 },
-	{ type = "item", name = "jelly", amount = 30 },
+	{ type = "item", name = "jelly", amount = 20 },
 	{ type = "item", name = "slipstack-pearl", amount = 5 },
 }
+data.raw.recipe["biolubricant"].energy_required = 5
 
 -- Could also put it in carbon fiber, or biosulfur.
 

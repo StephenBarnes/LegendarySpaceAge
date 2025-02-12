@@ -200,7 +200,7 @@ setSubgroupInOrder("space-interactors", "item", rocketParts, "e")
 setSubgroupInOrder("space-interactors", "recipe", rocketParts, "e")
 
 -- Populate Gleba subgroups: spoilage-and-nutrients, yumako-and-jellynut, slipstacks-and-boompuffs.
-setSubgroupInOrder("spoilage-and-nutrients", "item", {"spoilage", "nutrients"})
+setSubgroupInOrder("spoilage-and-nutrients", "item", {"spoilage", "sugars", "nutrients"})
 setSubgroupInOrder("spoilage-and-nutrients", "recipe", {"nutrients-from-spoilage", "nutrients-from-yumako-mash", "nutrients-from-bioflux", "nutrients-from-marrow"})
 setSubgroupInOrder("yumako-and-jellynut", "item", {"yumako-seed", "jellynut-seed", "fertilized-yumako-seed", "fertilized-jellynut-seed"}, "1")
 setSubgroupInOrder("yumako-and-jellynut", "capsule", {"yumako", "jellynut", "yumako-mash", "jelly"}, "2")
