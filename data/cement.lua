@@ -14,7 +14,7 @@ Original game recipes were:
 ]]
 
 -- Create new "cement" fluid.
-local cementFluid = table.deepcopy(FLUID["lubricant"])
+local cementFluid = copy(FLUID["lubricant"])
 cementFluid.name = "cement"
 cementFluid.icon = nil
 cementFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/fluids/cement-fluid.png", scale = .5, icon_size = 64}}
@@ -25,7 +25,7 @@ cementFluid.visualization_color = {.43, .43, .43, 1}
 data:extend{cementFluid}
 
 -- Create recipe for cement.
-local cementRecipe = table.deepcopy(RECIPE["lubricant"])
+local cementRecipe = copy(RECIPE["lubricant"])
 cementRecipe.name = "make-cement" -- Must be different from cement so it appears in factoriopedia correctly.
 cementRecipe.localised_name = {"fluid-name.cement"}
 cementRecipe.subgroup = "terrain"
@@ -44,7 +44,7 @@ cementRecipe.allow_decomposition = true
 data:extend{cementRecipe}
 
 -- Create tech for cement and brick structure.
-local tech = table.deepcopy(TECH.concrete)
+local tech = copy(TECH.concrete)
 tech.name = "cement"
 tech.effects = {
 	{
@@ -79,7 +79,7 @@ RECIPE["refined-concrete"].ingredients = {
 
 -- Create sulfur concrete recipes for foundries.
 -- TODO
-local concreteCastingRecipe = table.deepcopy(RECIPE["concrete-from-molten-iron"])
+local concreteCastingRecipe = copy(RECIPE["concrete-from-molten-iron"])
 concreteCastingRecipe.name = "sulfur-concrete"
 concreteCastingRecipe.ingredients = {
 	{type = "item", name = "sulfur", amount = 30},
@@ -95,7 +95,7 @@ concreteCastingRecipe.icons = {
 }
 data:extend{concreteCastingRecipe}
 
-local refinedConcreteCastingRecipe = table.deepcopy(RECIPE["concrete-from-molten-iron"])
+local refinedConcreteCastingRecipe = copy(RECIPE["concrete-from-molten-iron"])
 refinedConcreteCastingRecipe.name = "sulfur-refined-concrete"
 refinedConcreteCastingRecipe.ingredients = {
 	{type = "item", name = "sulfur", amount = 30},
@@ -117,7 +117,7 @@ data:extend{refinedConcreteCastingRecipe}
 Recipe.hide("concrete-from-molten-iron")
 
 -- Create sulfur concrete tech.
-local sulfurConcreteTech = table.deepcopy(TECH["concrete"])
+local sulfurConcreteTech = copy(TECH["concrete"])
 sulfurConcreteTech.name = "sulfur-concrete"
 sulfurConcreteTech.effects = {
 	{

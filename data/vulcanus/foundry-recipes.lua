@@ -45,7 +45,7 @@ Vulcanus unlocks a foundry recipe for concrete without water, using sulfur:
 ]]
 
 -- Make recipe for metals-from-lava.
-local metalsFromLavaRecipe = table.deepcopy(RECIPE["molten-iron-from-lava"])
+local metalsFromLavaRecipe = copy(RECIPE["molten-iron-from-lava"])
 metalsFromLavaRecipe.name = "metals-from-lava"
 metalsFromLavaRecipe.ingredients = {
 	{type = "fluid", name = "lava", amount = 500},
@@ -103,7 +103,7 @@ else
 end
 
 -- Make molten steel fluid.
-local moltenSteelFluid = table.deepcopy(FLUID["molten-iron"])
+local moltenSteelFluid = copy(FLUID["molten-iron"])
 moltenSteelFluid.name = "molten-steel"
 moltenSteelFluid.icon = nil
 moltenSteelFluid.icons = {{
@@ -118,7 +118,7 @@ moltenSteelFluid.visualization_color = {.2, 1, 1} -- Cyan for the diagram-like l
 data:extend{moltenSteelFluid}
 
 -- Make recipe for molten steel.
-local moltenSteelRecipe = table.deepcopy(RECIPE["molten-iron"])
+local moltenSteelRecipe = copy(RECIPE["molten-iron"])
 moltenSteelRecipe.name = "molten-steel-making"
 	-- Not naming it the same as the fluid, so recipe shows up with the rest of them.
 	-- Seems the way it works is, recipe can show up in a different subgroup as the fluid if it either has multiple products, or a different name from the fluid.
@@ -233,7 +233,7 @@ for _, recipe in pairs{"casting-pipe", "casting-pipe-to-ground"} do
 end
 
 -- Add recipe for casting advanced parts. (Bc can't make ingots from foundries.)
-local castingAdvancedPartsRecipe = table.deepcopy(RECIPE["casting-iron-gear-wheel"])
+local castingAdvancedPartsRecipe = copy(RECIPE["casting-iron-gear-wheel"])
 castingAdvancedPartsRecipe.name = "casting-advanced-parts"
 castingAdvancedPartsRecipe.ingredients = {
 	{ type = "fluid", name = "molten-steel", amount = 300 },
@@ -266,7 +266,7 @@ RECIPE["tungsten-carbide"].category = "chemistry"
 RECIPE["tungsten-carbide"].energy_required = 8
 
 -- Create molten tungsten fluid.
-local moltenTungstenFluid = table.deepcopy(FLUID["molten-iron"])
+local moltenTungstenFluid = copy(FLUID["molten-iron"])
 moltenTungstenFluid.name = "molten-tungsten"
 moltenTungstenFluid.icon = nil
 moltenTungstenFluid.icons = {{
@@ -281,7 +281,7 @@ moltenTungstenFluid.visualization_color = {.478, .191, .682} -- Measured on ore 
 data:extend{moltenTungstenFluid}
 
 -- Create recipe for molten tungsten.
-local moltenTungstenRecipe = table.deepcopy(RECIPE["molten-iron"])
+local moltenTungstenRecipe = copy(RECIPE["molten-iron"])
 moltenTungstenRecipe.name = "molten-tungsten"
 moltenTungstenRecipe.ingredients = {
 	{type = "item", name = "tungsten-ore", amount = 4},
@@ -299,7 +299,7 @@ data:extend{moltenTungstenRecipe}
 Tech.addRecipeToTech("molten-tungsten", "tungsten-steel", 1)
 
 -- Make foundry recipes for tungsten carbide and tungsten steel. And recipe for heating molten tungsten.
-local tungstenCarbideFromMoltenRecipe = table.deepcopy(RECIPE["tungsten-plate"])
+local tungstenCarbideFromMoltenRecipe = copy(RECIPE["tungsten-plate"])
 tungstenCarbideFromMoltenRecipe.name = "tungsten-carbide-from-molten"
 tungstenCarbideFromMoltenRecipe.ingredients = {
 	{type = "fluid", name = "molten-tungsten", amount = 40, minimum_temperature = 1600, maximum_temperature = 1800},
@@ -319,7 +319,7 @@ tungstenCarbideFromMoltenRecipe.icons = {
 }
 data:extend{tungstenCarbideFromMoltenRecipe}
 Tech.addRecipeToTech("tungsten-carbide-from-molten", "tungsten-steel")
-local tungstenSteelRecipe = table.deepcopy(RECIPE["tungsten-plate"])
+local tungstenSteelRecipe = copy(RECIPE["tungsten-plate"])
 tungstenSteelRecipe.name = "tungsten-steel-from-molten"
 	-- Again, can't name it "tungsten-steel" or it won't show separately from the item, which is a problem bc you can't see the temperature range requirement.
 tungstenSteelRecipe.ingredients = {
@@ -340,7 +340,7 @@ tungstenSteelRecipe.icons = {
 }
 data:extend{tungstenSteelRecipe}
 Tech.addRecipeToTech("tungsten-steel-from-molten", "tungsten-steel")
-local tungstenHeatingRecipe = table.deepcopy(RECIPE["molten-iron"])
+local tungstenHeatingRecipe = copy(RECIPE["molten-iron"])
 tungstenHeatingRecipe.name = "tungsten-heating"
 tungstenHeatingRecipe.ingredients = {
 	{type = "fluid", name = "molten-tungsten", amount = 100, ignored_by_stats=100},

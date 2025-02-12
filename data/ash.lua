@@ -13,7 +13,7 @@ Uses of ash:
 
 
 -- Create ash item.
-local item = table.deepcopy(ITEM["sulfur"])
+local item = copy(ITEM["sulfur"])
 item.name = "ash"
 local ashDir = "__LegendarySpaceAge__/graphics/ash/"
 item.icon = ashDir.."1.png"
@@ -26,7 +26,7 @@ data:extend{item}
 
 -- Create recipe for reprocessing ash.
 -- 4 ash + 5 water + 5 sulfuric acid -> 2 carbon + 1 sand + 20% sulfur + 20% 1 iron ore + 20% 1 copper ore.
-local ashRecipe = table.deepcopy(RECIPE["rocket-fuel"])
+local ashRecipe = copy(RECIPE["rocket-fuel"])
 ashRecipe.name = "ash-reprocessing"
 ashRecipe.ingredients = {
 	{type = "item", name = "ash", amount = 4},
@@ -54,7 +54,7 @@ ashRecipe.enabled = false
 data:extend{ashRecipe}
 
 -- Create tech for ash reprocessing.
-local tech = table.deepcopy(TECH["lamp"])
+local tech = copy(TECH["lamp"])
 tech.name = "ash-reprocessing"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "ash-reprocessing"},

@@ -15,6 +15,7 @@ Recipe = require "util.recipe"
 Table = require "util.table"
 Tech = require "util.tech"
 GreyPipes = require "util.grey-pipes"
+copy = table.deepcopy
 
 -- Files that create things needed in subsequent files.
 require("data.crafting-categories")

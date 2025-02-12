@@ -1,13 +1,13 @@
 -- Add 2 more fluid outputs to the refinery, so we can have recipes with 5 fluid outputs.
 -- Could get away with adding only 1 new output, but then it's asymmetric so we can't flip it.
 local oilRefinery = ASSEMBLER["oil-refinery"]
-local newFluidBox1 = table.deepcopy(oilRefinery.fluid_boxes[5])
+local newFluidBox1 = copy(oilRefinery.fluid_boxes[5])
 newFluidBox1.pipe_connections = {
 	{position = {-2, 1}, direction = defines.direction.west, flow_direction = "output"},
 }
 newFluidBox1.pipe_picture = GreyPipes.pipeBlocksShortWest()
 
-local newFluidBox2 = table.deepcopy(oilRefinery.fluid_boxes[5])
+local newFluidBox2 = copy(oilRefinery.fluid_boxes[5])
 newFluidBox2.pipe_connections = {
 	{position = {2, 1}, direction = defines.direction.east, flow_direction = "output"},
 }
@@ -26,7 +26,7 @@ oilRefinery.fluid_boxes = {
 
 -- Add 1 more fluid input to chem plant, so we can do explosives recipe.
 local chemPlant = ASSEMBLER["chemical-plant"]
-local newFluidBox = table.deepcopy(chemPlant.fluid_boxes[1])
+local newFluidBox = copy(chemPlant.fluid_boxes[1])
 newFluidBox.pipe_connections = {
 	{position = {1, 0}, direction = defines.direction.east, flow_direction = "input"},
 }
@@ -42,7 +42,7 @@ chemPlant.fluid_boxes_off_when_no_fluid_recipe = false -- If this is true, they 
 
 -- Also add an extra fluid input to biochambers, needed for synthetic rubber.
 local bioChamber = ASSEMBLER["biochamber"]
-local newFluidBoxB = table.deepcopy(bioChamber.fluid_boxes[1])
+local newFluidBoxB = copy(bioChamber.fluid_boxes[1])
 newFluidBoxB.pipe_connections = {
 	{position = {-1, 0}, direction = defines.direction.west, flow_direction = "input"},
 }
@@ -63,7 +63,7 @@ end
 
 -- Add extra fluid input to the foundry, needed for some recipes.
 local foundry = ASSEMBLER["foundry"]
-local newFluidBoxF1 = table.deepcopy(foundry.fluid_boxes[1])
+local newFluidBoxF1 = copy(foundry.fluid_boxes[1])
 newFluidBoxF1.pipe_connections = {
 	{position = {-2, 1}, direction = defines.direction.west, flow_direction = "input"},
 }

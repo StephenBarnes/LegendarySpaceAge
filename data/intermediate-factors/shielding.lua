@@ -1,7 +1,7 @@
 -- This file creates the "shielding" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
 -- Create item.
-local shieldingItem = table.deepcopy(ITEM["steel-plate"])
+local shieldingItem = copy(ITEM["steel-plate"])
 shieldingItem.name = "shielding"
 shieldingItem.subgroup = "shielding"
 shieldingItem.order = "01"
@@ -10,7 +10,7 @@ shieldingItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-fact
 data:extend{shieldingItem}
 
 -- Create recipe: 10 iron plate + 10 stone brick + 10 iron rod -> 1 shielding
-local recipeFromIron = table.deepcopy(RECIPE["iron-stick"])
+local recipeFromIron = copy(RECIPE["iron-stick"])
 recipeFromIron.name = "shielding-from-iron"
 recipeFromIron.ingredients = {
 	{type = "item", name = "iron-plate", amount = 10},
@@ -33,7 +33,7 @@ recipeFromIron.icons = {
 data:extend{recipeFromIron}
 
 -- Create recipe: 4 steel plate + 2 iron rod -> 2 shielding
-local recipeFromSteel = table.deepcopy(recipeFromIron)
+local recipeFromSteel = copy(recipeFromIron)
 recipeFromSteel.name = "shielding-from-steel"
 recipeFromSteel.ingredients = {
 	{type = "item", name = "steel-plate", amount = 10},
@@ -50,7 +50,7 @@ data:extend{recipeFromSteel}
 Tech.addRecipeToTech("shielding-from-steel", "steel-processing")
 
 -- Create recipe: 2 steel plate + 2 tungsten plate -> 2 shielding
-local recipeFromTungsten = table.deepcopy(recipeFromSteel)
+local recipeFromTungsten = copy(recipeFromSteel)
 recipeFromTungsten.name = "shielding-from-tungsten"
 recipeFromTungsten.ingredients = {
 	{type = "item", name = "steel-plate", amount = 5},

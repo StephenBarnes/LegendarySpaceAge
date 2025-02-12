@@ -18,7 +18,7 @@ local batteryItem = ITEM["battery"]
 batteryItem.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/battery_short.png"
 batteryItem.stack_size = 200 -- Vanilla is 200. This carries through to other cloned batteries.
 batteryItem.weight = 1000 -- Vanilla is 2500 (so 400 per rocket). Setting to 1000, so 1000 per rocket.
-local chargedBatteryItem = table.deepcopy(batteryItem)
+local chargedBatteryItem = copy(batteryItem)
 chargedBatteryItem.name = "charged-battery"
 chargedBatteryItem.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/battery_short_charged.png"
 chargedBatteryItem.order = batteryItem.order .. '-2'
@@ -33,12 +33,12 @@ chargedBatteryItem.fuel_value = "10MJ"
 	-- Seems that in real life, lithium-ion batteries are ~1GJ/ton while solid fuels are ~50GJ/ton.
 chargedBatteryItem.spoil_ticks = 60 * 60 * 60 * 2 -- 2 hours
 chargedBatteryItem.spoil_result = "battery"
-local holmiumBatteryItem = table.deepcopy(batteryItem)
+local holmiumBatteryItem = copy(batteryItem)
 holmiumBatteryItem.name = "holmium-battery"
 holmiumBatteryItem.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/holmium_battery_short.png"
 holmiumBatteryItem.order = batteryItem.order .. '-3'
 holmiumBatteryItem.weight = 1000 -- So 1000 per rocket, same as the weight of a normal battery.
-local chargedHolmiumBatteryItem = table.deepcopy(batteryItem)
+local chargedHolmiumBatteryItem = copy(batteryItem)
 chargedHolmiumBatteryItem.name = "charged-holmium-battery"
 chargedHolmiumBatteryItem.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/holmium_battery_short_charged.png"
 chargedHolmiumBatteryItem.order = batteryItem.order .. '-4'
@@ -53,7 +53,7 @@ chargedHolmiumBatteryItem.fuel_value = "100MJ"
 data:extend({chargedBatteryItem, holmiumBatteryItem, chargedHolmiumBatteryItem})
 
 -- Create recipe for holmium batteries.
-local holmiumBatteryRecipe = table.deepcopy(RECIPE["battery"])
+local holmiumBatteryRecipe = copy(RECIPE["battery"])
 holmiumBatteryRecipe.name = "holmium-battery"
 holmiumBatteryRecipe.results = {{type = "item", name = "holmium-battery", amount = 1}}
 holmiumBatteryRecipe.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/holmium_battery_short.png"
@@ -68,7 +68,7 @@ holmiumBatteryRecipe.allow_decomposition = true
 data:extend({holmiumBatteryRecipe})
 
 -- Create new tech for holmium battery. It gets unlocked after you've gotten science packs from both Fulgora and Vulcanus.
-local holmiumBatteryTech = table.deepcopy(TECH["battery-mk3-equipment"])
+local holmiumBatteryTech = copy(TECH["battery-mk3-equipment"])
 holmiumBatteryTech.name = "holmium-battery"
 holmiumBatteryTech.prerequisites = {"electromagnetic-science-pack", "metallurgic-science-pack"}
 holmiumBatteryTech.effects = {
@@ -287,7 +287,7 @@ data:extend({
         dying_explosion = accumulator.dying_explosion,
         collision_box = {{-0.9, -0.9}, {0.9, 0.9}},
         selection_box = {{-1, -1}, {1, 1}},
-        damaged_trigger_effect = table.deepcopy(accumulator.damaged_trigger_effect),
+        damaged_trigger_effect = copy(accumulator.damaged_trigger_effect),
         crafting_speed = 1,
         source_inventory_size = 1,
         result_inventory_size = 1,
@@ -306,7 +306,7 @@ data:extend({
 			idle_animation = chargerPic,
 			animation = chargerAnimation,
         },
-        water_reflection = table.deepcopy(accumulator.water_reflection),
+        water_reflection = copy(accumulator.water_reflection),
         impact_category = accumulator.impact_category,
         open_sound = accumulator.open_sound,
         close_sound = accumulator.close_sound,
@@ -333,7 +333,7 @@ data:extend({
         dying_explosion = accumulator.dying_explosion,
         collision_box = {{-0.9, -0.9}, {0.9, 0.9}},
         selection_box = {{-1, -1}, {1, 1}},
-        damaged_trigger_effect = table.deepcopy(accumulator.damaged_trigger_effect),
+        damaged_trigger_effect = copy(accumulator.damaged_trigger_effect),
         effectivity = 1,
 		energy_source = {
 			type = "electric",
@@ -363,7 +363,7 @@ data:extend({
 			idle_animation = chargerPic,
 			animation = chargerAnimation,
         },
-        water_reflection = table.deepcopy(accumulator.water_reflection),
+        water_reflection = copy(accumulator.water_reflection),
 		impact_category = accumulator.impact_category,
         open_sound = accumulator.open_sound,
         close_sound = accumulator.close_sound,

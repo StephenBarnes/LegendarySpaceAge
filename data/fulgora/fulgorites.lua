@@ -7,7 +7,7 @@
 
 -- Create item for fulgorite shards.
 -- I'm changing the holmium ore item to be called "holmium powder". Then using the holmium ore graphic for fulgorite shards.
-local fulgoriteShardItem = table.deepcopy(ITEM["holmium-ore"])
+local fulgoriteShardItem = copy(ITEM["holmium-ore"])
 fulgoriteShardItem.name = "fulgorite-shard"
 fulgoriteShardItem.icon = ITEM["holmium-ore"].icon
 fulgoriteShardItem.subgroup = "fulgora-processes"
@@ -33,7 +33,7 @@ data.raw["simple-entity"]["fulgurite"].minable.results = { {type = "item", name 
 data.raw["simple-entity"]["fulgurite-small"].minable.results = { {type = "item", name = "fulgorite-shard", amount_min = 2, amount_max = 4} }
 
 -- Create item for fulgorite starter.
-local fulgoriteStarterItem = table.deepcopy(ITEM["holmium-ore"])
+local fulgoriteStarterItem = copy(ITEM["holmium-ore"])
 fulgoriteStarterItem.name = "fulgorite-starter"
 fulgoriteStarterItem.icon = "__LegendarySpaceAge__/graphics/fulgora/fulgorite-stuff/fulgorite-starter.png"
 fulgoriteStarterItem.subgroup = "fulgora-processes"
@@ -47,7 +47,7 @@ fulgoriteStarterItem.pictures = nil -- Remove the holmium powder picture.
 data:extend({fulgoriteStarterItem})
 
 -- Create recipe to crush fulgorite shards for holmium powder.
-local crushFulgoriteShardRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local crushFulgoriteShardRecipe = copy(RECIPE["plastic-bar"])
 crushFulgoriteShardRecipe.name = "holmium-ore" -- Naming it the same as holmium ore, so it doesn't get a separate entry in Factoriopedia etc.
 crushFulgoriteShardRecipe.category = "chemistry-or-handcrafting"
 crushFulgoriteShardRecipe.auto_recycle = false
@@ -61,9 +61,9 @@ data:extend({crushFulgoriteShardRecipe})
 Tech.addRecipeToTech("holmium-ore", "holmium-processing", 1)
 
 -- Create plant
-local fulgoritePlant = table.deepcopy(data.raw.plant["jellystem"])
+local fulgoritePlant = copy(data.raw.plant["jellystem"])
 fulgoritePlant.name = "fulgorite-plant"
-fulgoritePlant.minable = table.deepcopy(data.raw["simple-entity"]["fulgurite"].minable)
+fulgoritePlant.minable = copy(data.raw["simple-entity"]["fulgurite"].minable)
 fulgoritePlant.harvest_emissions = nil
 fulgoritePlant.emissions_per_second = nil -- They're not really a plant, they're a coral, so shouldn't absorb pollution, unlike jellystem/yumako.
 fulgoritePlant.agricultural_tower_tint = {
@@ -90,7 +90,7 @@ fulgoritePlant.pictures = {
 	},
 }
 -- Stuff below is to make it grow on Fulgoran tiles. Seems it grows on any tile in its autoplace, but it's not documented anywhere.
-fulgoritePlant.autoplace = table.deepcopy(data.raw["simple-entity"].fulgurite.autoplace)
+fulgoritePlant.autoplace = copy(data.raw["simple-entity"].fulgurite.autoplace)
 local growableFulgoraTiles = {"fulgoran-dust", "fulgoran-dunes", "fulgoran-sand", "fulgoran-rock", "fulgoran-walls", "fulgoran-paving", "fulgoran-conduit", "fulgoran-machinery"}
 fulgoritePlant.autoplace.tile_restriction = growableFulgoraTiles
 fulgoritePlant.growth_ticks = 60 * 60 * 20 -- Gleba plants are 5 minutes. Making this longer bc they can be planted anywhere, but not too much since yield is low.
@@ -105,7 +105,7 @@ data.raw["simple-entity"]["fulgurite-small"].hidden_in_factoriopedia = true
 data.raw["simple-entity"]["fulgurite-small"].factoriopedia_alternative = "fulgorite-plant"
 
 -- Create recipe for making fulgorite starters from electrophages plus fulgorite shards.
-local fulgoriteStarterRecipe = table.deepcopy(RECIPE["electrophage-cultivation"])
+local fulgoriteStarterRecipe = copy(RECIPE["electrophage-cultivation"])
 fulgoriteStarterRecipe.name = "fulgorite-starter"
 fulgoriteStarterRecipe.ingredients = {
 	{ type = "item", name = "fulgorite-shard", amount = 2 },
@@ -121,7 +121,7 @@ fulgoriteStarterRecipe.icon = nil
 data:extend({fulgoriteStarterRecipe})
 
 -- Create tech for fulgorite farming.
-local fulgoriteFarmingTech = table.deepcopy(TECH["electrophages"])
+local fulgoriteFarmingTech = copy(TECH["electrophages"])
 fulgoriteFarmingTech.name = "fulgorite-farming"
 fulgoriteFarmingTech.prerequisites = {"electrophages"}
 fulgoriteFarmingTech.effects = {{type = "unlock-recipe", recipe = "fulgorite-starter"}}

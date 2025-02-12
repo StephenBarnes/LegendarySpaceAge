@@ -25,7 +25,7 @@ RECIPE["casting-iron-gear-wheel"].icons = {
 }
 
 -- Create advanced parts item.
-local advancedPartsItem = table.deepcopy(ITEM["iron-gear-wheel"])
+local advancedPartsItem = copy(ITEM["iron-gear-wheel"])
 advancedPartsItem.name = "advanced-parts"
 advancedPartsItem.icons = {
 	--[[
@@ -52,7 +52,7 @@ advancedPartsItem.order = "7"
 data:extend{advancedPartsItem}
 
 -- Create recipe for advanced parts.
-local advancedPartsRecipe = table.deepcopy(RECIPE["iron-gear-wheel"])
+local advancedPartsRecipe = copy(RECIPE["iron-gear-wheel"])
 advancedPartsRecipe.name = "advanced-parts"
 advancedPartsRecipe.ingredients = {
 	{type="item", name="ingot-steel-hot", amount=5},

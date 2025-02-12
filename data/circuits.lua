@@ -21,7 +21,7 @@ Generally on Nauvis and Gleba both wood and plastic circuit boards are viable. O
 ]]
 
 -- Add circuit board item.
-local circuitBoardItem = table.deepcopy(ITEM["electronic-circuit"])
+local circuitBoardItem = copy(ITEM["electronic-circuit"])
 circuitBoardItem.name = "circuit-board"
 circuitBoardItem.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/circuit-boards/circuit-board-generic.png", icon_size = 64, scale = .5},
@@ -35,7 +35,7 @@ data:extend{circuitBoardItem}
 
 -- Add recipe for circuit board from wood.
 -- 	1 wood + 1 resin -> 4 circuit boards
-local woodCircuitBoardRecipe = table.deepcopy(RECIPE["barrel"])
+local woodCircuitBoardRecipe = copy(RECIPE["barrel"])
 woodCircuitBoardRecipe.name = "wood-circuit-board"
 woodCircuitBoardRecipe.ingredients = {
 	{type = "item", name = "wood", amount = 1},
@@ -56,7 +56,7 @@ data:extend{woodCircuitBoardRecipe}
 
 -- Add recipe for circuit board from plastic.
 -- 	2 plastic bar + 1 resin + 0.2 rubber -> 8 circuit boards
-local plasticCircuitBoardRecipe = table.deepcopy(RECIPE["barrel"])
+local plasticCircuitBoardRecipe = copy(RECIPE["barrel"])
 plasticCircuitBoardRecipe.name = "plastic-circuit-board"
 plasticCircuitBoardRecipe.ingredients = {
 	{type = "item", name = "plastic-bar", amount = 2},
@@ -79,7 +79,7 @@ Tech.addRecipeToTech("plastic-circuit-board", "plastics") -- TODO rather make a 
 
 -- Add recipe for ceramic circuit board.
 -- 	4 calcite + 2 resin -> 8 circuit boards
-local calciteCircuitBoardRecipe = table.deepcopy(RECIPE["barrel"])
+local calciteCircuitBoardRecipe = copy(RECIPE["barrel"])
 calciteCircuitBoardRecipe.name = "calcite-circuit-board"
 calciteCircuitBoardRecipe.ingredients = {
 	{type = "item", name = "calcite", amount = 5},
@@ -104,7 +104,7 @@ Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rath
 	Makeshift circuit board: 1 stone brick -> 1 circuit board
 		Needed because all ways of making circuit boards require resin, which can't be obtained on Aquilo without buildings that require electronic circuits, creating a circular dependency. Also same on Nauvis at the start.
 ]]
-local makeshiftBoardRecipe = table.deepcopy(RECIPE["electronic-circuit"])
+local makeshiftBoardRecipe = copy(RECIPE["electronic-circuit"])
 makeshiftBoardRecipe.name = "makeshift-circuit-board"
 makeshiftBoardRecipe.ingredients = {{type = "item", name = "stone-brick", amount = 1}}
 makeshiftBoardRecipe.results = {{type = "item", name = "circuit-board", amount = 1}}
@@ -124,7 +124,7 @@ data:extend{makeshiftBoardRecipe}
 Tech.addRecipeToTech("makeshift-circuit-board", "electronics", 2)
 
 -- Create tech for wood circuit boards.
-local woodCircuitBoardTech = table.deepcopy(TECH["automation"])
+local woodCircuitBoardTech = copy(TECH["automation"])
 woodCircuitBoardTech.name = "wood-circuit-board"
 woodCircuitBoardTech.effects = {
 	{type = "unlock-recipe", recipe = "wood-resin"},
@@ -149,7 +149,7 @@ woodCircuitBoardTech.research_trigger = nil
 data:extend{woodCircuitBoardTech}
 
 -- Create item for silicon (undoped wafers).
-local silicon = table.deepcopy(ITEM["plastic-bar"])
+local silicon = copy(ITEM["plastic-bar"])
 silicon.name = "silicon"
 silicon.icon = "__LegendarySpaceAge__/graphics/circuit-chains/silicon.png"
 silicon.icon_size = 64
@@ -159,7 +159,7 @@ silicon.stack_size = 200
 data:extend{silicon}
 
 -- Create recipe for silicon.
-local siliconRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local siliconRecipe = copy(RECIPE["plastic-bar"])
 siliconRecipe.name = "silicon"
 siliconRecipe.ingredients = {
 	{type = "item", name = "sand", amount = 2},
@@ -178,7 +178,7 @@ Tech.addRecipeToTech("silicon", "processing-unit", 1)
 Tech.addRecipeToTech("silicon", "solar-energy", 1)
 
 -- Create item for doped wafers.
-local dopedWafer = table.deepcopy(ITEM["plastic-bar"])
+local dopedWafer = copy(ITEM["plastic-bar"])
 dopedWafer.name = "doped-wafer"
 dopedWafer.icon = "__LegendarySpaceAge__/graphics/circuit-chains/doped-wafer.png"
 dopedWafer.icon_size = 64
@@ -188,7 +188,7 @@ dopedWafer.stack_size = 100
 data:extend{dopedWafer}
 
 -- Create item for microchips
-local microchip = table.deepcopy(ITEM["processing-unit"])
+local microchip = copy(ITEM["processing-unit"])
 microchip.name = "microchip"
 microchip.icon = "__LegendarySpaceAge__/graphics/circuit-chains/microchip.png"
 microchip.icon_size = 64
@@ -198,7 +198,7 @@ microchip.stack_size = 200
 data:extend{microchip}
 
 -- Create recipe for doped wafers.
-local dopedWaferRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local dopedWaferRecipe = copy(RECIPE["plastic-bar"])
 dopedWaferRecipe.name = "doped-wafer"
 dopedWaferRecipe.ingredients = {
 	{type = "item", name = "silicon", amount = 1},
@@ -218,7 +218,7 @@ data:extend{dopedWaferRecipe}
 Tech.addRecipeToTech("doped-wafer", "processing-unit", 2)
 
 -- Create recipe for microchips.
-local microchipRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local microchipRecipe = copy(RECIPE["plastic-bar"])
 microchipRecipe.name = "microchip"
 microchipRecipe.ingredients = {
 	{type = "item", name = "doped-wafer", amount = 1},
@@ -251,7 +251,7 @@ RECIPE["processing-unit"].allow_decomposition = true
 RECIPE["processing-unit"].energy_required = 5
 
 -- Create item for electronic components.
-local electronicComponents = table.deepcopy(ITEM["advanced-circuit"])
+local electronicComponents = copy(ITEM["advanced-circuit"])
 electronicComponents.name = "electronic-components"
 electronicComponents.icon = nil
 electronicComponents.subgroup = "complex-circuit-intermediates"
@@ -267,7 +267,7 @@ data:extend{electronicComponents}
 
 -- Create a recipe for electronic components.
 -- 1 carbon + 1 plastic + 1 sand + 1 copper wire -> 2 electronic components
-local electronicComponentsRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local electronicComponentsRecipe = copy(RECIPE["plastic-bar"])
 electronicComponentsRecipe.name = "electronic-components"
 electronicComponentsRecipe.ingredients = {
 	{type = "item", name = "carbon", amount = 1},

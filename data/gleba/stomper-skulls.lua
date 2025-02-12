@@ -38,7 +38,7 @@ That still doesn't really match stromatolite distribution - stromatolites are al
 	On the whole, decided against it. Rather have stromatolites in the water, skulls on land.
 ]]
 
-local smallShellNoCorpse = table.deepcopy(data.raw["simple-entity"]["small-stomper-shell"])
+local smallShellNoCorpse = copy(data.raw["simple-entity"]["small-stomper-shell"])
 smallShellNoCorpse.name = "small-stomper-shell-no-corpse"
 smallShellNoCorpse.localised_name = {"entity-name.small-stomper-shell"}
 smallShellNoCorpse.created_effect = nil -- Don't create a corpse.
@@ -58,11 +58,11 @@ smallShellNoCorpse.factoriopedia_alternative = "small-stomper-shell"
 data:extend{smallShellNoCorpse}
 data.raw.planet.gleba.map_gen_settings.autoplace_settings.entity.settings["small-stomper-shell-no-corpse"] = {}
 
-local mediumShellNoCorpse = table.deepcopy(data.raw["simple-entity"]["medium-stomper-shell"])
+local mediumShellNoCorpse = copy(data.raw["simple-entity"]["medium-stomper-shell"])
 mediumShellNoCorpse.name = "medium-stomper-shell-no-corpse"
 mediumShellNoCorpse.localised_name = {"entity-name.medium-stomper-shell"}
 mediumShellNoCorpse.created_effect = nil -- Don't create a corpse.
-mediumShellNoCorpse.autoplace = table.deepcopy(smallShellNoCorpse.autoplace)
+mediumShellNoCorpse.autoplace = copy(smallShellNoCorpse.autoplace)
 mediumShellNoCorpse.autoplace.order = "a2"
 mediumShellNoCorpse.autoplace.local_expressions.multiplier = 0.004
 mediumShellNoCorpse.map_color = {174, 156, 136}

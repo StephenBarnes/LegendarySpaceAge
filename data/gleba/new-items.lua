@@ -12,7 +12,7 @@ data:extend{
 }
 
 -- Create geoplasm fluid
-local geoplasmFluid = table.deepcopy(FLUID["lubricant"])
+local geoplasmFluid = copy(FLUID["lubricant"])
 geoplasmFluid.name = "geoplasm"
 geoplasmFluid.icon = "__LegendarySpaceAge__/graphics/gleba/geoplasm.png"
 local geoplasmPinkColor = {r=.8, g=.404, b=.388}
@@ -23,7 +23,7 @@ geoplasmFluid.visualization_color = geoplasmPinkColor
 data:extend{geoplasmFluid}
 
 -- Create chitin fragments item
-local chitinFragments = table.deepcopy(ITEM["calcite"])
+local chitinFragments = copy(ITEM["calcite"])
 chitinFragments.name = "chitin-fragments"
 local chitinDir = "__LegendarySpaceAge__/graphics/gleba/chitin-fragments/"
 chitinFragments.icon = chitinDir.."3.png"
@@ -35,7 +35,7 @@ chitinFragments.subgroup = "gleba-non-agriculture"
 data:extend{chitinFragments}
 
 -- Create chitin block item
-local chitinBlock = table.deepcopy(ITEM["calcite"])
+local chitinBlock = copy(ITEM["calcite"])
 chitinBlock.name = "chitin-block"
 local chitinBlockDir = "__LegendarySpaceAge__/graphics/gleba/chitin-block/"
 chitinBlock.icon = chitinBlockDir.."3.png"
@@ -47,7 +47,7 @@ chitinBlock.subgroup = "gleba-non-agriculture"
 data:extend{chitinBlock}
 
 -- Create marrow item
-local marrowItem = table.deepcopy(ITEM["spoilage"])
+local marrowItem = copy(ITEM["spoilage"])
 marrowItem.name = "marrow"
 local marrowDir = "__LegendarySpaceAge__/graphics/gleba/marrow/"
 marrowItem.icon = marrowDir.."pillar-2.png"
@@ -77,7 +77,7 @@ marrowItem.weight = 1e6 / 500
 data:extend{marrowItem}
 
 -- Create tubule item
-local tubuleItem = table.deepcopy(ITEM["calcite"])
+local tubuleItem = copy(ITEM["calcite"])
 tubuleItem.name = "tubule"
 local tubuleDir = "__LegendarySpaceAge__/graphics/gleba/tubule/"
 tubuleItem.icon = tubuleDir.."1.png"
@@ -89,7 +89,7 @@ tubuleItem.subgroup = "gleba-non-agriculture"
 data:extend{tubuleItem}
 
 -- Create chitin-broth fluid.
-local chitinBrothFluid = table.deepcopy(FLUID["water"])
+local chitinBrothFluid = copy(FLUID["water"])
 chitinBrothFluid.name = "chitin-broth"
 chitinBrothFluid.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-broth.png"
 local chitinDarkColor = {r = .365, g = .263, b = .224}
@@ -103,7 +103,7 @@ chitinBrothFluid.heat_capacity = nil
 data:extend{chitinBrothFluid}
 
 -- Create appendage item.
-local appendageItem = table.deepcopy(marrowItem)
+local appendageItem = copy(marrowItem)
 appendageItem.name = "appendage"
 local appendageDir = "__LegendarySpaceAge__/graphics/gleba/appendage/"
 appendageItem.icon = appendageDir.."1.png"
@@ -118,7 +118,7 @@ appendageItem.spoil_result = "spoilage"
 data:extend{appendageItem}
 
 -- Create sencytium item.
-local sencytiumItem = table.deepcopy(appendageItem)
+local sencytiumItem = copy(appendageItem)
 sencytiumItem.name = "sencytium"
 local sencytiumDir = "__LegendarySpaceAge__/graphics/gleba/sencytium/"
 sencytiumItem.icon = sencytiumDir.."1.png"
@@ -134,7 +134,7 @@ data:extend{sencytiumItem}
 ------------------------------------------------------------------------
 
 -- Create chitin-broth recipe: 5 chitin fragments + 100 water + 5 nutrients -> 100 chitin-broth.
-local chitinBrothRecipe = table.deepcopy(RECIPE["lubricant"])
+local chitinBrothRecipe = copy(RECIPE["lubricant"])
 chitinBrothRecipe.name = "making-chitin-broth" -- Different name from fluid, so it doesn't get combined in factoriopedia.
 chitinBrothRecipe.category = "chemistry"
 chitinBrothRecipe.ingredients = {
@@ -156,7 +156,7 @@ data:extend{chitinBrothRecipe}
 -- TODO consider adding a recipe to cast structures out of chitin broth?
 
 -- Create recipe for tubules: 4 pearl + 40 chitin broth -> 3 pearls (20% fresh) + 4 tubules
-local tubuleRecipe = table.deepcopy(RECIPE["bioflux"])
+local tubuleRecipe = copy(RECIPE["bioflux"])
 tubuleRecipe.name = "tubule"
 tubuleRecipe.ingredients = {
 	{type = "item", name = "slipstack-pearl", amount = 5},
@@ -173,11 +173,11 @@ tubuleRecipe.energy_required = 10
 tubuleRecipe.enabled = false
 tubuleRecipe.icon = nil -- So it defaults to tubule icon.
 tubuleRecipe.subgroup = "gleba-non-agriculture"
-tubuleRecipe.crafting_machine_tint = table.deepcopy(chitinBrothRecipe.crafting_machine_tint)
+tubuleRecipe.crafting_machine_tint = copy(chitinBrothRecipe.crafting_machine_tint)
 data:extend{tubuleRecipe}
 
 -- Create recipe for compressing chitin fragments into blocks.
-local chitinBlockRecipe = table.deepcopy(RECIPE["rail"])
+local chitinBlockRecipe = copy(RECIPE["rail"])
 chitinBlockRecipe.name = "chitin-block"
 chitinBlockRecipe.ingredients = {
 	{type = "item", name = "chitin-fragments", amount = 2},
@@ -186,11 +186,11 @@ chitinBlockRecipe.results = {{type = "item", name = "chitin-block", amount = 1}}
 chitinBlockRecipe.enabled = false
 chitinBlockRecipe.auto_recycle = true
 chitinBlockRecipe.subgroup = "gleba-non-agriculture"
-chitinBlockRecipe.crafting_machine_tint = table.deepcopy(chitinBrothRecipe.crafting_machine_tint)
+chitinBlockRecipe.crafting_machine_tint = copy(chitinBrothRecipe.crafting_machine_tint)
 data:extend{chitinBlockRecipe}
 
 -- Create recipe for appendages: 10 geoplasm + 1 tubule -> 1 appendage
-local appendageRecipe = table.deepcopy(tubuleRecipe)
+local appendageRecipe = copy(tubuleRecipe)
 appendageRecipe.name = "appendage"
 appendageRecipe.ingredients = {
 	{type = "fluid", name = "geoplasm", amount = 10},
@@ -209,7 +209,7 @@ appendageRecipe.crafting_machine_tint = {
 data:extend{appendageRecipe}
 
 -- Create recipe for sencytium: 20 geoplasm + 1 activated pentapod egg -> 1 sencytium
-local sencytiumRecipe = table.deepcopy(appendageRecipe)
+local sencytiumRecipe = copy(appendageRecipe)
 sencytiumRecipe.name = "sencytium"
 sencytiumRecipe.ingredients = {
 	{type = "fluid", name = "geoplasm", amount = 20},
@@ -221,11 +221,11 @@ sencytiumRecipe.energy_required = 10
 sencytiumRecipe.enabled = false
 sencytiumRecipe.subgroup = "gleba-non-agriculture"
 sencytiumRecipe.icon = nil -- So it defaults to sencytium icon.
-sencytiumRecipe.crafting_machine_tint = table.deepcopy(appendageRecipe.crafting_machine_tint)
+sencytiumRecipe.crafting_machine_tint = copy(appendageRecipe.crafting_machine_tint)
 data:extend{sencytiumRecipe}
 
 -- Create recipe for nutrients from marrow: 5 marrow + 1 bioflux + 10 sulfuric acid -> 40 nutrients.
-local nutrientsFromMarrowRecipe = table.deepcopy(RECIPE["nutrients-from-bioflux"])
+local nutrientsFromMarrowRecipe = copy(RECIPE["nutrients-from-bioflux"])
 nutrientsFromMarrowRecipe.name = "nutrients-from-marrow"
 nutrientsFromMarrowRecipe.ingredients = {
 	{type = "item", name = "marrow", amount = 5},
@@ -240,11 +240,11 @@ nutrientsFromMarrowRecipe.icons = {
 	{icon = marrowItem.icon, size = 64, scale = 0.35, shift = {-4, -4}},
 	{icon = "__space-age__/graphics/icons/nutrients.png", size = 64, scale = 0.43, shift = {6, 6}},
 }
-nutrientsFromMarrowRecipe.crafting_machine_tint = table.deepcopy(RECIPE["sulfuric-acid"].crafting_machine_tint)
+nutrientsFromMarrowRecipe.crafting_machine_tint = copy(RECIPE["sulfuric-acid"].crafting_machine_tint)
 data:extend{nutrientsFromMarrowRecipe}
 
 -- Create recipe for landfill from chitin fragments.
-local landfillFromChitinRecipe = table.deepcopy(RECIPE["landfill"])
+local landfillFromChitinRecipe = copy(RECIPE["landfill"])
 landfillFromChitinRecipe.name = "landfill-from-chitin"
 landfillFromChitinRecipe.ingredients = {
 	{type = "item", name = "marrow", amount = 20},
@@ -277,7 +277,7 @@ end
 ------------------------------------------------------------------------
 
 -- Create 2 techs for chitin processing.
-local chitinTech1 = table.deepcopy(TECH["jellynut"])
+local chitinTech1 = copy(TECH["jellynut"])
 chitinTech1.name = "chitin-processing-1"
 chitinTech1.effects = {
 	{type = "unlock-recipe", recipe = "chitin-block"},
@@ -292,7 +292,7 @@ chitinTech1.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-tech-1.png"
 chitinTech1.localised_description = {"technology-description.chitin-processing-1"}
 data:extend{chitinTech1}
 
-local chitinTech2 = table.deepcopy(chitinTech1)
+local chitinTech2 = copy(chitinTech1)
 chitinTech2.name = "chitin-processing-2"
 chitinTech2.effects = {
 	{type = "unlock-recipe", recipe = "making-chitin-broth"},
@@ -310,7 +310,7 @@ chitinTech2.localised_description = {"technology-description.chitin-processing-2
 data:extend{chitinTech2}
 
 -- Create tech for marrow.
-local marrowTech = table.deepcopy(chitinTech1)
+local marrowTech = copy(chitinTech1)
 marrowTech.name = "marrow"
 marrowTech.effects = {
 	{type = "unlock-recipe", recipe = "nutrients-from-marrow"},
@@ -326,7 +326,7 @@ marrowTech.icon = "__LegendarySpaceAge__/graphics/gleba/marrow-tech.png"
 marrowTech.localised_description = nil
 data:extend{marrowTech}
 
-local biomechanismsTech = table.deepcopy(marrowTech)
+local biomechanismsTech = copy(marrowTech)
 biomechanismsTech.name = "biomechanisms"
 biomechanismsTech.prerequisites = {"marrow", "chitin-processing-2", "bioflux"}
 biomechanismsTech.research_trigger = {

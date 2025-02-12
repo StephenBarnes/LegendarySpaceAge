@@ -29,8 +29,8 @@ assert(hatches ~= nil)
 assert(#hatches == 6)
 for i = 1, 3 do
 	hatches[i].busy_timeout_ticks = 60 -- Default 120, TODO test
-	table.insert(hatches, table.deepcopy(hatches[i]))
-	table.insert(hatches, table.deepcopy(hatches[i]))
+	table.insert(hatches, copy(hatches[i]))
+	table.insert(hatches, copy(hatches[i]))
 	--hatch.hatch_opening_ticks
 end
 cargoParams.giga_hatch_definitions[1].covered_hatches = {1, 2, 3, 7, 8, 9, 10, 11, 12}

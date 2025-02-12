@@ -1,5 +1,5 @@
 --[[
-local mineralDustItem = table.deepcopy(ITEM.stone)
+local mineralDustItem = copy(ITEM.stone)
 mineralDustItem.name = "mineral-dust"
 mineralDustItem.order = (mineralDustItem.order or "") .. "-b"
 data:extend({mineralDustItem})

@@ -2,7 +2,7 @@
 
 -- Create a new "oxygen pressure" parameter.
 -- We could rename the existing one, but it seems to affect the speed of bots. They glitch out when pressure is too low. And it doesn't seem like I can make robots depend on a different property instead.
-local oxygenPressure = table.deepcopy(data.raw["surface-property"]["pressure"])
+local oxygenPressure = copy(data.raw["surface-property"]["pressure"])
 oxygenPressure.name = "oxygen-pressure"
 oxygenPressure.default_value = 0
 data:extend{oxygenPressure}
@@ -63,7 +63,7 @@ for _, typeName in pairs{
 end
 
 -- Create surface property for "surface stability"
-local surfaceStability = table.deepcopy(data.raw["surface-property"]["pressure"])
+local surfaceStability = copy(data.raw["surface-property"]["pressure"])
 surfaceStability.name = "surface-stability"
 surfaceStability.default_value = 100
 data:extend{surfaceStability}
@@ -109,7 +109,7 @@ for _, stabilityTypeKey in pairs{
 	if ent.surface_conditions == nil then
 		ent.surface_conditions = {}
 	else
-		ent.surface_conditions = table.deepcopy(ent.surface_conditions) -- Get rid of shared conditions, so adding surface stability here doesn't mess up cars etc.
+		ent.surface_conditions = copy(ent.surface_conditions) -- Get rid of shared conditions, so adding surface stability here doesn't mess up cars etc.
 	end
 	table.insert(ent.surface_conditions, {
 		property = "surface-stability",

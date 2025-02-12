@@ -134,7 +134,7 @@ data:extend({
 -- But doesn't really fit, bc Fulgora has no ambient decomposition bacteria, so spoilage shouldn't really exist.
 -- So, making a new type of nutrients that lasts longer than Gleba nutrients, and spoils to stone.
 ITEM["electrophage"].spoil_result = "polysalt"
-local polysaltItem = table.deepcopy(ITEM["nutrients"])
+local polysaltItem = copy(ITEM["nutrients"])
 polysaltItem.name = "polysalt"
 polysaltItem.icon = "__LegendarySpaceAge__/graphics/fulgora/polysalts.png"
 polysaltItem.icon_size = 128

@@ -2,7 +2,7 @@
 
 -- Create the new fluid.
 local volcanicGasColor = {0.788, 0.627, 0.167}
-local volcanicGas = table.deepcopy(FLUID["steam"])
+local volcanicGas = copy(FLUID["steam"])
 volcanicGas.name = "volcanic-gas"
 volcanicGas.base_color = volcanicGasColor
 volcanicGas.flow_color = volcanicGasColor
@@ -17,7 +17,7 @@ volcanicGas.heat_capacity = nil
 data:extend{volcanicGas}
 
 -- Create recipe for separating volcanic gas into water, sulfur, and carbon.
-local separationRecipe = table.deepcopy(RECIPE["steam-condensation"])
+local separationRecipe = copy(RECIPE["steam-condensation"])
 separationRecipe.name = "volcanic-gas-separation"
 separationRecipe.localised_name = nil
 separationRecipe.category = "chemistry-or-cryogenics"
@@ -46,7 +46,7 @@ data:extend{separationRecipe}
 
 -- Create a tech for volcanic gas separation.
 ---@type data.TechnologyPrototype
-local volcanicGasSeparationTech = table.deepcopy(TECH["tungsten-carbide"])
+local volcanicGasSeparationTech = copy(TECH["tungsten-carbide"])
 volcanicGasSeparationTech.name = "volcanic-gas-processing"
 volcanicGasSeparationTech.effects = {
 	{type = "unlock-recipe", recipe = "volcanic-gas-separation"},

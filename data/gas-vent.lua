@@ -5,7 +5,7 @@
 -- This modpack has gas heating tower for burnable gases, gas vent for non-burnable gases, fluid dump for fluids, and tossing-into-sea for items.
 
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
-local ventEnt = table.deepcopy(FURNACE["steel-furnace"])
+local ventEnt = copy(FURNACE["steel-furnace"])
 ventEnt.type = "furnace"
 ventEnt.name = "gas-vent"
 ventEnt.icon = nil
@@ -91,7 +91,7 @@ ventEnt.fluid_boxes = {
 ventEnt.surface_conditions = nil -- Should be able to vent on space platforms too.
 data:extend{ventEnt}
 
-local ventItem = table.deepcopy(ITEM["steel-furnace"])
+local ventItem = copy(ITEM["steel-furnace"])
 ventItem.type = "item"
 ventItem.name = "gas-vent"
 ventItem.icon = nil
@@ -105,7 +105,7 @@ ventItem.place_result = "gas-vent"
 ventItem.stack_size = 20
 data:extend{ventItem}
 
-local ventRecipe = table.deepcopy(RECIPE["steel-furnace"])
+local ventRecipe = copy(RECIPE["steel-furnace"])
 ventRecipe.type = "recipe"
 ventRecipe.name = "gas-vent"
 ventRecipe.enabled = false
@@ -117,7 +117,7 @@ ventRecipe.results = {{type = "item", name = "gas-vent", amount = 1}}
 -- TODO decide on ingredients
 data:extend{ventRecipe}
 
-local ventRecipeCategory = table.deepcopy(data.raw["recipe-category"]["crafting"])
+local ventRecipeCategory = copy(data.raw["recipe-category"]["crafting"])
 ventRecipeCategory.name = "gas-venting"
 data:extend{ventRecipeCategory}
 
@@ -168,7 +168,7 @@ for _, fluidData in pairs(ventableFluids) do
 	else
 		gasIcon = {icon = fluid.icon, icon_size = fluid.icon_size}
 	end
-	local thisGasVentRecipe = table.deepcopy(ventRecipe)
+	local thisGasVentRecipe = copy(ventRecipe)
 	thisGasVentRecipe.name = "gas-vent-"..gasToVent
 	thisGasVentRecipe.localised_name = {"recipe-name.gas-vent", {"fluid-name."..gasToVent}}
 	thisGasVentRecipe.category = "gas-venting"

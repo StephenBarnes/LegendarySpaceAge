@@ -2,7 +2,7 @@
 Also we change the recipe for assembling them to require hydrogen and oxygen. No rocket fuel.
 This is better IMO since it lets you use inserters to put blue circuits and LDS into rocket silos for transport. --]]
 
-local assembledRocketPartItem = table.deepcopy(ITEM["rocket-part"])
+local assembledRocketPartItem = copy(ITEM["rocket-part"])
 assembledRocketPartItem.name = "assembled-rocket-part"
 --assembledRocketPartItem.localised_name = {"item-name.assembled-rocket-part"}
 assembledRocketPartItem.icon = nil
@@ -18,7 +18,7 @@ data:extend{assembledRocketPartItem}
 RECIPE["rocket-part"].hide_from_player_crafting = false
 RECIPE["rocket-part"].always_show_made_in = true
 
-local rocketPartAssemblyRecipe = table.deepcopy(RECIPE["rocket-part"])
+local rocketPartAssemblyRecipe = copy(RECIPE["rocket-part"])
 rocketPartAssemblyRecipe.name = "assembled-rocket-part"
 rocketPartAssemblyRecipe.ingredients = {{type = "item", name = "rocket-part", amount = 1}}
 rocketPartAssemblyRecipe.results = {{type = "item", name = "assembled-rocket-part", amount = 1}}

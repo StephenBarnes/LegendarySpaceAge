@@ -2,7 +2,7 @@
 TODO: I'm still trying to figure out what sugars are for, their role in this modpack. Maybe a simpler, less efficient precursor to nutrients? TODO.
 ]]
 
-local item = table.deepcopy(ITEM["nutrients"])
+local item = copy(ITEM["nutrients"])
 item.name = "sugars"
 local sugarDir = "__LegendarySpaceAge__/graphics/gleba/sugars/"
 item.icon = sugarDir .. "1.png"

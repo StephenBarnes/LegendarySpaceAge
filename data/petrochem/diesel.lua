@@ -8,7 +8,7 @@ local brightColor = {r = .667, g = .082, b = .094}
 local darkColor = {r = .361, g = .055, b = .11}
 
 -- Create diesel fluid.
-local fluid = table.deepcopy(FLUID["light-oil"])
+local fluid = copy(FLUID["light-oil"])
 fluid.name = "diesel"
 fluid.icon = "__LegendarySpaceAge__/graphics/petrochem/diesel.png"
 fluid.base_color = brightColor
@@ -17,7 +17,7 @@ fluid.visualization_color = brightColor
 data:extend{fluid}
 
 -- Create diesel recipe: 100 light oil + 50 rich gas -> 100 diesel.
-local recipe = table.deepcopy(RECIPE["rocket-fuel"])
+local recipe = copy(RECIPE["rocket-fuel"])
 recipe.name = "make-diesel" -- Not just "diesel" bc that merges it with the fluid in factoriopedia.
 recipe.ingredients = {
 	{type = "fluid", name = "light-oil", amount = 100},
@@ -33,7 +33,7 @@ recipe.category = "chemistry-or-crafting-with-fluid"
 data:extend{recipe}
 
 -- Create tech for diesel.
-local tech = table.deepcopy(TECH["rocket-fuel"])
+local tech = copy(TECH["rocket-fuel"])
 tech.name = "diesel"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "make-diesel"},

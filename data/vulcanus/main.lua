@@ -16,7 +16,7 @@ TECH["calcite-processing"].icons = {{
 }}
 
 -- Add recipe for water heating with lava, in chem plant.
-local lavaWaterHeatingRecipe = table.deepcopy(RECIPE["steam-condensation"])
+local lavaWaterHeatingRecipe = copy(RECIPE["steam-condensation"])
 lavaWaterHeatingRecipe.name = "lava-water-heating"
 lavaWaterHeatingRecipe.category = "chemistry"
 lavaWaterHeatingRecipe.subgroup = "vulcanus-processes"
@@ -57,7 +57,7 @@ TECH["tungsten-steel"].research_trigger.count = 4 -- big mining drills
 TECH["metallurgic-science-pack"].research_trigger.count = 20 -- tungsten steel plates
 
 -- Add tech for inverse vulcanization, to make plastic cheaper on Vulcanus.
-local inverseVulcanizationTech = table.deepcopy(TECH["cliff-explosives"])
+local inverseVulcanizationTech = copy(TECH["cliff-explosives"])
 inverseVulcanizationTech.name = "inverse-vulcanization"
 inverseVulcanizationTech.effects = {{type = "unlock-recipe", recipe = "inverse-vulcanization"}}
 inverseVulcanizationTech.prerequisites = {"metallurgic-science-pack"}
@@ -76,7 +76,7 @@ inverseVulcanizationTech.unit = {
 	},
 	time = 30,
 }
-local inverseVulcanizationRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local inverseVulcanizationRecipe = copy(RECIPE["plastic-bar"])
 inverseVulcanizationRecipe.name = "inverse-vulcanization"
 inverseVulcanizationRecipe.subgroup = "raw-material"
 inverseVulcanizationRecipe.ingredients = {

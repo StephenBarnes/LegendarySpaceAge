@@ -6,7 +6,7 @@ Graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 Some code taken from Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above.
 ]]
 
-local ent = table.deepcopy(ASSEMBLER["assembling-machine-3"])
+local ent = copy(ASSEMBLER["assembling-machine-3"])
 ent.name = "deep-drill"
 ent.icon = "__LegendarySpaceAge__/graphics/deep-drill/item.png"
 ent.minable = {mining_time = 1, result = "deep-drill"}
@@ -135,7 +135,7 @@ ent.dying_explosion = "big-mining-drill-explosion"
 ent.max_health = 1000
 data:extend{ent}
 
-local item = table.deepcopy(ITEM["big-mining-drill"])
+local item = copy(ITEM["big-mining-drill"])
 item.name = "deep-drill"
 item.icon = "__LegendarySpaceAge__/graphics/deep-drill/item.png"
 item.place_result = "deep-drill"
@@ -144,7 +144,7 @@ item.weight = 1e7 -- Too heavy for rocket.
 item.order = "a[items]-d"
 data:extend{item}
 
-local recipe = table.deepcopy(RECIPE["electric-mining-drill"])
+local recipe = copy(RECIPE["electric-mining-drill"])
 recipe.name = "deep-drill"
 recipe.results = {{type = "item", name = "deep-drill", amount = 1}}
 recipe.energy_required = 30
@@ -163,7 +163,7 @@ data:extend{{
 }}
 
 -- Create deep drill recipe for Nauvis: no ingredients => 10 stone
-local nauvisDrillingRecipe = table.deepcopy(RECIPE["deep-drill"])
+local nauvisDrillingRecipe = copy(RECIPE["deep-drill"])
 nauvisDrillingRecipe.name = "deep-drill-nauvis"
 nauvisDrillingRecipe.ingredients = {}
 nauvisDrillingRecipe.results = {
@@ -209,7 +209,7 @@ for i, planetData in pairs{
 	}},
 } do
 	local planetName = planetData[1]
-	local drillingRecipe = table.deepcopy(nauvisDrillingRecipe)
+	local drillingRecipe = copy(nauvisDrillingRecipe)
 	drillingRecipe.name = "deep-drill-"..planetName
 	drillingRecipe.results = planetData[2]
 	drillingRecipe.order = tostring(i+1)
@@ -228,7 +228,7 @@ data:extend{{
 }}
 
 -- Create tech for the deep drill recipe.
-local tech = table.deepcopy(TECH["electric-mining-drill"])
+local tech = copy(TECH["electric-mining-drill"])
 tech.name = "deep-drill"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "deep-drill"},

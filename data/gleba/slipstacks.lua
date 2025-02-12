@@ -7,7 +7,7 @@
 
 ---@type data.PlantPrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
-local slipstackPlant = table.deepcopy(data.raw.tree.slipstack)
+local slipstackPlant = copy(data.raw.tree.slipstack)
 slipstackPlant.type = "plant"
 
 slipstackPlant.growth_ticks = 60 * 60 * 10 -- 10 minutes; compare to yumako/jellystem at 5 minutes.
@@ -41,7 +41,7 @@ data:extend{slipstackPlant}
 --- Create items
 
 -- Create item for slipstack pearl
-local slipstackPearl = table.deepcopy(ITEM.spoilage)
+local slipstackPearl = copy(ITEM.spoilage)
 slipstackPearl.name = "slipstack-pearl"
 slipstackPearl.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png"
 slipstackPearl.subgroup = "slipstacks-and-boompuffs"
@@ -52,7 +52,7 @@ Item.clearFuel(slipstackPearl)
 data:extend{slipstackPearl}
 
 -- Create item for slipstack nest
-local slipstackNest = table.deepcopy(ITEM["iron-ore"])
+local slipstackNest = copy(ITEM["iron-ore"])
 slipstackNest.name = "slipstack-nest"
 slipstackNest.localised_name = {"item-name.slipstack-nest"}
 slipstackNest.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-nest.png"
@@ -71,7 +71,7 @@ data:extend{slipstackNest}
 --- Create recipes
 
 -- Recipe for making slipstack nest from pearls and rocks
-local slipstackNestRecipe = table.deepcopy(RECIPE["bioflux"])
+local slipstackNestRecipe = copy(RECIPE["bioflux"])
 slipstackNestRecipe.name = "slipstack-nest"
 slipstackNestRecipe.ingredients = {
 	{ type = "item", name = "slipstack-pearl", amount = 4 }, -- Requires less than it yields (10), so you don't need a prod bonus to make it sustainable.
@@ -86,7 +86,7 @@ slipstackNestRecipe.icon = nil
 data:extend{slipstackNestRecipe}
 
 -- Recipe for smelting slipstack pearls to resin
-local pearlSmeltRecipe = table.deepcopy(RECIPE["bioplastic"])
+local pearlSmeltRecipe = copy(RECIPE["bioplastic"])
 pearlSmeltRecipe.name = "smelt-slipstack-pearl"
 pearlSmeltRecipe.ingredients = {{type = "item", name = "slipstack-pearl", amount = 1}}
 pearlSmeltRecipe.results = {{type = "item", name = "resin", amount = 1}}
@@ -120,7 +120,7 @@ RECIPE["biolubricant"].energy_required = 5
 ------------------------------------------------------------------------
 --- Create tech
 
-local slipstackTech = table.deepcopy(TECH["biochamber"])
+local slipstackTech = copy(TECH["biochamber"])
 slipstackTech.name = "slipstack-propagation"
 slipstackTech.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-tech.png"
 slipstackTech.prerequisites = {"planet-discovery-gleba"}

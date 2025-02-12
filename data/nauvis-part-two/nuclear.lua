@@ -3,7 +3,7 @@ TODO
 ]]
 
 -- Create nuclear science pack.
-local item = table.deepcopy(data.raw.tool["agricultural-science-pack"])
+local item = copy(data.raw.tool["agricultural-science-pack"])
 item.name = "nuclear-science-pack"
 item.order = "j2"
 item.spoil_ticks = 60 * 60 * 20 -- 20 minutes.
@@ -12,7 +12,7 @@ data:extend{item}
 -- TODO add this to a tech, add new sprite, etc.
 
 -- Create recipe for nuclear science pack.
-local recipe = table.deepcopy(RECIPE["automation-science-pack"])
+local recipe = copy(RECIPE["automation-science-pack"])
 recipe.name = "nuclear-science-pack"
 recipe.ingredients = {
 	{type="item", name="uranium-235", amount=1},
@@ -51,7 +51,7 @@ for _, techNameMilitaryNuclear in pairs{
 	{"fission-reactor-equipment", true, false},
 	{"nuclear-fuel-reprocessing", false, false},
 } do
-	local newIngredients = table.deepcopy(preUraniumSciencePackIngredients)
+	local newIngredients = copy(preUraniumSciencePackIngredients)
 	if techNameMilitaryNuclear[2] then
 		table.insert(newIngredients, {"military-science-pack", 1})
 	end

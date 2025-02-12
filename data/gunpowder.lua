@@ -10,7 +10,7 @@ for i = 1, 3 do
 		mipmap_count = 4,
 	})
 end
-local gunpowderItem = table.deepcopy(ITEM["sulfur"])
+local gunpowderItem = copy(ITEM["sulfur"])
 gunpowderItem.name = "gunpowder"
 gunpowderItem.icons = {{icon = gunpowderPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 gunpowderItem.pictures = gunpowderPictures
@@ -21,7 +21,7 @@ data:extend{gunpowderItem}
 
 -- Create recipe for gunpowder.
 -- 2 carbon + 1 sulfur + 1 sand -> 2 gunpowder
-local gunpowderRecipe = table.deepcopy(RECIPE["firearm-magazine"])
+local gunpowderRecipe = copy(RECIPE["firearm-magazine"])
 gunpowderRecipe.name = "gunpowder"
 gunpowderRecipe.ingredients = {
 	{type="item", name="carbon", amount=2},
@@ -55,7 +55,7 @@ RECIPE["shotgun-shell"].ingredients = { -- Originally 2 iron plate + 2 copper pl
 RECIPE["shotgun-shell"].results = {{type = "item", name = "shotgun-shell", amount = 2}}
 
 -- Create tech.
-local tech = table.deepcopy(TECH["rocket-fuel"])
+local tech = copy(TECH["rocket-fuel"])
 tech.name = "gunpowder"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "gunpowder"},

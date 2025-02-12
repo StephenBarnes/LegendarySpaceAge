@@ -13,7 +13,7 @@ local rubberIcons = {}
 for i = 1, 3 do
 	table.insert(rubberIcons, {filename = "__LegendarySpaceAge__/graphics/rubber/rubber-"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
-local rubberItem = table.deepcopy(ITEM["plastic-bar"])
+local rubberItem = copy(ITEM["plastic-bar"])
 rubberItem.name = "rubber"
 rubberItem.icon = nil
 rubberItem.icons = {{icon = rubberIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
@@ -23,7 +23,7 @@ data:extend{rubberItem}
 
 -- Create latex fluid.
 local latexColor = {r = .812, g = .761, b = .675, a=1}
-local latexFluid = table.deepcopy(FLUID["lubricant"])
+local latexFluid = copy(FLUID["lubricant"])
 latexFluid.name = "latex"
 latexFluid.icon = "__LegendarySpaceAge__/graphics/rubber/latex.png"
 latexFluid.icon_size = 64
@@ -33,7 +33,7 @@ latexFluid.visualization_color = latexColor
 data:extend{latexFluid}
 
 -- Create recipe for latex fluid.
-local latexRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local latexRecipe = copy(RECIPE["plastic-bar"])
 latexRecipe.name = "latex"
 latexRecipe.ingredients = {
 	{type="item", name="wood", amount=5},
@@ -46,7 +46,7 @@ latexRecipe.order = "f1"
 data:extend{latexRecipe}
 
 -- Create recipe for latex to rubber.
-local rubberFromLatexRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local rubberFromLatexRecipe = copy(RECIPE["plastic-bar"])
 rubberFromLatexRecipe.name = "rubber-from-latex"
 rubberFromLatexRecipe.ingredients = {
 	{ type = "fluid", name = "latex",         amount = 50 },
@@ -65,7 +65,7 @@ rubberFromLatexRecipe.icons = {
 data:extend{rubberFromLatexRecipe}
 
 -- Create recipe for synthetic rubber.
-local rubberFromPetrochemRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local rubberFromPetrochemRecipe = copy(RECIPE["plastic-bar"])
 rubberFromPetrochemRecipe.name = "rubber-from-oil"
 rubberFromPetrochemRecipe.ingredients = {
 	{type="fluid", name="light-oil", amount=50},
@@ -89,7 +89,7 @@ rubberFromPetrochemRecipe.icons = {
 data:extend{rubberFromPetrochemRecipe}
 
 -- Create tech for natural rubber.
-local naturalRubberTech = table.deepcopy(TECH["plastics"])
+local naturalRubberTech = copy(TECH["plastics"])
 naturalRubberTech.name = "rubber-1"
 naturalRubberTech.effects = {
 	{
@@ -109,7 +109,7 @@ naturalRubberTech.unit = TECH["automation"].unit
 data:extend{naturalRubberTech}
 
 -- Create tech for synthetic rubber.
-local syntheticRubberTech = table.deepcopy(TECH["plastics"])
+local syntheticRubberTech = copy(TECH["plastics"])
 syntheticRubberTech.name = "rubber-2"
 syntheticRubberTech.effects = {
 	{

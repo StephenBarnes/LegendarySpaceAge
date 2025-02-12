@@ -5,7 +5,7 @@ towerEnt.subgroup = "energy"
 
 -- Create entity for fluid heating tower
 ---@type data.ReactorPrototype
-local fluidHeatingTowerEnt = table.deepcopy(towerEnt)
+local fluidHeatingTowerEnt = copy(towerEnt)
 fluidHeatingTowerEnt.name = "fluid-heating-tower"
 fluidHeatingTowerEnt.placeable_by = {item = "fluid-heating-tower", count = 1}
 fluidHeatingTowerEnt.minable.result = "fluid-heating-tower"
@@ -48,7 +48,7 @@ data:extend{fluidHeatingTowerEnt}
 local towerItem = ITEM["heating-tower"]
 towerItem.subgroup = "energy"
 
-local fluidHeatingTowerItem = table.deepcopy(towerItem)
+local fluidHeatingTowerItem = copy(towerItem)
 fluidHeatingTowerItem.name = "fluid-heating-tower"
 fluidHeatingTowerItem.place_result = "fluid-heating-tower"
 fluidHeatingTowerItem.icons = fluidHeatingTowerEnt.icons
@@ -56,7 +56,7 @@ fluidHeatingTowerItem.order = ITEM["heating-tower"].order .. "-2"
 data:extend{fluidHeatingTowerItem}
 
 -- Create recipe for fluid heating tower
-local fluidHeatingTowerRecipe = table.deepcopy(RECIPE["heating-tower"])
+local fluidHeatingTowerRecipe = copy(RECIPE["heating-tower"])
 fluidHeatingTowerRecipe.name = "fluid-heating-tower"
 fluidHeatingTowerRecipe.results = {{type = "item", name = "fluid-heating-tower", amount = 1}}
 data:extend{fluidHeatingTowerRecipe}

@@ -40,7 +40,7 @@ local function combineResults(result1, result2)
 			comboMax = comboMax + r.extra_count_fraction
 		end
 	end
-	local newResult = table.deepcopy(result1)
+	local newResult = copy(result1)
 	if comboMin == comboMax then
 		local floor = math.floor(comboMin)
 		newResult.amount = floor

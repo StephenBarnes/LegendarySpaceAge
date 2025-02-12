@@ -1,7 +1,7 @@
 -- This file adds early ammonia tech and recipes, and later ammonia using syngas.
 
 -- Create ammonia 1 tech, for ammonia from spoilage and spoilage from wood.
-local ammonia1Tech = table.deepcopy(TECH["logistics"])
+local ammonia1Tech = copy(TECH["logistics"])
 ammonia1Tech.name = "ammonia-1"
 ammonia1Tech.localised_name = {"technology-name.ammonia-1"}
 ammonia1Tech.localised_description = {"technology-description.ammonia-1"}
@@ -15,7 +15,7 @@ ammonia1Tech.effects = {
 data:extend{ammonia1Tech}
 
 -- Create ammonia 2 tech, for ammonia from syngas.
-local ammonia2Tech = table.deepcopy(TECH["coal-liquefaction"])
+local ammonia2Tech = copy(TECH["coal-liquefaction"])
 ammonia2Tech.name = "ammonia-2"
 ammonia2Tech.localised_name = {"technology-name.ammonia-2"}
 ammonia2Tech.localised_description = {"technology-description.ammonia-2"}
@@ -37,7 +37,7 @@ ammonia2Tech.unit = {
 data:extend{ammonia2Tech}
 
 -- Create recipe for ammonia from wood
-local ammoniaFromWood = table.deepcopy(RECIPE["nutrients-from-spoilage"])
+local ammoniaFromWood = copy(RECIPE["nutrients-from-spoilage"])
 ammoniaFromWood.name = "ammonia-from-wood"
 ammoniaFromWood.ingredients = {
 	{type = "item", name = "wood", amount = 5},
@@ -58,7 +58,7 @@ ammoniaFromWood.icons = {
 data:extend{ammoniaFromWood}
 
 -- Create recipe for ammonia from spoilage.
-local ammoniaFromSpoilage = table.deepcopy(ammoniaFromWood)
+local ammoniaFromSpoilage = copy(ammoniaFromWood)
 ammoniaFromSpoilage.name = "ammonia-from-spoilage"
 ammoniaFromSpoilage.ingredients = {
 	{type = "item", name = "spoilage", amount = 5},
@@ -75,7 +75,7 @@ data:extend{ammoniaFromSpoilage}
 
 -- Create recipe for spoilage from wood.
 --[[ TODO not sure we want this recipe, at this stage. Increases the number of recipes and gives a way to fuel biochambers without imports from Gleba.
-local woodSpoilageRecipe = table.deepcopy(RECIPE["nutrients-from-spoilage"])
+local woodSpoilageRecipe = copy(RECIPE["nutrients-from-spoilage"])
 woodSpoilageRecipe.name = "spoilage-from-wood"
 woodSpoilageRecipe.ingredients = {
 	{type = "item", name = "wood", amount = 5},
@@ -96,7 +96,7 @@ data:extend{woodSpoilageRecipe}
 ]]
 
 -- Create recipe for niter from ammonia and sand.
-local niterFromAmmoniaRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local niterFromAmmoniaRecipe = copy(RECIPE["plastic-bar"])
 niterFromAmmoniaRecipe.name = "niter"
 niterFromAmmoniaRecipe.ingredients = {
 	{type = "fluid", name = "ammonia", amount = 5},
@@ -111,7 +111,7 @@ niterFromAmmoniaRecipe.energy_required = 1
 data:extend{niterFromAmmoniaRecipe}
 
 -- Create recipe for ammonia from syngas.
-local ammoniaSyngasRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local ammoniaSyngasRecipe = copy(RECIPE["plastic-bar"])
 ammoniaSyngasRecipe.name = "ammonia-from-syngas"
 ammoniaSyngasRecipe.ingredients = {
 	{type = "fluid", name = "syngas", amount = 100},

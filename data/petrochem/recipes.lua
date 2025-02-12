@@ -5,7 +5,7 @@ Fractionation recipes turn crude oil and natural gas into the 4 fractions: heavy
 	Oil fractionation: 10 crude oil + 2 steam -> 1 tar + 4 heavy oil + 5 light oil + 1 water + 2 sulfur + 2 carbon
 	Gas fractionation: 10 natural gas + 2 steam -> 5 rich gas + 5 dry gas + 1 water + 1 sulfur
 	]]
-local oilFractionationRecipe = table.deepcopy(RECIPE["advanced-oil-processing"])
+local oilFractionationRecipe = copy(RECIPE["advanced-oil-processing"])
 oilFractionationRecipe.name = "oil-fractionation"
 oilFractionationRecipe.ingredients = {
 	{type = "fluid", name = "crude-oil", amount = 100},
@@ -28,7 +28,7 @@ oilFractionationRecipe.icon = nil
 oilFractionationRecipe.order = "a[oil-processing]-b1"
 data:extend{oilFractionationRecipe}
 
-local gasFractionationRecipe = table.deepcopy(RECIPE["advanced-oil-processing"])
+local gasFractionationRecipe = copy(RECIPE["advanced-oil-processing"])
 gasFractionationRecipe.name = "gas-fractionation"
 gasFractionationRecipe.ingredients = {
 	{type = "fluid", name = "natural-gas", amount = 100},
@@ -88,7 +88,7 @@ lightOilCrackingRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={-6, 6}, tint=constants.richgasColor},
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 6}, tint=constants.richgasColor},
 }
-local richGasCrackingRecipe = table.deepcopy(RECIPE["light-oil-cracking"])
+local richGasCrackingRecipe = copy(RECIPE["light-oil-cracking"])
 richGasCrackingRecipe.name = "rich-gas-cracking"
 richGasCrackingRecipe.ingredients = {
 	{type = "fluid", name = "petroleum-gas", amount = 100},
@@ -110,7 +110,7 @@ data:extend{richGasCrackingRecipe}
 	Tar distillation: 10 tar -> 3 pitch + 2 heavy oil + 1 light oil + 2 carbon + 1 sulfur
 		(No steam input because we want this to be usable on Fulgora for pitch, to make resin.)
 ]]
-local tarDistillationRecipe = table.deepcopy(RECIPE["advanced-oil-processing"])
+local tarDistillationRecipe = copy(RECIPE["advanced-oil-processing"])
 tarDistillationRecipe.name = "tar-distillation"
 tarDistillationRecipe.ingredients = {
 	{type = "fluid", name = "tar", amount = 100},
@@ -137,7 +137,7 @@ data:extend{tarDistillationRecipe}
 		If you intend to burn the heavy oil, you can get more heat by coking first and then burning the tar and carbon. (This is realistic, and rewards the player for the extra complexity.)
 		This recipe is also useful when the player needs more tar or carbon - usually those are byproducts.
 ]]
-local heavyOilCokingRecipe = table.deepcopy(RECIPE["heavy-oil-cracking"])
+local heavyOilCokingRecipe = copy(RECIPE["heavy-oil-cracking"])
 heavyOilCokingRecipe.name = "heavy-oil-coking"
 heavyOilCokingRecipe.ingredients = {
 	{type = "fluid", name = "heavy-oil", amount = 100},
@@ -158,7 +158,7 @@ heavyOilCokingRecipe.energy_required = 5
 data:extend{heavyOilCokingRecipe}
 
 -- Add recipe for pitch processing: 10 pitch + 50 steam -> 10 heavy oil + 10 light oil + 10 tar + 1 carbon
-local pitchProcessingRecipe = table.deepcopy(heavyOilCokingRecipe)
+local pitchProcessingRecipe = copy(heavyOilCokingRecipe)
 pitchProcessingRecipe.name = "pitch-processing"
 pitchProcessingRecipe.ingredients = {
 	{type = "item", name = "pitch", amount = 10},
@@ -191,7 +191,7 @@ data:extend{pitchProcessingRecipe}
 					coke the coal, burn the carbon, dump the sulfur - needs more machines and dump route, creates less pollution, same energy minus assemblers
 					coke the coal, burn the carbon, burn the sulfur - needs machines, creates more pollution, gives more energy
 ]]
-local coalCokingRecipe = table.deepcopy(RECIPE["heavy-oil-cracking"])
+local coalCokingRecipe = copy(RECIPE["heavy-oil-cracking"])
 coalCokingRecipe.name = "coal-coking"
 coalCokingRecipe.ingredients = {
 	{type = "item", name = "coal", amount = 2},
@@ -220,7 +220,7 @@ data:extend{coalCokingRecipe}
 		This represents pet coke style briquettes. We tune the energy values so that this gives more heat per heavy oil than other forms of processing.
 	Currently 25MJ + 4MJ -> 24MJ + 7MJ, so on net this increases energy slightly.
 ]]
-local solidFuelRecipe = table.deepcopy(RECIPE["solid-fuel-from-light-oil"])
+local solidFuelRecipe = copy(RECIPE["solid-fuel-from-light-oil"])
 solidFuelRecipe.name = "solid-fuel"
 solidFuelRecipe.ingredients = {
 	{type = "fluid", name = "heavy-oil", amount = 50},
@@ -242,7 +242,7 @@ data:extend{solidFuelRecipe}
 	Pitch-based resin: 2 pitch + 1 sulfuric acid + 1 carbon -> 4 resin
 	Rich-gas-based resin: 2 rich gas + 1 sulfuric acid + 1 carbon -> 2 resin
 	]]
-local woodResinRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local woodResinRecipe = copy(RECIPE["plastic-bar"])
 woodResinRecipe.name = "wood-resin"
 woodResinRecipe.ingredients = {
 	{type = "item", name = "wood", amount = 1},
@@ -263,7 +263,7 @@ woodResinRecipe.main_product = "resin"
 woodResinRecipe.energy_required = 5
 data:extend{woodResinRecipe}
 
-local pitchResinRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local pitchResinRecipe = copy(RECIPE["plastic-bar"])
 pitchResinRecipe.name = "pitch-resin"
 pitchResinRecipe.ingredients = {
 	{type = "item", name = "pitch", amount = 2},
@@ -284,7 +284,7 @@ pitchResinRecipe.main_product = "resin"
 pitchResinRecipe.energy_required = 2
 data:extend{pitchResinRecipe}
 
-local richGasResinRecipe = table.deepcopy(RECIPE["plastic-bar"])
+local richGasResinRecipe = copy(RECIPE["plastic-bar"])
 richGasResinRecipe.name = "rich-gas-resin"
 richGasResinRecipe.ingredients = {
 	{type = "fluid", name = "petroleum-gas", amount = 20},
@@ -308,7 +308,7 @@ data:extend{richGasResinRecipe}
 	10 syngas + 1 iron plate -> 2 heavy oil + 3 light oil + 3 rich gas + 2 dry gas + 1 water
 		(Named "syngas liquefaction" for the benefit of players already familiar with "coal liquefaction" in the base game, since this effectively replaces coal liquefaction.)
 ]]
-local syngasLiquefactionRecipe = table.deepcopy(RECIPE["coal-liquefaction"])
+local syngasLiquefactionRecipe = copy(RECIPE["coal-liquefaction"])
 syngasLiquefactionRecipe.name = "syngas-liquefaction"
 syngasLiquefactionRecipe.ingredients = {
 	{type = "fluid", name = "syngas", amount = 100},

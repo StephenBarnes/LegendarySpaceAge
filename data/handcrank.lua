@@ -25,7 +25,7 @@ data:extend({handCrankTech})
 Tech.removeRecipesFromTechs({"copper-cable", "small-electric-pole"}, {"electronics"})
 
 -- Create recipe.
-local handCrankRecipe = table.deepcopy(RECIPE["assembling-machine-1"])
+local handCrankRecipe = copy(RECIPE["assembling-machine-1"])
 handCrankRecipe.name = "er-hcg"
 handCrankRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1},

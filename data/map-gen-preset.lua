@@ -37,6 +37,6 @@ custom.basic_settings.starting_area = 2
 -- Add custom elevation. TODO currently this is the same as the default, but still adding here so I can check they used the main LSA mapgen preset.
 custom.basic_settings.property_expression_names.elevation = "LSA-elevation"
 
-local lsaElevation = table.deepcopy(data.raw["noise-expression"]["elevation"])
+local lsaElevation = copy(data.raw["noise-expression"]["elevation"])
 lsaElevation.name = "LSA-elevation"
 data:extend{lsaElevation}

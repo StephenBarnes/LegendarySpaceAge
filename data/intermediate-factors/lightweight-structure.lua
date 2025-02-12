@@ -12,7 +12,7 @@ RECIPE["casting-low-density-structure"].order = "03"
 ITEM["low-density-structure"].weight = 500
 
 -- Create recipe from copper and steel, copying the default recipe.
-local recipeFromCopper = table.deepcopy(RECIPE["low-density-structure"])
+local recipeFromCopper = copy(RECIPE["low-density-structure"])
 recipeFromCopper.name = "low-density-structure-standard"
 recipeFromCopper.ingredients = {
 	{type="item", name="ingot-copper-hot", amount=5},
@@ -27,7 +27,7 @@ recipeFromCopper.icons = {
 	{icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64},
 }
 for _, icon in pairs(ITEM["ingot-copper-hot"].icons) do
-	local iconCopy = table.deepcopy(icon)
+	local iconCopy = copy(icon)
 	iconCopy.scale = 0.25
 	iconCopy.shift = {-8, -8}
 	table.insert(recipeFromCopper.icons, iconCopy)
@@ -40,7 +40,7 @@ RECIPE["low-density-structure"].hidden = true
 RECIPE["low-density-structure"].hidden_in_factoriopedia = true
 
 -- Create a new recipe for LDS from carbon fiber.
-local recipeFromCarbonFiber = table.deepcopy(recipeFromCopper)
+local recipeFromCarbonFiber = copy(recipeFromCopper)
 recipeFromCarbonFiber.name = "lds-from-carbon-fiber"
 recipeFromCarbonFiber.ingredients = {
 	{type = "item", name = "carbon-fiber", amount = 1},

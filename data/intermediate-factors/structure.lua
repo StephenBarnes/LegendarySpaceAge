@@ -1,7 +1,7 @@
 -- This file creates the "structure" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
 -- Create item.
-local structureItem = table.deepcopy(ITEM["steel-plate"])
+local structureItem = copy(ITEM["steel-plate"])
 structureItem.name = "structure"
 structureItem.subgroup = "structure"
 structureItem.order = "01"
@@ -10,7 +10,7 @@ structureItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-fact
 data:extend{structureItem}
 
 -- Create recipe: 8 stone brick + 20 cement -> 1 structure
-local recipeFromCement = table.deepcopy(RECIPE["iron-stick"])
+local recipeFromCement = copy(RECIPE["iron-stick"])
 recipeFromCement.name = "structure-from-cement"
 recipeFromCement.ingredients = {
 	{type = "item", name = "stone-brick", amount = 10},
@@ -34,7 +34,7 @@ data:extend{recipeFromCement}
 Tech.addRecipeToTech("structure-from-cement", "cement")
 
 -- Create recipe for structure from resin: 8 stone brick + 4 resin -> 1 structure
-local recipeFromResin = table.deepcopy(recipeFromCement)
+local recipeFromResin = copy(recipeFromCement)
 recipeFromResin.name = "structure-from-resin"
 recipeFromResin.ingredients = {
 	{ type = "item", name = "stone-brick", amount = 10 },
@@ -50,7 +50,7 @@ recipeFromResin.allow_as_intermediate = true
 data:extend{recipeFromResin}
 
 -- Create recipe for structure from chitin block: 4 chitin block + 20 slime -> 1 structure
-local recipeFromChitin = table.deepcopy(recipeFromCement)
+local recipeFromChitin = copy(recipeFromCement)
 recipeFromChitin.name = "structure-from-chitin"
 recipeFromChitin.ingredients = {
 	{type = "item", name = "chitin-block", amount = 10},

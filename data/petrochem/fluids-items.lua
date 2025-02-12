@@ -1,7 +1,7 @@
 local constants = require("data.petrochem.constants")
 
 -- Create natural gas fluid.
-local natgasFluid = table.deepcopy(FLUID["crude-oil"])
+local natgasFluid = copy(FLUID["crude-oil"])
 natgasFluid.name = "natural-gas"
 natgasFluid.base_color = constants.natgasColor
 natgasFluid.flow_color = constants.natgasFlowColor
@@ -12,7 +12,7 @@ natgasFluid.gas_temperature = 0
 data:extend{natgasFluid}
 
 -- Create dry gas fluid.
-local drygasFluid = table.deepcopy(natgasFluid)
+local drygasFluid = copy(natgasFluid)
 drygasFluid.name = "dry-gas"
 drygasFluid.base_color = constants.drygasColor
 drygasFluid.flow_color = constants.drygasFlowColor
@@ -34,7 +34,7 @@ richgasFluid.localised_name = {"fluid-name.rich-gas"} -- In case other languages
 richgasFluid.gas_temperature = 0
 
 -- Create syngas fluid.
-local syngasFluid = table.deepcopy(FLUID["heavy-oil"])
+local syngasFluid = copy(FLUID["heavy-oil"])
 syngasFluid.name = "syngas"
 syngasFluid.base_color = constants.syngasColor
 syngasFluid.flow_color = constants.syngasFlowColor
@@ -45,7 +45,7 @@ syngasFluid.gas_temperature = 0
 data:extend{syngasFluid}
 
 -- Create tar fluid.
-local tarFluid = table.deepcopy(FLUID["heavy-oil"])
+local tarFluid = copy(FLUID["heavy-oil"])
 tarFluid.name = "tar"
 tarFluid.base_color = constants.tarColor
 tarFluid.flow_color = constants.tarFlowColor
@@ -65,7 +65,7 @@ for i = 1, 3 do
 		mipmap_count = 4,
 	})
 end
-local pitchItem = table.deepcopy(ITEM["carbon"])
+local pitchItem = copy(ITEM["carbon"])
 pitchItem.name = "pitch"
 pitchItem.icons = {{icon = pitchPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 pitchItem.pictures = pitchPictures
@@ -83,7 +83,7 @@ for i = 1, 3 do
 		mipmap_count = 4,
 	})
 end
-local resinItem = table.deepcopy(ITEM["plastic-bar"])
+local resinItem = copy(ITEM["plastic-bar"])
 resinItem.name = "resin"
 resinItem.icons = {{icon = resinPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 resinItem.pictures = resinPictures

@@ -1,7 +1,7 @@
 -- This file creates the "frame" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
 -- Create item.
-local frame = table.deepcopy(ITEM["steel-plate"])
+local frame = copy(ITEM["steel-plate"])
 frame.name = "frame"
 frame.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/frame/frame.png"
 frame.subgroup = "frame"
@@ -11,7 +11,7 @@ frame.weight = 1e6 / 500
 data:extend{frame}
 
 -- Create recipe: 2 wood + 1 resin -> 1 frame
-local recipeFromWood = table.deepcopy(RECIPE["iron-stick"])
+local recipeFromWood = copy(RECIPE["iron-stick"])
 recipeFromWood.name = "frame-from-wood"
 recipeFromWood.ingredients = {
 	{type = "item", name = "wood", amount = 2},
@@ -33,7 +33,7 @@ recipeFromWood.icons = {
 data:extend{recipeFromWood}
 
 -- Create recipe: 12 iron rods -> 1 frame
-local recipeFromIron = table.deepcopy(RECIPE["iron-stick"])
+local recipeFromIron = copy(RECIPE["iron-stick"])
 recipeFromIron.name = "frame-from-iron"
 recipeFromIron.ingredients = {
 	{type = "item", name = "iron-stick", amount = 10}
@@ -53,7 +53,7 @@ recipeFromIron.icons = {
 data:extend{recipeFromIron}
 
 -- Create recipe from tubules: 8 tubules + 20 slime -> 1 frame
-local recipeFromTubules = table.deepcopy(recipeFromIron)
+local recipeFromTubules = copy(recipeFromIron)
 recipeFromTubules.name = "frame-from-tubules"
 recipeFromTubules.ingredients = {
 	{type = "item", name = "tubule", amount = 5},

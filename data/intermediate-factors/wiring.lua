@@ -1,7 +1,7 @@
 -- This file creates the "wiring" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
 -- Create item.
-local wiringItem = table.deepcopy(ITEM["copper-cable"])
+local wiringItem = copy(ITEM["copper-cable"])
 wiringItem.name = "wiring"
 wiringItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/wiring.png"
 wiringItem.subgroup = "wiring"
@@ -9,7 +9,7 @@ wiringItem.order = "01"
 data:extend{wiringItem}
 
 -- Make recipe for wiring: 4 copper cable + 1 resin -> 4 wiring
-local resinRecipe = table.deepcopy(RECIPE["copper-cable"])
+local resinRecipe = copy(RECIPE["copper-cable"])
 resinRecipe.name = "wiring-from-resin"
 resinRecipe.category = "crafting"
 resinRecipe.icon = nil
@@ -31,7 +31,7 @@ data:extend{resinRecipe}
 Tech.addRecipeToTech("wiring-from-resin", "basic-electricity")
 
 -- Create a recipe with rubber insulation: 8 copper cable + 1 rubber -> 8 wiring
-local rubberRecipe = table.deepcopy(resinRecipe)
+local rubberRecipe = copy(resinRecipe)
 rubberRecipe.name = "wiring-from-rubber"
 rubberRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/rubber/rubber-2.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 rubberRecipe.ingredients = {
@@ -46,7 +46,7 @@ data:extend{rubberRecipe}
 Tech.addRecipeToTech("wiring-from-rubber", "rubber-1")
 
 -- Create a recipe with plastic insulation: 4 copper cable + 1 plastic -> 4 wiring
-local plasticRecipe = table.deepcopy(resinRecipe)
+local plasticRecipe = copy(resinRecipe)
 plasticRecipe.name = "wiring-from-plastic"
 plasticRecipe.icons[2] = {icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 plasticRecipe.ingredients = {
@@ -61,7 +61,7 @@ data:extend{plasticRecipe}
 Tech.addRecipeToTech("wiring-from-plastic", "plastics")
 
 -- Create a recipe using neurofibrils: 8 neurofibril + 1 rubber -> 8 wiring
-local neurofibrilRecipe = table.deepcopy(resinRecipe)
+local neurofibrilRecipe = copy(resinRecipe)
 neurofibrilRecipe.name = "wiring-from-neurofibril"
 neurofibrilRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/neurofibrils/4.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
 neurofibrilRecipe.ingredients = {

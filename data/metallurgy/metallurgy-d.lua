@@ -48,7 +48,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	local coldIngotName = "ingot-" .. metal .. "-cold"
 	local tint = metalTint[metal]
 
-	local hotIngot = table.deepcopy(ITEM["iron-plate"])
+	local hotIngot = copy(ITEM["iron-plate"])
 	hotIngot.name = hotIngotName
 	hotIngot.icons = {
 		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot-heat.png", icon_size=64, scale=0.5},
@@ -72,7 +72,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	hotIngot.subgroup = "ingots"
 	data:extend{hotIngot}
 
-	local coldIngot = table.deepcopy(hotIngot)
+	local coldIngot = copy(hotIngot)
 	coldIngot.name = coldIngotName
 	coldIngot.spoil_ticks = nil
 	coldIngot.spoil_result = nil
@@ -83,7 +83,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	data:extend{coldIngot}
 
 	---@type data.RecipePrototype
-	local ingotHeatingRecipe = table.deepcopy(RECIPE["stone-brick"])
+	local ingotHeatingRecipe = copy(RECIPE["stone-brick"])
 	ingotHeatingRecipe.name = "heat-ingot-" .. metal
 	ingotHeatingRecipe.ingredients = {
 		{type="item", name=coldIngotName, amount=1},
@@ -106,7 +106,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 end
 
 -- Make recipe for iron ingot -> steel ingot.
-local steelIngotRecipe = table.deepcopy(RECIPE["steel-plate"])
+local steelIngotRecipe = copy(RECIPE["steel-plate"])
 steelIngotRecipe.name = "ingot-steel-hot"
 steelIngotRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=5}}
 steelIngotRecipe.results = {{type="item", name="ingot-steel-hot", amount=1}}
@@ -115,7 +115,7 @@ steelIngotRecipe.allow_decomposition = true
 data:extend{steelIngotRecipe}
 
 -- Make recipe for iron ore -> iron ingot.
-local ironIngotRecipe = table.deepcopy(steelIngotRecipe)
+local ironIngotRecipe = copy(steelIngotRecipe)
 ironIngotRecipe.name = "ingot-iron-hot"
 ironIngotRecipe.ingredients = {{type="item", name="iron-ore", amount=5}}
 ironIngotRecipe.results = {
@@ -128,7 +128,7 @@ ironIngotRecipe.enabled = true
 data:extend{ironIngotRecipe}
 
 -- Make recipe for copper ore -> copper matte.
-local copperMatteRecipe = table.deepcopy(ironIngotRecipe)
+local copperMatteRecipe = copy(ironIngotRecipe)
 copperMatteRecipe.name = "copper-matte"
 --copperMatteRecipe.factoriopedia_description = {"factoriopedia-description.copper-matte"}
 copperMatteRecipe.ingredients = {{type="item", name="copper-ore", amount=5}}
@@ -151,7 +151,7 @@ for i = 1, 12 do
 		mipmap_count = 4,
 	})
 end
-local copperMatte = table.deepcopy(ITEM["copper-ore"])
+local copperMatte = copy(ITEM["copper-ore"])
 copperMatte.name = "copper-matte"
 copperMatte.icons = {
 	{icon="__LegendarySpaceAge__/graphics/metallurgy/matte/matte1.png", icon_size=64, scale=0.5},
@@ -163,7 +163,7 @@ copperMatte.order = "a1"
 data:extend{copperMatte}
 
 -- Make recipe for copper matte -> copper ingot.
-local copperIngotRecipe = table.deepcopy(steelIngotRecipe)
+local copperIngotRecipe = copy(steelIngotRecipe)
 copperIngotRecipe.name = "ingot-copper-hot"
 copperIngotRecipe.ingredients = {{type="item", name="copper-matte", amount=1}}
 copperIngotRecipe.results = {

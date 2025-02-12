@@ -1,7 +1,7 @@
 -- This file creates the water filter item, plus recipes to filter local water on Nauvis and Gleba.
 
 -- Create item-subgroup for filtration.
-local filtrationSubgroup = table.deepcopy(data.raw["item-subgroup"]["fluid-recipes"])
+local filtrationSubgroup = copy(data.raw["item-subgroup"]["fluid-recipes"])
 filtrationSubgroup.name = "filtration"
 filtrationSubgroup.order = "c9"
 data:extend{filtrationSubgroup}
@@ -12,7 +12,7 @@ RECIPE["steam-condensation"].order = "05"
 RECIPE["ice-melting"].order = "06"
 
 -- Create filter item.
-local filterItem = table.deepcopy(ITEM["battery"])
+local filterItem = copy(ITEM["battery"])
 filterItem.name = "filter"
 filterItem.icon = nil
 filterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64}}
@@ -22,7 +22,7 @@ filterItem.weight = 1000
 data:extend{filterItem}
 
 -- Create spent filter item.
-local spentFilterItem = table.deepcopy(ITEM["battery"])
+local spentFilterItem = copy(ITEM["battery"])
 spentFilterItem.name = "spent-filter"
 spentFilterItem.icon = nil
 spentFilterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/spent-filter.png", icon_size = 64}}
@@ -32,7 +32,7 @@ spentFilterItem.weight = 1000
 data:extend{spentFilterItem}
 
 -- Create filtration-lake-water tech.
-local filtrationLakeWaterTech = table.deepcopy(TECH["automation"])
+local filtrationLakeWaterTech = copy(TECH["automation"])
 filtrationLakeWaterTech.name = "filtration-lake-water"
 filtrationLakeWaterTech.icon = nil
 filtrationLakeWaterTech.icons = {
@@ -59,7 +59,7 @@ filtrationLakeWaterTech.ignore_tech_cost_multiplier = true
 data:extend{filtrationLakeWaterTech}
 
 -- Create filtration-gleban-slime tech.
-local filtrationGlebanSlimeTech = table.deepcopy(TECH["jellynut"])
+local filtrationGlebanSlimeTech = copy(TECH["jellynut"])
 filtrationGlebanSlimeTech.name = "filtration-gleban-slime"
 filtrationGlebanSlimeTech.icon = nil
 filtrationGlebanSlimeTech.icons = {
@@ -82,7 +82,7 @@ Tech.addTechDependency("filtration-gleban-slime", "biochamber")
 -- TODO create tech for advanced filtration of Gleban slime, producing petrophages.
 
 -- Create filtration-fulgoran-sludge tech.
-local filtrationFulgoranSludgeTech = table.deepcopy(TECH["recycling"])
+local filtrationFulgoranSludgeTech = copy(TECH["recycling"])
 filtrationFulgoranSludgeTech.name = "filtration-fulgoran-sludge"
 filtrationFulgoranSludgeTech.icon = nil
 filtrationFulgoranSludgeTech.icons = {
@@ -103,7 +103,7 @@ Tech.addTechDependency("filtration-fulgoran-sludge", "holmium-processing")
 TECH["holmium-processing"].research_trigger.count = 10
 
 -- Create recipe to make filters.
-local filterRecipe = table.deepcopy(RECIPE["iron-gear-wheel"])
+local filterRecipe = copy(RECIPE["iron-gear-wheel"])
 filterRecipe.name = "filter"
 filterRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1},
@@ -117,7 +117,7 @@ filterRecipe.auto_recycle = true
 data:extend{filterRecipe}
 
 -- Create recipe to clean filters.
-local cleanFilterRecipe = table.deepcopy(RECIPE["iron-gear-wheel"])
+local cleanFilterRecipe = copy(RECIPE["iron-gear-wheel"])
 cleanFilterRecipe.name = "clean-filter"
 cleanFilterRecipe.ingredients = {
 	{type = "item", name = "spent-filter", amount = 1},
@@ -146,7 +146,7 @@ cleanFilterRecipe.auto_recycle = false
 data:extend{cleanFilterRecipe}
 
 -- Create recipe to filter lake water.
-local filterLakeWaterRecipe = table.deepcopy(RECIPE["iron-gear-wheel"])
+local filterLakeWaterRecipe = copy(RECIPE["iron-gear-wheel"])
 filterLakeWaterRecipe.name = "filter-lake-water"
 filterLakeWaterRecipe.ingredients = {
 	{type = "item", name = "filter", amount = 1},
@@ -179,7 +179,7 @@ filterLakeWaterRecipe.crafting_machine_tint = {
 data:extend{filterLakeWaterRecipe}
 
 -- Create lake water fluid.
-local lakeWaterFluid = table.deepcopy(FLUID.water)
+local lakeWaterFluid = copy(FLUID.water)
 lakeWaterFluid.name = "lake-water"
 lakeWaterFluid.icon = nil
 lakeWaterFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64}}
@@ -193,7 +193,7 @@ lakeWaterFluid.heat_capacity = nil
 data:extend{lakeWaterFluid}
 
 -- Create slime fluid.
-local slimeFluid = table.deepcopy(FLUID["water"])
+local slimeFluid = copy(FLUID["water"])
 slimeFluid.name = "slime"
 slimeFluid.icon = nil
 slimeFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64}}
@@ -207,7 +207,7 @@ slimeFluid.heat_capacity = nil
 data:extend{slimeFluid}
 
 -- Create recipe to filter slime.
-local filterSlimeRecipe = table.deepcopy(RECIPE["iron-gear-wheel"])
+local filterSlimeRecipe = copy(RECIPE["iron-gear-wheel"])
 filterSlimeRecipe.name = "filter-slime"
 filterSlimeRecipe.ingredients = {
 	{type = "item", name = "filter", amount = 1},

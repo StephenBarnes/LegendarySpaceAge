@@ -1,7 +1,7 @@
 -- This file creates the "sensor" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
 -- Create item.
-local sensorItem = table.deepcopy(ITEM["electronic-circuit"])
+local sensorItem = copy(ITEM["electronic-circuit"])
 sensorItem.name = "sensor"
 sensorItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/sensor.png"
 sensorItem.subgroup = "sensor"
@@ -9,7 +9,7 @@ sensorItem.order = "01"
 data:extend{sensorItem}
 
 -- Create recipe: 4 green circuit + 2 glass + 1 frame -> 1 sensor
-local greenCircuitRecipe = table.deepcopy(RECIPE["electronic-circuit"])
+local greenCircuitRecipe = copy(RECIPE["electronic-circuit"])
 greenCircuitRecipe.name = "sensor-from-green-circuit"
 greenCircuitRecipe.ingredients = {
 	{type = "item", name = "electronic-circuit", amount = 5},
@@ -32,7 +32,7 @@ data:extend{greenCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-green-circuit", "automation")
 
 -- Create redCircuitRecipe: 2 red circuit + 1 glass + 1 frame -> 1 sensor
-local redCircuitRecipe = table.deepcopy(greenCircuitRecipe)
+local redCircuitRecipe = copy(greenCircuitRecipe)
 redCircuitRecipe.name = "sensor-from-red-circuit"
 redCircuitRecipe.ingredients = {
 	{type = "item", name = "advanced-circuit", amount = 2},
@@ -49,7 +49,7 @@ data:extend{redCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-red-circuit", "advanced-circuit")
 
 -- Create blueCircuitRecipe: 1 blue circuit + 1 glass + 1 frame -> 2 sensors
-local blueCircuitRecipe = table.deepcopy(greenCircuitRecipe)
+local blueCircuitRecipe = copy(greenCircuitRecipe)
 blueCircuitRecipe.name = "sensor-from-blue-circuit"
 blueCircuitRecipe.ingredients = {
 	{type = "item", name = "processing-unit", amount = 1},
@@ -67,7 +67,7 @@ data:extend{blueCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-blue-circuit", "processing-unit")
 
 -- Create sencytiumRecipe: 1 green circuit + 1 sencytium + 1 frame -> 1 sensor
-local sencytiumRecipe = table.deepcopy(greenCircuitRecipe)
+local sencytiumRecipe = copy(greenCircuitRecipe)
 sencytiumRecipe.name = "sensor-from-sencytium"
 sencytiumRecipe.ingredients = {
 	{type = "item", name = "electronic-circuit", amount = 1},

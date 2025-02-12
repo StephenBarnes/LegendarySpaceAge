@@ -26,12 +26,12 @@ ITEM["sulfur"].fuel_glow_color = {r=.3, g=.3, b=1, a=.2} -- Sulfur burns blue in
 
 -- Create fuel category for non-carbon fuels like soldReplicationRecipeulfur, which can't be used in some places where carbon is needed (eg furnaces need carbon as reducing agent).
 -- Mostly this is to prevent using sulfur to make syngas in a gasifier, since that would create carbon out of nothing, which breaks Vulcanus.
-local nonCarbonFuelCategory = table.deepcopy(data.raw["fuel-category"]["chemical"])
+local nonCarbonFuelCategory = copy(data.raw["fuel-category"]["chemical"])
 nonCarbonFuelCategory.name = "non-carbon"
 data:extend{nonCarbonFuelCategory}
 
 -- Create fuel category for pure carbon. Because we want to allow char furnaces to use all carbon-based fuels except actual carbon.
-local pureCarbonFuelCategory = table.deepcopy(data.raw["fuel-category"]["chemical"])
+local pureCarbonFuelCategory = copy(data.raw["fuel-category"]["chemical"])
 pureCarbonFuelCategory.name = "pure-carbon"
 data:extend{pureCarbonFuelCategory}
 
@@ -43,7 +43,7 @@ for _, typeAndName in pairs{
 	{"inserter", "burner-inserter"},
 	{"mining-drill", "burner-mining-drill"},
 } do
-	data.raw[typeAndName[1]][typeAndName[2]].energy_source.fuel_categories = table.deepcopy(expandedFuelCategories)
+	data.raw[typeAndName[1]][typeAndName[2]].energy_source.fuel_categories = copy(expandedFuelCategories)
 end
 for _, typeAll in pairs{ -- Handle all cars (including tanks, boats) and locomotives (including big cargo ships)
 	"car",
@@ -51,11 +51,11 @@ for _, typeAll in pairs{ -- Handle all cars (including tanks, boats) and locomot
 } do
 	for ent in pairs(data.raw[typeAll]) do
 		if ent.burner then
-			ent.burner.fuel_categories = table.deepcopy(expandedFuelCategories)
+			ent.burner.fuel_categories = copy(expandedFuelCategories)
 		end
 	end
 end
-data.raw["generator-equipment"]["personal-burner-generator"].burner.fuel_categories = table.deepcopy(expandedFuelCategories)
+data.raw["generator-equipment"]["personal-burner-generator"].burner.fuel_categories = copy(expandedFuelCategories)
 
 -- Since pentapod eggs and biter eggs and carbon are now in different fuel categories, but should count as carbon-based, we need to make them burnable in heating towers etc.
 local otherCarbonicFuels = {"activated-pentapod-egg", "biter-egg", "pure-carbon"}

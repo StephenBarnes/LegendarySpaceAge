@@ -6,7 +6,7 @@ This allows the player to get carbon early-game, to make circuits.
 -- Create entity.
 ---@type data.AssemblingMachinePrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
-local charFurnace = table.deepcopy(FURNACE["stone-furnace"])
+local charFurnace = copy(FURNACE["stone-furnace"])
 charFurnace.type = "assembling-machine"
 charFurnace.fixed_recipe = "char-carbon"
 charFurnace.ingredient_count = 0
@@ -25,7 +25,7 @@ charFurnace.show_recipe_icon_on_map = false
 data:extend{charFurnace}
 
 -- Create corpse.
-local charFurnaceRemnants = table.deepcopy(data.raw.corpse["stone-furnace-remnants"])
+local charFurnaceRemnants = copy(data.raw.corpse["stone-furnace-remnants"])
 charFurnaceRemnants.name = "char-furnace-remnants"
 charFurnaceRemnants.animation = make_rotated_animation_variations_from_sheet(1,
 	{
@@ -40,25 +40,25 @@ charFurnaceRemnants.animation = make_rotated_animation_variations_from_sheet(1,
 data:extend{charFurnaceRemnants}
 
 -- Create item.
-local charFurnaceItem = table.deepcopy(ITEM["stone-furnace"])
+local charFurnaceItem = copy(ITEM["stone-furnace"])
 charFurnaceItem.name = "char-furnace"
 charFurnaceItem.place_result = "char-furnace"
 charFurnaceItem.icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png"
 data:extend{charFurnaceItem}
 
 -- Create recipe category.
-local charFurnaceRecipeCategory = table.deepcopy(data.raw["recipe-category"]["smelting"])
+local charFurnaceRecipeCategory = copy(data.raw["recipe-category"]["smelting"])
 charFurnaceRecipeCategory.name = "char-furnace"
 data:extend{charFurnaceRecipeCategory}
 
 -- Create recipe.
-local charFurnaceRecipe = table.deepcopy(RECIPE["stone-furnace"])
+local charFurnaceRecipe = copy(RECIPE["stone-furnace"])
 charFurnaceRecipe.name = "char-furnace"
 charFurnaceRecipe.results = {{type = "item", name = "char-furnace", amount = 1}}
 data:extend{charFurnaceRecipe}
 
 -- Create recipe for char/carbon.
-local charRecipe = table.deepcopy(RECIPE["rocket-fuel"])
+local charRecipe = copy(RECIPE["rocket-fuel"])
 charRecipe.name = "char-carbon"
 charRecipe.results = {{type = "item", name = "carbon", amount = 1}}
 charRecipe.ingredients = {}
@@ -74,7 +74,7 @@ charRecipe.icons = {
 data:extend{charRecipe}
 
 -- Create tech called "char", unlocking the furnace and recipe.
-local charTech = table.deepcopy(TECH["automation"])
+local charTech = copy(TECH["automation"])
 charTech.name = "char"
 charTech.effects = {
 	{type = "unlock-recipe", recipe = "char-carbon"},

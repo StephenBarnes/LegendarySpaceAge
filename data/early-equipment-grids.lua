@@ -39,7 +39,7 @@ RECIPE["personal-burner-generator"].ingredients = {
 Tech.removeRecipeFromTech("personal-burner-generator", "modular-armor")
 
 -- Create a tech for personal burner generator.
-local personalBurnerGeneratorTech = table.deepcopy(TECH["electronics"])
+local personalBurnerGeneratorTech = copy(TECH["electronics"])
 personalBurnerGeneratorTech.name = "personal-burner-generator"
 personalBurnerGeneratorTech.effects = {{type = "unlock-recipe", recipe = "personal-burner-generator"}}
 personalBurnerGeneratorTech.prerequisites = {"basic-electricity", "glass"}

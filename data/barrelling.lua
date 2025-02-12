@@ -1,7 +1,7 @@
 --[[ This file creates a new techs for barrelling and gas tanks, moves barrelling recipes to the new tech, and creates gas tanks and their recipes, etc. Also adds fuel values to barrels and tanks. ]]
 
 -- Create the new tech.
-local gasTankTech = table.deepcopy(TECH["oil-processing"])
+local gasTankTech = copy(TECH["oil-processing"])
 gasTankTech.name = "fluid-containers"
 gasTankTech.prerequisites = {"fluid-handling"}
 gasTankTech.effects = {
@@ -25,7 +25,7 @@ data:extend{gasTankTech}
 
 -- Create the new empty gas tank item.
 local emptyGasTankTint = {.3, .3, .3}
-local emptyGasTankItem = table.deepcopy(ITEM["barrel"])
+local emptyGasTankItem = copy(ITEM["barrel"])
 emptyGasTankItem.name = "gas-tank"
 emptyGasTankItem.icon = nil
 emptyGasTankItem.icons = {
@@ -37,7 +37,7 @@ emptyGasTankItem.order = ITEM["barrel"].order .. "-1"
 data:extend{emptyGasTankItem}
 
 -- Create recipe for empty gas tank.
-local emptyGasTankRecipe = table.deepcopy(RECIPE["barrel"])
+local emptyGasTankRecipe = copy(RECIPE["barrel"])
 emptyGasTankRecipe.name = "gas-tank"
 emptyGasTankRecipe.ingredients = {
 	{type = "item", name = "panel", amount = 1},

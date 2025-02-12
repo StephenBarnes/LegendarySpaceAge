@@ -10,7 +10,7 @@ for i, itemName in pairs{
 	"iron-stick",
 } do
 	local baseItem = ITEM[itemName]
-	local rustyItem = table.deepcopy(baseItem)
+	local rustyItem = copy(baseItem)
 	rustyItem.name = "rusty-"..itemName
 	rustyItem.icon = nil
 	rustyItem.icons = {
@@ -25,7 +25,7 @@ for i, itemName in pairs{
 	baseItem.spoil_ticks = RUST_TIME
 	baseItem.spoil_result = "rusty-"..itemName
 
-	local recipe1 = table.deepcopy(RECIPE["iron-stick"])
+	local recipe1 = copy(RECIPE["iron-stick"])
 	recipe1.name = "sand-derust-"..itemName
 	recipe1.ingredients = {
 		{type="item", name="rusty-"..itemName, amount=1},
@@ -50,7 +50,7 @@ for i, itemName in pairs{
 	recipe1.allow_as_intermediate = false
 	data:extend{recipe1}
 
-	local recipe2 = table.deepcopy(recipe1)
+	local recipe2 = copy(recipe1)
 	recipe2.name = "acid-derust-"..itemName
 	recipe2.ingredients = {
 		{type="item", name="rusty-"..itemName, amount=1},
@@ -83,7 +83,7 @@ ITEM["rusty-iron-gear-wheel"].pictures = {
 }
 for _, sandOrAcid in pairs{"sand", "acid"} do
 	local recipe = RECIPE[sandOrAcid.."-derust-iron-gear-wheel"]
-	local newIcons = table.deepcopy(rustyGearIcons)
+	local newIcons = copy(rustyGearIcons)
 	table.insert(newIcons, recipe.icons[2])
 	recipe.icons = newIcons
 end

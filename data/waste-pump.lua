@@ -2,14 +2,14 @@
 
 ---@type data.FurnacePrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
-local wastePump = table.deepcopy(data.raw["offshore-pump"]["offshore-pump"])
+local wastePump = copy(data.raw["offshore-pump"]["offshore-pump"])
 wastePump.type = "furnace"
 wastePump.name = "waste-pump"
 wastePump.crafting_categories = {"waste-pump"}
 wastePump.crafting_speed = 1
 wastePump.source_inventory_size = 0
 wastePump.result_inventory_size = 0
-wastePump.energy_source = table.deepcopy(data.raw.pump.pump.energy_source)
+wastePump.energy_source = copy(data.raw.pump.pump.energy_source)
 wastePump.energy_source.emissions_per_minute = {pollution = 1} -- This gets multiplied by the emissions multiplier for the specific venting recipe.
 wastePump.energy_source.drain = "0W"
 wastePump.energy_usage = "30kW"
@@ -51,19 +51,19 @@ for _, dir in pairs(wastePump.graphics_set.animation) do
 end
 data:extend{wastePump}
 
-local wastePumpCraftingCategory = table.deepcopy(data.raw["recipe-category"]["crafting"])
+local wastePumpCraftingCategory = copy(data.raw["recipe-category"]["crafting"])
 wastePumpCraftingCategory.name = "waste-pump"
 data:extend{wastePumpCraftingCategory}
 
 -- Create recipe.
-local wastePumpRecipe = table.deepcopy(RECIPE["pump"])
+local wastePumpRecipe = copy(RECIPE["pump"])
 wastePumpRecipe.name = "waste-pump"
 wastePumpRecipe.results = {{type = "item", name = "waste-pump", amount = 1}}
-wastePumpRecipe.ingredients = table.deepcopy(RECIPE["offshore-pump"].ingredients)
+wastePumpRecipe.ingredients = copy(RECIPE["offshore-pump"].ingredients)
 data:extend{wastePumpRecipe}
 
 -- Create item.
-local wastePumpItem = table.deepcopy(ITEM["pump"])
+local wastePumpItem = copy(ITEM["pump"])
 wastePumpItem.name = "waste-pump"
 wastePumpItem.place_result = "waste-pump"
 wastePumpItem.icon = "nil"
@@ -114,7 +114,7 @@ for _, effluentFluidAndPollution in pairs(effluentFluidsAndPollution) do
 	else
 		fluidIcon = {icon = fluid.icon, icon_size = fluid.icon_size}
 	end
-	local effluentRecipe = table.deepcopy(RECIPE["offshore-pump"])
+	local effluentRecipe = copy(RECIPE["offshore-pump"])
 	effluentRecipe.name = "vent-" .. effluentFluid
 	effluentRecipe.localised_name = {"recipe-name.waste-pumping", {"fluid-name."..effluentFluid}}
 	effluentRecipe.enabled = true

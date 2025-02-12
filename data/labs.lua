@@ -15,7 +15,7 @@
 --    Built only in space. So you'll probably want to have a travelling space platform picking up sciences on all planets.
 
 -- Regular labs should only be buildable on Nauvis.
-data.raw.lab.lab.surface_conditions = table.deepcopy(data.raw.lab.biolab.surface_conditions)
+data.raw.lab.lab.surface_conditions = copy(data.raw.lab.biolab.surface_conditions)
 -- Pentapod biolabs should only be buildable on Gleba.
 data.raw.lab.glebalab.surface_conditions = {
 	{
@@ -92,7 +92,7 @@ data:extend({
 			},
 		},
 		prerequisites = {"agricultural-science-pack"},
-		unit = table.deepcopy(TECH["carbon-fiber"].unit),
+		unit = copy(TECH["carbon-fiber"].unit),
 	},
 })
 -- Space biolabs go after nuclear fuel cells.

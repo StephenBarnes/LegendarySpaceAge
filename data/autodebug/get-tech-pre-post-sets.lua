@@ -72,7 +72,7 @@ end
 -- Expand these implicit unlocks on all planets to planet-specific sets.
 for _, unlock in pairs(implicitUnlocksForAllPlanets) do
 	for planetName, _ in pairs(Util.allPlanets) do
-		local planetUnlock = table.deepcopy(unlock)
+		local planetUnlock = copy(unlock)
 		for key1, val1 in pairs(planetUnlock) do
 			for key2, val2 in pairs(val1) do
 				planetUnlock[key1][key2] = planetName..":"..val2
@@ -264,7 +264,7 @@ local function getTechPrePostSets(toposortedTechs, thingToRecipes, recipeToPlane
 		end
 
 		-- After this tech, we have everything from before the tech. Then we'll add new stuff from this tech's unlocks.
-		local availableAfterThisTech = table.deepcopy(availableBeforeThisTech)
+		local availableAfterThisTech = copy(availableBeforeThisTech)
 		local anythingAddedToPostTech = false -- Optimization: don't extend to closure if nothing new was unlocked.
 
 		-- Add newly-unlocked recipes.

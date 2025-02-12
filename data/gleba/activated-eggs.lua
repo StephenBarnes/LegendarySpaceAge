@@ -1,7 +1,7 @@
 -- This file creates "activated eggs" item and makes some changes to recipes etc. to implement them.
 
 -- Create activated egg item.
-local activatedEggItem = table.deepcopy(ITEM["pentapod-egg"])
+local activatedEggItem = copy(ITEM["pentapod-egg"])
 activatedEggItem.name = "activated-pentapod-egg"
 local activatedEggGraphics = "__LegendarySpaceAge__/graphics/gleba/activated-pentapod-egg/"
 activatedEggItem.pictures = {
@@ -33,7 +33,7 @@ ITEM["pentapod-egg"].spoil_to_trigger_result = nil
 ITEM["pentapod-egg"].spoil_ticks = 60 * 60 * 10 -- 10 minutes, so it's not unthinkable to just let them spoil, rather than feeding them mash to deliberately activate them.
 
 -- Create new recipe for activating eggs using mash.
-local eggActivationRecipe = table.deepcopy(RECIPE["pentapod-egg"])
+local eggActivationRecipe = copy(RECIPE["pentapod-egg"])
 eggActivationRecipe.name = "activated-pentapod-egg"
 eggActivationRecipe.ingredients = {
 	{type = "item", name = "pentapod-egg", amount = 1},
@@ -53,7 +53,7 @@ Tech.addRecipeToTech("activated-pentapod-egg", "bioflux")
 -- Create new recipe for replicating activated eggs using slime and bioflux.
 -- Sometimes produces activated eggs instead of regular eggs.
 -- Old recipe was: 30 nutrients + 1 egg + 60 water -> 2 eggs.
-local eggReplicationRecipe = table.deepcopy(RECIPE["pentapod-egg"])
+local eggReplicationRecipe = copy(RECIPE["pentapod-egg"])
 --eggReplicationRecipe.name is left as pentapod-egg so it merges with item.
 eggReplicationRecipe.ingredients = {
 	{type = "item", name = "activated-pentapod-egg", amount = 1},

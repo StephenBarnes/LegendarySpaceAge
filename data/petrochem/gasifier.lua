@@ -3,7 +3,7 @@
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 ---@type data.AssemblingMachinePrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
-local gasifierEnt = table.deepcopy(FURNACE["steel-furnace"])
+local gasifierEnt = copy(FURNACE["steel-furnace"])
 gasifierEnt.type = "assembling-machine"
 gasifierEnt.name = "gasifier"
 gasifierEnt.fixed_recipe = "syngas"
@@ -140,7 +140,7 @@ gasifierEnt.surface_conditions = data.raw["mining-drill"]["burner-mining-drill"]
 data:extend{gasifierEnt}
 
 ---@type data.AssemblingMachinePrototype
-local fluidGasifierEnt = table.deepcopy(gasifierEnt)
+local fluidGasifierEnt = copy(gasifierEnt)
 fluidGasifierEnt.name = "fluid-fuelled-gasifier"
 fluidGasifierEnt.minable.result = "fluid-fuelled-gasifier"
 fluidGasifierEnt.placeable_by = {item = "fluid-fuelled-gasifier", count = 1}
@@ -170,7 +170,7 @@ fluidGasifierEnt.icons = {
 }
 data:extend{fluidGasifierEnt}
 
-local gasifierItem = table.deepcopy(ITEM["steel-furnace"])
+local gasifierItem = copy(ITEM["steel-furnace"])
 gasifierItem.type = "item"
 gasifierItem.name = "gasifier"
 gasifierItem.icon = nil
@@ -181,14 +181,14 @@ gasifierItem.place_result = "gasifier"
 gasifierItem.stack_size = 20
 data:extend{gasifierItem}
 
-local fluidGasifierItem = table.deepcopy(gasifierItem)
+local fluidGasifierItem = copy(gasifierItem)
 fluidGasifierItem.name = "fluid-fuelled-gasifier"
 fluidGasifierItem.place_result = "fluid-fuelled-gasifier"
 fluidGasifierItem.icons = fluidGasifierEnt.icons
 fluidGasifierItem.order = "zz"
 data:extend{fluidGasifierItem}
 
-local gasifierRecipe = table.deepcopy(RECIPE["steel-furnace"])
+local gasifierRecipe = copy(RECIPE["steel-furnace"])
 gasifierRecipe.type = "recipe"
 gasifierRecipe.name = "gasifier"
 gasifierRecipe.enabled = false
@@ -196,12 +196,12 @@ gasifierRecipe.results = {{type = "item", name = "gasifier", amount = 1}}
 -- TODO decide on ingredients
 data:extend{gasifierRecipe}
 
-local fluidGasifierRecipe = table.deepcopy(gasifierRecipe)
+local fluidGasifierRecipe = copy(gasifierRecipe)
 fluidGasifierRecipe.name = "fluid-fuelled-gasifier"
 fluidGasifierRecipe.results = {{type = "item", name = "fluid-fuelled-gasifier", amount = 1}}
 data:extend{fluidGasifierRecipe}
 
-local gasifierRecipeCategory = table.deepcopy(data.raw["recipe-category"]["crafting"])
+local gasifierRecipeCategory = copy(data.raw["recipe-category"]["crafting"])
 gasifierRecipeCategory.name = "gasifier"
 data:extend{gasifierRecipeCategory}
 
@@ -210,7 +210,7 @@ data:extend{gasifierRecipeCategory}
 		However, it can't be sulfur (since that would burn to SO2, not CO).
 		We want to keep it so 1 unit of every petro fluid is roughly equivalent, so this recipe must produce less syngas+tar than the input fuel; it's a lossy conversion to avoid a loop that creates infinite free fluids.
 ]]
-local gasificationRecipe = table.deepcopy(RECIPE["solid-fuel-from-light-oil"])
+local gasificationRecipe = copy(RECIPE["solid-fuel-from-light-oil"])
 gasificationRecipe.type = "recipe"
 gasificationRecipe.name = "syngas"
 gasificationRecipe.enabled = false

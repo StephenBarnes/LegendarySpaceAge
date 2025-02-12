@@ -1,7 +1,7 @@
 -- This file creates the "panel" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
 -- Create item.
-local panelItem = table.deepcopy(ITEM["steel-plate"])
+local panelItem = copy(ITEM["steel-plate"])
 panelItem.name = "panel"
 panelItem.subgroup = "panel"
 panelItem.order = "01"
@@ -9,7 +9,7 @@ panelItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/panel/pane
 data:extend{panelItem}
 
 -- Create recipe: 1 iron plate -> 1 panel
-local recipeFromIron = table.deepcopy(RECIPE["iron-stick"])
+local recipeFromIron = copy(RECIPE["iron-stick"])
 recipeFromIron.name = "panel-from-iron"
 recipeFromIron.ingredients = {
 	{type = "item", name = "iron-plate", amount = 1},
@@ -29,7 +29,7 @@ recipeFromIron.allow_as_intermediate = true
 data:extend{recipeFromIron}
 
 -- Create recipe: 1 copper plate -> 1 panel
-local recipeFromCopper = table.deepcopy(recipeFromIron)
+local recipeFromCopper = copy(recipeFromIron)
 recipeFromCopper.name = "panel-from-copper"
 recipeFromCopper.ingredients = {
 	{type = "item", name = "copper-plate", amount = 1},
@@ -42,7 +42,7 @@ recipeFromCopper.allow_as_intermediate = false
 data:extend{recipeFromCopper}
 
 -- Create recipe: 1 wood + 1 resin -> 1 panel
-local recipeFromWood = table.deepcopy(recipeFromIron)
+local recipeFromWood = copy(recipeFromIron)
 recipeFromWood.name = "panel-from-wood"
 recipeFromWood.ingredients = {
 	{type = "item", name = "wood", amount = 1},

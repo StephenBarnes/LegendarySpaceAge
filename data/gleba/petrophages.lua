@@ -11,7 +11,7 @@ Pitch is 3MJ. Dry gas is 800kJ. Recipe 1 -> 2 is actually ->3 from biochamber, s
 local petrophageDir = "__LegendarySpaceAge__/graphics/gleba/petrophages/"
 
 -- Create item.
-local petrophage = table.deepcopy(ITEM["iron-bacteria"])
+local petrophage = copy(ITEM["iron-bacteria"])
 petrophage.name = "petrophage"
 petrophage.icon = petrophageDir .. "1.png"
 petrophage.pictures = {}
@@ -31,7 +31,7 @@ petrophage.order = "21"
 data:extend{petrophage}
 
 -- Create recipe for breeding petrophages.
-local cultivationRecipe = table.deepcopy(RECIPE["iron-bacteria-cultivation"])
+local cultivationRecipe = copy(RECIPE["iron-bacteria-cultivation"])
 cultivationRecipe.name = "petrophage-cultivation"
 cultivationRecipe.ingredients = {
 	{type="fluid", name="dry-gas", amount=10},
@@ -43,7 +43,7 @@ cultivationRecipe.results = {
 cultivationRecipe.energy_required = 2
 cultivationRecipe.icon = nil
 cultivationRecipe.icons = {
-	table.deepcopy(FLUID["dry-gas"].icons[1]),
+	copy(FLUID["dry-gas"].icons[1]),
 	{icon = petrophageDir .. "4.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={4, 4}},
 }
 cultivationRecipe.icons[1].scale = 0.4
@@ -56,7 +56,7 @@ cultivationRecipe.order = "22"
 data:extend{cultivationRecipe}
 
 -- Create recipe for refreshing petrophages.
-local refreshRecipe = table.deepcopy(cultivationRecipe)
+local refreshRecipe = copy(cultivationRecipe)
 refreshRecipe.name = "refresh-petrophages"
 refreshRecipe.ingredients = {
 	{type="item", name="petrophage", amount=3},

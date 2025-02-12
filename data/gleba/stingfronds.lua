@@ -6,7 +6,7 @@
 
 ---@type data.PlantPrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
-local stingfrondPlant = table.deepcopy(data.raw.tree.stingfrond)
+local stingfrondPlant = copy(data.raw.tree.stingfrond)
 stingfrondPlant.type = "plant"
 
 stingfrondPlant.growth_ticks = 60 * 60 * 8 -- 8 minutes; compare to yumako/jellystem at 5 minutes.
@@ -75,11 +75,11 @@ local phaseTints = { -- Tints for the 5 phases of cyclosomes.
 }
 local cyclosomeItems = {}
 for i = 1, 5 do
-	local cyclosome = table.deepcopy(ITEM["tree-seed"])
+	local cyclosome = copy(ITEM["tree-seed"])
 	cyclosome.name = "cyclosome-"..i
 	cyclosome.localised_name = nil
 	cyclosome.localised_description = {"item-description.cyclosome"}
-	cyclosome.pictures = table.deepcopy(cyclosomePics)
+	cyclosome.pictures = copy(cyclosomePics)
 	for _, pic in pairs(cyclosome.pictures) do
 		pic.tint = phaseTints[i]
 	end
@@ -96,7 +96,7 @@ end
 data:extend(cyclosomeItems)
 
 -- Create sprout item
-local stingfrondSprout = table.deepcopy(ITEM["tree-seed"])
+local stingfrondSprout = copy(ITEM["tree-seed"])
 stingfrondSprout.name = "stingfrond-sprout"
 stingfrondSprout.localised_name = nil
 stingfrondSprout.plant_result = "stingfrond"
@@ -115,7 +115,7 @@ for i = 1, 6 do
 		scale = 0.5,
 	}
 end
-local neurofibril = table.deepcopy(ITEM["wood"])
+local neurofibril = copy(ITEM["wood"])
 neurofibril.fuel_category = "chemical"
 neurofibril.fuel_value = "1MJ"
 neurofibril.name = "neurofibril"
@@ -137,7 +137,7 @@ There's 3 techs.
 	Then the 2nd cultivation tech lets you duplicate cyclosomes, and also make various products more efficiently from cyclosomes and neurofibrils. Then carbon fiber tech depends on that.
 --]]
 
-local wiringTech = table.deepcopy(TECH["biochamber"])
+local wiringTech = copy(TECH["biochamber"])
 wiringTech.name = "neural-wiring"
 wiringTech.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech2.png"
 wiringTech.prerequisites = {"planet-discovery-gleba"}
@@ -153,7 +153,7 @@ wiringTech.effects = {
 }
 data:extend{wiringTech}
 
-local cultivationTech1 = table.deepcopy(TECH["biochamber"])
+local cultivationTech1 = copy(TECH["biochamber"])
 cultivationTech1.name = "stingfrond-cultivation-1"
 cultivationTech1.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech1.png"
 cultivationTech1.prerequisites = {"bioflux", "neural-wiring"}
@@ -171,7 +171,7 @@ cultivationTech1.effects = {
 cultivationTech1.localised_description = {"technology-description.stingfrond-cultivation-1"}
 data:extend{cultivationTech1}
 
-local cultivationTech2 = table.deepcopy(TECH["biochamber"])
+local cultivationTech2 = copy(TECH["biochamber"])
 cultivationTech2.name = "stingfrond-cultivation-2"
 cultivationTech2.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech1.png"
 cultivationTech2.prerequisites = {"stingfrond-cultivation-1"}
@@ -200,7 +200,7 @@ table.insert(TECH["agricultural-science-pack"].prerequisites, "stingfrond-cultiv
 
 -- cyclosome 1 + 10 water + 1 bioflux -> 20% stingfrond sprout
 -- So bioflux is needed, as for all "tier 2" crops, but the recipe otherwise isn't very expensive.
-local sproutRecipe = table.deepcopy(RECIPE["bioflux"])
+local sproutRecipe = copy(RECIPE["bioflux"])
 sproutRecipe.name = "stingfrond-sprout"
 sproutRecipe.ingredients = {
 	{type = "item", name = "cyclosome-1", amount = 1},
@@ -230,7 +230,7 @@ RECIPE["carbon-fiber"].category = "crafting"
 
 -- Resynchronization: 5 cyclosome A + ... + 5 cyclosome E + 2 neurofibrils -> 50 cyclosome C
 -- The neurofibrils are in this recipe to ensure cyclosome amount is still limited by farms.
-local resyncRecipe = table.deepcopy(RECIPE["bioflux"])
+local resyncRecipe = copy(RECIPE["bioflux"])
 resyncRecipe.name = "cyclosome-resynchronization"
 resyncRecipe.ingredients = {
 	{type = "item", name = "cyclosome-1", amount = 5},
@@ -276,7 +276,7 @@ data:extend{resyncRecipe}
 
 -- Explosive desynchronization: 10 cyclosome A + 1 explosives -> 0-3 cyclosome A + ... + 0-3 cyclosome E
 -- So total 0-15, mean 7.5.
-local desyncRecipe = table.deepcopy(resyncRecipe)
+local desyncRecipe = copy(resyncRecipe)
 desyncRecipe.name = "explosive-desynchronization"
 desyncRecipe.ingredients = {
 	{type = "item", name = "cyclosome-1", amount = 10},
@@ -290,7 +290,7 @@ desyncRecipe.results = {
 	{type = "item", name = "cyclosome-5", amount_min = 0, amount_max = 3, show_details_in_recipe_tooltip = false},
 }
 desyncRecipe.order = "d"
-desyncRecipe.icons = table.deepcopy(resyncRecipe.icons)
+desyncRecipe.icons = copy(resyncRecipe.icons)
 table.insert(desyncRecipe.icons, {
 	icon = "__base__/graphics/icons/explosives.png",
 	icon_size = 64,

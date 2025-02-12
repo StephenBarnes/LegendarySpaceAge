@@ -5,7 +5,7 @@ local niterIcons = {}
 for i = 1, 3 do
 	table.insert(niterIcons, {filename = "__LegendarySpaceAge__/graphics/niter/niter-"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
-local niterItem = table.deepcopy(ITEM["sulfur"])
+local niterItem = copy(ITEM["sulfur"])
 niterItem.name = "niter"
 niterItem.icon = nil
 niterItem.icons = {{icon = niterIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}

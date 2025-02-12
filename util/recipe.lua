@@ -82,7 +82,7 @@ Recipe.copyIngredients = function(fromRecipeName, toRecipeName)
 		log("ERROR: Couldn't find recipe "..toRecipeName.." to copy ingredients to.")
 		return
 	end
-	toRecipe.ingredients = table.deepcopy(fromRecipe.ingredients)
+	toRecipe.ingredients = copy(fromRecipe.ingredients)
 end
 
 return Recipe

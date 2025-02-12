@@ -4,7 +4,7 @@ Also make that a prereq for Aquilo, since otherwise it's too easy to softlock yo
 ]]
 
 -- Create a "mech armor 2 tech".
-local newTech = table.deepcopy(TECH["mech-armor"])
+local newTech = copy(TECH["mech-armor"])
 newTech.name = "mech-armor-2"
 newTech.prerequisites = {"mech-armor", "tungsten-axe"} -- Steel-axe prereq mostly just so players can easily see it.
 newTech.unit = nil
@@ -14,7 +14,7 @@ newTech.research_trigger = {
 	count = 1,
 }
 newTech.localised_description = {"technology-description.mech-armor-2"}
-newTech.effects = table.deepcopy(TECH["steel-axe"].effects)
+newTech.effects = copy(TECH["steel-axe"].effects)
 data:extend{newTech}
 
 Tech.addTechDependency("mech-armor-2", "planet-discovery-aquilo")

@@ -26,7 +26,7 @@ cultivationRecipe.results = {{type = "item", name = "bioflux", amount = 2}}
 cultivationRecipe.energy_required = 5
 
 -- Create new recipe for initial bioflux.
-local initialBiofluxRecipe = table.deepcopy(cultivationRecipe)
+local initialBiofluxRecipe = copy(cultivationRecipe)
 initialBiofluxRecipe.name = "bioflux-from-eggs"
 initialBiofluxRecipe.ingredients = {
 	{type = "item", name = "pentapod-egg", amount = 4},
@@ -45,7 +45,7 @@ Tech.addRecipeToTech("bioflux-from-eggs", "bioflux", 1)
 
 -- Create items for fertilized seeds.
 local fertilizedDir = "__LegendarySpaceAge__/graphics/gleba/fertilized-seeds/"
-local fertilizedYumakoSeedItem = table.deepcopy(ITEM["yumako-seed"])
+local fertilizedYumakoSeedItem = copy(ITEM["yumako-seed"])
 fertilizedYumakoSeedItem.name = "fertilized-yumako-seed"
 fertilizedYumakoSeedItem.icon = fertilizedDir .. "yumako-seed.png"
 fertilizedYumakoSeedItem.pictures = {}
@@ -58,7 +58,7 @@ fertilizedYumakoSeedItem.localised_name = {"item-name.fertilized-yumako-seed"}
 fertilizedYumakoSeedItem.localised_description = nil
 Item.clearFuel(fertilizedYumakoSeedItem)
 data:extend{fertilizedYumakoSeedItem}
-local fertilizedJellystemSeedItem = table.deepcopy(ITEM["jellynut-seed"])
+local fertilizedJellystemSeedItem = copy(ITEM["jellynut-seed"])
 fertilizedJellystemSeedItem.name = "fertilized-jellynut-seed"
 fertilizedJellystemSeedItem.icon = fertilizedDir .. "jellynut-seed.png"
 fertilizedJellystemSeedItem.pictures = {}
@@ -86,7 +86,7 @@ data.raw.plant["yumako-tree"].minable.results = {{type = "item", name = "yumako"
 data.raw.plant["jellystem"].minable.results = {{type = "item", name = "jellynut", amount_min = 20, amount_max = 40}}
 
 -- Create recipes for fertilized seeds.
-local fertilizedYumakoSeedRecipe = table.deepcopy(RECIPE["bioflux"])
+local fertilizedYumakoSeedRecipe = copy(RECIPE["bioflux"])
 fertilizedYumakoSeedRecipe.name = "fertilized-yumako-seed"
 fertilizedYumakoSeedRecipe.ingredients = {
 	{type = "item", name = "yumako-seed", amount = 1},
@@ -101,7 +101,7 @@ fertilizedYumakoSeedRecipe.energy_required = 2
 data:extend{fertilizedYumakoSeedRecipe}
 Tech.addRecipeToTech("fertilized-yumako-seed", "yumako")
 
-local fertilizedJellystemSeedRecipe = table.deepcopy(fertilizedYumakoSeedRecipe)
+local fertilizedJellystemSeedRecipe = copy(fertilizedYumakoSeedRecipe)
 fertilizedJellystemSeedRecipe.name = "fertilized-jellynut-seed"
 fertilizedJellystemSeedRecipe.ingredients = {
 	{type = "item", name = "jellynut-seed", amount = 1},

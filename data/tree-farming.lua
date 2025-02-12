@@ -98,7 +98,7 @@ local fertilizerIcons = {}
 for i = 1, 3 do
 	table.insert(fertilizerIcons, {filename = "__LegendarySpaceAge__/graphics/fertilizer/fertilizer-"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
 end
-local fertilizerItem = table.deepcopy(ITEM["wood"])
+local fertilizerItem = copy(ITEM["wood"])
 fertilizerItem.name = "fertilizer"
 fertilizerItem.order = "003"
 fertilizerItem.icon = nil
@@ -112,7 +112,7 @@ local saplingPictures = {}
 for _, i in pairs{"1", "2", "2-red", "3", "4", "5", "7", "8", "8-brown", "8-red", "9", "9-brown", "9-red"} do
 	table.insert(saplingPictures, {filename = "__base__/graphics/icons/tree-0"..i..".png", size = 64, scale=0.5, mipmap_count=4})
 end
-local saplingItem = table.deepcopy(ITEM["tree-seed"])
+local saplingItem = copy(ITEM["tree-seed"])
 saplingItem.name = "sapling"
 saplingItem.localised_name = {"item-name.sapling"} -- Seems to be necessary, else it takes name from planted/placed thing.
 saplingItem.localised_description = nil
@@ -133,7 +133,7 @@ ITEM["tree-seed"].place_result = nil
 -- Create recipe for fertilizer.
 -- Currently 1 tree -> 4 wood, and 5 wood -> 5 spoilage -> 10 ammonia. So 10 ammonia -> 2 fertilizer allows growing total number of trees.
 -- And then once you get biochambers with the prod bonus, you can greatly increase wood production.
-local fertilizerRecipe = table.deepcopy(RECIPE["wood-processing"])
+local fertilizerRecipe = copy(RECIPE["wood-processing"])
 fertilizerRecipe.name = "fertilizer"
 fertilizerRecipe.ingredients = {
 	{type="item", name="niter", amount=1},
@@ -154,7 +154,7 @@ fertilizerRecipe.allow_decomposition = true
 data:extend{fertilizerRecipe}
 
 -- Create recipe for saplings.
-local saplingRecipe = table.deepcopy(RECIPE["wood-processing"])
+local saplingRecipe = copy(RECIPE["wood-processing"])
 saplingRecipe.name = "sapling"
 saplingRecipe.ingredients = {
 	{type="item", name="tree-seed", amount=1},

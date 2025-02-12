@@ -1,7 +1,7 @@
 -- This file creates the "mechanism" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
 -- Create item.
-local mechanismItem = table.deepcopy(ITEM["steel-plate"])
+local mechanismItem = copy(ITEM["steel-plate"])
 mechanismItem.name = "mechanism"
 mechanismItem.subgroup = "mechanism"
 mechanismItem.order = "01"
@@ -10,7 +10,7 @@ mechanismItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-fact
 data:extend{mechanismItem}
 
 -- Create recipe: 8 machine parts + 1 frame -> 1 mechanism
-local basicRecipe = table.deepcopy(RECIPE["iron-stick"])
+local basicRecipe = copy(RECIPE["iron-stick"])
 basicRecipe.name = "mechanism-from-basic"
 basicRecipe.ingredients = {
 	{type = "item", name = "iron-gear-wheel", amount = 5},
@@ -32,7 +32,7 @@ basicRecipe.allow_as_intermediate = true
 data:extend{basicRecipe}
 
 -- Create recipe: 4 advanced parts + 1 frame -> 1 mechanism
-local advancedRecipe = table.deepcopy(basicRecipe)
+local advancedRecipe = copy(basicRecipe)
 advancedRecipe.name = "mechanism-from-advanced"
 advancedRecipe.ingredients = {
 	{type = "item", name = "advanced-parts", amount = 5},
@@ -48,7 +48,7 @@ data:extend{advancedRecipe}
 Tech.addRecipeToTech("mechanism-from-advanced", "electric-engine")
 
 -- Create recipe: 1 frame + 3 appendage -> 1 mechanism
-local appendageRecipe = table.deepcopy(basicRecipe)
+local appendageRecipe = copy(basicRecipe)
 appendageRecipe.name = "mechanism-from-appendage"
 appendageRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1},
