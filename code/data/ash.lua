@@ -49,7 +49,7 @@ ashRecipe.icons = {
 	{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.5, mipmap_count = 4},
 	{icon = "__LegendarySpaceAge__/graphics/ash/1.png", icon_size = 64, scale = 0.25, mipmap_count = 4, shift = {-8, -8}},
 }
-ashRecipe.category = "organic-or-chemistry"
+ashRecipe.category = "chemistry"
 ashRecipe.energy_required = 2
 ashRecipe.enabled = false
 data:extend{ashRecipe}

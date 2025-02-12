@@ -224,7 +224,7 @@ boomsacDeflationRecipe.results = {
 	{type = "fluid", name = "sulfuric-acid", amount = 20},
 	{type = "item", name = "sulfur", amount = 1},
 }
-boomsacDeflationRecipe.category = "organic-or-chemistry"
+boomsacDeflationRecipe.category = "chemistry"
 boomsacDeflationRecipe.crafting_machine_tint = boompuffTint
 boomsacDeflationRecipe.icon = nil
 boomsacDeflationRecipe.icons = {

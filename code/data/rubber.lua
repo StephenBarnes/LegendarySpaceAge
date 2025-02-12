@@ -40,7 +40,7 @@ latexRecipe.ingredients = {
 	{type="fluid", name="water", amount=20},
 }
 latexRecipe.results = {{type="fluid", name="latex", amount=50}}
-latexRecipe.category = "organic-or-chemistry"
+latexRecipe.category = "chemistry"
 latexRecipe.subgroup = "raw-material"
 latexRecipe.order = "f1"
 data:extend{latexRecipe}
@@ -54,7 +54,7 @@ rubberFromLatexRecipe.ingredients = {
 	{ type = "item",  name = "carbon",        amount = 1 },
 }
 rubberFromLatexRecipe.results = {{type="item", name="rubber", amount=5}}
-rubberFromLatexRecipe.category = "organic-or-chemistry"
+rubberFromLatexRecipe.category = "chemistry"
 rubberFromLatexRecipe.subgroup = "raw-material"
 rubberFromLatexRecipe.order = "f2"
 rubberFromLatexRecipe.icon = nil
@@ -78,7 +78,7 @@ rubberFromPetrochemRecipe.results = {
 	{type="fluid", name="tar", amount=20},
 }
 rubberFromPetrochemRecipe.main_product = "rubber"
-rubberFromPetrochemRecipe.category = "organic-or-chemistry"
+rubberFromPetrochemRecipe.category = "chemistry"
 rubberFromPetrochemRecipe.subgroup = "raw-material"
 rubberFromPetrochemRecipe.order = "f3"
 rubberFromPetrochemRecipe.icon = nil

@@ -61,7 +61,7 @@ recipeFromChitin.ingredients = {
 recipeFromChitin.results = {{type = "item", name = "structure", amount = 1}}
 recipeFromChitin.enabled = false
 recipeFromChitin.order = "04"
-recipeFromChitin.category = "organic-or-assembling-with-fluid"
+recipeFromChitin.category = "crafting-with-fluid"
 recipeFromChitin.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5},
 	{icon = "__LegendarySpaceAge__/graphics/gleba/chitin-block/1.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},

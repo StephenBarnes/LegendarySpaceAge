@@ -62,7 +62,7 @@ recipeFromTubules.ingredients = {
 recipeFromTubules.enabled = false
 recipeFromTubules.order = "05"
 recipeFromTubules.energy_required = 5
-recipeFromTubules.category = "organic-or-assembling-with-fluid"
+recipeFromTubules.category = "crafting-with-fluid"
 recipeFromTubules.allow_as_intermediate = false
 recipeFromTubules.icons[2].icon = "__LegendarySpaceAge__/graphics/gleba/tubule/1.png"
 data:extend{recipeFromTubules}

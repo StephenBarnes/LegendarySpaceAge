@@ -148,7 +148,7 @@ fertilizerRecipe.ingredients = {
 fertilizerRecipe.results = {
 	{type="item", name="fertilizer", amount=2},
 }
-fertilizerRecipe.category = "organic-or-chemistry"
+fertilizerRecipe.category = "chemistry"
 fertilizerRecipe.subgroup = "early-agriculture"
 fertilizerRecipe.order = "005"
 fertilizerRecipe.icon = nil

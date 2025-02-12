@@ -17,3 +17,8 @@ biochamber.production_health_effect = {
 biochamber.repair_speed_modifier = 0.5 -- 50% slower repair. Seems they added this for stone walls originally.
 
 -- TODO adjust recipes - basically everything should be either in assembler or biochamber or chem plant, not in multiple, with a handful of exceptions.
+
+-- Fruit processing is crafting recipe, not biology recipe.
+for _, recipeName in pairs{"yumako-processing", "jellynut-processing"} do
+	data.raw.recipe[recipeName].category = "crafting"
+end

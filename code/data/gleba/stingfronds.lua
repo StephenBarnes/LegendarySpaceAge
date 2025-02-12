@@ -228,7 +228,7 @@ data.raw.recipe["carbon-fiber"].ingredients = {
 }
 data.raw.recipe["carbon-fiber"].subgroup = "stingfrond-products"
 data.raw.recipe["carbon-fiber"].order = "b"
-data.raw.recipe["carbon-fiber"].category = "organic-or-assembling"
+data.raw.recipe["carbon-fiber"].category = "crafting"
 
 -- Resynchronization: 5 cyclosome A + ... + 5 cyclosome E + 2 neurofibrils -> 50 cyclosome C
 -- The neurofibrils are in this recipe to ensure cyclosome amount is still limited by farms.

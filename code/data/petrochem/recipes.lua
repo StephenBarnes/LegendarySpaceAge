@@ -67,6 +67,7 @@ heavyOilCrackingRecipe.results = {
 	{type = "item", name = "carbon", amount = 1, show_details_in_recipe_tooltip = false},
 	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 }
+heavyOilCrackingRecipe.category = "chemistry"
 heavyOilCrackingRecipe.icon = nil
 heavyOilCrackingRecipe.icons = {
 	{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
@@ -83,6 +84,7 @@ lightOilCrackingRecipe.results = {
 	{type = "fluid", name = "petroleum-gas", amount = 100, show_details_in_recipe_tooltip = false},
 	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 }
+lightOilCrackingRecipe.category = "chemistry"
 lightOilCrackingRecipe.icon = nil
 lightOilCrackingRecipe.icons = {
 	{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
@@ -98,6 +100,7 @@ richGasCrackingRecipe.ingredients = {
 richGasCrackingRecipe.results = {
 	{type = "fluid", name = "dry-gas", amount = 100, show_details_in_recipe_tooltip = false},
 }
+richGasCrackingRecipe.category = "chemistry"
 richGasCrackingRecipe.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.27, shift={0, -4}, tint=constants.richgasColor},
 	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={-6, 5}, tint=constants.drygasColor},

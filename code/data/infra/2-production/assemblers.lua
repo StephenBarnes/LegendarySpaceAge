@@ -5,6 +5,8 @@ Aims:
 * Rewrite recipes to use factors.
 ]]
 
+local recipes = data.raw.recipe
+
 for _, vals in pairs{
 	{
 		name = "assembling-machine-1",
@@ -46,7 +48,7 @@ for _, vals in pairs{
 		},
 	}
 } do
-	local recipe = data.raw.recipe[vals.name]
+	local recipe = recipes[vals.name]
 	recipe.ingredients = vals.ingredients
 	recipe.energy_required = 5
 
@@ -56,3 +58,20 @@ for _, vals in pairs{
 	ent.energy_usage = (vals.activeKW - vals.drainKW) .. "kW"
 	ent.energy_source.emissions_per_minute = { pollution = vals.pollution }
 end
+
+
+-- Chemical plant - shouldn't require steel bc we're moving it to automation 1. Also no pipe ingredients bc it comes before pipe tech. But it should cost more than assembler 1 since it's faster.
+recipes["chemical-plant"].ingredients = {
+	{type="item", name="frame", amount=2},
+	{type="item", name="fluid-fitting", amount=10},
+	{type="item", name="sensor", amount=2},
+	{type="item", name="mechanism", amount=2},
+}
+
+-- Foundry: 40 tungsten carbide + 40 shielding + 40 structure + 4 mechanism
+recipes["foundry"].ingredients = {
+	{type="item", name="tungsten-carbide", amount=40},
+	{type="item", name="shielding", amount=40},
+	{type="item", name="structure", amount=40},
+	{type="item", name="mechanism", amount=4},
+}

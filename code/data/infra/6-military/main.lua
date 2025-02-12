@@ -1,0 +1,5 @@
+require("code.data.infra.6-military.defenses")
+require("turrets")
+require("ammo")
+require("capsules")
+require("armor")

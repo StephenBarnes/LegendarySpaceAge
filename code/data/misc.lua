@@ -24,17 +24,9 @@ data.raw.container["crash-site-spaceship"].inventory_size = 10
 data.raw.container["crash-site-spaceship-wreck-big-2"].inventory_size = 5
 data.raw.container["crash-site-spaceship-wreck-medium-1"].inventory_size = 5
 
--- Make assembler 1 take fluid ingredients? For latex. TODO
-
--- TODO remove health techs.
-
 -- TODO make module recipes more complex -- add resin, and maybe make tier 2 and tier 3 require stuff from separate planets.
 
 -- TODO tech tree change - add nuclear science, move nuclear stuff to after first 3 planetary sciences, and then change all costs to include all science packs they're dependent on.
-
--- TODO change oil processing to require research, not trigger.
-
--- TODO get rid of advanced combinators tech, rather move the selector combinator into the main combinators tech.
 
 -- Edit items from mining boulders - more niter, more stone, more coal.
 data.raw["simple-entity"]["huge-rock"].minable.results = {

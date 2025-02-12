@@ -139,7 +139,7 @@ data:extend{sencytiumItem}
 -- Create chitin-broth recipe: 5 chitin fragments + 100 water + 5 nutrients -> 100 chitin-broth.
 local chitinBrothRecipe = table.deepcopy(data.raw.recipe["lubricant"])
 chitinBrothRecipe.name = "making-chitin-broth" -- Different name from fluid, so it doesn't get combined in factoriopedia.
-chitinBrothRecipe.category = "organic-or-chemistry"
+chitinBrothRecipe.category = "chemistry"
 chitinBrothRecipe.ingredients = {
 	{ type = "item",  name = "chitin-fragments", amount = 5 },
 	{ type = "item",  name = "nutrients",        amount = 5 },

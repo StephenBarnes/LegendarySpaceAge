@@ -132,7 +132,7 @@ data.raw.technology["inserter-capacity-bonus-2"].unit = {count = 200, ingredient
 
 -- Remove tech for advanced combinators. And move selector combinator recipe, and change recipe to not need red circuits.
 Tech.hideTech("advanced-combinators")
-Tech.addRecipeToTech("selector-combinator", "circuit-network", 3)
+Tech.addRecipeToTech("selector-combinator", "circuit-network", 4)
 data.raw.recipe["selector-combinator"].ingredients = {
 	{type = "item", name = "electronic-circuit", amount = 2},
 	{type = "item", name = "decider-combinator", amount = 5},

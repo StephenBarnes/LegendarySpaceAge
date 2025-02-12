@@ -62,7 +62,7 @@ appendageRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/appenda
 appendageRecipe.icons[3] = nil
 appendageRecipe.allow_as_intermediate = false
 appendageRecipe.enabled = false
-appendageRecipe.category = "organic-or-assembling"
+appendageRecipe.category = "crafting"
 data:extend{appendageRecipe}
 
 -- TODO make more recipes, and add them to techs.

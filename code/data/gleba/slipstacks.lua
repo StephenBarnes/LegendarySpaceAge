@@ -80,7 +80,7 @@ slipstackNestRecipe.ingredients = {
 	{ type = "item", name = "stone", amount = 4 },
 	{ type = "item", name = "marrow", amount = 2 },
 }
-slipstackNestRecipe.category = "organic-or-assembling"
+slipstackNestRecipe.category = "crafting"
 slipstackNestRecipe.results = {{type = "item", name = "slipstack-nest", amount = 1}}
 slipstackNestRecipe.surface_conditions = nil -- Allow anywhere. Can't be planted anywhere else, though.
 slipstackNestRecipe.auto_recycle = true
