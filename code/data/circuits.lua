@@ -217,7 +217,6 @@ dopedWaferRecipe.category = "chemistry-or-electronics"
 dopedWaferRecipe.energy_required = 20
 dopedWaferRecipe.allow_decomposition = true
 dopedWaferRecipe.allow_as_intermediate = true
-dopedWaferRecipe.main_product = "doped-wafer"
 data:extend{dopedWaferRecipe}
 Tech.addRecipeToTech("doped-wafer", "processing-unit", 2)
 
@@ -251,7 +250,6 @@ data.raw.recipe["processing-unit"].ingredients = {
 	{type = "fluid", name = "sulfuric-acid", amount = 5},
 }
 data.raw.recipe["processing-unit"].allow_decomposition = true
-data.raw.recipe["processing-unit"].main_product = "processing-unit"
 -- Make blue circuit recipe slower, as compromise for making it cheaper in materials.
 data.raw.recipe["processing-unit"].energy_required = 5
 
@@ -289,7 +287,6 @@ electronicComponentsRecipe.category = "electronics"
 electronicComponentsRecipe.energy_required = 5
 electronicComponentsRecipe.allow_decomposition = true
 electronicComponentsRecipe.allow_as_intermediate = true
-electronicComponentsRecipe.main_product = "electronic-components"
 data:extend{electronicComponentsRecipe}
 Tech.addRecipeToTech("electronic-components", "advanced-circuit", 1)
 

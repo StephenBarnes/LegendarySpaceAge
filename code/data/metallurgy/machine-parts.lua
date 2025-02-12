@@ -64,7 +64,6 @@ advancedPartsRecipe.ingredients = {
 	-- No lubricant here. Rather add lubricant in the recipe for gadgets.
 }
 advancedPartsRecipe.results = {{type="item", name="advanced-parts", amount=20}}
-advancedPartsRecipe.main_product = "advanced-parts"
 advancedPartsRecipe.category = "crafting"
 advancedPartsRecipe.energy_required = 5
 advancedPartsRecipe.allow_decomposition = true

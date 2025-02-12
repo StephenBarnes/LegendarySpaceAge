@@ -118,7 +118,6 @@ steelIngotRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=5}}
 steelIngotRecipe.results = {{type="item", name="ingot-steel-hot", amount=1}}
 steelIngotRecipe.energy_required = 10
 steelIngotRecipe.allow_decomposition = true
-steelIngotRecipe.main_product = "ingot-steel-hot"
 data:extend{steelIngotRecipe}
 
 -- Make recipe for iron ore -> iron ingot.

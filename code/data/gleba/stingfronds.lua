@@ -245,7 +245,6 @@ resyncRecipe.ingredients = {
 resyncRecipe.results = {
 	{type = "item", name = "cyclosome-3", amount = 50, show_details_in_recipe_tooltip = false},
 }
-resyncRecipe.main_product = "cyclosome-3"
 resyncRecipe.show_amount_in_title = false
 resyncRecipe.allow_productivity = false
 resyncRecipe.maximum_productivity = 0

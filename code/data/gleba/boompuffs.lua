@@ -183,7 +183,6 @@ sproutedBoomnutRecipe.ingredients = {
 sproutedBoomnutRecipe.results = {
 	{type = "item", name = "sprouted-boomnut", amount = 1, probability = 0.4},
 }
-sproutedBoomnutRecipe.main_product = "sprouted-boomnut"
 sproutedBoomnutRecipe.category = "smelting"
 sproutedBoomnutRecipe.crafting_machine_tint = boompuffTint
 sproutedBoomnutRecipe.icon = nil

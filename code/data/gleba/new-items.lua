@@ -147,7 +147,7 @@ chitinBrothRecipe.ingredients = {
 }
 chitinBrothRecipe.results = {{type = "fluid", name = "chitin-broth", amount = 100}}
 chitinBrothRecipe.main_product = "chitin-broth"
-chitinBrothRecipe.energy_required = 2
+chitinBrothRecipe.energy_required = 1
 chitinBrothRecipe.enabled = false
 chitinBrothRecipe.subgroup = "gleba-non-agriculture"
 chitinBrothRecipe.crafting_machine_tint = {

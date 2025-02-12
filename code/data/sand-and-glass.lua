@@ -57,7 +57,6 @@ sandRecipe.subgroup = "raw-material"
 sandRecipe.enabled = true
 sandRecipe.allow_decomposition = true
 sandRecipe.allow_as_intermediate = true
-sandRecipe.main_product = "sand"
 data:extend{sandRecipe}
 
 -- Create recipe for sand + ash -> glass batch.
@@ -70,7 +69,6 @@ glassBatchRecipe.subgroup = "raw-material"
 glassBatchRecipe.enabled = false
 glassBatchRecipe.allow_decomposition = true
 glassBatchRecipe.allow_as_intermediate = true
-glassBatchRecipe.main_product = "glass-batch"
 glassBatchRecipe.auto_recycle = true
 data:extend{glassBatchRecipe}
 
@@ -85,7 +83,6 @@ glassRecipe.enabled = false
 glassRecipe.energy_required = 2
 glassRecipe.allow_decomposition = true
 glassRecipe.allow_as_intermediate = true
-glassRecipe.main_product = "glass"
 data:extend{glassRecipe}
 
 -- Create tech for glass

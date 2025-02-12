@@ -301,7 +301,6 @@ richGasResinRecipe.icons = {
 richGasResinRecipe.icon = nil
 richGasResinRecipe.order = "03"
 richGasResinRecipe.subgroup = "resin"
-richGasResinRecipe.main_product = "resin"
 richGasResinRecipe.energy_required = 2
 data:extend{richGasResinRecipe}
 

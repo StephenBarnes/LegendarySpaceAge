@@ -56,7 +56,6 @@ crushFulgoriteShardRecipe.auto_recycle = false
 crushFulgoriteShardRecipe.results = {
 	{ type = "item", name = "holmium-ore", amount = 2 },
 }
-crushFulgoriteShardRecipe.main_product = "holmium-ore"
 crushFulgoriteShardRecipe.ingredients = {
 	{ type = "item", name = "fulgorite-shard", amount = 1 },
 }

@@ -59,10 +59,7 @@ data:extend({chargedBatteryItem, holmiumBatteryItem, chargedHolmiumBatteryItem})
 -- Create recipe for holmium batteries.
 local holmiumBatteryRecipe = table.deepcopy(data.raw.recipe["battery"])
 holmiumBatteryRecipe.name = "holmium-battery"
-holmiumBatteryRecipe.main_product = "holmium-battery"
-holmiumBatteryRecipe.results = {
-	{ type = "item", name = "holmium-battery", amount = 1 },
-}
+holmiumBatteryRecipe.results = {{type = "item", name = "holmium-battery", amount = 1}}
 holmiumBatteryRecipe.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/holmium_battery_short.png"
 holmiumBatteryRecipe.ingredients = {
 	{ type = "item", name = "holmium-plate", amount = 1 },
