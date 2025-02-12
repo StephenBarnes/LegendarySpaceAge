@@ -5,44 +5,29 @@ Glass batch can be smelted to glass in a furnace or foundry: 1 glass-batch -> 1 
 ]]
 
 -- Create sand item.
-local sandIcons = {}
-for i = 1, 3 do
-	table.insert(sandIcons, {filename = "__LegendarySpaceAge__/graphics/glass-etc/sand/"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
-end
 local sandItem = copy(ITEM["stone"])
 sandItem.name = "sand"
-sandItem.icon = nil
-sandItem.icons = {{icon = sandIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
-sandItem.pictures = sandIcons
+Icon.set(sandItem, "LSA/glass-etc/sand/1")
+Icon.variants(sandItem, "LSA/glass-etc/sand/%", 3)
 sandItem.subgroup = "raw-material"
 sandItem.order = "a2"
 sandItem.stack_size = 100 -- Increase 50->100 vs stone and ores. So it makes sense to crush stone before shipping.
 extend{sandItem}
 
 -- Create glass batch item.
-local glassBatchIcons = {}
-for i = 1, 3 do
-	table.insert(glassBatchIcons, {filename = "__LegendarySpaceAge__/graphics/glass-etc/batch/"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
-end
 local glassBatchItem = copy(ITEM["sulfur"])
 glassBatchItem.name = "glass-batch"
-glassBatchItem.icon = nil
-glassBatchItem.icons = {{icon = glassBatchIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
-glassBatchItem.pictures = glassBatchIcons
+Icon.set(glassBatchItem, "LSA/glass-etc/batch/1")
+Icon.variants(glassBatchItem, "LSA/glass-etc/batch/%", 3)
 glassBatchItem.subgroup = "raw-material"
 glassBatchItem.order = "a3"
 extend{glassBatchItem}
 
 -- Create glass item.
-local glassIcons = {}
-for i = 1, 6 do
-	table.insert(glassIcons, {filename = "__LegendarySpaceAge__/graphics/glass-etc/glass/"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
-end
 local glassItem = copy(ITEM["iron-plate"])
 glassItem.name = "glass"
-glassItem.icon = nil
-glassItem.icons = {{icon = glassIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
-glassItem.pictures = glassIcons
+Icon.set(glassItem, "LSA/glass-etc/glass/1")
+Icon.variants(glassItem, "LSA/glass-etc/glass/%", 6)
 glassItem.subgroup = "raw-material"
 glassItem.order = "a4"
 extend{glassItem}
@@ -105,7 +90,6 @@ glassTech.research_trigger = {
 	item = "sand",
 	count = 1,
 }
-glassTech.icon = nil
-glassTech.icons = {{icon = "__LegendarySpaceAge__/graphics/glass-etc/tech.png", icon_size = 256, scale=0.5, mipmap_count = 4}}
+Icon.set(glassTech, "LSA/glass-etc/tech")
 glassTech.order = "001"
 extend{glassTech}

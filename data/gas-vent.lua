@@ -8,8 +8,7 @@ local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 local ventEnt = copy(FURNACE["steel-furnace"])
 ventEnt.type = "furnace"
 ventEnt.name = "gas-vent"
-ventEnt.icon = nil
-ventEnt.icons = {{icon = GRAPHICS.."gas-vent-item.png", icon_size = 64}}
+ventEnt.icon = GRAPHICS.."gas-vent-item.png"
 ventEnt.minable = {mining_time = .5, result = "gas-vent"}
 ventEnt.collision_box = {{-0.3, -0.3}, {0.3, 0.3}}
 ventEnt.selection_box = {{-0.5, -0.5}, {0.5, 0.5}}

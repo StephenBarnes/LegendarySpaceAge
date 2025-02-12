@@ -3,7 +3,7 @@
 -- Create item.
 local wiringItem = copy(ITEM["copper-cable"])
 wiringItem.name = "wiring"
-wiringItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/wiring.png"
+Icon.set(wiringItem, "LSA/intermediate-factors/wiring")
 wiringItem.subgroup = "wiring"
 wiringItem.order = "01"
 extend{wiringItem}
@@ -12,11 +12,7 @@ extend{wiringItem}
 local resinRecipe = copy(RECIPE["copper-cable"])
 resinRecipe.name = "wiring-from-resin"
 resinRecipe.category = "crafting"
-resinRecipe.icon = nil
-resinRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/wiring.png", icon_size = 64, scale = 0.5},
-	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-}
+Icon.set(resinRecipe, {"wiring", "resin"})
 resinRecipe.ingredients = {
 	{type = "item", name = "copper-cable", amount = 1},
 	{type = "item", name = "resin", amount = 1},
@@ -48,7 +44,7 @@ Tech.addRecipeToTech("wiring-from-rubber", "rubber-1")
 -- Create a recipe with plastic insulation: 4 copper cable + 1 plastic -> 4 wiring
 local plasticRecipe = copy(resinRecipe)
 plasticRecipe.name = "wiring-from-plastic"
-plasticRecipe.icons[2] = {icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+Icon.set(plasticRecipe, {"wiring", "plastic-bar"})
 plasticRecipe.ingredients = {
 	{type = "item", name = "copper-cable", amount = 5},
 	{type = "item", name = "plastic-bar", amount = 1},
@@ -63,7 +59,7 @@ Tech.addRecipeToTech("wiring-from-plastic", "plastics")
 -- Create a recipe using neurofibrils: 8 neurofibril + 1 rubber -> 8 wiring
 local neurofibrilRecipe = copy(resinRecipe)
 neurofibrilRecipe.name = "wiring-from-neurofibril"
-neurofibrilRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/neurofibrils/4.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+Icon.set(neurofibrilRecipe, {"wiring", "LSA/gleba/stingfronds/neurofibrils/4"})
 neurofibrilRecipe.ingredients = {
 	{type = "item", name = "neurofibril", amount = 10},
 	{type = "item", name = "rubber", amount = 1},

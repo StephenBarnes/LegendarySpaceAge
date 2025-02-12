@@ -44,7 +44,7 @@ personalBurnerGeneratorTech.name = "personal-burner-generator"
 personalBurnerGeneratorTech.effects = {{type = "unlock-recipe", recipe = "personal-burner-generator"}}
 personalBurnerGeneratorTech.prerequisites = {"basic-electricity", "glass"}
 personalBurnerGeneratorTech.localised_name = {"equipment-name.personal-burner-generator"}
-personalBurnerGeneratorTech.icons = {{icon = "__LegendarySpaceAge__/graphics/equipment/personal-burner-generator-tech.png", icon_size = 256, mipmaps = 4}}
+Icon.set(personalBurnerGeneratorTech, "LSA/equipment/personal-burner-generator-tech")
 	-- Tech icons have to be square, so had to re-include this, can't just use the one from the other mod.
 personalBurnerGeneratorTech.research_trigger = {
 	type = "craft-item",

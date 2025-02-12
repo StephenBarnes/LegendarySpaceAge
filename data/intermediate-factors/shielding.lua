@@ -24,12 +24,7 @@ recipeFromIron.order = "02"
 recipeFromIron.energy_required = 5
 recipeFromIron.category = "crafting"
 recipeFromIron.allow_as_intermediate = true
-recipeFromIron.icon = nil
-recipeFromIron.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/shielding.png", icon_size = 64, scale = 0.4, shift = {0, 4}},
-	{icon = "__base__/graphics/icons/iron-plate.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-	{icon = "__base__/graphics/icons/stone-brick.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
-}
+Icon.set(recipeFromIron, {"shielding", "iron-plate", "stone-brick"})
 extend{recipeFromIron}
 
 -- Create recipe: 4 steel plate + 2 iron rod -> 2 shielding

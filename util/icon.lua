@@ -15,8 +15,7 @@ local dirCodeToPath = {
 	SA = "__space-age__/graphics/",
 }
 
----@return string?
-Icon.expandPath = function(pathCode, proto)
+Icon.getIconInfo = function(pathCode, proto)
 	local dirCode, rest = pathCode:match "^([^/]+)/(.+)" -- Split path by first '/' into 2 segments.
 	if dirCode == nil then -- If no '/' found, then check items and fluids.
 		rest = pathCode
@@ -31,17 +30,18 @@ Icon.expandPath = function(pathCode, proto)
 				path = path .. "icons/"
 			end
 		end
-		return path .. rest .. ".png"
+		return {path = path .. rest .. ".png"}
 	else
 		for _, t in pairs{"item", "fluid", "recipe", "capsule"} do
 			if RAW[t][rest] ~= nil and (RAW[t][rest].icon ~= nil or RAW[t][rest].icons ~= nil) then
 				if RAW[t][rest].icon ~= nil then
 					---@diagnostic disable-next-line: return-type-mismatch
-					return RAW[t][rest].icon
+					return {path = RAW[t][rest].icon}
 				else
 					assert(#RAW[t][rest].icons == 1, "Multi-icon must have exactly 1 icon")
+					local sourceIcon = RAW[t][rest].icons[1]
 					---@diagnostic disable-next-line: return-type-mismatch
-					return RAW[t][rest].icons[1].icon
+					return {path = sourceIcon.icon, tint = sourceIcon.tint}
 				end
 			end
 		end
@@ -49,31 +49,66 @@ Icon.expandPath = function(pathCode, proto)
 	assert(false, "No icon found for " .. pathCode)
 end
 
+-- Table that specifies the layout of multi-icons, by arrangement and number of icons.
 local multiIconVals = {
-	[2] = {
-		{scale = 0.46, shift = {5, 5}},
-		{scale = 0.3, shift = {-5, -4}},
+	default = { -- Default: 1st is product, 2nd is ingredient in top-left, 3rd is ingredient in top-right.
+		[2] = {
+			{scale = 0.46, shift = {5, 5}},
+			{scale = 0.3, shift = {-5, -4}},
+		},
+		[3] = {
+			{scale = 0.4, shift = {0, 4}},
+			{scale = 0.25, shift = {-8, -8}},
+			{scale = 0.25, shift = {8, -8}},
+		},
+	},
+	decomposition = { -- Used for recipes where one item is decomposed into multiple items, eg oil cracking. 1st is ingredient, other 2-3 are products. If only one product, repeat it.
+		[3] = {
+			{scale = 0.3, shift = {0, -4}},
+			{scale = 0.2, shift = {-7, 4}},
+			{scale = 0.2, shift = {7, 4}},
+		},
+		[4] = {
+			{scale = 0.3, shift = {0, -4.5}},
+			{scale = 0.18, shift = {-8, 3.5}},
+			{scale = 0.18, shift = {8, 3.5}},
+			{scale = 0.22, shift = {0, 6}},
+		},
+	},
+	casting = { -- Used for foundry casting recipes. 1st is product, 2nd is casting-bucket icon.
+		[2] = {
+			{scale = 0.5, shift = {-4, 4}},
+			{scale = 0.5, shift = {4, -4}},
+		},
 	},
 }
-
-local function getMultiIcon(iconInfo, proto)
+local function getMultiIconBase(count, arrangement)
+	if arrangement == nil then
+		return multiIconVals.default[count]
+	else
+		assert(multiIconVals[arrangement] ~= nil, "Invalid arrangement: " .. arrangement)
+		return multiIconVals[arrangement][count]
+	end
+end
+local function getMultiIcon(iconInfo, proto, arrangement)
 	assert(#iconInfo > 1, "Multi-icon must have at least 2 icons")
 	local newIcons = {}
 	local size = Icon.iconSize(proto)
-	local vals = multiIconVals[#iconInfo]
-	assert(vals ~= nil, "No multi-icon values found for " .. #iconInfo .. " icons")
+	local vals = getMultiIconBase(#iconInfo, arrangement)
+	assert(vals ~= nil, "No multi-icon values found for " .. #iconInfo .. " icons with arrangement " .. (arrangement or "nil"))
 	for i, pathCode in ipairs(iconInfo) do
-		local path = Icon.expandPath(pathCode, proto)
+		local iconInfo = Icon.getIconInfo(pathCode, proto)
 		local val = copy(vals[i])
-		val.icon = path
+		val.icon = iconInfo.path
 		val.icon_size = size
 		val.icon_mipmaps = 4
+		val.tint = iconInfo.tint
 		newIcons[#newIcons + 1] = val
 	end
 	return newIcons
 end
 
-Icon.set = function(thing, iconInfo)
+Icon.set = function(thing, iconInfo, arrangement)
 	---@type data.ItemPrototype | data.RecipePrototype | data.FluidPrototype | data.TechnologyPrototype
 	local proto
 	if type(thing) == "table" then
@@ -85,9 +120,12 @@ Icon.set = function(thing, iconInfo)
 	local newIcons = nil
 	local newIcon = nil
 	if type(iconInfo) == "string" then
-		newIcon = Icon.expandPath(iconInfo, proto)
+		assert(arrangement == nil, "Cannot specify arrangement for single icon")
+		local iconInfo = Icon.getIconInfo(iconInfo, proto)
+		newIcon = iconInfo.path
+		assert(iconInfo.tint == nil, "Tint not supported for single icon; could add support by setting it as .icons rather than .icon.")
 	else
-		newIcons = getMultiIcon(iconInfo, proto)
+		newIcons = getMultiIcon(iconInfo, proto, arrangement)
 	end
 
 	proto.icons = newIcons
@@ -99,17 +137,22 @@ Icon.set = function(thing, iconInfo)
 	end
 end
 
+---@param proto data.ItemPrototype | data.RecipePrototype | data.FluidPrototype | data.TechnologyPrototype
+---@param dirCode string
+---@param count number
+---@param additional table<string, any>?
 Icon.variants = function(proto, dirCode, count, additional)
 	assert(count <= 16, "Cannot have more than 16 variants")
 	local variants = {}
-	local path = Icon.expandPath(dirCode, proto)
-	assert(path ~= nil, "No path found for " .. dirCode)
+	local iconInfo = Icon.getIconInfo(dirCode, proto)
+	assert(iconInfo.path ~= nil, "No path found for " .. dirCode)
 	for i = 1, count do
 		local variant = {
-			filename = path:gsub("%%.png", i .. ".png"),
+			filename = iconInfo.path:gsub("%%.png", i .. ".png"),
 			size = 64,
 			scale = 0.5,
 			mipmap_count = 4,
+			tint = iconInfo.tint,
 		}
 		if additional ~= nil then
 			for _, val in pairs(additional) do
@@ -119,6 +162,11 @@ Icon.variants = function(proto, dirCode, count, additional)
 		variants[i] = variant
 	end
 	proto.pictures = variants
+end
+
+Icon.clear = function(proto)
+	proto.icons = nil
+	proto.icon = nil
 end
 
 return Icon

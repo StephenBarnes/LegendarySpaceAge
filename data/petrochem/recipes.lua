@@ -19,12 +19,7 @@ oilFractionationRecipe.results = {
 	{type = "item", name = "sulfur", amount = 2, show_details_in_recipe_tooltip = false},
 	{type = "item", name = "carbon", amount = 2, show_details_in_recipe_tooltip = false},
 }
-oilFractionationRecipe.icons = {
-	{icon = "__base__/graphics/icons/fluid/crude-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
-	{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.2, shift={-6, 4}},
-	{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
-}
-oilFractionationRecipe.icon = nil
+Icon.set(oilFractionationRecipe, {"crude-oil", "heavy-oil", "light-oil"}, "decomposition")
 oilFractionationRecipe.order = "a[oil-processing]-b1"
 extend{oilFractionationRecipe}
 
@@ -40,12 +35,7 @@ gasFractionationRecipe.results = {
 	{type = "fluid", name = "water", amount = 1, show_details_in_recipe_tooltip = false},
 	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 }
-gasFractionationRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.27, shift={0, -4}, tint=constants.natgasTint},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={-6, 5}, tint=constants.richgasColor},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 5}, tint=constants.drygasColor},
-}
-gasFractionationRecipe.icon = nil
+Icon.set(gasFractionationRecipe, {"natural-gas", "petroleum-gas", "dry-gas"}, "decomposition")
 gasFractionationRecipe.order = "a[oil-processing]-b2"
 extend{gasFractionationRecipe}
 
@@ -65,12 +55,7 @@ heavyOilCrackingRecipe.results = {
 	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 }
 heavyOilCrackingRecipe.category = "chemistry"
-heavyOilCrackingRecipe.icon = nil
-heavyOilCrackingRecipe.icons = {
-	{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
-	{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={-6, 4}},
-	{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
-}
+Icon.set(heavyOilCrackingRecipe, {"heavy-oil", "light-oil", "light-oil"}, "decomposition")
 
 local lightOilCrackingRecipe = RECIPE["light-oil-cracking"]
 lightOilCrackingRecipe.ingredients = {
@@ -82,12 +67,7 @@ lightOilCrackingRecipe.results = {
 	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 }
 lightOilCrackingRecipe.category = "chemistry"
-lightOilCrackingRecipe.icon = nil
-lightOilCrackingRecipe.icons = {
-	{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={-6, 6}, tint=constants.richgasColor},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 6}, tint=constants.richgasColor},
-}
+Icon.set(lightOilCrackingRecipe, {"light-oil", "petroleum-gas", "petroleum-gas"}, "decomposition")
 local richGasCrackingRecipe = copy(RECIPE["light-oil-cracking"])
 richGasCrackingRecipe.name = "rich-gas-cracking"
 richGasCrackingRecipe.ingredients = {
@@ -98,12 +78,7 @@ richGasCrackingRecipe.results = {
 	{type = "fluid", name = "dry-gas", amount = 100, show_details_in_recipe_tooltip = false},
 }
 richGasCrackingRecipe.category = "chemistry"
-richGasCrackingRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.27, shift={0, -4}, tint=constants.richgasColor},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={-6, 5}, tint=constants.drygasColor},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.18, shift={6, 5}, tint=constants.drygasColor},
-}
-richGasCrackingRecipe.icon = nil
+Icon.set(richGasCrackingRecipe, {"petroleum-gas", "dry-gas", "dry-gas"}, "decomposition")
 extend{richGasCrackingRecipe}
 
 --[[ Add recipe for tar distillation.
@@ -122,12 +97,7 @@ tarDistillationRecipe.results = {
 	{type = "fluid", name = "heavy-oil", amount = 20, show_details_in_recipe_tooltip = false},
 	{type = "fluid", name = "light-oil", amount = 10, show_details_in_recipe_tooltip = false},
 }
-tarDistillationRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale=0.3, shift={0, -3}},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size = 64, scale=0.2, shift={-6, 5}},
-	{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
-}
-tarDistillationRecipe.icon = nil
+Icon.set(tarDistillationRecipe, {"tar", "heavy-oil", "light-oil", "pitch"}, "decomposition")
 tarDistillationRecipe.order = "a[oil-processing]-b5"
 tarDistillationRecipe.subgroup = "complex-fluid-recipes"
 extend{tarDistillationRecipe}
@@ -146,12 +116,7 @@ heavyOilCokingRecipe.results = {
 	{type = "item", name = "carbon", amount = 3, show_details_in_recipe_tooltip = false},
 	{type = "fluid", name = "tar", amount = 50, show_details_in_recipe_tooltip = false},
 }
-heavyOilCokingRecipe.icons = {
-	{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.3, shift={0, -3}},
-	{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale=0.2, shift={-6, 5}},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64, scale=0.2, shift={6, 4}},
-}
-heavyOilCokingRecipe.icon = nil
+Icon.set(heavyOilCokingRecipe, {"heavy-oil", "carbon", "tar"}, "decomposition")
 heavyOilCokingRecipe.order = "a[oil-processing]-b4"
 heavyOilCokingRecipe.subgroup = "complex-fluid-recipes"
 heavyOilCokingRecipe.energy_required = 5
@@ -169,11 +134,7 @@ pitchProcessingRecipe.results = {
 	{ type = "fluid", name = "heavy-oil", amount = 20, show_details_in_recipe_tooltip = false },
 	{ type = "fluid", name = "light-oil", amount = 10, show_details_in_recipe_tooltip = false },
 }
-pitchProcessingRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size = 64, scale=0.3, shift={0, -3}},
-	{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.2, shift={-6, 4}},
-	{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
-}
+Icon.set(pitchProcessingRecipe, {"pitch", "tar", "light-oil", "heavy-oil"}, "decomposition")
 pitchProcessingRecipe.icon = nil
 pitchProcessingRecipe.order = "a[oil-processing]-b6"
 pitchProcessingRecipe.subgroup = "complex-fluid-recipes"
@@ -202,12 +163,7 @@ coalCokingRecipe.results = {
 	{type = "item", name = "pitch", amount = 1},
 	--{type = "fluid", name = "tar", amount = 20}, -- Removed bc the player has no way to handle fluid waste yet, except waste pump I guess.
 }
-coalCokingRecipe.icons = {
-	{icon = "__base__/graphics/icons/coal.png", icon_size = 64, scale=0.25, shift={0, -3}},
-	{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale=0.2, shift={-6, 5}},
-	{icon = "__base__/graphics/icons/sulfur.png", icon_size = 64, scale=0.2, shift={6, 5}},
-}
-coalCokingRecipe.icon = nil
+Icon.set(coalCokingRecipe, {"coal", "pitch", "sulfur", "carbon"}, "decomposition")
 coalCokingRecipe.order = "a[oil-processing]-b3"
 coalCokingRecipe.subgroup = "complex-fluid-recipes"
 coalCokingRecipe.category = "chemistry"
@@ -252,11 +208,7 @@ woodResinRecipe.results = {
 	{type = "item", name = "resin", amount = 10},
 	{type = "item", name = "carbon", amount = 1},
 }
-woodResinRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale=0.45, shift={1, 1}},
-	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale=0.32, shift={-5, -5}},
-}
-woodResinRecipe.icon = nil
+Icon.set(woodResinRecipe, {"resin", "wood"})
 woodResinRecipe.order = "01"
 woodResinRecipe.subgroup = "resin"
 woodResinRecipe.main_product = "resin"
@@ -273,11 +225,7 @@ pitchResinRecipe.ingredients = {
 pitchResinRecipe.results = {
 	{type = "item", name = "resin", amount = 2},
 }
-pitchResinRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale=0.45, shift={1, 1}},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/pitch-1.png", icon_size = 64, scale=0.32, shift={-5, -5}},
-}
-pitchResinRecipe.icon = nil
+Icon.set(pitchResinRecipe, {"resin", "pitch"})
 pitchResinRecipe.order = "02"
 pitchResinRecipe.subgroup = "resin"
 pitchResinRecipe.main_product = "resin"
@@ -294,19 +242,15 @@ richGasResinRecipe.ingredients = {
 richGasResinRecipe.results = {
 	{type = "item", name = "resin", amount = 1},
 }
-richGasResinRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale=0.45, shift={1, 1}},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.32, shift={-5, -5}, tint=constants.richgasColor},
-}
-richGasResinRecipe.icon = nil
+Icon.set(richGasResinRecipe, {"resin", "petroleum-gas"})
 richGasResinRecipe.order = "03"
 richGasResinRecipe.subgroup = "resin"
 richGasResinRecipe.energy_required = 2
 extend{richGasResinRecipe}
 
 --[[ Add syngas liquefaction.
-	10 syngas + 1 iron plate -> 2 heavy oil + 3 light oil + 3 rich gas + 2 dry gas + 1 water
-		(Named "syngas liquefaction" for the benefit of players already familiar with "coal liquefaction" in the base game, since this effectively replaces coal liquefaction.)
+	10 syngas + 1 iron plate -> 5 heavy oil + 5 light oil + 1 water
+		Named "syngas liquefaction" partly for the benefit of players already familiar with "coal liquefaction" in the base game, since this effectively replaces coal liquefaction.
 ]]
 local syngasLiquefactionRecipe = copy(RECIPE["coal-liquefaction"])
 syngasLiquefactionRecipe.name = "syngas-liquefaction"
@@ -315,18 +259,12 @@ syngasLiquefactionRecipe.ingredients = {
 	{type = "item", name = "iron-plate", amount = 1},
 }
 syngasLiquefactionRecipe.results = {
-	{ type = "fluid", name = "heavy-oil",     amount = 20, show_details_in_recipe_tooltip = false },
-	{ type = "fluid", name = "light-oil",     amount = 30, show_details_in_recipe_tooltip = false },
-	{ type = "fluid", name = "petroleum-gas", amount = 30, show_details_in_recipe_tooltip = false },
-	{ type = "fluid", name = "dry-gas",       amount = 20, show_details_in_recipe_tooltip = false },
+	{ type = "fluid", name = "heavy-oil",     amount = 5, show_details_in_recipe_tooltip = false },
+	{ type = "fluid", name = "light-oil",     amount = 20, show_details_in_recipe_tooltip = false },
 	{ type = "fluid", name = "water",         amount = 1,  show_details_in_recipe_tooltip = false },
 }
-syngasLiquefactionRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, scale=0.27, shift={0, -4}, tint=constants.syngasColor},
-	{icon = "__base__/graphics/icons/fluid/heavy-oil.png", icon_size = 64, scale=0.2, shift={-6, 4}},
-	{icon = "__base__/graphics/icons/fluid/light-oil.png", icon_size = 64, scale=0.2, shift={6, 4}},
-}
-syngasLiquefactionRecipe.icon = nil
+Icon.set(syngasLiquefactionRecipe, {"syngas", "heavy-oil", "light-oil"}, "decomposition")
+syngasLiquefactionRecipe.allow_productivity = false
 syngasLiquefactionRecipe.order = "a[coal-liquefaction]-b4"
 syngasLiquefactionRecipe.subgroup = "complex-fluid-recipes"
 extend{syngasLiquefactionRecipe}

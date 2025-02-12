@@ -23,10 +23,7 @@ Generally on Nauvis and Gleba both wood and plastic circuit boards are viable. O
 -- Add circuit board item.
 local circuitBoardItem = copy(ITEM["electronic-circuit"])
 circuitBoardItem.name = "circuit-board"
-circuitBoardItem.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/circuit-boards/circuit-board-generic.png", icon_size = 64, scale = .5},
-}
-circuitBoardItem.icon = nil
+Icon.set(circuitBoardItem, "LSA/circuit-boards/circuit-board-generic")
 circuitBoardItem.order = "b[circuits]-0"
 circuitBoardItem.subgroup = "circuit-board"
 circuitBoardItem.weight = 1000000 / 4000
@@ -46,11 +43,7 @@ woodCircuitBoardRecipe.results = {
 }
 woodCircuitBoardRecipe.order = "b[circuits]-001"
 woodCircuitBoardRecipe.subgroup = "circuit-board"
-woodCircuitBoardRecipe.icon = nil
-woodCircuitBoardRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board.png", icon_size = 64, scale = .5},
-	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-}
+Icon.set(woodCircuitBoardRecipe, {"LSA/circuit-boards/wood-circuit-board", "wood"})
 woodCircuitBoardRecipe.auto_recycle = false
 extend{woodCircuitBoardRecipe}
 
@@ -68,11 +61,7 @@ plasticCircuitBoardRecipe.results = {
 }
 plasticCircuitBoardRecipe.order = "b[circuits]-002"
 plasticCircuitBoardRecipe.subgroup = "circuit-board"
-plasticCircuitBoardRecipe.icon = nil
-plasticCircuitBoardRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/circuit-boards/plastic-circuit-board.png", icon_size = 64, scale = .5},
-	{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-}
+Icon.set(plasticCircuitBoardRecipe, {"LSA/circuit-boards/plastic-circuit-board", "plastic-bar"})
 plasticCircuitBoardRecipe.auto_recycle = false
 extend{plasticCircuitBoardRecipe}
 Tech.addRecipeToTech("plastic-circuit-board", "plastics") -- TODO rather make a separate tech for this, using plastic circuit board sprite.
@@ -90,11 +79,7 @@ calciteCircuitBoardRecipe.results = {
 }
 calciteCircuitBoardRecipe.order = "b[circuits]-003"
 calciteCircuitBoardRecipe.subgroup = "circuit-board"
-calciteCircuitBoardRecipe.icon = nil
-calciteCircuitBoardRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/circuit-boards/ceramic-circuit-board.png", icon_size = 64, scale = .5},
-	{icon = "__space-age__/graphics/icons/calcite.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-}
+Icon.set(calciteCircuitBoardRecipe, {"LSA/circuit-boards/ceramic-circuit-board", "calcite"})
 calciteCircuitBoardRecipe.category = "metallurgy"
 calciteCircuitBoardRecipe.auto_recycle = false
 extend{calciteCircuitBoardRecipe}
@@ -130,12 +115,7 @@ woodCircuitBoardTech.effects = {
 	{type = "unlock-recipe", recipe = "wood-resin"},
 	{type = "unlock-recipe", recipe = "wood-circuit-board"},
 }
-woodCircuitBoardTech.icon = nil
-woodCircuitBoardTech.icons = {
-	--{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board-tech.png", icon_size = 256, scale = 0.8, mipmap_count = 4, shift = {10, -10}},
-	--{icon = "__LegendarySpaceAge__/graphics/resin/tech.png", icon_size = 256, scale = 0.4, mipmap_count = 4, shift = {-10, 10}},
-	{icon = "__LegendarySpaceAge__/graphics/circuit-boards/wood-circuit-board-tech.png", icon_size = 256, mipmap_count = 4},
-}
+Icon.set(woodCircuitBoardTech, "LSA/circuit-boards/wood-circuit-board-tech")
 woodCircuitBoardTech.prerequisites = {"steam-power"}
 woodCircuitBoardTech.ignore_tech_cost_multiplier = false
 woodCircuitBoardTech.unit = {
@@ -151,8 +131,7 @@ extend{woodCircuitBoardTech}
 -- Create item for silicon (undoped wafers).
 local silicon = copy(ITEM["plastic-bar"])
 silicon.name = "silicon"
-silicon.icon = "__LegendarySpaceAge__/graphics/circuit-chains/silicon.png"
-silicon.icon_size = 64
+Icon.set(silicon, "LSA/circuit-chains/silicon")
 silicon.subgroup = "complex-circuit-intermediates"
 silicon.order = "001"
 silicon.stack_size = 200
@@ -169,8 +148,7 @@ siliconRecipe.results = {
 	{type = "item", name = "silicon", amount = 1},
 }
 siliconRecipe.subgroup = nil
-siliconRecipe.icon = nil
-siliconRecipe.icons = nil
+Icon.clear(siliconRecipe)
 siliconRecipe.allow_decomposition = true
 siliconRecipe.allow_as_intermediate = true
 extend{siliconRecipe}
@@ -180,8 +158,7 @@ Tech.addRecipeToTech("silicon", "solar-energy", 1)
 -- Create item for doped wafers.
 local dopedWafer = copy(ITEM["plastic-bar"])
 dopedWafer.name = "doped-wafer"
-dopedWafer.icon = "__LegendarySpaceAge__/graphics/circuit-chains/doped-wafer.png"
-dopedWafer.icon_size = 64
+Icon.set(dopedWafer, "LSA/circuit-chains/doped-wafer")
 dopedWafer.subgroup = "complex-circuit-intermediates"
 dopedWafer.order = "002"
 dopedWafer.stack_size = 100
@@ -190,8 +167,7 @@ extend{dopedWafer}
 -- Create item for microchips
 local microchip = copy(ITEM["processing-unit"])
 microchip.name = "microchip"
-microchip.icon = "__LegendarySpaceAge__/graphics/circuit-chains/microchip.png"
-microchip.icon_size = 64
+Icon.set(microchip, "LSA/circuit-chains/microchip")
 microchip.subgroup = "complex-circuit-intermediates"
 microchip.order = "003"
 microchip.stack_size = 200
@@ -208,8 +184,7 @@ dopedWaferRecipe.results = {
 	{type = "item", name = "doped-wafer", amount = 1},
 }
 dopedWaferRecipe.subgroup = nil
-dopedWaferRecipe.icon = nil
-dopedWaferRecipe.icons = nil
+Icon.clear(dopedWaferRecipe)
 dopedWaferRecipe.category = "chemistry-or-electronics"
 dopedWaferRecipe.energy_required = 20
 dopedWaferRecipe.allow_decomposition = true
@@ -229,8 +204,7 @@ microchipRecipe.results = {
 	{type = "item", name = "microchip", amount = 20},
 }
 microchipRecipe.subgroup = nil
-microchipRecipe.icon = nil
-microchipRecipe.icons = nil
+Icon.clear(microchipRecipe)
 microchipRecipe.category = "electronics"
 microchipRecipe.energy_required = 10
 microchipRecipe.allow_decomposition = true
@@ -253,16 +227,11 @@ RECIPE["processing-unit"].energy_required = 5
 -- Create item for electronic components.
 local electronicComponents = copy(ITEM["advanced-circuit"])
 electronicComponents.name = "electronic-components"
-electronicComponents.icon = nil
 electronicComponents.subgroup = "complex-circuit-intermediates"
 electronicComponents.order = "001"
 electronicComponents.stack_size = 200
-electronicComponents.icons = {{icon = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/1.png", icon_size = 64, scale = 0.5}}
-electronicComponents.pictures = {
-	{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/1.png", size = 64, scale = 0.5},
-	{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/2.png", size = 64, scale = 0.5},
-	{filename = "__LegendarySpaceAge__/graphics/circuit-chains/electronic-components/3.png", size = 64, scale = 0.5},
-}
+Icon.set(electronicComponents, "LSA/circuit-chains/electronic-components/1")
+Icon.variants(electronicComponents, "LSA/circuit-chains/electronic-components/%", 3)
 extend{electronicComponents}
 
 -- Create a recipe for electronic components.
@@ -278,8 +247,7 @@ electronicComponentsRecipe.results = {
 	{type = "item", name = "electronic-components", amount = 5},
 }
 electronicComponentsRecipe.subgroup = nil
-electronicComponentsRecipe.icon = nil
-electronicComponentsRecipe.icons = nil
+Icon.clear(electronicComponentsRecipe)
 electronicComponentsRecipe.category = "electronics"
 electronicComponentsRecipe.energy_required = 5
 electronicComponentsRecipe.allow_decomposition = true

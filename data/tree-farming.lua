@@ -94,16 +94,11 @@ ITEM["tree-seed"].subgroup = "early-agriculture"
 ITEM["tree-seed"].order = "002"
 
 -- Create fertilizer item.
-local fertilizerIcons = {}
-for i = 1, 3 do
-	table.insert(fertilizerIcons, {filename = "__LegendarySpaceAge__/graphics/fertilizer/fertilizer-"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
-end
 local fertilizerItem = copy(ITEM["wood"])
 fertilizerItem.name = "fertilizer"
 fertilizerItem.order = "003"
-fertilizerItem.icon = nil
-fertilizerItem.icons = {{icon = fertilizerIcons[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
-fertilizerItem.pictures = fertilizerIcons
+Icon.set(fertilizerItem, "LSA/fertilizer/fertilizer-1")
+Icon.variants(fertilizerItem, "LSA/fertilizer/fertilizer-%", 3)
 Item.clearFuel(fertilizerItem)
 extend{fertilizerItem}
 
@@ -121,8 +116,7 @@ saplingItem.order = "004"
 saplingItem.spoil_ticks = 60 * 60 * 60 -- 1 hour
 saplingItem.spoil_result = "wood"
 Item.clearFuel(saplingItem)
-saplingItem.icon = nil
-saplingItem.icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}}
+Icon.set(saplingItem, "base/tree-08")
 saplingItem.pictures = saplingPictures
 extend{saplingItem}
 
@@ -147,8 +141,7 @@ fertilizerRecipe.results = {
 fertilizerRecipe.category = "chemistry"
 fertilizerRecipe.subgroup = "early-agriculture"
 fertilizerRecipe.order = "005"
-fertilizerRecipe.icon = nil
-fertilizerRecipe.icons = nil
+Icon.clear(fertilizerRecipe)
 fertilizerRecipe.surface_conditions = nil
 fertilizerRecipe.allow_decomposition = true
 extend{fertilizerRecipe}
@@ -167,8 +160,7 @@ saplingRecipe.results = {
 saplingRecipe.subgroup = "early-agriculture"
 saplingRecipe.category = "organic-or-assembling-with-fluid"
 saplingRecipe.order = "006"
-saplingRecipe.icon = nil
-saplingRecipe.icons = {{icon = "__base__/graphics/icons/tree-08.png", icon_size = 64, scale=0.5, mipmap_count=4}}
+Icon.clear(saplingRecipe)
 saplingRecipe.surface_conditions = {{property = "pressure", min = 1000, max = 1000}}
 saplingRecipe.energy_required = 30
 saplingRecipe.allow_decomposition = true

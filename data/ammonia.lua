@@ -47,12 +47,9 @@ ammoniaFromWood.results = {
 ammoniaFromWood.show_amount_in_title = false
 ammoniaFromWood.category = "organic-or-chemistry"
 ammoniaFromWood.subgroup = "early-agriculture"
-ammoniaFromWood.order = "d2"
+ammoniaFromWood.order = "d1"
 ammoniaFromWood.energy_required = 60
-ammoniaFromWood.icons = {
-	{icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
-	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
-}
+Icon.set(ammoniaFromWood, {"ammonia", "wood"})
 extend{ammoniaFromWood}
 
 -- Create recipe for ammonia from spoilage.
@@ -64,10 +61,7 @@ ammoniaFromSpoilage.ingredients = {
 }
 ammoniaFromSpoilage.order = "d3"
 ammoniaFromSpoilage.energy_required = 30
-ammoniaFromSpoilage.icons = {
-	{icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
-	{icon = "__space-age__/graphics/icons/spoilage.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
-}
+Icon.set(ammoniaFromSpoilage, {"ammonia", "spoilage"})
 extend{ammoniaFromSpoilage}
 -- Will be unlocked by boompuff-cultivation tech.
 
@@ -86,10 +80,7 @@ woodSpoilageRecipe.category = "organic-or-chemistry"
 woodSpoilageRecipe.subgroup = "early-agriculture"
 woodSpoilageRecipe.order = "d1"
 woodSpoilageRecipe.energy_required = 30
-woodSpoilageRecipe.icons = {
-	{icon = "__space-age__/graphics/icons/spoilage.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
-	{icon = "__base__/graphics/icons/wood.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
-}
+Icon.set(woodSpoilageRecipe, {"spoilage", "wood"})
 extend{woodSpoilageRecipe}
 ]]
 
@@ -98,13 +89,12 @@ local niterFromAmmoniaRecipe = copy(RECIPE["plastic-bar"])
 niterFromAmmoniaRecipe.name = "niter"
 niterFromAmmoniaRecipe.ingredients = {
 	{type = "fluid", name = "ammonia", amount = 5},
-	{type = "item", name = "sand", amount = 4},
+	{type = "item", name = "sand", amount = 5},
 }
 niterFromAmmoniaRecipe.results = {
-	{type = "item", name = "niter", amount = 8},
+	{type = "item", name = "niter", amount = 10},
 }
-niterFromAmmoniaRecipe.icon = nil
-niterFromAmmoniaRecipe.icons = nil
+Icon.clear(niterFromAmmoniaRecipe)
 niterFromAmmoniaRecipe.energy_required = 1
 extend{niterFromAmmoniaRecipe}
 
@@ -120,12 +110,9 @@ ammoniaSyngasRecipe.results = {
 }
 ammoniaSyngasRecipe.show_amount_in_title = false
 ammoniaSyngasRecipe.category = "chemistry-or-cryogenics"
-ammoniaSyngasRecipe.subgroup = "complex-fluid-recipes"
-ammoniaSyngasRecipe.order = "d1"
-ammoniaSyngasRecipe.icons = {
-	{icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {4, 4}},
-	{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=require("data.petrochem.constants").syngasColor, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
-}
+ammoniaSyngasRecipe.subgroup = "early-agriculture"
+ammoniaSyngasRecipe.order = "d2"
+Icon.set(ammoniaSyngasRecipe, {"ammonia", "syngas"})
 ammoniaSyngasRecipe.energy_required = 4
 extend{ammoniaSyngasRecipe}
 

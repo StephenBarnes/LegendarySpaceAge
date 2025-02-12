@@ -14,8 +14,7 @@ RECIPE["ice-melting"].order = "06"
 -- Create filter item.
 local filterItem = copy(ITEM["battery"])
 filterItem.name = "filter"
-filterItem.icon = nil
-filterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64}}
+Icon.set(filterItem, "LSA/filtration/filter")
 filterItem.order = "01"
 filterItem.subgroup = "filtration"
 filterItem.weight = 1000
@@ -24,8 +23,7 @@ extend{filterItem}
 -- Create spent filter item.
 local spentFilterItem = copy(ITEM["battery"])
 spentFilterItem.name = "spent-filter"
-spentFilterItem.icon = nil
-spentFilterItem.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/spent-filter.png", icon_size = 64}}
+Icon.set(spentFilterItem, "LSA/filtration/spent-filter")
 spentFilterItem.order = "02"
 spentFilterItem.subgroup = "filtration"
 spentFilterItem.weight = 1000
@@ -181,8 +179,7 @@ extend{filterLakeWaterRecipe}
 -- Create lake water fluid.
 local lakeWaterFluid = copy(FLUID.water)
 lakeWaterFluid.name = "lake-water"
-lakeWaterFluid.icon = nil
-lakeWaterFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64}}
+Icon.set(lakeWaterFluid, "LSA/filtration/lake-water")
 lakeWaterFluid.auto_barrel = false
 lakeWaterFluid.order = "a[fluid]-a[water]-c"
 lakeWaterFluid.base_color = {0, .44, .6}
@@ -195,8 +192,7 @@ extend{lakeWaterFluid}
 -- Create slime fluid.
 local slimeFluid = copy(FLUID["water"])
 slimeFluid.name = "slime"
-slimeFluid.icon = nil
-slimeFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64}}
+Icon.set(slimeFluid, "LSA/filtration/slime")
 slimeFluid.auto_barrel = true
 slimeFluid.order = "b[new-fluid]-c2[gleba]-a"
 slimeFluid.base_color = {.176, .255, .200}

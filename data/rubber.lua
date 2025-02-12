@@ -12,7 +12,7 @@ Rubber is used in many recipes like belts, tires, engines, inserters, robots, an
 local rubberItem = copy(ITEM["plastic-bar"])
 rubberItem.name = "rubber"
 Icon.variants(rubberItem, "LSA/rubber/rubber-%", 3)
-Icon.set(rubberItem, "LSA/rubber/1")
+Icon.set(rubberItem, "LSA/rubber/rubber-1")
 rubberItem.order = "b[chemistry]-a3"
 extend{rubberItem}
 

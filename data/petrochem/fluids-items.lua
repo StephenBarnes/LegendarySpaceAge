@@ -56,37 +56,19 @@ tarFluid.order = "a[fluid]-b[oil]-c[fractions]-0"
 extend{tarFluid}
 
 -- Create pitch item.
-local pitchPictures = {}
-for i = 1, 3 do
-	table.insert(pitchPictures, {
-		filename = "__LegendarySpaceAge__/graphics/petrochem/pitch-" .. i .. ".png",
-		size = 64,
-		scale = 0.5,
-		mipmap_count = 4,
-	})
-end
 local pitchItem = copy(ITEM["carbon"])
 pitchItem.name = "pitch"
-pitchItem.icons = {{icon = pitchPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
-pitchItem.pictures = pitchPictures
+Icon.set(pitchItem, "LSA/petrochem/pitch-1")
+Icon.variants(pitchItem, "LSA/petrochem/pitch-%", 3)
 pitchItem.order = "b[chemistry]-b[plastic-bar]-1"
 Item.copySoundsTo("plastic-bar", pitchItem)
 extend{pitchItem}
 
 -- Create resin item.
-local resinPictures = {}
-for i = 1, 3 do
-	table.insert(resinPictures, {
-		filename = "__LegendarySpaceAge__/graphics/resin/resin-" .. i .. ".png",
-		size = 64,
-		scale = 0.5,
-		mipmap_count = 4,
-	})
-end
 local resinItem = copy(ITEM["plastic-bar"])
 resinItem.name = "resin"
-resinItem.icons = {{icon = resinPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
-resinItem.pictures = resinPictures
+Icon.set(resinItem, "LSA/resin/resin-1")
+Icon.variants(resinItem, "LSA/resin/resin-%", 3)
 resinItem.subgroup = "resin"
 Item.copySoundsTo(RAW.capsule["bioflux"], resinItem)
 extend{resinItem}

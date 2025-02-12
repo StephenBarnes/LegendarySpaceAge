@@ -16,8 +16,7 @@ Original game recipes were:
 -- Create new "cement" fluid.
 local cementFluid = copy(FLUID["lubricant"])
 cementFluid.name = "cement"
-cementFluid.icon = nil
-cementFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/fluids/cement-fluid.png", scale = .5, icon_size = 64}}
+Icon.set(cementFluid, "LSA/fluids/cement-fluid")
 cementFluid.auto_barrel = false
 cementFluid.base_color = {.33, .33, .33, 1}
 cementFluid.flow_color = {.6, .6, .6, 1}
@@ -88,11 +87,7 @@ concreteCastingRecipe.ingredients = {
 concreteCastingRecipe.results = {
 	{type = "item", name = "concrete", amount = 20},
 }
-concreteCastingRecipe.icon = nil
-concreteCastingRecipe.icons = {
-	{icon = "__base__/graphics/icons/concrete.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
-	{icon = "__LegendarySpaceAge__/graphics/vulcanus/sulfur-cast.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
-}
+Icon.set(concreteCastingRecipe, {"concrete", "LSA/vulcanus/sulfur-cast"}, "casting")
 extend{concreteCastingRecipe}
 
 local refinedConcreteCastingRecipe = copy(RECIPE["concrete-from-molten-iron"])
@@ -106,11 +101,7 @@ refinedConcreteCastingRecipe.ingredients = {
 refinedConcreteCastingRecipe.results = {
 	{type = "item", name = "refined-concrete", amount = 20},
 }
-refinedConcreteCastingRecipe.icon = nil
-refinedConcreteCastingRecipe.icons = {
-	{icon = "__base__/graphics/icons/refined-concrete.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
-	{icon = "__LegendarySpaceAge__/graphics/vulcanus/sulfur-cast.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
-}
+Icon.set(refinedConcreteCastingRecipe, {"refined-concrete", "LSA/vulcanus/sulfur-cast"}, "casting")
 extend{refinedConcreteCastingRecipe}
 
 -- Hide old concrete foundry recipe completely.
