@@ -7,7 +7,7 @@
 
 ---@type data.PlantPrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
-local slipstackPlant = copy(data.raw.tree.slipstack)
+local slipstackPlant = copy(RAW.tree.slipstack)
 slipstackPlant.type = "plant"
 
 slipstackPlant.growth_ticks = 60 * 60 * 10 -- 10 minutes; compare to yumako/jellystem at 5 minutes.
@@ -34,7 +34,7 @@ slipstackPlant.minable.results = {
 }
 
 -- Delete old slipstack tree, add new slipstack plant.
-data.raw.tree.slipstack = nil
+RAW.tree.slipstack = nil
 data:extend{slipstackPlant}
 
 ------------------------------------------------------------------------

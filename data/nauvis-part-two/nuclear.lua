@@ -3,7 +3,7 @@ TODO
 ]]
 
 -- Create nuclear science pack.
-local item = copy(data.raw.tool["agricultural-science-pack"])
+local item = copy(RAW.tool["agricultural-science-pack"])
 item.name = "nuclear-science-pack"
 item.order = "j2"
 item.spoil_ticks = 60 * 60 * 20 -- 20 minutes.
@@ -25,9 +25,9 @@ recipe.icon = nil
 data:extend{recipe}
 
 -- Allow nuclear science pack in labs.
-table.insert(data.raw.lab.lab.inputs, 11, "nuclear-science-pack")
-table.insert(data.raw.lab.glebalab.inputs, 11, "nuclear-science-pack")
-table.insert(data.raw.lab.biolab.inputs, 11, "nuclear-science-pack")
+table.insert(RAW.lab.lab.inputs, 11, "nuclear-science-pack")
+table.insert(RAW.lab.glebalab.inputs, 11, "nuclear-science-pack")
+table.insert(RAW.lab.biolab.inputs, 11, "nuclear-science-pack")
 
 -- Move uranium mining tech to after 3 sisters.
 TECH["uranium-mining"].prerequisites = {"agricultural-science-pack", "metallurgic-science-pack", "electromagnetic-science-pack"}

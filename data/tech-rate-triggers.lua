@@ -53,12 +53,12 @@ local rateItems = {
 	makeRateItem("iron-gear-wheel", copy(ITEM["iron-gear-wheel"].icons)),
 	makeRateItem("electronic-circuit", {{icon = ITEM["electronic-circuit"].icon, icon_size = ITEM["electronic-circuit"].icon_size}}),
 	makeRateItem("plastic-bar", {{icon = ITEM["plastic-bar"].icon, icon_size = ITEM["plastic-bar"].icon_size}}),
-	makeRateItem("piercing-rounds-magazine", {{icon = data.raw.ammo["piercing-rounds-magazine"].icon, icon_size = data.raw.ammo["piercing-rounds-magazine"].icon_size}}, copy(data.raw.ammo["piercing-rounds-magazine"])),
+	makeRateItem("piercing-rounds-magazine", {{icon = RAW.ammo["piercing-rounds-magazine"].icon, icon_size = RAW.ammo["piercing-rounds-magazine"].icon_size}}, copy(RAW.ammo["piercing-rounds-magazine"])),
 }
 data:extend(rateItems)
 
 -- Create a dummy lab that accepts all these fake science packs, else there's an error.
-local dummyLab = copy(data.raw.lab.lab)
+local dummyLab = copy(RAW.lab.lab)
 dummyLab.name = "rate-trigger-lab"
 dummyLab.inputs = {}
 for _, rateItem in pairs(rateItems) do

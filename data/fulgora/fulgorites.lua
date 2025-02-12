@@ -29,8 +29,8 @@ ITEM["holmium-ore"].pick_sound = ITEM["sulfur"].pick_sound
 ITEM["holmium-ore"].inventory_move_sound = ITEM["sulfur"].inventory_move_sound
 
 -- Fulgorite should yield fulgorite shard on mining, not holmium powder or stone or electrophages.
-data.raw["simple-entity"]["fulgurite"].minable.results = { {type = "item", name = "fulgorite-shard", amount_min = 4, amount_max = 8} }
-data.raw["simple-entity"]["fulgurite-small"].minable.results = { {type = "item", name = "fulgorite-shard", amount_min = 2, amount_max = 4} }
+RAW["simple-entity"]["fulgurite"].minable.results = { {type = "item", name = "fulgorite-shard", amount_min = 4, amount_max = 8} }
+RAW["simple-entity"]["fulgurite-small"].minable.results = { {type = "item", name = "fulgorite-shard", amount_min = 2, amount_max = 4} }
 
 -- Create item for fulgorite starter.
 local fulgoriteStarterItem = copy(ITEM["holmium-ore"])
@@ -61,9 +61,9 @@ data:extend({crushFulgoriteShardRecipe})
 Tech.addRecipeToTech("holmium-ore", "holmium-processing", 1)
 
 -- Create plant
-local fulgoritePlant = copy(data.raw.plant["jellystem"])
+local fulgoritePlant = copy(RAW.plant["jellystem"])
 fulgoritePlant.name = "fulgorite-plant"
-fulgoritePlant.minable = copy(data.raw["simple-entity"]["fulgurite"].minable)
+fulgoritePlant.minable = copy(RAW["simple-entity"]["fulgurite"].minable)
 fulgoritePlant.harvest_emissions = nil
 fulgoritePlant.emissions_per_second = nil -- They're not really a plant, they're a coral, so shouldn't absorb pollution, unlike jellystem/yumako.
 fulgoritePlant.agricultural_tower_tint = {
@@ -72,10 +72,10 @@ fulgoritePlant.agricultural_tower_tint = {
 }
 fulgoritePlant.variation_weights = nil
 fulgoritePlant.variations = nil
-fulgoritePlant.icon = data.raw["simple-entity"].fulgurite.icon
-data.raw["simple-entity"].fulgurite.hidden_in_factoriopedia = true -- Because we're rather adding the plant.
-data.raw["simple-entity"].fulgurite.factoriopedia_alternative = "fulgorite-plant" -- Redirect to the plant.
---fulgoritePlant.factoriopedia_simulation = data.raw["simple-entity"].fulgurite.factoriopedia_simulation
+fulgoritePlant.icon = RAW["simple-entity"].fulgurite.icon
+RAW["simple-entity"].fulgurite.hidden_in_factoriopedia = true -- Because we're rather adding the plant.
+RAW["simple-entity"].fulgurite.factoriopedia_alternative = "fulgorite-plant" -- Redirect to the plant.
+--fulgoritePlant.factoriopedia_simulation = RAW["simple-entity"].fulgurite.factoriopedia_simulation
 fulgoritePlant.factoriopedia_simulation = nil -- The simulation above looks stupid because it shows the tiny growing plant, not full-grown plant.
 fulgoritePlant.order = "a[tree]-b[fulgora]" -- Between Nauvis tree and Gleba trees.
 fulgoritePlant.pictures = {
@@ -90,7 +90,7 @@ fulgoritePlant.pictures = {
 	},
 }
 -- Stuff below is to make it grow on Fulgoran tiles. Seems it grows on any tile in its autoplace, but it's not documented anywhere.
-fulgoritePlant.autoplace = copy(data.raw["simple-entity"].fulgurite.autoplace)
+fulgoritePlant.autoplace = copy(RAW["simple-entity"].fulgurite.autoplace)
 local growableFulgoraTiles = {"fulgoran-dust", "fulgoran-dunes", "fulgoran-sand", "fulgoran-rock", "fulgoran-walls", "fulgoran-paving", "fulgoran-conduit", "fulgoran-machinery"}
 fulgoritePlant.autoplace.tile_restriction = growableFulgoraTiles
 fulgoritePlant.growth_ticks = 60 * 60 * 20 -- Gleba plants are 5 minutes. Making this longer bc they can be planted anywhere, but not too much since yield is low.
@@ -101,8 +101,8 @@ fulgoritePlant.minable.mining_particle = "stone-particle"
 data:extend({fulgoritePlant})
 
 -- Hide "fulgorite pieces" simple entity from Factoriopedia to not confuse people.
-data.raw["simple-entity"]["fulgurite-small"].hidden_in_factoriopedia = true
-data.raw["simple-entity"]["fulgurite-small"].factoriopedia_alternative = "fulgorite-plant"
+RAW["simple-entity"]["fulgurite-small"].hidden_in_factoriopedia = true
+RAW["simple-entity"]["fulgurite-small"].factoriopedia_alternative = "fulgorite-plant"
 
 -- Create recipe for making fulgorite starters from electrophages plus fulgorite shards.
 local fulgoriteStarterRecipe = copy(RECIPE["electrophage-cultivation"])

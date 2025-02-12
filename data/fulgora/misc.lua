@@ -1,5 +1,5 @@
 -- Change scrap recycling outputs.
-data.raw["recipe"]["scrap-recycling"].results = {
+RAW["recipe"]["scrap-recycling"].results = {
 	{ type = "item", name = "rusty-iron-gear-wheel", amount = 1, probability = 0.10, show_details_in_recipe_tooltip = false },
 
 	{ type = "item", name = "low-density-structure", amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false },
@@ -88,7 +88,7 @@ for _, vals in pairs{
 		electrophages = {6, 12, nil},
 	},
 } do
-	local ruin = data.raw[vals.type or "simple-entity"][vals.name]
+	local ruin = RAW[vals.type or "simple-entity"][vals.name]
 	assert(ruin ~= nil, "Fulgoran ruin " .. vals.name .. " not found")
 	local scrapHalf = math.floor(vals.scrapCount / 2)
 	local scrapMin = vals.scrapCount - scrapHalf

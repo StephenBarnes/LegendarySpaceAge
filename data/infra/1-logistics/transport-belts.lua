@@ -55,9 +55,9 @@ for _, vals in pairs{
 	local undergroundName = vals.prefix .. "underground-belt"
 	local splitterName = vals.prefix .. "splitter"
 
-	local beltEnt = data.raw["transport-belt"][beltName]
-	local undergroundEnt = data.raw["underground-belt"][undergroundName]
-	local splitterEnt = data.raw["splitter"][splitterName]
+	local beltEnt = RAW["transport-belt"][beltName]
+	local undergroundEnt = RAW["underground-belt"][undergroundName]
+	local splitterEnt = RAW["splitter"][splitterName]
 
 	local beltItem = ITEM[beltName]
 	local undergroundItem = ITEM[undergroundName]

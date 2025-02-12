@@ -1,6 +1,6 @@
 -- This file will unlock the heating tower early, and create the fluid heating tower. Also handle existing heating-tower tech on Gleba.
 
-local towerEnt = data.raw.reactor["heating-tower"]
+local towerEnt = RAW.reactor["heating-tower"]
 towerEnt.subgroup = "energy"
 
 -- Create entity for fluid heating tower

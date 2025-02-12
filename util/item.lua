@@ -15,7 +15,7 @@ end
 
 Item.multiplyWeight = function(itemName, multiplier, typeName)
 	typeName = typeName or "item"
-	local item = data.raw[typeName][itemName]
+	local item = RAW[typeName][itemName]
 	if item == nil then
 		log("ERROR: Couldn't find item "..itemName.." to multiply weight of.")
 		return

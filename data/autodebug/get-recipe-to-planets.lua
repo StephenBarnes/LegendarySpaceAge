@@ -5,10 +5,10 @@ local Util = require("data.autodebug.util")
 -- Get surface properties for planet, or "space".
 local function getSurfaceProperties(planetName)
 	if planetName == "space" then
-		return data.raw.surface["space-platform"].surface_properties
+		return RAW.surface["space-platform"].surface_properties
 	else
-		assert(data.raw.planet[planetName], "Unknown planet: " .. serpent.line(planetName))
-		return data.raw.planet[planetName].surface_properties
+		assert(RAW.planet[planetName], "Unknown planet: " .. serpent.line(planetName))
+		return RAW.planet[planetName].surface_properties
 	end
 end
 
@@ -19,7 +19,7 @@ local function getSurfacePropertyValue(propertyName, properties)
 	if properties[propertyName] ~= nil then
 		return properties[propertyName]
 	else
-		return data.raw["surface-property"][propertyName].default_value
+		return RAW["surface-property"][propertyName].default_value
 	end
 end
 

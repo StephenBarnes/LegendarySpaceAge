@@ -2,14 +2,14 @@
 
 ---@type data.FurnacePrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
-local wastePump = copy(data.raw["offshore-pump"]["offshore-pump"])
+local wastePump = copy(RAW["offshore-pump"]["offshore-pump"])
 wastePump.type = "furnace"
 wastePump.name = "waste-pump"
 wastePump.crafting_categories = {"waste-pump"}
 wastePump.crafting_speed = 1
 wastePump.source_inventory_size = 0
 wastePump.result_inventory_size = 0
-wastePump.energy_source = copy(data.raw.pump.pump.energy_source)
+wastePump.energy_source = copy(RAW.pump.pump.energy_source)
 wastePump.energy_source.emissions_per_minute = {pollution = 1} -- This gets multiplied by the emissions multiplier for the specific venting recipe.
 wastePump.energy_source.drain = "0W"
 wastePump.energy_usage = "30kW"
@@ -51,7 +51,7 @@ for _, dir in pairs(wastePump.graphics_set.animation) do
 end
 data:extend{wastePump}
 
-local wastePumpCraftingCategory = copy(data.raw["recipe-category"]["crafting"])
+local wastePumpCraftingCategory = copy(RAW["recipe-category"]["crafting"])
 wastePumpCraftingCategory.name = "waste-pump"
 data:extend{wastePumpCraftingCategory}
 

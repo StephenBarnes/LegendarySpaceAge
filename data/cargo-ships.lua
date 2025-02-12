@@ -5,17 +5,17 @@
 Tech.hideTech("oversea-energy-distribution")
 Recipe.hide("floating-electric-pole")
 ITEM["floating-electric-pole"].hidden = true
-data.raw["electric-pole"]["floating-electric-pole"].hidden = true
+RAW["electric-pole"]["floating-electric-pole"].hidden = true
 
 -- Remove tech and recipes for automated bridges.
 Tech.hideTech("automated_bridges")
 Recipe.hide("bridge_base")
 ITEM["bridge_base"].hidden = true
-data.raw["train-stop"]["bridge_base"].hidden = true
+RAW["train-stop"]["bridge_base"].hidden = true
 
 -- Hide indep-boat separate from regular boat.
-data.raw.car["indep-boat"].hidden = true
-data.raw.car["indep-boat"].factoriopedia_alternative = "boat"
+RAW.car["indep-boat"].hidden = true
+RAW.car["indep-boat"].factoriopedia_alternative = "boat"
 
 -- TODO move around techs - ships should be unlocked on Aquilo, probably.
 

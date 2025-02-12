@@ -3,7 +3,7 @@
 
 local constants = require("data.petrochem.constants")
 
-local gasWell = copy(data.raw.resource["crude-oil"])
+local gasWell = copy(RAW.resource["crude-oil"])
 gasWell.name = "natural-gas-well"
 gasWell.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/natural-gas-well-icon.png", icon_size = 64, mipmap_count = 4}}
 gasWell.icon = nil
@@ -16,9 +16,9 @@ gasWell.minable.results = {{
 gasWell.resource_patch_search_radius = 20
 -- Leaving the autoplace the same as crude oil.
 gasWell.map_color = constants.natgasColor
-gasWell.stages = copy(data.raw.resource["lithium-brine"].stages)
+gasWell.stages = copy(RAW.resource["lithium-brine"].stages)
 gasWell.stages.layers[1].filename = "__LegendarySpaceAge__/graphics/petrochem/natural-gas-well.png"
-gasWell.stateless_visualisation = copy(data.raw.resource["lithium-brine"].stateless_visualisation)
+gasWell.stateless_visualisation = copy(RAW.resource["lithium-brine"].stateless_visualisation)
 gasWell.stateless_visualisation[1].animation.tint = constants.natgasSmokeTint
 gasWell.stateless_visualisation[2].animation.tint = constants.natgasSmokeTint
 gasWell.stateless_visualisation[3].animation.tint = constants.natgasSmokeTint

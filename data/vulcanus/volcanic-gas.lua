@@ -65,8 +65,8 @@ table.insert(TECH["foundry"].prerequisites, "volcanic-gas-processing")
 
 -- Make the Vulcanus geysers produce volcanic gas, and a bit of sulfur.
 -- In base Space Age, they give 10 sulfuric acid.
-data.raw.resource["sulfuric-acid-geyser"].minable.result = nil
-data.raw.resource["sulfuric-acid-geyser"].minable.results = {
+RAW.resource["sulfuric-acid-geyser"].minable.result = nil
+RAW.resource["sulfuric-acid-geyser"].minable.results = {
 	{type = "fluid", name = "volcanic-gas", amount = 10},
 	{type = "item", name = "sulfur", amount = 1, probability = .02},
 }

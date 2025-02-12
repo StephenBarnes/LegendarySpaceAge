@@ -16,9 +16,9 @@ local newProbs = {
 	-- For landfill it's zero. Leaving as zero.
 }
 for name, prob in pairs(newProbs) do
-	if not data.raw.tile[name] then
+	if not RAW.tile[name] then
 		log("Error: No tile named " .. name .. " to change.")
 	else
-		data.raw.tile[name].decorative_removal_probability = prob
+		RAW.tile[name].decorative_removal_probability = prob
 	end
 end

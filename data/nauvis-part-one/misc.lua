@@ -3,4 +3,4 @@
 --TECH["fish-breeding"].prerequisites = {"agricultural-science-pack"}
 
 -- Change fish spoil timer to a more sane number. No fun allowed.
-data.raw.capsule["raw-fish"].spoil_ticks = 60 * 60 * 60 * 2 -- 2 hours.
+RAW.capsule["raw-fish"].spoil_ticks = 60 * 60 * 60 * 2 -- 2 hours.

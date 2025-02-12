@@ -12,7 +12,7 @@ TECH["tree-seeding"].unit = {
 }
 
 -- Remove placement restrictions for agricultural tower.
-data.raw["agricultural-tower"]["agricultural-tower"].surface_conditions = nil
+RAW["agricultural-tower"]["agricultural-tower"].surface_conditions = nil
 
 -- Gleba needs ag tower.
 Tech.addTechDependency("tree-seeding", "planet-discovery-gleba")
@@ -28,7 +28,7 @@ Tech.addRecipeToTech("nutrients-from-spoilage", "biochamber", 3)
 RECIPE["nutrients-from-spoilage"].category = "organic"
 
 -- Edit results from mining the living trees. They should give seeds directly, then we add recipe for seed -> sapling using fertilizer.
--- There's a lot of different types of trees, so I'm just going to look through everything in data.raw.tree and check if it's minable is exactly 4 wood and nothing else.
+-- There's a lot of different types of trees, so I'm just going to look through everything in RAW.tree and check if it's minable is exactly 4 wood and nothing else.
 ---@param tree data.TreePrototype
 local function isNormalTree(tree)
 	return tree.minable and
@@ -67,14 +67,14 @@ local newDeadTreeMinableResults = {
 		amount = 4,
 	},
 }
-for _, tree in pairs(data.raw.tree) do
+for _, tree in pairs(RAW.tree) do
 	if isNormalTree(tree) then
 		tree.minable.results = newTreeMinableResults
 	elseif isDeadTree(tree) then
 		tree.minable.results = newDeadTreeMinableResults
 	end
 end
-data.raw.plant["tree-plant"].minable.results = newTreeMinableResults
+RAW.plant["tree-plant"].minable.results = newTreeMinableResults
 
 -- Create item subgroup for "early agriculture".
 data:extend{
@@ -85,7 +85,7 @@ data:extend{
 		order = "gf",
 	},
 }
-data.raw["item-subgroup"]["agriculture-processes"].order = "m2"
+RAW["item-subgroup"]["agriculture-processes"].order = "m2"
 
 -- Organize agriculture row.
 ITEM["wood"].subgroup = "early-agriculture"
@@ -175,7 +175,7 @@ saplingRecipe.allow_decomposition = true
 data:extend{saplingRecipe}
 
 -- Edit growth time of saplings.
-data.raw.plant["tree-plant"].growth_ticks = 60 * 60 * 6 -- Originally 10 minutes.
+RAW.plant["tree-plant"].growth_ticks = 60 * 60 * 6 -- Originally 10 minutes.
 
 -- Add recipes to tree-seeding tech.
 TECH["tree-seeding"].effects = {

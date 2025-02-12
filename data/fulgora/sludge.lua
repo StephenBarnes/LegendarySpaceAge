@@ -60,5 +60,5 @@ data:extend({
 	}
 })
 -- Recipe gets added to tech created in filtration.lua.
-data.raw["tile"]["oil-ocean-shallow"].fluid = "fulgoran-sludge"
-data.raw["tile"]["oil-ocean-deep"].fluid = "fulgoran-sludge"
+RAW["tile"]["oil-ocean-shallow"].fluid = "fulgoran-sludge"
+RAW["tile"]["oil-ocean-deep"].fluid = "fulgoran-sludge"

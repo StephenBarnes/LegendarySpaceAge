@@ -9,7 +9,7 @@ for size, multiplier in pairs{
 	big = 3,
 	behemoth = 4,
 } do
-	local shell = data.raw["simple-entity"][size.."-stomper-shell"]
+	local shell = RAW["simple-entity"][size.."-stomper-shell"]
 	shell.minable.results = {
 		{type = "item", name = "chitin-fragments", amount_min = 0, amount_max = 20 * multiplier},
 		{type = "item", name = "marrow", amount_min = 0, amount_max = 5 * multiplier},
@@ -20,8 +20,8 @@ for size, multiplier in pairs{
 end
 
 --[[ SETTING AUTOPLACES FOR SMALL AND MEDIUM SKULLS.
-There's data.raw.corpse[prefix.."stomper-corpse"] (for prefix "small-", "medium-", "big-"). These are just decoratives.
-There's also data.raw["simple-entity"][prefix.."stomper-shell"] which is the created shell.
+There's RAW.corpse[prefix.."stomper-corpse"] (for prefix "small-", "medium-", "big-"). These are just decoratives.
+There's also RAW["simple-entity"][prefix.."stomper-shell"] which is the created shell.
 We want to autoplace all of them, basically just scattering small amounts everywhere in the lowlands, just roughly-uniformly distributed. Similar to stromatolites.
 But, currently when placed they also create the corpse. So we create no-corpse versions of them to autoplace.
 
@@ -38,7 +38,7 @@ That still doesn't really match stromatolite distribution - stromatolites are al
 	On the whole, decided against it. Rather have stromatolites in the water, skulls on land.
 ]]
 
-local smallShellNoCorpse = copy(data.raw["simple-entity"]["small-stomper-shell"])
+local smallShellNoCorpse = copy(RAW["simple-entity"]["small-stomper-shell"])
 smallShellNoCorpse.name = "small-stomper-shell-no-corpse"
 smallShellNoCorpse.localised_name = {"entity-name.small-stomper-shell"}
 smallShellNoCorpse.created_effect = nil -- Don't create a corpse.
@@ -56,9 +56,9 @@ smallShellNoCorpse.hidden = true
 smallShellNoCorpse.hidden_in_factoriopedia = true
 smallShellNoCorpse.factoriopedia_alternative = "small-stomper-shell"
 data:extend{smallShellNoCorpse}
-data.raw.planet.gleba.map_gen_settings.autoplace_settings.entity.settings["small-stomper-shell-no-corpse"] = {}
+RAW.planet.gleba.map_gen_settings.autoplace_settings.entity.settings["small-stomper-shell-no-corpse"] = {}
 
-local mediumShellNoCorpse = copy(data.raw["simple-entity"]["medium-stomper-shell"])
+local mediumShellNoCorpse = copy(RAW["simple-entity"]["medium-stomper-shell"])
 mediumShellNoCorpse.name = "medium-stomper-shell-no-corpse"
 mediumShellNoCorpse.localised_name = {"entity-name.medium-stomper-shell"}
 mediumShellNoCorpse.created_effect = nil -- Don't create a corpse.
@@ -70,4 +70,4 @@ mediumShellNoCorpse.hidden = true
 mediumShellNoCorpse.hidden_in_factoriopedia = true
 mediumShellNoCorpse.factoriopedia_alternative = "medium-stomper-shell"
 data:extend{mediumShellNoCorpse}
-data.raw.planet.gleba.map_gen_settings.autoplace_settings.entity.settings["medium-stomper-shell-no-corpse"] = {}
+RAW.planet.gleba.map_gen_settings.autoplace_settings.entity.settings["medium-stomper-shell-no-corpse"] = {}

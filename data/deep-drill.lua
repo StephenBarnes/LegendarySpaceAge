@@ -111,7 +111,7 @@ ent.graphics_set = {
 	},
 	reset_animation_when_frozen = true,
 }
-local bigDrill = data.raw["mining-drill"]["big-mining-drill"]
+local bigDrill = RAW["mining-drill"]["big-mining-drill"]
 ent.working_sound = {
 	main_sounds = {
 		{

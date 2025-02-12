@@ -1,4 +1,4 @@
-local presets = data.raw["map-gen-presets"]["default"]
+local presets = RAW["map-gen-presets"]["default"]
 ---@type data.MapGenPreset
 local custom = {order = "aaa", basic_settings = {autoplace_controls = {}, property_expression_names = {}}, advanced_settings = {difficulty_settings = {}, enemy_evolution = {}, asteroids = {}}}
 presets["LegendarySpaceAge"] = custom
@@ -37,6 +37,6 @@ custom.basic_settings.starting_area = 2
 -- Add custom elevation. TODO currently this is the same as the default, but still adding here so I can check they used the main LSA mapgen preset.
 custom.basic_settings.property_expression_names.elevation = "LSA-elevation"
 
-local lsaElevation = copy(data.raw["noise-expression"]["elevation"])
+local lsaElevation = copy(RAW["noise-expression"]["elevation"])
 lsaElevation.name = "LSA-elevation"
 data:extend{lsaElevation}

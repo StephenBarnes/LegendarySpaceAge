@@ -1,7 +1,7 @@
 -- This file changes cargo bays. We disallow them on space platforms, and prevent launching them on rockets. So it's harder to store anything. (Except belt weaving; might nerf that later, TODO.)
 
 -- Block building in space.
-local ent = data.raw["cargo-bay"]["cargo-bay"]
+local ent = RAW["cargo-bay"]["cargo-bay"]
 ent.surface_conditions = {{
 	property = "gravity",
 	min = 0.1,
@@ -23,7 +23,7 @@ Looks like giga hatch 1 is for receiving, giga hatch 2 is for sending cargo pods
 And hatches 1-3 are receiving, 4-6 are sending.
 So, tripled the number of cargo hatches, and assigned covered_hatches. Now it receives up to 9 pods each load, good.
 ]]
-local cargoParams = data.raw["space-platform-hub"]["space-platform-hub"].cargo_station_parameters
+local cargoParams = RAW["space-platform-hub"]["space-platform-hub"].cargo_station_parameters
 local hatches = cargoParams.hatch_definitions
 assert(hatches ~= nil)
 assert(#hatches == 6)

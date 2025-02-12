@@ -71,8 +71,8 @@ data:extend{
 -- Hide fluid wagons.
 Tech.hideTech("fluid-wagon")
 Recipe.hide("fluid-wagon")
-data.raw["item-with-entity-data"]["fluid-wagon"].hidden_in_factoriopedia = true
-data.raw["fluid-wagon"]["fluid-wagon"].hidden_in_factoriopedia = true
+RAW["item-with-entity-data"]["fluid-wagon"].hidden_in_factoriopedia = true
+RAW["fluid-wagon"]["fluid-wagon"].hidden_in_factoriopedia = true
 -- Can't do .hidden = true because that crashes Factory Planner.
 
 -- TODO look through fluids, maybe add more barrelling recipes. Eg for Gleban slime.

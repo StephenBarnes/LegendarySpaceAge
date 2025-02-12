@@ -117,7 +117,7 @@ ventRecipe.results = {{type = "item", name = "gas-vent", amount = 1}}
 -- TODO decide on ingredients
 data:extend{ventRecipe}
 
-local ventRecipeCategory = copy(data.raw["recipe-category"]["crafting"])
+local ventRecipeCategory = copy(RAW["recipe-category"]["crafting"])
 ventRecipeCategory.name = "gas-venting"
 data:extend{ventRecipeCategory}
 

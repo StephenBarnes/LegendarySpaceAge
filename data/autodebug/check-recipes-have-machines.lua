@@ -49,7 +49,7 @@ local function checkAllRecipesHaveMachines()
 	-- Build a table from crafting category to list of machines.
 	local categoryToMachines = {}
 	for _, machineType in pairs{"assembling-machine", "furnace", "rocket-silo"} do
-		for _, machine in pairs(data.raw[machineType]) do
+		for _, machine in pairs(RAW[machineType]) do
 			for _, category in pairs(machine.crafting_categories) do
 				categoryToMachines[category] = categoryToMachines[category] or {}
 				table.insert(categoryToMachines[category], machine)
@@ -61,7 +61,7 @@ local function checkAllRecipesHaveMachines()
 		type = "character",
 		name = "character",
 	}
-	for _, category in pairs(data.raw.character.character.crafting_categories) do
+	for _, category in pairs(RAW.character.character.crafting_categories) do
 		categoryToMachines[category] = categoryToMachines[category] or {}
 		table.insert(categoryToMachines[category], dummyMachine)
 	end

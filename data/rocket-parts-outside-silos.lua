@@ -23,11 +23,11 @@ rocketPartAssemblyRecipe.name = "assembled-rocket-part"
 rocketPartAssemblyRecipe.ingredients = {{type = "item", name = "rocket-part", amount = 1}}
 rocketPartAssemblyRecipe.results = {{type = "item", name = "assembled-rocket-part", amount = 1}}
 data:extend{rocketPartAssemblyRecipe}
-data.raw["rocket-silo"]["rocket-silo"].fixed_recipe = "assembled-rocket-part"
+RAW["rocket-silo"]["rocket-silo"].fixed_recipe = "assembled-rocket-part"
 
 RECIPE["rocket-part"].category = "crafting"
 
 Tech.addRecipeToTech("assembled-rocket-part", "rocket-silo", 3)
 
 -- Disable prod modules in the silo itself, since we allow prod modules in assemblers.
-data.raw["rocket-silo"]["rocket-silo"].allowed_module_categories = {"speed", "efficiency"}
+RAW["rocket-silo"]["rocket-silo"].allowed_module_categories = {"speed", "efficiency"}

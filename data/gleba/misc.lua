@@ -28,14 +28,14 @@ RECIPE["agricultural-science-pack"].ingredients = {
 ITEM.spoilage.spoil_ticks = 60 * 60 * 20
 
 -- Remove stone spawns from Gleba.
-data.raw.planet.gleba.map_gen_settings.autoplace_settings.entity.settings.stone = nil
-data.raw["autoplace-control"]["gleba_stone"].hidden = true
+RAW.planet.gleba.map_gen_settings.autoplace_settings.entity.settings.stone = nil
+RAW["autoplace-control"]["gleba_stone"].hidden = true
 
 --[[ Increase distance to first enemies on Gleba.
--- data.raw["noise-expression"]["gleba_enemy_base_frequency"].expression = "(0.000006 * (clamp(distance-5000, 0, 2400) / 325)) * control:gleba_enemy_base:frequency"
+-- RAW["noise-expression"]["gleba_enemy_base_frequency"].expression = "(0.000006 * (clamp(distance-5000, 0, 2400) / 325)) * control:gleba_enemy_base:frequency"
 That doesn't really work. Maybe rather look at gleba_starting_enemies_safe, gleba_starting_enemies, gleba_starting_area_multiplier.
 	Gleba_starting_area_multiplier is by default 0.7.
--- data.raw["noise-expression"]["gleba_starting_area_multiplier"].expression = "2"
+-- RAW["noise-expression"]["gleba_starting_area_multiplier"].expression = "2"
 That doesn't work, makes starting highlands region massive.
 Var "gleba_starting_enemies_safe" creates small spawners.
 Then "gleba_spawner" creates the bigger spawners. Default: expression = "max(0.01 * gleba_starting_enemies, max(min(0.02, enemy_autoplace_base(0, 8)), min(0.001, gleba_fertile_spots_coastal * 5000 - gleba_biome_mask_green * 25000)) * (distance > 500 * gleba_starting_area_multiplier)) * gleba_above_deep_water_mask"
@@ -43,7 +43,7 @@ So, changing this to increase distance to them, by increasing the distance>500 p
 	(Eg if this is 500, then big enemies start spawning at distance 500 * 0.7 = 350. (0.7 is the starting area multiplier.)
 	The default of 500 is too close. Setting it to 5000 is too far. Setting it to 1000 is a bit too far. Using 900.
 ]]
-data.raw["noise-expression"]["gleba_spawner"].expression = "max(0.01 * gleba_starting_enemies, max(min(0.02, enemy_autoplace_base(0, 8)), min(0.001, gleba_fertile_spots_coastal * 5000 - gleba_biome_mask_green * 25000)) * (distance > 900 * gleba_starting_area_multiplier)) * gleba_above_deep_water_mask"
+RAW["noise-expression"]["gleba_spawner"].expression = "max(0.01 * gleba_starting_enemies, max(min(0.02, enemy_autoplace_base(0, 8)), min(0.001, gleba_fertile_spots_coastal * 5000 - gleba_biome_mask_green * 25000)) * (distance > 900 * gleba_starting_area_multiplier)) * gleba_above_deep_water_mask"
 
 -- Hide recipe for spoilage-to-carbon.
 Recipe.hide("burnt-spoilage")
@@ -60,11 +60,11 @@ Recipe.hide("iron-bacteria")
 Recipe.hide("copper-bacteria")
 
 -- Change stromatolite products - no bacteria, more ore and stone.
-data.raw["simple-entity"]["iron-stromatolite"].minable.results = {
+RAW["simple-entity"]["iron-stromatolite"].minable.results = {
 	{type = "item", name = "stone", amount_min = 5, amount_max = 15}, -- Changed 3-7 to 5-15.
 	{type = "item", name = "iron-ore", amount_min = 15, amount_max = 25}, -- Changed 13-17 to 15-25.
 }
-data.raw["simple-entity"]["copper-stromatolite"].minable.results = {
+RAW["simple-entity"]["copper-stromatolite"].minable.results = {
 	{type = "item", name = "stone", amount_min = 5, amount_max = 15}, -- Changed 3-7 to 5-15.
 	{type = "item", name = "copper-ore", amount_min = 15, amount_max = 25}, -- Changed 13-17 to 15-25.
 }

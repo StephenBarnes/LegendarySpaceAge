@@ -25,7 +25,7 @@ charFurnace.show_recipe_icon_on_map = false
 data:extend{charFurnace}
 
 -- Create corpse.
-local charFurnaceRemnants = copy(data.raw.corpse["stone-furnace-remnants"])
+local charFurnaceRemnants = copy(RAW.corpse["stone-furnace-remnants"])
 charFurnaceRemnants.name = "char-furnace-remnants"
 charFurnaceRemnants.animation = make_rotated_animation_variations_from_sheet(1,
 	{
@@ -47,7 +47,7 @@ charFurnaceItem.icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png"
 data:extend{charFurnaceItem}
 
 -- Create recipe category.
-local charFurnaceRecipeCategory = copy(data.raw["recipe-category"]["smelting"])
+local charFurnaceRecipeCategory = copy(RAW["recipe-category"]["smelting"])
 charFurnaceRecipeCategory.name = "char-furnace"
 data:extend{charFurnaceRecipeCategory}
 

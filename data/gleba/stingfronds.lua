@@ -6,7 +6,7 @@
 
 ---@type data.PlantPrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
-local stingfrondPlant = copy(data.raw.tree.stingfrond)
+local stingfrondPlant = copy(RAW.tree.stingfrond)
 stingfrondPlant.type = "plant"
 
 stingfrondPlant.growth_ticks = 60 * 60 * 8 -- 8 minutes; compare to yumako/jellystem at 5 minutes.
@@ -37,7 +37,7 @@ stingfrondPlant.minable.results = {
 stingfrondPlant.harvest_emissions = { spores = 15 }
 
 -- Delete old stingfrond tree, add new stingfrond plant.
-data.raw.tree.stingfrond = nil
+RAW.tree.stingfrond = nil
 data:extend({stingfrondPlant})
 
 ------------------------------------------------------------------------

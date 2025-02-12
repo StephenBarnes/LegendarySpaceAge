@@ -3,7 +3,7 @@ local FORCE_SETTINGS = true
 local Export = {}
 
 Export.setDefault = function(name, settingType, value)
-	local s = data.raw[settingType .. "-setting"][name]
+	local s = RAW[settingType .. "-setting"][name]
 	if s == nil then
 		log("Couldn't find setting "..name.." to set default value for.")
 	else
@@ -12,7 +12,7 @@ Export.setDefault = function(name, settingType, value)
 end
 
 Export.forceSetting = function(name, settingType, value)
-	local s = data.raw[settingType .. "-setting"][name]
+	local s = RAW[settingType .. "-setting"][name]
 	if s == nil then
 		log("ERROR: Couldn't find setting "..name.." to force value for.")
 		return

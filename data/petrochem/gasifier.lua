@@ -136,7 +136,7 @@ gasifierEnt.fluid_boxes = {
 		filter = "syngas",
 	},
 }
-gasifierEnt.surface_conditions = data.raw["mining-drill"]["burner-mining-drill"].surface_conditions
+gasifierEnt.surface_conditions = RAW["mining-drill"]["burner-mining-drill"].surface_conditions
 data:extend{gasifierEnt}
 
 ---@type data.AssemblingMachinePrototype
@@ -201,7 +201,7 @@ fluidGasifierRecipe.name = "fluid-fuelled-gasifier"
 fluidGasifierRecipe.results = {{type = "item", name = "fluid-fuelled-gasifier", amount = 1}}
 data:extend{fluidGasifierRecipe}
 
-local gasifierRecipeCategory = copy(data.raw["recipe-category"]["crafting"])
+local gasifierRecipeCategory = copy(RAW["recipe-category"]["crafting"])
 gasifierRecipeCategory.name = "gasifier"
 data:extend{gasifierRecipeCategory}
 

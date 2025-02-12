@@ -31,4 +31,4 @@ Tech.removeRecipeFromTech("gas-furnace", "fluid-handling")
 Tech.addRecipeToTech("gas-furnace", "advanced-material-processing")
 
 -- Should only be able to place where there's oxygen.
-gasFurnaceEnt.surface_conditions = data.raw["mining-drill"]["burner-mining-drill"].surface_conditions
+gasFurnaceEnt.surface_conditions = RAW["mining-drill"]["burner-mining-drill"].surface_conditions

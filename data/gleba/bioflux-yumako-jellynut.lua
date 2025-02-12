@@ -77,13 +77,13 @@ ITEM["yumako-seed"].plant_result = nil
 ITEM["yumako-seed"].place_result = nil
 ITEM["jellynut-seed"].plant_result = nil
 ITEM["jellynut-seed"].place_result = nil
-data.raw.plant["jellystem"].placeable_by = {item = "fertilized-jellynut-seed", count = 1}
-data.raw.plant["yumako-tree"].placeable_by = {item = "fertilized-yumako-seed", count = 1}
+RAW.plant["jellystem"].placeable_by = {item = "fertilized-jellynut-seed", count = 1}
+RAW.plant["yumako-tree"].placeable_by = {item = "fertilized-yumako-seed", count = 1}
 
 -- Change yields of jellystem and yumako - default was 50, reducing that to 30.
 -- Note 1 fruit is 2 mash or 4 jelly, so roughly 1 fruits -> 1 bioflux with cultivation recipes.
-data.raw.plant["yumako-tree"].minable.results = {{type = "item", name = "yumako", amount_min = 20, amount_max = 40}}
-data.raw.plant["jellystem"].minable.results = {{type = "item", name = "jellynut", amount_min = 20, amount_max = 40}}
+RAW.plant["yumako-tree"].minable.results = {{type = "item", name = "yumako", amount_min = 20, amount_max = 40}}
+RAW.plant["jellystem"].minable.results = {{type = "item", name = "jellynut", amount_min = 20, amount_max = 40}}
 
 -- Create recipes for fertilized seeds.
 local fertilizedYumakoSeedRecipe = copy(RECIPE["bioflux"])

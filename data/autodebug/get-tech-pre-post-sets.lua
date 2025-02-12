@@ -63,7 +63,7 @@ local implicitUnlocksForAllPlanets = {
 }
 -- Add spoilage rules.
 for itemType, _ in pairs(defines.prototypes.item) do
-	for _, item in pairs(data.raw[itemType] or {}) do
+	for _, item in pairs(RAW[itemType] or {}) do
 		if item.spoil_result ~= nil then
 			table.insert(implicitUnlocksForAllPlanets, {{"item:"..item.name}, {"item:"..item.spoil_result}})
 		end

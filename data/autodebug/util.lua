@@ -15,7 +15,7 @@ Export.getCanonicalName = function(ingredientOrResult, planet)
 end
 
 Export.allPlanets = {}
-for planetName, _ in pairs(data.raw.planet) do
+for planetName, _ in pairs(RAW.planet) do
 	Export.allPlanets[planetName] = true
 end
 Export.allPlanets.space = true

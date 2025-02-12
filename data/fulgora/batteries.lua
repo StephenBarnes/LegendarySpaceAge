@@ -270,7 +270,7 @@ local dischargerAnimation = {
 }
 
 -- Create entities for charger and discharger buildings.
-local accumulator = data.raw.accumulator.accumulator
+local accumulator = RAW.accumulator.accumulator
 data:extend({
 	{
 		type = "furnace",
@@ -435,8 +435,8 @@ Tech.addRecipeToTech("charged-battery", "battery", 2)
 Tech.addRecipeToTech("charged-holmium-battery", "holmium-battery")
 
 -- Reduce efficiency of lightning rods.
-data.raw["lightning-attractor"]["lightning-rod"].efficiency = .1 -- Changing 20% to 10%.
-data.raw["lightning-attractor"]["lightning-collector"].efficiency = .3 -- Changing 40% to 30%.
+RAW["lightning-attractor"]["lightning-rod"].efficiency = .1 -- Changing 20% to 10%.
+RAW["lightning-attractor"]["lightning-collector"].efficiency = .3 -- Changing 40% to 30%.
 
 -- Add recipe to extract sulfuric acid from batteries - fits with the theme, plus water for sulfuric acid is scarce on Fulgora now.
 data:extend({

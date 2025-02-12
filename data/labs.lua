@@ -15,9 +15,9 @@
 --    Built only in space. So you'll probably want to have a travelling space platform picking up sciences on all planets.
 
 -- Regular labs should only be buildable on Nauvis.
-data.raw.lab.lab.surface_conditions = copy(data.raw.lab.biolab.surface_conditions)
+RAW.lab.lab.surface_conditions = copy(RAW.lab.biolab.surface_conditions)
 -- Pentapod biolabs should only be buildable on Gleba.
-data.raw.lab.glebalab.surface_conditions = {
+RAW.lab.glebalab.surface_conditions = {
 	{
 		property = "pressure",
 		min = 2000,
@@ -25,7 +25,7 @@ data.raw.lab.glebalab.surface_conditions = {
 	},
 }
 -- Space biolabs should only be buildable on space platforms.
-data.raw.lab.biolab.surface_conditions = {
+RAW.lab.biolab.surface_conditions = {
 	{
 		property = "gravity",
 		max = 0,
@@ -33,7 +33,7 @@ data.raw.lab.biolab.surface_conditions = {
 	},
 }
 -- And remove pollution for space biolabs, since it's irrelevant.
-data.raw.lab.biolab.energy_source.emissions_per_minute = nil
+RAW.lab.biolab.energy_source.emissions_per_minute = nil
 
 -- Set stack sizes and rocket capacities.
 ITEM.glebalab.stack_size = 10
@@ -42,13 +42,13 @@ ITEM.glebalab.weight = 10000
 ITEM.biolab.weight = 10000
 
 -- Set module slots.
-data.raw.lab.biolab.module_slots = 8
+RAW.lab.biolab.module_slots = 8
 
 -- Set science pack drain, and crafting speed.
-data.raw.lab.glebalab.researching_speed = 2
-data.raw.lab.biolab.researching_speed = 4
-data.raw.lab.glebalab.science_pack_drain_rate_percent = 50
-data.raw.lab.biolab.science_pack_drain_rate_percent = 25
+RAW.lab.glebalab.researching_speed = 2
+RAW.lab.biolab.researching_speed = 4
+RAW.lab.glebalab.science_pack_drain_rate_percent = 50
+RAW.lab.biolab.science_pack_drain_rate_percent = 25
 
 
 -- Make the pentapod biolabs consume pentapod eggs, and space biolabs consume biter eggs.
@@ -63,14 +63,14 @@ data:extend({
 	},
 })
 -- Egg fuel categories will be added to eggs in constants.lua with fuel.lua.
-data.raw.lab.glebalab.energy_source.fuel_categories = {"activated-pentapod-egg"}
-data.raw.lab.glebalab.energy_source.burner_usage = "food" -- Determines icons and tooltips - either fuel, nutrients, or food.
-data.raw.lab.glebalab.energy_usage = "500kW" -- A pentapod egg is 5MJ, so consumes 1 every 10 seconds. (Modules will probably reduce that to 1/50s.)
-data.raw.lab.biolab.energy_source.type = "burner"
-data.raw.lab.biolab.energy_source.fuel_inventory_size = 1
-data.raw.lab.biolab.energy_source.fuel_categories = {"biter-egg"}
-data.raw.lab.biolab.energy_source.burner_usage = "food"
-data.raw.lab.biolab.energy_usage = "3MW" -- A biter egg is 6MJ, so consumes 1 every 2 seconds. (Modules will probably reduce that to 1/10s.)
+RAW.lab.glebalab.energy_source.fuel_categories = {"activated-pentapod-egg"}
+RAW.lab.glebalab.energy_source.burner_usage = "food" -- Determines icons and tooltips - either fuel, nutrients, or food.
+RAW.lab.glebalab.energy_usage = "500kW" -- A pentapod egg is 5MJ, so consumes 1 every 10 seconds. (Modules will probably reduce that to 1/50s.)
+RAW.lab.biolab.energy_source.type = "burner"
+RAW.lab.biolab.energy_source.fuel_inventory_size = 1
+RAW.lab.biolab.energy_source.fuel_categories = {"biter-egg"}
+RAW.lab.biolab.energy_source.burner_usage = "food"
+RAW.lab.biolab.energy_usage = "3MW" -- A biter egg is 6MJ, so consumes 1 every 2 seconds. (Modules will probably reduce that to 1/10s.)
 
 -- Modify techs.
 -- Move pentapod labs to a separate tech, instead of putting their recipe in bioflux tech.

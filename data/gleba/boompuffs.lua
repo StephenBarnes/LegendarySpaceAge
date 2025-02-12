@@ -14,7 +14,7 @@ local boompuffTint = {
 
 ---@type data.PlantPrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
-local boompuffPlant = copy(data.raw.tree.boompuff)
+local boompuffPlant = copy(RAW.tree.boompuff)
 boompuffPlant.type = "plant"
 
 boompuffPlant.growth_ticks = 60 * 60 * 6 -- 6 minutes; compare to yumako/jellystem at 5 minutes.
@@ -50,7 +50,7 @@ boompuffPlant.minable.results = {
 boompuffPlant.remains_when_mined = nil
 
 -- Delete old boompuff tree, add new boompuff plant.
-data.raw.tree.boompuff = nil
+RAW.tree.boompuff = nil
 data:extend({boompuffPlant})
 
 ------------------------------------------------------------------------
@@ -94,7 +94,7 @@ data:extend{boomnutItem}
 -- Create boomsac item.
 local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
 local sounds = require("__base__.prototypes.entity.sounds")
-local boomsacItem = copy(data.raw.capsule["grenade"])
+local boomsacItem = copy(RAW.capsule["grenade"])
 boomsacItem.name = "boomsac"
 boomsacItem.subgroup = "slipstacks-and-boompuffs"
 boomsacItem.order = "13"
@@ -150,7 +150,7 @@ data:extend{boomsacItem}
 
 ------------------------------------------------------------------------
 -- Create projectile for thrown boomsac.
-local boomsacProjectile = copy(data.raw.projectile["grenade"])
+local boomsacProjectile = copy(RAW.projectile["grenade"])
 boomsacProjectile.name = "boomsac-projectile"
 boomsacProjectile.localised_name = {"item-name.boomsac"}
 boomsacProjectile.hidden = true
@@ -252,5 +252,5 @@ data:extend{tech}
 
 ------------------------------------------------------------------------
 
-data.raw.explosion["boompuff-explosion"].icon = "__base__/graphics/icons/explosion.png"
-data.raw.explosion["boompuff-explosion"].localised_name = {"entity-name.boompuff-explosion"}
+RAW.explosion["boompuff-explosion"].icon = "__base__/graphics/icons/explosion.png"
+RAW.explosion["boompuff-explosion"].localised_name = {"entity-name.boompuff-explosion"}

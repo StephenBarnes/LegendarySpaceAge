@@ -42,13 +42,13 @@ for _, recipeName in pairs({"selector-combinator", "arithmetic-combinator", "dec
 end
 
 -- Hide high-power interface in Factoriopedia since I'm removing it.
-data.raw["item"]["po-interface"].hidden_in_factoriopedia = true
-data.raw["electric-pole"]["po-interface"].hidden_in_factoriopedia = true
+RAW["item"]["po-interface"].hidden_in_factoriopedia = true
+RAW["electric-pole"]["po-interface"].hidden_in_factoriopedia = true
 -- Hide extra Factoriopedia entries.
 -- TODO remove the ones below since mod dev will probably do it.
-data.raw["electric-pole"]["po-interface-east"].hidden_in_factoriopedia = true
-data.raw["electric-pole"]["po-interface-north"].hidden_in_factoriopedia = true
-data.raw["electric-pole"]["po-interface-south"].hidden_in_factoriopedia = true
+RAW["electric-pole"]["po-interface-east"].hidden_in_factoriopedia = true
+RAW["electric-pole"]["po-interface-north"].hidden_in_factoriopedia = true
+RAW["electric-pole"]["po-interface-south"].hidden_in_factoriopedia = true
 
 -- Do we need the big pylons with 5GW power? Graphics are low-res, could upscale.
 -- Fusion reactor consumes 100MW fuel, 10MW electricity, and generates 100MW times neighbor bonus of maybe 600% max. Fusion generator produces 50MW.
@@ -58,11 +58,11 @@ data.raw["electric-pole"]["po-interface-south"].hidden_in_factoriopedia = true
 Tech.hideTech("po-electric-energy-distribution-3")
 Recipe.hide("po-huge-electric-pole")
 ITEM["po-huge-electric-pole"].hidden = true
-data.raw["electric-pole"]["po-huge-electric-pole"].hidden = true
+RAW["electric-pole"]["po-huge-electric-pole"].hidden = true
 RECIPE["po-huge-electric-pole-recycling"] = nil
 Recipe.hide("po-huge-electric-fuse")
 ITEM["po-huge-electric-fuse"].hidden = true
-data.raw["electric-pole"]["po-huge-electric-fuse"].hidden = true
+RAW["electric-pole"]["po-huge-electric-fuse"].hidden = true
 RECIPE["po-huge-electric-fuse-recycling"] = nil
 
 --[[ Obsolete stuff, now that pylons are removed:

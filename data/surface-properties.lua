@@ -2,7 +2,7 @@
 
 -- Create a new "oxygen pressure" parameter.
 -- We could rename the existing one, but it seems to affect the speed of bots. They glitch out when pressure is too low. And it doesn't seem like I can make robots depend on a different property instead.
-local oxygenPressure = copy(data.raw["surface-property"]["pressure"])
+local oxygenPressure = copy(RAW["surface-property"]["pressure"])
 oxygenPressure.name = "oxygen-pressure"
 oxygenPressure.default_value = 0
 data:extend{oxygenPressure}
@@ -15,7 +15,7 @@ for planetName, hPa in pairs{
 	aquilo = 10, -- Liquid ammonia does not favor stable free oxygen in large amounts.
 	gleba = 260, -- The fungal-looking foliage does massive net photosynthesis. Paradoxical "oxygen-rich swamp" where dead biomass gets locked in permanent spoilage loops, never fully breaking down.
 } do
-	data.raw.planet[planetName].surface_properties["oxygen-pressure"] = hPa
+	RAW.planet[planetName].surface_properties["oxygen-pressure"] = hPa
 end
 
 -- Remove crafting conditions for some entities.
@@ -40,7 +40,7 @@ for _, recipeName in pairs{
 end
 
 -- Aquilo should have less solar power in space, so you need a nuclear reactor.
-data.raw.planet.aquilo.solar_power_in_space = .05 -- Changed 60% -> 5%.
+RAW.planet.aquilo.solar_power_in_space = .05 -- Changed 60% -> 5%.
 
 -- Search for things requiring pressure over 10hPa, and change them to require oxygen-pressure over 10hPa.
 for _, typeName in pairs{
@@ -51,7 +51,7 @@ for _, typeName in pairs{
 	"boiler",
 	"reactor"
 } do
-	for _, thing in pairs(data.raw[typeName]) do
+	for _, thing in pairs(RAW[typeName]) do
 		if thing.surface_conditions ~= nil then
 			for _, condition in pairs(thing.surface_conditions) do
 				if condition.property == "pressure" and condition.min == 10 and condition.max == nil then
@@ -63,7 +63,7 @@ for _, typeName in pairs{
 end
 
 -- Create surface property for "surface stability"
-local surfaceStability = copy(data.raw["surface-property"]["pressure"])
+local surfaceStability = copy(RAW["surface-property"]["pressure"])
 surfaceStability.name = "surface-stability"
 surfaceStability.default_value = 100
 data:extend{surfaceStability}
@@ -72,10 +72,10 @@ for planetName, stabilityPercent in pairs{
 	vulcanus = 90,
 	gleba = 95,
 } do
-	data.raw.planet[planetName].surface_properties["surface-stability"] = stabilityPercent
+	RAW.planet[planetName].surface_properties["surface-stability"] = stabilityPercent
 end
 -- Surface stability in space should be 10%.
-data.raw.surface["space-platform"].surface_properties["surface-stability"] = 10
+RAW.surface["space-platform"].surface_properties["surface-stability"] = 10
 
 -- Make rail only buildable where surface stability at least 80%.
 -- Seems it's copying or sharing surface conditions between all rail types, so adding it to each of them will actually add the same condition many times.
@@ -105,7 +105,7 @@ for _, stabilityTypeKey in pairs{
 	{"cargo-wagon", "cargo-wagon"},
 	{"artillery-wagon", "artillery-wagon"},
 } do
-	local ent = data.raw[stabilityTypeKey[1]][stabilityTypeKey[2]]
+	local ent = RAW[stabilityTypeKey[1]][stabilityTypeKey[2]]
 	if ent.surface_conditions == nil then
 		ent.surface_conditions = {}
 	else
@@ -125,5 +125,5 @@ for planetName, solarInAtmosphere in pairs{
 	fulgora = 10, -- 20 to 10
 	aquilo = 2, -- Increasing 1% to 2% so it's a bit easier to get started.
 } do
-	data.raw.planet[planetName].surface_properties["solar-power"] = solarInAtmosphere
+	RAW.planet[planetName].surface_properties["solar-power"] = solarInAtmosphere
 end

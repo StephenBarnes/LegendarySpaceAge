@@ -7,7 +7,7 @@ Export.die = function(message)
 end
 
 Export.filterExistingItems = function(possibleItems)
-	-- Given a list of possible item IDs, returns a list of item IDs that are in data.raw.
+	-- Given a list of possible item IDs, returns a list of item IDs that are in RAW.
 	local existingItems = {}
 	for _, itemName in pairs(possibleItems) do
 		if ITEM[itemName] ~= nil then

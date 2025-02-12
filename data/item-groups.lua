@@ -4,8 +4,8 @@ Does not handle the tab or subgroups for intermediate factors - those are in int
 ]]
 
 -- Change the space tab's icon, from satellite to rocket silo, since it's now anything after Nauvis.
-data.raw["item-group"]["space"].icon = "__base__/graphics/technology/rocket-silo.png"
-data.raw["item-group"]["space"].icon_size = 256
+RAW["item-group"]["space"].icon = "__base__/graphics/technology/rocket-silo.png"
+RAW["item-group"]["space"].icon_size = 256
 
 data:extend{
 	-- Create subgroup for hot/cold ingots and ingot-heating recipes.
@@ -113,11 +113,11 @@ data:extend{
 local function setSubgroupInOrder(subgroup, kind, things, prefix)
 	if prefix == nil then prefix = "" end
 	for i, thing in pairs(things) do
-		if data.raw[kind][thing] == nil then
-			error("Not found: data.raw[" .. kind .. "][" .. thing .. "]")
+		if RAW[kind][thing] == nil then
+			error("Not found: RAW[" .. kind .. "][" .. thing .. "]")
 		end
-		data.raw[kind][thing].subgroup = subgroup
-		data.raw[kind][thing].order = prefix .. string.format("%02d", i)
+		RAW[kind][thing].subgroup = subgroup
+		RAW[kind][thing].order = prefix .. string.format("%02d", i)
 	end
 end
 
@@ -162,7 +162,7 @@ ITEM["chemical-plant"].order = "d[chemical-plant]"
 ITEM["sulfur"].order = "a0"
 
 -- Move fluid recipes to after raw materials like sulfur.
-data.raw["item-subgroup"]["fluid-recipes"].order = "d"
+RAW["item-subgroup"]["fluid-recipes"].order = "d"
 
 -- Move biter egg to the right row.
 ITEM["biter-egg"].subgroup = "nauvis-agriculture"
@@ -177,12 +177,12 @@ for subgroupName, order in pairs{
 	["uranium-processing"] = "042",
 	["aquilo-processes"] = "05",
 } do
-	data.raw["item-subgroup"][subgroupName].group = "space"
-	data.raw["item-subgroup"][subgroupName].order = order
+	RAW["item-subgroup"][subgroupName].group = "space"
+	RAW["item-subgroup"][subgroupName].order = order
 end
 
 -- In space group, move space platform starter up so it's not wasting a row.
-data.raw["space-platform-starter-pack"]["space-platform-starter-pack"].subgroup = "space-interactors"
+RAW["space-platform-starter-pack"]["space-platform-starter-pack"].subgroup = "space-interactors"
 
 -- Move fluid logistics stuff to that row.
 local fluidLogistics = {"pipe", "pipe-to-ground", "pump", "offshore-pump"}

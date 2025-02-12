@@ -88,7 +88,7 @@ resinItem.name = "resin"
 resinItem.icons = {{icon = resinPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
 resinItem.pictures = resinPictures
 resinItem.subgroup = "resin"
-Item.copySoundsTo(data.raw.capsule["bioflux"], resinItem)
+Item.copySoundsTo(RAW.capsule["bioflux"], resinItem)
 data:extend{resinItem}
 
 ------------------------------------------------------------------------

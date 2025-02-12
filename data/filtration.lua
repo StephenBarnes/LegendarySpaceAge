@@ -1,7 +1,7 @@
 -- This file creates the water filter item, plus recipes to filter local water on Nauvis and Gleba.
 
 -- Create item-subgroup for filtration.
-local filtrationSubgroup = copy(data.raw["item-subgroup"]["fluid-recipes"])
+local filtrationSubgroup = copy(RAW["item-subgroup"]["fluid-recipes"])
 filtrationSubgroup.name = "filtration"
 filtrationSubgroup.order = "c9"
 data:extend{filtrationSubgroup}
@@ -249,7 +249,7 @@ for _, tileName in pairs{
 	"water-shallow",
 	"water-mud",
 } do
-	data.raw.tile[tileName].fluid = "lake-water"
+	RAW.tile[tileName].fluid = "lake-water"
 end
 
 -- Make Gleba water tiles yield slime.
@@ -265,5 +265,5 @@ for _, tileName in pairs{
 	"wetland-yumako",
 	"wetland-jellynut",
 } do
-	data.raw.tile[tileName].fluid = "slime"
+	RAW.tile[tileName].fluid = "slime"
 end
