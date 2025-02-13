@@ -60,7 +60,7 @@ tech.unit = {
 		{"automation-science-pack", 1},
 	},
 }
-tech.icon = "__LegendarySpaceAge__/graphics/fluids/cement-tech.png"
+Icon.set(tech, "LSA/fluids/cement-tech")
 extend{tech}
 
 -- Adjust recipes for concrete and refined concrete.

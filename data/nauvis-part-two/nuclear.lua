@@ -20,7 +20,7 @@ recipe.ingredients = {
 recipe.results = {
 	{type="item", name="nuclear-science-pack", amount=2},
 }
-recipe.icon = nil
+Icon.clear(recipe)
 -- TODO add to a tech, actually decide on ingredients, etc.
 extend{recipe}
 

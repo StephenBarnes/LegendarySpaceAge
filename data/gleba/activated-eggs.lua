@@ -3,7 +3,7 @@
 -- Create activated egg item.
 local activatedEggItem = copy(ITEM["pentapod-egg"])
 activatedEggItem.name = "activated-pentapod-egg"
-Icon.variants(activatedEggItem, "LSA/gleba/activated-pentapod-egg/%", 4)
+Icon.variants(activatedEggItem, "LSA/gleba/activated-pentapod-egg/%", 4, {draw_as_glow=true})
 Icon.set(activatedEggItem, "LSA/gleba/activated-pentapod-egg/1")
 activatedEggItem.spoil_ticks = 60 * 30 -- 30 seconds
 activatedEggItem.order = activatedEggItem.order .. "-2"

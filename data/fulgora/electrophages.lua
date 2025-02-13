@@ -136,8 +136,7 @@ extend({
 ITEM["electrophage"].spoil_result = "polysalt"
 local polysaltItem = copy(ITEM["nutrients"])
 polysaltItem.name = "polysalt"
-polysaltItem.icon = "__LegendarySpaceAge__/graphics/fulgora/polysalts.png"
-polysaltItem.icon_size = 128
+Icon.set(polysaltItem, "LSA/fulgora/polysalts")
 polysaltItem.subgroup = "fulgora-processes"
 polysaltItem.order = "c[organics]-b[polysalt]"
 polysaltItem.spoil_ticks = 60 * 60 * 60 -- 1 hour.

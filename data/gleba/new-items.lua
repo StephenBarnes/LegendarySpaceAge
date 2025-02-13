@@ -14,7 +14,7 @@ extend{
 -- Create geoplasm fluid
 local geoplasmFluid = copy(FLUID["lubricant"])
 geoplasmFluid.name = "geoplasm"
-geoplasmFluid.icon = "__LegendarySpaceAge__/graphics/gleba/geoplasm.png"
+Icon.set(geoplasmFluid, "LSA/gleba/geoplasm")
 local geoplasmPinkColor = {r=.8, g=.404, b=.388}
 local geoplasmGreenColor = {r=.345, g = .518, b = .098}
 geoplasmFluid.base_color = geoplasmPinkColor
@@ -25,49 +25,24 @@ extend{geoplasmFluid}
 -- Create chitin fragments item
 local chitinFragments = copy(ITEM["calcite"])
 chitinFragments.name = "chitin-fragments"
-local chitinDir = "__LegendarySpaceAge__/graphics/gleba/chitin-fragments/"
-chitinFragments.icon = chitinDir.."3.png"
-chitinFragments.pictures = {}
-for i = 1, 3 do
-	chitinFragments.pictures[i] = {filename = chitinDir..i..".png", size = 64, scale = 0.5}
-end
+Icon.set(chitinFragments, "LSA/gleba/chitin-fragments/3")
+Icon.variants(chitinFragments, "LSA/gleba/chitin-fragments/%", 3)
 chitinFragments.subgroup = "gleba-non-agriculture"
 extend{chitinFragments}
 
 -- Create chitin block item
 local chitinBlock = copy(ITEM["calcite"])
 chitinBlock.name = "chitin-block"
-local chitinBlockDir = "__LegendarySpaceAge__/graphics/gleba/chitin-block/"
-chitinBlock.icon = chitinBlockDir.."3.png"
-chitinBlock.pictures = {}
-for i = 1, 3 do
-	chitinBlock.pictures[i] = {filename = chitinBlockDir..i..".png", size = 64, scale = 0.5}
-end
+Icon.set(chitinBlock, "LSA/gleba/chitin-block/3")
+Icon.variants(chitinBlock, "LSA/gleba/chitin-block/%", 3)
 chitinBlock.subgroup = "gleba-non-agriculture"
 extend{chitinBlock}
 
 -- Create marrow item
 local marrowItem = copy(ITEM["spoilage"])
 marrowItem.name = "marrow"
-local marrowDir = "__LegendarySpaceAge__/graphics/gleba/marrow/"
-marrowItem.icon = marrowDir.."pillar-2.png"
-marrowItem.pictures = {}
-for _, picName in pairs{
-	"pillar-1",
-	"pillar-2",
-	"pillar-3",
-	"pillar-4",
-	"pillar-5",
-	"roll-1",
-	"roll-2",
-	"roll-3",
-	"roll-4",
-	"roll-5",
-	"steak-1",
-	"steak-2",
-} do
-	table.insert(marrowItem.pictures, {filename = marrowDir..picName..".png", size = 64, scale = 0.5})
-end
+Icon.set(marrowItem, "LSA/gleba/marrow/2")
+Icon.variants(marrowItem, "LSA/gleba/marrow/%", 12)
 marrowItem.subgroup = "gleba-non-agriculture"
 marrowItem.spoil_ticks = 60 * 60 * 20 -- 20 minutes
 marrowItem.spoil_result = "spoilage"
@@ -79,19 +54,15 @@ extend{marrowItem}
 -- Create tubule item
 local tubuleItem = copy(ITEM["calcite"])
 tubuleItem.name = "tubule"
-local tubuleDir = "__LegendarySpaceAge__/graphics/gleba/tubule/"
-tubuleItem.icon = tubuleDir.."1.png"
-tubuleItem.pictures = {}
-for i = 1, 3 do
-	tubuleItem.pictures[i] = {filename = tubuleDir..i..".png", size = 64, scale = 0.5}
-end
+Icon.set(tubuleItem, "LSA/gleba/tubule/1")
+Icon.variants(tubuleItem, "LSA/gleba/tubule/%", 3)
 tubuleItem.subgroup = "gleba-non-agriculture"
 extend{tubuleItem}
 
 -- Create chitin-broth fluid.
 local chitinBrothFluid = copy(FLUID["water"])
 chitinBrothFluid.name = "chitin-broth"
-chitinBrothFluid.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-broth.png"
+Icon.set(chitinBrothFluid, "LSA/gleba/chitin-broth")
 local chitinDarkColor = {r = .365, g = .263, b = .224}
 local chitinLightColor = {r = .663, g = .58, b = .482}
 chitinBrothFluid.base_color = chitinDarkColor
@@ -105,29 +76,20 @@ extend{chitinBrothFluid}
 -- Create appendage item.
 local appendageItem = copy(marrowItem)
 appendageItem.name = "appendage"
-local appendageDir = "__LegendarySpaceAge__/graphics/gleba/appendage/"
-appendageItem.icon = appendageDir.."1.png"
-appendageItem.pictures = {}
-for i = 1, 9 do
-	appendageItem.pictures[i] = {filename = appendageDir..i..".png", size = 64, scale = 0.5}
-end
+Icon.set(appendageItem, "LSA/gleba/appendage/1")
+Icon.variants(appendageItem, "LSA/gleba/appendage/%", 9)
 appendageItem.subgroup = "gleba-non-agriculture"
-appendageItem.icon = appendageDir.."1.png"
-appendageItem.spoil_ticks = 60 * 60 * 10
+appendageItem.spoil_ticks = 10 * MINUTE
 appendageItem.spoil_result = "spoilage"
 extend{appendageItem}
 
 -- Create sencytium item.
 local sencytiumItem = copy(appendageItem)
 sencytiumItem.name = "sencytium"
-local sencytiumDir = "__LegendarySpaceAge__/graphics/gleba/sencytium/"
-sencytiumItem.icon = sencytiumDir.."1.png"
-sencytiumItem.pictures = {}
-for i = 1, 11 do
-	sencytiumItem.pictures[i] = {filename = sencytiumDir..i..".png", size = 64, scale = 0.5, draw_as_glow = true}
-end
+Icon.set(sencytiumItem, "LSA/gleba/sencytium/1")
+Icon.variants(sencytiumItem, "LSA/gleba/sencytium/%", 11, {draw_as_glow = true})
 sencytiumItem.subgroup = "gleba-non-agriculture"
-sencytiumItem.spoil_ticks = 60 * 60 * 10
+sencytiumItem.spoil_ticks = 10 * MINUTE
 sencytiumItem.spoil_result = "spoilage"
 extend{sencytiumItem}
 
@@ -171,7 +133,7 @@ tubuleRecipe.results = {
 tubuleRecipe.main_product = "tubule"
 tubuleRecipe.energy_required = 10
 tubuleRecipe.enabled = false
-tubuleRecipe.icon = nil -- So it defaults to tubule icon.
+Icon.clear(tubuleRecipe)
 tubuleRecipe.subgroup = "gleba-non-agriculture"
 tubuleRecipe.crafting_machine_tint = copy(chitinBrothRecipe.crafting_machine_tint)
 extend{tubuleRecipe}
@@ -220,7 +182,7 @@ sencytiumRecipe.main_product = "sencytium"
 sencytiumRecipe.energy_required = 10
 sencytiumRecipe.enabled = false
 sencytiumRecipe.subgroup = "gleba-non-agriculture"
-sencytiumRecipe.icon = nil -- So it defaults to sencytium icon.
+Icon.clear(sencytiumRecipe)
 sencytiumRecipe.crafting_machine_tint = copy(appendageRecipe.crafting_machine_tint)
 extend{sencytiumRecipe}
 

@@ -226,3 +226,16 @@ local labs = {"lab", "glebalab", "biolab"}
 setSubgroupInOrder("labs", "item", labs)
 setSubgroupInOrder("labs", "recipe", labs)
 setSubgroupInOrder("labs", "lab", labs)
+
+-- Move splitters to next row.
+extend{{type = "item-subgroup", name = "splitter", group = "logistics", order = "b2"}}
+local splitters = {"splitter", "fast-splitter", "express-splitter", "turbo-splitter"}
+setSubgroupInOrder("splitter", "item", splitters)
+setSubgroupInOrder("splitter", "recipe", splitters)
+setSubgroupInOrder("splitter", "splitter", splitters)
+
+-- Burner inserter at end of inserter row
+local inserters = {"inserter", "long-handed-inserter", "fast-inserter", "bulk-inserter", "stack-inserter", "burner-inserter"}
+setSubgroupInOrder("inserter", "item", inserters)
+setSubgroupInOrder("inserter", "recipe", inserters)
+setSubgroupInOrder("inserter", "inserter", inserters)

@@ -8,21 +8,12 @@ Petrophage breeding increases the number of petrophages, but they keep spoilage 
 Pitch is 3MJ. Dry gas is 800kJ. Recipe 1 -> 2 is actually ->3 from biochamber, so produces 6MJ, so should consume 7.5 dry gas.
 ]]
 
-local petrophageDir = "__LegendarySpaceAge__/graphics/gleba/petrophages/"
-
 -- Create item.
 local petrophage = copy(ITEM["iron-bacteria"])
 petrophage.name = "petrophage"
-petrophage.icon = petrophageDir .. "1.png"
-petrophage.pictures = {}
-for i=1,4 do
-	petrophage.pictures[i] = {
-		filename = petrophageDir .. i .. ".png",
-		width = 64,
-		height = 64,
-	}
-end
-petrophage.spoil_ticks = 60 * 60 * 2 -- 2 minutes
+Icon.set(petrophage, "LSA/gleba/petrophages/1")
+Icon.variants(petrophage, "LSA/gleba/petrophages/%", 4)
+petrophage.spoil_ticks = 2 * MINUTE
 petrophage.spoil_result = "pitch"
 petrophage.hidden = false
 petrophage.hidden_in_factoriopedia = false
@@ -44,7 +35,7 @@ cultivationRecipe.energy_required = 2
 cultivationRecipe.icon = nil
 cultivationRecipe.icons = {
 	copy(FLUID["dry-gas"].icons[1]),
-	{icon = petrophageDir .. "4.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={4, 4}},
+	{icon = "__LegendarySpaceAge__/graphics/gleba/petrophages/4.png", icon_size = 64, scale=0.4, mipmap_count=4, shift={4, 4}},
 }
 cultivationRecipe.icons[1].scale = 0.4
 cultivationRecipe.icons[1].shift = {-4, -4}
@@ -65,8 +56,7 @@ refreshRecipe.results = {
 	{type="item", name="petrophage", amount=1, percent_spoiled = 0},
 }
 refreshRecipe.result_is_always_fresh = true
-refreshRecipe.icon = petrophageDir .. "refresh.png"
-refreshRecipe.icons = nil
+Icon.set(refreshRecipe, "LSA/gleba/petrophages/refresh")
 refreshRecipe.subgroup = "slipstacks-and-boompuffs"
 refreshRecipe.order = "23"
 extend{refreshRecipe}
@@ -77,7 +67,7 @@ tech.effects = {
 	{type = "unlock-recipe", recipe = "petrophage-cultivation"},
 	{type = "unlock-recipe", recipe = "refresh-petrophages"},
 }
-tech.icon = petrophageDir .. "tech.png"
+Icon.set(tech, "LSA/gleba/petrophages/tech")
 tech.prerequisites = {"filtration-gleban-slime"}
 tech.research_trigger = {
 	type = "craft-item",

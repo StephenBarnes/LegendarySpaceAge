@@ -10,7 +10,7 @@ local darkColor = {r = .361, g = .055, b = .11}
 -- Create diesel fluid.
 local fluid = copy(FLUID["light-oil"])
 fluid.name = "diesel"
-fluid.icon = "__LegendarySpaceAge__/graphics/petrochem/diesel.png"
+Icon.set(fluid, "LSA/petrochem/diesel")
 fluid.base_color = brightColor
 fluid.flow_color = darkColor
 fluid.visualization_color = brightColor
@@ -38,7 +38,7 @@ tech.name = "diesel"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "make-diesel"},
 }
-tech.icon = "__LegendarySpaceAge__/graphics/petrochem/diesel-tech.png"
+Icon.set(tech, "LSA/petrochem/diesel-tech")
 tech.prerequisites = {"oil-processing", "fluid-containers"}
 tech.unit.ingredients = {
 	{"automation-science-pack", 1},

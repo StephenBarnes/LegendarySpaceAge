@@ -35,7 +35,7 @@ RAW["simple-entity"]["fulgurite-small"].minable.results = { {type = "item", name
 -- Create item for fulgorite starter.
 local fulgoriteStarterItem = copy(ITEM["holmium-ore"])
 fulgoriteStarterItem.name = "fulgorite-starter"
-fulgoriteStarterItem.icon = "__LegendarySpaceAge__/graphics/fulgora/fulgorite-stuff/fulgorite-starter.png"
+Icon.set(fulgoriteStarterItem, "LSA/fulgora/fulgorite-stuff/fulgorite-starter")
 fulgoriteStarterItem.subgroup = "fulgora-processes"
 fulgoriteStarterItem.order = "c[organics]-d[fulgorite-starter]"
 fulgoriteStarterItem.place_result = "fulgorite-plant"
@@ -117,7 +117,7 @@ fulgoriteStarterRecipe.results = {
 }
 fulgoriteStarterRecipe.main_product = "fulgorite-starter"
 --fulgoriteStarterRecipe.hidden_in_factoriopedia = true
-fulgoriteStarterRecipe.icon = nil
+Icon.clear(fulgoriteStarterRecipe)
 extend({fulgoriteStarterRecipe})
 
 -- Create tech for fulgorite farming.
@@ -125,5 +125,5 @@ local fulgoriteFarmingTech = copy(TECH["electrophages"])
 fulgoriteFarmingTech.name = "fulgorite-farming"
 fulgoriteFarmingTech.prerequisites = {"electrophages"}
 fulgoriteFarmingTech.effects = {{type = "unlock-recipe", recipe = "fulgorite-starter"}}
-fulgoriteFarmingTech.icon = "__LegendarySpaceAge__/graphics/fulgora/fulgorite-stuff/tech.png"
+Icon.set(fulgoriteFarmingTech, "LSA/fulgora/fulgorite-stuff/tech")
 extend({fulgoriteFarmingTech})

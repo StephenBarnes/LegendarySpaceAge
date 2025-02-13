@@ -1,8 +1,6 @@
 -- This file makes boompuffs a farmable crop, and creates recipes and items for them.
 -- Some code and graphics copied from Boompuff Agriculture mod by LordMiguel.
 
-local graphicsDir = "__LegendarySpaceAge__/graphics/gleba/boompuffs/"
-
 local boompuffTint = {
 	-- Copied these colors from Boompuff Agriculture mod.
 	primary = {r = 0.968, g = 0.381, b = 0.259, a = 1.000}, -- #f66142ff
@@ -17,7 +15,7 @@ local boompuffTint = {
 local boompuffPlant = copy(RAW.tree.boompuff)
 boompuffPlant.type = "plant"
 
-boompuffPlant.growth_ticks = 60 * 60 * 6 -- 6 minutes; compare to yumako/jellystem at 5 minutes.
+boompuffPlant.growth_ticks = 6 * MINUTE -- compare to yumako/jellystem at 5 minutes.
 boompuffPlant.placeable_by = {item = "sprouted-boomnut", count = 1}
 -- Wube's autoplace puts them in gleba_boompuff_region, which is some complicated expression. We need to add a tile restriction so it's growable on some tiles.
 boompuffPlant.autoplace.tile_restriction = {
@@ -61,11 +59,8 @@ local sproutItem = copy(ITEM["tree-seed"])
 sproutItem.name = "sprouted-boomnut"
 sproutItem.localised_name = {"item-name.sprouted-boomnut"}
 sproutItem.localised_description = {"item-description.sprouted-boomnut"}
-sproutItem.icon = graphicsDir .. "sprout/1.png"
-sproutItem.pictures = {}
-for i = 1, 3 do
-	sproutItem.pictures[i] = {filename = graphicsDir .. "sprout/" .. i .. ".png", size = 64, scale = 0.5}
-end
+Icon.variants(sproutItem, "LSA/gleba/boompuffs/sprout/%", 3)
+Icon.set(sproutItem, "LSA/gleba/boompuffs/sprout/1")
 sproutItem.subgroup = "slipstacks-and-boompuffs"
 sproutItem.order = "12"
 sproutItem.plant_result = "boompuff"
@@ -83,11 +78,8 @@ boomnutItem.place_result = nil
 boomnutItem.plant_result = nil
 boomnutItem.subgroup = "slipstacks-and-boompuffs"
 boomnutItem.order = "11"
-boomnutItem.icon = graphicsDir .. "nut/1.png"
-boomnutItem.pictures = {}
-for i = 1, 3 do
-	boomnutItem.pictures[i] = {filename = graphicsDir .. "nut/" .. i .. ".png", size = 64, scale = 0.5}
-end
+Icon.set(boomnutItem, "LSA/gleba/boompuffs/nut/1")
+Icon.variants(boomnutItem, "LSA/gleba/boompuffs/nut/%", 3)
 Item.clearFuel(boomnutItem)
 extend{boomnutItem}
 
@@ -141,11 +133,8 @@ boomsacItem.capsule_action.attack_parameters.ammo_type.action = { -- Copied from
 		}
 	}
 }
-boomsacItem.icon = graphicsDir .. "sac/6.png"
-boomsacItem.pictures = {}
-for i = 1, 8 do
-	boomsacItem.pictures[i] = {filename = graphicsDir .. "sac/" .. i .. ".png", size = 64, scale = 0.5}
-end
+Icon.set(boomsacItem, "LSA/gleba/boompuffs/sac/6")
+Icon.variants(boomsacItem, "LSA/gleba/boompuffs/sac/%", 8)
 extend{boomsacItem}
 
 ------------------------------------------------------------------------
@@ -155,7 +144,7 @@ boomsacProjectile.name = "boomsac-projectile"
 boomsacProjectile.localised_name = {"item-name.boomsac"}
 boomsacProjectile.hidden = true
 boomsacProjectile.animation = { -- Graphics and idea copied from Boompuff Agriculture mod.
-	filename = graphicsDir .. "grenade.png",
+	filename = "__LegendarySpaceAge__/graphics/gleba/boompuffs/grenade.png",
 	draw_as_glow = true,
 	frame_count = 15,
 	line_length = 8,
@@ -166,7 +155,7 @@ boomsacProjectile.animation = { -- Graphics and idea copied from Boompuff Agricu
 	priority = "high",
 	scale = 0.5,
 }
-boomsacProjectile.icon = graphicsDir .. "sac/6.png"
+boomsacProjectile.icon = "__LegendarySpaceAge__/graphics/gleba/boompuffs/sac/6.png"
 extend{boomsacProjectile}
 
 ------------------------------------------------------------------------
@@ -183,7 +172,7 @@ sproutedBoomnutRecipe.results = {
 }
 sproutedBoomnutRecipe.category = "smelting"
 sproutedBoomnutRecipe.crafting_machine_tint = boompuffTint
-sproutedBoomnutRecipe.icon = nil
+Icon.clear(sproutedBoomnutRecipe)
 sproutedBoomnutRecipe.show_amount_in_title = false
 extend{sproutedBoomnutRecipe}
 
@@ -239,7 +228,7 @@ tech.research_trigger = {
 	type = "mine-entity",
 	entity = "boompuff",
 }
-tech.icon = graphicsDir .. "tech.png"
+Icon.set(tech, "LSA/gleba/boompuffs/tech")
 extend{tech}
 
 ------------------------------------------------------------------------

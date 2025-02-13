@@ -100,7 +100,7 @@ local stingfrondSprout = copy(ITEM["tree-seed"])
 stingfrondSprout.name = "stingfrond-sprout"
 stingfrondSprout.localised_name = nil
 stingfrondSprout.plant_result = "stingfrond"
-stingfrondSprout.icon = "__space-age__/graphics/icons/stingfrond.png"
+Icon.set(stingfrondSprout, "SA/stingfrond")
 stingfrondSprout.subgroup = "stingfrond-products"
 stingfrondSprout.order = "a"
 Item.clearFuel(stingfrondSprout)

@@ -15,12 +15,12 @@ extend({
 -- Create items for batteries, with holmium and charged variants.
 -- Using a new shorter icon for the battery, so we can put the charge outline around it.
 local batteryItem = ITEM["battery"]
-batteryItem.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/battery_short.png"
+Icon.set(batteryItem, "LSA/fulgora/batteries/battery_short")
 batteryItem.stack_size = 200 -- Vanilla is 200. This carries through to other cloned batteries.
 batteryItem.weight = 1000 -- Vanilla is 2500 (so 400 per rocket). Setting to 1000, so 1000 per rocket.
 local chargedBatteryItem = copy(batteryItem)
 chargedBatteryItem.name = "charged-battery"
-chargedBatteryItem.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/battery_short_charged.png"
+Icon.set(chargedBatteryItem, "LSA/fulgora/batteries/battery_short_charged")
 chargedBatteryItem.order = batteryItem.order .. '-2'
 chargedBatteryItem.burnt_result = "battery"
 chargedBatteryItem.fuel_category = "battery"
@@ -35,12 +35,12 @@ chargedBatteryItem.spoil_ticks = 60 * 60 * 60 * 2 -- 2 hours
 chargedBatteryItem.spoil_result = "battery"
 local holmiumBatteryItem = copy(batteryItem)
 holmiumBatteryItem.name = "holmium-battery"
-holmiumBatteryItem.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/holmium_battery_short.png"
+Icon.set(holmiumBatteryItem, "LSA/fulgora/batteries/holmium_battery_short")
 holmiumBatteryItem.order = batteryItem.order .. '-3'
 holmiumBatteryItem.weight = 1000 -- So 1000 per rocket, same as the weight of a normal battery.
 local chargedHolmiumBatteryItem = copy(batteryItem)
 chargedHolmiumBatteryItem.name = "charged-holmium-battery"
-chargedHolmiumBatteryItem.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/holmium_battery_short_charged.png"
+Icon.set(chargedHolmiumBatteryItem, "LSA/fulgora/batteries/holmium_battery_short_charged")
 chargedHolmiumBatteryItem.order = batteryItem.order .. '-4'
 chargedHolmiumBatteryItem.weight = 1000
 chargedHolmiumBatteryItem.burnt_result = "holmium-battery"
@@ -56,7 +56,7 @@ extend({chargedBatteryItem, holmiumBatteryItem, chargedHolmiumBatteryItem})
 local holmiumBatteryRecipe = copy(RECIPE["battery"])
 holmiumBatteryRecipe.name = "holmium-battery"
 holmiumBatteryRecipe.results = {{type = "item", name = "holmium-battery", amount = 1}}
-holmiumBatteryRecipe.icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/holmium_battery_short.png"
+Icon.set(holmiumBatteryRecipe, "LSA/fulgora/batteries/holmium_battery_short")
 holmiumBatteryRecipe.ingredients = {
 	{ type = "item", name = "holmium-plate", amount = 1 },
 	{ type = "item", name = "tungsten-plate", amount = 1 },
@@ -439,39 +439,22 @@ RAW["lightning-attractor"]["lightning-rod"].efficiency = .1 -- Changing 20% to 1
 RAW["lightning-attractor"]["lightning-collector"].efficiency = .3 -- Changing 40% to 30%.
 
 -- Add recipe to extract sulfuric acid from batteries - fits with the theme, plus water for sulfuric acid is scarce on Fulgora now.
-extend({
-	{
-		type = "recipe",
-		name = "extract-sulfuric-acid-from-battery",
-		category = "chemistry",
-		icons = {
-			{
-				icon = "__base__/graphics/icons/fluid/sulfuric-acid.png",
-				scale = 0.45,
-				shift = { 4, 4 },
-			},
-			{
-				icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/battery_short.png",
-				scale = 0.35,
-				shift = { -6, -6 }
-			},
-		},
-		ingredients = {
-			{ type = "item", name = "battery", amount = 1 },
-		},
-		results = { -- Returns 25%, same as recycling, so should be fine.
-			{ type = "fluid", name = "sulfuric-acid", amount = 5, show_details_in_recipe_tooltip = false },
-			{ type = "item", name = "iron-plate", amount = 1, probability = 0.25, show_details_in_recipe_tooltip = false },
-			{ type = "item", name = "copper-plate", amount = 1, probability = 0.25, show_details_in_recipe_tooltip = false },
-		},
-		main_product = "sulfuric-acid",
-		order = RECIPE["sulfuric-acid"].order .. "-b",
-		subgroup = RECIPE["acid-neutralisation"].subgroup,
-		allow_as_intermediate = false,
-		allow_decomposition = false,
-		allow_productivity = false,
-		enabled = false,
-		crafting_machine_tint = RECIPE["sulfuric-acid"].crafting_machine_tint,
-	},
-})
+local extractionRecipe = copy(RECIPE["sulfuric-acid"])
+extractionRecipe.name = "extract-sulfuric-acid-from-battery"
+extractionRecipe.category = "chemistry"
+extractionRecipe.ingredients = {{ type = "item", name = "battery", amount = 1 } }
+extractionRecipe.results = { -- Returns 25%, same as recycling, so should be fine.
+	{ type = "fluid", name = "sulfuric-acid", amount = 5, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "iron-plate", amount = 1, probability = 0.25, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "copper-plate", amount = 1, probability = 0.25, show_details_in_recipe_tooltip = false },
+}
+extractionRecipe.main_product = "sulfuric-acid"
+extractionRecipe.order = RECIPE["sulfuric-acid"].order .. "-b"
+extractionRecipe.subgroup = RECIPE["acid-neutralisation"].subgroup
+extractionRecipe.allow_as_intermediate = false
+extractionRecipe.allow_decomposition = false
+extractionRecipe.allow_productivity = false
+Icon.set(extractionRecipe, {"sulfuric-acid", "battery"})
+extend{extractionRecipe}
 Tech.addRecipeToTech("extract-sulfuric-acid-from-battery", "battery")
+-- TODO rather add a fluid output to recyclers, and make recycling recipes also output fluids for some recipes - batteries, holmium batteries, maybe others?

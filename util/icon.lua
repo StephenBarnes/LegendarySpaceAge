@@ -161,12 +161,14 @@ Icon.variants = function(protoOrName, dirCode, count, additional)
 			mipmap_count = 4,
 			tint = iconInfo.tint,
 		}
-		if additional ~= nil then
-			for _, val in pairs(additional) do
-				table.insert(variant, val)
+		variants[i] = variant
+	end
+	if additional ~= nil then
+		for _, variant in pairs(variants) do
+			for k, v in pairs(additional) do
+				variant[k] = v
 			end
 		end
-		variants[i] = variant
 	end
 	proto.pictures = variants
 end

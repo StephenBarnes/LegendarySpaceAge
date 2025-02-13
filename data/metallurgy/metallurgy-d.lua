@@ -63,7 +63,6 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		}
 	}
 	hotIngot.icon = nil
-	hotIngot.icon_size = nil
 	hotIngot.spoil_ticks = INGOT_COOLING_TIME
 	hotIngot.spoil_result = coldIngotName
 	hotIngot.order = "a[smelting]-0-" .. i
@@ -142,19 +141,10 @@ copperMatteRecipe.enabled = true
 extend{copperMatteRecipe}
 
 -- Make copper-matte item.
-local copperMattePictures = {}
-for i = 1, 12 do
-	table.insert(copperMattePictures, {
-		filename = "__LegendarySpaceAge__/graphics/metallurgy/matte/matte" .. i .. ".png",
-		size = 64,
-		scale = 0.5,
-		mipmap_count = 4,
-	})
-end
 local copperMatte = copy(ITEM["copper-ore"])
 copperMatte.name = "copper-matte"
 Icon.set(copperMatte, "LSA/metallurgy/matte/matte1")
-copperMatte.pictures = copperMattePictures
+Icon.variants(copperMatte, "LSA/metallurgy/matte/matte%", 12)
 copperMatte.subgroup = "raw-material"
 copperMatte.order = "a1"
 --copperMatte.factoriopedia_description = {"factoriopedia-description.copper-matte"}

@@ -9,5 +9,5 @@ tungstenAxeTech.research_trigger = {
 	count = 50,
 }
 tungstenAxeTech.localised_description = {"technology-description.steel-axe"}
-tungstenAxeTech.icon = "__LegendarySpaceAge__/graphics/vulcanus/tungsten-axe-tech.png"
+Icon.set(tungstenAxeTech, "LSA/vulcanus/tungsten-axe-tech")
 extend{tungstenAxeTech}

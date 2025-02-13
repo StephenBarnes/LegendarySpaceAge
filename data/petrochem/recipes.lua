@@ -135,7 +135,6 @@ pitchProcessingRecipe.results = {
 	{ type = "fluid", name = "light-oil", amount = 10, show_details_in_recipe_tooltip = false },
 }
 Icon.set(pitchProcessingRecipe, {"pitch", "tar", "light-oil", "heavy-oil"}, "decomposition")
-pitchProcessingRecipe.icon = nil
 pitchProcessingRecipe.order = "a[oil-processing]-b6"
 pitchProcessingRecipe.subgroup = "complex-fluid-recipes"
 pitchProcessingRecipe.category = "oil-processing" -- Refinery.

@@ -238,7 +238,7 @@ tech.effects = {
 	{type = "unlock-recipe", recipe = "deep-drill-fulgora"},
 }
 tech.prerequisites = {"electric-mining-drill", "chemical-science-pack"}
-tech.icon = "__LegendarySpaceAge__/graphics/deep-drill/tech.png"
+Icon.set(tech, "LSA/deep-drill/tech")
 tech.unit = {
 	count = 100,
 	time = 30,

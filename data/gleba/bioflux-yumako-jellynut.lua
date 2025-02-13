@@ -40,15 +40,11 @@ extend{initialBiofluxRecipe}
 Tech.addRecipeToTech("bioflux-from-eggs", "bioflux", 1)
 
 -- Create items for fertilized seeds.
-local fertilizedDir = "__LegendarySpaceAge__/graphics/gleba/fertilized-seeds/"
 local fertilizedYumakoSeedItem = copy(ITEM["yumako-seed"])
 fertilizedYumakoSeedItem.name = "fertilized-yumako-seed"
-fertilizedYumakoSeedItem.icon = fertilizedDir .. "yumako-seed.png"
-fertilizedYumakoSeedItem.pictures = {}
-for i = 1, 4 do
-	fertilizedYumakoSeedItem.pictures[i] = {filename = fertilizedDir .. "yumako-seed-" .. i .. ".png", draw_as_glow = true, size = 64, scale = .5}
-end
-fertilizedYumakoSeedItem.spoil_ticks = 60 * 60 * 10
+Icon.set(fertilizedYumakoSeedItem, "LSA/gleba/fertilized-seeds/yumako-seed")
+Icon.variants(fertilizedYumakoSeedItem, "LSA/gleba/fertilized-seeds/yumako-seed-%", 4, {draw_as_glow=true})
+fertilizedYumakoSeedItem.spoil_ticks = 10 * MINUTE
 fertilizedYumakoSeedItem.spoil_result = "yumako-seed"
 fertilizedYumakoSeedItem.localised_name = {"item-name.fertilized-yumako-seed"}
 fertilizedYumakoSeedItem.localised_description = nil
@@ -56,12 +52,9 @@ Item.clearFuel(fertilizedYumakoSeedItem)
 extend{fertilizedYumakoSeedItem}
 local fertilizedJellystemSeedItem = copy(ITEM["jellynut-seed"])
 fertilizedJellystemSeedItem.name = "fertilized-jellynut-seed"
-fertilizedJellystemSeedItem.icon = fertilizedDir .. "jellynut-seed.png"
-fertilizedJellystemSeedItem.pictures = {}
-for i = 1, 4 do
-	fertilizedJellystemSeedItem.pictures[i] = {filename = fertilizedDir .. "jellynut-seed-" .. i .. ".png", draw_as_glow = true, size = 64, scale = .5}
-end
-fertilizedJellystemSeedItem.spoil_ticks = 60 * 60 * 10
+Icon.set(fertilizedJellystemSeedItem, "LSA/gleba/fertilized-seeds/jellynut-seed")
+Icon.variants(fertilizedJellystemSeedItem, "LSA/gleba/fertilized-seeds/jellynut-seed-%", 4, {draw_as_glow=true})
+fertilizedJellystemSeedItem.spoil_ticks = 10 * MINUTE
 fertilizedJellystemSeedItem.spoil_result = "jellynut-seed"
 fertilizedJellystemSeedItem.localised_name = {"item-name.fertilized-jellynut-seed"}
 fertilizedJellystemSeedItem.localised_description = nil
@@ -90,7 +83,7 @@ fertilizedYumakoSeedRecipe.ingredients = {
 	{type = "fluid", name = "slime", amount = 10},
 }
 fertilizedYumakoSeedRecipe.results = {{type = "item", name = "fertilized-yumako-seed", amount = 1}}
-fertilizedYumakoSeedRecipe.icon = nil -- So it takes the icon of the fertilized seed, instead of bioflux item.
+Icon.clear(fertilizedYumakoSeedRecipe) -- So it takes the icon of the fertilized seed, instead of bioflux item.
 fertilizedYumakoSeedRecipe.result_is_always_fresh = true
 fertilizedYumakoSeedRecipe.maximum_productivity = 0
 fertilizedYumakoSeedRecipe.energy_required = 2

@@ -15,12 +15,8 @@ Uses of ash:
 -- Create ash item.
 local item = copy(ITEM["sulfur"])
 item.name = "ash"
-local ashDir = "__LegendarySpaceAge__/graphics/ash/"
-item.icon = ashDir.."1.png"
-item.pictures = {}
-for i = 1, 3 do
-	item.pictures[i] = {filename = ashDir..i..".png", size = 64, scale = 0.5}
-end
+Icon.set(item, "LSA/ash/1")
+Icon.variants(item, "LSA/ash/%", 3)
 item.order = "0"
 extend{item}
 
