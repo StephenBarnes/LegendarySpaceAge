@@ -8,7 +8,7 @@ tech.research_trigger = {
 	item = "cyclosome-3",
 	count = 200,
 }
-table.insert(tech.effects, {type = "unlock-recipe", recipe = "lds-from-carbon-fiber"})
+table.insert(tech.effects, {type = "unlock-recipe", recipe = "lds-from-chitin-and-carbon-fiber"})
 
 -- Since carbon-fiber doesn't depend on ag science packs, things that depend on it and use ag science packs should get that dependency.
 Tech.addTechDependency("agricultural-science-pack", "stack-inserter")
