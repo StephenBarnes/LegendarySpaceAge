@@ -60,12 +60,7 @@ metalsFromLavaRecipe.results = {
 metalsFromLavaRecipe.enabled = false
 metalsFromLavaRecipe.allow_decomposition = true
 metalsFromLavaRecipe.allow_as_intermediate = true
-metalsFromLavaRecipe.icon = nil
-metalsFromLavaRecipe.icons = {{
-	icon = "__LegendarySpaceAge__/graphics/vulcanus/metals-from-lava.png",
-	icon_size = 64,
-	scale = 0.5,
-}}
+Icon.set(metalsFromLavaRecipe, "LSA/vulcanus/metals-from-lava")
 extend{metalsFromLavaRecipe}
 
 -- Hide old recipes for molten metals from lava, remove from tech, add new recipe to tech.
@@ -95,22 +90,12 @@ ironOreMeltRecipe.results = {
 }
 
 -- Adjust molten iron icon, to differentiate it from molten steel.
-local ironFluidIcon = "__LegendarySpaceAge__/graphics/vulcanus/molten-iron.png"
-if FLUID["molten-iron"].icon then
-	FLUID["molten-iron"].icon = ironFluidIcon
-else
-	FLUID["molten-iron"].icons[1].icon = ironFluidIcon
-end
+Icon.set("molten-iron", "LSA/vulcanus/molten-iron")
 
 -- Make molten steel fluid.
 local moltenSteelFluid = copy(FLUID["molten-iron"])
 moltenSteelFluid.name = "molten-steel"
-moltenSteelFluid.icon = nil
-moltenSteelFluid.icons = {{
-	icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-steel.png",
-	icon_size = 64,
-	scale = 0.5,
-}}
+Icon.set(moltenSteelFluid, "LSA/vulcanus/molten-steel")
 moltenSteelFluid.order = "b[new-fluid]-b[vulcanus]-c[molten-steel]"
 moltenSteelFluid.base_color = {.3, .4, .4}
 moltenSteelFluid.flow_color = {.5, .7, .7}
@@ -264,12 +249,7 @@ RECIPE["tungsten-carbide"].energy_required = 8
 -- Create molten tungsten fluid.
 local moltenTungstenFluid = copy(FLUID["molten-iron"])
 moltenTungstenFluid.name = "molten-tungsten"
-moltenTungstenFluid.icon = nil
-moltenTungstenFluid.icons = {{
-	icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png",
-	icon_size = 64,
-	scale = 0.5,
-}}
+Icon.set(moltenTungstenFluid, "LSA/vulcanus/molten-tungsten")
 moltenTungstenFluid.order = "b[new-fluid]-b[vulcanus]-d[molten-tungsten]"
 moltenTungstenFluid.base_color = {.259, .239, .349} -- Measured on ore
 moltenTungstenFluid.flow_color = {.635, .584, .741}
@@ -308,11 +288,7 @@ tungstenCarbideFromMoltenRecipe.results = {
 }
 tungstenCarbideFromMoltenRecipe.main_product = "tungsten-carbide"
 tungstenCarbideFromMoltenRecipe.energy_required = 4
-tungstenCarbideFromMoltenRecipe.icon = nil
-tungstenCarbideFromMoltenRecipe.icons = {
-	{icon = "__space-age__/graphics/icons/tungsten-carbide.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
-	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
-}
+Icon.set(tungstenCarbideFromMoltenRecipe, {"tungsten-carbide", "molten-tungsten"}, "casting")
 extend{tungstenCarbideFromMoltenRecipe}
 Tech.addRecipeToTech("tungsten-carbide-from-molten", "tungsten-steel")
 local tungstenSteelRecipe = copy(RECIPE["tungsten-plate"])
@@ -329,11 +305,7 @@ tungstenSteelRecipe.results = {
 }
 tungstenSteelRecipe.main_product = "tungsten-plate"
 tungstenSteelRecipe.energy_required = 8
-tungstenSteelRecipe.icon = nil
-tungstenSteelRecipe.icons = {
-	{icon = "__space-age__/graphics/icons/tungsten-plate.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
-	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten.png", icon_size = 64, scale = 0.5, mipmap_count = 4, shift = {4, -4}},
-}
+Icon.set(tungstenSteelRecipe, {"tungsten-plate", "molten-tungsten"}, "casting")
 extend{tungstenSteelRecipe}
 Tech.addRecipeToTech("tungsten-steel-from-molten", "tungsten-steel")
 local tungstenHeatingRecipe = copy(RECIPE["molten-iron"])
@@ -347,10 +319,7 @@ tungstenHeatingRecipe.results = {
 tungstenHeatingRecipe.main_product = "molten-tungsten"
 tungstenHeatingRecipe.order = "a[melting]-d[tungsten-heating]"
 tungstenHeatingRecipe.energy_required = 1
-tungstenHeatingRecipe.icon = nil
-tungstenHeatingRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/vulcanus/molten-tungsten-heating.png", icon_size = 64, scale=0.5, mipmap_count=4},
-}
+Icon.set(tungstenHeatingRecipe, "LSA/vulcanus/molten-tungsten-heating")
 tungstenHeatingRecipe.show_amount_in_title = false
 tungstenHeatingRecipe.hide_from_stats = true
 tungstenHeatingRecipe.allow_productivity = false

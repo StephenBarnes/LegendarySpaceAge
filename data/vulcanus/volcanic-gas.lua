@@ -7,10 +7,7 @@ volcanicGas.name = "volcanic-gas"
 volcanicGas.base_color = volcanicGasColor
 volcanicGas.flow_color = volcanicGasColor
 volcanicGas.visualization_color = volcanicGasColor
-volcanicGas.icon = nil
-volcanicGas.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/fluids/volcanic-gas.png", icon_size = 64, scale = 0.5},
-}
+Icon.set(volcanicGas, "LSA/fluids/volcanic-gas")
 volcanicGas.order = "b[new-fluid]-b[vulcanus]-0[volcanic-gas]"
 volcanicGas.max_temperature = nil
 volcanicGas.heat_capacity = nil
@@ -35,13 +32,7 @@ separationRecipe.results = {
 separationRecipe.enabled = false
 separationRecipe.allow_decomposition = false
 separationRecipe.allow_as_intermediate = false
-separationRecipe.icon = nil
-separationRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/fluids/volcanic-gas.png", icon_size = 64, scale = 0.38, shift = {0, -5}},
-	{icon = "__base__/graphics/icons/sulfur.png", icon_size = 64, scale = 0.15, shift = {-8, 1}},
-	{icon = "__space-age__/graphics/icons/carbon.png", icon_size = 64, scale = 0.15, shift = {8, 2}},
-	{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.24, shift = {0, 4}},
-}
+Icon.set(separationRecipe, {"volcanic-gas", "sulfur", "carbon", "water"}, "decomposition")
 extend{separationRecipe}
 
 -- Create a tech for volcanic gas separation.
@@ -51,11 +42,7 @@ volcanicGasSeparationTech.name = "volcanic-gas-processing"
 volcanicGasSeparationTech.effects = {
 	{type = "unlock-recipe", recipe = "volcanic-gas-separation"},
 }
-volcanicGasSeparationTech.icon = nil
-volcanicGasSeparationTech.icons = {{
-	icon = "__LegendarySpaceAge__/graphics/vulcanus/geyser-tech.png",
-	icon_size = 256,
-}}
+Icon.set(volcanicGasSeparationTech, "LSA/vulcanus/geyser-tech")
 volcanicGasSeparationTech.research_trigger.entity = "vulcanus-chimney"
 extend{volcanicGasSeparationTech}
 table.insert(TECH["foundry"].prerequisites, "volcanic-gas-processing")

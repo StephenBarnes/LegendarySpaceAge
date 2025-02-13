@@ -3,9 +3,7 @@
 -- Create item.
 local sensorItem = copy(ITEM["electronic-circuit"])
 sensorItem.name = "sensor"
-sensorItem.icon = "__LegendarySpaceAge__/graphics/intermediate-factors/sensor.png"
-sensorItem.subgroup = "sensor"
-sensorItem.order = "01"
+Icon.set(sensorItem, "LSA/intermediate-factors/sensor")
 extend{sensorItem}
 
 -- Create recipe: 4 green circuit + 2 glass + 1 frame -> 1 sensor
@@ -18,14 +16,8 @@ greenCircuitRecipe.ingredients = {
 }
 greenCircuitRecipe.results = {{type = "item", name = "sensor", amount = 1}}
 greenCircuitRecipe.enabled = false
-greenCircuitRecipe.subgroup = "sensor"
-greenCircuitRecipe.order = "02"
 greenCircuitRecipe.energy_required = 5
-greenCircuitRecipe.icon = nil
-greenCircuitRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/sensor.png", icon_size = 64, scale = 0.5},
-	{icon = "__base__/graphics/icons/electronic-circuit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-}
+Icon.set(greenCircuitRecipe, {"sensor", "electronic-circuit"})
 greenCircuitRecipe.allow_as_intermediate = true
 greenCircuitRecipe.allow_decomposition = true
 extend{greenCircuitRecipe}
@@ -39,9 +31,8 @@ redCircuitRecipe.ingredients = {
 	{type = "item", name = "glass", amount = 1},
 	{type = "item", name = "frame", amount = 1}
 }
-redCircuitRecipe.order = "03"
 redCircuitRecipe.enabled = false
-redCircuitRecipe.icons[2] = {icon = "__base__/graphics/icons/advanced-circuit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+Icon.set(redCircuitRecipe, {"sensor", "advanced-circuit"})
 redCircuitRecipe.allow_as_intermediate = false
 redCircuitRecipe.allow_decomposition = false
 redCircuitRecipe.energy_required = 2.5
@@ -57,9 +48,8 @@ blueCircuitRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1}
 }
 blueCircuitRecipe.results = {{type = "item", name = "sensor", amount = 2}}
-blueCircuitRecipe.order = "04"
 blueCircuitRecipe.enabled = false
-blueCircuitRecipe.icons[2] = {icon = "__base__/graphics/icons/processing-unit.png", icon_size = 64, scale = 0.25, shift = {-8, -8}}
+Icon.set(blueCircuitRecipe, {"sensor", "processing-unit"})
 blueCircuitRecipe.allow_as_intermediate = false
 blueCircuitRecipe.allow_decomposition = false
 blueCircuitRecipe.energy_required = 1
@@ -76,12 +66,18 @@ sencytiumRecipe.ingredients = {
 }
 sencytiumRecipe.results = {{type = "item", name = "sensor", amount = 1}}
 sencytiumRecipe.enabled = false
-sencytiumRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/sencytium/1.png", icon_size = 64, scale = 0.35, shift = {-8, -6}}
+Icon.set(sencytiumRecipe, {"sensor", "sencytium"})
 sencytiumRecipe.allow_as_intermediate = false
 sencytiumRecipe.allow_decomposition = false
 sencytiumRecipe.energy_required = 2
-sencytiumRecipe.order = "05"
 extend{sencytiumRecipe}
 
-
 -- TODO make more recipes, and add them to techs.
+
+Gen.order({
+	sensorItem,
+	greenCircuitRecipe,
+	redCircuitRecipe,
+	blueCircuitRecipe,
+	sencytiumRecipe,
+}, "sensor")

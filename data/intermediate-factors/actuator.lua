@@ -70,4 +70,4 @@ Gen.order({
 	advancedRecipe,
 	augmentedRecipe,
 	recipeFromAppendage,
-})
+}, "actuator")

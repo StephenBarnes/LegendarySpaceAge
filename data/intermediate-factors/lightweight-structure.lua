@@ -1,12 +1,6 @@
 -- This file will add recipes for low-density structures (which we rename to "Lightweight structure").
 
--- Move item and recipes into the subgroup.
-ITEM["low-density-structure"].subgroup = "lightweight-structure"
-RECIPE["low-density-structure"].subgroup = "lightweight-structure"
-RECIPE["low-density-structure"].order = "02"
 RECIPE["low-density-structure"].auto_recycle = false
-RECIPE["casting-low-density-structure"].subgroup = "lightweight-structure"
-RECIPE["casting-low-density-structure"].order = "03"
 
 -- Reduce weight of low-density structure.
 ITEM["low-density-structure"].weight = 500
@@ -22,16 +16,7 @@ recipeFromCopper.ingredients = {
 }
 recipeFromCopper.allow_as_intermediate = true
 recipeFromCopper.hide_from_player_crafting = false
-recipeFromCopper.icon = nil
-recipeFromCopper.icons = {
-	{icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64},
-}
-for _, icon in pairs(ITEM["ingot-copper-hot"].icons) do
-	local iconCopy = copy(icon)
-	iconCopy.scale = 0.25
-	iconCopy.shift = {-8, -8}
-	table.insert(recipeFromCopper.icons, iconCopy)
-end
+Icon.set(recipeFromCopper, {"low-density-structure", "ingot-copper-cold"})
 extend{recipeFromCopper}
 Tech.addRecipeToTech("low-density-structure-standard", "low-density-structure")
 
@@ -51,17 +36,18 @@ recipeFromCarbonFiber.ingredients = {
 recipeFromCarbonFiber.results = {
 	{type = "item", name = "low-density-structure", amount = 1},
 }
-recipeFromCarbonFiber.order = "04"
 recipeFromCarbonFiber.enabled = false
 recipeFromCarbonFiber.allow_as_intermediate = false
 recipeFromCarbonFiber.category = "organic"
-recipeFromCarbonFiber.subgroup = "lightweight-structure"
-recipeFromCarbonFiber.icon = nil
-recipeFromCarbonFiber.icons = {
-	{icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64},
-	{icon = "__LegendarySpaceAge__/graphics/gleba/chitin-broth.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}},
-	{icon = "__space-age__/graphics/icons/carbon-fiber.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={8, -8}},
-}
+Icon.set(recipeFromCarbonFiber, {"low-density-structure", "chitin-broth", "carbon-fiber"})
 extend{recipeFromCarbonFiber}
 
 -- TODO create new recipes for lightweight-structure.
+
+Gen.order({
+	ITEM["low-density-structure"],
+	RECIPE["low-density-structure"],
+	recipeFromCopper,
+	RECIPE["casting-low-density-structure"],
+	recipeFromCarbonFiber,
+}, "lightweight-structure")

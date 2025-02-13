@@ -50,8 +50,7 @@ tarFluid.name = "tar"
 tarFluid.base_color = constants.tarColor
 tarFluid.flow_color = constants.tarFlowColor
 tarFluid.visualization_color = constants.tarColor
-tarFluid.icon = nil
-tarFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/tar.png", icon_size = 64}}
+Icon.set(tarFluid, "LSA/petrochem/tar")
 tarFluid.order = "a[fluid]-b[oil]-c[fractions]-0"
 extend{tarFluid}
 

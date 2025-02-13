@@ -37,9 +37,12 @@ Export.multWithUnits = function(s, x)
 	return num * x .. units
 end
 
-Export.order = function(protos)
+---@param protos (data.ItemPrototype | data.RecipePrototype | data.FluidPrototype)[]
+---@param subgroup string
+Export.order = function(protos, subgroup)
 	for i, proto in pairs(protos) do
 		proto.order = string.format("%02d", i)
+		proto.subgroup = subgroup
 	end
 end
 

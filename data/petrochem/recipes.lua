@@ -187,8 +187,7 @@ solidFuelRecipe.results = {
 	{type = "fluid", name = "light-oil", amount = 10},
 }
 solidFuelRecipe.main_product = "solid-fuel"
-solidFuelRecipe.icons = nil
-solidFuelRecipe.icon = nil
+Icon.clear(solidFuelRecipe)
 solidFuelRecipe.energy_required = 4
 solidFuelRecipe.hide_from_player_crafting = false
 extend{solidFuelRecipe}

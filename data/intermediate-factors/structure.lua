@@ -3,10 +3,7 @@
 -- Create item.
 local structureItem = copy(ITEM["steel-plate"])
 structureItem.name = "structure"
-structureItem.subgroup = "structure"
-structureItem.order = "01"
-structureItem.icon = nil
-structureItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5}}
+Icon.set(structureItem, "LSA/intermediate-factors/structure/structure")
 extend{structureItem}
 
 -- Create recipe: 10 stone brick + 20 cement -> 1 structure
@@ -18,8 +15,6 @@ recipeFromCement.ingredients = {
 }
 recipeFromCement.results = {{type = "item", name = "structure", amount = 1}}
 recipeFromCement.enabled = false
-recipeFromCement.subgroup = "structure"
-recipeFromCement.order = "04"
 recipeFromCement.energy_required = 2
 recipeFromCement.category = "crafting-with-fluid"
 Icon.set(recipeFromCement, {"structure", "stone-brick", "cement"})
@@ -36,7 +31,6 @@ recipeFromResin.ingredients = {
 	{ type = "item", name = "resin",    amount = 2 },
 }
 recipeFromResin.enabled = true
-recipeFromResin.order = "02"
 recipeFromResin.energy_required = 5
 recipeFromResin.category = "crafting"
 Icon.set(recipeFromResin, {"structure", "stone-brick", "resin"})
@@ -51,7 +45,6 @@ recipeFromVitrified.ingredients = {
 }
 recipeFromVitrified.energy_required = 20
 recipeFromVitrified.enabled = true
-recipeFromVitrified.order = "03"
 recipeFromVitrified.category = "smelting"
 Icon.set(recipeFromVitrified, {"structure", "stone-brick", "base/signal/signal-hourglass"})
 extend{recipeFromVitrified}
@@ -65,7 +58,6 @@ recipeFromChitin.ingredients = {
 }
 recipeFromChitin.results = {{type = "item", name = "structure", amount = 1}}
 recipeFromChitin.enabled = false
-recipeFromChitin.order = "05"
 recipeFromChitin.category = "crafting-with-fluid"
 Icon.set(recipeFromChitin, {"structure", "chitin-block", "slime"})
 recipeFromChitin.allow_as_intermediate = false
@@ -75,3 +67,11 @@ extend{recipeFromChitin}
 -- TODO create casting recipes?
 
 -- TODO make a recipe with concrete and resin, for Fulgora.
+
+Gen.order({
+	structureItem,
+	recipeFromResin,
+	recipeFromVitrified,
+	recipeFromCement,
+	recipeFromChitin,
+}, "structure")

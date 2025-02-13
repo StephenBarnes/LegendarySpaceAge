@@ -1,7 +1,7 @@
 -- This file creates the tech for coal coking, soon after automation.
 local cokingTech = copy(TECH["lamp"])
 cokingTech.name = "coal-coking"
-cokingTech.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/coking-tech.png", icon_size = 256}}
+Icon.set(cokingTech, "LSA/petrochem/coking-tech")
 cokingTech.prerequisites = {"automation-science-pack"}
 cokingTech.effects = {
 	{type = "unlock-recipe", recipe = "chemical-plant"},

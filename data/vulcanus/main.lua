@@ -9,11 +9,7 @@ Tech.removeRecipeFromTech("steam-condensation", "calcite-processing")
 Tech.addRecipeToTech("steam-condensation", "planet-discovery-vulcanus")
 
 -- Change icon for calcite processing tech to show the circuit.
-TECH["calcite-processing"].icon = nil
-TECH["calcite-processing"].icons = {{
-	icon = "__LegendarySpaceAge__/graphics/vulcanus/ceramic-board-tech.png",
-	icon_size = 256,
-}}
+Icon.set(TECH["calcite-processing"], "LSA/vulcanus/ceramic-board-tech")
 
 -- Add recipe for water heating with lava, in chem plant.
 local lavaWaterHeatingRecipe = copy(RECIPE["steam-condensation"])
@@ -35,11 +31,7 @@ lavaWaterHeatingRecipe.enabled = false
 lavaWaterHeatingRecipe.allow_decomposition = false
 lavaWaterHeatingRecipe.allow_as_intermediate = false
 lavaWaterHeatingRecipe.allow_productivity = false
-lavaWaterHeatingRecipe.icon = nil
-lavaWaterHeatingRecipe.icons = {
-	{icon = "__base__/graphics/icons/fluid/steam.png", icon_size = 64, scale = 0.5},
-	{icon = "__space-age__/graphics/icons/fluid/lava.png", icon_size = 64, scale = 0.27, shift = {-6, -7}, mipmap_count=4},
-}
+Icon.set(lavaWaterHeatingRecipe, {"steam", "lava"})
 extend({lavaWaterHeatingRecipe})
 Tech.addRecipeToTech("lava-water-heating", "planet-discovery-vulcanus")
 

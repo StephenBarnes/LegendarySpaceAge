@@ -1,18 +1,10 @@
 -- This file creates the "fluid fitting" intermediate, and its multiple recipes. See main.lua in this folder for more info.
 
 -- Create item.
-local fluidFittingPics = {}
-for i = 1, 7 do
-	table.insert(fluidFittingPics, {filename = "__LegendarySpaceAge__/graphics/intermediate-factors/fluid-fitting/"..i..".png", size = 64, scale = 0.5, mipmap_count = 4})
-end
-local mainIcon = fluidFittingPics[1].filename
 local fluidFitting = copy(ITEM["plastic-bar"])
 fluidFitting.name = "fluid-fitting"
-fluidFitting.subgroup = "fluid-fitting"
-fluidFitting.order = "01"
-fluidFitting.pictures = fluidFittingPics
-fluidFitting.icon = nil
-fluidFitting.icons = {{icon = mainIcon, icon_size = 64, scale = 0.5}}
+Icon.set(fluidFitting, "LSA/intermediate-factors/fluid-fitting/1")
+Icon.variants(fluidFitting, "LSA/intermediate-factors/fluid-fitting/%", 7)
 extend{fluidFitting}
 
 -- Create recipe: 2 copper plates + 2 resin -> 1 fluid fitting
@@ -24,15 +16,8 @@ recipeFromCopper.ingredients = {
 }
 recipeFromCopper.results = {{type = "item", name = "fluid-fitting", amount = 1}}
 recipeFromCopper.enabled = true
-recipeFromCopper.subgroup = "fluid-fitting"
-recipeFromCopper.order = "02"
 recipeFromCopper.energy_required = 5
-recipeFromCopper.icon = nil
-recipeFromCopper.icons = {
-	{icon = mainIcon, icon_size = 64, scale = 0.5},
-	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.2, shift = {-8, -8}},
-	{icon = "__base__/graphics/icons/copper-plate.png", icon_size = 64, scale = 0.22, shift = {8, -8}},
-}
+Icon.set(recipeFromCopper, {"fluid-fitting", "resin", "copper-plate"})
 -- TODO make a copper-colored sprite.
 extend{recipeFromCopper}
 
@@ -47,16 +32,16 @@ recipeFromPlastic.results = {{type = "item", name = "fluid-fitting", amount = 2}
 recipeFromPlastic.enabled = false
 recipeFromPlastic.allow_as_intermediate = false
 recipeFromPlastic.allow_decomposition = false
-recipeFromPlastic.order = "03"
 recipeFromPlastic.energy_required = 5
-recipeFromPlastic.icons = {
-	{icon = mainIcon, icon_size = 64, scale = 0.5},
-	{icon = "__base__/graphics/icons/plastic-bar.png", icon_size = 64, scale = 0.23, shift = {8, -8}},
-	{icon = "__LegendarySpaceAge__/graphics/rubber/rubber-1.png", icon_size = 64, scale = 0.22, shift = {-8, -8}},
-}
--- TODO make white sprite.
+Icon.set(recipeFromPlastic, {"fluid-fitting", "rubber", "plastic-bar"})
+-- TODO make custom sprite with plastic.
 extend{recipeFromPlastic}
 Tech.addRecipeToTech("fluid-fitting-from-plastic", "plastics")
 
-
 -- TODO make more recipes, and add them to techs.
+
+Gen.order({
+	fluidFitting,
+	recipeFromCopper,
+	recipeFromPlastic,
+}, "fluid-fitting")

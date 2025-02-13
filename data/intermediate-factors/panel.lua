@@ -3,7 +3,6 @@
 -- Create item.
 local panelItem = copy(ITEM["steel-plate"])
 panelItem.name = "panel"
-panelItem.subgroup = "panel"
 Icon.set(panelItem, "LSA/intermediate-factors/panel/panel")
 extend{panelItem}
 
@@ -15,7 +14,6 @@ recipeFromIron.ingredients = {
 }
 recipeFromIron.results = {{type = "item", name = "panel", amount = 1}}
 recipeFromIron.enabled = true
-recipeFromIron.subgroup = "panel"
 recipeFromIron.energy_required = 0.25
 recipeFromIron.category = "crafting"
 recipeFromIron.icon = nil
@@ -64,4 +62,4 @@ Gen.order({
 	recipeFromGlass,
 	recipeFromIron,
 	recipeFromCopper,
-})
+}, "panel")

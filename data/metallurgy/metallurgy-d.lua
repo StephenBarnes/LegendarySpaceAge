@@ -153,9 +153,7 @@ for i = 1, 12 do
 end
 local copperMatte = copy(ITEM["copper-ore"])
 copperMatte.name = "copper-matte"
-copperMatte.icons = {
-	{icon="__LegendarySpaceAge__/graphics/metallurgy/matte/matte1.png", icon_size=64, scale=0.5},
-}
+Icon.set(copperMatte, "LSA/metallurgy/matte/matte1")
 copperMatte.pictures = copperMattePictures
 copperMatte.subgroup = "raw-material"
 copperMatte.order = "a1"

@@ -1,6 +1,8 @@
 local Tech = {}
 
 Tech.addRecipeToTech = function(recipeName, techName, index)
+	assert(RECIPE[recipeName] ~= nil, "Recipe "..recipeName.." not found.")
+	RECIPE[recipeName].enabled = false -- Don't enable at start.
 	local unlock = {
 		type = "unlock-recipe",
 		recipe = recipeName,

@@ -3,14 +3,11 @@
 -- Create item.
 local mechanismItem = copy(ITEM["steel-plate"])
 mechanismItem.name = "mechanism"
-mechanismItem.subgroup = "mechanism"
-mechanismItem.order = "01"
-mechanismItem.icon = nil
-mechanismItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/mechanism.png", icon_size = 64, scale = 0.5}}
+Icon.set(mechanismItem, "LSA/intermediate-factors/mechanism")
 extend{mechanismItem}
 
 -- Create recipe: 8 machine parts + 1 frame -> 1 mechanism
-local basicRecipe = copy(RECIPE["iron-stick"])
+local basicRecipe = copy(RECIPE["iron-gear-wheel"])
 basicRecipe.name = "mechanism-from-basic"
 basicRecipe.ingredients = {
 	{type = "item", name = "iron-gear-wheel", amount = 5},
@@ -18,8 +15,6 @@ basicRecipe.ingredients = {
 }
 basicRecipe.results = {{type = "item", name = "mechanism", amount = 1}}
 basicRecipe.enabled = true
-basicRecipe.subgroup = "mechanism"
-basicRecipe.order = "02"
 basicRecipe.energy_required = 5
 basicRecipe.category = "crafting"
 Icon.set(basicRecipe, {"mechanism", "iron-gear-wheel"})
@@ -34,7 +29,6 @@ advancedRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1},
 }
 advancedRecipe.results = {{type = "item", name = "mechanism", amount = 2}}
-advancedRecipe.order = "03"
 advancedRecipe.energy_required = 2.5
 Icon.set(advancedRecipe, {"mechanism", "advanced-parts"})
 advancedRecipe.allow_as_intermediate = false
@@ -49,7 +43,6 @@ appendageRecipe.ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "appendage", amount = 3},
 }
-appendageRecipe.order = "04"
 appendageRecipe.energy_required = 5
 Icon.set(appendageRecipe, {"mechanism", "appendage"})
 appendageRecipe.allow_as_intermediate = false
@@ -59,3 +52,9 @@ extend{appendageRecipe}
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?
+
+Gen.order({
+	mechanismItem,
+	basicRecipe,
+	advancedRecipe,
+}, "mechanism")

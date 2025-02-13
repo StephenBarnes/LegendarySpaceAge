@@ -3,10 +3,7 @@
 -- Create item.
 local shieldingItem = copy(ITEM["steel-plate"])
 shieldingItem.name = "shielding"
-shieldingItem.subgroup = "shielding"
-shieldingItem.order = "01"
-shieldingItem.icon = nil
-shieldingItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/shielding.png", icon_size = 64, scale = 0.5}}
+Icon.set(shieldingItem, "LSA/intermediate-factors/shielding")
 extend{shieldingItem}
 
 -- Create recipe: 10 iron plate + 10 stone brick + 10 iron rod -> 1 shielding
@@ -19,8 +16,6 @@ recipeFromIron.ingredients = {
 }
 recipeFromIron.results = {{type = "item", name = "shielding", amount = 1}}
 recipeFromIron.enabled = true
-recipeFromIron.subgroup = "shielding"
-recipeFromIron.order = "02"
 recipeFromIron.energy_required = 5
 recipeFromIron.category = "crafting"
 recipeFromIron.allow_as_intermediate = true
@@ -35,11 +30,9 @@ recipeFromSteel.ingredients = {
 	{type = "item", name = "iron-stick", amount = 10},
 }
 recipeFromSteel.results = {{type = "item", name = "shielding", amount = 2}}
-recipeFromSteel.order = "03"
 recipeFromSteel.allow_as_intermediate = false
 recipeFromSteel.energy_required = 5
-recipeFromSteel.icons[2].icon = "__base__/graphics/icons/steel-plate.png"
-recipeFromSteel.icons[3].icon = "__base__/graphics/icons/iron-stick.png"
+Icon.set(recipeFromSteel, {"shielding", "steel-plate", "iron-stick"})
 recipeFromSteel.enabled = false
 extend{recipeFromSteel}
 Tech.addRecipeToTech("shielding-from-steel", "steel-processing")
@@ -52,10 +45,8 @@ recipeFromTungsten.ingredients = {
 	{type = "item", name = "tungsten-plate", amount = 5},
 }
 recipeFromTungsten.results = {{type = "item", name = "shielding", amount = 5}}
-recipeFromTungsten.order = "04"
 recipeFromTungsten.energy_required = 5
-recipeFromTungsten.icons[2].icon = "__base__/graphics/icons/steel-plate.png"
-recipeFromTungsten.icons[3].icon = "__space-age__/graphics/icons/tungsten-plate.png"
+Icon.set(recipeFromTungsten, {"shielding", "steel-plate", "tungsten-plate"})
 recipeFromTungsten.category = "metallurgy-or-assembling"
 extend{recipeFromTungsten}
 Tech.addRecipeToTech("shielding-from-tungsten", "tungsten-steel")
@@ -64,3 +55,10 @@ Tech.addRecipeToTech("shielding-from-tungsten", "tungsten-steel")
 -- TODO create casting recipes?
 
 -- TODO make sprites for shielding different for different recipes.
+
+Gen.order({
+	shieldingItem,
+	recipeFromIron,
+	recipeFromSteel,
+	recipeFromTungsten,
+}, "shielding")
