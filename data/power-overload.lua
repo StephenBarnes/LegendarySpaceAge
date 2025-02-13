@@ -33,12 +33,8 @@ TECH["electric-energy-distribution-2"].localised_description = {"technology-desc
 
 -- Change transformer and all the combinators to also be craftable in EM plants.
 for _, recipeName in pairs({"selector-combinator", "arithmetic-combinator", "decider-combinator", "constant-combinator", "power-switch", "programmable-speaker", "display-panel", "small-lamp", "po-transformer"}) do
-	local recipe = RECIPE[recipeName]
-	if recipe == nil then
-		log("ERROR: Couldn't find recipe "..recipe.." to change to EM plants.")
-		return
-	end
-	recipe.category = "electronics"
+	assert(RECIPE[recipeName] ~= nil, "Couldn't find recipe "..recipeName.." to change to EM plants.")
+	RECIPE[recipeName].category = "electronics"
 end
 
 -- Hide high-power interface in Factoriopedia since I'm removing it.

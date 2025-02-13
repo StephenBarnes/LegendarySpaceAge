@@ -128,13 +128,9 @@ TECH["bulk-inserter"].unit = {count = 100, ingredients = {{"automation-science-p
 TECH["inserter-capacity-bonus-1"].unit = {count = 150, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 TECH["inserter-capacity-bonus-2"].unit = {count = 200, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 
--- Remove tech for advanced combinators. And move selector combinator recipe, and change recipe to not need red circuits.
+-- Remove tech for advanced combinators, and move selector combinator recipe.
 Tech.hideTech("advanced-combinators")
 Tech.addRecipeToTech("selector-combinator", "circuit-network", 4)
-RECIPE["selector-combinator"].ingredients = {
-	{type = "item", name = "electronic-circuit", amount = 2},
-	{type = "item", name = "decider-combinator", amount = 5},
-}
 
 -- Add red circuit dependency to assembling machine 2 and lasers, so we can add it as ingredient.
 Tech.setPrereqs("automation-2", {"advanced-circuit"})

@@ -14,7 +14,7 @@ local mod_prefix = "apprentice-foundry-"
 local APPLIES_TO_ENT = "foundry"
 local function get_bonuses(products) -- Percent bonuses given number of products finished.
 	return {
-		speed = products * 0.9,
+		speed = math.min(products * 1, 900),
 		productivity = products * 0.1,
 		consumption = 0,
 		pollution = 0,

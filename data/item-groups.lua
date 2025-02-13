@@ -227,15 +227,14 @@ setSubgroupInOrder("labs", "item", labs)
 setSubgroupInOrder("labs", "recipe", labs)
 setSubgroupInOrder("labs", "lab", labs)
 
--- Move splitters to next row.
-extend{{type = "item-subgroup", name = "splitter", group = "logistics", order = "b2"}}
+-- Move splitters to inserter row, and burner inserter to end of inserter row
 local splitters = {"splitter", "fast-splitter", "express-splitter", "turbo-splitter"}
-setSubgroupInOrder("splitter", "item", splitters)
-setSubgroupInOrder("splitter", "recipe", splitters)
-setSubgroupInOrder("splitter", "splitter", splitters)
-
--- Burner inserter at end of inserter row
 local inserters = {"inserter", "long-handed-inserter", "fast-inserter", "bulk-inserter", "stack-inserter", "burner-inserter"}
-setSubgroupInOrder("inserter", "item", inserters)
-setSubgroupInOrder("inserter", "recipe", inserters)
-setSubgroupInOrder("inserter", "inserter", inserters)
+setSubgroupInOrder("inserter", "item", inserters, "b")
+setSubgroupInOrder("inserter", "recipe", inserters, "b")
+setSubgroupInOrder("inserter", "inserter", inserters, "b")
+setSubgroupInOrder("inserter", "item", splitters, "a")
+setSubgroupInOrder("inserter", "recipe", splitters, "a")
+setSubgroupInOrder("inserter", "splitter", splitters, "a")
+
+-- TODO separate bottom logistics row into two lines, one with paving and one with the rest.
