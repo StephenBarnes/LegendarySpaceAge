@@ -252,12 +252,7 @@ landfillFromChitinRecipe.ingredients = {
 	{type = "item", name = "marrow", amount = 20},
 	{type = "item", name = "chitin-fragments", amount = 20},
 }
-landfillFromChitinRecipe.icon = nil
-landfillFromChitinRecipe.icons = {
-	{icon = "__base__/graphics/icons/landfill.png", size = 64, scale = 0.4, shift = {0, 6}},
-	{icon = chitinDir.."3.png", size = 64, scale = 0.26, shift = {8, -8}},
-	{icon = marrowItem.icon, size = 64, scale = 0.24, shift = {-8, -8}},
-}
+Icon.set(landfillFromChitinRecipe, {"landfill", "marrow", "chitin-fragments"})
 landfillFromChitinRecipe.subgroup = "gleba-non-agriculture"
 landfillFromChitinRecipe.order = "d"
 extend{landfillFromChitinRecipe}
@@ -290,7 +285,7 @@ chitinTech1.research_trigger = {
 	type = "mine-entity",
 	entity = "small-stomper-shell-no-corpse",
 }
-chitinTech1.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-tech-1.png"
+Icon.set(chitinTech1, "LSA/gleba/chitin-tech-1")
 chitinTech1.localised_description = {"technology-description.chitin-processing-1"}
 extend{chitinTech1}
 
@@ -307,7 +302,7 @@ chitinTech2.research_trigger = {
 	item = "chitin-block",
 	count = 20,
 }
-chitinTech2.icon = "__LegendarySpaceAge__/graphics/gleba/chitin-tech-2.png"
+Icon.set(chitinTech2, "LSA/gleba/chitin-tech-2")
 chitinTech2.localised_description = {"technology-description.chitin-processing-2"}
 extend{chitinTech2}
 
@@ -324,7 +319,7 @@ marrowTech.research_trigger = {
 	item = "marrow",
 	count = 10,
 }
-marrowTech.icon = "__LegendarySpaceAge__/graphics/gleba/marrow-tech.png"
+Icon.set(marrowTech, "LSA/gleba/marrow-tech")
 marrowTech.localised_description = nil
 extend{marrowTech}
 
@@ -343,6 +338,6 @@ biomechanismsTech.effects = {
 	{type = "unlock-recipe", recipe = "sensor-from-sencytium"},
 	{type = "unlock-recipe", recipe = "actuator-from-appendage"},
 }
-biomechanismsTech.icon = "__LegendarySpaceAge__/graphics/gleba/biomechanisms-tech.png"
+Icon.set(biomechanismsTech, "LSA/gleba/biomechanisms-tech")
 extend{biomechanismsTech}
 Tech.addTechDependency("biomechanisms", "agricultural-science-pack")

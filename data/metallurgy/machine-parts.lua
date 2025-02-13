@@ -3,44 +3,18 @@
 
 -- Update icons for iron parts.
 Icon.set("iron-gear-wheel", "LSA/parts-basic/plain/pair-item")
-ITEM["iron-gear-wheel"].pictures = {
-	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-1.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-2.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-3.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/spring-1.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-basic/plain/spring-2.png", size = 64, scale = 0.5, mipmap_count = 4},
-}
+Icon.variants("iron-gear-wheel", "LSA/parts-basic/plain/%", 5)
 ITEM["iron-gear-wheel"].has_random_tint = true
 ITEM["iron-gear-wheel"].random_tint_color = ITEM["iron-plate"].random_tint_color
 
 -- Update icon for casting recipe.
-RECIPE["casting-iron-gear-wheel"].icon = nil
-RECIPE["casting-iron-gear-wheel"].icons = {
-	{icon = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-2.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
-	{icon = "__space-age__/graphics/icons/fluid/molten-iron.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={4, -4}},
-}
+Icon.set("casting-iron-gear-wheel", {"iron-gear-wheel", "molten-iron"}, "casting")
 
 -- Create advanced parts item.
 local advancedPartsItem = copy(ITEM["iron-gear-wheel"])
 advancedPartsItem.name = "advanced-parts"
-advancedPartsItem.icons = {
-	--[[
-	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/flange-1.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={-6, 4}},
-	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/gasket.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={6, 4}},
-	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-1.png", icon_size = 64, scale=0.3, mipmap_count=4, shift={0, -6}},
-	]]
-	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.5, mipmap_count=4},
-}
-advancedPartsItem.pictures = {
-	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-1.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-2.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-2.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/flange-1.png", size = 64, scale = 0.36, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-advanced/flange-2.png", size = 64, scale = 0.36, mipmap_count = 4},
-	--{filename = "__LegendarySpaceAge__/graphics/parts-advanced/gasket.png", size = 64, scale = 0.36, mipmap_count = 4},
-}
+Icon.variants(advancedPartsItem, "LSA/parts-advanced/%", 5)
+Icon.set(advancedPartsItem, "LSA/parts-advanced/3")
 advancedPartsItem.has_random_tint = true
 advancedPartsItem.random_tint_color = {r = .955, g = .96, b = 1.0, a=1}
 advancedPartsItem.spoil_ticks = nil

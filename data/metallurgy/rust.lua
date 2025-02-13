@@ -12,10 +12,7 @@ for i, itemName in pairs{
 	local baseItem = ITEM[itemName]
 	local rustyItem = copy(baseItem)
 	rustyItem.name = "rusty-"..itemName
-	rustyItem.icon = nil
-	rustyItem.icons = {
-		{icon = "__LegendarySpaceAge__/graphics/metallurgy/rusty/"..itemName..".png", icon_size = 64, scale = 0.5},
-	}
+	Icon.set(rustyItem, "LSA/metallurgy/rusty/" .. itemName)
 	rustyItem.has_random_tint = true
 	rustyItem.random_tint_color = {.592, .463, .322}
 	rustyItem.localised_name = {"item-name.rusty-X", {"item-name.compound-"..itemName}}
@@ -36,11 +33,7 @@ for i, itemName in pairs{
 		{type="item", name="sand", amount=1, probability=0.8, show_details_in_recipe_tooltip=false},
 	}
 	recipe1.main_product = itemName
-	recipe1.icon = nil
-	recipe1.icons = {
-		rustyItem.icons[1],
-		{icon = "__LegendarySpaceAge__/graphics/glass-etc/sand/1.png", icon_size = 64, shift = {-8, -8}, scale = 0.25},
-	}
+	Icon.set(recipe1, {"rusty-"..itemName, "sand"})
 	recipe1.enabled = true
 	recipe1.subgroup = "derusting"
 	recipe1.order = "b-"..i
@@ -59,7 +52,7 @@ for i, itemName in pairs{
 	recipe2.results = {
 		{type="item", name=itemName, amount=1},
 	}
-	recipe2.icons[2].icon = "__base__/graphics/icons/fluid/sulfuric-acid.png"
+	Icon.set(recipe2, {"rusty-"..itemName, "sulfuric-acid"})
 	recipe2.order = "c-"..i
 	recipe2.enabled = false
 	recipe2.localised_name = {"recipe-name.acid-derust-X", {"item-name.compound-"..itemName}}
@@ -70,12 +63,6 @@ end
 
 -- Gears actually use different rusty sprites.
 Icon.set("rusty-iron-gear-wheel", "LSA/parts-basic/rusty/pair-item")
-ITEM["rusty-iron-gear-wheel"].pictures = {
-	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-1.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-2.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/gear-3.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/spring-1.png", size = 64, scale = 0.5, mipmap_count = 4},
-	{filename = "__LegendarySpaceAge__/graphics/parts-basic/rusty/spring-2.png", size = 64, scale = 0.5, mipmap_count = 4},
-}
+Icon.variants("rusty-iron-gear-wheel", "LSA/parts-basic/rusty/%", 5)
 Icon.set("sand-derust-iron-gear-wheel", {"LSA/parts-basic/rusty/pair-item", "sand"})
 Icon.set("acid-derust-iron-gear-wheel", {"LSA/parts-basic/rusty/pair-item", "sulfuric-acid"})

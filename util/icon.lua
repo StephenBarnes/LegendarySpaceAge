@@ -137,12 +137,19 @@ Icon.set = function(thing, iconInfo, arrangement)
 	end
 end
 
----@param proto data.ItemPrototype | data.RecipePrototype | data.FluidPrototype | data.TechnologyPrototype
+---@param protoOrName data.ItemPrototype | data.RecipePrototype | data.FluidPrototype | data.TechnologyPrototype | string
 ---@param dirCode string
 ---@param count number
 ---@param additional table<string, any>?
-Icon.variants = function(proto, dirCode, count, additional)
+Icon.variants = function(protoOrName, dirCode, count, additional)
 	assert(count <= 16, "Cannot have more than 16 variants")
+	local proto ---@type data.ItemPrototype | data.RecipePrototype | data.FluidPrototype | data.TechnologyPrototype
+	if type(protoOrName) == "string" then
+		proto = ITEM[protoOrName]
+	else
+		proto = protoOrName
+	end
+
 	local variants = {}
 	local iconInfo = Icon.getIconInfo(dirCode, proto)
 	assert(iconInfo.path ~= nil, "No path found for " .. dirCode)

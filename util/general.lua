@@ -37,4 +37,10 @@ Export.multWithUnits = function(s, x)
 	return num * x .. units
 end
 
+Export.order = function(protos)
+	for i, proto in pairs(protos) do
+		proto.order = string.format("%02d", i)
+	end
+end
+
 return Export

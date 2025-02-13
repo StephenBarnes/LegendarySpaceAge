@@ -82,6 +82,10 @@ glassTech.effects = {
 		type = "unlock-recipe",
 		recipe = "glass",
 	},
+	{
+		type = "unlock-recipe",
+		recipe = "panel-from-glass",
+	},
 }
 glassTech.prerequisites = {}
 glassTech.unit = nil

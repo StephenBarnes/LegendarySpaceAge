@@ -3,15 +3,8 @@
 -- Create activated egg item.
 local activatedEggItem = copy(ITEM["pentapod-egg"])
 activatedEggItem.name = "activated-pentapod-egg"
-local activatedEggGraphics = "__LegendarySpaceAge__/graphics/gleba/activated-pentapod-egg/"
-activatedEggItem.pictures = {
-	{filename = activatedEggGraphics.."main.png", size = 64, scale = 0.5, draw_as_glow = true},
-	{filename = activatedEggGraphics.."1.png", size = 64, scale = 0.5, draw_as_glow = true},
-	{filename = activatedEggGraphics.."2.png", size = 64, scale = 0.5, draw_as_glow = true},
-	{filename = activatedEggGraphics.."3.png", size = 64, scale = 0.5, draw_as_glow = true},
-}
-activatedEggItem.icons = nil
-activatedEggItem.icon = activatedEggItem.pictures[4].filename
+Icon.variants(activatedEggItem, "LSA/gleba/activated-pentapod-egg/%", 4)
+Icon.set(activatedEggItem, "LSA/gleba/activated-pentapod-egg/1")
 activatedEggItem.spoil_ticks = 60 * 30 -- 30 seconds
 activatedEggItem.order = activatedEggItem.order .. "-2"
 -- activatedEggItem.fuel_category = "activated-pentapod-egg" -- Fuel category set in constants.lua.
@@ -30,7 +23,7 @@ ITEM["pentapod-egg"].pictures = {
 -- Normal pentapod eggs spoil to activated eggs. Activated eggs spoil to hatch.
 ITEM["pentapod-egg"].spoil_result = "activated-pentapod-egg"
 ITEM["pentapod-egg"].spoil_to_trigger_result = nil
-ITEM["pentapod-egg"].spoil_ticks = 60 * 60 * 10 -- 10 minutes, so it's not unthinkable to just let them spoil, rather than feeding them mash to deliberately activate them.
+ITEM["pentapod-egg"].spoil_ticks = 10 * MINUTE -- 10 minutes, so it's not unthinkable to just let them spoil, rather than feeding them mash to deliberately activate them.
 
 -- Create new recipe for activating eggs using mash.
 local eggActivationRecipe = copy(RECIPE["pentapod-egg"])
@@ -43,9 +36,7 @@ eggActivationRecipe.results = {
 	{type = "item", name = "activated-pentapod-egg", amount = 1},
 }
 eggActivationRecipe.surface_conditions = nil
--- Remove icons so it defaults to the activated egg icon.
-eggActivationRecipe.icon = nil
-eggActivationRecipe.icons = nil
+Icon.clear(eggActivationRecipe) -- Remove icons so it defaults to the activated egg icon.
 eggActivationRecipe.order = eggActivationRecipe.order .. "-2"
 extend{eggActivationRecipe}
 Tech.addRecipeToTech("activated-pentapod-egg", "bioflux")
@@ -67,9 +58,7 @@ eggReplicationRecipe.results = {
 eggReplicationRecipe.main_product = "pentapod-egg"
 eggReplicationRecipe.surface_conditions = nil
 	-- Allow it anywhere, though it's only really useful on Gleba (since science pack can only be crafted on Gleba, and pentapod labs can only be placed on Gleba).
--- Remove icons so it defaults to the egg icon.
-eggReplicationRecipe.icon = nil
-eggReplicationRecipe.icons = nil
+Icon.clear(eggReplicationRecipe) -- Remove icons so it defaults to the egg icon.
 RECIPE["pentapod-egg"] = eggReplicationRecipe
 Tech.addRecipeToTech("pentapod-egg", "bioflux")
 Tech.removeRecipeFromTech("pentapod-egg", "biochamber")

@@ -107,21 +107,12 @@ Item.clearFuel(stingfrondSprout)
 extend{stingfrondSprout}
 
 -- Create neurofibril item
-local neurofibrilPics = {}
-for i = 1, 6 do
-	neurofibrilPics[i] = {
-		filename = "__LegendarySpaceAge__/graphics/gleba/stingfronds/neurofibrils/"..i..".png",
-		size = 64,
-		scale = 0.5,
-	}
-end
 local neurofibril = copy(ITEM["wood"])
 neurofibril.fuel_category = "chemical"
 neurofibril.fuel_value = "1MJ"
 neurofibril.name = "neurofibril"
-neurofibril.pictures = neurofibrilPics
-neurofibril.icon = nil
-neurofibril.icons = {{icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/neurofibrils/1.png", icon_size = 64, scale = 0.5, icon_mipmaps = 4}}
+Icon.set(neurofibril, "LSA/gleba/stingfronds/neurofibrils/1")
+Icon.variants(neurofibril, "LSA/gleba/stingfronds/neurofibrils/%", 6)
 neurofibril.subgroup = "stingfrond-products"
 neurofibril.order = "b"
 extend{neurofibril}
@@ -139,7 +130,7 @@ There's 3 techs.
 
 local wiringTech = copy(TECH["biochamber"])
 wiringTech.name = "neural-wiring"
-wiringTech.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech2.png"
+Icon.set(wiringTech, "LSA/gleba/stingfronds/tech2")
 wiringTech.prerequisites = {"planet-discovery-gleba"}
 wiringTech.research_trigger = {
 	type = "mine-entity",
@@ -155,7 +146,7 @@ extend{wiringTech}
 
 local cultivationTech1 = copy(TECH["biochamber"])
 cultivationTech1.name = "stingfrond-cultivation-1"
-cultivationTech1.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech1.png"
+Icon.set(cultivationTech1, "LSA/gleba/stingfronds/tech1")
 cultivationTech1.prerequisites = {"bioflux", "neural-wiring"}
 cultivationTech1.research_trigger = {
 	type = "craft-item",
@@ -173,7 +164,7 @@ extend{cultivationTech1}
 
 local cultivationTech2 = copy(TECH["biochamber"])
 cultivationTech2.name = "stingfrond-cultivation-2"
-cultivationTech2.icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/tech1.png"
+Icon.set(cultivationTech2, "LSA/gleba/stingfronds/tech1")
 cultivationTech2.prerequisites = {"stingfrond-cultivation-1"}
 cultivationTech2.research_trigger = {
 	type = "craft-item",
@@ -210,7 +201,7 @@ sproutRecipe.ingredients = {
 sproutRecipe.results = {
 	{type = "item", name = "stingfrond-sprout", amount = 1, probability = 0.2},
 }
-sproutRecipe.icon = nil
+Icon.clear(sproutRecipe)
 sproutRecipe.subgroup = "stingfrond-products"
 sproutRecipe.order = "a"
 sproutRecipe.energy_required = 5

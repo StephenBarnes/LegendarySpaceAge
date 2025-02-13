@@ -195,15 +195,11 @@ crushBoomnutRecipe.ingredients = {
 }
 crushBoomnutRecipe.results = {
 	{type = "item", name = "niter", amount = 1},
-	{type = "item", name = "spoilage", amount = 1},
+	{type = "item", name = "sugar", amount = 1},
 }
 crushBoomnutRecipe.category = "crafting"
 crushBoomnutRecipe.crafting_machine_tint = boompuffTint
-crushBoomnutRecipe.icon = nil
-crushBoomnutRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/niter/niter-1.png", icon_size = 64, scale = 0.5, mipmap_count = 4},
-	{icon = "__LegendarySpaceAge__/graphics/gleba/boompuffs/nut/1.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
-}
+Icon.set(crushBoomnutRecipe, {"boomnut", "niter", "LSA/gleba/sugar/1"}, "decomposition")
 crushBoomnutRecipe.subgroup = "slipstacks-and-boompuffs"
 crushBoomnutRecipe.order = "14"
 crushBoomnutRecipe.allow_decomposition = false -- Otherwise it thinks spoilage comes from boomnut crushing by default.
@@ -224,11 +220,7 @@ boomsacDeflationRecipe.results = {
 }
 boomsacDeflationRecipe.category = "chemistry"
 boomsacDeflationRecipe.crafting_machine_tint = boompuffTint
-boomsacDeflationRecipe.icon = nil
-boomsacDeflationRecipe.icons = {
-	FLUID["natural-gas"].icons[1],
-	{icon = "__LegendarySpaceAge__/graphics/gleba/boompuffs/sac/2.png", icon_size = 64, scale = 0.3, mipmap_count = 4, shift = {-6, -6}},
-}
+Icon.set(boomsacDeflationRecipe, {"natural-gas", "boomsac"})
 boomsacDeflationRecipe.subgroup = "slipstacks-and-boompuffs"
 boomsacDeflationRecipe.order = "15"
 extend{boomsacDeflationRecipe}

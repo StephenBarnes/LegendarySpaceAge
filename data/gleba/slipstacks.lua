@@ -43,7 +43,7 @@ extend{slipstackPlant}
 -- Create item for slipstack pearl
 local slipstackPearl = copy(ITEM.spoilage)
 slipstackPearl.name = "slipstack-pearl"
-slipstackPearl.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png"
+Icon.set(slipstackPearl, "LSA/gleba/slipstacks/pearl")
 slipstackPearl.subgroup = "slipstacks-and-boompuffs"
 slipstackPearl.order = "01"
 slipstackPearl.spoil_ticks = 60 * 60 * 5 -- 5 minutes.
@@ -55,7 +55,7 @@ extend{slipstackPearl}
 local slipstackNest = copy(ITEM["iron-ore"])
 slipstackNest.name = "slipstack-nest"
 slipstackNest.localised_name = {"item-name.slipstack-nest"}
-slipstackNest.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-nest.png"
+Icon.set(slipstackNest, "LSA/gleba/slipstacks/nest")
 slipstackNest.pictures = nil
 slipstackNest.subgroup = "slipstacks-and-boompuffs"
 slipstackNest.order = "02"
@@ -82,7 +82,7 @@ slipstackNestRecipe.category = "crafting"
 slipstackNestRecipe.results = {{type = "item", name = "slipstack-nest", amount = 1}}
 slipstackNestRecipe.surface_conditions = nil -- Allow anywhere. Can't be planted anywhere else, though.
 slipstackNestRecipe.auto_recycle = true
-slipstackNestRecipe.icon = nil
+Icon.clear(slipstackNestRecipe)
 extend{slipstackNestRecipe}
 
 -- Recipe for smelting slipstack pearls to resin
@@ -93,11 +93,7 @@ pearlSmeltRecipe.results = {{type = "item", name = "resin", amount = 1}}
 pearlSmeltRecipe.category = "smelting"
 pearlSmeltRecipe.subgroup = "resin"
 pearlSmeltRecipe.order = "04"
-pearlSmeltRecipe.icon = nil
-pearlSmeltRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png", icon_size = 64, scale = 0.5},
-	{icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-pearl.png", icon_size = 64, scale = 0.3, shift = {-8, -8}},
-}
+Icon.set(pearlSmeltRecipe, {"resin", "slipstack-pearl"})
 extend{pearlSmeltRecipe}
 
 ------------------------------------------------------------------------
@@ -122,7 +118,7 @@ RECIPE["biolubricant"].energy_required = 5
 
 local slipstackTech = copy(TECH["biochamber"])
 slipstackTech.name = "slipstack-propagation"
-slipstackTech.icon = "__LegendarySpaceAge__/graphics/slipstacks/slipstack-tech.png"
+Icon.set(slipstackTech, "LSA/gleba/slipstacks/tech")
 slipstackTech.prerequisites = {"planet-discovery-gleba"}
 slipstackTech.research_trigger = {
 	type = "mine-entity",

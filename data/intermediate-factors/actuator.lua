@@ -2,7 +2,6 @@
 
 -- Move item and recipes into the subgroup.
 ITEM["electric-engine-unit"].subgroup = "actuator"
-ITEM["electric-engine-unit"].order = "01"
 
 -- Create recipe: 8 advanced parts + 1 frame + 1 red circuit + 20 lubricant -> 1 actuator
 local standardRecipe = copy(RECIPE["electric-engine-unit"])
@@ -13,12 +12,7 @@ standardRecipe.ingredients = {
 	{ type = "item",  name = "advanced-circuit", amount = 1 },
 	{ type = "fluid", name = "lubricant",        amount = 20 }
 }
-standardRecipe.icon = nil
-standardRecipe.icons = {
-	{icon = "__base__/graphics/icons/electric-engine-unit.png", icon_size = 64, scale=0.5, mipmap_count=4},
-	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}},
-	{icon = "__base__/graphics/icons/advanced-circuit.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={8, -8}},
-}
+Icon.set(standardRecipe, {"electric-engine-unit", "LSA/parts-advanced/3", "advanced-circuit"})
 extend{standardRecipe}
 Tech.addRecipeToTech("actuator-standard", "electric-engine")
 
@@ -36,10 +30,22 @@ advancedRecipe.ingredients = {
 	{ type = "item",  name = "processing-unit",  amount = 1 },
 	{ type = "fluid", name = "lubricant",        amount = 20 }
 }
-advancedRecipe.icons[3].icon = "__base__/graphics/icons/processing-unit.png"
-advancedRecipe.order = "02"
+Icon.set(advancedRecipe, {"electric-engine-unit", "LSA/parts-advanced/3", "processing-unit"})
 extend{advancedRecipe}
 Tech.addRecipeToTech("actuator-from-blue-circuit", "processing-unit")
+
+-- Create recipe for augmented actuator: 1 mechanism + 5 lubricant + 1 blue circuit + 1 advanced part -> 1 actuator
+local augmentedRecipe = copy(standardRecipe)
+augmentedRecipe.name = "actuator-augmented"
+augmentedRecipe.ingredients = {
+	{ type = "item",  name = "mechanism",        amount = 1 },
+	{ type = "item",  name = "processing-unit",  amount = 1 },
+	{ type = "item",  name = "advanced-parts",   amount = 2 },
+	{ type = "fluid", name = "lubricant",        amount = 5 },
+}
+Icon.set(augmentedRecipe, {"electric-engine-unit", "LSA/intermediate-factors/mechanism", "processing-unit"})
+extend{augmentedRecipe}
+Tech.addRecipeToTech("actuator-augmented", "processing-unit")
 
 -- Create recipe: 1 frame + 8 appendage + 1 sencytium + 1 red circuit -> 1 actuator
 local recipeFromAppendage = copy(standardRecipe)
@@ -50,11 +56,18 @@ recipeFromAppendage.ingredients = {
 	{ type = "item",  name = "sencytium",         amount = 1 },
 	{ type = "item",  name = "advanced-circuit", amount = 1 },
 }
-recipeFromAppendage.icons[2].icon = "__LegendarySpaceAge__/graphics/gleba/appendage/1.png"
+Icon.set(recipeFromAppendage, {"electric-engine-unit", "LSA/gleba/appendage/4", "advanced-circuit"})
 recipeFromAppendage.allow_as_intermediate = false
 recipeFromAppendage.enabled = false
-recipeFromAppendage.order = "03"
 recipeFromAppendage.category = "crafting"
 extend{recipeFromAppendage}
 
 -- TODO create more recipes
+
+Gen.order({
+	ITEM["electric-engine-unit"],
+	standardRecipe,
+	advancedRecipe,
+	augmentedRecipe,
+	recipeFromAppendage,
+})

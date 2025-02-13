@@ -8,10 +8,7 @@ gasTankTech.effects = {
 	{type = "unlock-recipe", recipe = "barrel"},
 	{type = "unlock-recipe", recipe = "gas-tank"},
 }
-gasTankTech.icon = nil
-gasTankTech.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/gas-tanks/tech.png", icon_size = 256, scale = 0.5},
-}
+Icon.set(gasTankTech, "LSA/gas-tanks/tech")
 gasTankTech.research_trigger = nil
 gasTankTech.unit = {
 	count = 50,

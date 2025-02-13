@@ -22,12 +22,7 @@ basicRecipe.subgroup = "mechanism"
 basicRecipe.order = "02"
 basicRecipe.energy_required = 5
 basicRecipe.category = "crafting"
-basicRecipe.icon = nil
-basicRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/mechanism.png", icon_size = 64, scale = 0.5},
-	{icon = "__LegendarySpaceAge__/graphics/parts-basic/plain/gear-2.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={-8, -7}},
-	{icon = "__LegendarySpaceAge__/graphics/parts-basic/plain/spring-2.png", icon_size = 64, scale=0.2, mipmap_count=4, shift={-7, -8}},
-}
+Icon.set(basicRecipe, {"mechanism", "iron-gear-wheel"})
 basicRecipe.allow_as_intermediate = true
 extend{basicRecipe}
 
@@ -35,13 +30,13 @@ extend{basicRecipe}
 local advancedRecipe = copy(basicRecipe)
 advancedRecipe.name = "mechanism-from-advanced"
 advancedRecipe.ingredients = {
-	{type = "item", name = "advanced-parts", amount = 5},
+	{type = "item", name = "advanced-parts", amount = 2},
 	{type = "item", name = "frame", amount = 1},
 }
+advancedRecipe.results = {{type = "item", name = "mechanism", amount = 2}}
 advancedRecipe.order = "03"
 advancedRecipe.energy_required = 2.5
-advancedRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}}
-advancedRecipe.icons[3] = nil
+Icon.set(advancedRecipe, {"mechanism", "advanced-parts"})
 advancedRecipe.allow_as_intermediate = false
 advancedRecipe.enabled = false
 extend{advancedRecipe}
@@ -56,8 +51,7 @@ appendageRecipe.ingredients = {
 }
 appendageRecipe.order = "04"
 appendageRecipe.energy_required = 5
-appendageRecipe.icons[2] = {icon = "__LegendarySpaceAge__/graphics/gleba/appendage/1.png", icon_size = 64, scale=0.25, mipmap_count=4, shift={-8, -8}}
-appendageRecipe.icons[3] = nil
+Icon.set(appendageRecipe, {"mechanism", "appendage"})
 appendageRecipe.allow_as_intermediate = false
 appendageRecipe.enabled = false
 appendageRecipe.category = "crafting"

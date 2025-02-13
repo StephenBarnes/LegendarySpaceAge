@@ -1,19 +1,10 @@
 -- This file adds gunpowder item and recipes.
 
 -- Create gunpowder item.
-local gunpowderPictures = {}
-for i = 1, 3 do
-	table.insert(gunpowderPictures, {
-		filename = "__LegendarySpaceAge__/graphics/gunpowder/gunpowder-" .. i .. ".png",
-		size = 64,
-		scale = 0.5,
-		mipmap_count = 4,
-	})
-end
 local gunpowderItem = copy(ITEM["sulfur"])
 gunpowderItem.name = "gunpowder"
-gunpowderItem.icons = {{icon = gunpowderPictures[1].filename, icon_size = 64, scale=0.5, mipmap_count=4}}
-gunpowderItem.pictures = gunpowderPictures
+Icon.set(gunpowderItem, "LSA/gunpowder/gunpowder-1")
+Icon.variants(gunpowderItem, "LSA/gunpowder/gunpowder-%", 3)
 gunpowderItem.subgroup = "raw-material" -- Could put it with ammo, but it's really an intermediate.
 gunpowderItem.order = "b[chemistry]-a2"
 gunpowderItem.auto_recycle = true -- The item has auto_recycle (so it gets a recycling recipe), but the recipe doesn't, so quality mod doesn't see any recipe to reverse for recycling gunpowder, and therefore makes it recycle to itself.
@@ -68,5 +59,5 @@ tech.research_trigger = {
 	item = "carbon",
 	count = 100,
 }
-tech.icon = "__LegendarySpaceAge__/graphics/gunpowder/tech.png"
+Icon.set(tech, "LSA/gunpowder/tech")
 extend{tech}

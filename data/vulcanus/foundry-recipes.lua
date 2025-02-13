@@ -246,11 +246,7 @@ castingAdvancedPartsRecipe.results = {
 	{type = "fluid", name = "steam", amount = 40, temperature = 500, ignored_by_productivity=40},
 }
 castingAdvancedPartsRecipe.main_product = "advanced-parts"
-castingAdvancedPartsRecipe.icon = nil
-castingAdvancedPartsRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/parts-advanced/bearing-3.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={-4, 4}},
-	{icon = "__space-age__/graphics/icons/fluid/molten-iron.png", icon_size = 64, scale=0.5, mipmap_count=4, shift={4, -4}},
-}
+Icon.set(castingAdvancedPartsRecipe, {"advanced-parts", "molten-iron"}, "casting")
 castingAdvancedPartsRecipe.order = "b[casting]-f[casting-advanced-parts]"
 castingAdvancedPartsRecipe.energy_required = 16
 extend{castingAdvancedPartsRecipe}
