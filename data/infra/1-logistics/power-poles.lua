@@ -14,9 +14,10 @@ RECIPE["big-electric-pole"].ingredients = {
 }
 RECIPE["substation"].ingredients = {
 	{type = "item", name = "frame", amount = 2},
-	{type = "item", name = "wiring", amount = 4},
-	{type = "item", name = "advanced-circuit", amount = 4},
+	{type = "item", name = "electronic-components", amount = 5},
+	{type = "item", name = "advanced-circuit", amount = 5},
 }
+RECIPE["substation"].energy_required = 2
 RECIPE["po-transformer"].ingredients = {
 	{type = "item", name = "frame", amount = 2},
 	{type = "item", name = "wiring", amount = 2},

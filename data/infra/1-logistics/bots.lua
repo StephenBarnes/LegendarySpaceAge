@@ -5,5 +5,4 @@ RECIPE["roboport"].ingredients = {
 	{type="item", name="panel", amount=8},
 	{type="item", name="electric-engine-unit", amount=8},
 	{type="item", name="sensor", amount=8},
-	{type="item", name="wiring", amount=4},
 }

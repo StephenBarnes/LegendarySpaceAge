@@ -40,7 +40,7 @@ for _, vals in pairs{
 			{type="item", name="frame", amount=5},
 			{type="item", name="structure", amount=10},
 			{type="item", name="shielding", amount=10},
-			{type="item", name="wiring", amount=10},
+			{type="item", name="electronic-components", amount=10},
 		},
 		craft_time = 10,
 		energy_usage = "400kW",

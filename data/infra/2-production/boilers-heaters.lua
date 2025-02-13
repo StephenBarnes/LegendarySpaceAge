@@ -12,23 +12,23 @@ RECIPE["electric-boiler"].ingredients = {
 	{type = "item", name = "structure", amount = 2},
 	{type = "item", name = "fluid-fitting", amount = 2},
 	{type = "item", name = "shielding", amount = 1},
-	{type = "item", name = "wiring", amount = 2},
+	{type = "item", name = "wiring", amount = 2}, -- Wiring, not electronic components, bc electronic components aren't unlocked yet.
 }
 RECIPE["gas-boiler"].ingredients = {
 	{type = "item", name = "structure", amount = 2},
-	{type = "item", name = "fluid-fitting", amount = 4},
+	{type = "item", name = "fluid-fitting", amount = 5},
 	{type = "item", name = "shielding", amount = 2},
 }
-RECIPE["boiler"].energy_required = 4
-RECIPE["electric-boiler"].energy_required = 4
-RECIPE["gas-boiler"].energy_required = 4
+RECIPE["boiler"].energy_required = 5
+RECIPE["electric-boiler"].energy_required = 5
+RECIPE["gas-boiler"].energy_required = 5
 
 RECIPE["steam-engine"].ingredients = {
-	{type = "item", name = "wiring", amount = 4},
-	{type = "item", name = "mechanism", amount = 4},
+	{type = "item", name = "wiring", amount = 5}, -- Wiring, not electronic components, bc electronic components aren't unlocked yet.
+	{type = "item", name = "mechanism", amount = 5},
 	{type = "item", name = "fluid-fitting", amount = 2},
 }
-RECIPE["steam-engine"].energy_required = 4
+RECIPE["steam-engine"].energy_required = 5
 
 RECIPE["heating-tower"].ingredients = {
 	{type = "item", name = "structure", amount = 20},
@@ -55,10 +55,10 @@ RECIPE["heat-exchanger"].ingredients = {
 	{type = "item", name = "fluid-fitting", amount = 2},
 	{type = "item", name = "heat-pipe", amount = 2},
 }
-RECIPE["heat-exchanger"].energy_required = 4
+RECIPE["heat-exchanger"].energy_required = 5
 RECIPE["steam-turbine"].ingredients = {
-	{type = "item", name = "wiring", amount = 8},
-	{type = "item", name = "mechanism", amount = 8},
-	{type = "item", name = "fluid-fitting", amount = 4},
+	{type = "item", name = "wiring", amount = 10}, -- Wiring, not electronic components, bc electronic components aren't unlocked yet.
+	{type = "item", name = "mechanism", amount = 10},
+	{type = "item", name = "fluid-fitting", amount = 5},
 }
-RECIPE["steam-turbine"].energy_required = 4
+RECIPE["steam-turbine"].energy_required = 5
