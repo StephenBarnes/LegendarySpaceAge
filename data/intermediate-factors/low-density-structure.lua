@@ -1,4 +1,4 @@
--- This file will add recipes for low-density structures (which we rename to "Lightweight structure").
+-- This file will add recipes for low-density structures.
 
 RECIPE["low-density-structure"].auto_recycle = false
 
@@ -25,29 +25,31 @@ RECIPE["low-density-structure"].hidden = true
 RECIPE["low-density-structure"].hidden_in_factoriopedia = true
 
 -- Create a new recipe for LDS from carbon fiber.
-local recipeFromCarbonFiber = copy(recipeFromCopper)
-recipeFromCarbonFiber.name = "lds-from-carbon-fiber"
-recipeFromCarbonFiber.ingredients = {
+local recipeFromChitinAndCarbonFiber = copy(recipeFromCopper)
+recipeFromChitinAndCarbonFiber.name = "lds-from-chitin-and-carbon-fiber"
+recipeFromChitinAndCarbonFiber.ingredients = {
 	{type = "item", name = "carbon-fiber", amount = 1},
-	{type = "fluid", name = "chitin-broth", amount = 40},
-	{type = "item", name = "slipstack-pearl", amount = 1},
-	{type = "item", name = "resin", amount = 1},
+	{type = "fluid", name = "chitin-broth", amount = 50},
+	{type = "item", name = "slipstack-pearl", amount = 2},
 }
-recipeFromCarbonFiber.results = {
+recipeFromChitinAndCarbonFiber.energy_required = 20
+recipeFromChitinAndCarbonFiber.results = {
 	{type = "item", name = "low-density-structure", amount = 1},
 }
-recipeFromCarbonFiber.enabled = false
-recipeFromCarbonFiber.allow_as_intermediate = false
-recipeFromCarbonFiber.category = "organic"
-Icon.set(recipeFromCarbonFiber, {"low-density-structure", "chitin-broth", "carbon-fiber"})
-extend{recipeFromCarbonFiber}
+recipeFromChitinAndCarbonFiber.enabled = false
+recipeFromChitinAndCarbonFiber.allow_as_intermediate = false
+recipeFromChitinAndCarbonFiber.category = "organic"
+Icon.set(recipeFromChitinAndCarbonFiber, {"low-density-structure", "chitin-broth", "carbon-fiber"})
+extend{recipeFromChitinAndCarbonFiber}
 
--- TODO create new recipes for lightweight-structure.
+-- TODO create new recipes for low-density structure.
+-- TODO create a recipe like: tubules + carbon fiber + resin + plastic bar -> low-density structure.
+-- TODO create a ceramic-based recipe.
 
 Gen.order({
 	ITEM["low-density-structure"],
 	RECIPE["low-density-structure"],
 	recipeFromCopper,
 	RECIPE["casting-low-density-structure"],
-	recipeFromCarbonFiber,
-}, "lightweight-structure")
+	recipeFromChitinAndCarbonFiber,
+}, "low-density-structure")

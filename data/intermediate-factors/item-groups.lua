@@ -21,7 +21,7 @@ for i, factor in pairs{
 	"structure",
 	"fluid-fitting",
 	"shielding",
-	"lightweight-structure",
+	"low-density-structure",
 	"mechanism",
 	"sensor",
 	"actuator",

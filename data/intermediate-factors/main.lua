@@ -15,7 +15,7 @@ Factor intermediates and their meaning:
 	Structure - strong non-hollow building material, made from stone bricks + cement, or later from concrete, etc.
 	Fluid fitting - a pipe or fitting for carrying liquids/gases, made from copper+resin or plastic+rubber.
 	Shielding - heavy plate that protects against heat (in furnaces) or enemies (in turrets) or radiation (in reactors), made from steel plates or later tungsten plates.
-	Lightweight panel - basically we're stealing the "low-density structure" from the base game. Made from iron+copper+plastic, or maybe plastic+rubber+carbon fiber or sth.
+	Low-density structure - from the base game. Made from iron+copper+plastic, or maybe plastic+rubber+carbon fiber or sth.
 	Mechanism - made from machine parts plus frame, or later advanced parts, or with Gleba mineral-water nonsense.
 	Sensor - made from green/red/blue circuits, glass, etc.
 
@@ -35,7 +35,7 @@ require("data.intermediate-factors.panel")
 require("data.intermediate-factors.structure")
 require("data.intermediate-factors.fluid-fitting")
 require("data.intermediate-factors.shielding")
-require("data.intermediate-factors.lightweight-structure")
+require("data.intermediate-factors.low-density-structure")
 require("data.intermediate-factors.mechanism")
 require("data.intermediate-factors.sensor")
 require("data.intermediate-factors.actuator")
