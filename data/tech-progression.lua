@@ -136,8 +136,9 @@ RECIPE["selector-combinator"].ingredients = {
 	{type = "item", name = "decider-combinator", amount = 5},
 }
 
--- Add red circuit dependency to assembling machine 2, so we can add it as ingredient.
+-- Add red circuit dependency to assembling machine 2 and lasers, so we can add it as ingredient.
 Tech.setPrereqs("automation-2", {"advanced-circuit"})
+Tech.addTechDependency("advanced-circuit", "laser")
 -- Add blue circuit dependency to assembling machine 3, so we can add it as ingredient.
 Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine", "processing-unit", "speed-module"})
 

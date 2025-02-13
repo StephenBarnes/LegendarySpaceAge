@@ -15,3 +15,12 @@ RECIPE["radar"].ingredients = {
 	{type = "item", name = "iron-gear-wheel", amount = 5},
 	{type = "item", name = "electronic-circuit", amount = 5},
 }
+
+RECIPE["land-mine"].ingredients = {
+	{type = "item", name = "panel", amount = 1},
+	{type = "item", name = "gunpowder", amount = 1},
+	{type = "item", name = "explosives", amount = 1},
+}
+RECIPE["land-mine"].results = {{type = "item", name = "land-mine", amount = 2}}
+RECIPE["land-mine"].energy_required = 1
+
