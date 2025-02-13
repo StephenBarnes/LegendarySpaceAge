@@ -48,7 +48,7 @@ ammoniaFromWood.show_amount_in_title = false
 ammoniaFromWood.category = "organic-or-chemistry"
 ammoniaFromWood.subgroup = "early-agriculture"
 ammoniaFromWood.order = "d1"
-ammoniaFromWood.energy_required = 60
+ammoniaFromWood.energy_required = 30
 Icon.set(ammoniaFromWood, {"ammonia", "wood"})
 extend{ammoniaFromWood}
 

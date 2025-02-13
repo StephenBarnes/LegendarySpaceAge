@@ -1,6 +1,6 @@
 -- This file creates rusty versions of items, and adds derusting recipes.
 
-local RUST_TIME = 60 * 60 * 20
+local RUST_TIME = 20 * MINUTES
 
 -- Create rusty versions of items, and recipes for derusting them using sand or sulfuric acid.
 for i, itemName in pairs{

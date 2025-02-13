@@ -23,7 +23,7 @@ Re stack sizes:
 ]]
 
 local ROCKET_MASS = 1e6
-local INGOT_COOLING_TIME = 60 * 60 * 5 -- 5 minutes.
+local INGOT_COOLING_TIME = 5 * MINUTES
 
 local ORE_STACK_SIZE = 50
 local INGOT_STACK_SIZE = 100

@@ -124,7 +124,7 @@ extend({
 		stack_size = ITEM["iron-bacteria"].stack_size,
 		default_import_location = "fulgora",
 		weight = ITEM["iron-bacteria"].weight,
-		spoil_ticks = 60 * 60 * 3, -- 3 minutes.
+		spoil_ticks = 3 * MINUTES,
 		spoil_result = "spoilage",
 		--[{"simple-entity", "fulgurite"}] = {0, 0, .5}, -- Rather don't
 	},
@@ -139,7 +139,7 @@ polysaltItem.name = "polysalt"
 Icon.set(polysaltItem, "LSA/fulgora/polysalts")
 polysaltItem.subgroup = "fulgora-processes"
 polysaltItem.order = "c[organics]-b[polysalt]"
-polysaltItem.spoil_ticks = 60 * 60 * 60 -- 1 hour.
+polysaltItem.spoil_ticks = 1 * HOURS
 polysaltItem.spoil_result = "sand"
 polysaltItem.burnt_result = "sand"
 -- Copy dry powder sounds from sulfur, instead of wet nutrient sounds.

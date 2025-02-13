@@ -6,7 +6,7 @@ TODO
 local item = copy(RAW.tool["agricultural-science-pack"])
 item.name = "nuclear-science-pack"
 item.order = "j2"
-item.spoil_ticks = 60 * 60 * 20 -- 20 minutes.
+item.spoil_ticks = 20 * MINUTES
 item.spoil_result = "uranium-238"
 extend{item}
 -- TODO add this to a tech, add new sprite, etc.

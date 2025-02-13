@@ -13,7 +13,7 @@ local petrophage = copy(ITEM["iron-bacteria"])
 petrophage.name = "petrophage"
 Icon.set(petrophage, "LSA/gleba/petrophages/1")
 Icon.variants(petrophage, "LSA/gleba/petrophages/%", 4)
-petrophage.spoil_ticks = 2 * MINUTE
+petrophage.spoil_ticks = 2 * MINUTES
 petrophage.spoil_result = "pitch"
 petrophage.hidden = false
 petrophage.hidden_in_factoriopedia = false

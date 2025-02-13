@@ -31,7 +31,7 @@ chargedBatteryItem.fuel_value = "10MJ"
 	-- Compared to 8GJ in one nuclear fuel, per stack of 50 is 400GJ and per rocket of 10 is 80GJ.
 	-- Compared to 12MJ solid fuel, per stack of 50 is 600MJ and per rocket of 1000 is 12GJ. Makes sense that solid fuel would be more per mass, I think.
 	-- Seems that in real life, lithium-ion batteries are ~1GJ/ton while solid fuels are ~50GJ/ton.
-chargedBatteryItem.spoil_ticks = 60 * 60 * 60 * 2 -- 2 hours
+chargedBatteryItem.spoil_ticks = 2 * HOURS
 chargedBatteryItem.spoil_result = "battery"
 local holmiumBatteryItem = copy(batteryItem)
 holmiumBatteryItem.name = "holmium-battery"

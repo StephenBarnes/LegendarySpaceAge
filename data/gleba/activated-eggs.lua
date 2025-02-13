@@ -5,7 +5,7 @@ local activatedEggItem = copy(ITEM["pentapod-egg"])
 activatedEggItem.name = "activated-pentapod-egg"
 Icon.variants(activatedEggItem, "LSA/gleba/activated-pentapod-egg/%", 4, {draw_as_glow=true})
 Icon.set(activatedEggItem, "LSA/gleba/activated-pentapod-egg/1")
-activatedEggItem.spoil_ticks = 60 * 30 -- 30 seconds
+activatedEggItem.spoil_ticks = 30 * SECONDS
 activatedEggItem.order = activatedEggItem.order .. "-2"
 -- activatedEggItem.fuel_category = "activated-pentapod-egg" -- Fuel category set in constants.lua.
 extend{activatedEggItem}
@@ -23,7 +23,7 @@ ITEM["pentapod-egg"].pictures = {
 -- Normal pentapod eggs spoil to activated eggs. Activated eggs spoil to hatch.
 ITEM["pentapod-egg"].spoil_result = "activated-pentapod-egg"
 ITEM["pentapod-egg"].spoil_to_trigger_result = nil
-ITEM["pentapod-egg"].spoil_ticks = 10 * MINUTE -- 10 minutes, so it's not unthinkable to just let them spoil, rather than feeding them mash to deliberately activate them.
+ITEM["pentapod-egg"].spoil_ticks = 10 * MINUTES -- 10 minutes, so it's not unthinkable to just let them spoil, rather than feeding them mash to deliberately activate them.
 
 -- Create new recipe for activating eggs using mash.
 local eggActivationRecipe = copy(RECIPE["pentapod-egg"])

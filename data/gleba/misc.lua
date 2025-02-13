@@ -25,7 +25,7 @@ RECIPE["agricultural-science-pack"].ingredients = {
 }
 
 -- Make spoilage spoil to nothing. From testing, you can simply not define spoil result or trigger, and it'll disappear.
-ITEM.spoilage.spoil_ticks = 60 * 60 * 20
+ITEM.spoilage.spoil_ticks = 20 * MINUTES
 
 -- Remove stone spawns from Gleba.
 RAW.planet.gleba.map_gen_settings.autoplace_settings.entity.settings.stone = nil

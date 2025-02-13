@@ -44,7 +44,7 @@ local fertilizedYumakoSeedItem = copy(ITEM["yumako-seed"])
 fertilizedYumakoSeedItem.name = "fertilized-yumako-seed"
 Icon.set(fertilizedYumakoSeedItem, "LSA/gleba/fertilized-seeds/yumako-seed")
 Icon.variants(fertilizedYumakoSeedItem, "LSA/gleba/fertilized-seeds/yumako-seed-%", 4, {draw_as_glow=true})
-fertilizedYumakoSeedItem.spoil_ticks = 10 * MINUTE
+fertilizedYumakoSeedItem.spoil_ticks = 10 * MINUTES
 fertilizedYumakoSeedItem.spoil_result = "yumako-seed"
 fertilizedYumakoSeedItem.localised_name = {"item-name.fertilized-yumako-seed"}
 fertilizedYumakoSeedItem.localised_description = nil
@@ -54,7 +54,7 @@ local fertilizedJellystemSeedItem = copy(ITEM["jellynut-seed"])
 fertilizedJellystemSeedItem.name = "fertilized-jellynut-seed"
 Icon.set(fertilizedJellystemSeedItem, "LSA/gleba/fertilized-seeds/jellynut-seed")
 Icon.variants(fertilizedJellystemSeedItem, "LSA/gleba/fertilized-seeds/jellynut-seed-%", 4, {draw_as_glow=true})
-fertilizedJellystemSeedItem.spoil_ticks = 10 * MINUTE
+fertilizedJellystemSeedItem.spoil_ticks = 10 * MINUTES
 fertilizedJellystemSeedItem.spoil_result = "jellynut-seed"
 fertilizedJellystemSeedItem.localised_name = {"item-name.fertilized-jellynut-seed"}
 fertilizedJellystemSeedItem.localised_description = nil

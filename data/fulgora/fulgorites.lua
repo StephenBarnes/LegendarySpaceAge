@@ -40,7 +40,7 @@ fulgoriteStarterItem.subgroup = "fulgora-processes"
 fulgoriteStarterItem.order = "c[organics]-d[fulgorite-starter]"
 fulgoriteStarterItem.place_result = "fulgorite-plant"
 fulgoriteStarterItem.localised_name = {"item-name.fulgorite-starter"} -- Otherwise it gets entity name.
-fulgoriteStarterItem.spoil_ticks = 60 * 60 * 30 -- 30 minutes.
+fulgoriteStarterItem.spoil_ticks = 30 * MINUTES
 fulgoriteStarterItem.spoil_result = "stone"
 fulgoriteStarterItem.plant_result = "fulgorite-plant"
 fulgoriteStarterItem.pictures = nil -- Remove the holmium powder picture.
@@ -93,7 +93,7 @@ fulgoritePlant.pictures = {
 fulgoritePlant.autoplace = copy(RAW["simple-entity"].fulgurite.autoplace)
 local growableFulgoraTiles = {"fulgoran-dust", "fulgoran-dunes", "fulgoran-sand", "fulgoran-rock", "fulgoran-walls", "fulgoran-paving", "fulgoran-conduit", "fulgoran-machinery"}
 fulgoritePlant.autoplace.tile_restriction = growableFulgoraTiles
-fulgoritePlant.growth_ticks = 60 * 60 * 20 -- Gleba plants are 5 minutes. Making this longer bc they can be planted anywhere, but not too much since yield is low.
+fulgoritePlant.growth_ticks = 20 * MINUTES -- Gleba plants are 5 minutes. Making this longer bc they can be planted anywhere, but not too much since yield is low.
 -- Fix mining sound and particles
 fulgoritePlant.mined_sound = nil
 fulgoritePlant.mining_sound = nil

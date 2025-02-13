@@ -9,7 +9,7 @@
 local stingfrondPlant = copy(RAW.tree.stingfrond)
 stingfrondPlant.type = "plant"
 
-stingfrondPlant.growth_ticks = 60 * 60 * 8 -- 8 minutes; compare to yumako/jellystem at 5 minutes.
+stingfrondPlant.growth_ticks = 8 * MINUTES -- compare to yumako/jellystem at 5 minutes.
 stingfrondPlant.placeable_by = {item = "stingfrond-sprout", count = 1}
 -- Wube's code defines the autoplace stuff twice. Second time overwrites the tile restriction. But we need a tile restriction so it's growable on some tiles. Maybe just midland turquoise, like Fluroflux. By default it spawns in other midland/highland tiles too.
 stingfrondPlant.autoplace.tile_restriction = {
@@ -83,7 +83,7 @@ for i = 1, 5 do
 	for _, pic in pairs(cyclosome.pictures) do
 		pic.tint = phaseTints[i]
 	end
-	cyclosome.spoil_ticks = 60 * 30
+	cyclosome.spoil_ticks = 30 * SECONDS
 	cyclosome.spoil_result = "cyclosome-" .. ((i == 5 and 1) or (i + 1))
 	cyclosome.icon = nil
 	cyclosome.icons = {{icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/cyclosomes/"..i..".png", icon_size = 64, scale = 0.5, icon_mipmaps = 4, tint = phaseTints[i]}}

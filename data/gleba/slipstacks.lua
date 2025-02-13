@@ -10,7 +10,7 @@
 local slipstackPlant = copy(RAW.tree.slipstack)
 slipstackPlant.type = "plant"
 
-slipstackPlant.growth_ticks = 60 * 60 * 10 -- 10 minutes; compare to yumako/jellystem at 5 minutes.
+slipstackPlant.growth_ticks = 10 * MINUTES -- compare to yumako/jellystem at 5 minutes.
 slipstackPlant.placeable_by = {item = "slipstack-nest", count = 1}
 slipstackPlant.autoplace.tile_restriction = {
 	--"wetland-blue-slime",
@@ -46,7 +46,7 @@ slipstackPearl.name = "slipstack-pearl"
 Icon.set(slipstackPearl, "LSA/gleba/slipstacks/pearl")
 slipstackPearl.subgroup = "slipstacks-and-boompuffs"
 slipstackPearl.order = "01"
-slipstackPearl.spoil_ticks = 60 * 60 * 5 -- 5 minutes.
+slipstackPearl.spoil_ticks = 5 * MINUTES
 slipstackPearl.spoil_result = "spoilage"
 Item.clearFuel(slipstackPearl)
 extend{slipstackPearl}
@@ -59,7 +59,7 @@ Icon.set(slipstackNest, "LSA/gleba/slipstacks/nest")
 slipstackNest.pictures = nil
 slipstackNest.subgroup = "slipstacks-and-boompuffs"
 slipstackNest.order = "02"
-slipstackNest.spoil_ticks = 60 * 60 * 20
+slipstackNest.spoil_ticks = 20 * MINUTES
 slipstackNest.spoil_result = "stone"
 -- Make the nests non-burnable, since thy're supposed to be mostly rock and there's no risk of having too many.
 Item.clearFuel(slipstackNest)

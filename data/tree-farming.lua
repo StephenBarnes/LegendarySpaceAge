@@ -113,7 +113,7 @@ saplingItem.localised_name = {"item-name.sapling"} -- Seems to be necessary, els
 saplingItem.localised_description = nil
 saplingItem.subgroup = "early-agriculture"
 saplingItem.order = "004"
-saplingItem.spoil_ticks = 60 * 60 * 60 -- 1 hour
+saplingItem.spoil_ticks = 1 * HOURS
 saplingItem.spoil_result = "wood"
 Item.clearFuel(saplingItem)
 Icon.set(saplingItem, "base/tree-08")
@@ -167,7 +167,7 @@ saplingRecipe.allow_decomposition = true
 extend{saplingRecipe}
 
 -- Edit growth time of saplings.
-RAW.plant["tree-plant"].growth_ticks = 60 * 60 * 6 -- Originally 10 minutes.
+RAW.plant["tree-plant"].growth_ticks = 6 * MINUTES -- Originally 10 minutes.
 
 -- Add recipes to tree-seeding tech.
 TECH["tree-seeding"].effects = {

@@ -177,7 +177,6 @@ nauvisDrillingRecipe.category = "deep-drill"
 nauvisDrillingRecipe.hide_from_player_crafting = true
 nauvisDrillingRecipe.subgroup = "deep-drilling"
 nauvisDrillingRecipe.order = "1"
-nauvisDrillingRecipe.enabled = true
 nauvisDrillingRecipe.energy_required = 1
 nauvisDrillingRecipe.localised_name = {"recipe-name.deep-drill-planet", {"space-location-name.nauvis"}}
 nauvisDrillingRecipe.localised_description = {"recipe-description.deep-drill-planet", {"space-location-name.nauvis"}}

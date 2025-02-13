@@ -10,5 +10,7 @@ FURNACE = RAW.furnace
 -- Global aliases
 copy = table.deepcopy
 extend = function(x) data:extend(x) end
-MINUTE = 60 * 60
+SECONDS = 60
+MINUTES = 60 * SECONDS
+HOURS = 60 * MINUTES
 ROCKET_MASS = 1e6

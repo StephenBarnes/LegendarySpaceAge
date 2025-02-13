@@ -15,7 +15,7 @@ local boompuffTint = {
 local boompuffPlant = copy(RAW.tree.boompuff)
 boompuffPlant.type = "plant"
 
-boompuffPlant.growth_ticks = 6 * MINUTE -- compare to yumako/jellystem at 5 minutes.
+boompuffPlant.growth_ticks = 6 * MINUTES -- compare to yumako/jellystem at 5 minutes.
 boompuffPlant.placeable_by = {item = "sprouted-boomnut", count = 1}
 -- Wube's autoplace puts them in gleba_boompuff_region, which is some complicated expression. We need to add a tile restriction so it's growable on some tiles.
 boompuffPlant.autoplace.tile_restriction = {
@@ -65,7 +65,7 @@ sproutItem.subgroup = "slipstacks-and-boompuffs"
 sproutItem.order = "12"
 sproutItem.plant_result = "boompuff"
 sproutItem.place_result = "boompuff"
-sproutItem.spoil_ticks = 60 * 60 * 60 -- 1 hour
+sproutItem.spoil_ticks = 1 * HOURS
 sproutItem.spoil_result = "spoilage"
 Item.clearFuel(sproutItem)
 extend{sproutItem}
@@ -90,7 +90,7 @@ local boomsacItem = copy(RAW.capsule["grenade"])
 boomsacItem.name = "boomsac"
 boomsacItem.subgroup = "slipstacks-and-boompuffs"
 boomsacItem.order = "13"
-boomsacItem.spoil_ticks = 60 * 60 * 2 -- 2 minutes
+boomsacItem.spoil_ticks = 2 * MINUTES
 boomsacItem.spoil_to_trigger_result = {
 	items_per_trigger = 1,
 	trigger = {

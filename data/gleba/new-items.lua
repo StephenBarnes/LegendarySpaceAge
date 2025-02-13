@@ -44,7 +44,7 @@ marrowItem.name = "marrow"
 Icon.set(marrowItem, "LSA/gleba/marrow/2")
 Icon.variants(marrowItem, "LSA/gleba/marrow/%", 12)
 marrowItem.subgroup = "gleba-non-agriculture"
-marrowItem.spoil_ticks = 60 * 60 * 20 -- 20 minutes
+marrowItem.spoil_ticks = 20 * MINUTES
 marrowItem.spoil_result = "spoilage"
 Item.clearFuel(marrowItem)
 marrowItem.stack_size = 50
@@ -79,7 +79,7 @@ appendageItem.name = "appendage"
 Icon.set(appendageItem, "LSA/gleba/appendage/1")
 Icon.variants(appendageItem, "LSA/gleba/appendage/%", 9)
 appendageItem.subgroup = "gleba-non-agriculture"
-appendageItem.spoil_ticks = 10 * MINUTE
+appendageItem.spoil_ticks = 10 * MINUTES
 appendageItem.spoil_result = "spoilage"
 extend{appendageItem}
 
@@ -89,7 +89,7 @@ sencytiumItem.name = "sencytium"
 Icon.set(sencytiumItem, "LSA/gleba/sencytium/1")
 Icon.variants(sencytiumItem, "LSA/gleba/sencytium/%", 11, {draw_as_glow = true})
 sencytiumItem.subgroup = "gleba-non-agriculture"
-sencytiumItem.spoil_ticks = 10 * MINUTE
+sencytiumItem.spoil_ticks = 10 * MINUTES
 sencytiumItem.spoil_result = "spoilage"
 extend{sencytiumItem}
 
