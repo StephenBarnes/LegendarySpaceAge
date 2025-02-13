@@ -19,7 +19,9 @@ local function onRotateKey(e, dir)
 		return
 	end
 	if ((player.cursor_ghost ~= nil and player.cursor_ghost.count ~= 0)
-		or (player.cursor_stack ~= nil and player.cursor_stack.count ~= 0)) then
+		or (player.cursor_stack ~= nil and player.cursor_stack.count ~= 0)
+		or ((player.controller_type ~= defines.controllers.character) and (player.controller_type ~= defines.controllers.remote))
+		) then
 		return
 	end
 

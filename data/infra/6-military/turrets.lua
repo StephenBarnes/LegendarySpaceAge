@@ -80,3 +80,48 @@ end
 
 -- Make flamethrower turret consume more fluid.
 RAW["fluid-turret"]["flamethrower-turret"].attack_parameters.fluid_consumption = 1 -- Increased from 0.2 to 1.
+
+--[[ Make gun turrets and missile turrets consume electricity.
+Only works for ammo-turret currently, not fluid or artillery.
+How these work: Energy flows in at the input_flow_limit until buffer is filled, then gets drained at the drain power, so input flow is the same as that drain power.
+	But the input flow limit and buffer aren't shown to the user.
+	So, should set buffer to be small, and set input flow limit only slightly above drain, or else it'll have extra load on the power grid that players don't expect.
+	Also, we must have some energy_per_shot, or else the buffer won't drain when firing, so it'll last forever even if disconnected from power.
+	Seems game automatically gives "max consumption" in tooltip as drain plus firing rate * energy per shot.
+	So: Make the buffer just over the energy per shot, and make input flow limit higher than it'll ever need to be.
+		Except, we don't want power spikes with PowerOverload. So don't set input limit too high.
+For comparison: in vanilla, laser turret has buffer 801kJ, drain 24kW, input flow limit 9600kW.
+]]
+RAW["ammo-turret"]["gun-turret"].energy_source = {
+	type = "electric",
+	usage_priority = "primary-input", -- Top priority, same as laser turrets.
+	input_flow_limit = "40kW",
+	drain = "5kW",
+	buffer_capacity = "20kJ",
+}
+RAW["ammo-turret"]["gun-turret"].energy_per_shot = "1kJ"
+RAW["ammo-turret"]["rocket-turret"].energy_source = {
+	type = "electric",
+	usage_priority = "primary-input",
+	input_flow_limit = "100kW",
+	drain = "25kW",
+	buffer_capacity = "400kJ",
+}
+RAW["ammo-turret"]["rocket-turret"].energy_per_shot = "20kJ"
+-- While we're at it, reduce max consumption of laser and Tesla turrets so they don't spike too bad.
+RAW["electric-turret"]["laser-turret"].energy_source = {
+	type = "electric",
+	usage_priority = "primary-input",
+	drain = "25kW", -- Vanilla is 24kW.
+	buffer_capacity = "1001kJ", -- Vanilla is 801kJ, which is energy per shot plus 1kJ.
+	input_flow_limit = "5050kW", -- Vanilla is 9600kW. Max firing rate 5, 1MJ per shot, so 5MW max consumption from firing.
+}
+RAW["electric-turret"]["laser-turret"].attack_parameters.ammo_type.energy_consumption = "1MJ" -- Increased froom 800kJ.
+RAW["electric-turret"]["tesla-turret"].energy_source = {
+	type = "electric",
+	usage_priority = "primary-input",
+	drain = "1MW", -- Vanilla is 1MW.
+	buffer_capacity = "15MJ", -- Vanilla is 15MJ.
+	input_flow_limit = "6MW", -- Max firing rate 0.5, 10MJ per shot, so 5MW max consumption.
+}
+RAW["electric-turret"]["tesla-turret"].attack_parameters.ammo_type.energy_consumption = "10MJ" -- Vanilla is 12MJ.
