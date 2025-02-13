@@ -5,7 +5,7 @@ local frame = copy(ITEM["steel-plate"])
 frame.name = "frame"
 Icon.set(frame, "LSA/intermediate-factors/frame/frame")
 frame.stack_size = 50
-frame.weight = 1e6 / 500
+frame.weight = ROCKET / 500
 extend{frame}
 
 -- Create recipe: 2 wood + 1 resin -> 1 frame

@@ -26,7 +26,7 @@ circuitBoardItem.name = "circuit-board"
 Icon.set(circuitBoardItem, "LSA/circuit-boards/circuit-board-generic")
 circuitBoardItem.order = "b[circuits]-0"
 circuitBoardItem.subgroup = "circuit-board"
-circuitBoardItem.weight = 1000000 / 4000
+circuitBoardItem.weight = ROCKET / 4000
 Item.copySoundsTo("copper-cable", circuitBoardItem)
 extend{circuitBoardItem}
 

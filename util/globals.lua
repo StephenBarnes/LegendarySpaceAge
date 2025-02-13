@@ -13,4 +13,4 @@ extend = function(x) data:extend(x) end
 SECONDS = 60
 MINUTES = 60 * SECONDS
 HOURS = 60 * MINUTES
-ROCKET_MASS = 1e6
+ROCKET = 1e6

@@ -17,7 +17,7 @@ ITEM["tiny-inline-storage-tank"].weight = ITEM["pump"].weight
 --ITEM["tiny-inline-storage-tank"].subgroup = "energy-pipe-distribution"
 ITEM["tiny-inline-storage-tank"].order = "b[fluid]-a[0]"
 ITEM["tiny-inline-storage-tank"].stack_size = 100
-ITEM["tiny-inline-storage-tank"].weight = 1000000 / 100
+ITEM["tiny-inline-storage-tank"].weight = ROCKET / 100
 
 -- Adjust ingredients.
 RECIPE["large-storage-tank"].ingredients = { -- Has 4x capacity of normal storage tank, so make cost less than 4x, so there's reason to use it.

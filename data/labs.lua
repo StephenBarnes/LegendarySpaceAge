@@ -38,8 +38,8 @@ RAW.lab.biolab.energy_source.emissions_per_minute = nil
 -- Set stack sizes and rocket capacities.
 ITEM.glebalab.stack_size = 10
 ITEM.biolab.stack_size = 10
-ITEM.glebalab.weight = 10000
-ITEM.biolab.weight = 10000
+ITEM.glebalab.weight = ROCKET / 100
+ITEM.biolab.weight = ROCKET / 100
 
 -- Set module slots.
 RAW.lab.biolab.module_slots = 8

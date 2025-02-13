@@ -17,7 +17,7 @@ filterItem.name = "filter"
 Icon.set(filterItem, "LSA/filtration/filter")
 filterItem.order = "01"
 filterItem.subgroup = "filtration"
-filterItem.weight = 1000
+filterItem.weight = ROCKET / 1000
 extend{filterItem}
 
 -- Create spent filter item.
@@ -26,7 +26,7 @@ spentFilterItem.name = "spent-filter"
 Icon.set(spentFilterItem, "LSA/filtration/spent-filter")
 spentFilterItem.order = "02"
 spentFilterItem.subgroup = "filtration"
-spentFilterItem.weight = 1000
+spentFilterItem.weight = ROCKET / 1000
 extend{spentFilterItem}
 
 -- Create filtration-lake-water tech.

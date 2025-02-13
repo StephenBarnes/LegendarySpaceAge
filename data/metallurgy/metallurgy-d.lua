@@ -21,16 +21,14 @@ Re stack sizes:
 	Give ingots the same stack size as plates etc, so they're 5x more compact to transport.
 	For weights for rockets, rather use correct ratios, eg 1 ingot has the same weight as 5 plates.
 ]]
-
-local ROCKET_MASS = 1e6
 local INGOT_COOLING_TIME = 5 * MINUTES
 
 local ORE_STACK_SIZE = 50
 local INGOT_STACK_SIZE = 100
 
-local INGOT_WEIGHT = ROCKET_MASS / 200
+local INGOT_WEIGHT = ROCKET / 200
 	-- 200 ingots per rocket. Each ingot is 5 plates, so 1000 plates per rocket. Vanilla was 1000 plates per rocket.
-local ORE_WEIGHT = ROCKET_MASS / 500
+local ORE_WEIGHT = ROCKET / 500
 	-- Same as vanilla, 500 ore per rocket.
 
 local INGOT_TO_ITEM_SECONDS = 2.5
