@@ -24,6 +24,7 @@ for _, size in pairs{"small", "medium", "big"} do
 		{type = "item", name = "wiring", amount = 1},
 		{type = "item", name = size.."-electric-pole", amount = 1},
 	}
+	RECIPE["po-"..size.."-electric-fuse"].energy_required = RECIPE[size.."-electric-pole"].energy_required
 end
 
 -- Using custom descriptions for techs.

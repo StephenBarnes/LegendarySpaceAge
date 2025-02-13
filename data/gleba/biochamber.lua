@@ -12,9 +12,9 @@ biochamber.production_health_effect = {
 	not_producing = -(30/MINUTES),
 	producing = (100/MINUTES),
 }
-biochamber.repair_speed_modifier = 0.5 -- 50% slower repair. Seems they added this for stone walls originally.
-
--- TODO adjust recipes - basically everything should be either in assembler or biochamber or chem plant, not in multiple, with a handful of exceptions.
+biochamber.repair_speed_modifier = 0.5
+	-- 50% slower repair. Seems they added this for stone walls originally.
+	-- Tried setting this to 0, but bots will still use up repair kits trying to repair it.
 
 -- Fruit processing is crafting recipe, not biology recipe.
 for _, recipeName in pairs{"yumako-processing", "jellynut-processing"} do

@@ -20,6 +20,7 @@ RECIPE["constant-combinator"].ingredients = {
 	{type = "item", name = "wiring", amount = 2},
 }
 RECIPE["power-switch"].ingredients = RECIPE["po-transformer"].ingredients
+RECIPE["power-switch"].energy_required = RECIPE["po-transformer"].energy_required
 RECIPE["programmable-speaker"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "wiring", amount = 1},
