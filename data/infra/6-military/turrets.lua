@@ -19,6 +19,17 @@ for _, turretVals in pairs{
 	turret.attack_parameters.turn_range = (1/3)
 end
 
+--[[
+-- Add not-rotatable flag to turrets with limited range, to suppress the default popup when you try to rotate them.
+for _, k in pairs{"ammo-turret", "electric-turret"} do -- Not fluid-turret since it has connections.
+	for _, turret in pairs(RAW[k]) do
+		if turret.attack_parameters.turn_range ~= nil and turret.attack_parameters.turn_range ~= 1 then
+			table.insert(turret.flags, "not-rotatable")
+		end
+	end
+end
+]]
+
 -- Allow more fluids in flamethrower turret.
 RAW["fluid-turret"]["flamethrower-turret"].attack_parameters.fluids = {
 	{type = "crude-oil"},

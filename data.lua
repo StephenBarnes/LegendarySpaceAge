@@ -35,6 +35,7 @@ require("data.rocket-parts-outside-silos")
 require("data.deep-drill")
 require("data.mech-armor")
 require("data.planet-drop-techs")
+require("data.rotate-flip")
 
 -- Planets
 require("data.nauvis-part-one.misc")

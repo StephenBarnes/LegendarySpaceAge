@@ -3,6 +3,7 @@ local natGasWells = require("control.natural-gas-wells")
 local notifyIncorrectMapgenPreset = require("control.notify-incorrect-mapgen-preset")
 local deepDrillRecipe = require("control.deep-drill-recipe")
 local apprenticeFoundry = require("control.apprentice-foundry")
+require("control.rotate-flip")
 
 local techRateTriggers = require("control.tech-rate-triggers")
 script.on_nth_tick(60 * 10, techRateTriggers.onNthTick)
