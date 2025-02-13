@@ -9,7 +9,7 @@ structureItem.icon = nil
 structureItem.icons = {{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5}}
 extend{structureItem}
 
--- Create recipe: 8 stone brick + 20 cement -> 1 structure
+-- Create recipe: 10 stone brick + 20 cement -> 1 structure
 local recipeFromCement = copy(RECIPE["iron-stick"])
 recipeFromCement.name = "structure-from-cement"
 recipeFromCement.ingredients = {
@@ -19,15 +19,10 @@ recipeFromCement.ingredients = {
 recipeFromCement.results = {{type = "item", name = "structure", amount = 1}}
 recipeFromCement.enabled = false
 recipeFromCement.subgroup = "structure"
-recipeFromCement.order = "03"
+recipeFromCement.order = "04"
 recipeFromCement.energy_required = 2
 recipeFromCement.category = "crafting-with-fluid"
-recipeFromCement.icon = nil
-recipeFromCement.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5},
-	{icon = "__base__/graphics/icons/stone-brick.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-	{icon = "__LegendarySpaceAge__/graphics/fluids/cement-fluid.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
-}
+Icon.set(recipeFromCement, {"structure", "stone-brick", "cement"})
 recipeFromCement.allow_as_intermediate = false
 recipeFromCement.auto_recycle = false
 extend{recipeFromCement}
@@ -38,16 +33,28 @@ local recipeFromResin = copy(recipeFromCement)
 recipeFromResin.name = "structure-from-resin"
 recipeFromResin.ingredients = {
 	{ type = "item", name = "stone-brick", amount = 10 },
-	{ type = "item", name = "resin",    amount = 5 },
+	{ type = "item", name = "resin",    amount = 2 },
 }
 recipeFromResin.enabled = true
 recipeFromResin.order = "02"
 recipeFromResin.energy_required = 5
 recipeFromResin.category = "crafting"
-recipeFromResin.icons[3].icon = "__LegendarySpaceAge__/graphics/resin/resin-1.png"
-recipeFromResin.icons[3].scale = 0.2
+Icon.set(recipeFromResin, {"structure", "stone-brick", "resin"})
 recipeFromResin.allow_as_intermediate = true
 extend{recipeFromResin}
+
+-- Create recipe for structure from vitrified brick: 10 stone brick -> 1 structure
+local recipeFromVitrified = copy(recipeFromCement)
+recipeFromVitrified.name = "structure-from-vitrified-brick"
+recipeFromVitrified.ingredients = {
+	{type = "item", name = "stone-brick", amount = 10},
+}
+recipeFromVitrified.energy_required = 20
+recipeFromVitrified.enabled = true
+recipeFromVitrified.order = "03"
+recipeFromVitrified.category = "smelting"
+Icon.set(recipeFromVitrified, {"structure", "stone-brick", "base/signal/signal-hourglass"})
+extend{recipeFromVitrified}
 
 -- Create recipe for structure from chitin block: 4 chitin block + 20 slime -> 1 structure
 local recipeFromChitin = copy(recipeFromCement)
@@ -58,13 +65,9 @@ recipeFromChitin.ingredients = {
 }
 recipeFromChitin.results = {{type = "item", name = "structure", amount = 1}}
 recipeFromChitin.enabled = false
-recipeFromChitin.order = "04"
+recipeFromChitin.order = "05"
 recipeFromChitin.category = "crafting-with-fluid"
-recipeFromChitin.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/intermediate-factors/structure/structure.png", icon_size = 64, scale = 0.5},
-	{icon = "__LegendarySpaceAge__/graphics/gleba/chitin-block/1.png", icon_size = 64, scale = 0.25, shift = {-8, -8}},
-	{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.25, shift = {8, -8}},
-}
+Icon.set(recipeFromChitin, {"structure", "chitin-block", "slime"})
 recipeFromChitin.allow_as_intermediate = false
 extend{recipeFromChitin}
 
