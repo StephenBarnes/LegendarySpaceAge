@@ -15,9 +15,7 @@ local function setStartItems()
 		return
 	end
 	local items = {
-		-- No starting pistol or firearm-magazine, because I'm rather making players start with shotguns.
-		--['pistol'] = 1,
-		--['firearm-magazine'] = 52,
+		-- No starting pistol or firearm-magazine, because I'm rather making players begin with shotguns when they unlock gunpowder.
 
 		['construction-robot'] = 50,
 		['personal-roboport-equipment'] = 2,

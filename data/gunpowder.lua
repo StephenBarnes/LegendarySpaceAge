@@ -25,26 +25,6 @@ gunpowderRecipe.category = "chemistry-or-handcrafting"
 gunpowderRecipe.auto_recycle = false
 extend{gunpowderRecipe}
 
--- Adjust ammo mag recipes
--- 4 iron plate + 1 gunpowder -> 1 yellow mag
--- 1 steel plate + 4 copper plate + 1 gunpowder -> 1 red mag (represents steel core and copper jacket)
-RECIPE["firearm-magazine"].ingredients = {
-	{type="item", name="iron-plate", amount=5},
-	{type="item", name="gunpowder", amount=1},
-}
-RECIPE["piercing-rounds-magazine"].ingredients = {
-	{type="item", name="steel-plate", amount=1},
-	{type="item", name="copper-plate", amount=5},
-	{type="item", name="gunpowder", amount=2},
-}
-RECIPE["piercing-rounds-magazine"].results = {{type = "item", name = "piercing-rounds-magazine", amount = 2}}
-RECIPE["shotgun-shell"].ingredients = { -- Originally 2 iron plate + 2 copper plate -> 1 shotgun shell; changing to add 1 gunpowder and produce 2 shells.
-	{type="item", name="iron-plate", amount=2},
-	{type="item", name="copper-plate", amount=2},
-	{type="item", name="gunpowder", amount=1},
-}
-RECIPE["shotgun-shell"].results = {{type = "item", name = "shotgun-shell", amount = 2}}
-
 -- Create tech.
 local tech = copy(TECH["rocket-fuel"])
 tech.name = "gunpowder"

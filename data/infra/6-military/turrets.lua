@@ -129,16 +129,17 @@ for _, vals in pairs{
 	},
 	{
 		turret = RAW["ammo-turret"]["gun-turret"],
-		arcWidth = 1/7,
-		range = 32, -- Vanilla was 18; increasing it.
+		arcWidth = 1/9,
+		range = 30, -- Vanilla was 18; increasing it.
 	},
 	{
 		turret = RAW["fluid-turret"]["flamethrower-turret"],
 		range = 24, -- Vanilla was 30.
+		arcWidth = 1/5, -- Vanilla is 1/3.
 	},
 	{
 		turret = RAW["electric-turret"]["laser-turret"],
-		arcWidth = 1/5.5,
+		arcWidth = 1/9,
 		range = 36, -- Vanilla was 24.
 	},
 	{
@@ -153,17 +154,18 @@ for _, vals in pairs{
 		vals.turret.attack_parameters.turn_range = vals.arcWidth
 
 		-- Make turrets rotatable by telling the game they have direction.
-		assert(not vals.turret.turret_base_has_direction, "Turret already has direction")
-		vals.turret.turret_base_has_direction = true
-		-- Turret originally had 1 connector definition, but now it needs to have 4 (one for each direction).
-		assert(#vals.turret.circuit_connector == 1, "Turret has wrong number of connectors")
-		local connector = vals.turret.circuit_connector[1]
-		vals.turret.circuit_connector = {
-			connector,
-			connector,
-			connector,
-			connector,
-		}
+		if not vals.turret.turret_base_has_direction then
+			vals.turret.turret_base_has_direction = true
+			-- Turret originally had 1 connector definition, but now it needs to have 4 (one for each direction).
+			assert(#vals.turret.circuit_connector == 1, "Turret has unexpected number of connectors")
+			local connector = vals.turret.circuit_connector[1]
+			vals.turret.circuit_connector = {
+				connector,
+				connector,
+				connector,
+				connector,
+			}
+		end
 	end
 
 	if vals.range ~= nil then

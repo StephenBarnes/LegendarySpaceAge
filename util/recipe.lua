@@ -85,4 +85,89 @@ Recipe.copyIngredients = function(fromRecipeName, toRecipeName)
 	toRecipe.ingredients = copy(fromRecipe.ingredients)
 end
 
+local function nameToItemOrFluid(name)
+	if FLUID[name] ~= nil then
+		return "fluid"
+	else
+		return "item"
+	end
+end
+
+local function interpretIngredientsOrResults(list)
+	local result = {}
+	for _, thing in pairs(list) do
+		if type(thing) == "string" then
+			table.insert(result, {type = nameToItemOrFluid(thing), name = thing, amount = 1})
+		elseif type(thing) == "table" then
+			local name = thing[1] or thing.name or thing.item or thing.fluid
+			local amount = thing[2] or thing.amount or thing.count
+			local newElement = {type = nameToItemOrFluid(name), name = name, amount = amount}
+			for k, v in pairs(thing) do
+				if k ~= "name" and k ~= "amount" then
+					newElement[k] = v
+				end
+			end
+			table.insert(result, newElement)
+		else
+			error("interpretIngredientsOrResults: unknown item "..tostring(thing))
+		end
+	end
+	return result
+end
+
+--[[Shorthand to adjust a recipe. Table `a` can contain:
+	.recipe (prototype)
+	.name (alternative to .recipe)
+	.ingredients
+	.results
+	.resultCount (alternative to .results, assumes single result with the same name as the recipe)
+	.time
+	.category
+]]
+local recognizedFields = Table.listToSet{"recipe", "name", "ingredients", "results", "resultCount", "time", "category", "copy"}
+Recipe.adjust = function(a)
+	for k, _ in pairs(a) do
+		assert(recognizedFields[k], "Recipe.adjust: unknown field "..k)
+	end
+	local recipe
+	if a.recipe ~= nil then
+		recipe = a.recipe
+	elseif a.name ~= nil then
+		recipe = RECIPE[a.name]
+	else
+		error("Recipe.adjust: no recipe or name provided")
+	end
+
+	if a.ingredients ~= nil then
+		recipe.ingredients = interpretIngredientsOrResults(a.ingredients)
+	end
+	if a.results ~= nil then
+		assert(a.resultCount == nil)
+		recipe.results = interpretIngredientsOrResults(a.results)
+	end
+	if a.resultCount ~= nil then
+		assert(a.results == nil)
+		recipe.results = {{type = nameToItemOrFluid(recipe.name), name = recipe.name, amount = a.resultCount}}
+	end
+	if a.category ~= nil then
+		recipe.category = a.category
+	end
+	if a.time ~= nil then
+		recipe.energy_required = a.time
+	end
+end
+
+-- Create a recipe by copying an existing recipe and adjusting it. The a.copy field is the recipe to copy, rest of args the same as Recipe.adjust.
+Recipe.make = function(a)
+	assert(a.copy ~= nil, "Recipe.make: copy is required")
+	assert(a.name ~= nil, "Recipe.make: name is required")
+	assert(a.recipe == nil, "Recipe.make: recipe is not allowed")
+	assert(RECIPE[a.copy] ~= nil, "Recipe.make: asked to copy non-existent recipe "..a.copy)
+	local recipe = copy(RECIPE[a.copy])
+	a.recipe = recipe
+	Recipe.adjust(a)
+	extend{recipe}
+	return RECIPE[a.name]
+end
+
 return Recipe
