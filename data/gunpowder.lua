@@ -12,18 +12,19 @@ extend{gunpowderItem}
 
 -- Create recipe for gunpowder.
 -- 2 carbon + 1 sulfur + 1 sand -> 2 gunpowder
-local gunpowderRecipe = copy(RECIPE["firearm-magazine"])
-gunpowderRecipe.name = "gunpowder"
-gunpowderRecipe.ingredients = {
-	{type="item", name="carbon", amount=2},
-	{type="item", name="sulfur", amount=1},
-	{type="item", name="niter", amount=5},
+Recipe.make{
+	copy = "firearm-magazine",
+	name = "gunpowder",
+	ingredients = {
+		{"carbon", 2},
+		{"sulfur", 1},
+		{"niter", 5},
+	},
+	resultCount = 10,
+	enabled = false, -- Enabled by coal coking tech.
+	category = "chemistry-or-handcrafting",
+	auto_recycle = false,
 }
-gunpowderRecipe.results = {{type = "item", name = "gunpowder", amount = 10}}
-gunpowderRecipe.enabled = false -- Enabled by coal coking tech.
-gunpowderRecipe.category = "chemistry-or-handcrafting"
-gunpowderRecipe.auto_recycle = false
-extend{gunpowderRecipe}
 
 -- Create tech.
 local tech = copy(TECH["rocket-fuel"])

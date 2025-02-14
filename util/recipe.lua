@@ -118,25 +118,27 @@ end
 --[[Shorthand to adjust a recipe. Table `a` can contain:
 	.recipe (prototype)
 	.name (alternative to .recipe)
-	.ingredients
-	.results
+	.ingredients (in short format)
+	.results (in short format)
 	.resultCount (alternative to .results, assumes single result with the same name as the recipe)
 	.time
-	.category
+	.category, .enabled, .auto_recycle (just copied over)
 ]]
-local recognizedFields = Table.listToSet{"recipe", "name", "ingredients", "results", "resultCount", "time", "category", "copy"}
+local recognizedFields = Table.listToSet{"recipe", "name", "ingredients", "results", "resultCount", "time", "category", "copy", "enabled", "auto_recycle"}
 Recipe.adjust = function(a)
 	for k, _ in pairs(a) do
 		assert(recognizedFields[k], "Recipe.adjust: unknown field "..k)
 	end
-	local recipe
+	local recipe = nil
 	if a.recipe ~= nil then
+		assert(a.name == nil, "Recipe.adjust: recipe and name cannot both be provided; arguments: ".. serpent.block(a))
 		recipe = a.recipe
-	elseif a.name ~= nil then
-		recipe = RECIPE[a.name]
-	else
-		error("Recipe.adjust: no recipe or name provided")
 	end
+	if a.name ~= nil then
+		assert(a.recipe == nil, "Recipe.adjust: recipe and name cannot both be provided; arguments: ".. serpent.block(a))
+		recipe = RECIPE[a.name]
+	end
+	assert(recipe ~= nil, "Recipe.adjust: no recipe or name provided, or recipe not found; arguments: ".. serpent.block(a))
 
 	if a.ingredients ~= nil then
 		recipe.ingredients = interpretIngredientsOrResults(a.ingredients)
@@ -149,11 +151,15 @@ Recipe.adjust = function(a)
 		assert(a.results == nil)
 		recipe.results = {{type = nameToItemOrFluid(recipe.name), name = recipe.name, amount = a.resultCount}}
 	end
-	if a.category ~= nil then
-		recipe.category = a.category
-	end
 	if a.time ~= nil then
 		recipe.energy_required = a.time
+	end
+
+	-- Some fields just get copied over.
+	for _, field in pairs{"category", "enabled", "auto_recycle"} do
+		if a[field] ~= nil then
+			recipe[field] = a[field]
+		end
 	end
 end
 
@@ -164,10 +170,12 @@ Recipe.make = function(a)
 	assert(a.recipe == nil, "Recipe.make: recipe is not allowed")
 	assert(RECIPE[a.copy] ~= nil, "Recipe.make: asked to copy non-existent recipe "..a.copy)
 	local recipe = copy(RECIPE[a.copy])
+	recipe.name = a.name
+	a.name = nil
 	a.recipe = recipe
 	Recipe.adjust(a)
 	extend{recipe}
-	return RECIPE[a.name]
+	return RECIPE[recipe.name]
 end
 
 return Recipe

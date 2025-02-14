@@ -126,6 +126,8 @@ for _, vals in pairs{
 		turret = RAW["ammo-turret"]["shotgun-turret"],
 		arcWidth = 1/3,
 		range = 15, -- Same as handheld shotgun and combat shotgun.
+		--color = {r = .835, g = .4, b = .073}, -- Want to contrast with gun turrets. This is darkish orange, darker than flamethrowers.
+		color = {r = .597, g = .235, b = .733}, -- Purple, so it's easier to distinguish from gun turrets, even with firing range shown in white.
 	},
 	{
 		turret = RAW["ammo-turret"]["gun-turret"],
@@ -146,6 +148,19 @@ for _, vals in pairs{
 		turret = RAW["ammo-turret"]["rocket-turret"],
 		arcWidth = 1/3,
 		range = 44, --Vanilla range 15-36.
+		color = {r = .640, g = .13, b = .118}, -- This is darker red than laser turrets.
+	},
+	{
+		turret = RAW["electric-turret"]["tesla-turret"],
+		color = {r = .126, g = .631, b = .896}, -- Light blue for Tesla turrets. Vanilla was red, same as laser turrets.
+	},
+	{
+		turret = RAW["artillery-turret"]["artillery-turret"],
+		color = {r = .747, g = 0, b = .402}, -- Magenta, so it's easy to see. Default was dark blue.
+	},
+	{
+		turret = RAW["ammo-turret"]["railgun-turret"],
+		color = {r = 0, g = .38, b = .58}, -- This is darkish blue, which they originally gave to the artillery turrets. Instead using it for railguns since their ammo is blue.
 	},
 } do
 	if vals.arcWidth ~= nil then
@@ -171,6 +186,7 @@ for _, vals in pairs{
 	if vals.range ~= nil then
 		vals.turret.attack_parameters.range = vals.range
 	end
+	if vals.color ~= nil then
+		vals.turret.map_color = vals.color
+	end
 end
-
--- TODO increase range of gun turrets.
