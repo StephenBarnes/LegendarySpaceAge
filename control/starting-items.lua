@@ -15,8 +15,9 @@ local function setStartItems()
 		return
 	end
 	local items = {
-		['pistol'] = 1,
-		['firearm-magazine'] = 52, -- plus 8 for some reason.
+		-- No starting pistol or firearm-magazine, because I'm rather making players start with shotguns.
+		--['pistol'] = 1,
+		--['firearm-magazine'] = 52,
 
 		['construction-robot'] = 50,
 		['personal-roboport-equipment'] = 2,
@@ -34,6 +35,8 @@ local function setStartItems()
 	}
 	remote.call('freeplay', 'set_debris_items', items)
 	remote.call('freeplay', 'set_created_items', items)
+	remote.call('freeplay', 'set_respawn_items', {})
+	remote.call('freeplay', 'set_ship_items', {})
 end
 
 return {

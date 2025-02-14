@@ -86,6 +86,14 @@ RAW["ammo-turret"]["gun-turret"].energy_source = {
 	buffer_capacity = "20kJ",
 }
 RAW["ammo-turret"]["gun-turret"].energy_per_shot = "1kJ"
+RAW["ammo-turret"]["shotgun-turret"].energy_source = {
+	type = "electric",
+	usage_priority = "primary-input",
+	input_flow_limit = "5kW", -- 2kW drain, plus at most 2.6 shots per second at 1kJ each, so 4.6kW max.
+	drain = "2kW",
+	buffer_capacity = "10kJ",
+}
+RAW["ammo-turret"]["shotgun-turret"].energy_per_shot = "1kJ"
 RAW["ammo-turret"]["rocket-turret"].energy_source = {
 	type = "electric",
 	usage_priority = "primary-input",
@@ -112,35 +120,55 @@ RAW["electric-turret"]["tesla-turret"].energy_source = {
 }
 RAW["electric-turret"]["tesla-turret"].attack_parameters.ammo_type.energy_consumption = "10MJ" -- Vanilla is 12MJ.
 
--- Limit the arc of some turrets - because it makes defense design more interesting.
--- This val is 0-0.5 (empty to half-circle) or 1 (full circle, default). Can't be between 0.5 and 1. Flamethrower turret is 1/3 by default, so 120 degrees.
-for _, turretVals in pairs{
-	{"ammo-turret", "rocket-turret"},
-	{"ammo-turret", "gun-turret"},
-	{"electric-turret", "laser-turret"},
-	-- Not Tesla turrets, rather letting those still cover 360 degrees.
+-- Adjust some values for turrets.
+for _, vals in pairs{
+	{
+		turret = RAW["ammo-turret"]["shotgun-turret"],
+		arcWidth = 1/3,
+		range = 15, -- Same as handheld shotgun and combat shotgun.
+	},
+	{
+		turret = RAW["ammo-turret"]["gun-turret"],
+		arcWidth = 1/7,
+		range = 32, -- Vanilla was 18; increasing it.
+	},
+	{
+		turret = RAW["fluid-turret"]["flamethrower-turret"],
+		range = 24, -- Vanilla was 30.
+	},
+	{
+		turret = RAW["electric-turret"]["laser-turret"],
+		arcWidth = 1/5.5,
+		range = 36, -- Vanilla was 24.
+	},
+	{
+		turret = RAW["ammo-turret"]["rocket-turret"],
+		arcWidth = 1/3,
+		range = 44, --Vanilla range 15-36.
+	},
 } do
-	local turretType = turretVals[1]
-	local turretName = turretVals[2]
-	local turret = RAW[turretType][turretName] ---@type data.TurretPrototype
-	turret.attack_parameters.turn_range = (1/3)
+	if vals.arcWidth ~= nil then
+		-- Limit the arc of some turrets - because it makes defense design more interesting.
+		-- This val is 0-0.5 (empty to half-circle) or 1 (full circle, default). Can't be between 0.5 and 1. Flamethrower turret is 1/3 by default, so 120 degrees.
+		vals.turret.attack_parameters.turn_range = vals.arcWidth
+
+		-- Make turrets rotatable by telling the game they have direction.
+		assert(not vals.turret.turret_base_has_direction, "Turret already has direction")
+		vals.turret.turret_base_has_direction = true
+		-- Turret originally had 1 connector definition, but now it needs to have 4 (one for each direction).
+		assert(#vals.turret.circuit_connector == 1, "Turret has wrong number of connectors")
+		local connector = vals.turret.circuit_connector[1]
+		vals.turret.circuit_connector = {
+			connector,
+			connector,
+			connector,
+			connector,
+		}
+	end
+
+	if vals.range ~= nil then
+		vals.turret.attack_parameters.range = vals.range
+	end
 end
 
--- Make turrets rotatable by telling the game they have direction.
-for _, turret in pairs{
-	RAW["ammo-turret"]["gun-turret"],
-	RAW["ammo-turret"]["rocket-turret"],
-	RAW["electric-turret"]["laser-turret"],
-} do
-	assert(not turret.turret_base_has_direction, "Turret already has direction")
-	turret.turret_base_has_direction = true
-	-- Turret originally had 1 connector definition, but now it needs to have 4 (one for each direction).
-	assert(#turret.circuit_connector == 1, "Turret has wrong number of connectors")
-	local connector = turret.circuit_connector[1]
-	turret.circuit_connector = {
-		connector,
-		connector,
-		connector,
-		connector,
-	}
-end
+-- TODO increase range of gun turrets.

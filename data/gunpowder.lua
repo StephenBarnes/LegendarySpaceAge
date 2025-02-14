@@ -50,14 +50,15 @@ local tech = copy(TECH["rocket-fuel"])
 tech.name = "gunpowder"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "gunpowder"},
-	{type = "unlock-recipe", recipe = "firearm-magazine"},
+	{type = "unlock-recipe", recipe = "shotgun-shell"},
+	{type = "unlock-recipe", recipe = "shotgun"},
 }
 tech.prerequisites = {"char"}
 tech.unit = nil
 tech.research_trigger = {
 	type = "craft-item",
 	item = "carbon",
-	count = 100,
+	count = 20,
 }
 Icon.set(tech, "LSA/gunpowder/tech")
 extend{tech}

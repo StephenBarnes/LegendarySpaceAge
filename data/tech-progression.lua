@@ -27,10 +27,6 @@ RECIPE["automation-science-pack"].ingredients = {
 	{type = "item", name = "glass", amount = 1},
 }
 
--- Military 1 now depends on coal coking, for gunpowder. Also gun turrets.
-TECH["military"].prerequisites = {"gunpowder", "automation-science-pack"}
-TECH["gun-turret"].prerequisites = {"gunpowder", "automation-science-pack"}
-
 -- Move electric inserter to automation tech.
 Tech.removeRecipeFromTech("inserter", "electronics")
 Tech.addRecipeToTech("inserter", "automation")
@@ -162,6 +158,7 @@ RECIPE["logistic-science-pack"].category = "crafting-with-fluid"
 Tech.setPrereqs("logistic-science-pack", {"rubber-1", "wood-circuit-board"})
 
 -- Military stuff: move things around so military science pack can be made from poison/slowdown capsules, which now come earlier, while grenades come later.
+-- Also, change stuff so that shotgun and shotgun turrets come first, then SMG and rotary gun turrets.
 TECH["military-science-pack"].prerequisites = {"military-2"}
 RECIPE["military-science-pack"].ingredients = {
 	{type = "item", name = "poison-capsule", amount = 1},
@@ -179,6 +176,10 @@ Tech.removePrereq("military-4", "explosives")
 Tech.setPrereqs("stronger-explosives-1", {"military-3"})
 Tech.addSciencePack("stronger-explosives-1", "military-science-pack")
 Tech.setPrereqs("gate", {"stone-wall", "steel-processing", "logistic-science-pack"})
+Tech.removeRecipesFromTechs({"shotgun", "shotgun-shell"}, {"military"})
+Tech.addRecipeToTech("firearm-magazine", "military")
+TECH["military"].prerequisites = {"gunpowder", "automation-science-pack"}
+TECH["gun-turret"].prerequisites = {"military"}
 
 -- Add red circuit prereq to techs that need red circuits as ingredients.
 Tech.addTechDependency("advanced-circuit", "electric-energy-distribution-2")
