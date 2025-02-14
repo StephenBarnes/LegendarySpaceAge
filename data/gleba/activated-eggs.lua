@@ -39,7 +39,6 @@ eggActivationRecipe.surface_conditions = nil
 Icon.clear(eggActivationRecipe) -- Remove icons so it defaults to the activated egg icon.
 eggActivationRecipe.order = eggActivationRecipe.order .. "-2"
 extend{eggActivationRecipe}
-Tech.addRecipeToTech("activated-pentapod-egg", "bioflux")
 
 -- Create new recipe for replicating activated eggs using slime and bioflux.
 -- Sometimes produces activated eggs instead of regular eggs.
@@ -60,5 +59,21 @@ eggReplicationRecipe.surface_conditions = nil
 	-- Allow it anywhere, though it's only really useful on Gleba (since science pack can only be crafted on Gleba, and pentapod labs can only be placed on Gleba).
 Icon.clear(eggReplicationRecipe) -- Remove icons so it defaults to the egg icon.
 RECIPE["pentapod-egg"] = eggReplicationRecipe
-Tech.addRecipeToTech("pentapod-egg", "bioflux")
+
+-- Create tech for egg duplication etc. instead of having it in the bioflux tech.
+local tech = copy(TECH["bioflux"])
+tech.name = "egg-duplication"
+tech.effects = {
+	{type = "unlock-recipe", recipe = "activated-pentapod-egg"},
+	{type = "unlock-recipe", recipe = "pentapod-egg"},
+}
+tech.research_trigger = {
+	type = "craft-item",
+	item = "bioflux",
+	count = 1,
+}
+tech.prerequisites = {"bioflux"}
+Icon.set(tech, "LSA/gleba/egg-tech")
+extend{tech}
+Tech.removeRecipeFromTech("pentapod-egg", "bioflux")
 Tech.removeRecipeFromTech("pentapod-egg", "biochamber")

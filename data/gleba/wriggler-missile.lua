@@ -10,8 +10,10 @@ ammo.name = "wriggler-missile"
 ammo.ammo_type = copy(RAW["spider-unit"]["small-strafer-pentapod"].attack_parameters.ammo_type)
 Icon.set(ammo, "LSA/gleba/wriggler-missile")
 ammo.order = "d[rocket-launcher]-d[b]"
+--[[ Could make it spoil into activated pentapod egg, then a big wriggler hostile to you. Tested, this works. But it makes it inconvenient to use, so rather turned off.
 ammo.spoil_ticks = 10 * MINUTES
 ammo.spoil_result = "activated-pentapod-egg"
+]]
 extend{ammo}
 
 -- Create recipe
@@ -32,7 +34,7 @@ tech.name = "wriggler-missile"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "wriggler-missile"},
 }
-tech.prerequisites = {"bioflux"}
+tech.prerequisites = {"egg-duplication"}
 tech.research_trigger = {
 	type = "craft-item",
 	item = "pentapod-egg",

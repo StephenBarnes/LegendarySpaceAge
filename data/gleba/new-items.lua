@@ -287,7 +287,7 @@ extend{marrowTech}
 
 local biomechanismsTech = copy(marrowTech)
 biomechanismsTech.name = "biomechanisms"
-biomechanismsTech.prerequisites = {"marrow", "chitin-processing-2", "bioflux"}
+biomechanismsTech.prerequisites = {"marrow", "chitin-processing-2", "egg-duplication"}
 biomechanismsTech.research_trigger = {
 	type = "craft-item",
 	item = "biochamber",
