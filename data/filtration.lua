@@ -74,10 +74,6 @@ filtrationGlebanSlimeTech.research_trigger = {
 	amount = 100,
 }
 extend{filtrationGlebanSlimeTech}
--- Make filtration-gleban-sludge mandatory before biochambers.
-Tech.addTechDependency("filtration-gleban-slime", "biochamber")
-
--- TODO create tech for advanced filtration of Gleban slime, producing petrophages.
 
 -- Create filtration-fulgoran-sludge tech.
 local filtrationFulgoranSludgeTech = copy(TECH["recycling"])

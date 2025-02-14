@@ -265,13 +265,13 @@ resyncRecipe.crafting_machine_tint = {
 }
 extend{resyncRecipe}
 
--- Explosive desynchronization: 10 cyclosome A + 1 explosives -> 0-3 cyclosome A + ... + 0-3 cyclosome E
+-- Explosive desynchronization: 10 cyclosome A + 1 boomsac -> 0-3 cyclosome A + ... + 0-3 cyclosome E
 -- So total 0-15, mean 7.5.
 local desyncRecipe = copy(resyncRecipe)
 desyncRecipe.name = "explosive-desynchronization"
 desyncRecipe.ingredients = {
 	{type = "item", name = "cyclosome-1", amount = 10},
-	{type = "item", name = "explosives", amount = 1},
+	{type = "item", name = "boomsac", amount = 1},
 }
 desyncRecipe.results = {
 	{type = "item", name = "cyclosome-1", amount_min = 0, amount_max = 3, show_details_in_recipe_tooltip = false},
@@ -281,9 +281,10 @@ desyncRecipe.results = {
 	{type = "item", name = "cyclosome-5", amount_min = 0, amount_max = 3, show_details_in_recipe_tooltip = false},
 }
 desyncRecipe.order = "d"
+desyncRecipe.category = "crafting"
 desyncRecipe.icons = copy(resyncRecipe.icons)
 table.insert(desyncRecipe.icons, {
-	icon = "__base__/graphics/icons/explosives.png",
+	icon = "__LegendarySpaceAge__/graphics/gleba/boompuffs/sac/6.png",
 	icon_size = 64,
 	scale = 0.28,
 })
