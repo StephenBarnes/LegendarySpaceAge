@@ -15,3 +15,5 @@ RECIPE["aai-signal-receiver"].ingredients = {
 }
 
 -- Seems energy usage is always only drain, no extra. Except there's a buffer that has to fill up when it's first placed. Can't set usage to zero or drain also doesn't apply. Also seems usage is equal to drain if I change usage, not sure why, might be the mod.
+
+RAW["decider-combinator"]["aai-filter"].hidden_in_factoriopedia = true

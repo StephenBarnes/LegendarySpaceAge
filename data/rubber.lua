@@ -86,6 +86,10 @@ naturalRubberTech.effects = {
 		type = "unlock-recipe",
 		recipe = "rubber-from-latex",
 	},
+	{
+		type = "unlock-recipe",
+		recipe = "panel-from-rubber",
+	},
 }
 Icon.set(naturalRubberTech, "LSA/rubber/tech")
 naturalRubberTech.localised_description = {"technology-description.rubber-1"}

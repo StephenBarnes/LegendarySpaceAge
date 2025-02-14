@@ -100,7 +100,22 @@ RECIPE["plastic-bar-per-minute-recycling"] = nil
 RECIPE["piercing-rounds-magazine-per-minute-recycling"] = nil
 
 -- Hide recycling recipes for items that are not recyclable.
-RECIPE["assembled-rocket-part-recycling"] = nil
+for _, item in pairs{
+	"assembled-rocket-part",
+	"blueprint",
+	"deconstruction-planner",
+	"upgrade-planner",
+	"blueprint-book",
+	"copper-wire",
+	"green-wire",
+	"red-wire",
+	"spidertron-remote",
+	"discharge-defense-remote",
+	"artillery-targeting-remote",
+} do
+	RECIPE[item .. "-recycling"] = nil
+	-- Setting .hidden_in_factoriopedia to true doesn't work, still shows up in factoriopedia.
+end
 
 -- Space biolabs should have recycling recipe.
 -- Actually, looks like there's a hard-coded exception for recipe named "biolab". So let's generate it ourselves.

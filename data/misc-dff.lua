@@ -11,3 +11,8 @@ Tech.addRecipeToTech("po-small-electric-fuse", "electric-energy-distribution-1",
 
 -- Edit the spent-filter-recycling recipe to have the same results as filter-recycling.
 RECIPE["spent-filter-recycling"].results = RECIPE["filter-recycling"].results
+
+-- Spidertron Enhancements
+RAW["character-corpse"]["spidertron-enhancements-corpse"].hidden_in_factoriopedia = true
+RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].hidden_in_factoriopedia = true
+RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].factoriopedia_alternative = "spidertron"

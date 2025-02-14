@@ -64,10 +64,5 @@ RAW["logistic-robot"]["logistic-robot"].speed = 0.10 -- Was 0.05
 -- Logistics 1 tech doesn't give "faster ways of transportation".
 TECH["logistics"].localised_description = {"technology-description.logistics-1"}
 
--- Spidertron Enhancements
-RAW["character-corpse"]["spidertron-enhancements-corpse"].hidden_in_factoriopedia = true
---RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].hidden_in_factoriopedia = true
---RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].factoriopedia_alternative = "spidertron"
-
 -- Beacon interface should be hidden. TODO move to file for apprentice foundry.
 Item.hide("beacon-interface--beacon")

@@ -52,13 +52,26 @@ Icon.set(recipeFromGlass, {"panel", "glass"})
 -- TODO get custom glass-panel icon.
 extend{recipeFromGlass}
 
+-- Create recipe: 2 iron rods + 1 rubber -> 1 panel
+local recipeFromRubber = copy(recipeFromIron)
+recipeFromRubber.name = "panel-from-rubber"
+recipeFromRubber.ingredients = {
+	{type = "item", name = "iron-stick", amount = 2},
+	{type = "item", name = "rubber", amount = 1},
+}
+recipeFromRubber.allow_as_intermediate = false
+recipeFromRubber.enabled = false
+Icon.set(recipeFromRubber, {"panel", "rubber"}) -- TODO get custom rubber-panel icon.
+extend{recipeFromRubber}
+
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?
 
 Gen.order({
 	panelItem,
 	recipeFromWood,
-	recipeFromGlass,
 	recipeFromIron,
 	recipeFromCopper,
+	recipeFromGlass,
+	recipeFromRubber,
 }, "panel")
