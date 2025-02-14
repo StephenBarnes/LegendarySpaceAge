@@ -8,7 +8,7 @@ RECIPE["inserter"].ingredients = {
 }
 RECIPE["long-handed-inserter"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "mechanism", amount = 2},
+	{type = "item", name = "mechanism", amount = 1},
 	{type = "item", name = "sensor", amount = 1},
 }
 RECIPE["fast-inserter"].ingredients = {
@@ -18,6 +18,7 @@ RECIPE["fast-inserter"].ingredients = {
 RECIPE["fast-inserter"].category = "crafting"
 RECIPE["bulk-inserter"].ingredients = {
 	{type = "item", name = "electric-engine-unit", amount = 2},
+	{type = "item", name = "processing-unit", amount = 2},
 	{type = "item", name = "sensor", amount = 1},
 }
 RECIPE["bulk-inserter"].category = "crafting"

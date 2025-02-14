@@ -10,10 +10,10 @@ RECIPE["gate"].ingredients = {
 RECIPE["gate"].results = {{type = "item", name = "gate", amount = 4}}
 
 RECIPE["radar"].ingredients = {
-	{type = "item", name = "iron-stick", amount = 5},
-	{type = "item", name = "iron-plate", amount = 10},
-	{type = "item", name = "iron-gear-wheel", amount = 5},
-	{type = "item", name = "electronic-circuit", amount = 5},
+	{type = "item", name = "frame", amount = 1},
+	{type = "item", name = "panel", amount = 2},
+	{type = "item", name = "sensor", amount = 1},
+	{type = "item", name = "mechanism", amount = 1},
 }
 
 RECIPE["land-mine"].ingredients = {

@@ -25,9 +25,9 @@ extend{item}
 local ashRecipe = copy(RECIPE["rocket-fuel"])
 ashRecipe.name = "ash-reprocessing"
 ashRecipe.ingredients = {
-	{type = "item", name = "ash", amount = 4},
-	{type = "fluid", name = "water", amount = 5},
+	{type = "item", name = "ash", amount = 5},
 	{type = "fluid", name = "sulfuric-acid", amount = 5},
+	{type = "fluid", name = "water", amount = 10},
 }
 ashRecipe.results = {
 	{type = "item", name = "carbon", amount = 1},

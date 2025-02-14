@@ -127,7 +127,7 @@ Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
 -- Fast inserter should go after actuator.
 Tech.setPrereqs("fast-inserter", {"electric-engine"})
 TECH["fast-inserter"].unit = {count = 50, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
-Tech.setPrereqs("bulk-inserter", {"fast-inserter"})
+Tech.setPrereqs("bulk-inserter", {"fast-inserter", "processing-unit"})
 TECH["bulk-inserter"].unit = {count = 100, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 -- Inserter capacity techs should need more advanced science packs, since they're now after chem science.
 TECH["inserter-capacity-bonus-1"].unit = {count = 150, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
@@ -173,7 +173,7 @@ Tech.addRecipeToTech("poison-capsule", "military-2")
 Tech.addRecipeToTech("slowdown-capsule", "military-2")
 Tech.removeRecipeFromTech("grenade", "military-2")
 Tech.addRecipeToTech("grenade", "military-3")
-TECH["military-2"].prerequisites = {"military", "oil-processing", "ammonia-1"}
+TECH["military-2"].prerequisites = {"military", "oil-processing", "ammonia-1", "steel-processing"}
 Tech.addTechDependency("explosives", "military-3")
 Tech.removePrereq("military-4", "explosives")
 Tech.setPrereqs("stronger-explosives-1", {"military-3"})

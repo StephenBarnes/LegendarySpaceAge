@@ -49,20 +49,6 @@ RECIPE["tesla-turret"].energy_required = 25
 
 -- TODO railgun turret - first need to implement Aquilo stuff.
 
--- Limit the arc of all turrets - because it makes defense design more interesting.
--- This val is 0-0.5 (empty to half-circle) or 1 (full circle, default). Can't be between 0.5 and 1. Flamethrower turret is 1/3 by default, so 120 degrees.
-for _, turretVals in pairs{
-	{"ammo-turret", "rocket-turret"},
-	{"ammo-turret", "gun-turret"},
-	{"electric-turret", "laser-turret"},
-	-- Not Tesla turrets, rather letting those still cover 360 degrees.
-} do
-	local turretType = turretVals[1]
-	local turretName = turretVals[2]
-	local turret = RAW[turretType][turretName] ---@type data.TurretPrototype
-	turret.attack_parameters.turn_range = (1/3)
-end
-
 -- Allow more fluids in flamethrower turret.
 RAW["fluid-turret"]["flamethrower-turret"].attack_parameters.fluids = {
 	{type = "crude-oil"},
@@ -125,3 +111,36 @@ RAW["electric-turret"]["tesla-turret"].energy_source = {
 	input_flow_limit = "6MW", -- Max firing rate 0.5, 10MJ per shot, so 5MW max consumption.
 }
 RAW["electric-turret"]["tesla-turret"].attack_parameters.ammo_type.energy_consumption = "10MJ" -- Vanilla is 12MJ.
+
+-- Limit the arc of some turrets - because it makes defense design more interesting.
+-- This val is 0-0.5 (empty to half-circle) or 1 (full circle, default). Can't be between 0.5 and 1. Flamethrower turret is 1/3 by default, so 120 degrees.
+for _, turretVals in pairs{
+	{"ammo-turret", "rocket-turret"},
+	{"ammo-turret", "gun-turret"},
+	{"electric-turret", "laser-turret"},
+	-- Not Tesla turrets, rather letting those still cover 360 degrees.
+} do
+	local turretType = turretVals[1]
+	local turretName = turretVals[2]
+	local turret = RAW[turretType][turretName] ---@type data.TurretPrototype
+	turret.attack_parameters.turn_range = (1/3)
+end
+
+-- Make turrets rotatable by telling the game they have direction.
+for _, turret in pairs{
+	RAW["ammo-turret"]["gun-turret"],
+	RAW["ammo-turret"]["rocket-turret"],
+	RAW["electric-turret"]["laser-turret"],
+} do
+	assert(not turret.turret_base_has_direction, "Turret already has direction")
+	turret.turret_base_has_direction = true
+	-- Turret originally had 1 connector definition, but now it needs to have 4 (one for each direction).
+	assert(#turret.circuit_connector == 1, "Turret has wrong number of connectors")
+	local connector = turret.circuit_connector[1]
+	turret.circuit_connector = {
+		connector,
+		connector,
+		connector,
+		connector,
+	}
+end
