@@ -107,7 +107,11 @@ TECH["advanced-oil-processing"].unit = {
 	},
 }
 
-Tech.setPrereqs("lubricant", {"chemical-science-pack"})
+-- Remove the lubricant tech. Rather merge it with actuator / advanced robotics.
+Tech.hideTech("lubricant")
+Tech.replacePrereq("logistics-3", "lubricant", "electric-engine")
+Tech.replacePrereq("electric-engine", "lubricant", "chemical-science-pack")
+Tech.addRecipeToTech("lubricant", "electric-engine", 1)
 
 -- Rubber-2 is needed to make rubber from petrochems on Vulcanus and Fulgora.
 Tech.addTechDependency("rubber-2", "planet-discovery-vulcanus")
@@ -119,10 +123,11 @@ TECH["electric-mining-drill"].ignore_tech_cost_multiplier = true
 -- Move long inserter to logistics 2.
 Tech.removeRecipeFromTech("long-handed-inserter", "automation")
 Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
--- Fast inserter should go after lubricant.
-Tech.setPrereqs("fast-inserter", {"lubricant"})
+
+-- Fast inserter should go after actuator.
+Tech.setPrereqs("fast-inserter", {"electric-engine"})
 TECH["fast-inserter"].unit = {count = 50, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
-Tech.setPrereqs("bulk-inserter", {"fast-inserter", "electric-engine"})
+Tech.setPrereqs("bulk-inserter", {"fast-inserter"})
 TECH["bulk-inserter"].unit = {count = 100, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 -- Inserter capacity techs should need more advanced science packs, since they're now after chem science.
 TECH["inserter-capacity-bonus-1"].unit = {count = 150, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
