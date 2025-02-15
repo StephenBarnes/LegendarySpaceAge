@@ -93,7 +93,17 @@ local function nameToItemOrFluid(name)
 	end
 end
 
-local function interpretIngredientsOrResults(list)
+local recognizedIngredientOrResultFields = { -- Table of allowed fields in (Item/Fluid)(Ingredient/Product)Prototype.
+	ingredients = {
+		item = Table.listToSet{"name", "amount", "ignored_by_stats"},
+		fluid = Table.listToSet{"name", "amount", "temperature", "minimum_temperature", "maximum_temperature", "ignored_by_stats", "fluidbox_index", "fluidbox_multiplier"},
+	},
+	results = {
+		item = Table.listToSet{"name", "amount", "amount_min", "amount_max", "probability", "ignored_by_stats", "ignored_by_productivity", "show_details_in_recipe_tooltip", "extra_count_fraction", "percent_spoiled"},
+		fluid = Table.listToSet{"name", "amount", "amount_min", "amount_max", "probability", "ignored_by_stats", "ignored_by_productivity", "temperature", "fluidbox_index", "show_details_in_recipe_tooltip"},
+	},
+}
+local function interpretIngredientsOrResults(list, ingredientOrResult)
 	local result = {}
 	for _, thing in pairs(list) do
 		if type(thing) == "string" then
@@ -101,9 +111,12 @@ local function interpretIngredientsOrResults(list)
 		elseif type(thing) == "table" then
 			local name = thing[1] or thing.name or thing.item or thing.fluid
 			local amount = thing[2] or thing.amount or thing.count
-			local newElement = {type = nameToItemOrFluid(name), name = name, amount = amount}
+			local itemOrFluid = nameToItemOrFluid(name)
+			local newElement = {type = itemOrFluid, name = name, amount = amount}
 			for k, v in pairs(thing) do
-				if k ~= "name" and k ~= "amount" then
+				if k ~= "name" and k ~= "amount" and k ~= 1 and k ~= 2 then
+					assert(recognizedIngredientOrResultFields[ingredientOrResult][itemOrFluid][k],
+						"interpretIngredientsOrResults: unknown field "..k.." for "..itemOrFluid.." in "..ingredientOrResult)
 					newElement[k] = v
 				end
 			end
@@ -124,10 +137,10 @@ end
 	.time
 	.category, .enabled, .auto_recycle (just copied over)
 ]]
-local recognizedFields = Table.listToSet{"recipe", "name", "ingredients", "results", "resultCount", "time", "category", "copy", "enabled", "auto_recycle"}
+local possibleArgs = Table.listToSet{"recipe", "name", "ingredients", "results", "resultCount", "time", "category", "copy", "enabled", "auto_recycle"}
 Recipe.adjust = function(a)
 	for k, _ in pairs(a) do
-		assert(recognizedFields[k], "Recipe.adjust: unknown field "..k)
+		assert(possibleArgs[k], "Recipe.adjust: unknown field "..k)
 	end
 	local recipe = nil
 	if a.recipe ~= nil then
