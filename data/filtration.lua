@@ -193,36 +193,36 @@ slimeFluid.heat_capacity = nil
 extend{slimeFluid}
 
 -- Create recipe to filter slime.
-local filterSlimeRecipe = copy(RECIPE["iron-gear-wheel"])
-filterSlimeRecipe.name = "filter-slime"
-filterSlimeRecipe.ingredients = {
-	{type = "item", name = "filter", amount = 1},
-	{type = "fluid", name = "slime", amount = 400},
+Recipe.make{
+	copy = "iron-gear-wheel",
+	recipe = "filter-slime",
+	ingredients = {
+		{"filter", 1},
+		{"slime", 400, type = "fluid"},
+	},
+	results = {
+		{"water", 300},
+		{"spent-filter", 1},
+		{"spoilage", 10, show_details_in_recipe_tooltip = false},
+		{"petrophage", 1, probability = .05, show_details_in_recipe_tooltip = false},
+		-- Could give eggs or fruits with some small probability. But rather not, since that makes it too easy to restart cycles.
+	},
+	main_product = "water",
+	category = "chemistry-or-crafting-with-fluid",
+	subgroup = "gleba-non-agriculture",
+	order = "00",
+	enabled = false,
+	time = 5,
+	specialIcons = {
+		{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
+		{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
+	},
+	crafting_machine_tint = {
+		primary = {.176, .255, .200},
+		secondary = {.393, .453, .333},
+		tertiary = {.482, .745, .215},
+	}
 }
-filterSlimeRecipe.results = {
-	{type = "fluid", name = "water", amount = 300},
-	{type = "item", name = "spent-filter", amount = 1},
-	{type = "item", name = "spoilage", amount = 10, show_details_in_recipe_tooltip = false},
-	{type = "item", name = "petrophage", amount = 1, probability = .05, show_details_in_recipe_tooltip = false},
-	-- Could give eggs or fruits with some small probability. But rather not, since that makes it too easy to restart cycles.
-}
-filterSlimeRecipe.main_product = "water"
-filterSlimeRecipe.category = "chemistry-or-crafting-with-fluid"
-filterSlimeRecipe.subgroup = "gleba-non-agriculture"
-filterSlimeRecipe.order = "00"
-filterSlimeRecipe.icon = nil
-filterSlimeRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
-	{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
-}
-filterSlimeRecipe.enabled = false
-filterSlimeRecipe.energy_required = 6
-filterSlimeRecipe.crafting_machine_tint = {
-	primary = {.176, .255, .200},
-	secondary = {.393, .453, .333},
-	tertiary = {.482, .745, .215},
-}
-extend{filterSlimeRecipe}
 
 ------------------------------------------------------------------------
 

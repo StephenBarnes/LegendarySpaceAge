@@ -1,0 +1,32 @@
+-- This file adds fluorite item, hydrofluoric acid, and adjusts uranium patches on Nauvis to also produce some fluorite.
+
+-- Create fluorite item.
+local item = copy(ITEM["uranium-ore"])
+item.name = "fluorite"
+item.order = item.order .. "-2"
+Icon.set(item, "LSA/nuclear/fluorite-2")
+Icon.variants(item, "LSA/nuclear/fluorite-%", 3)
+extend{item}
+
+-- Create hydrofluoric acid fluid
+local hydrofluoricAcid = copy(FLUID["fluoroketone-cold"])
+hydrofluoricAcid.name = "hydrofluoric-acid"
+extend{hydrofluoricAcid}
+
+-- In chem plant: 1 fluorite + 1 sulfuric acid + 1 water -> 1 hydrofluoric acid + 1 stone (representing gypsum)
+local hydrofluoricAcidRecipe = Recipe.make{
+	copy = "ammoniacal-solution-separation",
+	recipe = "hydrofluoric-acid",
+	ingredients = {
+		{"fluorite", 1},
+		{"sulfuric-acid", 10},
+		{"water", 10},
+	},
+	results = {
+		{"hydrofluoric-acid", 10, type = "fluid"},
+		{"stone", 1},
+	},
+	main_product = "hydrofluoric-acid",
+	clearIcons = true,
+}
+hydrofluoricAcidRecipe.subgroup = nil

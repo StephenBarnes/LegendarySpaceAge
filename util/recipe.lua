@@ -141,13 +141,12 @@ end
 	.resultCount (alternative to .results, assumes single result with the same name as the recipe)
 	.time
 	.icons and .iconArrangement (for icons - see the icon util file)
-	.variants and .variantCount and .variantAdditional (for variant pictures - see the icon util file)
 	.clearIcons (clear existing icons)
 	.specialIcons (for explicitly specified multiple icons)
 	.category, .enabled, .auto_recycle, .subgroup, .order, .localised_name, .localised_description, .main_product, .allow_decomposition, .allow_as_intermediate, .show_amount_in_title, .crafting_machine_tint (just copied over)
 ]]
 local possibleArgs = Table.listToSet{"recipe", "ingredients", "results", "resultCount", "time",
-	"icons", "iconArrangement", "variants", "variantCount", "variantAdditional", "clearIcons", "specialIcons",
+	"icons", "iconArrangement", "clearIcons", "specialIcons",
 	"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint",
 }
 Recipe.edit = function(a)
@@ -197,9 +196,6 @@ Recipe.edit = function(a)
 	end
 	if a.icons ~= nil then
 		Icon.set(recipe, a.icons, a.iconArrangement)
-	end
-	if a.variants ~= nil then
-		Icon.variants(recipe, a.variants, a.variantCount, a.variantAdditional)
 	end
 end
 

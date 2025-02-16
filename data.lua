@@ -43,8 +43,7 @@ require("data.nauvis-part-one.worldgen")
 require("data.vulcanus.main")
 require("data.fulgora.main")
 require("data.gleba.main")
-require("data.nauvis-part-two.nauvis-biotech")
-require("data.nauvis-part-two.nuclear")
+require("data.nauvis-part-two.main")
 require("data.aquilo.main")
 
 -- Files that create protos, and require previous protos.
