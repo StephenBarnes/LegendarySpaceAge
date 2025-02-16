@@ -24,8 +24,7 @@ Icon.clear(recipe)
 -- TODO add to a tech, actually decide on ingredients, etc.
 extend{recipe}
 
--- Allow nuclear science pack in labs.
-table.insert(RAW.lab.lab.inputs, 11, "nuclear-science-pack")
+-- Allow nuclear science pack in labs, except for basic lab.
 table.insert(RAW.lab.glebalab.inputs, 11, "nuclear-science-pack")
 table.insert(RAW.lab.biolab.inputs, 11, "nuclear-science-pack")
 

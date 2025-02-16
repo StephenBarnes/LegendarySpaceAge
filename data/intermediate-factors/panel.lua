@@ -64,6 +64,17 @@ recipeFromRubber.enabled = false
 Icon.set(recipeFromRubber, {"panel", "rubber"}) -- TODO get custom rubber-panel icon.
 extend{recipeFromRubber}
 
+-- Create recipe: 1 steel plate -> 1 panel
+local recipeFromSteel = Recipe.make{
+	copy = recipeFromIron,
+	recipe = "panel-from-steel",
+	ingredients = {"steel-plate"},
+	allow_as_intermediate = false,
+	-- TODO custom icon.
+	icons = {"panel", "steel-plate"},
+}
+Tech.addRecipeToTech("panel-from-steel", "steel-processing")
+
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?
 
@@ -74,4 +85,5 @@ Gen.order({
 	recipeFromCopper,
 	recipeFromGlass,
 	recipeFromRubber,
+	recipeFromSteel,
 }, "panel")

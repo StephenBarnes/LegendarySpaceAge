@@ -204,9 +204,16 @@ Recipe.make = function(a)
 	assert(a.copy ~= nil, "Recipe.make: copy is required, arguments: ".. serpent.block(a))
 	assert(a.recipe ~= nil, "Recipe.make: recipe name is required, arguments: ".. serpent.block(a))
 	assert(type(a.recipe) == "string", "Recipe.make: recipe name must be a string, arguments: ".. serpent.block(a))
-	assert(RECIPE[a.copy] ~= nil, "Recipe.make: asked to copy non-existent recipe "..a.copy)
-	local recipe = copy(RECIPE[a.copy])
-	assert(recipe ~= nil, "Recipe.make: copy failed")
+	local recipe
+	if type(a.copy) == "string" then
+		assert(RECIPE[a.copy] ~= nil, "Recipe.make: asked to copy non-existent recipe "..a.copy)
+		recipe = copy(RECIPE[a.copy])
+	else
+		assert(type(a.copy) == "table", "Recipe.make: copy must be a table or a string, arguments: ".. serpent.block(a))
+		assert(a.copy.type == "recipe", "Recipe.make: copy must be a recipe prototype, arguments: ".. serpent.block(a))
+		recipe = copy(a.copy)
+	end
+	assert(recipe ~= nil)
 	---@diagnostic disable-next-line: assign-type-mismatch
 	recipe.name = a.recipe
 	a.recipe = recipe
