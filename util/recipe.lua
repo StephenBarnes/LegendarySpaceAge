@@ -143,10 +143,12 @@ end
 	.icons and .iconArrangement (for icons - see the icon util file)
 	.clearIcons (clear existing icons)
 	.specialIcons (for explicitly specified multiple icons)
+	.clearSubgroup
 	.category, .enabled, .auto_recycle, .subgroup, .order, .localised_name, .localised_description, .main_product, .allow_decomposition, .allow_as_intermediate, .show_amount_in_title, .crafting_machine_tint (just copied over)
 ]]
 local possibleArgs = Table.listToSet{"recipe", "ingredients", "results", "resultCount", "time",
 	"icons", "iconArrangement", "clearIcons", "specialIcons",
+	"clearSubgroup",
 	"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint",
 }
 Recipe.edit = function(a)
@@ -181,6 +183,9 @@ Recipe.edit = function(a)
 	if a.specialIcons ~= nil then
 		recipe.icons = a.specialIcons
 		recipe.icon =  nil
+	end
+	if a.clearSubgroup == true then
+		recipe.subgroup = nil
 	end
 
 	-- Some fields just get copied over.

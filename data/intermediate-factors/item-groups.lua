@@ -15,6 +15,7 @@ extend{
 for i, factor in pairs{
 	"resin",
 	"wiring",
+	"electronic-components",
 	"circuit-board",
 	"panel",
 	"frame",

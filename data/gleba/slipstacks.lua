@@ -93,7 +93,7 @@ pearlSmeltRecipe.results = {{type = "item", name = "resin", amount = 1}}
 pearlSmeltRecipe.category = "smelting"
 pearlSmeltRecipe.subgroup = "resin"
 pearlSmeltRecipe.order = "04"
-Icon.set(pearlSmeltRecipe, {"resin", "slipstack-pearl"})
+Icon.set(pearlSmeltRecipe, {"LSA/resin/resin-1", "slipstack-pearl"})
 extend{pearlSmeltRecipe}
 
 ------------------------------------------------------------------------

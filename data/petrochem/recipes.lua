@@ -1,5 +1,3 @@
-local constants = require("data.petrochem.constants")
-
 --[[ Create fractionation recipes.
 Fractionation recipes turn crude oil and natural gas into the 4 fractions: heavy oil, light oil, rich gas, dry gas.
 	Oil fractionation: 10 crude oil + 2 steam -> 1 tar + 4 heavy oil + 5 light oil + 1 water + 2 sulfur + 2 carbon
@@ -191,61 +189,6 @@ solidFuelRecipe.energy_required = 4
 solidFuelRecipe.hide_from_player_crafting = false
 extend{solidFuelRecipe}
 
---[[ Add recipes for resin.
-	Wood-based resin (pyrolysis): 5 wood + 5 steam -> 2 resin + 3 carbon
-	Pitch-based resin: 2 pitch + 1 sulfuric acid + 1 carbon -> 4 resin
-	Rich-gas-based resin: 2 rich gas + 1 sulfuric acid + 1 carbon -> 2 resin
-	]]
-local woodResinRecipe = copy(RECIPE["plastic-bar"])
-woodResinRecipe.name = "wood-resin"
-woodResinRecipe.ingredients = {
-	{type = "item", name = "wood", amount = 1},
-	{type = "fluid", name = "steam", amount = 100},
-}
-woodResinRecipe.results = {
-	{type = "item", name = "resin", amount = 10},
-	{type = "item", name = "carbon", amount = 1},
-}
-Icon.set(woodResinRecipe, {"resin", "wood"})
-woodResinRecipe.order = "01"
-woodResinRecipe.subgroup = "resin"
-woodResinRecipe.main_product = "resin"
-woodResinRecipe.energy_required = 5
-extend{woodResinRecipe}
-
-local pitchResinRecipe = copy(RECIPE["plastic-bar"])
-pitchResinRecipe.name = "pitch-resin"
-pitchResinRecipe.ingredients = {
-	{type = "item", name = "pitch", amount = 2},
-	{type = "fluid", name = "sulfuric-acid", amount = 10},
-	{type = "item", name = "carbon", amount = 1},
-}
-pitchResinRecipe.results = {
-	{type = "item", name = "resin", amount = 2},
-}
-Icon.set(pitchResinRecipe, {"resin", "pitch"})
-pitchResinRecipe.order = "02"
-pitchResinRecipe.subgroup = "resin"
-pitchResinRecipe.main_product = "resin"
-pitchResinRecipe.energy_required = 2
-extend{pitchResinRecipe}
-
-local richGasResinRecipe = copy(RECIPE["plastic-bar"])
-richGasResinRecipe.name = "rich-gas-resin"
-richGasResinRecipe.ingredients = {
-	{type = "fluid", name = "petroleum-gas", amount = 20},
-	{type = "fluid", name = "sulfuric-acid", amount = 10},
-	{type = "item", name = "carbon", amount = 1},
-}
-richGasResinRecipe.results = {
-	{type = "item", name = "resin", amount = 1},
-}
-Icon.set(richGasResinRecipe, {"resin", "petroleum-gas"})
-richGasResinRecipe.order = "03"
-richGasResinRecipe.subgroup = "resin"
-richGasResinRecipe.energy_required = 2
-extend{richGasResinRecipe}
-
 --[[ Add syngas liquefaction.
 	10 syngas + 1 iron plate -> 5 heavy oil + 5 light oil + 1 water
 		Named "syngas liquefaction" partly for the benefit of players already familiar with "coal liquefaction" in the base game, since this effectively replaces coal liquefaction.
@@ -353,5 +296,5 @@ Tech.addRecipeToTech("syngas-liquefaction", "coal-liquefaction")
 -- Remove default recipes for carbon, sulfur.
 Recipe.hide("sulfur")
 Recipe.hide("carbon")
-Tech.removeRecipeFromTech("sulfur", "sulfur-processing") -- TODO figure out what to do with that tech.
-Tech.removeRecipeFromTech("carbon", "tungsten-carbide") -- TODO check that tech
+Tech.removeRecipeFromTech("sulfur", "sulfur-processing")
+Tech.removeRecipeFromTech("carbon", "tungsten-carbide")

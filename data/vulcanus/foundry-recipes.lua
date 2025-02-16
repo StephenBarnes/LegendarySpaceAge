@@ -271,6 +271,7 @@ moltenTungstenRecipe.results = {
 moltenTungstenRecipe.main_product = "molten-tungsten"
 moltenTungstenRecipe.order = "a[melting]-d[molten-tungsten]"
 moltenTungstenRecipe.energy_required = 1
+moltenTungstenRecipe.icon = nil
 extend{moltenTungstenRecipe}
 Tech.addRecipeToTech("molten-tungsten", "tungsten-steel", 1)
 

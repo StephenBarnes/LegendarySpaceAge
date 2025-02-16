@@ -1,3 +1,4 @@
 require("biotech")
-require("nuclear")
 require("fluorite")
+require("uranium-processing")
+require("nuclear-science")

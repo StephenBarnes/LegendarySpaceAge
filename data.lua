@@ -6,7 +6,7 @@ require("data.crafting-categories")
 require("data.fluid-boxes")
 
 -- Files that create new protos.
-require("data.char-furnace")
+require("data.char-furnace") -- TODO need to adjust this so quality also affects power consumption.
 require("data.early-equipment-grids")
 require("data.map-gen-preset")
 require("data.remove-mapgen-presets")
@@ -41,7 +41,7 @@ require("data.shotgun-turrets")
 require("data.nauvis-part-one.misc")
 require("data.nauvis-part-one.worldgen")
 require("data.vulcanus.main")
-require("data.fulgora.main")
+require("data.fulgora.main") -- TODO need to adjust battery-chargers so quality affects power consumption.
 require("data.gleba.main")
 require("data.nauvis-part-two.main")
 require("data.aquilo.main")
@@ -50,8 +50,8 @@ require("data.aquilo.main")
 require("data.gas-vent")
 require("data.waste-pump")
 require("data.barrelling")
-require("data.fuel")
 require("data.intermediate-factors.main")
+require("data.fuel")
 require("data.space.main")
 
 -- Files that adjust protos

@@ -1,278 +1,128 @@
---[[
-Green circuits:
-	1 wood + 0.2 resin -> 4 circuit boards
-	1 circuit board + 3 copper wire -> 1 green circuit
+--[[ This file edits recipes for green/red/blue circuits, plus adds new intermediate items and their recipes: silicon, doped wafers, microchips.
 
-Red circuits are made after the player has petrochem set up:
-	1 carbon + 1 plastic + 1 stone + 1 copper wire -> 1 electronic components
+Factor intermediates used to make circuits:
+	Circuit boards - a factor intermediate (meaning it has multiple recipes) - initially makeshift, then wood+resin, then plastic, then later calcite.
+	Wiring - initially copper cable and resin, then substitute that with rubber or plastic.
+	Electronic components - initially glass plus carbon plus wiring, then later more alternate recipes using plastic, silicon, maybe others.
 		This represents resistors, capacitors, transistors, etc. that are large enough to pick up by hand.
-	1 green circuit + 1 copper wire + 2 electronic components -> 1 red circuit
+Non-factor intermediates used to make circuits:
+	Silicon - from sand and sulfuric acid.
+	Doped wafers - from silicon and carbon.
+	Microchips - from plastic bar, doped wafer, wiring.
+Note these non-factor intermediates rely on raw materials: stone, sulfuric acid (sulfur + water + iron), carbon (or carbon-based fuel), plastic.
+	So, these need to be obtainable basically anywhere. And they are, though on Gleba you use the alternate route for sulfuric acid.
 
-Blue circuits are made in the late stages of Nauvis part 1, and should have a significantly more complex production process:
-	2 stone + 10 sulfuric acid -> 1 silicon wafer
-	1 silicon wafer + 1 carbon -> 1 doped wafer
-	1 doped wafer + 1 wire + 1 plastic bar -> 20 microchips
-	1 red circuit + 5 microchips + 5 sulfuric acid -> 1 blue circuit
-
-On Nauvis you first make "makeshift" circuit boards, from just stone. Then later you cut trees and put the wood in a wood-to-resin-and-rubber line and use the resin plus wood to make wooden circuit boards. There's early agricultural towers for bulk wood.
-When plastic is unlocked with petrochem, you unlock a recipe for circuit boards from plastic:
-	2 plastic bar + 1 resin -> 10 circuit boards
-Generally on Nauvis and Gleba both wood and plastic circuit boards are viable. On Fulgora and Aquilo, only plastic circuit boards are viable. On Vulcanus there's another alternative recipe for ceramic circuit boards using calcite.
+Circuit recipes:
+	Green circuits:
+		1 circuit board + 2 components -> 1 green circuit
+		This is just a basic complexity check. Resources are not expensive.
+		Uses only factor intermediates, so can be produced anywhere easily.
+	Red circuits:
+		1 green circuit + 10 components + 1 microchip -> 1 red circuit
+		This is a complexity check on the components (pushing players to use more efficient recipes) plus complexity check for microchips.
+	Blue circuits:
+		1 red circuit + 5 microchips + 5 sulfuric acid -> 1 blue circuit
 ]]
 
--- Add circuit board item.
-local circuitBoardItem = copy(ITEM["electronic-circuit"])
-circuitBoardItem.name = "circuit-board"
-Icon.set(circuitBoardItem, "LSA/circuit-boards/circuit-board-generic")
-circuitBoardItem.order = "b[circuits]-0"
-circuitBoardItem.subgroup = "circuit-board"
-circuitBoardItem.weight = ROCKET / 4000
-Item.copySoundsTo("copper-cable", circuitBoardItem)
-extend{circuitBoardItem}
-
--- Add recipe for circuit board from wood.
--- 	1 wood + 1 resin -> 4 circuit boards
-local woodCircuitBoardRecipe = copy(RECIPE["barrel"])
-woodCircuitBoardRecipe.name = "wood-circuit-board"
-woodCircuitBoardRecipe.ingredients = {
-	{type = "item", name = "wood", amount = 1},
-	{type = "item", name = "resin", amount = 1},
-}
-woodCircuitBoardRecipe.results = {
-	{type = "item", name = "circuit-board", amount = 10},
-}
-woodCircuitBoardRecipe.order = "b[circuits]-001"
-woodCircuitBoardRecipe.subgroup = "circuit-board"
-Icon.set(woodCircuitBoardRecipe, {"LSA/circuit-boards/wood-circuit-board", "wood"})
-woodCircuitBoardRecipe.auto_recycle = false
-extend{woodCircuitBoardRecipe}
-
--- Add recipe for circuit board from plastic.
--- 	2 plastic bar + 1 resin + 0.2 rubber -> 8 circuit boards
-local plasticCircuitBoardRecipe = copy(RECIPE["barrel"])
-plasticCircuitBoardRecipe.name = "plastic-circuit-board"
-plasticCircuitBoardRecipe.ingredients = {
-	{type = "item", name = "plastic-bar", amount = 2},
-	{type = "item", name = "resin", amount = 1},
-	--{type = "item", name = "rubber", amount = 0.2}, -- TODO after adding rubber
-}
-plasticCircuitBoardRecipe.results = {
-	{type = "item", name = "circuit-board", amount = 10},
-}
-plasticCircuitBoardRecipe.order = "b[circuits]-002"
-plasticCircuitBoardRecipe.subgroup = "circuit-board"
-Icon.set(plasticCircuitBoardRecipe, {"LSA/circuit-boards/plastic-circuit-board", "plastic-bar"})
-plasticCircuitBoardRecipe.auto_recycle = false
-extend{plasticCircuitBoardRecipe}
-Tech.addRecipeToTech("plastic-circuit-board", "plastics") -- TODO rather make a separate tech for this, using plastic circuit board sprite.
-
--- Add recipe for ceramic circuit board.
--- 	4 calcite + 2 resin -> 8 circuit boards
-local calciteCircuitBoardRecipe = copy(RECIPE["barrel"])
-calciteCircuitBoardRecipe.name = "calcite-circuit-board"
-calciteCircuitBoardRecipe.ingredients = {
-	{type = "item", name = "calcite", amount = 5},
-	{type = "item", name = "resin", amount = 1},
-}
-calciteCircuitBoardRecipe.results = {
-	{type = "item", name = "circuit-board", amount = 10},
-}
-calciteCircuitBoardRecipe.order = "b[circuits]-003"
-calciteCircuitBoardRecipe.subgroup = "circuit-board"
-Icon.set(calciteCircuitBoardRecipe, {"LSA/circuit-boards/ceramic-circuit-board", "calcite"})
-calciteCircuitBoardRecipe.category = "metallurgy"
-calciteCircuitBoardRecipe.auto_recycle = false
-extend{calciteCircuitBoardRecipe}
-Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rather make a separate tech for this? Unlocked by mining like 10 calcite. Use the ceramic circuit board sprite.
-
---[[ Add "makeshift" circuit board recipe, only handcraftable.
-	Makeshift circuit board: 1 stone brick -> 1 circuit board
-		Needed because all ways of making circuit boards require resin, which can't be obtained on Aquilo without buildings that require electronic circuits, creating a circular dependency. Also same on Nauvis at the start.
-]]
-local makeshiftBoardRecipe = copy(RECIPE["electronic-circuit"])
-makeshiftBoardRecipe.name = "makeshift-circuit-board"
-makeshiftBoardRecipe.ingredients = {{type = "item", name = "stone-brick", amount = 1}}
-makeshiftBoardRecipe.results = {{type = "item", name = "circuit-board", amount = 1}}
-makeshiftBoardRecipe.order = "b[circuits]-004"
-makeshiftBoardRecipe.subgroup = "circuit-board"
-makeshiftBoardRecipe.icon = nil
-makeshiftBoardRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/circuit-boards/circuit-board-generic.png", icon_size = 64, scale = 0.5},
-	{icon = "__core__/graphics/icons/mip/slot-item-in-hand-black.png", icon_size = 64, mipmap_count = 2, scale = 0.4, shift = {5, 4}},
-	--{icon = "__core__/graphics/icons/mip/slot-item-in-hand.png", icon_size = 64, mipmap_count = 2, scale = 0.33, shift = {7, 6}},
-}
-makeshiftBoardRecipe.enabled = false
-makeshiftBoardRecipe.energy_required = 1
-makeshiftBoardRecipe.category = "handcrafting-only"
-makeshiftBoardRecipe.auto_recycle = false
-extend{makeshiftBoardRecipe}
-Tech.addRecipeToTech("makeshift-circuit-board", "electronics", 2)
-
--- Create tech for wood circuit boards.
-local woodCircuitBoardTech = copy(TECH["automation"])
-woodCircuitBoardTech.name = "wood-circuit-board"
-woodCircuitBoardTech.effects = {
-	{type = "unlock-recipe", recipe = "wood-resin"},
-	{type = "unlock-recipe", recipe = "wood-circuit-board"},
-}
-Icon.set(woodCircuitBoardTech, "LSA/circuit-boards/wood-circuit-board-tech")
-woodCircuitBoardTech.prerequisites = {"steam-power"}
-woodCircuitBoardTech.ignore_tech_cost_multiplier = false
-woodCircuitBoardTech.unit = {
-	count = 15,
-	ingredients = {
-		{"automation-science-pack", 1},
-	},
-	time = 15,
-}
-woodCircuitBoardTech.research_trigger = nil
-extend{woodCircuitBoardTech}
-
--- Create item for silicon (undoped wafers).
+-- Create new intermediate items: silicon, doped wafers, microchips.
 local silicon = copy(ITEM["plastic-bar"])
 silicon.name = "silicon"
 Icon.set(silicon, "LSA/circuit-chains/silicon")
-silicon.subgroup = "complex-circuit-intermediates"
-silicon.order = "001"
 silicon.stack_size = 200
 extend{silicon}
 
--- Create recipe for silicon.
-local siliconRecipe = copy(RECIPE["plastic-bar"])
-siliconRecipe.name = "silicon"
-siliconRecipe.ingredients = {
-	{type = "item", name = "sand", amount = 2},
-	{type = "fluid", name = "sulfuric-acid", amount = 10},
-}
-siliconRecipe.results = {
-	{type = "item", name = "silicon", amount = 1},
-}
-siliconRecipe.subgroup = nil
-Icon.clear(siliconRecipe)
-siliconRecipe.allow_decomposition = true
-siliconRecipe.allow_as_intermediate = true
-extend{siliconRecipe}
-Tech.addRecipeToTech("silicon", "processing-unit", 1)
-Tech.addRecipeToTech("silicon", "solar-energy", 1)
-
--- Create item for doped wafers.
 local dopedWafer = copy(ITEM["plastic-bar"])
 dopedWafer.name = "doped-wafer"
 Icon.set(dopedWafer, "LSA/circuit-chains/doped-wafer")
-dopedWafer.subgroup = "complex-circuit-intermediates"
-dopedWafer.order = "002"
 dopedWafer.stack_size = 100
 extend{dopedWafer}
 
--- Create item for microchips
 local microchip = copy(ITEM["processing-unit"])
 microchip.name = "microchip"
 Icon.set(microchip, "LSA/circuit-chains/microchip")
-microchip.subgroup = "complex-circuit-intermediates"
-microchip.order = "003"
 microchip.stack_size = 200
 extend{microchip}
 
--- Create recipe for doped wafers.
-local dopedWaferRecipe = copy(RECIPE["plastic-bar"])
-dopedWaferRecipe.name = "doped-wafer"
-dopedWaferRecipe.ingredients = {
-	{type = "item", name = "silicon", amount = 1},
-	{type = "item", name = "carbon", amount = 1},
-}
-dopedWaferRecipe.results = {
-	{type = "item", name = "doped-wafer", amount = 1},
-}
-dopedWaferRecipe.subgroup = nil
-Icon.clear(dopedWaferRecipe)
-dopedWaferRecipe.category = "chemistry-or-electronics"
-dopedWaferRecipe.energy_required = 20
-dopedWaferRecipe.allow_decomposition = true
-dopedWaferRecipe.allow_as_intermediate = true
-extend{dopedWaferRecipe}
-Tech.addRecipeToTech("doped-wafer", "processing-unit", 2)
 
--- Create recipe for microchips.
-local microchipRecipe = copy(RECIPE["plastic-bar"])
-microchipRecipe.name = "microchip"
-microchipRecipe.ingredients = {
-	{type = "item", name = "doped-wafer", amount = 1},
-	{type = "item", name = "wiring", amount = 1},
-	{type = "item", name = "plastic-bar", amount = 1},
-}
-microchipRecipe.results = {
-	{type = "item", name = "microchip", amount = 20},
-}
-microchipRecipe.subgroup = nil
-Icon.clear(microchipRecipe)
-microchipRecipe.category = "electronics"
-microchipRecipe.energy_required = 10
-microchipRecipe.allow_decomposition = true
-microchipRecipe.allow_as_intermediate = true
-extend{microchipRecipe}
-Tech.addRecipeToTech("microchip", "processing-unit", 3)
+-- Create recipes for new intermediate items: silicon, doped wafers, microchips.
 
--- Edit recipe for blue circuits (processing-unit) to use doped wafers.
--- 1 red circuit + 4 microchips + 5 sulfuric acid -> 1 blue circuit
--- Original recipe was 5 sulfuric acid + 2 red circuit + 20 green circuit.
-RECIPE["processing-unit"].ingredients = {
-	{type = "item", name = "advanced-circuit", amount = 1},
-	{type = "item", name = "microchip", amount = 5},
-	{type = "fluid", name = "sulfuric-acid", amount = 5},
+Recipe.make{
+	copy = "plastic-bar",
+	recipe = "silicon",
+	ingredients = {
+		{"sand", 2},
+		{"sulfuric-acid", 10},
+	},
+	resultCount = 1,
+	clearIcons = true,
+	allow_decomposition = true,
+	allow_as_intermediate = true,
+	clearSubgroup = true,
 }
-RECIPE["processing-unit"].allow_decomposition = true
--- Make blue circuit recipe slower, as compromise for making it cheaper in materials.
-RECIPE["processing-unit"].energy_required = 5
+Tech.addRecipeToTech("silicon", "advanced-circuit", 2)
+Tech.addRecipeToTech("silicon", "solar-energy", 1)
 
--- Create item for electronic components.
-local electronicComponents = copy(ITEM["advanced-circuit"])
-electronicComponents.name = "electronic-components"
-electronicComponents.subgroup = "complex-circuit-intermediates"
-electronicComponents.order = "001"
-electronicComponents.stack_size = 200
-Icon.set(electronicComponents, "LSA/circuit-chains/electronic-components/1")
-Icon.variants(electronicComponents, "LSA/circuit-chains/electronic-components/%", 3)
-extend{electronicComponents}
-
--- Create a recipe for electronic components.
--- 1 carbon + 1 plastic + 1 sand + 1 copper wire -> 2 electronic components
-local electronicComponentsRecipe = copy(RECIPE["plastic-bar"])
-electronicComponentsRecipe.name = "electronic-components"
-electronicComponentsRecipe.ingredients = {
-	{type = "item", name = "carbon", amount = 1},
-	{type = "item", name = "plastic-bar", amount = 1},
-	{type = "item", name = "wiring", amount = 1},
+Recipe.make{
+	copy = "plastic-bar",
+	recipe = "doped-wafer",
+	ingredients = {"silicon", "carbon"},
+	resultCount = 1,
+	clearIcons = true,
+	clearSubgroup = true,
+	allow_decomposition = true,
+	allow_as_intermediate = true,
+	category = "chemistry-or-electronics",
+	time = 20,
 }
-electronicComponentsRecipe.results = {
-	{type = "item", name = "electronic-components", amount = 5},
-}
-electronicComponentsRecipe.subgroup = nil
-Icon.clear(electronicComponentsRecipe)
-electronicComponentsRecipe.category = "electronics"
-electronicComponentsRecipe.energy_required = 5
-electronicComponentsRecipe.allow_decomposition = true
-electronicComponentsRecipe.allow_as_intermediate = true
-extend{electronicComponentsRecipe}
-Tech.addRecipeToTech("electronic-components", "advanced-circuit", 1)
+Tech.addRecipeToTech("doped-wafer", "advanced-circuit", 3)
 
--- Edit recipe for red circuits.
--- 1 circuit board + 2 copper cable + 2 electronic components -> 1 red circuit
--- Originally 2 green circuits + 2 plastic bar + 4 copper cable.
-RECIPE["advanced-circuit"].ingredients = {
-	{type = "item", name = "electronic-circuit", amount = 1},
-	{type = "item", name = "wiring", amount = 1},
-	{type = "item", name = "electronic-components", amount = 2},
+Recipe.make{
+	copy = "plastic-bar",
+	recipe = "microchip",
+	ingredients = {"doped-wafer", "wiring", "plastic-bar"},
+	resultCount = 20,
+	clearIcons = true,
+	category = "electronics",
+	time = 10,
+	allow_decomposition = true,
+	allow_as_intermediate = true,
 }
-RECIPE["advanced-circuit"].energy_required = 2.5
+Tech.addRecipeToTech("microchip", "advanced-circuit", 4)
 
--- Move circuits to complex-circuit-intermediates subgroup.
-ITEM["electronic-circuit"].subgroup = "complex-circuit-intermediates"
-ITEM["advanced-circuit"].subgroup = "complex-circuit-intermediates"
-ITEM["processing-unit"].subgroup = "complex-circuit-intermediates"
-
--- Edit green circuit ingredients.
-RECIPE["electronic-circuit"].ingredients = {
-	{type = "item", name = "circuit-board", amount = 1},
-	{type = "item", name = "wiring", amount = 2},
-	{type = "item", name = "carbon", amount = 1},
+-- Edit recipes for green/red/blue circuits.
+Recipe.edit{
+	recipe = "electronic-circuit",
+	ingredients = {
+		{"circuit-board", 1},
+		{"electronic-components", 2},
+	},
+	time = .5,
 }
+Recipe.edit{
+	recipe = "advanced-circuit",
+	ingredients = { -- Originally 2 green circuits + 2 plastic bar + 4 copper cable.
+		{"electronic-circuit", 1},
+		{"electronic-components", 5},
+		{"microchip", 1},
+	},
+	time = 1,
+}
+Recipe.edit{
+	recipe = "processing-unit",
+	ingredients = { -- Original recipe was 5 sulfuric acid + 2 red circuit + 20 green circuit.
+		{"advanced-circuit", 1},
+		{"microchip", 5},
+		{"sulfuric-acid", 5},
+	},
+	time = 5,
+	allow_decomposition = true,
+}
+
+Gen.order({
+	silicon,
+	dopedWafer,
+	microchip,
+	ITEM["electronic-circuit"],
+	ITEM["advanced-circuit"],
+	ITEM["processing-unit"],
+}, "complex-circuit-intermediates")

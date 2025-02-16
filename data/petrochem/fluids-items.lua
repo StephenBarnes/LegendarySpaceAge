@@ -63,15 +63,6 @@ pitchItem.order = "b[chemistry]-b[plastic-bar]-1"
 Item.copySoundsTo("plastic-bar", pitchItem)
 extend{pitchItem}
 
--- Create resin item.
-local resinItem = copy(ITEM["plastic-bar"])
-resinItem.name = "resin"
-Icon.set(resinItem, "LSA/resin/resin-1")
-Icon.variants(resinItem, "LSA/resin/resin-%", 3)
-resinItem.subgroup = "resin"
-Item.copySoundsTo(RAW.capsule["bioflux"], resinItem)
-extend{resinItem}
-
 ------------------------------------------------------------------------
 
 -- Fix ordering of the existing petro fractions.
