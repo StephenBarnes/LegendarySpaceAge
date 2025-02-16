@@ -6,49 +6,52 @@ mechanismItem.name = "mechanism"
 Icon.set(mechanismItem, "LSA/intermediate-factors/mechanism")
 extend{mechanismItem}
 
--- Create recipe: 8 machine parts + 1 frame -> 1 mechanism
-local basicRecipe = copy(RECIPE["iron-gear-wheel"])
-basicRecipe.name = "mechanism-from-basic"
-basicRecipe.ingredients = {
-	{type = "item", name = "iron-gear-wheel", amount = 5},
-	{type = "item", name = "frame", amount = 1},
+-- Create recipe: 5 machine parts + 1 frame -> 1 mechanism
+local basicRecipe = Recipe.make{
+	copy = "iron-gear-wheel",
+	recipe = "mechanism-from-basic",
+	ingredients = {
+		{"iron-gear-wheel", 5},
+		{"frame", 1},
+	},
+	results = {{"mechanism", 1}},
+	enabled = true,
+	time = 5,
+	category = "crafting",
+	allow_as_intermediate = true,
+	icons = {"mechanism", "iron-gear-wheel"},
 }
-basicRecipe.results = {{type = "item", name = "mechanism", amount = 1}}
-basicRecipe.enabled = true
-basicRecipe.energy_required = 5
-basicRecipe.category = "crafting"
-Icon.set(basicRecipe, {"mechanism", "iron-gear-wheel"})
-basicRecipe.allow_as_intermediate = true
-extend{basicRecipe}
 
--- Create recipe: 4 advanced parts + 1 frame -> 1 mechanism
-local advancedRecipe = copy(basicRecipe)
-advancedRecipe.name = "mechanism-from-advanced"
-advancedRecipe.ingredients = {
-	{type = "item", name = "advanced-parts", amount = 2},
-	{type = "item", name = "frame", amount = 1},
+-- Create recipe: 2 advanced parts + 1 frame -> 2 mechanism
+local advancedRecipe = Recipe.make{
+	copy = basicRecipe,
+	recipe = "mechanism-from-advanced",
+	ingredients = {
+		{"advanced-parts", 2},
+		{"frame", 1},
+	},
+	results = {{"mechanism", 2}},
+	allow_as_intermediate = false,
+	enabled = false,
+	time = 2.5,
+	icons = {"mechanism", "advanced-parts"},
 }
-advancedRecipe.results = {{type = "item", name = "mechanism", amount = 2}}
-advancedRecipe.energy_required = 2.5
-Icon.set(advancedRecipe, {"mechanism", "advanced-parts"})
-advancedRecipe.allow_as_intermediate = false
-advancedRecipe.enabled = false
-extend{advancedRecipe}
 Tech.addRecipeToTech("mechanism-from-advanced", "electric-engine")
 
 -- Create recipe: 1 frame + 3 appendage -> 1 mechanism
-local appendageRecipe = copy(basicRecipe)
-appendageRecipe.name = "mechanism-from-appendage"
-appendageRecipe.ingredients = {
-	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "appendage", amount = 3},
+local appendageRecipe = Recipe.make{
+	copy = basicRecipe,
+	recipe = "mechanism-from-appendage",
+	ingredients = {
+		{"frame", 1},
+		{"appendage", 3},
+	},
+	results = {{"mechanism", 1}},
+	allow_as_intermediate = false,
+	enabled = false,
+	time = 5,
+	icons = {"mechanism", "appendage"},
 }
-appendageRecipe.energy_required = 5
-Icon.set(appendageRecipe, {"mechanism", "appendage"})
-appendageRecipe.allow_as_intermediate = false
-appendageRecipe.enabled = false
-appendageRecipe.category = "crafting"
-extend{appendageRecipe}
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?
