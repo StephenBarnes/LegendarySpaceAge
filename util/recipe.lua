@@ -132,29 +132,34 @@ local function interpretIngredientsOrResults(list, ingredientOrResult)
 end
 
 --[[Shorthand to adjust a recipe. Table `a` can contain:
-	.recipe (prototype)
-	.name (alternative to .recipe)
+	.recipe (prototype or name)
 	.ingredients (in short format)
 	.results (in short format)
 	.resultCount (alternative to .results, assumes single result with the same name as the recipe)
 	.time
-	.category, .enabled, .auto_recycle (just copied over)
+	.icons and .iconArrangement (for icons - see the icon util file)
+	.variants and .variantCount and .variantAdditional (for variant pictures - see the icon util file)
+	.category, .enabled, .auto_recycle, .subgroup, .order (just copied over)
+	.localised_name, .localised_description, .main_product, .allow_decomposition (just copied over)
 ]]
-local possibleArgs = Table.listToSet{"recipe", "name", "ingredients", "results", "resultCount", "time", "category", "copy", "enabled", "auto_recycle"}
+local possibleArgs = Table.listToSet{"recipe", "ingredients", "results", "resultCount", "time",
+	"icons", "iconArrangement", "variants", "variantCount", "variantAdditional",
+	"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition",
+}
 Recipe.edit = function(a)
 	for k, _ in pairs(a) do
 		assert(possibleArgs[k], "Recipe.edit: unknown field "..k)
 	end
 	local recipe = nil
-	if a.recipe ~= nil then
-		assert(a.name == nil, "Recipe.edit: recipe and name cannot both be provided; arguments: ".. serpent.block(a))
+	assert(a.recipe ~= nil, "Recipe.edit: recipe proto or name is required, arguments: ".. serpent.block(a))
+	if type(a.recipe) == "string" then
+		recipe = RECIPE[a.recipe]
+		assert(recipe ~= nil, "Recipe.edit: recipe not found; arguments: ".. serpent.block(a))
+	else
 		recipe = a.recipe
+		assert(type(recipe) == "table", "Recipe.edit: recipe must be a table or a string; arguments: ".. serpent.block(a))
+		assert(recipe.type == "recipe", "Recipe.edit: recipe must be a recipe prototype; arguments: ".. serpent.block(a))
 	end
-	if a.name ~= nil then
-		assert(a.recipe == nil, "Recipe.edit: recipe and name cannot both be provided; arguments: ".. serpent.block(a))
-		recipe = RECIPE[a.name]
-	end
-	assert(recipe ~= nil, "Recipe.edit: no recipe or name provided, or recipe not found; arguments: ".. serpent.block(a))
 
 	if a.ingredients ~= nil then
 		recipe.ingredients = interpretIngredientsOrResults(a.ingredients, "ingredients")
@@ -172,23 +177,32 @@ Recipe.edit = function(a)
 	end
 
 	-- Some fields just get copied over.
-	for _, field in pairs{"category", "enabled", "auto_recycle"} do
+	for _, field in pairs{"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition"} do
 		if a[field] ~= nil then
 			recipe[field] = a[field]
 		end
+	end
+
+	if a.icons ~= nil then
+		Icon.set(recipe, a.icons, a.iconArrangement)
+	end
+	if a.variants ~= nil then
+		Icon.variants(recipe, a.variants, a.variantCount, a.variantAdditional)
 	end
 end
 
 -- Create a recipe by copying an existing recipe and adjusting it. The a.copy field is the recipe to copy, rest of args the same as Recipe.edit.
 Recipe.make = function(a)
-	assert(a.copy ~= nil, "Recipe.make: copy is required")
-	assert(a.name ~= nil, "Recipe.make: name is required")
-	assert(a.recipe == nil, "Recipe.make: recipe is not allowed")
+	assert(a.copy ~= nil, "Recipe.make: copy is required, arguments: ".. serpent.block(a))
+	assert(a.recipe ~= nil, "Recipe.make: recipe name is required, arguments: ".. serpent.block(a))
+	assert(type(a.recipe) == "string", "Recipe.make: recipe name must be a string, arguments: ".. serpent.block(a))
 	assert(RECIPE[a.copy] ~= nil, "Recipe.make: asked to copy non-existent recipe "..a.copy)
 	local recipe = copy(RECIPE[a.copy])
-	recipe.name = a.name
-	a.name = nil
+	assert(recipe ~= nil, "Recipe.make: copy failed")
+	---@diagnostic disable-next-line: assign-type-mismatch
+	recipe.name = a.recipe
 	a.recipe = recipe
+	a.copy = nil
 	Recipe.edit(a)
 	extend{recipe}
 	return RECIPE[recipe.name]

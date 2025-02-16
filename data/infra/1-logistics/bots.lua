@@ -1,7 +1,7 @@
 -- TODO recipes for bots, etc.
 
 Recipe.edit{
-	name = "roboport",
+	recipe = "roboport",
 	ingredients = {
 		{"frame", 2},
 		{"panel", 10},

@@ -24,23 +24,24 @@ cementFluid.visualization_color = {.43, .43, .43, 1}
 extend{cementFluid}
 
 -- Create recipe for cement.
-local cementRecipe = copy(RECIPE["lubricant"])
-cementRecipe.name = "make-cement" -- Must be different from cement so it appears in factoriopedia correctly.
-cementRecipe.localised_name = {"fluid-name.cement"}
-cementRecipe.subgroup = "terrain"
-cementRecipe.order = "e" -- After other stuff, since it'll be moved to the end in factoriopedia anyway because it's a recipe.
-cementRecipe.ingredients = {
-	{type = "item", name = "stone", amount = 2},
-	{type = "item", name = "sand", amount = 2},
-	{type = "fluid", name = "water", amount = 40},
+Recipe.make{
+	copy = "lubricant",
+	recipe = "make-cement", -- Must be different from cement so it appears in factoriopedia correctly.
+	subgroup = "terrain",
+	order = "e", -- After other stuff, since it'll be moved to the end in factoriopedia anyway because it's a recipe.
+	localised_name = {"fluid-name.cement"},
+	ingredients = {
+		{"stone", 2},
+		{"sand", 2},
+		{"water", 50},
+	},
+	results = {
+		{"cement", 50},
+	},
+	main_product = "cement",
+	category = "crafting-with-fluid",
+	allow_decomposition = true,
 }
-cementRecipe.results = {
-	{type = "fluid", name = "cement", amount = 40},
-}
-cementRecipe.main_product = "cement"
-cementRecipe.category = "crafting-with-fluid"
-cementRecipe.allow_decomposition = true
-extend{cementRecipe}
 
 -- Create tech for cement and brick structure.
 local tech = copy(TECH.concrete)
@@ -64,31 +65,38 @@ Icon.set(tech, "LSA/fluids/cement-tech")
 extend{tech}
 
 -- Adjust recipes for concrete and refined concrete.
-RECIPE["concrete"].ingredients = {
-	{type = "fluid", name = "cement", amount = 100},
-	{type = "item", name = "stone", amount = 8},
-	{type = "item", name = "iron-stick", amount = 4},
+Recipe.edit{
+	recipe = "concrete",
+	ingredients = {
+		{"cement", 100},
+		{"stone", 10},
+		{"iron-stick", 5},
+	}
 }
-RECIPE["refined-concrete"].ingredients = {
-	{type = "fluid", name = "cement", amount = 100},
-	{type = "item", name = "resin", amount = 2},
-	{type = "item", name = "ash", amount = 2},
-	{type = "item", name = "steel-plate", amount = 4},
+Recipe.edit{
+	recipe = "refined-concrete",
+	ingredients = {
+		{"cement", 100},
+		{"resin", 2},
+		{"ash", 2},
+		{"steel-plate", 5},
+	}
 }
 
 -- Create sulfur concrete recipes for foundries.
--- TODO
-local concreteCastingRecipe = copy(RECIPE["concrete-from-molten-iron"])
-concreteCastingRecipe.name = "sulfur-concrete"
-concreteCastingRecipe.ingredients = {
-	{type = "item", name = "sulfur", amount = 30},
-	{type = "item", name = "sand", amount = 30},
+Recipe.make{
+	copy = "concrete-from-molten-iron",
+	recipe = "sulfur-concrete",
+	ingredients = {
+		{"sulfur", 30},
+		{"sand", 30},
+	},
+	results = {
+		{"concrete", 20},
+	},
+	icons = {"concrete", "LSA/vulcanus/sulfur-cast"},
+	iconArrangement = "casting",
 }
-concreteCastingRecipe.results = {
-	{type = "item", name = "concrete", amount = 20},
-}
-Icon.set(concreteCastingRecipe, {"concrete", "LSA/vulcanus/sulfur-cast"}, "casting")
-extend{concreteCastingRecipe}
 
 local refinedConcreteCastingRecipe = copy(RECIPE["concrete-from-molten-iron"])
 refinedConcreteCastingRecipe.name = "sulfur-refined-concrete"

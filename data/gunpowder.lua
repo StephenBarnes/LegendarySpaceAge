@@ -14,7 +14,7 @@ extend{gunpowderItem}
 -- 2 carbon + 1 sulfur + 1 sand -> 2 gunpowder
 Recipe.make{
 	copy = "firearm-magazine",
-	name = "gunpowder",
+	recipe = "gunpowder",
 	ingredients = {
 		{"carbon", 2},
 		{"sulfur", 1},
