@@ -110,14 +110,17 @@ extend{
 
 ------------------------------------------------------------------------
 
-local function setSubgroupInOrder(subgroup, kind, things, prefix)
+local function setSubgroupInOrder(subgroup, kinds, things, prefix)
 	if prefix == nil then prefix = "" end
-	for i, thing in pairs(things) do
-		if RAW[kind][thing] == nil then
-			error("Not found: RAW[" .. kind .. "][" .. thing .. "]")
+	if type(kinds) == "string" then kinds = {kinds} end
+	for _, kind in pairs(kinds) do
+		for i, thing in pairs(things) do
+			if RAW[kind][thing] == nil then
+				error("Not found: RAW[" .. kind .. "][" .. thing .. "]")
+			end
+			RAW[kind][thing].subgroup = subgroup
+			RAW[kind][thing].order = prefix .. string.format("%02d", i)
 		end
-		RAW[kind][thing].subgroup = subgroup
-		RAW[kind][thing].order = prefix .. string.format("%02d", i)
 	end
 end
 
@@ -186,18 +189,15 @@ RAW["space-platform-starter-pack"]["space-platform-starter-pack"].subgroup = "sp
 
 -- Move fluid logistics stuff to that row.
 local fluidLogistics = {"pipe", "pipe-to-ground", "pump", "offshore-pump"}
-setSubgroupInOrder("fluid-logistics", "item", fluidLogistics)
-setSubgroupInOrder("fluid-logistics", "recipe", fluidLogistics)
+setSubgroupInOrder("fluid-logistics", {"item", "recipe"}, fluidLogistics)
 
 -- Move post-Nauvis science packs to the right row.
 local sciencePacks = {"metallurgic-science-pack", "agricultural-science-pack", "electromagnetic-science-pack", "nuclear-science-pack", "cryogenic-science-pack", "promethium-science-pack"}
-setSubgroupInOrder("alien-science-packs", "tool", sciencePacks)
-setSubgroupInOrder("alien-science-packs", "recipe", sciencePacks)
+setSubgroupInOrder("alien-science-packs", {"tool", "recipe"}, sciencePacks)
 
 -- Move rocket parts to space section.
 local rocketParts = {"rocket-part", "assembled-rocket-part"}
-setSubgroupInOrder("space-interactors", "item", rocketParts, "e")
-setSubgroupInOrder("space-interactors", "recipe", rocketParts, "e")
+setSubgroupInOrder("space-interactors", {"item", "recipe"}, rocketParts, "e")
 
 -- Populate Gleba subgroups: spoilage-and-nutrients, yumako-and-jellynut, slipstacks-and-boompuffs.
 setSubgroupInOrder("spoilage-and-nutrients", "item", {"spoilage", "sugar", "nutrients"})
@@ -212,29 +212,20 @@ setSubgroupInOrder("fulgora-agriculture", "recipe", {"electrophage-cultivation",
 
 -- Reorganize production tab.
 local electricityRelated = {"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector"}
-setSubgroupInOrder("electricity-related", "item", electricityRelated)
-setSubgroupInOrder("electricity-related", "recipe", electricityRelated)
+setSubgroupInOrder("electricity-related", {"item", "recipe"}, electricityRelated)
 local planetarySpecial = {"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge", "nuclear-reactor", "cryogenic-plant", "fusion-reactor", "fusion-generator"}
-setSubgroupInOrder("planetary-special", "item", planetarySpecial)
-setSubgroupInOrder("planetary-special", "recipe", planetarySpecial)
+setSubgroupInOrder("planetary-special", {"item", "recipe"}, planetarySpecial)
 local chemicalProcessing = {"chemical-plant", "oil-refinery", "gasifier", "fluid-fuelled-gasifier"}
-setSubgroupInOrder("chemical-processing", "item", chemicalProcessing)
-setSubgroupInOrder("chemical-processing", "recipe", chemicalProcessing)
+setSubgroupInOrder("chemical-processing", {"item", "recipe"}, chemicalProcessing)
 ITEM["agricultural-tower"].subgroup = "extraction-machine"
 ITEM["agricultural-tower"].order = "c"
 local labs = {"lab", "glebalab", "biolab"}
-setSubgroupInOrder("labs", "item", labs)
-setSubgroupInOrder("labs", "recipe", labs)
-setSubgroupInOrder("labs", "lab", labs)
+setSubgroupInOrder("labs", {"item", "recipe", "lab"}, labs)
 
 -- Move splitters to inserter row, and burner inserter to end of inserter row
 local splitters = {"splitter", "fast-splitter", "express-splitter", "turbo-splitter"}
 local inserters = {"inserter", "long-handed-inserter", "fast-inserter", "bulk-inserter", "stack-inserter", "burner-inserter"}
-setSubgroupInOrder("inserter", "item", inserters, "b")
-setSubgroupInOrder("inserter", "recipe", inserters, "b")
-setSubgroupInOrder("inserter", "inserter", inserters, "b")
-setSubgroupInOrder("inserter", "item", splitters, "a")
-setSubgroupInOrder("inserter", "recipe", splitters, "a")
-setSubgroupInOrder("inserter", "splitter", splitters, "a")
+setSubgroupInOrder("inserter", {"item", "recipe", "inserter"}, inserters, "b")
+setSubgroupInOrder("inserter", {"item", "recipe", "splitter"}, splitters, "a")
 
 -- TODO separate bottom logistics row into two lines, one with paving and one with the rest.

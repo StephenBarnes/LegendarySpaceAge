@@ -28,7 +28,7 @@ local cementRecipe = copy(RECIPE["lubricant"])
 cementRecipe.name = "make-cement" -- Must be different from cement so it appears in factoriopedia correctly.
 cementRecipe.localised_name = {"fluid-name.cement"}
 cementRecipe.subgroup = "terrain"
-cementRecipe.order = "b[a]"
+cementRecipe.order = "e" -- After other stuff, since it'll be moved to the end in factoriopedia anyway because it's a recipe.
 cementRecipe.ingredients = {
 	{type = "item", name = "stone", amount = 2},
 	{type = "item", name = "sand", amount = 2},

@@ -1,5 +1,5 @@
 require("util.globals")
-require("util.data-globals")
+require("util.globals-data")
 
 -- Files that create things needed in subsequent files.
 require("data.crafting-categories")

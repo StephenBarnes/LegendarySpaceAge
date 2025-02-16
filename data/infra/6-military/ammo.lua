@@ -1,5 +1,5 @@
 -- Shotgun shells: I want these to be very cheap in raw materials.
-Recipe.adjust{
+Recipe.edit{
 	name = "shotgun-shell",
 	ingredients = {
 		{"iron-plate", 1},
@@ -10,7 +10,7 @@ Recipe.adjust{
 	time = 2,
 }
 -- Piercing shotgun shells: These are pretty late-game, so could make them complex.
-Recipe.adjust{
+Recipe.edit{
 	name = "piercing-shotgun-shell",
 	ingredients = {
 		{"copper-plate", 5},
@@ -20,7 +20,7 @@ Recipe.adjust{
 	time = 5,
 }
 
-Recipe.adjust{
+Recipe.edit{
 	name = "firearm-magazine",
 	ingredients = {
 		{"iron-plate", 5},
@@ -28,7 +28,7 @@ Recipe.adjust{
 	},
 	time = 2,
 }
-Recipe.adjust{ -- I want these to be more complex to produce than yellow mags, but not significantly more expensive, in fact cheaper with foundries.
+Recipe.edit{ -- I want these to be more complex to produce than yellow mags, but not significantly more expensive, in fact cheaper with foundries.
 	name = "piercing-rounds-magazine",
 	ingredients = {
 		{"steel-plate", 1},
@@ -39,7 +39,7 @@ Recipe.adjust{ -- I want these to be more complex to produce than yellow mags, b
 	time = 5,
 }
 
-Recipe.adjust{
+Recipe.edit{
 	name = "flamethrower-ammo",
 	ingredients = {
 		{"fluid-fitting", 1},

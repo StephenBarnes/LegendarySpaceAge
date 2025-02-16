@@ -43,6 +43,7 @@ local function runFullDebug()
 	-- TODO check all science packs required by techs are available before those techs.
 	-- TODO check that when a recipe is unlocked, at least one machine that can craft it has been unlocked.
 	-- TODO add more checks here
+	-- TODO check that there are no items and fluids with the same name.
 	return success
 end
 

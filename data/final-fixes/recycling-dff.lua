@@ -23,7 +23,7 @@ end
 ---@param result1 data.ItemProductPrototype
 ---@param result2 data.ItemProductPrototype
 local function combineResults(result1, result2)
-	-- Combines results's numbers. Doesn't work in all edge cases. It doesn't really need to work in all cases, since it's just for recycling, which is not a big mechanic now that quality is gone.
+	-- Combines results's numbers. Doesn't work in all edge cases. TODO check if any of those edge cases happen in the game.
 	local comboMin = 0
 	local comboMax = 0
 	for _, r in pairs({result1, result2}) do

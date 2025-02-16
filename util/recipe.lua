@@ -86,9 +86,12 @@ Recipe.copyIngredients = function(fromRecipeName, toRecipeName)
 end
 
 local function nameToItemOrFluid(name)
-	if FLUID[name] ~= nil then
+	if FLUID[name] ~= nil then -- Note this assumes the fluid has already been created. If not, need to give type="fluid" in the ingredient list.
+		assert(not ITEM[name], "nameToItemOrFluid: "..name.." is both an item and a fluid")
+			-- Note this doesn't catch the case where we create an item with the same name as a fluid later.
 		return "fluid"
 	else
+		-- Here we could assert that the item proto exists in some item subtype. But it might not be created yet. And if it's not created, we'll get an error anyway.
 		return "item"
 	end
 end
@@ -111,7 +114,7 @@ local function interpretIngredientsOrResults(list, ingredientOrResult)
 		elseif type(thing) == "table" then
 			local name = thing[1] or thing.name or thing.item or thing.fluid
 			local amount = thing[2] or thing.amount or thing.count
-			local itemOrFluid = nameToItemOrFluid(name)
+			local itemOrFluid = thing.type or nameToItemOrFluid(name)
 			local newElement = {type = itemOrFluid, name = name, amount = amount}
 			for k, v in pairs(thing) do
 				if k ~= "name" and k ~= "amount" and k ~= 1 and k ~= 2 then
@@ -138,27 +141,27 @@ end
 	.category, .enabled, .auto_recycle (just copied over)
 ]]
 local possibleArgs = Table.listToSet{"recipe", "name", "ingredients", "results", "resultCount", "time", "category", "copy", "enabled", "auto_recycle"}
-Recipe.adjust = function(a)
+Recipe.edit = function(a)
 	for k, _ in pairs(a) do
-		assert(possibleArgs[k], "Recipe.adjust: unknown field "..k)
+		assert(possibleArgs[k], "Recipe.edit: unknown field "..k)
 	end
 	local recipe = nil
 	if a.recipe ~= nil then
-		assert(a.name == nil, "Recipe.adjust: recipe and name cannot both be provided; arguments: ".. serpent.block(a))
+		assert(a.name == nil, "Recipe.edit: recipe and name cannot both be provided; arguments: ".. serpent.block(a))
 		recipe = a.recipe
 	end
 	if a.name ~= nil then
-		assert(a.recipe == nil, "Recipe.adjust: recipe and name cannot both be provided; arguments: ".. serpent.block(a))
+		assert(a.recipe == nil, "Recipe.edit: recipe and name cannot both be provided; arguments: ".. serpent.block(a))
 		recipe = RECIPE[a.name]
 	end
-	assert(recipe ~= nil, "Recipe.adjust: no recipe or name provided, or recipe not found; arguments: ".. serpent.block(a))
+	assert(recipe ~= nil, "Recipe.edit: no recipe or name provided, or recipe not found; arguments: ".. serpent.block(a))
 
 	if a.ingredients ~= nil then
-		recipe.ingredients = interpretIngredientsOrResults(a.ingredients)
+		recipe.ingredients = interpretIngredientsOrResults(a.ingredients, "ingredients")
 	end
 	if a.results ~= nil then
 		assert(a.resultCount == nil)
-		recipe.results = interpretIngredientsOrResults(a.results)
+		recipe.results = interpretIngredientsOrResults(a.results, "results")
 	end
 	if a.resultCount ~= nil then
 		assert(a.results == nil)
@@ -176,7 +179,7 @@ Recipe.adjust = function(a)
 	end
 end
 
--- Create a recipe by copying an existing recipe and adjusting it. The a.copy field is the recipe to copy, rest of args the same as Recipe.adjust.
+-- Create a recipe by copying an existing recipe and adjusting it. The a.copy field is the recipe to copy, rest of args the same as Recipe.edit.
 Recipe.make = function(a)
 	assert(a.copy ~= nil, "Recipe.make: copy is required")
 	assert(a.name ~= nil, "Recipe.make: name is required")
@@ -186,7 +189,7 @@ Recipe.make = function(a)
 	recipe.name = a.name
 	a.name = nil
 	a.recipe = recipe
-	Recipe.adjust(a)
+	Recipe.edit(a)
 	extend{recipe}
 	return RECIPE[recipe.name]
 end

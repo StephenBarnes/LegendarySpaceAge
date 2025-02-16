@@ -64,4 +64,15 @@ Item.hide = function(itemName)
 	item.hidden = true
 	item.hidden_in_factoriopedia = true
 end
+
+-- Check whether an item exists, checking all item subtypes.
+Item.exists = function(itemName)
+	for itemType, _ in pairs(defines.prototypes.item) do
+		if RAW[itemType] ~= nil and RAW[itemType][itemName] ~= nil then
+			return true
+		end
+	end
+	return false
+end
+
 return Item
