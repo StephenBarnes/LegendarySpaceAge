@@ -18,6 +18,7 @@ local VERBOSE = true
 local unlockedAtStart = Table.listToSet{
 	"planet:nauvis",
 	"nauvis:item:wood",
+	"nauvis:item:resin",
 	"nauvis:item:tree-seed",
 	"nauvis:item:iron-ore",
 	"nauvis:item:copper-ore",
@@ -27,7 +28,7 @@ local unlockedAtStart = Table.listToSet{
 }
 -- Add all recipes that are enabled at start.
 for recipeName, recipe in pairs(RECIPE) do
-	if (recipe.enabled == true or recipe.enabled == nil) and recipe.category ~= "recycling" then
+	if (recipe.enabled == nil or recipe.enabled) and (not recipe.hidden) and (recipe.category ~= "recycling") then
 		unlockedAtStart["recipe:"..recipeName] = true
 	end
 end
@@ -85,6 +86,11 @@ end
 -- Add implicit unlocks for rocket silos and rocket parts on other planets.
 for _, planetName in pairs{"aquilo", "vulcanus", "fulgora", "gleba"} do
 	table.insert(implicitUnlocks, {{planetName..":item:rocket-silo", planetName..":item:rocket-part"}, {"exports:"..planetName}})
+end
+-- Add implicit unlocks for wood/coal to ash, except on Fulgora and in space.
+for _, planetName in pairs{"nauvis", "vulcanus", "gleba", "aquilo"} do
+	table.insert(implicitUnlocks, {{planetName..":item:wood", planetName..":item:char-furnace"}, {planetName..":item:ash"}})
+	table.insert(implicitUnlocks, {{planetName..":item:coal", planetName..":item:char-furnace"}, {planetName..":item:ash"}})
 end
 -- Add implicit unlocks for minable rocks, on each planet.
 -- TODO

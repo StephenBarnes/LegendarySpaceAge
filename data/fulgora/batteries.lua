@@ -456,5 +456,5 @@ extractionRecipe.allow_decomposition = false
 extractionRecipe.allow_productivity = false
 Icon.set(extractionRecipe, {"sulfuric-acid", "battery"})
 extend{extractionRecipe}
-Tech.addRecipeToTech("extract-sulfuric-acid-from-battery", "battery")
+Tech.addRecipeToTech("extract-sulfuric-acid-from-battery", "recycling")
 -- TODO rather add a fluid output to recyclers, and make recycling recipes also output fluids for some recipes - batteries, holmium batteries, maybe others?

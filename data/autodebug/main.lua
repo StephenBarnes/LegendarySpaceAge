@@ -1,16 +1,17 @@
 -- This file will run automated checks. For example, checking that when the player unlocks a recipe, he has the ingredients available.
 
--- This controls whether to actually run the full debug.
-local RUN_FULL_DEBUG = false
+-- This controls whether to actually run the full debug. Takes like 30 seconds to run, mostly because of getTechPrePostSets().
+local RUN_FULL_DEBUG = true
 
-local toposortTechs = require("data.autodebug.toposort-techs")
-local getThingToRecipes = require("data.autodebug.get-thing-to-recipes")
-local getRecipeToPlanets = require("data.autodebug.get-recipe-to-planets")
-local getTechPrePostSets = require("data.autodebug.get-tech-pre-post-sets")
+local toposortTechs = require("toposort-techs")
+local getThingToRecipes = require("get-thing-to-recipes")
+local getRecipeToPlanets = require("get-recipe-to-planets")
+local getTechPrePostSets = require("get-tech-pre-post-sets")
 
-local checkAllRecipesHaveMachines = require("data.autodebug.check-recipes-have-machines")
-local checkAllRecipesHaveIngredients = require("data.autodebug.check-recipes-have-ingredients")
-local checkRoundNumbers = require("data.autodebug.check-round-numbers")
+local checkAllRecipesHaveMachines = require("check-recipes-have-machines")
+local checkAllRecipesHaveIngredients = require("check-recipes-have-ingredients")
+local checkRoundNumbers = require("check-round-numbers")
+local checkRecipesObtainable = require("check-recipes-obtainable")
 
 local function runFullDebug()
 	log("Legendary Space Age: running full progression debug.")
@@ -40,10 +41,13 @@ local function runFullDebug()
 	success = checkAllRecipesHaveMachines() and success
 	success = checkAllRecipesHaveIngredients(toposortedTechs, postTechSets) and success
 	success = checkRoundNumbers() and success
+	success = checkRecipesObtainable() and success
 	-- TODO check all science packs required by techs are available before those techs.
 	-- TODO check that when a recipe is unlocked, at least one machine that can craft it has been unlocked.
-	-- TODO add more checks here
 	-- TODO check that there are no items and fluids with the same name.
+	-- TODO check that all non-hidden enabled techs have all prerequisites non-hidden and enabled.
+	-- TODO check that there are no items or fluids (or item subtypes) that have no recipes producing them. Except for things only mined, etc.
+	-- TODO add more checks here
 	return success
 end
 

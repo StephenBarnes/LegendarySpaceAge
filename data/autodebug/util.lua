@@ -15,11 +15,11 @@ Export.getCanonicalName = function(ingredientOrResult, planet)
 end
 
 Export.allPlanets = {}
-for planetName, _ in pairs(RAW.planet) do
-	Export.allPlanets[planetName] = true
+for planetName, planet in pairs(RAW.planet) do
+	if not planet.hidden_in_factoriopedia and not planet.hidden then -- This check catches special surfaces like "apprentice-foundry" and "thruster-control-behavior".
+		Export.allPlanets[planetName] = true
+	end
 end
 Export.allPlanets.space = true
--- Ignore special surfaces.
-Export.allPlanets["thruster-control-behavior"] = nil
 
 return Export

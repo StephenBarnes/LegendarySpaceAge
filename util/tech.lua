@@ -139,10 +139,6 @@ Tech.addEffect = function(tech, effect, index)
 	end
 end
 
-Tech.getPrereqList = function(tech)
-	return tech.prerequisites or Table.maybeGet(tech.normal, "prerequisites") or Table.maybeGet(tech.expensive, "prerequisites") or {}
-end
-
 Tech.getRecursivePrereqs = function(rootTechId)
 	-- Given a tech ID, returns a set of tech IDs that are prereqs of that tech, or prereqs of its prereqs, etc.
 	-- Returns nil if there's an error.
@@ -150,7 +146,7 @@ Tech.getRecursivePrereqs = function(rootTechId)
 	local foundPrereqs = {} -- Set of prereqs, mapped to true.
 	local frontier = {} -- List of tech IDs to check.
 	-- Add initial prereqs
-	for _, prereq in pairs(Tech.getPrereqList(TECH[rootTechId])) do
+	for _, prereq in pairs(TECH[rootTechId].prerequisites or {}) do
 		table.insert(frontier, prereq)
 	end
 	local loops = 0 -- To prevent infinite loops.
@@ -167,7 +163,7 @@ Tech.getRecursivePrereqs = function(rootTechId)
 		end
 		if not foundPrereqs[techId] then
 			foundPrereqs[techId] = true
-			for _, prereq in pairs(Tech.getPrereqList(TECH[techId])) do
+			for _, prereq in pairs(TECH[techId].prerequisites or {}) do
 				table.insert(frontier, prereq)
 			end
 		end
@@ -233,11 +229,26 @@ end
 
 Tech.copyUnit = function(fromTechId, toTechId)
 	local fromTech = TECH[fromTechId]
-	if fromTech == nil then
-		log("ERROR: Couldn't find tech "..fromTechId.." to copy unit from.")
-		return
-	end
+	assert(fromTech ~= nil, "Couldn't find tech "..fromTechId.." to copy unit from.")
+	assert(fromTech.unit ~= nil, "Tech "..fromTechId.." has no unit.")
 	Tech.setUnit(toTechId, fromTech.unit)
+end
+
+Tech.removeSciencePack = function(sciencePackName, techName)
+	local tech = TECH[techName]
+	assert(tech ~= nil, "Couldn't find tech "..techName.." to remove science pack "..sciencePackName.." from.")
+	assert(tech.unit ~= nil, "Tech "..techName.." has no unit.")
+	local newIngredients = {}
+	local found = false
+	for _, ingredient in pairs(tech.unit.ingredients) do
+		if ingredient[1] == sciencePackName then
+			found = true
+		else
+			table.insert(newIngredients, ingredient)
+		end
+	end
+	assert(found, "Science pack "..sciencePackName.." not found in tech "..techName..".")
+	tech.unit.ingredients = newIngredients
 end
 
 return Tech

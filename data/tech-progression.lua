@@ -2,7 +2,7 @@
 
 -- Early techs: basic electricity, then electronics, then personal burner generator, then red science, then automation, then filtration, then steam power.
 Tech.setPrereqs("electronics", {"basic-electricity", "char", "glass"})
-Tech.setPrereqs("automation", {"electronics", "lamp"})
+Tech.setPrereqs("automation", {"electronics"})
 Tech.addTechDependency("filtration-lake-water", "steam-power")
 TECH["steam-power"].unit = nil
 TECH["steam-power"].research_trigger = {
@@ -257,8 +257,13 @@ Tech.addTechDependency("advanced-circuit", "processing-unit")
 -- Remove steel prereq from some techs that don't really need steel, due to our factor intermediate system.
 Tech.removePrereq("electric-energy-distribution-1", "steel-processing")
 Tech.removePrereq("engine", "steel-processing") -- TODO change engine recipe
-Tech.removePrereq("heavy-armor", "steel-processing") -- TODO change heavy armor recipe
 Tech.removePrereq("solar-energy", "steel-processing") -- TODO change solar panel recipe
+
+-- TODO elevated rail tech should be a prereq for Vulcanus and Fulgora. So it should also not require purple science. Also it shouldn't have a concrete prereq either.
+Tech.addTechDependency("elevated-rail", "planet-discovery-vulcanus")
+Tech.addTechDependency("elevated-rail", "planet-discovery-fulgora")
+Tech.removeSciencePack("production-science-pack", "elevated-rail")
+Tech.setPrereqs("elevated-rail", {"railway"})
 
 -- TODO other science packs.
 

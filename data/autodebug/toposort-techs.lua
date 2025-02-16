@@ -21,11 +21,7 @@ local function toposortTechs()
 			if not beenAdded then
 				local allPrereqsAdded = true
 				local tech = TECH[techName]
-				local prereqs = Tech.getPrereqList(tech)
-				if prereqs == nil or type(prereqs) ~= "table" then
-					log("ERROR: Tech "..techName.." has no prereqs.")
-					return nil
-				end
+				local prereqs = tech.prerequisites or {}
 				for _, prereqName in pairs(prereqs or {}) do
 					if not techsAdded[prereqName] then
 						allPrereqsAdded = false
@@ -46,8 +42,7 @@ local function toposortTechs()
 			for techName, beenAdded in pairs(techsAdded) do
 				if not beenAdded then
 					local tech = TECH[techName]
-					local prereqs = Tech.getPrereqList(tech)
-					log("Could not reach tech "..techName..", which has prereqs: "..serpent.line(prereqs))
+					log("Could not reach tech "..techName..", which has prereqs: "..serpent.line(tech.prerequisites or "nil"))
 				end
 			end
 			log("Techs added: "..serpent.block(techsAdded))
