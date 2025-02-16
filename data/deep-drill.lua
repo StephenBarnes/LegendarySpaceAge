@@ -144,17 +144,18 @@ item.weight = 1e7 -- Too heavy for rocket.
 item.order = "a[items]-d"
 extend{item}
 
-local recipe = copy(RECIPE["electric-mining-drill"])
-recipe.name = "deep-drill"
-recipe.results = {{type = "item", name = "deep-drill", amount = 1}}
-recipe.energy_required = 30
-recipe.ingredients = {
-	{type = "item", name = "frame", amount = 40},
-	{type = "item", name = "structure", amount = 40},
-	{type = "item", name = "mechanism", amount = 20},
-	{type = "item", name = "electric-engine-unit", amount = 20},
+Recipe.make{
+	copy = "electric-mining-drill",
+	recipe = "deep-drill",
+	resultCount = 1,
+	time = 30,
+	ingredients = {
+		{"frame", 40},
+		{"structure", 40},
+		{"mechanism", 20},
+		{"electric-engine-unit", 20},
+	},
 }
-extend{recipe}
 
 -- Create recipe category for deep drilling. Can only be performed in deep drills. Recipe is auto-assigned by control script.
 extend{{

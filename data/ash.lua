@@ -21,29 +21,30 @@ item.order = "0"
 extend{item}
 
 -- Create recipe for reprocessing ash.
--- 4 ash + 5 water + 5 sulfuric acid -> 2 carbon + 1 sand + 20% sulfur + 20% 1 iron ore + 20% 1 copper ore.
-local ashRecipe = copy(RECIPE["rocket-fuel"])
-ashRecipe.name = "ash-reprocessing"
-ashRecipe.ingredients = {
-	{type = "item", name = "ash", amount = 5},
-	{type = "fluid", name = "sulfuric-acid", amount = 5},
-	{type = "fluid", name = "water", amount = 10},
+-- 5 ash + 5 water + 10 sulfuric acid -> 2 carbon + 1 sand + 20% sulfur + 20% 1 iron ore + 20% 1 copper ore.
+Recipe.make{
+	copy = "rocket-fuel",
+	recipe = "ash-reprocessing",
+	ingredients = {
+		{"ash", 5},
+		{"sulfuric-acid", 5},
+		{"water", 10},
+	},
+	results = {
+		{"carbon", 1},
+		{"sand", 1},
+		{"sulfur", 1, probability = 0.2},
+		{"iron-ore", 1, probability = 0.2},
+		{"copper-ore", 1, probability = 0.2},
+	},
+	allow_decomposition = false,
+	allow_as_intermediate = false,
+	main_product = "carbon",
+	icons = {"carbon", "ash"},
+	category = "chemistry",
+	time = 2,
+	enabled = false,
 }
-ashRecipe.results = {
-	{type = "item", name = "carbon", amount = 1},
-	{type = "item", name = "sand", amount = 1},
-	{type = "item", name = "sulfur", amount = 1, probability = 0.2},
-	{type = "item", name = "iron-ore", amount = 1, probability = 0.2},
-	{type = "item", name = "copper-ore", amount = 1, probability = 0.2},
-}
-ashRecipe.allow_decomposition = false
-ashRecipe.allow_as_intermediate = false
-ashRecipe.main_product = "carbon"
-Icon.set(ashRecipe, {"carbon", "ash"})
-ashRecipe.category = "chemistry"
-ashRecipe.energy_required = 2
-ashRecipe.enabled = false
-extend{ashRecipe}
 
 -- Create tech for ash reprocessing.
 local tech = copy(TECH["lamp"])

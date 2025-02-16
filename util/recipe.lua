@@ -113,11 +113,14 @@ local function interpretIngredientsOrResults(list, ingredientOrResult)
 			table.insert(result, {type = nameToItemOrFluid(thing), name = thing, amount = 1})
 		elseif type(thing) == "table" then
 			local name = thing[1] or thing.name or thing.item or thing.fluid
-			local amount = thing[2] or thing.amount or thing.count
+			local amount = thing[2] or thing.amount or nil
+			if thing["amount_min"] ~= nil or thing["amount_max"] ~= nil then
+				assert(amount == nil)
+			end
 			local itemOrFluid = thing.type or nameToItemOrFluid(name)
 			local newElement = {type = itemOrFluid, name = name, amount = amount}
 			for k, v in pairs(thing) do
-				if k ~= "name" and k ~= "amount" and k ~= 1 and k ~= 2 then
+				if k ~= "name" and k ~= "amount" and k ~= 1 and k ~= 2 and k ~= "type" then
 					assert(recognizedIngredientOrResultFields[ingredientOrResult][itemOrFluid][k],
 						"interpretIngredientsOrResults: unknown field "..k.." for "..itemOrFluid.." in "..ingredientOrResult)
 					newElement[k] = v
@@ -139,12 +142,13 @@ end
 	.time
 	.icons and .iconArrangement (for icons - see the icon util file)
 	.variants and .variantCount and .variantAdditional (for variant pictures - see the icon util file)
-	.category, .enabled, .auto_recycle, .subgroup, .order (just copied over)
-	.localised_name, .localised_description, .main_product, .allow_decomposition (just copied over)
+	.clearIcons (clear existing icons)
+	.specialIcons (for explicitly specified multiple icons)
+	.category, .enabled, .auto_recycle, .subgroup, .order, .localised_name, .localised_description, .main_product, .allow_decomposition, .allow_as_intermediate, .show_amount_in_title, .crafting_machine_tint (just copied over)
 ]]
 local possibleArgs = Table.listToSet{"recipe", "ingredients", "results", "resultCount", "time",
-	"icons", "iconArrangement", "variants", "variantCount", "variantAdditional",
-	"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition",
+	"icons", "iconArrangement", "variants", "variantCount", "variantAdditional", "clearIcons", "specialIcons",
+	"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint",
 }
 Recipe.edit = function(a)
 	for k, _ in pairs(a) do
@@ -175,14 +179,22 @@ Recipe.edit = function(a)
 	if a.time ~= nil then
 		recipe.energy_required = a.time
 	end
+	if a.specialIcons ~= nil then
+		recipe.icons = a.specialIcons
+		recipe.icon =  nil
+	end
 
 	-- Some fields just get copied over.
-	for _, field in pairs{"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition"} do
+	for _, field in pairs{"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint"} do
 		if a[field] ~= nil then
 			recipe[field] = a[field]
 		end
 	end
 
+	if a.clearIcons ~= nil then
+		assert(a.icons == nil, "Recipe.edit: clearIcons and icons cannot both be set")
+		Icon.clear(recipe)
+	end
 	if a.icons ~= nil then
 		Icon.set(recipe, a.icons, a.iconArrangement)
 	end

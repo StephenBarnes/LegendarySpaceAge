@@ -52,22 +52,25 @@ charFurnaceRecipeCategory.name = "char-furnace"
 extend{charFurnaceRecipeCategory}
 
 -- Create recipe.
-local charFurnaceRecipe = copy(RECIPE["stone-furnace"])
-charFurnaceRecipe.name = "char-furnace"
-charFurnaceRecipe.results = {{type = "item", name = "char-furnace", amount = 1}}
-extend{charFurnaceRecipe}
+Recipe.make{
+	copy = "stone-furnace",
+	recipe = "char-furnace",
+	results = {"char-furnace"},
+	clearIcons = true,
+}
 
 -- Create recipe for char/carbon.
-local charRecipe = copy(RECIPE["rocket-fuel"])
-charRecipe.name = "char-carbon"
-charRecipe.results = {{type = "item", name = "carbon", amount = 1}}
-charRecipe.ingredients = {}
-charRecipe.energy_required = 5
-charRecipe.enabled = false
-charRecipe.subgroup = "raw-material"
-charRecipe.category = "char-furnace"
-Icon.set(charRecipe, {"carbon", "char-furnace"})
-extend{charRecipe}
+Recipe.make{
+	copy = "rocket-fuel",
+	recipe = "char-carbon",
+	results = {"carbon"},
+	ingredients = {},
+	time = 5,
+	enabled = false,
+	subgroup = "raw-material",
+	category = "char-furnace",
+	icons = {"carbon", "char-furnace"},
+}
 
 -- Create tech called "char", unlocking the furnace and recipe.
 local charTech = copy(TECH["automation"])

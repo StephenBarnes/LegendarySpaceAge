@@ -1,11 +1,11 @@
-RECIPE["submachine-gun"].ingredients = {
-	{type = "item", name = "mechanism", amount = 1},
-	{type = "item", name = "frame", amount = 1},
+Recipe.edit{
+	recipe = "submachine-gun",
+	ingredients = {"mechanism", "frame"},
 }
 
-RECIPE["shotgun"].ingredients = {
-	{type = "item", name = "mechanism", amount = 1},
-	{type = "item", name = "frame", amount = 1},
+Recipe.edit{
+	recipe = "shotgun",
+	ingredients = {"mechanism", "frame"},
 }
 
 -- Hide the pistol.

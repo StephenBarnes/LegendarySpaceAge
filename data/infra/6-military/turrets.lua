@@ -1,51 +1,63 @@
--- Recipes.
-RECIPE["gun-turret"].ingredients = {
-	{type = "item", name = "mechanism", amount = 2},
-	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "sensor", amount = 1},
+Recipe.edit{
+	recipe = "gun-turret",
+	ingredients = {
+		{"mechanism", 2},
+		{"frame", 1},
+		{"sensor", 1},
+	},
+	time = 5,
 }
-RECIPE["gun-turret"].energy_required = 5
-
-RECIPE["laser-turret"].ingredients = {
-	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "mechanism", amount = 1},
-	{type = "item", name = "sensor", amount = 5},
-	{type = "item", name = "advanced-circuit", amount = 5},
-	{type = "item", name = "battery", amount = 10},
+Recipe.edit{
+	recipe = "laser-turret",
+	ingredients = {
+		{"frame", 1},
+		{"mechanism", 1},
+		{"sensor", 5},
+		{"advanced-circuit", 5},
+		{"battery", 10},
+	},
+	time = 10,
 }
-RECIPE["laser-turret"].energy_required = 10
-
-RECIPE["flamethrower-turret"].ingredients = {
-	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "mechanism", amount = 1},
-	{type = "item", name = "sensor", amount = 1},
-	{type = "item", name = "fluid-fitting", amount = 5},
-	{type = "item", name = "shielding", amount = 2},
+Recipe.edit{
+	recipe = "flamethrower-turret",
+	ingredients = {
+		{"frame", 1},
+		{"mechanism", 1},
+		{"sensor", 1},
+		{"fluid-fitting", 5},
+		{"shielding", 2},
+	},
+	time = 10,
 }
-RECIPE["flamethrower-turret"].energy_required = 10
-
-RECIPE["artillery-turret"].ingredients = {
-	{type = "item", name = "structure", amount = 50},
-	{type = "item", name = "electric-engine-unit", amount = 10},
-	{type = "item", name = "shielding", amount = 50},
+Recipe.edit{
+	recipe = "artillery-turret",
+	ingredients = {
+		{"structure", 50},
+		{"electric-engine-unit", 10},
+		{"shielding", 50},
+	},
+	time = 25,
 }
-RECIPE["artillery-turret"].energy_required = 25
-
-RECIPE["rocket-turret"].ingredients = {
-	{type = "item", name = "frame", amount = 2},
-	{type = "item", name = "rocket-launcher", amount = 2},
-	{type = "item", name = "sensor", amount = 5},
-	{type = "item", name = "electric-engine-unit", amount = 1},
+Recipe.edit{
+	recipe = "rocket-turret",
+	ingredients = {
+		{"frame", 2},
+		{"rocket-launcher", 2},
+		{"sensor", 5},
+		{"electric-engine-unit", 1},
+	},
+	time = 10,
 }
-RECIPE["rocket-turret"].energy_required = 10
-
-RECIPE["tesla-turret"].ingredients = {
-	{type = "item", name = "processing-unit", amount = 20},
-	{type = "item", name = "supercapacitor", amount = 50},
-	{type = "fluid", name = "electrolyte", amount = 500},
-	{type = "item", name = "electric-engine-unit", amount = 5},
+Recipe.edit{
+	recipe = "tesla-turret",
+	ingredients = {
+		{"processing-unit", 20},
+		{"supercapacitor", 50},
+		{"electrolyte", 500},
+		{"electric-engine-unit", 5},
+	},
+	time = 25,
 }
-RECIPE["tesla-turret"].energy_required = 25
 
 -- TODO railgun turret - first need to implement Aquilo stuff.
 

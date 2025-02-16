@@ -1,26 +1,34 @@
-RECIPE["stone-wall"].ingredients = {
-	{type = "item", name = "structure", amount = 1},
+Recipe.edit{
+	recipe = "stone-wall",
+	ingredients = {
+		{"structure", 1},
+	},
 }
-
-RECIPE["gate"].ingredients = {
-	{type = "item", name = "shielding", amount = 4},
-	{type = "item", name = "sensor", amount = 1},
-	{type = "item", name = "mechanism", amount = 1},
+Recipe.edit{
+	recipe = "gate",
+	ingredients = {
+		{"shielding", 4},
+		{"sensor", 1},
+		{"mechanism", 1},
+	},
+	resultCount = 4,
 }
-RECIPE["gate"].results = {{type = "item", name = "gate", amount = 4}}
-
-RECIPE["radar"].ingredients = {
-	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "panel", amount = 2},
-	{type = "item", name = "sensor", amount = 1},
-	{type = "item", name = "mechanism", amount = 1},
+Recipe.edit{
+	recipe = "radar",
+	ingredients = {
+		{"frame", 1},
+		{"panel", 2},
+		{"sensor", 1},
+		{"mechanism", 1},
+	},
 }
-
-RECIPE["land-mine"].ingredients = {
-	{type = "item", name = "panel", amount = 1},
-	{type = "item", name = "gunpowder", amount = 1},
-	{type = "item", name = "explosives", amount = 1},
+Recipe.edit{
+	recipe = "land-mine",
+	ingredients = {
+		{"panel", 1},
+		{"gunpowder", 1},
+		{"explosives", 1},
+	},
+	resultCount = 2,
+	time = 1,
 }
-RECIPE["land-mine"].results = {{type = "item", name = "land-mine", amount = 2}}
-RECIPE["land-mine"].energy_required = 1
-

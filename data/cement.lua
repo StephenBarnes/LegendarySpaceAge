@@ -98,19 +98,22 @@ Recipe.make{
 	iconArrangement = "casting",
 }
 
-local refinedConcreteCastingRecipe = copy(RECIPE["concrete-from-molten-iron"])
-refinedConcreteCastingRecipe.name = "sulfur-refined-concrete"
-refinedConcreteCastingRecipe.ingredients = {
-	{type = "item", name = "sulfur", amount = 30},
-	{type = "item", name = "sand", amount = 30},
-	{type = "item", name = "resin", amount = 1},
-	{type = "fluid", name = "molten-steel", amount = 40},
+-- Create sulfur refined concrete recipe for foundries.
+Recipe.make{
+	copy = "concrete-from-molten-iron",
+	recipe = "sulfur-refined-concrete",
+	ingredients = {
+		{"sulfur", 30},
+		{"sand", 30},
+		{"resin", 1},
+		{"molten-steel", 40, type="fluid"},
+	},
+	results = {
+		{"refined-concrete", 20},
+	},
+	icons = {"refined-concrete", "LSA/vulcanus/sulfur-cast"},
+	iconArrangement = "casting",
 }
-refinedConcreteCastingRecipe.results = {
-	{type = "item", name = "refined-concrete", amount = 20},
-}
-Icon.set(refinedConcreteCastingRecipe, {"refined-concrete", "LSA/vulcanus/sulfur-cast"}, "casting")
-extend{refinedConcreteCastingRecipe}
 
 -- Hide old concrete foundry recipe completely.
 Recipe.hide("concrete-from-molten-iron")

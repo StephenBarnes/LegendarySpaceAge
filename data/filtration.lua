@@ -97,80 +97,74 @@ Tech.addTechDependency("filtration-fulgoran-sludge", "holmium-processing")
 TECH["holmium-processing"].research_trigger.count = 10
 
 -- Create recipe to make filters.
-local filterRecipe = copy(RECIPE["iron-gear-wheel"])
-filterRecipe.name = "filter"
-filterRecipe.ingredients = {
-	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "carbon", amount = 1},
+Recipe.make{
+	copy = "iron-gear-wheel",
+	recipe = "filter",
+	ingredients = {"frame", "carbon"},
+	results = {"filter"},
+	enabled = false,
+	auto_recycle = true,
 }
-filterRecipe.results = {
-	{type = "item", name = "filter", amount = 1},
-}
-filterRecipe.enabled = false
-filterRecipe.auto_recycle = true
-extend{filterRecipe}
 
 -- Create recipe to clean filters.
-local cleanFilterRecipe = copy(RECIPE["iron-gear-wheel"])
-cleanFilterRecipe.name = "clean-filter"
-cleanFilterRecipe.ingredients = {
-	{type = "item", name = "spent-filter", amount = 1},
-	{type = "fluid", name = "water", amount = 20},
+Recipe.make{
+	copy = "iron-gear-wheel",
+	recipe = "clean-filter",
+	ingredients = {
+		{"spent-filter", 1},
+		{"water", 20},
+	},
+	results = {{"filter", 1, probability = .9}},
+	enabled = false,
+	category = "chemistry-or-crafting-with-fluid",
+	subgroup = "filtration",
+	order = "03",
+	show_amount_in_title = false,
+	time = 1,
+	auto_recycle = false,
+	specialIcons = {
+		{icon = "__LegendarySpaceAge__/graphics/filtration/spent-filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
+		{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.34, mipmap_count = 4, shift = {0, -4}},
+	},
+	crafting_machine_tint = {
+		primary = FLUID.water.base_color,
+		secondary = FLUID.water.flow_color,
+		tertiary = FLUID.water.visualization_color,
+	},
 }
-cleanFilterRecipe.results = {
-	{type = "item", name = "filter", amount = 1, probability = .9},
-}
-cleanFilterRecipe.category = "chemistry-or-crafting-with-fluid"
-cleanFilterRecipe.icon = nil
-cleanFilterRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/filtration/spent-filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
-	{icon = "__base__/graphics/icons/fluid/water.png", icon_size = 64, scale = 0.34, mipmap_count = 4, shift = {0, -4}},
-}
-cleanFilterRecipe.enabled = false
-cleanFilterRecipe.subgroup = "filtration"
-cleanFilterRecipe.order = "03"
-cleanFilterRecipe.show_amount_in_title = false
-cleanFilterRecipe.energy_required = 1
-cleanFilterRecipe.crafting_machine_tint = {
-	primary = FLUID.water.base_color,
-	secondary = FLUID.water.flow_color,
-	tertiary = FLUID.water.visualization_color,
-}
-cleanFilterRecipe.auto_recycle = false
-extend{cleanFilterRecipe}
 
 -- Create recipe to filter lake water.
-local filterLakeWaterRecipe = copy(RECIPE["iron-gear-wheel"])
-filterLakeWaterRecipe.name = "filter-lake-water"
-filterLakeWaterRecipe.ingredients = {
-	{type = "item", name = "filter", amount = 1},
-	{type = "fluid", name = "lake-water", amount = 1200},
+Recipe.make{
+	copy = "iron-gear-wheel",
+	recipe = "filter-lake-water",
+	ingredients = {
+		{"filter", 1},
+		{"lake-water", 1200, type = "fluid"},
+	},
+	results = {
+		{"water", 1000},
+		{"spent-filter", 1},
+		{"sand", amount_min = 0, amount_max = 4, show_details_in_recipe_tooltip = false},
+		{"stone", amount_min = 0, amount_max = 2, show_details_in_recipe_tooltip = false},
+		{"niter", amount_min = 0, amount_max = 2, show_details_in_recipe_tooltip = false},
+		{"raw-fish", 1, probability = .01, show_details_in_recipe_tooltip = false},
+	},
+	main_product = "water",
+	category = "chemistry-or-crafting-with-fluid",
+	subgroup = "filtration",
+	order = "04",
+	specialIcons = {
+		{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
+		{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
+	},
+	enabled = false,
+	time = 5,
+	crafting_machine_tint = {
+		primary = {.015, .631, .682},
+		secondary = FLUID.water.base_color,
+		tertiary = FLUID.water.flow_color,
+	},
 }
-filterLakeWaterRecipe.results = {
-	{type = "fluid", name = "water", amount = 1000},
-	{type = "item", name = "spent-filter", amount = 1},
-	{type = "item", name = "sand", amount_min = 0, amount_max = 4, show_details_in_recipe_tooltip = false},
-	{type = "item", name = "stone", amount_min = 0, amount_max = 2, show_details_in_recipe_tooltip = false},
-	{type = "item", name = "niter", amount_min = 0, amount_max = 2, show_details_in_recipe_tooltip = false},
-	{type = "item", name = "raw-fish", amount = 1, probability = .01, show_details_in_recipe_tooltip = false},
-}
-filterLakeWaterRecipe.main_product = "water"
-filterLakeWaterRecipe.category = "chemistry-or-crafting-with-fluid"
-filterLakeWaterRecipe.subgroup = "filtration"
-filterLakeWaterRecipe.order = "04"
-filterLakeWaterRecipe.icon = nil
-filterLakeWaterRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
-	{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
-}
-filterLakeWaterRecipe.enabled = false
-filterLakeWaterRecipe.energy_required = 5
-filterLakeWaterRecipe.crafting_machine_tint = {
-	primary = {.015, .631, .682},
-	secondary = FLUID.water.base_color,
-	tertiary = FLUID.water.flow_color,
-}
-extend{filterLakeWaterRecipe}
 
 -- Create lake water fluid.
 local lakeWaterFluid = copy(FLUID.water)
