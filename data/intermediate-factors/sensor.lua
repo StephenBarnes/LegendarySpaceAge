@@ -35,7 +35,7 @@ redCircuitRecipe.enabled = false
 Icon.set(redCircuitRecipe, {"sensor", "advanced-circuit"})
 redCircuitRecipe.allow_as_intermediate = false
 redCircuitRecipe.allow_decomposition = false
-redCircuitRecipe.energy_required = 2.5
+redCircuitRecipe.energy_required = 2
 extend{redCircuitRecipe}
 Tech.addRecipeToTech("sensor-from-red-circuit", "advanced-circuit")
 

@@ -57,4 +57,5 @@ Gen.order({
 	mechanismItem,
 	basicRecipe,
 	advancedRecipe,
+	appendageRecipe,
 }, "mechanism")

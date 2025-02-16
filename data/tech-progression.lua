@@ -1,7 +1,7 @@
 -- This file adjusts the overall progression, by moving techs around, changing dependencies, moving recipes between techs, etc.
 
 -- Early techs: basic electricity, then electronics, then personal burner generator, then red science, then automation, then filtration, then steam power.
-Tech.setPrereqs("electronics", {"basic-electricity", "char"})
+Tech.setPrereqs("electronics", {"basic-electricity", "char", "glass"})
 Tech.setPrereqs("automation", {"electronics", "lamp"})
 Tech.addTechDependency("filtration-lake-water", "steam-power")
 TECH["steam-power"].unit = nil

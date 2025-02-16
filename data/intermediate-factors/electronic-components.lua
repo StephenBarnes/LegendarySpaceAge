@@ -21,7 +21,6 @@ local basicRecipe = Recipe.make{
 Tech.addRecipeToTech("components-basic", "electronics", 2)
 
 -- Create recipe: 1 carbon + 1 plastic + 1 wiring -> 5 electronic components
--- This is partly meant for Gleba - can't easily get a lot of glass.
 local recipeFromPlastic = Recipe.make{
 	copy = basicRecipe,
 	recipe = "components-from-plastic",

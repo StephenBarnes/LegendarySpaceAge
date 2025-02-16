@@ -24,7 +24,9 @@ Circuit recipes:
 		1 red circuit + 5 microchips + 5 sulfuric acid -> 1 blue circuit
 ]]
 
+
 -- Create new intermediate items: silicon, doped wafers, microchips.
+
 local silicon = copy(ITEM["plastic-bar"])
 silicon.name = "silicon"
 Icon.set(silicon, "LSA/circuit-chains/silicon")
@@ -59,7 +61,7 @@ Recipe.make{
 	allow_as_intermediate = true,
 	clearSubgroup = true,
 }
-Tech.addRecipeToTech("silicon", "advanced-circuit", 2)
+Tech.addRecipeToTech("silicon", "advanced-circuit", 1)
 Tech.addRecipeToTech("silicon", "solar-energy", 1)
 
 Recipe.make{
@@ -74,7 +76,7 @@ Recipe.make{
 	category = "chemistry-or-electronics",
 	time = 20,
 }
-Tech.addRecipeToTech("doped-wafer", "advanced-circuit", 3)
+Tech.addRecipeToTech("doped-wafer", "advanced-circuit", 2)
 
 Recipe.make{
 	copy = "plastic-bar",
@@ -87,7 +89,8 @@ Recipe.make{
 	allow_decomposition = true,
 	allow_as_intermediate = true,
 }
-Tech.addRecipeToTech("microchip", "advanced-circuit", 4)
+Tech.addRecipeToTech("microchip", "advanced-circuit", 3)
+
 
 -- Edit recipes for green/red/blue circuits.
 Recipe.edit{
@@ -117,6 +120,7 @@ Recipe.edit{
 	time = 5,
 	allow_decomposition = true,
 }
+
 
 Gen.order({
 	silicon,
