@@ -52,6 +52,7 @@ glassBatchRecipe.results = {{type="item", name="glass-batch", amount=1}}
 glassBatchRecipe.category = "crafting"
 glassBatchRecipe.subgroup = "raw-material"
 glassBatchRecipe.enabled = false
+glassBatchRecipe.energy_required = 0.5
 glassBatchRecipe.allow_decomposition = true
 glassBatchRecipe.allow_as_intermediate = true
 glassBatchRecipe.auto_recycle = true

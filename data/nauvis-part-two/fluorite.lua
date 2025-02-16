@@ -11,6 +11,9 @@ extend{item}
 -- Create hydrofluoric acid fluid
 local hydrofluoricAcid = copy(FLUID["fluoroketone-cold"])
 hydrofluoricAcid.name = "hydrofluoric-acid"
+hydrofluoricAcid.auto_barrel = true -- Apparently people ship it regularly IRL.
+-- TODO maybe a different icon?
+-- TODO maybe different fluid flow colors.
 extend{hydrofluoricAcid}
 
 -- In chem plant: 1 fluorite + 1 sulfuric acid + 1 water -> 1 hydrofluoric acid + 1 stone (representing gypsum)
@@ -30,3 +33,10 @@ local hydrofluoricAcidRecipe = Recipe.make{
 	clearIcons = true,
 }
 hydrofluoricAcidRecipe.subgroup = nil
+
+-- Add fluorite to uranium patches.
+-- Going to make Nauvis have lots of uranium but not enough fluorite to process it all; and then Aquilo is the opposite, lots of fluorine but not enough uranium. So the player gains a lot by shipping uranium or fluorine between the two.
+RAW.resource["uranium-ore"].minable.results = {
+	{type = "item", name = "uranium-ore", amount = 1},
+	{type = "item", name = "fluorite", amount = 1, probability = 0.05},
+}

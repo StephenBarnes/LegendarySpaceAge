@@ -74,10 +74,11 @@ RAW["fluid-wagon"]["fluid-wagon"].hidden_in_factoriopedia = true
 
 -- TODO look through fluids, maybe add more barrelling recipes. Eg for Gleban slime.
 -- Allow more fluids in barrels and tanks.
-FLUID.steam.auto_barrel = true
+FLUID["steam"].auto_barrel = false -- In the real world, seems it's hard to do without constant heating and some amount of condensation.
 FLUID["holmium-solution"].auto_barrel = true
 FLUID["electrolyte"].auto_barrel = true
 FLUID["thruster-oxidizer"].auto_barrel = true
 FLUID["thruster-fuel"].auto_barrel = true
 FLUID["ammonia"].auto_barrel = true
-FLUID["fluorine"].auto_barrel = true
+FLUID["fluorine"].auto_barrel = true -- It's not that hard to barrel and transport IRL, so I'll allow it.
+FLUID["lithium-brine"].auto_barrel = true

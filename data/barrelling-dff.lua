@@ -1,10 +1,12 @@
+-- This file changes some barrelling recipes to use gas tanks instead of barrels.
+-- Note that I renamed the tank to just "pressurized tank" so it's not necessarily for gases, more just for anything that doesn't seem right in an ordinary barrel.
 
 local BARREL_FLUID_AMOUNT = 50 -- 50 fluid units per barrel, from vanilla.
 local GAS_TANK_FLUID_AMOUNT = 50 -- Considered having it higher, but doesn't really make sense realistically, and gas tanks aren't more expensive than barrels.
 
 -- Edit some of the barrelling recipes to instead have the icon for the gas tank, and use gas tank ingredient and result.
 local gases = Table.listToSet{
-	"steam",
+	--"steam", -- Not barrellable.
 	"petroleum-gas",
 	"dry-gas",
 	"natural-gas",
@@ -12,7 +14,12 @@ local gases = Table.listToSet{
 	"thruster-oxidizer",
 	"thruster-fuel",
 	"ammonia",
+
 	"fluorine",
+	"hydrofluoric-acid",
+	"nitrogen-gas",
+	"liquid-nitrogen",
+	"refrigerant",
 }
 local function makeGasTankIcons(fluid, straight)
 	local kind = straight and "straight" or "angled"
@@ -49,9 +56,13 @@ local function makeGasTankFillingIcons(fluid, straight, shift)
 end
 for gasName, _ in pairs(gases) do
 	local barrelRecipe = RECIPE[gasName.."-barrel"]
+	assert(barrelRecipe ~= nil, "barrel recipe for "..gasName.." not found")
 	local emptyRecipe = RECIPE["empty-"..gasName.."-barrel"]
+	assert(emptyRecipe ~= nil, "empty recipe for "..gasName.." not found")
 	local item = ITEM[gasName.."-barrel"]
+	assert(item ~= nil, "item for "..gasName.." not found")
 	local fluid = FLUID[gasName]
+	assert(fluid ~= nil, "fluid for "..gasName.." not found")
 
 	-- Edit filling recipe's ingredients
 	for _, ingredient in pairs(barrelRecipe.ingredients) do

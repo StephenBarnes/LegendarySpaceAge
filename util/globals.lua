@@ -7,9 +7,24 @@ TECH = RAW.technology
 ASSEMBLER = RAW["assembling-machine"]
 FURNACE = RAW.furnace
 
--- Global aliases
-copy = table.deepcopy
-extend = function(x) data:extend(x) end
+-- Global function aliases with some asserts.
+copy = function(x)
+	assert(x ~= nil)
+	assert(type(x) == "table")
+	return table.deepcopy(x)
+end
+extend = function(x)
+	assert(x ~= nil)
+	assert(type(x) == "table")
+	assert(#x > 0)
+	for _, v in pairs(x) do
+		assert(v ~= nil)
+		assert(type(v) == "table")
+	end
+	data:extend(x)
+end
+
+-- Global constants.
 SECONDS = 60
 MINUTES = 60 * SECONDS
 HOURS = 60 * MINUTES
