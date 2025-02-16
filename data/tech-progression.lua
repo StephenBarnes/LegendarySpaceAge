@@ -2,7 +2,7 @@
 
 -- Early techs: basic electricity, then electronics, then personal burner generator, then red science, then automation, then filtration, then steam power.
 Tech.setPrereqs("electronics", {"basic-electricity", "char", "glass"})
-Tech.setPrereqs("automation", {"electronics"})
+Tech.setPrereqs("automation", {"electronics", "lamp"})
 Tech.addTechDependency("filtration-lake-water", "steam-power")
 TECH["steam-power"].unit = nil
 TECH["steam-power"].research_trigger = {
@@ -106,7 +106,7 @@ TECH["advanced-oil-processing"].unit = {
 -- Remove the lubricant tech. Rather merge it with actuator / advanced robotics.
 Tech.hideTech("lubricant")
 Tech.replacePrereq("logistics-3", "lubricant", "electric-engine")
-Tech.replacePrereq("electric-engine", "lubricant", "chemical-science-pack")
+Tech.setPrereqs("electric-engine", {"processing-unit"})
 Tech.addRecipeToTech("lubricant", "electric-engine", 1)
 
 -- Rubber-2 is needed to make rubber from petrochems on Vulcanus and Fulgora.
@@ -123,7 +123,7 @@ Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
 -- Fast inserter should go after actuator.
 Tech.setPrereqs("fast-inserter", {"electric-engine"})
 TECH["fast-inserter"].unit = {count = 50, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
-Tech.setPrereqs("bulk-inserter", {"fast-inserter", "processing-unit"})
+Tech.setPrereqs("bulk-inserter", {"fast-inserter"})
 TECH["bulk-inserter"].unit = {count = 100, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 -- Inserter capacity techs should need more advanced science packs, since they're now after chem science.
 TECH["inserter-capacity-bonus-1"].unit = {count = 150, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
@@ -137,7 +137,7 @@ Tech.addRecipeToTech("selector-combinator", "circuit-network", 4)
 Tech.setPrereqs("automation-2", {"advanced-circuit"})
 Tech.addTechDependency("advanced-circuit", "laser")
 -- Add blue circuit dependency to assembling machine 3, so we can add it as ingredient.
-Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine", "processing-unit", "speed-module"})
+Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine", "speed-module"})
 
 -- Heating tower tech should be early.
 Tech.setPrereqs("heating-tower", {"steel-processing", "logistic-science-pack"})
@@ -170,7 +170,7 @@ Tech.addRecipeToTech("poison-capsule", "military-2")
 Tech.addRecipeToTech("slowdown-capsule", "military-2")
 Tech.removeRecipeFromTech("grenade", "military-2")
 Tech.addRecipeToTech("grenade", "military-3")
-TECH["military-2"].prerequisites = {"military", "oil-processing", "ammonia-1", "steel-processing"}
+TECH["military-2"].prerequisites = {"military", "advanced-oil-processing", "ammonia-1", "steel-processing"}
 Tech.addTechDependency("explosives", "military-3")
 Tech.removePrereq("military-4", "explosives")
 Tech.setPrereqs("stronger-explosives-1", {"military-3"})
@@ -183,7 +183,6 @@ TECH["gun-turret"].prerequisites = {"military"}
 
 -- Add red circuit prereq to techs that need red circuits as ingredients.
 Tech.addTechDependency("advanced-circuit", "electric-energy-distribution-2")
-Tech.addTechDependency("advanced-circuit", "electric-engine")
 Tech.addTechDependency("advanced-circuit", "advanced-material-processing-2")
 Tech.addTechDependency("advanced-circuit", "tank")
 

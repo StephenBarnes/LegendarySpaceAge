@@ -2,7 +2,7 @@ require("assemblers")
 require("furnaces")
 require("modules")
 require("labs")
-require("mining-drills")
+require("miners-etc")
 require("boilers-heaters")
 
 -- Repair pack
@@ -19,11 +19,3 @@ RECIPE["solar-panel"].ingredients = {
 	{type = "item", name = "frame", amount = 2},
 }
 RECIPE["solar-panel"].energy_required = 10
-
--- Ag tower - shouldn't need steel, or landfill, or spoilage. Moving it to early game on Nauvis.
-RECIPE["agricultural-tower"].ingredients = {
-	{type="item", name="mechanism", amount=2},
-	{type="item", name="frame", amount=1},
-	{type="item", name="sensor", amount=1},
-	{type="item", name="glass", amount=4},
-}

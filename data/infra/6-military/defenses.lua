@@ -16,16 +16,17 @@ Recipe.edit{
 Recipe.edit{
 	recipe = "radar",
 	ingredients = {
-		{"frame", 1},
-		{"panel", 2},
-		{"sensor", 1},
+		{"frame", 5},
+		{"panel", 5},
+		{"sensor", 5},
 		{"mechanism", 1},
 	},
+	time = 10,
 }
 Recipe.edit{
 	recipe = "land-mine",
 	ingredients = {
-		{"panel", 1},
+		{"panel", 2},
 		{"gunpowder", 1},
 		{"explosives", 1},
 	},

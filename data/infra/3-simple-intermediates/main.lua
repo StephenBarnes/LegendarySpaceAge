@@ -5,15 +5,33 @@ New recipe: 1 shielding + 2 fluid fitting + 1 mechanism -> 1 engine.
 Using basic recipes for the factors, that's 32 metal plate + 4 resin. So it's  like 4x the cost.
 So, I've also reduced the number of engine units needed for other recipes to balance that. Which is more intuitively satisfying anyway, eg a car shouldn't need 8 combustion engines.
 ]]
-RECIPE["engine-unit"].ingredients = {
-	{type = "item", name = "shielding", amount = 1},
-	{type = "item", name = "fluid-fitting", amount = 2},
-	{type = "item", name = "mechanism", amount = 1},
+Recipe.edit{
+	recipe = "engine-unit",
+	ingredients = {
+		{"shielding", 1},
+		{"fluid-fitting", 2},
+		{"mechanism", 1},
+	},
+	time = 5, -- Originally 10, but I always thought that was too long.
 }
 
-RECIPE["flying-robot-frame"].ingredients = {
-	{type = "item", name = "battery", amount = 2},
-	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "sensor", amount = 1},
-	{type = "item", name = "electric-engine-unit", amount = 1},
+Recipe.edit{
+	recipe = "flying-robot-frame",
+	ingredients = {
+		{"battery", 2},
+		{"frame", 1},
+		{"sensor", 1},
+		{"electric-engine-unit", 1},
+	},
+	time = 10, -- Originally 20, but I always thought that was too long.
+}
+
+Recipe.edit{
+	recipe = "battery",
+	ingredients = { -- Originally 1 iron plate + 1 copper plate + 20 sulfuric acid.
+		{"panel", 2},
+		{"electronic-components", 1},
+		{"sulfuric-acid", 10},
+	},
+	time = 2,
 }

@@ -27,7 +27,7 @@ local advancedRecipe = Recipe.make{
 	copy = basicRecipe,
 	recipe = "mechanism-from-advanced",
 	ingredients = {
-		{"advanced-parts", 2},
+		{"advanced-parts", 5},
 		{"frame", 1},
 	},
 	results = {{"mechanism", 2}},

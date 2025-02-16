@@ -54,7 +54,7 @@ local function checkRecipesObtainable()
 		local recipeOk = checkRecipeOk(recipe, recipesUnlockedByTechs)
 		success = success and recipeOk
 		if not recipeOk then
-			log("Prototype: " .. serpent.block(recipe))
+			--log("Prototype: " .. serpent.block(recipe))
 		end
 	end
 

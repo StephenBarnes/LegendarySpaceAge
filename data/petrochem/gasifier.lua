@@ -188,18 +188,28 @@ fluidGasifierItem.icons = fluidGasifierEnt.icons
 fluidGasifierItem.order = "zz"
 extend{fluidGasifierItem}
 
-local gasifierRecipe = copy(RECIPE["steel-furnace"])
-gasifierRecipe.type = "recipe"
-gasifierRecipe.name = "gasifier"
-gasifierRecipe.enabled = false
-gasifierRecipe.results = {{type = "item", name = "gasifier", amount = 1}}
--- TODO decide on ingredients
-extend{gasifierRecipe}
+local gasifierRecipe = Recipe.make{
+	copy = "steel-furnace",
+	recipe = "gasifier",
+	enabled = false,
+	resultCount = 1,
+	ingredients = {
+		{"frame", 5},
+		{"fluid-fitting", 10},
+	},
+	time = 5,
+}
 
-local fluidGasifierRecipe = copy(gasifierRecipe)
-fluidGasifierRecipe.name = "fluid-fuelled-gasifier"
-fluidGasifierRecipe.results = {{type = "item", name = "fluid-fuelled-gasifier", amount = 1}}
-extend{fluidGasifierRecipe}
+local fluidGasifierRecipe = Recipe.make{
+	copy = gasifierRecipe,
+	recipe = "fluid-fuelled-gasifier",
+	enabled = false,
+	resultCount = 1,
+	ingredients = {
+		{"frame", 5},
+		{"fluid-fitting", 15},
+	},
+}
 
 local gasifierRecipeCategory = copy(RAW["recipe-category"]["crafting"])
 gasifierRecipeCategory.name = "gasifier"

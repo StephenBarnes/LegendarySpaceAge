@@ -59,11 +59,26 @@ end
 
 
 -- Chemical plant - shouldn't require steel bc we're moving it to automation 1. Also no pipe ingredients bc it comes before pipe tech. But it should cost more than assembler 1 since it's faster.
-RECIPE["chemical-plant"].ingredients = {
-	{type="item", name="frame", amount=2},
-	{type="item", name="fluid-fitting", amount=10},
-	{type="item", name="sensor", amount=2},
-	{type="item", name="mechanism", amount=2},
+Recipe.edit{
+	recipe = "chemical-plant",
+	ingredients = {
+		{"frame", 2},
+		{"fluid-fitting", 10},
+		{"sensor", 2},
+		{"mechanism", 2},
+	},
+	time = 10,
+}
+
+Recipe.edit{
+	recipe = "oil-refinery",
+	ingredients = {
+		{"frame", 10},
+		{"fluid-fitting", 20},
+		{"structure", 10},
+		{"panel", 20},
+	},
+	time = 20,
 }
 
 -- Foundry: 40 tungsten carbide + 40 shielding + 40 structure + 4 mechanism
