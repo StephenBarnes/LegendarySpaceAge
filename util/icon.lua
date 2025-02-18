@@ -61,6 +61,12 @@ local multiIconVals = {
 			{scale = 0.25, shift = {-8, -8}},
 			{scale = 0.25, shift = {8, -8}},
 		},
+		[4] = {
+			{scale = 0.33, shift = {0, 4.5}},
+			{scale = 0.18, shift = {-8, -3.5}},
+			{scale = 0.18, shift = {8, -3.5}},
+			{scale = 0.22, shift = {0, -6}},
+		},
 	},
 	decomposition = { -- Used for recipes where one item is decomposed into multiple items, eg oil cracking. 1st is ingredient, other 2-3 are products. If only one product, repeat it.
 		[3] = {
