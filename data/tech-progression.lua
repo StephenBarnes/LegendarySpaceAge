@@ -48,7 +48,7 @@ TECH["steam-power"].effects = {
 }
 
 -- Tank ship shouldn't depend on Fluid handling 2. 
-Tech.setPrereqs("tank_ship", {"automated_water_transport"})
+Tech.setPrereqs("tank_ship", {"automated_water_transport", "fluid-handling"})
 
 -- Logistics 2 depends on rubber.
 Tech.addTechDependency("rubber-1", "logistics-2")
@@ -106,7 +106,7 @@ TECH["advanced-oil-processing"].unit = {
 -- Remove the lubricant tech. Rather merge it with actuator / advanced robotics.
 Tech.hideTech("lubricant")
 Tech.replacePrereq("logistics-3", "lubricant", "electric-engine")
-Tech.setPrereqs("electric-engine", {"processing-unit"})
+Tech.setPrereqs("electric-engine", {"processing-unit", "steel-processing"})
 Tech.addRecipeToTech("lubricant", "electric-engine", 1)
 
 -- Rubber-2 is needed to make rubber from petrochems on Vulcanus and Fulgora.

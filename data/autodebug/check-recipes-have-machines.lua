@@ -68,7 +68,7 @@ local function checkAllRecipesHaveMachines()
 	-- Check all recipes.
 	for _, recipe in pairs(RECIPE) do
 		local recipeCategory = recipe.category or "crafting" -- "crafting" is default.
-		if recipeCategory ~= "parameters" then
+		if recipeCategory ~= "parameters" and (not recipe.hidden) then
 			success = checkRecipeHasMachines(recipe, categoryToMachines[recipeCategory]) and success
 		end
 	end

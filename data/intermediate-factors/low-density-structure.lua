@@ -23,6 +23,7 @@ Tech.addRecipeToTech("low-density-structure-standard", "low-density-structure")
 -- Hide default recipe.
 RECIPE["low-density-structure"].hidden = true
 RECIPE["low-density-structure"].hidden_in_factoriopedia = true
+Tech.removeRecipeFromTech("low-density-structure", "low-density-structure")
 
 -- Create a new recipe for growing LDS from chitin broth.
 local recipeFromChitinAndCarbonFiber = copy(recipeFromCopper)

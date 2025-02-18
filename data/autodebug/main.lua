@@ -1,7 +1,7 @@
 -- This file will run automated checks. For example, checking that when the player unlocks a recipe, he has the ingredients available.
 
 -- This controls whether to actually run the full debug. Takes like 30 seconds to run, mostly because of getTechPrePostSets().
-local RUN_FULL_DEBUG = true
+local RUN_FULL_DEBUG = false
 
 local toposortTechs = require("toposort-techs")
 local getThingToRecipes = require("get-thing-to-recipes")

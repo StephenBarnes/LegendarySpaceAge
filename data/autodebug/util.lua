@@ -22,4 +22,15 @@ for planetName, planet in pairs(RAW.planet) do
 end
 Export.allPlanets.space = true
 
+local recipesToIgnore = Table.listToSet{
+	"data-dd-flare-capsule",
+}
+Export.shouldIgnoreRecipe = function(recipe)
+	-- Ignore recipes from Editor Extensions, starting with "ee-".
+	if string.find(recipe.name, "^ee-") then
+		return true
+	end
+	return recipesToIgnore[recipe.name]
+end
+
 return Export

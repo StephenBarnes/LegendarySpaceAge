@@ -237,7 +237,7 @@ tech.effects = {
 	{type = "unlock-recipe", recipe = "deep-drill-gleba"},
 	{type = "unlock-recipe", recipe = "deep-drill-fulgora"},
 }
-tech.prerequisites = {"electric-mining-drill", "chemical-science-pack"}
+tech.prerequisites = {"electric-mining-drill", "electric-engine"}
 Icon.set(tech, "LSA/deep-drill/tech")
 tech.unit = {
 	count = 100,

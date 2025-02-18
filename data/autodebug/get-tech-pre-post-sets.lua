@@ -37,9 +37,9 @@ assert(unlockedAtStart["recipe:iron-gear-wheel"] == true)
 -- Table of sets of things that unlock other things implicitly, without explicit recipes.
 local implicitUnlocks = {
 	-- Minable resources.
-	{{"planet:fulgora"}, {"fulgora:item:scrap"}},
-	{{"planet:gleba"}, {"gleba:item:wood", "gleba:item:wood", "gleba:item:yumako", "gleba:item:jellynut"}}, -- TODO more
-	{{"planet:vulcanus"}, {"vulcanus:item:iron-ore", "vulcanus:item:calcite"}}, -- TODO more
+	{{"planet:fulgora"}, {"fulgora:item:scrap", "fulgora:item:fulgorite-shard"}},
+	{{"planet:gleba"}, {"gleba:item:wood", "gleba:item:yumako", "gleba:item:jellynut", "gleba:item:slipstack-pearl", "gleba:item:stone", "gleba:item:neurofibril", "gleba:item:boomnut", "gleba:item:boomsac", "gleba:item:pentapod-egg"}}, -- TODO more
+	{{"planet:vulcanus"}, {"vulcanus:item:iron-ore", "vulcanus:item:calcite", "vulcanus:item:copper-ore", "vulcanus:item:tungsten-ore", "vulcanus:item:stone"}}, -- TODO more
 	{{"planet:aquilo"}, {"aquilo:item:ice"}},
 	{{"space:item:asteroid-collector"}, {"space:item:metallic-asteroid-chunk", "space:item:carbonic-asteroid-chunk", "space:item:oxide-asteroid-chunk"}},
 
@@ -54,6 +54,7 @@ local implicitUnlocks = {
 	{{"nauvis:item:pumpjack"}, {"nauvis:fluid:crude-oil", "nauvis:fluid:natural-gas"}},
 	{{"aquilo:item:pumpjack"}, {"aquilo:fluid:natural-gas", "aquilo:fluid:fluorine", "aquilo:fluid:lithium-brine"}},
 	{{"vulcanus:item:pumpjack"}, {"vulcanus:fluid:volcanic-gas", "vulcanus:item:sulfur"}},
+	{{"aquilo:item:pumpjack"}, {"aquilo:fluid:fluorine", "aquilo:fluid:lithium-brine"}},
 
 	-- Rocket silo plus rocket parts allows you to go to space, and import/export space and Nauvis.
 	{{"nauvis:item:rocket-silo", "nauvis:item:rocket-part"}, {"planet:space", "exports:nauvis", "imports:nauvis", "exports:space", "imports:space"}},
