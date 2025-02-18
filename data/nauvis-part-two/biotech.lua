@@ -5,3 +5,10 @@
 for _, recipeName in pairs{"fish-breeding", "nutrients-from-fish", "nutrients-from-biter-egg"} do
 	RECIPE[recipeName].category = "organic"
 end
+
+-- Create fluid for meat paste.
+local meatPaste = copy(FLUID["water"])
+meatPaste.name = "meat-paste"
+Icon.set(meatPaste, "LSA/fluids/meat-paste")
+-- TODO fluid colors
+extend{meatPaste}
