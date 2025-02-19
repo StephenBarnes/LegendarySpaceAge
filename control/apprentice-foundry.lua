@@ -137,6 +137,8 @@ Handler.on_init = function()
 	storage.index = 0
 	storage.structs = {}
 	storage.deathrattles = {}
+	-- Added by StephenB: Register beacon for the Beacon Rebalance mod, so it doesn't count towards overload.
+	remote.call("wr-beacon-rebalance", "add_whitelisted_beacon", "apprentice-foundry-beacon-interface")
 end
 
 Handler.on_configuration_changed = function()
@@ -147,6 +149,8 @@ Handler.on_configuration_changed = function()
 		struct.products_finished = struct.products_finished or 0
 		struct.last_idle_at = struct.last_idle_at or 0
 	end
+	-- Added by StephenB: Register beacon for the Beacon Rebalance mod, so it doesn't count towards overload.
+	remote.call("wr-beacon-rebalance", "add_whitelisted_beacon", "apprentice-foundry-beacon-interface")
 end
 
 function Handler.on_created_entity(event)
@@ -243,6 +247,11 @@ Handler.on_object_destroyed = function(event)
 			error(serpent.block(deathrattle))
 		end
 	end
+end
+
+-- Added by StephenB: Register beacon for the Beacon Rebalance mod, so it doesn't count towards overload.
+Handler.on_load = function()
+	remote.call("wr-beacon-rebalance", "add_whitelisted_beacon", "apprentice-foundry-beacon-interface")
 end
 
 return Handler
