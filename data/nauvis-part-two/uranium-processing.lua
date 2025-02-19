@@ -11,6 +11,7 @@ local yellowcake = copy(ITEM["sulfur"])
 yellowcake.name = "yellowcake"
 Icon.set(yellowcake, "LSA/nuclear/yellowcake-2")
 Icon.variants(yellowcake, "LSA/nuclear/yellowcake-%", 3)
+yellowcake.subgroup = "uranium-processing"
 extend{yellowcake}
 
 -- Create item for plutonium.

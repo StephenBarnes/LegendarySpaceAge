@@ -58,7 +58,7 @@ local recipeFromSilicon = Recipe.make{
 		{"glass", 1},
 		{"plastic-bar", 1},
 		{"carbon", 1},
-		{"wiring", 4},
+		{"wiring", 2},
 		{"sulfuric-acid", 5},
 	},
 	results = {{"electronic-components", 20}},

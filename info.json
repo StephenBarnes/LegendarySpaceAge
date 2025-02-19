@@ -72,6 +72,9 @@
 		, "show-max-underground-distance"
 		, "CursorEnhancements"
 
+		, "! GROUP-optional-content-addons"
+		, "? compaktcircuit"
+
 		, "! GROUP-graphics-to-mark-optional"
 		, "elevated-rails-recolor"
 		, "fire-lights"
