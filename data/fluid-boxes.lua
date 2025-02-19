@@ -75,3 +75,38 @@ foundry.fluid_boxes = {
 	foundry.fluid_boxes[3], -- output
 	foundry.fluid_boxes[4], -- output
 }
+
+-- Add fluid inputs to the rocket silo, needed for assembling rocket parts.
+local rocketSilo = RAW["rocket-silo"]["rocket-silo"]
+rocketSilo.fluid_boxes_off_when_no_fluid_recipe = false
+rocketSilo.fluid_boxes = {
+	{
+		production_type = "input",
+		pipe_picture = GreyPipes.pipeBlocksDeepDrill(),
+		pipe_covers = pipecoverspictures(),
+		volume = 1000,
+		pipe_connections = {
+			--[[
+			{position = {4, 2}, direction = defines.direction.east, flow_direction = "input-output"},
+			{position = {-4, 2}, direction = defines.direction.west, flow_direction = "input-output"},
+			{position = {-2, -4}, direction = defines.direction.north, flow_direction = "input-output"},
+			{position = {-2, 4}, direction = defines.direction.south, flow_direction = "input-output"},
+			]]
+			{position = {4, -1}, direction = defines.direction.east, flow_direction = "input-output"},
+			{position = {-4, -1}, direction = defines.direction.west, flow_direction = "input-output"},
+		},
+	},
+	{
+		production_type = "input",
+		pipe_picture = GreyPipes.pipeBlocksDeepDrill(),
+		pipe_covers = pipecoverspictures(),
+		volume = 1000,
+		pipe_connections = {
+			--{position = {4, -2}, direction = defines.direction.east, flow_direction = "input-output"},
+			--{position = {-4, -2}, direction = defines.direction.west, flow_direction = "input-output"},
+			{position = {2, -4}, direction = defines.direction.north, flow_direction = "input-output"},
+			{position = {2, 4}, direction = defines.direction.south, flow_direction = "input-output"},
+		},
+		secondary_draw_orders = { south = 100, north = -1 },
+	},
+}
