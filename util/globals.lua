@@ -8,6 +8,9 @@ ASSEMBLER = RAW["assembling-machine"]
 FURNACE = RAW.furnace
 
 -- Global function aliases with some asserts.
+---@generic T
+---@param x T
+---@return T
 copy = function(x)
 	assert(x ~= nil)
 	assert(type(x) == "table")

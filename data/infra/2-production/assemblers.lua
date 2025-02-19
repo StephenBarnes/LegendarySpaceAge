@@ -18,6 +18,7 @@ for _, vals in pairs{
 			{type="item", name="mechanism", amount=2},
 			{type="item", name="sensor", amount=1},
 		},
+		moduleSlots = 1, -- Increase from 0 to 1, since modules are now early-game.
 	},
 	{
 		name = "assembling-machine-2",
@@ -55,6 +56,9 @@ for _, vals in pairs{
 	ent.energy_source.drain = vals.drainKW .. "kW"
 	ent.energy_usage = (vals.activeKW - vals.drainKW) .. "kW"
 	ent.energy_source.emissions_per_minute = { pollution = vals.pollution }
+	if vals.moduleSlots then
+		ent.module_slots = vals.moduleSlots
+	end
 end
 
 

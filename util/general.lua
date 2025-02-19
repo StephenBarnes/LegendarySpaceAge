@@ -66,5 +66,13 @@ Export.orderKinds = function(subgroup, kinds, protoNames)
 	end
 end
 
+-- Round `x` to `n` decimal places.
+---@param x number
+---@param n number
+---@return number
+Export.round = function(x, n)
+	return math.floor(x * 10^n) / 10^n
+end
+
 
 return Export

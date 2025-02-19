@@ -1,6 +1,6 @@
 require("assemblers")
 require("furnaces")
-require("modules")
+require("data.infra.2-production.beacons-modules")
 require("labs")
 require("miners-etc")
 require("boilers-heaters")

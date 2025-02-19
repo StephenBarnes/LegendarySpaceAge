@@ -36,6 +36,7 @@ require("data.deep-drill")
 require("data.mech-armor")
 require("data.planet-drop-techs")
 require("data.shotgun-turrets")
+require("data.beacons")
 
 -- Planets
 require("data.nauvis-part-one.misc")
@@ -63,4 +64,4 @@ require("data.ocean-dumping")
 require("data.tech-progression")
 require("data.tech-rate-triggers")
 require("data.stack-sizes")
-require("data.beacon-rebalance")
+require("data.quality")

@@ -42,7 +42,3 @@ end)
 script.on_event(defines.events.on_object_destroyed, function(e)
 	apprenticeFoundry.on_object_destroyed(e)
 end)
-
-script.on_load(function()
-	apprenticeFoundry.on_load()
-end)

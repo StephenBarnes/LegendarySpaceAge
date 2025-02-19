@@ -45,8 +45,3 @@ u.setDefaultOrForce("use_dark_blue_waterways", "bool", false) -- Irrelevant, onl
 -- For Power Overload
 -- TODO set pole maxes
 -- TODO set transformer efficiency to 98% and hide it.
-
--- For Beacon Rebalance mod.
-u.setDefaultOrForce("wret-overload-keep-vanilla-sprite-mk1", "bool", false)
-u.setDefaultOrForce("wret-overload-enable-beaconmk2", "bool", true)
-u.setDefaultOrForce("wret-overload-enable-beaconmk3", "bool", false)

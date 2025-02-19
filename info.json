@@ -38,7 +38,7 @@
 		, "behemoth-enemies"
 
 		, "beacon-interface"
-		, "wret-beacon-rebalance-mod"
+		, "! wret-beacon-rebalance-mod"
 
 		, "PlanetsLib"
 

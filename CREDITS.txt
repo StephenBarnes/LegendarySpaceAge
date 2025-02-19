@@ -7,6 +7,7 @@ This file is to keep track of other people's stuff that I've used.
 * Flare Stack by GotLag, snouz, and others - mods.factorio.com/mod/Flare%20Stack - Used graphics and code.
 * Battery Powered by harag - mods.factorio.com/mod/battery-powered - Charger/discharger graphics, code, ideas.
 * Apprentice Assembler by Quezler - mods.factorio.com/mod/apprentice-assembler - Code copied and modified to apply the effect to foundries.
+* Beacon Rebalance by wretlaw120 with some spritework by Sir-Lags-A-Lot - https://mods.factorio.com/mod/wret-beacon-rebalance-mod - Using high-res old-beacon graphics and code.
 * Gleba crop mods by LordMiguel (slipstacks, boompuffs, stingfronds) - Took ideas and bits of code for the Gleba crops.
 * Galdoc's Manufacturing - mods.factorio.com/mod/galdocs-manufacturing - Stole the idea of having intermediate factors with multiple recipes, though I'm simplifying it.
 * AdamoCarbon by ElAdamo - mods.factorio.com/mod/adamo-carbon - Stole several ideas for the petrochem system, plus some code and graphics.
