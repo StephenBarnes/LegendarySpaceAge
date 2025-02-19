@@ -46,4 +46,25 @@ Export.order = function(protos, subgroup)
 	end
 end
 
+---@param kind {[string]: data.Prototype}
+---@param protoNames string[]
+---@param subgroup string
+Export.orderKind = function(subgroup, kind, protoNames)
+	for i, protoName in pairs(protoNames) do
+		assert(kind[protoName] ~= nil, "OrderKind: kind["..protoName.."] is nil")
+		kind[protoName].order = string.format("%02d", i)
+		kind[protoName].subgroup = subgroup
+	end
+end
+
+---@param subgroup string
+---@param kinds {[string]: data.Prototype}[]
+---@param protoNames string[]
+Export.orderKinds = function(subgroup, kinds, protoNames)
+	for _, kind in pairs(kinds) do
+		Export.orderKind(subgroup, kind, protoNames)
+	end
+end
+
+
 return Export

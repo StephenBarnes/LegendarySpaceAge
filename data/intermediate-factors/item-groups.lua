@@ -22,10 +22,10 @@ for i, factor in pairs{
 	"structure",
 	"fluid-fitting",
 	"shielding",
-	"low-density-structure",
 	"mechanism",
 	"sensor",
 	"actuator",
+	"low-density-structure",
 } do
 	extend{
 		{

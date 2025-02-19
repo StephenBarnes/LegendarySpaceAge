@@ -10,9 +10,9 @@ extend{shieldingItem}
 local recipeFromIron = copy(RECIPE["iron-stick"])
 recipeFromIron.name = "shielding-from-iron"
 recipeFromIron.ingredients = {
-	{type = "item", name = "iron-plate", amount = 10},
-	{type = "item", name = "stone-brick", amount = 10},
-	{type = "item", name = "iron-stick", amount = 10},
+	{type = "item", name = "iron-plate", amount = 5},
+	{type = "item", name = "stone-brick", amount = 5},
+	{type = "item", name = "iron-stick", amount = 5},
 }
 recipeFromIron.results = {{type = "item", name = "shielding", amount = 1}}
 recipeFromIron.enabled = true
@@ -26,8 +26,8 @@ extend{recipeFromIron}
 local recipeFromSteel = copy(recipeFromIron)
 recipeFromSteel.name = "shielding-from-steel"
 recipeFromSteel.ingredients = {
-	{type = "item", name = "steel-plate", amount = 10},
-	{type = "item", name = "iron-stick", amount = 10},
+	{type = "item", name = "steel-plate", amount = 5},
+	{type = "item", name = "iron-stick", amount = 5},
 }
 recipeFromSteel.results = {{type = "item", name = "shielding", amount = 2}}
 recipeFromSteel.allow_as_intermediate = false
@@ -47,7 +47,6 @@ recipeFromTungsten.ingredients = {
 recipeFromTungsten.results = {{type = "item", name = "shielding", amount = 5}}
 recipeFromTungsten.energy_required = 5
 Icon.set(recipeFromTungsten, {"shielding", "steel-plate", "tungsten-plate"})
-recipeFromTungsten.category = "metallurgy-or-assembling"
 extend{recipeFromTungsten}
 Tech.addRecipeToTech("shielding-from-tungsten", "tungsten-steel")
 

@@ -169,23 +169,23 @@ coalCokingRecipe.enabled = false -- Unlocked by coal-coking tech, created in ano
 extend{coalCokingRecipe}
 
 --[[ Add recipe for solid fuel.
-	5 heavy oil + 2 tar -> 2 solid fuel + 1 light oil
+	20 heavy oil + 10 tar -> 1 solid fuel + 10 light oil
 		This represents pet coke style briquettes. We tune the energy values so that this gives more heat per heavy oil than other forms of processing.
-	Currently 25MJ + 4MJ -> 24MJ + 7MJ, so on net this increases energy slightly.
+	Currently 10MJ + 2MJ -> 12MJ + 3.5MJ, so on net this increases energy.
 ]]
 local solidFuelRecipe = copy(RECIPE["solid-fuel-from-light-oil"])
 solidFuelRecipe.name = "solid-fuel"
 solidFuelRecipe.ingredients = {
-	{type = "fluid", name = "heavy-oil", amount = 50},
-	{type = "fluid", name = "tar", amount = 20},
+	{type = "fluid", name = "heavy-oil", amount = 20},
+	{type = "fluid", name = "tar", amount = 10},
 }
 solidFuelRecipe.results = {
-	{type = "item", name = "solid-fuel", amount = 2},
-	{type = "fluid", name = "light-oil", amount = 10},
+	{type = "item", name = "solid-fuel", amount = 1},
+	{type = "fluid", name = "light-oil", amount = 5},
 }
 solidFuelRecipe.main_product = "solid-fuel"
 Icon.clear(solidFuelRecipe)
-solidFuelRecipe.energy_required = 4
+solidFuelRecipe.energy_required = 1
 solidFuelRecipe.hide_from_player_crafting = false
 extend{solidFuelRecipe}
 

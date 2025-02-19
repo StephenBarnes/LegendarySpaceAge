@@ -21,7 +21,7 @@ Tech.reorderRecipeUnlocks("electric-energy-distribution-1",
 -- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive. Rather just the pole plus a wiring.
 for _, size in pairs{"small", "medium", "big"} do
 	RECIPE["po-"..size.."-electric-fuse"].ingredients = {
-		{type = "item", name = "wiring", amount = 1},
+		{type = "item", name = "electronic-components", amount = 2},
 		{type = "item", name = size.."-electric-pole", amount = 1},
 	}
 	RECIPE["po-"..size.."-electric-fuse"].energy_required = RECIPE[size.."-electric-pole"].energy_required

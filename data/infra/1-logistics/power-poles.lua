@@ -24,6 +24,6 @@ RECIPE["substation"].energy_required = 5
 RECIPE["po-transformer"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 	{type = "item", name = "wiring", amount = 1},
-	{type = "item", name = "electronic-circuit", amount = 1},
+	{type = "item", name = "electronic-components", amount = 5},
 }
 RECIPE["po-transformer"].energy_required = 1

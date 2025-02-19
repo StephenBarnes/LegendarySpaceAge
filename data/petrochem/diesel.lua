@@ -29,7 +29,7 @@ recipe.maximum_productivity = 0.2
 recipe.subgroup = "complex-fluid-recipes"
 recipe.order = "e"
 recipe.energy_required = 2
-recipe.category = "chemistry-or-crafting-with-fluid"
+recipe.category = "chemistry" -- Could also allow "crafting-with-fluid" but then assemblers need 2 fluid inputs.
 extend{recipe}
 
 -- Create tech for diesel.

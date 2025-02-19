@@ -4,6 +4,7 @@ Recipe.edit{
 	ingredients = { -- Originally 40 iron plate.
 		{"panel", 10},
 	},
+	time = 5,
 }
 Recipe.edit{
 	recipe = "heavy-armor",
@@ -11,6 +12,7 @@ Recipe.edit{
 		{"steel-plate", 10},
 		{"rubber", 20},
 	},
+	time = 10,
 }
 Tech.setPrereqs("heavy-armor", {"rubber-1", "steel-processing"})
 Recipe.edit{
