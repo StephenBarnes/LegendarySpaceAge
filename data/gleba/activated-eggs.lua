@@ -48,7 +48,7 @@ local eggReplicationRecipe = copy(RECIPE["pentapod-egg"])
 eggReplicationRecipe.ingredients = {
 	{type = "item", name = "activated-pentapod-egg", amount = 1},
 	{type = "item", name = "bioflux", amount = 1},
-	{type = "fluid", name = "slime", amount = 5},
+	--{type = "fluid", name = "slime", amount = 5}, -- Removing this, it's just annoying.
 }
 eggReplicationRecipe.results = {
 	{type = "item", name = "pentapod-egg", amount = 2},

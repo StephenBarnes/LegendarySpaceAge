@@ -30,9 +30,10 @@ end
 
 -- Edit personal burner generator's recipe so it's craftable early-game.
 RECIPE["personal-burner-generator"].ingredients = {
-	{type = "item", name = "iron-plate", amount = 10},
-	{type = "item", name = "copper-cable", amount = 8},
 	{type = "item", name = "glass", amount = 1},
+	{type = "item", name = "wiring", amount = 1},
+	{type = "item", name = "shielding", amount = 1},
+	{type = "item", name = "fluid-fitting", amount = 1},
 }
 
 -- Unlock personal burner generator from its own tech, not modular armor.

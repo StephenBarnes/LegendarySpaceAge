@@ -170,7 +170,8 @@ Tech.addRecipeToTech("poison-capsule", "military-2")
 Tech.addRecipeToTech("slowdown-capsule", "military-2")
 Tech.removeRecipeFromTech("grenade", "military-2")
 Tech.addRecipeToTech("grenade", "military-3")
-TECH["military-2"].prerequisites = {"military", "advanced-oil-processing", "ammonia-1", "steel-processing"}
+TECH["military-2"].prerequisites = {"military", "ammonia-1", "steel-processing"}
+	-- It also needs pitch for the poison capsule - but you can get that from either advanced-oil-processing or coal-coking techs, so not going to have prereqs for that.
 Tech.addTechDependency("explosives", "military-3")
 Tech.removePrereq("military-4", "explosives")
 Tech.setPrereqs("stronger-explosives-1", {"military-3"})
