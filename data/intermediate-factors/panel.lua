@@ -16,6 +16,7 @@ recipeFromIron.results = {{type = "item", name = "panel", amount = 1}}
 recipeFromIron.enabled = true
 recipeFromIron.energy_required = 0.25
 recipeFromIron.category = "crafting"
+recipeFromIron.auto_recycle = false
 Icon.set(recipeFromIron, {"LSA/intermediate-factors/panel/iron-panel", "iron-plate"})
 recipeFromIron.allow_as_intermediate = true
 extend{recipeFromIron}

@@ -16,6 +16,7 @@ local basicRecipe = Recipe.make{
 	time = 5,
 	allow_decomposition = true,
 	allow_as_intermediate = true,
+	auto_recycle = false,
 	icons = {"electronic-components", "glass"},
 }
 Tech.addRecipeToTech("components-basic", "electronics", 2)
@@ -51,7 +52,7 @@ Tech.addRecipeToTech("components-from-glass-plastic", "plastics", 4)
 
 -- Create recipe: 2 silicon + 1 glass + 1 plastic + 1 carbon + 4 wiring -> 20 electronic components
 local recipeFromSilicon = Recipe.make{
-	copy = recipeFromGlassPlastic,
+	copy = recipeFromPlastic,
 	recipe = "components-from-silicon",
 	ingredients = {
 		{"silicon", 2},

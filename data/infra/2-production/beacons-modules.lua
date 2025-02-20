@@ -61,3 +61,30 @@ local moduleData = {
 for _, moduleType in pairs{"speed", "efficiency", "productivity"} do
 	Recipe.addIngredients(moduleType.."-module", {{type = "item", name = "resin", amount = 1}})
 end
+
+
+-- Arrange beacons and modules in two rows.
+local module2Subgroup = copy(RAW["item-subgroup"]["module"])
+module2Subgroup.name = "module-2"
+module2Subgroup.order = "g2"
+extend{module2Subgroup}
+
+-- Order modules into 2 rows.
+Gen.orderKinds("module", {RAW.module, RECIPE}, {
+	"speed-module",
+	"speed-module-2",
+	"speed-module-3",
+	"efficiency-module",
+	"efficiency-module-2",
+	"efficiency-module-3",
+})
+Gen.orderKinds("module", {RAW.beacon, RECIPE, ITEM}, {"basic-beacon"}, "9-")
+Gen.orderKinds("module-2", {RAW.module, RECIPE}, {
+	"productivity-module",
+	"productivity-module-2",
+	"productivity-module-3",
+	"quality-module",
+	"quality-module-2",
+	"quality-module-3",
+})
+Gen.orderKinds("module-2", {RAW.beacon, RECIPE, ITEM}, {"beacon"}, "9-")

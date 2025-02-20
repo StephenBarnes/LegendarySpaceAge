@@ -19,6 +19,7 @@ recipeFromIron.enabled = true
 recipeFromIron.energy_required = 5
 recipeFromIron.category = "crafting"
 recipeFromIron.allow_as_intermediate = true
+recipeFromIron.auto_recycle = false
 Icon.set(recipeFromIron, {"shielding", "iron-plate", "stone-brick"})
 extend{recipeFromIron}
 

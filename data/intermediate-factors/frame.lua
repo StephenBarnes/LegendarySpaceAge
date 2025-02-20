@@ -20,6 +20,7 @@ recipeFromWood.enabled = true
 recipeFromWood.energy_required = 10
 recipeFromWood.category = "crafting"
 recipeFromWood.allow_as_intermediate = false
+recipeFromWood.auto_recycle = false
 Icon.set(recipeFromWood, {"LSA/intermediate-factors/frame/wooden-frame", "wood"})
 extend{recipeFromWood}
 
@@ -34,6 +35,7 @@ recipeFromIron.enabled = true
 recipeFromIron.energy_required = 5
 recipeFromIron.category = "crafting"
 recipeFromIron.allow_as_intermediate = true
+recipeFromIron.auto_recycle = false
 Icon.set(recipeFromIron, {"frame", "iron-stick"})
 extend{recipeFromIron}
 

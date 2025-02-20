@@ -21,6 +21,7 @@ local greenCircuitRecipe = Recipe.make{
 	icons = {"sensor", "electronic-circuit"},
 	allow_as_intermediate = true,
 	allow_decomposition = true,
+	auto_recycle = false,
 }
 Tech.addRecipeToTech("sensor-from-green-circuit", "automation")
 

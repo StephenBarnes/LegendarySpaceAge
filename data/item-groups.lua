@@ -1,6 +1,9 @@
 --[[ This file makes item subgroups so we can organize stuff in the player crafting menu and Factoriopedia.
 Also reorganizes some recipes.
 Does not handle the tab or subgroups for intermediate factors - those are in intermediate-factors/item-groups.lua.
+
+TODO rewrite setSubgroupInOrder to use Gen.orderKinds.
+TODO also rewrite all the manual for-loops etc to use Gen.orderKinds.
 ]]
 
 -- Change the space tab's icon, from satellite to rocket silo, since it's now anything after Nauvis.
@@ -211,12 +214,13 @@ setSubgroupInOrder("fulgora-agriculture", "item", {"fulgorite-shard", "electroph
 setSubgroupInOrder("fulgora-agriculture", "recipe", {"electrophage-cultivation", "electrophage-cultivation-holmium", "fulgorite-starter"}, "2")
 
 -- Reorganize production tab.
-local electricityRelated = {"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector"}
-setSubgroupInOrder("electricity-related", {"item", "recipe"}, electricityRelated)
-local planetarySpecial = {"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge", "nuclear-reactor", "cryogenic-plant", "fusion-reactor", "fusion-generator"}
-setSubgroupInOrder("planetary-special", {"item", "recipe"}, planetarySpecial)
-local chemicalProcessing = {"chemical-plant", "oil-refinery", "gasifier", "fluid-fuelled-gasifier"}
-setSubgroupInOrder("chemical-processing", {"item", "recipe"}, chemicalProcessing)
+setSubgroupInOrder("electricity-related", {"item", "recipe"},
+	{"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector", "nuclear-reactor", "fusion-reactor", "fusion-generator"})
+setSubgroupInOrder("planetary-special", {"item", "recipe"},
+	{"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge", "cryogenic-plant"})
+
+setSubgroupInOrder("chemical-processing", {"item", "recipe"},
+	{"chemical-plant", "oil-refinery", "gasifier", "fluid-fuelled-gasifier"})
 ITEM["agricultural-tower"].subgroup = "extraction-machine"
 ITEM["agricultural-tower"].order = "c"
 local labs = {"lab", "glebalab", "biolab"}

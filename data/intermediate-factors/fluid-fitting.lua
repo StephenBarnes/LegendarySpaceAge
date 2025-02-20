@@ -18,6 +18,7 @@ recipeFromCopper.results = {{type = "item", name = "fluid-fitting", amount = 1}}
 recipeFromCopper.enabled = true
 recipeFromCopper.energy_required = 5
 Icon.set(recipeFromCopper, {"fluid-fitting", "resin", "copper-plate"})
+recipeFromCopper.auto_recycle = false
 -- TODO make a copper-colored sprite.
 extend{recipeFromCopper}
 

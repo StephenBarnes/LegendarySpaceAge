@@ -23,6 +23,7 @@ resinRecipe.subgroup = "wiring"
 resinRecipe.order = "02"
 resinRecipe.energy_required = 5
 resinRecipe.allow_as_intermediate = true
+resinRecipe.auto_recycle = false
 extend{resinRecipe}
 Tech.addRecipeToTech("wiring-from-resin", "basic-electricity")
 

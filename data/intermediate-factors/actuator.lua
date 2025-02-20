@@ -13,12 +13,14 @@ standardRecipe.ingredients = {
 	{ type = "fluid", name = "lubricant",        amount = 20 }
 }
 Icon.set(standardRecipe, {"electric-engine-unit", "LSA/parts-advanced/3", "advanced-circuit"})
+standardRecipe.auto_recycle = false
 extend{standardRecipe}
 Tech.addRecipeToTech("actuator-standard", "electric-engine")
 
 -- Hide the default recipe.
 RECIPE["electric-engine-unit"].hidden = true
 RECIPE["electric-engine-unit"].hidden_in_factoriopedia = true
+RECIPE["electric-engine-unit"].auto_recycle = false
 Tech.removeRecipeFromTech("electric-engine-unit", "electric-engine")
 
 -- Create recipe: 6 advanced parts + 1 frame + 1 blue circuit + 20 lubricant -> 1 actuator

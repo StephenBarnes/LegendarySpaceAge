@@ -19,11 +19,10 @@ Recipe.edit{
 Recipe.edit{
 	recipe = "big-mining-drill",
 	ingredients = {
-		{"electric-engine-unit", 10},
-		{"processing-unit", 10},
+		{"electric-engine-unit", 20},
 		{"tungsten-carbide", 20},
-		{"molten-steel", 200, type = "fluid"},
 	},
+	category = "crafting", -- Not foundry.
 	time = 20,
 }
 

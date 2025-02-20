@@ -20,6 +20,7 @@ local basicRecipe = Recipe.make{
 	category = "crafting",
 	allow_as_intermediate = true,
 	icons = {"mechanism", "iron-gear-wheel"},
+	auto_recycle = false,
 }
 
 -- Create recipe: 2 advanced parts + 1 frame -> 2 mechanism
