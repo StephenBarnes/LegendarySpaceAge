@@ -178,15 +178,15 @@ end
 
 -- Adjust recipes for other stuff made out of ingots: gears, rods, cables.
 for _, vals in pairs{
-	{"iron", "iron-gear-wheel", 5},
-	{"iron", "iron-stick", 5},
-	{"copper", "copper-cable", 10},
+	{"iron", "iron-gear-wheel", 5, INGOT_TO_ITEM_SECONDS*2},
+	{"iron", "iron-stick", 5, INGOT_TO_ITEM_SECONDS},
+	{"copper", "copper-cable", 10, INGOT_TO_ITEM_SECONDS},
 } do
-	local metal, item, num = vals[1], vals[2], vals[3]
+	local metal, item, num, seconds = vals[1], vals[2], vals[3], vals[4]
 	local recipe = RECIPE[item]
 	recipe.ingredients = {{type="item", name="ingot-" .. metal .. "-hot", amount=1}}
 	recipe.results = {{type="item", name=item, amount=num}}
-	recipe.energy_required = INGOT_TO_ITEM_SECONDS
+	recipe.energy_required = seconds
 	recipe.auto_recycle = true
 	recipe.category = "crafting"
 end

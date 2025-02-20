@@ -54,14 +54,17 @@ for minerName, vals in pairs{
 	["burner-mining-drill"] = {
 		speed = 0.5, -- Originally 0.25
 		activeKW = 250, -- Originally 150
+		pollution = 25, -- Originally 12; doubling because speed is doubled.
 	},
 	["electric-mining-drill"] = {
 		speed = 1, -- Originally 0.5
 		activeKW = 200, -- Originally 90
+		pollution = 20, -- Originally 10.
 	},
 	["big-mining-drill"] = {
 		speed = 5, -- Originally 2.5
 		activeKW = 500, -- Originally 300
+		pollution = 80, -- Originally 40.
 	},
 	["pumpjack"] = {
 		activeKW = 100, -- Originally 90
@@ -75,4 +78,7 @@ for minerName, vals in pairs{
 		ent.energy_usage = vals.activeKW .. "kW"
 	end
 	-- No drain. Could add drain.
+	if vals.pollution then
+		ent.energy_source.emissions_per_minute.pollution = vals.pollution
+	end
 end

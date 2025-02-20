@@ -33,7 +33,7 @@ advancedPartsRecipe.ingredients = {
 }
 advancedPartsRecipe.results = {{type="item", name="advanced-parts", amount=20}}
 advancedPartsRecipe.category = "crafting"
-advancedPartsRecipe.energy_required = 5
+advancedPartsRecipe.energy_required = 10
 advancedPartsRecipe.allow_decomposition = true
 advancedPartsRecipe.allow_as_intermediate = true
 advancedPartsRecipe.enabled = false

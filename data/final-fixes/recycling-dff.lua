@@ -95,10 +95,12 @@ end
 -- Hide rate-trigger items' recycling recipes.
 -- Apparently hiding the recipe isn't enough, need to delete it.
 -- This happens bc the "quality" mod creates self-recycling recipes for all items that don't have recycling recipes.
-RECIPE["iron-gear-wheel-per-minute-recycling"] = nil
-RECIPE["electronic-circuit-per-minute-recycling"] = nil
-RECIPE["plastic-bar-per-minute-recycling"] = nil
-RECIPE["piercing-rounds-magazine-per-minute-recycling"] = nil
+local TECH_RATES = require("util.const.tech-rates")
+for _, vals in pairs(TECH_RATES) do
+	local name = vals.showPerMinute and (vals.item .. "-per-minute-recycling") or (vals.item .. "-per-second-recycling")
+	assert(RECIPE[name] ~= nil, "Expected recycling recipe for " .. name)
+	RECIPE[name] = nil
+end
 
 -- Hide recycling recipes for items that are not recyclable.
 for _, item in pairs{

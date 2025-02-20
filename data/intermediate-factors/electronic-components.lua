@@ -10,10 +10,14 @@ extend{electronicComponents}
 local basicRecipe = Recipe.make{
 	copy = "electronic-circuit",
 	recipe = "components-basic",
-	ingredients = {"glass", "carbon", "wiring"},
-	results = {{"electronic-components", 2}},
+	ingredients = {
+		{"glass", 1},
+		{"carbon", 1},
+		{"wiring", 2},
+	},
+	results = {{"electronic-components", 5}},
 	category = "electronics",
-	time = 5,
+	time = 2.5,
 	allow_decomposition = true,
 	allow_as_intermediate = true,
 	auto_recycle = false,
@@ -25,9 +29,13 @@ Tech.addRecipeToTech("components-basic", "electronics", 2)
 local recipeFromPlastic = Recipe.make{
 	copy = basicRecipe,
 	recipe = "components-from-plastic",
-	ingredients = {"carbon", "plastic-bar", "wiring"},
+	ingredients = {
+		{"carbon", 1},
+		{"plastic-bar", 1},
+		{"wiring", 1},
+	},
 	results = {{"electronic-components", 5}},
-	time = 5,
+	time = 2.5,
 	allow_decomposition = false,
 	allow_as_intermediate = false,
 	icons = {"electronic-components", "plastic-bar"},
@@ -45,7 +53,7 @@ local recipeFromGlassPlastic = Recipe.make{
 		{"wiring", 2},
 	},
 	results = {{"electronic-components", 10}},
-	time = 10,
+	time = 2.5,
 	icons = {"electronic-components", "glass", "plastic-bar"},
 }
 Tech.addRecipeToTech("components-from-glass-plastic", "plastics", 4)
@@ -63,7 +71,7 @@ local recipeFromSilicon = Recipe.make{
 		{"sulfuric-acid", 5},
 	},
 	results = {{"electronic-components", 20}},
-	time = 10,
+	time = 2.5,
 	icons = {"electronic-components", "glass", "plastic-bar", "silicon"},
 }
 Tech.addRecipeToTech("components-from-silicon", "processing-unit")

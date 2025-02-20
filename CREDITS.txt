@@ -10,7 +10,7 @@ This file is to keep track of other people's stuff that I've used.
 * Beacon Rebalance by wretlaw120 with some spritework by Sir-Lags-A-Lot - https://mods.factorio.com/mod/wret-beacon-rebalance-mod - Using high-res old-beacon graphics and code.
 * Gleba crop mods by LordMiguel (slipstacks, boompuffs, stingfronds) - Took ideas and bits of code for the Gleba crops.
 * Galdoc's Manufacturing - mods.factorio.com/mod/galdocs-manufacturing - Stole the idea of having intermediate factors with multiple recipes, though I'm simplifying it.
-* AdamoCarbon by ElAdamo - mods.factorio.com/mod/adamo-carbon - Stole several ideas for the petrochem system, plus some code and graphics.
+* Carbon by ElAdamo - mods.factorio.com/mod/carbon - Stole several ideas for the petrochem system, plus some code and graphics.
 * Roc's Rusting Iron by thesixthroc - https://mods.factorio.com/mod/Rocs-Rusting-Iron - for rusting iron idea, and idea for sulfuric acid derusting from NOiZE.
 * Biochemistry by Tenebrais - mods.factorio.com/mod/biochemistry - Electrophage graphics, and ideas.
 * Fulgoran Sludge by Tatticky - mods.factorio.com/mod/fulgoran-sludge - Sludge idea.

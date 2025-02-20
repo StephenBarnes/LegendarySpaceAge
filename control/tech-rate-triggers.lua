@@ -13,6 +13,8 @@ If we use a time-frame of 1 hour, each sample index gives (60 minutes / 300 = 0.
 	Ok, we'll do that.
 ]]
 
+local TECH_RATES = require("util.const.tech-rates")
+
 ---@param force LuaForce
 local function techIsNext(force, techName)
 	-- Returns true iff the force can research the tech, and has researched all its prereqs.
@@ -85,8 +87,8 @@ end
 ---@param numMinutes number
 local function updateRateTech(force, techName, producedItemName, subtractInputItemName, numMinutes)
 	if not techIsNext(force, techName) then return end
-	local requiredCount = (prototypes.technology[techName].research_unit_count * .97) * numMinutes
-		-- Small fudge factor reducing the amount required, since we only check every 10 seconds.
+	local requiredCount = TECH_RATES[techName].perSecond * (TECH_RATES[techName].numMinutes * 60 - 10)
+		-- 10 second grace period reducing the amount required, since we only check every 10 seconds.
 	local forceRate = productionOverLastNMinutes(force, producedItemName, numMinutes)
 	if subtractInputItemName then
 		forceRate = forceRate - productionOverLastNMinutes(force, subtractInputItemName, numMinutes, "output") -- Subtract out e.g. reheated iron ingots.
@@ -99,10 +101,9 @@ end
 local function onNthTick(e)
 	for _, force in pairs(game.forces) do
 		if #force.players > 0 then
-			updateRateTech(force, "automation-science-pack", "iron-gear-wheel", nil, 3)
-			updateRateTech(force, "logistic-science-pack", "electronic-circuit", nil, 5)
-			updateRateTech(force, "chemical-science-pack", "plastic-bar", nil, 5)
-			updateRateTech(force, "military-science-pack", "piercing-rounds-magazine", nil, 5)
+			for techName, vals in pairs(TECH_RATES) do
+				updateRateTech(force, techName, vals.item, vals.subtractInputItemName, vals.numMinutes)
+			end
 		end
 	end
 end

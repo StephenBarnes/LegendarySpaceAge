@@ -2,9 +2,8 @@
 local cokingTech = copy(TECH["lamp"])
 cokingTech.name = "coal-coking"
 Icon.set(cokingTech, "LSA/petrochem/coking-tech")
-cokingTech.prerequisites = {"automation-science-pack"}
+cokingTech.prerequisites = {"filtration-lake-water"}
 cokingTech.effects = {
-	{type = "unlock-recipe", recipe = "chemical-plant"},
 	{type = "unlock-recipe", recipe = "coal-coking"},
 }
 cokingTech.unit = {

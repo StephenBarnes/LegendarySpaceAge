@@ -226,17 +226,20 @@ lubricantRecipe.results = {
 lubricantRecipe.main_product = "lubricant"
 
 --[[ Modify recipe for plastic-bar.
-	5 syngas + 2 carbon + 1 sulfuric acid -> 5 plastic bars
+	20 syngas + 1 carbon + 5 sulfuric acid ---1s--> 1 plastic bar.
 		Syngas provides hydrogen, carbon is the backbone, and sulfuric acid helps drive polymerization.
+	Vanilla was 20 petroleum gas + 1 coal ---1s--> 2 plastic bars.
+		Compared to that, it's more expensive. But also you don't need as much plastic.
 ]]
-local plasticBarRecipe = RECIPE["plastic-bar"]
-plasticBarRecipe.ingredients = {
-	{ type = "item",  name = "carbon",        amount = 2 },
-	{ type = "fluid", name = "syngas",        amount = 50 },
-	{ type = "fluid", name = "sulfuric-acid", amount = 10 },
-}
-plasticBarRecipe.results = {
-	{type = "item", name = "plastic-bar", amount = 3},
+Recipe.edit{
+	recipe = "plastic-bar",
+	ingredients = {
+		{"carbon", 1},
+		{"syngas", 20, type="fluid"},
+		{"sulfuric-acid", 5},
+	},
+	time = 1,
+	resultCount = 1,
 }
 
 -- Modify recipe for explosives.

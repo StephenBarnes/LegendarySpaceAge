@@ -36,7 +36,7 @@ Recipe.edit{ -- I want these to be more complex to produce than yellow mags, but
 		{"gunpowder", 1},
 	},
 	resultCount = 1,
-	time = 5,
+	time = 2,
 }
 
 Recipe.edit{ -- Originally 2 steel plate + 2 plastic bar + 1 explosives.

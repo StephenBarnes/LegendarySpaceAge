@@ -19,7 +19,6 @@ TECH["automation"].research_trigger = {
 
 -- In the gap between automation and automation-science-pack, player does production challenge of like 150 hot iron per minute.
 TECH["automation-science-pack"].prerequisites = {"automation"}
-TECH["automation-science-pack"].unit = nil
 Tech.removeRecipeFromTech("lab", "electronics")
 Tech.addRecipeToTech("lab", "automation-science-pack")
 RECIPE["automation-science-pack"].ingredients = {
@@ -132,6 +131,9 @@ TECH["inserter-capacity-bonus-2"].unit = {count = 200, ingredients = {{"automati
 -- Remove tech for advanced combinators, and move selector combinator recipe.
 Tech.hideTech("advanced-combinators")
 Tech.addRecipeToTech("selector-combinator", "circuit-network", 4)
+-- Move circuit network to after electric-energy-distribution-1, so there's not so much right after green science.
+Tech.removePrereq("circuit-network", "logistic-science-pack")
+Tech.addTechDependency("electric-energy-distribution-1", "circuit-network")
 
 -- Add red circuit dependency to assembling machine 2 and lasers, so we can add it as ingredient.
 Tech.setPrereqs("automation-2", {"advanced-circuit"})
@@ -139,8 +141,8 @@ Tech.addTechDependency("advanced-circuit", "laser")
 -- Add blue circuit dependency to assembling machine 3, so we can add it as ingredient.
 Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine", "speed-module"})
 
--- Heating tower tech should be early.
-Tech.setPrereqs("heating-tower", {"steel-processing", "logistic-science-pack"})
+-- Heating tower tech should be fairly early.
+Tech.setPrereqs("heating-tower", {"steel-processing", "fluid-handling", "advanced-material-processing"})
 TECH["heating-tower"].unit = {count = 300, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 30}
 TECH["heating-tower"].research_trigger = nil
 
@@ -256,8 +258,16 @@ Tech.addTechDependency("advanced-circuit", "processing-unit")
 
 -- Remove steel prereq from some techs that don't really need steel, due to our factor intermediate system.
 Tech.removePrereq("electric-energy-distribution-1", "steel-processing")
-Tech.removePrereq("engine", "steel-processing") -- TODO change engine recipe
 Tech.removePrereq("solar-energy", "steel-processing") -- TODO change solar panel recipe
+Tech.removePrereq("engine", "steel-processing") -- TODO change engine recipe
+
+-- Move solar to after electric-energy-distribution-1.
+Tech.removePrereq("solar-energy", "logistic-science-pack")
+Tech.addTechDependency("electric-energy-distribution-1", "solar-energy")
+
+-- Move engine to after fluid handling.
+Tech.removePrereq("engine", "logistic-science-pack")
+Tech.addTechDependency("fluid-handling", "engine")
 
 -- TODO elevated rail tech should be a prereq for Vulcanus and Fulgora. So it should also not require purple science. Also it shouldn't have a concrete prereq either.
 Tech.addTechDependency("elevated-rail", "planet-discovery-vulcanus")

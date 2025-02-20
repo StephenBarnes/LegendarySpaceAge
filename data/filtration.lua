@@ -39,6 +39,7 @@ filtrationLakeWaterTech.icons = {
 }
 filtrationLakeWaterTech.prerequisites = {"automation-science-pack"}
 filtrationLakeWaterTech.effects = {
+	{type = "unlock-recipe", recipe = "chemical-plant"},
 	{type = "unlock-recipe", recipe = "offshore-pump"},
 	{type = "unlock-recipe", recipe = "pipe"},
 	{type = "unlock-recipe", recipe = "pipe-to-ground"},
