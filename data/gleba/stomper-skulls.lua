@@ -1,5 +1,5 @@
 --[[ This file adds autoplaces for stomper head shells, and changes their minable results.
-	So that the player can manually mine them for initial calcite, marrow, eggs, without needing to actually kill stompers.
+	So that the player can manually mine them for initial chitin, marrow, eggs, without needing to actually kill stompers.
 ]]
 
 -- Setting minable results. Originally they were 1-10 stone, 1-10 spoilage, 0-1 half-spoiled eggs. Same for all sizes.

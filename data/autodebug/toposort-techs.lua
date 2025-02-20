@@ -1,7 +1,7 @@
 ---@return string[]?
 local function toposortTechs()
 	-- Topologically sort the techs, storing the result in toposortedTechs.
-	-- If there's a cycle, return false.
+	-- If there's a cycle, return nil.
 	local currToposortedTechs = {}
 	local techsAdded = {} -- maps tech name to true/false for whether it's been added yet
 	local numTechs = 0

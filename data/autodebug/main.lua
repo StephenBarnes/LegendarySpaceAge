@@ -58,5 +58,3 @@ if RUN_FULL_DEBUG then
 		log("Legendary Space Age ERROR: one or more progression debug checks failed.")
 	end
 end
-
--- TODO maybe check that all recipes unlocked after advanced parts use advanced parts, not machine parts.

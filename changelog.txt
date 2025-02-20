@@ -4,7 +4,7 @@ Date: 2025-02-20
   Features:
     - Added "factor intermediates" like frame, structure, mechanism, etc. These are intermediate items with multiple alternative recipes, and replace ingredients in most building recipes, effectively allowing you to e.g. make pipes out of copper or transport belts out of plastic.
     - Added lots of stuff to Gleba - farmable stingfronds with cyclosome system, farmable slipstacks, farmable boompuffs, activated pentapod eggs, seed fertilization, petrophages, chitin, appendages, etc. Biochambers take damage while inactive. Removed metal bacteria, so there's no renewable sources of metals.
-    - Added deep mining drill, using graphics from Hurricane046.
+    - Added borehole mining drill, using graphics from Hurricane046.
     - Added char furnace, and reorganized early-game tech tree.
     - Added automatic progression debug script, for debugging. This is disabled by default; edit data/autodebug/main.lua to enable it.
     - Added shotgun turrets.

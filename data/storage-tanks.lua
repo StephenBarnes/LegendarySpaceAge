@@ -7,7 +7,7 @@ table.insert(TECH["fluid-handling"].effects, 3, {
 })
 RAW["storage-tank"]["large-storage-tank"].heating_energy = Gen.multWithUnits(RAW["storage-tank"]["storage-tank"].heating_energy, 3)
 
--- For inline storage tanks: remove the 4-way one, and remove the tech.
+-- For inline storage tanks: remove the 4-way one.
 RAW["storage-tank"]["tiny-4way-storage-tank"] = nil
 RECIPE["tiny-4way-storage-tank"] = nil
 ITEM["tiny-4way-storage-tank"] = nil
@@ -37,3 +37,5 @@ RECIPE["tiny-inline-storage-tank"].ingredients = {
 	{type = "item", name = "panel", amount = 2},
 }
 RECIPE["tiny-inline-storage-tank"].energy_required = 2
+
+-- TODO move this to infra/ folder.

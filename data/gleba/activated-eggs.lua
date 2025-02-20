@@ -35,13 +35,14 @@ eggActivationRecipe.ingredients = {
 eggActivationRecipe.results = {
 	{type = "item", name = "activated-pentapod-egg", amount = 1},
 }
+eggActivationRecipe.allow_productivity = false -- TODO add note to description.
 eggActivationRecipe.surface_conditions = nil
 Icon.clear(eggActivationRecipe) -- Remove icons so it defaults to the activated egg icon.
 eggActivationRecipe.order = eggActivationRecipe.order .. "-2"
 extend{eggActivationRecipe}
 
 -- Create new recipe for replicating activated eggs using slime and bioflux.
--- Sometimes produces activated eggs instead of regular eggs.
+-- Sometimes produces activated eggs also, to keep things interesting.
 -- Old recipe was: 30 nutrients + 1 egg + 60 water -> 2 eggs.
 local eggReplicationRecipe = copy(RECIPE["pentapod-egg"])
 --eggReplicationRecipe.name is left as pentapod-egg so it merges with item.
