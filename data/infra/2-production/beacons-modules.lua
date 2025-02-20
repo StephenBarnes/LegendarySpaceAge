@@ -40,6 +40,7 @@ In base game, EFFECTS were:
 ]]
 -- TODO rewrite module recipes, bonuses, etc. Probably including resin.
 -- TODO edit modules to instead be like +25% or +20%, not e.g. +30%.
+-- TODO give some of them effects on pollution. Eg quality module could also decrease pollution.
 local moduleData = {
 	speed = {
 		[1] = {

@@ -265,6 +265,11 @@ Tech.addTechDependency("elevated-rail", "planet-discovery-fulgora")
 Tech.removeSciencePack("production-science-pack", "elevated-rail")
 Tech.setPrereqs("elevated-rail", {"railway"})
 
+-- Assemblers have base effects.
+Tech.addTechDependency("quality-module", "automation-2")
+Tech.addTechDependency("productivity-module", "automation-3") -- Not currently necessary bc prod module ==> purple science ==> automation-3. But might later change the recipe of that.
+Tech.removePrereq("automation-3", "speed-module")
+
 -- TODO other science packs.
 
 -- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.
