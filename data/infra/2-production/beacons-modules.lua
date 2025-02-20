@@ -35,6 +35,7 @@ Maybe adjust this so that they start having special items in tier-2 already?
 Idea: make all tier-3 modules require electrolyte and superconductor. So you'll probably want to make the tier 2's on other planets (with special items), then export them to Fulgora to make tier 3's.
 
 In base game, EFFECTS were:
+	* TODO
 
 ]]
 -- TODO rewrite module recipes, bonuses, etc. Probably including resin.

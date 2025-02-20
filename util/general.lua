@@ -74,7 +74,7 @@ end
 ---@param n number
 ---@return number
 Export.round = function(x, n)
-	return math.floor(x * 10^n) / 10^n
+	return math.ceil(x * 10^n) / 10^n
 end
 
 

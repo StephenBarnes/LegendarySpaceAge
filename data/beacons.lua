@@ -24,10 +24,10 @@ For profiles:
 				Marginal benefit approaches 0 but is always positive. I think that's desired. If marginal benefit was ever negative, rather just make it zero.
 			I kind of want marginal benefit to drop faster. Could move k closer to 1, eg p(n) = n^(-0.666).
 		Suppose that instead of this power law p(n) = n^(-k), we want to asymptotically approach a total effect of T.
-			We could start at 1, then remove fraction f (say 0.5) the distance to T with each beacon.
-			So: p(1) = 1, and then subsequent values are p(n) = ((n-1)p(n-1) + (T - f(n-1)p(n-1)))/n.
-			Solving this recurrence relation produces: p(n) = (T + (1-T)((1-f)^(n-1)))/n.
-			For example maybe T = 3, f = 1/2, we get total values 1, 2, 2.5, 2.75, 2.875, etc.
+			We could start at 0, then remove fraction f (say 0.5) the distance to T with each beacon.
+				For example, with T = 2, f = 1, we total effect will be 1, 1.5, 1.75, 1.875, etc.
+				So p(0) = 0 and p(n) = ((n-1)p(n-1) + f(T - (n-1)p(n-1)))/n.
+				Solving this recurrence relation produces: p(n) = (T/n)(1 - (1-f)^n).
 	You can actually use negative values in the profile, though it breaks the graph in Factoriopedia. Eg {1, 0.7, 0, -0.1}.
 		And it actually works. Including eg inverting speed modules to produce a quality bonus and reduced energy consumption.
 	You can specify beacon_counter = "same_type" or "total". So could make basic beacon and advanced beacon not figure into each other's profiles.
@@ -40,8 +40,9 @@ For profiles:
 			For simplicity, give basic/advanced beacons 1 and 2 module slots respectively, with 100% effectivity, so effectively it's 1x and 2x effects.
 			You can fit at most around 10 advanced and 10 basic around a machine.
 			Total benefit should be around 13x with maximum beacons, so maybe 1*5 = 5 from basic, and 2*4 = 8 from advanced.
-			So maybe T = 5, f = 1/4 for basic beacons, and T = 4, f = 1/3 for advanced beacons.
-				Those f values mean diminishing returns only kick in with 3rd beacon of that type.
+			So maybe T = 5, f = 1/5 for both beacon types.
+			But that diminishes too slow IMO - it incentivizes like 8+8 beacons per machine which looks dumb.
+			So rather using T = 4, f = 1/2 for both. So first beacon has 2x power, 2nd has 1x, 3rd has 0.5x, and 4th has 0.25x. So more than like 5 beacons is almost never good.
 
 Might have been interesting to make one of the beacon types require lubricant or something. But seems BeaconPrototype only supports electric and void energy sources.
 ]]
@@ -132,54 +133,80 @@ basicEnt.placeable_by = {
 basicEnt.fast_replaceable_group = nil
 extend{basicEnt}
 
-local function asymptoticProfileEntry(n, T, f)
-	-- Returns effect of nth beacon, if we want to asymptotically approach T times the power of first beacon, with rate of approach f.
-	-- For example, T = 4, f = 1/4, the first beacon has effect 1, next one has f =(1/4) times the remaining distance to T which is 3, so 0.75.
-	local val = (T + (1-T)*((1-f)^(n-1)))/n
+------------------------------------------------------------------------
+--- FUNCTIONS FOR PROFILES
+
+local function zeroBasedAsymptoticEntry(n, T, f)
+	-- Returns effect of nth beacon, if we want to asymptotically approach T.
+	-- Each beacon pushes total effect towards T by the fraction f times the remaining distance to T.
+	-- For example, T = 4, f = 1/4 will give cumulative effect 1, 1.75, 2.3125, etc.
+	local val = (T * (1 - (1-f)^n))/n
 	return Gen.round(val, 4)
 end
-local function makeAsymptoticProfile(T, f)
-	local profile = {1}
-	for i = 2, 50 do
-		profile[i] = asymptoticProfileEntry(i, T, f)
+local function zeroBasedAsymptoticProfile(T, f)
+	local profile = {}
+	for i = 1, 50 do
+		profile[i] = zeroBasedAsymptoticEntry(i, T, f)
 	end
 	return profile
 end
-basicEnt.profile = makeAsymptoticProfile(5, 1/4)
+
+local function oneBasedAsymptoticEntry(n, T, f)
+	-- Returns effect of nth beacon, if we want to asymptotically approach T.
+	-- First beacon is strength 1, then each beacon pushes total effect towards T by the fraction f times the remaining distance to T.
+	-- For example, T = 4, f = 1/3 will give cumulative effect 1, 2, 2.67, etc.
+	local val = (T + (1-T)*((1-f)^(n-1)))/n
+	return Gen.round(val, 4)
+end
+local function oneBasedAsymptoticProfile(T, f)
+	local profile = {1}
+	for i = 2, 50 do
+		profile[i] = oneBasedAsymptoticEntry(i, T, f)
+	end
+	return profile
+end
+
+local function powerLawProfile(k)
+	local profile = {}
+	for i = 1, 50 do
+		profile[i] = Gen.round(i ^ (-k), 4)
+	end
+	return profile
+end
+
+------------------------------------------------------------------------
+--- EDIT BEACON PROFILES ETC.
+
+basicEnt.profile = oneBasedAsymptoticProfile(5, 1/4)
 basicEnt.module_slots = 1
 basicEnt.distribution_effectivity = 1
 basicEnt.distribution_effectivity_bonus_per_quality_level = 0.25
 basicEnt.collision_box = {{-0.95, -0.95}, {0.95, 0.95}}
 basicEnt.selection_box = {{-1, -1}, {1, 1}}
-basicEnt.supply_area_distance = 2
+basicEnt.supply_area_distance = 1 -- 1 tile away from each side.
 basicEnt.energy_usage = "200kW"
 basicEnt.allowed_effects = {"consumption", "speed", "productivity", "pollution", "quality"} -- Allow all modules! Including prod and quality.
 basicEnt.max_health = 100
 basicEnt.heating_energy = "200kW" -- vs 400kW for advanced.
 basicEnt.corpse = "medium-remnants"
 
---[[Could use asymptotic profile above, or n^(-k) profile below.
-local advancedProfile = {1}
-for i = 2, 50 do
-	advancedProfile[i] = Gen.round(i ^ (-0.6), 4)
-end
-advancedEnt.profile = advancedProfile]]
---advancedEnt.profile = copy(basicEnt.profile)
-advancedEnt.profile = makeAsymptoticProfile(4, 1/3)
+advancedEnt.profile = copy(basicEnt.profile)
 advancedEnt.module_slots = 2
 advancedEnt.distribution_effectivity = 1
 advancedEnt.distribution_effectivity_bonus_per_quality_level = 0.25
 advancedEnt.collision_box = {{-1.45, -1.45}, {1.45, 1.45}} -- Make collision box closer to boundaries, since supply area must be whole-number.
-advancedEnt.supply_area_distance = 3
+advancedEnt.supply_area_distance = 2
 --[[advancedEnt.icons_positioning = {{ -- Adjusting beacon icon positioning - for back when I gave them 8 module slots, now no longer needed.
 	---@diagnostic disable-next-line: assign-type-mismatch
 	inventory_index = defines.inventory.beacon_modules,
 	max_icons_per_row = 2,
 	shift = {0, 0.5}, -- Seems default is 0, 0.7.
 }}]]
-advancedEnt.energy_usage = "250kW"
+advancedEnt.energy_usage = "500kW"
 advancedEnt.allowed_effects = basicEnt.allowed_effects
 advancedEnt.graphics_set.no_modules_tint = {1, 1, 0} -- Not red, since that's now for productivity.
+
+------------------------------------------------------------------------
 
 -- Give beacon-wave colors to the prod and quality modules, since they're now allowed in beacons.
 -- Also show the graphics of the modules "plugged in" on beacons.
