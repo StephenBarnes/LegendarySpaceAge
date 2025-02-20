@@ -63,27 +63,11 @@
 		, "! slipstacks"
 		, "! boompuff-agriculture"
 
-		, "! GROUP-qol-optional"
-		, "factoryplanner"
-		, "simpleadjustableinserters"
-		, "FilterHelper"
-		, "thruster-control-behavior"
-		, "captains-log"
-		, "SpidertronEnhancements"
-		, "show-max-underground-distance"
-		, "CursorEnhancements"
-
-		, "! GROUP-graphics-optional"
-		, "elevated-rails-recolor"
-		, "fire-lights"
-		, "distant-misfires"
-		, "visible-planets"
+		, "? elevated-rails-recolor"
+		, "? fire-lights"
+		, "? distant-misfires"
+		, "? visible-planets"
 		, "? gore-TEMPORARILY-DISABLED-PENDING-BUGFIX"
-
-		, "! GROUP-stuff-for-dev-only"
-		, "EditorExtensions"
-		, "? WriteRecipesByMod"
-		, "? no-graphics"
 	],
 	"description": "IN DEVELOPMENT. Overhaul modpack for Space Age veterans seeking a new challenge."
 }

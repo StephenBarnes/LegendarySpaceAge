@@ -13,6 +13,10 @@ Tech.addRecipeToTech("po-small-electric-fuse", "electric-energy-distribution-1",
 RECIPE["spent-filter-recycling"].results = RECIPE["filter-recycling"].results
 
 -- Spidertron Enhancements
-RAW["character-corpse"]["spidertron-enhancements-corpse"].hidden_in_factoriopedia = true
-RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].hidden_in_factoriopedia = true
-RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].factoriopedia_alternative = "spidertron"
+if RAW["character-corpse"]["spidertron-enhancements-corpse"] then
+	RAW["character-corpse"]["spidertron-enhancements-corpse"].hidden_in_factoriopedia = true
+end
+if RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"] then
+	RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].hidden_in_factoriopedia = true
+	RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].factoriopedia_alternative = "spidertron"
+end
