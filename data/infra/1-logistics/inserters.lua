@@ -26,3 +26,5 @@ RECIPE["stack-inserter"].ingredients = {
 	{type = "item", name = "bulk-inserter", amount = 1},
 	{type = "item", name = "neurofibril", amount = 2},
 }
+
+-- TODO edit inserter operating characteristics, eg make yellow inserters just exactly 1 item per second.
