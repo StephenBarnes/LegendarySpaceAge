@@ -114,9 +114,13 @@ Recipe.edit{
 }
 
 -- Foundry: 40 tungsten carbide + 40 shielding + 40 structure + 4 mechanism
-RECIPE["foundry"].ingredients = {
-	{type="item", name="tungsten-carbide", amount=40},
-	{type="item", name="shielding", amount=40},
-	{type="item", name="structure", amount=40},
-	{type="item", name="mechanism", amount=4},
+Recipe.edit{
+	recipe = "foundry",
+	ingredients = {
+		{"tungsten-carbide", 40},
+		{"shielding", 40},
+		{"structure", 40},
+		{"mechanism", 4},
+	},
+	category = "crafting", -- Don't allow crafting foundries in foundry.
 }

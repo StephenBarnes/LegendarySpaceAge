@@ -41,7 +41,7 @@ ent.energy_source.emissions_per_minute = {
 ent.ignore_output_full = false -- Stop mining when output reaches count 50.
 ent.crafting_categories = {"deep-drill"}
 ent.surface_conditions = {{property = "surface-stability", min = 80}}
-ent.energy_usage = "5MW"
+ent.energy_usage = "4800kW" -- So it's 5MW with drain.
 ent.energy_source.drain = "200kW"
 ent.show_recipe_icon = false
 ent.show_recipe_icon_on_map = false

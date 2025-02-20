@@ -48,3 +48,31 @@ Recipe.edit{
 	},
 	time = 10,
 }
+
+-- I want to edit miner speeds to be more regular and generally faster, to speed up the game, especially early game.
+for minerName, vals in pairs{
+	["burner-mining-drill"] = {
+		speed = 0.5, -- Originally 0.25
+		activeKW = 250, -- Originally 150
+	},
+	["electric-mining-drill"] = {
+		speed = 1, -- Originally 0.5
+		activeKW = 200, -- Originally 90
+	},
+	["big-mining-drill"] = {
+		speed = 5, -- Originally 2.5
+		activeKW = 500, -- Originally 300
+	},
+	["pumpjack"] = {
+		activeKW = 100, -- Originally 90
+	},
+} do
+	local ent = RAW["mining-drill"][minerName]
+	if vals.speed then
+		ent.mining_speed = vals.speed
+	end
+	if vals.activeKW then
+		ent.energy_usage = vals.activeKW .. "kW"
+	end
+	-- No drain. Could add drain.
+end
