@@ -17,9 +17,9 @@ Recipe.edit{
 Recipe.edit{
 	recipe = "radar",
 	ingredients = {
+		{"electronic-components", 10},
+		{"electronic-circuit", 5},
 		{"frame", 2},
-		{"panel", 5},
-		{"electronic-components", 5},
 		{"mechanism", 1},
 	},
 	time = 10,

@@ -39,6 +39,33 @@ recipeFromIron.auto_recycle = false
 Icon.set(recipeFromIron, {"frame", "iron-stick"})
 extend{recipeFromIron}
 
+-- Create recipe: 5 iron rod + 1 steel plate -> 1 frame.
+-- With early recipes, this needs 2 iron ingots, so it's basically the same raw materials, plus coal to make steel. But it needs fewer machines total. And then later you get more efficient recipes for making steel.
+local recipeFromIronAndSteel = Recipe.make{
+	copy = recipeFromIron,
+	recipe = "frame-from-iron-and-steel",
+	ingredients = {
+		{"iron-stick", 5},
+		{"steel-plate", 1},
+	},
+	time = 2,
+	icons = {"frame", "steel-plate", "iron-stick"},
+}
+Tech.addRecipeToTech("frame-from-iron-and-steel", "steel-processing")
+
+-- Create recipe from steel: 5 steel plate -> 2 frame
+local recipeFromSteel = Recipe.make{
+	copy = recipeFromIronAndSteel,
+	recipe = "frame-from-steel",
+	ingredients = {
+		{"steel-plate", 5},
+	},
+	results = {{"frame", 2}},
+	time = 5,
+	icons = {"frame", "steel-plate"},
+}
+Tech.addRecipeToTech("frame-from-steel", "steel-processing")
+
 -- Create recipe from tubules: 8 tubules + 20 slime -> 1 frame
 local recipeFromTubules = copy(recipeFromIron)
 recipeFromTubules.name = "frame-from-tubules"
@@ -60,5 +87,7 @@ Gen.order({
 	frame,
 	recipeFromWood,
 	recipeFromIron,
+	recipeFromIronAndSteel,
+	recipeFromSteel,
 	recipeFromTubules,
 }, "frame")
