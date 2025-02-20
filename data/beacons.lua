@@ -35,10 +35,11 @@ For profiles:
 		In 2.0, with 8 or 12 beacons, that's 8.5 or 10.5 effect.
 			This is counting 1 beacon as 3 effect, since it's 1.5 effectivity times 2 module slots.
 		Note I'm making beacon ranges lower, so maybe should be easier to reach asymptote. Maybe around 4 advanced beacons, 2 basic beacons.
-		(Also I'm giving them 4 or 8 module slots with 50% effectivity, so effectively it's 2x and 4x effects.)
+		(Also I'm giving them 1 or 2 module slots with 100% effectivity, so effectively it's 1x and 2x effects.)
 		So maybe:
-			Both types of beacons at T = 5, f = 1/4.
-			Then at most you could fit like 5 basic and 5 advanced. Total benefit is 2*187% + 4*187% = 11.22.
+			You can fit at most around 10 advanced and 10 basic around a machine.
+			Total benefit should be around 11x with maximum beacons, so maybe 1*5 = 5 from basic, and 2*3 = 6 from advanced.
+			So maybe T = 5, f = 1/4 for basic beacons, and T = 3, f = 1/4 for advanced beacons.
 
 Might have been interesting to make one of the beacon types require lubricant or something. But seems BeaconPrototype only supports electric and void.
 ]]
@@ -47,6 +48,8 @@ Might have been interesting to make one of the beacon types require lubricant or
 local advancedEnt = RAW.beacon.beacon
 local basicEnt = copy(advancedEnt)
 basicEnt.name = "basic-beacon"
+local graphicsScale = 0.333 -- Beacon rebalance uses 0.5. I'm reducing it to make them 2x2.
+local animationSpeed = 0.25 -- Beacon rebalance uses 0.5.
 basicEnt.graphics_set = {
 	module_icons_suppressed = false,
 	animation_list = {
@@ -59,16 +62,16 @@ basicEnt.graphics_set = {
                         filename = "__LegendarySpaceAge__/graphics/beacons/beacon-base.png",
 						width = 232,
 						height = 186,
-						shift = util.by_pixel(11, 1.5),
-						scale = 0.5,
+						shift = util.by_pixel(22*graphicsScale, 3*graphicsScale),
+						scale = graphicsScale,
                     },
                     { -- Shadow
                         filename = "__LegendarySpaceAge__/graphics/beacons/beacon-base-shadow.png",
 						width = 232,
 						height = 186,
-						shift = util.by_pixel(11, 1.5),
+						shift = util.by_pixel(22*graphicsScale, 3*graphicsScale),
 						draw_as_shadow = true,
-						scale = 0.5,
+						scale = graphicsScale,
                     }
                 }
             }
@@ -84,9 +87,9 @@ basicEnt.graphics_set = {
 						height = 100,
 						line_length = 8,
 						frame_count = 32,
-						animation_speed = 0.5,
-						shift = util.by_pixel(-1, -55),
-						scale = 0.5,
+						animation_speed = animationSpeed,
+						shift = util.by_pixel(-2*graphicsScale, -110*graphicsScale),
+						scale = graphicsScale,
                     },
                     { -- Shadow
                         filename = "__LegendarySpaceAge__/graphics/beacons/beacon-antenna-shadow.png",
@@ -94,10 +97,10 @@ basicEnt.graphics_set = {
 						height = 98,
 						line_length = 8,
 						frame_count = 32,
-						animation_speed = 0.5,
-						shift = util.by_pixel(100.5, 15.5),
+						animation_speed = animationSpeed,
+						shift = util.by_pixel(201*graphicsScale, 31*graphicsScale),
 						draw_as_shadow = true,
-						scale = 0.5,
+						scale = graphicsScale,
                     },
                 },
             },
@@ -112,7 +115,7 @@ basicEnt.water_reflection = {
         height = 28,
         shift = util.by_pixel(0, 55),
         variation_count = 1,
-        scale = 5,
+        scale = 10 * graphicsScale,
     },
     rotate = false,
     orientation_to_variation = false
@@ -123,21 +126,8 @@ basicEnt.placeable_by = {
     item = "basic-beacon",
     count = 1
 }
+basicEnt.fast_replaceable_group = nil
 extend{basicEnt}
-
--- Create item.
-local basicItem = copy(ITEM.beacon)
-basicItem.name = "basic-beacon"
-basicItem.icon = "__LegendarySpaceAge__/graphics/beacons/icon.png"
-basicItem.place_result = "basic-beacon"
-extend{basicItem}
-
--- Create recipe.
-local basicRecipe = Recipe.make{
-	copy = "beacon",
-	recipe = "basic-beacon",
-	resultCount = 1,
-}
 
 local function asymptoticProfileEntry(n, T, f)
 	-- Returns effect of nth beacon, if we want to asymptotically approach T times the power of first beacon, with rate of approach f.
@@ -153,11 +143,12 @@ local function makeAsymptoticProfile(T, f)
 	return profile
 end
 basicEnt.profile = makeAsymptoticProfile(5, 1/4)
-basicEnt.module_slots = 4
-basicEnt.distribution_effectivity = 0.5
+basicEnt.module_slots = 1
+basicEnt.distribution_effectivity = 1
 basicEnt.distribution_effectivity_bonus_per_quality_level = 0.25
-basicEnt.collision_box = {{-1.45, -1.45}, {1.45, 1.45}} -- Make collision box closer to boundaries, since supply area must be whole-number.
-basicEnt.supply_area_distance = 1
+basicEnt.collision_box = {{-0.95, -0.95}, {0.95, 0.95}}
+basicEnt.selection_box = {{-1, -1}, {1, 1}}
+basicEnt.supply_area_distance = 2
 basicEnt.energy_usage = "100kW"
 
 --[[Could use asymptotic profile above, or n^(-k) profile below.
@@ -166,20 +157,34 @@ for i = 2, 50 do
 	advancedProfile[i] = Gen.round(i ^ (-0.6), 4)
 end
 advancedEnt.profile = advancedProfile]]
---advancedEnt.profile = makeAsymptoticProfile(7, 1/6)
-advancedEnt.profile = copy(basicEnt.profile)
-advancedEnt.module_slots = 8
-advancedEnt.distribution_effectivity = 0.5
+--advancedEnt.profile = copy(basicEnt.profile)
+advancedEnt.profile = makeAsymptoticProfile(3, 1/4)
+advancedEnt.module_slots = 2
+advancedEnt.distribution_effectivity = 1
 advancedEnt.distribution_effectivity_bonus_per_quality_level = 0.25
-advancedEnt.collision_box = {{-1.45, -1.45}, {1.45, 1.45}}
+advancedEnt.collision_box = {{-1.45, -1.45}, {1.45, 1.45}} -- Make collision box closer to boundaries, since supply area must be whole-number.
 advancedEnt.supply_area_distance = 3
-advancedEnt.icons_positioning = {{ 
+--[[advancedEnt.icons_positioning = {{ -- Adjusting beacon icon positioning - for back when I gave them 8 module slots, now no longer needed.
 	---@diagnostic disable-next-line: assign-type-mismatch
 	inventory_index = defines.inventory.beacon_modules,
-	max_icons_per_row = 4,
-	shift = {0, 0.3}, -- Seems default is 0, 0.7.
-}}
+	max_icons_per_row = 2,
+	shift = {0, 0.5}, -- Seems default is 0, 0.7.
+}}]]
 advancedEnt.energy_usage = "1MW"
+
+-- Create item.
+local basicItem = copy(ITEM.beacon)
+basicItem.name = "basic-beacon"
+basicItem.icon = "__LegendarySpaceAge__/graphics/beacons/icon.png"
+basicItem.place_result = "basic-beacon"
+extend{basicItem}
+
+-- Create recipe. Will set the details in infra/ file.
+local basicRecipe = Recipe.make{
+	copy = "beacon",
+	recipe = "basic-beacon",
+	resultCount = 1,
+}
 
 -- Create tech for basic beacons, and edit module tech and advanced beacon tech.
 local advancedTech = TECH["effect-transmission"]
@@ -197,11 +202,9 @@ basicTech.unit = copy(TECH["modules"].unit)
 basicTech.unit.count = 2 * basicTech.unit.count
 extend{basicTech}
 Tech.setPrereqs("modules", {"logistic-science-pack"})
-advancedTech.prerequisites = {"basic-beacons", "electromagnetic-science-pack"}
+advancedTech.prerequisites = {"basic-beacons", "processing-unit"}
 advancedTech.unit.ingredients = {
 	{"automation-science-pack", 1},
 	{"logistic-science-pack", 1},
 	{"chemical-science-pack", 1},
-	{"space-science-pack", 1},
-	{"electromagnetic-science-pack", 1},
 }

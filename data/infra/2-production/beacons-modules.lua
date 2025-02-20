@@ -13,18 +13,31 @@ Recipe.edit{
 	recipe = "beacon",
 	ingredients = {
 		{"frame", 5},
-		{"processing-unit", 10},
-		{"superconductor", 5},
-		{"electrolyte", 10},
+		{"processing-unit", 20},
+		{"sensor", 10},
 	},
 	time = 20,
 }
 
+--[[ Table with new values for modules.
+In base game, recipes were:
+	* 5 green + 5 red -> tier-1
+	* 5 red + 5 blue + 4 tier-1 -> tier-2
+	* 5 red + 5 blue + 4 tier-2 + special item -> tier-3.
+	Special items:
+		speed: 1 tungsten carbide
+		efficiency: 5 spoilage
+		productivity: 1 biter egg
+		quality: 1 superconductor
+Maybe adjust this so that they start having special items in tier-2 already?
+
+Idea: make all tier-3 modules require electrolyte and superconductor. So you'll probably want to make the tier 2's on other planets (with special items), then export them to Fulgora to make tier 3's.
+]]
+-- TODO rewrite module recipes, bonuses, etc. Probably including resin.
+-- TODO edit modules to instead be like +25% or +20%, not e.g. +30%.
 local moduleData = {
 	speed = {
 		[1] = {
-			ingredients = {
-			},
 		},
 		[2] = {
 		},
@@ -56,10 +69,28 @@ local moduleData = {
 		},
 	},
 }
--- TODO rewrite module recipes, bonuses, etc. Probably including resin.
--- TODO edit modules to instead be like +25% or +20%, not e.g. +30%.
-for _, moduleType in pairs{"speed", "efficiency", "productivity"} do
-	Recipe.addIngredients(moduleType.."-module", {{type = "item", name = "resin", amount = 1}})
+-- Same recipe for all tier-1 modules.
+for moduleType, tiers in pairs(moduleData) do
+	tiers[1].ingredients = {
+		{"electronic-circuit", 5},
+		{"sensor", 1},
+		{"wiring", 1},
+	}
+	tiers[1].time = 10
+end
+-- Apply these new values.
+for moduleType, tiers in pairs(moduleData) do
+	for tier, vals in pairs(tiers) do
+		local moduleName = moduleType.."-module"
+		if tier ~= 1 then moduleName = moduleName.."-"..tier end
+		if vals.ingredients then
+			Recipe.edit{
+				recipe = moduleName,
+				ingredients = vals.ingredients,
+				time = vals.time,
+			}
+		end
+	end
 end
 
 
