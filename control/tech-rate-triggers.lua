@@ -50,7 +50,7 @@ end
 ---@param progress number
 local function setProgress(force, techName, progress)
 	if progress < 0 then progress = 0 end
-	if progress > 1 then
+	if progress >= 1 then
 		force.technologies[techName].saved_progress = 0.999
 		if #force.research_queue == 0 then
 			force.add_research(techName)
@@ -68,7 +68,7 @@ local function setProgress(force, techName, progress)
 			force.research_queue = newResearchQueue
 			force.research_progress = 1
 		end
-	else
+	elseif progress > 0 then
 		force.technologies[techName].saved_progress = progress
 		if #force.research_queue == 0 then
 			force.add_research(techName)
@@ -76,6 +76,12 @@ local function setProgress(force, techName, progress)
 		elseif #force.research_queue > 0 and force.research_queue[1].name == techName then
 			-- The progress readout doesn't update unless we also set this.
 			force.research_progress = progress
+		end
+	else -- progress == 0
+		force.technologies[techName].saved_progress = 0
+		if #force.research_queue > 0 and force.research_queue[1].name == techName then
+			-- The progress readout doesn't update unless we also set this.
+			force.research_progress = 0
 		end
 	end
 end
