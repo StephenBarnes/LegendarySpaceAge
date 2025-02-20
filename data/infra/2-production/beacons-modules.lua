@@ -20,7 +20,8 @@ Recipe.edit{
 }
 
 --[[ Table with new values for modules.
-In base game, recipes were:
+
+In base game, RECIPES were:
 	* 5 green + 5 red -> tier-1
 	* 5 red + 5 blue + 4 tier-1 -> tier-2
 	* 5 red + 5 blue + 4 tier-2 + special item -> tier-3.
@@ -32,6 +33,9 @@ In base game, recipes were:
 Maybe adjust this so that they start having special items in tier-2 already?
 
 Idea: make all tier-3 modules require electrolyte and superconductor. So you'll probably want to make the tier 2's on other planets (with special items), then export them to Fulgora to make tier 3's.
+
+In base game, EFFECTS were:
+
 ]]
 -- TODO rewrite module recipes, bonuses, etc. Probably including resin.
 -- TODO edit modules to instead be like +25% or +20%, not e.g. +30%.

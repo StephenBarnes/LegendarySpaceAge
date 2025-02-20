@@ -12,6 +12,7 @@ biochamber.production_health_effect = {
 	not_producing = -(30/MINUTES),
 	producing = (100/MINUTES),
 }
+biochamber.damaged_trigger_effect = nil -- Remove the effect shown when damaged. Otherwise we could have a hundred biochambers doing the same particle effect, might cause lag, IDK.
 biochamber.repair_speed_modifier = 0.5
 	-- 50% slower repair. Seems they added this for stone walls originally.
 	-- Tried setting this to 0, but bots will still use up repair kits trying to repair it.
