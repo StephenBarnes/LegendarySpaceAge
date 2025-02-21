@@ -27,4 +27,9 @@ RECIPE["stack-inserter"].ingredients = {
 	{type = "item", name = "neurofibril", amount = 2},
 }
 
+-- Allow burner inserters to leech. Unclear why this is off by default.
+RAW.inserter["burner-inserter"].allow_burner_leech = true
+
 -- TODO edit inserter operating characteristics, eg make yellow inserters just exactly 1 item per second.
+
+-- TODO edit inserters' max healths, they're very high and vary seemingly randomly between inserters.

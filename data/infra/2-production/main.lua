@@ -19,3 +19,5 @@ RECIPE["solar-panel"].ingredients = {
 	{type = "item", name = "frame", amount = 2},
 }
 RECIPE["solar-panel"].energy_required = 10
+
+RAW["solar-panel"]["solar-panel"].max_health = 50 -- From default 200. It's fragile.

@@ -10,6 +10,8 @@ Adjust recipes:
 * For splitter, same thing - remove nesting, simplify recipes, make them hand-craftable. For ingredients, require 2 belts of that tier, plus sensor and mechanism. Nothing else, rather put it into the transport belt recipes.
 
 TODO: compare all these recipes to base-game, and number per belt.
+
+TODO edit max healths of belts/undergrounds/splitters, they're very high and vary seemingly randomly.
 ]]
 for _, vals in pairs{
 	{

@@ -39,9 +39,6 @@ for _, recipeName in pairs{
 	RECIPE[recipeName].surface_conditions = nil
 end
 
--- Aquilo should have less solar power in space, so you need a nuclear reactor.
-RAW.planet.aquilo.solar_power_in_space = .05 -- Changed 60% -> 5%.
-
 -- Search for things requiring pressure over 10hPa, and change them to require oxygen-pressure over 10hPa.
 for _, typeName in pairs{
 	"recipe",
@@ -119,13 +116,22 @@ for _, stabilityTypeKey in pairs{
 	})
 end
 
--- Update solar power in atmosphere for planets. Generally reducing it to make solar power less OP on planets. Still leaving it powerful for space platforms.
-for planetName, solarInAtmosphere in pairs{
-	vulcanus = 200, -- 400 to 200
-	gleba = 25, -- 50 to 25
-	nauvis = 50, -- 100 to 50
-	fulgora = 10, -- 20 to 10
-	aquilo = 2, -- Increasing 1% to 2% so it's a bit easier to get started.
+
+------------------------------------------------------------------------
+--- Solar power.
+--- I want to generally make solar infeasible on planets, so that it's only worth it on space platforms. But I don't want to make it like 50% on Nauvis surface, rather keep it at 100% on Nauvis surface and then reduce solar panel's power field. And then make it higher in space.
+
+-- Reduce energy from solar panels, from 60kW default to 20kW.
+RAW["solar-panel"]["solar-panel"].production = "20kW"
+
+-- Update solar power in atmosphere for planets, and in space. Generally keeping it the same on the ground, since solar panels are made 3x weaker above already, and I want to keep Nauvis ground as the 100% standard. For space platforms, I'm buffing it by about 2x so it's still fairly powerful in space.
+for planetName, groundAndSpace in pairs{
+	vulcanus = {400, 1000}, -- Default 400, 600.
+	gleba = {50, 500}, -- Default 50, 200.
+	nauvis = {100, 600}, -- Default 100, 300.
+	fulgora = {20, 250}, -- Default 20, 120.
+	aquilo = {5, 5}, -- Default 1, 60. Increasing ground 1% to 5% so it's easier to get started. Reducing space 60->5 so you need a nuclear reactor.
 } do
-	RAW.planet[planetName].surface_properties["solar-power"] = solarInAtmosphere
+	RAW.planet[planetName].surface_properties["solar-power"] = groundAndSpace[1]
+	RAW.planet[planetName].solar_power_in_space = groundAndSpace[2]
 end

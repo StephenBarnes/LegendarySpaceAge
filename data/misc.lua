@@ -1,22 +1,5 @@
 -- TODO move most of this out to other files.
 
--- Add electric energy distribution as prereq to Fulgora and Vulcanus, since you can't get wood for wooden poles there, and now you can't even research electric energy distribution there since you can't build labs.
-Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-fulgora")
-Tech.addTechDependency("electric-energy-distribution-1", "planet-discovery-vulcanus")
-
--- Make some recipe times more sane.
-RECIPE["stone-brick"].energy_required = 2 -- Originally 3.2.
-for _, recipeName in pairs{"hazard-concrete", "refined-hazard-concrete"} do
-	RECIPE[recipeName].energy_required = 10 -- Originally 0.25.
-end
-
--- Increase storage of starting base, so there's enough space for all starting items.
-RAW.container["crash-site-spaceship"].inventory_size = 10
-RAW.container["crash-site-spaceship-wreck-big-2"].inventory_size = 5
-RAW.container["crash-site-spaceship-wreck-medium-1"].inventory_size = 5
-
--- TODO make module recipes more complex -- add resin, and maybe make tier 2 and tier 3 require stuff from separate planets.
-
 -- TODO tech tree change - add nuclear science, move nuclear stuff to after first 3 planetary sciences, and then change all costs to include all science packs they're dependent on.
 
 -- Edit items from mining boulders - more niter, more stone, more coal.
@@ -37,9 +20,6 @@ RAW["simple-entity"]["big-sand-rock"].minable.results = {
 }
 -- TODO also boulders etc in other places, eg Vulcanus needs niter.
 
--- Allow burner inserters to leech. Unclear why this is off by default.
-RAW.inserter["burner-inserter"].allow_burner_leech = true
-
 -- Diurnal Dynamics: hide flare from factoriopedia, since we're disabling it using mod setting.
 RAW.capsule["data-dd-flare-capsule"].hidden_in_factoriopedia = true
 RECIPE["data-dd-flare-capsule"].hidden_in_factoriopedia = true
@@ -51,6 +31,7 @@ RAW["smoke-with-trigger"]["data-dd-flare-cloud"].hidden = true
 -- Reduce health of furnaces and pipes, to encourage building walls.
 RAW.pipe.pipe.max_health = 35 -- Reduced from 100 to 35. Wall is 350.
 FURNACE["stone-furnace"].max_health = 100 -- Reduced from 200 to 100.
+-- TODO rather go through all infra and edit healths. A lot of them are too high or low.
 
 -- Make bots faster. This makes them a bit ridiculous at full +6 bot speed tech, but that's fine.
 RAW["construction-robot"]["construction-robot"].speed = 0.12 -- Was 0.06
