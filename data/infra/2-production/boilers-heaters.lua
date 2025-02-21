@@ -51,12 +51,24 @@ Recipe.edit{
 
 Recipe.edit{
 	recipe = "steam-engine",
-	time = 5,
 	ingredients = {
+		{"frame", 1},
 		{"electronic-components", 5},
-		{"mechanism", 5},
+		{"mechanism", 2},
 		{"fluid-fitting", 2},
 	},
+	time = 5,
+}
+Recipe.edit{
+	recipe = "steam-turbine",
+	ingredients = {
+		{"frame", 5},
+		{"electronic-components", 10},
+		{"mechanism", 10},
+		{"fluid-fitting", 10},
+		{"shielding", 5}, -- High-pressure and high-temperature steam.
+	},
+	time = 10,
 }
 
 Recipe.edit{
@@ -95,15 +107,6 @@ Recipe.edit{
 		{"shielding", 2},
 		{"fluid-fitting", 2},
 		{"heat-pipe", 2},
-	},
-	time = 5,
-}
-Recipe.edit{
-	recipe = "steam-turbine",
-	ingredients = {
-		{"electronic-components", 10},
-		{"mechanism", 10},
-		{"fluid-fitting", 5},
 	},
 	time = 5,
 }
