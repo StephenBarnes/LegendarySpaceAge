@@ -39,7 +39,7 @@ for _, vals in pairs{
 		},
 		time = 10,
 		effects = {
-			quality = 0.5,
+			quality = 0.5, -- +5%
 		},
 	},
 	{
@@ -58,8 +58,8 @@ for _, vals in pairs{
 		},
 		time = 20,
 		effects = {
-			productivity = 0.1, -- Seems to be fraction (0-1).
-			quality = -1,
+			productivity = 0.05, -- It's a fraction 0-1.
+			quality = 0.5, -- +5%
 		},
 	}
 } do

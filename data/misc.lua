@@ -42,3 +42,7 @@ TECH["logistics"].localised_description = {"technology-description.logistics-1"}
 
 -- Beacon interface should be hidden. TODO move to file for apprentice foundry.
 Item.hide("beacon-interface--beacon")
+
+-- Experiment, TODO remove. Checking if modules can be made spoilable, and that works correctly, and they can be inserted/removed using inserters.
+RAW.module["efficiency-module"].spoil_ticks = 60 * 10
+RAW.module["efficiency-module"].spoil_result = "spoilage"

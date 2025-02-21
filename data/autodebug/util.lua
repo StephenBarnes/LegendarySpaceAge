@@ -30,6 +30,7 @@ Export.shouldIgnoreRecipe = function(recipe)
 	if string.find(recipe.name, "^ee-") then
 		return true
 	end
+	if recipe.hidden then return true end
 	return recipesToIgnore[recipe.name]
 end
 
