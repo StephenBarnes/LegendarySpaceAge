@@ -46,8 +46,8 @@ for _, vals in pairs{
 		name = "assembling-machine-3",
 		-- Vanilla was speed 1.25, 375kW, 2 pollution.
 		speed = 2,
-		drainKW = 500,
-		activeKW = 1000,
+		drainKW = 250,
+		activeKW = 500,
 		pollution = 20,
 		ingredients = {
 			{"frame", 5},

@@ -1,5 +1,6 @@
 -- Modifying the gas furnace, from Adamo's Gas Furnace mod.
 local gasFurnaceEnt = FURNACE["gas-furnace"]
+local item = ITEM["gas-furnace"]
 
 -- Remove fluid inputs and outputs.
 gasFurnaceEnt.fluid_boxes = nil
@@ -8,6 +9,13 @@ gasFurnaceEnt.fluid_boxes = nil
 gasFurnaceEnt.energy_source.fluid_box.pipe_connections = {
 	{ flow_direction = "input-output", position = { 0.5, -0.5 }, direction = 4 },
 	{ flow_direction = "input-output", position = { -0.5, -0.5 }, direction = 12 },
+}
+
+-- Change icon to be consistent with other fluid-fuelled stuff.
+item.icons = {
+	--{icon = "__base__/graphics/icons/steel-furnace.png", icon_size = 64, scale = 0.5, shift = {2, 0}},
+	{icon = "__gas-furnace__/icon.png", icon_size = 32, scale = 1, shift = {2, 0}},
+	{icon = FLUID["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = FLUID["petroleum-gas"].icons[1].tint},
 }
 
 -- Show arrows for fuel pipes.
