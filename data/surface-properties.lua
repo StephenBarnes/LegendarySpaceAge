@@ -51,6 +51,7 @@ for _, typeName in pairs{
 	"boiler",
 	"reactor",
 	"fluid-turret",
+	"inserter",
 } do
 	for _, thing in pairs(RAW[typeName]) do
 		if thing.surface_conditions ~= nil then

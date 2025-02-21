@@ -45,6 +45,8 @@ TECH["steam-power"].effects = {
 	{type = "unlock-recipe", recipe = "electric-boiler"},
 	{type = "unlock-recipe", recipe = "steam-engine"},
 }
+-- Remove tech for electric boiler, rather putting recipe in steam-power tech.
+Tech.hideTech("electric-boiler")
 
 -- Tank ship shouldn't depend on Fluid handling 2. 
 Tech.setPrereqs("tank_ship", {"automated_water_transport", "fluid-handling"})
