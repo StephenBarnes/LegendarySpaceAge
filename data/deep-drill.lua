@@ -195,6 +195,7 @@ for i, planetData in pairs{
 		{ type = "fluid", name = "tar",   amount = 5 },
 		{ type = "item",  name = "stone", amount = 10 },
 		{ type = "item",  name = "pitch", amount = 1 },
+		{ type = "item",  name = "ash", amount = 2 },
 		-- Drill consumes 10MJ for each recipe, which can be reduced to 2MJ with modules. Each pitch is 3MJ, each tar is 200kJ.
 	}},
 	{"gleba", {

@@ -6,7 +6,7 @@ This file is to keep track of other people's stuff that I've used.
 * Cannon Turret mod (mods.factorio.com/mod/vtk-cannon-turret) by VortiK, from original mod by AmbulatoryCortex, original graphics by YuokiTani, graphics improvements by JavitoVk and snouz. I'm using the graphics for LSA's shotgun turrets, and also adapted some code.
 * Flare Stack by GotLag, snouz, and others - mods.factorio.com/mod/Flare%20Stack - Used graphics and code.
 * Battery Powered by harag - mods.factorio.com/mod/battery-powered - Charger/discharger graphics, code, ideas.
-* Apprentice Assembler by Quezler - mods.factorio.com/mod/apprentice-assembler - Code copied and modified to apply the effect to foundries.
+* Apprentice Assembler by Quezler - mods.factorio.com/mod/apprentice-assembler - Copied the code from this and modified slightly to apply the effect to foundries. Relies on Beacon Interface mod also by Quezler - mods.factorio.com/mod/beacon-interface - which is a dependency of LSA.
 * Beacon Rebalance by wretlaw120 with some spritework by Sir-Lags-A-Lot - mods.factorio.com/mod/wret-beacon-rebalance-mod - Using high-res old-beacon graphics and code.
 * Gleba crop mods by LordMiguel (slipstacks, boompuffs, stingfronds) - Took ideas and bits of code for the Gleba crops.
 * Galdoc's Manufacturing - mods.factorio.com/mod/galdocs-manufacturing - Stole the idea of having intermediate factors with multiple recipes, though I'm simplifying it.
