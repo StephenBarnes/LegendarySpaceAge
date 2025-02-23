@@ -141,7 +141,7 @@ Tech.addTechDependency("electric-energy-distribution-1", "circuit-network")
 Tech.setPrereqs("automation-2", {"advanced-circuit"})
 Tech.addTechDependency("advanced-circuit", "laser")
 -- Add blue circuit dependency to assembling machine 3, so we can add it as ingredient.
-Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine", "speed-module"})
+Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine"})
 
 -- Heating tower tech should be fairly early.
 Tech.setPrereqs("heating-tower", {"steel-processing", "fluid-handling", "advanced-material-processing"})
@@ -201,6 +201,9 @@ RECIPE["agricultural-science-pack"].ingredients = {
 	{type = "item", name = "petrophage", amount = 1},
 	--{type = "item", name = "marrow", amount = 1},
 }
+-- Allow science pack to be made on any planet - it's probably not optimal (since eg stingfronds are hard to cultivate on Nauvis) but might still be interesting.
+RECIPE["agricultural-science-pack"].surface_conditions = nil
+
 TECH["agricultural-science-pack"].research_trigger = { -- TODO later this should be a rate trigger on bioflux.
 	type = "craft-item",
 	item = "bioflux",
@@ -300,7 +303,13 @@ Recipe.edit{
 -- Make red circuits require beacons 1, so that I can put the charging recipe in the red-circuit tech.
 Tech.addTechDependency("basic-beacons", "advanced-circuit")
 
--- TODO other science packs.
+-- Move AAI signal transmission tech to after Fulgora.
+Tech.addTechDependency("electromagnetic-science-pack", "aai-signal-transmission")
+Tech.removePrereq("aai-signal-transmission", "space-science-pack")
+Tech.addSciencePack("aai-signal-transmission", "electromagnetic-science-pack")
+
+
+-- TODO edit recipes for other science packs.
 
 -- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.
 

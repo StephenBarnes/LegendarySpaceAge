@@ -42,3 +42,13 @@ Recipe.edit{
 	},
 	time = 20, -- Originally 25.
 }
+Recipe.edit{
+	recipe = "mech-armor",
+	ingredients = { -- Originally 100 blue circuit (replacing with white circuits), 50 supercapacitor (replacing with holmium batteries), 200 holmium plate (replaced with tungsten plate), 50 superconductor (removing), 1 power armor mk2.
+		{"white-circuit", 100},
+		{"holmium-battery", 50},
+		{"tungsten-plate", 50},
+		{"power-armor-mk2", 1},
+	},
+	time = 50, -- Originally 60.
+}

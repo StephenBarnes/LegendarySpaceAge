@@ -44,10 +44,10 @@ RECIPE["cargo-wagon"].ingredients = {
 	{type="item", name="mechanism", amount=2},
 	{type="item", name="panel", amount=5},
 }
--- Artillery-wagon: 20 shielding + 20 engine-unit + 8 electric-engine-unit + 4 structure + 8 sensor
+-- Artillery-wagon: 5 frame + 50 shielding + 10 electric-engine-unit. Should be roughly the same as artillery turret.
 RECIPE["artillery-wagon"].ingredients = {
 	{type="item", name="frame", amount=5},
-	{type="item", name="shielding", amount=5},
-	{type="item", name="electric-engine-unit", amount=5},
+	{type="item", name="shielding", amount=50},
+	{type="item", name="electric-engine-unit", amount=10},
 }
-RECIPE["artillery-wagon"].energy_required = 10
+RECIPE["artillery-wagon"].energy_required = 20

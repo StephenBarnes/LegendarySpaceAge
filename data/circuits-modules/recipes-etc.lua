@@ -136,7 +136,7 @@ Recipe.make{
 		{"supercapacitor", 1},
 		{"superconductor", 1},
 	},
-	time = 5,
+	time = 2, -- Made in EM plant, with speed 2, prod bonus +50% or something.
 	allow_decomposition = true,
 	allow_as_intermediate = true,
 	category = "electromagnetics", -- Only in EM plant.

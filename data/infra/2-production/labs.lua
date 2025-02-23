@@ -1,18 +1,30 @@
-RECIPE["lab"].ingredients = {
-	{type = "item", name = "frame", amount = 2},
-	{type = "item", name = "electronic-circuit", amount = 2},
-	{type = "item", name = "glass", amount = 2},
+Recipe.edit{
+	recipe = "lab",
+	ingredients = {
+		{"frame", 2},
+		{"electronic-circuit", 2},
+		{"glass", 2},
+	},
+	time = 5,
 }
-RECIPE["glebalab"].ingredients = {
-	{type = "item", name = "steel-plate", amount = 10},
-	{type = "item", name = "processing-unit", amount = 5},
-	{type = "item", name = "pentapod-egg", amount = 5},
-	{type = "item", name = "refined-concrete", amount = 10},
+Recipe.edit{ -- TODO edit this
+	recipe = "glebalab",
+	ingredients = {
+		{"frame", 10},
+		{"processing-unit", 10},
+		{"marrow", 50},
+		{"geoplasm", 100, type = "fluid"},
+	},
+	time = 20,
+	category = "crafting-with-fluid",
 }
-RECIPE["biolab"].ingredients = {
-	{type = "item", name = "low-density-structure", amount = 20},
-	{type = "item", name = "processing-unit", amount = 10},
-	{type = "item", name = "uranium-fuel-cell", amount = 4},
-	{type = "item", name = "biter-egg", amount = 5},
-	{type = "item", name = "refined-concrete", amount = 20},
+Recipe.edit{ -- TODO edit this after I do Nauvis part 2. Eg should require meat paste, etc.
+	recipe = "biolab",
+	ingredients = {
+		{"low-density-structure", 50},
+		{"white-circuit", 50},
+		{"uranium-fuel-cell", 5},
+		{"biter-egg", 5},
+	},
+	time = 20,
 }

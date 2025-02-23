@@ -99,17 +99,11 @@ Tech.addSciencePack("holmium-battery", "metallurgic-science-pack")
 -- Change techs and recipes (advanced roboport, personal batteries, maybe more) to require holmium batteries.
 Tech.replacePrereq("battery-mk3-equipment", "electromagnetic-science-pack", "holmium-battery")
 Tech.addSciencePack("battery-mk3-equipment", "metallurgic-science-pack")
-Recipe.substituteIngredient("battery-mk3-equipment", "supercapacitor", "holmium-battery")
 Tech.replacePrereq("mech-armor", "electromagnetic-science-pack", "holmium-battery")
 Tech.addSciencePack("mech-armor", "metallurgic-science-pack")
 Tech.addTechDependency("metallurgic-science-pack", "mech-armor")
-Recipe.substituteIngredient("mech-armor", "supercapacitor", "holmium-battery")
-Recipe.substituteIngredient("mech-armor", "holmium-plate", "tungsten-plate")
 Tech.replacePrereq("personal-roboport-mk2-equipment", "electromagnetic-science-pack", "holmium-battery")
 Tech.addSciencePack("personal-roboport-mk2-equipment", "metallurgic-science-pack")
-Recipe.addIngredients("personal-roboport-mk2-equipment", {
-	{ type = "item", name = "holmium-battery", amount = 4 },
-})
 -- TODO more?
 
 -- Create items and recipes for the charger/discharger buildings.

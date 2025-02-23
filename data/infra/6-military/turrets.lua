@@ -36,7 +36,7 @@ Recipe.edit{
 		{"electric-engine-unit", 10},
 		{"shielding", 50},
 	},
-	time = 25,
+	time = 20,
 }
 Recipe.edit{
 	recipe = "rocket-turret",
@@ -51,7 +51,7 @@ Recipe.edit{
 Recipe.edit{
 	recipe = "tesla-turret",
 	ingredients = {
-		{"processing-unit", 20},
+		{"white-circuit", 20},
 		{"supercapacitor", 50},
 		{"electrolyte", 500},
 		{"electric-engine-unit", 5},

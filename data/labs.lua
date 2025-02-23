@@ -16,6 +16,7 @@
 
 -- Regular labs should only be buildable on Nauvis.
 RAW.lab.lab.surface_conditions = copy(RAW.lab.biolab.surface_conditions)
+	-- (Could allow these labs anywhere, but forbid planetary science packs in normal labs? But then it's impossible to research with Vulcanus/Fulgora science packs. Or even research pentapod biolabs.)
 -- Pentapod biolabs should only be buildable on Gleba.
 RAW.lab.glebalab.surface_conditions = {
 	{

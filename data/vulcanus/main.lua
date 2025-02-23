@@ -41,6 +41,8 @@ RECIPE["metallurgic-science-pack"].ingredients = {
 	{type = "item", name = "tungsten-plate", amount = 2},
 	{type = "fluid", name = "lava", amount = 200},
 }
+-- Remove surface condition for the science pack. But there's no lava anywhere else. TODO add recipe for artificial lava maybe.
+RECIPE["metallurgic-science-pack"].surface_conditions = nil
 
 -- Change Vulcanus tech triggers to need larger amounts.
 TECH["foundry"].research_trigger.count = 20 -- tungsten carbide

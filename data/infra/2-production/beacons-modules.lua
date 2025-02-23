@@ -1,3 +1,5 @@
+-- TODO most of this file should be deleted since I'm removing all modules.
+
 -- Edit beacon recipes. Note beacons are also edited in data/beacons.lua, which creates the basic beacon etc.
 Recipe.edit{
 	recipe = "basic-beacon",

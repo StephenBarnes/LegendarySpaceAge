@@ -12,8 +12,7 @@ table.insert(assembler2Tech.effects, {
 	quality = "rare",
 })
 
--- Hide all module items.
---[[
+-- Hide all module items and recipes.
 for _, category in pairs{"speed", "efficiency", "productivity", "quality"} do
 	for tier = 1, 3 do
 		local moduleName = category.."-module"
@@ -22,9 +21,6 @@ for _, category in pairs{"speed", "efficiency", "productivity", "quality"} do
 		RECIPE[moduleName].hidden = true
 	end
 end
--- TODO add this back later - just want to check recipes now.
-]]
-
 
 ------------------------------------------------------------------------
 --- REMOVE ALL MODULE TECHS.
@@ -46,7 +42,6 @@ end
 Tech.hideTech("quality-module")
 
 Tech.removePrereq("destroyer", "speed-module")
-Tech.removePrereq("automation-3", "speed-module")
 Tech.removePrereq("power-armor-mk2", "speed-module")
 Tech.hideTech("speed-module")
 
@@ -56,4 +51,4 @@ Tech.hideTech("efficiency-module")
 Tech.removePrereq("production-science-pack", "productivity-module")
 Tech.hideTech("productivity-module")
 
--- TODO the modules tech.
+Tech.hideTech("modules")

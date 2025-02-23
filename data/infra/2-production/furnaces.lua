@@ -39,7 +39,9 @@ for _, vals in pairs{
 		speed = 1,
 	},
 	{
-		-- Electric furnaces: same speed as steel furnaces, lower pollution (though electricity gen generates pollution). But make them have high drain so they're bad when not needed. Also give them higher energy consumption since they're more convenient bc no fuel needed. And note they have module slots so energy increase isn't all that bad.
+		-- Electric furnaces: same speed as steel furnaces, lower pollution (though electricity gen generates pollution).
+		-- But make them have high drain so they're bad when not needed.
+		-- Giving them the same overall energy consumption, since energy gen from steam engines/turbines is only 50% efficient in this modpack, so that's effectively double the energy consumption unless you use nuclear or solar or lava heating etc.
 		name = "electric-furnace",
 		ingredients = {
 			{"frame", 5},
@@ -48,7 +50,7 @@ for _, vals in pairs{
 			{"electronic-components", 10},
 		},
 		time = 10,
-		energy_usage = "450kW",
+		energy_usage = "150kW",
 		drain = "50kW",
 		speed = 1,
 	},

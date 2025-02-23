@@ -15,15 +15,6 @@ end
 -- Decided against this bc it's already high, don't want to remove the incentive to set up toxophages etc.
 --Item.multiplyWeight("bioflux", 0.5, "capsule")
 
--- Change ingredients of biological science pack.
-RECIPE["agricultural-science-pack"].ingredients = {
-	{type = "item", name = "nutrients", amount = 4},
-	{type = "item", name = "pentapod-egg", amount = 1},
-	--{type = "item", name = "iron-bacteria", amount = 1},
-	{type = "item", name = "copper-bacteria", amount = 1},
-	{type = "item", name = "slipstack-pearl", amount = 1},
-}
-
 -- Make spoilage spoil to nothing. From testing, you can simply not define spoil result or trigger, and it'll disappear.
 ITEM.spoilage.spoil_ticks = 20 * MINUTES
 

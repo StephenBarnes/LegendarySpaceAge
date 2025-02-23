@@ -47,6 +47,7 @@ local function runFullDebug()
 	-- TODO check that there are no items and fluids with the same name.
 	-- TODO check that all non-hidden enabled techs have all prerequisites non-hidden and enabled.
 	-- TODO check that there are no items or fluids (or item subtypes) that have no recipes producing them. Except for things only mined, etc.
+	-- TODO check that recipes in techs after the nth circuit use the most advanced circuit. Eg should use white circuits for centrifuges, not red circuits.
 	-- TODO add more checks here
 	return success
 end
