@@ -37,7 +37,7 @@ for _, vals in pairs{
 		},
 		time = 10,
 		effects = {
-			quality = 0.5, -- +5%
+			-- None. Could give it a +5% quality, but it would be annoying to do everywhere, seems better to put it in assembler 3 only. So assembler 3 is for when you can handle the non-normal-quality stuff and the high drain, and then it gives you the extra prod bonus.
 		},
 	},
 	{
@@ -55,7 +55,7 @@ for _, vals in pairs{
 		},
 		time = 20,
 		effects = {
-			productivity = 0.05, -- It's a fraction 0-1.
+			productivity = 0.1, -- It's a fraction 0-1.
 			quality = 0.5, -- +5%
 		},
 	}

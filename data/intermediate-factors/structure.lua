@@ -55,12 +55,12 @@ local recipeFromVitrified = Recipe.make{
 	allow_as_intermediate = true,
 }
 
--- Create recipe for structure from chitin block: 4 chitin block + 20 slime -> 1 structure
+-- Create recipe for structure from chitin block: 5 chitin block + 20 slime -> 1 structure
 local recipeFromChitin = Recipe.make{
 	copy = recipeFromCement,
 	recipe = "structure-from-chitin",
 	ingredients = {
-		{"chitin-block", 4},
+		{"chitin-block", 5},
 		{"slime", 20, type = "fluid"},
 	},
 	results = {{"structure", 1}},
@@ -70,6 +70,41 @@ local recipeFromChitin = Recipe.make{
 	icons = {"structure", "chitin-block", "slime"},
 	allow_as_intermediate = false,
 }
+
+-- Create recipe for structure from concrete: 10 concrete + 20 cement -> 2 structure
+local recipeFromConcrete = Recipe.make{
+	copy = recipeFromCement,
+	recipe = "structure-from-concrete",
+	ingredients = {
+		{"concrete", 10},
+		{"cement", 20, type = "fluid"},
+	},
+	results = {{"structure", 2}},
+	enabled = false,
+	time = 2,
+	category = "crafting-with-fluid",
+	icons = {"structure", "concrete", "cement"},
+	allow_as_intermediate = false,
+}
+Tech.addRecipeToTech("structure-from-concrete", "concrete")
+
+-- Create recipe for structure from refined concrete: 10 refined concrete + 10 cement -> 5 structure
+local recipeFromRefinedConcrete = Recipe.make{
+	copy = recipeFromConcrete,
+	recipe = "structure-from-refined-concrete",
+	ingredients = {
+		{"refined-concrete", 10},
+		{"cement", 10, type = "fluid"},
+	},
+	results = {{"structure", 5}},
+	enabled = false,
+	time = 5,
+	category = "crafting-with-fluid",
+	icons = {"structure", "refined-concrete", "cement"},
+	allow_as_intermediate = false,
+}
+Tech.addRecipeToTech("structure-from-refined-concrete", "concrete")
+
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?
@@ -81,5 +116,7 @@ Gen.order({
 	recipeFromResin,
 	recipeFromVitrified,
 	recipeFromCement,
+	recipeFromConcrete,
+	recipeFromRefinedConcrete,
 	recipeFromChitin,
 }, "structure")

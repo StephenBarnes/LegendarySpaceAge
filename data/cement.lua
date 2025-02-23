@@ -71,7 +71,8 @@ Recipe.edit{
 		{"cement", 100},
 		{"stone", 10},
 		{"iron-stick", 5},
-	}
+	},
+	time = 10,
 }
 Recipe.edit{
 	recipe = "refined-concrete",
@@ -80,7 +81,8 @@ Recipe.edit{
 		{"resin", 2},
 		{"ash", 2},
 		{"steel-plate", 5},
-	}
+	},
+	time = 10,
 }
 
 -- Create sulfur concrete recipes for foundries.
