@@ -1,8 +1,14 @@
 --[[ This file adjusts numbers and recipes for assemblers.
 Aims:
 * Simplify the speeds to 0.5 -- 1 -- 2.
-* Make the more advanced ones have higher drain when not active, and also worse electricity-per-product and pollution-per-product. But the module slots can make them worth using.
 * Rewrite recipes to use factors.
+* Change assembler properties to have good tradeoffs:
+	* Electricity per product is roughly the same for all of them, though lower for tier 1 if not using beacons.
+	* Pollution is the same for all of them, so pollution per product is lower for higher tiers.
+	* Tier 3 has prod and quality bonuses. Quality bonus also means you have to design your production lines to handle quality items.
+	* Since speeds double each tier, each tier needs half as much space and belts etc.
+	* Tier 3 has high drain, so best suited for lines that are always running.
+	* Tier 1 has no drain, so it could actually be best to use tier 1 sometimes even in the late game, eg when using a lot of beacons, or on rarely-used production lines.
 ]]
 
 for _, vals in pairs{
@@ -26,9 +32,9 @@ for _, vals in pairs{
 	{
 		name = "assembling-machine-2",
 		speed = 1,
-		drainKW = 20,
-		activeKW = 200, -- Vanilla was 150.
-		pollution = 10, -- Vanilla was 3.
+		drainKW = 50,
+		activeKW = 250, -- Vanilla was 150.
+		pollution = 5, -- Vanilla was 3.
 		ingredients = {
 			{"frame", 5},
 			{"panel", 5},
@@ -44,9 +50,9 @@ for _, vals in pairs{
 		name = "assembling-machine-3",
 		-- Vanilla was speed 1.25, 375kW, 2 pollution.
 		speed = 2,
-		drainKW = 250,
+		drainKW = 200,
 		activeKW = 500,
-		pollution = 20,
+		pollution = 5,
 		ingredients = {
 			{"frame", 5},
 			{"panel", 5},

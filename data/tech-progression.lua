@@ -137,11 +137,11 @@ Tech.addRecipeToTech("selector-combinator", "circuit-network", 4)
 Tech.removePrereq("circuit-network", "logistic-science-pack")
 Tech.addTechDependency("electric-energy-distribution-1", "circuit-network")
 
--- Add red circuit dependency to assembling machine 2 and lasers, so we can add it as ingredient.
-Tech.setPrereqs("automation-2", {"advanced-circuit"})
+-- Add red circuit dependency to lasers, so we can add it as ingredient.
 Tech.addTechDependency("advanced-circuit", "laser")
--- Add blue circuit dependency to assembling machine 3, so we can add it as ingredient.
-Tech.setPrereqs("automation-3", {"automation-2", "production-science-pack", "electric-engine"})
+
+-- Automation 2 after green science.
+Tech.setPrereqs("automation-2", {"logistic-science-pack"})
 
 -- Heating tower tech should be fairly early.
 Tech.setPrereqs("heating-tower", {"steel-processing", "fluid-handling", "advanced-material-processing"})
@@ -308,6 +308,22 @@ Tech.addTechDependency("electromagnetic-science-pack", "aai-signal-transmission"
 Tech.removePrereq("aai-signal-transmission", "space-science-pack")
 Tech.addSciencePack("aai-signal-transmission", "electromagnetic-science-pack")
 
+-- Add first 2 qualities to assembler 3 tech. (Originally in quality module tech. Assembler 3 now has builtin quality bonus.)
+local assembler3Tech = TECH["automation-3"]
+table.insert(assembler3Tech.effects, {
+	type = "unlock-quality",
+	quality = "uncommon",
+})
+table.insert(assembler3Tech.effects, {
+	type = "unlock-quality",
+	quality = "rare",
+})
+
+-- Make assembler 3 mandatory before Fulgora, since white circuits add quality, so we need quality to be unlocked by then.
+Tech.addTechDependency("automation-3", "planet-discovery-fulgora")
+-- Make assembler 3 tech not require purple science, so you can do Fulgora before purple science.
+Tech.setPrereqs("automation-3", {"automation-2", "electric-engine"})
+Tech.removeSciencePack("production-science-pack", "automation-3")
 
 -- TODO edit recipes for other science packs.
 

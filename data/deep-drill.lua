@@ -148,10 +148,10 @@ Recipe.make{
 	copy = "electric-mining-drill",
 	recipe = "deep-drill",
 	resultCount = 1,
-	time = 30,
+	time = 20,
 	ingredients = {
-		{"frame", 40},
-		{"structure", 40},
+		{"frame", 50},
+		{"structure", 50},
 		{"mechanism", 20},
 		{"electric-engine-unit", 20},
 	},

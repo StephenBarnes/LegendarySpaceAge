@@ -1,17 +1,6 @@
 --[[ This file removes the existing modules system from the game. Because I'm replacing them with charged and supercharged circuits.
 ]]
 
--- Add first 2 qualities to assembler 2 tech. (Originally in quality module tech. Assembler 2 now has builtin quality bonus.)
-local assembler2Tech = TECH["automation-2"]
-table.insert(assembler2Tech.effects, {
-	type = "unlock-quality",
-	quality = "uncommon",
-})
-table.insert(assembler2Tech.effects, {
-	type = "unlock-quality",
-	quality = "rare",
-})
-
 -- Hide all module items and recipes.
 for _, category in pairs{"speed", "efficiency", "productivity", "quality"} do
 	for tier = 1, 3 do

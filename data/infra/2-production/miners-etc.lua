@@ -46,7 +46,7 @@ Recipe.edit{
 		{"sensor", 1},
 		{"glass", 2},
 	},
-	time = 10,
+	time = 2,
 }
 
 -- I want to edit miner speeds to be more regular and generally faster, to speed up the game, especially early game.

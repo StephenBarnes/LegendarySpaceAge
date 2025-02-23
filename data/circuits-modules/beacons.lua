@@ -184,10 +184,10 @@ basicEnt.distribution_effectivity_bonus_per_quality_level = 0.25
 basicEnt.collision_box = {{-0.95, -0.95}, {0.95, 0.95}}
 basicEnt.selection_box = {{-1, -1}, {1, 1}}
 basicEnt.supply_area_distance = 1 -- 1 tile away from each side.
-basicEnt.energy_usage = "200kW"
+basicEnt.energy_usage = "100kW"
+basicEnt.heating_energy = "100kW" -- vs 250kW for advanced.
 basicEnt.allowed_effects = {"consumption", "speed", "productivity", "pollution", "quality"} -- Allow all modules! Including prod and quality.
 basicEnt.max_health = 100
-basicEnt.heating_energy = "200kW" -- vs 400kW for advanced.
 basicEnt.corpse = "medium-remnants"
 
 advancedEnt.profile = copy(basicEnt.profile)
@@ -202,7 +202,8 @@ advancedEnt.supply_area_distance = 2
 	max_icons_per_row = 2,
 	shift = {0, 0.5}, -- Seems default is 0, 0.7.
 }}]]
-advancedEnt.energy_usage = "500kW"
+advancedEnt.energy_usage = "250kW"
+advancedEnt.heating_energy = "250kW"
 advancedEnt.allowed_effects = basicEnt.allowed_effects
 advancedEnt.graphics_set.no_modules_tint = {1, 1, 0} -- Not red, since that's now for productivity.
 

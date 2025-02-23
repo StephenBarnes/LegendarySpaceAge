@@ -1,5 +1,5 @@
 --[[ Entity and item properties:
-* Make speeds 10 -- 20 -- 40 -- 80. Originally 15--30--45--60. Because I want to simplify the mental math, e.g. 7.5/s per side or 22.5/s per side is annoying. Also easier if you can just merge 2 yellows onto 1 red, etc.
+* Make speeds 10 -- 20 -- 50 -- 100. Originally 15--30--45--60. Because I want to simplify the mental math, e.g. 7.5/s per side or 22.5/s per side is annoying. Also easier if you can just merge 2 yellows onto 1 red, etc. And I want both the items/sec/belt and the items/sec/side to be simple numbers that conform to the existing 1-2-5-10 system of round numbers. Also I think it's nice to make green belts even faster.
 * Standardize stack sizes and weights.
 
 Adjust recipes:
@@ -36,7 +36,7 @@ for _, vals in pairs{
 	},
 	{
 		prefix = "express-",
-		speed = 40,
+		speed = 50,
 		producedPerRecipe = 2,
 		ingredients = {
 			{type="item", name="electric-engine-unit", amount=1},
@@ -45,7 +45,7 @@ for _, vals in pairs{
 	},
 	{
 		prefix = "turbo-",
-		speed = 80,
+		speed = 100,
 		producedPerRecipe = 1,
 		ingredients = {
 			{type="item", name="electric-engine-unit", amount=1},
