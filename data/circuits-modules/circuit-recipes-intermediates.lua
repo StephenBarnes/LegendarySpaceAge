@@ -121,6 +121,55 @@ Recipe.edit{
 	allow_decomposition = true,
 }
 
+-- Create white circuits.
+local whiteCircuit = copy(ITEM["processing-unit"])
+whiteCircuit.name = "white-circuit"
+Icon.set(whiteCircuit, "LSA/white-circuits/item")
+extend{whiteCircuit}
+
+Recipe.make{
+	recipe = "white-circuit",
+	copy = "processing-unit",
+	resultCount = 1,
+	ingredients = {
+		{"processing-unit", 1},
+		{"supercapacitor", 1},
+		{"superconductor", 1},
+	},
+	time = 5,
+	allow_decomposition = true,
+	allow_as_intermediate = true,
+	category = "electromagnetics", -- Only in EM plant.
+}
+-- Could make it only craftable on Fulgora. Or maybe allow anywhere, so you only need to export the supercapacitors.
+
+-- Make tech for white circuits.
+local whiteCircuitTech = copy(TECH["processing-unit"])
+whiteCircuitTech.name = "white-circuit"
+whiteCircuitTech.effects = {{
+	type = "unlock-recipe",
+	recipe = "white-circuit",
+}}
+Icon.set(whiteCircuitTech, "LSA/white-circuits/tech")
+whiteCircuitTech.prerequisites = {"electromagnetic-plant"}
+whiteCircuitTech.unit = nil
+whiteCircuitTech.research_trigger = {
+	type = "craft-item",
+	item = "supercapacitor",
+	amount = 1,
+}
+extend{whiteCircuitTech}
+
+-- Set stack sizes and weights.
+ITEM["electronic-circuit"].stack_size = 200
+ITEM["advanced-circuit"].stack_size = 200
+ITEM["processing-unit"].stack_size = 200
+whiteCircuit.stack_size = 200
+local circuitWeight = ROCKET / 2000
+ITEM["electronic-circuit"].weight = circuitWeight
+ITEM["advanced-circuit"].weight = circuitWeight
+ITEM["processing-unit"].weight = circuitWeight
+whiteCircuit.weight = circuitWeight
 
 Gen.order({
 	silicon,
@@ -129,4 +178,5 @@ Gen.order({
 	ITEM["electronic-circuit"],
 	ITEM["advanced-circuit"],
 	ITEM["processing-unit"],
+	whiteCircuit,
 }, "complex-circuit-intermediates")

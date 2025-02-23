@@ -82,3 +82,4 @@ FLUID["thruster-fuel"].auto_barrel = true
 FLUID["ammonia"].auto_barrel = true
 FLUID["fluorine"].auto_barrel = true -- It's not that hard to barrel and transport IRL, so I'll allow it.
 FLUID["lithium-brine"].auto_barrel = true
+FLUID["fulgoran-sludge"].auto_barrel = true -- Could be interesting to ship it around and filter it elsewhere.

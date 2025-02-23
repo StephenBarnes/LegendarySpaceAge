@@ -110,3 +110,35 @@ for _, vals in pairs{
 		})
 	end
 end
+
+-- Edit recipes.
+Recipe.edit{
+	recipe = "supercapacitor",
+	ingredients = { -- Originallyy 4 green circuit + 1 battery + 2 holmium plate + 2 superconductor + 10 electrolyte.
+		{"holmium-plate", 2},
+		{"superconductor", 2},
+		{"electrolyte", 10},
+	},
+	time = 10,
+}
+Recipe.edit{
+	recipe = "superconductor",
+	ingredients = { -- Originally 1 copper plate + 1 plastic bar + 1 holmium plate + 5 light oil -> 2 superconductor.
+		{"copper-plate", 1},
+		{"plastic-bar", 1},
+		{"holmium-plate", 1},
+		{"fulgoran-sludge", 5, type = "fluid"},
+	},
+	time = 5,
+}
+RECIPE["electromagnetic-science-pack"].surface_conditions = nil
+	-- Allow it anywhere - you'd still need to ship holmium solution, but I think it's good to give people the choice to maybe ship that instead of the science packs.
+Recipe.edit{
+	recipe = "electromagnetic-science-pack",
+	ingredients = { -- Originally 1 accumulator + 1 supercapacitor + 25 electrolyte + 25 holmium solution.
+		{"white-circuit", 2}, -- TODO change this to the supercharged version.
+		{"electrolyte", 10},
+		{"fulgoran-sludge", 10, type = "fluid"},
+	},
+	time = 10,
+}

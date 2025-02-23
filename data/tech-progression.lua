@@ -282,6 +282,14 @@ Tech.addTechDependency("quality-module", "automation-2")
 Tech.addTechDependency("productivity-module", "automation-3") -- Not currently necessary bc prod module ==> purple science ==> automation-3. But might later change the recipe of that.
 Tech.removePrereq("automation-3", "speed-module")
 
+-- Fulgoran techs: EM plants -> white circuits -> electromagnetic-science-pack.
+Tech.setPrereqs("electromagnetic-science-pack", {"white-circuit"})
+TECH["electromagnetic-science-pack"].research_trigger = {
+	type = "craft-item",
+	item = "white-circuit",
+	count = 10,
+} -- TODO later this should be a rate trigger on white circuits.
+
 -- TODO other science packs.
 
 -- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.
