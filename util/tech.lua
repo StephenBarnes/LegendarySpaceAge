@@ -251,4 +251,19 @@ Tech.removeSciencePack = function(sciencePackName, techName)
 	tech.unit.ingredients = newIngredients
 end
 
+Tech.replaceSciencePack = function(techName, oldSciencePackName, newSciencePackName)
+	local tech = TECH[techName]
+	assert(tech ~= nil, "Couldn't find tech "..techName.." to replace science pack "..oldSciencePackName.." with "..newSciencePackName..".")
+	assert(tech.unit ~= nil, "Tech "..techName.." has no unit.")
+	local found = false
+	for i, ingredient in pairs(tech.unit.ingredients) do
+		assert(ingredient[1] ~= newSciencePackName, "Science pack "..newSciencePackName.." already exists in tech "..techName..".")
+		if ingredient[1] == oldSciencePackName then
+			tech.unit.ingredients[i] = {newSciencePackName, ingredient[2]}
+			found = true
+		end
+	end
+	assert(found, "Science pack "..oldSciencePackName.." not found in tech "..techName..".")
+end
+
 return Tech

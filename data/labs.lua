@@ -41,9 +41,6 @@ ITEM.biolab.stack_size = 10
 ITEM.glebalab.weight = ROCKET / 100
 ITEM.biolab.weight = ROCKET / 100
 
--- Set module slots.
-RAW.lab.biolab.module_slots = 8
-
 -- Set science pack drain, and crafting speed.
 RAW.lab.glebalab.researching_speed = 2
 RAW.lab.biolab.researching_speed = 4

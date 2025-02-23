@@ -151,7 +151,8 @@ whiteCircuitTech.effects = {{
 	recipe = "white-circuit",
 }}
 Icon.set(whiteCircuitTech, "LSA/white-circuits/tech")
-whiteCircuitTech.prerequisites = {"electromagnetic-plant"}
+whiteCircuitTech.prerequisites = {"electromagnetic-plant", "effect-transmission"}
+	-- Effect-transmission prereq is to make it more discoverable when browsing beacons in tech tree.
 whiteCircuitTech.unit = nil
 whiteCircuitTech.research_trigger = {
 	type = "craft-item",

@@ -277,11 +277,6 @@ Tech.addTechDependency("elevated-rail", "planet-discovery-fulgora")
 Tech.removeSciencePack("production-science-pack", "elevated-rail")
 Tech.setPrereqs("elevated-rail", {"railway"})
 
--- Assemblers have base effects.
-Tech.addTechDependency("quality-module", "automation-2")
-Tech.addTechDependency("productivity-module", "automation-3") -- Not currently necessary bc prod module ==> purple science ==> automation-3. But might later change the recipe of that.
-Tech.removePrereq("automation-3", "speed-module")
-
 -- Fulgoran techs: EM plants -> white circuits -> electromagnetic-science-pack.
 Tech.setPrereqs("electromagnetic-science-pack", {"white-circuit"})
 TECH["electromagnetic-science-pack"].research_trigger = {
@@ -289,6 +284,21 @@ TECH["electromagnetic-science-pack"].research_trigger = {
 	item = "white-circuit",
 	count = 10,
 } -- TODO later this should be a rate trigger on white circuits.
+
+-- Production science pack: need to remove prod module at least, since I'm deleting all modules.
+-- TODO later rewrite this recipe entirely to be more interesting.
+Recipe.edit{
+	recipe = "production-science-pack",
+	ingredients = { -- Originally 30 rail + 1 electric furnace + 1 prod module 1 -> 3 prod science packs.
+		{"electric-engine-unit", 1},
+		{"sensor", 1},
+		{"structure", 1},
+	},
+	resultCount = 1,
+}
+
+-- Make red circuits require beacons 1, so that I can put the charging recipe in the red-circuit tech.
+Tech.addTechDependency("basic-beacons", "advanced-circuit")
 
 -- TODO other science packs.
 

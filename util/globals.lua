@@ -2,6 +2,7 @@
 RAW = data.raw
 RECIPE = RAW.recipe
 ITEM = RAW.item
+MODULE = RAW.module
 FLUID = RAW.fluid
 TECH = RAW.technology
 ASSEMBLER = RAW["assembling-machine"]

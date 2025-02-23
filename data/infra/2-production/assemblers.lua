@@ -19,7 +19,6 @@ for _, vals in pairs{
 			{"sensor", 1},
 		},
 		time = 5,
-		moduleSlots = 1, -- Increase from 0 to 1, since modules are now early-game.
 		effects = {
 			quality = -0.5, -- Seems to be "perdec" (0-10) rather than percent (0-100) or fraction (0-1).
 		},
@@ -34,8 +33,7 @@ for _, vals in pairs{
 			{"frame", 5},
 			{"panel", 5},
 			{"mechanism", 5},
-			{"sensor", 2},
-			{"quality-module", 5},
+			{"sensor", 5},
 		},
 		time = 10,
 		effects = {
@@ -52,9 +50,8 @@ for _, vals in pairs{
 		ingredients = {
 			{"frame", 5},
 			{"panel", 5},
-			{"electric-engine-unit", 5},
-			{"sensor", 5},
-			{"productivity-module", 5},
+			{"electric-engine-unit", 20},
+			{"sensor", 20},
 		},
 		time = 20,
 		effects = {
@@ -74,18 +71,14 @@ for _, vals in pairs{
 	ent.energy_source.drain = vals.drainKW .. "kW"
 	ent.energy_usage = (vals.activeKW - vals.drainKW) .. "kW"
 	ent.energy_source.emissions_per_minute = { pollution = vals.pollution }
-	if vals.moduleSlots then
-		ent.module_slots = vals.moduleSlots
-	end
 
+	-- All assemblers can get all beacon and module effects. No module slots.
 	ent.effect_receiver = {
 		uses_beacon_effects = true,
 		uses_module_effects = true,
 		uses_surface_effects = true,
+		base_effect = vals.effects,
 	}
-	if vals.effects then
-		ent.effect_receiver.base_effect = vals.effects
-	end
 	ent.allowed_effects = {"speed", "productivity", "consumption", "pollution", "quality"}
 	ent.allowed_module_categories = nil -- Allows all by default.
 end
