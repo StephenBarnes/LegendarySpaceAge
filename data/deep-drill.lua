@@ -49,13 +49,13 @@ ent.graphics_set = {
 	animation = {
 		layers = {
 			{
-				filename = "__LegendarySpaceAge__/graphics/deep-drill/hr-shadow.png",
+				filename = "__LegendarySpaceAge__/graphics/deep-drill/shadow.png",
 				priority = "high",
 				width = 1400,
 				height = 1400,
 				frame_count = 1,
 				repeat_count = 120,
-				animation_speed = 0.5,
+				animation_speed = 1,
 				draw_as_shadow = true,
 				scale = 0.5,
 			},
@@ -64,16 +64,16 @@ ent.graphics_set = {
 				width = 704,
 				height = 704,
 				frame_count = 120,
-				animation_speed = 0.5,
+				animation_speed = 1,
 				scale = 0.5,
 				stripes = {
 					{
-						filename = "__LegendarySpaceAge__/graphics/deep-drill/hr-animation-1.png",
+						filename = "__LegendarySpaceAge__/graphics/deep-drill/animation-1.png",
 						width_in_frames = 8,
 						height_in_frames = 8,
 					},
 					{
-						filename = "__LegendarySpaceAge__/graphics/deep-drill/hr-animation-2.png",
+						filename = "__LegendarySpaceAge__/graphics/deep-drill/animation-2.png",
 						width_in_frames = 8,
 						height_in_frames = 7,
 					},
@@ -90,18 +90,18 @@ ent.graphics_set = {
 				height = 704,
 				--shift = util.by_pixel_hr(0, 92),
 				frame_count = 120,
-				animation_speed = 0.5,
+				animation_speed = 1,
 				scale = 0.5,
 				draw_as_light = true,
 				blend_mode = "additive",
 				stripes = {
 					{
-						filename = "__LegendarySpaceAge__/graphics/deep-drill/hr-emission-1.png",
+						filename = "__LegendarySpaceAge__/graphics/deep-drill/emission-1.png",
 						width_in_frames = 8,
 						height_in_frames = 8,
 					},
 					{
-						filename = "__LegendarySpaceAge__/graphics/deep-drill/hr-emission-2.png",
+						filename = "__LegendarySpaceAge__/graphics/deep-drill/emission-2.png",
 						width_in_frames = 8,
 						height_in_frames = 7,
 					},

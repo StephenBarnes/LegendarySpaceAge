@@ -100,26 +100,3 @@ for moduleType, tiers in pairs(moduleData) do
 		end
 	end
 end
-
-
--- Arrange beacons and modules in two rows.
-local module2Subgroup = copy(RAW["item-subgroup"]["module"])
-module2Subgroup.name = "module-2"
-module2Subgroup.order = "g2"
-extend{module2Subgroup}
-
--- Order beacons and primed circuits into 2 rows.
-Gen.orderKinds("module", {RAW.beacon, RECIPE, ITEM}, {"basic-beacon"}, "1-")
-Gen.orderKinds("module", {RAW.module, RECIPE}, {
-	"electronic-circuit-primed",
-	"advanced-circuit-primed",
-	"processing-unit-primed",
-	"white-circuit-primed",
-}, "2-")
-Gen.orderKinds("module-2", {RAW.beacon, RECIPE, ITEM}, {"beacon"}, "1-")
-Gen.orderKinds("module-2", {RAW.module, RECIPE}, {
-	"electronic-circuit-hyperprimed",
-	"advanced-circuit-hyperprimed",
-	"processing-unit-hyperprimed",
-	"white-circuit-hyperprimed",
-}, "2-")

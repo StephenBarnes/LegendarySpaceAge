@@ -1,7 +1,7 @@
 This file is to keep track of other people's stuff that I've used.
 
 * Malcolm Riley for graphics - github.com/malcolmriley/unused-renders - Used icons for polysalts and sludge.
-* Factorio building graphics by Hurricane046 - shorturl.at/AFcDm - Planning to use the core extractor and possibly others.
+* Factorio building graphics by Hurricane046 - shorturl.at/AFcDm - Used graphics for the borehole mining drill, circuit primer, superclocker.
 * Snouz - Graphics for flare stack, silicon wafers.
 * Cannon Turret mod (mods.factorio.com/mod/vtk-cannon-turret) by VortiK, from original mod by AmbulatoryCortex, original graphics by YuokiTani, graphics improvements by JavitoVk and snouz. I'm using the graphics for LSA's shotgun turrets, and also adapted some code.
 * Flare Stack by GotLag, snouz, and others - mods.factorio.com/mod/Flare%20Stack - Used graphics and code.

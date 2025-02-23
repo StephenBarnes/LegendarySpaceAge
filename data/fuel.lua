@@ -73,9 +73,11 @@ local function addOtherCarbonicFuelsToEnt(ent)
 		addOtherCarbonicFuelsToBurner(ent.burner)
 	end
 end
-for _, ents in pairs(data.raw) do
-	for _, ent in pairs(ents) do
-		addOtherCarbonicFuelsToEnt(ent)
+for kind, ents in pairs(data.raw) do
+	if kind ~= "utility-constants" then
+		for _, ent in pairs(ents) do
+			addOtherCarbonicFuelsToEnt(ent)
+		end
 	end
 end
 

@@ -42,3 +42,7 @@ TECH["logistics"].localised_description = {"technology-description.logistics-1"}
 
 -- Beacon interface should be hidden. TODO move to file for apprentice foundry.
 Item.hide("beacon-interface--beacon")
+
+-- TODO remove; testing.
+--RAW["utility-constants"].inventory_width = "20" -- Originally 10.
+-- TODO PyCoalProcessing is making crafting menu 17 wide. Not sure if that's necessary to get more item/recipe groups in crafting menu in 1 row.

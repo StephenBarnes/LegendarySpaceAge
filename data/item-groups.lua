@@ -50,6 +50,7 @@ extend{
 	},
 
 	-- Create subgroup for circuits and advanced circuit intermediates (electronic components, silicon wafers, doped wafers).
+	-- TODO remove this later, once we've added the extra group to the top row.
 	{
 		type = "item-subgroup",
 		name = "complex-circuit-intermediates",
@@ -232,4 +233,46 @@ local inserters = {"inserter", "long-handed-inserter", "fast-inserter", "bulk-in
 setSubgroupInOrder("inserter", {"item", "recipe", "inserter"}, inserters, "b")
 setSubgroupInOrder("inserter", {"item", "recipe", "splitter"}, splitters, "a")
 
+-- Organize raw materials line. Probably 2 or 3 lines, with actual raw materials, petroleum stuff, fuels, etc. Add silicon to one of these lines.
+-- TODO
+-- Organize intermediate-products line. Probably add doped wafer and microchip to this line.
+-- TODO
+
+--[[
+	ITEM["electronic-circuit"],
+	ITEM["advanced-circuit"],
+	ITEM["processing-unit"],
+	whiteCircuit,
+]]
+
 -- TODO separate bottom logistics row into two lines, one with paving and one with the rest.
+
+-- Arrange beacons, primers, circuits, primed/superclocked circuits, etc in 3 rows.
+for i = 2, 3 do
+	local moduleSubgroup = copy(RAW["item-subgroup"]["module"])
+	moduleSubgroup.name = "module-" .. i
+	moduleSubgroup.order = "g" .. i
+	extend{moduleSubgroup}
+end
+Gen.orderKinds("module", {ITEM, RECIPE}, {
+	"electronic-circuit",
+	"advanced-circuit",
+	"processing-unit",
+	"white-circuit",
+})
+Gen.orderKinds("module-2", {RAW.module, RECIPE}, {
+	"electronic-circuit-primed",
+	"advanced-circuit-primed",
+	"processing-unit-primed",
+	"white-circuit-primed",
+}, "1-")
+Gen.orderKinds("module-2", {FURNACE, RECIPE, ITEM}, {"circuit-primer"}, "2-")
+Gen.orderKinds("module-2", {RAW.beacon, RECIPE, ITEM}, {"basic-beacon"}, "3-")
+Gen.orderKinds("module-3", {RAW.module, RECIPE}, {
+	"electronic-circuit-superclocked",
+	"advanced-circuit-superclocked",
+	"processing-unit-superclocked",
+	"white-circuit-superclocked",
+}, "1-")
+Gen.orderKinds("module-3", {FURNACE, RECIPE, ITEM}, {"superclocker"}, "2-")
+Gen.orderKinds("module-3", {RAW.beacon, RECIPE, ITEM}, {"beacon"}, "3-")
