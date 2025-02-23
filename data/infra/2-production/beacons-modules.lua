@@ -108,22 +108,18 @@ module2Subgroup.name = "module-2"
 module2Subgroup.order = "g2"
 extend{module2Subgroup}
 
--- Order modules into 2 rows.
+-- Order beacons and primed circuits into 2 rows.
+Gen.orderKinds("module", {RAW.beacon, RECIPE, ITEM}, {"basic-beacon"}, "1-")
 Gen.orderKinds("module", {RAW.module, RECIPE}, {
-	"speed-module",
-	"speed-module-2",
-	"speed-module-3",
-	"efficiency-module",
-	"efficiency-module-2",
-	"efficiency-module-3",
-})
-Gen.orderKinds("module", {RAW.beacon, RECIPE, ITEM}, {"basic-beacon"}, "9-")
+	"electronic-circuit-primed",
+	"advanced-circuit-primed",
+	"processing-unit-primed",
+	"white-circuit-primed",
+}, "2-")
+Gen.orderKinds("module-2", {RAW.beacon, RECIPE, ITEM}, {"beacon"}, "1-")
 Gen.orderKinds("module-2", {RAW.module, RECIPE}, {
-	"productivity-module",
-	"productivity-module-2",
-	"productivity-module-3",
-	"quality-module",
-	"quality-module-2",
-	"quality-module-3",
-})
-Gen.orderKinds("module-2", {RAW.beacon, RECIPE, ITEM}, {"beacon"}, "9-")
+	"electronic-circuit-hyperprimed",
+	"advanced-circuit-hyperprimed",
+	"processing-unit-hyperprimed",
+	"white-circuit-hyperprimed",
+}, "2-")
