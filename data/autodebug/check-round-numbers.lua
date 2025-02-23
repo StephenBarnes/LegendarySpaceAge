@@ -110,6 +110,24 @@ local function checkCraftingMachine(machine)
 	return success
 end
 
+---@param item data.ItemPrototype
+---@return boolean
+local function checkItem(item)
+	local success = true
+	for name, val in pairs{
+		["stack size"] = item.stack_size,
+		["num per rocket"] = ROCKET / item.weight,
+	} do
+		if not complexityOk(val) then
+			log("Complexity of item " .. item.name .. " value \"" .. name .. "\" is too high: " .. val)
+			success = false
+		end
+	end
+	return success
+end
+
+------------------------------------------------------------------------
+
 ---@return boolean
 local function checkRoundNumbers()
 	local success = true
@@ -122,6 +140,10 @@ local function checkRoundNumbers()
 		for _, craftingMachine in pairs(RAW[craftingMachineSubtype]) do
 			success = checkCraftingMachine(craftingMachine) and success
 		end
+	end
+
+	for _, item in pairs(ITEM) do
+		success = checkItem(item) and success
 	end
 
 	-- TODO check furnaces
