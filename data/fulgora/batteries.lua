@@ -153,6 +153,9 @@ extend({
 })
 Tech.addRecipeToTech("battery-charger", "battery")
 Tech.addRecipeToTech("battery-discharger", "battery")
+Item.copySoundsTo("accumulator", "battery-charger")
+Item.copySoundsTo("accumulator", "battery-discharger")
+Item.copySoundsTo("assembling-machine-1", "er-hcg")
 
 -- Picture and animation layers for charger and discharger - copied from Battery Powered mod.
 local chargerPic = {

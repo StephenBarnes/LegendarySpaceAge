@@ -244,7 +244,14 @@ local basicItem = copy(ITEM.beacon)
 basicItem.name = "basic-beacon"
 basicItem.icon = "__LegendarySpaceAge__/graphics/beacons/icon.png"
 basicItem.place_result = "basic-beacon"
+basicItem.stack_size = 50
+basicItem.weight = ROCKET / 50
 extend{basicItem}
+
+-- Edit advanced beacon item.
+local advancedItem = ITEM["beacon"]
+advancedItem.stack_size = 20
+advancedItem.weight = ROCKET / 20
 
 -- Create recipe. Will set the details in infra/ file.
 local basicRecipe = Recipe.make{

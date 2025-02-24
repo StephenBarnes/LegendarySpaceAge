@@ -109,6 +109,7 @@ for _, vals in pairs(CIRCUITS) do
 	primedCirc.spoil_result = circName
 	primedCirc.localised_description = nil
 	primedCirc.effect = vals.primedEffect
+	primedCirc.pick_sound = ITEM["nuclear-reactor"].pick_sound -- Default module pickup sound doesn't sound right.
 	extend{primedCirc}
 
 	-- Create module for superclocked circuit.
@@ -131,6 +132,7 @@ for _, vals in pairs(CIRCUITS) do
 	superclockedCirc.spoil_result = primedCircName
 	superclockedCirc.localised_description = {"item-description."..primedCircName}
 	superclockedCirc.effect = vals.superclockedEffect
+	Item.copySoundsTo("energy-shield-equipment", superclockedCirc)
 	extend{superclockedCirc}
 
 	-- Create recipe for primed circuit.

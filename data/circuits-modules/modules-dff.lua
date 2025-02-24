@@ -48,4 +48,4 @@ for _, recipe in pairs(RECIPE) do
 end
 
 -- TODO also disable quality for some recipes, and check that. Eg battery charging.
--- TODO check that all machines allow beacons, and productivity. Eg furnaces.
+-- TODO allow beacons and quality and prod for (almost) all machines, eg furnaces.

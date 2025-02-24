@@ -15,8 +15,8 @@ Recipe.edit{
 	recipe = "beacon",
 	ingredients = {
 		{"frame", 5},
-		{"processing-unit", 20},
-		{"sensor", 10},
+		{"processing-unit-primed", 20},
+		{"sensor", 20},
 	},
 	time = 20,
 }
