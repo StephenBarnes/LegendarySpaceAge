@@ -29,7 +29,7 @@ for _, recipe in pairs(RECIPE) do
 	if not recipe.parameter and (recipe.hidden == false or recipe.hidden == nil) then
 		if (recipe.allow_productivity == nil) then
 			recipe.allow_productivity = true
-			recipe.maximum_productivity = 3
+			assert(recipe.maximum_productivity == nil or recipe.maximum_productivity == 3)
 		end
 	end
 end

@@ -15,7 +15,7 @@ So players have lots of different options. Could use no beacons, could have one 
 ]]
 
 local PRIMED_SPOIL_TICKS = 5 * MINUTES
-local SUPERCLOCKED_SPOIL_TICKS = 2 * MINUTES
+local SUPERCLOCKED_SPOIL_TICKS = 3 * MINUTES
 local OUTLINE_PIC = "__LegendarySpaceAge__/graphics/primed-circuits/outline.png"
 local WIRES_PIC = "__LegendarySpaceAge__/graphics/primed-circuits/wires.png"
 local BLACK_BOARD_PIC = "__LegendarySpaceAge__/graphics/primed-circuits/black-board.png"
@@ -23,7 +23,6 @@ local BLACK_BOARD_PIC = "__LegendarySpaceAge__/graphics/primed-circuits/black-bo
 --[[ Table of circuits in order, with info.
 	name: name of base circuit item
 	icon: icon of base circuit item
-	contrastTint: color that stands out against the item
 	normalBrightTint: color same as boardTint but brighter
 	boardTint: roughly the default color for the board of the item
 	primedEffect/superclockedEffect: module effects.
@@ -43,8 +42,7 @@ local CIRCUITS = {
 	{
 		name = "electronic-circuit",
 		icon = "__base__/graphics/icons/electronic-circuit.png",
-		contrastTint = {1, 0, 1, .8},
-		normalBrightTint = {0, 1, 0, 1},
+		normalBrightTint = {0, 1, 0},
 		boardTint = {0, .624, 0},
 		copyModule = "efficiency-module",
 		primedEffect = {consumption = -.5},
@@ -53,8 +51,7 @@ local CIRCUITS = {
 	{
 		name = "advanced-circuit",
 		icon = "__base__/graphics/icons/advanced-circuit.png",
-		contrastTint = {0, 1, 1, .8},
-		normalBrightTint = {1, 0, 0, 1},
+		normalBrightTint = {1, 0, 0},
 		boardTint = {.855, 0, 0},
 		copyModule = "productivity-module",
 		primedEffect = {consumption = 1, productivity = .1, pollution = .1},
@@ -63,8 +60,7 @@ local CIRCUITS = {
 	{
 		name = "processing-unit",
 		icon = "__base__/graphics/icons/processing-unit.png",
-		contrastTint = {1, 0, 0, .8},
-		normalBrightTint = {0, 0, 1, 1},
+		normalBrightTint = {0, 0, 1},
 		boardTint = {0, .333, 1},
 		copyModule = "speed-module",
 		primedEffect = {speed = .5, consumption = 1},
@@ -73,15 +69,21 @@ local CIRCUITS = {
 	{
 		name = "white-circuit",
 		icon = "__LegendarySpaceAge__/graphics/white-circuits/item.png",
-		contrastTint = {0, 0, 1, .8},
-		--normalBrightTint = {1, .5, 0, 1},
-		normalBrightTint = {1, 1, 1, 1},
+		normalBrightTint = {1, 1, 1},
 		boardTint = {.839, .808, .769},
 		copyModule = "quality-module",
 		primedEffect = {quality = .25},
 		superclockedEffect = {quality = .5},
 	},
 }
+
+-- Add tints to circuit recipes. These are used in the primer and superclocker buildings.
+for _, vals in pairs(CIRCUITS) do
+	RECIPE[vals.name].crafting_machine_tint = {
+		primary = vals.normalBrightTint,
+		secondary = vals.boardTint,
+	}
+end
 
 -- Create primed and superclocked circuits.
 for _, vals in pairs(CIRCUITS) do
@@ -120,11 +122,6 @@ for _, vals in pairs(CIRCUITS) do
 	}
 	superclockedCirc.pictures = {{
 		layers = {
-			--[[
-			{filename = circIcon, scale = 0.5, size = 64, mipmap_count = 4},
-			{filename = OUTLINE_PIC, scale = 0.5, tint = vals.contrastTint, draw_as_glow = true, size = 64, mipmap_count = 4},
-			{filename = WIRES_PIC, scale = 0.5, tint = vals.contrastTint, draw_as_glow = true, size = 64, mipmap_count = 4},
-			]]
 			{filename = BLACK_BOARD_PIC, scale = 0.5, size = 64, mipmap_count = 4},
 			{filename = WIRES_PIC, scale = 0.5, tint = vals.normalBrightTint, draw_as_glow = true, size = 64, mipmap_count = 4},
 			{filename = OUTLINE_PIC, scale = 0.5, tint = vals.boardTint, draw_as_glow = true, size = 64, mipmap_count = 4},
@@ -155,7 +152,7 @@ for _, vals in pairs(CIRCUITS) do
 		copy = primedRecipe,
 		recipe = superclockedCircName,
 		ingredients = {{primedCircName, 10}},
-		resultCount = 9,
+		results = {{superclockedCircName, amount_min = 9, amount_max = 10}},
 		category = "circuit-superclocking",
 		time = 5,
 	}

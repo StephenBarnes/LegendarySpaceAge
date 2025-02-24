@@ -21,13 +21,13 @@ primerEnt.energy_source.drain = "500kW"
 primerEnt.emissions_per_second = nil
 primerEnt.energy_source.emissions_per_minute = nil
 primerEnt.max_health = 500
-primerEnt.allowed_effects = {"consumption", "speed", "pollution"}
+primerEnt.cant_insert_at_source_message_key = "inventory-restriction.cant-be-primed"
+primerEnt.allowed_effects = {"consumption", "speed", "pollution"} -- Not prod or quality.
 primerEnt.graphics_set = {
 	animation = {
 		layers = {
 			{
 				filename = GRAPHICS_FOLDER.."1/shadow.png",
-				priority = "high",
 				width = 1200,
 				height = 700,
 				frame_count = 1,
@@ -37,7 +37,6 @@ primerEnt.graphics_set = {
 				scale = 0.5,
 			},
 			{
-				priority = "high",
 				width = 330,
 				height = 390,
 				frame_count = 80,
@@ -61,8 +60,8 @@ primerEnt.graphics_set = {
 	working_visualisations = {
 		{
 			fadeout = true,
+			apply_recipe_tint = "primary",
 			animation = {
-				priority = "high",
 				width = 330,
 				height = 390,
 				frame_count = 80,
@@ -121,12 +120,12 @@ superclockerEnt.tile_width = 6
 superclockerEnt.crafting_categories = {"circuit-superclocking"}
 superclockerEnt.energy_usage = "9MW"
 superclockerEnt.energy_source.drain = "1MW"
+superclockerEnt.cant_insert_at_source_message_key = "inventory-restriction.cant-be-superclocked"
 superclockerEnt.graphics_set = {
 	animation = {
 		layers = {
 			{
 				filename = GRAPHICS_FOLDER.."2/shadow.png",
-				priority = "high",
 				width = 900,
 				height = 420,
 				frame_count = 1,
@@ -136,7 +135,6 @@ superclockerEnt.graphics_set = {
 				draw_as_shadow = true,
 			},
 			{
-				priority = "high",
 				width = 410,
 				height = 410,
 				frame_count = 100,
@@ -160,8 +158,8 @@ superclockerEnt.graphics_set = {
 	working_visualisations = {
 		{
 			fadeout = true,
+			apply_recipe_tint = "primary",
 			animation = {
-				priority = "high",
 				width = 410,
 				height = 410,
 				frame_count = 100,
