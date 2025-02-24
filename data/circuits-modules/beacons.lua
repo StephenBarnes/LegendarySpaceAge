@@ -253,11 +253,19 @@ local basicRecipe = Recipe.make{
 	resultCount = 1,
 }
 
--- Create tech for basic beacons, and edit module tech and advanced beacon tech.
+-- Create tech for basic beacons.
 local advancedTech = TECH["effect-transmission"]
 local basicTech = copy(advancedTech)
 basicTech.name = "basic-beacons"
 basicTech.effects = {
+	{
+		type = "unlock-recipe",
+		recipe = "circuit-primer",
+	},
+	{
+		type = "unlock-recipe",
+		recipe = "electronic-circuit-primed",
+	},
 	{
 		type = "unlock-recipe",
 		recipe = "basic-beacon",
@@ -268,10 +276,12 @@ basicTech.prerequisites = {"logistic-science-pack"}
 basicTech.unit = copy(TECH["modules"].unit)
 basicTech.unit.count = 2 * basicTech.unit.count
 extend{basicTech}
-Tech.setPrereqs("modules", {"logistic-science-pack"})
+
+-- Edit advanced beacon tech.
 advancedTech.prerequisites = {"basic-beacons", "processing-unit"}
 advancedTech.unit.ingredients = {
 	{"automation-science-pack", 1},
 	{"logistic-science-pack", 1},
 	{"chemical-science-pack", 1},
 }
+advancedTech.unit.count = 300

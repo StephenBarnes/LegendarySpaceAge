@@ -258,7 +258,7 @@ chitinTech2.effects = {
 	{type = "unlock-recipe", recipe = "tubule"},
 	{type = "unlock-recipe", recipe = "frame-from-tubules"},
 }
-chitinTech2.prerequisites = {"chitin-processing-1", "biochamber"}
+chitinTech2.prerequisites = {"chitin-processing-1", "biochamber", "slipstack-propagation"}
 chitinTech2.research_trigger = {
 	type = "craft-item",
 	item = "chitin-block",

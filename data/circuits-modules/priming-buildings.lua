@@ -105,7 +105,7 @@ Recipe.make{
 	recipe = "circuit-primer",
 	ingredients = {"iron-plate", "copper-plate"}, -- TODO
 	resultCount = 1,
-	enabled = true, -- TODO add to tech.
+	enabled = false,
 }
 
 -- Create superclocker entity.
@@ -204,7 +204,40 @@ Recipe.make{
 	recipe = "superclocker",
 	ingredients = {"iron-plate", "copper-plate"}, -- TODO
 	resultCount = 1,
-	enabled = true, -- TODO add to tech.
 }
 
 -- TODO change emissions graphics to use recipe's colors, and then set primary/secondary colors of all priming recipes.
+
+-- Create tech for superclocking.
+local superclockingTech = copy(TECH["effect-transmission"])
+superclockingTech.name = "superclocked-circuits"
+superclockingTech.effects = {
+	{
+		type = "unlock-recipe",
+		recipe = "superclocker",
+	},
+	{
+		type = "unlock-recipe",
+		recipe = "electronic-circuit-superclocked",
+	},
+	{
+		type = "unlock-recipe",
+		recipe = "advanced-circuit-superclocked",
+	},
+	{
+		type = "unlock-recipe",
+		recipe = "processing-unit-superclocked",
+	},
+}
+superclockingTech.prerequisites = {"electric-engine"}
+superclockingTech.unit = {
+	count = 300,
+	ingredients = {
+		{"automation-science-pack", 1},
+		{"logistic-science-pack", 1},
+		{"chemical-science-pack", 1},
+	},
+	time = 30,
+}
+Icon.set(superclockingTech, "LSA/primer/2/tech")
+extend{superclockingTech}

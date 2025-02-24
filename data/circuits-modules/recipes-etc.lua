@@ -146,12 +146,23 @@ Recipe.make{
 -- Make tech for white circuits.
 local whiteCircuitTech = copy(TECH["processing-unit"])
 whiteCircuitTech.name = "white-circuit"
-whiteCircuitTech.effects = {{
-	type = "unlock-recipe",
-	recipe = "white-circuit",
-}}
+whiteCircuitTech.effects = {
+	{
+		type = "unlock-recipe",
+		recipe = "white-circuit",
+	},
+	{
+		type = "unlock-recipe",
+		recipe = "white-circuit-primed",
+	},
+	{
+		type = "unlock-recipe",
+		recipe = "white-circuit-superclocked",
+	},
+	
+}
 Icon.set(whiteCircuitTech, "LSA/white-circuits/tech")
-whiteCircuitTech.prerequisites = {"electromagnetic-plant", "effect-transmission"}
+whiteCircuitTech.prerequisites = {"electromagnetic-plant", "effect-transmission", "superclocked-circuits"}
 	-- Effect-transmission prereq is to make it more discoverable when browsing beacons in tech tree.
 whiteCircuitTech.unit = nil
 whiteCircuitTech.research_trigger = {

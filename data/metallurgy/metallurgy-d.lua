@@ -89,7 +89,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		{type="item", name=hotIngotName, amount=1},
 	}
 	ingotHeatingRecipe.energy_required = 1
-	ingotHeatingRecipe.hide_from_player_crafting = false
+	ingotHeatingRecipe.hide_from_player_crafting = true
 	ingotHeatingRecipe.category = "smelting"
 	ingotHeatingRecipe.enabled = true
 	ingotHeatingRecipe.icons = {
@@ -109,6 +109,7 @@ steelIngotRecipe.ingredients = {{type="item", name="ingot-iron-hot", amount=5}}
 steelIngotRecipe.results = {{type="item", name="ingot-steel-hot", amount=1}}
 steelIngotRecipe.energy_required = 10
 steelIngotRecipe.allow_decomposition = true
+steelIngotRecipe.hide_from_player_crafting = true
 extend{steelIngotRecipe}
 
 -- Make recipe for iron ore -> iron ingot.
@@ -122,6 +123,7 @@ ironIngotRecipe.results = {
 ironIngotRecipe.main_product = "ingot-iron-hot"
 ironIngotRecipe.energy_required = 5
 ironIngotRecipe.enabled = true
+ironIngotRecipe.hide_from_player_crafting = true
 extend{ironIngotRecipe}
 
 -- Make recipe for copper ore -> copper matte.
@@ -136,6 +138,7 @@ copperMatteRecipe.results = {
 copperMatteRecipe.main_product = "copper-matte"
 copperMatteRecipe.energy_required = 5
 copperMatteRecipe.enabled = true
+copperMatteRecipe.hide_from_player_crafting = true
 extend{copperMatteRecipe}
 
 -- Make copper-matte item.

@@ -14,8 +14,8 @@ The primer and superclocker buildings might have some requirement to discourage 
 So players have lots of different options. Could use no beacons, could have one priming hub and ship primed circuits. Could do superclocking and then ship to beacons, but let them spoil in beacons and only remove them once they become completely unprimed. Etc.
 ]]
 
-local PRIMED_SPOIL_TICKS = 10 * MINUTES
-local SUPERCLOCKED_SPOIL_TICKS = 5 * MINUTES
+local PRIMED_SPOIL_TICKS = 5 * MINUTES
+local SUPERCLOCKED_SPOIL_TICKS = 2 * MINUTES
 local OUTLINE_PIC = "__LegendarySpaceAge__/graphics/primed-circuits/outline.png"
 local WIRES_PIC = "__LegendarySpaceAge__/graphics/primed-circuits/wires.png"
 local BLACK_BOARD_PIC = "__LegendarySpaceAge__/graphics/primed-circuits/black-board.png"
@@ -26,6 +26,18 @@ local BLACK_BOARD_PIC = "__LegendarySpaceAge__/graphics/primed-circuits/black-bo
 	contrastTint: color that stands out against the item
 	normalBrightTint: color same as boardTint but brighter
 	boardTint: roughly the default color for the board of the item
+	primedEffect/superclockedEffect: module effects.
+
+In vanilla, effects are:
+	efficiency-module: -30/40/50% consumption.
+	speed-module: +50/60/70% consumption, +20/30/50% speed, -1/1.5/2.5% quality.
+	productivity-module: +40/60/80% consumption, -5/10/15% speed, +4/6/10% prod, +5/7/10% pollution.
+	quality-module: -5/5/5% speed, +1/2/2.5% quality.
+So, effects I'll use:
+	green: -50/100% consumption.
+	red: +100/200% consumption, +10/20% prod, +10/20% pollution, no speed effect.
+	blue: +100/200% consumption, +50/100% speed, no quality effect.
+	white: +2.5/5% quality, no speed effect.
 ]]
 local CIRCUITS = {
 	{
@@ -34,6 +46,9 @@ local CIRCUITS = {
 		contrastTint = {1, 0, 1, .8},
 		normalBrightTint = {0, 1, 0, 1},
 		boardTint = {0, .624, 0},
+		copyModule = "efficiency-module",
+		primedEffect = {consumption = -.5},
+		superclockedEffect = {consumption = -1},
 	},
 	{
 		name = "advanced-circuit",
@@ -41,6 +56,9 @@ local CIRCUITS = {
 		contrastTint = {0, 1, 1, .8},
 		normalBrightTint = {1, 0, 0, 1},
 		boardTint = {.855, 0, 0},
+		copyModule = "productivity-module",
+		primedEffect = {consumption = 1, productivity = .1, pollution = .1},
+		superclockedEffect = {consumption = 2, productivity = .2, pollution = .2},
 	},
 	{
 		name = "processing-unit",
@@ -48,6 +66,9 @@ local CIRCUITS = {
 		contrastTint = {1, 0, 0, .8},
 		normalBrightTint = {0, 0, 1, 1},
 		boardTint = {0, .333, 1},
+		copyModule = "speed-module",
+		primedEffect = {speed = .5, consumption = 1},
+		superclockedEffect = {speed = 1, consumption = 2},
 	},
 	{
 		name = "white-circuit",
@@ -56,6 +77,9 @@ local CIRCUITS = {
 		--normalBrightTint = {1, .5, 0, 1},
 		normalBrightTint = {1, 1, 1, 1},
 		boardTint = {.839, .808, .769},
+		copyModule = "quality-module",
+		primedEffect = {quality = .25},
+		superclockedEffect = {quality = .5},
 	},
 }
 
@@ -66,7 +90,7 @@ for _, vals in pairs(CIRCUITS) do
 	local superclockedCircName = circName.."-superclocked"
 
 	-- Create module for primed circuit.
-	local primedCirc = copy(MODULE["efficiency-module"])
+	local primedCirc = copy(MODULE[vals.copyModule])
 	primedCirc.name = primedCircName
 	primedCirc.icon = nil
 	primedCirc.icons = {
@@ -81,10 +105,12 @@ for _, vals in pairs(CIRCUITS) do
 	}}
 	primedCirc.spoil_ticks = PRIMED_SPOIL_TICKS
 	primedCirc.spoil_result = circName
+	primedCirc.localised_description = nil
+	primedCirc.effect = vals.primedEffect
 	extend{primedCirc}
 
 	-- Create module for superclocked circuit.
-	local superclockedCirc = copy(MODULE["quality-module-3"])
+	local superclockedCirc = copy(MODULE[vals.copyModule.."-3"])
 	superclockedCirc.name = superclockedCircName
 	superclockedCirc.icon = nil
 	superclockedCirc.icons = {
@@ -106,6 +132,8 @@ for _, vals in pairs(CIRCUITS) do
 	}}
 	superclockedCirc.spoil_ticks = SUPERCLOCKED_SPOIL_TICKS
 	superclockedCirc.spoil_result = primedCircName
+	superclockedCirc.localised_description = {"item-description."..primedCircName}
+	superclockedCirc.effect = vals.superclockedEffect
 	extend{superclockedCirc}
 
 	-- Create recipe for primed circuit.
@@ -115,7 +143,7 @@ for _, vals in pairs(CIRCUITS) do
 		ingredients = {circName},
 		resultCount = 1,
 		category = "circuit-priming",
-		enabled = true, -- TODO add to tech.
+		enabled = false,
 		time = 0.5,
 	}
 	primedRecipe.allow_productivity = false
@@ -129,7 +157,6 @@ for _, vals in pairs(CIRCUITS) do
 		ingredients = {{primedCircName, 10}},
 		resultCount = 9,
 		category = "circuit-superclocking",
-		enabled = true, -- TODO add to tech.
 		time = 5,
 	}
 	superclockedRecipe.allow_productivity = false
@@ -149,10 +176,6 @@ extend{
 	},
 }
 
--- TODO set module effects
--- TODO make recipes
--- TODO make furnace entity and item and recipe for the primer building and superclocker building
--- TODO edit item-groups stuff. Maybe 2 rows. Row 1 is beacon, primer, primed circuits. Row 2 is advanced beacon, superclocker, superclocked circuits.
--- TODO add recipes to techs
-
--- TODO add prod limits to all priming recipes.
+-- Add primed circuit recipes to techs.
+Tech.addRecipeToTech("advanced-circuit-primed", "advanced-circuit")
+Tech.addRecipeToTech("processing-unit-primed", "processing-unit")
