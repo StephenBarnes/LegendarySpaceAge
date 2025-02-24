@@ -45,6 +45,7 @@ Recipe.make{
 	category = "chemistry",
 	time = 2,
 	enabled = false,
+	subgroup = "raw-material",
 }
 
 -- Create tech for ash reprocessing.

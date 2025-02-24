@@ -171,10 +171,3 @@ ITEM["electronic-circuit"].weight = circuitWeight
 ITEM["advanced-circuit"].weight = circuitWeight
 ITEM["processing-unit"].weight = circuitWeight
 whiteCircuit.weight = circuitWeight
-
--- TODO instead of this, rather order these in item-groups.lua. But first want to add extra group to top row.
-Gen.order({
-	silicon,
-	dopedWafer,
-	microchip,
-}, "complex-circuit-intermediates")

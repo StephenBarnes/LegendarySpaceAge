@@ -438,6 +438,7 @@ RAW["lightning-attractor"]["lightning-collector"].efficiency = .3 -- Changing 40
 local extractionRecipe = copy(RECIPE["sulfuric-acid"])
 extractionRecipe.name = "extract-sulfuric-acid-from-battery"
 extractionRecipe.category = "chemistry"
+extractionRecipe.hidden = false
 extractionRecipe.ingredients = {{ type = "item", name = "battery", amount = 1 } }
 extractionRecipe.results = { -- Returns 25%, same as recycling, so should be fine.
 	{ type = "fluid", name = "sulfuric-acid", amount = 5, show_details_in_recipe_tooltip = false },

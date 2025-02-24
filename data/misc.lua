@@ -43,6 +43,13 @@ TECH["logistics"].localised_description = {"technology-description.logistics-1"}
 -- Beacon interface should be hidden. TODO move to file for apprentice foundry.
 Item.hide("beacon-interface--beacon")
 
--- TODO remove; testing.
---RAW["utility-constants"].inventory_width = "20" -- Originally 10.
--- TODO PyCoalProcessing is making crafting menu 17 wide. Not sure if that's necessary to get more item/recipe groups in crafting menu in 1 row.
+-- Change GUI.
+RAW["utility-constants"].default.select_slot_row_count = 12 -- Was 10. This is the number of slots per row in the crafting menu, Factoriopedia, etc.
+RAW["utility-constants"].default.select_group_row_count = 7 -- Was 6. This is the number of item-group's per row in the crafting menu, Factoriopedia, etc. The width of the menu seems to be determined by select_slot_row_count above, then gets split up for the item-groups; unless there's not enough, then these group tabs push it wider? Might still be something off here.
+
+-- Boost some character speed stats, because this modpack is for people who are not slow in the head.
+local character = RAW.character.character
+character.ticks_to_keep_aiming_direction = 50 -- default 100
+character.running_speed = .2 -- default 0.15
+--character.distance_per_frame = .13 -- default 0.13, seems to be for calculating how fast to play animation frames (along with eg speed bonuses from exoskeletons), so shouldn't be changed.
+-- TODO maybe add some techs for running speed bonuses? Or can we have eg techs for spidertron running speed, car driving speed, etc.?

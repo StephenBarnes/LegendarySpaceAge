@@ -6,7 +6,7 @@ extend{
 	{
 		type = "item-subgroup",
 		name = "gleba-non-agriculture",
-		group = "space",
+		group = "post-space",
 		order = "0211",
 	}
 }

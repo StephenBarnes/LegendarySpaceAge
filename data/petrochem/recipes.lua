@@ -301,3 +301,13 @@ Recipe.hide("sulfur")
 Recipe.hide("carbon")
 Tech.removeRecipeFromTech("sulfur", "sulfur-processing")
 Tech.removeRecipeFromTech("carbon", "tungsten-carbide")
+
+-- Change sulfuric acid recipe to be in raw-material.
+Recipe.make{
+	copy = "sulfuric-acid",
+	recipe = "make-sulfuric-acid",
+	subgroup = "raw-material",
+}
+Recipe.hide("sulfuric-acid")
+Tech.removeRecipeFromTech("sulfuric-acid", "sulfur-processing")
+Tech.addRecipeToTech("make-sulfuric-acid", "sulfur-processing")

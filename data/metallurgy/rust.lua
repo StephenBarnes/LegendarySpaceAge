@@ -16,7 +16,7 @@ for i, itemName in pairs{
 	rustyItem.has_random_tint = true
 	rustyItem.random_tint_color = {.592, .463, .322}
 	rustyItem.localised_name = {"item-name.rusty-X", {"item-name.compound-"..itemName}}
-	rustyItem.subgroup = "rusty"
+	rustyItem.subgroup = "rust"
 	rustyItem.order = "a-"..i
 	extend{rustyItem}
 	baseItem.spoil_ticks = RUST_TIME
@@ -35,7 +35,7 @@ for i, itemName in pairs{
 	recipe1.main_product = itemName
 	Icon.set(recipe1, {"rusty-"..itemName, "sand"})
 	recipe1.enabled = true
-	recipe1.subgroup = "derusting"
+	recipe1.subgroup = "rust"
 	recipe1.order = "b-"..i
 	recipe1.auto_recycle = false
 	recipe1.localised_name = {"recipe-name.sand-derust-X", {"item-name.compound-"..itemName}}

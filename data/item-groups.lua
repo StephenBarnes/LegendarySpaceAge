@@ -7,8 +7,19 @@ TODO also rewrite all the manual for-loops etc to use Gen.orderKinds.
 ]]
 
 -- Change the space tab's icon, from satellite to rocket silo, since it's now anything after Nauvis.
+local originalSpaceIcon = RAW["item-group"].space.icon
+local originalSpaceIconSize = RAW["item-group"].space.icon_size
 RAW["item-group"]["space"].icon = "__base__/graphics/technology/rocket-silo.png"
 RAW["item-group"]["space"].icon_size = 256
+
+-- Create item group for other planets and Nauvis.
+extend{{
+	type = "item-group",
+	name = "post-space",
+	order = "d2",
+	icon = originalSpaceIcon,
+	icon_size = originalSpaceIconSize,
+}}
 
 extend{
 	-- Create subgroup for hot/cold ingots and ingot-heating recipes.
@@ -27,18 +38,11 @@ extend{
 		order = "b2",
 	},
 
-	-- Create subgroups for rusted items and derusting.
-	{
+	{ -- Create subgroup for rusted items and derusting.
 		type = "item-subgroup",
-		name = "rusty",
+		name = "rust",
 		group = "intermediate-products",
 		order = "b3",
-	},
-	{
-		type = "item-subgroup",
-		name = "derusting",
-		group = "intermediate-products",
-		order = "b4",
 	},
 
 	-- Create subgroup for fluid logistics items.
@@ -49,11 +53,10 @@ extend{
 		order = "d2",
 	},
 
-	-- Create subgroup for circuits and advanced circuit intermediates (electronic components, silicon wafers, doped wafers).
-	-- TODO remove this later, once we've added the extra group to the top row.
+	-- Create subgroup for petroleum materials (plastic, rubber, etc.)
 	{
 		type = "item-subgroup",
-		name = "complex-circuit-intermediates",
+		name = "petroleum-materials",
 		group = "intermediate-products",
 		order = "c7",
 	},
@@ -104,12 +107,12 @@ extend{
 	{ type = "item-subgroup", name = "alien-science-packs", group = "intermediate-products", order = "y2" },
 
 	-- Subgroups for Gleba.
-	{ type = "item-subgroup", name = "spoilage-and-nutrients", group = "space", order = "0200" },
-	{ type = "item-subgroup", name = "yumako-and-jellynut", group = "space", order = "0201" },
-	{ type = "item-subgroup", name = "slipstacks-and-boompuffs", group = "space", order = "022b" },
+	{ type = "item-subgroup", name = "spoilage-and-nutrients", group = "post-space", order = "0200" },
+	{ type = "item-subgroup", name = "yumako-and-jellynut", group = "post-space", order = "0201" },
+	{ type = "item-subgroup", name = "slipstacks-and-boompuffs", group = "post-space", order = "022b" },
 
 	-- Subgroup for Fulgora biological processes.
-	{ type = "item-subgroup", name = "fulgora-agriculture", group = "space", order = "031" },
+	{ type = "item-subgroup", name = "fulgora-agriculture", group = "post-space", order = "031" },
 }
 
 ------------------------------------------------------------------------
@@ -142,31 +145,12 @@ for subgroup, fluids in pairs{
 	setSubgroupInOrder(subgroup .. "-fluids", "fluid", fluids)
 end
 
--- Move battery-salvage.
-RECIPE["extract-sulfuric-acid-from-battery"].subgroup = ITEM["battery"].subgroup
-
--- Move batteries to intermediate-product instead of raw-material.
-ITEM["battery"].subgroup = "intermediate-product"
-ITEM["charged-battery"].subgroup = "intermediate-product"
-ITEM["holmium-battery"].subgroup = "intermediate-product"
-ITEM["charged-holmium-battery"].subgroup = "intermediate-product"
-
--- Move rocket fuel to raw-material bc it makes more sense (sprite has canister, but no iron/steel ingredient) and balances subgroup populations better.
-ITEM["rocket-fuel"].subgroup = "raw-material"
-
 -- Move lubricant to complex-fluid-recipes.
 RECIPE["lubricant"].subgroup = "complex-fluid-recipes"
-
--- Reorder raw-materials line.
-ITEM["solid-fuel"].order = "c"
-ITEM["explosives"].order = "e"
 
 -- Move chem plant before refinery.
 ITEM["oil-refinery"].order = "e[refinery]"
 ITEM["chemical-plant"].order = "d[chemical-plant]"
-
--- Sulfur near start of raw material line, since it now appears early in the game.
-ITEM["sulfur"].order = "a0"
 
 -- Move fluid recipes to after raw materials like sulfur.
 RAW["item-subgroup"]["fluid-recipes"].order = "d"
@@ -174,7 +158,7 @@ RAW["item-subgroup"]["fluid-recipes"].order = "d"
 -- Move biter egg to the right row.
 ITEM["biter-egg"].subgroup = "nauvis-agriculture"
 
--- Move intermediate subgroups to the space group.
+-- Move intermediate subgroups to the post-space group.
 for subgroupName, order in pairs{
 	["vulcanus-processes"] = "01",
 	["agriculture-processes"] = "021",
@@ -184,7 +168,7 @@ for subgroupName, order in pairs{
 	["uranium-processing"] = "042",
 	["aquilo-processes"] = "05",
 } do
-	RAW["item-subgroup"][subgroupName].group = "space"
+	RAW["item-subgroup"][subgroupName].group = "post-space"
 	RAW["item-subgroup"][subgroupName].order = order
 end
 
@@ -233,18 +217,6 @@ local inserters = {"inserter", "long-handed-inserter", "fast-inserter", "bulk-in
 setSubgroupInOrder("inserter", {"item", "recipe", "inserter"}, inserters, "b")
 setSubgroupInOrder("inserter", {"item", "recipe", "splitter"}, splitters, "a")
 
--- Organize raw materials line. Probably 2 or 3 lines, with actual raw materials, petroleum stuff, fuels, etc. Add silicon to one of these lines.
--- TODO
--- Organize intermediate-products line. Probably add doped wafer and microchip to this line.
--- TODO
-
---[[
-	ITEM["electronic-circuit"],
-	ITEM["advanced-circuit"],
-	ITEM["processing-unit"],
-	whiteCircuit,
-]]
-
 -- TODO separate bottom logistics row into two lines, one with paving and one with the rest.
 
 -- Arrange beacons, primers, circuits, primed/superclocked circuits, etc in 3 rows.
@@ -276,3 +248,54 @@ Gen.orderKinds("module-3", {RAW.module, RECIPE}, {
 }, "1-")
 Gen.orderKinds("module-3", {FURNACE, RECIPE, ITEM}, {"superclocker"}, "2-")
 Gen.orderKinds("module-3", {RAW.beacon, RECIPE, ITEM}, {"beacon"}, "3-")
+
+-- Order the raw-material group.
+Gen.orderKinds("raw-material", {ITEM}, {
+	"ash",
+	"sand",
+	"glass-batch",
+	"glass",
+	"silicon",
+	"copper-matte",
+	"sulfur",
+	"niter",
+	"gunpowder",
+})
+
+-- Move petroleum materials to their row.
+Gen.orderKinds("petroleum-materials", {ITEM}, {
+	"pitch",
+	"carbon",
+	"solid-fuel",
+	"explosives",
+	"plastic-bar",
+	"rubber",
+}, "1-")
+Gen.orderKinds("petroleum-materials", {RECIPE}, {
+	"rubber-from-latex",
+	"rubber-from-oil",
+	"char-carbon",
+	"inverse-vulcanization",
+}, "2-")
+
+-- Move sulfuric acid to fluid-recipes.
+Gen.orderKinds("fluid-recipes", {RECIPE}, {
+	"make-sulfuric-acid",
+	"extract-sulfuric-acid-from-battery",
+}, "c-")
+
+-- Order the intermediate-product group.
+Gen.orderKinds("intermediate-product", {ITEM}, {
+	"doped-wafer",
+	"microchip",
+	"engine-unit",
+	"electric-engine-unit",
+	"flying-robot-frame",
+	"barrel",
+	"gas-tank",
+	"battery",
+	"charged-battery",
+	"holmium-battery",
+	"charged-holmium-battery",
+})
+RAW["item-subgroup"]["intermediate-product"].order = "c8"

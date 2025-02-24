@@ -35,8 +35,9 @@ latexRecipe.ingredients = {
 }
 latexRecipe.results = {{type="fluid", name="latex", amount=50}}
 latexRecipe.category = "chemistry"
-latexRecipe.subgroup = "raw-material"
-latexRecipe.order = "f1"
+latexRecipe.subgroup = nil
+latexRecipe.order = nil
+latexRecipe.hide_from_player_crafting = true
 extend{latexRecipe}
 
 -- Create recipe for latex to rubber.
@@ -49,8 +50,6 @@ rubberFromLatexRecipe.ingredients = {
 }
 rubberFromLatexRecipe.results = {{type="item", name="rubber", amount=5}}
 rubberFromLatexRecipe.category = "chemistry"
-rubberFromLatexRecipe.subgroup = "raw-material"
-rubberFromLatexRecipe.order = "f2"
 Icon.set(rubberFromLatexRecipe, {"rubber", "latex"})
 extend{rubberFromLatexRecipe}
 

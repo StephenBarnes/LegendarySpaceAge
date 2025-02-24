@@ -48,7 +48,7 @@ extend{
 	{
 		type = "item-subgroup",
 		name = "stingfrond-products",
-		group = "space",
+		group = "post-space",
 		order = "023",
 	},
 }
