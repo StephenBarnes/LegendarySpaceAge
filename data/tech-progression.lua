@@ -263,12 +263,16 @@ Tech.addTechDependency("advanced-circuit", "processing-unit")
 
 -- Remove steel prereq from some techs that don't really need steel, due to our factor intermediate system.
 Tech.removePrereq("electric-energy-distribution-1", "steel-processing")
-Tech.removePrereq("solar-energy", "steel-processing") -- TODO change solar panel recipe
 Tech.removePrereq("engine", "steel-processing") -- TODO change engine recipe
 
--- Move solar to after electric-energy-distribution-1.
-Tech.removePrereq("solar-energy", "logistic-science-pack")
-Tech.addTechDependency("electric-energy-distribution-1", "solar-energy")
+-- Solar comes after blue circuits. It and its dependent techs should use chem science.
+Tech.setPrereqs("solar-energy", {"processing-unit"})
+Tech.addSciencePack("solar-energy", "chemical-science-pack")
+Tech.addSciencePack("solar-panel-equipment", "chemical-science-pack")
+Tech.addSciencePack("battery-equipment", "chemical-science-pack")
+Tech.addSciencePack("belt-immunity-equipment", "chemical-science-pack")
+Tech.addSciencePack("night-vision-equipment", "chemical-science-pack")
+Tech.addTechDependency("solar-energy", "rocket-silo")
 
 -- Move engine to after fluid handling.
 Tech.removePrereq("engine", "logistic-science-pack")

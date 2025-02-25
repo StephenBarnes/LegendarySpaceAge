@@ -62,7 +62,7 @@ Recipe.make{
 	clearSubgroup = true,
 }
 Tech.addRecipeToTech("silicon", "advanced-circuit", 1)
-Tech.addRecipeToTech("silicon", "solar-energy", 1)
+--Tech.addRecipeToTech("silicon", "solar-energy", 1)
 
 Recipe.make{
 	copy = "plastic-bar",

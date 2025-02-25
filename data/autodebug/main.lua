@@ -4,7 +4,7 @@
 local RUN_FULL_DEBUG = false
 
 -- This controls whether to run shorter debugs that don't need tech pre/post sets.
-local RUN_QUICK_DEBUG = false
+local RUN_QUICK_DEBUG = true
 
 
 local toposortTechs = require("toposort-techs")
@@ -87,8 +87,8 @@ if RUN_FULL_DEBUG then
 	end
 elseif RUN_QUICK_DEBUG then
 	if runQuickDebug() then
-		log("Legendary Space Age: quick progression debug passed.")
+		log("Legendary Space Age: quick debug passed.")
 	else
-		log("Legendary Space Age ERROR: one or more quick progression debug checks failed.")
+		log("Legendary Space Age ERROR: one or more quick debug checks failed.")
 	end
 end

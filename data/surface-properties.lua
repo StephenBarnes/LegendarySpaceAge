@@ -121,16 +121,16 @@ end
 --- Solar power.
 --- I want to generally make solar infeasible on planets, so that it's only worth it on space platforms. But I don't want to make it like 50% on Nauvis surface, rather keep it at 100% on Nauvis surface and then reduce solar panel's power field. And then make it higher in space.
 
--- Reduce energy from solar panels, from 60kW default to 20kW.
-RAW["solar-panel"]["solar-panel"].production = "20kW"
+-- Reduce energy from solar panels, from 60kW default to 10kW.
+RAW["solar-panel"]["solar-panel"].production = "10kW"
 
--- Update solar power in atmosphere for planets, and in space. Generally keeping it the same on the ground, since solar panels are made 3x weaker above already, and I want to keep Nauvis ground as the 100% standard. For space platforms, I'm buffing it by about 2x so it's still fairly powerful in space.
+-- Update solar power in atmosphere for planets, and in space. Generally keeping it the same on the ground, since solar panels are made 6x weaker above already, and I want to keep Nauvis ground as the 100% standard. For space platforms, I'm buffing it by about 4x so it's still fairly powerful in space.
 for planetName, groundAndSpace in pairs{
-	vulcanus = {400, 1000}, -- Default 400, 600.
-	gleba = {50, 500}, -- Default 50, 200.
-	nauvis = {100, 600}, -- Default 100, 300.
-	fulgora = {20, 250}, -- Default 20, 120.
-	aquilo = {5, 5}, -- Default 1, 60. Increasing ground 1% to 5% so it's easier to get started. Reducing space 60->5 so you need a nuclear reactor.
+	vulcanus = {400, 2000}, -- Default 400, 600.
+	gleba = {50, 1000}, -- Default 50, 200.
+	nauvis = {100, 1200}, -- Default 100, 300.
+	fulgora = {20, 5000}, -- Default 20, 120.
+	aquilo = {10, 10}, -- Default 1, 60. Increasing ground 1% to 10% so it's easier to get started. Reducing space 60->10 so you need a nuclear reactor.
 } do
 	RAW.planet[planetName].surface_properties["solar-power"] = groundAndSpace[1]
 	RAW.planet[planetName].solar_power_in_space = groundAndSpace[2]

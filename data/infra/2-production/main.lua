@@ -6,18 +6,24 @@ require("miners-etc")
 require("boilers-heaters")
 
 -- Repair pack
-RECIPE["repair-pack"].ingredients = {
-	{type="item", name="mechanism", amount=1},
-	{type="item", name="sensor", amount=1},
+Recipe.edit{
+	recipe = "repair-pack",
+	ingredients = {
+		{"mechanism", 1},
+		{"sensor", 1},
+	},
 }
 
 -- Solar panels.
-RECIPE["solar-panel"].ingredients = {
-	{type = "item", name = "glass", amount = 10},
-	{type = "item", name = "silicon", amount = 10},
-	{type = "item", name = "electronic-circuit", amount = 2},
-	{type = "item", name = "frame", amount = 2},
+Recipe.edit{
+	recipe = "solar-panel",
+	ingredients = {
+		{"glass", 10},
+		{"silicon", 10},
+		{"processing-unit", 2},
+		{"frame", 2},
+	},
+	time = 10,
 }
-RECIPE["solar-panel"].energy_required = 10
 
 RAW["solar-panel"]["solar-panel"].max_health = 50 -- From default 200. It's fragile.
