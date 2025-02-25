@@ -4,56 +4,62 @@ Generally we want beacons and all module effects to be allowed for basically eve
 
 local Util = require("data.autodebug.util")
 
--- Table of recipes and machines that should have prod/quality disabled or modified. Maps from type to max prod (0 for disabled) and whether quality is enabled.
-local expected = {
-	["recipe"] = {
-		-- All priming and superclocking recipes have prod and quality disabled, since the result decays back into the ingredient quickly.
-		["electronic-circuit-primed"] = {0, false},
-		["electronic-circuit-superclocked"] = {0, false},
-		["advanced-circuit-primed"] = {0, false},
-		["advanced-circuit-superclocked"] = {0, false},
-		["processing-unit-primed"] = {0, false},
-		["processing-unit-superclocked"] = {0, false},
-		["white-circuit-primed"] = {0, false},
-		["white-circuit-superclocked"] = {0, false},
+-- Table of recipes that should have prod/quality disabled or modified. Maps from type to max prod (0 for disabled) and whether quality is enabled.
+local expectedRecipes = {
+	-- All priming and superclocking recipes have prod and quality disabled, since the result decays back into the ingredient quickly.
+	["electronic-circuit-primed"] = {0, false},
+	["electronic-circuit-superclocked"] = {0, false},
+	["advanced-circuit-primed"] = {0, false},
+	["advanced-circuit-superclocked"] = {0, false},
+	["processing-unit-primed"] = {0, false},
+	["processing-unit-superclocked"] = {0, false},
+	["white-circuit-primed"] = {0, false},
+	["white-circuit-superclocked"] = {0, false},
 
-		["tungsten-heating"] = {0, false}, -- Just changes temperature, so no prod.
-		["lava-water-heating"] = {0, false}, -- Water + lava -> stone + steam. No prod so water is conserved.
+	["tungsten-heating"] = {0, false}, -- Just changes temperature, so no prod.
+	["lava-water-heating"] = {0, false}, -- Water + lava -> stone + steam. No prod so water is conserved.
 
-		["explosive-desynchronization"] = {0, false}, -- This turns 10 into 5 * 1.5 = 7.5, which could easily tip over to >10, so no prod bonuses. It's intended to use resynchronization to get more; allowing prod here would remove that challenge.
-		["cyclosome-resynchronization"] = {3, true}, -- This should allow quality since it's the only way to make cyclosomes. Also allowing prod.
+	["explosive-desynchronization"] = {0, false}, -- This turns 10 into 5 * 1.5 = 7.5, which could easily tip over to >10, so no prod bonuses. It's intended to use resynchronization to get more; allowing prod here would remove that challenge.
+	["cyclosome-resynchronization"] = {3, true}, -- This should allow quality since it's the only way to make cyclosomes. Also allowing prod.
 
-		-- Fertilized seeds decay back into normal seeds, so can't allow prod or quality.
-		["fertilized-yumako-seed"] = {0, false},
-		["fertilized-jellynut-seed"] = {0, false},
+	-- Fertilized seeds decay back into normal seeds, so can't allow prod or quality.
+	["fertilized-yumako-seed"] = {0, false},
+	["fertilized-jellynut-seed"] = {0, false},
 
-		-- Oil cracking shouldn't allow prod because it would allow you to amplify amount of oil at each step, then do syngas liquefaction for positive-sum loop.
-		-- But allowing quality for the sulfur and carbon byproducts.
-		["heavy-oil-cracking"] = {0, true},
-		["light-oil-cracking"] = {0, true},
-		["rich-gas-cracking"] = {0, false}, -- No solid byproducts, so no quality.
+	-- Oil cracking shouldn't allow prod because it would allow you to amplify amount of oil at each step, then do syngas liquefaction for positive-sum loop.
+	-- But allowing quality for the sulfur and carbon byproducts.
+	["heavy-oil-cracking"] = {0, true},
+	["light-oil-cracking"] = {0, true},
+	["rich-gas-cracking"] = {0, false}, -- No solid byproducts, so no quality.
 
-		-- You can't get crude or natgas back, so enabling prod doesn't cause problems. Also enabling quality for the sulfur and carbon byproducts.
-		["oil-fractionation"] = {3, true},
-		["gas-fractionation"] = {3, true},
+	-- You can't get crude or natgas back, so enabling prod doesn't cause problems. Also enabling quality for the sulfur and carbon byproducts.
+	["oil-fractionation"] = {3, true},
+	["gas-fractionation"] = {3, true},
 
-		["pentapod-egg"] = {3, true}, -- This is the recipe for turning activated eggs into multiple dormant ones. Allowing prod and quality.
-		["activated-pentapod-egg"] = {3, true}, -- This is the recipe for activating dormant eggs with mash. Allowing prod and quality.
+	["pentapod-egg"] = {3, true}, -- This is the recipe for turning activated eggs into multiple dormant ones. Allowing prod and quality.
+	["activated-pentapod-egg"] = {3, true}, -- This is the recipe for activating dormant eggs with mash. Allowing prod and quality.
 
-		["clean-filter"] = {0, false}, -- Clean filter can be easily turned into spent filter, so can't enable prod or quality.
+	["clean-filter"] = {0, false}, -- Clean filter can be easily turned into spent filter, so can't enable prod or quality.
 
-		-- Filtration recipes should allow prod and quality, since you can't get the input back.
-		["filter-lake-water"] = {3, true},
-		["filter-slime"] = {3, true},
-		["filter-fulgoran-sludge"] = {3, true},
+	-- Filtration recipes should allow prod and quality, since you can't get the input back.
+	["filter-lake-water"] = {3, true},
+	["filter-slime"] = {3, true},
+	["filter-fulgoran-sludge"] = {3, true},
 
-		["coal-coking"] = {3, true}, -- Can't get coal back, so no issue enabling prod.
-		--["heavy-oil-coking"] = {3, true}, -- Converts 50MJ to 6MJ + 10MJ, so allowing prod and quality is maybe fine? Need to check with carbon conservation.
-		--["tar-distillation"] = {3, true}, -- Converts 40MJ to 6MJ + 3MJ + 10MJ + 7MJ = 26MJ.
-		-- TODO do the 2 above after implementing carbon conservation checks.
+	["coal-coking"] = {3, true}, -- Can't get coal back, so no issue enabling prod.
+	--["heavy-oil-coking"] = {3, true}, -- Converts 50MJ to 6MJ + 10MJ, so allowing prod and quality is maybe fine? Need to check with carbon conservation.
+	--["tar-distillation"] = {3, true}, -- Converts 40MJ to 6MJ + 3MJ + 10MJ + 7MJ = 26MJ.
+	-- TODO do the 2 above after implementing carbon conservation checks.
 
-		-- TODO add sth about prod bonuses being disabled for foundry water outputs.
-	},
+	-- Water phase conversions should conserve total water.
+	["ice-melting"] = {0, false},
+	["steam-condensation"] = {0, false},
+
+	-- TODO more.
+}
+
+-- Table of machines that should have prod/quality/beacons disabled or modified.
+local expectedMachines = {
 	["assembling-machine"] = {
 	},
 	["furnace"] = {
@@ -76,7 +82,7 @@ local function getRecipeExpected(recipe)
 	end
 
 	local success = true
-	local expectedVals = expected.recipe[recipe.name]
+	local expectedVals = expectedRecipes[recipe.name]
 	local expectedProd, expectedQuality
 	if expectedVals == nil then
 		expectedProd = 3
@@ -95,7 +101,7 @@ local function getRecipeExpected(recipe)
 
 	-- If recipe produces only fluids, quality should be disabled by default.
 	if Recipe.hasOnlyFluidOutputs(recipe) then
-		if expected["recipe"][recipe.name] == nil then -- If not specified, assume quality should be disabled.
+		if expectedRecipes[recipe.name] == nil then -- If not specified, assume quality should be disabled.
 			expectedQuality = false
 		else
 			if expectedQuality ~= false then

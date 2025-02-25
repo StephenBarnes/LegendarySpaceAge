@@ -126,9 +126,9 @@ tubuleRecipe.ingredients = {
 }
 tubuleRecipe.results = {
 	{type = "item", name = "tubule", amount = 5},
-	{type = "fluid", name = "slime", amount = 10}, -- Kind of just an annoyance (have to pump it into a lake) but I like this aesthetically. Also it's exactly enough for making frames.
-	{type = "item", name = "slipstack-pearl", amount = 4, percent_spoiled = 0.8},
-		-- With productivity, this is 3 pearls.
+	{type = "item", name = "slipstack-pearl", amount = 4, percent_spoiled = 0.8, ignored_by_productivity = 4},
+	{type = "fluid", name = "slime", amount = 10, ignored_by_productivity = 10}, -- Kind of just an annoyance (have to pump it into a lake) but I like this aesthetically. Also it's exactly enough for making frames.
+		-- Also, have to ignore prod for the slime, to avoid allowing a loop that creates water out of nothing.
 }
 tubuleRecipe.main_product = "tubule"
 tubuleRecipe.energy_required = 10

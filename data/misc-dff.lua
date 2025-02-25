@@ -22,7 +22,12 @@ if RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"] then
 end
 
 -- Disable quality for some recipes that only produce fluids.
-for _, recipeName in pairs{"make-sulfuric-acid", "holmium-solution", "ice-melting"} do
+for _, recipeName in pairs{"make-sulfuric-acid", "holmium-solution", "ice-melting", "steam-condensation"} do
 	local recipe = RECIPE[recipeName]
 	recipe.allow_quality = false
+end
+-- Disable prod for some recipes.
+for _, recipeName in pairs{"ice-melting", "steam-condensation"} do
+	local recipe = RECIPE[recipeName]
+	recipe.allow_productivity = false
 end

@@ -13,7 +13,7 @@ oilFractionationRecipe.results = {
 	{type = "fluid", name = "tar", amount = 10, show_details_in_recipe_tooltip = false},
 	{type = "fluid", name = "heavy-oil", amount = 40, show_details_in_recipe_tooltip = false},
 	{type = "fluid", name = "light-oil", amount = 50, show_details_in_recipe_tooltip = false},
-	{type = "fluid", name = "water", amount = 1, show_details_in_recipe_tooltip = false}, -- Game has water 10x denser than steam. So this gives half the steam back as water.
+	{type = "fluid", name = "water", amount = 1, ignored_by_productivity = 1, show_details_in_recipe_tooltip = false}, -- Game has water 10x denser than steam. So this gives half the steam back as water.
 	{type = "item", name = "sulfur", amount = 2, show_details_in_recipe_tooltip = false},
 	{type = "item", name = "carbon", amount = 2, show_details_in_recipe_tooltip = false},
 }
@@ -32,7 +32,7 @@ gasFractionationRecipe.ingredients = {
 gasFractionationRecipe.results = {
 	{type = "fluid", name = "petroleum-gas", amount = 50, show_details_in_recipe_tooltip = false},
 	{type = "fluid", name = "dry-gas", amount = 50, show_details_in_recipe_tooltip = false},
-	{type = "fluid", name = "water", amount = 1, show_details_in_recipe_tooltip = false},
+	{type = "fluid", name = "water", amount = 1, ignored_by_productivity = 1, show_details_in_recipe_tooltip = false},
 	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 }
 Icon.set(gasFractionationRecipe, {"natural-gas", "petroleum-gas", "dry-gas"}, "decomposition")

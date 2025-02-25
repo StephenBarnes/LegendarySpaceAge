@@ -1,8 +1,9 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.8.0
-Date: 2025-02-22
+Date: 2025-02-25
   Features:
-    - TODO maybe do the circuit/module reorganization
+    - Added primer building and superclocker building. Removed modules, which are now replaced with primed and superclocked circuits, which spoil. Added white circuits.
+    - Added filtration plant.
 ---------------------------------------------------------------------------------------------------
 Version: 0.7.0
 Date: 2025-02-20

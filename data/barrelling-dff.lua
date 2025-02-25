@@ -1,9 +1,6 @@
 -- This file changes some barrelling recipes to use gas tanks instead of barrels.
 -- Note that I renamed the tank to just "pressurized tank" so it's not necessarily for gases, more just for anything that doesn't seem right in an ordinary barrel.
 
-local BARREL_FLUID_AMOUNT = 50 -- 50 fluid units per barrel, from vanilla.
-local GAS_TANK_FLUID_AMOUNT = 50 -- Considered having it higher, but doesn't really make sense realistically, and gas tanks aren't more expensive than barrels.
-
 -- Edit some of the barrelling recipes to instead have the icon for the gas tank, and use gas tank ingredient and result.
 local gases = Table.listToSet{
 	--"steam", -- Not barrellable.
@@ -69,7 +66,7 @@ for gasName, _ in pairs(gases) do
 		if ingredient.name == "barrel" then
 			ingredient.name = "gas-tank"
 		else
-			ingredient.amount = GAS_TANK_FLUID_AMOUNT
+			ingredient.amount = FLUID_PER_BARREL
 		end
 	end
 
@@ -78,7 +75,7 @@ for gasName, _ in pairs(gases) do
 		if result.name == "barrel" then
 			result.name = "gas-tank"
 		else
-			result.amount = GAS_TANK_FLUID_AMOUNT
+			result.amount = FLUID_PER_BARREL
 		end
 	end
 
@@ -148,8 +145,8 @@ for fluidName, fuelValues in pairs(Const.fluidFuelValues) do
 	if ITEM[fluidName.."-barrel"] then
 		if fuelValues[1] ~= nil then
 			local isGas = gases[fluidName]
-			local fluidNumMult = Gen.ifThenElse(isGas, GAS_TANK_FLUID_AMOUNT, BARREL_FLUID_AMOUNT)
-			ITEM[fluidName.."-barrel"].fuel_value = Gen.multWithUnits(fuelValues[1], fluidNumMult)
+			--local fluidNumMult = Gen.ifThenElse(isGas, GAS_TANK_FLUID_AMOUNT, BARREL_FLUID_AMOUNT)
+			ITEM[fluidName.."-barrel"].fuel_value = Gen.multWithUnits(fuelValues[1], FLUID_PER_BARREL)
 			ITEM[fluidName.."-barrel"].fuel_emissions_multiplier = fuelValues[2]
 			ITEM[fluidName.."-barrel"].fuel_acceleration_multiplier = fuelValues[3]
 			ITEM[fluidName.."-barrel"].fuel_top_speed_multiplier = fuelValues[4]
