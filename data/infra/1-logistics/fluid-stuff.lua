@@ -13,3 +13,20 @@ RECIPE["pump"].ingredients = {
 	{type="item", name="fluid-fitting", amount=4},
 	{type="item", name="mechanism", amount=2},
 }
+
+Recipe.edit{
+	recipe = "offshore-pump",
+	ingredients = {
+		{"fluid-fitting", 5},
+		{"mechanism", 2},
+	},
+	time = 1,
+}
+Recipe.edit{
+	recipe = "waste-pump",
+	ingredients = {
+		{"fluid-fitting", 5},
+		{"mechanism", 2},
+	},
+	time = 1,
+}

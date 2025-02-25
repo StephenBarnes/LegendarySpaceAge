@@ -156,13 +156,13 @@ Recipe.make{
 	copy = "iron-gear-wheel",
 	recipe = "filter-lake-water",
 	ingredients = {
-		{"lake-water", 1000, type = "fluid"},
+		{"lake-water", 100, type = "fluid"},
 	},
 	results = {
-		{"water", 1000},
-		{"sand", amount_min = 0, amount_max = 4, show_details_in_recipe_tooltip = false},
-		{"stone", amount_min = 0, amount_max = 2, show_details_in_recipe_tooltip = false},
-		{"niter", amount_min = 0, amount_max = 2, show_details_in_recipe_tooltip = false},
+		{"water", 100},
+		{"sand", 1, probability = .4, show_details_in_recipe_tooltip = false},
+		{"stone", 1, probability = .2, show_details_in_recipe_tooltip = false},
+		{"niter", 1, probability = .2, show_details_in_recipe_tooltip = false},
 		{"raw-fish", 1, probability = .01, show_details_in_recipe_tooltip = false},
 	},
 	main_product = "water",
@@ -174,7 +174,7 @@ Recipe.make{
 		{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
 	},
 	enabled = false,
-	time = 5,
+	time = 1,
 	crafting_machine_tint = {
 		primary = {.015, .631, .682},
 		secondary = FLUID.water.base_color,
@@ -213,12 +213,12 @@ Recipe.make{
 	copy = "iron-gear-wheel",
 	recipe = "filter-slime",
 	ingredients = {
-		{"slime", 400, type = "fluid"},
+		{"slime", 100, type = "fluid"},
 	},
 	results = {
-		{"water", 300},
-		{"spoilage", 10, show_details_in_recipe_tooltip = false},
-		{"petrophage", 1, probability = .05, show_details_in_recipe_tooltip = false},
+		{"water", 50},
+		{"spoilage", 1, show_details_in_recipe_tooltip = false},
+		{"petrophage", 1, probability = .01, show_details_in_recipe_tooltip = false},
 		-- Could give eggs or fruits with some small probability. But rather not, since that makes it too easy to restart cycles.
 	},
 	main_product = "water",
@@ -226,7 +226,7 @@ Recipe.make{
 	subgroup = "gleba-non-agriculture",
 	order = "00",
 	enabled = false,
-	time = 5,
+	time = 1,
 	specialIcons = {
 		{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
 		{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},

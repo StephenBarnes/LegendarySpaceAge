@@ -24,17 +24,17 @@ Recipe.edit{
 	recipe = "boiler",
 	time = 5,
 	ingredients = {
-		{"structure", 2},
-		{"fluid-fitting", 2},
-		{"shielding", 2},
+		{"structure", 1},
+		{"fluid-fitting", 5},
+		{"shielding", 1},
 	},
 }
 Recipe.edit{
 	recipe = "electric-boiler",
 	time = 5,
 	ingredients = {
-		{"structure", 2},
-		{"fluid-fitting", 2},
+		{"structure", 1},
+		{"fluid-fitting", 5},
 		{"shielding", 1},
 		{"electronic-components", 2},
 	},
@@ -43,9 +43,9 @@ Recipe.edit{
 	recipe = "gas-boiler",
 	time = 5,
 	ingredients = {
-		{"structure", 2},
-		{"fluid-fitting", 5},
-		{"shielding", 2},
+		{"structure", 1},
+		{"fluid-fitting", 10},
+		{"shielding", 1},
 	},
 }
 
@@ -55,7 +55,7 @@ Recipe.edit{
 		{"frame", 1},
 		{"electronic-components", 5},
 		{"mechanism", 2},
-		{"fluid-fitting", 2},
+		{"fluid-fitting", 5},
 	},
 	time = 5,
 }

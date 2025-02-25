@@ -148,10 +148,6 @@ end
 -- Move lubricant to complex-fluid-recipes.
 RECIPE["lubricant"].subgroup = "complex-fluid-recipes"
 
--- Move chem plant before refinery.
-ITEM["oil-refinery"].order = "e[refinery]"
-ITEM["chemical-plant"].order = "d[chemical-plant]"
-
 -- Move fluid recipes to after raw materials like sulfur.
 RAW["item-subgroup"]["fluid-recipes"].order = "d"
 
@@ -205,7 +201,7 @@ setSubgroupInOrder("planetary-special", {"item", "recipe"},
 	{"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge", "cryogenic-plant"})
 
 setSubgroupInOrder("chemical-processing", {"item", "recipe"},
-	{"chemical-plant", "oil-refinery", "gasifier", "fluid-fuelled-gasifier"})
+	{"filtration-plant", "chemical-plant", "oil-refinery", "gasifier", "fluid-fuelled-gasifier"})
 ITEM["agricultural-tower"].subgroup = "extraction-machine"
 ITEM["agricultural-tower"].order = "c"
 local labs = {"lab", "glebalab", "biolab"}

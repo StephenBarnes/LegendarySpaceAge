@@ -12,9 +12,17 @@ Plus, I ended up adding filtration as an important recipe to 4 of the 5 planets 
 local ent = copy(ASSEMBLER["chemical-plant"])
 ent.type = "furnace"
 ent.name = "filtration-plant"
+Icon.set(ent, "LSA/filtration/filtration-plant/icon")
 ent.minable = {mining_time = 1, result = "filtration-plant"}
 ent.crafting_categories = {"filtration"}
 ent.crafting_speed = 1
+ent.heating_energy = "200kW"
+ent.emissions_per_second = nil
+ent.energy_source.emissions_per_minute = nil
+ent.max_health = 1000
+ent.perceived_performance = {maximum = 1.5}
+ent.fast_replaceable_group = nil
+ent.energy_usage = "200kW" -- Filter is 1MJ, so 5 seconds per filter.
 ent.energy_source = {
 	type = "burner",
 	fuel_categories = {"filter"},
@@ -30,7 +38,7 @@ ent.energy_source = {
 		minimum_light_size = 0,
 		light_intensity_to_size_coefficient = 0.0,
 		color = {0, 0, 0, 1}
-	}
+	},
 }
 ent.selection_box = {{-3, -3}, {3, 3}}
 ent.collision_box = {{-2.95, -2.95}, {2.95, 2.95}}
@@ -38,6 +46,9 @@ ent.tile_height = 6
 ent.tile_width = 6
 ent.source_inventory_size = 0
 ent.result_inventory_size = 17
+ent.dying_explosion = "agricultural-tower-explosion"
+ent.corpse = "biochamber-remnants"
+-- Circuit connector looks fine.
 local pipeCovers = pipecoverspictures()
 ent.fluid_boxes = {
 	{
@@ -81,7 +92,6 @@ ent.fluid_boxes = {
 		},
 	},
 }
-ent.energy_usage = "100kW"
 local graphicsShift = {0, -0.25}
 ent.graphics_set = {
 	animation = {
@@ -145,7 +155,37 @@ ent.graphics_set = {
 	reset_animation_when_frozen = true,
 }
 -- TODO sounds
--- TODO corpse, explosion.
+ent.working_sound = {
+	main_sounds = {
+		{
+			sound = {
+				filename = "__base__/sound/chemical-plant.ogg",
+				volume = 0.25,
+				audible_distance_modifier = 0.4,
+			},
+			fade_in_ticks = 4,
+			fade_out_ticks = 20,
+		},
+	},
+	sound_accents = {
+		-- There's 30 frames, water fills up around frame 14, gone around framo 22.
+		{
+			sound = {
+				--filename = "__space-age__/sound/entity/cryogenic-plant/cp-anim3-bubbles-rise.ogg",
+				variations = sound_variations("__space-age__/sound/entity/foundry/foundry-fire-whoosh", 2, 0.8),
+				audible_distance_modifier = 0.7,
+			},
+			frame = 4,
+		},
+		{
+			sound = {
+				filename = "__space-age__/sound/entity/agricultural-tower/agricultural-tower-grappler-extend-stop.ogg",
+				audible_distance_modifier = 1.5,
+			},
+			frame = 19,
+		},
+	},
+}
 extend{ent}
 
 -- Create item.
@@ -161,5 +201,5 @@ Recipe.make{
 	recipe = "filtration-plant",
 	resultCount = 1,
 	clearIcons = true,
-	-- TODO ingredients etc.
+	-- Will set ingredients in infra file.
 }

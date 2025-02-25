@@ -89,6 +89,17 @@ for _, vals in pairs{
 	ent.allowed_module_categories = nil -- Allows all by default.
 end
 
+Recipe.edit{
+	recipe = "filtration-plant",
+	ingredients = {
+		{"frame", 10},
+		{"fluid-fitting", 20},
+		{"mechanism", 5},
+		{"panel", 20},
+	},
+	time = 10,
+}
+
 -- Chemical plant - shouldn't require steel bc we're moving it to automation 1. Also no pipe ingredients bc it comes before pipe tech. But it should cost more than assembler 1 since it's faster.
 Recipe.edit{
 	recipe = "chemical-plant",
