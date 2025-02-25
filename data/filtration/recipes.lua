@@ -177,8 +177,8 @@ Recipe.make{
 	time = 1,
 	crafting_machine_tint = {
 		primary = {.015, .631, .682},
-		secondary = FLUID.water.base_color,
-		tertiary = FLUID.water.flow_color,
+		secondary = FLUID.water.flow_color,
+		tertiary = FLUID.water.base_color,
 	},
 }
 
@@ -232,9 +232,9 @@ Recipe.make{
 		{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
 	},
 	crafting_machine_tint = {
-		primary = {.176, .255, .200},
-		secondary = {.393, .453, .333},
-		tertiary = {.482, .745, .215},
+		primary = {.482, .745, .215},
+		secondary = {.176, .255, .200},
+		tertiary = {.393, .453, .333},
 	}
 }
 

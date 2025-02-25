@@ -2,6 +2,7 @@
 -- Some code taken from Fulgoran Sludge mod by Tatticky.
 
 -- Create sludge fluid, and a recipe to separate it.
+local sludgeFlowColor = { r = 0.08, g = 0.08, b = 0.08 }
 extend({
 	{
 		type = "fluid",
@@ -10,7 +11,7 @@ extend({
 		icon_size = 64,
 		mipmap_count = 4,
 		base_color = { r = 0.24, g = 0.16, b = 0.16 },
-		flow_color = { r = 0.08, g = 0.08, b = 0.08 },
+		flow_color = sludgeFlowColor,
 		default_temperature = 5,
 		auto_barrel = false,
 		subgroup = "fluid",
@@ -49,11 +50,9 @@ extend({
 		maximum_productivity = 3,
 		---@diagnostic disable-next-line: assign-type-mismatch
 		auto_recycle = false,
-		crafting_machine_tint = { -- TODO check and maybe improve tints.
-			primary = { r = 0.5, g = 0.4, b = 0.25, a = 1.000 },
-			secondary = { r = 0, g = 0, b = 0, a = 1.000 },
-			tertiary = { r = 0.75, g = 0.5, b = 0.5 },
-			quaternary = { r = 0.24, g = 0.16, b = 0.16 }
+		crafting_machine_tint = {
+			primary = FLUID["heavy-oil"].flow_color,
+			secondary = sludgeFlowColor,
 		}
 	}
 })

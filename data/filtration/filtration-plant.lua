@@ -121,6 +121,7 @@ ent.graphics_set = {
 	},
 	working_visualisations = {
 		{ -- Light overlay.
+			apply_recipe_tint = "primary",
 			fadeout = true,
 			animation = {
 				width = 200,
@@ -134,9 +135,9 @@ ent.graphics_set = {
 				filename = "__LegendarySpaceAge__/graphics/filtration/filtration-plant/light.png",
 				shift = graphicsShift,
 			},
-			apply_recipe_tint = "secondary",
 		},
 		{ -- Fluid overlay.
+			apply_recipe_tint = "primary",
 			fadeout = true,
 			animation = {
 				width = 400,
@@ -145,11 +146,11 @@ ent.graphics_set = {
 				line_length = 4,
 				animation_speed = 0.5,
 				scale = 0.5,
-				filename = "__LegendarySpaceAge__/graphics/filtration/filtration-plant/fluid-overlay.png",
+				blend_mode = "normal",
 				draw_as_glow = true,
+				filename = "__LegendarySpaceAge__/graphics/filtration/filtration-plant/fluid-overlay.png",
 				shift = graphicsShift,
 			},
-			apply_recipe_tint = "primary",
 		},
 	},
 	reset_animation_when_frozen = true,
