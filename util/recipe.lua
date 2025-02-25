@@ -146,15 +146,8 @@ end
 	.clearSubgroup
 	.category, .enabled, .auto_recycle, .subgroup, .order, .localised_name, .localised_description, .main_product, .allow_decomposition, .allow_as_intermediate, .show_amount_in_title, .crafting_machine_tint (just copied over)
 ]]
-local possibleArgs = Table.listToSet{"recipe", "ingredients", "results", "resultCount", "time",
-	"icons", "iconArrangement", "clearIcons", "specialIcons",
-	"clearSubgroup",
-	"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint",
-}
+---@param a {recipe: string|data.RecipePrototype, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: string, localised_description?: string, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean}
 Recipe.edit = function(a)
-	for k, _ in pairs(a) do
-		assert(possibleArgs[k], "Recipe.edit: unknown field "..k)
-	end
 	local recipe = nil
 	assert(a.recipe ~= nil, "Recipe.edit: recipe proto or name is required, arguments: ".. serpent.block(a))
 	if type(a.recipe) == "string" then
@@ -189,7 +182,7 @@ Recipe.edit = function(a)
 	end
 
 	-- Some fields just get copied over.
-	for _, field in pairs{"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint"} do
+	for _, field in pairs{"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh"} do
 		if a[field] ~= nil then
 			recipe[field] = a[field]
 		end
@@ -205,6 +198,7 @@ Recipe.edit = function(a)
 end
 
 -- Create a recipe by copying an existing recipe and adjusting it. The a.copy field is the recipe to copy, rest of args the same as Recipe.edit.
+---@param a {copy: string|data.RecipePrototype, recipe: string, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: string, localised_description?: string, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean}
 Recipe.make = function(a)
 	assert(a.copy ~= nil, "Recipe.make: copy is required, arguments: ".. serpent.block(a))
 	assert(a.recipe ~= nil, "Recipe.make: recipe name is required, arguments: ".. serpent.block(a))
@@ -221,11 +215,26 @@ Recipe.make = function(a)
 	assert(recipe ~= nil)
 	---@diagnostic disable-next-line: assign-type-mismatch
 	recipe.name = a.recipe
+	---@diagnostic disable-next-line: assign-type-mismatch
 	a.recipe = recipe
 	a.copy = nil
+	---@diagnostic disable-next-line: param-type-mismatch
 	Recipe.edit(a)
 	extend{recipe}
 	return RECIPE[recipe.name]
+end
+
+---@param recipe data.RecipePrototype
+Recipe.hasOnlyFluidOutputs = function(recipe)
+	for _, result in pairs(recipe.results or {}) do
+		if result.type ~= "fluid" then return false end
+	end
+	return true
+end
+
+---@param recipe data.RecipePrototype
+Recipe.isBarrellingRecipe = function(recipe)
+	return recipe.subgroup == "fill-barrel" or recipe.subgroup == "empty-barrel" or recipe.subgroup == "fill-gas-tank" or recipe.subgroup == "empty-gas-tank"
 end
 
 return Recipe

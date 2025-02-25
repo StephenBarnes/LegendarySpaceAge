@@ -35,22 +35,24 @@ ammonia2Tech.unit = {
 extend{ammonia2Tech}
 
 -- Create recipe for ammonia from wood
-local ammoniaFromWood = copy(RECIPE["nutrients-from-spoilage"])
-ammoniaFromWood.name = "ammonia-from-wood"
-ammoniaFromWood.ingredients = {
-	{type = "item", name = "wood", amount = 5},
-	{type = "fluid", name = "water", amount = 20},
+local ammoniaFromWood = Recipe.make{
+	copy = "nutrients-from-spoilage",
+	recipe = "ammonia-from-wood",
+	ingredients = {
+		{"wood", 5},
+		{"water", 20},
+	},
+	results = {
+		{"ammonia", 10},
+	},
+	show_amount_in_title = false,
+	category = "organic-or-chemistry",
+	subgroup = "early-agriculture",
+	order = "d1",
+	energy_required = 30,
+	allow_quality = false,
+	icons = {"ammonia", "wood"},
 }
-ammoniaFromWood.results = {
-	{type = "fluid", name = "ammonia", amount = 10},
-}
-ammoniaFromWood.show_amount_in_title = false
-ammoniaFromWood.category = "organic-or-chemistry"
-ammoniaFromWood.subgroup = "early-agriculture"
-ammoniaFromWood.order = "d1"
-ammoniaFromWood.energy_required = 30
-Icon.set(ammoniaFromWood, {"ammonia", "wood"})
-extend{ammoniaFromWood}
 
 -- Create recipe for ammonia from spoilage.
 local ammoniaFromSpoilage = copy(ammoniaFromWood)

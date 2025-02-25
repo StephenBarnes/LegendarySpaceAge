@@ -4,8 +4,6 @@
 Recipe.hide("po-interface")
 Tech.removeRecipeFromTech("po-interface", "po-electric-energy-distribution-3")
 
--- Tempted to hide the fuses bc they look a bit weird. But they do make the design a bit more interesting.
-
 -- Fix order of recipes in electric energy distribution 1 tech.
 -- I think this can't run in data, must be data-updates, maybe bc rusting iron mod hasn't made its recipe yet.
 Tech.reorderRecipeUnlocks("electric-energy-distribution-1",
@@ -17,15 +15,6 @@ Tech.reorderRecipeUnlocks("electric-energy-distribution-1",
 		"po-transformer",
 		"iron-stick",
 	})
-
--- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive. Rather just the pole plus a wiring.
-for _, size in pairs{"small", "medium", "big"} do
-	RECIPE["po-"..size.."-electric-fuse"].ingredients = {
-		{type = "item", name = "electronic-components", amount = 2},
-		{type = "item", name = size.."-electric-pole", amount = 1},
-	}
-	RECIPE["po-"..size.."-electric-fuse"].energy_required = RECIPE[size.."-electric-pole"].energy_required
-end
 
 -- Using custom descriptions for techs.
 TECH["electric-energy-distribution-1"].localised_description = {"technology-description.electric-energy-distribution-1"}

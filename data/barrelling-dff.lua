@@ -135,6 +135,14 @@ for _, recipeGroup in pairs{barrellingRecipes, unbarrellingRecipes, gasFillingRe
 end
 Tech.removeRecipeFromTech("barrel", "fluid-handling")
 
+-- Disable prod and quality for all barrelling recipes.
+for _, recipeGroup in pairs{barrellingRecipes, unbarrellingRecipes, gasFillingRecipes, gasEmptyingRecipes} do
+	for _, recipeName in pairs(recipeGroup) do
+		RECIPE[recipeName].allow_productivity = false
+		RECIPE[recipeName].allow_quality = false
+	end
+end
+
 -- Add fuel values for barrels and gas tanks.
 for fluidName, fuelValues in pairs(Const.fluidFuelValues) do
 	if ITEM[fluidName.."-barrel"] then

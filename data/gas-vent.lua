@@ -104,17 +104,16 @@ ventItem.place_result = "gas-vent"
 ventItem.stack_size = 20
 extend{ventItem}
 
-local ventRecipe = copy(RECIPE["steel-furnace"])
-ventRecipe.type = "recipe"
-ventRecipe.name = "gas-vent"
-ventRecipe.enabled = false
-ventRecipe.ingredients = {
-	{type = "item", name = "frame", amount = 2},
-	{type = "item", name = "fluid-fitting", amount = 1},
+local ventRecipe = Recipe.make{
+	copy = "steel-furnace",
+	recipe = "gas-vent",
+	ingredients = {
+		{"frame", 5},
+		{"fluid-fitting", 5},
+	},
+	resultCount = 1,
+	time = 5,
 }
-ventRecipe.results = {{type = "item", name = "gas-vent", amount = 1}}
--- TODO decide on ingredients
-extend{ventRecipe}
 
 local ventRecipeCategory = copy(RAW["recipe-category"]["crafting"])
 ventRecipeCategory.name = "gas-venting"
@@ -172,12 +171,14 @@ for _, fluidData in pairs(ventableFluids) do
 	thisGasVentRecipe.localised_name = {"recipe-name.gas-vent", {"fluid-name."..gasToVent}}
 	thisGasVentRecipe.category = "gas-venting"
 	thisGasVentRecipe.subgroup = "fluid"
-	thisGasVentRecipe.ingredients = {{type = "fluid", name = gasToVent, amount = 120}}
+	thisGasVentRecipe.ingredients = {{type = "fluid", name = gasToVent, amount = 100}}
 	thisGasVentRecipe.results = {}
 	thisGasVentRecipe.enabled = true
 	thisGasVentRecipe.hidden = false
 	thisGasVentRecipe.hidden_in_factoriopedia = true
 	thisGasVentRecipe.hide_from_player_crafting = true
+	thisGasVentRecipe.allow_productivity = false
+	thisGasVentRecipe.allow_quality = false
 	thisGasVentRecipe.icons = {
 		gasIcon,
 		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64},

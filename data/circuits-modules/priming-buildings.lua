@@ -4,14 +4,6 @@ Using graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 
 local GRAPHICS_FOLDER = "__LegendarySpaceAge__/graphics/primer/"
 
--- Some functions to shift circuit connectors.
-local function shift(v, x, y)
-	return {v[1] + x, v[2] + y}
-end
-local function shiftConnector(connector, x, y)
-	connector.sprites.blue_led_light_offset = shift(connector.sprites.blue_led_light_offset, x, y)
-end
-
 -- Create circuit primer entity.
 local primerEnt = copy(FURNACE["electric-furnace"])
 primerEnt.name = "circuit-primer"
@@ -297,8 +289,6 @@ Recipe.make{
 	ingredients = {"iron-plate", "copper-plate"}, -- Overwritten in infra file.
 	resultCount = 1,
 }
-
--- TODO change emissions graphics to use recipe's colors, and then set primary/secondary colors of all priming recipes.
 
 -- Create tech for superclocking.
 local superclockingTech = copy(TECH["effect-transmission"])

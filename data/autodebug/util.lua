@@ -27,11 +27,15 @@ local recipesToIgnore = Table.listToSet{
 }
 Export.shouldIgnoreRecipe = function(recipe)
 	-- Ignore recipes from Editor Extensions, starting with "ee-".
-	if string.find(recipe.name, "^ee-") then
-		return true
-	end
-	if recipe.hidden then return true end
+	if string.find(recipe.name, "^ee-") then return true end
+	if recipe.hidden or recipe.parameter then return true end
 	return recipesToIgnore[recipe.name]
+end
+
+Export.shouldIgnoreItem = function(item)
+	if item.hidden or item.parameter then return true end
+	if string.find(item.name, "^ee-") then return true end
+	return recipesToIgnore[item.name]
 end
 
 return Export

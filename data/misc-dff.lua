@@ -20,3 +20,9 @@ if RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"] then
 	RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].hidden_in_factoriopedia = true
 	RAW["spider-vehicle"]["spidertron-enhancements-dummy-spidertron"].factoriopedia_alternative = "spidertron"
 end
+
+-- Disable quality for some recipes that only produce fluids.
+for _, recipeName in pairs{"make-sulfuric-acid", "holmium-solution", "ice-melting"} do
+	local recipe = RECIPE[recipeName]
+	recipe.allow_quality = false
+end

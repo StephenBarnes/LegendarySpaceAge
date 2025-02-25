@@ -95,7 +95,6 @@ local function checkCraftingMachine(machine)
 	local energyUsage = energyToNumber(machine.energy_usage)
 	local drain = energyToNumber(machine.energy_source.drain or "0W")
 	for name, val in pairs{
-		["energy usage"] = energyUsage,
 		["crafting speed"] = machine.crafting_speed,
 		["drain"] = drain,
 		["drain plus active energy usage"] = drain + energyUsage,
@@ -113,15 +112,18 @@ end
 ---@param item data.ItemPrototype
 ---@return boolean
 local function checkItem(item)
+	if Util.shouldIgnoreItem(item) then return true end
 	local success = true
-	for name, val in pairs{
-		["stack size"] = item.stack_size,
-		["num per rocket"] = ROCKET / item.weight,
-	} do
-		if not complexityOk(val) then
-			log("Complexity of item " .. item.name .. " value \"" .. name .. "\" is too high: " .. val)
-			success = false
-		end
+	if not complexityOk(item.stack_size) then
+		log("Complexity of item " .. item.name .. " stack size is too high: " .. item.stack_size)
+		success = false
+	end
+	if item.weight == nil then
+		log("Item " .. item.name .. " has no weight")
+		success = false
+	elseif not complexityOk(ROCKET / item.weight) then
+		log("Complexity of item " .. item.name .. " num per rocket is too high: " .. ROCKET / item.weight)
+		success = false
 	end
 	return success
 end

@@ -38,6 +38,7 @@ latexRecipe.category = "chemistry"
 latexRecipe.subgroup = nil
 latexRecipe.order = nil
 latexRecipe.hide_from_player_crafting = true
+latexRecipe.allow_quality = false
 extend{latexRecipe}
 
 -- Create recipe for latex to rubber.

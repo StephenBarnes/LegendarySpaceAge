@@ -118,9 +118,11 @@ for _, effluentFluidAndPollution in pairs(effluentFluidsAndPollution) do
 	effluentRecipe.name = "vent-" .. effluentFluid
 	effluentRecipe.localised_name = {"recipe-name.waste-pumping", {"fluid-name."..effluentFluid}}
 	effluentRecipe.enabled = true
-	effluentRecipe.ingredients = {{type = "fluid", name = effluentFluid, amount = 1200}}
+	effluentRecipe.ingredients = {{type = "fluid", name = effluentFluid, amount = 1000}}
 	effluentRecipe.results = {}
 	effluentRecipe.energy_required = 1
+	effluentRecipe.allow_productivity = false
+	effluentRecipe.allow_quality = false
 	effluentRecipe.hidden = false
 	effluentRecipe.hidden_in_factoriopedia = true
 	effluentRecipe.hide_from_player_crafting = true

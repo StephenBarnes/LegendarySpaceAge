@@ -265,6 +265,9 @@ Tech.addRecipeToTech("rich-gas-cracking", "oil-processing")
 Tech.removeRecipeFromTech("heavy-oil-cracking", "advanced-oil-processing")
 Tech.removeRecipeFromTech("light-oil-cracking", "advanced-oil-processing")
 
+-- Solid fuel recipe goes in the first oil tech.
+Tech.addRecipeToTech("solid-fuel", "oil-processing")
+
 -- Add heavy oil coking, tar distillation, pitch processing to advanced oil processing.
 Tech.addRecipeToTech("heavy-oil-coking", "advanced-oil-processing")
 Tech.addRecipeToTech("tar-distillation", "advanced-oil-processing")
@@ -311,3 +314,10 @@ Recipe.make{
 Recipe.hide("sulfuric-acid")
 Tech.removeRecipeFromTech("sulfuric-acid", "sulfur-processing")
 Tech.addRecipeToTech("make-sulfuric-acid", "sulfur-processing")
+
+-- Disable prod and quality for all the cracking recipes.
+for _, recipeName in pairs{"heavy-oil-cracking", "light-oil-cracking", "rich-gas-cracking"} do
+	local recipe = RECIPE[recipeName]
+	recipe.allow_productivity = false
+	recipe.allow_quality = false
+end

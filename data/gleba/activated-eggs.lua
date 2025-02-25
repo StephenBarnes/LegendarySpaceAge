@@ -35,7 +35,6 @@ eggActivationRecipe.ingredients = {
 eggActivationRecipe.results = {
 	{type = "item", name = "activated-pentapod-egg", amount = 1},
 }
-eggActivationRecipe.allow_productivity = false -- TODO add note to description.
 eggActivationRecipe.surface_conditions = nil
 Icon.clear(eggActivationRecipe) -- Remove icons so it defaults to the activated egg icon.
 eggActivationRecipe.order = eggActivationRecipe.order .. "-2"

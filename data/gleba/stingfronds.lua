@@ -235,8 +235,9 @@ resyncRecipe.results = {
 	{type = "item", name = "cyclosome-3", amount = 50, show_details_in_recipe_tooltip = false},
 }
 resyncRecipe.show_amount_in_title = false
-resyncRecipe.allow_productivity = false
-resyncRecipe.maximum_productivity = 0
+resyncRecipe.allow_productivity = true
+resyncRecipe.maximum_productivity = nil
+resyncRecipe.allow_quality = true
 resyncRecipe.subgroup = "stingfrond-products"
 resyncRecipe.order = "c"
 resyncRecipe.energy_required = 10

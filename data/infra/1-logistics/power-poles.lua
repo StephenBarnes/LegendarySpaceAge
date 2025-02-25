@@ -1,29 +1,54 @@
--- Electric poles
-RECIPE["small-electric-pole"].ingredients = {
-	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "wiring", amount = 1},
+Recipe.edit{
+	recipe = "small-electric-pole",
+	ingredients = {
+		{"frame", 1},
+		{"wiring", 1},
+	},
+	time = 0.5,
 }
-RECIPE["small-electric-pole"].energy_required = 0.5
-RECIPE["medium-electric-pole"].ingredients = {
-	{type = "item", name = "frame", amount = 2},
-	{type = "item", name = "wiring", amount = 1},
+Recipe.edit{
+	recipe = "medium-electric-pole",
+	ingredients = {
+		{"frame", 2},
+		{"wiring", 1},
+	},
+	time = 1,
 }
-RECIPE["medium-electric-pole"].energy_required = 1
-RECIPE["big-electric-pole"].ingredients = {
-	{type = "item", name = "structure", amount = 1},
-	{type = "item", name = "frame", amount = 3},
-	{type = "item", name = "wiring", amount = 2},
+Recipe.edit{
+	recipe = "big-electric-pole",
+	ingredients = {
+		{"structure", 1},
+		{"frame", 2},
+		{"wiring", 2},
+	},
+	time = 2,
 }
-RECIPE["big-electric-pole"].energy_required = 2
-RECIPE["substation"].ingredients = {
-	{type = "item", name = "frame", amount = 2},
-	{type = "item", name = "electronic-components", amount = 5},
-	{type = "item", name = "advanced-circuit", amount = 5},
+Recipe.edit{
+	recipe = "substation",
+	ingredients = {
+		{"frame", 5},
+		{"advanced-circuit", 5},
+	},
+	time = 5,
 }
-RECIPE["substation"].energy_required = 5
-RECIPE["po-transformer"].ingredients = {
-	{type = "item", name = "frame", amount = 1},
-	{type = "item", name = "wiring", amount = 1},
-	{type = "item", name = "electronic-components", amount = 5},
+Recipe.edit{
+	recipe = "po-transformer",
+	ingredients = {
+		{"frame", 1},
+		{"wiring", 1},
+		{"electronic-components", 5},
+	},
+	time = 2,
 }
-RECIPE["po-transformer"].energy_required = 1
+
+-- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive. Rather just the pole plus a wiring.
+for _, size in pairs{"small", "medium", "big"} do
+	Recipe.edit{
+		recipe = "po-"..size.."-electric-fuse",
+		ingredients = {
+			{"electronic-components", 2},
+			{size.."-electric-pole", 1},
+		},
+		time = RECIPE[size.."-electric-pole"].energy_required,
+	}
+end

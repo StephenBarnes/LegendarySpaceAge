@@ -75,41 +75,48 @@ RAW.plant["yumako-tree"].minable.results = {{type = "item", name = "yumako", amo
 RAW.plant["jellystem"].minable.results = {{type = "item", name = "jellynut", amount_min = 20, amount_max = 40}}
 
 -- Create recipes for fertilized seeds.
-local fertilizedYumakoSeedRecipe = copy(RECIPE["bioflux"])
-fertilizedYumakoSeedRecipe.name = "fertilized-yumako-seed"
-fertilizedYumakoSeedRecipe.ingredients = {
-	{type = "item", name = "yumako-seed", amount = 1},
-	{type = "item", name = "bioflux", amount = 1},
-	{type = "fluid", name = "slime", amount = 10},
+local fertilizedYumakoSeedRecipe = Recipe.make{
+	copy = "bioflux",
+	recipe = "fertilized-yumako-seed",
+	ingredients = {
+		{"yumako-seed", 1},
+		{"bioflux", 1},
+		{"slime", 10, type = "fluid"},
+	},
+	resultCount = 1,
+	clearIcons = true, -- So it takes the icon of the fertilized seed, instead of bioflux item.
+	result_is_always_fresh = true,
+	allow_productivity = false,
+	allow_quality = false,
+	time = 1,
 }
-fertilizedYumakoSeedRecipe.results = {{type = "item", name = "fertilized-yumako-seed", amount = 1}}
-Icon.clear(fertilizedYumakoSeedRecipe) -- So it takes the icon of the fertilized seed, instead of bioflux item.
-fertilizedYumakoSeedRecipe.result_is_always_fresh = true
-fertilizedYumakoSeedRecipe.maximum_productivity = 0
-fertilizedYumakoSeedRecipe.energy_required = 2
-extend{fertilizedYumakoSeedRecipe}
 Tech.addRecipeToTech("fertilized-yumako-seed", "yumako")
 
-local fertilizedJellystemSeedRecipe = copy(fertilizedYumakoSeedRecipe)
-fertilizedJellystemSeedRecipe.name = "fertilized-jellynut-seed"
-fertilizedJellystemSeedRecipe.ingredients = {
-	{type = "item", name = "jellynut-seed", amount = 1},
-	{type = "item", name = "bioflux", amount = 1},
-	{type = "fluid", name = "slime", amount = 10},
+local fertilizedJellynutSeedRecipe = Recipe.make{
+	copy = fertilizedYumakoSeedRecipe,
+	recipe = "fertilized-jellynut-seed",
+	ingredients = {
+		{"jellynut-seed", 1},
+		{"bioflux", 1},
+		{"slime", 10, type = "fluid"},
+	},
+	resultCount = 1,
 }
-fertilizedJellystemSeedRecipe.results = {{type = "item", name = "fertilized-jellynut-seed", amount = 1}}
-fertilizedJellystemSeedRecipe.result_is_always_fresh = true
-fertilizedJellystemSeedRecipe.maximum_productivity = 0
-extend{fertilizedJellystemSeedRecipe}
 Tech.addRecipeToTech("fertilized-jellynut-seed", "jellynut")
 
 -- Make the fruit processing recipes yield 90%-spoiled fertilized seeds. (Spoil timer is 10 minutes, so we make the fruits yield 90% spoiled seeds, so 60 seconds left.)
 -- Also, increase seed output, since biochambers no longer have a prod bonus.
-RECIPE["yumako-processing"].results = {
-	{type = "item", name = "yumako-mash", amount = 2},
-	{type = "item", name = "fertilized-yumako-seed", amount = 1, probability = .025, percent_spoiled = .9},
+Recipe.edit{
+	recipe = "yumako-processing",
+	results = {
+		{"yumako-mash", 2},
+		{"fertilized-yumako-seed", 1, probability = .025, percent_spoiled = .9},
+	},
 }
-RECIPE["jellynut-processing"].results = {
-	{type = "item", name = "jelly", amount = 4},
-	{type = "item", name = "fertilized-jellynut-seed", amount = 1, probability = .025, percent_spoiled = .9},
+Recipe.edit{
+	recipe = "jellynut-processing",
+	results = {
+		{"jelly", 4},
+		{"fertilized-jellynut-seed", 1, probability = .025, percent_spoiled = .9},
+	},
 }

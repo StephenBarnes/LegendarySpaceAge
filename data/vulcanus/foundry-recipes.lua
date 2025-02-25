@@ -325,6 +325,7 @@ tungstenHeatingRecipe.show_amount_in_title = false
 tungstenHeatingRecipe.hide_from_stats = true
 tungstenHeatingRecipe.allow_productivity = false
 tungstenHeatingRecipe.maximum_productivity = 0
+tungstenHeatingRecipe.allow_quality = false
 extend{tungstenHeatingRecipe}
 Tech.addRecipeToTech("tungsten-heating", "tungsten-steel")
 

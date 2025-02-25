@@ -140,7 +140,7 @@ Recipe.make{
 	recipe = "filter-lake-water",
 	ingredients = {
 		{"filter", 1},
-		{"lake-water", 1200, type = "fluid"},
+		{"lake-water", 1000, type = "fluid"},
 	},
 	results = {
 		{"water", 1000},

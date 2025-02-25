@@ -33,19 +33,3 @@ for _, recipe in pairs(RECIPE) do
 		end
 	end
 end
-
--- TODO temporary: print out all recipes that don't have productivity enabled.
--- TODO move this to autodebugger.
-for _, recipe in pairs(RECIPE) do
-	if not recipe.parameter and (recipe.hidden == false or recipe.hidden == nil) then
-		if (recipe.allow_productivity == false) then
-			log("Disabled productivity: "..recipe.name)
-		end
-		if (recipe.maximum_productivity ~= 3) and (recipe.maximum_productivity ~= nil) then
-			log("Non-default maximum productivity: "..recipe.name.." "..(recipe.maximum_productivity or "nil"))
-		end
-	end
-end
-
--- TODO also disable quality for some recipes, and check that. Eg battery charging.
--- TODO allow beacons and quality and prod for (almost) all machines, eg furnaces.

@@ -28,7 +28,7 @@ local hatches = cargoParams.hatch_definitions
 assert(hatches ~= nil)
 assert(#hatches == 6)
 for i = 1, 3 do
-	hatches[i].busy_timeout_ticks = 60 -- Default 120, TODO test
+	hatches[i].busy_timeout_ticks = 60 -- Default 120.
 	table.insert(hatches, copy(hatches[i]))
 	table.insert(hatches, copy(hatches[i]))
 	--hatch.hatch_opening_ticks
