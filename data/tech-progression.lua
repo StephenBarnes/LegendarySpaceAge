@@ -329,6 +329,8 @@ Tech.addTechDependency("automation-3", "planet-discovery-fulgora")
 Tech.setPrereqs("automation-3", {"automation-2", "electric-engine"})
 Tech.removeSciencePack("production-science-pack", "automation-3")
 
+-- Make recipe for chemistry, and move chem plant to that.
+
 -- TODO edit recipes for other science packs.
 
 -- TODO lubricant should come earlier, so that we can unlock advanced parts early, and then put it in many recipes.

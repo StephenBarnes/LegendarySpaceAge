@@ -4,19 +4,19 @@
 
 -- Edit items from mining boulders - more niter, more stone, more coal.
 RAW["simple-entity"]["huge-rock"].minable.results = {
-	{type = "item", name = "stone", amount_min = 25, amount_max = 75}, -- Was 24-50.
-	{type = "item", name = "coal", amount_min = 25, amount_max = 75}, -- Was 24-50.
-	{type = "item", name = "niter", amount_min = 0, amount_max = 20}, -- Added.
+	{type = "item", name = "stone", amount=100}, -- Was 24-50.
+	{type = "item", name = "coal", amount=25}, -- Was 24-50.
+	{type = "item", name = "niter", amount=10}, -- Added.
 }
 RAW["simple-entity"]["big-rock"].minable.results = {
-	{type = "item", name = "stone", amount_min = 30, amount_max = 50}, -- Was 20.
-	{type = "item", name = "coal", amount_min = 0, amount_max = 30}, -- Added.
-	{type = "item", name = "niter", amount_min = 0, amount_max = 10}, -- Added.
+	{type = "item", name = "stone", amount=50}, -- Was 20.
+	{type = "item", name = "coal", amount=10}, -- Added.
+	{type = "item", name = "niter", amount=10}, -- Added.
 }
 RAW["simple-entity"]["big-sand-rock"].minable.results = {
-	{type = "item", name = "stone", amount_min = 30, amount_max = 50}, -- Was 19-25.
-	{type = "item", name = "coal", amount_min = 0, amount_max = 20}, -- Added.
-	{type = "item", name = "niter", amount_min = 0, amount_max = 20}, -- Added.
+	{type = "item", name = "stone", amount=50}, -- Was 19-25.
+	{type = "item", name = "coal", amount=10}, -- Added.
+	{type = "item", name = "niter", amount=10}, -- Added.
 }
 -- TODO also boulders etc in other places, eg Vulcanus needs niter.
 
