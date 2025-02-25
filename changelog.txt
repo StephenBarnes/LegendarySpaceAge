@@ -4,6 +4,8 @@ Date: 2025-02-25
   Features:
     - Added primer building and superclocker building. Removed modules, which are now replaced with primed and superclocked circuits, which spoil. Added white circuits.
     - Added filtration plant.
+  Bugfixes:
+    - Fixed crash from missing hourglass signal icon.
 ---------------------------------------------------------------------------------------------------
 Version: 0.7.0
 Date: 2025-02-20

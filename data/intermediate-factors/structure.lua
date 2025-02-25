@@ -51,7 +51,8 @@ local recipeFromVitrified = Recipe.make{
 	enabled = true,
 	time = 30,
 	category = "smelting",
-	icons = {"structure", "stone-brick", "base/signal/signal-hourglass"},
+	--icons = {"structure", "stone-brick", "base/signal/signal-hourglass"},
+	icons = {"structure", "stone-brick", "LSA/temp-delete/signal-hourglass"},
 	allow_as_intermediate = true,
 }
 

@@ -4,7 +4,7 @@
 local RUN_FULL_DEBUG = false
 
 -- This controls whether to run shorter debugs that don't need tech pre/post sets.
-local RUN_QUICK_DEBUG = true
+local RUN_QUICK_DEBUG = false
 
 
 local toposortTechs = require("toposort-techs")
