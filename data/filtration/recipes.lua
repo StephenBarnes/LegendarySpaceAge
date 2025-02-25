@@ -1,5 +1,15 @@
 -- This file creates the water filter item, plus recipes to filter local water on Nauvis and Gleba.
 
+-- Create recipe category for filtration.
+local filtrationRecipeCategory = copy(RAW["recipe-category"]["crafting-with-fluid"])
+filtrationRecipeCategory.name = "filtration"
+extend{filtrationRecipeCategory}
+
+-- Create fuel category for filters.
+local filterFuelCategory = copy(RAW["fuel-category"]["chemical"])
+filterFuelCategory.name = "filter"
+extend{filterFuelCategory}
+
 -- Create item-subgroup for filtration.
 local filtrationSubgroup = copy(RAW["item-subgroup"]["fluid-recipes"])
 filtrationSubgroup.name = "filtration"
@@ -18,6 +28,10 @@ Icon.set(filterItem, "LSA/filtration/filter")
 filterItem.order = "01"
 filterItem.subgroup = "filtration"
 filterItem.weight = ROCKET / 1000
+filterItem.fuel_category = "filter"
+filterItem.fuel_value = "1MJ"
+filterItem.burnt_result = "spent-filter"
+filterItem.fuel_glow_color = nil
 extend{filterItem}
 
 -- Create spent filter item.
@@ -39,6 +53,7 @@ filtrationLakeWaterTech.icons = {
 }
 filtrationLakeWaterTech.prerequisites = {"automation-science-pack"}
 filtrationLakeWaterTech.effects = {
+	{type = "unlock-recipe", recipe = "filtration-plant"},
 	{type = "unlock-recipe", recipe = "chemical-plant"},
 	{type = "unlock-recipe", recipe = "offshore-pump"},
 	{type = "unlock-recipe", recipe = "pipe"},
@@ -117,7 +132,7 @@ Recipe.make{
 	},
 	results = {{"filter", 1, probability = .9}},
 	enabled = false,
-	category = "chemistry-or-crafting-with-fluid",
+	category = "crafting-with-fluid",
 	subgroup = "filtration",
 	order = "03",
 	show_amount_in_title = false,
@@ -141,19 +156,17 @@ Recipe.make{
 	copy = "iron-gear-wheel",
 	recipe = "filter-lake-water",
 	ingredients = {
-		{"filter", 1},
 		{"lake-water", 1000, type = "fluid"},
 	},
 	results = {
 		{"water", 1000},
-		{"spent-filter", 1},
 		{"sand", amount_min = 0, amount_max = 4, show_details_in_recipe_tooltip = false},
 		{"stone", amount_min = 0, amount_max = 2, show_details_in_recipe_tooltip = false},
 		{"niter", amount_min = 0, amount_max = 2, show_details_in_recipe_tooltip = false},
 		{"raw-fish", 1, probability = .01, show_details_in_recipe_tooltip = false},
 	},
 	main_product = "water",
-	category = "chemistry-or-crafting-with-fluid",
+	category = "filtration",
 	subgroup = "filtration",
 	order = "04",
 	specialIcons = {
@@ -200,18 +213,16 @@ Recipe.make{
 	copy = "iron-gear-wheel",
 	recipe = "filter-slime",
 	ingredients = {
-		{"filter", 1},
 		{"slime", 400, type = "fluid"},
 	},
 	results = {
 		{"water", 300},
-		{"spent-filter", 1},
 		{"spoilage", 10, show_details_in_recipe_tooltip = false},
 		{"petrophage", 1, probability = .05, show_details_in_recipe_tooltip = false},
 		-- Could give eggs or fruits with some small probability. But rather not, since that makes it too easy to restart cycles.
 	},
 	main_product = "water",
-	category = "chemistry-or-crafting-with-fluid",
+	category = "filtration",
 	subgroup = "gleba-non-agriculture",
 	order = "00",
 	enabled = false,

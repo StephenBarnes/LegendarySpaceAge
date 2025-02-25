@@ -99,7 +99,7 @@ Tech.removeRecipeFromTech("nuclear-fuel", "kovarex-enrichment-process")
 for _, type in pairs{"car", "locomotive", "inserter", "furnace", "assembling-machine", "boiler", "reactor"} do
 	for _, burner in pairs(RAW[type]) do
 		if burner.energy_source and burner.energy_source.type == "burner" then
-			if burner.energy_source.fuel_inventory_size < 2 then
+			if (burner.energy_source.fuel_inventory_size or 1) < 2 then
 				burner.energy_source.fuel_inventory_size = 2
 			end
 			if (burner.energy_source.burnt_inventory_size or 0) < 2 then

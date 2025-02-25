@@ -50,7 +50,6 @@ ent.graphics_set = {
 		layers = {
 			{
 				filename = "__LegendarySpaceAge__/graphics/deep-drill/shadow.png",
-				priority = "high",
 				width = 1400,
 				height = 1400,
 				frame_count = 1,
@@ -60,7 +59,6 @@ ent.graphics_set = {
 				scale = 0.5,
 			},
 			{
-				priority = "high",
 				width = 704,
 				height = 704,
 				frame_count = 60,
@@ -85,7 +83,6 @@ ent.graphics_set = {
 		{
 			fadeout = true,
 			animation = {
-				priority = "high",
 				width = 352,
 				height = 352,
 				--shift = util.by_pixel_hr(0, 92),

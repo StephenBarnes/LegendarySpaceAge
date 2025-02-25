@@ -19,21 +19,18 @@ extend({
 	{
 		type = "recipe",
 		name = "fulgoran-sludge-filtration",
-		category = "chemistry",
+		category = "filtration",
 		icons = {
 			{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
 			{icon = "__LegendarySpaceAge__/graphics/fulgora/sludge.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
 		},
 		enabled = false,
-		energy_required = 4,
+		energy_required = 5,
 		ingredients = {
-			{ type = "item", name = "filter", amount = 1},
-			{ type = "fluid", name = "fulgoran-sludge", amount = 100, fluidbox_multiplier = 10 },
+			{ type = "fluid", name = "fulgoran-sludge", amount = 100 },
 		},
 		results = {
-			{ type = "item",  name = "spent-filter",          amount = 1 },
 			{ type = "fluid", name = "heavy-oil",             amount = 60 },
-			{ type = "fluid", name = "light-oil",             amount = 20 },
 			{ type = "item",  name = "ice",                   amount = 1, probability = 0.05,  show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "stone",                 amount = 1, probability = 0.02,  show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "sand",                  amount = 1, probability = 0.02,  show_details_in_recipe_tooltip = false },
@@ -42,6 +39,7 @@ extend({
 			{ type = "item",  name = "copper-cable",          amount = 1, probability = 0.03,  show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "holmium-ore",           amount = 1, probability = 0.004, show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "plastic-bar",           amount = 1, probability = 0.01,  show_details_in_recipe_tooltip = false },
+			-- NOTE when changing this, have to check that filtration plant still has enough output slots.
 		},
 		main_product = "heavy-oil",
 		allow_as_intermediate = false,
