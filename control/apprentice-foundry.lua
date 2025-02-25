@@ -150,6 +150,11 @@ Handler.on_configuration_changed = function()
 end
 
 function Handler.on_created_entity(event)
+	-- SAB adding this check. This shouldn't happen, but it did, maybe bc I only added this script after creating the game?
+	if storage.index == nil then
+		Handler.on_init()
+	end
+
 	local entity = event.entity or event.destination
 	if entity.name ~= APPLIES_TO_ENT then return end
 

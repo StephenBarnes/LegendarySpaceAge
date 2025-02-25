@@ -81,10 +81,15 @@ local multiIconVals = {
 			{scale = 0.22, shift = {0, 6}},
 		},
 	},
-	casting = { -- Used for foundry casting recipes. 1st is product, 2nd is casting-bucket icon.
+	casting = { -- Used for foundry casting recipes. 1st is product, 2nd is casting-bucket icon, 3rd is optional second casting-bucket icon in front of the 2nd one.
 		[2] = {
 			{scale = 0.5, shift = {-4, 4}},
 			{scale = 0.5, shift = {4, -4}},
+		},
+		[3] = {
+			{scale = 0.5, shift = {-4, 4}},
+			{scale = 0.3, shift = {6, -6}},
+			{scale = 0.33, shift = {-3, -4}},
 		},
 	},
 }

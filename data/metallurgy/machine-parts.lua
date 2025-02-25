@@ -7,9 +7,6 @@ Icon.variants("iron-gear-wheel", "LSA/parts-basic/plain/%", 5)
 ITEM["iron-gear-wheel"].has_random_tint = true
 ITEM["iron-gear-wheel"].random_tint_color = ITEM["iron-plate"].random_tint_color
 
--- Update icon for casting recipe.
-Icon.set("casting-iron-gear-wheel", {"iron-gear-wheel", "molten-iron"}, "casting")
-
 -- Create advanced parts item.
 local advancedPartsItem = copy(ITEM["iron-gear-wheel"])
 advancedPartsItem.name = "advanced-parts"

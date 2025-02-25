@@ -285,7 +285,6 @@ Gen.orderKinds("intermediate-product", {ITEM}, {
 	"doped-wafer",
 	"microchip",
 	"engine-unit",
-	"electric-engine-unit",
 	"flying-robot-frame",
 	"barrel",
 	"gas-tank",

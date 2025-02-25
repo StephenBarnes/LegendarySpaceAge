@@ -1,67 +1,86 @@
---[[ This file modifies and creates recipes for the foundry.
-Foundries are used for processing molten metals.
-Following the standard that roughly 10 molten metal equals 1 plate. Except steel.
+--[[ This file modifies and creates recipes for the foundry. Foundries are used for processing molten metals.
+Ratios:
+	5 ore = 1 ingot = 1 matte = 5 plates/parts/rods = 10 cables.
+	5 iron ingot = 1 steel ingot = 5 steel plates.
+	10 molten metal = 1 plate = 1 ore = 1/5 ingot.
+Old ratios were:
+	1 ore = 10 molten metal = 1 plate (copper and iron)
+	30 molten iron = 1 steel plate
+
+General rules for recipe times:
+	Recipes for making molten metal (from ore, lava, or other molten metals) deal with 100 molten metal per second.
+	Casting recipes deal with 10 molten metal per second, turned into 1 plate per second.
+	(All of these get 10x'd by foundry bonus.)
+
 Basic process from lava:
-	500 lava + 1 calcite + 1 carbon -> 250 molten iron + 10 copper matte + 20 stone
-	(It might be more realistic and easy to have separate iron and copper recipes. But tying them together like this is interesting for gameplay, since the player will get too many of one, and have to set up a system to balance iron and copper by dumping excess into the lava. It's also realistic.)
+	100 lava + 1 calcite + 1 carbon --1s--> 50 molten iron + 1 copper matte + 1 stone
+		(It might be more realistic and easy to have separate iron and copper recipes. But tying them together like this means the player will get too many of one, and have to set up a system to balance them by dumping excess into the lava.)
 	Old recipes were:
-		1 calcite + 500 lava -> 10 stone + 250 molten iron
-		1 calcite + 500 lava -> 15 stone + 250 molten copper
-		And then 10 molten iron/copper is 1 plate; 30 molten iron is 1 steel plate.
-	So, we're keeping it similarly difficult to produce those, since 10 copper matte = 20 ore = 5 ingots = 20 plates.
+		1 calcite + 500 lava --4s--> 10 stone + 250 molten iron
+		1 calcite + 500 lava --4s--> 15 stone + 250 molten copper
+		These were 16s, but foundry has speed 4, so 4s.
 Copper matte can be directly turned into molten copper:
-	25 copper matte -> 500 molten copper + 10 sulfur
+	1 copper matte --1s--> 50 molten copper + 1 sulfur
+
 Turning ores into the same metal intermediates, in a foundry (not used on Vulcanus):
-	50 iron ore + 1 calcite + 2 carbon -> 500 molten iron + 25 stone
+	10 iron ore + 1 calcite + 2 carbon --1s--> 100 molten iron + 10 stone
 	(Copper ore to matte actually has to be done in a furnace. No foundry recipe, since it's not molten.)
 	Old recipes were:
-		50 iron ore + 1 calcite -> 500 molten iron
-		50 copper ore + 1 calcite -> 500 molten copper
+		50 iron ore + 1 calcite --8s--> 500 molten iron
+		50 copper ore + 1 calcite --8s--> 500 molten copper
+		These were 32s, but foundry has speed 4, so 8s.
+
 Turning molten metals into items, in a foundry:
-	20 molten iron + 1 water -> 2 iron plate + 10 steam
+	10 molten iron + 1 water -> 1 iron plate + 10 steam
 	The water ingredient and steam byproduct represent water cooling; this adds substantial fluid management complexity to all of the foundries casting metal items.
-	Similar recipes for copper plates, iron rods, iron machine parts, copper cables, and possibly more.
+	Similar recipes for copper plates, iron rods, iron machine parts, copper cables.
 	Casting iron items makes them start 20% spoiled (from rust).
+
 Molten steel recipes:
-	100 molten iron + 1 calcite -> 100 molten steel + 1 stone (in a foundry)
-	40 molten steel + 1 water -> 2 steel plate + 10 steam
+	100 molten iron + 1 calcite --1s--> 20 molten steel + 1 stone
+	10 molten steel + 1 water --1s--> 1 steel plate + 10 steam
 			Originally 30 molten iron -> 1 steel plate.
 
-Tungsten ore is only found on Vulcanus.
-In a foundry: 4 tungsten ore + 1 carbon + 10 sulfuric acid -> 40 molten tungsten (at 1500 degrees) + 1 stone
-	This represents acid leaching, high-temperature reduction, and foundry smelting. In gameplay terms, tungsten production is limited by carbon and water (for sulfuric acid), both of which are scarce.
-Molten tungsten is then converted into tungsten carbide and tungsten steel. We introduce a new challenge here by requiring the molten tungsten for carbide/steel to be in specific temperature ranges. It's produced at 1500 degrees, then we add a recipe to heat it to 2000 degrees; then the player must mix these different temperatures to get into the necessary ranges:
-	In foundry: 10 molten tungsten (any temperature) -> 10 molten tungsten (2000 degrees)
-	In foundry: 20 molten tungsten (1600-1800 degrees) + 1 carbon + 1 water -> 1 tungsten carbide + 10 steam
-	In foundry: 40 molten tungsten (1800-1900 degrees) + 10 molten steel + 1 water -> 1 tungsten-steel plate + 10 steam
-Note temp range of carbide is deliberately made to touch but not overlap with tungsten steel, since it allows more interesting feasible designs. (If they overlap, you can just heat up until both production lines are active. If they're disjoint then you need to build separate fluid systems for carbide vs steel. Touching but not overlapping means both approaches are sorta feasible.)
-Since tungsten carbide is needed to make foundries, to avoid circular dependency we also allow smelting tungsten ore directly to tungsten carbide in a furnace. This is simple but very inefficient, consuming a lot of carbon.
-Originally tungsten recipes were:
-	In assembler only: 2 tungsten ore + 1 carbon + 10 sulfuric acid -> 1 tungsten carbide (1 second)
-	In foundry: 4 tungsten ore + 10 molten iron -> 1 tungsten plate (10 seconds)
-
-Vulcanus unlocks a foundry recipe for concrete without water, using sulfur:
-	10 stone brick + 5 sulfur -> 10 concrete (representing sulfur concrete)
+Tungsten recipes:
+	You need tungsten carbide to make first foundries and big miners. So there needs to be a recipe to make tungsten carbide without using foundries.
+		In chem plant: 2 tungsten ore + 5 carbon + 50 sulfuric acid --10s--> 1 tungsten carbide
+		This is very slow and costs a lot of carbon, so there's reason to switch to the more efficient foundry recipes below.
+	Making molten tungsten:
+		1 carbon + 10 tungsten ore + 10 sulfuric acid --1s--> 100 molten tungsten (1500C) + 1 stone
+		This represents acid leaching, high-temperature reduction, and foundry smelting. In gameplay terms, tungsten production is limited by carbon and water (for sulfuric acid), both of which are scarce.
+	Then you can heat molten tungsten from 1500C to 2000C in a foundry:
+		100 molten tungsten (any temp) --1s--> 100 molten tungsten (2000C)
+	Then you use molten tungsten to cast carbide or plate, by mixing specific temperatures:
+		20 molten tungsten (1600-1800C) + 1 carbon + 1 water --1s--> 2 tungsten carbide + 10 steam
+		50 molten tungsten (1800-1900C) + 10 molten steel + 5 water --5s--> 5 tungsten plate + 50 steam
+	There's also a casting recipe for shielding, using molten tungsten in the plate temp range.
+	Note temp range of carbide is deliberately made to touch but not overlap with tungsten steel, since it allows more interesting feasible designs. (If they overlap, you can just heat up until both production lines are active. If they're disjoint then you need to build separate fluid systems for carbide vs steel. Touching but not overlapping means both approaches are sorta feasible.)
+	Originally tungsten recipes were:
+		In assembler only: 2 tungsten ore + 1 carbon + 10 sulfuric acid -> 1 tungsten carbide (1 second)
+		In foundry: 4 tungsten ore + 10 molten iron -> 1 tungsten plate (10 seconds)
 ]]
 
 -- Make recipe for metals-from-lava.
-local metalsFromLavaRecipe = copy(RECIPE["molten-iron-from-lava"])
-metalsFromLavaRecipe.name = "metals-from-lava"
-metalsFromLavaRecipe.ingredients = {
-	{type = "fluid", name = "lava", amount = 500},
-	{type = "item", name = "calcite", amount = 1},
-	{type = "item", name = "carbon", amount = 1},
+Recipe.make{
+	copy = "molten-iron-from-lava",
+	recipe = "metals-from-lava",
+	ingredients = {
+		{"lava", 100},
+		{"calcite", 1},
+		{"carbon", 1},
+	},
+	results = {
+		{"molten-iron", 50},
+		{"copper-matte", 1},
+		{"stone", 1},
+	},
+	icon = "LSA/vulcanus/metals-from-lava",
+	enabled = false,
+	allow_decomposition = false,
+	allow_as_intermediate = true,
+	time = 1,
 }
-metalsFromLavaRecipe.results = {
-	{type = "fluid", name = "molten-iron", amount = 250},
-	{type = "item", name = "copper-matte", amount = 10},
-	{type = "item", name = "stone", amount = 20},
-}
-metalsFromLavaRecipe.enabled = false
-metalsFromLavaRecipe.allow_decomposition = true
-metalsFromLavaRecipe.allow_as_intermediate = true
-Icon.set(metalsFromLavaRecipe, "LSA/vulcanus/metals-from-lava")
-extend{metalsFromLavaRecipe}
+Tech.addRecipeToTech("metals-from-lava", "foundry", 3)
 
 -- Hide old recipes for molten metals from lava, remove from tech, add new recipe to tech.
 Recipe.hide("molten-iron-from-lava")
@@ -69,28 +88,38 @@ Recipe.hide("molten-copper-from-lava")
 Tech.removeRecipesFromTechs({"molten-iron-from-lava", "molten-copper-from-lava"}, {"foundry"})
 Tech.addRecipeToTech("metals-from-lava", "foundry", 3)
 
+-- Make molten iron use new icon.
+Icon.set(FLUID["molten-iron"], "LSA/vulcanus/molten-iron")
+Icon.clear(RECIPE["molten-iron"])
+
 -- Edit recipe for copper-ore-to-molten-copper to instead use copper matte.
-local matteMeltRecipe = RECIPE["molten-copper"]
-matteMeltRecipe.ingredients = {{type = "item", name = "copper-matte", amount = 25}}
-matteMeltRecipe.results = {
-	{type = "fluid", name = "molten-copper", amount = 500},
-	{type = "item", name = "sulfur", amount = 10},
+Recipe.edit{
+	recipe = "molten-copper",
+	ingredients = {
+		{"copper-matte", 1},
+	},
+	results = {
+		{"molten-copper", 50},
+		{"sulfur", 1},
+	},
+	time = 1,
 }
 
 -- Edit recipe for iron-ore-to-molten-iron.
-local ironOreMeltRecipe = RECIPE["molten-iron"]
-ironOreMeltRecipe.ingredients = {
-	{type = "item", name = "iron-ore", amount = 50},
-	{type = "item", name = "calcite", amount = 1},
-	{type = "item", name = "carbon", amount = 2},
+Recipe.edit{
+	recipe = "molten-iron",
+	ingredients = {
+		{"iron-ore", 10},
+		{"calcite", 1},
+		{"carbon", 2},
+	},
+	results = {
+		{"molten-iron", 100},
+		{"stone", 10},
+	},
+	time = 1,
+	clearIcon = true, -- So that it uses the icon for the fluid, which I changed above to distinguish from molten steel better.
 }
-ironOreMeltRecipe.results = {
-	{type = "fluid", name = "molten-iron", amount = 500},
-	{type = "item", name = "stone", amount = 25},
-}
-
--- Adjust molten iron icon, to differentiate it from molten steel.
-Icon.set("molten-iron", "LSA/vulcanus/molten-iron")
 
 -- Make molten steel fluid.
 local moltenSteelFluid = copy(FLUID["molten-iron"])
@@ -103,113 +132,143 @@ moltenSteelFluid.visualization_color = {.2, 1, 1} -- Cyan for the diagram-like l
 extend{moltenSteelFluid}
 
 -- Make recipe for molten steel.
-local moltenSteelRecipe = copy(RECIPE["molten-iron"])
-moltenSteelRecipe.name = "molten-steel-making"
-	-- Not naming it the same as the fluid, so recipe shows up with the rest of them.
-	-- Seems the way it works is, recipe can show up in a different subgroup as the fluid if it either has multiple products, or a different name from the fluid.
-moltenSteelRecipe.localised_name = {"fluid-name.molten-steel"}
-moltenSteelRecipe.ingredients = {
-	{type = "fluid", name = "molten-iron", amount = 100},
-	{type = "item", name = "calcite", amount = 1},
+Recipe.make{
+	copy = "molten-iron",
+	recipe = "molten-steel-making",
+		-- Not naming it the same as the fluid, so recipe shows up with the rest of them.
+		-- Seems the way it works is, recipe can show up in a different subgroup as the fluid if it either has multiple products, or a different name from the fluid.
+	ingredients = {
+		{"molten-iron", 100},
+		{"calcite", 1},
+	},
+	results = {
+		{"molten-steel", 20},
+		{"stone", 1},
+	},
+	time = 1,
+	localised_name = {"fluid-name.molten-steel"},
+	main_product = "molten-steel",
+	order = "a[melting]-d[molten-steel]",
+	icon = "LSA/vulcanus/molten-steel",
 }
-moltenSteelRecipe.results = {
-	{type = "fluid", name = "molten-steel", amount = 100},
-	{type = "item", name = "stone", amount = 1},
-}
-moltenSteelRecipe.main_product = "molten-steel"
-moltenSteelRecipe.order = "a[melting]-d[molten-steel]"
-extend{moltenSteelRecipe}
-Tech.addRecipeToTech("molten-steel-making", "foundry", 8)
+Tech.addRecipeToTech("molten-steel-making", "foundry", 7)
 
 -- Adjust recipes for casting molten metals into items.
--- Balanced so that they have the same molten metal costs, and all of them consume ~40/s molten metal and 1/s water. Note 40 molten metal is equivalent to 1 ingot. Foundry has speed 4.
--- In base Space Age they do 30 molten iron -> 1 steel plate. But we're using the extra step of molten iron -> molten steel, with the +50% prod bonus, so let's not also do 30->1.
-local ironCastingRecipe = RECIPE["casting-iron"]
-ironCastingRecipe.ingredients = {
-	{type = "fluid", name = "molten-iron", amount = 40},
-	{type = "fluid", name = "water", amount = 1},
+-- Balanced so that they have the same molten metal costs, and all of them consume ~20 molten metal and 1 water in 2 seconds.
+Recipe.edit{
+	recipe = "casting-iron", -- casting iron plate
+	ingredients = {
+		{"molten-iron", 10},
+		{"water", 1},
+	},
+	results = {
+		{"iron-plate", 1, percent_spoiled = .2},
+		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+	},
+	main_product = "iron-plate",
+	time = 1,
+	icons = {"iron-plate", "molten-iron"},
+	iconArrangement = "casting",
 }
-ironCastingRecipe.results = {
-	{type = "item", name = "iron-plate", amount = 4, percent_spoiled = .2},
-	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-}
-ironCastingRecipe.main_product = "iron-plate"
-ironCastingRecipe.energy_required = 4
 
-local copperCastingRecipe = RECIPE["casting-copper"]
-copperCastingRecipe.ingredients = {
-	{type = "fluid", name = "molten-copper", amount = 40},
-	{type = "fluid", name = "water", amount = 1},
+Recipe.edit{
+	recipe = "casting-copper",
+	ingredients = {
+		{"molten-copper", 10},
+		{"water", 1},
+	},
+	results = {
+		{"copper-plate", 1},
+		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+	},
+	main_product = "copper-plate",
+	time = 1,
+	icons = {"copper-plate", "molten-copper"},
+	iconArrangement = "casting",
 }
-copperCastingRecipe.results = {
-	{type = "item", name = "copper-plate", amount = 4},
-	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-}
-copperCastingRecipe.main_product = "copper-plate"
-copperCastingRecipe.energy_required = 4
 
-local steelCastingRecipe = RECIPE["casting-steel"]
-steelCastingRecipe.ingredients = {
-	{type = "fluid", name = "molten-steel", amount = 40},
-	{type = "fluid", name = "water", amount = 1},
+Recipe.edit{
+	recipe = "casting-steel",
+	ingredients = {
+		{"molten-steel", 10},
+		{"water", 1},
+	},
+	results = {
+		{"steel-plate", 1},
+		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+	},
+	main_product = "steel-plate",
+	time = 1,
+	icons = {"steel-plate", "molten-steel"},
+	iconArrangement = "casting",
 }
-steelCastingRecipe.results = {
-	{type = "item", name = "steel-plate", amount = 2},
-	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-}
-steelCastingRecipe.main_product = "steel-plate"
-steelCastingRecipe.energy_required = 4
 
-local ironGearWheelCastingRecipe = RECIPE["casting-iron-gear-wheel"]
-ironGearWheelCastingRecipe.ingredients = {
-	{type = "fluid", name = "molten-iron", amount = 40},
-	{type = "fluid", name = "water", amount = 1},
+Recipe.edit{
+	recipe = "casting-iron-gear-wheel",
+	ingredients = {
+		{"molten-iron", 10},
+		{"water", 1},
+	},
+	results = {
+		{"iron-gear-wheel", 1, percent_spoiled = .2},
+		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+	},
+	main_product = "iron-gear-wheel",
+	time = 1,
+	icons = {"iron-gear-wheel", "molten-iron"},
+	iconArrangement = "casting",
 }
-ironGearWheelCastingRecipe.results = {
-	{type = "item", name = "iron-gear-wheel", amount = 4, percent_spoiled = .2},
-	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-}
-ironGearWheelCastingRecipe.main_product = "iron-gear-wheel"
-ironGearWheelCastingRecipe.energy_required = 4
 
-local ironStickCastingRecipe = RECIPE["casting-iron-stick"]
-ironStickCastingRecipe.ingredients = {
-	{type = "fluid", name = "molten-iron", amount = 40},
-	{type = "fluid", name = "water", amount = 1},
+Recipe.edit{
+	recipe = "casting-iron-stick",
+	ingredients = {
+		{"molten-iron", 10},
+		{"water", 1},
+	},
+	results = {
+		{"iron-stick", 1, percent_spoiled = .2},
+		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+	},
+	main_product = "iron-stick",
+	time = 1,
+	icons = {"iron-stick", "molten-iron"},
+	iconArrangement = "casting",
 }
-ironStickCastingRecipe.results = {
-	{type = "item", name = "iron-stick", amount = 8, percent_spoiled = .2},
-	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-}
-ironStickCastingRecipe.main_product = "iron-stick"
-ironStickCastingRecipe.energy_required = 4
-local lowDensityStructureRecipe = RECIPE["casting-low-density-structure"]
--- Originally 5 plastic bar + 80 molten iron + 250 molten copper
-lowDensityStructureRecipe.ingredients = {
-	{ type = "item",  name = "plastic-bar",   amount = 3 },
-	{ type = "item",  name = "resin",         amount = 1 },
-	{ type = "fluid", name = "molten-steel",  amount = 80 },
-	{ type = "fluid", name = "molten-copper", amount = 200 },
-	{ type = "fluid", name = "water",         amount = 3 },
-}
-lowDensityStructureRecipe.results = {
-	{type = "item", name = "low-density-structure", amount = 1},
-	{type = "fluid", name = "steam", amount = 30, temperature = 500, ignored_by_productivity=30},
-}
-lowDensityStructureRecipe.main_product = "low-density-structure"
-lowDensityStructureRecipe.energy_required = 12
 
-local copperCableRecipe = RECIPE["casting-copper-cable"]
-copperCableRecipe.ingredients = {
-	{type = "fluid", name = "molten-copper", amount = 40},
-	{type = "fluid", name = "water", amount = 1},
+Recipe.edit{
+	recipe = "casting-low-density-structure",
+	ingredients = {
+		{"plastic-bar", 3},
+		{"resin", 1},
+		{"molten-steel", 100},
+		{"molten-copper", 250},
+		{"water", 10},
+	},
+	results = {
+		{"low-density-structure", 1},
+		{"steam", 100, temperature = 500, ignored_by_productivity=100},
+	},
+	main_product = "low-density-structure",
+	time = 10,
+	icons = {"low-density-structure", "molten-copper", "molten-steel"},
+	iconArrangement = "casting",
 }
-copperCableRecipe.results = {
-	{type = "item", name = "copper-cable", amount = 8},
-	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
+
+Recipe.edit{
+	recipe = "casting-copper-cable",
+	ingredients = {
+		{"molten-copper", 10},
+		{"water", 1},
+	},
+	results = {
+		{"copper-cable", 2},
+		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+	},
+	main_product = "copper-cable",
+	time = 1,
+	icons = {"copper-cable", "molten-copper"},
+	iconArrangement = "casting",
 }
-copperCableRecipe.main_product = "copper-cable"
-copperCableRecipe.energy_required = 4
 
 -- Hide recipes for casting pipes and pipe-to-ground.
 for _, recipe in pairs{"casting-pipe", "casting-pipe-to-ground"} do
@@ -218,33 +277,39 @@ for _, recipe in pairs{"casting-pipe", "casting-pipe-to-ground"} do
 end
 
 -- Add recipe for casting advanced parts. (Bc can't make ingots from foundries.)
-local castingAdvancedPartsRecipe = copy(RECIPE["casting-iron-gear-wheel"])
-castingAdvancedPartsRecipe.name = "casting-advanced-parts"
-castingAdvancedPartsRecipe.ingredients = {
-	{ type = "fluid", name = "molten-steel", amount = 300 },
-	{ type = "fluid", name = "water",        amount = 4 },
-	{ type = "item",  name = "rubber",       amount = 1 },
-	{ type = "item",  name = "plastic-bar",  amount = 2 },
+Recipe.make{
+	copy = "casting-iron-gear-wheel",
+	recipe = "casting-advanced-parts",
+	ingredients = {
+		{"molten-steel", 250},
+		{"water", 25},
+		{"rubber", 1},
+		{"plastic-bar", 2},
+	},
+	results = {
+		{"advanced-parts", 20},
+		{"steam", 250, temperature = 500, ignored_by_productivity=250},
+	},
+	main_product = "advanced-parts",
+	time = 10,
+	icons = {"advanced-parts", "molten-steel"},
+	iconArrangement = "casting",
+	order = "b[casting]-f[casting-advanced-parts]",
 }
-castingAdvancedPartsRecipe.results = {
-	{type = "item", name = "advanced-parts", amount = 4},
-	{type = "fluid", name = "steam", amount = 40, temperature = 500, ignored_by_productivity=40},
-}
-castingAdvancedPartsRecipe.main_product = "advanced-parts"
-Icon.set(castingAdvancedPartsRecipe, {"advanced-parts", "molten-iron"}, "casting")
-castingAdvancedPartsRecipe.order = "b[casting]-f[casting-advanced-parts]"
-castingAdvancedPartsRecipe.energy_required = 16
-extend{castingAdvancedPartsRecipe}
 Tech.addRecipeToTech("casting-advanced-parts", "foundry")
 
 -- Adjust the default tungsten-carbide recipe to be more expensive, to create more incentive for the foundry recipes.
-RECIPE["tungsten-carbide"].ingredients = {
-	{type = "item", name = "tungsten-ore", amount = 2},
-	{type = "item", name = "carbon", amount = 8},
-	{type = "fluid", name = "sulfuric-acid", amount = 40},
+Recipe.edit{
+	recipe = "tungsten-carbide",
+	ingredients = {
+		{"tungsten-ore", 2},
+		{"carbon", 5},
+		{"sulfuric-acid", 50},
+	},
+	resultCount = 1,
+	category = "chemistry",
+	time = 10,
 }
-RECIPE["tungsten-carbide"].category = "chemistry"
-RECIPE["tungsten-carbide"].energy_required = 8
 
 -- Create molten tungsten fluid.
 local moltenTungstenFluid = copy(FLUID["molten-iron"])
@@ -257,76 +322,83 @@ moltenTungstenFluid.visualization_color = {.478, .191, .682} -- Measured on ore 
 extend{moltenTungstenFluid}
 
 -- Create recipe for molten tungsten.
-local moltenTungstenRecipe = copy(RECIPE["molten-iron"])
-moltenTungstenRecipe.name = "molten-tungsten"
-moltenTungstenRecipe.ingredients = {
-	{type = "item", name = "tungsten-ore", amount = 4},
-	{type = "item", name = "carbon", amount = 1},
-	{type = "fluid", name = "sulfuric-acid", amount = 10},
+Recipe.make{
+	copy = "molten-iron",
+	recipe = "molten-tungsten",
+	ingredients = {
+		{"tungsten-ore", 10},
+		{"carbon", 1},
+		{"sulfuric-acid", 10},
+	},
+	results = {
+		{"molten-tungsten", 100, temperature = 1500},
+		{"stone", 1},
+	},
+	main_product = "molten-tungsten",
+	order = "a[melting]-d[molten-tungsten]",
+	time = 1,
+	clearIcons = true,
 }
-moltenTungstenRecipe.results = {
-	{type = "fluid", name = "molten-tungsten", amount = 40, temperature = 1500},
-	{type = "item", name = "stone", amount = 2},
-}
-moltenTungstenRecipe.main_product = "molten-tungsten"
-moltenTungstenRecipe.order = "a[melting]-d[molten-tungsten]"
-moltenTungstenRecipe.energy_required = 1
-moltenTungstenRecipe.icon = nil
-extend{moltenTungstenRecipe}
 Tech.addRecipeToTech("molten-tungsten", "tungsten-steel", 1)
 
 -- Make foundry recipes for tungsten carbide and tungsten steel. And recipe for heating molten tungsten.
-local tungstenCarbideFromMoltenRecipe = copy(RECIPE["tungsten-plate"])
-tungstenCarbideFromMoltenRecipe.name = "tungsten-carbide-from-molten"
-tungstenCarbideFromMoltenRecipe.ingredients = {
-	{type = "fluid", name = "molten-tungsten", amount = 40, minimum_temperature = 1600, maximum_temperature = 1800},
-	{type = "item", name = "carbon", amount = 1},
-	{type = "fluid", name = "water", amount = 1},
+Recipe.make{
+	copy = "tungsten-plate",
+	recipe = "tungsten-carbide-from-molten",
+	ingredients = {
+		{"molten-tungsten", 20, minimum_temperature = 1600, maximum_temperature = 1800},
+		{"carbon", 1},
+		{"water", 1},
+	},
+	results = {
+		{"tungsten-carbide", 2},
+		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+	},
+	main_product = "tungsten-carbide",
+	time = 1,
+	icons = {"tungsten-carbide", "molten-tungsten"},
+	iconArrangement = "casting",
 }
-tungstenCarbideFromMoltenRecipe.results = {
-	{type = "item", name = "tungsten-carbide", amount = 4},
-	{type = "fluid", name = "steam", amount = 10, temperature = 500, ignored_by_productivity=10},
-}
-tungstenCarbideFromMoltenRecipe.main_product = "tungsten-carbide"
-tungstenCarbideFromMoltenRecipe.energy_required = 4
-Icon.set(tungstenCarbideFromMoltenRecipe, {"tungsten-carbide", "molten-tungsten"}, "casting")
-extend{tungstenCarbideFromMoltenRecipe}
 Tech.addRecipeToTech("tungsten-carbide-from-molten", "tungsten-steel")
-local tungstenSteelRecipe = copy(RECIPE["tungsten-plate"])
-tungstenSteelRecipe.name = "tungsten-steel-from-molten"
-	-- Again, can't name it "tungsten-steel" or it won't show separately from the item, which is a problem bc you can't see the temperature range requirement.
-tungstenSteelRecipe.ingredients = {
-	{type = "fluid", name = "molten-tungsten", amount = 40, minimum_temperature = 1800, maximum_temperature = 1900},
-	{type = "fluid", name = "molten-steel", amount = 10},
-	{type = "fluid", name = "water", amount = 2},
+Recipe.make{
+	copy = "tungsten-plate",
+	recipe = "tungsten-steel-from-molten",
+		-- Again, can't name it "tungsten-steel" or it won't show separately from the item, which is a problem bc you can't see the temperature range requirement.
+	ingredients = {
+		{"molten-tungsten", 50, minimum_temperature = 1800, maximum_temperature = 1900},
+		{"molten-steel", 10},
+		{"water", 5},
+	},
+	results = {
+		{"tungsten-plate", 5},
+		{"steam", 50, temperature = 500, ignored_by_productivity=50},
+	},
+	main_product = "tungsten-plate",
+	time = 5,
+	icons = {"tungsten-plate", "molten-tungsten"},
+	iconArrangement = "casting",
 }
-tungstenSteelRecipe.results = {
-	{type = "item", name = "tungsten-plate", amount = 1},
-	{type = "fluid", name = "steam", amount = 20, temperature = 500, ignored_by_productivity=20},
-}
-tungstenSteelRecipe.main_product = "tungsten-plate"
-tungstenSteelRecipe.energy_required = 8
-Icon.set(tungstenSteelRecipe, {"tungsten-plate", "molten-tungsten"}, "casting")
-extend{tungstenSteelRecipe}
 Tech.addRecipeToTech("tungsten-steel-from-molten", "tungsten-steel")
-local tungstenHeatingRecipe = copy(RECIPE["molten-iron"])
-tungstenHeatingRecipe.name = "tungsten-heating"
-tungstenHeatingRecipe.ingredients = {
-	{type = "fluid", name = "molten-tungsten", amount = 100, ignored_by_stats=100},
+
+-- Create recipe for heating molten tungsten.
+Recipe.make{
+	copy = "molten-iron",
+	recipe = "tungsten-heating",
+	ingredients = {
+		{"molten-tungsten", 100, ignored_by_stats=100},
+	},
+	results = {
+		{"molten-tungsten", 100, temperature = 2000, ignored_by_stats=100, ignored_by_productivity=100},
+	},
+	main_product = "molten-tungsten",
+	order = "a[melting]-d[tungsten-heating]",
+	time = 1,
+	icon = "LSA/vulcanus/molten-tungsten-heating",
+	show_amount_in_title = false,
+	hide_from_stats = true,
+	allow_productivity = false,
+	allow_quality = false,
 }
-tungstenHeatingRecipe.results = {
-	{type = "fluid", name = "molten-tungsten", amount = 100, temperature = 2000, ignored_by_stats=100, ignored_by_productivity=100},
-}
-tungstenHeatingRecipe.main_product = "molten-tungsten"
-tungstenHeatingRecipe.order = "a[melting]-d[tungsten-heating]"
-tungstenHeatingRecipe.energy_required = 1
-Icon.set(tungstenHeatingRecipe, "LSA/vulcanus/molten-tungsten-heating")
-tungstenHeatingRecipe.show_amount_in_title = false
-tungstenHeatingRecipe.hide_from_stats = true
-tungstenHeatingRecipe.allow_productivity = false
-tungstenHeatingRecipe.maximum_productivity = 0
-tungstenHeatingRecipe.allow_quality = false
-extend{tungstenHeatingRecipe}
 Tech.addRecipeToTech("tungsten-heating", "tungsten-steel")
 
 -- Hide default tungsten-steel recipe.

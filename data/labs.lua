@@ -48,7 +48,6 @@ RAW.lab.biolab.researching_speed = 4
 RAW.lab.glebalab.science_pack_drain_rate_percent = 50
 RAW.lab.biolab.science_pack_drain_rate_percent = 25
 
-
 -- Make the pentapod biolabs consume pentapod eggs, and space biolabs consume biter eggs.
 extend({
 	{
@@ -69,6 +68,9 @@ RAW.lab.biolab.energy_source.fuel_inventory_size = 1
 RAW.lab.biolab.energy_source.fuel_categories = {"biter-egg"}
 RAW.lab.biolab.energy_source.burner_usage = "food"
 RAW.lab.biolab.energy_usage = "3MW" -- A biter egg is 6MJ, so consumes 1 every 2 seconds. (Modules will probably reduce that to 1/10s.)
+RAW.lab.biolab.energy_source.emissions_per_minute = {
+	spores = 2, -- Compare to 10/m for borehole drill.
+}
 
 -- Modify techs.
 -- Move pentapod labs to a separate tech, instead of putting their recipe in bioflux tech.

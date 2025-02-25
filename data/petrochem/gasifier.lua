@@ -42,6 +42,7 @@ gasifierEnt.energy_source = {
 		light_intensity_to_size_coefficient = 0.6,
 		-- Sucks there's no way to move the light flicker up to the top of the sprite.
 	},
+	fuel_categories = {"chemical", "pure-carbon"},
 }
 gasifierEnt.energy_usage = "20MW" -- TODO check for balance.
 gasifierEnt.trash_inventory_size = 0
