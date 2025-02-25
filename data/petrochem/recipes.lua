@@ -93,12 +93,13 @@ tarDistillationRecipe.ingredients = {
 	{type = "fluid", name = "tar", amount = 100},
 }
 tarDistillationRecipe.results = {
-	{type = "item", name = "pitch", amount = 3, show_details_in_recipe_tooltip = false},
+	{type = "item", name = "pitch", amount = 2, show_details_in_recipe_tooltip = false},
 	--{type = "item", name = "carbon", amount = 2},
 	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 	{type = "fluid", name = "heavy-oil", amount = 20, show_details_in_recipe_tooltip = false},
 	{type = "fluid", name = "light-oil", amount = 10, show_details_in_recipe_tooltip = false},
 }
+tarDistillationRecipe.energy_required = 5
 Icon.set(tarDistillationRecipe, {"tar", "heavy-oil", "light-oil", "pitch"}, "decomposition")
 tarDistillationRecipe.order = "a[oil-processing]-b5"
 tarDistillationRecipe.subgroup = "complex-fluid-recipes"
@@ -168,6 +169,8 @@ Icon.set(coalCokingRecipe, {"coal", "pitch", "sulfur", "carbon"}, "decomposition
 coalCokingRecipe.order = "a[oil-processing]-b3"
 coalCokingRecipe.subgroup = "complex-fluid-recipes"
 coalCokingRecipe.category = "chemistry"
+coalCokingRecipe.allow_productivity = true
+coalCokingRecipe.allow_quality = true
 coalCokingRecipe.energy_required = 1
 coalCokingRecipe.enabled = false -- Unlocked by coal-coking tech, created in another file.
 extend{coalCokingRecipe}

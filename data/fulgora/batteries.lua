@@ -338,6 +338,7 @@ extend({
 			type = "electric",
 			usage_priority = "tertiary",
 			drain = "0kW",
+			burner_usage = "discharge",
 		},
 		max_power_output = "2MW",
         order = "z-2",

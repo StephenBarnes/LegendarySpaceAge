@@ -114,6 +114,7 @@ ammoniaSyngasRecipe.show_amount_in_title = false
 ammoniaSyngasRecipe.category = "chemistry-or-cryogenics"
 ammoniaSyngasRecipe.subgroup = "early-agriculture"
 ammoniaSyngasRecipe.order = "d2"
+ammoniaSyngasRecipe.allow_quality = false
 Icon.set(ammoniaSyngasRecipe, {"ammonia", "syngas"})
 ammoniaSyngasRecipe.energy_required = 4
 extend{ammoniaSyngasRecipe}

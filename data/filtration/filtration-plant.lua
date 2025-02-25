@@ -26,6 +26,7 @@ ent.energy_usage = "200kW" -- Filter is 1MJ, so 5 seconds per filter.
 ent.energy_source = {
 	type = "burner",
 	fuel_categories = {"filter"},
+	burner_usage = "filtration",
 	effectivity = 1,
 	burnt_inventory_size = 2,
 	fuel_inventory_size = 2,
@@ -188,6 +189,31 @@ ent.working_sound = {
 	},
 }
 extend{ent}
+
+-- Create "burner usage" for filter.
+extend{
+	{
+		type = "burner-usage",
+		name = "filtration",
+		empty_slot_sprite = {
+			filename = "__core__/graphics/icons/mip/recipe-arrow.png",
+			size = 32,
+			mipmap_count = 2,
+			flags = {"gui-icon"},
+		},
+		empty_slot_caption = {"gui.filtration"},
+		empty_slot_description = {"gui.filtration-description"},
+		icon = {
+			filename = "__core__/graphics/icons/alerts/pipeline-disabled-icon.png",
+			width = 64,
+			height = 64,
+			flags = {"icon"}
+		},
+		no_fuel_status = {"entity-status.no-filters"},
+		accepted_fuel_key = "description.accepted-filters",
+		burned_in_key = "filter-used-by", -- factoriopedia
+	},
+}
 
 -- Create item.
 local item = copy(ITEM["chemical-plant"])

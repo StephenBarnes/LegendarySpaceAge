@@ -8,6 +8,7 @@ extend{filtrationRecipeCategory}
 -- Create fuel category for filters.
 local filterFuelCategory = copy(RAW["fuel-category"]["chemical"])
 filterFuelCategory.name = "filter"
+filterFuelCategory.fuel_value_type = {"description.filtration-energy-value"}
 extend{filterFuelCategory}
 
 -- Create item-subgroup for filtration.
@@ -237,6 +238,12 @@ Recipe.make{
 		tertiary = {.393, .453, .333},
 	}
 }
+
+-- Adjust ammoniacal solution separation to use filtration plant.
+RECIPE["ammoniacal-solution-separation"].category = "filtration"
+-- TODO change the icon to match the others.
+-- TODO define recipe colors so it looks good in the filtration plant.
+-- TODO rename to "ammoniacal solution filtration".
 
 ------------------------------------------------------------------------
 

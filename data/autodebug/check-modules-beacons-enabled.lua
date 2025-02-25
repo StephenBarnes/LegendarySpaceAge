@@ -40,6 +40,18 @@ local expected = {
 		["pentapod-egg"] = {3, true}, -- This is the recipe for turning activated eggs into multiple dormant ones. Allowing prod and quality.
 		["activated-pentapod-egg"] = {3, true}, -- This is the recipe for activating dormant eggs with mash. Allowing prod and quality.
 
+		["clean-filter"] = {0, false}, -- Clean filter can be easily turned into spent filter, so can't enable prod or quality.
+
+		-- Filtration recipes should allow prod and quality, since you can't get the input back.
+		["filter-lake-water"] = {3, true},
+		["filter-slime"] = {3, true},
+		["filter-fulgoran-sludge"] = {3, true},
+
+		["coal-coking"] = {3, true}, -- Can't get coal back, so no issue enabling prod.
+		--["heavy-oil-coking"] = {3, true}, -- Converts 50MJ to 6MJ + 10MJ, so allowing prod and quality is maybe fine? Need to check with carbon conservation.
+		--["tar-distillation"] = {3, true}, -- Converts 40MJ to 6MJ + 3MJ + 10MJ + 7MJ = 26MJ.
+		-- TODO do the 2 above after implementing carbon conservation checks.
+
 		-- TODO add sth about prod bonuses being disabled for foundry water outputs.
 	},
 	["assembling-machine"] = {
