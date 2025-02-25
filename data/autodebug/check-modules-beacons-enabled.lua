@@ -23,15 +23,19 @@ local expected = {
 		["explosive-desynchronization"] = {0, false}, -- This turns 10 into 5 * 1.5 = 7.5, which could easily tip over to >10, so no prod bonuses. It's intended to use resynchronization to get more; allowing prod here would remove that challenge.
 		["cyclosome-resynchronization"] = {3, true}, -- This should allow quality since it's the only way to make cyclosomes. Also allowing prod.
 
+		-- Fertilized seeds decay back into normal seeds, so can't allow prod or quality.
 		["fertilized-yumako-seed"] = {0, false},
 		["fertilized-jellynut-seed"] = {0, false},
 
-		["heavy-oil-cracking"] = {0, false},
-		["light-oil-cracking"] = {0, false},
-		["rich-gas-cracking"] = {0, false},
+		-- Oil cracking shouldn't allow prod because it would allow you to amplify amount of oil at each step, then do syngas liquefaction for positive-sum loop.
+		-- But allowing quality for the sulfur and carbon byproducts.
+		["heavy-oil-cracking"] = {0, true},
+		["light-oil-cracking"] = {0, true},
+		["rich-gas-cracking"] = {0, false}, -- No solid byproducts, so no quality.
 
-		["oil-fractionation"] = {3, false}, -- Enable prod (since you can't get crude back), disable quality (since only fluid outputs).
-		["gas-fractionation"] = {3, false}, -- Same.
+		-- You can't get crude or natgas back, so enabling prod doesn't cause problems. Also enabling quality for the sulfur and carbon byproducts.
+		["oil-fractionation"] = {3, true},
+		["gas-fractionation"] = {3, true},
 
 		["pentapod-egg"] = {3, true}, -- This is the recipe for turning activated eggs into multiple dormant ones. Allowing prod and quality.
 		["activated-pentapod-egg"] = {3, true}, -- This is the recipe for activating dormant eggs with mash. Allowing prod and quality.

@@ -132,6 +132,8 @@ Recipe.make{
 		secondary = FLUID.water.flow_color,
 		tertiary = FLUID.water.visualization_color,
 	},
+	allow_quality = false,
+	allow_productivity = false,
 }
 
 -- Create recipe to filter lake water.

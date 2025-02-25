@@ -32,6 +32,8 @@ separationRecipe.results = {
 separationRecipe.enabled = false
 separationRecipe.allow_decomposition = false
 separationRecipe.allow_as_intermediate = false
+separationRecipe.allow_quality = true
+separationRecipe.allow_productivity = true
 Icon.set(separationRecipe, {"volcanic-gas", "sulfur", "carbon", "water"}, "decomposition")
 extend{separationRecipe}
 

@@ -19,6 +19,8 @@ oilFractionationRecipe.results = {
 }
 Icon.set(oilFractionationRecipe, {"crude-oil", "heavy-oil", "light-oil"}, "decomposition")
 oilFractionationRecipe.order = "a[oil-processing]-b1"
+oilFractionationRecipe.allow_quality = true
+oilFractionationRecipe.allow_productivity = true
 extend{oilFractionationRecipe}
 
 local gasFractionationRecipe = copy(RECIPE["advanced-oil-processing"])
@@ -35,6 +37,8 @@ gasFractionationRecipe.results = {
 }
 Icon.set(gasFractionationRecipe, {"natural-gas", "petroleum-gas", "dry-gas"}, "decomposition")
 gasFractionationRecipe.order = "a[oil-processing]-b2"
+gasFractionationRecipe.allow_quality = true
+gasFractionationRecipe.allow_productivity = true
 extend{gasFractionationRecipe}
 
 --[[ Edit existing cracking recipes, and add the new one.
@@ -317,7 +321,8 @@ Tech.addRecipeToTech("make-sulfuric-acid", "sulfur-processing")
 
 -- Disable prod and quality for all the cracking recipes.
 for _, recipeName in pairs{"heavy-oil-cracking", "light-oil-cracking", "rich-gas-cracking"} do
-	local recipe = RECIPE[recipeName]
-	recipe.allow_productivity = false
-	recipe.allow_quality = false
+	RECIPE[recipeName].allow_productivity = false
 end
+RECIPE["heavy-oil-cracking"].allow_quality = true
+RECIPE["light-oil-cracking"].allow_quality = true
+RECIPE["rich-gas-cracking"].allow_quality = false -- No solid byproducts, so no quality.
