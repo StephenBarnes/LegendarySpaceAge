@@ -44,25 +44,68 @@ local solarSimulation = {
 for i, section in pairs{
     {name = "main", indent = 0},
     {name = "early-bots"},
-    {name = "factors"},
-    {name = "enemy-spawns"},
-    {name = "enemy-resistances"},
-    {name = "power-overload"},
-    {name = "dumping"},
-    {name = "fuels"},
-    {name = "fluid-wagons"},
-    {name = "advanced-logistics"},
+    {
+        name = "factors",
+        trigger = {type = "research", technology = "basic-electricity"},
+    },
+    {
+        name = "enemy-spawns",
+        trigger = {type = "research", technology = "char"},
+    },
+    {
+        name = "enemy-resistances",
+        trigger = {type = "research", technology = "char"},
+    },
+    {
+        name = "power-overload",
+        trigger = {type = "research", technology = "basic-electricity"},
+    },
+    {
+        name = "dumping",
+        trigger = {type = "research", technology = "automation"},
+    },
+    {
+        name = "fuels",
+        trigger = {type = "research", technology = "fluid-handling"},
+    },
+    {
+        name = "fluid-wagons",
+        trigger = {type = "research", technology = "railway"},
+    },
+    {
+        name = "advanced-logistics",
+        trigger = {type = "research", technology = "logistics"},
+    },
     {
         name = "solar-power",
         simulation = solarSimulation,
         trigger = {type = "unlock-recipe", recipe = "solar-panel"},
     },
-    {name = "space-platforms"},
-    {name = "planet-drops"},
-    {name = "vulcanus"},
-    {name = "vulcanus-lava", indent = 2},
-    {name = "gleba"},
-    {name = "aquilo-trip"},
+    {
+        name = "space-platforms",
+        trigger = {type = "research", technology = "space-platform"},
+    },
+    {
+        name = "planet-drops",
+        trigger = {type = "research", technology = "space-platform-thruster"},
+    },
+    {
+        name = "vulcanus",
+        trigger = {type = "research", technology = "planet-discovery-vulcanus"},
+    },
+    {
+        name = "vulcanus-lava",
+        indent = 2,
+        trigger = {type = "research", technology = "planet-discovery-vulcanus"},
+    },
+    {
+        name = "gleba",
+        trigger = {type = "research", technology = "planet-discovery-gleba"},
+    },
+    {
+        name = "aquilo-trip",
+        trigger = {type = "research", technology = "planet-discovery-aquilo"},
+    },
 } do
     ---@type data.TipsAndTricksItem
     section = section
