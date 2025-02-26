@@ -75,7 +75,7 @@ inverseVulcanizationRecipe.name = "inverse-vulcanization"
 inverseVulcanizationRecipe.subgroup = "raw-material"
 inverseVulcanizationRecipe.ingredients = {
 	{type = "item", name = "sulfur", amount = 5},
-	{type = "fluid", name = "tar", amount = 5},
+	{type = "fluid", name = "tar", amount = 10},
 }
 inverseVulcanizationRecipe.results = {
 	{type = "item", name = "plastic-bar", amount = 3},

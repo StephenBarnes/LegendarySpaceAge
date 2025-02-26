@@ -61,11 +61,11 @@ rubberFromPetrochemRecipe.ingredients = {
 	{type="fluid", name="light-oil", amount=50},
 	{type="fluid", name="steam", amount=20},
 	{type="fluid", name="sulfuric-acid", amount=10},
-	{type="item", name="carbon", amount=1},
+	{type="item", name="carbon", amount=2},
 }
 rubberFromPetrochemRecipe.results = {
 	{type="item", name="rubber", amount=5},
-	{type="fluid", name="tar", amount=20},
+	{type="fluid", name="tar", amount=10},
 }
 rubberFromPetrochemRecipe.main_product = "rubber"
 rubberFromPetrochemRecipe.category = "chemistry"

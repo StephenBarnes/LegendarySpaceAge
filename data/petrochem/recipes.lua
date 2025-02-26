@@ -103,6 +103,9 @@ tarDistillationRecipe.energy_required = 5
 Icon.set(tarDistillationRecipe, {"tar", "heavy-oil", "light-oil", "pitch"}, "decomposition")
 tarDistillationRecipe.order = "a[oil-processing]-b5"
 tarDistillationRecipe.subgroup = "complex-fluid-recipes"
+tarDistillationRecipe.allow_productivity = true
+tarDistillationRecipe.maximum_productivity = 2
+tarDistillationRecipe.allow_quality = true
 extend{tarDistillationRecipe}
 
 --[[ Add recipe for heavy oil coking.
@@ -116,13 +119,15 @@ heavyOilCokingRecipe.ingredients = {
 	{type = "fluid", name = "heavy-oil", amount = 100},
 }
 heavyOilCokingRecipe.results = {
-	{type = "item", name = "carbon", amount = 3, show_details_in_recipe_tooltip = false},
-	{type = "fluid", name = "tar", amount = 50, show_details_in_recipe_tooltip = false},
+	{type = "item", name = "carbon", amount = 2, show_details_in_recipe_tooltip = false},
+	{type = "fluid", name = "tar", amount = 20, show_details_in_recipe_tooltip = false},
 }
 Icon.set(heavyOilCokingRecipe, {"heavy-oil", "carbon", "tar"}, "decomposition")
 heavyOilCokingRecipe.order = "a[oil-processing]-b4"
 heavyOilCokingRecipe.subgroup = "complex-fluid-recipes"
 heavyOilCokingRecipe.energy_required = 5
+heavyOilCokingRecipe.allow_productivity = true
+heavyOilCokingRecipe.maximum_productivity = 1
 extend{heavyOilCokingRecipe}
 
 -- Add recipe for pitch processing: 10 pitch + 50 steam -> 10 heavy oil + 10 light oil + 10 tar + 1 carbon

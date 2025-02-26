@@ -294,6 +294,8 @@ desyncRecipe.crafting_machine_tint = {
 	secondary = phaseTints[2],
 	tertiary = phaseTints[3],
 }
+desyncRecipe.allow_quality = false
+desyncRecipe.allow_productivity = false
 extend{desyncRecipe}
 
 -- TODO add recipes for stuff like rocket fuel, 

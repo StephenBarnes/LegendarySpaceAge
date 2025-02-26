@@ -47,9 +47,8 @@ local expectedRecipes = {
 	["filter-fulgoran-sludge"] = {3, true},
 
 	["coal-coking"] = {3, true}, -- Can't get coal back, so no issue enabling prod.
-	--["heavy-oil-coking"] = {3, true}, -- Converts 50MJ to 6MJ + 10MJ, so allowing prod and quality is maybe fine? Need to check with carbon conservation.
-	--["tar-distillation"] = {3, true}, -- Converts 40MJ to 6MJ + 3MJ + 10MJ + 7MJ = 26MJ.
-	-- TODO do the 2 above after implementing carbon conservation checks.
+	["heavy-oil-coking"] = {1, true}, -- Max prod +100% for carbon conservation.
+	["tar-distillation"] = {2, true}, -- Max prod +200% for carbon conservation.
 
 	-- Water phase conversions should conserve total water.
 	["ice-melting"] = {0, false},
