@@ -330,7 +330,7 @@ Recipe.make{
 }
 Recipe.hide("sulfuric-acid")
 Tech.removeRecipeFromTech("sulfuric-acid", "sulfur-processing")
-Tech.addRecipeToTech("make-sulfuric-acid", "sulfur-processing")
+Tech.addRecipeToTech("make-sulfuric-acid", "sulfur-processing", 1)
 
 -- Disable prod and quality for all the cracking recipes.
 for _, recipeName in pairs{"heavy-oil-cracking", "light-oil-cracking", "rich-gas-cracking"} do

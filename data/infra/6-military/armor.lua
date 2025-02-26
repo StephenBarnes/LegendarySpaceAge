@@ -37,10 +37,10 @@ Recipe.edit{
 	ingredients = { -- Originally 60 blue circuit + 100 speed module + 100 efficiency module + 40 actuator + 30 LDs. I need to remove the modules.
 		{"processing-unit", 100},
 		{"advanced-circuit", 100},
-		{"electric-engine-unit", 40},
-		{"low-density-structure", 60},
+		{"electric-engine-unit", 50},
+		{"low-density-structure", 50},
 	},
-	time = 20, -- Originally 25.
+	time = 20,
 }
 Recipe.edit{
 	recipe = "mech-armor",

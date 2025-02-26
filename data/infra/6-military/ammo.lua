@@ -98,8 +98,27 @@ Recipe.edit{
 }
 -- TODO atomic bomb, once I do "Nauvis part 2" recipes.
 
--- TODO capture bot rocket, once I do "Nauvis part 2" recipes.
--- TODO tesla ammo maybe, once I've done Fulgora more.
+Recipe.edit{
+	recipe = "capture-robot-rocket",
+	ingredients = { -- Originally 2 steel plate + 1 flying robot frame + 2 blue circuit + 20 bioflux.
+		{"flying-robot-frame", 1},
+		{"white-circuit", 2},
+		{"bioflux", 20},
+		-- TODO later maybe add some ingredients specific to Nauvis-part-2?
+	},
+	time = 10,
+}
+
+Recipe.edit{
+	recipe = "tesla-ammo",
+	-- I want to make Tesla ammo more widely producible without setting up specific ship commands to export stuff Fulgora->Gleba. Because the ammo is only used by players, so people will probably just not bother to set up specific export routes. So make them producible locally everywhere fairly easily.
+	ingredients = { -- Originally 1 plastic bar + 1 supercapacitor + 10 electrolyte.
+		{"charged-battery", 1},
+		{"processing-unit-superclocked", 1},
+	},
+	time = 10,
+}
+
 -- TODO railgun ammo, once I figure out endgame.
 
 -- Make a separate subgroup for more ammo, since it'll be over 2 rows anyway.

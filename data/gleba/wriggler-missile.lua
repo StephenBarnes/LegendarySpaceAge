@@ -23,6 +23,7 @@ recipe.enabled = false
 recipe.ingredients = {
 	{type = "item", name = "pentapod-egg", amount = 1},
 	{type = "item", name = "boomsac", amount = 1},
+	{type = "item", name = "panel", amount = 1},
 }
 recipe.results = {{type = "item", name = "wriggler-missile", amount = 1}}
 recipe.category = "organic-or-assembling" -- TODO check

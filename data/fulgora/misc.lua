@@ -18,6 +18,8 @@ RAW["recipe"]["scrap-recycling"].results = {
 	{ type = "item", name = "holmium-battery",       amount = 1, probability = 0.0005, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "holmium-ore",           amount = 1, probability = 0.004, show_details_in_recipe_tooltip = false },
 
+	-- TODO stuff to add maybe: energy-shield-equipment, mechanism, electric-engine-unit, sensors, LDS, panels, wiring, frames, structures, 
+
 	-- Rather don't produce fulgorite shards - should need to grow them to continue everything.
 }
 

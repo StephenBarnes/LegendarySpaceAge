@@ -44,3 +44,19 @@ end)
 script.on_event(defines.events.on_object_destroyed, function(e)
 	apprenticeFoundry.on_object_destroyed(e)
 end)
+
+
+-- Temporary code to output recipes, for rewriting.
+--[[
+log("SABBB2 military recipes:")
+for _, recipe in pairs(prototypes.recipe) do
+	local subgroup = recipe.subgroup
+	local group = subgroup.group
+	--log(group.name)
+	if group.name == "combat" then
+		log(recipe.name)
+		log(serpent.line(recipe.ingredients))
+		log(serpent.line(recipe.products))
+	end
+end
+]]
