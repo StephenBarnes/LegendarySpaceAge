@@ -58,13 +58,25 @@ end
 ---@param recipe data.RecipePrototype
 ---@param contentTable table<string, number>
 ---@param nonConservingRecipes table<string, boolean>
+---@param recipeAdditions table<string, (data.FluidIngredientPrototype|data.ItemIngredientPrototype)[]>?
 ---@return boolean
 ---Checks that a conservation rule is followed for a recipe.
-local function checkConservationRule(conservedName, recipe, contentTable, nonConservingRecipes)
+local function checkConservationRule(conservedName, recipe, contentTable, nonConservingRecipes, recipeAdditions)
 	if nonConservingRecipes[recipe.name] then
 		return true
 	end
-	local totalIn = countRecipeSide(contentTable, recipe.ingredients, false)
+
+	local totalIn
+	if recipeAdditions == nil or recipeAdditions[recipe.name] == nil then
+		totalIn = countRecipeSide(contentTable, recipe.ingredients, false)
+	else
+		local ingredients = copy(recipe.ingredients or {})
+		for _, addition in pairs(recipeAdditions[recipe.name]) do
+			table.insert(ingredients, addition)
+		end
+		totalIn = countRecipeSide(contentTable, ingredients, false)
+	end
+
 	local totalOut = countRecipeSide(contentTable, recipe.results, false)
 	if totalOut > totalIn then
 		if recipe.allow_productivity then
@@ -158,8 +170,21 @@ local carbonContent = {
 	["carbon"] = 1,
 	["pitch"] = 1,
 	["ash"] = 1,
-	["syngas"] = 7.5/10,
+	["syngas"] = 2.55 / 100,
 	["resin"] = .25,
+	["solid-fuel"] = 3,
+	["diesel"] = 0.15,
+
+	["spoilage"] = .25,
+	["nutrients"] = .25,
+	["sugar"] = .25,
+	["marrow"] = .25,
+	["appendage"] = .25,
+	["sencytium"] = .25,
+	["petrophage"] = 1,
+	["agricultural-science-pack"] = .25,
+	["slime"] = 2,
+	["lake-water"] = 1,
 
 	["tar"] = .16,
 	["heavy-oil"] = .11,
@@ -177,14 +202,30 @@ local carbonContent = {
 	["carbonic-asteroid-chunk"] = 1000,
 	["metallic-asteroid-chunk"] = 1000,
 	["oxide-asteroid-chunk"] = 1000,
+	["geoplasm"] = 2,
 
 	-- Materials that can be produced via farming, without carbon input, but that's intended.
 	["wood"] = 100,
+	["tree-seed"] = 1600,
+	["sapling"] = 400,
 	["slipstack-pearl"] = 100,
 	["boomsac"] = 200,
-
-	-- End products not used to make carbon-containing items, so can set these to low numbers.
-	["solid-fuel"] = 0,
+	["sprouted-boomnut"] = .25,
+	["boomnut"] = 1,
+	["yumako-seed"] = 10,
+	["fertilized-yumako-seed"] = 10,
+	["yumako-mash"] = 10000,
+	["yumako"] = 100000,
+	["jelly"] = 10000,
+	["jellynut-seed"] = 10,
+	["fertilized-jellynut-seed"] = 10,
+	["jellynut"] = 200000,
+	["biter-egg"] = 1000,
+	["pentapod-egg"] = 1000,
+	["activated-pentapod-egg"] = 100,
+	["bioflux"] = 10000, -- Can be used to multiply pentapod eggs, which are carbon-based fuel.
+	["neurofibril"] = 1000,
+	["raw-fish"] = 5,
 }
 
 -- Recipes where we're fine with them producing carbon out of nothing.
@@ -193,18 +234,80 @@ local nonCarbonConservingRecipes = Table.listToSet{
 	"deep-drill-nauvis",
 	"deep-drill-gleba",
 	"deep-drill-vulcanus",
+	"biter-egg", -- Recipe that creates biter eggs out of nothing in a captive spawner.
 }
+
+-- Table from recipes to additional ingredients that should be added to the recipe to check conservation.
+-- Using this for syngas recipes, since gasifier needs additional carbon for fuel.
+local carbonRecipeAdditions = {}
 
 local function initializeCarbonConservation()
 	addBarrelContent(carbonContent)
+
 	-- The gasifier turns steam into syngas (which contains carbon). It consumes fuel which contains carbon, so we need to find out the most carbon-efficient fuel it can be fed, to add that to the syngas recipe.
-	-- TODO
+	-- The char furnace is similar.
+	local fuelCategoryAllowedInGasifier = Table.listToSet(ASSEMBLER["gasifier"].energy_source.fuel_categories)
+	for _, effect in pairs{"consumption", "productivity"} do
+		-- We can allow speed, since the speed modules give greater increase to energy consumption than to speed.
+		assert(not Gen.effectAllowed(ASSEMBLER["gasifier"], effect), "Gasifier should not allow " .. effect .. " modules.")
+		assert(not Gen.effectAllowed(ASSEMBLER["fluid-fuelled-gasifier"], effect), "Gasifier should not allow " .. effect .. " modules.")
+		assert(not Gen.effectAllowed(ASSEMBLER["char-furnace"], effect), "Char furnace should not allow " .. effect .. " modules.")
+	end
+	local mostEfficientFuel = nil
+	local mostEfficientFuelCarbonPerJoule = nil
+	local mostEfficientFuelJoules = nil
+	-- Look through all items, including subtypes, to find the most carbon-efficient fuel.
+	Item.forAllIncludingSubtypes(function(item, itemType)
+		if not Util.shouldIgnoreItem(item) then
+			if item.fuel_category ~= nil and fuelCategoryAllowedInGasifier[item.fuel_category] then
+				local joules = Gen.toJoules(item.fuel_value)
+				local carbon = carbonContent[item.name] or 0
+				local carbonPerJoule = carbon / joules
+
+				if mostEfficientFuelCarbonPerJoule == nil or carbonPerJoule < mostEfficientFuelCarbonPerJoule then
+					mostEfficientFuelCarbonPerJoule = carbonPerJoule
+					mostEfficientFuel = {type = "item", name = item.name}
+					mostEfficientFuelJoules = joules
+				end
+			end
+		end
+	end)
+	for _, fluid in pairs(FLUID) do -- Look through all fuel fluids allowed in fluid-fuelled gasifier.
+		if not fluid.parameter then
+			if fluid.fuel_value ~= nil then
+				local joules = Gen.toJoules(fluid.fuel_value)
+				local carbon = carbonContent[fluid.name] or 0
+				local carbonPerJoule = carbon / joules
+				if mostEfficientFuelCarbonPerJoule == nil or carbonPerJoule < mostEfficientFuelCarbonPerJoule then
+					mostEfficientFuelCarbonPerJoule = carbonPerJoule
+					mostEfficientFuel = {type = "fluid", name = fluid.name}
+					mostEfficientFuelJoules = joules
+				end
+			end
+		end
+	end
+	log("Most efficient fuel for gasifier: " .. serpent.line(mostEfficientFuel) .. "  -- details: each item has " .. mostEfficientFuelJoules .. " joules of fuel value, and " .. (mostEfficientFuelCarbonPerJoule * mostEfficientFuelJoules) .. " carbon, so " .. mostEfficientFuelCarbonPerJoule .. " carbon per joule.")
+	assert(mostEfficientFuel ~= nil, "No fuel found for gasifier.")
+	assert(ASSEMBLER["gasifier"].energy_usage == ASSEMBLER["fluid-fuelled-gasifier"].energy_usage, "Gasifier and fluid-fuelled gasifier should have the same energy usage.")
+	assert(ASSEMBLER["gasifier"].crafting_speed == 1, "Gasifier should have speed 1.")
+	assert(ASSEMBLER["fluid-fuelled-gasifier"].crafting_speed == 1, "Fluid-fuelled gasifier should have speed 1.")
+	local gasifierJoulesPerSecond = Gen.toJoules(ASSEMBLER["gasifier"].energy_usage)
+	local syngasRecipeSeconds = RECIPE["syngas"].energy_required
+	local fuelPerRecipe = gasifierJoulesPerSecond * syngasRecipeSeconds / mostEfficientFuelJoules
+	carbonRecipeAdditions["syngas"] = {{type = mostEfficientFuel.type, name = mostEfficientFuel.name, amount = fuelPerRecipe}}
+
+	-- Do the same for the char furnace.
+	assert(ASSEMBLER["char-furnace"].crafting_speed == 1, "Char furnace should have speed 1.")
+	local charFurnaceJoulesPerSecond = Gen.toJoules(ASSEMBLER["char-furnace"].energy_usage)
+	local charFurnaceRecipeSeconds = RECIPE["char-carbon"].energy_required
+	local fuelPerCharCarbonRecipe = charFurnaceJoulesPerSecond * charFurnaceRecipeSeconds / mostEfficientFuelJoules
+	carbonRecipeAdditions["char-carbon"] = {{type = mostEfficientFuel.type, name = mostEfficientFuel.name, amount = fuelPerCharCarbonRecipe}}
 end
 
 ---@param recipe data.RecipePrototype
 ---@return boolean
 local function checkCarbonConservation(recipe)
-	return checkConservationRule("carbon", recipe, carbonContent, nonCarbonConservingRecipes)
+	return checkConservationRule("carbon", recipe, carbonContent, nonCarbonConservingRecipes, carbonRecipeAdditions)
 end
 
 ------------------------------------------------------------------------
@@ -224,6 +327,16 @@ end
 ------------------------------------------------------------------------
 --- MAIN.
 
+---@param recipe data.RecipePrototype
+---@return boolean
+local function runChecks(recipe)
+	local success = true
+	success = checkWaterConservation(recipe) and success
+	success = checkCarbonConservation(recipe) and success
+	success = checkFuelPotentialConservation(recipe) and success
+	return success
+end
+
 ---@return boolean
 local function checkConservationRules()
 	local success = true
@@ -234,11 +347,25 @@ local function checkConservationRules()
 
 	for _, recipe in pairs(RECIPE) do
 		if not Util.shouldIgnoreRecipe(recipe) then
-			success = checkWaterConservation(recipe) and success
-			success = checkCarbonConservation(recipe) and success
-			success = checkFuelPotentialConservation(recipe) and success
+			success = runChecks(recipe) and success
 		end
 	end
+
+	-- Look through all items that spoil into other items, and check them too as if they were recipes.
+	Item.forAllIncludingSubtypes(function(item, itemType)
+		if item.spoil_ticks ~= nil and item.spoil_result ~= nil then
+			local spoilResult = Item.getIncludingSubtypes(item.spoil_result)
+			assert(spoilResult ~= nil, "Invalid spoil result: " .. item.spoil_result)
+			local spoilingRecipe = {
+				type = "recipe",
+				name = item.name .. "-spoil",
+				ingredients = {{type = "item", name = item.name, amount = 1}},
+				results = {{type = "item", name = item.spoil_result, amount = 1}},
+				allow_productivity = false,
+			}
+			success = runChecks(spoilingRecipe) and success
+		end
+	end)
 
 	return success
 end

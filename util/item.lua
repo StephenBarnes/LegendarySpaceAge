@@ -75,4 +75,38 @@ Item.exists = function(itemName)
 	return false
 end
 
+---@param func fun(item: data.ItemPrototype, itemType: string)
+-- Function to run a loop through all items, including subtypes.
+Item.forAllIncludingSubtypes = function(func)
+	for itemType, _ in pairs(defines.prototypes.item) do
+		if RAW[itemType] ~= nil then
+			for _, item in pairs(RAW[itemType]) do
+				---@type data.ItemPrototype
+				---@diagnostic disable-next-line: assign-type-mismatch
+				item = item
+				if not item.parameter then
+					func(item, itemType)
+				end
+			end
+		end
+	end
+end
+
+---@param itemName string
+---@return data.ItemPrototype
+Item.getIncludingSubtypes = function(itemName)
+	if ITEM[itemName] ~= nil then
+		return ITEM[itemName]
+	end
+	for itemType, _ in pairs(defines.prototypes.item) do
+		if itemType ~= "item" and RAW[itemType] ~= nil then
+			if RAW[itemType][itemName] ~= nil then
+				---@diagnostic disable-next-line: return-type-mismatch
+				return RAW[itemType][itemName]
+			end
+		end
+	end
+	error("Couldn't find item "..itemName.." including subtypes.")
+end
+
 return Item

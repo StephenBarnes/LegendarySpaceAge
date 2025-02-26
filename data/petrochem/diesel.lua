@@ -25,7 +25,8 @@ recipe.ingredients = {
 }
 recipe.results = {{type = "fluid", name = "diesel", amount = 100}}
 recipe.main_product = "diesel"
-recipe.maximum_productivity = 0.2
+recipe.allow_productivity = false
+recipe.allow_quality = false
 recipe.subgroup = "complex-fluid-recipes"
 recipe.order = "e"
 recipe.energy_required = 2

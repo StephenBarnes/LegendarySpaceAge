@@ -44,6 +44,8 @@ cultivationRecipe.hidden_in_factoriopedia = false
 cultivationRecipe.surface_conditions = nil
 cultivationRecipe.subgroup = "slipstacks-and-boompuffs"
 cultivationRecipe.order = "22"
+cultivationRecipe.allow_productivity = false
+cultivationRecipe.allow_quality = true
 extend{cultivationRecipe}
 
 -- Create recipe for refreshing petrophages.
@@ -59,6 +61,8 @@ refreshRecipe.result_is_always_fresh = true
 Icon.set(refreshRecipe, "LSA/gleba/petrophages/refresh")
 refreshRecipe.subgroup = "slipstacks-and-boompuffs"
 refreshRecipe.order = "23"
+cultivationRecipe.allow_productivity = false
+cultivationRecipe.allow_quality = true
 extend{refreshRecipe}
 
 -- Adjust the bacteria-cultivation tech to include the new recipes.

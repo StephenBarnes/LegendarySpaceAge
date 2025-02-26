@@ -50,9 +50,18 @@ local expectedRecipes = {
 	["heavy-oil-coking"] = {1, true}, -- Max prod +100% for carbon conservation.
 	["tar-distillation"] = {2, true}, -- Max prod +200% for carbon conservation.
 
+	["syngas-liquefaction"] = {0, false}, -- Banning prod to conserve carbon.
+	["syngas"] = {0, true}, -- Banning prod to conserve carbon.
+
+	["make-diesel"] = {0, false}, -- Ban prod to conserve carbon and fuel-potential.
+	["solid-fuel"] = {0, true}, -- Ban prod to conserve carbon.
+
 	-- Water phase conversions should conserve total water.
 	["ice-melting"] = {0, false},
 	["steam-condensation"] = {0, false},
+
+	["petrophage-cultivation"] = {0, true}, -- Ban prod to conserve carbon.
+	["refresh-petrophages"] = {0, true}, -- Ban prod to conserve carbon.
 
 	-- TODO more.
 }

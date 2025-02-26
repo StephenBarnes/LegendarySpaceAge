@@ -199,6 +199,8 @@ solidFuelRecipe.main_product = "solid-fuel"
 Icon.clear(solidFuelRecipe)
 solidFuelRecipe.energy_required = 1
 solidFuelRecipe.hide_from_player_crafting = false
+solidFuelRecipe.allow_productivity = false
+solidFuelRecipe.allow_quality = true
 extend{solidFuelRecipe}
 
 --[[ Add syngas liquefaction.
@@ -218,6 +220,7 @@ syngasLiquefactionRecipe.results = {
 }
 Icon.set(syngasLiquefactionRecipe, {"syngas", "heavy-oil", "light-oil"}, "decomposition")
 syngasLiquefactionRecipe.allow_productivity = false
+syngasLiquefactionRecipe.allow_quality = false
 syngasLiquefactionRecipe.order = "a[coal-liquefaction]-b4"
 syngasLiquefactionRecipe.subgroup = "complex-fluid-recipes"
 extend{syngasLiquefactionRecipe}

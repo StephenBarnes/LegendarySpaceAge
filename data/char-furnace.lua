@@ -23,6 +23,7 @@ charFurnace.allowed_effects = {"pollution"}
 charFurnace.icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png"
 charFurnace.show_recipe_icon = false
 charFurnace.show_recipe_icon_on_map = false
+charFurnace.allowed_effects = {"pollution", "speed", "quality"}
 extend{charFurnace}
 
 -- Create corpse.
@@ -71,6 +72,8 @@ Recipe.make{
 	subgroup = "raw-material",
 	category = "char-furnace",
 	icons = {"carbon", "char-furnace"},
+	allow_productivity = false,
+	allow_quality = true,
 }
 
 -- Create tech called "char", unlocking the furnace and recipe.

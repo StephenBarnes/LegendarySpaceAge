@@ -19,7 +19,7 @@ require("data.labs")
 require("data.metallurgy.metallurgy-d")
 require("data.metallurgy.machine-parts")
 require("data.metallurgy.rust")
-require("data.petrochem.main")
+require("data.petrochem.main") -- TODO need to adjust gasifiers so quality affects power consumption.
 require("data.cement")
 require("data.circuits-modules.recipes-etc")
 require("data.circuits-modules.primed-circuits")

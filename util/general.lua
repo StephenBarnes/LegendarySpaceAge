@@ -77,5 +77,43 @@ Export.round = function(x, n)
 	return math.ceil(x * 10^n) / 10^n
 end
 
+---@param ent data.CraftingMachinePrototype
+---@param effect string
+---@return boolean
+Export.effectAllowed = function(ent, effect)
+	if ent.allowed_effects == nil then return true end
+	if type(ent.allowed_effects) == "string" then
+		return ent.allowed_effects == effect
+	end
+	assert(type(ent.allowed_effects) == "table", "allowed_effects is not a table: "..serpent.block(ent.allowed_effects))
+	---@diagnostic disable-next-line: param-type-mismatch
+	for _, v in pairs(ent.allowed_effects) do
+		if v == effect then return true end
+	end
+	return false
+end
+
+---@param jouleString string
+---@return number
+Export.toJoules = function(jouleString)
+	-- Convert a string like "100kJ" or "100MJ" to a number of joules.
+	-- Also works for "100kW", but treating "W" the same as "J".
+	local num, units = jouleString:match("^([%d.]+)([a-zA-Z]*)$")
+	if units == "" or units == "J" or units == "W" then
+		return num
+	end
+	-- Get the first character of the units string, and convert it to a multiplier.
+	local unitMult = 1
+	if units:sub(1, 1) == "k" then
+		unitMult = 1e3
+	elseif units:sub(1, 1) == "M" then
+		unitMult = 1e6
+	elseif units:sub(1, 1) == "G" then
+		unitMult = 1e9
+	else
+		error("toJoules: unknown unit: "..units)
+	end
+	return num * unitMult
+end
 
 return Export
