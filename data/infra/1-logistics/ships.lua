@@ -1,40 +1,49 @@
--- Ports, signal buoys, cargo ships.
--- Port: 1 frame + 1 small-lamp + 1 sensor
-RECIPE["port"].ingredients = {
-	{type="item", name="frame", amount=1},
-	{type="item", name="small-lamp", amount=1},
-	{type="item", name="sensor", amount=1},
+Recipe.edit{
+	recipe = "port",
+	ingredients = {"frame", "small-lamp", "sensor"},
+	time = 1,
 }
--- Buoy: 1 frame + 1 small-lamp + 1 sensor
-RECIPE["buoy"].ingredients = {
-	{type="item", name="frame", amount=1},
-	{type="item", name="small-lamp", amount=1},
-	{type="item", name="sensor", amount=1},
+Recipe.edit{
+	recipe = "buoy",
+	ingredients = {"frame", "small-lamp", "sensor"},
+	time = 1,
 }
--- Chain_buoy: 1 frame + 1 small-lamp + 2 sensor
-RECIPE["chain_buoy"].ingredients = {
-	{type="item", name="frame", amount=1},
-	{type="item", name="small-lamp", amount=1},
-	{type="item", name="sensor", amount=2},
+Recipe.edit{
+	recipe = "chain_buoy",
+	ingredients = {
+		{"frame", 1},
+		{"small-lamp", 1},
+		{"sensor", 2},
+	},
+	time = 1,
 }
--- Boat: 10 engine-unit + 20 frame + 20 panel
-RECIPE["boat"].ingredients = {
-	{type="item", name="engine-unit", amount=2},
-	{type="item", name="frame", amount=20},
-	{type="item", name="panel", amount=20},
+Recipe.edit{
+	recipe = "boat",
+	ingredients = {
+		{"engine-unit", 2},
+		{"frame", 20},
+		{"panel", 50},
+	},
+	time = 5,
 }
--- Cargo ship: 40 engine-unit + 80 frame + 80 panel
-RECIPE["cargo_ship"].ingredients = {
-	{type="item", name="engine-unit", amount=8},
-	{type="item", name="frame", amount=80},
-	{type="item", name="panel", amount=80},
-	{type="item", name="sensor", amount=4},
+Recipe.edit{
+	recipe = "cargo_ship",
+	ingredients = {
+		{"engine-unit", 5},
+		{"frame", 100},
+		{"panel", 100},
+		{"sensor", 5},
+	},
+	time = 10,
 }
--- Oil_tanker: 40 engine-unit + 60 frame + 60 panel + 20 fluid-fitting + 10 storage-tank
-RECIPE["oil_tanker"].ingredients = {
-	{type="item", name="engine-unit", amount=8},
-	{type="item", name="frame", amount=60},
-	{type="item", name="panel", amount=60},
-	{type="item", name="fluid-fitting", amount=20},
-	{type="item", name="storage-tank", amount=10},
+Recipe.edit{
+	recipe = "oil_tanker",
+	ingredients = {
+		{"engine-unit", 5},
+		{"frame", 50},
+		{"panel", 50},
+		{"fluid-fitting", 20},
+		{"storage-tank", 10},
+	},
+	time = 10,
 }

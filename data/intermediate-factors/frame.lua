@@ -50,6 +50,7 @@ local recipeFromIronAndSteel = Recipe.make{
 	},
 	time = 2,
 	icons = {"frame", "steel-plate", "iron-stick"},
+	allow_as_intermediate = false,
 }
 Tech.addRecipeToTech("frame-from-iron-and-steel", "steel-processing")
 
@@ -63,6 +64,7 @@ local recipeFromSteel = Recipe.make{
 	results = {{"frame", 2}},
 	time = 5,
 	icons = {"frame", "steel-plate"},
+	allow_as_intermediate = false,
 }
 Tech.addRecipeToTech("frame-from-steel", "steel-processing")
 

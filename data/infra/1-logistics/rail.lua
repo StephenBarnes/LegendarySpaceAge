@@ -1,53 +1,83 @@
--- Rail stuff
-RECIPE["rail"].ingredients = {
-	{type="item", name="structure", amount=1},
-	{type="item", name="frame", amount=1},
-	-- Stone in rail recipe represents the track ballast; makes sense to crush/process stone before using as ballast. So could have sand as ingredient here, but it doesn't quite work with Gleba.
+Recipe.edit{
+	recipe = "rail",
+	ingredients = {
+		{"sand", 1},
+		{"frame", 1},
+		-- Stone in rail recipe represents the track ballast; makes sense to crush/process stone before using as ballast. So I'm putting sand as an ingredient here.
+	},
+	resultCount = 2,
+	time = 0.5,
 }
-RECIPE["rail-ramp"].ingredients = {
-	{type="item", name="structure", amount=20},
-	{type="item", name="frame", amount=20},
-	{type="item", name="rail", amount=10},
+Recipe.edit{
+	recipe = "rail-ramp",
+	ingredients = {
+		{"structure", 20},
+		{"frame", 20},
+		{"rail", 10},
+	},
+	time = 10,
 }
-RECIPE["rail-ramp"].energy_required = 10
-RECIPE["rail-support"].ingredients = {
-	{type="item", name="structure", amount=5},
-	{type="item", name="frame", amount=5},
+Recipe.edit{
+	recipe = "rail-support",
+	ingredients = {
+		{"structure", 5},
+		{"frame", 5},
+	},
+	time = 5,
 }
-RECIPE["rail-support"].energy_required = 5
--- Train stop: 4 frame + 2 small-lamp + 1 wiring + 2 electronic-circuit
-RECIPE["train-stop"].ingredients = {
-	{type="item", name="frame", amount=2},
-	{type="item", name="small-lamp", amount=2},
-	{type="item", name="sensor", amount=1},
+Recipe.edit{
+	recipe = "train-stop",
+	ingredients = {
+		{"frame", 2},
+		{"small-lamp", 2},
+		{"sensor", 1},
+	},
+	time = 1,
 }
--- Rail signals should need some glass.
-RECIPE["rail-signal"].ingredients = {
-	{type="item", name="frame", amount=1},
-	{type="item", name="sensor", amount=1},
-	{type="item", name="small-lamp", amount=1},
+
+Recipe.edit{
+	recipe = "rail-signal",
+	ingredients = {
+		{"frame", 1},
+		{"sensor", 1},
+		{"small-lamp", 1},
+	},
+	time = 1,
 }
-RECIPE["rail-chain-signal"].ingredients = {
-	{type="item", name="frame", amount=1},
-	{type="item", name="sensor", amount=2},
-	{type="item", name="small-lamp", amount=1},
+Recipe.edit{
+	recipe = "rail-chain-signal",
+	ingredients = {
+		{"frame", 1},
+		{"sensor", 2},
+		{"small-lamp", 1},
+	},
+	time = 1,
 }
-RECIPE["locomotive"].ingredients = {
-	{type="item", name="engine-unit", amount=5},
-	{type="item", name="sensor", amount=5},
-	{type="item", name="shielding", amount=2},
-	{type="item", name="frame", amount=5},
+Recipe.edit{
+	recipe = "locomotive",
+	ingredients = {
+		{"engine-unit", 5},
+		{"sensor", 5},
+		{"shielding", 2},
+		{"frame", 5},
+	},
+	time = 5,
 }
-RECIPE["locomotive"].energy_required = 5
-RECIPE["cargo-wagon"].ingredients = {
-	{type="item", name="frame", amount=5},
-	{type="item", name="mechanism", amount=2},
-	{type="item", name="panel", amount=5},
+Recipe.edit{
+	recipe = "cargo-wagon",
+	ingredients = {
+		{"frame", 5},
+		{"mechanism", 2},
+		{"panel", 5},
+	},
+	time = 5,
 }
--- Artillery-wagon: 5 frame + 50 shielding + 10 electric-engine-unit. Should be roughly the same as artillery turret.
-RECIPE["artillery-wagon"].ingredients = {
-	{type="item", name="frame", amount=5},
-	{type="item", name="shielding", amount=50},
-	{type="item", name="electric-engine-unit", amount=10},
+Recipe.edit{
+	recipe = "artillery-wagon",
+	ingredients = {
+		{"frame", 5},
+		{"shielding", 50},
+		{"electric-engine-unit", 10},
+	},
+	time = 20,
 }
-RECIPE["artillery-wagon"].energy_required = 20
