@@ -147,13 +147,16 @@ pitchProcessingRecipe.order = "a[oil-processing]-b6"
 pitchProcessingRecipe.subgroup = "complex-fluid-recipes"
 pitchProcessingRecipe.category = "oil-processing" -- Refinery.
 pitchProcessingRecipe.auto_recycle = false
+pitchProcessingRecipe.allow_productivity = false
+pitchProcessingRecipe.allow_quality = false
 extend{pitchProcessingRecipe}
 
 --[[ Add recipe for coal coking.
-	Coal coking: 10 coal -> 6 carbon + 1 sulfur
+	Coal coking: 1 coal -> 1 carbon + 1 sulfur + 1 pitch.
 		This offers a route from coal to carbon that's more direct than syngas liquefaction.
 		For realism, this should slightly reduce total fuel energy.
 			But I'm rather making it slightly energy-positive but only if you burn the sulfur, since that's more interesting.
+				Works out to 4MJ -> 1MJ + 3MJ + 1MJ sulfur.
 				Options are now:
 					burn the coal
 					coke the coal, burn the carbon, dump the sulfur - needs more machines and dump route, creates less pollution, same energy minus assemblers
@@ -162,10 +165,10 @@ extend{pitchProcessingRecipe}
 local coalCokingRecipe = copy(RECIPE["heavy-oil-cracking"])
 coalCokingRecipe.name = "coal-coking"
 coalCokingRecipe.ingredients = {
-	{type = "item", name = "coal", amount = 2},
+	{type = "item", name = "coal", amount = 1},
 }
 coalCokingRecipe.results = {
-	{type = "item", name = "carbon", amount = 2},
+	{type = "item", name = "carbon", amount = 1},
 	{type = "item", name = "sulfur", amount = 1},
 	{type = "item", name = "pitch", amount = 1},
 	--{type = "fluid", name = "tar", amount = 20}, -- Removed bc the player has no way to handle fluid waste yet, except waste pump I guess.

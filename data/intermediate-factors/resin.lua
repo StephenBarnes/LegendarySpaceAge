@@ -44,6 +44,9 @@ pitchResinRecipe.order = "02"
 pitchResinRecipe.subgroup = "resin"
 pitchResinRecipe.main_product = "resin"
 pitchResinRecipe.energy_required = 2
+pitchResinRecipe.allow_quality = true
+pitchResinRecipe.allow_productivity = true
+pitchResinRecipe.maximum_productivity = 2
 extend{pitchResinRecipe}
 
 local richGasResinRecipe = copy(RECIPE["plastic-bar"])

@@ -167,13 +167,12 @@ end
 
 -- Table of how much carbon is contained in each item/fluid.
 local carbonContent = {
-	["carbon"] = 1,
+	["carbon"] = .5,
 	["pitch"] = 1,
 	["ash"] = 1,
-	["syngas"] = 2.55 / 100,
-	["resin"] = .25,
-	["solid-fuel"] = 3,
-	["diesel"] = 0.15,
+	["syngas"] = (5 * .22 + 20 * .2) / 100,
+	["resin"] = .4,
+	["solid-fuel"] = 6.6,
 
 	["spoilage"] = .25,
 	["nutrients"] = .25,
@@ -186,11 +185,12 @@ local carbonContent = {
 	["slime"] = 2,
 	["lake-water"] = 1,
 
-	["tar"] = .16,
-	["heavy-oil"] = .11,
-	["light-oil"] = .1,
-	["petroleum-gas"] = .1,
-	["dry-gas"] = .1,
+	["diesel"] = 0.3,
+	["tar"] = .32,
+	["heavy-oil"] = .22,
+	["light-oil"] = .2,
+	["petroleum-gas"] = .2,
+	["dry-gas"] = .2,
 
 	-- Raw materials, can set these to high numbers.
 	["coal"] = 10,

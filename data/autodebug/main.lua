@@ -18,6 +18,7 @@ local checkRoundNumbers = require("check-round-numbers")
 local checkRecipesObtainable = require("check-recipes-obtainable")
 local checkModulesBeaconsEnabled = require("check-modules-beacons-enabled")
 local checkConservationRules = require("check-conservation-rules")
+local checkIntendedTradeoffs = require("check-intended-tradeoffs")
 
 local function runFullDebug()
 	log("Legendary Space Age: running full progression debug.")
@@ -50,6 +51,7 @@ local function runFullDebug()
 	success = checkRecipesObtainable() and success
 	success = checkModulesBeaconsEnabled() and success
 	success = checkConservationRules() and success
+	success = checkIntendedTradeoffs() and success
 	-- TODO check all science packs required by techs are available before those techs.
 	-- TODO check that when a recipe is unlocked, at least one machine that can craft it has been unlocked.
 	-- TODO check that there are no items and fluids with the same name.
@@ -69,6 +71,7 @@ local function runQuickDebug()
 	success = checkRecipesObtainable() and success
 	success = checkModulesBeaconsEnabled() and success
 	success = checkConservationRules() and success
+	success = checkIntendedTradeoffs() and success
 	-- TODO check all science packs required by techs are available before those techs.
 	-- TODO check that when a recipe is unlocked, at least one machine that can craft it has been unlocked.
 	-- TODO check that there are no items and fluids with the same name.

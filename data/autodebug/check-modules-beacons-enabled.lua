@@ -49,6 +49,8 @@ local expectedRecipes = {
 	["coal-coking"] = {3, true}, -- Can't get coal back, so no issue enabling prod.
 	["heavy-oil-coking"] = {1, true}, -- Max prod +100% for carbon conservation.
 	["tar-distillation"] = {2, true}, -- Max prod +200% for carbon conservation.
+	["pitch-processing"] = {0, true}, -- Ban prod to conserve carbon.
+	["pitch-resin"] = {2, true}, -- Max prod +200% for carbon conservation.
 
 	["syngas-liquefaction"] = {0, false}, -- Banning prod to conserve carbon.
 	["syngas"] = {0, true}, -- Banning prod to conserve carbon.

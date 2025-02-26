@@ -6,10 +6,10 @@ local Export = {}
 Export.fluidFuelValues = { -- Maps from fluid name to fuel value, pollution multiplier, vehicle acceleration mult, vehicle top-speed mult, and fuel category of barrels/tanks if they're usable as fuel, else nil.
 	["crude-oil"] = {"400kJ", 2, .7, .7, "chemical"},
 	["heavy-oil"] = {"500kJ", 2.5, .7, .7, "chemical"},
-	["light-oil"] = {"700kJ", 1.5, .9, .9, "chemical"},
-	["petroleum-gas"] = {"900kJ", .9, .9, .9, "chemical"},
-	["dry-gas"] = {"800kJ", .7, .7, .7, "chemical"},
-	["natural-gas"] = {"800kJ", 1.2, .8, .8, "chemical"},
+	["light-oil"] = {"650kJ", 1.5, .9, .9, "chemical"},
+	["petroleum-gas"] = {"750kJ", .9, .9, .9, "chemical"},
+	["dry-gas"] = {"700kJ", .7, .7, .7, "chemical"},
+	["natural-gas"] = {"700kJ", 1.2, .8, .8, "chemical"},
 	["syngas"] = {"100kJ", 1.5, .5, .5, "chemical"},
 	["tar"] = {"200kJ", 3, .5, .5, "chemical"},
 	["thruster-fuel"] = {nil, nil, nil, nil, nil}, -- Hydrogen - not giving it a fuel value, since there's no way to set fluid-burning ents (like the fluid-fuelled gasifier) to not accept it.
@@ -21,14 +21,14 @@ Export.fluidFuelValues = { -- Maps from fluid name to fuel value, pollution mult
 }
 
 Export.itemFuelValues = { -- Maps from fluid name to fuel value, pollution multiplier, vehicle acceleration mult, vehicle top-speed mult, fuel category, whether it should produce ash, and type name.
-	["sulfur"] = {"3MJ", 8, .5, .5, "non-carbon", false, "item"},
+	["sulfur"] = {"1MJ", 8, .5, .5, "non-carbon", false, "item"},
 
 	["pitch"] = {"3MJ", 2.5, .5, .5, "chemical", false, "item"},
 	["resin"] = {"1MJ", 2, .5, .5, "chemical", false, "item"},
 
 	["solid-fuel"] = {"12MJ", 2, .8, .8, "chemical", false, "item"},
 
-	["carbon"] = {"2MJ", .6, .7, .7, "pure-carbon", false, "item"},
+	["carbon"] = {"1MJ", .6, .7, .7, "pure-carbon", false, "item"},
 
 	["coal"] = {"4MJ", 1, .5, .5, "chemical", true, "item"},
 	["wood"] = {"2MJ", 1, .4, .4, "chemical", true, "item"},

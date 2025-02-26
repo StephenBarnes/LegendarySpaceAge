@@ -109,4 +109,13 @@ Item.getIncludingSubtypes = function(itemName)
 	error("Couldn't find item "..itemName.." including subtypes.")
 end
 
+---@param itemName string
+---@return number
+Item.getJoules = function(itemName)
+	local item = Item.getIncludingSubtypes(itemName)
+	assert(item ~= nil, "Item "..itemName.." not found.")
+	assert(item.fuel_value ~= nil, "Item "..itemName.." has no fuel value.")
+	return Gen.toJoules(item.fuel_value)
+end
+
 return Item

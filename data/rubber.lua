@@ -65,7 +65,7 @@ rubberFromPetrochemRecipe.ingredients = {
 }
 rubberFromPetrochemRecipe.results = {
 	{type="item", name="rubber", amount=5},
-	{type="fluid", name="tar", amount=10},
+	{type="fluid", name="tar", amount=10, ignored_by_productivity = 10},
 }
 rubberFromPetrochemRecipe.main_product = "rubber"
 rubberFromPetrochemRecipe.category = "chemistry"
