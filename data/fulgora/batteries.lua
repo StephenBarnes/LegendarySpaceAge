@@ -316,6 +316,8 @@ extend({
 			fade_in_ticks = 4,
 			fade_out_ticks = 20,
         },
+		allowed_effects = {"speed", "pollution"},
+		allowed_module_categories = {"speed"},
 	},
 	{
 		type = "burner-generator",
@@ -406,31 +408,30 @@ ITEM["battery-discharger"].place_result = "battery-discharger"
 -- TODO write control script to replace chargers on placement, and then remove no-quality mod as prereq.
 
 -- Create recipes for charging batteries.
-extend({
-	{
-		type = "recipe",
-		name = "charged-battery",
-		ingredients = { { type = "item", name = "battery", amount = 1 } },
-		results = { { type = "item", name = "charged-battery", amount = 1, probability = 0.98 } },
-		energy_required = 10, -- Charger uses 1MW, battery holds 10MJ.
-		enabled = false,
-		category = "charging",
-		show_amount_in_title = false,
-		allowed_effects = {},
-		hidden_in_factoriopedia = false,
+Recipe.make{
+	copy = "battery",
+	recipe = "charged-battery",
+	ingredients = {"battery"},
+	results = {
+		{"charged-battery", 1, probability = 0.98},
 	},
-	{
-		type = "recipe",
-		name = "charged-holmium-battery",
-		ingredients = { { type = "item", name = "holmium-battery", amount = 1 } },
-		results = { { type = "item", name = "charged-holmium-battery", amount = 1 } },
-		energy_required = 100, -- Charger uses 1MW, battery holds 100MJ.
-		enabled = false,
-		category = "charging",
-		allowed_effects = {},
-		hidden_in_factoriopedia = false,
-	},
-})
+	time = 10, -- Charger uses 1MW, battery holds 10MJ.
+	category = "charging",
+	show_amount_in_title = false,
+	allow_productivity = false,
+	allow_quality = false,
+	allow_speed = true,
+	allow_consumption = false,
+}
+Recipe.make{
+	copy = "charged-battery",
+	recipe = "charged-holmium-battery",
+	ingredients = {"holmium-battery"},
+	results = {"charged-holmium-battery"},
+	time = 100, -- Charger uses 1MW, battery holds 100MJ.
+	category = "charging",
+	show_amount_in_title = false,
+}
 Tech.addRecipeToTech("charged-battery", "battery", 2)
 Tech.addRecipeToTech("charged-holmium-battery", "holmium-battery")
 

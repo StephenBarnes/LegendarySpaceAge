@@ -49,7 +49,7 @@ local ammoniaFromWood = Recipe.make{
 	category = "organic-or-chemistry",
 	subgroup = "early-agriculture",
 	order = "d1",
-	energy_required = 30,
+	time = 30,
 	allow_quality = false,
 	icons = {"ammonia", "wood"},
 }

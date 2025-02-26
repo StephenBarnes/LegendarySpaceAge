@@ -1,11 +1,12 @@
 --[[ This file checks that conservation rules are followed.
-Currently conservation rules are:
-	* water - check that steam/ice/water is never created or destroyed.
-	* carbon - we assume there's a certain amount of carbon in each item/fluid, and then check that no recipes are net-positive. (This is important eg on Vulcanus, where there's lots of energy and fuel (sulfur) but we still want to make carbon scarce.)
-	* "fuel potential" - we assign a "fuel potential" to each item/fluid, measuring how much fuel it's equivalent to. The item's actual fuel value, if it has one, should be at most this. Some fluids (eg tar) will have fuel value lower than their potential, but can be converted to other items/fluids to realize that fuel potential. This ensures there's no loop of recipes you can do that will produce infinite fuel.
-]]
 
--- TODO get table from recipe to machines that support it, then use that (plus efficiency and speed bonuses, etc.) to compute fuel? Eg for syngas.
+Currently conservation rules are:
+	* water - check that steam/ice/water is never created by any recipe (except if the recipe ingredients involve at least that much water).
+	* carbon - we assume there's a certain amount of carbon in each item/fluid, and then check that no recipes are net-positive. (This is important eg on Vulcanus, where there's lots of energy and fuel (sulfur) but we still want to make carbon scarce.)
+	* "fuel potential" - we assign a "fuel potential" to each item/fluid, measuring how much fuel it "could be made into". The item's actual fuel value, if it has one, should be at most this potential. Some fluids (eg tar) will have fuel value much lower than their potential, but can be converted to other items/fluids to realize that fuel potential. This ensures there's no loop of recipes you can do that will produce infinite fuel.
+
+It's pretty easy to write recipes that follow all these conservation rules BUT then prod bonuses screw it all up. Often the way to fix this is to just limit the prod bonus for a recipe or for some of a recipe's products. I'm noting ALL of these prod limits in recipe/entity descriptions so player's don't have to be surprised.
+]]
 
 local Util = require("data.autodebug.util")
 
@@ -54,11 +55,11 @@ local function countRecipeSide(content, side, includeProd, maxProd)
 	return total
 end
 
----@param conservedName string
+---@param conservedName string Used for logging.
 ---@param recipe data.RecipePrototype
----@param contentTable table<string, number>
+---@param contentTable table<string, number> Maps item/fluid name to amount of conserved quantity in it.
 ---@param nonConservingRecipes table<string, boolean>
----@param recipeAdditions table<string, (data.FluidIngredientPrototype|data.ItemIngredientPrototype)[]>?
+---@param recipeAdditions table<string, (data.FluidIngredientPrototype|data.ItemIngredientPrototype)[]>? List of additional ingredients to add to the recipe because they're needed to fuel the entity that crafts the recipe.
 ---@return boolean
 ---Checks that a conservation rule is followed for a recipe.
 local function checkConservationRule(conservedName, recipe, contentTable, nonConservingRecipes, recipeAdditions)
@@ -286,8 +287,9 @@ local function initializeCarbonConservation()
 			end
 		end
 	end
-	log("Most efficient fuel for gasifier: " .. serpent.line(mostEfficientFuel) .. "  -- details: each item has " .. mostEfficientFuelJoules .. " joules of fuel value, and " .. (mostEfficientFuelCarbonPerJoule * mostEfficientFuelJoules) .. " carbon, so " .. mostEfficientFuelCarbonPerJoule .. " carbon per joule.")
+	log("Most carbon-efficient carbon-based fuel: " .. serpent.line(mostEfficientFuel) .. "  -- details: each item has " .. mostEfficientFuelJoules .. " joules of fuel value, and " .. (mostEfficientFuelCarbonPerJoule * mostEfficientFuelJoules) .. " carbon, so " .. mostEfficientFuelCarbonPerJoule .. " carbon per joule.")
 	assert(mostEfficientFuel ~= nil, "No fuel found for gasifier.")
+	assert(mostEfficientFuel.name ~= "carbon", "This code assumed that pure carbon wouldn't be most efficient; if it is' then the char furnace bit below doesn't work because char furnace can't burn carbon.")
 	assert(ASSEMBLER["gasifier"].energy_usage == ASSEMBLER["fluid-fuelled-gasifier"].energy_usage, "Gasifier and fluid-fuelled gasifier should have the same energy usage.")
 	assert(ASSEMBLER["gasifier"].crafting_speed == 1, "Gasifier should have speed 1.")
 	assert(ASSEMBLER["fluid-fuelled-gasifier"].crafting_speed == 1, "Fluid-fuelled gasifier should have speed 1.")
@@ -315,6 +317,7 @@ end
 
 local function initializeFuelPotentialConservation()
 	-- TODO implement.
+	-- TODO we need to check that the fuel value of every item/fluid is at most its fuel potential.
 end
 
 ---@param recipe data.RecipePrototype

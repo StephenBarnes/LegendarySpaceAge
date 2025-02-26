@@ -17,6 +17,8 @@ copy = function(x)
 	assert(type(x) == "table")
 	return table.deepcopy(x)
 end
+
+---@param x data.Prototype[]
 extend = function(x)
 	assert(x ~= nil)
 	assert(type(x) == "table")

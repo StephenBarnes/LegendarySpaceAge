@@ -118,7 +118,7 @@ Recipe.edit{
 		{"stone", 10},
 	},
 	time = 1,
-	clearIcon = true, -- So that it uses the icon for the fluid, which I changed above to distinguish from molten steel better.
+	clearIcons = true, -- So that it uses the icon for the fluid, which I changed above to distinguish from molten steel better.
 }
 
 -- Make molten steel fluid.

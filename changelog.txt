@@ -4,6 +4,7 @@ Date: 2025-02-25
   Features:
     - Added briefings with tech triggers.
     - Updated foundry recipes.
+    - Added quality scaling of power consumption for gasifiers, char furnaces, and battery chargers, to remove infinite-energy exploits.
 ---------------------------------------------------------------------------------------------------
 Version: 0.8.0
 Date: 2025-02-25

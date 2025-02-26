@@ -111,11 +111,32 @@ end
 
 ---@param itemName string
 ---@return number
-Item.getJoules = function(itemName)
+Item.getJoules = function(itemName, allowZero)
 	local item = Item.getIncludingSubtypes(itemName)
 	assert(item ~= nil, "Item "..itemName.." not found.")
-	assert(item.fuel_value ~= nil, "Item "..itemName.." has no fuel value.")
+	if not allowZero then
+		assert(item.fuel_value ~= nil, "Item "..itemName.." has no fuel value.")
+	else
+		if item == nil or item.fuel_value == nil then
+			return 0
+		end
+	end
 	return Gen.toJoules(item.fuel_value)
+end
+
+---@param fluidName string
+---@return number
+Item.fluidGetJoules = function(fluidName, allowZero)
+	local fluid = FLUID[fluidName]
+	assert(fluid ~= nil, "Fluid "..fluidName.." not found.")
+	if not allowZero then
+		assert(fluid.fuel_value ~= nil, "Fluid "..fluidName.." has no fuel value.")
+	else
+		if fluid == nil or fluid.fuel_value == nil then
+			return 0
+		end
+	end
+	return Gen.toJoules(fluid.fuel_value)
 end
 
 return Item

@@ -146,8 +146,14 @@ end
 	.clearSubgroup
 	.category, .enabled, .auto_recycle, .subgroup, .order, .localised_name, .localised_description, .main_product, .allow_decomposition, .allow_as_intermediate, .show_amount_in_title, .crafting_machine_tint (just copied over)
 ]]
----@param a {recipe: string|data.RecipePrototype, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean}
+local allowedFieldsEdit = Table.listToSet{ -- Apparently the LSP's type-checking doesn't notice non-existent fields in the arg (?????), so we need to check them here.
+	"recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution",
+}
+---@param a {recipe: string|data.RecipePrototype, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean}
 Recipe.edit = function(a)
+	for field, _ in pairs(a) do
+		assert(allowedFieldsEdit[field], "Recipe.edit: unknown field "..field.." in arguments: ".. serpent.block(a))
+	end
 	local recipe = nil
 	assert(a.recipe ~= nil, "Recipe.edit: recipe proto or name is required, arguments: ".. serpent.block(a))
 	if type(a.recipe) == "string" then
@@ -182,7 +188,7 @@ Recipe.edit = function(a)
 	end
 
 	-- Some fields just get copied over.
-	for _, field in pairs{"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh"} do
+	for _, field in pairs{"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution"} do
 		if a[field] ~= nil then
 			recipe[field] = a[field]
 		end
@@ -202,8 +208,14 @@ Recipe.edit = function(a)
 end
 
 -- Create a recipe by copying an existing recipe and adjusting it. The a.copy field is the recipe to copy, rest of args the same as Recipe.edit.
----@param a {copy: string|data.RecipePrototype, recipe: string, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean}
+local allowedFieldsMake = Table.listToSet{
+	"copy", "recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution",
+}
+---@param a {copy: string|data.RecipePrototype, recipe: string, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean}
 Recipe.make = function(a)
+	for field, _ in pairs(a) do
+		assert(allowedFieldsMake[field], "Recipe.make: unknown field "..field.." in arguments: ".. serpent.block(a))
+	end
 	assert(a.copy ~= nil, "Recipe.make: copy is required, arguments: ".. serpent.block(a))
 	assert(a.recipe ~= nil, "Recipe.make: recipe name is required, arguments: ".. serpent.block(a))
 	assert(type(a.recipe) == "string", "Recipe.make: recipe name must be a string, arguments: ".. serpent.block(a))
@@ -224,6 +236,7 @@ Recipe.make = function(a)
 	a.copy = nil
 	---@diagnostic disable-next-line: param-type-mismatch
 	Recipe.edit(a)
+	recipe = recipe ---@type data.RecipePrototype
 	extend{recipe}
 	return RECIPE[recipe.name]
 end
@@ -239,6 +252,27 @@ end
 ---@param recipe data.RecipePrototype
 Recipe.isBarrellingRecipe = function(recipe)
 	return recipe.subgroup == "fill-barrel" or recipe.subgroup == "empty-barrel" or recipe.subgroup == "fill-gas-tank" or recipe.subgroup == "empty-gas-tank"
+end
+
+---@param ingredientOrResult data.IngredientPrototype|data.ProductPrototype
+---@param allowZero boolean?
+---@return number
+Recipe.ingredientOrResultJoules = function(ingredientOrResult, allowZero)
+	if ingredientOrResult.type == "item" then
+		return Item.getJoules(ingredientOrResult.name, allowZero)
+	else
+		return Item.fluidGetJoules(ingredientOrResult.name, allowZero)
+	end
+end
+
+---@param recipeSide (data.IngredientPrototype|data.ProductPrototype)[]
+---@return number
+Recipe.recipeSideJoules = function(recipeSide)
+	local joules = 0
+	for _, ingredientOrResult in pairs(recipeSide) do
+		joules = joules + Recipe.ingredientOrResultJoules(ingredientOrResult)
+	end
+	return joules
 end
 
 return Recipe

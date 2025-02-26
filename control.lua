@@ -3,6 +3,7 @@ local natGasWells = require("control.natural-gas-wells")
 local notifyIncorrectMapgenPreset = require("control.notify-incorrect-mapgen-preset")
 local deepDrillRecipe = require("control.deep-drill-recipe")
 local apprenticeFoundry = require("control.apprentice-foundry")
+local qualityPowerScaling = require("control.quality-power-scaling")
 
 local techRateTriggers = require("control.tech-rate-triggers")
 script.on_nth_tick(60 * 10, techRateTriggers.onNthTick)
@@ -28,6 +29,7 @@ for _, event in ipairs({
 	script.on_event(event, function(e)
 		deepDrillRecipe.onBuilt(e)
 		apprenticeFoundry.on_created_entity(e)
+		qualityPowerScaling.onBuilt(e)
 	end)
 end
 

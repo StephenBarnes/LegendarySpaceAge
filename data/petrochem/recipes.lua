@@ -92,11 +92,10 @@ tarDistillationRecipe.name = "tar-distillation"
 tarDistillationRecipe.ingredients = {
 	{type = "fluid", name = "tar", amount = 100},
 }
-tarDistillationRecipe.results = {
+tarDistillationRecipe.results = { -- Results have been increased so that carbon is barely preserved at the max prod of +100%.
 	{type = "item", name = "pitch", amount = 2, show_details_in_recipe_tooltip = false},
-	--{type = "item", name = "carbon", amount = 2},
 	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
-	{type = "fluid", name = "heavy-oil", amount = 20, show_details_in_recipe_tooltip = false},
+	{type = "fluid", name = "heavy-oil", amount = 50, show_details_in_recipe_tooltip = false},
 	{type = "fluid", name = "light-oil", amount = 10, show_details_in_recipe_tooltip = false},
 }
 tarDistillationRecipe.energy_required = 5
@@ -104,12 +103,12 @@ Icon.set(tarDistillationRecipe, {"tar", "heavy-oil", "light-oil", "pitch"}, "dec
 tarDistillationRecipe.order = "a[oil-processing]-b5"
 tarDistillationRecipe.subgroup = "complex-fluid-recipes"
 tarDistillationRecipe.allow_productivity = true
-tarDistillationRecipe.maximum_productivity = 2
+tarDistillationRecipe.maximum_productivity = 1
 tarDistillationRecipe.allow_quality = true
 extend{tarDistillationRecipe}
 
 --[[ Add recipe for heavy oil coking.
-	Heavy oil coking: 10 heavy oil -> 5 tar + 3 carbon
+	Heavy oil coking: 100 heavy oil -> 5 carbon + 25 tar
 		If you intend to burn the heavy oil, you can get more heat by coking first and then burning the tar and carbon. (This is realistic, and rewards the player for the extra complexity.)
 		This recipe is also useful when the player needs more tar or carbon - usually those are byproducts.
 ]]
@@ -119,8 +118,8 @@ heavyOilCokingRecipe.ingredients = {
 	{type = "fluid", name = "heavy-oil", amount = 100},
 }
 heavyOilCokingRecipe.results = {
-	{type = "item", name = "carbon", amount = 2, show_details_in_recipe_tooltip = false},
-	{type = "fluid", name = "tar", amount = 20, show_details_in_recipe_tooltip = false},
+	{type = "item", name = "carbon", amount = 5, show_details_in_recipe_tooltip = false},
+	{type = "fluid", name = "tar", amount = 25, show_details_in_recipe_tooltip = false},
 }
 Icon.set(heavyOilCokingRecipe, {"heavy-oil", "carbon", "tar"}, "decomposition")
 heavyOilCokingRecipe.order = "a[oil-processing]-b4"
