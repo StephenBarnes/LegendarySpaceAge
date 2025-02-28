@@ -242,7 +242,7 @@ Gen.orderKinds("module-3", {RAW.module, RECIPE}, {
 	"processing-unit-superclocked",
 	"white-circuit-superclocked",
 }, "1-")
-Gen.orderKinds("module-3", {FURNACE, RECIPE, ITEM}, {"superclocker"}, "2-")
+Gen.orderKinds("module-3", {ASSEMBLER, RECIPE, ITEM}, {"superclocker"}, "2-")
 Gen.orderKinds("module-3", {RAW.beacon, RECIPE, ITEM}, {"beacon"}, "3-")
 
 -- Order the raw-material group.

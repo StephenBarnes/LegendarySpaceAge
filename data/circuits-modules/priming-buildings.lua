@@ -174,20 +174,22 @@ Recipe.make{
 }
 
 -- Create superclocker entity.
-local superclockerEnt = copy(primerEnt)
+---@diagnostic disable-next-line: assign-type-mismatch
+local superclockerEnt = copy(primerEnt) ---@type data.AssemblingMachinePrototype
 superclockerEnt.name = "superclocker"
+superclockerEnt.type = "assembling-machine"
 superclockerEnt.icon = GRAPHICS_FOLDER.."2/icon.png"
 superclockerEnt.minable = {mining_time = 1, result = "superclocker"}
 superclockerEnt.placeable_by = {item = "superclocker", count = 1}
 superclockerEnt.selection_box = {{-3, -3}, {3, 3}}
-superclockerEnt.collision_box = {{-2.9, -2.3}, {2.9, 2.85}}
+--superclockerEnt.collision_box = {{-2.9, -2.3}, {2.9, 2.85}}
+superclockerEnt.collision_box = {{-2.9, -2.5}, {2.9, 2.85}}
 superclockerEnt.tile_height = 6
 superclockerEnt.tile_width = 6
 superclockerEnt.crafting_categories = {"circuit-superclocking"}
 superclockerEnt.energy_usage = "9MW"
 superclockerEnt.energy_source.drain = "1MW"
 superclockerEnt.heating_energy = "1MW"
-superclockerEnt.cant_insert_at_source_message_key = "inventory-restriction.cant-be-superclocked"
 superclockerEnt.graphics_set = {
 	animation = {
 		layers = {
@@ -263,6 +265,29 @@ superclockerEnt.working_sound = {
 			},
 			fade_in_ticks = 4,
 			fade_out_ticks = 20,
+		},
+	},
+}
+local pipeCovers = pipecoverspictures()
+superclockerEnt.fluid_boxes = {
+	{
+		production_type = "input",
+		pipe_covers = pipeCovers,
+		volume = 200,
+        pipe_picture = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures,
+        pipe_picture_frozen = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures_frozen,
+		secondary_draw_order = -1,
+		pipe_connections = {
+			{
+				flow_direction = "input",
+				direction = defines.direction.north,
+				positions = {
+					{-0.5, -2.5},
+					{2.5, 0.5},
+					{-0.5, 2.5},
+					{-2.5, 0.5},
+				},
+			},
 		},
 	},
 }

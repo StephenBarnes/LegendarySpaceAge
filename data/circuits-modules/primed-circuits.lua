@@ -153,10 +153,13 @@ for _, vals in pairs(CIRCUITS) do
 	local superclockedRecipe = Recipe.make{
 		copy = primedRecipe,
 		recipe = superclockedCircName,
-		ingredients = {{primedCircName, 10}},
-		results = {{superclockedCircName, amount_min = 9, amount_max = 10}},
+		ingredients = {
+			{primedCircName, 1},
+			{"electrolyte", 1},
+		},
+		results = {{superclockedCircName, 1, probability = .9}},
 		category = "circuit-superclocking",
-		time = 5,
+		time = 1,
 	}
 	superclockedRecipe.allow_productivity = false
 	superclockedRecipe.allow_quality = false
