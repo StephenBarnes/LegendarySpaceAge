@@ -447,8 +447,8 @@ extractionRecipe.hidden = false
 extractionRecipe.ingredients = {{ type = "item", name = "battery", amount = 1 } }
 extractionRecipe.results = { -- Returns 25%, same as recycling, so should be fine.
 	{ type = "fluid", name = "sulfuric-acid", amount = 5, show_details_in_recipe_tooltip = false },
-	{ type = "item", name = "iron-plate", amount = 1, probability = 0.25, show_details_in_recipe_tooltip = false },
-	{ type = "item", name = "copper-plate", amount = 1, probability = 0.25, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "panel", amount = 1, probability = 0.5, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "electronic-components", amount = 1, probability = 0.25, show_details_in_recipe_tooltip = false },
 }
 extractionRecipe.main_product = "sulfuric-acid"
 extractionRecipe.order = RECIPE["sulfuric-acid"].order .. "-b"

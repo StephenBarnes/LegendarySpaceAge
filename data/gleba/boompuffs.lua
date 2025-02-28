@@ -47,6 +47,27 @@ boompuffPlant.minable.results = {
 -- Harvesting boompuffs doesn't produce an explosion (remains_when_mined), although it does make an explosion when destroyed (dying_explosion).
 boompuffPlant.remains_when_mined = nil
 
+-- Create Factoriopedia simulation. Copied from base game's yumako/jellynut simulations.
+boompuffPlant.factoriopedia_simulation = {
+	planet = "gleba",
+	hide_factoriopedia_gradient = true,
+	init = [[
+		game.simulation.camera_zoom = 1.4
+		game.simulation.camera_position = {-0.5, 0}
+		for x = -10, 9, 1 do
+		for y = -4, 4 do
+			game.surfaces[1].set_tiles{{position = {x, y}, name = "midland-yellow-crust"}}
+		end
+		end
+
+		game.surfaces[1].create_entity{name = "boompuff", position = {x=-2.54, y=-0.76}, tick_grown = 1}
+		game.surfaces[1].create_entity{name = "boompuff", position = {x=2.87, y=-0.37}, tick_grown = 8000}
+		game.surfaces[1].create_entity{name = "boompuff", position = {x=-4.68, y=1.83}, tick_grown = 1000}
+		game.surfaces[1].create_entity{name = "boompuff", position = {x=-0.10, y=0.67}, tick_grown = 10000}
+		game.surfaces[1].create_entity{name = "boompuff", position = {x=4.80, y=1.69}, tick_grown = 1}
+	]]
+}
+
 -- Delete old boompuff tree, add new boompuff plant.
 RAW.tree.boompuff = nil
 extend({boompuffPlant})
@@ -163,57 +184,53 @@ extend{boomsacProjectile}
 --- Create recipes.
 
 -- Create recipe for sprouted-boomnut: 1 boomnut -> 40% chance for 1 sprouted-boomnut.
-local sproutedBoomnutRecipe = copy(RECIPE["bioflux"])
-sproutedBoomnutRecipe.name = "sprouted-boomnut"
-sproutedBoomnutRecipe.ingredients = {
-	{type = "item", name = "boomnut", amount = 1},
+Recipe.make{
+	copy = "bioflux",
+	recipe = "sprouted-boomnut",
+	ingredients = {"boomnut"},
+	results = {{"sprouted-boomnut", 1, probability = 0.4}},
+	category = "smelting",
+	crafting_machine_tint = boompuffTint,
+	clearIcons = true,
+	show_amount_in_title = false,
+	time = 5,
 }
-sproutedBoomnutRecipe.results = {
-	{type = "item", name = "sprouted-boomnut", amount = 1, probability = 0.4},
-}
-sproutedBoomnutRecipe.category = "smelting"
-sproutedBoomnutRecipe.crafting_machine_tint = boompuffTint
-Icon.clear(sproutedBoomnutRecipe)
-sproutedBoomnutRecipe.show_amount_in_title = false
-extend{sproutedBoomnutRecipe}
 
--- Create recipe for crush-boomnut: 1 boomnut -> 1 niter + 1 spoilage
-local crushBoomnutRecipe = copy(RECIPE["bioflux"])
-crushBoomnutRecipe.name = "crush-boomnut"
-crushBoomnutRecipe.ingredients = {
-	{type = "item", name = "boomnut", amount = 1},
+-- Create recipe for crush-boomnut: 1 boomnut -> 1 niter + 1 sugar
+Recipe.make{
+	copy = "bioflux",
+	recipe = "crush-boomnut",
+	ingredients = {"boomnut"},
+	results = {"niter", "sugar"},
+	category = "crafting",
+	crafting_machine_tint = boompuffTint,
+	icons = {"boomnut", "niter", "LSA/gleba/sugar/1"},
+	iconArrangement = "decomposition",
+	subgroup = "slipstacks-and-boompuffs",
+	order = "14",
+	allow_decomposition = false, -- Otherwise it thinks spoilage comes from boomnut crushing by default.
 }
-crushBoomnutRecipe.results = {
-	{type = "item", name = "niter", amount = 1},
-	{type = "item", name = "sugar", amount = 1},
-}
-crushBoomnutRecipe.category = "crafting"
-crushBoomnutRecipe.crafting_machine_tint = boompuffTint
-Icon.set(crushBoomnutRecipe, {"boomnut", "niter", "LSA/gleba/sugar/1"}, "decomposition")
-crushBoomnutRecipe.subgroup = "slipstacks-and-boompuffs"
-crushBoomnutRecipe.order = "14"
-crushBoomnutRecipe.allow_decomposition = false -- Otherwise it thinks spoilage comes from boomnut crushing by default.
-extend{crushBoomnutRecipe}
 
--- Create recipe for boomsac-deflation: 1 boomsac + 10 water + 10 sulfuric acid -> 40 natural gas + 20 sulfuric acid + 1 sulfur
-local boomsacDeflationRecipe = copy(RECIPE["bioflux"])
-boomsacDeflationRecipe.name = "boomsac-deflation"
-boomsacDeflationRecipe.ingredients = {
-	{type = "item", name = "boomsac", amount = 1},
-	{type = "fluid", name = "water", amount = 10},
-	{type = "fluid", name = "sulfuric-acid", amount = 10},
+-- Create recipe for boomsac-deflation: 1 boomsac + 10 water + 10 sulfuric acid -> 50 natural gas + 20 sulfuric acid + 1 sulfur
+Recipe.make{
+	copy = "bioflux",
+	recipe = "boomsac-deflation",
+	ingredients = {
+		{"boomsac", 1},
+		{"water", 10},
+		{"sulfuric-acid", 10},
+	},
+	results = {
+		{"natural-gas", 50},
+		{"sulfuric-acid", 20},
+		{"sulfur", 1},
+	},
+	category = "chemistry",
+	crafting_machine_tint = boompuffTint,
+	icons = {"natural-gas", "boomsac"},
+	subgroup = "slipstacks-and-boompuffs",
+	order = "15",
 }
-boomsacDeflationRecipe.results = {
-	{type = "fluid", name = "natural-gas", amount = 40},
-	{type = "fluid", name = "sulfuric-acid", amount = 20},
-	{type = "item", name = "sulfur", amount = 1},
-}
-boomsacDeflationRecipe.category = "chemistry"
-boomsacDeflationRecipe.crafting_machine_tint = boompuffTint
-Icon.set(boomsacDeflationRecipe, {"natural-gas", "boomsac"})
-boomsacDeflationRecipe.subgroup = "slipstacks-and-boompuffs"
-boomsacDeflationRecipe.order = "15"
-extend{boomsacDeflationRecipe}
 
 ------------------------------------------------------------------------
 -- Create tech.

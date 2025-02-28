@@ -36,6 +36,27 @@ stingfrondPlant.minable.results = {
 -- Emits spores, same as yumako/jellystem. This gives a reason to use resync recipe, rather than just planting 2x more stingfronds.
 stingfrondPlant.harvest_emissions = { spores = 15 }
 
+-- Create Factoriopedia simulation. Copied from base game's yumako/jellynut simulations.
+stingfrondPlant.factoriopedia_simulation = {
+	planet = "gleba",
+	hide_factoriopedia_gradient = true,
+	init = [[
+		game.simulation.camera_zoom = 1.4
+		game.simulation.camera_position = {-0.5, 0}
+		for x = -10, 9, 1 do
+		for y = -4, 4 do
+			game.surfaces[1].set_tiles{{position = {x, y}, name = "midland-turquoise-bark"}}
+		end
+		end
+
+		game.surfaces[1].create_entity{name = "stingfrond", position = {x=-2.54, y=-0.76}, tick_grown = 1}
+		game.surfaces[1].create_entity{name = "stingfrond", position = {x=2.87, y=-0.37}, tick_grown = 8000}
+		game.surfaces[1].create_entity{name = "stingfrond", position = {x=-4.68, y=1.83}, tick_grown = 1000}
+		game.surfaces[1].create_entity{name = "stingfrond", position = {x=-0.10, y=0.67}, tick_grown = 10000}
+		game.surfaces[1].create_entity{name = "stingfrond", position = {x=4.80, y=1.69}, tick_grown = 1}
+	]]
+}
+
 -- Delete old stingfrond tree, add new stingfrond plant.
 RAW.tree.stingfrond = nil
 extend({stingfrondPlant})
@@ -98,8 +119,9 @@ extend(cyclosomeItems)
 -- Create sprout item
 local stingfrondSprout = copy(ITEM["tree-seed"])
 stingfrondSprout.name = "stingfrond-sprout"
-stingfrondSprout.localised_name = nil
+stingfrondSprout.localised_name = {"item-name.stingfrond-sprout"}
 stingfrondSprout.plant_result = "stingfrond"
+stingfrondSprout.place_result = "stingfrond"
 Icon.set(stingfrondSprout, "SA/stingfrond")
 stingfrondSprout.subgroup = "stingfrond-products"
 stingfrondSprout.order = "a"

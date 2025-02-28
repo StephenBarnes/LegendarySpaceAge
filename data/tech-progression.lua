@@ -153,22 +153,27 @@ TECH["heating-tower"].research_trigger = nil
 Tech.removeRecipesFromTechs({"heat-exchanger", "heat-pipe", "steam-turbine"}, {"nuclear-power"})
 
 -- Logistic (green) science needs steam, rubber.
-RECIPE["logistic-science-pack"].ingredients = {
-	{type = "fluid", name = "steam", amount = 10},
-	{type = "item", name = "sensor", amount = 1},
-	{type = "item", name = "rubber", amount = 1},
+Recipe.edit{
+	recipe = "logistic-science-pack",
+	ingredients = {
+		{"steam", 10},
+		{"sensor", 1},
+		{"rubber", 1},
+	},
+	category = "crafting-with-fluid",
+	time = 1,
 }
-RECIPE["logistic-science-pack"].category = "crafting-with-fluid"
 -- Could make green science depend only on rubber and steam-power. But that's sorta guiding people in the direction of not automating circuit boards. Rather make it a prereq. That also lets us assume resin is available after green science.
 Tech.setPrereqs("logistic-science-pack", {"rubber-1", "wood-circuit-board"})
 
 -- Military stuff: move things around so military science pack can be made from poison/slowdown capsules, which now come earlier, while grenades come later.
 -- Also, change stuff so that shotgun and shotgun turrets come first, then SMG and rotary gun turrets.
 TECH["military-science-pack"].prerequisites = {"military-2"}
-RECIPE["military-science-pack"].ingredients = {
-	{type = "item", name = "poison-capsule", amount = 1},
-	{type = "item", name = "slowdown-capsule", amount = 1},
-	{type = "item", name = "piercing-rounds-magazine", amount = 1},
+Recipe.edit{
+	recipe = "military-science-pack",
+	ingredients = {"poison-capsule", "slowdown-capsule", "piercing-rounds-magazine"},
+	resultCount = 1,
+	time = 1,
 }
 Tech.removeRecipesFromTechs({"poison-capsule", "slowdown-capsule"}, {"military-3"})
 Tech.addRecipeToTech("poison-capsule", "military-2")
@@ -256,9 +261,14 @@ RECIPE["rocket-part"].ingredients = {
 }
 
 -- Chemical science pack: 1 barrel diesel + 2 plastic -> 2 chemical science packs.
-RECIPE["chemical-science-pack"].ingredients = {
-	{type = "item", name = "diesel-barrel", amount = 1},
-	{type = "item", name = "plastic-bar", amount = 2},
+Recipe.edit{
+	recipe = "chemical-science-pack",
+	ingredients = {
+		{"diesel-barrel", 1},
+		{"plastic-bar", 2},
+	},
+	resultCount = 1,
+	time = 1,
 }
 TECH["chemical-science-pack"].prerequisites = {"plastics", "diesel"}
 

@@ -63,7 +63,7 @@ local expectedRecipes = {
 	["steam-condensation"] = {0, false},
 
 	["petrophage-cultivation"] = {0.5, true}, -- Cap prod to conserve carbon.
-	["refresh-petrophages"] = {1.5, true}, -- Cap prod to conserve carbon.
+	["refresh-petrophages"] = {2, true}, -- Cap prod to conserve carbon.
 
 	-- TODO more.
 }

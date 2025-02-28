@@ -30,6 +30,7 @@ for _, vals in pairs{
 			{type="item", name="panel", amount=10},
 			{type="item", name="mechanism", amount=1},
 		},
+		time = 5,
 	},
 	{
 		prefix = "fast-",
@@ -39,6 +40,7 @@ for _, vals in pairs{
 			{type="item", name="mechanism", amount=1},
 			{type="item", name="rubber", amount=1},
 		},
+		time = 1,
 	},
 	{
 		prefix = "express-",
@@ -48,6 +50,7 @@ for _, vals in pairs{
 			{type="item", name="electric-engine-unit", amount=1},
 			{type="item", name="rubber", amount=1},
 		},
+		time = 1,
 	},
 	{
 		prefix = "turbo-",
@@ -57,6 +60,7 @@ for _, vals in pairs{
 			{type="item", name="electric-engine-unit", amount=1},
 			{type="item", name="tungsten-plate", amount=2},
 		},
+		time = 1,
 	},
 } do
 	local beltName = vals.prefix .. "transport-belt"
@@ -94,7 +98,7 @@ for _, vals in pairs{
 	beltRecipe.category = "crafting"
 	beltRecipe.allow_decomposition = true
 	beltRecipe.allow_as_intermediate = true
-	beltRecipe.energy_required = 10
+	beltRecipe.energy_required = vals.time
 
 	-- Set underground recipes.
 	undergroundRecipe.ingredients = {

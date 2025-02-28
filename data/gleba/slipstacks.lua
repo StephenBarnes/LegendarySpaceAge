@@ -33,6 +33,27 @@ slipstackPlant.minable.results = {
 	{type = "item", name = "slipstack-pearl", amount_min = 5, amount_max = 15}
 }
 
+-- Create Factoriopedia simulation. Copied from base game's yumako/jellynut simulations.
+slipstackPlant.factoriopedia_simulation = {
+	planet = "gleba",
+	hide_factoriopedia_gradient = true,
+	init = [[
+		game.simulation.camera_zoom = 1.4
+		game.simulation.camera_position = {-0.5, 0}
+		for x = -10, 9, 1 do
+		for y = -4, 4 do
+			game.surfaces[1].set_tiles{{position = {x, y}, name = "wetland-pink-tentacle"}}
+		end
+		end
+
+		game.surfaces[1].create_entity{name = "slipstack", position = {x=-2.54, y=-0.76}, tick_grown = 1}
+		game.surfaces[1].create_entity{name = "slipstack", position = {x=2.87, y=-0.37}, tick_grown = 8000}
+		game.surfaces[1].create_entity{name = "slipstack", position = {x=-4.68, y=1.83}, tick_grown = 1000}
+		game.surfaces[1].create_entity{name = "slipstack", position = {x=-0.10, y=0.67}, tick_grown = 10000}
+		game.surfaces[1].create_entity{name = "slipstack", position = {x=4.80, y=1.69}, tick_grown = 1}
+	]]
+}
+
 -- Delete old slipstack tree, add new slipstack plant.
 RAW.tree.slipstack = nil
 extend{slipstackPlant}

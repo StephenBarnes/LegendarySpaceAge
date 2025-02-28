@@ -38,10 +38,10 @@ local cultivationRecipe = Recipe.make{
 	allow_quality = true,
 	hidden = false,
 	hidden_in_factoriopedia = false,
-	surface_conditions = nil,
 	subgroup = "slipstacks-and-boompuffs",
 	order = "22",
 }
+cultivationRecipe.surface_conditions = nil
 cultivationRecipe.icon = nil
 cultivationRecipe.icons = {
 	copy(FLUID["dry-gas"].icons[1]),

@@ -58,28 +58,43 @@ local function complexityOk(x)
 	return complexity(x) <= 2
 end
 
+local ignoreRecipeItem = {
+	["underground-belt"] = {["transport-belt"] = true},
+	["fast-underground-belt"] = {["fast-transport-belt"] = true},
+	["express-underground-belt"] = {["express-transport-belt"] = true},
+	["turbo-underground-belt"] = {["turbo-transport-belt"] = true},
+}
+local ignoreRecipe = Table.listToSet{
+	"explosive-desynchronization",
+}
+
 ---@param recipe data.RecipePrototype
 local function checkRecipe(recipe)
 	if recipe.category == "recycling" then return true end -- Ignore recycling recipes.
+	if ignoreRecipe[recipe.name] then return true end
 	if Util.shouldIgnoreRecipe(recipe) then return true end
 	local success = true
 	for _, ingredient in pairs(recipe.ingredients or {}) do
-		if ingredient.amount ~= nil then
-			if not complexityOk(ingredient.amount) then
-				log("Complexity of recipe " .. recipe.name .. " ingredient " .. ingredient.name .. " amount is too high: " .. ingredient.amount)
-				success = false
+		if ignoreRecipeItem[recipe.name] == nil or not ignoreRecipeItem[recipe.name][ingredient.name] then
+			if ingredient.amount ~= nil then
+				if not complexityOk(ingredient.amount) then
+					log("Complexity of recipe " .. recipe.name .. " ingredient " .. ingredient.name .. " amount is too high: " .. ingredient.amount)
+					success = false
+				end
 			end
 		end
 	end
 	for _, result in pairs(recipe.results or {}) do
-		local effectiveAmount
-		if result.amount ~= nil then effectiveAmount = result.amount end
-		if result.amount_min ~= nil then effectiveAmount = (result.amount_min + result.amount_max) / 2 end
-		assert(effectiveAmount ~= nil, "Could not find effective amount for recipe " .. recipe.name .. " result " .. result.name)
-		if result.probability ~= nil then effectiveAmount = effectiveAmount * result.probability end
-		if not complexityOk(effectiveAmount) then
-			log("Complexity of recipe " .. recipe.name .. " result " .. result.name .. " effective-amount is too high: " .. effectiveAmount)
-			success = false
+		if ignoreRecipeItem[recipe.name] == nil or not ignoreRecipeItem[recipe.name][result.name] then
+			local effectiveAmount
+			if result.amount ~= nil then effectiveAmount = result.amount end
+			if result.amount_min ~= nil then effectiveAmount = (result.amount_min + result.amount_max) / 2 end
+			assert(effectiveAmount ~= nil, "Could not find effective amount for recipe " .. recipe.name .. " result " .. result.name)
+			if result.probability ~= nil then effectiveAmount = effectiveAmount * result.probability end
+			if not complexityOk(effectiveAmount) then
+				log("Complexity of recipe " .. recipe.name .. " result " .. result.name .. " effective-amount is too high: " .. effectiveAmount)
+				success = false
+			end
 		end
 	end
 	if not complexityOk(recipe.energy_required or 0.5) then
@@ -144,14 +159,11 @@ local function checkRoundNumbers()
 		end
 	end
 
-	for _, item in pairs(ITEM) do
+	Item.forAllIncludingSubtypes(function(item)
 		success = checkItem(item) and success
-	end
+	end)
 
-	-- TODO check furnaces
-	-- TODO check assemblers and subtypes.
 	-- TODO check miners, boilers, reactors
-
 	-- TODO check whole list of prototypes for what types we need to check.
 	-- TODO modules
 
