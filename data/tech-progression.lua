@@ -21,9 +21,10 @@ TECH["automation"].research_trigger = {
 TECH["automation-science-pack"].prerequisites = {"automation"}
 Tech.removeRecipeFromTech("lab", "electronics")
 Tech.addRecipeToTech("lab", "automation-science-pack")
-RECIPE["automation-science-pack"].ingredients = {
-	{type = "item", name = "iron-gear-wheel", amount = 1},
-	{type = "item", name = "glass", amount = 1},
+Recipe.edit{
+	recipe = "automation-science-pack",
+	ingredients = {"mechanism", "wiring"},
+	time = 1,
 }
 
 -- Move electric inserter to automation tech.
@@ -154,7 +155,7 @@ Tech.removeRecipesFromTechs({"heat-exchanger", "heat-pipe", "steam-turbine"}, {"
 -- Logistic (green) science needs steam, rubber.
 RECIPE["logistic-science-pack"].ingredients = {
 	{type = "fluid", name = "steam", amount = 10},
-	{type = "item", name = "electronic-circuit", amount = 1},
+	{type = "item", name = "sensor", amount = 1},
 	{type = "item", name = "rubber", amount = 1},
 }
 RECIPE["logistic-science-pack"].category = "crafting-with-fluid"
@@ -245,6 +246,9 @@ Tech.hideTech("health")
 Tech.removePrereq("rocket-silo", "rocket-fuel")
 -- TODO add hydrogen/oxygen techs.
 
+-- Rocket silo doesn't need concrete, since we replaced those ingredients with structure etc.
+Tech.removePrereq("rocket-silo", "concrete")
+
 -- Remove rocket fuel from rocket part recipe. TODO later we should re-write this recipe completely maybe.
 RECIPE["rocket-part"].ingredients = {
 	{type = "item", name = "processing-unit", amount = 1},
@@ -274,6 +278,9 @@ Tech.addSciencePack("belt-immunity-equipment", "chemical-science-pack")
 Tech.addSciencePack("night-vision-equipment", "chemical-science-pack")
 Tech.addTechDependency("solar-energy", "rocket-silo")
 
+-- Battery needs green science.
+Tech.addTechDependency("logistic-science-pack", "battery")
+
 -- Move engine to after fluid handling.
 Tech.removePrereq("engine", "logistic-science-pack")
 Tech.addTechDependency("fluid-handling", "engine")
@@ -284,8 +291,8 @@ Tech.addTechDependency("elevated-rail", "planet-discovery-fulgora")
 Tech.removeSciencePack("production-science-pack", "elevated-rail")
 Tech.setPrereqs("elevated-rail", {"railway"})
 
--- Fulgoran techs: EM plants -> white circuits -> electromagnetic-science-pack.
-Tech.setPrereqs("electromagnetic-science-pack", {"white-circuit"})
+-- Fulgoran techs: EM plants -> white circuits -> superclocking -> electromagnetic-science-pack.
+Tech.setPrereqs("electromagnetic-science-pack", {"superclocked-circuits"})
 TECH["electromagnetic-science-pack"].research_trigger = {
 	type = "craft-item",
 	item = "white-circuit",

@@ -155,19 +155,14 @@ whiteCircuitTech.effects = {
 		type = "unlock-recipe",
 		recipe = "white-circuit-primed",
 	},
-	{
-		type = "unlock-recipe",
-		recipe = "white-circuit-superclocked",
-	},
-	
 }
 Icon.set(whiteCircuitTech, "LSA/white-circuits/tech")
-whiteCircuitTech.prerequisites = {"electromagnetic-plant", "effect-transmission", "superclocked-circuits"}
-	-- Effect-transmission prereq is to make it more discoverable when browsing beacons in tech tree.
+whiteCircuitTech.prerequisites = {"electromagnetic-plant", "effect-transmission"}
+	-- Effect-transmission prereq is partly to make it more discoverable when browsing beacons in tech tree.
 whiteCircuitTech.unit = nil
 whiteCircuitTech.research_trigger = {
 	type = "craft-item",
-	item = "supercapacitor",
+	item = "electromagnetic-plant",
 	amount = 1,
 }
 extend{whiteCircuitTech}

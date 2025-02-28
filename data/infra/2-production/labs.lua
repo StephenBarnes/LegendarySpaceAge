@@ -2,17 +2,17 @@ Recipe.edit{
 	recipe = "lab",
 	ingredients = {
 		{"frame", 2},
-		{"electronic-circuit", 2},
-		{"glass", 2},
+		{"mechanism", 5},
+		{"sensor", 5},
 	},
 	time = 5,
 }
-Recipe.edit{ -- TODO edit this
+Recipe.edit{
 	recipe = "glebalab",
 	ingredients = {
 		{"frame", 10},
-		{"processing-unit", 10},
-		{"marrow", 50},
+		{"electric-engine-unit", 10},
+		{"sensor", 20},
 		{"geoplasm", 100, type = "fluid"},
 	},
 	time = 20,

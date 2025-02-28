@@ -109,7 +109,8 @@ Recipe.edit{
 		{"sensor", 2},
 		{"mechanism", 2},
 	},
-	time = 10,
+	time = 5,
+	category = "crafting",
 }
 
 Recipe.edit{
@@ -123,14 +124,37 @@ Recipe.edit{
 	time = 20,
 }
 
--- Foundry: 40 tungsten carbide + 40 shielding + 40 structure + 4 mechanism
+--[[ Foundry:
+Originally 50 tungsten carbide + 50 steel plate + 30 green circuit + 20 refined concrete + 20 lubricant.
+	That was foundry with speed 4. We're changing it to speed 1 increasing to 10.
+]]
 Recipe.edit{
 	recipe = "foundry",
 	ingredients = {
-		{"tungsten-carbide", 40},
-		{"shielding", 40},
-		{"structure", 40},
-		{"mechanism", 4},
+		{"tungsten-carbide", 50},
+		{"fluid-fitting", 10},
+		{"shielding", 10},
+		{"structure", 10},
+		{"mechanism", 10},
 	},
+	time = 10,
 	category = "crafting", -- Don't allow crafting foundries in foundry.
+}
+
+--[[ Biochamber:
+Originally 20 iron plate + 1 landfill + 5 green circuit + 5 nutrients + 1 pentapod egg.
+Changing to use chem plant's ingredients, plus some nutrients and slime.
+TODO ensure that you can obtain the nutrients without a biochamber, since the main route is going to be sugar-to-nutrients fermentation.
+]]
+Recipe.edit{
+	recipe = "biochamber",
+	ingredients = {
+		{"fluid-fitting", 10},
+		{"sensor", 2},
+		{"mechanism", 2},
+		{"nutrients", 10},
+		--{"slime", 20}, -- No fluid, rather make it hand-craftable.
+	},
+	time = 5,
+	category = "organic-or-assembling",
 }

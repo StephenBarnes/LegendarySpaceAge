@@ -310,16 +310,17 @@ superclockingTech.effects = {
 		type = "unlock-recipe",
 		recipe = "processing-unit-superclocked",
 	},
-}
-superclockingTech.prerequisites = {"electric-engine"}
-superclockingTech.unit = {
-	count = 300,
-	ingredients = {
-		{"automation-science-pack", 1},
-		{"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
+	{
+		type = "unlock-recipe",
+		recipe = "white-circuit-superclocked",
 	},
-	time = 30,
+}
+superclockingTech.prerequisites = {"white-circuit"}
+superclockingTech.unit = nil
+superclockingTech.research_trigger = {
+	type = "craft-item",
+	count = 1,
+	item = "white-circuit-primed",
 }
 Icon.set(superclockingTech, "LSA/primer/2/tech")
 extend{superclockingTech}

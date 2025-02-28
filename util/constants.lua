@@ -26,7 +26,7 @@ Export.itemFuelValues = { -- Maps from fluid name to fuel value, pollution multi
 	["pitch"] = {"3MJ", 2.5, .5, .5, "chemical", false, "item"},
 	["resin"] = {"1MJ", 2, .5, .5, "chemical", false, "item"},
 
-	["solid-fuel"] = {"12MJ", 2, .8, .8, "chemical", false, "item"},
+	["solid-fuel"] = {"15MJ", 1.5, 1.1, 1.1, "chemical", false, "item"},
 
 	["carbon"] = {"1MJ", .6, .7, .7, "pure-carbon", false, "item"},
 

@@ -12,15 +12,15 @@ return {
 		showPerMinute = true,
 	},
 	["logistic-science-pack"] = {
-		item = "electronic-circuit",
-		perSecond = 5,
+		item = "sensor",
+		perSecond = 1,
 		numMinutes = 5,
 		baseKind = "item",
 		showPerMinute = false,
 	},
 	["chemical-science-pack"] = {
 		item = "plastic-bar",
-		perSecond = 10,
+		perSecond = 20,
 		numMinutes = 5,
 		baseKind = "item",
 		showPerMinute = false,

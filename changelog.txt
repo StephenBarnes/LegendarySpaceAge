@@ -5,6 +5,10 @@ Date: 2025-02-26
     - Added briefings with tech triggers.
     - Updated foundry recipes.
     - Added quality scaling of power consumption for gasifiers, char furnaces, and battery chargers, to remove infinite-energy exploits.
+    - TODO add sugar system
+    - TODO add resistances for enemies
+    - TODO add bream
+    - TODO add recipes for liquid hydrogen and oxygen
 ---------------------------------------------------------------------------------------------------
 Version: 0.8.0
 Date: 2025-02-25

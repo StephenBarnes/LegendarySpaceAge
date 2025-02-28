@@ -92,7 +92,7 @@ boomsacItem.subgroup = "slipstacks-and-boompuffs"
 boomsacItem.order = "13"
 boomsacItem.spoil_ticks = 2 * MINUTES
 boomsacItem.spoil_to_trigger_result = {
-	items_per_trigger = 1,
+	items_per_trigger = 5, -- So for a stack of 100, it triggers 20 times. For 1 item, it still triggers 1 time.
 	trigger = {
 		type = "direct",
 		action_delivery = {
@@ -135,6 +135,7 @@ boomsacItem.capsule_action.attack_parameters.ammo_type.action = { -- Copied from
 }
 Icon.set(boomsacItem, "LSA/gleba/boompuffs/sac/6")
 Icon.variants(boomsacItem, "LSA/gleba/boompuffs/sac/%", 8)
+Item.copySoundsTo(RAW.capsule["yumako-mash"], boomsacItem)
 extend{boomsacItem}
 
 ------------------------------------------------------------------------

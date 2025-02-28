@@ -1,12 +1,18 @@
 --[[ Entity and item properties:
-* Make speeds 10 -- 20 -- 50 -- 100. Originally 15--30--45--60. Because I want to simplify the mental math, e.g. 7.5/s per side or 22.5/s per side is annoying. Also easier if you can just merge 2 yellows onto 1 red, etc. And I want both the items/sec/belt and the items/sec/side to be simple numbers that conform to the existing 1-2-5-10 system of round numbers. Also I think it's nice to make green belts even faster.
 * Standardize stack sizes and weights.
+* Make speeds 10 -- 20 -- 50 -- 100.
+	Originally they were 15--30--45--60.
+	Changing because I want to simplify the mental math, e.g. 7.5/s per side or 22.5/s per side is annoying.
+	And I want both the items/sec/belt and the items/sec/side to be simple numbers that conform to the existing 1-2-5-10 system of round numbers.
+	Also easier if you can just merge 2 yellows onto 1 red, etc. Though I'm breaking that with red-blue where the ratio is instead 2.5:1.
+	Also I think it's nice to make green belts even faster.
 
 Adjust recipes:
 * Remove the nesting in the recipes (each tier ingredient to the next), and change to factor intermediates.
 * Make them more expensive per throughput (as in vanilla), and increase in complexity.
-* Remove them from foundry. Rather reserve foundries for bulk metal production.
-* For underground belts, remove nesting and simplify recipes: just the number of belts, plus panels. So you can even craft them by hand, and eg turn green belts into green undergrounds off-Vulcanus.
+* Remove them from foundry. Rather reserve foundries for bulk molten metal stuff (producting molten metals, and casting them).
+* Allow handcrafting undergrounds/splitters from belts by hand anywhere, so no fluid ingredients or surface restrictions.
+* For underground belts, remove nesting and simplify recipes: just the number of belts, plus panels.
 * For splitter, same thing - remove nesting, simplify recipes, make them hand-craftable. For ingredients, require 2 belts of that tier, plus sensor and mechanism. Nothing else, rather put it into the transport belt recipes.
 
 TODO: compare all these recipes to base-game, and number per belt.
@@ -17,11 +23,11 @@ for _, vals in pairs{
 	{
 		prefix = "",
 		speed = 10,
-		producedPerRecipe = 4,
+		producedPerRecipe = 10,
 		ingredients = {
 			--[[ Base game is 1 iron plate + 1 gear for 2 belts, so 1.5 iron plate per belt.
-			Changing it to 1 panel + 1 mechanism = 1 iron plate + 8 machine parts + 1 frame = 1 + 1 + 4 iron plates, so 6. So doubling amount produced to 4 belts. ]]
-			{type="item", name="panel", amount=1},
+			Changing it to 10 belts from 10 panel + 1 mechanism = 10 iron plate + 5 machine parts + 1 frame = 10 + 5 + 10 iron plates, so 25. So it comes out to 2.5 iron plate per belt. ]]
+			{type="item", name="panel", amount=10},
 			{type="item", name="mechanism", amount=1},
 		},
 	},
@@ -88,7 +94,7 @@ for _, vals in pairs{
 	beltRecipe.category = "crafting"
 	beltRecipe.allow_decomposition = true
 	beltRecipe.allow_as_intermediate = true
-	beltRecipe.energy_required = 0.5
+	beltRecipe.energy_required = 10
 
 	-- Set underground recipes.
 	undergroundRecipe.ingredients = {

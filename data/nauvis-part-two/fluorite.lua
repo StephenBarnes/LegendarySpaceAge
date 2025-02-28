@@ -31,6 +31,7 @@ local hydrofluoricAcidRecipe = Recipe.make{
 	},
 	main_product = "hydrofluoric-acid",
 	clearIcons = true,
+	category = "chemistry",
 }
 hydrofluoricAcidRecipe.subgroup = nil
 

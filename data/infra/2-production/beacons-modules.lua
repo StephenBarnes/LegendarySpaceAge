@@ -35,10 +35,11 @@ Recipe.edit{
 Recipe.edit{
 	recipe = "superclocker",
 	ingredients = {
-		{"processing-unit-primed", 50},
 		{"shielding", 20},
-		{"sensor", 20},
-		{"electric-engine-unit", 20},
+		{"white-circuit-primed", 50},
+		{"electric-engine-unit", 50},
+		{"electrolyte", 200},
 	},
 	time = 20,
+	category = "electromagnetics",
 }

@@ -282,13 +282,14 @@ Tech.addRecipeToTech("rich-gas-cracking", "oil-processing")
 Tech.removeRecipeFromTech("heavy-oil-cracking", "advanced-oil-processing")
 Tech.removeRecipeFromTech("light-oil-cracking", "advanced-oil-processing")
 
--- Solid fuel recipe goes in the first oil tech.
-Tech.addRecipeToTech("solid-fuel", "oil-processing")
-
--- Add heavy oil coking, tar distillation, pitch processing to advanced oil processing.
+-- Add heavy oil coking, tar distillation, pitch processing, solid fuel to advanced oil processing.
 Tech.addRecipeToTech("heavy-oil-coking", "advanced-oil-processing")
 Tech.addRecipeToTech("tar-distillation", "advanced-oil-processing")
 Tech.addRecipeToTech("pitch-processing", "advanced-oil-processing")
+Tech.addRecipeToTech("solid-fuel", "advanced-oil-processing")
+
+-- Missiles require solid fuel, so add tech dependency.
+Tech.addTechDependency("advanced-oil-processing", "rocketry")
 
 -- Wood resin recipe will be placed in wood circuit boards tech.
 -- Pitch resin and rich-gas resin will be unlocked in a special "petroleum resin" tech, after blue science.

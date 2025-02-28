@@ -1,4 +1,5 @@
 --[[ This file checks that various tradeoffs are as intended.
+TODO add more?
 ]]
 
 

@@ -22,16 +22,26 @@ petrophage.order = "21"
 extend{petrophage}
 
 -- Create recipe for breeding petrophages.
-local cultivationRecipe = copy(RECIPE["iron-bacteria-cultivation"])
-cultivationRecipe.name = "petrophage-cultivation"
-cultivationRecipe.ingredients = {
-	{type="fluid", name="dry-gas", amount=10},
-	{type="item", name="petrophage", amount=1},
+local cultivationRecipe = Recipe.make{
+	copy = "iron-bacteria-cultivation",
+	recipe = "petrophage-cultivation",
+	ingredients = {
+		{"dry-gas", 10, type = "fluid"},
+		{"petrophage", 1},
+	},
+	results = {
+		{"petrophage", 2},
+	},
+	time = 5,
+	allow_productivity = true,
+	maximum_productivity = 0.5,
+	allow_quality = true,
+	hidden = false,
+	hidden_in_factoriopedia = false,
+	surface_conditions = nil,
+	subgroup = "slipstacks-and-boompuffs",
+	order = "22",
 }
-cultivationRecipe.results = {
-	{type="item", name="petrophage", amount=2},
-}
-cultivationRecipe.energy_required = 2
 cultivationRecipe.icon = nil
 cultivationRecipe.icons = {
 	copy(FLUID["dry-gas"].icons[1]),
@@ -39,31 +49,26 @@ cultivationRecipe.icons = {
 }
 cultivationRecipe.icons[1].scale = 0.4
 cultivationRecipe.icons[1].shift = {-4, -4}
-cultivationRecipe.hidden = false
-cultivationRecipe.hidden_in_factoriopedia = false
-cultivationRecipe.surface_conditions = nil
-cultivationRecipe.subgroup = "slipstacks-and-boompuffs"
-cultivationRecipe.order = "22"
-cultivationRecipe.allow_productivity = false
-cultivationRecipe.allow_quality = true
-extend{cultivationRecipe}
 
 -- Create recipe for refreshing petrophages.
-local refreshRecipe = copy(cultivationRecipe)
-refreshRecipe.name = "refresh-petrophages"
-refreshRecipe.ingredients = {
-	{type="item", name="petrophage", amount=3},
+Recipe.make{
+	copy = cultivationRecipe,
+	recipe = "refresh-petrophages",
+	ingredients = {
+		{"petrophage", 3},
+	},
+	results = {
+		{"petrophage", 1, percent_spoiled = 0},
+	},
+	time = 1,
+	result_is_always_fresh = true,
+	allow_productivity = true,
+	allow_quality = true,
+	maximum_productivity = 2,
+	icon = "LSA/gleba/petrophages/refresh",
+	subgroup = "slipstacks-and-boompuffs",
+	order = "23",
 }
-refreshRecipe.results = {
-	{type="item", name="petrophage", amount=1, percent_spoiled = 0},
-}
-refreshRecipe.result_is_always_fresh = true
-Icon.set(refreshRecipe, "LSA/gleba/petrophages/refresh")
-refreshRecipe.subgroup = "slipstacks-and-boompuffs"
-refreshRecipe.order = "23"
-cultivationRecipe.allow_productivity = false
-cultivationRecipe.allow_quality = true
-extend{refreshRecipe}
 
 -- Adjust the bacteria-cultivation tech to include the new recipes.
 local tech = TECH["bacteria-cultivation"]
