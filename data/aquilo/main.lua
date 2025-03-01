@@ -20,32 +20,5 @@ mapGen.property_expression_names["entity:natural-gas-well:richness"] = mapGen.pr
 mapGen.property_expression_names["entity:crude-oil:probability"] = nil
 mapGen.property_expression_names["entity:crude-oil:richness"] = nil
 
--- Create refrigerant fluid.
-local refrigerant = copy(FLUID["fluoroketone-cold"])
-refrigerant.name = "refrigerant"
-refrigerant.auto_barrel = true
-Icon.set(refrigerant, "LSA/aquilo/refrigerant")
--- TODO fluid flow colors.
--- TODO temperature to make it a gas.
-extend{refrigerant}
-
 -- Change icon for lithium brine, which is now "mineral brine".
 Icon.set(FLUID["lithium-brine"], "LSA/aquilo/mineral-brine")
-
--- Create fluid for liquid nitrogen.
-local liquidNitrogen = copy(FLUID["fluoroketone-cold"])
-liquidNitrogen.name = "liquid-nitrogen"
-liquidNitrogen.auto_barrel = true
-Icon.set(liquidNitrogen, "LSA/aquilo/liquid-nitrogen")
--- TODO fluid flow colors.
--- TODO temperature to make it a liquid.
-extend{liquidNitrogen}
-
--- Create fluid for nitrogen gas.
-local nitrogenGas = copy(FLUID["fluoroketone-cold"])
-nitrogenGas.name = "nitrogen-gas"
-nitrogenGas.auto_barrel = true
-Icon.set(nitrogenGas, "LSA/aquilo/nitrogen-gas")
--- TODO fluid flow colors.
--- TODO temperature to make it a gas.
-extend{nitrogenGas}

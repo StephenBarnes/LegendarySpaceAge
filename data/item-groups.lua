@@ -98,10 +98,11 @@ extend{
 	-- Create subgroups for fluids by planet, etc.
 	{ type = "item-subgroup", name = "nauvis-fluids",    group = "fluids", order = "01" },
 	{ type = "item-subgroup", name = "petrochem-fluids", group = "fluids", order = "02" },
-	{ type = "item-subgroup", name = "vulcanus-fluids",  group = "fluids", order = "03" },
-	{ type = "item-subgroup", name = "gleba-fluids",     group = "fluids", order = "04" },
-	{ type = "item-subgroup", name = "fulgora-fluids",   group = "fluids", order = "05" },
-	{ type = "item-subgroup", name = "aquilo-fluids",    group = "fluids", order = "06" },
+	{ type = "item-subgroup", name = "cryo-fluids",      group = "fluids", order = "03" },
+	{ type = "item-subgroup", name = "vulcanus-fluids",  group = "fluids", order = "04" },
+	{ type = "item-subgroup", name = "gleba-fluids",     group = "fluids", order = "05" },
+	{ type = "item-subgroup", name = "fulgora-fluids",   group = "fluids", order = "06" },
+	{ type = "item-subgroup", name = "aquilo-fluids",    group = "fluids", order = "07" },
 
 	-- Subgroup for post-Nauvis science packs.
 	{ type = "item-subgroup", name = "alien-science-packs", group = "intermediate-products", order = "y2" },
@@ -135,8 +136,9 @@ end
 
 -- Move all fluids to the right row.
 for subgroup, fluids in pairs{
-	nauvis = {"lake-water", "water", "steam", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant", "thruster-fuel", "thruster-oxidizer"},
+	nauvis = {"lake-water", "water", "steam", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant"},
 	petrochem = {"crude-oil", "natural-gas", "tar", "heavy-oil", "light-oil", "petroleum-gas", "dry-gas", "syngas", "diesel"},
+	cryo = {"nitrogen-gas", "compressed-nitrogen-gas", "oxygen-gas", "hydrogen-gas", "liquid-nitrogen", "thruster-oxidizer", "thruster-fuel"},
 	vulcanus = {"lava", "volcanic-gas", "molten-iron", "molten-copper", "molten-steel", "molten-tungsten"},
 	fulgora = {"fulgoran-sludge", "holmium-solution", "electrolyte"},
 	gleba = {"slime", "geoplasm", "chitin-broth"},

@@ -1,22 +1,25 @@
--- This file changes some barrelling recipes to use gas tanks instead of barrels.
+-- This file changes some barrelling recipes to use pressurized tanks instead of barrels.
 -- Note that I renamed the tank to just "pressurized tank" so it's not necessarily for gases, more just for anything that doesn't seem right in an ordinary barrel.
 
--- Edit some of the barrelling recipes to instead have the icon for the gas tank, and use gas tank ingredient and result.
-local gases = Table.listToSet{
+-- Edit some of the barrelling recipes to instead have the icon for the pressurized tank, and use pressurized tank ingredient and result.
+local pressurizedFluids = Table.listToSet{
 	--"steam", -- Not barrellable.
 	"petroleum-gas",
 	"dry-gas",
 	"natural-gas",
 	"syngas",
+	"ammonia",
+
+	"liquid-nitrogen",
 	"thruster-oxidizer",
 	"thruster-fuel",
-	"ammonia",
+	"nitrogen-gas",
+	"compressed-nitrogen-gas",
+	"oxygen-gas",
+	"hydrogen-gas",
 
 	"fluorine",
 	"hydrofluoric-acid",
-	"nitrogen-gas",
-	"liquid-nitrogen",
-	"refrigerant",
 }
 local function makeGasTankIcons(fluid, straight)
 	local kind = straight and "straight" or "angled"
@@ -51,7 +54,7 @@ local function makeGasTankFillingIcons(fluid, straight, shift)
 	end
 	return icons
 end
-for gasName, _ in pairs(gases) do
+for gasName, _ in pairs(pressurizedFluids) do
 	local barrelRecipe = RECIPE[gasName.."-barrel"]
 	assert(barrelRecipe ~= nil, "barrel recipe for "..gasName.." not found")
 	local emptyRecipe = RECIPE["empty-"..gasName.."-barrel"]
@@ -144,7 +147,7 @@ end
 for fluidName, fuelValues in pairs(Const.fluidFuelValues) do
 	if ITEM[fluidName.."-barrel"] then
 		if fuelValues[1] ~= nil then
-			local isGas = gases[fluidName]
+			local isGas = pressurizedFluids[fluidName]
 			--local fluidNumMult = Gen.ifThenElse(isGas, GAS_TANK_FLUID_AMOUNT, BARREL_FLUID_AMOUNT)
 			ITEM[fluidName.."-barrel"].fuel_value = Gen.multWithUnits(fuelValues[1], FLUID_PER_BARREL)
 			ITEM[fluidName.."-barrel"].fuel_emissions_multiplier = fuelValues[2]

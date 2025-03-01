@@ -7,7 +7,10 @@ volcanicGas.name = "volcanic-gas"
 volcanicGas.base_color = volcanicGasColor
 volcanicGas.flow_color = volcanicGasColor
 volcanicGas.visualization_color = volcanicGasColor
-Icon.set(volcanicGas, "LSA/fluids/volcanic-gas")
+volcanicGas.icon = nil
+volcanicGas.icons = {
+	{icon = "__LegendarySpaceAge__/graphics/fluids/vapor.png", icon_size = 64, tint = {r = 0.996, g = 0.859, b = 0.31}},
+}
 volcanicGas.order = "b[new-fluid]-b[vulcanus]-0[volcanic-gas]"
 volcanicGas.max_temperature = nil
 volcanicGas.heat_capacity = nil
