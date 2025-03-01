@@ -73,3 +73,15 @@ RECIPE["po-huge-electric-fuse"].category = "electromagnetics"
 -- Reorder pylon recipe to be after substation
 RECIPE["po-huge-electric-pole"].order = "a[energy]-e[huge]"
 ]]
+
+-- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive. Rather just the pole plus a wiring. Must be in dff stage or data-updates.
+for _, size in pairs{"small", "medium", "big"} do
+	Recipe.edit{
+		recipe = "po-"..size.."-electric-fuse",
+		ingredients = {
+			{"electronic-components", 2},
+			{size.."-electric-pole", 1},
+		},
+		time = RECIPE[size.."-electric-pole"].energy_required,
+	}
+end

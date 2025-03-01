@@ -138,7 +138,7 @@ for subgroup, fluids in pairs{
 	nauvis = {"lake-water", "water", "steam", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant", "thruster-fuel", "thruster-oxidizer"},
 	petrochem = {"crude-oil", "natural-gas", "tar", "heavy-oil", "light-oil", "petroleum-gas", "dry-gas", "syngas", "diesel"},
 	vulcanus = {"lava", "volcanic-gas", "molten-iron", "molten-copper", "molten-steel", "molten-tungsten"},
-	fulgora = {"fulgoran-sludge", "electrolyte", "holmium-solution"},
+	fulgora = {"fulgoran-sludge", "holmium-solution", "electrolyte"},
 	gleba = {"slime", "geoplasm", "chitin-broth"},
 	aquilo = {"ammoniacal-solution", "fluorine", "fluoroketone-hot", "fluoroketone-cold", "lithium-brine", "fusion-plasma"},
 } do

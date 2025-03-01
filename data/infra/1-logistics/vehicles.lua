@@ -1,22 +1,34 @@
 -- Vehicles
-RECIPE["car"].ingredients = {
-	{type="item", name="engine-unit", amount=1},
-	{type="item", name="rubber", amount=4},
-	{type="item", name="frame", amount=4},
-	{type="item", name="shielding", amount=4},
+Recipe.edit{
+	recipe = "car",
+	ingredients = {
+		{"engine-unit", 1},
+		{"rubber", 5},
+		{"frame", 5},
+		{"shielding", 10},
+	},
+	time = 5,
 }
-RECIPE["tank"].ingredients = {
-	{type="item", name="engine-unit", amount=4},
-	{type="item", name="frame", amount=8},
-	{type="item", name="shielding", amount=20},
-	{type="item", name="advanced-circuit", amount=20},
+Recipe.edit{
+	recipe = "tank",
+	ingredients = {
+		{"engine-unit", 5},
+		{"frame", 10},
+		{"shielding", 50},
+		{"advanced-circuit", 50},
+	},
+	time = 10,
 }
-RECIPE["spidertron"].ingredients = {
-	{type="item", name="low-density-structure", amount=20},
-	{type="item", name="exoskeleton-equipment", amount=4},
-	{type="item", name="radar", amount=2},
-	{type="item", name="rocket-turret", amount=1},
-	{type="item", name="sensor", amount=8},
-	--{type="item", name="pentapod-egg", amount=1}, -- Makes sense lore-wise, but I'd rather not force players to build them on Gleba, it's a pain to ship them.
-	--{type="item", name="fission-reactor-equipment", amount=2}, -- Can't require this, because nuclear is now late-game.
+Recipe.edit{
+	recipe = "spidertron",
+	ingredients = {
+		{"low-density-structure", 20},
+		{"exoskeleton-equipment", 4},
+		{"radar", 2},
+		{"rocket-turret", 1},
+		{"sensor", 8},
+		-- No pentapod-egg -- Makes sense lore-wise, but I'd rather not force players to build them on Gleba, it's a pain to ship them.
+		-- No fission-reactor-equipment -- Can't require this, because nuclear is now late-game.
+	},
+	time = 20,
 }

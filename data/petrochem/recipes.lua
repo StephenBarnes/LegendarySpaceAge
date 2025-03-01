@@ -257,17 +257,22 @@ Recipe.edit{
 	},
 	time = 1,
 	resultCount = 1,
+	category = "chemistry",
 }
 
 -- Modify recipe for explosives.
-local explosivesRecipe = RECIPE["explosives"]
-explosivesRecipe.ingredients = {
-	{ type = "item",  name = "niter",         amount = 2 },
-	{ type = "fluid", name = "ammonia",       amount = 20 },
-	{ type = "fluid", name = "light-oil",     amount = 10 },
-	{ type = "fluid", name = "sulfuric-acid", amount = 10 },
+Recipe.edit{
+	recipe = "explosives",
+	ingredients = {
+		{"niter", 1},
+		{"ammonia", 10},
+		{"light-oil", 5},
+		{"sulfuric-acid", 5},
+	},
+	resultCount = 1,
+	time = 1,
+	category = "chemistry",
 }
-explosivesRecipe.results = {{type = "item", name = "explosives", amount = 2}}
 
 ------------------------------------------------------------------------
 

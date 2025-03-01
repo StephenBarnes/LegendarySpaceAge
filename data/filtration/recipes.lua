@@ -131,7 +131,10 @@ Recipe.make{
 		{"spent-filter", 1},
 		{"water", 20},
 	},
-	results = {{"filter", 1, probability = .9}},
+	results = {
+		{"filter", 1, probability = .5},
+		{"frame", 1, probability = .5},
+	},
 	enabled = false,
 	category = "crafting-with-fluid",
 	subgroup = "filtration",

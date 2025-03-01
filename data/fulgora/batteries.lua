@@ -413,7 +413,7 @@ Recipe.make{
 	recipe = "charged-battery",
 	ingredients = {"battery"},
 	results = {
-		{"charged-battery", 1, probability = 0.98},
+		{"charged-battery", 1, probability = 0.99},
 	},
 	time = 10, -- Charger uses 1MW, battery holds 10MJ.
 	category = "charging",

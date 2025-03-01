@@ -40,11 +40,11 @@ Recipe.edit{
 Recipe.edit{
 	recipe = "space-platform-foundation",
 	ingredients = {
-		{"low-density-structure", 4},
+		{"low-density-structure", 5},
 			-- Effectively 80 copper plate, 8 steel plate, 12 plastic, 4 resin.
-		{"electric-engine-unit", 1},
-		{"processing-unit", 1},
-	}
+		{"electric-engine-unit", 2},
+	},
+	time = 5,
 }
 Recipe.edit{
 	recipe = "asteroid-collector",

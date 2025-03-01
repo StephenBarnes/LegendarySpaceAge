@@ -162,6 +162,7 @@ Recipe.edit{
 	},
 	category = "crafting-with-fluid",
 	time = 1,
+	resultCount = 1,
 }
 -- Could make green science depend only on rubber and steam-power. But that's sorta guiding people in the direction of not automating circuit boards. Rather make it a prereq. That also lets us assume resin is available after green science.
 Tech.setPrereqs("logistic-science-pack", {"rubber-1", "wood-circuit-board"})
@@ -299,7 +300,7 @@ Tech.addTechDependency("fluid-handling", "engine")
 Tech.addTechDependency("elevated-rail", "planet-discovery-vulcanus")
 Tech.addTechDependency("elevated-rail", "planet-discovery-fulgora")
 Tech.removeSciencePack("production-science-pack", "elevated-rail")
-Tech.setPrereqs("elevated-rail", {"railway"})
+Tech.setPrereqs("elevated-rail", {"railway", "chemical-science-pack"})
 
 -- Fulgoran techs: EM plants -> white circuits -> superclocking -> electromagnetic-science-pack.
 Tech.setPrereqs("electromagnetic-science-pack", {"superclocked-circuits"})

@@ -90,14 +90,16 @@ Recipe.make{
 	copy = "concrete-from-molten-iron",
 	recipe = "sulfur-concrete",
 	ingredients = {
-		{"sulfur", 30},
-		{"sand", 30},
+		{"sulfur", 10},
+		{"sand", 10},
+		{"molten-iron", 50},
 	},
 	results = {
-		{"concrete", 20},
+		{"concrete", 10},
 	},
 	icons = {"concrete", "LSA/vulcanus/sulfur-cast"},
 	iconArrangement = "casting",
+	time = 10,
 }
 
 -- Create sulfur refined concrete recipe for foundries.
@@ -105,16 +107,17 @@ Recipe.make{
 	copy = "concrete-from-molten-iron",
 	recipe = "sulfur-refined-concrete",
 	ingredients = {
-		{"sulfur", 30},
-		{"sand", 30},
+		{"sulfur", 10},
+		{"sand", 10},
 		{"resin", 1},
-		{"molten-steel", 40, type="fluid"},
+		{"molten-steel", 50, type="fluid"},
 	},
 	results = {
-		{"refined-concrete", 20},
+		{"refined-concrete", 10},
 	},
 	icons = {"refined-concrete", "LSA/vulcanus/sulfur-cast"},
 	iconArrangement = "casting",
+	time = 10,
 }
 
 -- Hide old concrete foundry recipe completely.

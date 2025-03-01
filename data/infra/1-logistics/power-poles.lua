@@ -40,15 +40,3 @@ Recipe.edit{
 	},
 	time = 2,
 }
-
--- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive. Rather just the pole plus a wiring.
-for _, size in pairs{"small", "medium", "big"} do
-	Recipe.edit{
-		recipe = "po-"..size.."-electric-fuse",
-		ingredients = {
-			{"electronic-components", 2},
-			{size.."-electric-pole", 1},
-		},
-		time = RECIPE[size.."-electric-pole"].energy_required,
-	}
-end

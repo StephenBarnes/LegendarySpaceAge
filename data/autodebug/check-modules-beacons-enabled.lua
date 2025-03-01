@@ -39,12 +39,12 @@ local expectedRecipes = {
 	["pentapod-egg"] = {3, true}, -- This is the recipe for turning activated eggs into multiple dormant ones. Allowing prod and quality.
 	["activated-pentapod-egg"] = {3, true}, -- This is the recipe for activating dormant eggs with mash. Allowing prod and quality.
 
-	["clean-filter"] = {0, false}, -- Clean filter can be easily turned into spent filter, so can't enable prod or quality.
-
 	-- Filtration recipes should allow prod and quality, since you can't get the input back.
 	["filter-lake-water"] = {3, true},
 	["filter-slime"] = {3, true},
 	["filter-fulgoran-sludge"] = {3, true},
+
+	["clean-filter"] = {0, false}, -- Clean filter can be easily turned into spent filter, so can't enable prod or quality.
 
 	["coal-coking"] = {3, true}, -- Can't get coal back, so no issue enabling prod.
 	["heavy-oil-coking"] = {1, true}, -- Max prod +100% for carbon conservation.
