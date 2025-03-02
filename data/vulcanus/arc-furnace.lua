@@ -63,11 +63,22 @@ ent.graphics_set = {
 	},
 	reset_animation_when_frozen = true,
 }
+--[[ Thinking about what fluid boxes we need.
+Recipes, thinking only about fluids:
+	Metals from lava: lava + oxygen -> molten iron + molten copper
+	Molten iron/copper: oxygen -> molten metal
+	Molten steel: molten iron + oxygen -> molten steel
+	Molten tungsten: oxygen + hydrogen -> molten tungsten
+So we need either 1 or 2 input lines (gas+gas or fluid+gas or just gas) and either 1 or 2 output lines (fluid or fluid+fluid).
+I'd prefer straight passthrough lines, like for the foundry.
+So, I'll make 2 inputs going horizontally, 2 outputs going vertically. Don't need to explicitly assign fluidboxes in recipes, just order them so oxygen is at least consistent. If only one input/output, it'll use both lines automatically.
+	Checked: if it has eg 2 input fluidboxes, and only 1 is used, and source is connected to the one, but another machine is connected to the other, it'll work - the two input fluidboxes get automatically connected to each other.
+TODO implement
+]]
 -- TODO add fluid boxes and pipes, and check the .enable_working_visualisations in the foundry.
 -- Adding fluid boxes. We need at least 2 inputs and 2 outputs. Eg lava and oxygen to molten iron and molten copper. Or molten iron and oxygen to molten steel.
 ent.fluid_boxes_off_when_no_fluid_recipe = false
-local pipeCovers = pipecoverspictures()
-local emPipePictures = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures")
+--[[
 ---@return data.FluidBox
 local function makeFluidBox(productionType, flowDir, dir, pipePosition)
 	return {
@@ -92,6 +103,66 @@ ent.fluid_boxes = {
 	makeFluidBox("output", "output", defines.direction.east, {2, -1}),
 	makeFluidBox("output", "output", defines.direction.east, {2, 1}),
 }
+]]
+-- TODO consider making some of the connections output-only, since otherwise you can't tell which ones are the output eg when using tungsten heating recipe.
+local emPipePictures = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures")
+local pipeCovers = pipecoverspictures()
+---@return data.FluidBox
+local function makePassthroughFluidLine(production_type, positionList, dirList, unidirectionalIndex)
+	local pipe_connections = {}
+	for i, position in pairs(positionList) do
+		local flowDir = Gen.ifThenElse(i == unidirectionalIndex, production_type, "input-output")
+		table.insert(pipe_connections, {
+			flow_direction = flowDir,
+			direction = dirList[i],
+			position = position,
+			show_bar_in_fluid_gui = true,
+		})
+	end
+	local volume = Gen.ifThenElse(production_type == "input", 1000, 100) -- TODO investigate this - shouldn't output be higher in case of high speed and prod etc?
+	return {
+		production_type = production_type,
+		pipe_picture = emPipePictures.pipe_pictures,
+		pipe_picture_frozen = emPipePictures.pipe_pictures_frozen,
+		pipe_covers = pipeCovers,
+		always_draw_covers = false,
+		volume = volume,
+		secondary_draw_order = -1,
+		pipe_connections = pipe_connections,
+	}
+end
+local fluidIOGroup = {
+	input = {
+		{ -- North-south west
+			positionList = {{-1, -2}, {-1, 2}},
+			dirList = {NORTH, SOUTH},
+			unidirectionalIndex = 1,
+		},
+		{ -- North-south east
+			positionList = {{1, -2}, {1, 2}},
+			dirList = {NORTH, SOUTH},
+			unidirectionalIndex = 2,
+		},
+	},
+	output = {
+		{ -- East-west north
+			positionList = {{-2, -1}, {2, -1}},
+			dirList = {WEST, EAST},
+		},
+		{ -- East-west south
+			positionList = {{-2, 1}, {2, 1}},
+			dirList = {WEST, EAST},
+		},
+	},
+}
+local arcFurnaceFluidBoxes = {}
+for productionType, fluidSets in pairs(fluidIOGroup) do
+	for _, fluidSet in pairs(fluidSets) do
+		local fluidBox = makePassthroughFluidLine(productionType, fluidSet.positionList, fluidSet.dirList, fluidSet.unidirectionalIndex)
+		table.insert(arcFurnaceFluidBoxes, fluidBox)
+	end
+end
+ent.fluid_boxes = arcFurnaceFluidBoxes
 -- TODO add sounds
 -- TODO add dying_explosion
 -- TODO add corpse

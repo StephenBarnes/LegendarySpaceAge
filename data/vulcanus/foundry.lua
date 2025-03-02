@@ -58,14 +58,14 @@ local fluidIOGroup = {
 			positionList = {{1, -2}, {1, 2}},
 			dirList = {NORTH, SOUTH},
 		},
-		{ -- East-west single south, used for water.
+		{ -- East-west south, used for water.
 			positionList = {{-2, 1}, {2, 1}},
 			dirList = {WEST, EAST},
 			filter = "water",
 		},
 	},
 	output = {
-		{ -- East-west single north, used for steam.
+		{ -- East-west north, used for steam.
 			positionList = {{-2, -1}, {2, -1}},
 			dirList = {WEST, EAST},
 			filter = "steam",
