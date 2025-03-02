@@ -21,6 +21,7 @@ Recipe.edit{
 	ingredients = {
 		{"electric-engine-unit", 20},
 		{"tungsten-carbide", 20},
+		{"frame", 20},
 	},
 	category = "crafting", -- Not foundry.
 	time = 20,

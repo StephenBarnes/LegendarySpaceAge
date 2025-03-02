@@ -14,9 +14,9 @@ ent.crafting_categories = {"arc-furnace"}
 ent.crafting_speed = 1
 ent.effect_receiver.base_effect = nil -- Remove base productivity bonus.
 	-- Considered giving it a starting -50% prod. But negative productivity doesn't actually work, gets coerced to 0.
-ent.energy_source.emissions_per_minute = { pollution = 10 }
+ent.energy_source.emissions_per_minute = { pollution = 20 }
 ent.energy_source.drain = "1MW"
-ent.energy_usage = "9MW"
+ent.energy_usage = "4MW"
 ent.heating_energy = "1MW"
 ent.perceived_performance = {maximum = 1.5} -- So it doesn't look ridiculously fast.
 local animationSpeed = 0.4
@@ -67,43 +67,30 @@ ent.graphics_set = {
 -- Adding fluid boxes. We need at least 2 inputs and 2 outputs. Eg lava and oxygen to molten iron and molten copper. Or molten iron and oxygen to molten steel.
 ent.fluid_boxes_off_when_no_fluid_recipe = false
 local pipeCovers = pipecoverspictures()
-local northPipePos = {
-	{-1, -2},
-	{2, 1},
-	{-1, 2},
-	{-2, 1},
-}
-local function rotatePipePositions(n)
-	return {
-		northPipePos[(0+n) % 4 + 1],
-		northPipePos[(1+n) % 4 + 1],
-		northPipePos[(2+n) % 4 + 1],
-		northPipePos[(3+n) % 4 + 1],
-	}
-end
+local emPipePictures = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures")
 ---@return data.FluidBox
-local function makeFluidBox(productionType, flowDir, dir, pipePositions)
+local function makeFluidBox(productionType, flowDir, dir, pipePosition)
 	return {
 		production_type = productionType,
 		pipe_covers = pipeCovers,
 		volume = 1000,
-		pipe_picture = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures,
-		pipe_picture_frozen = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures_frozen,
+		pipe_picture = emPipePictures.pipe_pictures,
+		pipe_picture_frozen = emPipePictures.pipe_pictures_frozen,
 		secondary_draw_order = -1,
 		pipe_connections = {
 			{
 				flow_direction = flowDir,
 				direction = dir,
-				positions = pipePositions,
+				position = pipePosition,
 			},
 		},
 	}
 end
 ent.fluid_boxes = {
-	makeFluidBox("input", "input", defines.direction.north, northPipePos),
-	makeFluidBox("input", "input", defines.direction.east, rotatePipePositions(1)),
-	makeFluidBox("output", "output", defines.direction.south, rotatePipePositions(2)),
-	makeFluidBox("output", "output", defines.direction.west, rotatePipePositions(3)),
+	makeFluidBox("input", "input", defines.direction.west, {-2, -1}),
+	makeFluidBox("input", "input", defines.direction.west, {-2, 1}),
+	makeFluidBox("output", "output", defines.direction.east, {2, -1}),
+	makeFluidBox("output", "output", defines.direction.east, {2, 1}),
 }
 -- TODO add sounds
 -- TODO add dying_explosion
@@ -126,5 +113,7 @@ Recipe.make{
 	recipe = "arc-furnace",
 	ingredients = {"steel-plate"}, -- TODO write proper recipe
 	resultCount = 1,
-	enabled = true, -- TODO add tech
+	enabled = false,
+	category = "crafting",
 }
+Tech.addRecipeToTech("arc-furnace", "foundry", 1)

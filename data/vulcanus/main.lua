@@ -1,3 +1,14 @@
+-- Create a second tech for molten metals.
+local foundry2Tech = copy(TECH.foundry)
+foundry2Tech.name = "foundry-2"
+Icon.set(foundry2Tech, "SA/foundry")
+Icon.set(TECH.foundry, "LSA/arc-furnace/tech")
+foundry2Tech.prerequisites = {"big-mining-drill"}
+foundry2Tech.localised_description = {"technology-description.foundry-2"}
+foundry2Tech.effects = {} -- Will add effects in other files that make recipes.
+extend{foundry2Tech}
+TECH["tungsten-steel"].prerequisites = {"foundry-2"}
+
 require("data.vulcanus.worldgen")
 require("data.vulcanus.volcanic-gas")
 require("data.vulcanus.arc-furnace")
@@ -46,11 +57,32 @@ RECIPE["metallurgic-science-pack"].ingredients = {
 -- Remove surface condition for the science pack. But there's no lava anywhere else. TODO add recipe for artificial lava maybe.
 RECIPE["metallurgic-science-pack"].surface_conditions = nil
 
--- Change Vulcanus tech triggers to need larger amounts.
-TECH["foundry"].research_trigger.count = 20 -- tungsten carbide
-TECH["big-mining-drill"].research_trigger.count = 4 -- foundries
-TECH["tungsten-steel"].research_trigger.count = 4 -- big mining drills
-TECH["metallurgic-science-pack"].research_trigger.count = 20 -- tungsten steel plates
+-- Change Vulcanus tech triggers.
+TECH["foundry"].research_trigger = {
+	type = "craft-item",
+	item = "tungsten-carbide",
+	count = 20,
+}
+TECH["big-mining-drill"].research_trigger = {
+	type = "craft-item",
+	item = "arc-furnace",
+	count = 1,
+}
+TECH["foundry-2"].research_trigger = {
+	type = "craft-item",
+	item = "big-mining-drill",
+	count = 5,
+}
+TECH["tungsten-steel"].research_trigger = {
+	type = "craft-item",
+	item = "foundry",
+	count = 20,
+}
+TECH["metallurgic-science-pack"].research_trigger = {
+	type = "craft-item",
+	item = "tungsten-plate",
+	count = 100, -- TODO this should be a rate trigger.
+}
 
 -- Add tech for inverse vulcanization, to make plastic cheaper on Vulcanus.
 local inverseVulcanizationTech = copy(TECH["cliff-explosives"])

@@ -124,21 +124,29 @@ Recipe.edit{
 	time = 20,
 }
 
---[[ Foundry:
-Originally 50 tungsten carbide + 50 steel plate + 30 green circuit + 20 refined concrete + 20 lubricant.
-	That was foundry with speed 4. We're changing it to speed 1 increasing to 10.
-]]
+-- Foundry: Originally 50 tungsten carbide + 50 steel plate + 30 green circuit + 20 refined concrete + 20 lubricant.
 Recipe.edit{
 	recipe = "foundry",
 	ingredients = {
-		{"tungsten-carbide", 50},
+		{"tungsten-carbide", 20},
 		{"fluid-fitting", 10},
 		{"shielding", 10},
-		{"structure", 10},
 		{"mechanism", 10},
 	},
 	time = 10,
 	category = "crafting", -- Don't allow crafting foundries in foundry.
+}
+Recipe.edit{
+	recipe = "arc-furnace",
+	ingredients = {
+		{"tungsten-carbide", 20},
+		{"shielding", 20},
+		{"fluid-fitting", 20},
+		{"structure", 20},
+	},
+	time = 10,
+	category = "crafting",
+	clearSurfaceConditions = true,
 }
 
 --[[ Biochamber:

@@ -137,7 +137,7 @@ sulfurConcreteTech.effects = {
 	},
 }
 sulfurConcreteTech.prerequisites = {
-	"foundry",
+	"foundry-2",
 }
 sulfurConcreteTech.icon = nil
 sulfurConcreteTech.icons = {

@@ -115,6 +115,9 @@ Tech.addRecipeToTech("lubricant", "electric-engine", 1)
 Tech.addTechDependency("rubber-2", "planet-discovery-vulcanus")
 Tech.addTechDependency("rubber-2", "planet-discovery-fulgora")
 
+-- Fulgora needs electric mining drill, bc burner miners don't work.
+Tech.addTechDependency("electric-mining-drill", "planet-discovery-fulgora")
+
 -- Electric mining drill shouldn't be affected by tech multiplier since it's very early-game, making it 250 science instead of 25 is just annoying because it's not high enough to justify setting up with burner miners.
 TECH["electric-mining-drill"].ignore_tech_cost_multiplier = true
 

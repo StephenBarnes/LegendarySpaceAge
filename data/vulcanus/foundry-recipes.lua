@@ -1,4 +1,4 @@
---[[ This file modifies and creates recipes for the foundry. Foundries are used for processing molten metals.
+--[[ This file modifies and creates recipes for the foundry. Foundries are used for casting molten metals into solid items. They're NOT used for making molten metals, that's been moved to the arc furnace.
 Ratios:
 	5 ore = 1 ingot = 1 matte = 5 plates/parts/rods = 10 cables.
 	5 iron ingot = 1 steel ingot = 5 steel plates.
@@ -7,49 +7,22 @@ Old ratios were:
 	1 ore = 10 molten metal = 1 plate (copper and iron)
 	30 molten iron = 1 steel plate
 
-General rules for recipe times:
-	Recipes for making molten metal (from ore, lava, or other molten metals) deal with 100 molten metal per second.
-	Casting recipes deal with 10 molten metal per second, turned into 1 plate per second.
-	(All of these get 10x'd by foundry bonus.)
-
-Basic process from lava:
-	100 lava + 1 calcite + 1 carbon --1s--> 50 molten iron + 1 copper matte + 1 stone
-		(It might be more realistic and easy to have separate iron and copper recipes. But tying them together like this means the player will get too many of one, and have to set up a system to balance them by dumping excess into the lava.)
-	Old recipes were:
-		1 calcite + 500 lava --4s--> 10 stone + 250 molten iron
-		1 calcite + 500 lava --4s--> 15 stone + 250 molten copper
-		These were 16s, but foundry has speed 4, so 4s.
-Copper matte can be directly turned into molten copper:
-	1 copper matte --1s--> 50 molten copper + 1 sulfur
-
-Turning ores into the same metal intermediates, in a foundry (not used on Vulcanus):
-	10 iron ore + 1 calcite + 2 carbon --1s--> 100 molten iron + 10 stone
-	(Copper ore to matte actually has to be done in a furnace. No foundry recipe, since it's not molten.)
-	Old recipes were:
-		50 iron ore + 1 calcite --8s--> 500 molten iron
-		50 copper ore + 1 calcite --8s--> 500 molten copper
-		These were 32s, but foundry has speed 4, so 8s.
+Recipe times: Casting recipes deal with 100 molten metal per second, turned into 10 plate per second.
 
 Turning molten metals into items, in a foundry:
 	10 molten iron + 1 water -> 1 iron plate + 10 steam
 	The water ingredient and steam byproduct represent water cooling; this adds substantial fluid management complexity to all of the foundries casting metal items.
 	Similar recipes for copper plates, iron rods, iron machine parts, copper cables.
 	Casting iron items makes them start 20% spoiled (from rust).
-
-Molten steel recipes:
-	100 molten iron + 1 calcite --1s--> 20 molten steel + 1 stone
-	10 molten steel + 1 water --1s--> 1 steel plate + 10 steam
-			Originally 30 molten iron -> 1 steel plate.
+	Casting steel:
+		10 molten steel + 1 water --1s--> 1 steel plate + 10 steam
+		Originally 30 molten iron -> 1 steel plate.
 
 Tungsten recipes:
 	You need tungsten carbide to make first foundries and big miners. So there needs to be a recipe to make tungsten carbide without using foundries.
 		In chem plant: 2 tungsten ore + 5 carbon + 50 sulfuric acid --10s--> 1 tungsten carbide
 		This is very slow and costs a lot of carbon, so there's reason to switch to the more efficient foundry recipes below.
-	Making molten tungsten:
-		1 carbon + 10 tungsten ore + 10 sulfuric acid --1s--> 100 molten tungsten (1500C) + 1 stone
-		This represents acid leaching, high-temperature reduction, and foundry smelting. In gameplay terms, tungsten production is limited by carbon and water (for sulfuric acid), both of which are scarce.
-	Then you can heat molten tungsten from 1500C to 2000C in a foundry:
-		100 molten tungsten (any temp) --1s--> 100 molten tungsten (2000C)
+	Making and heating molten tungsten - see arc furnace file.
 	Then you use molten tungsten to cast carbide or plate, by mixing specific temperatures:
 		20 molten tungsten (1600-1800C) + 1 carbon + 1 water --1s--> 2 tungsten carbide + 10 steam
 		50 molten tungsten (1800-1900C) + 10 molten steel + 5 water --5s--> 5 tungsten plate + 50 steam
@@ -59,99 +32,6 @@ Tungsten recipes:
 		In assembler only: 2 tungsten ore + 1 carbon + 10 sulfuric acid -> 1 tungsten carbide (1 second)
 		In foundry: 4 tungsten ore + 10 molten iron -> 1 tungsten plate (10 seconds)
 ]]
-
--- Make recipe for metals-from-lava.
-Recipe.make{
-	copy = "molten-iron-from-lava",
-	recipe = "metals-from-lava",
-	ingredients = {
-		{"lava", 100},
-		{"calcite", 1},
-		{"carbon", 1},
-	},
-	results = {
-		{"molten-iron", 50},
-		{"copper-matte", 1},
-		{"stone", 1},
-	},
-	icon = "LSA/vulcanus/metals-from-lava",
-	enabled = false,
-	allow_decomposition = false,
-	allow_as_intermediate = true,
-	time = 1,
-}
-Tech.addRecipeToTech("metals-from-lava", "foundry", 3)
-
--- Hide old recipes for molten metals from lava, remove from tech, add new recipe to tech.
-Recipe.hide("molten-iron-from-lava")
-Recipe.hide("molten-copper-from-lava")
-Tech.removeRecipesFromTechs({"molten-iron-from-lava", "molten-copper-from-lava"}, {"foundry"})
-Tech.addRecipeToTech("metals-from-lava", "foundry", 3)
-
--- Make molten iron use new icon.
-Icon.set(FLUID["molten-iron"], "LSA/vulcanus/molten-iron")
-Icon.clear(RECIPE["molten-iron"])
-
--- Edit recipe for copper-ore-to-molten-copper to instead use copper matte.
-Recipe.edit{
-	recipe = "molten-copper",
-	ingredients = {
-		{"copper-matte", 1},
-	},
-	results = {
-		{"molten-copper", 50},
-		{"sulfur", 1},
-	},
-	time = 1,
-}
-
--- Edit recipe for iron-ore-to-molten-iron.
-Recipe.edit{
-	recipe = "molten-iron",
-	ingredients = {
-		{"iron-ore", 10},
-		{"calcite", 1},
-		{"carbon", 2},
-	},
-	results = {
-		{"molten-iron", 100},
-		{"stone", 10},
-	},
-	time = 1,
-	clearIcons = true, -- So that it uses the icon for the fluid, which I changed above to distinguish from molten steel better.
-}
-
--- Make molten steel fluid.
-local moltenSteelFluid = copy(FLUID["molten-iron"])
-moltenSteelFluid.name = "molten-steel"
-Icon.set(moltenSteelFluid, "LSA/vulcanus/molten-steel")
-moltenSteelFluid.order = "b[new-fluid]-b[vulcanus]-c[molten-steel]"
-moltenSteelFluid.base_color = {.3, .4, .4}
-moltenSteelFluid.flow_color = {.5, .7, .7}
-moltenSteelFluid.visualization_color = {.2, 1, 1} -- Cyan for the diagram-like lines drawn on pipes.
-extend{moltenSteelFluid}
-
--- Make recipe for molten steel.
-Recipe.make{
-	copy = "molten-iron",
-	recipe = "molten-steel-making",
-		-- Not naming it the same as the fluid, so recipe shows up with the rest of them.
-		-- Seems the way it works is, recipe can show up in a different subgroup as the fluid if it either has multiple products, or a different name from the fluid.
-	ingredients = {
-		{"molten-iron", 100},
-		{"calcite", 1},
-	},
-	results = {
-		{"molten-steel", 20},
-		{"stone", 1},
-	},
-	time = 1,
-	localised_name = {"fluid-name.molten-steel"},
-	main_product = "molten-steel",
-	order = "a[melting]-d[molten-steel]",
-	icon = "LSA/vulcanus/molten-steel",
-}
-Tech.addRecipeToTech("molten-steel-making", "foundry", 7)
 
 -- Adjust recipes for casting molten metals into items.
 -- Balanced so that they have the same molten metal costs, and all of them consume ~20 molten metal and 1 water in 2 seconds.
@@ -253,6 +133,8 @@ Recipe.edit{
 	icons = {"low-density-structure", "molten-copper", "molten-steel"},
 	iconArrangement = "casting",
 }
+Tech.removeRecipeFromTech("casting-low-density-structure", "foundry")
+Tech.addRecipeToTech("casting-low-density-structure", "foundry-2")
 
 Recipe.edit{
 	recipe = "casting-copper-cable",
@@ -311,36 +193,6 @@ Recipe.edit{
 	time = 10,
 }
 
--- Create molten tungsten fluid.
-local moltenTungstenFluid = copy(FLUID["molten-iron"])
-moltenTungstenFluid.name = "molten-tungsten"
-Icon.set(moltenTungstenFluid, "LSA/vulcanus/molten-tungsten")
-moltenTungstenFluid.order = "b[new-fluid]-b[vulcanus]-d[molten-tungsten]"
-moltenTungstenFluid.base_color = {.259, .239, .349} -- Measured on ore
-moltenTungstenFluid.flow_color = {.635, .584, .741}
-moltenTungstenFluid.visualization_color = {.478, .191, .682} -- Measured on ore and boosted saturation.
-extend{moltenTungstenFluid}
-
--- Create recipe for molten tungsten.
-Recipe.make{
-	copy = "molten-iron",
-	recipe = "molten-tungsten",
-	ingredients = {
-		{"tungsten-ore", 10},
-		{"carbon", 1},
-		{"sulfuric-acid", 10},
-	},
-	results = {
-		{"molten-tungsten", 100, temperature = 1500},
-		{"stone", 1},
-	},
-	main_product = "molten-tungsten",
-	order = "a[melting]-d[molten-tungsten]",
-	time = 1,
-	clearIcons = true,
-}
-Tech.addRecipeToTech("molten-tungsten", "tungsten-steel", 1)
-
 -- Make foundry recipes for tungsten carbide and tungsten steel. And recipe for heating molten tungsten.
 Recipe.make{
 	copy = "tungsten-plate",
@@ -380,37 +232,13 @@ Recipe.make{
 }
 Tech.addRecipeToTech("tungsten-steel-from-molten", "tungsten-steel")
 
--- Create recipe for heating molten tungsten.
-Recipe.make{
-	copy = "molten-iron",
-	recipe = "tungsten-heating",
-	ingredients = {
-		{"molten-tungsten", 100, ignored_by_stats=100},
-	},
-	results = {
-		{"molten-tungsten", 100, temperature = 2000, ignored_by_stats=100, ignored_by_productivity=100},
-	},
-	main_product = "molten-tungsten",
-	order = "a[melting]-d[tungsten-heating]",
-	time = 1,
-	icon = "LSA/vulcanus/molten-tungsten-heating",
-	show_amount_in_title = false,
-	hide_from_stats = true,
-	allow_productivity = false,
-	allow_quality = false,
-}
-Tech.addRecipeToTech("tungsten-heating", "tungsten-steel")
-
 -- Hide default tungsten-steel recipe.
 Recipe.hide("tungsten-plate")
 Tech.removeRecipeFromTech("tungsten-plate", "tungsten-steel")
 
--- TODO Create a recipe for casting stone bricks from cement mix? Or maybe sulfur.
-
--- Reorder some of the unlocks in the foundry tech.
-Tech.removeRecipesFromTechs({"concrete-from-molten-iron", "casting-low-density-structure"}, {"foundry"})
-Tech.addRecipeToTech("casting-low-density-structure", "foundry")
--- Foundry concrete recipe will be added to new sulfur concrete tech, in concrete file.
+-- Remove default concrete recipe.
+Recipe.hide("concrete-from-molten-iron")
+Tech.removeRecipeFromTech("concrete-from-molten-iron", "foundry")
 
 -- Adjust stats of foundry.
 local foundry = ASSEMBLER["foundry"]
@@ -418,5 +246,5 @@ foundry.crafting_speed = 1 -- Instead of 4, set it to base 1, since it doesn't s
 foundry.effect_receiver.base_effect = nil -- Remove base productivity bonus.
 	-- Considered giving it a starting -50% prod. But negative productivity doesn't actually work, gets coerced to 0.
 foundry.energy_source.emissions_per_minute = { pollution = 10 }
-foundry.energy_source.drain = nil
-foundry.energy_usage = "1MW"
+foundry.energy_source.drain = "200kW"
+foundry.energy_usage = "800kW"

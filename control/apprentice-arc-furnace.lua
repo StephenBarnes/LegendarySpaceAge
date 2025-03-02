@@ -14,17 +14,17 @@ local mod_prefix = "apprentice-arc-furnace-"
 local APPLIES_TO_ENT = "arc-furnace"
 local function get_bonuses(products) -- Percent bonuses given number of products finished.
 	return {
-		speed = math.min(products * 1, 900),
-		productivity = products * 0.1,
+		speed = math.min(products * 10, 900),
+		productivity = products * 1,
 		consumption = 0,
 		pollution = 0,
 		quality = 0,
 	}
 end
-local LOSSES_PER_TICK = (5/3)
-	-- Number of consecutive-products lost for each tick of inactivity. Setting this to 1/3 means you lose 20 per second. Setting to 5/3 loses 100 per second.
+local LOSSES_PER_TICK = (10/60)
+	-- Number of consecutive-products lost for each tick of inactivity. Setting this to 20/60 means you lose 20 per second. Setting to 100/60 loses 100 per second.
 	-- Note that when arc furnace is inactive it looks like all bonuses were lost instantly. It gets shown accurately when arc furnace starts working again.
-local MAX_PRODUCTS = 1000 -- Maximum number of products finished in a row before we stop counting.
+local MAX_PRODUCTS = 100 -- Maximum number of products finished in a row before we stop counting.
 ------------------------------------------------------------------------
 
 
