@@ -117,3 +117,6 @@ Recipe.make{
 	category = "crafting",
 }
 Tech.addRecipeToTech("arc-furnace", "foundry", 1)
+
+
+-- TODO add better fluidboxes to the arc furnace. Preferably passthrough, so you can run multiple arc furnaces from lava.

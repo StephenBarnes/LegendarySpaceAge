@@ -33,6 +33,8 @@ Tungsten recipes:
 		In foundry: 4 tungsten ore + 10 molten iron -> 1 tungsten plate (10 seconds)
 ]]
 
+-- Re fluidbox indexes, we don't need to assign anything explicitly, since we want some output fluids to take multiple fluidboxes.
+
 -- Adjust recipes for casting molten metals into items.
 -- Balanced so that they have the same molten metal costs, and all of them consume ~20 molten metal and 1 water in 2 seconds.
 Recipe.edit{
@@ -240,11 +242,93 @@ Tech.removeRecipeFromTech("tungsten-plate", "tungsten-steel")
 Recipe.hide("concrete-from-molten-iron")
 Tech.removeRecipeFromTech("concrete-from-molten-iron", "foundry")
 
--- Adjust stats of foundry.
-local foundry = ASSEMBLER["foundry"]
-foundry.crafting_speed = 1 -- Instead of 4, set it to base 1, since it doesn't share recipes with anything else anyway.
-foundry.effect_receiver.base_effect = nil -- Remove base productivity bonus.
-	-- Considered giving it a starting -50% prod. But negative productivity doesn't actually work, gets coerced to 0.
-foundry.energy_source.emissions_per_minute = { pollution = 10 }
-foundry.energy_source.drain = "200kW"
-foundry.energy_usage = "800kW"
+-- Forbid holmium plates in foundry. Doesn't really give any benefit since foundries no longer have a prod bonus.
+RECIPE["holmium-plate"].category = "crafting-with-fluid"
+
+-- Change the science pack to use lava.
+Recipe.edit{
+	recipe = "metallurgic-science-pack",
+	ingredients = {
+		{"tungsten-plate", 1},
+		{"tungsten-carbide", 1},
+		{"lava", 200},
+		{"water", 1},
+	},
+	results = {
+		{"metallurgic-science-pack", 1},
+	},
+	clearSurfaceConditions = true, -- Remove surface condition for the science pack. But there's no lava anywhere else. TODO add recipe for artificial lava maybe?
+	category = "metallurgy",
+}
+
+-- Hide old concrete foundry recipe completely.
+Recipe.hide("concrete-from-molten-iron")
+
+-- Create sulfur concrete recipes.
+Recipe.make{
+	copy = "concrete-from-molten-iron",
+	recipe = "sulfur-concrete",
+	ingredients = {
+		{"sulfur", 10},
+		{"sand", 10},
+		{"molten-iron", 50},
+		{"water", 1},
+	},
+	results = {
+		{"concrete", 10},
+		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+	},
+	icons = {"concrete", "LSA/vulcanus/sulfur-cast"},
+	iconArrangement = "casting",
+	time = 10,
+}
+Recipe.make{
+	copy = "concrete-from-molten-iron",
+	recipe = "sulfur-refined-concrete",
+	ingredients = {
+		{"sulfur", 10},
+		{"sand", 10},
+		{"resin", 1},
+		{"molten-steel", 50, type="fluid"},
+		{"water", 1},
+	},
+	results = {
+		{"refined-concrete", 10},
+		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+	},
+	icons = {"refined-concrete", "LSA/vulcanus/sulfur-cast"},
+	iconArrangement = "casting",
+	time = 10,
+}
+
+-- Create sulfur concrete tech.
+local sulfurConcreteTech = copy(TECH["concrete"])
+sulfurConcreteTech.name = "sulfur-concrete"
+sulfurConcreteTech.effects = {
+	{
+		type = "unlock-recipe",
+		recipe = "sulfur-concrete",
+	},
+	{
+		type = "unlock-recipe",
+		recipe = "sulfur-refined-concrete",
+	},
+}
+sulfurConcreteTech.prerequisites = {
+	"foundry-2",
+}
+sulfurConcreteTech.icon = nil
+sulfurConcreteTech.icons = {
+	{icon = "__base__/graphics/technology/concrete.png", icon_size = 256, scale = 1},
+	{icon = "__base__/graphics/technology/sulfur-processing.png", icon_size = 256, scale = 0.7, shift = {0, -40}},
+}
+sulfurConcreteTech.unit = {
+	count = 250,
+	time = 30,
+	ingredients = {
+		{"automation-science-pack", 1},
+		{"logistic-science-pack", 1},
+		{"chemical-science-pack", 1},
+	},
+}
+extend{sulfurConcreteTech}

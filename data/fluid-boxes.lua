@@ -61,21 +61,6 @@ for _, fluidBox in pairs(ASSEMBLER["assembling-machine-1"].fluid_boxes) do
 	fluidBox.pipe_picture = GreyPipes.pipeBlocks()
 end
 
--- Add extra fluid input to the foundry, needed for some recipes.
-local foundry = ASSEMBLER["foundry"]
-local newFluidBoxF1 = copy(foundry.fluid_boxes[1])
-newFluidBoxF1.pipe_connections = {
-	{position = {-2, 1}, direction = defines.direction.west, flow_direction = "input"},
-}
-newFluidBoxF1.pipe_picture = GreyPipes.pipeBlocks()
-foundry.fluid_boxes = {
-	foundry.fluid_boxes[1], -- input
-	foundry.fluid_boxes[2], -- input
-	newFluidBoxF1, -- input
-	foundry.fluid_boxes[3], -- output
-	foundry.fluid_boxes[4], -- output
-}
-
 -- Add fluid inputs to the rocket silo, needed for assembling rocket parts.
 local rocketSilo = RAW["rocket-silo"]["rocket-silo"]
 rocketSilo.fluid_boxes_off_when_no_fluid_recipe = false

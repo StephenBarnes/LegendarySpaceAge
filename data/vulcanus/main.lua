@@ -13,6 +13,7 @@ require("data.vulcanus.worldgen")
 require("data.vulcanus.volcanic-gas")
 require("data.vulcanus.arc-furnace")
 require("data.vulcanus.arc-furnace-recipes")
+require("data.vulcanus.foundry")
 require("data.vulcanus.foundry-recipes")
 require("data.vulcanus.apprentice-arc-furnace")
 require("data.vulcanus.tungsten-axe")
@@ -47,15 +48,6 @@ lavaWaterHeatingRecipe.allow_productivity = false
 Icon.set(lavaWaterHeatingRecipe, {"steam", "lava"})
 extend({lavaWaterHeatingRecipe})
 Tech.addRecipeToTech("lava-water-heating", "planet-discovery-vulcanus")
-
--- Change the science pack to use lava.
-RECIPE["metallurgic-science-pack"].ingredients = {
-	{type = "item", name = "tungsten-carbide", amount = 3},
-	{type = "item", name = "tungsten-plate", amount = 2},
-	{type = "fluid", name = "lava", amount = 200},
-}
--- Remove surface condition for the science pack. But there's no lava anywhere else. TODO add recipe for artificial lava maybe.
-RECIPE["metallurgic-science-pack"].surface_conditions = nil
 
 -- Change Vulcanus tech triggers.
 TECH["foundry"].research_trigger = {
