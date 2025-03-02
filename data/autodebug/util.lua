@@ -16,7 +16,7 @@ end
 
 Export.allPlanets = {}
 for planetName, planet in pairs(RAW.planet) do
-	if not planet.hidden_in_factoriopedia and not planet.hidden then -- This check catches special surfaces like "apprentice-foundry" and "thruster-control-behavior".
+	if not planet.hidden_in_factoriopedia and not planet.hidden then -- This check catches special surfaces like "apprentice-arc-furnace" and "thruster-control-behavior".
 		Export.allPlanets[planetName] = true
 	end
 end

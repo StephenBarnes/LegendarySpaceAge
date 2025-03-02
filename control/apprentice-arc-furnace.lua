@@ -1,17 +1,17 @@
---[[ This file makes foundries get an increasing speed and prod bonus as they continue to run, which then drops off when they're idle.
+--[[ This file makes arc furnaces get an increasing speed and prod bonus as they continue to run, which then drops off when they're idle.
 Almost all the code here is copied from Apprentice Assembler mod by Quezler: https://mods.factorio.com/mod/apprentice-assembler
-I decided to copy code here and edit it because I wanted it to apply to existing foundry (instead of a new assembler) and I want to customize the numbers for bonuses.
+I decided to copy code here and edit it because I wanted it to apply to existing foundry (instead of a new assembler) and then later changed my mind to rather apply it to a different new building (arc furnace), and I want to customize the numbers for bonuses.
 Explanation of how it works:
 	The beacon-interface mod (dependency) has beacons with adjustable bonuses. This is implemented by giving it like 400 module slots then using modules with power-of-two benefits. For example to get +50% prod (110010 in binary), the beacon gets 3 modules with +32% prod, +16% prod, +2% prod.
-	This mod (apprentice-assembler) creates one of those adjustable beacons inside the apprentice assembler (now foundry), and sets bonuses based on how many products have been finished.
-	To count when products are finished or machine is idle, the assembler (foundry) has circuit connections to inserters on a hidden surface. Inserters get enabled/disabled using circuit conditions looking at the assembler's working state.
+	This mod (apprentice-assembler) creates one of those adjustable beacons inside the apprentice assembler (now arc furnace), and sets bonuses based on how many products have been finished.
+	To count when products are finished or machine is idle, the assembler (arc furnace) has circuit connections to inserters on a hidden surface. Inserters get enabled/disabled using circuit conditions looking at the assembler's working state.
 	When the inserters are enabled, they pick up wood "offering" items on the hidden surface, which causes the item-on-ground entity to die, which triggers a callback in this mod to update products-finished count.
 ]]
 
 -- ADDED
-local mod_name = "apprentice-foundry"
-local mod_prefix = "apprentice-foundry-"
-local APPLIES_TO_ENT = "foundry"
+local mod_name = "apprentice-arc-furnace"
+local mod_prefix = "apprentice-arc-furnace-"
+local APPLIES_TO_ENT = "arc-furnace"
 local function get_bonuses(products) -- Percent bonuses given number of products finished.
 	return {
 		speed = math.min(products * 1, 900),
@@ -23,7 +23,7 @@ local function get_bonuses(products) -- Percent bonuses given number of products
 end
 local LOSSES_PER_TICK = (5/3)
 	-- Number of consecutive-products lost for each tick of inactivity. Setting this to 1/3 means you lose 20 per second. Setting to 5/3 loses 100 per second.
-	-- Note that when foundry is inactive it looks like all bonuses were lost instantly. It gets shown accurately when foundry starts working again.
+	-- Note that when arc furnace is inactive it looks like all bonuses were lost instantly. It gets shown accurately when arc furnace starts working again.
 local MAX_PRODUCTS = 1000 -- Maximum number of products finished in a row before we stop counting.
 ------------------------------------------------------------------------
 

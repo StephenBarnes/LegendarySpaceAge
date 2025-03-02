@@ -156,7 +156,6 @@ ent.graphics_set = {
 	},
 	reset_animation_when_frozen = true,
 }
--- TODO sounds
 ent.working_sound = {
 	main_sounds = {
 		{

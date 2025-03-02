@@ -411,3 +411,12 @@ Tech.removeRecipeFromTech("tungsten-plate", "tungsten-steel")
 Tech.removeRecipesFromTechs({"concrete-from-molten-iron", "casting-low-density-structure"}, {"foundry"})
 Tech.addRecipeToTech("casting-low-density-structure", "foundry")
 -- Foundry concrete recipe will be added to new sulfur concrete tech, in concrete file.
+
+-- Adjust stats of foundry.
+local foundry = ASSEMBLER["foundry"]
+foundry.crafting_speed = 1 -- Instead of 4, set it to base 1, since it doesn't share recipes with anything else anyway.
+foundry.effect_receiver.base_effect = nil -- Remove base productivity bonus.
+	-- Considered giving it a starting -50% prod. But negative productivity doesn't actually work, gets coerced to 0.
+foundry.energy_source.emissions_per_minute = { pollution = 10 }
+foundry.energy_source.drain = nil
+foundry.energy_usage = "1MW"

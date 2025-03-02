@@ -2,7 +2,7 @@ local startingEquipment = require("control.starting-items")
 local natGasWells = require("control.natural-gas-wells")
 local notifyIncorrectMapgenPreset = require("control.notify-incorrect-mapgen-preset")
 local deepDrillRecipe = require("control.deep-drill-recipe")
-local apprenticeFoundry = require("control.apprentice-foundry")
+local apprenticeFoundry = require("control.apprentice-arc-furnace")
 local qualityPowerScaling = require("control.quality-power-scaling")
 
 local techRateTriggers = require("control.tech-rate-triggers")

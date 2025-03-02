@@ -1,7 +1,9 @@
 require("data.vulcanus.worldgen")
 require("data.vulcanus.volcanic-gas")
+require("data.vulcanus.arc-furnace")
+require("data.vulcanus.arc-furnace-recipes")
 require("data.vulcanus.foundry-recipes")
-require("data.vulcanus.apprentice-foundry")
+require("data.vulcanus.apprentice-arc-furnace")
 require("data.vulcanus.tungsten-axe")
 
 -- Move steam-to-water to Vulcanus tech, not calcite processing.
