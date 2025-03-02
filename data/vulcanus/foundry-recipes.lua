@@ -245,22 +245,6 @@ Tech.removeRecipeFromTech("concrete-from-molten-iron", "foundry")
 -- Forbid holmium plates in foundry. Doesn't really give any benefit since foundries no longer have a prod bonus.
 RECIPE["holmium-plate"].category = "crafting-with-fluid"
 
--- Change the science pack to use lava.
-Recipe.edit{
-	recipe = "metallurgic-science-pack",
-	ingredients = {
-		{"tungsten-plate", 1},
-		{"tungsten-carbide", 1},
-		{"lava", 200},
-		{"water", 1},
-	},
-	results = {
-		{"metallurgic-science-pack", 1},
-	},
-	clearSurfaceConditions = true, -- Remove surface condition for the science pack. But there's no lava anywhere else. TODO add recipe for artificial lava maybe?
-	category = "metallurgy",
-}
-
 -- Hide old concrete foundry recipe completely.
 Recipe.hide("concrete-from-molten-iron")
 

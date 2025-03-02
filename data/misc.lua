@@ -53,3 +53,11 @@ character.ticks_to_keep_aiming_direction = 50 -- default 100
 character.running_speed = .2 -- default 0.15
 --character.distance_per_frame = .13 -- default 0.13, seems to be for calculating how fast to play animation frames (along with eg speed bonuses from exoskeletons), so shouldn't be changed.
 -- TODO maybe add some techs for running speed bonuses? Or can we have eg techs for spidertron running speed, car driving speed, etc.?
+
+-- Adjust pumping rate of offshore pump.
+local newSpeed = 16.67 --1000/60 -- Was 1200/60.
+RAW["offshore-pump"]["offshore-pump"].pumping_speed = newSpeed
+if RAW["offshore-pump"]["lava-pump"] ~= nil then
+	-- If it's defined, change it there too. If it's not defined, lava pump will inherit the change from the above.
+	RAW["offshore-pump"]["lava-pump"].pumping_speed = newSpeed
+end

@@ -73,45 +73,20 @@ So we need either 1 or 2 input lines (gas+gas or fluid+gas or just gas) and eith
 I'd prefer straight passthrough lines, like for the foundry.
 So, I'll make 2 inputs going horizontally, 2 outputs going vertically. Don't need to explicitly assign fluidboxes in recipes, just order them so oxygen is at least consistent. If only one input/output, it'll use both lines automatically.
 	Checked: if it has eg 2 input fluidboxes, and only 1 is used, and source is connected to the one, but another machine is connected to the other, it'll work - the two input fluidboxes get automatically connected to each other.
-TODO implement
+
+Note we can't have input fluidboxes also being input-output, because that lets you circumvent the no-lava-in-pipes restriction - can connect pipes to those outputs.
+Also because we have the tungsten heating recipe, we want inputs and outputs to be distinguishable.
+Actually, we can have input fluidboxes also being input-output, but just set fluidbox_index for lava ingredients so it's input-only.
+	Except, that doesn't work even if it looks like it should. Fluid just won't go into the unidirectional input, sometimes.
 ]]
--- TODO add fluid boxes and pipes, and check the .enable_working_visualisations in the foundry.
--- Adding fluid boxes. We need at least 2 inputs and 2 outputs. Eg lava and oxygen to molten iron and molten copper. Or molten iron and oxygen to molten steel.
 ent.fluid_boxes_off_when_no_fluid_recipe = false
---[[
----@return data.FluidBox
-local function makeFluidBox(productionType, flowDir, dir, pipePosition)
-	return {
-		production_type = productionType,
-		pipe_covers = pipeCovers,
-		volume = 1000,
-		pipe_picture = emPipePictures.pipe_pictures,
-		pipe_picture_frozen = emPipePictures.pipe_pictures_frozen,
-		secondary_draw_order = -1,
-		pipe_connections = {
-			{
-				flow_direction = flowDir,
-				direction = dir,
-				position = pipePosition,
-			},
-		},
-	}
-end
-ent.fluid_boxes = {
-	makeFluidBox("input", "input", defines.direction.west, {-2, -1}),
-	makeFluidBox("input", "input", defines.direction.west, {-2, 1}),
-	makeFluidBox("output", "output", defines.direction.east, {2, -1}),
-	makeFluidBox("output", "output", defines.direction.east, {2, 1}),
-}
-]]
--- TODO consider making some of the connections output-only, since otherwise you can't tell which ones are the output eg when using tungsten heating recipe.
 local emPipePictures = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures")
 local pipeCovers = pipecoverspictures()
 ---@return data.FluidBox
-local function makePassthroughFluidLine(production_type, positionList, dirList, unidirectionalIndex)
+local function makePassthroughFluidLine(production_type, positionList, dirList, bidirectional)
 	local pipe_connections = {}
+	local flowDir = Gen.ifThenElse(bidirectional, "input-output", production_type)
 	for i, position in pairs(positionList) do
-		local flowDir = Gen.ifThenElse(i == unidirectionalIndex, production_type, "input-output")
 		table.insert(pipe_connections, {
 			flow_direction = flowDir,
 			direction = dirList[i],
@@ -136,29 +111,31 @@ local fluidIOGroup = {
 		{ -- North-south west
 			positionList = {{-1, -2}, {-1, 2}},
 			dirList = {NORTH, SOUTH},
-			unidirectionalIndex = 1,
+			bidirectional = false,
 		},
 		{ -- North-south east
 			positionList = {{1, -2}, {1, 2}},
 			dirList = {NORTH, SOUTH},
-			unidirectionalIndex = 2,
+			bidirectional = false,
 		},
 	},
 	output = {
 		{ -- East-west north
 			positionList = {{-2, -1}, {2, -1}},
 			dirList = {WEST, EAST},
+			bidirectional = true,
 		},
 		{ -- East-west south
 			positionList = {{-2, 1}, {2, 1}},
 			dirList = {WEST, EAST},
+			bidirectional = true,
 		},
 	},
 }
 local arcFurnaceFluidBoxes = {}
 for productionType, fluidSets in pairs(fluidIOGroup) do
 	for _, fluidSet in pairs(fluidSets) do
-		local fluidBox = makePassthroughFluidLine(productionType, fluidSet.positionList, fluidSet.dirList, fluidSet.unidirectionalIndex)
+		local fluidBox = makePassthroughFluidLine(productionType, fluidSet.positionList, fluidSet.dirList, fluidSet.bidirectional)
 		table.insert(arcFurnaceFluidBoxes, fluidBox)
 	end
 end

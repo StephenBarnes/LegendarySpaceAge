@@ -37,10 +37,8 @@ handCrankRecipe.order = "a"
 extend({handCrankRecipe})
 
 -- Make the offshore pump require electricity, since we have a way to generate electricity before offshore pump now.
-for _, name in pairs{"offshore-pump", "lava-pump"} do
-	RAW["offshore-pump"][name].energy_usage = "30kW"
-	RAW["offshore-pump"][name].energy_source = ASSEMBLER["assembling-machine-1"].energy_source
-end
+RAW["offshore-pump"]["offshore-pump"].energy_usage = "50kW"
+RAW["offshore-pump"]["offshore-pump"].energy_source = copy(ASSEMBLER["assembling-machine-1"].energy_source)
 
 -- Move to start of row.
 ITEM["er-hcg"].order = "a1"

@@ -59,6 +59,7 @@ require("data.intermediate-factors.main")
 require("data.fuel")
 require("data.space.main")
 require("data.tech-rate-triggers")
+require("data.no-lava-in-pipes")
 
 -- Files that adjust protos
 require("data.circuits-modules.remove-modules")

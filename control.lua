@@ -4,6 +4,7 @@ local notifyIncorrectMapgenPreset = require("control.notify-incorrect-mapgen-pre
 local deepDrillRecipe = require("control.deep-drill-recipe")
 local apprenticeFoundry = require("control.apprentice-arc-furnace")
 local qualityPowerScaling = require("control.quality-power-scaling")
+local noLavaInPipes = require("control.no-lava-in-pipes")
 
 local techRateTriggers = require("control.tech-rate-triggers")
 script.on_nth_tick(60 * 10, techRateTriggers.onNthTick)
@@ -30,6 +31,7 @@ for _, event in ipairs({
 		deepDrillRecipe.onBuilt(e)
 		apprenticeFoundry.on_created_entity(e)
 		qualityPowerScaling.onBuilt(e)
+		noLavaInPipes.onBuilt(e)
 	end)
 end
 

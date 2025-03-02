@@ -197,3 +197,18 @@ Recipe.make{
 	allow_quality = false,
 }
 Tech.addRecipeToTech("tungsten-heating", "tungsten-steel")
+
+-- Change the science pack to be made in arc furnace, using lava.
+Recipe.edit{
+	recipe = "metallurgic-science-pack",
+	ingredients = {
+		{"tungsten-plate", 1},
+		{"tungsten-carbide", 1},
+		{"lava", 20},
+	},
+	results = {
+		{"metallurgic-science-pack", 1},
+	},
+	clearSurfaceConditions = true, -- Remove surface condition for the science pack. But there's no lava anywhere else. TODO add recipe for artificial lava maybe?
+	category = "arc-furnace",
+}

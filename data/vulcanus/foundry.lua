@@ -29,6 +29,7 @@ So, what I/O lines do foundries need?
 	* steam output
 	* input line for molten metals, OR two different molten metals.
 So, will make 3 input fluidboxes, and then NOT explicitly assign results to them, but arrange so that if we have 1 molten-metal input, water goes to the right input and the other 2 inputs are both used for the single molten metal ingredient. Can't explicitly assign ingredients/results to multiple fluidboxes.
+I want to make all the fluid inputs bidirectional, but then we can't have a lava input, since that lets you put lava in pipes. So, not putting any recipe that uses lava in the foundry.
 ]]
 ---@return data.FluidBox
 local function makePassthroughFluidLine(production_type, positionList, dirList)
