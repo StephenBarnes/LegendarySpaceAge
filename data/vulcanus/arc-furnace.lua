@@ -18,8 +18,8 @@ ent.energy_source.emissions_per_minute = { pollution = 20 }
 ent.energy_source.drain = "1MW"
 ent.energy_usage = "4MW"
 ent.heating_energy = "1MW"
-ent.perceived_performance = {maximum = 1.5} -- So it doesn't look ridiculously fast.
-local animationSpeed = 0.4
+ent.perceived_performance = {maximum = 4}
+local animationSpeed = 0.15
 ent.graphics_set = {
 	animation = {
 		layers = {
@@ -140,10 +140,27 @@ for productionType, fluidSets in pairs(fluidIOGroup) do
 	end
 end
 ent.fluid_boxes = arcFurnaceFluidBoxes
--- TODO add sounds
--- TODO add dying_explosion
--- TODO add corpse
--- TODO add circuit_connector
+ent.working_sound = {
+	sound = {
+		filename = "__base__/sound/electric-furnace.ogg",
+		--variations = sound_variations("__space-age__/sound/entity/platform-thruster/thruster-engine", 3, 0.8),
+		--variations = sound_variations("__base__/sound/centrifuge", 3, 0.15),
+		volume = 0.8,
+		audible_distance_modifier = 0.7,
+	},
+	fade_in_ticks = 4,
+	fade_out_ticks = 20,
+	-- Considered sound accents, but decided against, bc animation doesn't really do anything that seems like it would be enhanced by sound accents.
+	--[[
+	sound_accents = {
+		--{sound = {variations = sound_variations("__space-age__/sound/entity/platform-thruster/thruster-engine-deactivate", 3, 0.8), audible_distance_modifier = 0.7}, frame = 40},
+		{sound = {variations = sound_variations("__space-age__/sound/entity/platform-thruster/thruster-engine", 3, 0.8), audible_distance_modifier = 0.7}, frame = 15},
+	},
+	]]
+	max_sounds_per_prototype = 2,
+}
+-- Dying explosion is fine. No better corpse.
+ent.circuit_connector = copy(ASSEMBLER["oil-refinery"].circuit_connector)
 extend{ent}
 
 -- Create item.

@@ -45,6 +45,7 @@ ent.energy_usage = "4800kW" -- So it's 5MW with drain.
 ent.energy_source.drain = "200kW"
 ent.show_recipe_icon = false
 ent.show_recipe_icon_on_map = false
+local animationSpeed = 0.5
 ent.graphics_set = {
 	animation = {
 		layers = {
@@ -54,7 +55,7 @@ ent.graphics_set = {
 				height = 1400,
 				frame_count = 1,
 				repeat_count = 60,
-				animation_speed = 0.5,
+				animation_speed = animationSpeed,
 				draw_as_shadow = true,
 				scale = 0.5,
 			},
@@ -62,7 +63,7 @@ ent.graphics_set = {
 				width = 704,
 				height = 704,
 				frame_count = 60,
-				animation_speed = 0.5,
+				animation_speed = animationSpeed,
 				scale = 0.5,
 				stripes = {
 					{
@@ -87,7 +88,7 @@ ent.graphics_set = {
 				height = 352,
 				--shift = util.by_pixel_hr(0, 92),
 				frame_count = 60,
-				animation_speed = 0.5,
+				animation_speed = animationSpeed,
 				scale = 1,
 				draw_as_light = true,
 				blend_mode = "additive",
@@ -108,28 +109,40 @@ ent.graphics_set = {
 	},
 	reset_animation_when_frozen = true,
 }
-local bigDrill = RAW["mining-drill"]["big-mining-drill"]
 ent.working_sound = {
 	main_sounds = {
 		{
-			sound = {filename = "__space-age__/sound/entity/big-mining-drill/big-mining-drill-working-loop.ogg", volume = 0.6}, -- vs 0.3 for big drill
+			sound = {filename = "__space-age__/sound/entity/big-mining-drill/big-mining-drill-loop.ogg", volume = 0.45}, -- vs 0.3 for big drill
+			audible_distance_modifier = 0.5,
 			fade_in_ticks = 4,
-			fade_out_ticks = 30,
+			fade_out_ticks = 30
 		},
 		{
-			sound = {filename = "__space-age__/sound/entity/big-mining-drill/big-mining-drill-loop.ogg", volume = 1.2},
+			sound = {filename = "__space-age__/sound/entity/big-mining-drill/big-mining-drill-moving-loop.ogg", volume = 0.45},
+			audible_distance_modifier = 0.5,
 			fade_in_ticks = 4,
-			fade_out_ticks = 30,
+			fade_out_ticks = 30
 		},
 	},
-	max_sounds_per_prototype = 2,
+	sound_accents = {
+		{ -- loud bang, timed to when drill hits bottom
+			sound = {filename = "__space-age__/sound/entity/big-mining-drill/big-mining-drill-moving-stop.ogg", volume = 0.95, audible_distance_modifier = 0.9},
+			frame = 10, -- 11 is too late, 9 too early.
+		},
+		{ -- puff of dirt sound, timed to when drill moves up
+			sound = {filename = "__space-age__/sound/entity/big-mining-drill/big-mining-drill-start.ogg", volume = 0.75, audible_distance_modifier = 0.5},
+			frame = 36, -- 40 is too late, 38 maybe too late
+		},
+	},
+	--max_sounds_per_prototype = 3,
 }
-ent.build_sound = bigDrill.build_sound
-ent.open_sound = bigDrill.open_sound
-ent.close_sound = bigDrill.close_sound
-ent.corpse = "big-mining-drill-remnants"
-ent.dying_explosion = "big-mining-drill-explosion"
+ent.build_sound = ASSEMBLER.foundry.build_sound
+ent.open_sound = ASSEMBLER.foundry.open_sound
+ent.close_sound = ASSEMBLER.foundry.close_sound
+ent.corpse = "rocket-silo-remnants"
+ent.dying_explosion = "rocket-silo-explosion"
 ent.max_health = 1000
+ent.circuit_connector = copy(RAW["rocket-silo"]["rocket-silo"].circuit_connector)
 extend{ent}
 
 local item = copy(ITEM["big-mining-drill"])
