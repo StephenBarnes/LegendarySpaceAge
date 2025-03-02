@@ -61,36 +61,68 @@ for _, fluidBox in pairs(ASSEMBLER["assembling-machine-1"].fluid_boxes) do
 	fluidBox.pipe_picture = GreyPipes.pipeBlocks()
 end
 
--- Add fluid inputs to the rocket silo, needed for assembling rocket parts.
+-- Add fluid inputs to the rocket silo, needed for assembling rocket parts. Seems like rocket silo can't be rotated, so I'm adding all of them on all sides.
+local emPipePictures = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures")
 local rocketSilo = RAW["rocket-silo"]["rocket-silo"]
 rocketSilo.fluid_boxes_off_when_no_fluid_recipe = false
 rocketSilo.fluid_boxes = {
 	{
 		production_type = "input",
-		pipe_picture = GreyPipes.pipeBlocksDeepDrill(),
+		pipe_picture = emPipePictures.pipe_pictures,
+		pipe_picture_frozen = emPipePictures.pipe_pictures_frozen,
 		pipe_covers = pipecoverspictures(),
 		volume = 1000,
 		pipe_connections = {
-			--[[
-			{position = {4, 2}, direction = defines.direction.east, flow_direction = "input-output"},
-			{position = {-4, 2}, direction = defines.direction.west, flow_direction = "input-output"},
-			{position = {-2, -4}, direction = defines.direction.north, flow_direction = "input-output"},
-			{position = {-2, 4}, direction = defines.direction.south, flow_direction = "input-output"},
-			]]
-			{position = {4, -1}, direction = defines.direction.east, flow_direction = "input-output"},
-			{position = {-4, -1}, direction = defines.direction.west, flow_direction = "input-output"},
+			{
+				direction = NORTH,
+				flow_direction = "input-output",
+				position = {-2, -4},
+			},
+			{
+				direction = SOUTH,
+				flow_direction = "input-output",
+				position = {-2, 4},
+			},
+			{
+				direction = EAST,
+				flow_direction = "input-output",
+				position = {4, -2},
+			},
+			{
+				direction = WEST,
+				flow_direction = "input-output",
+				position = {-4, -2},
+			},
 		},
+		secondary_draw_orders = { south = 100, north = -1 },
 	},
 	{
 		production_type = "input",
-		pipe_picture = GreyPipes.pipeBlocksDeepDrill(),
+		pipe_picture = emPipePictures.pipe_pictures,
+		pipe_picture_frozen = emPipePictures.pipe_pictures_frozen,
 		pipe_covers = pipecoverspictures(),
 		volume = 1000,
 		pipe_connections = {
-			--{position = {4, -2}, direction = defines.direction.east, flow_direction = "input-output"},
-			--{position = {-4, -2}, direction = defines.direction.west, flow_direction = "input-output"},
-			{position = {2, -4}, direction = defines.direction.north, flow_direction = "input-output"},
-			{position = {2, 4}, direction = defines.direction.south, flow_direction = "input-output"},
+			{
+				direction = NORTH,
+				flow_direction = "input-output",
+				position = {2, -4},
+			},
+			{
+				direction = SOUTH,
+				flow_direction = "input-output",
+				position = {2, 4},
+			},
+			{
+				direction = EAST,
+				flow_direction = "input-output",
+				position = {4, 2},
+			},
+			{
+				direction = WEST,
+				flow_direction = "input-output",
+				position = {-4, 2},
+			},
 		},
 		secondary_draw_orders = { south = 100, north = -1 },
 	},

@@ -13,6 +13,8 @@ assembledRocketPartItem.icons = {
 assembledRocketPartItem.order = ITEM["rocket-part"].order .. "-2"
 assembledRocketPartItem.hidden = false
 ITEM["rocket-part"].hidden = false
+assembledRocketPartItem.stack_size = 10
+assembledRocketPartItem.weight = ROCKET / 20
 extend{assembledRocketPartItem}
 
 RECIPE["rocket-part"].hide_from_player_crafting = false

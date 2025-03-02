@@ -162,8 +162,8 @@ Recipe.make{
 	ingredients = {
 		{"frame", 50},
 		{"structure", 50},
-		{"mechanism", 20},
-		{"electric-engine-unit", 20},
+		{"mechanism", 50},
+		{"electric-engine-unit", 50},
 	},
 }
 
