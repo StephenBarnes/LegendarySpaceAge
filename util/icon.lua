@@ -38,7 +38,7 @@ Icon.getIconInfo = function(pathCode, proto)
 					---@diagnostic disable-next-line: return-type-mismatch
 					return {path = RAW[t][rest].icon}
 				else
-					assert(#RAW[t][rest].icons == 1, "Multi-icon must have exactly 1 icon")
+					assert(#RAW[t][rest].icons == 1, "Multi-icon must have exactly 1 icon, but " .. #RAW[t][rest].icons .. " found for " .. serpent.block(RAW[t][rest]) .. " (" .. t .. " " .. rest .. ")")
 					local sourceIcon = RAW[t][rest].icons[1]
 					---@diagnostic disable-next-line: return-type-mismatch
 					return {path = sourceIcon.icon, tint = sourceIcon.tint}

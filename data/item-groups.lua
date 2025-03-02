@@ -296,3 +296,39 @@ Gen.orderKinds("intermediate-product", {ITEM}, {
 	"charged-holmium-battery",
 })
 RAW["item-subgroup"]["intermediate-product"].order = "c8"
+
+-- Make subgroups for cryo fluids and recipes.
+extend{
+	{
+		type = "item-subgroup",
+		name = "cryo-fluids",
+		group = "space",
+		order = "01",
+	},
+	{
+		type = "item-subgroup",
+		name = "cryo-recipes",
+		group = "space",
+		order = "02",
+	},
+}
+Gen.orderKinds("cryo-fluids", {FLUID}, {
+	"nitrogen-gas",
+	"compressed-nitrogen-gas",
+	"oxygen-gas",
+	"hydrogen-gas",
+	"liquid-nitrogen",
+	"thruster-oxidizer",
+	"thruster-fuel",
+})
+Gen.orderKinds("cryo-recipes", {RECIPE}, {
+	"syngas-separation",
+	"air-separation",
+	"ammonia-cracking",
+	"electrolysis",
+	"nitrogen-compression-exchange",
+	"nitrogen-expansion",
+	"oxygen-cascade-cooling",
+	"hydrogen-cascade-cooling",
+	"regenerative-cooling",
+})

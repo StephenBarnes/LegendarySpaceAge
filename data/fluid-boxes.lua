@@ -127,3 +127,20 @@ rocketSilo.fluid_boxes = {
 		secondary_draw_orders = { south = 100, north = -1 },
 	},
 }
+
+-- Add a side fluid input to the cryogenic plant, needed for hydrogen cascade cooling.
+local cryogenicPlant = ASSEMBLER["cryogenic-plant"]
+local newFluidBoxC = copy(cryogenicPlant.fluid_boxes[6])
+newFluidBoxC.pipe_connections = {
+	{position = {-2, 0}, direction = defines.direction.west, flow_direction = "output"},
+}
+cryogenicPlant.fluid_boxes = {
+	cryogenicPlant.fluid_boxes[1], -- input
+	cryogenicPlant.fluid_boxes[2], -- input
+	cryogenicPlant.fluid_boxes[3], -- input
+	cryogenicPlant.fluid_boxes[4], -- output
+	cryogenicPlant.fluid_boxes[5], -- output
+	cryogenicPlant.fluid_boxes[6], -- output
+	newFluidBoxC, -- New output
+}
+-- TODO this is very temporary to test cascade cooling, change it later to have passthrough fluid connections etc.
