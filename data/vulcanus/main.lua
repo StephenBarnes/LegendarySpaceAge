@@ -119,3 +119,9 @@ inverseVulcanizationRecipe.main_product = "plastic-bar"
 inverseVulcanizationRecipe.order = ITEM["plastic-bar"].order.."-2"
 Icon.set(inverseVulcanizationRecipe, {"plastic-bar", "tar"})
 extend({inverseVulcanizationTech, inverseVulcanizationRecipe})
+
+-- Clear temperature spam for fluids.
+Item.setFluidSimpleTemp(FLUID["lava"], 5000, true, 1500)
+Item.setFluidSimpleTemp(FLUID["molten-iron"], 5000, true, 1500)
+Item.setFluidSimpleTemp(FLUID["molten-copper"], 5000, true, 1500)
+Item.setFluidSimpleTemp(FLUID["molten-steel"], 5000, true, 1500)

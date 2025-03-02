@@ -22,3 +22,6 @@ mapGen.property_expression_names["entity:crude-oil:richness"] = nil
 
 -- Change icon for lithium brine, which is now "mineral brine".
 Icon.set(FLUID["lithium-brine"], "LSA/aquilo/mineral-brine")
+
+-- Clear temperature spam for fluids.
+Item.setFluidSimpleTemp(FLUID["ammoniacal-solution"], -33, true, -50)

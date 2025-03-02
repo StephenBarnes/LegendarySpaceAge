@@ -6,7 +6,7 @@ natgasFluid.name = "natural-gas"
 natgasFluid.base_color = constants.natgasColor
 natgasFluid.flow_color = constants.natgasFlowColor
 natgasFluid.icon = nil
-natgasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.natgasTint}}
+natgasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/fluids/gas-2.png", icon_size = 64, tint=constants.natgasTint}}
 natgasFluid.order = "a[fluid]-b[oil]-aa[natgas]"
 natgasFluid.gas_temperature = 0
 extend{natgasFluid}
@@ -18,7 +18,7 @@ drygasFluid.base_color = constants.drygasColor
 drygasFluid.flow_color = constants.drygasFlowColor
 drygasFluid.visualization_color = constants.drygasColor
 drygasFluid.icon = nil
-drygasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.drygasTint}}
+drygasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/fluids/gas-2.png", icon_size = 64, tint=constants.drygasTint}}
 drygasFluid.order = "a[fluid]-b[oil]-c[fractions]-4"
 drygasFluid.gas_temperature = 0
 extend{drygasFluid}
@@ -29,7 +29,7 @@ richgasFluid.order = "a[fluid]-b[oil]-c[fractions]-3"
 richgasFluid.base_color = constants.richgasColor
 richgasFluid.flow_color = constants.richgasFlowColor
 richgasFluid.icon = nil
-richgasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.richgasColor}}
+richgasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/fluids/gas-2.png", icon_size = 64, tint=constants.richgasColor}}
 richgasFluid.localised_name = {"fluid-name.rich-gas"} -- In case other languages are used, don't use that language's version of "petroleum gas".
 richgasFluid.gas_temperature = 0
 
@@ -39,7 +39,7 @@ syngasFluid.name = "syngas"
 syngasFluid.base_color = constants.syngasColor
 syngasFluid.flow_color = constants.syngasFlowColor
 syngasFluid.icon = nil
-syngasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/petrochem/gas.png", icon_size = 64, tint=constants.syngasColor}}
+syngasFluid.icons = {{icon = "__LegendarySpaceAge__/graphics/fluids/gas-2.png", icon_size = 64, tint=constants.syngasColor}}
 syngasFluid.order = "a[fluid]-b[oil]-c[fractions]-6"
 syngasFluid.gas_temperature = 0
 extend{syngasFluid}

@@ -4,6 +4,7 @@
 local uraniumHexafluoride = copy(FLUID["steam"])
 uraniumHexafluoride.name = "uranium-hexafluoride"
 Icon.set(uraniumHexafluoride, "LSA/nuclear/uranium-hexafluoride")
+Item.setFluidSimpleTemp(uraniumHexafluoride, 100, false, 10)
 extend{uraniumHexafluoride}
 
 -- Create item for yellowcake.
@@ -27,7 +28,7 @@ extend{plutonium}
 -- Create item for fuel rod.
 local fuelRod = copy(ITEM["uranium-fuel-cell"])
 fuelRod.name = "fuel-rod"
-fuelRod.spent_result = "depleted-fuel-rod"
+fuelRod.burnt_result = "depleted-fuel-rod"
 Icon.set(fuelRod, "LSA/nuclear/fuel-rod")
 extend{fuelRod}
 

@@ -1,14 +1,14 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.9.0
-Date: 2025-02-26
+Date: 2025-03-02
   Features:
-    - Added briefings with tech triggers.
-    - Updated foundry recipes.
+    - Added arc furnace for making molten metals. Foundry now only casts molten metals.
     - Added quality scaling of power consumption for gasifiers, char furnaces, and battery chargers, to remove infinite-energy exploits.
+    - Added briefings with tech triggers.
+    - TODO add refrigeration system, including nitrogen/oxygen/hydrogen in gas and liquid form. Cryo plants moved to early game.
     - TODO add sugar system
     - TODO add resistances for enemies
     - TODO add bream
-    - TODO add recipes for liquid hydrogen and oxygen
 ---------------------------------------------------------------------------------------------------
 Version: 0.8.0
 Date: 2025-02-25

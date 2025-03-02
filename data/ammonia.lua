@@ -121,3 +121,6 @@ extend{ammoniaSyngasRecipe}
 
 -- Aquilo should require ammonia 2 tech? Not really. Maybe if I later add tech to make fuel from ammonia, separate from the Aquilo discovery tech. TODO.
 --Tech.addTechDependency("ammonia-2", "planet-discovery-aquilo")
+
+-- Clear temperature spam for ammonia fluid. Assume it's gas most of the time.
+Item.setFluidSimpleTemp(FLUID["ammonia"], -33, false, 0)

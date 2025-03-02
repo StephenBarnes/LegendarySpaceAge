@@ -150,6 +150,7 @@ moltenTungstenFluid.order = "b[new-fluid]-b[vulcanus]-d[molten-tungsten]"
 moltenTungstenFluid.base_color = {.259, .239, .349} -- Measured on ore
 moltenTungstenFluid.flow_color = {.635, .584, .741}
 moltenTungstenFluid.visualization_color = {.478, .191, .682} -- Measured on ore and boosted saturation.
+moltenTungstenFluid.heat_capacity = nil
 extend{moltenTungstenFluid}
 
 -- Create recipe for molten tungsten.

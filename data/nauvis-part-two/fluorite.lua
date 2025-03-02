@@ -14,6 +14,10 @@ hydrofluoricAcid.name = "hydrofluoric-acid"
 hydrofluoricAcid.auto_barrel = true -- Apparently people ship it regularly IRL.
 -- TODO maybe a different icon?
 -- TODO maybe different fluid flow colors.
+hydrofluoricAcid.heat_capacity = nil
+hydrofluoricAcid.max_temperature = nil
+hydrofluoricAcid.default_temperature = 25
+hydrofluoricAcid.gas_temperature = 100 -- to make it a liquid.
 extend{hydrofluoricAcid}
 
 -- In chem plant: 1 fluorite + 1 sulfuric acid + 1 water -> 1 hydrofluoric acid + 1 stone (representing gypsum)
@@ -27,13 +31,16 @@ local hydrofluoricAcidRecipe = Recipe.make{
 	},
 	results = {
 		{"hydrofluoric-acid", 10, type = "fluid"},
-		{"stone", 1},
+		--{"stone", 1, show_details_in_recipe_tooltip = false},
 	},
 	main_product = "hydrofluoric-acid",
 	clearIcons = true,
 	category = "chemistry",
+	allow_decomposition = true,
+	allow_as_intermediate = true,
+	allow_quality = true,
+	allow_productivity = true,
 }
-hydrofluoricAcidRecipe.subgroup = nil
 
 -- Add fluorite to uranium patches.
 -- Going to make Nauvis have lots of uranium but not enough fluorite to process it all; and then Aquilo is the opposite, lots of fluorine but not enough uranium. So the player gains a lot by shipping uranium or fluorine between the two.

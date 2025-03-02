@@ -1,14 +1,21 @@
 -- This file creates cryogenic fluids and recipes - nitrogen/oxygen/hydrogen gases and liquids.
 
 local noh = {
+	-- Base/flow colors for oxygen/hydrogen taken from Space Age. Nitrogen colors chosen by analogy.
 	nitrogen = {
-		tint = {.243, .835, .322, .35},
+		baseColor = {.1, .53, 0},
+		flowColor = {.68, .93, .2},
+		boilsAt = -196,
 	},
 	oxygen = {
-		tint = {.118, .776, .937, .35},
+		baseColor = {0.0, 0.1, 0.53},
+		flowColor = {0.2, 0.68, 0.93},
+		boilsAt = -183,
 	},
 	hydrogen = {
-		tint = {.988, .376, .063, .35},
+		baseColor = {0.53, 0.1, 0},
+		flowColor = {0.93, 0.68, 0.2},
+		boilsAt = -253,
 	},
 }
 
@@ -17,12 +24,10 @@ for name, data in pairs(noh) do
 	local gas = copy(FLUID.fluorine)
 	gas.name = name .. "-gas"
 	gas.auto_barrel = true
-	gas.icon = nil
-	gas.icons = {
-		{icon = "__LegendarySpaceAge__/graphics/fluids/vapor.png", icon_size = 64, tint = data.tint, scale = .5},
-	}
-	-- TODO fluid flow colors.
-	-- TODO temperature to make it a gas.
+	Icon.set(gas, "LSA/cryo/" .. name .. "-gas")
+	gas.base_color = data.baseColor
+	gas.flow_color = data.flowColor
+	Item.setFluidSimpleTemp(gas, data.boilsAt, false, 10)
 	extend{gas}
 end
 
@@ -30,12 +35,10 @@ end
 local cn = copy(FLUID["nitrogen-gas"])
 cn.name = "compressed-nitrogen-gas"
 cn.auto_barrel = true
-cn.icons[2] = cn.icons[1]
-cn.icons[2].scale = .35
-cn.icons[1] = {
-	icon = "__LegendarySpaceAge__/graphics/cryo/compressed.png",
-	icon_size = 64,
-	scale = .5,
+Icon.set(cn, {"nitrogen-gas", "LSA/cryo/compressed"})
+cn.icons = {
+	{icon = "__LegendarySpaceAge__/graphics/cryo/nitrogen-gas.png", icon_size = 64},
+	{icon = "__LegendarySpaceAge__/graphics/cryo/compressed.png", icon_size = 64},
 }
 extend{cn}
 
@@ -44,11 +47,16 @@ local liquidNitrogen = copy(FLUID["fluoroketone-cold"])
 liquidNitrogen.name = "liquid-nitrogen"
 liquidNitrogen.auto_barrel = true
 Icon.set(liquidNitrogen, "LSA/cryo/liquid-nitrogen")
--- TODO fluid flow colors.
--- TODO temperature to make it a liquid.
+liquidNitrogen.base_color = {.1, .53, 0}
+liquidNitrogen.flow_color = {.68, .93, .2}
+Item.setFluidSimpleTemp(liquidNitrogen, noh.nitrogen.boilsAt, true, 10)
 extend{liquidNitrogen}
 
--- Edit thruster fuel and oxidizer to use liquid hydrogen/oxygen icons.
+-- Set temps for liquid O/H.
+Item.setFluidSimpleTemp(FLUID["thruster-oxidizer"], noh.oxygen.boilsAt, true, 10)
+Item.setFluidSimpleTemp(FLUID["thruster-fuel"], noh.hydrogen.boilsAt, true, 10)
+
+-- Edit thruster fuel and oxidizer (which we're renaming to liquid hydrogen and oxygen respectively) to use new icons.
 Icon.set(FLUID["thruster-fuel"], "LSA/cryo/liquid-hydrogen")
 Icon.set(FLUID["thruster-oxidizer"], "LSA/cryo/liquid-oxygen")
 
