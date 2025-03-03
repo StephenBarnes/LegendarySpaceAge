@@ -1,0 +1,3 @@
+-- Change GUI.
+RAW["utility-constants"].default.select_slot_row_count = 12 -- Was 10. This is the number of slots per row in the crafting menu, Factoriopedia, etc.
+RAW["utility-constants"].default.select_group_row_count = 7 -- Was 6. This is the number of item-group's per row in the crafting menu, Factoriopedia, etc. The width of the menu seems to be determined by select_slot_row_count above, then gets split up for the item-groups; unless there's not enough, then these group tabs push it wider? Might still be something off here.

@@ -4,18 +4,6 @@
 Recipe.hide("po-interface")
 Tech.removeRecipeFromTech("po-interface", "po-electric-energy-distribution-3")
 
--- Fix order of recipes in electric energy distribution 1 tech.
--- I think this can't run in data, must be data-updates, maybe bc rusting iron mod hasn't made its recipe yet.
-Tech.reorderRecipeUnlocks("electric-energy-distribution-1",
-	{
-		"medium-electric-pole",
-		"big-electric-pole",
-		"po-medium-electric-fuse",
-		"po-big-electric-fuse",
-		"po-transformer",
-		"iron-stick",
-	})
-
 -- Using custom descriptions for techs.
 TECH["electric-energy-distribution-1"].localised_description = {"technology-description.electric-energy-distribution-1"}
 TECH["electric-energy-distribution-2"].localised_description = {"technology-description.electric-energy-distribution-2"}

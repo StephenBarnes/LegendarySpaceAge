@@ -6,6 +6,7 @@ Aims:
 * Simplify numbers for recipe ingredients, products, times, and machine crafting speeds etc. Prefer to only have 2 and 5 as factors for numbers (including 1/2 and 1/5). No 3's and 6's. Avoid 8, 12, 15, 16, 32, 60, etc. Most machines with most recipes should have simple per-second rates like 1 or 0.5 or 0.2 or 2, etc. (These numbers will break down when you use quality machines or modules or beacons.)
 ]]
 
+require("0-environment.main")
 require("1-logistics.main")
 require("2-production.main")
 require("3-simple-intermediates.main")

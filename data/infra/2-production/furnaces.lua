@@ -75,3 +75,7 @@ Recipe.edit{
 	ingredients = {"structure"},
 	time = 1,
 }
+
+-- Reduce health of furnaces, to encourage building walls.
+FURNACE["stone-furnace"].max_health = 100 -- Reduced from 200 to 100.
+-- TODO rather go through all infra and edit healths. A lot of them are too high or low.

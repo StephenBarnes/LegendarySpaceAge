@@ -20,22 +20,34 @@ ITEM["tiny-inline-storage-tank"].stack_size = 100
 Item.perRocket(ITEM["tiny-inline-storage-tank"], 100)
 
 -- Adjust ingredients.
-RECIPE["large-storage-tank"].ingredients = { -- Has 4x capacity of normal storage tank, so make cost less than 4x, so there's reason to use it.
-	{type = "item", name = "frame", amount = 10},
-	{type = "item", name = "fluid-fitting", amount = 10},
-	{type = "item", name = "panel", amount = 20},
+Recipe.edit{
+	recipe = "large-storage-tank",
+	ingredients = { -- Has 4x capacity of normal storage tank, so make cost less than 4x, so there's reason to use it.
+		{"frame", 10},
+		{"fluid-fitting", 10},
+		{"panel", 20},
+	},
+	time = 10,
 }
-RECIPE["large-storage-tank"].energy_required = 10
-RECIPE["storage-tank"].ingredients = {
-	{type = "item", name = "frame", amount = 5},
-	{type = "item", name = "fluid-fitting", amount = 5},
-	{type = "item", name = "panel", amount = 10},
+Item.perRocket("large-storage-tank", 20)
+
+Recipe.edit{
+	recipe = "storage-tank",
+	ingredients = {
+		{"frame", 5},
+		{"fluid-fitting", 5},
+		{"panel", 10},
+	},
+	time = 5,
 }
-RECIPE["storage-tank"].energy_required = 5
-RECIPE["tiny-inline-storage-tank"].ingredients = {
-	{type = "item", name = "fluid-fitting", amount = 1},
-	{type = "item", name = "panel", amount = 2},
+Recipe.edit{
+	recipe = "tiny-inline-storage-tank",
+	ingredients = {
+		{"fluid-fitting", 1},
+		{"panel", 2},
+	},
+	time = 2,
 }
-RECIPE["tiny-inline-storage-tank"].energy_required = 2
+Item.perRocket("tiny-inline-storage-tank", 100)
 
 -- TODO move this to infra/ folder.

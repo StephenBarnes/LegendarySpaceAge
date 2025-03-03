@@ -350,7 +350,10 @@ Tech.addTechDependency("automation-3", "planet-discovery-fulgora")
 Tech.setPrereqs("automation-3", {"automation-2", "electric-engine"})
 Tech.removeSciencePack("production-science-pack", "automation-3")
 
--- Make recipe for chemistry, and move chem plant to that.
+-- Logistics 1 tech doesn't give "faster ways of transportation".
+TECH["logistics"].localised_description = {"technology-description.logistics-1"}
+
+-- TODO Make tech for chemistry, and move chem plant to that.
 
 -- TODO edit recipes for other science packs.
 
@@ -361,3 +364,5 @@ Tech.removeSciencePack("production-science-pack", "automation-3")
 -- TODO should engines need rubber? If so, need to add rubber=>engine dependency.
 
 -- TODO write some code to toposort the whole tech tree and then assign order strings.
+
+-- TODO tech tree change - add nuclear science, move nuclear stuff to after first 3 planetary sciences, and then change all costs to include all science packs they're dependent on.

@@ -45,3 +45,14 @@ Recipe.edit{
 	},
 	time = 1,
 }
+
+-- Adjust pumping rate of offshore pump.
+local newSpeed = 16.6667 --1000/60 -- Was 1200/60.
+RAW["offshore-pump"]["offshore-pump"].pumping_speed = newSpeed
+if RAW["offshore-pump"]["lava-pump"] ~= nil then
+	-- If it's defined, change it there too. If it's not defined, lava pump will inherit the change from the above.
+	RAW["offshore-pump"]["lava-pump"].pumping_speed = newSpeed
+end
+
+-- Reduce health of pipes, to encourage building walls.
+RAW.pipe.pipe.max_health = 35 -- Reduced from 100 to 35. Wall is 350.

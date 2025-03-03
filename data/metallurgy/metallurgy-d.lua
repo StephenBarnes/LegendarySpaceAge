@@ -229,3 +229,9 @@ ITEM["iron-stick"].stack_size = 200
 for _, furnace in pairs{"stone-furnace", "steel-furnace", "gas-furnace", "electric-furnace"} do
 	FURNACE[furnace].result_inventory_size = 2
 end
+
+-- Move iron rod to be enabled from the start, and remove it from techs.
+RECIPE["iron-stick"].enabled = true
+Tech.removeRecipesFromTechs(
+	{"iron-stick"},
+	{"railway", "circuit-network", "electric-energy-distribution-1", "concrete"})

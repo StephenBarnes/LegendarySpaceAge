@@ -14,3 +14,6 @@ extend{{
 local beacon_interface = copy(RAW["beacon"]["beacon-interface--beacon-tile"])
 beacon_interface.name = "apprentice-arc-furnace-beacon-interface"
 extend{beacon_interface}
+
+-- Beacon interface should be hidden.
+Item.hide("beacon-interface--beacon")

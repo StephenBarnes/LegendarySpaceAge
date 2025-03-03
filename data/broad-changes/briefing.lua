@@ -114,5 +114,6 @@ for i, section in pairs{
     section.category = "Legendary-Space-Age"
     section.order = string.format("%02d", i)
     section.indent = section.indent or 1
+    ---@diagnostic disable-next-line: assign-type-mismatch
     extend{section}
 end
