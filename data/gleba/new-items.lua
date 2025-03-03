@@ -48,7 +48,7 @@ marrowItem.spoil_ticks = 20 * MINUTES
 marrowItem.spoil_result = "spoilage"
 Item.clearFuel(marrowItem)
 marrowItem.stack_size = 50
-marrowItem.weight = ROCKET / 500
+Item.perRocket(marrowItem, 500)
 extend{marrowItem}
 
 -- Create tubule item

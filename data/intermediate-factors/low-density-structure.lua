@@ -3,7 +3,7 @@
 RECIPE["low-density-structure"].auto_recycle = false
 
 -- Reduce weight of low-density structure.
-ITEM["low-density-structure"].weight = ROCKET / 2000
+Item.perRocket("low-density-structure", 2000)
 
 -- Create recipe from copper and steel, copying the default recipe.
 local recipeFromCopper = copy(RECIPE["low-density-structure"])

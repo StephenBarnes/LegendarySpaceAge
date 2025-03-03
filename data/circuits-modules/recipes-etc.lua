@@ -172,8 +172,7 @@ ITEM["electronic-circuit"].stack_size = 200
 ITEM["advanced-circuit"].stack_size = 200
 ITEM["processing-unit"].stack_size = 200
 whiteCircuit.stack_size = 200
-local circuitWeight = ROCKET / 2000
-ITEM["electronic-circuit"].weight = circuitWeight
-ITEM["advanced-circuit"].weight = circuitWeight
-ITEM["processing-unit"].weight = circuitWeight
-whiteCircuit.weight = circuitWeight
+Item.perRocket(ITEM["electronic-circuit"], 2000)
+Item.perRocket(ITEM["advanced-circuit"], 2000)
+Item.perRocket(ITEM["processing-unit"], 2000)
+Item.perRocket(whiteCircuit, 2000)

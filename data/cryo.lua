@@ -27,7 +27,7 @@ for name, data in pairs(noh) do
 	Icon.set(gas, "LSA/cryo/" .. name .. "-gas")
 	gas.base_color = data.baseColor
 	gas.flow_color = data.flowColor
-	Item.setFluidSimpleTemp(gas, data.boilsAt, false, 10)
+	Fluid.setSimpleTemp(gas, data.boilsAt, false, 10)
 	extend{gas}
 end
 
@@ -45,12 +45,12 @@ liquidNitrogen.auto_barrel = true
 Icon.set(liquidNitrogen, "LSA/cryo/liquid-nitrogen")
 liquidNitrogen.base_color = {.1, .53, 0}
 liquidNitrogen.flow_color = {.68, .93, .2}
-Item.setFluidSimpleTemp(liquidNitrogen, noh.nitrogen.boilsAt, true, 10)
+Fluid.setSimpleTemp(liquidNitrogen, noh.nitrogen.boilsAt, true, 10)
 extend{liquidNitrogen}
 
 -- Set temps for liquid O/H.
-Item.setFluidSimpleTemp(FLUID["thruster-oxidizer"], noh.oxygen.boilsAt, true, 10)
-Item.setFluidSimpleTemp(FLUID["thruster-fuel"], noh.hydrogen.boilsAt, true, 10)
+Fluid.setSimpleTemp(FLUID["thruster-oxidizer"], noh.oxygen.boilsAt, true, 10)
+Fluid.setSimpleTemp(FLUID["thruster-fuel"], noh.hydrogen.boilsAt, true, 10)
 
 -- Edit thruster fuel and oxidizer (which we're renaming to liquid hydrogen and oxygen respectively) to use new icons.
 Icon.set(FLUID["thruster-fuel"], "LSA/cryo/liquid-hydrogen")

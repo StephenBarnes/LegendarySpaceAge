@@ -17,7 +17,7 @@ extend({
 local batteryItem = ITEM["battery"]
 Icon.set(batteryItem, "LSA/fulgora/batteries/battery_short")
 batteryItem.stack_size = 200 -- Vanilla is 200. This carries through to other cloned batteries.
-batteryItem.weight = ROCKET / 1000 -- Vanilla is 2500 (so 400 per rocket). Setting to 1000, so 1000 per rocket.
+Item.perRocket(batteryItem, 1000) -- Vanilla is 400 per rocket.
 local chargedBatteryItem = copy(batteryItem)
 chargedBatteryItem.name = "charged-battery"
 Icon.set(chargedBatteryItem, "LSA/fulgora/batteries/battery_short_charged")
@@ -37,12 +37,10 @@ local holmiumBatteryItem = copy(batteryItem)
 holmiumBatteryItem.name = "holmium-battery"
 Icon.set(holmiumBatteryItem, "LSA/fulgora/batteries/holmium_battery_short")
 holmiumBatteryItem.order = batteryItem.order .. '-3'
-holmiumBatteryItem.weight = ROCKET / 1000 -- So 1000 per rocket, same as the weight of a normal battery.
 local chargedHolmiumBatteryItem = copy(batteryItem)
 chargedHolmiumBatteryItem.name = "charged-holmium-battery"
 Icon.set(chargedHolmiumBatteryItem, "LSA/fulgora/batteries/holmium_battery_short_charged")
 chargedHolmiumBatteryItem.order = batteryItem.order .. '-4'
-chargedHolmiumBatteryItem.weight = ROCKET / 1000
 chargedHolmiumBatteryItem.burnt_result = "holmium-battery"
 chargedHolmiumBatteryItem.fuel_category = "battery"
 chargedHolmiumBatteryItem.fuel_emissions_multiplier = 0

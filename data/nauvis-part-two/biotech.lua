@@ -11,5 +11,5 @@ local meatPaste = copy(FLUID["water"])
 meatPaste.name = "meat-paste"
 Icon.set(meatPaste, "LSA/fluids/meat-paste")
 -- TODO fluid colors
-Item.setFluidSimpleTemp(meatPaste, 100, true, 10)
+Fluid.setSimpleTemp(meatPaste, 100, true, 10)
 extend{meatPaste}

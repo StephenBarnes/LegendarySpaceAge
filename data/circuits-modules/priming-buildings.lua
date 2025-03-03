@@ -161,7 +161,7 @@ primerItem.name = "circuit-primer"
 primerItem.icon = GRAPHICS_FOLDER.."1/icon.png"
 primerItem.place_result = "circuit-primer"
 primerItem.stack_size = 20
-primerItem.weight = ROCKET / 20
+Item.perRocket(primerItem, 20)
 extend{primerItem}
 
 -- Create recipe for primer.
@@ -303,7 +303,7 @@ superclockerItem.name = "superclocker"
 superclockerItem.icon = GRAPHICS_FOLDER.."2/icon.png"
 superclockerItem.place_result = "superclocker"
 superclockerItem.stack_size = 10
-superclockerItem.weight = ROCKET / 10
+Item.perRocket(superclockerItem, 10)
 Item.copySoundsTo("energy-shield-equipment", superclockerItem)
 extend{superclockerItem}
 

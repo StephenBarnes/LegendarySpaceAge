@@ -60,6 +60,7 @@ require("data.fuel")
 require("data.space.main")
 require("data.tech-rate-triggers")
 require("data.no-lava-in-pipes")
+require("data.electric-vehicles")
 
 -- Files that adjust protos
 require("data.circuits-modules.remove-modules")

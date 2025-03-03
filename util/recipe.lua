@@ -273,7 +273,7 @@ Recipe.ingredientOrResultJoules = function(ingredientOrResult, allowZero)
 	if ingredientOrResult.type == "item" then
 		return Item.getJoules(ingredientOrResult.name, allowZero)
 	else
-		return Item.fluidGetJoules(ingredientOrResult.name, allowZero)
+		return Fluid.getJoules(ingredientOrResult.name, allowZero)
 	end
 end
 

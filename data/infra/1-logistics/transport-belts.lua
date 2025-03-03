@@ -86,11 +86,11 @@ for _, vals in pairs{
 
 	-- Set stack sizes and weights.
 	beltItem.stack_size = 200
-	beltItem.weight = ROCKET / 400
+	Item.perRocket(beltItem, 400)
 	undergroundItem.stack_size = 100
-	undergroundItem.weight = ROCKET / 200
+	Item.perRocket(undergroundItem, 200)
 	splitterItem.stack_size = 50
-	splitterItem.weight = ROCKET / 100
+	Item.perRocket(splitterItem, 100)
 
 	-- Set belt recipes.
 	beltRecipe.ingredients = vals.ingredients

@@ -24,4 +24,4 @@ mapGen.property_expression_names["entity:crude-oil:richness"] = nil
 Icon.set(FLUID["lithium-brine"], "LSA/aquilo/mineral-brine")
 
 -- Clear temperature spam for fluids.
-Item.setFluidSimpleTemp(FLUID["ammoniacal-solution"], -33, true, -50)
+Fluid.setSimpleTemp(FLUID["ammoniacal-solution"], -33, true, -50)

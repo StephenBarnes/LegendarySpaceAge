@@ -114,6 +114,8 @@ for _, stabilityTypeKey in pairs{
 		property = "surface-stability",
 		min = 80,
 	})
+
+	-- Could also edit their recipes so they can't be crafted. Not sure if I should do that.
 end
 
 

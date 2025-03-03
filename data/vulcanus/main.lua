@@ -113,7 +113,7 @@ Icon.set(inverseVulcanizationRecipe, {"plastic-bar", "tar"})
 extend({inverseVulcanizationTech, inverseVulcanizationRecipe})
 
 -- Clear temperature spam for fluids.
-Item.setFluidSimpleTemp(FLUID["lava"], 5000, true, 1500)
-Item.setFluidSimpleTemp(FLUID["molten-iron"], 5000, true, 1500)
-Item.setFluidSimpleTemp(FLUID["molten-copper"], 5000, true, 1500)
-Item.setFluidSimpleTemp(FLUID["molten-steel"], 5000, true, 1500)
+Fluid.setSimpleTemp(FLUID["lava"], 5000, true, 1500)
+Fluid.setSimpleTemp(FLUID["molten-iron"], 5000, true, 1500)
+Fluid.setSimpleTemp(FLUID["molten-copper"], 5000, true, 1500)
+Fluid.setSimpleTemp(FLUID["molten-steel"], 5000, true, 1500)

@@ -39,8 +39,8 @@ RAW.lab.biolab.energy_source.emissions_per_minute = nil
 -- Set stack sizes and rocket capacities.
 ITEM.glebalab.stack_size = 10
 ITEM.biolab.stack_size = 10
-ITEM.glebalab.weight = ROCKET / 100
-ITEM.biolab.weight = ROCKET / 100
+Item.perRocket(ITEM.glebalab, 100)
+Item.perRocket(ITEM.biolab, 100)
 
 -- Set science pack drain, and crafting speed.
 RAW.lab.glebalab.researching_speed = 2

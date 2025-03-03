@@ -169,7 +169,7 @@ local item = copy(ITEM["foundry"])
 item.name = "arc-furnace"
 Icon.set(item, "LSA/arc-furnace/icon")
 item.place_result = "arc-furnace"
-item.weight = ROCKET / 20
+Item.perRocket(item, 20)
 item.stack_size = 20
 extend{item}
 

@@ -4,7 +4,7 @@
 local uraniumHexafluoride = copy(FLUID["steam"])
 uraniumHexafluoride.name = "uranium-hexafluoride"
 Icon.set(uraniumHexafluoride, "LSA/nuclear/uranium-hexafluoride")
-Item.setFluidSimpleTemp(uraniumHexafluoride, 100, false, 10)
+Fluid.setSimpleTemp(uraniumHexafluoride, 100, false, 10)
 extend{uraniumHexafluoride}
 
 -- Create item for yellowcake.
