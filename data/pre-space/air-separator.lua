@@ -110,7 +110,7 @@ ent.fluid_boxes_off_when_no_fluid_recipe = false
 ent.ingredient_count = 1
 ent.energy_source.emissions_per_minute = {
 	pollution = -4,
-	spores = -4, -- For comparison, yumako tree is 15/harvest, and grows for 5m, so about 3/min spores.
+	spores = -2, -- For comparison, yumako tree is 15/harvest, and grows for 5m, so about 3/min spores.
 }
 ent.crafting_categories = {"air-separation"}
 ent.energy_usage = "200kW" -- So it's 5MW with drain.
@@ -207,7 +207,7 @@ for i, planetData in pairs{
 			{"nitrogen-gas", 200, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightMiddle},
 			{"oxygen-gas", 50, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
 		},
-		filtersPer20s = 1,
+		filtersPer50s = 1,
 	}},
 	{"vulcanus", {
 		results = {
@@ -215,7 +215,7 @@ for i, planetData in pairs{
 			{"oxygen-gas", 10, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightTop},
 			{"steam", 10, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
 		},
-		filtersPer20s = 2,
+		filtersPer50s = 2,
 		-- Every 100 volcanic gas is 1 carbon (before prod), so this uses 2 filters (<=2*0.5 carbon) to make ~1 carbon, so net even with carbon. But you can use prod modules to get net profit.
 		-- Player needs some way to get nitrogen, so added that to volcanic gas separation outputs.
 	}},
@@ -225,14 +225,14 @@ for i, planetData in pairs{
 			{"oxygen-gas", 100, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
 			{"dry-gas", 5, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
 		},
-		filtersPer20s = 2,
+		filtersPer50s = 2,
 	}},
 	{"fulgora", {
 		results = {
 			{"nitrogen-gas", 200, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightMiddle},
 			{"dry-gas", 50, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
 		},
-		filtersPer20s = 5, -- Lots of filters, partly bc I want to incentivize throwing away the spent filters instead of cleaning them.
+		filtersPer50s = 5, -- Lots of filters, partly bc I want to incentivize throwing away the spent filters instead of cleaning them.
 	}},
 	{"aquilo", {
 		results = {
@@ -240,22 +240,22 @@ for i, planetData in pairs{
 			{"ammonia", 50, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightTop},
 			{"dry-gas", 20, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
 		},
-		filtersPer20s = 1,
+		filtersPer50s = 1,
 	}},
 } do
 	local planetName = planetData[1]
 
-	local filtersPer20s = planetData[2].filtersPer20s
-	assert(filtersPer20s ~= nil, "No filtersPer20s specified for planet "..planetName)
+	local filtersPer50s = planetData[2].filtersPer50s
+	assert(filtersPer50s ~= nil, "No filtersPer50s specified for planet "..planetName)
 	local results = planetData[2].results
-	table.insert(results, {"spent-filter", filtersPer20s, ignored_by_productivity = filtersPer20s})
+	table.insert(results, {"spent-filter", filtersPer50s, ignored_by_productivity = filtersPer50s})
 
 	local recipe = Recipe.make{
 		copy = "air-separator",
 		recipe = "air-separation-"..planetName,
-		ingredients = {{"filter", filtersPer20s}},
+		ingredients = {{"filter", filtersPer50s}},
 		results = results,
-		time = 20,
+		time = 50,
 		order = tostring(i),
 		localised_name = {"recipe-name.air-separation-planet", {"space-location-name."..planetName}},
 		localised_description = {"recipe-description.air-separation-planet", {"space-location-name."..planetName}},
@@ -265,12 +265,8 @@ for i, planetData in pairs{
 		hide_from_player_crafting = true,
 		subgroup = "air-separation",
 		show_amount_in_title = false,
-	}
-	local planetIcon = RAW.planet[planetName].icon
-	assert(planetIcon ~= nil, "No icon found for planet "..planetName)
-	recipe.icons = { -- TODO rather have a standard iconArrangement for this, used by deep drill and air separator.
-		{icon = "__LegendarySpaceAge__/graphics/air-separator/icon.png", scale = 0.37, shift = {3, 3}},
-		{icon = planetIcon, scale = 0.2, shift={-8,-8}},
+		icons = {"air-separator", "planet/"..planetName},
+		iconArrangement = "planetFixed",
 	}
 end
 
@@ -288,10 +284,6 @@ tech.name = "air-separation"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "air-separator"},
 	{type = "unlock-recipe", recipe = "air-separation-nauvis"},
-	{type = "unlock-recipe", recipe = "air-separation-vulcanus"},
-	{type = "unlock-recipe", recipe = "air-separation-gleba"},
-	{type = "unlock-recipe", recipe = "air-separation-fulgora"},
-	{type = "unlock-recipe", recipe = "air-separation-aquilo"},
 }
 tech.prerequisites = {"electric-mining-drill", "electric-engine"} -- TODO
 Icon.set(tech, "LSA/air-separator/tech")
@@ -305,6 +297,11 @@ tech.unit = { -- TODO
 	},
 }
 extend{tech}
+
+-- Add air separation recipe to each planet tech.
+for _, planet in pairs{"vulcanus", "gleba", "fulgora", "aquilo"} do
+	Tech.addRecipeToTech("air-separation-"..planet, "planet-discovery-"..planet)
+end
 
 -- Create a collision layer for the air separator exclusion zones.
 extend{

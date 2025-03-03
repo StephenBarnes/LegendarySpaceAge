@@ -20,7 +20,7 @@ extend{assembledRocketPartItem}
 RECIPE["rocket-part"].hide_from_player_crafting = false
 RECIPE["rocket-part"].always_show_made_in = true
 
-local rocketPartAssemblyRecipe = Recipe.make{
+Recipe.make{
 	copy = "rocket-part",
 	recipe = "assembled-rocket-part",
 	ingredients = {
@@ -29,6 +29,7 @@ local rocketPartAssemblyRecipe = Recipe.make{
 		{"thruster-oxidizer", 10},
 	},
 	resultCount = 1,
+	time = 1,
 }
 RAW["rocket-silo"]["rocket-silo"].fixed_recipe = "assembled-rocket-part"
 

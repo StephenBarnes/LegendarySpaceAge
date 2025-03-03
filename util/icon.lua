@@ -21,7 +21,11 @@ Icon.getIconInfo = function(pathCode, proto)
 		rest = pathCode
 	end
 
-	if dirCode ~= nil and dirCodeToPath[dirCode] ~= nil then
+	if dirCode == "planet" then
+		local planetIcon = RAW.planet[rest].icon
+		assert(planetIcon ~= nil, "No icon found for planet "..rest)
+		return {path = planetIcon}
+	elseif dirCode ~= nil and dirCodeToPath[dirCode] ~= nil then
 		local path = dirCodeToPath[dirCode]
 		if dirCode ~= "LSA" then
 			if proto ~= nil and proto.type == "technology" then
@@ -90,6 +94,12 @@ local multiIconVals = {
 			{scale = 0.5, shift = {-4, 4}},
 			{scale = 0.3, shift = {6, -6}},
 			{scale = 0.33, shift = {-3, -4}},
+		},
+	},
+	planetFixed = {
+		[2] = {
+			{scale = 0.37, shift = {3, 3}},
+			{scale = 0.2, shift={-8,-8}},
 		},
 	},
 }

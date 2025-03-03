@@ -51,6 +51,7 @@ ent.dying_explosion = "agricultural-tower-explosion"
 ent.corpse = "biochamber-remnants"
 -- Circuit connector looks fine.
 local pipeCovers = pipecoverspictures()
+-- TODO make these fluid boxes passthrough, and add another output.
 ent.fluid_boxes = {
 	{
 		production_type = "input",

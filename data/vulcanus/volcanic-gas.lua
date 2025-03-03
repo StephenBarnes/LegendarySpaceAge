@@ -34,7 +34,7 @@ separationRecipe.results = {
 	{type = "item", name = "sulfur", amount = 1},
 	{type = "item", name = "carbon", amount = 1},
 	{type = "fluid", name = "water", amount = 10},
-	--{type = "fluid", name = "nitrogen-gas", amount = 10}, -- TODO re-enable once I add another output fluidbox.
+	{type = "fluid", name = "nitrogen-gas", amount = 10},
 }
 separationRecipe.enabled = false
 separationRecipe.allow_decomposition = false

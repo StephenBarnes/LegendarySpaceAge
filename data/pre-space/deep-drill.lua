@@ -173,61 +173,50 @@ extend{{
 	name = "deep-drill",
 }}
 
--- Create deep drill recipe for Nauvis: no ingredients => 10 stone
-local nauvisDrillingRecipe = copy(RECIPE["deep-drill"])
-nauvisDrillingRecipe.name = "deep-drill-nauvis"
-nauvisDrillingRecipe.ingredients = {}
-nauvisDrillingRecipe.results = {
-	{type = "item", name = "stone", amount = 10},
-	{type = "fluid", name = "lake-water", amount = 10},
-		-- TODO rename this to "groundwater" or sth, maybe allow filtering it for water and stone or sth.
-}
-nauvisDrillingRecipe.category = "deep-drill"
---nauvisDrillingRecipe.hidden = true
---nauvisDrillingRecipe.hidden_in_factoriopedia = true
-nauvisDrillingRecipe.hide_from_player_crafting = true
-nauvisDrillingRecipe.subgroup = "deep-drilling"
-nauvisDrillingRecipe.order = "1"
-nauvisDrillingRecipe.energy_required = 1
-nauvisDrillingRecipe.localised_name = {"recipe-name.deep-drill-planet", {"space-location-name.nauvis"}}
-nauvisDrillingRecipe.localised_description = {"recipe-description.deep-drill-planet", {"space-location-name.nauvis"}}
-nauvisDrillingRecipe.icon = nil
-nauvisDrillingRecipe.show_amount_in_title = false
-nauvisDrillingRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/deep-drill/item.png"},
-	{icon = "__base__/graphics/icons/nauvis.png", scale = 0.2, shift={-8,-8}},
-}
-extend{nauvisDrillingRecipe}
--- Create drilling recipes for other planets
+-- Create drilling recipe for each planet.
 for i, planetData in pairs{
+	{"nauvis", {
+		{"lake-water", 10, type = "fluid"},
+		{"stone", 10},
+	}},
 	{"vulcanus", {
-		--{type = "fluid", name = "lava", amount = 5}, -- Could make it produce lava, but then you could put lava in pipes.
-		{ type = "fluid", name = "tar",   amount = 5 },
-		{ type = "item",  name = "stone", amount = 10 },
-		{ type = "item",  name = "pitch", amount = 1 },
-		{ type = "item",  name = "ash", amount = 2 },
+		{"tar", 5, type = "fluid"},
+		{"stone", 10},
+		{"pitch", 1},
+		{"ash", 2},
 		-- Drill consumes 10MJ for each recipe, which can be reduced to 2MJ with modules. Each pitch is 3MJ, each tar is 200kJ.
+		-- Could make it produce lava, but then you could put lava in pipes.
 	}},
 	{"gleba", {
-		{ type = "fluid", name = "geoplasm",         amount = 10 },
-		{ type = "item",  name = "chitin-fragments", amount = 5 },
-		{ type = "item",  name = "marrow",           amount = 5 },
+		{"geoplasm", 10, type = "fluid"},
+		{"chitin-fragments", 5},
+		{"marrow", 5},
 	}},
 	{"fulgora", {
-		{type = "item", name = "stone", amount = 7},
-		{type = "item", name = "scrap", amount = 3},
-		{type = "fluid", name = "fulgoran-sludge", amount = 10},
+		{"stone", 7},
+		{"scrap", 3},
+		{"fulgoran-sludge", 10, type = "fluid"},
 	}},
 } do
 	local planetName = planetData[1]
-	local drillingRecipe = copy(nauvisDrillingRecipe)
-	drillingRecipe.name = "deep-drill-"..planetName
-	drillingRecipe.results = planetData[2]
-	drillingRecipe.order = tostring(i+1)
-	drillingRecipe.localised_name[2][1] = "space-location-name."..planetName
-	drillingRecipe.localised_description[2][1] = "space-location-name."..planetName
-	drillingRecipe.icons[2].icon = "__space-age__/graphics/icons/"..planetName..".png"
-	extend{drillingRecipe}
+	Recipe.make{
+		copy = "deep-drill",
+		recipe = "deep-drill-"..planetName,
+		ingredients = {},
+		results = planetData[2],
+		order = tostring(i),
+		localised_name = {"recipe-name.deep-drill-planet", {"space-location-name."..planetName}},
+		localised_description = {"recipe-description.deep-drill-planet", {"space-location-name."..planetName}},
+		icons = {"deep-drill", "planet/"..planetName},
+		iconArrangement = "planetFixed",
+		category = "deep-drill",
+		allow_productivity = true,
+		allow_quality = false,
+		hide_from_player_crafting = true,
+		subgroup = "deep-drilling",
+		show_amount_in_title = false,
+		time = 1,
+	}
 end
 
 -- Create a subgroup for the drilling recipes
@@ -244,9 +233,6 @@ tech.name = "deep-drill"
 tech.effects = {
 	{type = "unlock-recipe", recipe = "deep-drill"},
 	{type = "unlock-recipe", recipe = "deep-drill-nauvis"},
-	{type = "unlock-recipe", recipe = "deep-drill-vulcanus"},
-	{type = "unlock-recipe", recipe = "deep-drill-gleba"},
-	{type = "unlock-recipe", recipe = "deep-drill-fulgora"},
 }
 tech.prerequisites = {"electric-mining-drill", "electric-engine"}
 Icon.set(tech, "LSA/deep-drill/tech")
@@ -260,6 +246,11 @@ tech.unit = {
 	},
 }
 extend{tech}
+
+-- Add drilling recipe to each planet tech.
+for _, planet in pairs{"vulcanus", "gleba", "fulgora"} do
+	Tech.addRecipeToTech("deep-drill-"..planet, "planet-discovery-"..planet)
+end
 
 -- Gleba needs deep drill. Technically it's possible without that, but won't be fully self-sustaining.
 Tech.addTechDependency("deep-drill", "planet-discovery-gleba")
