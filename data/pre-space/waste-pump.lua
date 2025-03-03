@@ -25,7 +25,7 @@ wastePump.fluid_boxes = {
 		base_level = -1,
 		volume = 2400,
 		pipe_connections = {
-			{position = {0, 0}, flow_direction = "input", direction = defines.direction.south},
+			{position = {0, 0}, flow_direction = "input", direction = SOUTH},
 		},
 	},
 }

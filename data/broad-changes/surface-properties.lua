@@ -40,6 +40,9 @@ for _, recipeName in pairs{
 end
 
 -- Search for things requiring pressure over 10hPa, and change them to require oxygen-pressure over 10hPa.
+local excluded = {
+	["air-separator"] = true,
+}
 for _, typeName in pairs{
 	"recipe",
 	"assembling-machine",
@@ -52,9 +55,11 @@ for _, typeName in pairs{
 } do
 	for _, thing in pairs(RAW[typeName]) do
 		if thing.surface_conditions ~= nil then
-			for _, condition in pairs(thing.surface_conditions) do
-				if condition.property == "pressure" and condition.min == 10 and condition.max == nil then
-					condition.property = "oxygen-pressure"
+			if excluded[thing.name] ~= true then
+				for _, condition in pairs(thing.surface_conditions) do
+					if condition.property == "pressure" and condition.min == 10 and condition.max == nil then
+						condition.property = "oxygen-pressure"
+					end
 				end
 			end
 		end

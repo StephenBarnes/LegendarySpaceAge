@@ -24,8 +24,8 @@ ent.fluid_boxes = {
 		base_level = 1,
 		volume = 200,
 		pipe_connections = {
-			{flow_direction = "input-output", position = {0, -5}, direction = defines.direction.north},
-			{flow_direction = "input-output", position = {0,  5}, direction = defines.direction.south},
+			{flow_direction = "input-output", position = {0, -5}, direction = NORTH},
+			{flow_direction = "input-output", position = {0,  5}, direction = SOUTH},
 		},
 		secondary_draw_orders = draworders,
 		hide_connection_info = false,

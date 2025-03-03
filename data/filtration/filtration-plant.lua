@@ -62,7 +62,7 @@ ent.fluid_boxes = {
 		pipe_connections = {
 			{
 				flow_direction = "input",
-				direction = defines.direction.north,
+				direction = NORTH,
 				positions = {
 					{-0.5, -2.5},
 					{2.5, 0.5},
@@ -82,7 +82,7 @@ ent.fluid_boxes = {
 		pipe_connections = {
 			{
 				flow_direction = "output",
-				direction = defines.direction.south,
+				direction = SOUTH,
 				positions = {
 					{-0.5, 2.5},
 					{-2.5, 0.5},

@@ -3,13 +3,13 @@
 local oilRefinery = ASSEMBLER["oil-refinery"]
 local newFluidBox1 = copy(oilRefinery.fluid_boxes[5])
 newFluidBox1.pipe_connections = {
-	{position = {-2, 1}, direction = defines.direction.west, flow_direction = "output"},
+	{position = {-2, 1}, direction = WEST, flow_direction = "output"},
 }
 newFluidBox1.pipe_picture = GreyPipes.pipeBlocksShortWest()
 
 local newFluidBox2 = copy(oilRefinery.fluid_boxes[5])
 newFluidBox2.pipe_connections = {
-	{position = {2, 1}, direction = defines.direction.east, flow_direction = "output"},
+	{position = {2, 1}, direction = EAST, flow_direction = "output"},
 }
 newFluidBox2.pipe_picture = GreyPipes.pipeBlocksShortWest()
 
@@ -28,7 +28,7 @@ oilRefinery.fluid_boxes = {
 local chemPlant = ASSEMBLER["chemical-plant"]
 local newFluidBox = copy(chemPlant.fluid_boxes[1])
 newFluidBox.pipe_connections = {
-	{position = {1, 0}, direction = defines.direction.east, flow_direction = "input"},
+	{position = {1, 0}, direction = EAST, flow_direction = "input"},
 }
 newFluidBox.pipe_picture = GreyPipes.pipeBlocksShortNorthWest()
 chemPlant.fluid_boxes = {
@@ -44,7 +44,7 @@ chemPlant.fluid_boxes_off_when_no_fluid_recipe = false -- If this is true, they 
 local bioChamber = ASSEMBLER["biochamber"]
 local newFluidBoxB = copy(bioChamber.fluid_boxes[1])
 newFluidBoxB.pipe_connections = {
-	{position = {-1, 0}, direction = defines.direction.west, flow_direction = "input"},
+	{position = {-1, 0}, direction = WEST, flow_direction = "input"},
 }
 bioChamber.fluid_boxes = {
 	bioChamber.fluid_boxes[1], -- input
@@ -132,7 +132,7 @@ rocketSilo.fluid_boxes = {
 local cryogenicPlant = ASSEMBLER["cryogenic-plant"]
 local newFluidBoxC = copy(cryogenicPlant.fluid_boxes[6])
 newFluidBoxC.pipe_connections = {
-	{position = {-2, 0}, direction = defines.direction.west, flow_direction = "output"},
+	{position = {-2, 0}, direction = WEST, flow_direction = "output"},
 }
 cryogenicPlant.fluid_boxes = {
 	cryogenicPlant.fluid_boxes[1], -- input

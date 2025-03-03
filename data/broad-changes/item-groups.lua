@@ -200,10 +200,10 @@ setSubgroupInOrder("fulgora-agriculture", "recipe", {"electrophage-cultivation",
 setSubgroupInOrder("electricity-related", {"item", "recipe"},
 	{"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector", "nuclear-reactor", "fusion-reactor", "fusion-generator"})
 setSubgroupInOrder("planetary-special", {"item", "recipe"},
-	{"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge", "cryogenic-plant"})
+	{"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge"})
 
 setSubgroupInOrder("chemical-processing", {"item", "recipe"},
-	{"filtration-plant", "chemical-plant", "oil-refinery", "gasifier", "fluid-fuelled-gasifier"})
+	{"chemical-plant", "cryogenic-plant", "oil-refinery", "filtration-plant", "air-separator", "gasifier", "fluid-fuelled-gasifier"})
 ITEM["agricultural-tower"].subgroup = "extraction-machine"
 ITEM["agricultural-tower"].order = "c"
 local labs = {"lab", "glebalab", "biolab"}

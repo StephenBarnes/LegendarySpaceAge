@@ -41,7 +41,7 @@ function Inserters.create_for_struct(struct)
 		force = "neutral",
 		position = { 0.5 + struct.index, -1.5 },
 		---@diagnostic disable-next-line: assign-type-mismatch
-		direction = defines.direction.south,
+		direction = SOUTH,
 	}
 	assert(struct.inserter_1)
 	inserter_1_cb = struct.inserter_1.get_or_create_control_behavior() --[[@as LuaInserterControlBehavior]]
@@ -69,7 +69,7 @@ function Inserters.create_for_struct(struct)
 		force = "neutral",
 		position = { 0.5 + struct.index, -4.5 },
 		---@diagnostic disable-next-line: assign-type-mismatch
-		direction = defines.direction.south,
+		direction = SOUTH,
 	}
 	assert(struct.inserter_2)
 	inserter_2_cb = struct.inserter_2.get_or_create_control_behavior() --[[@as LuaInserterControlBehavior]]
@@ -156,6 +156,7 @@ function Handler.on_created_entity(event)
 	end
 
 	local entity = event.entity or event.destination
+	if not entity.valid then return end -- SAB added, seems to be needed because I'm adding air-separator-exclusion stuff.
 	if entity.name ~= APPLIES_TO_ENT then return end
 
 	local struct = new_struct(storage.structs, {

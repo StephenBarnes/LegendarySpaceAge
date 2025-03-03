@@ -85,7 +85,7 @@ ventEnt.fluid_boxes = {
 		production_type = "input",
 		pipe_covers = pipecoverspictures(), -- Seems to be already globally defined? TODO check
 		volume = 240,
-		pipe_connections = { { flow_direction = "input", direction = defines.direction.south, position = {0, 0} } },
+		pipe_connections = { { flow_direction = "input", direction = SOUTH, position = {0, 0} } },
 	}
 }
 ventEnt.surface_conditions = nil -- Should be able to vent on space platforms too.

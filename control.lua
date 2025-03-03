@@ -2,6 +2,7 @@ local startingEquipment = require("control.starting-items")
 local natGasWells = require("control.natural-gas-wells")
 local notifyIncorrectMapgenPreset = require("control.notify-incorrect-mapgen-preset")
 local deepDrillRecipe = require("control.deep-drill-recipe")
+local airSeparator = require("control.air-separator")
 local apprenticeFoundry = require("control.apprentice-arc-furnace")
 local qualityPowerScaling = require("control.quality-power-scaling")
 local noLavaInPipes = require("control.no-lava-in-pipes")
@@ -29,6 +30,7 @@ for _, event in ipairs({
 }) do
 	script.on_event(event, function(e)
 		deepDrillRecipe.onBuilt(e)
+		airSeparator.onBuilt(e)
 		apprenticeFoundry.on_created_entity(e)
 		qualityPowerScaling.onBuilt(e)
 		noLavaInPipes.onBuilt(e)
@@ -45,6 +47,7 @@ end)
 
 script.on_event(defines.events.on_object_destroyed, function(e)
 	apprenticeFoundry.on_object_destroyed(e)
+	airSeparator.onObjectDestroyed(e)
 end)
 
 

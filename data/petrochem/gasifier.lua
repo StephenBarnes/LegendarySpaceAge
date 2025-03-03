@@ -128,14 +128,14 @@ gasifierEnt.fluid_boxes = {
 		production_type = "input",
 		pipe_covers = pipecoverspictures(), -- Seems to be already globally defined.
 		volume = 20,
-		pipe_connections = { { flow_direction = "input", direction = defines.direction.west, position = {0, 0} } },
+		pipe_connections = { { flow_direction = "input", direction = WEST, position = {0, 0} } },
 		filter = "steam",
 	},
 	{
 		production_type = "output",
 		pipe_covers = pipecoverspictures(),
 		volume = 20,
-		pipe_connections = { { flow_direction = "output", direction = defines.direction.east, position = {0, 0} } },
+		pipe_connections = { { flow_direction = "output", direction = EAST, position = {0, 0} } },
 		filter = "syngas",
 	},
 }
@@ -157,7 +157,7 @@ fluidGasifierEnt.energy_source = {
 		pipe_picture = furnacepipepictures,
 		pipe_covers = pipecoverspictures(),
 		pipe_connections = {
-			{flow_direction = "input", position = { 0, 0}, direction = defines.direction.north},
+			{flow_direction = "input", position = { 0, 0}, direction = NORTH},
 		},
 		secondary_draw_orders = draworders,
 		hide_connection_info = false,

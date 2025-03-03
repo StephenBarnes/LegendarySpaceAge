@@ -19,8 +19,8 @@ fluidHeatingTowerEnt.energy_source = {
 		pipe_picture = GreyPipes.pipeBlocks(),
 		pipe_covers = pipecoverspictures(),
 		pipe_connections = {
-			{flow_direction = "input-output", position = {1, 0}, direction = defines.direction.east},
-			{flow_direction = "input-output", position = {-1, 0}, direction = defines.direction.west},
+			{flow_direction = "input-output", position = {1, 0}, direction = EAST},
+			{flow_direction = "input-output", position = {-1, 0}, direction = WEST},
 		},
 		secondary_draw_orders = draworders,
 		hide_connection_info = false,
@@ -38,10 +38,10 @@ fluidHeatingTowerEnt.icons = {
 fluidHeatingTowerEnt.hidden_in_factoriopedia = false
 -- Adjust heat pipes, since I want the fluid pipes to be where the side heat pipes used to be.
 fluidHeatingTowerEnt.heat_buffer.connections = {
-	{position = {0, -1}, direction = defines.direction.north},
-	{position = {1, -1}, direction = defines.direction.east},
-	{position = {0, 1}, direction = defines.direction.south},
-	{position = {-1, -1}, direction = defines.direction.west},
+	{position = {0, -1}, direction = NORTH},
+	{position = {1, -1}, direction = EAST},
+	{position = {0, 1}, direction = SOUTH},
+	{position = {-1, -1}, direction = WEST},
 }
 extend{fluidHeatingTowerEnt}
 

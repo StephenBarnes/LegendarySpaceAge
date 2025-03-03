@@ -280,7 +280,7 @@ superclockerEnt.fluid_boxes = {
 		pipe_connections = {
 			{
 				flow_direction = "input",
-				direction = defines.direction.north,
+				direction = NORTH,
 				positions = {
 					{-0.5, -2.5},
 					{2.5, 0.5},
