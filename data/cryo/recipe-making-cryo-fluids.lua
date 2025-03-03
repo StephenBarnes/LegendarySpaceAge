@@ -2,21 +2,6 @@
 
 local nitrogenCompressionRecipe = RECIPE["nitrogen-compression"]
 
--- Create recipe for regenerative cooling: 50 liquid nitrogen + 200 nitrogen gas -> 200 compressed nitrogen gas
-Recipe.make{
-	copy = nitrogenCompressionRecipe,
-	recipe = "regenerative-cooling",
-	ingredients = {
-		{"liquid-nitrogen", 50},
-		{"nitrogen-gas", 200},
-	},
-	results = {
-		{"compressed-nitrogen-gas", 200},
-	},
-	icons = {"nitrogen-gas", "liquid-nitrogen"}, -- TODO better icons
-}
-Tech.addRecipeToTech("regenerative-cooling", "cryogenic-plant") -- TODO add to its own tech, after cryogenic-plant.
-
 -- Syngas reforming: 100 syngas + 100 steam -> 100 hydrogen gas (plus carbon dioxide, ignored)
 Recipe.make{
 	copy = nitrogenCompressionRecipe,
@@ -31,29 +16,31 @@ Recipe.make{
 	icons = {"hydrogen-gas", "syngas", "steam"}, -- TODO better icons
 	category = "chemistry",
 }
-Tech.addRecipeToTech("syngas-reforming", "cryogenic-plant") -- TODO tech
+Tech.addRecipeToTech("syngas-reforming", "cryogenic-plant")
 
 -- Ammonia cracking: 20 ammonia -> 10 hydrogen + 10 nitrogen
 -- Checked: ammonia cracking is NOT very similar to water electrolysis. So not going to unlock them together, probably.
 -- Checked: ammonia cracking uses a catalyst, often nickel or iron-based.
--- TODO this should be slow, only worthwhile on Aquilo.
+-- TODO this should be slow, worthwhile on Aquilo but only maybe-worthwhile on Nauvis. (Ie getting nitrogen via wood->ammonia should be generally harder than getting it via syngas.)
 Recipe.make{
 	copy = nitrogenCompressionRecipe,
 	recipe = "ammonia-cracking",
 	ingredients = {
-		{"ammonia", 20},
+		{"ammonia", 100},
 		{"iron-plate", 1},
 	},
 	results = {
-		{"hydrogen-gas", 10},
-		{"nitrogen-gas", 10},
+		{"hydrogen-gas", 100},
+		{"nitrogen-gas", 100},
 	},
-	time = 5,
-	icons = {"ammonia", "hydrogen-gas", "nitrogen-gas"}, -- TODO better icons
+	time = 10,
+	icons = {"ammonia", "hydrogen-gas", "nitrogen-gas"},
 	iconArrangement = "decomposition",
 	category = "chemistry",
+	allow_quality = false,
+	allow_productivity = false,
 }
-Tech.addRecipeToTech("ammonia-cracking", "cryogenic-plant") -- TODO tech
+-- Added to ammonia-2 tech when that's created.
 
 -- Electrolysis: 20 water -> 10 hydrogen + 10 oxygen
 -- Checked: electrolysis generally done with liquid water, not steam.

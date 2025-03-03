@@ -5,28 +5,81 @@ Using graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 local GRAPHICS_FOLDER = "__LegendarySpaceAge__/graphics/primer/"
 
 -- Create circuit primer entity.
-local primerEnt = copy(FURNACE["electric-furnace"])
+---@diagnostic disable-next-line: assign-type-mismatch
+local primerEnt = copy(FURNACE["electric-furnace"]) ---@type data.AssemblingMachinePrototype
+primerEnt.type = "assembling-machine"
 primerEnt.name = "circuit-primer"
 primerEnt.icon = GRAPHICS_FOLDER.."1/icon.png"
 primerEnt.minable = {mining_time = 1, result = "circuit-primer"}
 primerEnt.placeable_by = {item = "circuit-primer", count = 1}
 primerEnt.crafting_speed = 1
-primerEnt.selection_box = {{-2.5, -3}, {2.5, 3}}
-primerEnt.collision_box = {{-2.4, -2.5}, {2.4, 2.92}}
-primerEnt.tile_height = 6
+primerEnt.selection_box = {{-2.5, -2.5}, {2.5, 2.5}}
+primerEnt.collision_box = {{-2.4, -2.4}, {2.4, 2.4}}
+primerEnt.tile_height = 5
 primerEnt.tile_width = 5
 primerEnt.crafting_categories = {"circuit-priming"}
-primerEnt.energy_usage = "500kW"
-primerEnt.energy_source.drain = "500kW"
-primerEnt.heating_energy = "200kW"
+primerEnt.energy_usage = "800kW"
+primerEnt.energy_source.drain = "200kW"
+primerEnt.heating_energy = "500kW"
 primerEnt.emissions_per_second = nil
 primerEnt.energy_source.emissions_per_minute = nil
 primerEnt.max_health = 500
-primerEnt.cant_insert_at_source_message_key = "inventory-restriction.cant-be-primed"
 primerEnt.perceived_performance = {maximum = 1.5} -- So it doesn't become crazy fast when beaconed.
 primerEnt.allowed_effects = {"consumption", "speed", "pollution"} -- Not prod or quality.
 primerEnt.fast_replaceable_group = nil
 primerEnt.resistances = copy(ASSEMBLER["electromagnetic-plant"].resistances)
+local PIPE_PICTURES = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures
+primerEnt.fluid_boxes = {
+	{
+		production_type = "input",
+		pipe_covers = pipecoverspictures(),
+		pipe_picture = PIPE_PICTURES,
+		secondary_draw_orders = {north=-1, west=1, south=1, east=1},
+		pipe_connections = {
+			{
+				flow_direction = "input",
+				direction = WEST,
+				positions = {
+					{-2, 0},
+					{0, -2},
+					{2, 0},
+					{0, 2},
+				},
+			},
+		},
+		volume = 100,
+	},
+	{
+		production_type = "output",
+		pipe_covers = pipecoverspictures(),
+		pipe_picture = PIPE_PICTURES,
+		secondary_draw_orders = {north=-1, west=1, south=1, east=1},
+		pipe_connections = {
+			{
+				flow_direction = "input-output",
+				direction = NORTH,
+				positions = {
+					{0, -2},
+					{2, 0},
+					{0, 2},
+					{-2, 0},
+				},
+			},
+			{
+				flow_direction = "input-output",
+				direction = SOUTH,
+				positions = {
+					{0, 2},
+					{-2, 0},
+					{0, -2},
+					{2, 0},
+				},
+			},
+		},
+		volume = 100,
+	},
+}
+local primerGraphicsShift = {0, -0.42}
 primerEnt.graphics_set = {
 	animation = {
 		layers = {
@@ -39,6 +92,7 @@ primerEnt.graphics_set = {
 				animation_speed = 1,
 				draw_as_shadow = true,
 				scale = 0.5,
+				shift = primerGraphicsShift,
 			},
 			{
 				width = 330,
@@ -46,6 +100,7 @@ primerEnt.graphics_set = {
 				frame_count = 80,
 				animation_speed = 1,
 				scale = 0.5,
+				shift = primerGraphicsShift,
 				stripes = {
 					{
 						filename = GRAPHICS_FOLDER.."1/animation-1.png",
@@ -86,6 +141,7 @@ primerEnt.graphics_set = {
 						height_in_frames = 2,
 					},
 				},
+				shift = primerGraphicsShift,
 			},
 		}
 	},

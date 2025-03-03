@@ -229,6 +229,7 @@ Gen.orderKinds("module", {ITEM, RECIPE}, {
 	"advanced-circuit",
 	"processing-unit",
 	"white-circuit",
+	--"quantum-processor",
 })
 Gen.orderKinds("module-2", {RAW.module, RECIPE}, {
 	"electronic-circuit-primed",
@@ -236,7 +237,7 @@ Gen.orderKinds("module-2", {RAW.module, RECIPE}, {
 	"processing-unit-primed",
 	"white-circuit-primed",
 }, "1-")
-Gen.orderKinds("module-2", {FURNACE, RECIPE, ITEM}, {"circuit-primer"}, "2-")
+Gen.orderKinds("module-2", {ASSEMBLER, RECIPE, ITEM}, {"circuit-primer"}, "2-")
 Gen.orderKinds("module-2", {RAW.beacon, RECIPE, ITEM}, {"basic-beacon"}, "3-")
 Gen.orderKinds("module-3", {RAW.module, RECIPE}, {
 	"electronic-circuit-superclocked",

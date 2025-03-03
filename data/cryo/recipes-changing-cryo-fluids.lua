@@ -19,6 +19,8 @@ local nitrogenCompressionRecipe = Recipe.make{
 	},
 	enabled = false,
 	icons = {"compressed-nitrogen-gas", "nitrogen-gas", "water"}, -- TODO better icons
+	allow_quality = false,
+	allow_productivity = false,
 }
 Tech.addRecipeToTech("nitrogen-compression", "cryogenic-plant") -- TODO add to something else
 
@@ -35,6 +37,8 @@ Recipe.make{
 	},
 	icons = {"compressed-nitrogen-gas", "liquid-nitrogen", "nitrogen-gas"}, -- TODO better icons
 	iconArrangement = "decomposition",
+	allow_quality = false,
+	allow_productivity = false,
 }
 Tech.addRecipeToTech("nitrogen-expansion", "cryogenic-plant") -- TODO add to something else
 
@@ -52,6 +56,8 @@ Recipe.make{
 		{"nitrogen-gas", 100},
 	},
 	icons = {"thruster-oxidizer", "liquid-nitrogen"}, -- TODO better icons
+	allow_quality = false,
+	allow_productivity = false,
 }
 Tech.addRecipeToTech("oxygen-cascade-cooling", "cryogenic-plant") -- TODO add to something else
 
@@ -71,6 +77,33 @@ Recipe.make{
 		{"nitrogen-gas", 100},
 	},
 	icons = {"thruster-fuel", "thruster-oxidizer"}, -- TODO better icons
+	allow_quality = false,
+	allow_productivity = false,
 }
 Tech.addRecipeToTech("hydrogen-cascade-cooling", "cryogenic-plant") -- TODO add to something else
 -- TODO add more fluid I/O to cryogenic plant, so this actually works.
+
+-- Create recipe for regenerative cooling: 50 liquid nitrogen + 200 nitrogen gas -> 200 compressed nitrogen gas
+Recipe.make{
+	copy = nitrogenCompressionRecipe,
+	recipe = "regenerative-cooling",
+	ingredients = {
+		{"liquid-nitrogen", 50},
+		{"nitrogen-gas", 200},
+	},
+	results = {
+		{"compressed-nitrogen-gas", 200},
+	},
+	icons = {"nitrogen-gas", "liquid-nitrogen"}, -- TODO better icons
+}
+-- Will be added to cryogenic-plant-2 tech when that's created.
+
+-- Disable the Space Age recipes for thruster fuel and oxidizer.
+Recipe.hide("thruster-fuel")
+Recipe.hide("thruster-oxidizer")
+Tech.removeRecipeFromTech("thruster-fuel", "space-platform-thruster")
+Tech.removeRecipeFromTech("thruster-oxidizer", "space-platform-thruster")
+Recipe.hide("advanced-thruster-fuel")
+Recipe.hide("advanced-thruster-oxidizer")
+Tech.removeRecipeFromTech("advanced-thruster-fuel", "advanced-asteroid-processing")
+Tech.removeRecipeFromTech("advanced-thruster-oxidizer", "advanced-asteroid-processing")

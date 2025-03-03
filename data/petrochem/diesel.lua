@@ -40,7 +40,7 @@ tech.effects = {
 	{type = "unlock-recipe", recipe = "make-diesel"},
 }
 Icon.set(tech, "LSA/petrochem/diesel-tech")
-tech.prerequisites = {"oil-processing", "fluid-containers"}
+tech.prerequisites = {"oil-processing"}
 tech.unit.ingredients = {
 	{"automation-science-pack", 1},
 	{"logistic-science-pack", 1},

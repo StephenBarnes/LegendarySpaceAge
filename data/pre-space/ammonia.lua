@@ -22,6 +22,7 @@ ammonia2Tech.prerequisites = {"chemical-science-pack"} -- Assume chemical scienc
 Icon.set(ammonia2Tech, "LSA/ammonia/tech")
 ammonia2Tech.effects = {
 	{type = "unlock-recipe", recipe = "ammonia-synthesis"},
+	{type = "unlock-recipe", recipe = "ammonia-cracking"},
 }
 ammonia2Tech.unit = {
 	count = 1000,
@@ -120,8 +121,8 @@ Icon.set(ammoniaSynthesisRecipe, {"ammonia", "hydrogen-gas", "nitrogen-gas"})
 ammoniaSynthesisRecipe.energy_required = 1
 extend{ammoniaSynthesisRecipe}
 
--- Aquilo should require ammonia 2 tech? Not really. Maybe if I later add tech to make fuel from ammonia, separate from the Aquilo discovery tech. TODO.
---Tech.addTechDependency("ammonia-2", "planet-discovery-aquilo")
+-- Aquilo should require ammonia 2 tech, for the ammonia cracking recipe.
+Tech.addTechDependency("ammonia-2", "planet-discovery-aquilo")
 
 -- Clear temperature spam for ammonia fluid. Assume it's gas most of the time.
 Fluid.setSimpleTemp(FLUID["ammonia"], -33, false, 0)

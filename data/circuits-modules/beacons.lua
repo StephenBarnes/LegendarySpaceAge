@@ -279,7 +279,7 @@ basicTech.effects = {
 	},
 }
 Icon.set(basicTech, "LSA/beacons/tech")
-basicTech.prerequisites = {"logistic-science-pack"}
+basicTech.prerequisites = {"cryogenic-plant"}
 basicTech.unit = copy(TECH["modules"].unit)
 basicTech.unit.count = 2 * basicTech.unit.count
 extend{basicTech}

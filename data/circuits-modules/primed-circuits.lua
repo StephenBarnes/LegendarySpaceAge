@@ -76,6 +76,7 @@ local CIRCUITS = {
 		superclockedEffect = {quality = .5},
 	},
 }
+-- TODO add priming and superclocking for quantum circuits!
 
 -- Add tints to circuit recipes. These are used in the primer and superclocker buildings.
 for _, vals in pairs(CIRCUITS) do
@@ -139,15 +140,21 @@ for _, vals in pairs(CIRCUITS) do
 	local primedRecipe = Recipe.make{
 		copy = circName,
 		recipe = primedCircName,
-		ingredients = {circName},
-		resultCount = 1,
+		ingredients = {
+			{circName, 1},
+			{"liquid-nitrogen", 1, type = "fluid"},
+		},
+		results = {
+			{primedCircName, 1},
+			{"nitrogen-gas", 1, type = "fluid"},
+		},
+		main_product = primedCircName,
 		category = "circuit-priming",
 		enabled = false,
 		time = 0.5,
+		allow_quality = false,
+		allow_productivity = false,
 	}
-	primedRecipe.allow_productivity = false
-	primedRecipe.allow_quality = false
-	primedRecipe.results[1].ignored_by_productivity = 1
 
 	-- Create recipe for superclocked circuit.
 	local superclockedRecipe = Recipe.make{
@@ -158,6 +165,7 @@ for _, vals in pairs(CIRCUITS) do
 			{"electrolyte", 1},
 		},
 		results = {{superclockedCircName, 1, probability = .9}},
+		main_product = superclockedCircName,
 		category = "circuit-superclocking",
 		time = 1,
 	}

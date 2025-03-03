@@ -285,15 +285,14 @@ tech.effects = {
 	{type = "unlock-recipe", recipe = "air-separator"},
 	{type = "unlock-recipe", recipe = "air-separation-nauvis"},
 }
-tech.prerequisites = {"electric-mining-drill", "electric-engine"} -- TODO
+tech.prerequisites = {"fluid-handling"}
 Icon.set(tech, "LSA/air-separator/tech")
 tech.unit = { -- TODO
 	count = 100,
-	time = 30,
+	time = 15,
 	ingredients = {
 		{"automation-science-pack", 1},
 		{"logistic-science-pack", 1},
-		{"chemical-science-pack", 1},
 	},
 }
 extend{tech}

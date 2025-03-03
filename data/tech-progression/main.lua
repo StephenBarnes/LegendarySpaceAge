@@ -355,8 +355,40 @@ Tech.removeSciencePack("production-science-pack", "automation-3")
 -- Logistics 1 tech doesn't give "faster ways of transportation".
 TECH["logistics"].localised_description = {"technology-description.logistics-1"}
 
--- Make tech for chem plant.
+-- Move cryo tech to early game.
+Tech.setPrereqs("cryogenic-plant", {"air-separation", "coal-liquefaction"}) -- Needs coal liquefaction for syngas.
+Tech.setUnit("cryogenic-plant", {
+	count = 100,
+	ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}},
+	time = 15,
+})
+TECH["cryogenic-plant"].research_trigger = nil
+-- Cryo plant is needed before rocket silo.
+Tech.addTechDependency("cryogenic-plant", "rocket-silo")
+-- Repair cryo science pack tech.
+TECH["cryogenic-science-pack"].prerequisites = {"lithium-processing"}
+TECH["cryogenic-science-pack"].research_trigger = {
+	type = "craft-item",
+	item = "lithium-plate",
+	count = 10,
+}
+-- Make a separate tech for regenerative cooling.
+local cryo2Tech = copy(TECH["cryogenic-plant"])
+cryo2Tech.name = "cryogenic-plant-2"
+cryo2Tech.prerequisites = {"cryogenic-plant", "chemical-science-pack"}
+cryo2Tech.effects = {
+	{type = "unlock-recipe", recipe = "regenerative-cooling"},
+}
+cryo2Tech.unit = {
+	count = 100,
+	ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}},
+	time = 30,
+}
+cryo2Tech.localised_description = {"technology-description.cryogenic-plant-2"}
+extend{cryo2Tech}
 
+-- Make tech for chem plant.
+-- TODO
 
 -- TODO make techs for electronics, unlocking extra recipes for sensors, electronic components, etc. Using graphics from 1.1 techs.
 
