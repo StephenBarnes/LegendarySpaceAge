@@ -21,6 +21,8 @@ TODO:
 local ALLOW_SELECT_EXCLUSIONS = true -- Whether to allow selection of the exclusion zones - for debugging.
 local EXCLUSION_DIMS = {15, 9} -- Tested with both odd; I think they could be even too.
 	-- Note that control/air-separator.lua computes distance from center of air separator to center of exclusion zone, using the 2nd number here (y) as y/2 + 1.5. Making the 2nd number smaller than the 1st number is best, so that it's more rounded rather than cross-shaped.
+local EXCLUSION_LONG_SIDE = EXCLUSION_DIMS[1]
+local EXCLUSION_SHORT_SIDE = EXCLUSION_DIMS[2]
 
 local ent = copy(ASSEMBLER["assembling-machine-3"])
 ent.name = "air-separator"
@@ -157,21 +159,41 @@ ent.dying_explosion = "rocket-silo-explosion" -- TODO
 ent.max_health = 200
 ent.circuit_connector = copy(RAW["rocket-silo"]["rocket-silo"].circuit_connector) -- TODO
 ent.surface_conditions = {{property = "pressure", min = 10}} -- So it can't be built on space platforms.
-ent.placeable_position_visualization = { -- TODO testing.
+--[[ent.placeable_position_visualization = { -- TODO testing.
 	filename = "__core__/graphics/cursor-boxes-32x32.png",
 	priority = "extra-high-no-scale",
 	size = 64,
 	scale = 0.5,
 	x = 3*64, -- Image file is a row of box images. This selects which image to use.
+}]]
+local trim = 0.05
+local function trimBounds(bounds)
+	return {
+		{bounds[1][1] + trim, bounds[1][2] + trim},
+		{bounds[2][1] - trim, bounds[2][2] - trim},
+	}
+end
+local entBounds = trimBounds{{-1.5, -1.5}, {1.5, 1.5}}
+local buildabilityRules = {
+	{area = entBounds, required_tiles = {layers = {ground_tile = true}}, remove_on_collision = false},
 }
-local boundsHorizontal = {{-EXCLUSION_DIMS[1] - 1.5, -EXCLUSION_DIMS[2] - 1.5}, {EXCLUSION_DIMS[1] + 1.5, EXCLUSION_DIMS[2] + 1.5}}
-local boundsVertical = {{-EXCLUSION_DIMS[2] - 1.5, -EXCLUSION_DIMS[1] - 1.5}, {EXCLUSION_DIMS[2] + 1.5, EXCLUSION_DIMS[1] + 1.5}}
-local tempBounds = {{-5, -5}, {-3, -3}}
-local entBounds = {{-1.5, -1.5}, {1.5, 1.5}}
-ent.tile_buildability_rules = { -- TODO testing. Add tile buildability rules, just so that the box is visible.
-	{area = entBounds, required_tiles = {layers = {ground_tile = true}}, colliding_tiles = {layers = {air_separator_exclusion = true}}, remove_on_collision = true},
-	--{area = boundsVertical, colliding_tiles = {layers={}}, remove_on_collision = false},
-}
+for _, exclusionBox in pairs{
+	trimBounds{{-EXCLUSION_LONG_SIDE/2, -1.5-EXCLUSION_SHORT_SIDE}, {EXCLUSION_LONG_SIDE/2, -1.5}}, -- Box above the air-separator.
+	trimBounds{{-1.5-EXCLUSION_SHORT_SIDE, -EXCLUSION_LONG_SIDE/2}, {-1.5, EXCLUSION_LONG_SIDE/2}}, -- Box to the left of the air-separator.
+	trimBounds{{1.5, -EXCLUSION_LONG_SIDE/2}, {1.5+EXCLUSION_SHORT_SIDE, EXCLUSION_LONG_SIDE/2}}, -- Box to the right of the air-separator.
+	trimBounds{{-EXCLUSION_LONG_SIDE/2, 1.5}, {EXCLUSION_LONG_SIDE/2, 1.5+EXCLUSION_SHORT_SIDE}}, -- Box below the air-separator.
+} do
+	table.insert(buildabilityRules, {
+		area = exclusionBox,
+		required_tiles = {layers = {ground_tile = true, water_tile = true,}},
+		--colliding_tiles = {layers = {air_separator_exclusion = true}},
+		colliding_tiles = {layers = {empty_space = true}},
+		remove_on_collision = false,
+	})
+end
+ent.tile_buildability_rules = buildabilityRules
+-- NOTE I was thinking maybe we could ONLY do tile_buildability_rules, instead of doing control-stage creation of exclusion zone entities. BUT the tile_buildability_rules are only checked against TILES, not entities. So they won't collide with other air separators.
+-- NOTE Was also thinking about adding buildability rules just to highlight some tiles. Could do that.
 extend{ent}
 
 local item = copy(ITEM["assembling-machine-3"])
