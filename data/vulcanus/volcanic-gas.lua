@@ -2,14 +2,15 @@
 
 -- Create the new fluid.
 local volcanicGasColor = {0.788, 0.627, 0.167}
+local brighterVolcanicGasColor = {0.996, 0.859, 0.31}
 local volcanicGas = copy(FLUID["steam"])
 volcanicGas.name = "volcanic-gas"
 volcanicGas.base_color = volcanicGasColor
-volcanicGas.flow_color = volcanicGasColor
+volcanicGas.flow_color = brighterVolcanicGasColor
 volcanicGas.visualization_color = volcanicGasColor
 volcanicGas.icon = nil
 volcanicGas.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/fluids/gas-2.png", icon_size = 64, tint = {r = 0.996, g = 0.859, b = 0.31}},
+	{icon = "__LegendarySpaceAge__/graphics/fluids/gas-2.png", icon_size = 64, tint = brighterVolcanicGasColor},
 }
 volcanicGas.order = "b[new-fluid]-b[vulcanus]-0[volcanic-gas]"
 volcanicGas.max_temperature = nil
@@ -17,26 +18,33 @@ volcanicGas.heat_capacity = nil
 extend{volcanicGas}
 
 -- Create recipe for separating volcanic gas into water, sulfur, and carbon.
+-- Going to do this in filtration plant, so it consumes filters, which require carbon or water.
+-- This produces nitrogen bc there's no other way to get nitrogen on Vulcanus, I think.
 local separationRecipe = copy(RECIPE["steam-condensation"])
 separationRecipe.name = "volcanic-gas-separation"
 separationRecipe.localised_name = nil
-separationRecipe.category = "chemistry-or-cryogenics"
+separationRecipe.category = "filtration"
 separationRecipe.subgroup = "vulcanus-processes"
 separationRecipe.order = "02"
-separationRecipe.energy_required = 2
+separationRecipe.energy_required = 1
 separationRecipe.ingredients = {
 	{type = "fluid", name = "volcanic-gas", amount = 100},
 }
 separationRecipe.results = {
-	{type = "item", name = "sulfur", amount = 2},
+	{type = "item", name = "sulfur", amount = 1},
 	{type = "item", name = "carbon", amount = 1},
-	{type = "fluid", name = "water", amount = 20},
+	{type = "fluid", name = "water", amount = 10},
+	--{type = "fluid", name = "nitrogen-gas", amount = 10}, -- TODO re-enable once I add another output fluidbox.
 }
 separationRecipe.enabled = false
 separationRecipe.allow_decomposition = false
 separationRecipe.allow_as_intermediate = false
 separationRecipe.allow_quality = true
 separationRecipe.allow_productivity = true
+separationRecipe.crafting_machine_tint = {
+	primary = volcanicGasColor,
+	secondary = brighterVolcanicGasColor,
+}
 Icon.set(separationRecipe, {"volcanic-gas", "sulfur", "carbon", "water"}, "decomposition")
 extend{separationRecipe}
 

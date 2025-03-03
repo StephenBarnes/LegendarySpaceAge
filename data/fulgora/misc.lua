@@ -1,6 +1,8 @@
 -- Change scrap recycling outputs.
 RAW["recipe"]["scrap-recycling"].results = {
 	{ type = "item", name = "rusty-iron-gear-wheel", amount = 1, probability = 0.10, show_details_in_recipe_tooltip = false },
+	{ type = "item", name = "carbon",                amount = 1, probability = 0.10, show_details_in_recipe_tooltip = false },
+		-- Valuable for filters.
 
 	{ type = "item", name = "low-density-structure", amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false },
 	{ type = "item", name = "advanced-circuit",      amount = 1, probability = 0.05, show_details_in_recipe_tooltip = false },

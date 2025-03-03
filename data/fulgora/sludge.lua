@@ -32,14 +32,16 @@ extend({
 		},
 		results = {
 			{ type = "fluid", name = "heavy-oil",             amount = 10 },
+			{ type = "item",  name = "carbon",                amount = 1, probability = 0.10,  show_details_in_recipe_tooltip = false },
+				-- Crucial to have some way of getting this, since you need it for the filters.
 			{ type = "item",  name = "ice",                   amount = 1, probability = 0.01,  show_details_in_recipe_tooltip = false },
-			{ type = "item",  name = "stone",                 amount = 1, probability = 0.005,  show_details_in_recipe_tooltip = false },
-			{ type = "item",  name = "sand",                  amount = 1, probability = 0.005,  show_details_in_recipe_tooltip = false },
-			{ type = "item",  name = "rusty-iron-gear-wheel", amount = 1, probability = 0.005,  show_details_in_recipe_tooltip = false },
-			{ type = "item",  name = "rusty-iron-stick",      amount = 1, probability = 0.005,  show_details_in_recipe_tooltip = false },
+			{ type = "item",  name = "stone",                 amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false },
+			{ type = "item",  name = "sand",                  amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false },
+			{ type = "item",  name = "rusty-iron-gear-wheel", amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false },
+			{ type = "item",  name = "rusty-iron-stick",      amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "copper-cable",          amount = 1, probability = 0.01,  show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "holmium-ore",           amount = 1, probability = 0.001, show_details_in_recipe_tooltip = false },
-			{ type = "item",  name = "plastic-bar",           amount = 1, probability = 0.002,  show_details_in_recipe_tooltip = false },
+			{ type = "item",  name = "plastic-bar",           amount = 1, probability = 0.002, show_details_in_recipe_tooltip = false },
 			-- NOTE when changing this, have to check that filtration plant still has enough output slots.
 		},
 		main_product = "heavy-oil",

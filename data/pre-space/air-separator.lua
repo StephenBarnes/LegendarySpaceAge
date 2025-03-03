@@ -18,11 +18,9 @@ TODO:
 		Set recipe according to surface, when air separator is built.
 ]]
 
-local ALLOW_SELECT_EXCLUSIONS = true -- Whether to allow selection of the exclusion zones - for debugging.
-local EXCLUSION_DIMS = {15, 9} -- Tested with both odd; I think they could be even too.
+local ALLOW_SELECT_EXCLUSIONS = false -- Whether to allow selection of the exclusion zones - for debugging.
+local EXCLUSION_DIMS = {27, 21} -- Tested with both odd; I think they could be even too.
 	-- Note that control/air-separator.lua computes distance from center of air separator to center of exclusion zone, using the 2nd number here (y) as y/2 + 1.5. Making the 2nd number smaller than the 1st number is best, so that it's more rounded rather than cross-shaped.
-local EXCLUSION_LONG_SIDE = EXCLUSION_DIMS[1]
-local EXCLUSION_SHORT_SIDE = EXCLUSION_DIMS[2]
 
 local ent = copy(ASSEMBLER["assembling-machine-3"])
 ent.name = "air-separator"
@@ -54,7 +52,7 @@ ent.fluid_boxes = {
 		pipe_covers = pipecoverspictures(),
 		base_area = 10,
 		base_level = 1,
-		volume = 200,
+		volume = 5000,
 		pipe_connections = {
 			{flow_direction = "input-output", position = {-1, 0}, direction = WEST},
 			{flow_direction = "input-output", position = {1, 0}, direction = EAST},
@@ -69,7 +67,7 @@ ent.fluid_boxes = {
 		pipe_covers = pipecoverspictures(),
 		base_area = 10,
 		base_level = 1,
-		volume = 200,
+		volume = 5000,
 		pipe_connections = {
 			{flow_direction = "input-output", position = {0, -1}, direction = NORTH},
 			{flow_direction = "input-output", position = {0,  1}, direction = SOUTH},
@@ -84,7 +82,7 @@ ent.fluid_boxes = {
 		pipe_covers = pipecoverspictures(),
 		base_area = 10,
 		base_level = 1,
-		volume = 200,
+		volume = 5000,
 		pipe_connections = {
 			{flow_direction = "input-output", position = {-1, -1}, direction = WEST},
 			{flow_direction = "input-output", position = {1, -1}, direction = EAST},
@@ -99,7 +97,7 @@ ent.fluid_boxes = {
 		pipe_covers = pipecoverspictures(),
 		base_area = 10,
 		base_level = 1,
-		volume = 200,
+		volume = 5000,
 		pipe_connections = {
 			{flow_direction = "input-output", position = {-1, 1}, direction = WEST},
 			{flow_direction = "input-output", position = {1,  1}, direction = EAST},
@@ -159,41 +157,18 @@ ent.dying_explosion = "rocket-silo-explosion" -- TODO
 ent.max_health = 200
 ent.circuit_connector = copy(RAW["rocket-silo"]["rocket-silo"].circuit_connector) -- TODO
 ent.surface_conditions = {{property = "pressure", min = 10}} -- So it can't be built on space platforms.
---[[ent.placeable_position_visualization = { -- TODO testing.
-	filename = "__core__/graphics/cursor-boxes-32x32.png",
-	priority = "extra-high-no-scale",
-	size = 64,
-	scale = 0.5,
-	x = 3*64, -- Image file is a row of box images. This selects which image to use.
-}]]
-local trim = 0.05
-local function trimBounds(bounds)
-	return {
-		{bounds[1][1] + trim, bounds[1][2] + trim},
-		{bounds[2][1] - trim, bounds[2][2] - trim},
-	}
-end
-local entBounds = trimBounds{{-1.5, -1.5}, {1.5, 1.5}}
-local buildabilityRules = {
-	{area = entBounds, required_tiles = {layers = {ground_tile = true}}, remove_on_collision = false},
-}
-for _, exclusionBox in pairs{
-	trimBounds{{-EXCLUSION_LONG_SIDE/2, -1.5-EXCLUSION_SHORT_SIDE}, {EXCLUSION_LONG_SIDE/2, -1.5}}, -- Box above the air-separator.
-	trimBounds{{-1.5-EXCLUSION_SHORT_SIDE, -EXCLUSION_LONG_SIDE/2}, {-1.5, EXCLUSION_LONG_SIDE/2}}, -- Box to the left of the air-separator.
-	trimBounds{{1.5, -EXCLUSION_LONG_SIDE/2}, {1.5+EXCLUSION_SHORT_SIDE, EXCLUSION_LONG_SIDE/2}}, -- Box to the right of the air-separator.
-	trimBounds{{-EXCLUSION_LONG_SIDE/2, 1.5}, {EXCLUSION_LONG_SIDE/2, 1.5+EXCLUSION_SHORT_SIDE}}, -- Box below the air-separator.
-} do
-	table.insert(buildabilityRules, {
-		area = exclusionBox,
-		required_tiles = {layers = {ground_tile = true, water_tile = true,}},
-		--colliding_tiles = {layers = {air_separator_exclusion = true}},
-		colliding_tiles = {layers = {empty_space = true}},
-		remove_on_collision = false,
-	})
-end
-ent.tile_buildability_rules = buildabilityRules
 -- NOTE I was thinking maybe we could ONLY do tile_buildability_rules, instead of doing control-stage creation of exclusion zone entities. BUT the tile_buildability_rules are only checked against TILES, not entities. So they won't collide with other air separators.
--- NOTE Was also thinking about adding buildability rules just to highlight some tiles. Could do that.
+-- NOTE Was also thinking about adding buildability rules just to highlight some tiles. Tried that but it doesn't really work, the squares only get shown when they're going to block building due to tile collisions, which never happens unless their collision layers are misconfigured, so never mind.
+-- Instead, using Entity.radius_visualisation_specification to show the exclusion zone.
+ent.radius_visualisation_specification = {
+	sprite = {
+		filename = "__LegendarySpaceAge__/graphics/air-separator/grid_27_21.png",
+		priority = "extra-high-no-scale",
+		width = 45,
+		height = 45,
+	},
+	distance = EXCLUSION_DIMS[2] + 1.5,
+}
 extend{ent}
 
 local item = copy(ITEM["assembling-machine-3"])
@@ -223,69 +198,80 @@ extend{{
 	name = "air-separation",
 }}
 
--- Create air separator recipe for Nauvis: no ingredients => 10 stone
-local nauvisAirRecipe = Recipe.make{
-	copy = "air-separator",
-	recipe = "air-separation-nauvis",
-	ingredients = {
-		{"filter", 1},
-	},
-	results = {
-		{"nitrogen-gas", 100, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightMiddle},
-		{"oxygen-gas", 20, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
-		{"spent-filter", 1, ignored_by_productivity = 1},
-	},
-	category = "air-separation",
-	time = 10,
-	allow_productivity = true,
-	allow_quality = false,
-	hide_from_player_crafting = true,
-	subgroup = "air-separation",
-	order = "1",
-	localised_name = {"recipe-name.air-separation-planet", {"space-location-name.nauvis"}},
-	localised_description = {"recipe-description.air-separation-planet", {"space-location-name.nauvis"}},
-	icon = nil,
-	show_amount_in_title = false,
-}
-nauvisAirRecipe.icons = { -- TODO rather have a standard iconArrangement for this, used by deep drill and air separator.
-	{icon = "__LegendarySpaceAge__/graphics/air-separator/icon.png"},
-	{icon = "__base__/graphics/icons/nauvis.png", scale = 0.2, shift={-8,-8}},
-}
-extend{nauvisAirRecipe}
-
--- Create air separation recipes for other planets
+-- Create air separation recipes for each planet.
+-- I'm making every recipe take 20 seconds, and then adjusting how many filters they use, rather than changing the recipe time to control rate of filter use.
+-- Note all these recipes produce no solid products except the spent filter, so I think it's the one case where having filters as ingredients (rather than fuel) makes sense, since it doesn't create quality exploits.
 for i, planetData in pairs{
+	{"nauvis", {
+		results = {
+			{"nitrogen-gas", 200, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightMiddle},
+			{"oxygen-gas", 50, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
+		},
+		filtersPer20s = 1,
+	}},
 	{"vulcanus", {
-		{"volcanic-gas", 20, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightMiddle},
+		results = {
+			{"volcanic-gas", 100, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
+			{"oxygen-gas", 10, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightTop},
+			{"steam", 10, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
+		},
+		filtersPer20s = 2,
+		-- Every 100 volcanic gas is 1 carbon (before prod), so this uses 2 filters (<=2*0.5 carbon) to make ~1 carbon, so net even with carbon. But you can use prod modules to get net profit.
+		-- Player needs some way to get nitrogen, so added that to volcanic gas separation outputs.
 	}},
 	{"gleba", {
-		{"nitrogen-gas", 50, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightTop},
-		{"oxygen-gas", 50, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
-		{"dry-gas", 5, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
+		results = {
+			{"nitrogen-gas", 100, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightTop},
+			{"oxygen-gas", 100, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
+			{"dry-gas", 5, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
+		},
+		filtersPer20s = 2,
 	}},
 	{"fulgora", {
-		{"nitrogen-gas", 50, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightMiddle},
-		{"dry-gas", 5, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
+		results = {
+			{"nitrogen-gas", 200, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightMiddle},
+			{"dry-gas", 50, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
+		},
+		filtersPer20s = 5, -- Lots of filters, partly bc I want to incentivize throwing away the spent filters instead of cleaning them.
 	}},
 	{"aquilo", {
-		{"nitrogen-gas", 100, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
-		{"ammonia", 10, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightTop},
-		{"dry-gas", 5, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
+		results = {
+			{"nitrogen-gas", 200, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
+			{"ammonia", 50, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightTop},
+			{"dry-gas", 20, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
+		},
+		filtersPer20s = 1,
 	}},
 } do
 	local planetName = planetData[1]
-	local results = planetData[2]
-	table.insert(results, {"spent-filter", 1, ignored_by_productivity = 1})
-	local airSepRecipe = Recipe.make{
-		copy = nauvisAirRecipe,
+
+	local filtersPer20s = planetData[2].filtersPer20s
+	assert(filtersPer20s ~= nil, "No filtersPer20s specified for planet "..planetName)
+	local results = planetData[2].results
+	table.insert(results, {"spent-filter", filtersPer20s, ignored_by_productivity = filtersPer20s})
+
+	local recipe = Recipe.make{
+		copy = "air-separator",
 		recipe = "air-separation-"..planetName,
-		ingredients = {"filter"},
+		ingredients = {{"filter", filtersPer20s}},
 		results = results,
-		order = tostring(i+1),
+		time = 20,
+		order = tostring(i),
 		localised_name = {"recipe-name.air-separation-planet", {"space-location-name."..planetName}},
 		localised_description = {"recipe-description.air-separation-planet", {"space-location-name."..planetName}},
+		category = "air-separation",
+		allow_productivity = true,
+		allow_quality = false,
+		hide_from_player_crafting = true,
+		subgroup = "air-separation",
+		show_amount_in_title = false,
 	}
-	airSepRecipe.icons[2].icon = "__space-age__/graphics/icons/"..planetName..".png"
+	local planetIcon = RAW.planet[planetName].icon
+	assert(planetIcon ~= nil, "No icon found for planet "..planetName)
+	recipe.icons = { -- TODO rather have a standard iconArrangement for this, used by deep drill and air separator.
+		{icon = "__LegendarySpaceAge__/graphics/air-separator/icon.png", scale = 0.37, shift = {3, 3}},
+		{icon = planetIcon, scale = 0.2, shift={-8,-8}},
+	}
 end
 
 -- Create a subgroup for the air separator recipes
@@ -331,10 +317,6 @@ extend{
 -- Create simple-entities for the air separator exclusion zones. One is more horizontal, the other more vertical.
 -- We place 4 of these around the air separator, one on each side. That way we leave a gap in the middle for the air separator to be built. This is necessary for ghosts to not get destroyed by their own exclusion zones.
 local collisionBox = {{-EXCLUSION_DIMS[1]/2, -EXCLUSION_DIMS[2]/2}, {EXCLUSION_DIMS[1]/2, EXCLUSION_DIMS[2]/2}}
-local flags = {"not-on-map", "not-repairable", "not-deconstructable", "not-flammable", "not-blueprintable", "placeable-neutral"}
-if not ALLOW_SELECT_EXCLUSIONS then
-	table.insert(flags, "non-selectable")
-end
 ---@type data.SimpleEntityPrototype
 local exclusion1 = {
 	type = "simple-entity",
@@ -360,7 +342,7 @@ local exclusion1 = {
 	localised_name = {"entity-name.air-separator-exclusion"},
 	localised_description = {"entity-description.air-separator-exclusion"},
 	remove_decoratives = "false",
-	flags = flags,
+	flags = {"not-on-map", "not-repairable", "not-deconstructable", "not-flammable", "not-blueprintable", "placeable-neutral"},
 	allow_copy_paste = false,
 	hidden_in_factoriopedia = true,
 }
