@@ -322,7 +322,7 @@ Gen.orderKinds("cryo-fluids", {FLUID}, {
 	"thruster-fuel",
 })
 Gen.orderKinds("cryo-recipes", {RECIPE}, {
-	"syngas-separation",
+	"syngas-reforming",
 	"air-separation",
 	"ammonia-cracking",
 	"electrolysis",

@@ -144,3 +144,5 @@ cryogenicPlant.fluid_boxes = {
 	newFluidBoxC, -- New output
 }
 -- TODO this is very temporary to test cascade cooling, change it later to have passthrough fluid connections etc.
+
+-- TODO change assembler fluidboxes to be passthrough. One pair vertical, one pair horizontal.

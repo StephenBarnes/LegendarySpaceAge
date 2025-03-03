@@ -5,7 +5,8 @@ Date: 2025-03-02
     - Added arc furnace for making molten metals. Foundry now only casts molten metals.
     - Added quality scaling of power consumption for gasifiers, char furnaces, and battery chargers, to remove infinite-energy exploits.
     - Added briefings with tech triggers.
-    - TODO add refrigeration system, including nitrogen/oxygen/hydrogen in gas and liquid form. Cryo plants moved to early game.
+    - Added nitrogen, oxygen, and hydrogen gases and liquids, with recipes for cascade cooling. TODO Cryo plants moved to early game.
+    - TODO Added air separator.
     - TODO add sugar system
     - TODO add resistances for enemies
     - TODO add bream

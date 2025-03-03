@@ -18,10 +18,10 @@ local ammonia2Tech = copy(TECH["coal-liquefaction"])
 ammonia2Tech.name = "ammonia-2"
 ammonia2Tech.localised_name = {"technology-name.ammonia-2"}
 ammonia2Tech.localised_description = {"technology-description.ammonia-2"}
-ammonia2Tech.prerequisites = {"ammonia-1", "chemical-science-pack"}
+ammonia2Tech.prerequisites = {"chemical-science-pack"} -- Assume chemical science pack has prereq on ammonia-1.
 Icon.set(ammonia2Tech, "LSA/ammonia/tech")
 ammonia2Tech.effects = {
-	{type = "unlock-recipe", recipe = "ammonia-from-syngas"},
+	{type = "unlock-recipe", recipe = "ammonia-synthesis"},
 }
 ammonia2Tech.unit = {
 	count = 1000,
@@ -100,24 +100,24 @@ Icon.clear(niterFromAmmoniaRecipe)
 niterFromAmmoniaRecipe.energy_required = 1
 extend{niterFromAmmoniaRecipe}
 
--- Create recipe for ammonia from syngas.
-local ammoniaSyngasRecipe = copy(RECIPE["plastic-bar"])
-ammoniaSyngasRecipe.name = "ammonia-from-syngas"
-ammoniaSyngasRecipe.ingredients = {
-	{type = "fluid", name = "syngas", amount = 100},
-	{type = "fluid", name = "steam", amount = 100},
+-- Create recipe for ammonia synthesis.
+local ammoniaSynthesisRecipe = copy(RECIPE["plastic-bar"])
+ammoniaSynthesisRecipe.name = "ammonia-synthesis"
+ammoniaSynthesisRecipe.ingredients = {
+	{type = "fluid", name = "hydrogen-gas", amount = 100},
+	{type = "fluid", name = "nitrogen-gas", amount = 100},
 }
-ammoniaSyngasRecipe.results = {
+ammoniaSynthesisRecipe.results = {
 	{type = "fluid", name = "ammonia", amount = 100},
 }
-ammoniaSyngasRecipe.show_amount_in_title = false
-ammoniaSyngasRecipe.category = "chemistry-or-cryogenics"
-ammoniaSyngasRecipe.subgroup = "early-agriculture"
-ammoniaSyngasRecipe.order = "d2"
-ammoniaSyngasRecipe.allow_quality = false
-Icon.set(ammoniaSyngasRecipe, {"ammonia", "syngas"})
-ammoniaSyngasRecipe.energy_required = 4
-extend{ammoniaSyngasRecipe}
+ammoniaSynthesisRecipe.show_amount_in_title = false
+ammoniaSynthesisRecipe.category = "chemistry-or-cryogenics"
+ammoniaSynthesisRecipe.subgroup = "early-agriculture"
+ammoniaSynthesisRecipe.order = "d2"
+ammoniaSynthesisRecipe.allow_quality = false
+Icon.set(ammoniaSynthesisRecipe, {"ammonia", "hydrogen-gas", "nitrogen-gas"})
+ammoniaSynthesisRecipe.energy_required = 4
+extend{ammoniaSynthesisRecipe}
 
 -- Aquilo should require ammonia 2 tech? Not really. Maybe if I later add tech to make fuel from ammonia, separate from the Aquilo discovery tech. TODO.
 --Tech.addTechDependency("ammonia-2", "planet-discovery-aquilo")

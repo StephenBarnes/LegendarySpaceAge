@@ -79,6 +79,15 @@ Tech.removePrereq = function(techName, oldPrereq)
 	end
 end
 
+Tech.hasPrereq = function(techName, prereqName)
+	local tech = TECH[techName]
+	if tech == nil then
+		log("ERROR: Couldn't find tech "..techName.." to check for prereq "..prereqName..".")
+		return false
+	end
+	return Table.hasEntry(prereqName, tech.prerequisites or {})
+end
+
 Tech.removeRecipesFromTechs = function(recipeList, techNames)
 	local recipeSet = Table.listToSet(recipeList)
 

@@ -268,13 +268,15 @@ RECIPE["rocket-part"].ingredients = {
 Recipe.edit{
 	recipe = "chemical-science-pack",
 	ingredients = {
-		{"diesel-barrel", 1},
-		{"plastic-bar", 2},
+		{"plastic-bar", 1},
+		{"diesel", 20, type = "fluid"},
+		{"ammonia", 20},
 	},
 	resultCount = 1,
 	time = 1,
+	category = "chemistry",
 }
-TECH["chemical-science-pack"].prerequisites = {"plastics", "diesel"}
+TECH["chemical-science-pack"].prerequisites = {"plastics", "diesel", "ammonia-1"}
 
 -- Blue circuits need a new dependency on red circuits.
 Tech.addTechDependency("advanced-circuit", "processing-unit")
