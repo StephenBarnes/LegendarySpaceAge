@@ -24,6 +24,10 @@ Recipe.edit{
 	},
 	time = 2,
 }
+local pump = RAW.pump.pump
+pump.energy_usage = "40kW"
+pump.energy_source.drain = "10kW"
+pump.pumping_speed = 16.6667 -- This is 1000/60 per tick, so 1000 per second.
 
 Recipe.edit{
 	recipe = "offshore-pump",

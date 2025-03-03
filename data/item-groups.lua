@@ -326,7 +326,7 @@ Gen.orderKinds("cryo-recipes", {RECIPE}, {
 	"air-separation",
 	"ammonia-cracking",
 	"electrolysis",
-	"nitrogen-compression-exchange",
+	"nitrogen-compression",
 	"nitrogen-expansion",
 	"oxygen-cascade-cooling",
 	"hydrogen-cascade-cooling",

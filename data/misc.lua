@@ -55,7 +55,7 @@ character.running_speed = .2 -- default 0.15
 -- TODO maybe add some techs for running speed bonuses? Or can we have eg techs for spidertron running speed, car driving speed, etc.?
 
 -- Adjust pumping rate of offshore pump.
-local newSpeed = 16.67 --1000/60 -- Was 1200/60.
+local newSpeed = 16.6667 --1000/60 -- Was 1200/60.
 RAW["offshore-pump"]["offshore-pump"].pumping_speed = newSpeed
 if RAW["offshore-pump"]["lava-pump"] ~= nil then
 	-- If it's defined, change it there too. If it's not defined, lava pump will inherit the change from the above.

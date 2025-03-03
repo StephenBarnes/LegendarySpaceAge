@@ -18,6 +18,7 @@ gasifierEnt.crafting_speed = 1
 gasifierEnt.show_recipe_icon = false -- Since there's only 1 recipe.
 gasifierEnt.show_recipe_icon_on_map = true
 gasifierEnt.allowed_effects = {"speed", "pollution", "quality"}
+gasifierEnt.drawing_box_vertical_extension = 3
 gasifierEnt.energy_source = {
 	type = "burner",
 	emissions_per_minute = {

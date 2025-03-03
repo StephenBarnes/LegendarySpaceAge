@@ -19,6 +19,7 @@ ent.energy_source.drain = "1MW"
 ent.energy_usage = "4MW"
 ent.heating_energy = "1MW"
 ent.perceived_performance = {maximum = 4}
+ent.drawing_box_vertical_extension = 0
 local animationSpeed = 0.15
 ent.graphics_set = {
 	animation = {

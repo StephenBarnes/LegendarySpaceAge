@@ -64,7 +64,7 @@ Icon.set(FLUID["thruster-oxidizer"], "LSA/cryo/liquid-oxygen")
 
 -- Create recipe for nitrogen compression and heat exchange.
 -- 100 nitrogen gas + 10 water + significant electricity -> 100 compressed nitrogen gas + 100 steam
-Recipe.make{
+local nitrogenCompressionRecipe = Recipe.make{
 	copy = "fluoroketone-cooling",
 	recipe = "nitrogen-compression",
 	clearLocalisedName = true,
@@ -99,7 +99,7 @@ Tech.addRecipeToTech("nitrogen-expansion", "cryogenic-plant") -- TODO add to som
 
 -- Create recipe for oxygen cascade cooling: 100 oxygen gas + 100 liquid nitrogen -> 50 liquid oxygen + 50 oxygen gas + 100 nitrogen gas
 Recipe.make{
-	copy = "nitrogen-compression",
+	copy = nitrogenCompressionRecipe,
 	recipe = "oxygen-cascade-cooling",
 	ingredients = {
 		{"oxygen-gas", 100},
@@ -116,7 +116,7 @@ Tech.addRecipeToTech("oxygen-cascade-cooling", "cryogenic-plant") -- TODO add to
 
 -- Create recipe for hydrogen cascade cooling: 100 hydrogen gas + 100 liquid oxygen + 100 liquid nitrogen -> 50 liquid hydrogen + 50 hydrogen gas + 100 oxygen gas + 100 nitrogen gas
 Recipe.make{
-	copy = "nitrogen-compression",
+	copy = nitrogenCompressionRecipe,
 	recipe = "hydrogen-cascade-cooling",
 	ingredients = {
 		{"hydrogen-gas", 100},
@@ -139,7 +139,7 @@ Tech.addRecipeToTech("hydrogen-cascade-cooling", "cryogenic-plant") -- TODO add 
 
 -- Create recipe for regenerative cooling: 50 liquid nitrogen + 200 nitrogen gas -> 200 compressed nitrogen gas
 Recipe.make{
-	copy = "nitrogen-compression",
+	copy = nitrogenCompressionRecipe,
 	recipe = "regenerative-cooling",
 	ingredients = {
 		{"liquid-nitrogen", 50},
@@ -154,7 +154,7 @@ Tech.addRecipeToTech("regenerative-cooling", "cryogenic-plant") -- TODO add to i
 
 -- Syngas separation: 100 syngas -> 50 hydrogen gas
 Recipe.make{
-	copy = "nitrogen-compression",
+	copy = nitrogenCompressionRecipe,
 	recipe = "syngas-separation",
 	ingredients = {
 		{"syngas", 100},
@@ -170,7 +170,7 @@ Tech.addRecipeToTech("syngas-separation", "cryogenic-plant") -- TODO tech
 -- TODO add surface condition so you can't do this on Fulgora.
 -- TODO probably add air separator as a separate building? Since Hurricane has graphics for air filterer.
 Recipe.make{
-	copy = "nitrogen-compression",
+	copy = nitrogenCompressionRecipe,
 	recipe = "air-separation",
 	ingredients = {
 	},
@@ -185,7 +185,7 @@ Tech.addRecipeToTech("air-separation", "cryogenic-plant") -- TODO tech
 -- Ammonia cracking: 20 ammonia -> 10 hydrogen + 10 nitrogen
 -- TODO this should be slow, only worthwhile on Aquilo.
 Recipe.make{
-	copy = "nitrogen-compression",
+	copy = nitrogenCompressionRecipe,
 	recipe = "ammonia-cracking",
 	ingredients = {
 		{"ammonia", 20},
@@ -202,7 +202,7 @@ Tech.addRecipeToTech("ammonia-cracking", "cryogenic-plant") -- TODO tech
 -- Electrolysis: 20 water -> 10 hydrogen + 10 oxygen
 -- TODO this should be slow, only worthwhile on Fulgora.
 Recipe.make{
-	copy = "nitrogen-compression",
+	copy = nitrogenCompressionRecipe,
 	recipe = "electrolysis",
 	ingredients = {
 		{"water", 20},

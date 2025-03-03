@@ -12,7 +12,7 @@ wastePump.result_inventory_size = 0
 wastePump.energy_source = copy(RAW.pump.pump.energy_source)
 wastePump.energy_source.emissions_per_minute = {pollution = 1} -- This gets multiplied by the emissions multiplier for the specific venting recipe.
 wastePump.energy_source.drain = "0W"
-wastePump.energy_usage = "30kW"
+wastePump.energy_usage = "50kW"
 wastePump.heating_energy = "50kW"
 wastePump.minable.result = "waste-pump"
 wastePump.placeable_by = {item = "waste-pump", count = 1}

@@ -58,7 +58,7 @@ Recipe.edit{
 	ingredients = {
 		{"engine-unit", 5},
 		{"sensor", 5},
-		{"shielding", 2},
+		{"shielding", 5},
 		{"frame", 5},
 	},
 	time = 5,
@@ -68,7 +68,7 @@ Recipe.edit{
 	ingredients = {
 		{"frame", 5},
 		{"mechanism", 2},
-		{"panel", 5},
+		{"panel", 20},
 	},
 	time = 5,
 }

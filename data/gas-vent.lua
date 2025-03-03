@@ -23,6 +23,7 @@ ventEnt.energy_source = {
 ventEnt.energy_usage = "1kW"
 ventEnt.source_inventory_size = 0
 ventEnt.result_inventory_size = 0
+ventEnt.drawing_box_vertical_extension = 3
 ventEnt.stateless_visualisation = {
 	{
 		animation = {
