@@ -31,4 +31,11 @@ Fluid.setSimpleTemp = function(fluid, boilingPoint, isLiquid, liquidDefault)
 	end
 end
 
+Fluid.hide = function(fluidName)
+	local fluid = FLUID[fluidName]
+	assert(fluid ~= nil, "Fluid "..fluidName.." not found.")
+	fluid.hidden = true
+	fluid.hidden_in_factoriopedia = true
+end
+
 return Fluid

@@ -355,6 +355,11 @@ Tech.removeSciencePack("production-science-pack", "automation-3")
 -- Logistics 1 tech doesn't give "faster ways of transportation".
 TECH["logistics"].localised_description = {"technology-description.logistics-1"}
 
+-- Make tech for chem plant.
+
+
+-- TODO make techs for electronics, unlocking extra recipes for sensors, electronic components, etc. Using graphics from 1.1 techs.
+
 -- TODO Make tech for chemistry, and move chem plant to that.
 
 -- TODO edit recipes for other science packs.

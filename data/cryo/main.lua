@@ -2,3 +2,4 @@
 require("fluids")
 require("recipes-changing-cryo-fluids")
 require("recipe-making-cryo-fluids")
+require("techs")

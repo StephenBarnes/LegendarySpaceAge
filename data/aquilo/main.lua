@@ -25,3 +25,50 @@ Icon.set(FLUID["lithium-brine"], "LSA/aquilo/mineral-brine")
 
 -- Clear temperature spam for fluids.
 Fluid.setSimpleTemp(FLUID["ammoniacal-solution"], -33, true, -50)
+
+-- Remove fluoroketone and recipes.
+Recipe.hide("fluoroketone")
+Recipe.hide("fluoroketone-cooling")
+Tech.removeRecipeFromTech("fluoroketone", "cryogenic-plant")
+Tech.removeRecipeFromTech("fluoroketone-cooling", "cryogenic-plant")
+Fluid.hide("fluoroketone-cold")
+Fluid.hide("fluoroketone-hot")
+FLUID["fluoroketone-cold"].auto_barrel = false
+FLUID["fluoroketone-hot"].auto_barrel = false
+-- TODO maybe add liquid helium (since it has even lower boiling point than hydrogen) and use that for Aquilo processes.
+-- TODO and maybe instead of making that a new fluid, use fluoroketone-cold/hot but change locale and icons to helium gas / liquid helium.
+Recipe.edit{
+	recipe = "cryogenic-science-pack",
+	ingredients = { -- Originally 3 ice + 1 lithium plate + 6 fluoroketone-cold -> 1 science pack + 3 fluoroketone-hot.
+		{"lithium-plate", 1},
+		{"ice", 5}, -- TODO remove this
+		{"liquid-nitrogen", 5, type = "fluid"},
+	},
+	results = {
+		{"cryogenic-science-pack", 1},
+		{"nitrogen-gas", 3, type = "fluid"},
+	},
+	time = 10,
+}
+Recipe.edit{
+	recipe = "quantum-processor",
+	ingredients = { -- Originally 1 blue circuit + 1 tungsten carbide + 1 carbon fiber + 1 superconductor + 2 lithium plate + 10 fluoroketone-cold -> 1 quantum processor + 5 fluoroketone-hot.
+		{"white-circuit", 1},
+		{"tungsten-carbide", 1},
+		{"carbon-fiber", 1},
+		{"lithium-plate", 2},
+		{"liquid-nitrogen", 10, type = "fluid"},
+	},
+	results = {
+		{"quantum-processor", 1},
+		{"nitrogen-gas", 5, type = "fluid"},
+	},
+	time = 10,
+}
+Recipe.substituteIngredient("foundation", "fluoroketone-cold", "liquid-nitrogen")
+Recipe.substituteIngredient("captive-biter-spawner", "fluoroketone-cold", "liquid-nitrogen")
+Recipe.substituteIngredient("railgun", "fluoroketone-cold", "liquid-nitrogen")
+Recipe.substituteIngredient("railgun-turret", "fluoroketone-cold", "liquid-nitrogen")
+-- Edit everywhere else that fluoroketone shows up.
+RAW["fusion-generator"]["fusion-generator"].output_fluid_box.filter = "nitrogen-gas"
+RAW["fusion-reactor"]["fusion-reactor"].input_fluid_box.filter = "liquid-nitrogen"

@@ -323,7 +323,6 @@ Gen.orderKinds("cryo-fluids", {FLUID}, {
 })
 Gen.orderKinds("cryo-recipes", {RECIPE}, {
 	"syngas-reforming",
-	"air-separation",
 	"ammonia-cracking",
 	"electrolysis",
 	"nitrogen-compression",

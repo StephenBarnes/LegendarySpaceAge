@@ -34,10 +34,15 @@ Recipe.edit{
 		{"sulfuric-acid", 10},
 	},
 	time = 2,
-	category = "crafting", -- Not cryo plant.
+	category = "crafting-with-fluid", -- Not cryo plant.
 }
 
 Recipe.edit{
 	recipe = "sulfuric-acid",
+	category = "chemistry", -- Not cryo plant.
+}
+
+Recipe.edit{
+	recipe = "solid-fuel-from-ammonia",
 	category = "chemistry", -- Not cryo plant.
 }

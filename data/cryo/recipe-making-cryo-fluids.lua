@@ -34,17 +34,21 @@ Recipe.make{
 Tech.addRecipeToTech("syngas-reforming", "cryogenic-plant") -- TODO tech
 
 -- Ammonia cracking: 20 ammonia -> 10 hydrogen + 10 nitrogen
+-- Checked: ammonia cracking is NOT very similar to water electrolysis. So not going to unlock them together, probably.
+-- Checked: ammonia cracking uses a catalyst, often nickel or iron-based.
 -- TODO this should be slow, only worthwhile on Aquilo.
 Recipe.make{
 	copy = nitrogenCompressionRecipe,
 	recipe = "ammonia-cracking",
 	ingredients = {
 		{"ammonia", 20},
+		{"iron-plate", 1},
 	},
 	results = {
 		{"hydrogen-gas", 10},
 		{"nitrogen-gas", 10},
 	},
+	time = 5,
 	icons = {"ammonia", "hydrogen-gas", "nitrogen-gas"}, -- TODO better icons
 	iconArrangement = "decomposition",
 	category = "chemistry",
@@ -52,6 +56,7 @@ Recipe.make{
 Tech.addRecipeToTech("ammonia-cracking", "cryogenic-plant") -- TODO tech
 
 -- Electrolysis: 20 water -> 10 hydrogen + 10 oxygen
+-- Checked: electrolysis generally done with liquid water, not steam.
 -- TODO this should be slow, only worthwhile on Fulgora.
 Recipe.make{
 	copy = nitrogenCompressionRecipe,
@@ -63,7 +68,9 @@ Recipe.make{
 		{"hydrogen-gas", 10},
 		{"oxygen-gas", 10},
 	},
+	time = 10,
 	icons = {"water", "hydrogen-gas", "oxygen-gas"}, -- TODO better icons
 	iconArrangement = "decomposition",
+	category = "chemistry-or-electronics",
 }
-Tech.addRecipeToTech("electrolysis", "cryogenic-plant") -- TODO tech
+-- Added to tech in cryo/techs.lua.

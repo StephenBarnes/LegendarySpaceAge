@@ -27,3 +27,7 @@ Recipe.edit{
 }
 
 RAW["solar-panel"]["solar-panel"].max_health = 50 -- From default 200. It's fragile.
+
+-- Edit some recipes to not use cryo plants.
+RECIPE["fusion-generator"].category = "crafting"
+RECIPE["fusion-reactor"].category = "crafting"
