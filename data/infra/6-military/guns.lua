@@ -35,6 +35,11 @@ Recipe.edit{
 		{"shielding", 1},
 	},
 }
+Recipe.edit{
+	recipe = "railgun",
+	category = "crafting", -- Not cryo plant.
+	-- TODO edit ingredients later when I've figured out Aquilo.
+}
 
 -- Hide the pistol.
 RAW.gun["pistol"].hidden = true

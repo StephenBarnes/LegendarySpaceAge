@@ -22,7 +22,7 @@ ent.energy_source.emissions_per_minute = nil
 ent.max_health = 1000
 ent.perceived_performance = {maximum = 1.5}
 ent.fast_replaceable_group = nil
-ent.energy_usage = "200kW" -- Filter is 1MJ, so 5 seconds per filter.
+ent.energy_usage = "1W" -- Filter is 10J, so 10 seconds per filter.
 ent.energy_source = {
 	type = "burner",
 	fuel_categories = {"filter"},
@@ -62,13 +62,23 @@ ent.fluid_boxes = {
 		secondary_draw_order = -1,
 		pipe_connections = {
 			{
-				flow_direction = "input",
+				flow_direction = "input-output",
 				direction = NORTH,
 				positions = {
 					{-0.5, -2.5},
 					{2.5, 0.5},
 					{-0.5, 2.5},
 					{-2.5, 0.5},
+				},
+			},
+			{
+				flow_direction = "input-output",
+				direction = SOUTH,
+				positions = {
+					{-0.5, 2.5},
+					{-2.5, 0.5},
+					{-0.5, -2.5},
+					{2.5, 0.5},
 				},
 			},
 		},
@@ -83,12 +93,32 @@ ent.fluid_boxes = {
 		pipe_connections = {
 			{
 				flow_direction = "output",
-				direction = SOUTH,
+				direction = EAST,
 				positions = {
+					{2.5, 0.5},
 					{-0.5, 2.5},
 					{-2.5, 0.5},
 					{-0.5, -2.5},
+				},
+			},
+		},
+	},
+	{
+		production_type = "output",
+		pipe_covers = pipeCovers,
+		volume = 2000,
+		pipe_picture = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures,
+		pipe_picture_frozen = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures_frozen,
+		secondary_draw_order = -1,
+		pipe_connections = {
+			{
+				flow_direction = "output",
+				direction = WEST,
+				positions = {
+					{-2.5, 0.5},
+					{-0.5, -2.5},
 					{2.5, 0.5},
+					{-0.5, 2.5},
 				},
 			},
 		},

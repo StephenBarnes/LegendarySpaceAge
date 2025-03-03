@@ -166,3 +166,23 @@ Recipe.edit{
 	time = 5,
 	category = "organic-or-assembling",
 }
+
+-- Cryo plant: now moved to early game.
+Recipe.edit{
+	recipe = "cryogenic-plant",
+	ingredients = {
+		{"frame", 10},
+		{"fluid-fitting", 20},
+		{"sensor", 20},
+		{"shielding", 10},
+	},
+	time = 10,
+	category = "crafting", -- Not in cryo plant.
+}
+local cryoPlant = ASSEMBLER["cryogenic-plant"]
+cryoPlant.crafting_speed = 1
+cryoPlant.energy_usage = "1MW"
+cryoPlant.energy_source.drain = "0W"
+cryoPlant.energy_source.emissions_per_minute = { pollution = 5 }
+Item.perRocket("cryogenic-plant", 20)
+

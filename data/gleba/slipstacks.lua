@@ -95,10 +95,11 @@ extend{slipstackNest}
 local slipstackNestRecipe = copy(RECIPE["bioflux"])
 slipstackNestRecipe.name = "slipstack-nest"
 slipstackNestRecipe.ingredients = {
-	{ type = "item", name = "slipstack-pearl", amount = 4 }, -- Requires less than it yields (10), so you don't need a prod bonus to make it sustainable.
-	{ type = "item", name = "stone", amount = 4 },
-	{ type = "item", name = "marrow", amount = 2 },
+	{ type = "item", name = "slipstack-pearl", amount = 5 }, -- Requires less than it yields (10), so you don't need a prod bonus to make it sustainable.
+	{ type = "item", name = "stone", amount = 5 },
+	{ type = "item", name = "marrow", amount = 1 },
 }
+slipstackNestRecipe.energy_required = 1
 slipstackNestRecipe.category = "crafting"
 slipstackNestRecipe.results = {{type = "item", name = "slipstack-nest", amount = 1}}
 slipstackNestRecipe.surface_conditions = nil -- Allow anywhere. Can't be planted anywhere else, though.

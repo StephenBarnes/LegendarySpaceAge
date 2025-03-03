@@ -33,8 +33,8 @@ separationRecipe.ingredients = {
 separationRecipe.results = {
 	{type = "item", name = "sulfur", amount = 1},
 	{type = "item", name = "carbon", amount = 1},
-	{type = "fluid", name = "water", amount = 10},
-	{type = "fluid", name = "nitrogen-gas", amount = 10},
+	{type = "fluid", name = "water", amount = 10, fluidbox_index = 1},
+	{type = "fluid", name = "nitrogen-gas", amount = 10, fluidbox_index = 2},
 }
 separationRecipe.enabled = false
 separationRecipe.allow_decomposition = false

@@ -60,6 +60,10 @@ Recipe.edit{
 }
 
 -- TODO railgun turret - first need to implement Aquilo stuff.
+Recipe.edit{
+	recipe = "railgun-turret",
+	category = "crafting", -- Not cryo plant.
+}
 
 -- Allow more fluids in flamethrower turret.
 RAW["fluid-turret"]["flamethrower-turret"].attack_parameters.fluids = {

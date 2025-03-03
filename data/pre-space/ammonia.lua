@@ -111,12 +111,13 @@ ammoniaSynthesisRecipe.results = {
 	{type = "fluid", name = "ammonia", amount = 100},
 }
 ammoniaSynthesisRecipe.show_amount_in_title = false
-ammoniaSynthesisRecipe.category = "chemistry-or-cryogenics"
+ammoniaSynthesisRecipe.category = "chemistry"
 ammoniaSynthesisRecipe.subgroup = "early-agriculture"
 ammoniaSynthesisRecipe.order = "d2"
 ammoniaSynthesisRecipe.allow_quality = false
+ammoniaSynthesisRecipe.allow_productivity = false
 Icon.set(ammoniaSynthesisRecipe, {"ammonia", "hydrogen-gas", "nitrogen-gas"})
-ammoniaSynthesisRecipe.energy_required = 4
+ammoniaSynthesisRecipe.energy_required = 1
 extend{ammoniaSynthesisRecipe}
 
 -- Aquilo should require ammonia 2 tech? Not really. Maybe if I later add tech to make fuel from ammonia, separate from the Aquilo discovery tech. TODO.

@@ -30,7 +30,7 @@ filterItem.order = "01"
 filterItem.subgroup = "filtration"
 Item.perRocket(filterItem, 1000)
 filterItem.fuel_category = "filter"
-filterItem.fuel_value = "1MJ"
+filterItem.fuel_value = "10J"
 filterItem.burnt_result = "spent-filter"
 filterItem.fuel_glow_color = nil
 extend{filterItem}

@@ -42,12 +42,13 @@ Recipe.edit{
 Recipe.edit{
 	recipe = "agricultural-tower",
 	ingredients = {
+		{"glass", 5},
+		{"frame", 5},
 		{"mechanism", 2},
-		{"frame", 2},
 		{"sensor", 1},
-		{"glass", 2},
+		{"fertilizer", 1},
 	},
-	time = 2,
+	time = 5,
 }
 
 -- I want to edit miner speeds to be more regular and generally faster, to speed up the game, especially early game.

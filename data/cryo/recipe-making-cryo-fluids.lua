@@ -29,24 +29,9 @@ Recipe.make{
 		{"hydrogen-gas", 100},
 	},
 	icons = {"hydrogen-gas", "syngas", "steam"}, -- TODO better icons
+	category = "chemistry",
 }
 Tech.addRecipeToTech("syngas-reforming", "cryogenic-plant") -- TODO tech
-
--- Air separation: (air) -> 100 nitrogen + 100 oxygen
--- TODO add surface condition so you can't do this on Fulgora.
--- TODO probably add air separator as a separate building? Since Hurricane has graphics for air filterer.
-Recipe.make{
-	copy = nitrogenCompressionRecipe,
-	recipe = "air-separation",
-	ingredients = {
-	},
-	results = {
-		{"nitrogen-gas", 100},
-		{"oxygen-gas", 100},
-	},
-	icons = {"nitrogen-gas", "oxygen-gas"}, -- TODO better icons
-}
-Tech.addRecipeToTech("air-separation", "cryogenic-plant") -- TODO tech
 
 -- Ammonia cracking: 20 ammonia -> 10 hydrogen + 10 nitrogen
 -- TODO this should be slow, only worthwhile on Aquilo.
@@ -62,6 +47,7 @@ Recipe.make{
 	},
 	icons = {"ammonia", "hydrogen-gas", "nitrogen-gas"}, -- TODO better icons
 	iconArrangement = "decomposition",
+	category = "chemistry",
 }
 Tech.addRecipeToTech("ammonia-cracking", "cryogenic-plant") -- TODO tech
 

@@ -68,6 +68,7 @@ Recipe.hide = function(recipeName)
 		return
 	else
 		recipe.hidden = true
+		recipe.hidden_in_factoriopedia = true
 	end
 end
 
