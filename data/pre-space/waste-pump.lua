@@ -79,16 +79,21 @@ extend{wastePumpItem}
 local effluentFluidsAndPollution = {
 	{"water", 0},
 	{"lake-water", 0},
+	{"latex", 5},
+	{"cement", 0},
+	{"sulfuric-acid", 20},
 	{"crude-oil", 20},
 	{"tar", 30},
 	{"heavy-oil", 25},
 	{"light-oil", 15},
+	{"diesel", 20},
 	{"lubricant", 20},
 	{"slime", 0},
-	{"geoplasm", 10},
+	{"geoplasm", 5},
 	{"chitin-broth", 0},
 	{"thruster-fuel", 0}, -- hydrogen
 	{"thruster-oxidizer", 0}, -- oxygen
+	{"liquid-nitrogen", 0},
 	{"lava", 0},
 	{"molten-iron", 20},
 	{"molten-copper", 20},
@@ -108,12 +113,6 @@ for _, effluentFluidAndPollution in pairs(effluentFluidsAndPollution) do
 	local effluentFluid = effluentFluidAndPollution[1]
 	local effluentPollution = effluentFluidAndPollution[2]
 	local fluid = FLUID[effluentFluid]
-	local fluidIcon
-	if fluid.icons then
-		fluidIcon = fluid.icons[1]
-	else
-		fluidIcon = {icon = fluid.icon, icon_size = fluid.icon_size}
-	end
 	local effluentRecipe = copy(RECIPE["offshore-pump"])
 	effluentRecipe.name = "vent-" .. effluentFluid
 	effluentRecipe.localised_name = {"recipe-name.waste-pumping", {"fluid-name."..effluentFluid}}
@@ -123,19 +122,31 @@ for _, effluentFluidAndPollution in pairs(effluentFluidsAndPollution) do
 	effluentRecipe.energy_required = 1
 	effluentRecipe.allow_productivity = false
 	effluentRecipe.allow_quality = false
+	-- I'm not hiding these recipes - rather show the player eg what pollution mult will be, and keep it as reminder that fluids can be vented.
 	effluentRecipe.hidden = false
-	effluentRecipe.hidden_in_factoriopedia = true
+	effluentRecipe.hidden_in_factoriopedia = false
 	effluentRecipe.hide_from_player_crafting = true
 	effluentRecipe.emissions_multiplier = effluentPollution
 	effluentRecipe.crafting_machine_tint = { -- This is shown on the waste pump graphics.
 		primary = fluid.base_color,
 	}
 	effluentRecipe.category = "waste-pump"
-	effluentRecipe.subgroup = "fluid"
+	effluentRecipe.subgroup = "waste-pump"
+
+	local fluidIcon
+	if fluid.icons then
+		fluidIcon = copy(fluid.icons[1])
+	else
+		fluidIcon = {icon = fluid.icon, icon_size = fluid.icon_size}
+	end
+	fluidIcon.scale = 0.3
+	fluidIcon.shift = {4, -4}
 	effluentRecipe.icons = {
 		fluidIcon,
-		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64},
+		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.21, shift = {4, -4}},
+		{icon = "__base__/graphics/icons/offshore-pump.png", icon_size = 64, scale = 0.2, shift = {-4, 4}},
 	}
+
 	extend{effluentRecipe}
 end
 

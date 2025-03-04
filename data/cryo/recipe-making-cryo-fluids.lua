@@ -15,6 +15,8 @@ Recipe.make{
 	},
 	icons = {"hydrogen-gas", "syngas", "steam"}, -- TODO better icons
 	category = "chemistry",
+	allow_speed = true,
+	time = 2,
 }
 Tech.addRecipeToTech("syngas-reforming", "cryogenic-plant")
 
@@ -39,6 +41,7 @@ Recipe.make{
 	category = "chemistry",
 	allow_quality = false,
 	allow_productivity = false,
+	allow_speed = true,
 }
 -- Added to ammonia-2 tech when that's created.
 
@@ -49,15 +52,16 @@ Recipe.make{
 	copy = nitrogenCompressionRecipe,
 	recipe = "electrolysis",
 	ingredients = {
-		{"water", 20},
+		{"water", 100},
 	},
 	results = {
-		{"hydrogen-gas", 10},
-		{"oxygen-gas", 10},
+		{"hydrogen-gas", 50},
+		{"oxygen-gas", 50},
 	},
 	time = 10,
 	icons = {"water", "hydrogen-gas", "oxygen-gas"}, -- TODO better icons
 	iconArrangement = "decomposition",
 	category = "chemistry-or-electronics",
+	allow_speed = true,
 }
 -- Added to tech in cryo/techs.lua.

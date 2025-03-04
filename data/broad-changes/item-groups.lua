@@ -96,13 +96,17 @@ extend{
 	},
 
 	-- Create subgroups for fluids by planet, etc.
-	{ type = "item-subgroup", name = "nauvis-fluids",    group = "fluids", order = "01" },
-	{ type = "item-subgroup", name = "petrochem-fluids", group = "fluids", order = "02" },
-	{ type = "item-subgroup", name = "cryo-fluids",      group = "fluids", order = "03" },
-	{ type = "item-subgroup", name = "vulcanus-fluids",  group = "fluids", order = "04" },
-	{ type = "item-subgroup", name = "gleba-fluids",     group = "fluids", order = "05" },
-	{ type = "item-subgroup", name = "fulgora-fluids",   group = "fluids", order = "06" },
-	{ type = "item-subgroup", name = "aquilo-fluids",    group = "fluids", order = "07" },
+	{ type = "item-subgroup", name = "nauvis-fluids",       group = "fluids", order = "01" },
+	{ type = "item-subgroup", name = "petrochem-fluids",    group = "fluids", order = "02" },
+	{ type = "item-subgroup", name = "cryo-fluids",         group = "fluids", order = "03" },
+	{ type = "item-subgroup", name = "vulcanus-fluids",     group = "fluids", order = "04" },
+	{ type = "item-subgroup", name = "gleba-fluids",        group = "fluids", order = "05" },
+	{ type = "item-subgroup", name = "fulgora-fluids",      group = "fluids", order = "06" },
+	-- Group "fluid" with order "a" goes here. Will have most fluids from other mods. (TODO move out everything that's still in "fluid" group, mostly Nauvis part 2.)
+	{ type = "item-subgroup", name = "aquilo-fluids",       group = "fluids", order = "b07" },
+	{ type = "item-subgroup", name = "waste-pump",          group = "fluids", order = "b08" },
+	{ type = "item-subgroup", name = "gas-vent-on-surface", group = "fluids", order = "b09" },
+	{ type = "item-subgroup", name = "gas-vent-in-space",   group = "fluids", order = "b10" },
 
 	-- Subgroup for post-Nauvis science packs.
 	{ type = "item-subgroup", name = "alien-science-packs", group = "intermediate-products", order = "y2" },
@@ -141,7 +145,7 @@ for subgroup, fluids in pairs{
 	cryo = {"nitrogen-gas", "compressed-nitrogen-gas", "oxygen-gas", "hydrogen-gas", "liquid-nitrogen", "thruster-oxidizer", "thruster-fuel"},
 	vulcanus = {"lava", "volcanic-gas", "molten-iron", "molten-copper", "molten-steel", "molten-tungsten"},
 	fulgora = {"fulgoran-sludge", "holmium-solution", "electrolyte"},
-	gleba = {"slime", "geoplasm", "chitin-broth"},
+	gleba = {"slime", "geoplasm", "chitin-broth", "spore-gas"},
 	aquilo = {"ammoniacal-solution", "fluorine", "fluoroketone-hot", "fluoroketone-cold", "lithium-brine", "fusion-plasma"},
 } do
 	setSubgroupInOrder(subgroup .. "-fluids", "fluid", fluids)
@@ -203,9 +207,11 @@ setSubgroupInOrder("planetary-special", {"item", "recipe"},
 	{"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge"})
 
 setSubgroupInOrder("chemical-processing", {"item", "recipe"},
-	{"chemical-plant", "cryogenic-plant", "oil-refinery", "filtration-plant", "air-separator", "gasifier", "fluid-fuelled-gasifier"})
+	{"chemical-plant", "cryogenic-plant", "oil-refinery", "filtration-plant", "gasifier", "fluid-fuelled-gasifier"})
 ITEM["agricultural-tower"].subgroup = "extraction-machine"
 ITEM["agricultural-tower"].order = "c"
+ITEM["air-separator"].subgroup = "extraction-machine"
+ITEM["air-separator"].order = "d"
 local labs = {"lab", "glebalab", "biolab"}
 setSubgroupInOrder("labs", {"item", "recipe", "lab"}, labs)
 
@@ -300,12 +306,14 @@ RAW["item-subgroup"]["intermediate-product"].order = "c8"
 
 -- Make subgroups for cryo fluids and recipes.
 extend{
+	--[[
 	{
 		type = "item-subgroup",
 		name = "cryo-fluids",
 		group = "space",
 		order = "01",
 	},
+	]]
 	{
 		type = "item-subgroup",
 		name = "cryo-recipes",

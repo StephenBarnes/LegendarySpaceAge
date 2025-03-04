@@ -9,10 +9,12 @@ local pressurizedFluids = Table.listToSet{
 	"natural-gas",
 	"syngas",
 	"ammonia",
+	"spore-gas",
 
 	"liquid-nitrogen",
 	"thruster-oxidizer",
 	"thruster-fuel",
+
 	"nitrogen-gas",
 	"compressed-nitrogen-gas",
 	"oxygen-gas",

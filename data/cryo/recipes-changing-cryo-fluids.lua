@@ -15,12 +15,15 @@ local nitrogenCompressionRecipe = Recipe.make{
 	},
 	results = {
 		{"compressed-nitrogen-gas", 100},
-		{"steam", 100},
+		{"steam", 100, temperature = 100},
 	},
-	enabled = false,
-	icons = {"compressed-nitrogen-gas", "nitrogen-gas", "water"}, -- TODO better icons
+	-- So, this recipe produces 100 steam at 100C, which holds 1 MJ, which is 800kJ in turbine (80% efficiency). So if it takes 5s, then it's 160kW in steam. Machine uses 1MW, but can be reduced to 200kW with efficiency modules. Need to disable speed modules, because otherwise you can eg double the output but still use 200kW with more efficiency modules.
+	time = 5,
 	allow_quality = false,
 	allow_productivity = false,
+	allow_speed = false,
+	enabled = false,
+	icons = {"compressed-nitrogen-gas", "nitrogen-gas", "water"}, -- TODO better icons
 }
 Tech.addRecipeToTech("nitrogen-compression", "cryogenic-plant") -- TODO add to something else
 
@@ -39,6 +42,8 @@ Recipe.make{
 	iconArrangement = "decomposition",
 	allow_quality = false,
 	allow_productivity = false,
+	allow_speed = true,
+	time = 1,
 }
 Tech.addRecipeToTech("nitrogen-expansion", "cryogenic-plant") -- TODO add to something else
 
@@ -58,6 +63,8 @@ Recipe.make{
 	icons = {"thruster-oxidizer", "liquid-nitrogen"}, -- TODO better icons
 	allow_quality = false,
 	allow_productivity = false,
+	allow_speed = true,
+	time = 5,
 }
 Tech.addRecipeToTech("oxygen-cascade-cooling", "cryogenic-plant") -- TODO add to something else
 
@@ -79,6 +86,8 @@ Recipe.make{
 	icons = {"thruster-fuel", "thruster-oxidizer"}, -- TODO better icons
 	allow_quality = false,
 	allow_productivity = false,
+	allow_speed = true,
+	time = 10,
 }
 Tech.addRecipeToTech("hydrogen-cascade-cooling", "cryogenic-plant") -- TODO add to something else
 -- TODO add more fluid I/O to cryogenic plant, so this actually works.
@@ -95,6 +104,8 @@ Recipe.make{
 		{"compressed-nitrogen-gas", 200},
 	},
 	icons = {"nitrogen-gas", "liquid-nitrogen"}, -- TODO better icons
+	allow_speed = true,
+	time = 2,
 }
 -- Will be added to cryogenic-plant-2 tech when that's created.
 

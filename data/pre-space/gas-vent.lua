@@ -18,7 +18,7 @@ ventEnt.show_recipe_icon = false -- Don't show the "void X" icon on the entity.
 ventEnt.show_recipe_icon_on_map = false
 ventEnt.energy_source = {
 	type = "void",
-	emissions_per_minute = {pollution = 1}, -- This gets multiplied by the emissions multiplier for the specific venting recipe.
+	emissions_per_minute = {pollution = 1, spores = 1}, -- This gets multiplied by the emissions multiplier for the specific venting recipe.
 }
 ventEnt.energy_usage = "1kW"
 ventEnt.source_inventory_size = 0
@@ -130,20 +130,30 @@ local ventableFluids = {
 	{"dry-gas", 4, false},
 	{"syngas", 4, false},
 	{"ammonia", 10, false},
+	{"volcanic-gas", 10, false},
+	{"spore-gas", 20, false},
 	{"fluorine", 30, false},
-	{"volcanic-gas", 0, false},
-	{"thruster-fuel", 0, true}, -- hydrogen
-	{"thruster-oxidizer", 0, true}, -- oxygen
+
+	{"compressed-nitrogen-gas", 0, false},
+	{"nitrogen-gas", 0, false},
+	{"oxygen-gas", 0, false},
+	{"hydrogen-gas", 0, false},
 
 	-- Liquids - only ventable in space.
+	{"thruster-fuel", 0, true}, -- hydrogen
+	{"thruster-oxidizer", 0, true}, -- oxygen
+	{"liquid-nitrogen", 0, true},
 	{"water", 0, true},
+	{"sulfuric-acid", 0, true},
 	{"crude-oil", 0, true},
 	{"tar", 0, true},
 	{"heavy-oil", 0, true},
 	{"light-oil", 0, true},
+	{"diesel", 0, true},
 	{"cement", 0, true},
 	{"latex", 0, true},
 	{"lubricant", 0, true},
+	{"fulgoran-sludge", 0, true},
 	{"slime", 0, true},
 	{"geoplasm", 0, true},
 	{"chitin-broth", 0, true},
@@ -153,6 +163,7 @@ local ventableFluids = {
 	{"molten-tungsten", 0, true},
 	{"holmium-solution", 0, true},
 	{"electrolyte", 0, true},
+	{"lithium-brine", 0, true},
 	{"fluoroketone-hot", 0, true},
 	{"fluoroketone-cold", 0, true},
 }
@@ -161,29 +172,42 @@ for _, fluidData in pairs(ventableFluids) do
 	local emissionsMult = fluidData[2]
 	local onlyInSpace = fluidData[3]
 	local fluid = FLUID[gasToVent]
-	local gasIcon
-	if fluid.icons then
-		gasIcon = fluid.icons[1]
-	else
-		gasIcon = {icon = fluid.icon, icon_size = fluid.icon_size}
-	end
 	local thisGasVentRecipe = copy(ventRecipe)
 	thisGasVentRecipe.name = "gas-vent-"..gasToVent
-	thisGasVentRecipe.localised_name = {"recipe-name.gas-vent", {"fluid-name."..gasToVent}}
+	if onlyInSpace then
+		thisGasVentRecipe.localised_name = {"recipe-name.gas-vent-space", {"fluid-name."..gasToVent}}
+		thisGasVentRecipe.subgroup = "gas-vent-in-space"
+	else
+		thisGasVentRecipe.localised_name = {"recipe-name.gas-vent", {"fluid-name."..gasToVent}}
+		thisGasVentRecipe.subgroup = "gas-vent-on-surface"
+	end
 	thisGasVentRecipe.category = "gas-venting"
-	thisGasVentRecipe.subgroup = "fluid"
 	thisGasVentRecipe.ingredients = {{type = "fluid", name = gasToVent, amount = 100}}
 	thisGasVentRecipe.results = {}
 	thisGasVentRecipe.enabled = true
+	-- I'm not hiding these recipes - rather show the player eg what pollution mult will be, whether it's a gas or not, etc.
 	thisGasVentRecipe.hidden = false
-	thisGasVentRecipe.hidden_in_factoriopedia = true
+	thisGasVentRecipe.hidden_in_factoriopedia = false
 	thisGasVentRecipe.hide_from_player_crafting = true
 	thisGasVentRecipe.allow_productivity = false
 	thisGasVentRecipe.allow_quality = false
+
+	local gasIcon
+	if fluid.icons then
+		gasIcon = copy(fluid.icons[1])
+	else
+		gasIcon = {icon = fluid.icon, icon_size = fluid.icon_size}
+	end
+	gasIcon.scale = 0.3
+	gasIcon.shift = {4, -4}
+	local machineIcon = Gen.ifThenElse(onlyInSpace, "__space-age__/graphics/icons/space-platform-surface.png", "__LegendarySpaceAge__/graphics/gas-vent/gas-vent-item.png")
+	local machineScale = Gen.ifThenElse(onlyInSpace, 0.15, 0.25)
 	thisGasVentRecipe.icons = {
 		gasIcon,
-		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64},
+		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.21, shift = {4, -4}},
+		{icon = machineIcon, icon_size = 64, scale = machineScale, shift = {-4, 4}},
 	}
+
 	thisGasVentRecipe.energy_required = 1
 	thisGasVentRecipe.emissions_multiplier = emissionsMult
 	thisGasVentRecipe.crafting_machine_tint = {

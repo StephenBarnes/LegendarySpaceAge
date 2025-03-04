@@ -61,12 +61,11 @@ Recipe.edit{
 }
 Recipe.edit{
 	recipe = "steam-turbine",
-	ingredients = {
-		{"frame", 5},
-		{"electronic-components", 10},
-		{"mechanism", 10},
-		{"fluid-fitting", 10},
-		{"shielding", 5}, -- High-pressure and high-temperature steam.
+	ingredients = { -- Steam turbine is much more efficient than steam engine, so giving it much greater material cost as the tradeoff.
+		{"frame", 10},
+		{"electronic-components", 20},
+		{"fluid-fitting", 50},
+		{"shielding", 50}, -- High-pressure and high-temperature steam.
 	},
 	time = 10,
 }
@@ -75,19 +74,19 @@ Recipe.edit{
 	recipe = "heating-tower",
 	time = 10,
 	ingredients = {
-		{"structure", 20},
-		{"shielding", 20},
-		{"heat-pipe", 5},
+		{"structure", 50},
+		{"shielding", 50},
+		{"heat-pipe", 20},
 	},
 }
 Recipe.edit{
 	recipe = "fluid-heating-tower",
 	time = 10,
 	ingredients = {
-		{"structure", 20},
-		{"shielding", 20},
-		{"heat-pipe", 5},
-		{"fluid-fitting", 2},
+		{"structure", 50},
+		{"shielding", 50},
+		{"heat-pipe", 20},
+		{"fluid-fitting", 10},
 	},
 }
 
@@ -102,13 +101,13 @@ Recipe.edit{
 }
 Recipe.edit{
 	recipe = "heat-exchanger",
-	ingredients = {
-		{"structure", 2},
-		{"shielding", 2},
-		{"fluid-fitting", 2},
-		{"heat-pipe", 2},
+	ingredients = { -- The whole system with heat exchangers is much more efficient than boilers and steam engines. So, increasing material cost as tradeoff.
+		{"structure", 10},
+		{"shielding", 20},
+		{"fluid-fitting", 10},
+		{"heat-pipe", 20},
 	},
-	time = 5,
+	time = 10,
 }
 
 ------------------------------------------------------------------------
@@ -128,24 +127,28 @@ for _, vals in pairs{
 		consumption = "2MW", -- Originally 1.8MW.
 		effectivity = 1, -- Originally 1.
 		targetTemp = 200, -- Originally 165.
+		pollution = 20, -- Originally 30.
 	},
 	{
 		name = "electric-boiler",
 		consumption = "2MW", -- Originally 1.8MW.
 		effectivity = 1,
 		targetTemp = 200,
+		pollution = 20, -- Originally 30.
 	},
 	{
 		name = "gas-boiler",
 		consumption = "2MW", -- Originally 1.8MW.
 		effectivity = 1,
 		targetTemp = 200,
+		pollution = 20, -- Originally 30.
 	},
 } do
 	local ent = RAW.boiler[vals.name]
 	ent.energy_consumption = vals.consumption
 	ent.energy_source.effectivity = vals.effectivity
 	ent.target_temperature = vals.targetTemp
+	ent.energy_source.emissions_per_minute = {pollution = vals.pollution}
 end
 
 -- Edit generators (steam engines and turbine).
@@ -158,8 +161,8 @@ for _, vals in pairs{
 	},
 	{
 		name = "steam-turbine",
-		effectivity = 0.5, -- Originally 1.
-		fluidUsagePerTick = 100/60, -- Originally 1, so 60/s.
+		effectivity = 0.8, -- Originally 1. Changing to .8, so it produces an even 2MW and it's more efficient than the steam engine.
+		fluidUsagePerTick = 50/60, -- Originally 1, so 60/s.
 		maxTemp = 500, -- Originally 500.
 	},
 } do
@@ -176,16 +179,19 @@ for _, vals in pairs{
 		name = "heating-tower",
 		effectivity = 1, -- Originally 2.5.
 		consumption = "5MW", -- Originally 40MW. Compare 2MW for a boiler.
+		pollution = 50, -- Originally 100.
 	},
 	{
 		name = "fluid-heating-tower",
 		effectivity = 1,
 		consumption = "5MW",
+		pollution = 50,
 	},
 } do
 	local ent = RAW.reactor[vals.name]
 	ent.energy_source.effectivity = vals.effectivity
 	ent.consumption = vals.consumption
+	ent.energy_source.emissions_per_minute = {pollution = vals.pollution}
 end
 
 --[[ Edit heat exchanger to have the same fluid stats as a boiler.

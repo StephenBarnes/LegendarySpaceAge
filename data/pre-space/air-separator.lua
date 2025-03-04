@@ -110,7 +110,7 @@ ent.fluid_boxes_off_when_no_fluid_recipe = false
 ent.ingredient_count = 1
 ent.energy_source.emissions_per_minute = {
 	pollution = -4,
-	spores = -2, -- For comparison, yumako tree is 15/harvest, and grows for 5m, so about 3/min spores.
+	spores = -4, -- For comparison, yumako tree is 15/harvest, and grows for 5m, so about 3/min spores.
 }
 ent.crafting_categories = {"air-separation"}
 ent.energy_usage = "200kW" -- So it's 5MW with drain.
@@ -213,7 +213,7 @@ for i, planetData in pairs{
 		results = {
 			{"volcanic-gas", 100, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
 			{"oxygen-gas", 10, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightTop},
-			{"steam", 10, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
+			{"steam", 10, type = "fluid", temperature = 100, fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
 		},
 		filtersPer50s = 2,
 		-- Every 100 volcanic gas is 1 carbon (before prod), so this uses 2 filters (<=2*0.5 carbon) to make ~1 carbon, so net even with carbon. But you can use prod modules to get net profit.
@@ -223,7 +223,7 @@ for i, planetData in pairs{
 		results = {
 			{"nitrogen-gas", 100, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightTop},
 			{"oxygen-gas", 100, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
-			{"dry-gas", 5, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
+			{"spore-gas", 20, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
 		},
 		filtersPer50s = 2,
 	}},
