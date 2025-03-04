@@ -45,7 +45,11 @@ separationRecipe.crafting_machine_tint = {
 	primary = volcanicGasColor,
 	secondary = brighterVolcanicGasColor,
 }
-Icon.set(separationRecipe, {"volcanic-gas", "sulfur", "carbon", "water"}, "decomposition")
+--Icon.set(separationRecipe, {"volcanic-gas", "sulfur", "carbon", "water"}, "decomposition")
+separationRecipe.icons = {
+	{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
+	{icon = "__LegendarySpaceAge__/graphics/fluids/gas-2.png", icon_size = 64, tint = brighterVolcanicGasColor, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
+}
 extend{separationRecipe}
 
 -- Create a tech for volcanic gas separation.

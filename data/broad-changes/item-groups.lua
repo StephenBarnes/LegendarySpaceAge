@@ -182,7 +182,14 @@ local fluidLogistics = {"pipe", "pipe-to-ground", "pump", "offshore-pump"}
 setSubgroupInOrder("fluid-logistics", {"item", "recipe"}, fluidLogistics)
 
 -- Move post-Nauvis science packs to the right row.
-local sciencePacks = {"metallurgic-science-pack", "agricultural-science-pack", "electromagnetic-science-pack", "nuclear-science-pack", "cryogenic-science-pack", "promethium-science-pack"}
+local sciencePacks = {
+	"nuclear-science-pack", -- Out of order (discovered after the rest), but this way it lines up with the drill/filter/airsep recipes.
+	"metallurgic-science-pack",
+	"agricultural-science-pack",
+	"electromagnetic-science-pack",
+	"cryogenic-science-pack",
+	"promethium-science-pack",
+}
 setSubgroupInOrder("alien-science-packs", {"tool", "recipe"}, sciencePacks)
 
 -- Move rocket parts to space section.
@@ -304,23 +311,13 @@ Gen.orderKinds("intermediate-product", {ITEM}, {
 })
 RAW["item-subgroup"]["intermediate-product"].order = "c8"
 
--- Make subgroups for cryo fluids and recipes.
-extend{
-	--[[
-	{
-		type = "item-subgroup",
-		name = "cryo-fluids",
-		group = "space",
-		order = "01",
-	},
-	]]
-	{
+-- Make subgroups for cryo recipes.
+extend{{
 		type = "item-subgroup",
 		name = "cryo-recipes",
-		group = "space",
-		order = "02",
-	},
-}
+		group = "intermediate-products",
+		order = "h",
+}}
 Gen.orderKinds("cryo-fluids", {FLUID}, {
 	"nitrogen-gas",
 	"compressed-nitrogen-gas",
@@ -340,3 +337,22 @@ Gen.orderKinds("cryo-recipes", {RECIPE}, {
 	"hydrogen-cascade-cooling",
 	"regenerative-cooling",
 })
+
+-- Create a row for filtration recipes, since they line up nicely with the planets.
+extend{{
+	type = "item-subgroup",
+	name = "planet-filtration",
+	group = "intermediate-products",
+	order = "y3",
+}}
+local planetFiltration = {
+	"filter-lake-water",
+	"volcanic-gas-separation",
+	"filter-slime",
+	"fulgoran-sludge-filtration",
+	"ammoniacal-solution-separation",
+}
+Gen.orderKinds("planet-filtration", {RECIPE}, planetFiltration)
+for _, recipeName in pairs(planetFiltration) do
+	RECIPE[recipeName].hide_from_player_crafting = true
+end

@@ -52,7 +52,7 @@ local newTreeMinableResults = {
 	{ -- Increase total wood yield, to reduce the number of trees you need to harvest to do the 1000-circuit challenge for red science.
 		type = "item",
 		name = "wood",
-		amount = 8,
+		amount = 10,
 	},
 	{ -- Add resin, for early fluid fittings.
 		type = "item",
@@ -64,7 +64,7 @@ local newDeadTreeMinableResults = {
 	{
 		type = "item",
 		name = "wood",
-		amount = 4,
+		amount = 5,
 	},
 }
 for _, tree in pairs(RAW.tree) do
@@ -181,3 +181,6 @@ TECH["tree-seeding"].effects = {
 Recipe.hide("wood-processing")
 
 -- TODO turn off or greatly reduce pollution absorption from trees, since you can now plant a lot from early-game.
+
+-- Clear description of ag tower.
+RAW["agricultural-tower"]["agricultural-tower"].localised_description = {"entity-description.no-description"}

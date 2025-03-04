@@ -260,3 +260,8 @@ Recipe.make{
 	clearIcons = true,
 	-- Will set ingredients in infra file.
 }
+
+-- Create recipe category for filtration.
+local filtrationRecipeCategory = copy(RAW["recipe-category"]["crafting-with-fluid"])
+filtrationRecipeCategory.name = "filtration"
+extend{filtrationRecipeCategory}

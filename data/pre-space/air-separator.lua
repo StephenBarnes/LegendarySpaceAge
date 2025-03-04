@@ -237,8 +237,8 @@ for i, planetData in pairs{
 	{"aquilo", {
 		results = {
 			{"nitrogen-gas", 200, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.upDownMiddle},
-			{"ammonia", 50, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightTop},
-			{"dry-gas", 20, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
+			{"dry-gas", 20, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightTop},
+			{"ammonia", 20, type = "fluid", fluidbox_index = FLUIDBOX_INDEX.leftRightBottom},
 		},
 		filtersPer50s = 1,
 	}},

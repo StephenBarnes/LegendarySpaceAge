@@ -240,7 +240,6 @@ tech.effects = {
 	{type = "unlock-recipe", recipe = "sprouted-boomnut"},
 	{type = "unlock-recipe", recipe = "crush-boomnut"},
 	{type = "unlock-recipe", recipe = "boomsac-deflation"},
-	{type = "unlock-recipe", recipe = "ammonia-from-spoilage"},
 }
 tech.research_trigger = {
 	type = "mine-entity",

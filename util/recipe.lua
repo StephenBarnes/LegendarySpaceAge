@@ -151,9 +151,9 @@ end
 	.category, .enabled, .auto_recycle, .subgroup, .order, .localised_name, .localised_description, .main_product, .allow_decomposition, .allow_as_intermediate, .show_amount_in_title, .crafting_machine_tint (just copied over)
 ]]
 local allowedFieldsEdit = Table.listToSet{ -- Apparently the LSP's type-checking doesn't notice non-existent fields in the arg (?????), so we need to check them here.
-	"recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearSurfaceConditions", "clearLocalisedName", "hide_from_player_crafting",
+	"recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearSurfaceConditions", "clearLocalisedName", "hide_from_player_crafting", "iconsLiteral",
 }
----@param a {recipe: string|data.RecipePrototype, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearSurfaceConditions?: boolean, clearLocalisedName?: boolean, hide_from_player_crafting?: boolean}
+---@param a {recipe: string|data.RecipePrototype, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearSurfaceConditions?: boolean, clearLocalisedName?: boolean, hide_from_player_crafting?: boolean, iconsLiteral?: any}
 ---@return data.RecipePrototype
 Recipe.edit = function(a)
 	for field, _ in pairs(a) do
@@ -207,15 +207,24 @@ Recipe.edit = function(a)
 	end
 
 	if a.clearIcons ~= nil then
-		assert(a.icons == nil, "Recipe.edit: clearIcons and icons cannot both be set")
+		assert(a.icons == nil)
 		Icon.clear(recipe)
 	end
 	if a.icons ~= nil then
+		assert(a.icon == nil)
+		assert(a.iconsLiteral == nil)
 		Icon.set(recipe, a.icons, a.iconArrangement)
 	end
 	if a.icon ~= nil then
-		assert(a.icons == nil, "Recipe.edit: icon and icons cannot both be set")
+		assert(a.icons == nil)
+		assert(a.iconArrangement == nil)
+		assert(a.iconsLiteral == nil)
 		Icon.set(recipe, a.icon)
+	end
+	if a.iconsLiteral ~= nil then
+		assert(a.icons == nil)
+		assert(a.icon == nil)
+		recipe.icons = a.iconsLiteral
 	end
 	return recipe
 end

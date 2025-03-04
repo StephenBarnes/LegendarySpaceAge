@@ -29,7 +29,7 @@ stingfrondPlant.agricultural_tower_tint = {
 
 -- Harvesting stingfronds produces wood, cyclosomes, and neurofibrils.
 stingfrondPlant.minable.results = {
-	{type = "item", name = "wood", amount = 8},
+	{type = "item", name = "wood", amount = 5},
 	{type = "item", name = "cyclosome-1", amount_min = 0, amount_max = 10},
 	{type = "item", name = "neurofibril", amount_min = 0, amount_max = 10},
 }

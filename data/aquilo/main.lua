@@ -72,3 +72,38 @@ Recipe.substituteIngredient("railgun-turret", "fluoroketone-cold", "liquid-nitro
 -- Edit everywhere else that fluoroketone shows up.
 RAW["fusion-generator"]["fusion-generator"].output_fluid_box.filter = "nitrogen-gas"
 RAW["fusion-reactor"]["fusion-reactor"].input_fluid_box.filter = "liquid-nitrogen"
+
+Recipe.edit{
+	recipe = "ammoniacal-solution-separation",
+
+	-- Change to filtration plant.
+	category = "filtration",
+
+	-- Change icons to match other filtration recipes.
+	iconsLiteral = {
+		{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
+		{icon = FLUID["ammoniacal-solution"].icon, icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
+	},
+
+	-- Set recipe colors for filtration plant. Recipe already has tints but they're too light-colored I think, prefer deeper blue.
+	crafting_machine_tint = {
+		primary = FLUID["ammoniacal-solution"].base_color,
+		secondary = FLUID["ammoniacal-solution"].flow_color,
+		tertiary = FLUID["ammoniacal-solution"].visualization_color,
+	},
+
+	-- Clear description.
+	localised_description = {"recipe-description.no-description"},
+
+	ingredients = {
+		{"ammoniacal-solution", 100},
+	},
+	results = { -- Originally 50 ammoniacal solution -> 50 ammonia + 5 ice.
+		{"ammonia", 100}, -- For some reason this gets forced to one of the 2 outputs of the filtration plant. Not sure why.
+		{"dry-gas", 10},
+			-- This has 7MJ, for 50s, and costs 0.5 carbon = 0.5 MJ. But it takes 50s, so that's 6.5MJ/50s = 130kW, not terribly significant.
+		{"ice", 10},
+		-- TODO later add gas ice, etc.
+	},
+	time = 1,
+}

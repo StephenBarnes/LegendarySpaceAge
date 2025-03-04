@@ -29,3 +29,6 @@ recycler.fluid_boxes = {
 		volume = 200,
 	},
 }
+
+-- Add more output slots. Default was 12.
+recycler.result_inventory_size = 20
