@@ -436,27 +436,3 @@ Tech.addRecipeToTech("charged-holmium-battery", "holmium-battery")
 -- Reduce efficiency of lightning rods.
 RAW["lightning-attractor"]["lightning-rod"].efficiency = .1 -- Changing 20% to 10%.
 RAW["lightning-attractor"]["lightning-collector"].efficiency = .3 -- Changing 40% to 30%.
-
--- Add recipe to extract sulfuric acid from batteries - fits with the theme, plus water for sulfuric acid is scarce on Fulgora now.
--- TODO remove this recipe, rather make it part of battery recycling.
-local extractionRecipe = copy(RECIPE["sulfuric-acid"])
-extractionRecipe.name = "extract-sulfuric-acid-from-battery"
-extractionRecipe.category = "chemistry"
-extractionRecipe.hidden = false
-extractionRecipe.hidden_in_factoriopedia = false
-extractionRecipe.ingredients = {{ type = "item", name = "battery", amount = 1 } }
-extractionRecipe.results = { -- Returns 25%, same as recycling, so should be fine.
-	{ type = "fluid", name = "sulfuric-acid", amount = 5, show_details_in_recipe_tooltip = false },
-	{ type = "item", name = "panel", amount = 1, probability = 0.5, show_details_in_recipe_tooltip = false },
-	{ type = "item", name = "electronic-components", amount = 1, probability = 0.25, show_details_in_recipe_tooltip = false },
-}
-extractionRecipe.main_product = "sulfuric-acid"
-extractionRecipe.order = RECIPE["sulfuric-acid"].order .. "-b"
-extractionRecipe.subgroup = RECIPE["acid-neutralisation"].subgroup
-extractionRecipe.allow_as_intermediate = false
-extractionRecipe.allow_decomposition = false
-extractionRecipe.allow_productivity = false
-Icon.set(extractionRecipe, {"sulfuric-acid", "battery"})
-extend{extractionRecipe}
-Tech.addRecipeToTech("extract-sulfuric-acid-from-battery", "recycling")
--- TODO rather add a fluid output to recyclers, and make recycling recipes also output fluids for some recipes - batteries, holmium batteries, maybe others?

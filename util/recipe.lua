@@ -309,4 +309,36 @@ Recipe.recipeSideJoules = function(recipeSide)
 	return joules
 end
 
+---@param recipe data.RecipePrototype|string
+---@param sideName "ingredients"|"results"
+---@param name string
+---@return data.IngredientPrototype|data.ProductPrototype?
+Recipe.getIngredientOrResult = function(recipe, sideName, name)
+	if type(recipe) == "string" then
+		recipe = RECIPE[recipe]
+		assert(recipe ~= nil, "Recipe.getIngredientOrResult: recipe not found: "..recipe)
+	end
+	for _, ingredientOrResult in pairs(recipe[sideName]) do
+		if ingredientOrResult.name == name then
+			return ingredientOrResult
+		end
+	end
+	return nil
+end
+---@param recipe data.RecipePrototype|string
+---@param ingredientName string
+---@return data.IngredientPrototype?
+Recipe.getIngredient = function(recipe, ingredientName)
+	---@diagnostic disable-next-line: return-type-mismatch
+	return Recipe.getIngredientOrResult(recipe, "ingredients", ingredientName)
+end
+---@param recipe data.RecipePrototype|string
+---@param resultName string
+---@return data.ProductPrototype?
+Recipe.getResult = function(recipe, resultName)
+	---@diagnostic disable-next-line: return-type-mismatch
+	return Recipe.getIngredientOrResult(recipe, "results", resultName)
+end
+
+
 return Recipe

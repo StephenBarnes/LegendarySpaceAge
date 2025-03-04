@@ -293,7 +293,6 @@ Gen.orderKinds("petroleum-materials", {RECIPE}, {
 -- Move sulfuric acid to fluid-recipes.
 Gen.orderKinds("fluid-recipes", {RECIPE}, {
 	"make-sulfuric-acid",
-	"extract-sulfuric-acid-from-battery",
 }, "c-")
 
 -- Order the intermediate-product group.
@@ -356,3 +355,17 @@ Gen.orderKinds("planet-filtration", {RECIPE}, planetFiltration)
 for _, recipeName in pairs(planetFiltration) do
 	RECIPE[recipeName].hide_from_player_crafting = true
 end
+
+-- Reorder rail and ships, so signals line up.
+RAW["rail-planner"]["waterway"].order = "g"
+RAW["rail-planner"]["rail"].order = "g1"
+RAW["rail-planner"]["rail-ramp"].order = "g2"
+RAW["rail-support"]["rail-support"].order = "g3"
+RECIPE["rail"].order = "g1"
+RECIPE["rail-ramp"].order = "g2"
+RECIPE["rail-support"].order = "g3"
+ITEM["rail-support"].order = "g3"
+
+-- Hide infinity cargo wagon.
+RAW["infinity-cargo-wagon"]["infinity-cargo-wagon"].hidden = true
+RAW["infinity-cargo-wagon"]["infinity-cargo-wagon"].hidden_from_player_crafting = true

@@ -1,5 +1,4 @@
 require("data.broad-changes.barrelling-dff")
-require("data.fulgora.main-dff")
 require("data.broad-changes.recycling-dff")
 require("data.broad-changes.recipe-final-fixes")
 require("data.circuits-modules.modules-dff")

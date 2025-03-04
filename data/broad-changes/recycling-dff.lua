@@ -123,3 +123,44 @@ end
 -- Space biolabs should have recycling recipe.
 -- Actually, looks like there's a hard-coded exception for recipe named "biolab". So let's generate it ourselves.
 Recycling.generate_recycling_recipe(RECIPE.biolab, (function(_) return true end))
+
+-- Change charged battery recycling recipes to just discharge the batteries.
+if RECIPE["charged-battery-recycling"] then
+	RECIPE["charged-battery-recycling"].results = {{type = "item", name = "battery", amount = 1}}
+end
+if RECIPE["charged-holmium-battery-recycling"] then
+	RECIPE["charged-holmium-battery-recycling"].results = {{type = "item", name = "holmium-battery", amount = 1}}
+end
+
+-- Add sulfuric acid product to some recycling recipes.
+for _, recipeName in pairs{
+	"battery",
+	"sulfuric-acid-barrel",
+} do
+	local recyclingRecipeName = recipeName .. "-recycling"
+	local recyclingRecipe = RECIPE[recyclingRecipeName]
+	local baseRecipe = RECIPE[recipeName]
+	assert(recyclingRecipe ~= nil, "Expected recycling recipe for " .. recyclingRecipeName)
+	assert(baseRecipe ~= nil, "Expected base recipe for " .. recipeName)
+	local saIngredient = Recipe.getIngredient(baseRecipe, "sulfuric-acid")
+	assert(saIngredient ~= nil)
+	local amount = saIngredient.amount * 0.25
+	-- No extra_count_fraction, it doesn't work for fluids. Plus you can have fractional result amounts for fluids.
+	table.insert(recyclingRecipe.results, {
+			type = "fluid",
+			name = "sulfuric-acid",
+			amount = amount,
+	})
+end
+
+-- Change concrete recycling to give back stone. (Ingredient is fluid, but it solidifies.)
+RECIPE["concrete-recycling"].results = {
+	{type = "item", name = "stone", amount = 1, extra_count_fraction = .25},
+	{type = "item", name = "sand", amount = 1, extra_count_fraction = .25},
+}
+
+-- Change refined concrete recycling to give back stone and sand.
+table.insert(RECIPE["refined-concrete-recycling"].results, {type = "item", name = "stone", amount = 1, extra_count_fraction = .25})
+table.insert(RECIPE["refined-concrete-recycling"].results, {type = "item", name = "sand", amount = 1, extra_count_fraction = .25})
+
+-- TODO edit recycling recipe times, and recycler speed.

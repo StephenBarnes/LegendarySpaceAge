@@ -25,13 +25,13 @@ Re furnace energy consumption:
 -- TODO edit healths for all entities.
 -- TODO add stack size
 -- TODO add mandatory perRocket field.
+-- TODO check all of these have all of these fields.
 
--- Define a type for the assembler vals "machine" field:
----@alias MachineVals {kind: string, speed: number, drainKW: number, activeKW: number, pollution: number, effects: table, forbid_quality: boolean, forbid_productivity: boolean, clearDescription: boolean}
-
-
----@type table<string, {machine: table, recipe: table, item:table}>
-local ASSEMBLER_VALS = {
+---@alias CrafterMachineVals {kind: string, speed: number, drainKW: number, activeKW: number, pollution: number, spores: number?, effects: table?, forbid_quality: boolean?, forbid_productivity: boolean?, clearDescription: boolean?}
+---@alias CrafterRecipeVals {ingredients: table, time: number, category: string?}
+---@alias CrafterItemVals {perRocket: number, stackSize: number}
+---@type table<string, {machine: CrafterMachineVals, recipe: CrafterRecipeVals, item:CrafterItemVals}>
+local CRAFTER_VALS = {
 	["assembling-machine-1"] = {
 		machine = {
 			kind = "assembling-machine",
@@ -283,7 +283,7 @@ local ASSEMBLER_VALS = {
 		machine = {
 			kind = "assembling-machine",
 			speed = 1,
-			energy_usage = "1MW",
+			activeKW = 1000,
 			drainKW = 0,
 			pollution = 5,
 		},
@@ -309,7 +309,7 @@ local ASSEMBLER_VALS = {
 				productivity = 0.5,
 			},
 			-- Increase power consumption to make Fulgora harder. Originally 2MW.
-			energy_usage = "5MW",
+			activeKW = 5000,
 			drainKW = 0,
 			clearDescription = true,
 		},
@@ -330,7 +330,7 @@ local ASSEMBLER_VALS = {
 		machine = {
 			kind = "furnace",
 			-- Increase power consumption to make Fulgora harder. Originally 180kW.
-			energy_usage = "250kW",
+			activeKW = 250,
 			drainKW = 0,
 			forbid_quality = true, -- Disabling it to discourage loops for quality, rather encourage quality along the entire production line.
 			forbid_productivity = true, -- It's disabled in base Space Age, since it would allow cheese loops.
@@ -339,8 +339,7 @@ local ASSEMBLER_VALS = {
 			ingredients = {
 				{"mechanism", 10},
 				{"frame", 5},
-				{"sensor", 1},
-				{"fluid-fitting", 2},
+				{"fluid-fitting", 1},
 			},
 			time = 5,
 		},
@@ -360,10 +359,11 @@ local ASSEMBLER_VALS = {
 	},
 }
 
-for name, vals in pairs(ASSEMBLER_VALS) do
+for name, vals in pairs(CRAFTER_VALS) do
 	if vals.recipe then
-		vals.recipe.recipe = name
-		Recipe.edit(vals.recipe)
+		local recipeArgs = vals.recipe ---@type table
+		recipeArgs.recipe = name
+		Recipe.edit(recipeArgs)
 	end
 
 	if vals.machine then
