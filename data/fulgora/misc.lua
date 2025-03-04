@@ -38,12 +38,6 @@ RECIPE["electrolyte"].ingredients = {
 	{type = "fluid", name = "water", amount = 10},
 }
 
--- Increase power consumption of EM plants and recyclers.
-ASSEMBLER["electromagnetic-plant"].energy_usage = "5MW" -- Originally 2MW max, changing to 5MW.
-ASSEMBLER["electromagnetic-plant"].energy_source.drain = "0W"
-FURNACE["recycler"].energy_usage = "250kW" -- Increasing 180kW -> 250kW.
-FURNACE["recycler"].energy_source.drain = "0W"
-
 -- Remove temperature stats from fluids (electrolyte and holmium-solution).
 FLUID["holmium-solution"].max_temperature = nil
 FLUID["holmium-solution"].heat_capacity = nil

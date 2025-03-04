@@ -19,6 +19,7 @@ local checkRecipesObtainable = require("check-recipes-obtainable")
 local checkModulesBeaconsEnabled = require("check-modules-beacons-enabled")
 local checkConservationRules = require("check-conservation-rules")
 local checkIntendedTradeoffs = require("check-intended-tradeoffs")
+-- TODO add a check that no recipe has time and ingredients and products divisible by any whole number above 1.
 
 local function runFullDebug()
 	log("Legendary Space Age: running full progression debug.")

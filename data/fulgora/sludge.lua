@@ -32,11 +32,13 @@ extend({
 		},
 		results = {
 			{ type = "fluid", name = "heavy-oil",             amount = 10 },
+			{ type = "fluid", name = "tar",                   amount = 10 },
 			{ type = "item",  name = "carbon",                amount = 1, probability = 0.10,  show_details_in_recipe_tooltip = false },
 				-- Crucial to have some way of getting this, since you need it for the filters.
 			{ type = "item",  name = "ice",                   amount = 1, probability = 0.01,  show_details_in_recipe_tooltip = false },
-			{ type = "item",  name = "stone",                 amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false },
-			{ type = "item",  name = "sand",                  amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false },
+			{ type = "item",  name = "ash",                   amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false },
+				-- Needed so there's a way to make glass on Fulgora.
+			-- No stone or sand. Can still get it from recycling concrete.
 			{ type = "item",  name = "rusty-iron-gear-wheel", amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "rusty-iron-stick",      amount = 1, probability = 0.005, show_details_in_recipe_tooltip = false },
 			{ type = "item",  name = "copper-cable",          amount = 1, probability = 0.01,  show_details_in_recipe_tooltip = false },

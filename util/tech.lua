@@ -1,8 +1,14 @@
 local Tech = {}
 
-Tech.addRecipeToTech = function(recipeName, techName, index)
-	assert(RECIPE[recipeName] ~= nil, "Recipe "..recipeName.." not found.")
-	RECIPE[recipeName].enabled = false -- Don't enable at start.
+---@param recipeName string
+---@param techName string
+---@param index number?
+---@param assertRecipeExists boolean?
+Tech.addRecipeToTech = function(recipeName, techName, index, assertRecipeExists)
+	if assertRecipeExists == true then
+		assert(RECIPE[recipeName] ~= nil, "Recipe "..recipeName.." not found.")
+		RECIPE[recipeName].enabled = false -- Don't enable at start.
+	end
 	local unlock = {
 		type = "unlock-recipe",
 		recipe = recipeName,

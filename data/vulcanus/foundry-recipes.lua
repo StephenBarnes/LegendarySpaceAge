@@ -212,27 +212,28 @@ Recipe.make{
 	time = 1,
 	icons = {"tungsten-carbide", "molten-tungsten"},
 	iconArrangement = "casting",
+	addToTech = "tungsten-steel",
 }
-Tech.addRecipeToTech("tungsten-carbide-from-molten", "tungsten-steel")
+
 Recipe.make{
 	copy = "tungsten-plate",
 	recipe = "tungsten-steel-from-molten",
 		-- Again, can't name it "tungsten-steel" or it won't show separately from the item, which is a problem bc you can't see the temperature range requirement.
 	ingredients = {
-		{"molten-tungsten", 50, minimum_temperature = 1800, maximum_temperature = 1900},
-		{"molten-steel", 10},
-		{"water", 5},
+		{"molten-tungsten", 10, minimum_temperature = 1800, maximum_temperature = 1900},
+		{"molten-steel", 2},
+		{"water", 1},
 	},
 	results = {
-		{"tungsten-plate", 5},
-		{"steam", 50, temperature = 500, ignored_by_productivity=50},
+		{"tungsten-plate", 1},
+		{"steam", 10, temperature = 500, ignored_by_productivity=50},
 	},
 	main_product = "tungsten-plate",
-	time = 5,
+	time = 1,
 	icons = {"tungsten-plate", "molten-tungsten"},
 	iconArrangement = "casting",
+	addToTech = "tungsten-steel",
 }
-Tech.addRecipeToTech("tungsten-steel-from-molten", "tungsten-steel")
 
 -- Hide default tungsten-steel recipe.
 Recipe.hide("tungsten-plate")

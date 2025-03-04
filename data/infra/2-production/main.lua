@@ -1,7 +1,6 @@
-require("assemblers")
-require("furnaces")
-require("data.infra.2-production.beacons-modules")
-require("data.tech-progression.labs")
+require("assemblers-furnaces")
+require("beacons-modules")
+require("labs")
 require("miners-etc")
 require("boilers-heaters")
 

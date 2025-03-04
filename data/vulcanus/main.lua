@@ -17,6 +17,7 @@ require("data.vulcanus.foundry")
 require("data.vulcanus.foundry-recipes")
 require("data.vulcanus.apprentice-arc-furnace")
 require("data.vulcanus.tungsten-axe")
+require("data.vulcanus.env-minables")
 
 -- Move steam-to-water to Vulcanus tech, not calcite processing.
 Tech.removeRecipeFromTech("steam-condensation", "calcite-processing")

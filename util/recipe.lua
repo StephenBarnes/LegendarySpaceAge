@@ -222,9 +222,9 @@ end
 
 -- Create a recipe by copying an existing recipe and adjusting it. The a.copy field is the recipe to copy, rest of args the same as Recipe.edit.
 local allowedFieldsMake = Table.listToSet{
-	"copy", "recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearLocalisedName", "hide_from_player_crafting",
+	"copy", "recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearLocalisedName", "hide_from_player_crafting", "addToTech", "addToTechIndex"
 }
----@param a {copy: string|data.RecipePrototype, recipe: string, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearLocalisedName?: boolean, hide_from_player_crafting?: boolean}
+---@param a {copy: string|data.RecipePrototype, recipe: string, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearLocalisedName?: boolean, hide_from_player_crafting?: boolean, addToTech?: string, addToTechIndex?: number}
 Recipe.make = function(a)
 	for field, _ in pairs(a) do
 		assert(allowedFieldsMake[field], "Recipe.make: unknown field "..field.." in arguments: ".. serpent.block(a))
@@ -232,6 +232,17 @@ Recipe.make = function(a)
 	assert(a.copy ~= nil, "Recipe.make: copy is required, arguments: ".. serpent.block(a))
 	assert(a.recipe ~= nil, "Recipe.make: recipe name is required, arguments: ".. serpent.block(a))
 	assert(type(a.recipe) == "string", "Recipe.make: recipe name must be a string, arguments: ".. serpent.block(a))
+
+	if a.addToTech ~= nil then
+		Tech.addRecipeToTech(a.recipe, a.addToTech, a.addToTechIndex, false)
+		a.addToTech = nil
+		a.addToTechIndex = nil
+		assert(a.enabled ~= true, "Recipe.make: recipe "..a.recipe.." is enabled, but we're adding it to a tech, so it should be disabled.")
+		a.enabled = false
+	else
+		assert(a.addToTechIndex == nil, "Recipe.make: addToTechIndex is not allowed if addToTech is not set.")
+	end
+
 	local recipe
 	if type(a.copy) == "string" then
 		assert(RECIPE[a.copy] ~= nil, "Recipe.make: asked to copy non-existent recipe "..a.copy)
@@ -242,6 +253,7 @@ Recipe.make = function(a)
 		recipe = copy(a.copy)
 	end
 	assert(recipe ~= nil)
+
 	---@diagnostic disable-next-line: assign-type-mismatch
 	recipe.name = a.recipe
 	---@diagnostic disable-next-line: assign-type-mismatch

@@ -18,11 +18,9 @@ charFurnace.energy_usage = "2MW"
 charFurnace.crafting_categories = {"char-furnace"}
 charFurnace.graphics_set.animation.layers[1].filename = "__LegendarySpaceAge__/graphics/char-furnace/entity.png"
 charFurnace.corpse = "char-furnace-remnants"
-charFurnace.allowed_effects = {"pollution"}
 charFurnace.icon = "__LegendarySpaceAge__/graphics/char-furnace/item.png"
 charFurnace.show_recipe_icon = false
 charFurnace.show_recipe_icon_on_map = false
-charFurnace.allowed_effects = {"pollution", "speed", "quality"}
 extend{charFurnace}
 
 -- Create corpse.

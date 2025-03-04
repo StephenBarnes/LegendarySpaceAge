@@ -216,13 +216,13 @@ table.insert(TECH["agricultural-science-pack"].prerequisites, "stingfrond-cultiv
 local sproutRecipe = copy(RECIPE["bioflux"])
 sproutRecipe.name = "stingfrond-sprout"
 sproutRecipe.ingredients = {
-	{type = "item", name = "cyclosome-1", amount = 1},
+	{type = "item", name = "cyclosome-1", amount = 5},
 	{type = "item", name = "bioflux", amount = 1},
 	{type = "item", name = "fertilizer", amount = 1},
 	--{type = "fluid", name = "water", amount = 10},
 }
 sproutRecipe.results = {
-	{type = "item", name = "stingfrond-sprout", amount = 1, probability = 0.2},
+	{type = "item", name = "stingfrond-sprout", amount = 1},
 }
 Icon.clear(sproutRecipe)
 sproutRecipe.subgroup = "stingfrond-products"
