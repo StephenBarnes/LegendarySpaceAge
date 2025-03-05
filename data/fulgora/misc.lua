@@ -100,7 +100,7 @@ Recipe.edit{
 		{"copper-plate", 1},
 		{"plastic-bar", 1},
 		{"holmium-plate", 1},
-		{"fulgoran-sludge", 5, type = "fluid"},
+		{"electrolyte", 5},
 	},
 	time = 5,
 }

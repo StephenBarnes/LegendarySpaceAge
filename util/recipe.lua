@@ -126,7 +126,7 @@ local function interpretIngredientsOrResults(list, ingredientOrResult)
 			for k, v in pairs(thing) do
 				if k ~= "name" and k ~= "amount" and k ~= 1 and k ~= 2 and k ~= "type" then
 					assert(recognizedIngredientOrResultFields[ingredientOrResult][itemOrFluid][k],
-						"interpretIngredientsOrResults: unknown field "..k.." for "..itemOrFluid.." in "..ingredientOrResult)
+						"interpretIngredientsOrResults: unknown field \""..k.."\" for "..itemOrFluid.." in "..ingredientOrResult)
 					newElement[k] = v
 				end
 			end
@@ -157,7 +157,7 @@ local allowedFieldsEdit = Table.listToSet{ -- Apparently the LSP's type-checking
 ---@return data.RecipePrototype
 Recipe.edit = function(a)
 	for field, _ in pairs(a) do
-		assert(allowedFieldsEdit[field], "Recipe.edit: unknown field "..field.." in arguments: ".. serpent.block(a))
+		assert(allowedFieldsEdit[field], "Recipe.edit: unknown field \""..field.."\" in arguments: ".. serpent.block(a))
 	end
 	local recipe = nil
 	assert(a.recipe ~= nil, "Recipe.edit: recipe proto or name is required, arguments: ".. serpent.block(a))
@@ -236,7 +236,7 @@ local allowedFieldsMake = Table.listToSet{
 ---@param a {copy: string|data.RecipePrototype, recipe: string, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearLocalisedName?: boolean, hide_from_player_crafting?: boolean, addToTech?: string, addToTechIndex?: number}
 Recipe.make = function(a)
 	for field, _ in pairs(a) do
-		assert(allowedFieldsMake[field], "Recipe.make: unknown field "..field.." in arguments: ".. serpent.block(a))
+		assert(allowedFieldsMake[field], "Recipe.make: unknown field \""..field.."\" in arguments: ".. serpent.block(a))
 	end
 	assert(a.copy ~= nil, "Recipe.make: copy is required, arguments: ".. serpent.block(a))
 	assert(a.recipe ~= nil, "Recipe.make: recipe name is required, arguments: ".. serpent.block(a))

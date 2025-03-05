@@ -24,6 +24,7 @@ for _, equipmentTypeAndName in pairs{
 	{"roboport-equipment", "personal-roboport-equipment"},
 	{"battery-equipment", "battery-equipment"},
 	{"generator-equipment", "personal-burner-generator"},
+	{"generator-equipment", "personal-battery-generator"},
 } do
 	table.insert(RAW[equipmentTypeAndName[1]][equipmentTypeAndName[2]].categories, "early-armor")
 end
@@ -35,6 +36,9 @@ RECIPE["personal-burner-generator"].ingredients = {
 	{type = "item", name = "shielding", amount = 1},
 	{type = "item", name = "fluid-fitting", amount = 1},
 }
+
+-- Edit personal burner generator to be 50% efficient, so it consumes more fuel, but still produces 25kW/tile.
+RAW["generator-equipment"]["personal-burner-generator"].burner.effectivity = 0.5
 
 -- Unlock personal burner generator from its own tech, not modular armor.
 Tech.removeRecipeFromTech("personal-burner-generator", "modular-armor")

@@ -7,7 +7,6 @@ require("data.broad-changes.fluid-boxes")
 
 -- Files that create new protos.
 require("data.pre-space.char-furnace")
-require("data.pre-space.early-equipment-grids")
 require("data.broad-changes.map-gen-preset")
 require("data.broad-changes.remove-mapgen-presets")
 require("data.pre-space.gunpowder")
@@ -46,6 +45,8 @@ require("data.tech-progression.mech-armor")
 require("data.broad-changes.planet-drop-techs")
 require("data.pre-space.shotgun-turrets")
 require("data.circuits-modules.beacons")
+require("data.pre-space.personal-battery-generator")
+require("data.pre-space.early-equipment-grids")
 
 -- Planets
 require("data.pre-space.misc")
