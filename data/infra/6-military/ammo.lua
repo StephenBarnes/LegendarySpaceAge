@@ -86,15 +86,19 @@ Recipe.edit{
 		{"panel", 1}, -- Representing body.
 		{"explosives", 1}, -- Payload.
 	},
+	time = 2,
 }
 Recipe.edit{
 	recipe = "explosive-rocket",
 	-- Originally 2 explosives + 1 missile in 8s. But they're not very good IME, so should be cheaper. And fast since it's just adding a bit of extra payload.
+	-- Also don't want missile as an ingredient, since prod is enabled everywhere, so that would let you get >1 explosive missile per missile.
 	ingredients = {
-		{"rocket", 1},
-		{"explosives", 1},
+		{"solid-fuel", 1},
+		{"fluid-fitting", 1},
+		{"panel", 1},
+		{"explosives", 2},
 	},
-	time = 1,
+	time = 2,
 }
 -- TODO atomic bomb, once I do "Nauvis part 2" recipes.
 

@@ -24,13 +24,3 @@ Recipe.edit{
 	},
 	time = 10,
 }
-Recipe.edit{
-	recipe = "land-mine",
-	ingredients = {
-		{"panel", 2},
-		--{"gunpowder", 1},
-		{"explosives", 1},
-	},
-	resultCount = 2,
-	time = 1,
-}

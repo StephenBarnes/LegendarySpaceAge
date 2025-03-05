@@ -47,6 +47,7 @@ require("data.pre-space.shotgun-turrets")
 require("data.circuits-modules.beacons")
 require("data.pre-space.personal-battery-generator")
 require("data.pre-space.early-equipment-grids")
+require("data.pre-space.landmines")
 
 -- Planets
 require("data.pre-space.misc")

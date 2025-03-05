@@ -7,6 +7,8 @@ Date: 2025-03-03
     - Added air separator, which produces different gases on each planet, and can't be placed near other air separators.
     - Added quality scaling of power consumption for gasifiers, char furnaces, and battery chargers, to remove infinite-energy exploits.
     - Added briefings with tech triggers.
+    - Added personal battery generator equipment.
+    - TODO add poison and slowdown landmines
     - TODO add sugar system
     - TODO add resistances for enemies
     - TODO add bream
