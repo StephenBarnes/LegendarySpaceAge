@@ -64,8 +64,18 @@ Recipe.edit{
 	ingredients = { -- Steam turbine is much more efficient than steam engine, so giving it much greater material cost as the tradeoff.
 		{"frame", 10},
 		{"electronic-components", 20},
+		{"fluid-fitting", 20},
+		{"shielding", 20}, -- High-pressure and high-temperature steam.
+	},
+	time = 10,
+}
+Recipe.edit{ -- Condensing turbine: more advanced than steam turbine, gives water back at the cost of half the efficiency.
+	recipe = "condensing-turbine",
+	ingredients = { -- Steam turbine is much more efficient than steam engine, so giving it much greater material cost as the tradeoff.
+		{"frame", 10},
+		{"electronic-components", 20},
 		{"fluid-fitting", 50},
-		{"shielding", 50}, -- High-pressure and high-temperature steam.
+		{"shielding", 20},
 	},
 	time = 10,
 }

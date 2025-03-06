@@ -6,6 +6,7 @@ local airSeparator = require("control.air-separator")
 local apprenticeFoundry = require("control.apprentice-arc-furnace")
 local qualityPowerScaling = require("control.quality-power-scaling")
 local noLavaInPipes = require("control.no-lava-in-pipes")
+local condensingTurbineEfficiency = require("control.condensing-turbine-efficiency")
 
 local techRateTriggers = require("control.tech-rate-triggers")
 script.on_nth_tick(60 * 10, techRateTriggers.onNthTick)
@@ -34,6 +35,7 @@ for _, event in ipairs({
 		apprenticeFoundry.on_created_entity(e)
 		qualityPowerScaling.onBuilt(e)
 		noLavaInPipes.onBuilt(e)
+		condensingTurbineEfficiency.onBuilt(e)
 	end)
 end
 
@@ -48,6 +50,7 @@ end)
 script.on_event(defines.events.on_object_destroyed, function(e)
 	apprenticeFoundry.on_object_destroyed(e)
 	airSeparator.onObjectDestroyed(e)
+	condensingTurbineEfficiency.onObjectDestroyed(e)
 end)
 
 

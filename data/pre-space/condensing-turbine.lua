@@ -17,9 +17,9 @@ ent.fluid_box = nil
 ent.max_fluid_usage = 5.0/60.0 -- 5 per second.
 ent.input_fluid_box = {
 	filter = "steam",
-	maximum_temperature = 200.0,
+	maximum_temperature = 500.0,
 		-- TODO testing.
-	minimum_temperature = 200.0,
+	minimum_temperature = 500.0,
 	pipe_covers = pipecoverspictures(),
 	pipe_connections = {
 		{ flow_direction = "input", direction = defines.direction.south, position = {0, 2} },
@@ -68,6 +68,7 @@ ent.graphics_set = {
 	south_graphics_set = verticalGraphicsSet,
 	west_graphics_set = horizontalGraphicsSet,
 }
+Icon.set(ent, {"steam-turbine", "water"})
 extend{ent}
 
 -- Create item.
@@ -83,6 +84,7 @@ Recipe.make{
 	copy = "steam-turbine",
 	recipe = "condensing-turbine",
 	resultCount = 1,
+	clearIcons = true,
 	-- Will set ingredients later, in infra.
 }
 
@@ -107,3 +109,132 @@ tech.unit = {
 tech.research_trigger = nil
 tech.prerequisites = {"heating-tower"}
 extend{tech}
+
+------------------------------------------------------------------------
+--[[ Rest of this file uses evil tricks to make the condensing turbine not have 100% efficiency.
+Namely:
+	* Create condensing-turbine-evil, which is a copy of condensing-turbine, except its input fluidbox is moved 1 tile inwards, and it consumes steam-evil.
+	* Create steam-evil, which is a fluid that's like steam, but with specific heat changed so that 500C steam-evil has the same energy as 200C steam.
+	* Create steam-evilizer, which turns steam into steam-evil. Intake is at condensing-turbine's input, outputs 1 tile inward.
+	* In control stage, when player places a condensing-turbine, we replace it with a condensing-turbine-evil plus a steam-evilizer. So the steam gets converted to steam-evil before being used to power the condensing-turbine-evil.
+This is all so that it looks like the condensing turbine is consuming 500C steam (actually steam-evil) and generating energy with 40% efficiency.
+]]
+
+local HIDE_EVIL = true -- Whether to hide all of these entities, etc.
+
+-- Create condensing-turbine-evil.
+local ctEvilEnt = copy(ent)
+ctEvilEnt.name = "condensing-turbine-evil"
+ctEvilEnt.input_fluid_box.pipe_connections[1].position = {0, 0}
+ctEvilEnt.input_fluid_box.pipe_covers = nil
+ctEvilEnt.input_fluid_box.filter = "steam-evil"
+if HIDE_EVIL then
+	ctEvilEnt.localised_name = {"entity-name.condensing-turbine"}
+	ctEvilEnt.localised_description = {"entity-description.condensing-turbine"}
+	ctEvilEnt.hidden = true
+	ctEvilEnt.input_fluid_box.hide_connection_info = true
+end
+extend{ctEvilEnt}
+
+-- Create steam-evil.
+local steamEvil = copy(FLUID["steam"])
+steamEvil.name = "steam-evil"
+-- For regular steam, heat capacity is 1kJ, so 200C steam is 200kJ per unit.
+-- We want 500C steam-evil to have 200kJ per unit, so heat capacity is 200/500 = 0.4kJ per unit.
+steamEvil.heat_capacity = "0.4kJ"
+if HIDE_EVIL then
+	steamEvil.hidden = true
+	steamEvil.factoriopedia_alternative = "steam"
+	steamEvil.localised_name = {"fluid-name.steam"}
+	steamEvil.localised_description = {"fluid-description.steam"}
+end
+extend{steamEvil}
+
+-- Create recipe and crafting category for evilizing steam.
+---@type data.RecipePrototype
+local evilRecipe = {
+	type = "recipe",
+	name = "steam-evilizing",
+	ingredients = {
+		{type = "fluid", name = "steam", amount = 1, minimum_temperature = 490}, -- Making it 490 in case someone's network has a bit of leftover cold water.
+	},
+	results = {
+		{type = "fluid", name = "steam-evil", amount = 1, temperature = 500},
+	},
+	energy_required = 0.01,
+	auto_recycle = false,
+	allow_productivity = false,
+	category = "steam-evilizing",
+}
+if HIDE_EVIL then
+	evilRecipe.hidden = true
+	evilRecipe.hidden_in_factoriopedia = true
+end
+---@type data.RecipeCategory
+local evilCategory = {
+	type = "recipe-category",
+	name = "steam-evilizing",
+}
+if HIDE_EVIL then
+	evilCategory.hidden = true
+	evilCategory.hidden_in_factoriopedia = true
+end
+extend{evilRecipe, evilCategory}
+
+-- Create steam-evilizer.
+---@type data.AssemblingMachinePrototype
+local steamEvilizerEnt = {
+	type = "assembling-machine",
+	name = "steam-evilizer",
+	icon = "__core__/graphics/empty.png",
+	icon_size = 64,
+	icon_mipmaps = 4,
+	fixed_recipe = "steam-evilizing",
+	crafting_categories = {"steam-evilizing"},
+	crafting_speed = 100,
+	energy_usage = "1W",
+	energy_source = {
+		type = "void",
+	},
+	allowed_effects = {},
+	fluid_boxes = {
+		{
+			production_type = "input",
+			filter = "steam",
+			pipe_covers = pipecoverspictures(),
+			pipe_connections = {
+				{ flow_direction = "input", direction = defines.direction.south, position = {0, 2} },
+			},
+			volume = 10,
+		},
+		{
+			production_type = "output",
+			filter = "steam-evil",
+			pipe_connections = {
+				{ flow_direction = "output", direction = defines.direction.north, position = {0, 1} }
+			},
+			volume = 10,
+			hide_connection_info = HIDE_EVIL,
+		},
+	},
+	collision_box = ent.collision_box,
+	selection_box = ent.selection_box,
+	show_recipe_icon_on_map = false,
+	selection_priority = 1,
+	collision_mask = {layers={}},
+	remove_decoratives = "false",
+	allow_copy_paste = false,
+	flags = {"not-on-map", "not-repairable", "not-deconstructable", "not-flammable", "not-blueprintable", "placeable-neutral"},
+}
+if HIDE_EVIL then
+	steamEvilizerEnt.hidden = true
+	steamEvilizerEnt.factoriopedia_alternative = "condensing-turbine"
+	steamEvilizerEnt.selectable_in_game = false
+	steamEvilizerEnt.localised_name = {"entity-name.condensing-turbine"}
+	steamEvilizerEnt.localised_description = {"entity-description.condensing-turbine"}
+end
+extend{steamEvilizerEnt}
+
+-- TODO make the evilizer ent non-selectable.
+-- TODO hide the 2 extra fluid connections.
+-- TODO change to a furnace, and then allow input fluid with lower temps maybe?
