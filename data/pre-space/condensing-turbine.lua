@@ -54,6 +54,28 @@ local empty = {
 	width = 1,
 	height = 1,
 }
+---@diagnostic disable-next-line: undefined-field
+table.insert(ent.vertical_animation.layers, {
+	filename = "__LegendarySpaceAge__/graphics/condensing-turbine/lid-V.png",
+	width = 217,
+	height = 347,
+	repeat_count = 8,
+	line_length = 1,
+	shift = util.by_pixel(4.75, 6.75),
+	run_mode = "backward",
+	scale = 0.5,
+})
+---@diagnostic disable-next-line: undefined-field
+table.insert(ent.horizontal_animation.layers, {
+	filename = "__LegendarySpaceAge__/graphics/condensing-turbine/lid-H.png",
+	width = 320,
+	height = 245,
+	repeat_count = 8,
+	line_length = 1,
+	shift = util.by_pixel(0, -2.75),
+	run_mode = "backward",
+	scale = 0.5,
+})
 local verticalGraphicsSet = {
 	---@diagnostic disable-next-line: undefined-field
 	animation = ent.vertical_animation,
@@ -71,14 +93,14 @@ ent.graphics_set = {
 	south_graphics_set = verticalGraphicsSet,
 	west_graphics_set = horizontalGraphicsSet,
 }
-Icon.set(ent, {"steam-turbine", "water"})
+Icon.set(ent, {"LSA/condensing-turbine/icon", "water"})
 extend{ent}
 
 -- Create item.
 local item = copy(ITEM["steam-turbine"])
 item.name = "condensing-turbine"
 item.place_result = "condensing-turbine"
-Icon.set(item, {"steam-turbine", "water"})
+Icon.set(item, {"LSA/condensing-turbine/icon", "water"})
 item.order = "g"
 extend{item}
 
