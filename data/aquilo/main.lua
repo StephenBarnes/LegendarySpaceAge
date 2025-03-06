@@ -107,3 +107,12 @@ Recipe.edit{
 	},
 	time = 1,
 }
+
+Recipe.edit{
+	recipe = "solid-fuel-from-ammonia",
+	ingredients = { -- Originally 15 ammonia + 6 crude oil. Not sure what I want to do with this recipe, TODO check later when I do Aquilo properly.
+		{"ammonia", 15},
+		{"crude-oil", 10},
+	},
+	allow_productivity = false,
+}

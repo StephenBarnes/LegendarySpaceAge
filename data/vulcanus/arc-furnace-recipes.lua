@@ -12,8 +12,8 @@ Recipes:
 			1 calcite + 500 lava --4s--> 15 stone + 250 molten copper
 			These were 16s, but foundry has speed 4, so 4s.
 	Turning ores into molten metals, not used on Vulcanus:
-		10 iron ore   + 1 calcite + 1 carbon + 10 oxygen --10s--> 100 molten iron + 10 stone
-		10 copper ore + 1 calcite + 1 carbon + 10 oxygen --10s--> 100 molten copper + 10 stone + 10 sulfur
+		10 iron ore   + 1 calcite + 5 carbon + 10 oxygen --10s--> 100 molten iron + 10 stone
+		10 copper ore + 1 calcite + 5 carbon + 10 oxygen --10s--> 100 molten copper + 10 stone + 10 sulfur
 			Note this doesn't use copper matte. Copper matte is only involved with old normal-furnace smelting, which is realistic.
 		Old recipes were:
 			50 iron ore + 1 calcite --8s--> 500 molten iron
@@ -78,7 +78,7 @@ Recipe.edit{
 	ingredients = {
 		{"copper-ore", 10},
 		{"calcite", 1},
-		{"carbon", 2},
+		{"carbon", 5},
 		{"oxygen-gas", 10, type="fluid"},
 	},
 	results = {
@@ -96,7 +96,7 @@ Recipe.edit{
 	ingredients = {
 		{"iron-ore", 10},
 		{"calcite", 1},
-		{"carbon", 2},
+		{"carbon", 5},
 		{"oxygen-gas", 10, type="fluid"},
 	},
 	results = {
@@ -120,9 +120,7 @@ extend{moltenSteelFluid}
 -- Make recipe for molten steel.
 Recipe.make{
 	copy = "molten-iron",
-	recipe = "molten-steel-making",
-		-- Not naming it the same as the fluid, so recipe shows up with the rest of them.
-		-- Seems the way it works is, recipe can show up in a different subgroup as the fluid if it either has multiple products, or a different name from the fluid.
+	recipe = "molten-steel",
 	category = "arc-furnace",
 	ingredients = {
 		{"molten-iron", 200},
@@ -139,8 +137,7 @@ Recipe.make{
 	order = "a[melting]-d[molten-steel]",
 	icon = "LSA/vulcanus/molten-steel",
 }
-Tech.addRecipeToTech("molten-steel-making", "foundry", 7)
-
+Tech.addRecipeToTech("molten-steel", "foundry", 7)
 
 -- Create molten tungsten fluid.
 local moltenTungstenFluid = copy(FLUID["molten-iron"])

@@ -15,7 +15,7 @@ local nitrogenCompressionRecipe = Recipe.make{
 	},
 	results = {
 		{"compressed-nitrogen-gas", 100},
-		{"steam", 100, temperature = 100},
+		{"steam", 10, temperature = 100},
 	},
 	-- So, this recipe produces 100 steam at 100C, which holds 1 MJ, which is 800kJ in turbine (80% efficiency). So if it takes 5s, then it's 160kW in steam. Machine uses 1MW, but can be reduced to 200kW with efficiency modules. Need to disable speed modules, because otherwise you can eg double the output but still use 200kW with more efficiency modules.
 	time = 5,

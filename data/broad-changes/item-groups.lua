@@ -369,3 +369,45 @@ ITEM["rail-support"].order = "g3"
 -- Hide infinity cargo wagon.
 RAW["infinity-cargo-wagon"]["infinity-cargo-wagon"].hidden = true
 RAW["infinity-cargo-wagon"]["infinity-cargo-wagon"].hidden_from_player_crafting = true
+
+-- Organize Vulcanus stuff.
+Gen.orderKinds("vulcanus-processes", {ITEM}, {
+	"calcite",
+	"tungsten-ore",
+	"tungsten-carbide",
+	"tungsten-plate",
+}, "1-")
+RECIPE["tungsten-carbide"].order = ITEM["tungsten-carbide"].order
+Gen.orderKinds("vulcanus-processes", {RECIPE}, {
+	"lava-water-heating",
+	"metals-from-lava",
+}, "2-")
+Gen.orderKinds("vulcanus-processes", {RECIPE}, {
+	"molten-iron",
+	"molten-copper",
+	"molten-steel",
+	"molten-tungsten",
+	"tungsten-heating",
+}, "3-")
+extend{{
+	type = "item-subgroup",
+	name = "vulcanus-casting",
+	group = "post-space",
+	order = "01b",
+}}
+Gen.orderKinds("vulcanus-casting", {RECIPE}, {
+	"casting-iron",
+	"casting-copper",
+	"casting-steel",
+
+	"casting-brick",
+	"sulfur-concrete",
+	"sulfur-refined-concrete",
+
+	"casting-iron-gear-wheel",
+	"casting-iron-stick",
+	"casting-copper-cable",
+	"casting-advanced-parts",
+	"tungsten-carbide-from-molten",
+	"tungsten-steel-from-molten",
+})

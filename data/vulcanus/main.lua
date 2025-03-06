@@ -39,7 +39,7 @@ lavaWaterHeatingRecipe.ingredients = {
 	{type = "fluid", name = "water", amount = 50},
 }
 lavaWaterHeatingRecipe.results = {
-	{type = "fluid", name = "steam", amount = 500, temperature = 500, ignored_by_productivity = 500},
+	{type = "fluid", name = "steam", amount = 50, temperature = 500, ignored_by_productivity = 500},
 	{type = "item", name = "stone", amount = 5},
 }
 lavaWaterHeatingRecipe.enabled = false

@@ -18,7 +18,25 @@ for _, typeAndName in pairs{
 	table.insert(RAW[typeAndName[1]][typeAndName[2]].crafting_categories, "smelting-or-metallurgy")
 end
 
--- Create crafting category for smelting or metallurgy or handcrafting, for the stone bricks recipe.
+-- Create crafting category for smelting or handcrafting.
+extend({
+	{
+		type = "recipe-category",
+		name = "smelting-or-handcrafting",
+	},
+})
+for _, typeAndName in pairs{
+	{"furnace", "stone-furnace"},
+	{"furnace", "steel-furnace"},
+	{"furnace", "gas-furnace"},
+	{"furnace", "electric-furnace"},
+} do
+	table.insert(RAW[typeAndName[1] ][typeAndName[2] ].crafting_categories, "smelting-or-handcrafting")
+end
+table.insert(RAW["character"]["character"].crafting_categories, "smelting-or-handcrafting")
+
+-- Create crafting category for smelting or metallurgy or handcrafting.
+--[[ Disabling bc no longer used.
 extend({
 	{
 		type = "recipe-category",
@@ -32,11 +50,13 @@ for _, typeAndName in pairs{
 	{"furnace", "electric-furnace"},
 	{"assembling-machine", "foundry"},
 } do
-	table.insert(RAW[typeAndName[1]][typeAndName[2]].crafting_categories, "smelting-or-metallurgy-or-handcrafting")
+	table.insert(RAW[typeAndName[1] ][typeAndName[2] ].crafting_categories, "smelting-or-metallurgy-or-handcrafting")
 end
 table.insert(RAW["character"]["character"].crafting_categories, "smelting-or-metallurgy-or-handcrafting")
+]]
 
 -- Create crafting category for chemistry or crafting-with-fluid, so that water filter cleaning can be done in both.
+--[[ Disabling bc unused.
 extend({
 	{
 		type = "recipe-category",
@@ -61,6 +81,7 @@ for _, machineType in pairs{
 		considerAddingCat(machine)
 	end
 end
+]]
 
 -- Create crafting category for chem plant or handcrafting - for gunpowder, maybe more.
 extend({
@@ -82,6 +103,7 @@ extend({
 table.insert(RAW["character"]["character"].crafting_categories, "handcrafting-only")
 
 -- Create crafting category for chem plant or biochamber or handcrafting - for fulgorite shards to holmium powder.
+--[[ Disabling bc unused.
 extend({
 	{
 		type = "recipe-category",
@@ -91,6 +113,7 @@ extend({
 table.insert(ASSEMBLER["chemical-plant"].crafting_categories, "chemistry-or-organic-or-handcrafting")
 table.insert(ASSEMBLER["biochamber"].crafting_categories, "chemistry-or-organic-or-handcrafting")
 table.insert(RAW["character"]["character"].crafting_categories, "chemistry-or-organic-or-handcrafting")
+]]
 
 -- Create crafting category for chem plant or electromagnetic plant.
 extend({

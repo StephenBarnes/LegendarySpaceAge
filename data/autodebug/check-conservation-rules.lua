@@ -117,8 +117,8 @@ end
 -- Table of how much water is contained in each item/fluid.
 local waterContent = {
 	["water"] = 1,
-	["steam"] = 0.1,
-	["ice"] = 20,
+	["steam"] = 1,
+	["ice"] = 10,
 	["slime"] = 2,
 	["chitin-broth"] = .5,
 	["syngas"] = .04,
@@ -149,6 +149,11 @@ local nonWaterConservingRecipes = Table.listToSet{
 	"deep-drill-fulgora",
 	"deep-drill-nauvis",
 	"deep-drill-gleba",
+	"air-separation-vulcanus",
+	"air-separation-nauvis",
+	"air-separation-gleba",
+	"air-separation-fulgora",
+	"air-separation-aquilo",
 }
 
 -- Function run before checking conservation rules for all recipes. This is in a separate function so we don't waste time running it if debug checks are disabled.
@@ -200,6 +205,7 @@ local carbonContent = {
 	["volcanic-gas"] = 1,
 	["scrap"] = 10,
 	["fulgoran-sludge"] = 10,
+	["ammoniacal-solution"] = 10,
 	["carbonic-asteroid-chunk"] = 1000,
 	["metallic-asteroid-chunk"] = 1000,
 	["oxide-asteroid-chunk"] = 1000,
@@ -236,6 +242,10 @@ local nonCarbonConservingRecipes = Table.listToSet{
 	"deep-drill-gleba",
 	"deep-drill-vulcanus",
 	"biter-egg", -- Recipe that creates biter eggs out of nothing in a captive spawner.
+	"air-separation-vulcanus",
+	"air-separation-nauvis",
+	"air-separation-gleba",
+	"air-separation-fulgora",
 }
 
 -- Table from recipes to additional ingredients that should be added to the recipe to check conservation.

@@ -81,8 +81,9 @@ local recipeFromCastingSteel = Recipe.make{
 	},
 	results = {
 		{"shielding", 1},
-		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
+	time = 1,
 	category = "metallurgy",
 	icons = {"shielding", "molten-steel"},
 	iconArrangement = "casting",
@@ -97,12 +98,13 @@ local recipeFromCastingTungsten = Recipe.make{
 	ingredients = {
 		{"molten-tungsten", 10, minimum_temperature = 1800, maximum_temperature = 1900},
 		{"molten-steel", 10},
-		{"water", 2},
+		{"water", 1},
 	},
 	results = {
 		{"shielding", 1},
-		{"steam", 20, temperature = 500, ignored_by_productivity=20},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
+	time = 1,
 	category = "metallurgy",
 	icons = {"shielding", "molten-tungsten"},
 	iconArrangement = "casting",

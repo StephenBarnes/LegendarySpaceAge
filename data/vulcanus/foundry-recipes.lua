@@ -10,7 +10,7 @@ Old ratios were:
 Recipe times: Casting recipes deal with 100 molten metal per second, turned into 10 plate per second.
 
 Turning molten metals into items, in a foundry:
-	10 molten iron + 1 water -> 1 iron plate + 10 steam
+	100 molten iron + 1 water -> 10 iron plate + 10 steam
 	The water ingredient and steam byproduct represent water cooling; this adds substantial fluid management complexity to all of the foundries casting metal items.
 	Similar recipes for copper plates, iron rods, iron machine parts, copper cables.
 	Casting iron items makes them start 20% spoiled (from rust).
@@ -31,6 +31,17 @@ Tungsten recipes:
 	Originally tungsten recipes were:
 		In assembler only: 2 tungsten ore + 1 carbon + 10 sulfuric acid -> 1 tungsten carbide (1 second)
 		In foundry: 4 tungsten ore + 10 molten iron -> 1 tungsten plate (10 seconds)
+
+Re avoiding infinite energy from the steam:
+	First, it requires ore or lava, so inherently limited.
+		Lava giving unlimited water->steam is intentional, not as issue. Only concerned with other planets using ore to get molten metals and steam.
+	You can turn 10 iron/copper ore into 100 molten, with +100% prod from arc furnace, and +300% prod from modules, so total +600% prod for 700 molten iron.
+		This costs 5 carbon = 5 MJ and at least 1.8MW for like 1 second (assuming speed bonuses too).
+		Ignore the potential speed bonuses etc, just assume you can do it instantly and for free.
+		Gives you 70x the recipe to cast iron plates, so 7 steam at 500C.
+		That 7 steam in a turbine lasts 7/5 = 1.4 seconds, generates 2MW, so ~3MJ.
+			Although that also costs water. If you use condensing turbine, it's 1.5MJ.
+		So, the carbon alone is enough to make it not infinite energy.
 ]]
 
 -- Re fluidbox indexes, we don't need to assign anything explicitly, since we want some output fluids to take multiple fluidboxes.
@@ -40,12 +51,12 @@ Tungsten recipes:
 Recipe.edit{
 	recipe = "casting-iron", -- casting iron plate
 	ingredients = {
-		{"molten-iron", 10},
+		{"molten-iron", 100},
 		{"water", 1},
 	},
 	results = {
-		{"iron-plate", 1, percent_spoiled = .2},
-		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+		{"iron-plate", 10, percent_spoiled = .2},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
 	main_product = "iron-plate",
 	time = 1,
@@ -56,12 +67,12 @@ Recipe.edit{
 Recipe.edit{
 	recipe = "casting-copper",
 	ingredients = {
-		{"molten-copper", 10},
+		{"molten-copper", 100},
 		{"water", 1},
 	},
 	results = {
-		{"copper-plate", 1},
-		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+		{"copper-plate", 10},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
 	main_product = "copper-plate",
 	time = 1,
@@ -72,12 +83,12 @@ Recipe.edit{
 Recipe.edit{
 	recipe = "casting-steel",
 	ingredients = {
-		{"molten-steel", 10},
+		{"molten-steel", 100},
 		{"water", 1},
 	},
 	results = {
-		{"steel-plate", 1},
-		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+		{"steel-plate", 10},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
 	main_product = "steel-plate",
 	time = 1,
@@ -85,15 +96,33 @@ Recipe.edit{
 	iconArrangement = "casting",
 }
 
-Recipe.edit{
-	recipe = "casting-iron-gear-wheel",
+-- Add recipe for casting bricks from lava.
+Recipe.make{
+	copy = "casting-steel",
+	recipe = "casting-brick",
 	ingredients = {
-		{"molten-iron", 10},
+		{"lava", 100},
 		{"water", 1},
 	},
 	results = {
-		{"iron-gear-wheel", 1, percent_spoiled = .2},
-		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+		{"stone-brick", 10},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
+	},
+	main_product = "stone-brick",
+	time = 1,
+	icons = {"stone-brick", "LSA/vulcanus/lava-cast"},
+	iconArrangement = "casting",
+}
+
+Recipe.edit{
+	recipe = "casting-iron-gear-wheel",
+	ingredients = {
+		{"molten-iron", 100},
+		{"water", 1},
+	},
+	results = {
+		{"iron-gear-wheel", 10, percent_spoiled = .2},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
 	main_product = "iron-gear-wheel",
 	time = 1,
@@ -104,12 +133,12 @@ Recipe.edit{
 Recipe.edit{
 	recipe = "casting-iron-stick",
 	ingredients = {
-		{"molten-iron", 10},
+		{"molten-iron", 100},
 		{"water", 1},
 	},
 	results = {
-		{"iron-stick", 1, percent_spoiled = .2},
-		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+		{"iron-stick", 10, percent_spoiled = .2},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
 	main_product = "iron-stick",
 	time = 1,
@@ -124,14 +153,14 @@ Recipe.edit{
 		{"resin", 1},
 		{"molten-steel", 100},
 		{"molten-copper", 250},
-		{"water", 10},
+		{"water", 1},
 	},
 	results = {
 		{"low-density-structure", 1},
-		{"steam", 100, temperature = 500, ignored_by_productivity=100},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
 	main_product = "low-density-structure",
-	time = 10,
+	time = 1,
 	icons = {"low-density-structure", "molten-copper", "molten-steel"},
 	iconArrangement = "casting",
 }
@@ -141,12 +170,12 @@ Tech.addRecipeToTech("casting-low-density-structure", "foundry-2")
 Recipe.edit{
 	recipe = "casting-copper-cable",
 	ingredients = {
-		{"molten-copper", 10},
+		{"molten-copper", 100},
 		{"water", 1},
 	},
 	results = {
-		{"copper-cable", 2},
-		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+		{"copper-cable", 20},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
 	main_product = "copper-cable",
 	time = 1,
@@ -165,17 +194,17 @@ Recipe.make{
 	copy = "casting-iron-gear-wheel",
 	recipe = "casting-advanced-parts",
 	ingredients = {
-		{"molten-steel", 250},
-		{"water", 25},
+		{"molten-steel", 100},
+		{"water", 1},
 		{"rubber", 1},
-		{"plastic-bar", 2},
+		{"plastic-bar", 1},
 	},
 	results = {
-		{"advanced-parts", 20},
-		{"steam", 250, temperature = 500, ignored_by_productivity=250},
+		{"advanced-parts", 10},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
 	main_product = "advanced-parts",
-	time = 10,
+	time = 1,
 	icons = {"advanced-parts", "molten-steel"},
 	iconArrangement = "casting",
 	order = "b[casting]-f[casting-advanced-parts]",
@@ -200,13 +229,13 @@ Recipe.make{
 	copy = "tungsten-plate",
 	recipe = "tungsten-carbide-from-molten",
 	ingredients = {
-		{"molten-tungsten", 20, minimum_temperature = 1600, maximum_temperature = 1800},
+		{"molten-tungsten", 100, minimum_temperature = 1600, maximum_temperature = 1800},
 		{"carbon", 1},
 		{"water", 1},
 	},
 	results = {
-		{"tungsten-carbide", 2},
-		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+		{"tungsten-carbide", 10},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
 	main_product = "tungsten-carbide",
 	time = 1,
@@ -220,13 +249,13 @@ Recipe.make{
 	recipe = "tungsten-steel-from-molten",
 		-- Again, can't name it "tungsten-steel" or it won't show separately from the item, which is a problem bc you can't see the temperature range requirement.
 	ingredients = {
-		{"molten-tungsten", 10, minimum_temperature = 1800, maximum_temperature = 1900},
-		{"molten-steel", 2},
+		{"molten-tungsten", 100, minimum_temperature = 1800, maximum_temperature = 1900},
+		{"molten-steel", 20},
 		{"water", 1},
 	},
 	results = {
-		{"tungsten-plate", 1},
-		{"steam", 10, temperature = 500, ignored_by_productivity=50},
+		{"tungsten-plate", 10},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
 	main_product = "tungsten-plate",
 	time = 1,
@@ -239,15 +268,8 @@ Recipe.make{
 Recipe.hide("tungsten-plate")
 Tech.removeRecipeFromTech("tungsten-plate", "tungsten-steel")
 
--- Remove default concrete recipe.
-Recipe.hide("concrete-from-molten-iron")
-Tech.removeRecipeFromTech("concrete-from-molten-iron", "foundry")
-
 -- Forbid holmium plates in foundry. Doesn't really give any benefit since foundries no longer have a prod bonus.
 RECIPE["holmium-plate"].category = "crafting-with-fluid"
-
--- Hide old concrete foundry recipe completely.
-Recipe.hide("concrete-from-molten-iron")
 
 -- Create sulfur concrete recipes.
 Recipe.make{
@@ -261,11 +283,11 @@ Recipe.make{
 	},
 	results = {
 		{"concrete", 10},
-		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+		{"steam", 1, temperature = 500, ignored_by_productivity=1},
 	},
 	icons = {"concrete", "LSA/vulcanus/sulfur-cast"},
 	iconArrangement = "casting",
-	time = 10,
+	time = 1,
 }
 Recipe.make{
 	copy = "concrete-from-molten-iron",
@@ -275,16 +297,20 @@ Recipe.make{
 		{"sand", 10},
 		{"resin", 1},
 		{"molten-steel", 50, type="fluid"},
-		{"water", 1},
+		{"water", 2},
 	},
 	results = {
 		{"refined-concrete", 10},
-		{"steam", 10, temperature = 500, ignored_by_productivity=10},
+		{"steam", 2, temperature = 500, ignored_by_productivity=2},
 	},
 	icons = {"refined-concrete", "LSA/vulcanus/sulfur-cast"},
 	iconArrangement = "casting",
-	time = 10,
+	time = 2,
 }
+
+-- Remove default concrete recipe.
+Recipe.hide("concrete-from-molten-iron")
+Tech.removeRecipeFromTech("concrete-from-molten-iron", "foundry")
 
 -- Create sulfur concrete tech.
 local sulfurConcreteTech = copy(TECH["concrete"])

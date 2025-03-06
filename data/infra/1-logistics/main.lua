@@ -11,7 +11,7 @@ require("circuit-stuff")
 require("bots")
 
 -- Stone bricks - allowed in foundry and handcrafting.
-RECIPE["stone-brick"].category = "smelting-or-metallurgy-or-handcrafting"
+RECIPE["stone-brick"].category = "smelting-or-handcrafting"
 
 -- Adjust recipe times.
 RECIPE["stone-brick"].energy_required = 2 -- Originally 3.2.

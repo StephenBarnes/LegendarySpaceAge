@@ -186,14 +186,16 @@ local evilRecipe = {
 	type = "recipe",
 	name = "steam-evilizing",
 	ingredients = {
-		{type = "fluid", name = "steam", amount = 1, minimum_temperature = 490}, -- Making it 490 in case someone's network has a bit of leftover cold water.
+		{type = "fluid", name = "steam", amount = 5, minimum_temperature = 490}, -- Making it 490 in case someone's network has a bit of leftover cold water.
 	},
 	results = {
-		{type = "fluid", name = "steam-evil", amount = 1, temperature = 500},
+		{type = "fluid", name = "steam-evil", amount = 5, temperature = 500},
 	},
-	energy_required = 0.01,
+	energy_required = 0.1,
 	auto_recycle = false,
 	allow_productivity = false,
+	allow_speed = false,
+	allow_quality = false,
 	category = "steam-evilizing",
 }
 if HIDE_EVIL then
@@ -221,7 +223,7 @@ local steamEvilizerEnt = {
 	icon_mipmaps = 4,
 	fixed_recipe = "steam-evilizing",
 	crafting_categories = {"steam-evilizing"},
-	crafting_speed = 100,
+	crafting_speed = 1,
 	energy_usage = "1W",
 	energy_source = {
 		type = "void",
