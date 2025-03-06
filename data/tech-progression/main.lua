@@ -152,6 +152,10 @@ Tech.setPrereqs("heating-tower", {"steel-processing", "fluid-handling", "advance
 TECH["heating-tower"].unit = {count = 300, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 30}
 TECH["heating-tower"].research_trigger = nil
 
+-- Heating tower doesn't need to go to Aquilo, since we now have heating tower -> condensing turbine -> space platforms.
+Tech.removePrereq("planet-discovery-aquilo", "heating-tower")
+Tech.addTechDependency("condensing-turbine", "rocket-silo")
+
 -- Nuclear is going to post-triplets, and heating tower is early, so remove heating tower stuff fom nuclear tech.
 Tech.removeRecipesFromTechs({"heat-exchanger", "heat-pipe", "steam-turbine"}, {"nuclear-power"})
 

@@ -49,7 +49,7 @@ require("data.pre-space.personal-battery-generator")
 require("data.pre-space.early-equipment-grids")
 require("data.pre-space.landmines")
 require("data.pre-space.water-etc")
---require("data.pre-space.condensing-turbine")
+require("data.pre-space.condensing-turbine")
 
 -- Planets
 require("data.pre-space.misc")
