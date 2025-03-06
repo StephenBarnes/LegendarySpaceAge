@@ -76,7 +76,7 @@ local recipeFromCastingSteel = Recipe.make{
 	copy = recipeFromTungstenSteel,
 	recipe = "shielding-from-casting-steel",
 	ingredients = {
-		{"molten-steel", 100, minimum_temperature = 1800, maximum_temperature = 1900},
+		{"molten-steel", 50},
 		{"water", 1},
 	},
 	results = {

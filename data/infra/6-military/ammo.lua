@@ -38,6 +38,17 @@ Recipe.edit{ -- I want these to be more complex to produce than yellow mags, but
 	resultCount = 1,
 	time = 2,
 }
+Recipe.edit{
+	-- TODO check this again after implementing Nauvis pt 2 nuclear stuff.
+	recipe = "uranium-rounds-magazine",
+	ingredients = {
+		{"uranium-238", 1},
+		{"copper-plate", 2},
+		{"gunpowder", 1},
+	},
+	resultCount = 1,
+	time = 5,
+}
 
 Recipe.edit{ -- Originally 2 steel plate + 2 plastic bar + 1 explosives.
 	recipe = "cannon-shell",
@@ -55,13 +66,31 @@ Recipe.edit{
 	},
 	time = 5,
 }
+Recipe.edit{ -- Removing nesting of normal cannon shells inside uranium cannon shells.
+	recipe = "uranium-cannon-shell",
+	ingredients = {
+		{"shielding", 1},
+		{"explosives", 1},
+		{"uranium-238", 1},
+	},
+	time = 5,
+}
+Recipe.edit{
+	recipe = "explosive-uranium-cannon-shell",
+	ingredients = {
+		{"shielding", 1},
+		{"explosives", 2},
+		{"uranium-238", 1},
+	},
+	time = 5,
+}
 
 Recipe.edit{ -- Originally radar, calcite, tungsten plate, explosives.
 	recipe = "artillery-shell",
 	ingredients = {
 		{"shielding", 5},
 		{"explosives", 5},
-		{"tungsten-plate", 2},
+		{"tungsten-plate", 1},
 		{"sensor", 1},
 	},
 	time = 10,

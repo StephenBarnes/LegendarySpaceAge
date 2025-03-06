@@ -67,18 +67,15 @@ Recipe.edit{
 
 -- Allow more fluids in flamethrower turret.
 RAW["fluid-turret"]["flamethrower-turret"].attack_parameters.fluids = {
-	{type = "crude-oil"},
-	{type = "tar"},
-	{type = "heavy-oil", damage_modifier = 1.1},
-	{type = "light-oil", damage_modifier = 1.2},
-	{type = "diesel", damage_modifier = 1.3},
-	{type = "lava"},
+	{type = "crude-oil", damage_modifier = 0.7}, -- Lower than 1, which is realistic and also incentivizes processing.
+	{type = "tar", damage_modifier = 0.7},
+	{type = "heavy-oil", damage_modifier = 1},
+	{type = "light-oil", damage_modifier = 1.4},
+	{type = "diesel", damage_modifier = 1.2},
+	--{type = "lava"},
+		-- Can't allow lava bc it breaks the no-lava-in-pipes rule. Can connect pump -> turret -> pipe to get lava in a pipe.
 }
-
--- Allow flamethrower turret to connect to lava pumps.
-for _, pipeConnection in pairs(RAW["fluid-turret"]["flamethrower-turret"].fluid_box.pipe_connections) do
-	pipeConnection.connection_category = {"default", "lava"}
-end
+RAW["fluid-turret"]["flamethrower-turret"].factoriopedia_description = {"factoriopedia-description.flamethrower-turret"}
 
 -- Make flamethrower turret consume more fluid.
 RAW["fluid-turret"]["flamethrower-turret"].attack_parameters.fluid_consumption = 1 -- Increased from 0.2 to 1.

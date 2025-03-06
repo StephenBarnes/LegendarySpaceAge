@@ -16,8 +16,7 @@ for _, recipeName in pairs{"make-sulfuric-acid", "holmium-solution", "ice-meltin
 	local recipe = RECIPE[recipeName]
 	recipe.allow_quality = false
 end
--- Disable prod for some recipes.
-for _, recipeName in pairs{"ice-melting", "steam-condensation"} do
-	local recipe = RECIPE[recipeName]
-	recipe.allow_productivity = false
-end
+-- Change prod for some recipes.
+RECIPE["ice-melting"].allow_productivity = false
+RECIPE["steam-condensation"].allow_productivity = true
+RECIPE["steam-condensation"].maximum_productivity = 0.1
