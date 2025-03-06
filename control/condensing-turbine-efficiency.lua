@@ -17,10 +17,17 @@ local setCondensingTurbineDeathRattle = function(entity)
 	deathrattles[script.register_on_object_destroyed(entity)] = { "condensing-turbine-evil", entity.surface, entity.position }
 end
 
----@param entity LuaEntity
-local function replaceCondensingTurbine(entity)
+-- When a condensing turbine is built, replace it with a condensing-turbine-evil plus a steam-evilizer.
+---@param event EventData.on_built_entity|EventData.on_robot_built_entity|EventData.on_space_platform_built_entity|EventData.script_raised_built|EventData.script_raised_revive|EventData.on_entity_cloned
+local function onBuilt(event)
+	if event.entity == nil or not event.entity.valid then return end
+	if event.entity.type ~= "fusion-generator" then return end
+	if event.entity.name ~= "condensing-turbine" and event.entity.name ~= "condensing-turbine-evil" then return end
+	local entity = event.entity
+	-- The placed entity could be either a regular condensing-turbine, or a condensing-turbine-evil (via bots/blueprints).
     local surface = entity.surface
     if not surface.valid then return end
+	local name = entity.name
     local info = {
         name = "condensing-turbine-evil",
         position = entity.position,
@@ -31,20 +38,17 @@ local function replaceCondensingTurbine(entity)
 		orientation = entity.orientation,
 		direction = entity.direction,
     }
-    entity.destroy()
-    local ctEvil =surface.create_entity(info)
-    if ctEvil == nil or not ctEvil.valid then return end
+	local ctEvil = nil
+	if name == "condensing-turbine" then -- Regular condensing turbine: destroy it and replace with a condensing-turbine-evil.
+		entity.destroy()
+		ctEvil = surface.create_entity(info)
+	else -- Condensing-turbine-evil: just add the evilizer.
+		ctEvil = entity
+	end
+	if ctEvil == nil or not ctEvil.valid then return end
     setCondensingTurbineDeathRattle(ctEvil)
     info.name = "steam-evilizer"
     surface.create_entity(info)
-end
-
--- When a condensing turbine is built, replace it with a condensing-turbine-evil plus a steam-evilizer.
----@param event EventData.on_built_entity|EventData.on_robot_built_entity|EventData.on_space_platform_built_entity|EventData.script_raised_built|EventData.script_raised_revive|EventData.on_entity_cloned
-local function onBuilt(event)
-	if event.entity == nil or not event.entity.valid then return end
-	if event.entity.name ~= "condensing-turbine" or event.entity.type ~= "fusion-generator" then return end
-	replaceCondensingTurbine(event.entity)
 end
 
 ---@param e EventData.on_object_destroyed

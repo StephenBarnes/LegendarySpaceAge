@@ -47,6 +47,7 @@ ent.energy_source = {
 	-- input_flow_limit = "500kW", -- Doesn't do anything.
 }
 -- Fusion generator expects graphics_set, while turbine has horizontal_animation and vertical_animation. So we need to convert.
+-- Also I'm adding lid graphics on top, to cover up the exposed rotating part, and so players can tell them apart from regular steam turbines.
 local empty = {
 	filename = "__core__/graphics/empty.png",
 	priority = "medium",
@@ -54,11 +55,13 @@ local empty = {
 	height = 1,
 }
 local verticalGraphicsSet = {
-	animation = RAW["generator"]["steam-turbine"].vertical_animation,
+	---@diagnostic disable-next-line: undefined-field
+	animation = ent.vertical_animation,
 	fluid_input_graphics = {{sprite = empty}}
 }
 local horizontalGraphicsSet = {
-	animation = RAW["generator"]["steam-turbine"].horizontal_animation,
+	---@diagnostic disable-next-line: undefined-field
+	animation = ent.horizontal_animation,
 	fluid_input_graphics = {{sprite = empty}}
 }
 ent.graphics_set = {
@@ -128,6 +131,11 @@ ctEvilEnt.name = "condensing-turbine-evil"
 ctEvilEnt.input_fluid_box.pipe_connections[1].position = {0, 0}
 ctEvilEnt.input_fluid_box.pipe_covers = nil
 ctEvilEnt.input_fluid_box.filter = "steam-evil"
+ctEvilEnt.placeable_by = {item = "condensing-turbine", count = 1}
+table.insert(ctEvilEnt.flags, "not-rotatable")
+	-- TODO in future, could handle rotations and flips too.
+	-- Note this only affects the evil ent, not the base ent, so you can still rotate before placing.
+	-- Note it works in a weird way when you try to rotate blueprints - doesn't actually turn the turbines, but does rotate the blueprint, so they overlap, but when built they fix themselves.
 if HIDE_EVIL then
 	ctEvilEnt.localised_name = {"entity-name.condensing-turbine"}
 	ctEvilEnt.localised_description = {"entity-description.condensing-turbine"}
@@ -220,6 +228,7 @@ local steamEvilizerEnt = {
 	collision_box = ent.collision_box,
 	selection_box = ent.selection_box,
 	show_recipe_icon_on_map = false,
+	show_recipe_icon = false,
 	selection_priority = 1,
 	collision_mask = {layers={}},
 	remove_decoratives = "false",
