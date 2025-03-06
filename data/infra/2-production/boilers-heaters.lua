@@ -113,13 +113,6 @@ Recipe.edit{
 ------------------------------------------------------------------------
 --- Editing entity values.
 
--- Edit water and steam.
-FLUID.water.default_temperature = 0 -- Originally 15.
-FLUID.steam.default_temperature = 0 -- Originally 15. Wanted to make this 100, but then boiler has weird nonsense readouts (like "steam 200/s out of 100/s").
-FLUID.water.heat_capacity = "1kJ" -- Originally 2kJ.
-FLUID.steam.heat_capacity = "0.1kJ" -- Originally 0.2kJ.
-FLUID.steam.gas_temperature = 100 -- Originally 15.
-
 -- Edit boilers.
 for _, vals in pairs{
 	{
@@ -156,13 +149,13 @@ for _, vals in pairs{
 	{
 		name = "steam-engine",
 		effectivity = 0.5, -- Originally 1.
-		fluidUsagePerTick = 50/60, -- Originally 0.5, so 30/s.
+		fluidUsagePerTick = 5/60, -- Originally 0.5, so 30/s.
 		maxTemp = 200, -- Originally 165.
 	},
 	{
 		name = "steam-turbine",
 		effectivity = 0.8, -- Originally 1. Changing to .8, so it produces an even 2MW and it's more efficient than the steam engine.
-		fluidUsagePerTick = 50/60, -- Originally 1, so 60/s.
+		fluidUsagePerTick = 5/60, -- Originally 1, so 60/s.
 		maxTemp = 500, -- Originally 500.
 	},
 } do

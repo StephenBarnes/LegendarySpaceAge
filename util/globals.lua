@@ -35,6 +35,6 @@ SECONDS = 60
 MINUTES = 60 * SECONDS
 HOURS = 60 * MINUTES
 ROCKET = 1e6
-FLUID_PER_BARREL = 50 -- 50 fluid units per barrel, from vanilla.
+FLUID_PER_BARREL = 100 -- 100 fluid units per barrel. Vanilla was 50.
 	-- That number also applies to gas tanks. Considered having it higher, but doesn't really make sense realistically, and gas tanks aren't more expensive than barrels. Also note currently filled gas tanks are also named "[something]-barrel".
 NORTH, SOUTH, EAST, WEST = defines.direction.north, defines.direction.south, defines.direction.east, defines.direction.west

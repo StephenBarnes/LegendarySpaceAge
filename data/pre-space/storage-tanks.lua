@@ -50,4 +50,9 @@ Recipe.edit{
 }
 Item.perRocket("tiny-inline-storage-tank", 100)
 
+-- Edit the storage capacities, so a tank of steam isn't so absurdly power-dense.
+RAW["storage-tank"]["tiny-inline-storage-tank"].fluid_box.volume = 1000
+RAW["storage-tank"]["storage-tank"].fluid_box.volume = 10000 -- Originally 25k.
+RAW["storage-tank"]["large-storage-tank"].fluid_box.volume = 50000 -- Originally 100k.
+
 -- TODO move this to infra/ folder.

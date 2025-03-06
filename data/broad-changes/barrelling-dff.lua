@@ -145,6 +145,28 @@ for _, recipeGroup in pairs{barrellingRecipes, unbarrellingRecipes, gasFillingRe
 	end
 end
 
+-- Change fluid amount per barrel to 100, originally 50.
+for _, recipeGroup in pairs{barrellingRecipes, gasFillingRecipes} do
+	for _, recipeName in pairs(recipeGroup) do
+		for _, ingredient in pairs(RECIPE[recipeName].ingredients) do
+			if ingredient.name ~= "barrel" and ingredient.name ~= "gas-tank" then
+				assert(ingredient.type == "fluid", "ingredient "..ingredient.name.." for "..recipeName.." is not a fluid")
+				ingredient.amount = FLUID_PER_BARREL
+			end
+		end
+	end
+end
+for _, recipeGroup in pairs{unbarrellingRecipes, gasEmptyingRecipes} do
+	for _, recipeName in pairs(recipeGroup) do
+		for _, result in pairs(RECIPE[recipeName].results) do
+			if result.name ~= "barrel" and result.name ~= "gas-tank" then
+				assert(result.type == "fluid", "result "..result.name.." for "..recipeName.." is not a fluid")
+				result.amount = FLUID_PER_BARREL
+			end
+		end
+	end
+end
+
 -- Add fuel values for barrels and gas tanks.
 for fluidName, fuelValues in pairs(Const.fluidFuelValues) do
 	if ITEM[fluidName.."-barrel"] then

@@ -60,7 +60,7 @@ local expectedRecipes = {
 
 	-- Water phase conversions should conserve total water.
 	["ice-melting"] = {0, false},
-	["steam-condensation"] = {0.1, false},
+	["steam-condensation"] = {0, false},
 
 	["petrophage-cultivation"] = {0.5, true}, -- Cap prod to conserve carbon.
 	["refresh-petrophages"] = {2, true}, -- Cap prod to conserve carbon.
