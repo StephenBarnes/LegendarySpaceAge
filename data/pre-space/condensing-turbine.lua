@@ -145,7 +145,7 @@ Namely:
 This is all so that it looks like the condensing turbine is consuming 500C steam (actually steam-evil) and generating energy with 40% efficiency.
 ]]
 
-local HIDE_EVIL = true -- Whether to hide all of these entities, etc.
+local HIDE_EVIL = true -- Whether to hide all of these entities, etc. Set to false for debugging.
 
 -- Create condensing-turbine-evil.
 local ctEvilEnt = copy(ent)
@@ -154,8 +154,8 @@ ctEvilEnt.input_fluid_box.pipe_connections[1].position = {0, 0}
 ctEvilEnt.input_fluid_box.pipe_covers = nil
 ctEvilEnt.input_fluid_box.filter = "steam-evil"
 ctEvilEnt.placeable_by = {item = "condensing-turbine", count = 1}
-table.insert(ctEvilEnt.flags, "not-rotatable")
-	-- TODO in future, could handle rotations and flips too.
+--table.insert(ctEvilEnt.flags, "not-rotatable")
+	-- Used to use this, but disabling now bc I'll rather respond to rotation and flip events.
 	-- Note this only affects the evil ent, not the base ent, so you can still rotate before placing.
 	-- Note it works in a weird way when you try to rotate blueprints - doesn't actually turn the turbines, but does rotate the blueprint, so they overlap, but when built they fix themselves.
 if HIDE_EVIL then
@@ -267,7 +267,3 @@ if HIDE_EVIL then
 	steamEvilizerEnt.localised_description = {"entity-description.condensing-turbine"}
 end
 extend{steamEvilizerEnt}
-
--- TODO make the evilizer ent non-selectable.
--- TODO hide the 2 extra fluid connections.
--- TODO change to a furnace, and then allow input fluid with lower temps maybe?

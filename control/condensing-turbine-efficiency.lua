@@ -37,6 +37,7 @@ local function onBuilt(event)
         player = entity.last_user,
 		orientation = entity.orientation,
 		direction = entity.direction,
+		mirroring = entity.mirroring,
     }
 	local ctEvil = nil
 	if name == "condensing-turbine" then -- Regular condensing turbine: destroy it and replace with a condensing-turbine-evil.
@@ -79,7 +80,40 @@ local function onObjectDestroyed(e)
 	deathrattles[e.registration_number] = nil
 end
 
+-- Update the evilizer's direction and mirroring to match the condensing turbine.
+---@param entity LuaEntity
+local function updateEvilizer(entity)
+	local surface = entity.surface
+	if not surface.valid then return end
+	local evilizers = surface.find_entities_filtered{
+		name = "steam-evilizer",
+		position = entity.position,
+	}
+	if #evilizers ~= 1 then
+		log("Expected 1 steam-evilizer at " .. serpent.block(entity.position) .. ", found " .. #evilizers .. ", this should not happen")
+		if #evilizers == 0 then return end
+	end
+	local evilizer = evilizers[1]
+	if not evilizer.valid then
+		log("Steam-evilizer at " .. serpent.block(entity.position) .. " is invalid, this should not happen")
+		return
+	end
+	evilizer.direction = entity.direction
+	evilizer.mirroring = entity.mirroring
+	evilizer.orientation = entity.orientation
+end
+
+---@param e EventData.on_player_rotated_entity|EventData.on_player_flipped_entity
+local function onRotatedOrFlipped(e)
+	if e.entity == nil or not e.entity.valid then return end
+	if e.entity.type ~= "fusion-generator" then return end
+	if e.entity.name ~= "condensing-turbine" and e.entity.name ~= "condensing-turbine-evil" then return end
+	updateEvilizer(e.entity)
+end
+
 return {
 	onBuilt = onBuilt,
 	onObjectDestroyed = onObjectDestroyed,
+	onRotated = onRotatedOrFlipped,
+	onFlipped = onRotatedOrFlipped,
 }

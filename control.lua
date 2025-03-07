@@ -53,6 +53,14 @@ script.on_event(defines.events.on_object_destroyed, function(e)
 	condensingTurbineEfficiency.onObjectDestroyed(e)
 end)
 
+script.on_event(defines.events.on_player_rotated_entity, function(e)
+	condensingTurbineEfficiency.onRotated(e)
+end)
+
+script.on_event(defines.events.on_player_flipped_entity, function(e)
+	condensingTurbineEfficiency.onFlipped(e)
+end)
+
 
 -- Temporary code to output recipes, for rewriting.
 --[[
