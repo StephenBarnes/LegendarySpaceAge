@@ -93,14 +93,14 @@ ent.graphics_set = {
 	south_graphics_set = verticalGraphicsSet,
 	west_graphics_set = horizontalGraphicsSet,
 }
-Icon.set(ent, {"LSA/condensing-turbine/icon", "water"})
+Icon.set(ent, {"steam-turbine", "water"})
 extend{ent}
 
 -- Create item.
 local item = copy(ITEM["steam-turbine"])
 item.name = "condensing-turbine"
 item.place_result = "condensing-turbine"
-Icon.set(item, {"LSA/condensing-turbine/icon", "water"})
+Icon.set(item, {"steam-turbine", "water"})
 item.order = "g"
 extend{item}
 
