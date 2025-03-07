@@ -11,9 +11,24 @@ local condensingTurbineEfficiency = require("control.condensing-turbine-efficien
 local techRateTriggers = require("control.tech-rate-triggers")
 script.on_nth_tick(60 * 10, techRateTriggers.onNthTick)
 
+local function handlePickerDolliesEvent(e)
+	condensingTurbineEfficiency.onPickerDollyMoved(e)
+end
+
+local function registerForPickerDollies()
+	if remote.interfaces["PickerDollies"] and remote.interfaces["PickerDollies"]["dolly_moved_entity_id"] then
+		script.on_event(remote.call("PickerDollies", "dolly_moved_entity_id"), handlePickerDolliesEvent)
+	end
+end
+
 script.on_init(function()
+	registerForPickerDollies()
 	startingEquipment.onInit()
 	apprenticeFoundry.on_init()
+end)
+
+script.on_load(function()
+	registerForPickerDollies()
 end)
 
 script.on_configuration_changed(function(data)

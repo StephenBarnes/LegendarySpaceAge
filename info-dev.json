@@ -64,6 +64,8 @@
 		, "! slipstacks"
 		, "! boompuff-agriculture"
 
+		, "? even-pickier-dollies"
+
 		, "! GROUP-qol-optional"
 		, "factoryplanner"
 		, "simpleadjustableinserters"

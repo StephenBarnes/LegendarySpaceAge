@@ -81,34 +81,60 @@ local function onObjectDestroyed(e)
 end
 
 -- Update the evilizer's direction and mirroring to match the condensing turbine.
----@param entity LuaEntity
-local function updateEvilizer(entity)
-	local surface = entity.surface
+---@param evilizer LuaEntity
+---@param condensingTurbine LuaEntity
+---@param updatePos boolean
+local function updateEvilizer(evilizer, condensingTurbine, updatePos)
+	evilizer.direction = condensingTurbine.direction
+	evilizer.mirroring = condensingTurbine.mirroring
+	evilizer.orientation = condensingTurbine.orientation
+	if updatePos then
+		--evilizer.position = condensingTurbine.position -- Can't, it's read-only.
+		local success = evilizer.teleport(condensingTurbine.position)
+		if not success then
+			log("Failed to teleport steam-evilizer to " .. serpent.block(condensingTurbine.position) .. ", this should not happen")
+		end
+	end
+end
+
+-- Find the evilizer at the given position and update it to match the condensing turbine.
+---@param condensingTurbine LuaEntity
+---@param searchPos table
+---@param updatePos boolean
+local function findAndUpdateEvilizer(condensingTurbine, searchPos, updatePos)
+	local surface = condensingTurbine.surface
 	if not surface.valid then return end
 	local evilizers = surface.find_entities_filtered{
 		name = "steam-evilizer",
-		position = entity.position,
+		position = searchPos,
 	}
 	if #evilizers ~= 1 then
-		log("Expected 1 steam-evilizer at " .. serpent.block(entity.position) .. ", found " .. #evilizers .. ", this should not happen")
+		log("Expected 1 steam-evilizer at " .. serpent.block(searchPos) .. ", found " .. #evilizers .. ", this should not happen")
 		if #evilizers == 0 then return end
 	end
 	local evilizer = evilizers[1]
 	if not evilizer.valid then
-		log("Steam-evilizer at " .. serpent.block(entity.position) .. " is invalid, this should not happen")
+		log("Steam-evilizer at " .. serpent.block(searchPos) .. " is invalid, this should not happen")
 		return
 	end
-	evilizer.direction = entity.direction
-	evilizer.mirroring = entity.mirroring
-	evilizer.orientation = entity.orientation
+	updateEvilizer(evilizer, condensingTurbine, updatePos)
 end
 
 ---@param e EventData.on_player_rotated_entity|EventData.on_player_flipped_entity
 local function onRotatedOrFlipped(e)
-	if e.entity == nil or not e.entity.valid then return end
-	if e.entity.type ~= "fusion-generator" then return end
-	if e.entity.name ~= "condensing-turbine" and e.entity.name ~= "condensing-turbine-evil" then return end
-	updateEvilizer(e.entity)
+	local ent = e.entity
+	if ent == nil or not ent.valid then return end
+	if ent.type ~= "fusion-generator" then return end
+	if ent.name ~= "condensing-turbine" and ent.name ~= "condensing-turbine-evil" then return end
+	findAndUpdateEvilizer(ent, ent.position, false)
+end
+
+---@param e {player_index:number, moved_entity:LuaEntity, start_pos:table}
+local function onPickerDollyMoved(e)
+	if e.moved_entity == nil or not e.moved_entity.valid then return end
+	if e.moved_entity.type ~= "fusion-generator" then return end
+	if e.moved_entity.name ~= "condensing-turbine" and e.moved_entity.name ~= "condensing-turbine-evil" then return end
+	findAndUpdateEvilizer(e.moved_entity, e.start_pos, true)
 end
 
 return {
@@ -116,4 +142,5 @@ return {
 	onObjectDestroyed = onObjectDestroyed,
 	onRotated = onRotatedOrFlipped,
 	onFlipped = onRotatedOrFlipped,
+	onPickerDollyMoved = onPickerDollyMoved,
 }
