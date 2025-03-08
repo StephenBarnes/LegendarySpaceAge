@@ -35,12 +35,12 @@ Tungsten recipes:
 Re avoiding infinite energy from the steam:
 	First, it requires ore or lava, so inherently limited.
 		Lava giving unlimited water->steam is intentional, not as issue. Only concerned with other planets using ore to get molten metals and steam.
-	You can turn 10 iron/copper ore into 100 molten, with +100% prod from arc furnace, and +300% prod from modules, so total +600% prod for 700 molten iron.
+	You can turn 10 iron/copper ore into 100 molten, with +100% prod from arc furnace, and +300% prod from modules, so total +400% prod for 500 molten iron.
 		This costs 5 carbon = 5 MJ and at least 1.8MW for like 1 second (assuming speed bonuses too).
 		Ignore the potential speed bonuses etc, just assume you can do it instantly and for free.
-		Gives you 70x the recipe to cast iron plates, so 7 steam at 500C.
-		That 7 steam in a turbine lasts 7/5 = 1.4 seconds, generates 2MW, so ~3MJ.
-			Although that also costs water. If you use condensing turbine, it's 1.5MJ.
+		Gives you 50x the recipe to cast iron plates, so 5 steam at 500C.
+		That 5 steam in a turbine lasts 1 second, generates 2MW, so ~2MJ.
+			Although that also costs water. If you use condensing turbine, it's 1MJ.
 		So, the carbon alone is enough to make it not infinite energy.
 ]]
 
@@ -112,6 +112,7 @@ Recipe.make{
 	time = 1,
 	icons = {"stone-brick", "LSA/vulcanus/lava-cast"},
 	iconArrangement = "casting",
+	addToTech = "foundry-2",
 }
 
 Recipe.edit{

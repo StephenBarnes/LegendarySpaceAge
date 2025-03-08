@@ -232,6 +232,9 @@ local CRAFTER_VALS = {
 	["foundry"] = {
 		machine = {
 			kind = "assembling-machine",
+			-- Originally consumed 2.5MW, and I'm making each one produce like 5x faster though with no prod bonus. But also, I added arc furnaces which consume more.
+			activeKW = 2500,
+			drainKW = 500,
 		},
 		-- Originally 50 tungsten carbide + 50 steel plate + 30 green circuit + 20 refined concrete + 20 lubricant.
 		-- I'm changing it to not need tungsten carbide, so you can make it on any planet without importing from Vulcanus.
@@ -248,6 +251,8 @@ local CRAFTER_VALS = {
 	["arc-furnace"] = {
 		machine = {
 			kind = "assembling-machine",
+			activeKW = 5000,
+			drainKW = 1000,
 		},
 		recipe = {
 			time = 10,
