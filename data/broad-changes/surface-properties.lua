@@ -142,3 +142,10 @@ for planetName, groundAndSpace in pairs{
 	RAW.planet[planetName].surface_properties["solar-power"] = groundAndSpace[1]
 	RAW.planet[planetName].solar_power_in_space = groundAndSpace[2]
 end
+
+------------------------------------------------------------------------
+-- Hide some surface properties.
+
+-- Magnetic field is not used.
+RAW["surface-property"]["magnetic-field"].hidden = true
+RAW["surface-property"]["magnetic-field"].hidden_in_factoriopedia = true

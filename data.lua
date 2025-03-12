@@ -50,8 +50,9 @@ require("data.pre-space.early-equipment-grids")
 require("data.pre-space.landmines")
 require("data.pre-space.water-etc")
 require("data.pre-space.condensing-turbine")
+require("data.charon.main")
 
--- Planets
+-- Editing planets
 require("data.pre-space.misc")
 require("data.pre-space.nauvis-worldgen")
 require("data.vulcanus.main")

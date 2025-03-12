@@ -9,12 +9,21 @@ This file is to keep track of other people's stuff that I've used.
 * Apprentice Assembler by Quezler - mods.factorio.com/mod/apprentice-assembler - Copied the code from this and modified slightly to apply the effect to arc furnaces. Relies on Beacon Interface mod also by Quezler - mods.factorio.com/mod/beacon-interface
 * Beacon Rebalance by wretlaw120 with some spritework by Sir-Lags-A-Lot - mods.factorio.com/mod/wret-beacon-rebalance-mod - Using high-res old-beacon graphics and code.
 * Gleba crop mods by LordMiguel (slipstacks, boompuffs, stingfronds) - Took ideas and bits of code for the Gleba crops.
-* Galdoc's Manufacturing - mods.factorio.com/mod/galdocs-manufacturing - Stole the idea of having intermediate factors with multiple recipes, though I'm simplifying it.
 * Carbon by ElAdamo - mods.factorio.com/mod/carbon - Stole several ideas for the petrochem system, plus some code and graphics.
+* Biochemistry by Tenebrais - mods.factorio.com/mod/biochemistry - Electrophage graphics, and ideas.
+* Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above. Copied deep drill, maybe more later.
+* Lunar Landings by Xorimuth - mods.factorio.com/mod/LunarLandings - Charon icon. Also using some ideas, such as ice nodes and telescopes on lunar mountains.
+* PlanetsLib - mods.factorio.com/mod/PlanetsLib - using for cargo-drop techs and orbit graphics.
+
+Only ideas taken:
+* Galdoc's Manufacturing - mods.factorio.com/mod/galdocs-manufacturing - Stole the idea of having intermediate factors with multiple recipes, though I'm simplifying it.
 * Roc's Rusting Iron by thesixthroc - mods.factorio.com/mod/Rocs-Rusting-Iron - for rusting iron idea, and idea for sulfuric acid derusting from NOiZE.
 * Meifray's condenser turbine proof of concept - mods.factorio.com/mod/condenser_turbine_proof_of_concept - for the idea.
-* Biochemistry by Tenebrais - mods.factorio.com/mod/biochemistry - Electrophage graphics, and ideas.
 * Fulgoran Sludge by Tatticky - mods.factorio.com/mod/fulgoran-sludge - Sludge idea.
 * RateBasedResearch by tomlee - mods.factorio.com/mod/RateBasedResearch - Idea of gating techs with production rates rather than amounts.
-* Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above. Copied deep drill, maybe more later.
 * Industrial Revolution 3 by Deadlock989 - mods.factorio.com/mod/IndustrialRevolution3 - Some general ideas used, like rubber, glass, cryogenics, battery charging, starting with shotguns and shotgun turrets, etc.
+
+Planned:
+* Krastorio 2 by raiguard and others - mods.factorio.com/mod/Krastorio2 - Possibly use graphics?
+
+The mod as a whole is under GNU GPLv3 because it uses some graphics from other mods that are GPL.

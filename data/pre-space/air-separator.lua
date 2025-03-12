@@ -338,4 +338,4 @@ exclusion2.selection_box = Gen.ifThenElse(ALLOW_SELECT_EXCLUSIONS, collisionBox2
 exclusion2.collision_box = collisionBox2
 extend{exclusion1, exclusion2}
 
--- TODO add air separation productivity techs. Should be easy.
+-- Could add productivity techs for air separation, but I'm not sure prod techs in general are a good idea.
