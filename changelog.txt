@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.10.0
+Date: 2025-03-??
+  Features:
+    - TODO add Charon, moon of Nauvis.
+    - TODO add sugar system
+    - TODO add resistances for enemies
+    - TODO add bream
+---------------------------------------------------------------------------------------------------
 Version: 0.9.0
 Date: 2025-03-08
   Features:

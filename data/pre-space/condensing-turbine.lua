@@ -2,6 +2,8 @@
 The turbine has 40% efficiency, vs regular turbine at 80% efficiency.
 Using the fusion-generator prototype, since that allows you to have one fluid input and a different fluid output, originally designed to allow hot plasma input and fluoroketone output.
 Credit to meifray for the idea, in this mod: mods.factorio.com/mod/condenser_turbine_proof_of_concept
+
+NOTE turns out Space Exploration also has condensing turbines, with a different implementation. The main entity is a furnace turning steam into water and "internal steam", which gets outputted into a fluid tank buffer, then goes into a generator that consumes internal steam. Not sure which approach is better between the two. If I didn't want to add effectivity then the fusion-generator approach would be simpler, with no hidden ents. But since I want effectivity under 100%, I have to use hidden ents below, and then both approaches seem to have the same complexity. SE also has "big turbine" converting hot steam to cold steam and water, using same system.
 ]]
 
 -- Create entity.

@@ -214,7 +214,15 @@ setSubgroupInOrder("planetary-special", {"item", "recipe"},
 	{"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge"})
 
 setSubgroupInOrder("chemical-processing", {"item", "recipe"},
-	{"chemical-plant", "cryogenic-plant", "oil-refinery", "filtration-plant", "gasifier", "fluid-fuelled-gasifier"})
+	{
+		"chemical-plant",
+		"oil-refinery",
+		"filtration-plant",
+		"cryogenic-plant",
+		"gasifier",
+		"fluid-fuelled-gasifier",
+		"oil-refinery",
+	})
 ITEM["agricultural-tower"].subgroup = "extraction-machine"
 ITEM["agricultural-tower"].order = "c"
 ITEM["air-separator"].subgroup = "extraction-machine"

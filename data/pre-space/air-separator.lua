@@ -5,17 +5,6 @@ There's a separate runtime script in control/air-separator.lua which:
 	* sets the recipe for the air separator according to the surface it was built on, similar to the borehole mining drill.
 	* creates or destroys the "air-separator-exclusion" entities when air separators are built or destroyed, including blueprints.
 Graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
-
-TODO:
-	Create entity.
-		Graphics.
-		Sounds.
-	Create exclusion zone entities.
-	Create item.
-	Create recipes.
-	Control script:
-		Create and destroy exclusion zone entities when air separators are built or destroyed.
-		Set recipe according to surface, when air separator is built.
 ]]
 
 local ALLOW_SELECT_EXCLUSIONS = false -- Whether to allow selection of the exclusion zones - for debugging.
@@ -28,8 +17,7 @@ ent.icon = "__LegendarySpaceAge__/graphics/air-separator/icon.png"
 ent.minable = {mining_time = 1, result = "air-separator"}
 ent.crafting_speed = 1
 ent.selection_box = {{-1.5, -1.5}, {1.5, 1.5}}
-ent.collision_box = {{-1.45, -1.45}, {1.45, 1.45}} -- TODO check.
-log(serpent.block(RAW["utility-constants"]))
+ent.collision_box = {{-1.45, -1.45}, {1.45, 1.45}}
 if ent.collision_mask == nil then
 	ent.collision_mask = copy(RAW["utility-constants"].default.building_collision_mask)
 end
@@ -148,14 +136,14 @@ ent.graphics_set = {
 	},
 	reset_animation_when_frozen = true,
 }
-ent.working_sound = nil -- TODO
-ent.build_sound = ASSEMBLER.foundry.build_sound -- TODO
-ent.open_sound = ASSEMBLER.foundry.open_sound -- TODO
-ent.close_sound = ASSEMBLER.foundry.close_sound -- TODO
-ent.corpse = "rocket-silo-remnants" -- TODO
-ent.dying_explosion = "rocket-silo-explosion" -- TODO
+ent.working_sound = copy(RAW.generator["steam-turbine"].working_sound)
+ent.open_sound = ASSEMBLER.foundry.open_sound -- sounds.steam_open
+ent.close_sound = ASSEMBLER.foundry.close_sound -- sounds.steam_close
+ent.build_sound = nil -- just default.
+ent.corpse = "biochamber-remnants"
+ent.dying_explosion = "steam-turbine-explosion"
 ent.max_health = 200
-ent.circuit_connector = copy(RAW["rocket-silo"]["rocket-silo"].circuit_connector) -- TODO
+ent.circuit_connector = copy(ASSEMBLER["cryogenic-plant"].circuit_connector)
 ent.surface_conditions = {{property = "pressure", min = 10}} -- So it can't be built on space platforms.
 -- NOTE I was thinking maybe we could ONLY do tile_buildability_rules, instead of doing control-stage creation of exclusion zone entities. BUT the tile_buildability_rules are only checked against TILES, not entities. So they won't collide with other air separators.
 -- NOTE Was also thinking about adding buildability rules just to highlight some tiles. Tried that but it doesn't really work, the squares only get shown when they're going to block building due to tile collisions, which never happens unless their collision layers are misconfigured, so never mind.
@@ -177,6 +165,7 @@ item.icon = "__LegendarySpaceAge__/graphics/air-separator/icon.png"
 item.place_result = "air-separator"
 item.stack_size = 20
 Item.perRocket(item, 40)
+Item.copySoundsTo("steam-engine", item)
 extend{item}
 
 Recipe.make{
@@ -287,7 +276,7 @@ tech.effects = {
 }
 tech.prerequisites = {"fluid-handling"}
 Icon.set(tech, "LSA/air-separator/tech")
-tech.unit = { -- TODO
+tech.unit = {
 	count = 100,
 	time = 15,
 	ingredients = {
@@ -349,6 +338,4 @@ exclusion2.selection_box = Gen.ifThenElse(ALLOW_SELECT_EXCLUSIONS, collisionBox2
 exclusion2.collision_box = collisionBox2
 extend{exclusion1, exclusion2}
 
--- TODO try attaching placeable position visualizations to the air separator.
-
--- TODO add air separation productivity techs. Should be easy, just copy mining productivity techs.
+-- TODO add air separation productivity techs. Should be easy.
