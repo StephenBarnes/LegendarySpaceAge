@@ -9,7 +9,7 @@ local starmapBase = RAW["utility-sprites"]["default"]["starmap_star"]
 starmapBase.layers = starmapBase.layers or {}
 for _, vals in pairs(C.planetsAndBelts) do
 	if vals.beltRockTint ~= nil then
-		local scale = 0.033 * vals.distance -- Set scale so it overlaps with belt node. This constant is chosen bc with scale 0.93 it's at distance 29, so .94/29 is the constant.
+		local scale = 0.0326 * vals.distance -- Set scale so it overlaps with belt node. This constant is chosen bc with scale 0.93 it's at distance 29, so .94/29 is the constant.
 		table.insert(starmapBase.layers, {
 			filename = beltPic,
 			size = beltSize,

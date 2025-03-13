@@ -91,7 +91,7 @@ R.planetsAndBelts = {
 
 local planetToBeltDeltaV = 10000
 local beltToBeltDeltaV = 1000
-R.connectionsData = {
+R.connectionsData = { -- Table of info about new connections between space locations that LSA creates.
 	-- Planet-to-belt-to-planet links.
 	{
 		a = "vulcanus",
