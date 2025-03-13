@@ -7,6 +7,8 @@ FLUID = RAW.fluid
 TECH = RAW.technology
 ASSEMBLER = RAW["assembling-machine"]
 FURNACE = RAW.furnace
+PLANET = RAW.planet
+SPACE_CONNECTION = RAW["space-connection"]
 
 -- Global function aliases with some asserts.
 ---@generic T

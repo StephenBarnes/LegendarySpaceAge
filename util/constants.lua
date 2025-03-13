@@ -12,7 +12,8 @@ Export.fluidFuelValues = { -- Maps from fluid name to fuel value, pollution mult
 	["natural-gas"] = {"700kJ", 1.2, .8, .8, "chemical"},
 	["syngas"] = {"100kJ", 1.5, .5, .5, "chemical"},
 	["tar"] = {"200kJ", 3, .5, .5, "chemical"},
-	["thruster-fuel"] = {nil, nil, nil, nil, nil}, -- Hydrogen - not giving it a fuel value, since there's no way to set fluid-burning ents (like the fluid-fuelled gasifier) to not accept it.
+	["thruster-fuel"] = {"1kJ", nil, 0, 0, "no-barrel-fuel"}, -- Hydrogen - don't want to give it a fuel value, since there's no way to set fluid-burning ents (like the fluid-fuelled gasifier) to not accept it. BUT it seems we have to, or else thrusters give zero thrust.
+		-- Using no-barrel-fuel so canisters of it don't get a fuel value.
 	["thruster-oxidizer"] = {nil, nil, nil, nil, nil}, -- Oxygen. Originally 50kJ, setting it to zero, seems there's no issue doing that, thrusters still work. Don't want oxygen to be usable as fuel in fluid fuelled boilers etc.
 	["geoplasm"] = {"100kJ", 1, .5, .5, "chemical"},
 	["diesel"] = {"1MJ", 1, 2, 1.15, "chemical"},

@@ -3,6 +3,7 @@ Version: 0.10.0
 Date: 2025-03-??
   Features:
     - TODO add Charon, moon of Nauvis.
+    - TODO Rearranged space map. Added asteroid belts.
     - TODO add sugar system
     - TODO add resistances for enemies
     - TODO add bream

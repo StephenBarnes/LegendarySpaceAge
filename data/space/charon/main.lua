@@ -6,6 +6,7 @@ local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-de
 local charon = {
 	name = "charon",
 	type = "planet",
+	subgroup = "planets",
 	order = "a[nauvis]-charon", -- after Nauvis, before Vulcanus.
 	-- Setting orbit. This is for PlanetsLib, not technically part of Planet prototype.
 	orbit = {
@@ -14,7 +15,7 @@ local charon = {
 			name = "nauvis",
 		},
 		distance = 1.5,
-		orientation = 0.7,
+		orientation = 0.15,
 		sprite = {
 			type = "sprite",
 			filename = "__LegendarySpaceAge__/graphics/charon/orbit.png",
@@ -22,7 +23,7 @@ local charon = {
 			scale = .25,
 		},
 	},
-	label_orientation = 0.55,
+	label_orientation = 0.03,
 	icon = "__LegendarySpaceAge__/graphics/charon/icon.png",
 	icon_size = 64,
 	starmap_icon = "__LegendarySpaceAge__/graphics/charon/large.png",
@@ -48,9 +49,9 @@ local charon = {
 		departure = { "planet-to-platform-a" },
 	},
 	procession_graphic_catalogue = nil,
-	asteroid_spawn_influence = 1, -- TODO,
+	asteroid_spawn_influence = 1, -- TODO
 	asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.gleba_fulgora, 0.9), -- TODO
-	persistent_ambient_sounds = {},
+	persistent_ambient_sounds = {}, -- TODO
 	surface_render_parameters = {
 		shadow_opacity = 0.75, -- Most planets are 0.5. Making this higher due to no atmosphere.
 	},
@@ -60,6 +61,7 @@ local charon = {
 }
 PlanetsLib:extend{charon}
 
+-- Make space connections.
 ---@type data.SpaceConnectionPrototype
 local charonNauvis = {
 	type = "space-connection",
@@ -68,21 +70,34 @@ local charonNauvis = {
 	from = "charon",
 	to = "nauvis",
 	order = "c",
-	length = 800, -- TODO
+	length = 1000, -- TODO
 	asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.gleba_fulgora), -- TODO
 }
+-- TODO other space connections.
 extend{charonNauvis}
 
--- Make tech. TODO more work, eg icons.
+-- Make tech.
 local tech = copy(TECH["planet-discovery-vulcanus"])
 tech.name = "planet-discovery-charon"
 tech.effects = {
 	{
 		type = "unlock-space-location",
 		space_location = "charon",
+		use_icon_overlay_constant = true,
 	},
 }
-Icon.set(tech, "LSA/charon/tech")
+tech.icon = nil
+tech.icons = {
+	{
+		icon = "__LegendarySpaceAge__/graphics/charon/tech.png",
+		icon_size = 256,
+	},
+	{
+		icon = "__core__/graphics/icons/technology/constants/constant-planet.png",
+		icon_size = 128,
+		scale = 0.5,
+		shift = {50, 50},
+		floating = true
+	},
+}
 extend{tech}
-
-

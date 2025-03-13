@@ -170,7 +170,7 @@ end
 -- Add fuel values for barrels and gas tanks.
 for fluidName, fuelValues in pairs(Const.fluidFuelValues) do
 	if ITEM[fluidName.."-barrel"] then
-		if fuelValues[1] ~= nil then
+		if fuelValues[1] ~= nil and fuelValues[5] ~= "no-barrel-fuel" then
 			local isGas = pressurizedFluids[fluidName]
 			--local fluidNumMult = Gen.ifThenElse(isGas, GAS_TANK_FLUID_AMOUNT, BARREL_FLUID_AMOUNT)
 			ITEM[fluidName.."-barrel"].fuel_value = Gen.multWithUnits(fuelValues[1], FLUID_PER_BARREL)
