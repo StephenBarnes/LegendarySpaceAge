@@ -1,6 +1,8 @@
 -- This file handles fuel values, emissions multipliers, and vehicle stats for all solid and fluid fuels in the game. Mostly petrochem stuff but also some other fuels.
 -- Fuel values for barrels and tanks are set in barrelling-dff.lua instead.
 
+local Const = require "util.const.fuel-const"
+
 -- Set fuel values for fluids (for fluid-fuelled vehicles, gasifiers, heating towers, boilers)
 for fluidName, fuelValues in pairs(Const.fluidFuelValues) do
 	FLUID[fluidName].fuel_value = fuelValues[1]

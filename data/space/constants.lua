@@ -28,8 +28,10 @@ R.planetsAndBelts = {
 		name = "metallic-belt",
 		type = "belt",
 		distance = sunDist + 1.25 * layerDist,
-		--beltRockTint = {.404, .318, .306},
-		beltRockTint = {.606, .476, .459},
+		drawAsteroidBelt = {
+			{1, {.322, .322, .325}}, -- greyish undertone
+			{2, {.357, .180, .125}}, -- red top layer
+		},
 		solarPowerInSpace = 1700,
 	},
 	{
@@ -41,7 +43,10 @@ R.planetsAndBelts = {
 		name = "carbonic-belt",
 		type = "belt",
 		distance = sunDist + 3 * layerDist,
-		beltRockTint = {.6, .6, .6},
+		drawAsteroidBelt = {
+			{2, {.330, .322, .360}}, -- lighter grey bottom layer
+			{1, {.165, .161, .180}}, -- dark top layer
+		},
 		solarPowerInSpace = 1300,
 	},
 	{
@@ -53,7 +58,9 @@ R.planetsAndBelts = {
 		name = "ice-belt",
 		type = "belt",
 		distance = sunDist + 5 * layerDist,
-		beltRockTint = {.404, .549, .541, .7},
+		drawAsteroidBelt = {
+			{2, {.404, .549, .541, .7}}, -- light blue
+		},
 		solarPowerInSpace = 800,
 	},
 	{
@@ -65,9 +72,11 @@ R.planetsAndBelts = {
 		name = "belt-of-aquilo",
 		type = "belt",
 		distance = sunDist + 8 * layerDist,
-		beltRockTint = {1, 1, 1},
+		drawAsteroidBelt = {
+			{1, {.404, .549, .541, .7}}, -- bottom layer ice
+			{2, {.342, .322, .325}}, -- top layer greyish
+		},
 		solarPowerInSpace = 300,
-		-- TODO multiple belt graphics?
 	},
 	{
 		name = "aquilo",
@@ -78,7 +87,10 @@ R.planetsAndBelts = {
 		name = "shattered-planet",
 		type = "belt",
 		distance = sunDist + 12 * layerDist,
-		beltRockTint = {.871, .286, .286},
+		drawAsteroidBelt = {
+			{2, {.733, .227, .160}}, -- brighter red bottom
+			{1, {.576, .016, .059}}, -- darker red top
+		},
 		solarPowerInSpace = 10,
 	},
 	{
