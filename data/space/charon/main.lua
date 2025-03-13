@@ -23,7 +23,8 @@ local charon = {
 			scale = .25,
 		},
 	},
-	label_orientation = 0.03,
+	label_orientation = 0.05,
+	parked_platforms_orientation = 0.0,
 	icon = "__LegendarySpaceAge__/graphics/charon/icon.png",
 	icon_size = 64,
 	starmap_icon = "__LegendarySpaceAge__/graphics/charon/large.png",
@@ -57,7 +58,6 @@ local charon = {
 	},
 	entities_require_heating = false,
 	map_gen_settings = nil, -- TODO
-	enabled = true, -- TODO make tech.
 }
 PlanetsLib:extend{charon}
 
@@ -69,8 +69,8 @@ local charonNauvis = {
 	subgroup = "planet-connections",
 	from = "charon",
 	to = "nauvis",
-	order = "c",
-	length = 1000, -- TODO
+	order = "05-2",
+	length = 1000,
 	asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.gleba_fulgora), -- TODO
 }
 -- TODO other space connections.

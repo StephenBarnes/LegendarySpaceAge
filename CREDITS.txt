@@ -14,7 +14,8 @@ This file is to keep track of other people's stuff that I've used.
 * Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above. Copied deep drill, maybe more later.
 * Lunar Landings by Xorimuth - mods.factorio.com/mod/LunarLandings - Charon icon. Also using some ideas, such as ice nodes and telescopes on lunar mountains.
 * PlanetsLib - mods.factorio.com/mod/PlanetsLib - using for cargo-drop techs and orbit graphics.
-* Alatar's Rocketry - mods.factorio.com/mod/alatar-rocketry - using graphics for asteroid belts, and the idea of changing distances to delta-V's (though reasons I changed intercepts to asteroid belts, for gameplay reasons, not realism).
+* Alatar's Rocketry - mods.factorio.com/mod/alatar-rocketry - using graphics for asteroid belts, and the idea of changing distances to delta-V's (though I changed intercepts to asteroid belts, for gameplay reasons more than realism).
+* Realistic Celestial Universe by plexpt - mods.factorio.com/mod/real-starry-universe - using graphics for asteroid belts.
 
 Only ideas taken:
 * Galdoc's Manufacturing - mods.factorio.com/mod/galdocs-manufacturing - Stole the idea of having intermediate factors with multiple recipes, though I'm simplifying it.

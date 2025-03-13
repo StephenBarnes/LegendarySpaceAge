@@ -134,9 +134,9 @@ RAW["solar-panel"]["solar-panel"].production = "10kW"
 -- Update solar power in atmosphere for planets, and in space. Generally keeping it the same on the ground, since solar panels are made 6x weaker above already, and I want to keep Nauvis ground as the 100% standard. For space platforms, I'm buffing it by about 4x so it's still fairly powerful in space.
 for planetName, groundAndSpace in pairs{
 	vulcanus = {400, 2000}, -- Default 400, 600.
-	gleba = {50, 1000}, -- Default 50, 200.
+	gleba = {140, 1400}, -- Default 50, 200. I'm moving Gleba closer to the sun than Nauvis, so increasing solar power.
 	nauvis = {100, 1200}, -- Default 100, 300.
-	fulgora = {20, 5000}, -- Default 20, 120.
+	fulgora = {20, 500}, -- Default 20, 120.
 	aquilo = {10, 10}, -- Default 1, 60. Increasing ground 1% to 10% so it's easier to get started. Reducing space 60->10 so you need a nuclear reactor.
 } do
 	RAW.planet[planetName].surface_properties["solar-power"] = groundAndSpace[1]

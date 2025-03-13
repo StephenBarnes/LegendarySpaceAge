@@ -10,7 +10,7 @@ local beltsData = {
 		graphics = "metallic",
 	},
 	{
-		name = "carbon-belt",
+		name = "carbonic-belt",
 		graphics = "carbon",
 	},
 	{
@@ -48,3 +48,10 @@ for _, vals in pairs(beltsData) do
 	}
 	extend{belt}
 end
+
+-- Add belt of Aquilo to tech that unlocks Aquilo.
+table.insert( TECH["planet-discovery-aquilo"].effects, {
+	type = "unlock-space-location",
+	space_location = "belt-of-aquilo",
+	use_icon_overlay_constant = true,
+})
