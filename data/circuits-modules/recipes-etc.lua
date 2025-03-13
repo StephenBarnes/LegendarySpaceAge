@@ -67,9 +67,17 @@ Tech.addRecipeToTech("silicon", "advanced-circuit", 1)
 Recipe.make{
 	copy = "plastic-bar",
 	recipe = "doped-wafer",
-	ingredients = {"silicon", "carbon"},
-	resultCount = 1,
+	ingredients = {
+		{"silicon", 1},
+		{"carbon", 1},
+		{"liquid-nitrogen", 10},
+	},
+	results = {
+		{"doped-wafer", 1},
+		{"nitrogen-gas", 10},
+	},
 	clearIcons = true,
+	main_product = "doped-wafer",
 	clearSubgroup = true,
 	allow_decomposition = true,
 	allow_as_intermediate = true,
@@ -81,7 +89,12 @@ Tech.addRecipeToTech("doped-wafer", "advanced-circuit", 2)
 Recipe.make{
 	copy = "plastic-bar",
 	recipe = "microchip",
-	ingredients = {"doped-wafer", "wiring", "plastic-bar"},
+	ingredients = {
+		{"doped-wafer", 1},
+		{"wiring", 1},
+		{"plastic-bar", 1},
+		{"sulfuric-acid", 20},
+	},
 	resultCount = 20,
 	clearIcons = true,
 	category = "electronics",
@@ -115,7 +128,10 @@ Recipe.edit{
 	ingredients = { -- Original recipe was 5 sulfuric acid + 2 red circuit + 20 green circuit.
 		{"advanced-circuit", 1},
 		{"microchip", 5},
-		{"sulfuric-acid", 5},
+		{"sulfuric-acid", 10},
+	},
+	results = {
+		{"processing-unit", 1},
 	},
 	time = 5,
 	allow_decomposition = true,

@@ -78,10 +78,10 @@ Recipe.make{
 		{"liquid-nitrogen", 100},
 	},
 	results = {
-		{"thruster-fuel", 50},
-		{"hydrogen-gas", 50},
-		{"oxygen-gas", 100},
-		{"nitrogen-gas", 100},
+		{"thruster-fuel", 50, show_details_in_recipe_tooltip = false},
+		{"hydrogen-gas", 50, show_details_in_recipe_tooltip = false},
+		{"oxygen-gas", 100, show_details_in_recipe_tooltip = false},
+		{"nitrogen-gas", 100, show_details_in_recipe_tooltip = false},
 	},
 	icons = {"thruster-fuel", "thruster-oxidizer"}, -- TODO better icons
 	allow_quality = false,
