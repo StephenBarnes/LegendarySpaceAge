@@ -211,7 +211,7 @@ for i, planetData in pairs{
 		iconArrangement = "planetFixed",
 		category = "deep-drill",
 		allow_productivity = true,
-		allow_quality = false,
+		allow_quality = true,
 		hide_from_player_crafting = true,
 		subgroup = "deep-drilling",
 		show_amount_in_title = false,

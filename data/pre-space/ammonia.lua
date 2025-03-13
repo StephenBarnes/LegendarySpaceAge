@@ -60,7 +60,7 @@ Recipe.make{
 	subgroup = "early-agriculture",
 	order = "d1",
 	time = 20,
-	allow_quality = false,
+	allow_quality = true,
 	icons = {"spoilage", "wood"},
 }
 

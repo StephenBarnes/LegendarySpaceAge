@@ -13,7 +13,7 @@ oilFractionationRecipe.results = {
 	{type = "fluid", name = "tar", amount = 10, show_details_in_recipe_tooltip = false},
 	{type = "fluid", name = "heavy-oil", amount = 40, show_details_in_recipe_tooltip = false},
 	{type = "fluid", name = "light-oil", amount = 50, show_details_in_recipe_tooltip = false},
-	{type = "fluid", name = "water", amount = 1, ignored_by_productivity = 1, show_details_in_recipe_tooltip = false}, -- Game has water 10x denser than steam. So this gives half the steam back as water.
+	{type = "fluid", name = "water", amount = 10, ignored_by_productivity = 10, show_details_in_recipe_tooltip = false},
 	{type = "item", name = "sulfur", amount = 2, show_details_in_recipe_tooltip = false},
 	{type = "item", name = "carbon", amount = 2, show_details_in_recipe_tooltip = false},
 }
@@ -32,7 +32,7 @@ gasFractionationRecipe.ingredients = {
 gasFractionationRecipe.results = {
 	{type = "fluid", name = "petroleum-gas", amount = 50, show_details_in_recipe_tooltip = false},
 	{type = "fluid", name = "dry-gas", amount = 50, show_details_in_recipe_tooltip = false},
-	{type = "fluid", name = "water", amount = 1, ignored_by_productivity = 1, show_details_in_recipe_tooltip = false},
+	{type = "fluid", name = "water", amount = 10, ignored_by_productivity = 10, show_details_in_recipe_tooltip = false},
 	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 }
 Icon.set(gasFractionationRecipe, {"natural-gas", "petroleum-gas", "dry-gas"}, "decomposition")
@@ -49,7 +49,7 @@ extend{gasFractionationRecipe}
 local heavyOilCrackingRecipe = RECIPE["heavy-oil-cracking"]
 heavyOilCrackingRecipe.ingredients = {
 	{type = "fluid", name = "heavy-oil", amount = 100},
-	{type = "fluid", name = "steam", amount = 50},
+	{type = "fluid", name = "steam", amount = 20},
 }
 heavyOilCrackingRecipe.results = {
 	{type = "fluid", name = "light-oil", amount = 100, show_details_in_recipe_tooltip = false},
@@ -62,7 +62,7 @@ Icon.set(heavyOilCrackingRecipe, {"heavy-oil", "light-oil", "light-oil"}, "decom
 local lightOilCrackingRecipe = RECIPE["light-oil-cracking"]
 lightOilCrackingRecipe.ingredients = {
 	{type = "fluid", name = "light-oil", amount = 100},
-	{type = "fluid", name = "steam", amount = 50},
+	{type = "fluid", name = "steam", amount = 20},
 }
 lightOilCrackingRecipe.results = {
 	{type = "fluid", name = "petroleum-gas", amount = 100, show_details_in_recipe_tooltip = false},
@@ -74,7 +74,7 @@ local richGasCrackingRecipe = copy(RECIPE["light-oil-cracking"])
 richGasCrackingRecipe.name = "rich-gas-cracking"
 richGasCrackingRecipe.ingredients = {
 	{type = "fluid", name = "petroleum-gas", amount = 100},
-	{type = "fluid", name = "steam", amount = 50},
+	{type = "fluid", name = "steam", amount = 20},
 }
 richGasCrackingRecipe.results = {
 	{type = "fluid", name = "dry-gas", amount = 100, show_details_in_recipe_tooltip = false},
@@ -127,6 +127,7 @@ heavyOilCokingRecipe.subgroup = "complex-fluid-recipes"
 heavyOilCokingRecipe.energy_required = 5
 heavyOilCokingRecipe.allow_productivity = true
 heavyOilCokingRecipe.maximum_productivity = 1
+heavyOilCokingRecipe.allow_quality = true
 extend{heavyOilCokingRecipe}
 
 -- Add recipe for pitch processing: 10 pitch + 50 steam -> 10 heavy oil + 10 light oil + 10 tar + 1 carbon
@@ -134,7 +135,7 @@ local pitchProcessingRecipe = copy(heavyOilCokingRecipe)
 pitchProcessingRecipe.name = "pitch-processing"
 pitchProcessingRecipe.ingredients = {
 	{type = "item", name = "pitch", amount = 10},
-	{type = "fluid", name = "steam", amount = 50},
+	{type = "fluid", name = "steam", amount = 20},
 }
 pitchProcessingRecipe.results = {
 	{ type = "fluid", name = "tar",       amount = 10, show_details_in_recipe_tooltip = false },
@@ -218,7 +219,7 @@ syngasLiquefactionRecipe.ingredients = {
 syngasLiquefactionRecipe.results = {
 	{ type = "fluid", name = "heavy-oil",     amount = 5, show_details_in_recipe_tooltip = false },
 	{ type = "fluid", name = "light-oil",     amount = 20, show_details_in_recipe_tooltip = false },
-	{ type = "fluid", name = "water",         amount = 1,  show_details_in_recipe_tooltip = false },
+	{ type = "fluid", name = "water",         amount = 2,  show_details_in_recipe_tooltip = false },
 }
 Icon.set(syngasLiquefactionRecipe, {"syngas", "heavy-oil", "light-oil"}, "decomposition")
 syngasLiquefactionRecipe.allow_productivity = false

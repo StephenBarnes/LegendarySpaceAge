@@ -246,6 +246,7 @@ local nonCarbonConservingRecipes = Table.listToSet{
 	"air-separation-nauvis",
 	"air-separation-gleba",
 	"air-separation-fulgora",
+	"air-separation-aquilo",
 }
 
 -- Table from recipes to additional ingredients that should be added to the recipe to check conservation.
@@ -284,16 +285,15 @@ local function initializeCarbonConservation()
 		end
 	end)
 	for _, fluid in pairs(FLUID) do -- Look through all fuel fluids allowed in fluid-fuelled gasifier.
-		if not fluid.parameter then
-			if fluid.fuel_value ~= nil then
-				local joules = Gen.toJoules(fluid.fuel_value)
-				local carbon = carbonContent[fluid.name] or 0
-				local carbonPerJoule = carbon / joules
-				if mostEfficientFuelCarbonPerJoule == nil or carbonPerJoule < mostEfficientFuelCarbonPerJoule then
-					mostEfficientFuelCarbonPerJoule = carbonPerJoule
-					mostEfficientFuel = {type = "fluid", name = fluid.name}
-					mostEfficientFuelJoules = joules
-				end
+		if not fluid.parameter and fluid.fuel_value ~= nil and fluid.name ~= "thruster-fuel" then
+			-- Note thruster-fuel is specifically allowed, since I can't block non-carbonic fluids. But it should be fine since it has extremely low fuel value.
+			local joules = Gen.toJoules(fluid.fuel_value)
+			local carbon = carbonContent[fluid.name] or 0
+			local carbonPerJoule = carbon / joules
+			if mostEfficientFuelCarbonPerJoule == nil or carbonPerJoule < mostEfficientFuelCarbonPerJoule then
+				mostEfficientFuelCarbonPerJoule = carbonPerJoule
+				mostEfficientFuel = {type = "fluid", name = fluid.name}
+				mostEfficientFuelJoules = joules
 			end
 		end
 	end

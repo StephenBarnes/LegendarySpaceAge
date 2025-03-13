@@ -49,7 +49,7 @@ local expectedRecipes = {
 	["coal-coking"] = {3, true}, -- Can't get coal back, so no issue enabling prod.
 	["heavy-oil-coking"] = {1, true}, -- Max prod +100% for carbon conservation.
 	["tar-distillation"] = {1, true}, -- Max prod +100% for carbon conservation.
-	["pitch-processing"] = {0, true}, -- Ban prod to conserve carbon.
+	["pitch-processing"] = {0, false}, -- Ban prod to conserve carbon.
 	["pitch-resin"] = {2, true}, -- Max prod +200% for carbon conservation.
 
 	["syngas-liquefaction"] = {0, false}, -- Banning prod to conserve carbon.
@@ -58,12 +58,41 @@ local expectedRecipes = {
 	["make-diesel"] = {0, false}, -- Ban prod to conserve carbon and fuel-potential.
 	["solid-fuel"] = {0, true}, -- Ban prod to conserve carbon.
 
+	["char-carbon"] = {0, true}, -- No prod bonuses for char furnaces. Quality is allowed.
+
 	-- Water phase conversions should conserve total water.
 	["ice-melting"] = {0, false},
 	["steam-condensation"] = {0, false},
 
 	["petrophage-cultivation"] = {0.5, true}, -- Cap prod to conserve carbon.
 	["refresh-petrophages"] = {2, true}, -- Cap prod to conserve carbon.
+
+	["nitrogen-compression"] = {0, false},
+	["nitrogen-expansion"] = {0, false},
+	["oxygen-cascade-cooling"] = {0, false},
+	["hydrogen-cascade-cooling"] = {0, false},
+	["regenerative-cooling"] = {0, false},
+	["syngas-reforming"] = {0, false},
+	["ammonia-cracking"] = {0, false},
+	["electrolysis"] = {0, false},
+	["ammonia-synthesis"] = {0, false},
+
+	-- Air separation: block quality (for spent filter), allow prod (ignored for spent filter byproduct, affects gases).
+	["air-separation-nauvis"] = {3, false},
+	["air-separation-vulcanus"] = {3, false},
+	["air-separation-gleba"] = {3, false},
+	["air-separation-fulgora"] = {3, false},
+	["air-separation-aquilo"] = {3, false},
+
+	-- Deep drill: allow quality (for solid products) and prod.
+	["deep-drill-nauvis"] = {3, true},
+	["deep-drill-vulcanus"] = {3, true},
+	["deep-drill-gleba"] = {3, true},
+	["deep-drill-fulgora"] = {3, true},
+
+	-- Battery charging: can't improve quality, can't get prod bonuses.
+	["charged-battery"] = {0, false},
+	["charged-holmium-battery"] = {0, false},
 
 	-- TODO more.
 }
