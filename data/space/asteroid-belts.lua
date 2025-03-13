@@ -28,7 +28,7 @@ for _, vals in pairs(beltsData) do
 		name = vals.name,
 		type = "space-location",
 		subgroup = "planets",
-		order = "a[nauvis]-charon", -- TODO
+		order = "a[nauvis]-heimdall", -- TODO
 
 		gravity_pull = 0, -- This is 10 for all planets, except solar system edge and shattered planet, which are -10. Affects speed travelling towards or away. So setting this to 0 means that on planet->belt route, you travel slower and can fall back to the planet.
 		draw_orbit = false,

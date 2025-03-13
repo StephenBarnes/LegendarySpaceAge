@@ -7,7 +7,7 @@ Fields:
 	name: name of the space-location or planet.
 	type: "belt" or "planet". This determines orientation.
 	distance: distance from sun, chosen to be in specific order. By default Vulcanus is 10, Aquilo is 35.
-NOTE I'm not adjusting Charon here, rather set it in the separate file for Charon, loaded after this one.
+NOTE I'm not adjusting Heimdall here, rather set it in the separate file for Heimdall, loaded after this one.
 TODO asteroid definitions, later.
 ]]
 local sunDist = 5.0 -- Base distance from sun.
@@ -101,91 +101,81 @@ R.planetsAndBelts = {
 	},
 }
 
-local planetToBeltDeltaV = 10000
-local beltToBeltDeltaV = 1000
+local planetToBeltDist = 10000
+local beltToBeltDist = 10000
 R.connectionsData = { -- Table of info about new connections between space locations that LSA creates.
 	-- Planet-to-belt-to-planet links.
 	{
 		a = "vulcanus",
 		b = "metallic-belt",
-		length = planetToBeltDeltaV,
+		length = planetToBeltDist,
 	},
 	{
 		a = "metallic-belt",
 		b = "gleba",
-		length = planetToBeltDeltaV,
+		length = planetToBeltDist,
 	},
 	{
 		a = "gleba",
 		b = "carbonic-belt",
-		length = planetToBeltDeltaV,
+		length = planetToBeltDist,
 	},
 	{
 		a = "carbonic-belt",
-		b = "nauvis",
-		length = planetToBeltDeltaV,
+		b = "heimdall",
+		length = planetToBeltDist,
 	},
 	{
-		a = "nauvis",
+		a = "heimdall",
 		b = "ice-belt",
-		length = planetToBeltDeltaV,
-	},
-	{
-		a = "carbonic-belt",
-		b = "charon",
-		length = planetToBeltDeltaV,
-	},
-	{
-		a = "charon",
-		b = "ice-belt",
-		length = planetToBeltDeltaV,
+		length = planetToBeltDist,
 	},
 	{
 		a = "ice-belt",
 		b = "fulgora",
-		length = planetToBeltDeltaV,
+		length = planetToBeltDist,
 	},
 	{
 		a = "fulgora",
 		b = "belt-of-aquilo",
-		length = planetToBeltDeltaV,
+		length = planetToBeltDist,
 	},
 	{
 		a = "belt-of-aquilo",
 		b = "aquilo",
-		length = planetToBeltDeltaV * 2,
+		length = planetToBeltDist * 3,
 	},
 	{
 		a = "aquilo",
 		b = "shattered-planet",
-		length = planetToBeltDeltaV * 2,
+		length = planetToBeltDist * 3,
 	},
 	-- Belt-to-belt links.
 	{
 		a = "metallic-belt",
 		b = "carbonic-belt",
-		length = beltToBeltDeltaV,
+		length = beltToBeltDist,
 	},
 	{
 		a = "carbonic-belt",
 		b = "ice-belt",
-		length = beltToBeltDeltaV,
+		length = beltToBeltDist,
 	},
 	{
 		a = "ice-belt",
 		b = "belt-of-aquilo",
-		length = beltToBeltDeltaV * 2,
+		length = beltToBeltDist,
 	},
 	{
 		a = "belt-of-aquilo",
 		b = "shattered-planet",
-		length = beltToBeltDeltaV * 20,
+		length = beltToBeltDist * 5,
 	},
 }
 R.connectionEdits = {
 	{
 		name = "solar-system-edge-shattered-planet",
-		length = beltToBeltDeltaV * 25,
+		length = beltToBeltDist * 20,
 	},
 }
 
