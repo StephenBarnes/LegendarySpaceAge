@@ -9,7 +9,8 @@ Graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 
 local ALLOW_SELECT_EXCLUSIONS = false -- Whether to allow selection of the exclusion zones - for debugging.
 local EXCLUSION_DIMS = {27, 21} -- Tested with both odd; I think they could be even too.
-	-- Note that control/air-separator.lua computes distance from center of air separator to center of exclusion zone, using the 2nd number here (y) as y/2 + 1.5. Making the 2nd number smaller than the 1st number is best, so that it's more rounded rather than cross-shaped.
+	-- Note that control/air-separator.lua computes distance from center of air separator to center of exclusion zone, using the 2nd number here (y) as y/2 + ENT_SIZE/2. Making the 2nd number smaller than the 1st number is best, so that it's more rounded rather than cross-shaped.
+local ENT_SIZE = 3 -- Size of air separator in tiles, assumed square.
 
 local ent = copy(ASSEMBLER["assembling-machine-3"])
 ent.name = "air-separator"
@@ -22,20 +23,31 @@ if ent.collision_mask == nil then
 	ent.collision_mask = copy(RAW["utility-constants"].default.building_collision_mask)
 end
 ent.collision_mask.layers["air_separator_exclusion"] = true
-ent.tile_height = 3
-ent.tile_width = 3
+ent.tile_height = ENT_SIZE
+ent.tile_width = ENT_SIZE
 local FLUIDBOX_INDEX = {
 	leftRightMiddle = 1,
 	upDownMiddle = 2,
 	leftRightTop = 3,
 	leftRightBottom = 4,
 }
-local emPipePicture = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures
-local emPipePictureFrozen = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures_frozen
+local em = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures")
+local emPipePictures = copy(em.pipe_pictures)
+local emPipePictureFrozen = copy(em.pipe_pictures_frozen)
+-- Remove shadow layers from pipe pictures, bc they look wrong on air separator.
+for _, sprite in pairs(emPipePictures) do
+	local newLayers = {}
+	for _, layer in pairs(sprite.layers) do
+		if layer.draw_as_shadow ~= true then
+			table.insert(newLayers, layer)
+		end
+	end
+	sprite.layers = newLayers
+end
 ent.fluid_boxes = {
 	{ -- Left-right output in the middle.
 		production_type = "output",
-		pipe_picture = emPipePicture,
+		pipe_picture = emPipePictures,
 		pipe_picture_frozen = emPipePictureFrozen,
 		pipe_covers = pipecoverspictures(),
 		base_area = 10,
@@ -50,7 +62,7 @@ ent.fluid_boxes = {
 	},
 	{ -- Up-down output in the middle.
 		production_type = "output",
-		pipe_picture = emPipePicture,
+		pipe_picture = emPipePictures,
 		pipe_picture_frozen = emPipePictureFrozen,
 		pipe_covers = pipecoverspictures(),
 		base_area = 10,
@@ -65,7 +77,7 @@ ent.fluid_boxes = {
 	},
 	{ -- Left-right output on top.
 		production_type = "output",
-		pipe_picture = emPipePicture,
+		pipe_picture = emPipePictures,
 		pipe_picture_frozen = emPipePictureFrozen,
 		pipe_covers = pipecoverspictures(),
 		base_area = 10,
@@ -80,7 +92,7 @@ ent.fluid_boxes = {
 	},
 	{ -- Left-right output on bottom.
 		production_type = "output",
-		pipe_picture = emPipePicture,
+		pipe_picture = emPipePictures,
 		pipe_picture_frozen = emPipePictureFrozen,
 		pipe_covers = pipecoverspictures(),
 		base_area = 10,
@@ -152,10 +164,10 @@ ent.radius_visualisation_specification = {
 	sprite = {
 		filename = "__LegendarySpaceAge__/graphics/air-separator/grid_27_21.png",
 		priority = "extra-high-no-scale",
-		width = 45,
-		height = 45,
+		width = EXCLUSION_DIMS[2] * 2 + ENT_SIZE,
+		height = EXCLUSION_DIMS[2] * 2 + ENT_SIZE,
 	},
-	distance = EXCLUSION_DIMS[2] + 1.5,
+	distance = EXCLUSION_DIMS[2] + ENT_SIZE/2,
 }
 extend{ent}
 
@@ -239,7 +251,7 @@ for i, planetData in pairs{
 	local results = planetData[2].results
 	table.insert(results, {"spent-filter", filtersPer50s, ignored_by_productivity = filtersPer50s})
 
-	local recipe = Recipe.make{
+	Recipe.make{
 		copy = "air-separator",
 		recipe = "air-separation-"..planetName,
 		ingredients = {{"filter", filtersPer50s}},

@@ -1,7 +1,7 @@
 local startingEquipment = require("control.starting-items")
 local natGasWells = require("control.natural-gas-wells")
 local notifyIncorrectMapgenPreset = require("control.notify-incorrect-mapgen-preset")
-local deepDrillRecipe = require("control.deep-drill-recipe")
+local deepDrill = require("control.deep-drill")
 local airSeparator = require("control.air-separator")
 local apprenticeFoundry = require("control.apprentice-arc-furnace")
 local qualityPowerScaling = require("control.quality-power-scaling")
@@ -45,7 +45,7 @@ for _, event in ipairs({
 	defines.events.on_entity_cloned,
 }) do
 	script.on_event(event, function(e)
-		deepDrillRecipe.onBuilt(e)
+		deepDrill.onBuilt(e)
 		airSeparator.onBuilt(e)
 		apprenticeFoundry.on_created_entity(e)
 		qualityPowerScaling.onBuilt(e)
@@ -65,6 +65,7 @@ end)
 script.on_event(defines.events.on_object_destroyed, function(e)
 	apprenticeFoundry.on_object_destroyed(e)
 	airSeparator.onObjectDestroyed(e)
+	deepDrill.onObjectDestroyed(e)
 	condensingTurbineEfficiency.onObjectDestroyed(e)
 end)
 

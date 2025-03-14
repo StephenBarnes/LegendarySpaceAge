@@ -5,7 +5,8 @@ We register a death rattle for each air separator, so we can destroy the exclusi
 ]]
 
 -- Compute distance from center of air separator to center of exclusion zone.
-local EXCLUSION_CENTER_DIST = prototypes.entity["air-separator-exclusion-1"].collision_box.right_bottom.y + 1.5
+local ENT_SIZE = prototypes.entity["air-separator"].tile_width
+local EXCLUSION_CENTER_DIST = prototypes.entity["air-separator-exclusion-1"].collision_box.right_bottom.y + ENT_SIZE/2
 
 local getAirSepDeathRattles = function()
 	if storage.airSepDeathRattles == nil then
@@ -83,7 +84,6 @@ local function createExclusionZone(entity)
 			ent.destructible = false -- Otherwise you can literally shoot it dead.
 		end
 	end
-	-- TODO check the case where a blueprint got built.
 end
 
 -- Function to destroy exclusion zone around air separator, or ghost of air separator.
