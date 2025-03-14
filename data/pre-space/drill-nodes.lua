@@ -121,6 +121,8 @@ dummyMiner.output_fluid_box = nil
 dummyMiner.resource_searching_radius = (11 / 2) - 0.01 -- So it says it's 11x11.
 dummyMiner.tile_height = deepDrill.tile_height
 dummyMiner.tile_width = deepDrill.tile_width
+dummyMiner.collision_box = deepDrill.collision_box
+dummyMiner.selection_box = deepDrill.selection_box
 extend{dummyMiner}
 
 

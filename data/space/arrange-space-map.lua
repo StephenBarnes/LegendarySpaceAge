@@ -15,6 +15,11 @@ local function editBelt(vals)
 	belt.draw_orbit = false
 	belt.parked_platforms_orientation = C.beltParkedPlatformsOrientation
 	belt.order = vals.order
+	if vals.iconMagnitude ~= nil then
+		belt.magnitude = vals.iconMagnitude
+	end
+	belt.asteroid_spawn_definitions = vals.asteroid_spawn_definitions
+	belt.asteroid_spawn_influence = vals.asteroid_spawn_influence
 end
 
 local function editPlanet(vals)
@@ -28,6 +33,11 @@ local function editPlanet(vals)
 		loc.draw_orbit = vals.drawOrbit
 	end
 	loc.order = vals.order
+	if vals.iconMagnitude ~= nil then
+		loc.magnitude = vals.iconMagnitude
+	end
+	loc.asteroid_spawn_definitions = vals.asteroid_spawn_definitions -- This is always nil, currently.
+	loc.asteroid_spawn_influence = vals.asteroid_spawn_influence -- This is always nil, currently. Default is 0.1.
 end
 
 for i, vals in pairs(C.planetsAndBelts) do
@@ -70,7 +80,7 @@ for i, vals in pairs(C.connectionsData) do
 		to = vals.b,
 		length = vals.length,
 		order = string.format("%02d", i),
-		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora), -- TODO
+		--asteroid_spawn_definitions = nil,
 	}
 	extend{conn}
 end
@@ -78,4 +88,7 @@ for _, vals in pairs(C.connectionEdits) do
 	local conn = RAW["space-connection"][vals.name]
 	assert(conn ~= nil, "Connection " .. vals.name .. " not found.")
 	conn.length = vals.length
+	conn.from = vals.a
+	conn.to = vals.b
+	conn.asteroid_spawn_definitions = vals.asteroid_spawn_definitions
 end

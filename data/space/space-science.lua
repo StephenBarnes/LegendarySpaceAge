@@ -1,4 +1,4 @@
--- This file makes tech that unlocks belts, and edits space science techs to use asteroid chunks from those belts.
+-- This file makes tech that unlocks asteroid belts, and edits space science techs to use asteroid chunks from those belts.
 
 local tech = copy(TECH["space-science-pack"])
 tech.name = "asteroid-space-science"

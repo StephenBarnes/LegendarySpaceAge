@@ -50,8 +50,8 @@ local heimdall = {
 		departure = { "planet-to-platform-a" },
 	},
 	procession_graphic_catalogue = nil,
-	asteroid_spawn_influence = 1, -- TODO
-	asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.gleba_fulgora, 0.9), -- TODO
+	asteroid_spawn_influence = nil,
+	asteroid_spawn_definitions = {},
 	persistent_ambient_sounds = {}, -- TODO
 	surface_render_parameters = {
 		shadow_opacity = 0.75, -- Most planets are 0.5. Making this higher due to no atmosphere.
@@ -71,9 +71,8 @@ local heimdallNauvis = {
 	to = "nauvis",
 	order = "05-2",
 	length = 1000,
-	asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.gleba_fulgora), -- TODO
+	asteroid_spawn_definitions = {},
 }
--- TODO other space connections.
 extend{heimdallNauvis}
 
 -- Make tech.

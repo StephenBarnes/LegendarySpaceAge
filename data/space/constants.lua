@@ -2,6 +2,27 @@
 
 local R = {}
 
+---@return data.SpaceLocationAsteroidSpawnDefinition
+local function makeAsteroidSpawnDefinitions(kind, size, prob, angle, speed)
+	local r = {
+		probability = prob,
+		angle = angle,
+		speed = speed,
+	}
+	if size == "chunk" then
+		r.asteroid = kind .. "-asteroid-chunk"
+		r.type = "asteroid-chunk"
+	else
+		r.asteroid = size .. "-" .. kind .. "-asteroid"
+	end
+	return r
+end
+
+-- Function to fudge asteroid spawn numbers a bit so the graphs don't overlap.
+local function fudge(x, n)
+	return x * (1 + .05 * n)
+end
+
 --[[ Define table of info on asteroid belts and planets.
 Fields:
 	name: name of the space-location or planet.
@@ -33,6 +54,14 @@ R.planetsAndBelts = {
 			{2, {.357, .180, .125}}, -- red top layer
 		},
 		solarPowerInSpace = 1700,
+		shouldCreateBeltLocation = true,
+		beltGraphicsKey = "metallic",
+		asteroid_spawn_definitions = {
+			makeAsteroidSpawnDefinitions("metallic", "chunk", 0.002, 1, 0.0166667),
+			makeAsteroidSpawnDefinitions("metallic", "medium", 0.0025, 0.7, 0.0166667),
+				-- Note angle range 0.7 for the medium ones when stopped, mostly just so you don't have to defend right at center-middle thrusters.
+		},
+		asteroid_spawn_influence = 0.3,
 	},
 	{
 		name = "gleba",
@@ -48,6 +77,13 @@ R.planetsAndBelts = {
 			{1, {.165, .161, .180}}, -- dark top layer
 		},
 		solarPowerInSpace = 1300,
+		shouldCreateBeltLocation = true,
+		beltGraphicsKey = "carbon",
+		asteroid_spawn_definitions = {
+			makeAsteroidSpawnDefinitions("carbonic", "chunk", 0.002, 1, 0.0166667),
+			makeAsteroidSpawnDefinitions("carbonic", "medium", 0.0025, 0.7, 0.0166667),
+		},
+		asteroid_spawn_influence = 0.3,
 	},
 	{
 		name = "nauvis",
@@ -59,9 +95,16 @@ R.planetsAndBelts = {
 		type = "belt",
 		distance = sunDist + 5 * layerDist,
 		drawAsteroidBelt = {
-			{2, {.404, .549, .541, .7}}, -- light blue
+			{2, {.404, .549, .541, .6}}, -- light blue
 		},
 		solarPowerInSpace = 800,
+		shouldCreateBeltLocation = true,
+		beltGraphicsKey = "ice",
+		asteroid_spawn_definitions = {
+			makeAsteroidSpawnDefinitions("oxide", "chunk", 0.002, 1, 0.0166667),
+			makeAsteroidSpawnDefinitions("oxide", "medium", 0.0025, 0.7, 0.0166667),
+		},
+		asteroid_spawn_influence = 0.3,
 	},
 	{
 		name = "fulgora",
@@ -73,10 +116,23 @@ R.planetsAndBelts = {
 		type = "belt",
 		distance = sunDist + 8 * layerDist,
 		drawAsteroidBelt = {
-			{1, {.404, .549, .541, .7}}, -- bottom layer ice
+			{1, {.404, .549, .541, .6}}, -- bottom layer ice
 			{2, {.342, .322, .325}}, -- top layer greyish
 		},
 		solarPowerInSpace = 300,
+		shouldCreateBeltLocation = true,
+		beltGraphicsKey = "jormungandr",
+		iconMagnitude = 1.5,
+		asteroid_spawn_definitions = {
+			makeAsteroidSpawnDefinitions("carbonic", "medium", fudge(0.002, -1), 0.7, 0.0166667),
+			makeAsteroidSpawnDefinitions("metallic", "medium", fudge(0.002, 0), 0.7, 0.0166667),
+			makeAsteroidSpawnDefinitions("oxide",    "medium", fudge(0.002, 1), 0.7, 0.0166667),
+
+			makeAsteroidSpawnDefinitions("metallic", "big", fudge(0.0025, -1), 0.6, 0.0166667),
+			makeAsteroidSpawnDefinitions("carbonic", "big", fudge(0.0025, 0), 0.6, 0.0166667),
+			makeAsteroidSpawnDefinitions("oxide",    "big", fudge(0.0025, 1), 0.6, 0.0166667),
+		},
+		asteroid_spawn_influence = 0.3,
 	},
 	{
 		name = "aquilo",
@@ -92,12 +148,33 @@ R.planetsAndBelts = {
 			{1, {.576, .016, .059}}, -- darker red top
 		},
 		solarPowerInSpace = 10,
+		shouldCreateBeltLocation = false,
+		iconMagnitude = 1.5,
+		asteroid_spawn_definitions = {
+			makeAsteroidSpawnDefinitions("oxide",      "medium", fudge(0.0005, -1), 0.7, 0.0166667),
+			makeAsteroidSpawnDefinitions("metallic",   "medium", fudge(0.0005, 0), 0.7, 0.0166667),
+			makeAsteroidSpawnDefinitions("carbonic",   "medium", fudge(0.0005, 1), 0.7, 0.0166667),
+			makeAsteroidSpawnDefinitions("promethium", "medium", fudge(0.0020, 0), 0.7, 0.0166667),
+
+			makeAsteroidSpawnDefinitions("oxide",      "big", fudge(0.001, -1), 0.7, 0.0166667),
+			makeAsteroidSpawnDefinitions("metallic",   "big", fudge(0.001, 0), 0.7, 0.0166667),
+			makeAsteroidSpawnDefinitions("carbonic",   "big", fudge(0.001, 1), 0.7, 0.0166667),
+			makeAsteroidSpawnDefinitions("promethium", "big", fudge(0.004, 0), 0.7, 0.0166667),
+
+			makeAsteroidSpawnDefinitions("oxide",      "huge", fudge(0.0015, -1), 0.6, 0.0166667),
+			makeAsteroidSpawnDefinitions("metallic",   "huge", fudge(0.0015,  0), 0.6, 0.0166667),
+			makeAsteroidSpawnDefinitions("carbonic",   "huge", fudge(0.0015,  1), 0.6, 0.0166667),
+			makeAsteroidSpawnDefinitions("promethium", "huge", fudge(0.0060, 0), 0.6, 0.0166667),
+			-- TODO these numbers all need to be balanced.
+		},
+		asteroid_spawn_influence = 0.4,
 	},
 	{
 		name = "solar-system-edge",
 		type = "belt",
 		distance = sunDist + 15 * layerDist,
 		solarPowerInSpace = 1,
+		shouldCreateBeltLocation = false,
 	},
 }
 
@@ -176,6 +253,8 @@ R.connectionEdits = {
 	{
 		name = "solar-system-edge-shattered-planet",
 		length = beltToBeltDist * 20,
+		a = "shattered-planet",
+		b = "solar-system-edge",
 	},
 }
 
