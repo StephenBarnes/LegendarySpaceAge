@@ -7,7 +7,7 @@ local heimdall = {
 	name = "heimdall",
 	type = "planet",
 	subgroup = "planets",
-	order = "a[nauvis]-heimdall", -- after Nauvis, before Vulcanus.
+	order = "05b", -- after Nauvis, before Vulcanus.
 	-- Setting orbit. This is for PlanetsLib, not technically part of Planet prototype.
 	orbit = {
 		parent = {
