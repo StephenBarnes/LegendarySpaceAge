@@ -7,6 +7,8 @@ Date: 2025-03-??
     - TODO add sugar system
     - TODO add resistances for enemies
     - TODO add bream
+    - TODO add nodes for borehole drills
+    - Borehole drills can't be built close to each other.
 ---------------------------------------------------------------------------------------------------
 Version: 0.9.0
 Date: 2025-03-08

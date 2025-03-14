@@ -17,6 +17,11 @@ wastePump.heating_energy = "50kW"
 wastePump.minable.result = "waste-pump"
 wastePump.placeable_by = {item = "waste-pump", count = 1}
 wastePump.show_recipe_icon = true -- Just so player can distinguish them from the non-waste pumps.
+wastePump.icon = nil
+wastePump.icons = {
+	{icon = "__base__/graphics/icons/offshore-pump.png", icon_size = 64, scale = 0.5},
+	{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.25, shift = {-8, 8}},
+}
 wastePump.fluid_boxes = {
 	{
 		production_type = "input",
@@ -66,7 +71,7 @@ extend{wastePumpRecipe}
 local wastePumpItem = copy(ITEM["pump"])
 wastePumpItem.name = "waste-pump"
 wastePumpItem.place_result = "waste-pump"
-wastePumpItem.icon = "nil"
+wastePumpItem.icon = nil
 wastePumpItem.icons = {
 	{icon = "__base__/graphics/icons/offshore-pump.png", icon_size = 64, scale = 0.5},
 	{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.25, shift = {-8, 8}},
@@ -116,6 +121,7 @@ for _, effluentFluidAndPollution in pairs(effluentFluidsAndPollution) do
 	local effluentRecipe = copy(RECIPE["offshore-pump"])
 	effluentRecipe.name = "vent-" .. effluentFluid
 	effluentRecipe.localised_name = {"recipe-name.waste-pumping", {"fluid-name."..effluentFluid}}
+	effluentRecipe.localised_description = {"recipe-description.waste-pumping"}
 	effluentRecipe.enabled = true
 	effluentRecipe.ingredients = {{type = "fluid", name = effluentFluid, amount = 1000}}
 	effluentRecipe.results = {}

@@ -36,6 +36,10 @@ RAW.lab.biolab.surface_conditions = {
 -- And remove pollution for space biolabs, since it's irrelevant.
 RAW.lab.biolab.energy_source.emissions_per_minute = nil
 
+-- Clear description of glebalab.
+ITEM.glebalab.localised_description = {"item-description.no-description"}
+RECIPE.glebalab.localised_description = {"recipe-description.no-description"}
+
 -- Set stack sizes and rocket capacities.
 ITEM.glebalab.stack_size = 10
 ITEM.biolab.stack_size = 10

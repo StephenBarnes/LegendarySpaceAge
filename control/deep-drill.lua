@@ -7,6 +7,8 @@ We register a death rattle for each deep drill, so we can destroy the exclusion 
 local ENT_SIZE = prototypes.entity["deep-drill"].tile_width
 local EXCLUSION_CENTER_DIST = prototypes.entity["deep-drill-exclusion-1"].collision_box.right_bottom.y + ENT_SIZE/2
 
+local NodeVals = require("util.const.drill-nodes")
+
 local getDeepDrillDeathRattles = function()
 	if storage.deepDrillDeathRattles == nil then
 		storage.deepDrillDeathRattles = {}
@@ -32,9 +34,30 @@ local function getExclusionPositions(pos)
 end
 
 -- Function to set recipe of deep drill when it's built.
+---@param entity LuaEntity
 local function setDeepDrillRecipe(entity)
 	entity.recipe_locked = true
 	local surface = entity.surface
+	-- First, try looking for a nearby drill node.
+	local entsUnder = surface.find_entities_filtered{
+		area = {
+			{entity.position.x - ENT_SIZE / 2, entity.position.y - ENT_SIZE / 2},
+			{entity.position.x + ENT_SIZE / 2, entity.position.y + ENT_SIZE / 2},
+		},
+		type = "resource",
+	}
+	for _, ent in pairs(entsUnder) do
+		if ent.name:sub(1, 10) == "drill-node" then
+			local recipeName = "recipe-" .. ent.name
+			if prototypes.recipe[recipeName] == nil then
+				log("ERROR: Deep drill recipe not found: "..recipeName)
+			else
+				entity.set_recipe(recipeName)
+				return
+			end
+		end
+	end
+	-- If no drill node found, then use default recipe for the planet.
 	if surface.name == "nauvis" then
 		entity.set_recipe("deep-drill-nauvis")
 	elseif surface.name == "gleba" then

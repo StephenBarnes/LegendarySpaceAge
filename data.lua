@@ -69,6 +69,7 @@ require("data.broad-changes.fuel")
 require("data.space.main")
 require("data.tech-progression.tech-rate-triggers")
 require("data.vulcanus.no-lava-in-pipes")
+require("data.pre-space.drill-nodes")
 
 -- Files that adjust protos
 require("data.circuits-modules.remove-modules")

@@ -36,7 +36,7 @@ Icon.getIconInfo = function(pathCode, proto)
 		end
 		return {path = path .. rest .. ".png"}
 	else
-		for _, t in pairs{"item", "fluid", "recipe", "capsule"} do
+		for _, t in pairs{"item", "fluid", "recipe", "capsule", "resource"} do
 			if RAW[t][rest] ~= nil and (RAW[t][rest].icon ~= nil or RAW[t][rest].icons ~= nil) then
 				if RAW[t][rest].icon ~= nil then
 					---@diagnostic disable-next-line: return-type-mismatch

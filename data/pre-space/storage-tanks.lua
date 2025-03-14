@@ -58,5 +58,7 @@ RAW["storage-tank"]["large-storage-tank"].fluid_box.volume = 50000 -- Originally
 -- Clear descriptions of storage tanks.
 RAW["storage-tank"]["large-storage-tank"].localised_description = {"entity-description.no-description"}
 RAW["storage-tank"]["tiny-inline-storage-tank"].localised_description = {"entity-description.no-description"}
+ITEM["large-storage-tank"].localised_description = {"item-description.no-description"}
+ITEM["tiny-inline-storage-tank"].localised_description = {"item-description.no-description"}
 
 -- TODO move this to infra/ folder.

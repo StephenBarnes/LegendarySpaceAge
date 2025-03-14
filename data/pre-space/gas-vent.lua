@@ -8,7 +8,11 @@ local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 local ventEnt = copy(FURNACE["steel-furnace"])
 ventEnt.type = "furnace"
 ventEnt.name = "gas-vent"
-ventEnt.icon = GRAPHICS.."gas-vent-item.png"
+ventEnt.icon = nil
+ventEnt.icons = {
+	{icon = GRAPHICS.."gas-vent-item.png", icon_size = 64},
+	{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.25, shift = {-8, 8}},
+}
 ventEnt.minable = {mining_time = .5, result = "gas-vent"}
 ventEnt.collision_box = {{-0.3, -0.3}, {0.3, 0.3}}
 ventEnt.selection_box = {{-0.5, -0.5}, {0.5, 0.5}}
@@ -176,9 +180,11 @@ for _, fluidData in pairs(ventableFluids) do
 	thisGasVentRecipe.name = "gas-vent-"..gasToVent
 	if onlyInSpace then
 		thisGasVentRecipe.localised_name = {"recipe-name.gas-vent-space", {"fluid-name."..gasToVent}}
+		thisGasVentRecipe.localised_description = {"recipe-description.gas-vent-space"}
 		thisGasVentRecipe.subgroup = "gas-vent-in-space"
 	else
 		thisGasVentRecipe.localised_name = {"recipe-name.gas-vent", {"fluid-name."..gasToVent}}
+		thisGasVentRecipe.localised_description = {"recipe-description.gas-vent"}
 		thisGasVentRecipe.subgroup = "gas-vent-on-surface"
 	end
 	thisGasVentRecipe.category = "gas-venting"
