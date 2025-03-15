@@ -50,6 +50,7 @@ require("data.pre-space.early-equipment-grids")
 require("data.pre-space.landmines")
 require("data.pre-space.water-etc")
 require("data.pre-space.condensing-turbine")
+require("data.pre-space.drill-nodes")
 
 -- Editing planets
 require("data.pre-space.misc")
@@ -69,7 +70,6 @@ require("data.broad-changes.fuel")
 require("data.space.main")
 require("data.tech-progression.tech-rate-triggers")
 require("data.vulcanus.no-lava-in-pipes")
-require("data.pre-space.drill-nodes")
 
 -- Files that adjust protos
 require("data.circuits-modules.remove-modules")

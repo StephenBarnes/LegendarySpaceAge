@@ -1,6 +1,8 @@
 -- This folder creates Heimdall, moon of Nauvis.
 
-local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-definitions")
+require("data.space.heimdall.autoplace")
+require("decorative-craters")
+local mapGen = require("map-gen")
 
 -- Create Heimdall, moon of Nauvis.
 local heimdall = {
@@ -57,7 +59,7 @@ local heimdall = {
 		shadow_opacity = 0.75, -- Most planets are 0.5. Making this higher due to no atmosphere.
 	},
 	entities_require_heating = false,
-	map_gen_settings = nil, -- TODO
+	map_gen_settings = mapGen,
 }
 PlanetsLib:extend{heimdall}
 
