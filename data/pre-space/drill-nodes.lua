@@ -61,27 +61,13 @@ for _, spec in pairs(NodeVals.specs) do
 				line_length = 16,
 				width = 90,
 				height = 188,
-				animation_speed = 0.2,
-				shift = {-0.3, -6},
-				scale = 2,
-				tint = util.multiply_color(spec.entTint, 0.15)
+				animation_speed = 0.18,
+				shift = {-0.3, -5},
+				scale = 2.5,
+				tint = util.multiply_color(spec.entTint, 0.07)
 			}
 		},
-		{
-			count = 1,
-			render_layer = "smoke",
-			animation = {
-				filename = "__base__/graphics/entity/crude-oil/oil-smoke-inner.png",
-				frame_count = 47,
-				line_length = 16,
-				width = 40,
-				height = 84,
-				animation_speed = 0.2,
-				shift = {-0.3, -6},
-				scale = 2,
-				tint = util.multiply_color(spec.entTint, 0.22)
-			}
-		}
+		-- Crude oil also has "oil-smoke-inner", but I'm not using that here bc the drill node is bigger than a crude oil spot.
 	}
 	ent.map_color = spec.mapTint
 	extend{ent}

@@ -28,9 +28,10 @@ return {
 		},
 		["decorative"] = {
 			settings = {
-				["heimdall-crater-small"] = {},
-				["heimdall-crater-medium"] = {},
 				["heimdall-crater-large"] = {},
+				["heimdall-crater-medium"] = {},
+				["heimdall-crater-small"] = {},
+				["heimdall-crater-tiny"] = {},
 				-- TODO
 				["calcite-stain"] = {},
 				["calcite-stain-small"] = {},
