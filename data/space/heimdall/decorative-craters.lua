@@ -32,17 +32,40 @@ end
 * So instead, I'll have to use noise expressions to make them not overlap.
 	* Vanilla code has a place_every_n noise-function which places at the corners of a sort of tilted triangular grid. Used for crater decals on Vulcanus. However this sometimes includes like 2 adjacent tiles, so it can create overlapping cters.
 	* Could use peaks function, only for medium, large, small. Then tiny craters can go anywhere.
-* We could also rather use control-stage scripts - on chunk generated, look for large or medium craters, remove other large/medium craters that are overlapping.
+* We could also use control-stage scripts - on chunk generated, look for large or medium craters, remove other large/medium craters that are overlapping.
+* Let's use a simple noise layer, then segment by ranges:
+	* Large craters spawn where it's say 0.95 - 1.0.
+	* Then all other craters only spawn where it's say under 0.7 or above 0.98 (ie inside large craters).
+	* Then use a second, nested noise layer to place mediums and smals.
 ]]
 
--- Define a noise expression with frequent peaks, to place larger craters.
+-- Define a new version of the built-in place_every_n function that's a bit narrower, won't include multiple adjacent tiles.
+extend{{
+	type = "noise-function",
+	name = "every_n_finer",
+	parameters = {"x_spacing", "y_spacing"},
+	expression = "min(((x + y * 0.93819) / 1.41983 % x_spacing) <= 0.6,\z
+                       ((x / 4.1875839 - y) * 0.913853883 % y_spacing) <= 0.6)",
+}}
+
+-- Noise expressions for craters.
 ---@type data.NamedNoiseExpression
-local craterVar = {
+local craterVarLarge = {
     type = "noise-expression",
-    name = "heimdall_crater_peaks",
-    expression = "abs(multioctave_noise{x = x, y = y, persistence = 0.85, seed0 = map_seed, seed1 = 7, octaves = 3, input_scale = 1/6})"
+    name = "heimdall_crater_1",
+    expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 1, input_scale = 1/8, output_scale = 1}"
 }
-extend{craterVar}
+local craterVarMedium = {
+    type = "noise-expression",
+    name = "heimdall_crater_2",
+    expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 2, input_scale = 1/6, output_scale = 1}"
+}
+local craterVarSmall = { -- Used to decide between small and tiny craters, so we don't place them right next to each other.
+    type = "noise-expression",
+    name = "heimdall_crater_3",
+    expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 3, input_scale = 1/4, output_scale = 1}"
+}
+extend{craterVarLarge, craterVarMedium, craterVarSmall}
 
 for i, vals in pairs{
 	{
@@ -50,36 +73,35 @@ for i, vals in pairs{
 		scale = 0.5,
 		collisionSize = 3,
 		placeLayer = "1",
-		--noise_expression = "min(0.03, (0.2 - vulcanus_rock_noise - aux) * place_every_n(5,5,0,0))",
-		--noise_expression = "0.1 * (heimdall_crater_peaks - 0.7)",
-		noise_expression = "0.01",
+		probabilityExpression = "(heimdall_crater_1 > 0.76) * every_n_finer(7, 7)",
 	},
 	{
 		name = "medium",
 		scale = 0.25,
 		collisionSize = 1.5,
 		placeLayer = "2",
-		--noise_expression = "min(0.07, (0.2 - vulcanus_rock_noise - aux) * place_every_n(5,5,0,0))",
-		--noise_expression = "min(0.05, 0.2 * place_every_n(7,7,0,0))",
-		--noise_expression = "0.2 * (heimdall_crater_peaks - 0.5)",
-		noise_expression = "0.02",
+		probabilityExpression = "(heimdall_crater_1 < 0.5) * (heimdall_crater_2 > 0.7) * every_n_finer(5, 5)",
 	},
 	{
 		name = "small",
 		scale = 0.1,
 		collisionSize = 0.7,
 		placeLayer = "3",
-		--noise_expression = "min(0.15, (0.3 - vulcanus_rock_noise - aux)) * place_every_n(5,5,0,0)",
-		--noise_expression = "min(0.10, (aux - 0.1) * place_every_n(7,7,0,0))",
-		--noise_expression = "0.3 * (heimdall_crater_peaks - 0.3)",
-		noise_expression = "0.035",
+		-- Use max with ranges on heimdall_crater_1 to make tiny craters only spawn right inside large craters or outside them, not on the rim.
+		probabilityExpression = "max((heimdall_crater_1 > 0.85) * every_n_finer(7, 7), (heimdall_crater_1 < 0.5))\z
+			* (heimdall_crater_2 < 0.55)\z
+			* every_n_finer(2, 2)\z
+			* (heimdall_crater_3 > 0.5)",
 	},
 	{
 		name = "tiny",
 		scale = 0.05,
 		collisionSize = 0.51,
-		placeLayer = "4", -- Same placement layer?
-		noise_expression = "0.09",
+		placeLayer = "4",
+		probabilityExpression = "max((heimdall_crater_1 > 0.85) * every_n_finer(7, 7), (heimdall_crater_1 < 0.5))\z
+			* (heimdall_crater_2 < 0.55)\z
+			* (heimdall_crater_3 < 0.4)\z
+			* 0.12",
 	},
 } do
 	---@type data.DecorativePrototype
@@ -96,7 +118,7 @@ for i, vals in pairs{
 		walking_sound = base_tile_sounds.walking.sand,
 		autoplace = {
 			order = "d[ground-surface]-e[crater]-" .. vals.placeLayer, -- TODO testing - same layer, so they won't overlap?
-			probability_expression = "heimdall_crater_" .. vals.name,
+			probability_expression = vals.probabilityExpression,
 		},
 		--pictures = get_decal_pictures("__LegendarySpaceAge__/graphics/heimdall/craters/", "", 1024, 24, nil, true, vals.scale)
 		pictures = {
@@ -111,11 +133,5 @@ for i, vals in pairs{
 			},
 		},
 	}
-	---@type data.NamedNoiseExpression
-	local noiseExp = { -- Create noise expressions for placing these.
-		type = "noise-expression",
-		name = "heimdall_crater_" .. vals.name,
-		expression = vals.noise_expression
-	}
-	extend{crater, noiseExp}
+	extend{crater}
 end

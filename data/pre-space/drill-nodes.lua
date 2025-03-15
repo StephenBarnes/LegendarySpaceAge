@@ -62,9 +62,9 @@ for _, spec in pairs(NodeVals.specs) do
 				width = 90,
 				height = 188,
 				animation_speed = 0.18,
-				shift = {-0.3, -5},
-				scale = 2.5,
-				tint = util.multiply_color(spec.entTint, 0.07)
+				shift = {-0.3, -7.5},
+				scale = 2.7,
+				tint = util.multiply_color(spec.entTint, 0.12)
 			}
 		},
 		-- Crude oil also has "oil-smoke-inner", but I'm not using that here bc the drill node is bigger than a crude oil spot.

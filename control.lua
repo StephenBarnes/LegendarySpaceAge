@@ -7,7 +7,6 @@ local apprenticeFoundry = require("control.apprentice-arc-furnace")
 local qualityPowerScaling = require("control.quality-power-scaling")
 local noLavaInPipes = require("control.no-lava-in-pipes")
 local condensingTurbineEfficiency = require("control.condensing-turbine-efficiency")
-local craterOverlaps = require("control.crater-overlaps")
 
 local techRateTriggers = require("control.tech-rate-triggers")
 script.on_nth_tick(60 * 10, techRateTriggers.onNthTick)
@@ -57,7 +56,6 @@ end
 
 script.on_event(defines.events.on_chunk_generated, function(e)
 	natGasWells.onChunkGenerated(e)
-	craterOverlaps.onChunkGenerated(e)
 end)
 
 script.on_event(defines.events.on_player_created, function(e)
