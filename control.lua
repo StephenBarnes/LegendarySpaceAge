@@ -7,6 +7,7 @@ local apprenticeFoundry = require("control.apprentice-arc-furnace")
 local qualityPowerScaling = require("control.quality-power-scaling")
 local noLavaInPipes = require("control.no-lava-in-pipes")
 local condensingTurbineEfficiency = require("control.condensing-turbine-efficiency")
+local lowGravityRunning = require("control.low-gravity-running")
 
 local techRateTriggers = require("control.tech-rate-triggers")
 script.on_nth_tick(60 * 10, techRateTriggers.onNthTick)
@@ -77,6 +78,9 @@ script.on_event(defines.events.on_player_flipped_entity, function(e)
 	condensingTurbineEfficiency.onFlipped(e)
 end)
 
+script.on_event(defines.events.on_player_changed_surface, function(e)
+	lowGravityRunning.onPlayerChangedSurface(e)
+end)
 
 -- Temporary code to output recipes, for rewriting.
 --[[
