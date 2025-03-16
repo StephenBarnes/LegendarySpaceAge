@@ -1,14 +1,14 @@
--- This folder creates Heimdall, moon of Nauvis.
+-- This folder creates Apollo, moon of Nauvis.
 
-require("data.space.heimdall.autoplace")
+require("data.space.apollo.autoplace")
 require("decorative-craters")
 require("low-gravity-runner")
 
 local mapGen = require("map-gen")
 
--- Create Heimdall, moon of Nauvis.
-local heimdall = {
-	name = "heimdall",
+-- Create Apollo, moon of Nauvis.
+local apollo = {
+	name = "apollo",
 	type = "planet",
 	subgroup = "planets",
 	order = "05b", -- after Nauvis, before Vulcanus.
@@ -22,23 +22,23 @@ local heimdall = {
 		orientation = 1./3.,
 		sprite = {
 			type = "sprite",
-			filename = "__LegendarySpaceAge__/graphics/heimdall/orbit.png",
+			filename = "__LegendarySpaceAge__/graphics/apollo/orbit.png",
 			size = 384,
 			scale = .25,
 		},
 	},
 	label_orientation = 0.05,
 	parked_platforms_orientation = 0.0,
-	icon = "__LegendarySpaceAge__/graphics/heimdall/icon.png",
+	icon = "__LegendarySpaceAge__/graphics/apollo/icon.png",
 	icon_size = 64,
-	starmap_icon = "__LegendarySpaceAge__/graphics/heimdall/large.png",
+	starmap_icon = "__LegendarySpaceAge__/graphics/apollo/large.png",
 	starmap_icon_size = 808,
-	gravity_pull = 10, -- Seems this is 10 for all planets, except solar system edge and shattered planet, which are -10. Affects speed travelling towards or away. So setting this to 5 means that on Nauvis->Heimdall route, you travel slower and can fall back to Nauvis. Although seems that makes it require a lot of thrust to get anywhere, so rather just set to 10.
+	gravity_pull = 10, -- Seems this is 10 for all planets, except solar system edge and shattered planet, which are -10. Affects speed travelling towards or away. So setting this to 5 means that on Nauvis->Apollo route, you travel slower and can fall back to Nauvis. Although seems that makes it require a lot of thrust to get anywhere, so rather just set to 10.
 	draw_orbit = true,
 	magnitude = 0.4, -- Apparent size on map.
 	pollutant_type = nil,
 	surface_properties = {
-		["day-night-cycle"] = 3 * MINUTES, -- Seems there's no general rule for how long moons' day-night cycles are relative to planet. Since solar is the main source on Heimdall most of the time, setting this fairly short. Also note actual value seems to be 4x this.
+		["day-night-cycle"] = 3 * MINUTES, -- Seems there's no general rule for how long moons' day-night cycles are relative to planet. Since solar is the main source on Apollo most of the time, setting this fairly short. Also note actual value seems to be 4x this.
 		["magnetic-field"] = 0,
 		["pressure"] = 5, -- 5 hPa, so basically no atmosphere. (Earth's moon is 3e-15 hPa.)
 		["gravity"] = 1, -- Earth's moon is 1.5. Note chests have minimum 0.1, so this allows chests.
@@ -63,36 +63,36 @@ local heimdall = {
 	entities_require_heating = false,
 	map_gen_settings = mapGen,
 }
-PlanetsLib:extend{heimdall}
+PlanetsLib:extend{apollo}
 
 -- Make space connections.
 ---@type data.SpaceConnectionPrototype
-local heimdallNauvis = {
+local apolloNauvis = {
 	type = "space-connection",
-	name = "heimdall-nauvis",
+	name = "apollo-nauvis",
 	subgroup = "planet-connections",
-	from = "heimdall",
+	from = "apollo",
 	to = "nauvis",
 	order = "05-2",
 	length = 1000,
 	asteroid_spawn_definitions = {},
 }
-extend{heimdallNauvis}
+extend{apolloNauvis}
 
 -- Make tech.
 local tech = copy(TECH["planet-discovery-vulcanus"])
-tech.name = "planet-discovery-heimdall"
+tech.name = "planet-discovery-apollo"
 tech.effects = {
 	{
 		type = "unlock-space-location",
-		space_location = "heimdall",
+		space_location = "apollo",
 		use_icon_overlay_constant = true,
 	},
 }
 tech.icon = nil
 tech.icons = {
 	{
-		icon = "__LegendarySpaceAge__/graphics/heimdall/tech.png",
+		icon = "__LegendarySpaceAge__/graphics/apollo/tech.png",
 		icon_size = 256,
 	},
 	{

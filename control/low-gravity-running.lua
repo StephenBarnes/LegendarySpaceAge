@@ -1,4 +1,4 @@
---[[ This file replaces player character when they land on low-gravity surfaces (currently only Heimdall), to make them run faster but with slower animation.
+--[[ This file replaces player character when they land on low-gravity surfaces (currently only Apollo), to make them run faster but with slower animation.
 Uses the new character "low-gravity-character" that was added in data stage. We switch to the new character, and transfer over everything like inventory etc.
 ]]
 
@@ -82,7 +82,6 @@ local function swapCharacter(player, surface, prevChar, newCharName)
 	end
 
 	-- Switch to new character.
-	newChar.teleport(player.position, surface, false)
 	player.set_controller{
 		type = player.controller_type,
 		character = newChar,
@@ -126,9 +125,9 @@ local function onNthTick()
 			---@cast prevCharacter LuaEntity
 			local prevCharName = prevCharacter.name
 			local newSurface = prevCharacter.surface
-			if newSurface.name == "heimdall" and prevCharName == "character" then
+			if newSurface.name == "apollo" and prevCharName == "character" then
 				swapCharacter(player, newSurface, prevCharacter, "low-gravity-character")
-			elseif newSurface.name ~= "heimdall" and prevCharName == "low-gravity-character" then
+			elseif newSurface.name ~= "apollo" and prevCharName == "low-gravity-character" then
 				swapCharacter(player, newSurface, prevCharacter, "character")
 			end
 			storage.lowGravityChanges[playerIndex] = nil

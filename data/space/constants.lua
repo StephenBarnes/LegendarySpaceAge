@@ -28,7 +28,7 @@ Fields:
 	name: name of the space-location or planet.
 	type: "belt" or "planet". This determines orientation.
 	distance: distance from sun, chosen to be in specific order. By default Vulcanus is 10, Aquilo is 35.
-NOTE I'm not adjusting Heimdall here, rather set it in the separate file for Heimdall, loaded after this one.
+NOTE I'm not adjusting Apollo here, rather set it in the separate file for Apollo, loaded after this one.
 TODO asteroid definitions, later.
 ]]
 local sunDist = 5.0 -- Base distance from sun.
@@ -199,11 +199,11 @@ R.connectionsData = { -- Table of info about new connections between space locat
 	},
 	{
 		a = "carbonic-belt",
-		b = "heimdall",
+		b = "apollo",
 		length = planetToBeltDist,
 	},
 	{
-		a = "heimdall",
+		a = "apollo",
 		b = "ice-belt",
 		length = planetToBeltDist,
 	},

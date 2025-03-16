@@ -1,4 +1,4 @@
--- This file defines constants for "drill nodes", which are placed on world gen and can be harvested with a borehole drill to produce extra resources (eg ice on Heimdall, or iron/copper/coal/uranium nodes on Nauvis). Mostly created to provide ice on Heimdall. These constants are used both in data stage (to make recipes and entities) and in control stage (to set recipes for borehole drills).
+-- This file defines constants for "drill nodes", which are placed on world gen and can be harvested with a borehole drill to produce extra resources (eg ice on Apollo, or iron/copper/coal/uranium nodes on Nauvis). Mostly created to provide ice on Apollo. These constants are used both in data stage (to make recipes and entities) and in control stage (to set recipes for borehole drills).
 
 local R = {}
 
@@ -13,7 +13,7 @@ R.specs = {
 			{type = "item", name = "ice", amount = 10},
 			{type = "fluid", name = "water", amount = 10},
 		},
-		addToTech = "planet-discovery-heimdall",
+		addToTech = "planet-discovery-apollo",
 	},
 	-- TODO more.
 }

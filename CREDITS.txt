@@ -12,7 +12,7 @@ This file is to keep track of other people's stuff that I've used.
 * Carbon by ElAdamo - mods.factorio.com/mod/carbon - Stole several ideas for the petrochem system, plus some code and graphics.
 * Biochemistry by Tenebrais - mods.factorio.com/mod/biochemistry - Electrophage graphics, and ideas.
 * Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above. Copied deep drill, maybe more later.
-* Lunar Landings by Xorimuth - mods.factorio.com/mod/LunarLandings - Heimdall icon. Also using some ideas, such as ice nodes and telescopes on lunar mountains.
+* Lunar Landings by Xorimuth - mods.factorio.com/mod/LunarLandings - Apollo icon. Also using some ideas, such as ice nodes and telescopes on lunar mountains.
 * PlanetsLib - mods.factorio.com/mod/PlanetsLib - using for cargo-drop techs and orbit graphics.
 * Alatar's Rocketry - mods.factorio.com/mod/alatar-rocketry - using graphics for asteroid belt icons.
 * Starmap: Solar-System by Tserup - mods.factorio.com/mod/Starmap_Solar_System - using graphics for asteroid belts on space map.

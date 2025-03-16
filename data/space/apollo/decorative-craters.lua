@@ -1,7 +1,7 @@
---[[ This file makes crater decoratives to put on Heimdall, and defines autoplaces for them.
+--[[ This file makes crater decoratives to put on Apollo, and defines autoplaces for them.
 
 Notes on autoplacing craters:
-* Craters just come from asteroid impacts and then stay there (since there's no wind on Heimdall to erode them). Asteroid impacts are uniformly distributed. There might be large-scale patterns due to orbital mechanics or whatever, but our factory is small relative to the moon, so it's locally uniform. So don't use an aux noise layer to distribute them in clumps, etc, like they are on Vulcanus.
+* Craters just come from asteroid impacts and then stay there (since there's no wind on Apollo to erode them). Asteroid impacts are uniformly distributed. There might be large-scale patterns due to orbital mechanics or whatever, but our factory is small relative to the moon, so it's locally uniform. So don't use an aux noise layer to distribute them in clumps, etc, like they are on Vulcanus.
 * Craters IRL do sometimes overlap. But my decals partially overlapping won't work, makes a vesica piscis shape that looks unnatural. So I want to avoid overlaps. But it's fine for smaller craters to be completely inside larger ones.
 * The collision mask doesn't seem to work for decoratives, except for the cliff layer and tile layers. Can't use them to make craters not overlap. Seems it forces colliding_with_tiles_only=true, maybe.
 * So instead, I'll have to use noise expressions to make them not overlap.
@@ -31,17 +31,17 @@ extend{{
 extend{
 	{
 		type = "noise-expression",
-		name = "heimdall_crater_1",
+		name = "apollo_crater_1",
 		expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 1, input_scale = 1/8, output_scale = 1}"
 	},
 	{
 		type = "noise-expression",
-		name = "heimdall_crater_2",
+		name = "apollo_crater_2",
 		expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 2, input_scale = 1/6, output_scale = 1}"
 	},
 	{ -- Used to decide between small and tiny craters, so we don't place them overlapping.
 		type = "noise-expression",
-		name = "heimdall_crater_3",
+		name = "apollo_crater_3",
 		expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 3, input_scale = 1/4, output_scale = 1}"
 	},
 }
@@ -52,42 +52,42 @@ for i, vals in pairs{
 		scale = 0.5,
 		collisionSize = 3,
 		placeLayer = "1",
-		probabilityExpression = "(heimdall_crater_1 > 0.76) * every_n_finer(7, 7)",
+		probabilityExpression = "(apollo_crater_1 > 0.76) * every_n_finer(7, 7)",
 	},
 	{
 		name = "medium",
 		scale = 0.25,
 		collisionSize = 1.5,
 		placeLayer = "2",
-		probabilityExpression = "(heimdall_crater_1 < 0.5) * (heimdall_crater_2 > 0.7) * every_n_finer(5, 5)",
+		probabilityExpression = "(apollo_crater_1 < 0.5) * (apollo_crater_2 > 0.7) * every_n_finer(5, 5)",
 	},
 	{
 		name = "small",
 		scale = 0.1,
 		collisionSize = 0.7,
 		placeLayer = "3",
-		-- Use max with ranges on heimdall_crater_1 to make tiny craters only spawn right inside large craters or outside them, not on the rim.
-		probabilityExpression = "max((heimdall_crater_1 > 0.85) * every_n_finer(7, 7), (heimdall_crater_1 < 0.5))\z
-			* (heimdall_crater_2 < 0.55)\z
+		-- Use max with ranges on apollo_crater_1 to make tiny craters only spawn right inside large craters or outside them, not on the rim.
+		probabilityExpression = "max((apollo_crater_1 > 0.85) * every_n_finer(7, 7), (apollo_crater_1 < 0.5))\z
+			* (apollo_crater_2 < 0.55)\z
 			* every_n_finer(2, 2)\z
-			* (heimdall_crater_3 > 0.5)",
+			* (apollo_crater_3 > 0.5)",
 	},
 	{
 		name = "tiny",
 		scale = 0.05,
 		collisionSize = 0.51,
 		placeLayer = "4",
-		probabilityExpression = "max((heimdall_crater_1 > 0.85) * every_n_finer(7, 7), (heimdall_crater_1 < 0.5))\z
-			* (heimdall_crater_2 < 0.55)\z
-			* (heimdall_crater_3 < 0.4)\z
+		probabilityExpression = "max((apollo_crater_1 > 0.85) * every_n_finer(7, 7), (apollo_crater_1 < 0.5))\z
+			* (apollo_crater_2 < 0.55)\z
+			* (apollo_crater_3 < 0.4)\z
 			* 0.12",
 	},
 } do
 	---@type data.DecorativePrototype
 	local crater = {
-		name = "heimdall-crater-" .. vals.name,
+		name = "apollo-crater-" .. vals.name,
 		type = "optimized-decorative",
-		order = "z[heimdall]-b[decorative]-crater-" .. i,
+		order = "z[apollo]-b[decorative]-crater-" .. i,
 		collision_box = { { -vals.collisionSize, -vals.collisionSize }, { vals.collisionSize, vals.collisionSize } },
 		--collision_mask = {layers={water_tile=true, doodad=true, cliff=true}, colliding_with_tiles_only=false, not_colliding_with_itself=false},
 		collision_mask = {layers={water_tile=true, doodad=true, cliff=true}, colliding_with_tiles_only=false, not_colliding_with_itself=false},
@@ -101,7 +101,7 @@ for i, vals in pairs{
 		},
 		pictures = {
 			sheet = {
-				filename = "__LegendarySpaceAge__/graphics/heimdall/craters.png",
+				filename = "__LegendarySpaceAge__/graphics/apollo/craters.png",
 				width = 1024,
 				height = 1024,
 				scale = 0.5 * vals.scale,

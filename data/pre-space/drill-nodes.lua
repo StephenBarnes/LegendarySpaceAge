@@ -1,4 +1,4 @@
--- This file creates "drill nodes", which are placed on world gen and can be harvested with a borehole drill to produce extra resources (eg ice on Heimdall, or iron/copper/coal/uranium nodes on Nauvis). Mostly created to provide ice on Heimdall.
+-- This file creates "drill nodes", which are placed on world gen and can be harvested with a borehole drill to produce extra resources (eg ice on Apollo, or iron/copper/coal/uranium nodes on Nauvis). Mostly created to provide ice on Apollo.
 
 -- Constants are in separate file, since they're also used in control stage.
 local NodeVals = require("util.const.drill-nodes")

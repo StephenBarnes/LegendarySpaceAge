@@ -1,4 +1,4 @@
--- This file defines map gen settings for Heimdall.
+-- This file defines map gen settings for Apollo.
 
 return {
 	property_expression_names = {
@@ -6,7 +6,7 @@ return {
 		aux = "vulcanus_aux", -- TODO
 		cliffiness = "cliffiness_basic",
 		cliff_elevation = "cliff_elevation_from_elevation",
-		["entity:drill-node-ice:probability"] = "heimdall_ice_node_probability",
+		["entity:drill-node-ice:probability"] = "apollo_ice_node_probability",
 	},
 	cliff_settings = {
 		name = "cliff-nauvis", -- TODO make new cliff set.
@@ -20,7 +20,6 @@ return {
 		["tile"] = {
 			settings = {
 				-- TODO
-				--nauvis tiles
 				["volcanic-soil-dark"] = {},
 				["volcanic-soil-light"] = {},
 				["volcanic-ash-soil"] = {},
@@ -28,10 +27,10 @@ return {
 		},
 		["decorative"] = {
 			settings = {
-				["heimdall-crater-large"] = {},
-				["heimdall-crater-medium"] = {},
-				["heimdall-crater-small"] = {},
-				["heimdall-crater-tiny"] = {},
+				["apollo-crater-large"] = {},
+				["apollo-crater-medium"] = {},
+				["apollo-crater-small"] = {},
+				["apollo-crater-tiny"] = {},
 				-- TODO
 				["calcite-stain"] = {},
 				["calcite-stain-small"] = {},
@@ -46,3 +45,5 @@ return {
 		}
 	}
 }
+
+-- TODO make cliffs, and then make them so they don't actually obstruct the player's movement, you can jump over them.
