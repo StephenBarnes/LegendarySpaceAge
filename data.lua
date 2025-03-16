@@ -81,25 +81,3 @@ require("data.broad-changes.ocean-dumping")
 require("data.tech-progression.main")
 require("data.broad-changes.stack-sizes")
 require("data.broad-changes.quality")
-
--- TODO temp testing: make player run animation slower, for low-gravity later.
---local animationMult = 0.6
---local runMult = 0.63 -- I think this should be slightly higher than animationMult, since you move further per stride on the moon but also don't want to slip too much.
---[[
-local animationMult = 0.4
-local runMult = 1.2
-for i, anim in pairs(RAW.character.character.animations) do
-	for _, k in pairs{"running_with_gun", "flipped_shadow_running_with_gun", "running"} do
-		if anim[k] ~= nil then
-			local animLayers = anim[k].layers
-			assert(animLayers ~= nil, "No layers for " .. k .. " for " .. i .. ": " .. serpent.block(anim))
-			for _, layer in pairs(animLayers) do
-				layer.animation_speed = layer.animation_speed * animationMult
-			end
-		elseif anim.armors == nil or anim.armors[1] ~= "mech-armor" then -- We expect mech-armor to have missing animations, but not the other ones.
-			log("Warning: no " .. k .. " for " .. i .. " " .. serpent.block(anim))
-		end
-	end
-end
-RAW.character.character.running_speed = RAW.character.character.running_speed * runMult
-]]

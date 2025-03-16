@@ -8,9 +8,14 @@ local qualityPowerScaling = require("control.quality-power-scaling")
 local noLavaInPipes = require("control.no-lava-in-pipes")
 local condensingTurbineEfficiency = require("control.condensing-turbine-efficiency")
 local lowGravityRunning = require("control.low-gravity-running")
-
 local techRateTriggers = require("control.tech-rate-triggers")
-script.on_nth_tick(60 * 10, techRateTriggers.onNthTick)
+
+script.on_nth_tick(60 * 10, function()
+	techRateTriggers.onNthTick()
+end)
+script.on_nth_tick(60, function()
+	lowGravityRunning.onNthTick()
+end)
 
 local function handlePickerDolliesEvent(e)
 	condensingTurbineEfficiency.onPickerDollyMoved(e)

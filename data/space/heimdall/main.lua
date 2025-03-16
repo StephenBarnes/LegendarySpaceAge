@@ -2,6 +2,8 @@
 
 require("data.space.heimdall.autoplace")
 require("decorative-craters")
+require("low-gravity-runner")
+
 local mapGen = require("map-gen")
 
 -- Create Heimdall, moon of Nauvis.
@@ -31,7 +33,7 @@ local heimdall = {
 	icon_size = 64,
 	starmap_icon = "__LegendarySpaceAge__/graphics/heimdall/large.png",
 	starmap_icon_size = 808,
-	gravity_pull = 5, -- Seems this is 10 for all planets, except solar system edge and shattered planet, which are -10. Affects speed travelling towards or away. So setting this to 5 means that on Nauvis->Heimdall route, you travel slower and can fall back to Nauvis.
+	gravity_pull = 10, -- Seems this is 10 for all planets, except solar system edge and shattered planet, which are -10. Affects speed travelling towards or away. So setting this to 5 means that on Nauvis->Heimdall route, you travel slower and can fall back to Nauvis. Although seems that makes it require a lot of thrust to get anywhere, so rather just set to 10.
 	draw_orbit = true,
 	magnitude = 0.4, -- Apparent size on map.
 	pollutant_type = nil,
