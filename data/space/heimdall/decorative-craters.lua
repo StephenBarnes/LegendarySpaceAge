@@ -1,43 +1,22 @@
--- This file makes crater decoratives to put on Heimdall.
--- Mostly copied from vanilla code.
+--[[ This file makes crater decoratives to put on Heimdall, and defines autoplaces for them.
 
-local base_tile_sounds = require("__base__.prototypes.tile.tile-sounds")
-local space_age_tile_sounds = require ("__space-age__.prototypes.tile.tile-sounds")
-
-local base_decorative_sprite_priority = "extra-high"
-local decal_tile_layer = 255
-function get_decal_pictures(file_path, size_class, image_size, amount, tint, tint_as_overlay, scale)
-	local pictures  = {}
-	tint_as_overlay = tint_as_overlay or false
-	tint            = tint or { 1, 1, 1 }
-	for i = 1, amount do
-		table.insert(pictures,
-			{
-				filename = file_path .. size_class .. string.format("%02i", i) .. ".png",
-				priority = base_decorative_sprite_priority,
-				width = image_size,
-				height = image_size,
-				scale = 0.5 * (scale or 1),
-				tint_as_overlay = tint_as_overlay,
-				tint = tint
-			})
-	end
-	return pictures
-end
-
---[[ Notes on autoplacing craters:
-* There's no wind on Heimdall, so craters just come from asteroid impacts and then stay there. And asteroid impacts are uniformly distributed. There might be large-scale patterns due to orbital mechanics or whatever, but our factory is small relative to the moon, so it's locally uniform. So don't use an aux noise layer to distribute them in clumps, etc, like they are on Vcanus.
-* Craters IRL do sometimes overlap. But my decals partially overlapping won't work, makes a vesica piscis shape that looks unnatural. So I want to avoid overlaps. But it's fine for smaller craters to be inside larger ones.
+Notes on autoplacing craters:
+* Craters just come from asteroid impacts and then stay there (since there's no wind on Heimdall to erode them). Asteroid impacts are uniformly distributed. There might be large-scale patterns due to orbital mechanics or whatever, but our factory is small relative to the moon, so it's locally uniform. So don't use an aux noise layer to distribute them in clumps, etc, like they are on Vulcanus.
+* Craters IRL do sometimes overlap. But my decals partially overlapping won't work, makes a vesica piscis shape that looks unnatural. So I want to avoid overlaps. But it's fine for smaller craters to be completely inside larger ones.
 * The collision mask doesn't seem to work for decoratives, except for the cliff layer and tile layers. Can't use them to make craters not overlap. Seems it forces colliding_with_tiles_only=true, maybe.
 * So instead, I'll have to use noise expressions to make them not overlap.
 	* Vanilla code has a place_every_n noise-function which places at the corners of a sort of tilted triangular grid. Used for crater decals on Vulcanus. However this sometimes includes like 2 adjacent tiles, so it can create overlapping cters.
-	* Could use peaks function, only for medium, large, small. Then tiny craters can go anywhere.
 * We could also use control-stage scripts - on chunk generated, look for large or medium craters, remove other large/medium craters that are overlapping.
-* Let's use a simple noise layer, then segment by ranges:
+* Let's use a basis noise layer, then segment by ranges:
 	* Large craters spawn where it's say 0.95 - 1.0.
 	* Then all other craters only spawn where it's say under 0.7 or above 0.98 (ie inside large craters).
-	* Then use a second, nested noise layer to place mediums and smals.
+	* Then use a second noise layer as a nested condition to place medium vs small/tiny, etc.
 ]]
+
+local base_tile_sounds = require("__base__.prototypes.tile.tile-sounds")
+
+local base_decorative_sprite_priority = "extra-high"
+local decal_tile_layer = 255
 
 -- Define a new version of the built-in place_every_n function that's a bit narrower, won't include multiple adjacent tiles.
 extend{{
@@ -49,23 +28,23 @@ extend{{
 }}
 
 -- Noise expressions for craters.
----@type data.NamedNoiseExpression
-local craterVarLarge = {
-    type = "noise-expression",
-    name = "heimdall_crater_1",
-    expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 1, input_scale = 1/8, output_scale = 1}"
+extend{
+	{
+		type = "noise-expression",
+		name = "heimdall_crater_1",
+		expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 1, input_scale = 1/8, output_scale = 1}"
+	},
+	{
+		type = "noise-expression",
+		name = "heimdall_crater_2",
+		expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 2, input_scale = 1/6, output_scale = 1}"
+	},
+	{ -- Used to decide between small and tiny craters, so we don't place them overlapping.
+		type = "noise-expression",
+		name = "heimdall_crater_3",
+		expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 3, input_scale = 1/4, output_scale = 1}"
+	},
 }
-local craterVarMedium = {
-    type = "noise-expression",
-    name = "heimdall_crater_2",
-    expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 2, input_scale = 1/6, output_scale = 1}"
-}
-local craterVarSmall = { -- Used to decide between small and tiny craters, so we don't place them right next to each other.
-    type = "noise-expression",
-    name = "heimdall_crater_3",
-    expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 3, input_scale = 1/4, output_scale = 1}"
-}
-extend{craterVarLarge, craterVarMedium, craterVarSmall}
 
 for i, vals in pairs{
 	{
@@ -120,7 +99,6 @@ for i, vals in pairs{
 			order = "d[ground-surface]-e[crater]-" .. vals.placeLayer, -- TODO testing - same layer, so they won't overlap?
 			probability_expression = vals.probabilityExpression,
 		},
-		--pictures = get_decal_pictures("__LegendarySpaceAge__/graphics/heimdall/craters/", "", 1024, 24, nil, true, vals.scale)
 		pictures = {
 			sheet = {
 				filename = "__LegendarySpaceAge__/graphics/heimdall/craters.png",
