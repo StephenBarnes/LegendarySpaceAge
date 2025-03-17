@@ -19,10 +19,11 @@ return {
 	autoplace_settings = {
 		["tile"] = {
 			settings = {
-				-- TODO
-				["volcanic-soil-dark"] = {},
-				["volcanic-soil-light"] = {},
-				["volcanic-ash-soil"] = {},
+				["lunar-dirt"] = {},
+				["lunar-doughy"] = {},
+				["lunar-clay"] = {},
+				["lunar-sandy-rock"] = {},
+				-- TODO add fulgoran rock.
 			}
 		},
 		["decorative"] = {
@@ -31,11 +32,7 @@ return {
 				["apollo-crater-medium"] = {},
 				["apollo-crater-small"] = {},
 				["apollo-crater-tiny"] = {},
-				-- TODO
-				["calcite-stain"] = {},
-				["calcite-stain-small"] = {},
-				--["crater-small"] = {},
-				--["crater-large"] = {},
+				-- TODO add rocks.
 			}
 		},
 		["entity"] = {

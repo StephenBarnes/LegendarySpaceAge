@@ -1,9 +1,9 @@
 -- This folder creates Apollo, moon of Nauvis.
 
-require("data.space.apollo.autoplace")
+require("autoplace-controls")
 require("decorative-craters")
 require("low-gravity-runner")
-
+require("tiles")
 local mapGen = require("map-gen")
 
 -- Create Apollo, moon of Nauvis.

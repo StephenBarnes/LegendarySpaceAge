@@ -1,6 +1,6 @@
 -- This file makes a new character that's the same as the default, but runs a bit faster with slower animation. For while player is on the moon.
 
-local animationMult = .5
+local animationMult = .55
 local runMult = .9
 local newChar = copy(RAW.character.character)
 newChar.name = "low-gravity-character"
