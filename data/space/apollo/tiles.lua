@@ -148,41 +148,10 @@ local function makeTilePrototype(args)
 	}
 end
 
----@type data.NamedNoiseExpression
-local lunarRockiness = {
-    type = "noise-expression",
-    name = "lunar_rockiness",
-    expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 1, input_scale = 1/16, output_scale = 1}"
-}
-extend{lunarRockiness}
-
-local lunarDirt = makeTilePrototype{
-    name = "lunar-dirt",
-    order = "01",
-    autoplaceProb = "min(lunar_rockiness - 0.2, 0.7 - lunar_rockiness)",
-    variants = tile_variations_template_with_transitions( -- Copied from volcanic-soil-dark, with some changes.
-        "__LegendarySpaceAge__/graphics/apollo/tiles/dirt.png",
-		{
-			max_size = 4,
-			[1] = { weights = { 0.085, 0.085, 0.085, 0.085, 0.087, 0.085, 0.065, 0.085, 0.045, 0.045, 0.045, 0.045, 0.005, 0.025, 0.045, 0.045 } },
-			[2] = { probability = 1, weights = { 0.070, 0.070, 0.025, 0.070, 0.070, 0.070, 0.007, 0.025, 0.070, 0.050, 0.015, 0.026, 0.030, 0.005, 0.070, 0.027 } },
-			[4] = { probability = 1.00, weights = { 0.070, 0.070, 0.070, 0.070, 0.070, 0.070, 0.015, 0.070, 0.070, 0.070, 0.015, 0.050, 0.070, 0.070, 0.065, 0.070 }, },
-		}
-	),
-	walkingSound = tile_sounds.walking.soft_sand({}),
-	landingStepsSound = tile_sounds.landing.sand,
-	drivingSound = base_tile_sounds.driving.sand,
-	mapColor = { r = 100, g = 100, b = 100 }, -- TODO
-	walkingSpeedModifier = 1,
-	vehicleFrictionModifier = 1,
-    layerOffset = 7,
-}
-extend{lunarDirt}
-
 local lunarDoughy = makeTilePrototype{
     name = "lunar-doughy",
-    order = "02",
-    autoplaceProb = "0.3 - lunar_rockiness",
+    order = "01",
+    autoplaceProb = "lunar_doughy",
     variants = tile_variations_template_with_transitions( -- Copied from dust-flat.
         "__LegendarySpaceAge__/graphics/apollo/tiles/doughy.png",
         {
@@ -202,10 +171,33 @@ local lunarDoughy = makeTilePrototype{
 }
 extend{lunarDoughy}
 
+local lunarDirt = makeTilePrototype{
+    name = "lunar-dirt",
+    order = "02",
+    autoplaceProb = "lunar_dirt",
+    variants = tile_variations_template_with_transitions( -- Copied from volcanic-soil-dark, with some changes.
+        "__LegendarySpaceAge__/graphics/apollo/tiles/dirt.png",
+		{
+			max_size = 4,
+			[1] = { weights = { 0.085, 0.085, 0.085, 0.085, 0.087, 0.085, 0.065, 0.085, 0.045, 0.045, 0.045, 0.045, 0.005, 0.025, 0.045, 0.045 } },
+			[2] = { probability = 1, weights = { 0.070, 0.070, 0.025, 0.070, 0.070, 0.070, 0.007, 0.025, 0.070, 0.050, 0.015, 0.026, 0.030, 0.005, 0.070, 0.027 } },
+			[4] = { probability = 1.00, weights = { 0.070, 0.070, 0.070, 0.070, 0.070, 0.070, 0.015, 0.070, 0.070, 0.070, 0.015, 0.050, 0.070, 0.070, 0.065, 0.070 }, },
+		}
+	),
+	walkingSound = tile_sounds.walking.soft_sand({}),
+	landingStepsSound = tile_sounds.landing.sand,
+	drivingSound = base_tile_sounds.driving.sand,
+	mapColor = { r = 100, g = 100, b = 100 }, -- TODO
+	walkingSpeedModifier = 1,
+	vehicleFrictionModifier = 1,
+    layerOffset = 7,
+}
+extend{lunarDirt}
+
 local lunarClay = makeTilePrototype{
     name = "lunar-clay",
     order = "03",
-    autoplaceProb = "lunar_rockiness - 0.7",
+    autoplaceProb = "lunar_clay",
     variants = tile_variations_template_with_transitions( -- Copied from volcanic-ash-soil.
         "__LegendarySpaceAge__/graphics/apollo/tiles/clay.png",
         {
@@ -228,7 +220,7 @@ extend{lunarClay}
 local lunarSandyRock = makeTilePrototype{
     name = "lunar-sandy-rock",
     order = "04",
-    autoplaceProb = "4 * (lunar_rockiness - 0.9)",
+    autoplaceProb = "lunar_sandy_rock",
     variants = tile_variations_template_with_transitions( -- Copied from volcanic-pumice-stones.
         "__LegendarySpaceAge__/graphics/apollo/tiles/sandy-rock.png",
         {

@@ -2,7 +2,7 @@
 
 return {
 	property_expression_names = {
-		elevation = "vulcanus_elevation", -- TODO make new elevation.
+		elevation = "lunar_elevation", -- TODO make new elevation.
 		aux = "vulcanus_aux", -- TODO
 		cliffiness = "cliffiness_basic",
 		cliff_elevation = "cliff_elevation_from_elevation",

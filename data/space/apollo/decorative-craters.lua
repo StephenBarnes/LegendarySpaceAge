@@ -59,7 +59,7 @@ for i, vals in pairs{
 		scale = 0.25,
 		collisionSize = 1.5,
 		placeLayer = "2",
-		probabilityExpression = "(apollo_crater_1 < 0.5) * (apollo_crater_2 > 0.7) * every_n_finer(5, 5)",
+		probabilityExpression = "(apollo_crater_1 < 0.4) * (apollo_crater_2 > 0.7) * every_n_finer(5, 5)",
 	},
 	{
 		name = "small",
@@ -67,7 +67,7 @@ for i, vals in pairs{
 		collisionSize = 0.7,
 		placeLayer = "3",
 		-- Use max with ranges on apollo_crater_1 to make tiny craters only spawn right inside large craters or outside them, not on the rim.
-		probabilityExpression = "max((apollo_crater_1 > 0.85) * every_n_finer(7, 7), (apollo_crater_1 < 0.5))\z
+		probabilityExpression = "max((apollo_crater_1 > 0.85) * every_n_finer(7, 7), (apollo_crater_1 < 0.4))\z
 			* (apollo_crater_2 < 0.55)\z
 			* every_n_finer(2, 2)\z
 			* (apollo_crater_3 > 0.5)",
@@ -77,7 +77,7 @@ for i, vals in pairs{
 		scale = 0.05,
 		collisionSize = 0.51,
 		placeLayer = "4",
-		probabilityExpression = "max((apollo_crater_1 > 0.85) * every_n_finer(7, 7), (apollo_crater_1 < 0.5))\z
+		probabilityExpression = "max((apollo_crater_1 > 0.85) * every_n_finer(7, 7), (apollo_crater_1 < 0.4))\z
 			* (apollo_crater_2 < 0.55)\z
 			* (apollo_crater_3 < 0.4)\z
 			* 0.12",
