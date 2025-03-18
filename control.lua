@@ -13,7 +13,7 @@ local techRateTriggers = require("control.tech-rate-triggers")
 script.on_nth_tick(60 * 10, function()
 	techRateTriggers.onNthTick()
 end)
-script.on_nth_tick(60, function()
+script.on_nth_tick(30, function()
 	lowGravityRunning.onNthTick()
 end)
 

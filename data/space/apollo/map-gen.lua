@@ -10,11 +10,17 @@ return {
 	},
 	cliff_settings = {
 		name = "cliff-nauvis", -- TODO make new cliff set.
-		cliff_elevation_interval = 120,
-		cliff_elevation_0 = 70
+		cliff_elevation_interval = .7,
+		cliff_elevation_0 = 0,
 	},
 	autoplace_controls = {
 		["ice_node"] = {},
+		["crater-scale"] = {},
+		["crater-max-radius"] = {},
+		["crater-rad-variance"] = {},
+		["crater-depth"] = {},
+		["crater-ridge-height"] = {},
+		["crater-candidate-count"] = {},
 	},
 	autoplace_settings = {
 		["tile"] = {

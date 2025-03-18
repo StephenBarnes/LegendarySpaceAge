@@ -164,7 +164,7 @@ local lunarDoughy = makeTilePrototype{
     walkingSound = tile_sounds.walking.soft_sand({}),
 	landingStepsSound = tile_sounds.landing.sand,
 	drivingSound = base_tile_sounds.driving.sand,
-	mapColor = { r = 100, g = 100, b = 100 }, -- TODO
+	mapColor = {150, 150, 150}, -- TODO
 	walkingSpeedModifier = 1,
 	vehicleFrictionModifier = 1,
     layerOffset = 20,
@@ -187,7 +187,7 @@ local lunarDirt = makeTilePrototype{
 	walkingSound = tile_sounds.walking.soft_sand({}),
 	landingStepsSound = tile_sounds.landing.sand,
 	drivingSound = base_tile_sounds.driving.sand,
-	mapColor = { r = 100, g = 100, b = 100 }, -- TODO
+	mapColor = {100, 100, 100}, -- TODO
 	walkingSpeedModifier = 1,
 	vehicleFrictionModifier = 1,
     layerOffset = 7,
@@ -210,7 +210,7 @@ local lunarClay = makeTilePrototype{
     walkingSound = tile_sounds.walking.soft_sand({}),
 	landingStepsSound = tile_sounds.landing.sand,
 	drivingSound = base_tile_sounds.driving.sand,
-	mapColor = { r = 100, g = 100, b = 100 }, -- TODO
+	mapColor = {50, 50, 50}, -- TODO
 	walkingSpeedModifier = 1,
 	vehicleFrictionModifier = 1,
     layerOffset = 11,
@@ -233,7 +233,7 @@ local lunarSandyRock = makeTilePrototype{
     walkingSound = tile_sounds.walking.soft_sand({}),
 	landingStepsSound = tile_sounds.landing.sand,
 	drivingSound = base_tile_sounds.driving.sand,
-	mapColor = { r = 100, g = 100, b = 100 }, -- TODO
+	mapColor = {190, 190, 190}, -- TODO
 	walkingSpeedModifier = 1,
 	vehicleFrictionModifier = 1,
     layerOffset = 15,
