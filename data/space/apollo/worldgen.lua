@@ -23,185 +23,198 @@ So, how to create that terrain using noise expressions?
 }, {game.player.character.position})))
 ]]
 
+local enableDetailedApolloTerrainSliders = settings.startup["LSA-enable-detailed-apollo-terrain-sliders"].value
+
 extend{
 	------------------------------------------------------------------------
 	--- General terrain noise.
 	{ -- Crater scale: general scale parameter.
-		name = "crater_scale",
+		name = "apollo_crater_scale",
 		type = "noise-expression",
-		--expression = "1",
-		expression = "12 * var(\"control:crater-scale:frequency\")",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"12 * var(\"control:apollo-crater-scale:frequency\")",
+			"12"),
 	},
 	{
-		name = "crater_max_radius",
+		name = "apollo_crater_max_radius",
 		type = "noise-expression",
-		--expression = "40 * crater_scale",
-		expression = "22 * var(\"control:crater-max-radius:frequency\") * crater_scale",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"22 * var(\"control:apollo-crater-max-radius:frequency\") * apollo_crater_scale",
+			"22 * apollo_crater_scale"),
 	},
 	{
-		name = "crater_rad_variance",
+		name = "apollo_crater_rad_variance",
 		type = "noise-expression",
-		--expression = "0.8",
-		expression = "0.8 * var(\"control:crater-rad-variance:frequency\")",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"0.8 * var(\"control:apollo-crater-rad-variance:frequency\")",
+			"0.8"),
 	},
 	{ -- Crater radius: random number between max radius and say 20% of max radius.
-		name = "crater_radius",
+		name = "apollo_crater_radius",
 		type = "noise-expression",
-		expression = "crater_max_radius * random_penalty{x=x, y=y, amplitude=crater_rad_variance, source=1}",
+		expression = "apollo_crater_max_radius * random_penalty{x=x, y=y, amplitude=apollo_crater_rad_variance, source=1}",
 	},
 	{
-		name = "crater_spacing_mult",
+		name = "apollo_crater_spacing_mult",
 		type = "noise-expression",
-		expression = "2 * var(\"control:crater-spacing-mult:frequency\")",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"2 * var(\"control:apollo-crater-spacing-mult:frequency\")",
+			"2"),
 	},
 	{
-		name = "crater_spacing",
+		name = "apollo_crater_spacing",
 		type = "noise-expression",
-		expression = "crater_max_radius * crater_spacing_mult", -- This should be at least 2x crater_max_radius, so craters don't touch.
+		expression = "apollo_crater_max_radius * apollo_crater_spacing_mult", -- This should be at least 2x crater_max_radius, so craters don't touch.
 	},
 	{
-		name = "crater_ridge_height",
+		name = "apollo_crater_ridge_height",
 		type = "noise-expression",
-		expression = "4 * var(\"control:crater-ridge-height:frequency\")",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"4 * var(\"control:apollo-crater-ridge-height:frequency\")",
+			"4"),
 	},
 	{
-		name = "crater_depth",
+		name = "apollo_crater_depth",
 		type = "noise-expression",
 		--expression = "5", -- Number of points of depth the crater has, per area.
-		expression = "45 * var(\"control:crater-depth:frequency\")",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"45 * var(\"control:apollo-crater-depth:frequency\")",
+			"45"),
 	},
 	{
-		name = "crater_candidate_count",
+		name = "apollo_crater_candidate_count",
 		type = "noise-expression",
-		expression = "60 * var(\"control:crater-candidate-count:frequency\")",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"60 * var(\"control:apollo-crater-candidate-count:frequency\")",
+			"60"),
 	},
 	{
-		name = "crater_density",
+		name = "apollo_crater_density",
 		type = "noise-expression",
-		expression = "2.0 * var(\"control:crater-density:frequency\")",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"2.0 * var(\"control:apollo-crater-density:frequency\")",
+			"2.0"),
 	},
 	{ -- Place craters, using spot noise.
 		-- x dimension is stretched a bit, so craters are wider than they are tall, to match the decoratives.
-		name = "lunar_crater_spots",
+		name = "apollo_crater_spots",
 		type = "noise-expression",
 		expression = "spot_noise{x = x * 0.85, y = y, seed0 = map_seed, seed1 = 2,\z
-						density_expression = crater_density,\z
-						spot_quantity_expression = crater_radius * crater_radius * crater_depth,\z
-						spot_radius_expression = crater_radius,\z
+						density_expression = apollo_crater_density,\z
+						spot_quantity_expression = apollo_crater_radius * apollo_crater_radius * apollo_crater_depth,\z
+						spot_radius_expression = apollo_crater_radius,\z
 						spot_favorability_expression = 1,\z
 						region_size = 1024,\z
-						candidate_point_count = crater_candidate_count,\z
+						candidate_point_count = apollo_crater_candidate_count,\z
 						hard_region_target_quantity = 0,\z
-						suggested_minimum_candidate_point_spacing = crater_spacing,\z
+						suggested_minimum_candidate_point_spacing = apollo_crater_spacing,\z
 						basement_value = -1000,\z
-						maximum_spot_basement_radius = crater_max_radius}",
+						maximum_spot_basement_radius = apollo_crater_max_radius}",
 		local_expressions = {
 			-- Moved out for now, so I can see it.
 		},
 	},
 	{ -- Noise amplitude.
-		name = "lunar_crater_noise_amplitude",
+		name = "apollo_crater_noise_amplitude",
 		type = "noise-expression",
-		expression = "2.25 * var(\"control:lunar-crater-noise-amplitude:frequency\")",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"2.25 * var(\"control:apollo-crater-noise-amplitude:frequency\")",
+			"2.25"),
 	},
 	{ -- Noise frequency.
-		name = "lunar_crater_noise_frequency",
+		name = "apollo_crater_noise_frequency",
 		type = "noise-expression",
-		expression = "(1/100) * var(\"control:lunar-crater-noise-frequency:frequency\")",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"(1/100) * var(\"control:apollo-crater-noise-frequency:frequency\")",
+			"(1/100)"),
 	},
 	{ -- Noise layer.
-		name = "lunar_crater_spot_noise",
+		name = "apollo_crater_spot_noise",
 		type = "noise-expression",
-		expression = "lunar_crater_noise_amplitude * multioctave_noise{x = x * 0.85, y = y, seed0 = map_seed, seed1 = 3, input_scale = lunar_crater_noise_frequency, output_scale = 1,\z
+		expression = "apollo_crater_noise_amplitude * multioctave_noise{x = x * 0.85, y = y, seed0 = map_seed, seed1 = 3, input_scale = apollo_crater_noise_frequency, output_scale = 1,\z
 										octaves = 4, persistence = 0.5}",
 	},
 	{ -- Noise layer.
-		name = "lunar_crater_spots_with_noise",
+		name = "apollo_crater_spots_with_noise",
 		type = "noise-expression",
-		expression = "lunar_crater_spots + lunar_crater_spot_noise",
+		expression = "apollo_crater_spots + apollo_crater_spot_noise",
 	},
 	{ -- Ridge the spots so that it curves up at the edges, making W shape. Note the outside of spot noise is sometimes negative, so need the max with 0 too.
-		name = "lunar_craters_ridged",
+		name = "apollo_craters_ridged",
 		type = "noise-expression",
-		expression = "if(lunar_crater_spots_with_noise < crater_ridge_height, (2 * crater_ridge_height) - lunar_crater_spots_with_noise, lunar_crater_spots_with_noise)",
+		expression = "if(apollo_crater_spots_with_noise < apollo_crater_ridge_height, (2 * apollo_crater_ridge_height) - apollo_crater_spots_with_noise, apollo_crater_spots_with_noise)",
 	},
 	{ -- Negate the ridged spots, making M shape.
-	-- TODO not completely sure about this. Especially the constant.
-		name = "lunar_craters_ridged_negated",
+		name = "apollo_craters_ridged_negated",
 		type = "noise-expression",
-		expression = "(2 * crater_ridge_height) - lunar_craters_ridged",
+		expression = "(2 * apollo_crater_ridge_height) - apollo_craters_ridged",
 	},
 	{
-		name = "lunar_inside_crater",
+		name = "apollo_inside_crater",
 		type = "noise-expression",
-		expression = "lunar_crater_spots_with_noise > 0",
+		expression = "apollo_crater_spots_with_noise > 0",
 	},
 	{
-		name = "lunar_elevation",
+		name = "apollo_elevation",
 		type = "noise-expression",
 		-- Out of any craters, elevation is 0. Inside craters, we use the negated-ridged crater shapes.
-		expression = "if(lunar_inside_crater, lunar_craters_ridged_negated, 0)",
+		expression = "if(apollo_inside_crater, apollo_craters_ridged_negated, 0)",
 	},
-	--expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 2, input_scale = 1/60, output_scale = 1}",
-	-- TODO add general noise.
 
 	------------------------------------------------------------------------
 	--- Tiles.
 	{
-		name = "lunar_doughy",
+		name = "apollo_doughy",
 		type = "noise-expression",
-		-- Doughy highland is outside of craters.
-		--expression = "max((lunar_crater_spots == -1000), (lunar_elevation > 0) * 0.5)",
-		--expression = "max((lunar_crater_spots == -1000), (lunar_elevation == 0))",
-		--expression = "(lunar_crater_spots <= 0) * 1000"
-			-- Covers both basement values (-1000) and other values outside the radius (which are negative values like -2).
-			-- The *1000 makes it override the other tiles, I think.
 		-- Doughly highland spawns in intermediate height range that's also outside of craters.
-		expression = "(lunar_elevation > -5) * (lunar_elevation < 1.8) * (lunar_inside_crater == 0)"
+		expression = "(apollo_elevation > -5) * (apollo_elevation < 1.8) * (apollo_inside_crater == 0)"
 	},
 	{
-		name = "lunar_sandy_rock",
+		name = "apollo_dirt",
 		type = "noise-expression",
-		-- Sandy rock is wherever elevation is high.
-		expression = "lunar_elevation >= 1.8",
+		-- Dirt slopes are wherever elevation is high.
+		expression = "apollo_elevation >= 1.8",
 	},
 	{
-		name = "lunar_dirt",
+		name = "apollo_sandy_rock",
 		type = "noise-expression",
-		-- Dirt slopes are wherever elevation is fairly low.
-		expression = "(lunar_elevation > -5) * (lunar_elevation < 1.8) * (lunar_inside_crater)",
+		-- Sandy rock is wherever elevation is fairly low, ie on slopes.
+		expression = "(apollo_elevation > -5) * (apollo_elevation < 1.8) * (apollo_inside_crater)",
 	},
 	{
-		name = "lunar_clay",
+		name = "apollo_clay",
 		type = "noise-expression",
 		-- Clay lowlands are wherever elevation is very low.
-		expression = "lunar_elevation <= -5",
+		expression = "apollo_elevation <= -5",
 	},
 }
 
--- Temporary TODO: Adding some autoplace controls, to experiment.
-for i, name in pairs{
-	"crater-scale",
-	"crater-max-radius",
-	"crater-rad-variance",
-	"crater-depth",
-	"crater-ridge-height",
-	"crater-candidate-count",
-	"lunar-crater-noise-amplitude",
-	"lunar-crater-noise-frequency",
-	"crater-spacing-mult",
-	"crater-density",
-} do
-	extend{
-		{
-			type = "autoplace-control",
-			name = name,
-			richness = false,
-			order = "z" .. i,
-			category = "terrain"
-		},
-	}
+-- Detailed sliders for controlling terrain gen.
+if enableDetailedApolloTerrainSliders then
+	for i, name in pairs{
+		"apollo-crater-scale",
+		"apollo-crater-max-radius",
+		"apollo-crater-rad-variance",
+		"apollo-crater-depth",
+		"apollo-crater-ridge-height",
+		"apollo-crater-candidate-count",
+		"apollo-crater-noise-amplitude",
+		"apollo-crater-noise-frequency",
+		"apollo-crater-spacing-mult",
+		"apollo-crater-density",
+	} do
+		extend{
+			{
+				type = "autoplace-control",
+				name = name,
+				richness = false,
+				order = "z" .. i,
+				category = "terrain"
+			},
+		}
+	end
 end
+
 extend{
 	{
 		type = "autoplace-control",

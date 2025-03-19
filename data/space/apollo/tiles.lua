@@ -6,14 +6,14 @@ NOTE all my tilesets are modified versions of vanilla:
 * volcanic-soil-dark -> dirt.
 * volcanic-ash-soil -> clay.
 * volcanic-pumice-stones -> sandy-rock.
-* fulgoran-rock -> rocky. (This one has different layout from all the rest.)
+* fulgoran-rock -> rocky. (This one has different layout from all the rest.) (Not currently used.)
 * (dust-lumpy -> was going to use, but it seems to just be volcanic-pumice-stones with calcite stains)
 ]]
 
--- Create a subgroup for lunar tiles.
+-- Create a subgroup for Apollo tiles.
 extend{{
     type = "item-subgroup",
-    name = "lunar-tiles",
+    name = "apollo-tiles",
     order = "b2", -- After Nauvis, before Vulcanus.
     group = "tiles",
 }}
@@ -29,9 +29,9 @@ local tile_spritesheet_layout = tile_graphics.tile_spritesheet_layout
 
 local patch_for_inner_corner_of_transition_between_transition = tile_graphics.patch_for_inner_corner_of_transition_between_transition
 
-local lunarTileOffset = 40
+local apolloTileOffset = 40
     -- Controls transition drawing priority. Vulcanus file says it should be above 33 (nuclear ground), below 100 (concrete). Vulcanus is 40, so setting to the same.
-local lunarTileAbsorptions = { pollution = 0.00003 } -- Setting it the same as most other tiles. Doesn't really matter since there's no enemies.
+local apolloTileAbsorptions = { pollution = 0.00003 } -- Setting it the same as most other tiles. Doesn't really matter since there's no enemies.
 
 -- Function for the spritesheet format used for all my spritesheets except rocky.
 function tile_variations_template_with_transitions(high_res_picture, options)
@@ -127,13 +127,13 @@ local function makeTilePrototype(args)
     return {
 		type = "tile",
 		name = args.name,
-		subgroup = "lunar-tiles",
+		subgroup = "apollo-tiles",
 		order = args.order,
 		collision_mask = tile_collision_masks.ground(),
 		autoplace = {
 			probability_expression = args.autoplaceProb,
 		},
-		layer = lunarTileOffset + args.layerOffset,
+		layer = apolloTileOffset + args.layerOffset,
 		sprite_usage_surface = "any",
 		variants = args.variants,
 		transitions = lava_stone_transitions,
@@ -144,14 +144,14 @@ local function makeTilePrototype(args)
 		map_color = args.mapColor,
 		walking_speed_modifier = args.walkingSpeedModifier,
 		vehicle_friction_modifier = args.vehicleFrictionModifier,
-		absorptions_per_second = lunarTileAbsorptions,
+		absorptions_per_second = apolloTileAbsorptions,
 	}
 end
 
-local lunarDoughy = makeTilePrototype{
-    name = "lunar-doughy",
+local apolloDoughy = makeTilePrototype{
+    name = "apollo-doughy",
     order = "01",
-    autoplaceProb = "lunar_doughy",
+    autoplaceProb = "apollo_doughy",
     variants = tile_variations_template_with_transitions( -- Copied from dust-flat.
         "__LegendarySpaceAge__/graphics/apollo/tiles/doughy.png",
         {
@@ -169,12 +169,12 @@ local lunarDoughy = makeTilePrototype{
 	vehicleFrictionModifier = 1,
     layerOffset = 20,
 }
-extend{lunarDoughy}
+extend{apolloDoughy}
 
-local lunarDirt = makeTilePrototype{
-    name = "lunar-dirt",
+local apolloDirt = makeTilePrototype{
+    name = "apollo-dirt",
     order = "02",
-    autoplaceProb = "lunar_dirt",
+    autoplaceProb = "apollo_dirt",
     variants = tile_variations_template_with_transitions( -- Copied from volcanic-soil-dark, with some changes.
         "__LegendarySpaceAge__/graphics/apollo/tiles/dirt.png",
 		{
@@ -187,17 +187,17 @@ local lunarDirt = makeTilePrototype{
 	walkingSound = tile_sounds.walking.soft_sand({}),
 	landingStepsSound = tile_sounds.landing.sand,
 	drivingSound = base_tile_sounds.driving.sand,
-	mapColor = {100, 100, 100}, -- TODO
+	mapColor = {190, 190, 190}, -- TODO
 	walkingSpeedModifier = 1,
 	vehicleFrictionModifier = 1,
     layerOffset = 7,
 }
-extend{lunarDirt}
+extend{apolloDirt}
 
-local lunarClay = makeTilePrototype{
-    name = "lunar-clay",
+local apolloClay = makeTilePrototype{
+    name = "apollo-clay",
     order = "03",
-    autoplaceProb = "lunar_clay",
+    autoplaceProb = "apollo_clay",
     variants = tile_variations_template_with_transitions( -- Copied from volcanic-ash-soil.
         "__LegendarySpaceAge__/graphics/apollo/tiles/clay.png",
         {
@@ -215,12 +215,12 @@ local lunarClay = makeTilePrototype{
 	vehicleFrictionModifier = 1,
     layerOffset = 11,
 }
-extend{lunarClay}
+extend{apolloClay}
 
-local lunarSandyRock = makeTilePrototype{
-    name = "lunar-sandy-rock",
+local apolloSandyRock = makeTilePrototype{
+    name = "apollo-sandy-rock",
     order = "04",
-    autoplaceProb = "lunar_sandy_rock",
+    autoplaceProb = "apollo_sandy_rock",
     variants = tile_variations_template_with_transitions( -- Copied from volcanic-pumice-stones.
         "__LegendarySpaceAge__/graphics/apollo/tiles/sandy-rock.png",
         {
@@ -233,11 +233,9 @@ local lunarSandyRock = makeTilePrototype{
     walkingSound = tile_sounds.walking.soft_sand({}),
 	landingStepsSound = tile_sounds.landing.sand,
 	drivingSound = base_tile_sounds.driving.sand,
-	mapColor = {190, 190, 190}, -- TODO
+	mapColor = {100, 100, 100}, -- TODO
 	walkingSpeedModifier = 1,
 	vehicleFrictionModifier = 1,
     layerOffset = 15,
 }
-extend{lunarSandyRock}
-
--- TODO still need to do Fulgoran rock.
+extend{apolloSandyRock}

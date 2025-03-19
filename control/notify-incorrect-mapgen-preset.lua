@@ -2,12 +2,6 @@
 
 local NOTIFY_INCORRECT_MAPGEN_PRESET = true
 
-local function registerRepeatingMessage()
-	script.on_nth_tick(60 * 15, function(event)
-		game.print({"LSA-message.incorrect-mapgen-preset"})
-	end)
-end
-
 local function onPlayerCreated(event)
 	if not NOTIFY_INCORRECT_MAPGEN_PRESET then return end
 	local player = game.players[event.player_index]
@@ -20,7 +14,7 @@ local function onPlayerCreated(event)
 	if mapGen.width == 50 and mapGen.height == 50 then return end
 
 	-- Otherwise, show message.
-	registerRepeatingMessage()
+	game.print({"LSA-message.incorrect-mapgen-preset"})
 end
 
 return {

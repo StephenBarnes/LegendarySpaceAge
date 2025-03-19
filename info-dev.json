@@ -81,7 +81,7 @@
 		, "fire-lights"
 		, "distant-misfires"
 		, "visible-planets"
-		, "? gore-TEMPORARILY-DISABLED-PENDING-BUGFIX"
+		, "? gore"
 
 		, "! GROUP-stuff-for-dev-only"
 		, "EditorExtensions"

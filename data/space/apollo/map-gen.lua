@@ -1,8 +1,30 @@
 -- This file defines map gen settings for Apollo.
 
+local enableDetailedApolloTerrainSliders = settings.startup["LSA-enable-detailed-apollo-terrain-sliders"].value
+local autoplaceControls = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+	{
+		["ice_node"] = {},
+		["apollo-crater-scale"] = {},
+		["apollo-crater-max-radius"] = {},
+		["apollo-crater-rad-variance"] = {},
+		["apollo-crater-depth"] = {},
+		["apollo-crater-ridge-height"] = {},
+		["apollo-crater-candidate-count"] = {},
+		["apollo-crater-noise-amplitude"] = {},
+		["apollo-crater-noise-frequency"] = {},
+		["apollo-crater-spacing-mult"] = {},
+		["apollo-crater-density"] = {},
+		["apollo_cliffs"] = {},
+	},
+	{
+		["ice_node"] = {},
+		["apollo_cliffs"] = {},
+	}
+)
+
 return {
 	property_expression_names = {
-		elevation = "lunar_elevation",
+		elevation = "apollo_elevation",
 		aux = "vulcanus_aux", -- TODO
 		cliffiness = "cliffiness_basic",
 		cliff_elevation = "cliff_elevation_from_elevation",
@@ -15,27 +37,14 @@ return {
 		cliff_smoothing = 1,
 		control = "apollo_cliffs",
 	},
-	autoplace_controls = {
-		["ice_node"] = {},
-		["crater-scale"] = {},
-		["crater-max-radius"] = {},
-		["crater-rad-variance"] = {},
-		["crater-depth"] = {},
-		["crater-ridge-height"] = {},
-		["crater-candidate-count"] = {},
-		["lunar-crater-noise-amplitude"] = {},
-		["lunar-crater-noise-frequency"] = {},
-		["crater-spacing-mult"] = {},
-		["crater-density"] = {},
-		["apollo_cliffs"] = {},
-	},
+	autoplace_controls = autoplaceControls,
 	autoplace_settings = {
 		["tile"] = {
 			settings = {
-				["lunar-dirt"] = {},
-				["lunar-doughy"] = {},
-				["lunar-clay"] = {},
-				["lunar-sandy-rock"] = {},
+				["apollo-dirt"] = {},
+				["apollo-doughy"] = {},
+				["apollo-clay"] = {},
+				["apollo-sandy-rock"] = {},
 				-- TODO add fulgoran rock.
 			}
 		},
