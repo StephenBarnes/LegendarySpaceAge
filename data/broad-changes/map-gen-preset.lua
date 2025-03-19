@@ -16,6 +16,7 @@ custom.basic_settings.autoplace_controls = {
 	stone = {frequency = 1/3, size = 3},
 	["enemy-base"] = {size = 1},
 	water = {frequency = 0.5, size = 1.5},
+	["apollo_cliffs"] = {frequency = 1, size = 3}, -- Continuity 3, TODO check.
 }
 
 -- Less asteroids -- mostly makes it harder since there's less materials.

@@ -2,7 +2,7 @@
 
 return {
 	property_expression_names = {
-		elevation = "lunar_elevation", -- TODO make new elevation.
+		elevation = "lunar_elevation",
 		aux = "vulcanus_aux", -- TODO
 		cliffiness = "cliffiness_basic",
 		cliff_elevation = "cliff_elevation_from_elevation",
@@ -10,8 +10,10 @@ return {
 	},
 	cliff_settings = {
 		name = "cliff-nauvis", -- TODO make new cliff set.
-		cliff_elevation_interval = .7,
-		cliff_elevation_0 = 0,
+		cliff_elevation_interval = 1.4,
+		cliff_elevation_0 = 1,
+		cliff_smoothing = 1,
+		control = "apollo_cliffs",
 	},
 	autoplace_controls = {
 		["ice_node"] = {},
@@ -21,6 +23,11 @@ return {
 		["crater-depth"] = {},
 		["crater-ridge-height"] = {},
 		["crater-candidate-count"] = {},
+		["lunar-crater-noise-amplitude"] = {},
+		["lunar-crater-noise-frequency"] = {},
+		["crater-spacing-mult"] = {},
+		["crater-density"] = {},
+		["apollo_cliffs"] = {},
 	},
 	autoplace_settings = {
 		["tile"] = {

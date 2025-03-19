@@ -30,13 +30,13 @@ extend{
 		name = "crater_scale",
 		type = "noise-expression",
 		--expression = "1",
-		expression = "6 * var(\"control:crater-scale:frequency\")",
+		expression = "12 * var(\"control:crater-scale:frequency\")",
 	},
 	{
 		name = "crater_max_radius",
 		type = "noise-expression",
 		--expression = "40 * crater_scale",
-		expression = "60 * var(\"control:crater-max-radius:frequency\") * crater_scale",
+		expression = "22 * var(\"control:crater-max-radius:frequency\") * crater_scale",
 	},
 	{
 		name = "crater_rad_variance",
@@ -50,35 +50,46 @@ extend{
 		expression = "crater_max_radius * random_penalty{x=x, y=y, amplitude=crater_rad_variance, source=1}",
 	},
 	{
+		name = "crater_spacing_mult",
+		type = "noise-expression",
+		expression = "2 * var(\"control:crater-spacing-mult:frequency\")",
+	},
+	{
 		name = "crater_spacing",
 		type = "noise-expression",
-		expression = "crater_max_radius * 2.5", -- This should be at least 2x crater_max_radius, so craters don't touch.
+		expression = "crater_max_radius * crater_spacing_mult", -- This should be at least 2x crater_max_radius, so craters don't touch.
 	},
 	{
 		name = "crater_ridge_height",
 		type = "noise-expression",
-		expression = "3 * var(\"control:crater-ridge-height:frequency\")",
+		expression = "4 * var(\"control:crater-ridge-height:frequency\")",
 	},
 	{
 		name = "crater_depth",
 		type = "noise-expression",
 		--expression = "5", -- Number of points of depth the crater has, per area.
-		expression = "40 * var(\"control:crater-depth:frequency\")",
+		expression = "45 * var(\"control:crater-depth:frequency\")",
 	},
 	{
 		name = "crater_candidate_count",
 		type = "noise-expression",
-		expression = "400 * var(\"control:crater-candidate-count:frequency\")",
+		expression = "60 * var(\"control:crater-candidate-count:frequency\")",
 	},
 	{
+		name = "crater_density",
+		type = "noise-expression",
+		expression = "2.0 * var(\"control:crater-density:frequency\")",
+	},
+	{ -- Place craters, using spot noise.
+		-- x dimension is stretched a bit, so craters are wider than they are tall, to match the decoratives.
 		name = "lunar_crater_spots",
 		type = "noise-expression",
-		expression = "spot_noise{x = x, y = y, seed0 = map_seed, seed1 = 2,\z
-						density_expression = 1,\z
+		expression = "spot_noise{x = x * 0.85, y = y, seed0 = map_seed, seed1 = 2,\z
+						density_expression = crater_density,\z
 						spot_quantity_expression = crater_radius * crater_radius * crater_depth,\z
 						spot_radius_expression = crater_radius,\z
 						spot_favorability_expression = 1,\z
-						region_size = 2048 * crater_scale,\z
+						region_size = 1024,\z
 						candidate_point_count = crater_candidate_count,\z
 						hard_region_target_quantity = 0,\z
 						suggested_minimum_candidate_point_spacing = crater_spacing,\z
@@ -88,10 +99,31 @@ extend{
 			-- Moved out for now, so I can see it.
 		},
 	},
+	{ -- Noise amplitude.
+		name = "lunar_crater_noise_amplitude",
+		type = "noise-expression",
+		expression = "2.25 * var(\"control:lunar-crater-noise-amplitude:frequency\")",
+	},
+	{ -- Noise frequency.
+		name = "lunar_crater_noise_frequency",
+		type = "noise-expression",
+		expression = "(1/100) * var(\"control:lunar-crater-noise-frequency:frequency\")",
+	},
+	{ -- Noise layer.
+		name = "lunar_crater_spot_noise",
+		type = "noise-expression",
+		expression = "lunar_crater_noise_amplitude * multioctave_noise{x = x * 0.85, y = y, seed0 = map_seed, seed1 = 3, input_scale = lunar_crater_noise_frequency, output_scale = 1,\z
+										octaves = 4, persistence = 0.5}",
+	},
+	{ -- Noise layer.
+		name = "lunar_crater_spots_with_noise",
+		type = "noise-expression",
+		expression = "lunar_crater_spots + lunar_crater_spot_noise",
+	},
 	{ -- Ridge the spots so that it curves up at the edges, making W shape. Note the outside of spot noise is sometimes negative, so need the max with 0 too.
 		name = "lunar_craters_ridged",
 		type = "noise-expression",
-		expression = "if(lunar_crater_spots < crater_ridge_height, (2 * crater_ridge_height) - lunar_crater_spots, lunar_crater_spots)",
+		expression = "if(lunar_crater_spots_with_noise < crater_ridge_height, (2 * crater_ridge_height) - lunar_crater_spots_with_noise, lunar_crater_spots_with_noise)",
 	},
 	{ -- Negate the ridged spots, making M shape.
 	-- TODO not completely sure about this. Especially the constant.
@@ -99,17 +131,16 @@ extend{
 		type = "noise-expression",
 		expression = "(2 * crater_ridge_height) - lunar_craters_ridged",
 	},
-	{ -- Noise layer.
-		name = "lunar_elevation_noise",
+	{
+		name = "lunar_inside_crater",
 		type = "noise-expression",
-		expression = "multioctave_noise{x = x, y = y, seed0 = map_seed, seed1 = 3, input_scale = 1/600, output_scale = .9,\z
-										octaves = 6, persistence = 0.5}",
+		expression = "lunar_crater_spots_with_noise > 0",
 	},
 	{
 		name = "lunar_elevation",
 		type = "noise-expression",
-		-- Out of any craters, elevation is 1. Inside craters, we invert the crater and then add something to make mountain ridges.
-		expression = "if(lunar_crater_spots < -900, 0, lunar_craters_ridged_negated + lunar_elevation_noise)",
+		-- Out of any craters, elevation is 0. Inside craters, we use the negated-ridged crater shapes.
+		expression = "if(lunar_inside_crater, lunar_craters_ridged_negated, 0)",
 	},
 	--expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 2, input_scale = 1/60, output_scale = 1}",
 	-- TODO add general noise.
@@ -122,9 +153,11 @@ extend{
 		-- Doughy highland is outside of craters.
 		--expression = "max((lunar_crater_spots == -1000), (lunar_elevation > 0) * 0.5)",
 		--expression = "max((lunar_crater_spots == -1000), (lunar_elevation == 0))",
-		expression = "(lunar_crater_spots <= 0) * 1000"
+		--expression = "(lunar_crater_spots <= 0) * 1000"
 			-- Covers both basement values (-1000) and other values outside the radius (which are negative values like -2).
 			-- The *1000 makes it override the other tiles, I think.
+		-- Doughly highland spawns in intermediate height range that's also outside of craters.
+		expression = "(lunar_elevation > -5) * (lunar_elevation < 1.8) * (lunar_inside_crater == 0)"
 	},
 	{
 		name = "lunar_sandy_rock",
@@ -136,13 +169,13 @@ extend{
 		name = "lunar_dirt",
 		type = "noise-expression",
 		-- Dirt slopes are wherever elevation is fairly low.
-		expression = "(lunar_elevation < 1.8) * (lunar_elevation > -5)",
+		expression = "(lunar_elevation > -5) * (lunar_elevation < 1.8) * (lunar_inside_crater)",
 	},
 	{
 		name = "lunar_clay",
 		type = "noise-expression",
 		-- Clay lowlands are wherever elevation is very low.
-		expression = "(lunar_elevation <= -5) * (lunar_crater_spots > 0)",
+		expression = "lunar_elevation <= -5",
 	},
 }
 
@@ -154,6 +187,10 @@ for i, name in pairs{
 	"crater-depth",
 	"crater-ridge-height",
 	"crater-candidate-count",
+	"lunar-crater-noise-amplitude",
+	"lunar-crater-noise-frequency",
+	"crater-spacing-mult",
+	"crater-density",
 } do
 	extend{
 		{
@@ -165,3 +202,11 @@ for i, name in pairs{
 		},
 	}
 end
+extend{
+	{
+		type = "autoplace-control",
+		name = "apollo_cliffs",
+		order = "z",
+		category = "cliff"
+	}
+}
