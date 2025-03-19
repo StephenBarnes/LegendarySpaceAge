@@ -30,3 +30,10 @@ RAW["solar-panel"]["solar-panel"].max_health = 50 -- From default 200. It's frag
 -- Edit some recipes to not use cryo plants.
 RECIPE["fusion-generator"].category = "crafting"
 RECIPE["fusion-reactor"].category = "crafting"
+
+-- Change solar panels so they can't be built on dark tiles (only Apollo crater interior currently).
+local solarPanel = RAW["solar-panel"]["solar-panel"]
+if solarPanel.collision_mask == nil then
+	solarPanel.collision_mask = RAW["utility-constants"].default.default_collision_masks["solar-panel"]
+end
+solarPanel.collision_mask.layers["too-dark-for-solar"] = true

@@ -121,7 +121,10 @@ local lava_stone_transitions_between_transitions = {
     }
 }
 
----@param args { name: string, order: string, autoplaceProb: string, variants: data.TileTransitionsVariants, walkingSound: ((string|data.SoundDefinition.struct)[]|data.Sound.struct)?, landingStepsSound: ((string|data.SoundDefinition.struct)[]|data.Sound.struct)?, drivingSound: ((string|data.SoundDefinition.struct)[]|data.Sound.struct)?, mapColor: data.Color, walkingSpeedModifier: number, vehicleFrictionModifier: number, layerOffset: number }
+local darkTileCollisionMask = copy(tile_collision_masks.ground())
+darkTileCollisionMask.layers["too-dark-for-solar"] = true
+
+---@param args { name: string, order: string, autoplaceProb: string, variants: data.TileTransitionsVariants, walkingSound: ((string|data.SoundDefinition.struct)[]|data.Sound.struct)?, landingStepsSound: ((string|data.SoundDefinition.struct)[]|data.Sound.struct)?, drivingSound: ((string|data.SoundDefinition.struct)[]|data.Sound.struct)?, mapColor: data.Color, walkingSpeedModifier: number, vehicleFrictionModifier: number, layerOffset: number, isDark: boolean? }
 ---@return data.TilePrototype
 local function makeTilePrototype(args)
     return {
@@ -129,7 +132,7 @@ local function makeTilePrototype(args)
 		name = args.name,
 		subgroup = "apollo-tiles",
 		order = args.order,
-		collision_mask = tile_collision_masks.ground(),
+		collision_mask = Gen.ifThenElse(args.isDark, darkTileCollisionMask, tile_collision_masks.ground()),
 		autoplace = {
 			probability_expression = args.autoplaceProb,
 		},
@@ -214,6 +217,7 @@ local apolloClay = makeTilePrototype{
 	walkingSpeedModifier = 1,
 	vehicleFrictionModifier = 1,
     layerOffset = 11,
+    isDark = true,
 }
 extend{apolloClay}
 
@@ -239,3 +243,9 @@ local apolloSandyRock = makeTilePrototype{
     layerOffset = 15,
 }
 extend{apolloSandyRock}
+
+-- Create collision layer for dark tiles.
+extend{{
+    type = "collision-layer",
+    name = "too-dark-for-solar",
+}}

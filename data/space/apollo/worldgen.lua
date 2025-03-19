@@ -125,14 +125,14 @@ extend{
 		name = "apollo_crater_noise_frequency",
 		type = "noise-expression",
 		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
-			"(1/100) * var(\"control:apollo-crater-noise-frequency:frequency\")",
-			"(1/100)"),
+			"(1/50) * var(\"control:apollo-crater-noise-frequency:frequency\")",
+			"(1/50)"),
 	},
 	{ -- Noise layer.
 		name = "apollo_crater_spot_noise",
 		type = "noise-expression",
-		expression = "apollo_crater_noise_amplitude * multioctave_noise{x = x * 0.85, y = y, seed0 = map_seed, seed1 = 3, input_scale = apollo_crater_noise_frequency, output_scale = 1,\z
-										octaves = 4, persistence = 0.5}",
+		expression = "apollo_crater_noise_amplitude * multioctave_noise{x = x * 0.85, y = y, seed0 = map_seed, seed1 = 3, input_scale = apollo_crater_noise_frequency, output_scale = 1.1,\z
+										octaves = 6, persistence = 0.6}",
 	},
 	{ -- Noise layer.
 		name = "apollo_crater_spots_with_noise",
@@ -172,19 +172,19 @@ extend{
 	{
 		name = "apollo_dirt",
 		type = "noise-expression",
-		-- Dirt slopes are wherever elevation is high.
+		-- Dirt tiles are wherever elevation is high.
 		expression = "apollo_elevation >= 1.8",
 	},
 	{
 		name = "apollo_sandy_rock",
 		type = "noise-expression",
-		-- Sandy rock is wherever elevation is fairly low, ie on slopes.
+		-- Sandy rock tiles are on crater slopes.
 		expression = "(apollo_elevation > -5) * (apollo_elevation < 1.8) * (apollo_inside_crater)",
 	},
 	{
 		name = "apollo_clay",
 		type = "noise-expression",
-		-- Clay lowlands are wherever elevation is very low.
+		-- Clay lowlands are wherever elevation is very low, ie inside craters.
 		expression = "apollo_elevation <= -5",
 	},
 }
