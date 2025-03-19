@@ -93,7 +93,7 @@ R.planetsAndBelts = {
 	{
 		name = "ice-belt",
 		type = "belt",
-		distance = sunDist + 5 * layerDist,
+		distance = sunDist + 5.5 * layerDist,
 		drawAsteroidBelt = {
 			{2, {.404, .549, .541, .6}}, -- light blue
 		},
@@ -109,12 +109,12 @@ R.planetsAndBelts = {
 	{
 		name = "fulgora",
 		type = "planet",
-		distance = sunDist + 6 * layerDist,
+		distance = sunDist + 7 * layerDist,
 	},
 	{
 		name = "belt-of-aquilo",
 		type = "belt",
-		distance = sunDist + 8 * layerDist,
+		distance = sunDist + 9 * layerDist,
 		drawAsteroidBelt = {
 			{1, {.404, .549, .541, .6}}, -- bottom layer ice
 			{2, {.342, .322, .325}}, -- top layer greyish
@@ -137,12 +137,12 @@ R.planetsAndBelts = {
 	{
 		name = "aquilo",
 		type = "planet",
-		distance = sunDist + 10 * layerDist,
+		distance = sunDist + 11 * layerDist,
 	},
 	{
 		name = "shattered-planet",
 		type = "belt",
-		distance = sunDist + 12 * layerDist,
+		distance = sunDist + 13 * layerDist,
 		drawAsteroidBelt = {
 			{2, {.733, .227, .160}}, -- brighter red bottom
 			{1, {.576, .016, .059}}, -- darker red top
@@ -172,7 +172,7 @@ R.planetsAndBelts = {
 	{
 		name = "solar-system-edge",
 		type = "belt",
-		distance = sunDist + 15 * layerDist,
+		distance = sunDist + 15.5 * layerDist,
 		solarPowerInSpace = 1,
 		shouldCreateBeltLocation = false,
 	},

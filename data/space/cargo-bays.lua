@@ -15,7 +15,7 @@ ITEM["cargo-bay"].subgroup = "space-interactors"
 ITEM["cargo-bay"].order = "b[cargo-landing-pad]-a"
 
 --[[ Make the space platform hub receive cargo faster - since you can't build cargo expansions, and it's best to not have too many platforms.
-Note this stuff isn't documented anywhere, aren't even set in Wube's Lua code, so TODO test that this actually works.
+Note this stuff isn't documented anywhere, aren't even set in Wube's Lua code, so tested that this actually works.
 Testing: with busy_timeout_ticks = 60, we can receive 3 pods every ~8 seconds.
 Tried doubling the number of cargo hatches, but it seems to cause a visual bug sometimes with it landing before the big hatch opens.
 	Seems you need to set giga hatch's covered_hatches so that works correctly.

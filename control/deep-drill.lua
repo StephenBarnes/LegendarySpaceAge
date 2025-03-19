@@ -145,7 +145,16 @@ local function onObjectDestroyed(e)
 	destroyExclusionZone(e)
 end
 
+local function onInitOrLoad()
+	-- Blacklist it from picker dollies, since that doesn't work with exclusion zones.
+	local epd_api = remote.interfaces['PickerDollies']
+	if (epd_api) then
+		remote.call('PickerDollies', 'add_blacklist_name', 'deep-drill')
+	end
+end
+
 return {
+	onInitOrLoad = onInitOrLoad,
 	onBuilt = onBuilt,
 	onObjectDestroyed = onObjectDestroyed,
 }
