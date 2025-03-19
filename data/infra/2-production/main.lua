@@ -36,4 +36,4 @@ local solarPanel = RAW["solar-panel"]["solar-panel"]
 if solarPanel.collision_mask == nil then
 	solarPanel.collision_mask = RAW["utility-constants"].default.default_collision_masks["solar-panel"]
 end
-solarPanel.collision_mask.layers["too-dark-for-solar"] = true
+solarPanel.collision_mask.layers.too_dark_for_solar = true

@@ -89,6 +89,10 @@ tech.effects = {
 		space_location = "apollo",
 		use_icon_overlay_constant = true,
 	},
+	{
+		type = "unlock-recipe",
+		recipe = "recipe-drill-node-ice",
+	},
 }
 tech.icon = nil
 tech.icons = {

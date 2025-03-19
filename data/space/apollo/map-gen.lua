@@ -31,7 +31,7 @@ return {
 		["entity:drill-node-ice:probability"] = "apollo_ice_node_probability",
 	},
 	cliff_settings = {
-		name = "cliff-nauvis", -- TODO make new cliff set.
+		name = "cliff-vulcanus", -- TODO make new cliff set?
 		cliff_elevation_interval = 1.4,
 		cliff_elevation_0 = 1,
 		cliff_smoothing = 1,
@@ -45,7 +45,6 @@ return {
 				["apollo-doughy"] = {},
 				["apollo-clay"] = {},
 				["apollo-sandy-rock"] = {},
-				-- TODO add fulgoran rock.
 			}
 		},
 		["decorative"] = {

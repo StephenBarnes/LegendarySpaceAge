@@ -62,12 +62,12 @@ require("data.nauvis-part-two.main")
 require("data.aquilo.main")
 
 -- Files that create protos, and require previous protos.
+require("data.space.main")
 require("data.pre-space.gas-vent")
 require("data.pre-space.waste-pump")
 require("data.broad-changes.barrelling")
 require("data.intermediate-factors.main")
 require("data.broad-changes.fuel")
-require("data.space.main")
 require("data.tech-progression.tech-rate-triggers")
 require("data.vulcanus.no-lava-in-pipes")
 

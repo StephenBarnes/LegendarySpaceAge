@@ -98,8 +98,8 @@ for i, vals in pairs{
 		autoplace = {
 			order = "d[ground-surface]-e[crater]-" .. vals.placeLayer, -- TODO testing - same layer, so they won't overlap?
 			probability_expression = vals.probabilityExpression,
-			--tile_restriction = {"apollo-doughy", "apollo-clay"},
-			tile_restriction = {"apollo-doughy"},
+			tile_restriction = {"apollo-doughy", "apollo-clay"},
+			--tile_restriction = {"apollo-doughy"},
 		},
 		pictures = {
 			sheet = {

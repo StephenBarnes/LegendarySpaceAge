@@ -13,7 +13,7 @@ R.specs = {
 			{type = "item", name = "ice", amount = 10},
 			{type = "fluid", name = "water", amount = 10},
 		},
-		addToTech = "planet-discovery-apollo",
+		addToTech = nil, --"planet-discovery-apollo", -- Not adding yet, bc making tech after creating drill nodes.
 	},
 	-- TODO more.
 }

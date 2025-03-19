@@ -122,7 +122,7 @@ local lava_stone_transitions_between_transitions = {
 }
 
 local darkTileCollisionMask = copy(tile_collision_masks.ground())
-darkTileCollisionMask.layers["too-dark-for-solar"] = true
+darkTileCollisionMask.layers.too_dark_for_solar = true
 
 ---@param args { name: string, order: string, autoplaceProb: string, variants: data.TileTransitionsVariants, walkingSound: ((string|data.SoundDefinition.struct)[]|data.Sound.struct)?, landingStepsSound: ((string|data.SoundDefinition.struct)[]|data.Sound.struct)?, drivingSound: ((string|data.SoundDefinition.struct)[]|data.Sound.struct)?, mapColor: data.Color, walkingSpeedModifier: number, vehicleFrictionModifier: number, layerOffset: number, isDark: boolean? }
 ---@return data.TilePrototype
@@ -247,5 +247,5 @@ extend{apolloSandyRock}
 -- Create collision layer for dark tiles.
 extend{{
     type = "collision-layer",
-    name = "too-dark-for-solar",
+    name = "too_dark_for_solar",
 }}

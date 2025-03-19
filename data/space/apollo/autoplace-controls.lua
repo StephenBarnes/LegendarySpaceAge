@@ -11,31 +11,27 @@ extend{
 }
 
 -- Create autoplace for ice nodes.
-local resource_autoplace = require("resource-autoplace")
---[[RAW.resource["drill-node-ice"].autoplace = resource_autoplace.resource_autoplace_settings{
-	name = "drill-node-ice",
-	order = "z",
-	autoplace_control_name = "ice_node",
-	base_density = 10,
-	base_spots_per_km = 10,
-	regular_rq_factor_multiplier = 1,
-	starting_rq_factor_multiplier = autoplace_parameters.starting_rq_factor_multiplier,
-	candidate_spot_count = autoplace_parameters.candidate_spot_count,
-	tile_restriction = autoplace_parameters.tile_restriction
-}]]
 RAW.resource["drill-node-ice"].autoplace = {
 	control = "ice_node",
 	order = "z",
 	probability_expression = "ice_node_probability",
-	richness_expression = "1"
+	richness_expression = "1",
+	tile_restriction = {"apollo-clay"}, -- Only inside craters.
 }
 extend{
 	{
 		type = "noise-expression",
 		name = "ice_node_probability",
 		expression = "(control:ice_node:size > 0)\z
-                  * (max(aquilo_starting_flourine_vent * 0.02,\z
-                        aquilo_starting_flourine_vent_tiny > 0,\z
-                        min(aquilo_starting_mask, aquilo_flourine_vent_spots) * 0.008))"
+					* spot_noise{x = x, y = y, seed0 = map_seed, seed1 = 4,\z
+						density_expression = 0.5 * (control:ice_node:frequency),\z
+						spot_quantity_expression = 1,\z
+						spot_radius_expression = 1,\z
+						spot_favorability_expression = (apollo_clay),\z
+						region_size = 512,\z
+						candidate_point_count = 30,\z
+						hard_region_target_quantity = 0,\z
+						basement_value = -1000,\z
+						maximum_spot_basement_radius = apollo_crater_max_radius}",
 	},
 }
