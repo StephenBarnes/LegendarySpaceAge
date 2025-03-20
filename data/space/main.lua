@@ -1,7 +1,7 @@
 -- This folder makes changes to space stuff.
 
 require("data.space.cargo-bays")
-require("data.space.thruster-liquids")
+require("data.space.thrusters")
 require("data.space.space-science")
 require("data.space.asteroid-recipes")
 
