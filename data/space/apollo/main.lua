@@ -1,8 +1,7 @@
 -- This folder creates Apollo, moon of Nauvis.
 
 require("autoplace-controls")
-require("data.space.apollo.decoratives")
-require("rocks")
+require("decoratives")
 require("low-gravity-runner")
 require("cliffs")
 require("worldgen")

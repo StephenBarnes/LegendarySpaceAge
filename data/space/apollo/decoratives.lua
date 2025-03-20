@@ -79,18 +79,33 @@ extend{
 		expression = "max((apollo_crater_1 > 0.85) * every_n_finer(7, 7), (apollo_crater_1 < 0.4))\z
 			* (apollo_crater_2 < 0.55)\z
 			* (apollo_crater_3 < 0.4)\z
-			* 0.08\z
+			* 0.025\z
 			* apollo_megacrater_crater_penalty",
 	},
 	-- Create noise expressions for rock decoratives.
 	-- Small rocks should go anywhere, but more on rims of megacraters, fewer on non-mega craters except at center.
 	{
 		type = "noise-expression",
-		name = "apollo_rock_small",
+		name = "apollo_rock_common",
 		expression = "(apollo_crater_1 < 0.4)\z
-			* 0.005\z
-			* max(apollo_sandy_rock, apollo_dirt, (1/5)) * 5\z
+			* 0.003\z
+			* max(apollo_sandy_rock, apollo_dirt, (1/4)) * 4\z
 			* apollo_megacrater_crater_penalty",
+	},
+	{
+		type = "noise-expression",
+		name = "apollo_rock_tiny",
+		expression = "apollo_rock_common",
+	},
+	{
+		type = "noise-expression",
+		name = "apollo_rock_small",
+		expression = "apollo_rock_common",
+	},
+	{
+		type = "noise-expression",
+		name = "apollo_rock_medium",
+		expression = "apollo_rock_common * .2",
 	},
 }
 
@@ -157,16 +172,18 @@ end
 -- Create rock decoratives.
 --local rockTint = {.643, .635, .630}
 local rockTint = {.624, .635, .642} -- Originally they used {0.2588}*3 multiplied by a Vulcanus base tint of {1}*3.
-local smallRock = copy(RAW["optimized-decorative"]["small-volcanic-rock"])
-smallRock.name = "apollo-rock-small"
-smallRock.autoplace.probability_expression = "apollo_rock_small"
-smallRock.autoplace.order = "d[ground-surface]-f[rock]-1"
-smallRock.collision_mask = {layers={water_tile=true, cliff=true}, colliding_with_tiles_only=false, not_colliding_with_itself=false}
-	-- Add cliff to collision mask, since cliffs have reduced alpha, so rocks under them can shine through them.
-for _, pic in pairs(smallRock.pictures) do
-	pic.tint = rockTint
+for i, size in pairs{"medium", "small", "tiny"} do
+	local rock = copy(RAW["optimized-decorative"][size .. "-volcanic-rock"])
+	rock.name = "apollo-rock-" .. size
+	rock.autoplace.probability_expression = "apollo_rock_" .. size
+	rock.autoplace.order = "d[ground-surface]-f[rock]-" .. i
+	rock.collision_mask = {layers={water_tile=true, cliff=true}, colliding_with_tiles_only=false, not_colliding_with_itself=false}
+		-- Add cliff to collision mask, since cliffs have reduced alpha, so rocks under them can shine through them.
+	for _, pic in pairs(rock.pictures) do
+		pic.tint = rockTint
+	end
+	extend{rock}
 end
-extend{smallRock}
 
 -- TODO consider using tiny, medium, large, huge rocks as well.
 

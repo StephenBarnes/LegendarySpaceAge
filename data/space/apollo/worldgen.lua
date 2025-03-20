@@ -183,7 +183,7 @@ extend{
 		name = "apollo_aux",
 		type = "noise-expression",
 		-- Aux dimension, mostly just for some terrain variation so it doesn't look so uniform.
-		expression = "multioctave_noise{x = x, y = y, seed0 = map_seed, seed1 = 6, input_scale = (1/20), output_scale = 1, octaves = 6, persistence = 0.5}",
+		expression = "multioctave_noise{x = x, y = y, seed0 = map_seed, seed1 = 6, input_scale = (1/5), output_scale = 1, octaves = 6, persistence = 0.5}",
 	},
 
 	------------------------------------------------------------------------
@@ -192,13 +192,13 @@ extend{
 		name = "apollo_doughy",
 		type = "noise-expression",
 		-- Doughy highland spawns outside craters.
-		expression = "(apollo_inside_crater == 0) * (apollo_aux <= 0.8)",
+		expression = "(apollo_inside_crater == 0) * (apollo_aux <= 0.5)",
 	},
 	{
 		name = "apollo_dirt_2",
 		type = "noise-expression",
 		-- Highland 2 spawns outside craters, but at different aux.
-		expression = "(apollo_inside_crater == 0) * (apollo_aux > 0.8)",
+		expression = "(apollo_inside_crater == 0) * (apollo_aux > 0.5)",
 	},
 	{
 		name = "apollo_dirt",
