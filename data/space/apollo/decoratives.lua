@@ -27,8 +27,10 @@ extend{{
                        ((x / 4.1875839 - y) * 0.913853883 % y_spacing) <= 0.6)",
 }}
 
--- Noise expressions for craters.
+local megacrater_crater_penalty = 0.75 -- How much decorative craters are penalized from forming inside megacraters.
+
 extend{
+	-- Create first layer of noise expressions for craters.
 	{
 		type = "noise-expression",
 		name = "apollo_crater_1",
@@ -44,43 +46,79 @@ extend{
 		name = "apollo_crater_3",
 		expression = "basis_noise{x = x, y = y, seed0 = map_seed, seed1 = 3, input_scale = 1/4, output_scale = 1}"
 	},
+	{ -- Penalty to craters from large craters.
+		type = "noise-expression",
+		name = "apollo_megacrater_crater_penalty",
+		expression = "1 - (apollo_clay * " .. megacrater_crater_penalty .. ")",
+	},
+	-- Create second layer of noise expressions for craters, using 1st layer to place them non-overlapping.
+	{
+		type = "noise-expression",
+		name = "apollo_large_crater",
+		expression = "(apollo_crater_1 > 0.76) * every_n_finer(7, 7) * apollo_megacrater_crater_penalty * apollo_megacrater_crater_penalty * .5",
+		-- Applying the megacrater penalty twice, seems to produce better results.
+	},
+	{
+		type = "noise-expression",
+		name = "apollo_medium_crater",
+		expression = "(apollo_crater_1 < 0.4) * (apollo_crater_2 > 0.7) * every_n_finer(5, 5) * apollo_megacrater_crater_penalty",
+	},
+	{
+		type = "noise-expression",
+		name = "apollo_small_crater",
+		-- Use max with ranges on apollo_crater_1 to make tiny craters only spawn right inside large craters or outside them, not on the rim.
+		expression = "max((apollo_crater_1 > 0.85) * every_n_finer(7, 7), (apollo_crater_1 < 0.4))\z
+			* (apollo_crater_2 < 0.55)\z
+			* every_n_finer(2, 2)\z
+			* (apollo_crater_3 > 0.5)\z
+			* apollo_megacrater_crater_penalty",
+	},
+	{
+		type = "noise-expression",
+		name = "apollo_tiny_crater",
+		expression = "max((apollo_crater_1 > 0.85) * every_n_finer(7, 7), (apollo_crater_1 < 0.4))\z
+			* (apollo_crater_2 < 0.55)\z
+			* (apollo_crater_3 < 0.4)\z
+			* 0.08\z
+			* apollo_megacrater_crater_penalty",
+	},
+	-- Create noise expressions for rock decoratives.
+	-- Small rocks should go anywhere, but more on rims of megacraters, fewer on non-mega craters except at center.
+	{
+		type = "noise-expression",
+		name = "apollo_rock_small",
+		expression = "(apollo_crater_1 < 0.4)\z
+			* 0.005\z
+			* max(apollo_sandy_rock, apollo_dirt, (1/5)) * 5\z
+			* apollo_megacrater_crater_penalty",
+	},
 }
 
+-- Create crater decoratives.
 for i, vals in pairs{
 	{
 		name = "large",
 		scale = 0.5,
 		collisionSize = 3,
 		placeLayer = "1",
-		probabilityExpression = "(apollo_crater_1 > 0.76) * every_n_finer(7, 7)",
 	},
 	{
 		name = "medium",
 		scale = 0.25,
 		collisionSize = 1.5,
 		placeLayer = "2",
-		probabilityExpression = "(apollo_crater_1 < 0.4) * (apollo_crater_2 > 0.7) * every_n_finer(5, 5)",
 	},
 	{
 		name = "small",
 		scale = 0.1,
 		collisionSize = 0.7,
 		placeLayer = "3",
-		-- Use max with ranges on apollo_crater_1 to make tiny craters only spawn right inside large craters or outside them, not on the rim.
-		probabilityExpression = "max((apollo_crater_1 > 0.85) * every_n_finer(7, 7), (apollo_crater_1 < 0.4))\z
-			* (apollo_crater_2 < 0.55)\z
-			* every_n_finer(2, 2)\z
-			* (apollo_crater_3 > 0.5)",
 	},
 	{
 		name = "tiny",
 		scale = 0.05,
 		collisionSize = 0.51,
 		placeLayer = "4",
-		probabilityExpression = "max((apollo_crater_1 > 0.85) * every_n_finer(7, 7), (apollo_crater_1 < 0.4))\z
-			* (apollo_crater_2 < 0.55)\z
-			* (apollo_crater_3 < 0.4)\z
-			* 0.12",
 	},
 } do
 	---@type data.DecorativePrototype
@@ -97,8 +135,8 @@ for i, vals in pairs{
 		walking_sound = base_tile_sounds.walking.sand,
 		autoplace = {
 			order = "d[ground-surface]-e[crater]-" .. vals.placeLayer, -- TODO testing - same layer, so they won't overlap?
-			probability_expression = vals.probabilityExpression,
-			tile_restriction = {"apollo-doughy", "apollo-clay"},
+			probability_expression = "apollo_" .. vals.name .. "_crater",
+			tile_restriction = {"apollo-doughy", "apollo-clay", "apollo-dirt-2"},
 			--tile_restriction = {"apollo-doughy"},
 		},
 		pictures = {
@@ -115,3 +153,21 @@ for i, vals in pairs{
 	}
 	extend{crater}
 end
+
+-- Create rock decoratives.
+--local rockTint = {.643, .635, .630}
+local rockTint = {.624, .635, .642} -- Originally they used {0.2588}*3 multiplied by a Vulcanus base tint of {1}*3.
+local smallRock = copy(RAW["optimized-decorative"]["small-volcanic-rock"])
+smallRock.name = "apollo-rock-small"
+smallRock.autoplace.probability_expression = "apollo_rock_small"
+smallRock.autoplace.order = "d[ground-surface]-f[rock]-1"
+smallRock.collision_mask = {layers={water_tile=true, cliff=true}, colliding_with_tiles_only=false, not_colliding_with_itself=false}
+	-- Add cliff to collision mask, since cliffs have reduced alpha, so rocks under them can shine through them.
+for _, pic in pairs(smallRock.pictures) do
+	pic.tint = rockTint
+end
+extend{smallRock}
+
+-- TODO consider using tiny, medium, large, huge rocks as well.
+
+-- TODO consider also using vulcanus-sand-decal.

@@ -55,6 +55,7 @@ return {
 				["apollo-crater-medium"] = {},
 				["apollo-crater-small"] = {},
 				["apollo-crater-tiny"] = {},
+				["apollo-rock-small"] = {},
 				-- TODO add rocks.
 			}
 		},

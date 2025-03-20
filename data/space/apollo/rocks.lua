@@ -1,0 +1,2 @@
+-- This file adds decorative rocks for Apollo.
+-- Mostly using rocks from decoratives-vulcanus.lua in Space Age code.
