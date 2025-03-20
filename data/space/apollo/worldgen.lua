@@ -155,10 +155,35 @@ extend{
 		expression = "apollo_crater_spots_with_noise > 0",
 	},
 	{
+		name = "apollo_elevation_noise_outside_craters_frequency",
+		type = "noise-expression",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"(1/20) * var(\"control:apollo-elevation-noise-outside-craters-frequency:frequency\")",
+			"(1/20)"),
+	},
+	{
+		name = "apollo_elevation_noise_outside_craters_amplitude",
+		type = "noise-expression",
+		expression = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
+			"1.5 * var(\"control:apollo-elevation-noise-outside-craters-amplitude:frequency\")",
+			"1.5"),
+	},
+	{
+		name = "apollo_elevation_noise_outside_craters",
+		type = "noise-expression",
+		expression = "multioctave_noise{x = x, y = y, seed0 = map_seed, seed1 = 5, input_scale = apollo_elevation_noise_outside_craters_frequency, output_scale = apollo_elevation_noise_outside_craters_amplitude, octaves = 5, persistence = 0.5}",
+	},
+	{
 		name = "apollo_elevation",
 		type = "noise-expression",
 		-- Out of any craters, elevation is 0. Inside craters, we use the negated-ridged crater shapes.
-		expression = "if(apollo_inside_crater, apollo_craters_ridged_negated, 0)",
+		expression = "if(apollo_inside_crater, apollo_craters_ridged_negated, apollo_elevation_noise_outside_craters)",
+	},
+	{
+		name = "apollo_aux",
+		type = "noise-expression",
+		-- Aux dimension, mostly just for some terrain variation so it doesn't look so uniform.
+		expression = "multioctave_noise{x = x, y = y, seed0 = map_seed, seed1 = 6, input_scale = (1/20), output_scale = 1, octaves = 6, persistence = 0.5}",
 	},
 
 	------------------------------------------------------------------------
@@ -166,26 +191,32 @@ extend{
 	{
 		name = "apollo_doughy",
 		type = "noise-expression",
-		-- Doughly highland spawns in intermediate height range that's also outside of craters.
-		expression = "(apollo_elevation > -5) * (apollo_elevation < 1.8) * (apollo_inside_crater == 0)"
+		-- Doughy highland spawns outside craters.
+		expression = "(apollo_inside_crater == 0) * (apollo_aux <= 0.8)",
+	},
+	{
+		name = "apollo_dirt_2",
+		type = "noise-expression",
+		-- Highland 2 spawns outside craters, but at different aux.
+		expression = "(apollo_inside_crater == 0) * (apollo_aux > 0.8)",
 	},
 	{
 		name = "apollo_dirt",
 		type = "noise-expression",
-		-- Dirt tiles are wherever elevation is high.
-		expression = "apollo_elevation >= 1.8",
+		-- Dirt tiles are inside craters, at high elevations (rim mountain range).
+		expression = "(apollo_elevation >= 1.8) * apollo_inside_crater",
 	},
 	{
 		name = "apollo_sandy_rock",
 		type = "noise-expression",
 		-- Sandy rock tiles are on crater slopes.
-		expression = "(apollo_elevation > -5) * (apollo_elevation < 1.8) * (apollo_inside_crater)",
+		expression = "apollo_inside_crater * (apollo_elevation > -5) * (apollo_elevation < 1.8)",
 	},
 	{
 		name = "apollo_clay",
 		type = "noise-expression",
-		-- Clay lowlands are wherever elevation is very low, ie inside craters.
-		expression = "apollo_elevation <= -5",
+		-- Clay lowlands are inside craters, at low elevations.
+		expression = "(apollo_elevation <= -5) * apollo_inside_crater",
 	},
 }
 
@@ -202,6 +233,8 @@ if enableDetailedApolloTerrainSliders then
 		"apollo-crater-noise-frequency",
 		"apollo-crater-spacing-mult",
 		"apollo-crater-density",
+		"apollo-elevation-noise-outside-craters-frequency",
+		"apollo-elevation-noise-outside-craters-amplitude",
 	} do
 		extend{
 			{

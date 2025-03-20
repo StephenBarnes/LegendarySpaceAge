@@ -167,7 +167,7 @@ local apolloDoughy = makeTilePrototype{
     walkingSound = tile_sounds.walking.soft_sand({}),
 	landingStepsSound = tile_sounds.landing.sand,
 	drivingSound = base_tile_sounds.driving.sand,
-	mapColor = {150, 150, 150}, -- TODO
+	mapColor = {.604, .592, .592},
 	walkingSpeedModifier = 1,
 	vehicleFrictionModifier = 1,
     layerOffset = 20,
@@ -190,12 +190,36 @@ local apolloDirt = makeTilePrototype{
 	walkingSound = tile_sounds.walking.soft_sand({}),
 	landingStepsSound = tile_sounds.landing.sand,
 	drivingSound = base_tile_sounds.driving.sand,
-	mapColor = {190, 190, 190}, -- TODO
+	mapColor = {.733, .718, .725},
 	walkingSpeedModifier = 1,
 	vehicleFrictionModifier = 1,
     layerOffset = 7,
 }
 extend{apolloDirt}
+
+-- Make a copy of dirt, with darker map color, mostly just for variety in main terrain.
+local apolloDirt2 = makeTilePrototype{
+    name = "apollo-dirt-2",
+    order = "01b",
+    autoplaceProb = "apollo_dirt_2",
+    variants = tile_variations_template_with_transitions( -- Copied from volcanic-soil-dark, with some changes.
+        "__LegendarySpaceAge__/graphics/apollo/tiles/dirt.png",
+		{
+			max_size = 4,
+			[1] = { weights = { 0.085, 0.085, 0.085, 0.085, 0.087, 0.085, 0.065, 0.085, 0.045, 0.045, 0.045, 0.045, 0.005, 0.025, 0.045, 0.045 } },
+			[2] = { probability = 1, weights = { 0.070, 0.070, 0.025, 0.070, 0.070, 0.070, 0.007, 0.025, 0.070, 0.050, 0.015, 0.026, 0.030, 0.005, 0.070, 0.027 } },
+			[4] = { probability = 1.00, weights = { 0.070, 0.070, 0.070, 0.070, 0.070, 0.070, 0.015, 0.070, 0.070, 0.070, 0.015, 0.050, 0.070, 0.070, 0.065, 0.070 }, },
+		}
+	),
+	walkingSound = tile_sounds.walking.soft_sand({}),
+	landingStepsSound = tile_sounds.landing.sand,
+	drivingSound = base_tile_sounds.driving.sand,
+    mapColor = {.576, .561, .561},
+	walkingSpeedModifier = 1,
+	vehicleFrictionModifier = 1,
+    layerOffset = 7,
+}
+extend{apolloDirt2}
 
 local apolloClay = makeTilePrototype{
     name = "apollo-clay",
@@ -213,7 +237,7 @@ local apolloClay = makeTilePrototype{
     walkingSound = tile_sounds.walking.soft_sand({}),
 	landingStepsSound = tile_sounds.landing.sand,
 	drivingSound = base_tile_sounds.driving.sand,
-	mapColor = {50, 50, 50}, -- TODO
+	mapColor = {.486, .467, .467},
 	walkingSpeedModifier = 1,
 	vehicleFrictionModifier = 1,
     layerOffset = 11,
@@ -237,7 +261,7 @@ local apolloSandyRock = makeTilePrototype{
     walkingSound = tile_sounds.walking.soft_sand({}),
 	landingStepsSound = tile_sounds.landing.sand,
 	drivingSound = base_tile_sounds.driving.sand,
-	mapColor = {100, 100, 100}, -- TODO
+	mapColor = {.433, .414, .409},
 	walkingSpeedModifier = 1,
 	vehicleFrictionModifier = 1,
     layerOffset = 15,

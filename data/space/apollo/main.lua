@@ -3,6 +3,7 @@
 require("autoplace-controls")
 require("decorative-craters")
 require("low-gravity-runner")
+require("cliffs")
 require("worldgen")
 require("tiles")
 local mapGen = require("map-gen")

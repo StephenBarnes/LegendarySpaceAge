@@ -14,6 +14,8 @@ local autoplaceControls = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
 		["apollo-crater-noise-frequency"] = {},
 		["apollo-crater-spacing-mult"] = {},
 		["apollo-crater-density"] = {},
+		["apollo-elevation-noise-outside-craters-frequency"] = {},
+		["apollo-elevation-noise-outside-craters-amplitude"] = {},
 		["apollo_cliffs"] = {},
 	},
 	{
@@ -25,14 +27,13 @@ local autoplaceControls = Gen.ifThenElse(enableDetailedApolloTerrainSliders,
 return {
 	property_expression_names = {
 		elevation = "apollo_elevation",
-		aux = "vulcanus_aux", -- TODO
+		aux = "apollo_aux",
 		cliffiness = "cliffiness_basic",
 		cliff_elevation = "cliff_elevation_from_elevation",
-		["entity:drill-node-ice:probability"] = "apollo_ice_node_probability",
 	},
 	cliff_settings = {
-		name = "cliff-vulcanus", -- TODO make new cliff set?
-		cliff_elevation_interval = 1.4,
+		name = "cliff-apollo",
+		cliff_elevation_interval = 1.5,
 		cliff_elevation_0 = 1,
 		cliff_smoothing = 1,
 		control = "apollo_cliffs",
@@ -42,6 +43,7 @@ return {
 		["tile"] = {
 			settings = {
 				["apollo-dirt"] = {},
+				["apollo-dirt-2"] = {},
 				["apollo-doughy"] = {},
 				["apollo-clay"] = {},
 				["apollo-sandy-rock"] = {},
