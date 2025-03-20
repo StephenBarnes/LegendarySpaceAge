@@ -16,9 +16,11 @@ local apolloCliffs = scaled_cliff({ -- Global function defined in entity-util.lu
 
 -- Now make all the pictures have low alpha.
 local tint = {.25, .25, .25, .25}
+-- That looks a bit weird, makes lines where they overlap from alphas adding. But making it opaque makes it too dark.
 local function setTint(ar)
 	for _, pic in pairs(ar) do
 		pic.tint = tint
+		pic.surface = "any" -- Change surface hint to "any" instead of vulcanus.
 		if pic.layers then
 			setTint(pic.layers)
 		end

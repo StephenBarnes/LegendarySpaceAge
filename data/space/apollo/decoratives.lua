@@ -107,6 +107,17 @@ extend{
 		name = "apollo_rock_medium",
 		expression = "apollo_rock_common * .2",
 	},
+	{
+		type = "noise-expression",
+		name = "apollo_rock_cluster",
+		-- Rock clusters only in crater slopes, not anywhere else.
+		expression = "apollo_sandy_rock * .03",
+	},
+	--[[ {
+		type = "noise-expression",
+		name = "apollo_relief_decal",
+		expression = "apollo_rock_common * .3 * (1 - apollo_clay)",
+	}, ]]
 }
 
 -- Create crater decoratives.
@@ -170,12 +181,16 @@ for i, vals in pairs{
 end
 
 -- Create rock decoratives.
---local rockTint = {.643, .635, .630}
 local rockTint = {.624, .635, .642} -- Originally they used {0.2588}*3 multiplied by a Vulcanus base tint of {1}*3.
-for i, size in pairs{"medium", "small", "tiny"} do
-	local rock = copy(RAW["optimized-decorative"][size .. "-volcanic-rock"])
-	rock.name = "apollo-rock-" .. size
-	rock.autoplace.probability_expression = "apollo_rock_" .. size
+for i, vals in pairs{
+	{"cluster", "tiny-rock-cluster"},
+	{"medium", "medium-volcanic-rock"},
+	{"small", "small-volcanic-rock"},
+	{"tiny", "tiny-volcanic-rock"},
+} do
+	local rock = copy(RAW["optimized-decorative"][vals[2]])
+	rock.name = "apollo-rock-" .. vals[1]
+	rock.autoplace.probability_expression = "apollo_rock_" .. vals[1]
 	rock.autoplace.order = "d[ground-surface]-f[rock]-" .. i
 	rock.collision_mask = {layers={water_tile=true, cliff=true}, colliding_with_tiles_only=false, not_colliding_with_itself=false}
 		-- Add cliff to collision mask, since cliffs have reduced alpha, so rocks under them can shine through them.
@@ -185,6 +200,16 @@ for i, size in pairs{"medium", "small", "tiny"} do
 	extend{rock}
 end
 
--- TODO consider using tiny, medium, large, huge rocks as well.
-
--- TODO consider also using vulcanus-sand-decal.
+-- Create relief decal from pumice-relief-decal.
+--[[ Commenting this out because I don't think it looks good.
+local relief = copy(RAW["optimized-decorative"]["pumice-relief-decal"])
+relief.name = "apollo-relief-decal"
+relief.autoplace.probability_expression = "apollo_relief_decal"
+relief.autoplace.order = "d[ground-surface]-g[relief]"
+for _, pic in pairs(relief.pictures) do
+	pic.tint = {.02, .02, .02, .02} -- Make it stand out much less.
+	pic.tint_as_overlay = true
+	pic.blend_mode = "multiplicative-with-alpha" -- TODO testing
+end
+extend{relief}
+]]

@@ -56,11 +56,12 @@ return {
 				["apollo-crater-small"] = {},
 				["apollo-crater-tiny"] = {},
 
+				["apollo-rock-cluster"] = {},
 				["apollo-rock-medium"] = {},
 				["apollo-rock-small"] = {},
 				["apollo-rock-tiny"] = {},
 
-				-- TODO maybe add sand decals.
+				--["apollo-relief-decal"] = {},
 			}
 		},
 		["entity"] = {
