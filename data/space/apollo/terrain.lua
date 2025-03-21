@@ -204,7 +204,7 @@ extend{
 	{
 		name = "apollo_dirt",
 		type = "noise-expression",
-		-- Dirt tiles are inside craters, at high elevations (rim mountain range).
+		-- Dirt tiles are on crater rims, ie inside crater regions at high elevations.
 		expression = "(apollo_elevation >= 1.8) * apollo_inside_crater",
 	},
 	{

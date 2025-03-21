@@ -13,11 +13,10 @@ ent.minable.result = "telescope"
 ent.alert_icon_shift = util.by_pixel(0, -12)
 ent.collision_box = {{-1.2, -1.2}, {1.2, 1.2}}
 ent.selection_box = {{-1.5, -1.5}, {1.5, 1.5}}
--- TODO corpse, dying explosion
--- TODO max health
--- TODO switch to passthrough fluid boxes.
--- TODO circuit connection.
--- TODO audio - probably combine assembling machine and radar.
+ent.corpse = "big-remnants"
+ent.dying_explosion = "medium-explosion"
+ent.max_health = 300
+-- Circuit connection looks fine.
 ent.fluid_boxes = {
 	{
 		production_type = "input",
@@ -66,27 +65,87 @@ ent.graphics_set = {
 		layers = {
 			{
 				filename = "__space-exploration-graphics-4__/graphics/entity/telescope/telescope.png",
-				priority = "high",
 				width = 2080/8,
 				height = 2128/8,
 				frame_count = 64,
 				line_length = 8,
 				shift = util.by_pixel(6, -19),
-				animation_speed = 0.2,
+				animation_speed = 0.25,
 				scale = 0.5,
 			},
 			{
 				draw_as_shadow = true,
 				filename = "__space-exploration-graphics-4__/graphics/entity/telescope/telescope-shadow.png",
-				priority = "high",
 				width = 2608/8,
 				height = 1552/8,
 				frame_count = 64,
 				line_length = 8,
 				shift = util.by_pixel(32, 7),
-				animation_speed = 0.2,
+				animation_speed = 0.25,
 				scale = 0.5,
 			},
+		},
+	},
+}
+ent.working_sound = {
+	--[[
+	idle_sound = {
+		filename = "__base__/sound/idle1.ogg",
+		volume = 0.6
+	},]]
+	main_sounds = {
+		{
+			--sound = {filename = "__base__/sound/idle1.ogg", volume = 0.4},
+			sound = {filename = "__space-age__/sound/entity/agricultural-tower/agricultural-tower-arm-extend-loop.ogg", volume = 0.27},
+			audible_distance_modifier = 0.5,
+			fade_in_ticks = 4,
+			fade_out_ticks = 30,
+		},
+	},
+	sound_accents = {
+		--[[ Frame counts:
+			There's 64 frames.
+			Inclines upwards around 6-17.
+			Sweeps around 19-40. (Smaller rotation.)
+			Declines downwards 41-56.
+			Sweeps back 57-64. (Larger rotation.)
+			]]
+		--[[
+		{ -- Incline
+			sound = {filename = "__base__/sound/inserter-long-handed-2.ogg", volume = 0.8, audible_distance_modifier = 0.6},
+			frame = 5, -- 7 is too late.
+		},
+		{ -- Rotate 1
+			sound = {filename = "__base__/sound/roboport-door.ogg", volume = 0.8, audible_distance_modifier = 0.6},
+			frame = 18,
+		},
+		{ -- Decline
+			sound = {filename = "__space-age__/sound/entity/recycler/recycler-mechanic-3.ogg", volume = 0.8, audible_distance_modifier = 0.6},
+			frame = 40, -- 42 is too late.
+		},
+		{ -- Rotate 2
+			sound = {filename = "__space-age__/sound/entity/recycler/recycler-mechanic-3.ogg", volume = 0.8, audible_distance_modifier = 0.6},
+			frame = 55, -- 57 is too late.
+		},
+		]]
+		-- Rather doing click sounds at velocity changes / extremes of range-of-motion.
+		{ -- Start of incline.
+			sound = {
+				filename = "__space-age__/sound/entity/rocket-turret/rocket-turret-rotation-stop.ogg",
+				volume = 0.65,
+				audible_distance_modifier = 0.5,
+				probability = .4,
+			},
+			frame = 2,
+		},
+		{ -- Start of rotate 2
+			sound = {
+				filename = "__space-age__/sound/entity/rocket-turret/rocket-turret-rotation-stop.ogg",
+				volume = 0.65,
+				audible_distance_modifier = 0.5,
+				probability = .4,
+			},
+			frame = 47,
 		},
 	},
 }
@@ -97,8 +156,9 @@ ent.energy_source = {
 	type = "electric",
 	usage_priority = "secondary-input",
 	emissions_per_minute = {},
+	drain = "0W",
 }
-ent.energy_usage = "500kW" -- TODO decide.
+ent.energy_usage = "500kW" -- Solar panels on Apollo are 120kW, so I think this is reasonable.
 local apolloGravity = RAW.planet.apollo.surface_properties.gravity
 ent.surface_conditions = {
 	{
@@ -107,8 +167,12 @@ ent.surface_conditions = {
 		max = apolloGravity,
 	},
 }
-extend{ent}
+ent.tile_buildability_rules = {{ -- Only allow building on high tiles.
+	area = ent.collision_box,
+	required_tiles = {layers = {allows_telescope=true}},
+}}
 -- TODO exclusion zones?
+extend{ent}
 
 -- Create crafting category.
 extend{{
