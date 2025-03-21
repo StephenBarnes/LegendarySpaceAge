@@ -21,6 +21,7 @@ So, how to create that terrain using noise expressions?
 	"crater_radius",
 	"crater_ridge_height",
 }, {game.player.character.position})))
+-- NOTE it seems this command doesn't work with local expressions, so I'm registering most of the stuff below as noise expressions for debugging.
 ]]
 
 local enableDetailedApolloTerrainSliders = settings.startup["LSA-enable-detailed-apollo-terrain-sliders"].value
@@ -255,4 +256,37 @@ extend{
 		order = "z",
 		category = "cliff"
 	}
+}
+
+--[[ Create autoplace for ice nodes.
+Basically I want all craters to have some nodes, even small craters, but I also don't want big craters to have too many. So I want a higher density of ice nodes per area for small craters.
+	So, accomplishing that using spot noise, with hard region target quantity. It tries to place nodes, but stops once it's placed enough, which causes lower density for big craters.
+]]
+RAW.resource["drill-node-ice"].autoplace = {
+	control = "ice_node",
+	order = "z",
+	probability_expression = "ice_node_probability",
+	richness_expression = "1",
+	tile_restriction = {"apollo-clay"}, -- Only inside craters.
+}
+extend{
+	{
+		type = "noise-expression",
+		name = "ice_node_probability",
+		expression = "(control:ice_node:size > 0)\z
+					* spot_noise{x = x, y = y, seed0 = map_seed, seed1 = 6,\z
+						density_expression = (1 * (control:ice_node:frequency)) / region_area,\z
+						spot_quantity_expression = 1,\z
+						spot_radius_expression = 1,\z
+						spot_favorability_expression = (apollo_clay),\z
+						region_size = region_side,\z
+						candidate_point_count = 10 * (control:ice_node:size),\z
+						hard_region_target_quantity = 1,\z
+						basement_value = 0,\z
+						maximum_spot_basement_radius = 5}",
+		local_expressions = {
+			region_side = "128 * (control:ice_node:size)",
+			region_area = "region_side * region_side",
+		},
+	},
 }
