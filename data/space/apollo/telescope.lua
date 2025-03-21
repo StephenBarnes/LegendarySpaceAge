@@ -13,9 +13,13 @@ ent.minable.result = "telescope"
 ent.alert_icon_shift = util.by_pixel(0, -12)
 ent.collision_box = {{-1.2, -1.2}, {1.2, 1.2}}
 ent.selection_box = {{-1.5, -1.5}, {1.5, 1.5}}
+ent.tile_width = 3
+ent.tile_height = 3
 ent.corpse = "big-remnants"
 ent.dying_explosion = "medium-explosion"
 ent.max_health = 300
+ent.next_upgrade = nil
+ent.fast_replaceable_group = nil
 -- Circuit connection looks fine.
 ent.fluid_boxes = {
 	{
@@ -171,7 +175,6 @@ ent.tile_buildability_rules = {{ -- Only allow building on high tiles.
 	area = ent.collision_box,
 	required_tiles = {layers = {allows_telescope=true}},
 }}
--- TODO exclusion zones?
 extend{ent}
 
 -- Create crafting category.
@@ -186,16 +189,30 @@ item.name = "telescope"
 item.icon = "__space-exploration-graphics__/graphics/icons/telescope.png"
 item.place_result = "telescope"
 item.subgroup = ITEM["rocket-silo"].subgroup
+item.order = "e"
 extend{item}
 
--- TODO create recipe for making telescopes.
+-- Create recipe for making telescopes.
+Recipe.make{
+	copy = "assembling-machine-2",
+	recipe = "telescope",
+	ingredients = {
+		{"electric-engine-unit", 20},
+		{"fluid-fitting", 10},
+		{"sensor", 50},
+	},
+	resultCount = 1,
+	time = 50,
+	enabled = false,
+		-- Added to Apollo tech when that's created.
+}
 
--- TODO create item for lunar science.
+-- Create item for lunar science.
 local scienceItem = copy(RAW.tool["space-science-pack"])
 scienceItem.name = "lunar-science-pack"
 extend{scienceItem}
 
--- TODO create recipe for lunar science.
+-- Create recipe for lunar science.
 Recipe.make{
 	copy = "space-science-pack",
 	recipe = "lunar-science-pack",
@@ -206,13 +223,16 @@ Recipe.make{
 	},
 	results = {
 		{"lunar-science-pack", 1},
-		{"nitrogen-gas", 1, type="fluid", ignored_by_productivity = 1}, -- TODO check.
+		{"nitrogen-gas", 1, type="fluid", ignored_by_productivity = 1},
 	},
 	main_product = "lunar-science-pack",
 	allow_productivity = true,
 	allow_quality = true,
 	time = 10,
-	enabled = true, -- TODO add to tech.
+	enabled = false,
+		-- Added to Apollo tech when that's created.
+	surface_conditions = ent.surface_conditions,
 }
 
--- TODO add to tech.
+-- Create exclusion zones.
+ExclusionZones.create(ASSEMBLER["telescope"])

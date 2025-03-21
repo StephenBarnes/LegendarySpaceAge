@@ -7,11 +7,7 @@ There's a separate runtime script in control/air-separator.lua which:
 Graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 ]]
 
-local ALLOW_SELECT_EXCLUSIONS = false -- Whether to allow selection of the exclusion zones - for debugging.
-local EXCLUSION_DIMS = {27, 21} -- Tested with both odd; I think they could be even too.
-	-- Note that control/air-separator.lua computes distance from center of air separator to center of exclusion zone, using the 2nd number here (y) as y/2 + ENT_SIZE/2. Making the 2nd number smaller than the 1st number is best, so that it's more rounded rather than cross-shaped.
 local ENT_SIZE = 3 -- Size of air separator in tiles, assumed square.
-
 local ent = copy(ASSEMBLER["assembling-machine-3"])
 ent.name = "air-separator"
 ent.icon = "__LegendarySpaceAge__/graphics/air-separator/icon.png"
@@ -19,10 +15,6 @@ ent.minable = {mining_time = 1, result = "air-separator"}
 ent.crafting_speed = 1
 ent.selection_box = {{-1.5, -1.5}, {1.5, 1.5}}
 ent.collision_box = {{-1.45, -1.45}, {1.45, 1.45}}
-if ent.collision_mask == nil then
-	ent.collision_mask = copy(RAW["utility-constants"].default.building_collision_mask)
-end
-ent.collision_mask.layers["air_separator_exclusion"] = true
 ent.tile_height = ENT_SIZE
 ent.tile_width = ENT_SIZE
 local FLUIDBOX_INDEX = {
@@ -157,18 +149,6 @@ ent.dying_explosion = "steam-turbine-explosion"
 ent.max_health = 200
 ent.circuit_connector = copy(ASSEMBLER["cryogenic-plant"].circuit_connector)
 ent.surface_conditions = {{property = "pressure", min = 10}} -- So it can't be built on space platforms.
--- NOTE I was thinking maybe we could ONLY do tile_buildability_rules, instead of doing control-stage creation of exclusion zone entities. BUT the tile_buildability_rules are only checked against TILES, not entities. So they won't collide with other air separators.
--- NOTE Was also thinking about adding buildability rules just to highlight some tiles. Tried that but it doesn't really work, the squares only get shown when they're going to block building due to tile collisions, which never happens unless their collision layers are misconfigured, so never mind.
--- Instead, using Entity.radius_visualisation_specification to show the exclusion zone.
-ent.radius_visualisation_specification = {
-	sprite = {
-		filename = "__LegendarySpaceAge__/graphics/air-separator/grid_27_21.png",
-		priority = "extra-high-no-scale",
-		width = EXCLUSION_DIMS[2] * 2 + ENT_SIZE,
-		height = EXCLUSION_DIMS[2] * 2 + ENT_SIZE,
-	},
-	distance = EXCLUSION_DIMS[2] + ENT_SIZE/2,
-}
 extend{ent}
 
 local item = copy(ITEM["assembling-machine-3"])
@@ -303,51 +283,7 @@ for _, planet in pairs{"vulcanus", "gleba", "fulgora", "aquilo"} do
 	Tech.addRecipeToTech("air-separation-"..planet, "planet-discovery-"..planet)
 end
 
--- Create a collision layer for the air separator exclusion zones.
-extend{
-	{
-		type = "collision-layer",
-		name = "air_separator_exclusion",
-	},
-}
-
--- Create simple-entities for the air separator exclusion zones. One is more horizontal, the other more vertical.
--- We place 4 of these around the air separator, one on each side. That way we leave a gap in the middle for the air separator to be built. This is necessary for ghosts to not get destroyed by their own exclusion zones.
-local collisionBox = {{-EXCLUSION_DIMS[1]/2, -EXCLUSION_DIMS[2]/2}, {EXCLUSION_DIMS[1]/2, EXCLUSION_DIMS[2]/2}}
----@type data.SimpleEntityPrototype
-local exclusion1 = {
-	type = "simple-entity",
-	name = "air-separator-exclusion-1",
-	icons = {
-		{
-			icon = "__LegendarySpaceAge__/graphics/air-separator/icon.png",
-			icon_size = 64,
-			scale = 0.5,
-		},
-		{
-			icon = "__LegendarySpaceAge__/graphics/misc/no.png",
-			icon_size = 64,
-			scale = 0.5,
-			shift = {0, 0},
-		},
-	},
-	selection_box = Gen.ifThenElse(ALLOW_SELECT_EXCLUSIONS, collisionBox, nil),
-	collision_box = collisionBox,
-	selection_priority = 1, -- So other stuff on top of it gets selected instead of this. Seems chests are 50, setting this to 0 makes it actually 50 in-game. So I'm guessing 0 doesn't work, but other than that higher number gets selected preferentially.
-	selectable_in_game = ALLOW_SELECT_EXCLUSIONS,
-	collision_mask = {layers={["air_separator_exclusion"] = true}},
-	localised_name = {"entity-name.air-separator-exclusion"},
-	localised_description = {"entity-description.air-separator-exclusion"},
-	remove_decoratives = "false",
-	flags = {"not-on-map", "not-repairable", "not-deconstructable", "not-flammable", "not-blueprintable", "placeable-neutral"},
-	allow_copy_paste = false,
-	hidden_in_factoriopedia = true,
-}
-local exclusion2 = copy(exclusion1)
-exclusion2.name = "air-separator-exclusion-2"
-local collisionBox2 = {{-EXCLUSION_DIMS[2]/2, -EXCLUSION_DIMS[1]/2}, {EXCLUSION_DIMS[2]/2, EXCLUSION_DIMS[1]/2}}
-exclusion2.selection_box = Gen.ifThenElse(ALLOW_SELECT_EXCLUSIONS, collisionBox2, nil)
-exclusion2.collision_box = collisionBox2
-extend{exclusion1, exclusion2}
+-- Create ents etc. for exclusion zones.
+ExclusionZones.create(ASSEMBLER["air-separator"])
 
 -- Could add productivity techs for air separation, but I'm not sure prod techs in general are a good idea.

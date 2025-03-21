@@ -6,11 +6,7 @@ Graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 Some code taken from Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above.
 ]]
 
-local ALLOW_SELECT_EXCLUSIONS = false -- Whether to allow selection of the exclusion zones - for debugging.
-local EXCLUSION_DIMS = {35, 25} -- Tested with both odd; I think they could be even too.
-	-- Note that control/deep-drill.lua computes distance from center of deep drill to center of exclusion zone, using the 2nd number here (y) as y/2 + ENT_SIZE/2. Making the 2nd number smaller than the 1st number is best, so that it's more rounded rather than cross-shaped.
 local ENT_SIZE = 11 -- Size of deep drill in tiles, assumed square.
-
 local ent = copy(ASSEMBLER["assembling-machine-3"])
 ent.name = "deep-drill"
 ent.icon = "__LegendarySpaceAge__/graphics/deep-drill/icon.png"
@@ -18,10 +14,6 @@ ent.minable = {mining_time = 1, result = "deep-drill"}
 ent.crafting_speed = 1
 ent.selection_box = {{-5.5, -5.5}, {5.5, 5.5}}
 ent.collision_box = {{-5.45, -5.45}, {5.45, 5.45}}
-if ent.collision_mask == nil then
-	ent.collision_mask = copy(RAW["utility-constants"].default.building_collision_mask)
-end
-ent.collision_mask.layers["deep_drill_exclusion"] = true
 ent.tile_height = ENT_SIZE
 ent.tile_width = ENT_SIZE
 ent.fluid_boxes = {
@@ -152,15 +144,6 @@ ent.corpse = "rocket-silo-remnants"
 ent.dying_explosion = "rocket-silo-explosion"
 ent.max_health = 1000
 ent.circuit_connector = copy(RAW["rocket-silo"]["rocket-silo"].circuit_connector)
-ent.radius_visualisation_specification = {
-	sprite = {
-		filename = "__LegendarySpaceAge__/graphics/deep-drill/grid_35_25.png",
-		priority = "extra-high-no-scale",
-		width = EXCLUSION_DIMS[2] * 2 + ENT_SIZE,
-		height = EXCLUSION_DIMS[2] * 2 + ENT_SIZE,
-	},
-	distance = EXCLUSION_DIMS[2] + ENT_SIZE/2,
-}
 extend{ent}
 
 local item = copy(ITEM["big-mining-drill"])
@@ -214,6 +197,11 @@ for i, planetData in pairs{
 		{"stone", 7},
 		{"scrap", 3},
 		{"fulgoran-sludge", 10, type = "fluid"},
+	}},
+	{"apollo", {
+		{"sand", 5},
+		{"stone", 5},
+		-- TODO later maybe add titanium or regolith or sth.
 	}},
 } do
 	local planetName = planetData[1]
@@ -287,49 +275,5 @@ for i = 1, 3 do
 	end
 end
 
--- Create a collision layer for the deep drill exclusion zones.
-extend{
-	{
-		type = "collision-layer",
-		name = "deep_drill_exclusion",
-	},
-}
-
--- Create simple-entities for the deep drill exclusion zones. One is more horizontal, the other more vertical.
--- We place 4 of these around the deep drill, one on each side. That way we leave a gap in the middle for the deep drill to be built. This is necessary for ghosts to not get destroyed by their own exclusion zones.
-local collisionBox = {{-EXCLUSION_DIMS[1]/2, -EXCLUSION_DIMS[2]/2}, {EXCLUSION_DIMS[1]/2, EXCLUSION_DIMS[2]/2}}
----@type data.SimpleEntityPrototype
-local exclusion1 = {
-	type = "simple-entity",
-	name = "deep-drill-exclusion-1",
-	icons = {
-		{
-			icon = "__LegendarySpaceAge__/graphics/deep-drill/icon.png",
-			icon_size = 64,
-			scale = 0.5,
-		},
-		{
-			icon = "__LegendarySpaceAge__/graphics/misc/no.png",
-			icon_size = 64,
-			scale = 0.5,
-			shift = {0, 0},
-		},
-	},
-	selection_box = Gen.ifThenElse(ALLOW_SELECT_EXCLUSIONS, collisionBox, nil),
-	collision_box = collisionBox,
-	selection_priority = 1, -- So other stuff on top of it gets selected instead of this. Seems chests are 50, setting this to 0 makes it actually 50 in-game. So I'm guessing 0 doesn't work, but other than that higher number gets selected preferentially.
-	selectable_in_game = ALLOW_SELECT_EXCLUSIONS,
-	collision_mask = {layers={["deep_drill_exclusion"] = true}},
-	localised_name = {"entity-name.deep-drill-exclusion"},
-	localised_description = {"entity-description.deep-drill-exclusion"},
-	remove_decoratives = "false",
-	flags = {"not-on-map", "not-repairable", "not-deconstructable", "not-flammable", "not-blueprintable", "placeable-neutral"},
-	allow_copy_paste = false,
-	hidden_in_factoriopedia = true,
-}
-local exclusion2 = copy(exclusion1)
-exclusion2.name = "deep-drill-exclusion-2"
-local collisionBox2 = {{-EXCLUSION_DIMS[2]/2, -EXCLUSION_DIMS[1]/2}, {EXCLUSION_DIMS[2]/2, EXCLUSION_DIMS[1]/2}}
-exclusion2.selection_box = Gen.ifThenElse(ALLOW_SELECT_EXCLUSIONS, collisionBox2, nil)
-exclusion2.collision_box = collisionBox2
-extend{exclusion1, exclusion2}
+-- Create exclusion zones.
+ExclusionZones.create(ASSEMBLER["deep-drill"])

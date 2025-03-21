@@ -22,6 +22,7 @@ Icon.getIconInfo = function(pathCode, proto)
 	end
 
 	if dirCode == "planet" then
+		if rest == "apollo" then return {path = "__LegendarySpaceAge__/graphics/apollo/icon.png"} end
 		local planetIcon = RAW.planet[rest].icon
 		assert(planetIcon ~= nil, "No icon found for planet "..rest)
 		return {path = planetIcon}
