@@ -40,7 +40,8 @@ for i, itemName in pairs{
 	recipe1.auto_recycle = false
 	recipe1.localised_name = {"recipe-name.sand-derust-X", {"item-name.compound-"..itemName}}
 	recipe1.category = "crafting"
-	recipe1.allow_as_intermediate = false
+	recipe1.allow_as_intermediate = true
+	recipe1.allow_decomposition = false
 	extend{recipe1}
 
 	local recipe2 = copy(recipe1)

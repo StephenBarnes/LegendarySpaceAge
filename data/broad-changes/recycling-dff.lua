@@ -120,8 +120,8 @@ for _, item in pairs{
 	-- Setting .hidden_in_factoriopedia to true doesn't work, still shows up in factoriopedia.
 end
 
--- Space biolabs should have recycling recipe.
--- Actually, looks like there's a hard-coded exception for recipe named "biolab". So let's generate it ourselves.
+-- Vacuum biolabs should have recycling recipe.
+-- Looks like there's a hard-coded exception for recipe named "biolab". So let's generate it ourselves.
 Recycling.generate_recycling_recipe(RECIPE.biolab, (function(_) return true end))
 
 -- Change charged battery recycling recipes to just discharge the batteries.

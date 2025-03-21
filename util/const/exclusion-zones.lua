@@ -14,6 +14,6 @@ return {
 	},
 	["telescope"] = {
 		size = 3,
-		dims = {27, 21},
+		dims = {11, 7},
 	},
 }

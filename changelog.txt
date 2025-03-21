@@ -2,13 +2,15 @@
 Version: 0.10.0
 Date: 2025-03-??
   Features:
-    - TODO Added Apollo, moon of Nauvis.
-    - TODO Rearranged space map. Added asteroid belts.
+    - Added Apollo, moon of Nauvis.
+    - Rearranged space map. Added asteroid belts.
+    - Added telescopes for making lunar science.
+    - Added underground deposits for borehole drills - ice on Apollo, and (TODO Gleba, Vulcanus, etc.)
+    - TODO added asteroid science pack, made from asteroid chunks.
+    - TODO added vacuum assembler
     - TODO add sugar system
     - TODO add resistances for enemies
     - TODO add bream
-    - TODO add nodes for borehole drills
-    - Borehole drills can't be built close to each other.
 ---------------------------------------------------------------------------------------------------
 Version: 0.9.0
 Date: 2025-03-08

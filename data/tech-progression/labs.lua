@@ -1,18 +1,19 @@
--- This file changes the labs.
--- There are 3 lab types: normal electric, pentapod biolabs, and space biolabs.
--- Pentapod biolabs are from the "Gleba Lab" mod by LordMiguel.
--- The base biolabs from Space Age are renamed to space biolabs.
+--[[ This file changes the labs.
+There are 3 lab types: normal electric, pentapod biolabs, and vacuum biolabs.
+Pentapod biolabs are from the "Gleba Lab" mod by LordMiguel.
+The base biolabs from Space Age are renamed to vacuum biolabs.
 
--- For progression, we want to make them successively better but also more complex to run.
--- Base labs: 1x research speed, 100% science pack drain, 120kW electricity, 2 module slots. Produces no pollution.
---    Built only on Nauvis, so have to ship science packs back to Nauvis before you get techs that make planets easier, eg cliff explosives.
--- Pentapod biolabs: 2x research speed, 50% science pack drain, 4 module slots.
---    Requires 1/10s pentapod eggs to run. So if you run out of science, your pentapod eggs hatch. (Modules will probably reduce that to 1/50s.)
---    Built only on Gleba.
---    Produces lots of spores.
--- Space biolabs: 4x research speed, 25% science pack drain, 8 module slots.
---    Requires 1/2s biter eggs to run. (Modules will probably reduce that to 1/10s.)
---    Built only in space. So you'll probably want to have a travelling space platform picking up sciences on all planets.
+For progression, we want to make them successively better but also more complex to run.
+Base labs: 1x research speed, 100% science pack drain, 120kW electricity, 2 module slots. Produces no pollution.
+	Built only on Nauvis, so have to ship science packs back to Nauvis before you get techs that make planets easier, eg cliff explosives.
+Pentapod biolabs: 2x research speed, 50% science pack drain, 4 module slots.
+	Requires 1/10s pentapod eggs to run. So if you run out of science, your pentapod eggs hatch. (Modules will probably reduce that to 1/50s.)
+	Built only on Gleba.
+	Produces lots of spores.
+Vacuum biolabs: 4x research speed, 25% science pack drain, 8 module slots.
+	Requires 1/2s biter eggs to run. (Modules will probably reduce that to 1/10s.)
+	Built only on spaceships and Apollo. So you'll probably want to have a travelling space platform picking up sciences on all planets, or a moon base.
+]]
 
 -- Regular labs should only be buildable on Nauvis.
 RAW.lab.lab.surface_conditions = copy(RAW.lab.biolab.surface_conditions)
@@ -25,20 +26,19 @@ RAW.lab.glebalab.surface_conditions = {
 		max = 2000,
 	},
 }
--- Space biolabs should only be buildable on space platforms.
+-- Vacuum biolabs should only be buildable on space platforms and on Apollo.
 RAW.lab.biolab.surface_conditions = {
 	{
-		property = "gravity",
-		max = 0,
-		min = 0,
+		property = "pressure",
+		max = 5,
 	},
 }
--- And remove pollution for space biolabs, since it's irrelevant.
+-- And remove pollution for vacuum biolabs, since it's irrelevant.
 RAW.lab.biolab.energy_source.emissions_per_minute = nil
 
 -- Clear description of glebalab.
-ITEM.glebalab.localised_description = {"item-description.no-description"}
 RECIPE.glebalab.localised_description = {"recipe-description.no-description"}
+ITEM.glebalab.localised_description = {"entity-description.glebalab"}
 
 -- Set stack sizes and rocket capacities.
 ITEM.glebalab.stack_size = 10
@@ -52,7 +52,7 @@ RAW.lab.biolab.researching_speed = 4
 RAW.lab.glebalab.science_pack_drain_rate_percent = 50
 RAW.lab.biolab.science_pack_drain_rate_percent = 25
 
--- Make the pentapod biolabs consume pentapod eggs, and space biolabs consume biter eggs.
+-- Make the pentapod biolabs consume pentapod eggs, and vacuum biolabs consume biter eggs.
 extend({
 	{
 		type = "fuel-category",
@@ -99,13 +99,8 @@ extend({
 		unit = copy(TECH["carbon-fiber"].unit),
 	},
 })
--- Space biolabs go after nuclear fuel cells.
+-- Vacuum biolabs go after nuclear fuel cells.
 Tech.replacePrereq("biolab", "uranium-processing", "nuclear-power")
 Tech.addTechDependency("pentapod-biolab", "biolab")
 
--- Remove extra description for Gleba biolab.
-RECIPE.glebalab.localised_description = nil
-ITEM.glebalab.localised_description = {"entity-description.glebalab"}
--- TODO check this worked
-
--- TODO don't allow advanced science packs in ordinary electric labs, rather stage them to pentapod labs and then space biolabs.
+-- TODO don't allow advanced science packs in ordinary electric labs, rather stage them to pentapod labs and then vacuum biolabs.

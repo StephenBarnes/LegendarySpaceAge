@@ -392,6 +392,9 @@ cryo2Tech.unit = {
 cryo2Tech.localised_description = {"technology-description.cryogenic-plant-2"}
 extend{cryo2Tech}
 
+-- Add dependency from fluid containers to rocket silo, since you need barrelled nitrogen for Apollo.
+Tech.addTechDependency("fluid-containers", "rocket-silo")
+
 -- Make tech for chem plant.
 -- TODO
 

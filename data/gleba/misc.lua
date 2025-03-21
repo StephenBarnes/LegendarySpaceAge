@@ -79,3 +79,6 @@ TECH["bioflux-processing"].unit = {
 		{"agricultural-science-pack", 1},
 	},
 }
+
+-- Disable decomposition of plastic through bioplastic recipe. Otherwise chem science gets decomposed weird.
+RECIPE["bioplastic"].allow_decomposition = false
