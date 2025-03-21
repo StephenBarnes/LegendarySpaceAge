@@ -15,6 +15,9 @@
 		[ "base >= 2.0"
 		, "space-age"
 
+		, "space-exploration-graphics"
+		, "space-exploration-graphics-4"
+
 		, "gleba-lab"
 		, "cargo-ships"
 

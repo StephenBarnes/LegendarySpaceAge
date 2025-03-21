@@ -9,3 +9,5 @@ require("data.space.asteroid-recipes")
 require("data.space.asteroid-belts")
 require("data.space.arrange-space-map")
 require("data.space.apollo.main")
+
+require("data.space.telescope")

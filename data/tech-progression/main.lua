@@ -264,8 +264,9 @@ Tech.removePrereq("rocket-silo", "concrete")
 
 -- Remove rocket fuel from rocket part recipe. TODO later we should re-write this recipe completely maybe.
 RECIPE["rocket-part"].ingredients = {
-	{type = "item", name = "processing-unit", amount = 1},
+	{type = "item", name = "electric-engine-unit", amount = 1},
 	{type = "item", name = "low-density-structure", amount = 1},
+	{type = "item", name = "shielding", amount = 1},
 }
 
 -- Chemical science pack: 1 barrel diesel + 2 plastic -> 2 chemical science packs.
