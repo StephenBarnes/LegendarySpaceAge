@@ -1,6 +1,26 @@
 -- This file adds/edits the values for surface properties (like gravity and pressure) for planets and recipes.
 
--- Create a new "oxygen pressure" parameter.
+-- Create a new "parts per rocket" property. This isn't actually directly used for surface conditions, only to show info to the player.
+-- Then in runtime scripting I'll actually swap the rocket silo entity for a different entity depending on the value, or maybe depending on a global const.
+-- TODO implement the runtime part of that.
+local partsPerRocket = copy(RAW["surface-property"]["pressure"])
+partsPerRocket.name = "parts-per-rocket"
+partsPerRocket.default_value = 100
+extend{partsPerRocket}
+
+for planetName, parts in pairs{
+	nauvis = 100,
+	vulcanus = 100,
+	fulgora = 100,
+	aquilo = 100,
+	gleba = 100,
+} do
+	RAW.planet[planetName].surface_properties["parts-per-rocket"] = parts
+end
+
+------------------------------------------------------------------------
+
+-- Create a new "oxygen pressure" property.
 -- We could rename the existing one, but it seems to affect the speed of bots. They glitch out when pressure is too low. And it doesn't seem like I can make robots depend on a different property instead.
 local oxygenPressure = copy(RAW["surface-property"]["pressure"])
 oxygenPressure.name = "oxygen-pressure"

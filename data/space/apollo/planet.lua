@@ -39,6 +39,7 @@ local apollo = {
 		["pressure"] = 5, -- 5 hPa, so basically no atmosphere. (Earth's moon is 3e-15 hPa.)
 		["gravity"] = 1, -- Earth's moon is 1.5. Note chests have minimum 0.1, so this allows chests.
 		["solar-power"] = 1200, -- Solar power: same as in space around Nauvis. LSA makes solar panels a lot weaker, so this is actually buffing them back to vanilla SA levels.
+		["parts-per-rocket"] = 10,
 	},
 	solar_power_in_space = 1200,
 	platform_procession_set = {

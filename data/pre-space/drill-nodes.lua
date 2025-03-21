@@ -109,6 +109,8 @@ dummyMiner.tile_height = deepDrill.tile_height
 dummyMiner.tile_width = deepDrill.tile_width
 dummyMiner.collision_box = deepDrill.collision_box
 dummyMiner.selection_box = deepDrill.selection_box
+dummyMiner.resource_drain_rate_percent = 1 -- Actually 0 but we can't set that.
+dummyMiner.max_health = deepDrill.max_health
 extend{dummyMiner}
 
 
