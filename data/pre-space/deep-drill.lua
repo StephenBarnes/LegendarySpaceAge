@@ -180,6 +180,11 @@ for i, planetData in pairs{
 		{"lake-water", 10, type = "fluid"},
 		{"stone", 10},
 	}},
+	{"apollo", {
+		{"sand", 5},
+		{"stone", 5},
+		-- TODO later maybe add titanium or regolith or sth.
+	}},
 	{"vulcanus", {
 		{"tar", 5, type = "fluid"},
 		{"stone", 10},
@@ -197,11 +202,6 @@ for i, planetData in pairs{
 		{"stone", 7},
 		{"scrap", 3},
 		{"fulgoran-sludge", 10, type = "fluid"},
-	}},
-	{"apollo", {
-		{"sand", 5},
-		{"stone", 5},
-		-- TODO later maybe add titanium or regolith or sth.
 	}},
 } do
 	local planetName = planetData[1]

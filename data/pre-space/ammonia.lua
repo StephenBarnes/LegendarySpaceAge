@@ -103,6 +103,7 @@ ammoniaSynthesisRecipe.ingredients = {
 ammoniaSynthesisRecipe.results = {
 	{type = "fluid", name = "ammonia", amount = 100},
 }
+ammoniaSynthesisRecipe.main_product = "ammonia"
 ammoniaSynthesisRecipe.show_amount_in_title = false
 ammoniaSynthesisRecipe.category = "chemistry"
 ammoniaSynthesisRecipe.subgroup = "early-agriculture"

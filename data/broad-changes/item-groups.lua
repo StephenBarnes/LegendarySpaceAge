@@ -183,10 +183,11 @@ setSubgroupInOrder("fluid-logistics", {"item", "recipe"}, fluidLogistics)
 
 -- Move post-Nauvis science packs to the right row.
 local sciencePacks = {
-	"nuclear-science-pack", -- Out of order (discovered after the rest), but this way it lines up with the drill/filter/airsep recipes.
+	"asteroid-science-pack",
 	"metallurgic-science-pack",
 	"agricultural-science-pack",
 	"electromagnetic-science-pack",
+	"nuclear-science-pack",
 	"cryogenic-science-pack",
 	"promethium-science-pack",
 }

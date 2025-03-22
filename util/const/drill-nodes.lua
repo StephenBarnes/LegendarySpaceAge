@@ -14,6 +14,7 @@ R.specs = {
 			{type = "fluid", name = "water", amount = 10},
 		},
 		addToTech = nil, --"planet-discovery-apollo", -- Not adding yet, bc making tech after creating drill nodes.
+		order = "2b",
 	},
 	-- TODO more.
 }

@@ -91,7 +91,7 @@ tech.effects = {
 	},
 	{
 		type = "unlock-recipe",
-		recipe = "lunar-science-pack",
+		recipe = "space-science-pack",
 	},
 	{
 		type = "unlock-recipe",

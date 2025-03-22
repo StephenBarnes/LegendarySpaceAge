@@ -1,4 +1,5 @@
 --[[ This file contains constants for exclusion zones, used in both data and control stages.
+Exclusion zones are used to prevent buildings from being placed too close to each other.
 I've only tested with both dims odd; I think they could be even too.
 Making the 2nd number smaller than the 1st number is best, so that it's more rounded rather than cross-shaped.
 ]]

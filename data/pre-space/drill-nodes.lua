@@ -115,13 +115,13 @@ extend{dummyMiner}
 
 
 -- Create recipes.
-for i, spec in pairs(NodeVals.specs) do
+for _, spec in pairs(NodeVals.specs) do
 	Recipe.make{
 		copy = "deep-drill",
 		recipe = "recipe-drill-node-" .. spec.name,
 		ingredients = {},
 		results = spec.results,
-		order = tostring(i),
+		order = spec.order,
 		localised_name = {"recipe-name.node-drilling", {"entity-name.drill-node-" .. spec.name}},
 		localised_description = {"recipe-description.node-drilling", "drill-node-" .. spec.name},
 		icons = {"deep-drill", "drill-node-" .. spec.name},

@@ -154,7 +154,7 @@ ent.working_sound = {
 	},
 }
 ent.crafting_categories = {"telescope"}
-ent.fixed_recipe = "lunar-science-pack"
+ent.fixed_recipe = "space-science-pack"
 ent.crafting_speed = 1
 ent.energy_source = {
 	type = "electric",
@@ -207,25 +207,21 @@ Recipe.make{
 		-- Added to Apollo tech when that's created.
 }
 
--- Create item for lunar science.
-local scienceItem = copy(RAW.tool["space-science-pack"])
-scienceItem.name = "lunar-science-pack"
-extend{scienceItem}
+-- Not creating a new item for lunar science. Instead using existing space-science-pack.
 
 -- Create recipe for lunar science.
-Recipe.make{
-	copy = "space-science-pack",
-	recipe = "lunar-science-pack",
+Recipe.edit{
+	recipe = "space-science-pack",
 	category = "telescope",
 	ingredients = {
 		{"processing-unit", 1},
 		{"liquid-nitrogen", 1, type="fluid"},
 	},
 	results = {
-		{"lunar-science-pack", 1},
+		{"space-science-pack", 1},
 		{"nitrogen-gas", 1, type="fluid", ignored_by_productivity = 1},
 	},
-	main_product = "lunar-science-pack",
+	main_product = "space-science-pack",
 	allow_productivity = true,
 	allow_quality = true,
 	time = 10,

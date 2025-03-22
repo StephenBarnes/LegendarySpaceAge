@@ -2,7 +2,7 @@
 Currently used for air separators and deep drills.
 ]]
 
--- Funciton to destroy entity and spill its item.
+-- Function to destroy entity and spill its item.
 local function spillEnt(entity, itemName, surface)
 	entity.active = false
 	local stack = {name = itemName, count = 1, quality = entity.quality}
