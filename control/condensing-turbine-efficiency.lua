@@ -47,13 +47,13 @@ local function onBuilt(event)
 		ctEvil = entity
 	end
 	if ctEvil == nil or not ctEvil.valid then return end
-	ctEvil.mirroring = entity.mirroring
+	ctEvil.mirroring = info.mirroring
     setCondensingTurbineDeathRattle(ctEvil)
     info.name = "steam-evilizer"
     local evilizer = surface.create_entity(info)
     if evilizer ~= nil and evilizer.valid then
         evilizer.destructible = false
-		evilizer.mirroring = ctEvil.mirroring
+		evilizer.mirroring = info.mirroring
     end
 end
 

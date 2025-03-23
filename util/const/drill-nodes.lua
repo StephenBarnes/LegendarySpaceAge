@@ -5,10 +5,13 @@ local R = {}
 R.specs = {
 	{
 		name = "ice",
-		entTint = {.565, .663, .698},
+		darkTint = {.125, .184, .239},
+		--lightTint = {.655, .757, .796},
+		lightTint = {.349, .537, .631},
 		mapTint = {.639, .741, .784},
-		--iconTint = {.727, .832, .867},
 		iconTint = {.639, .741, .784},
+		vaporTint = {.565, .663, .698},
+		vaporAlpha = 0.24,
 		results = {
 			{type = "item", name = "ice", amount = 10},
 			{type = "fluid", name = "water", amount = 10},
@@ -19,6 +22,6 @@ R.specs = {
 	-- TODO more.
 }
 
-R.sideLen = 5
+R.sideLen = 7
 
 return R

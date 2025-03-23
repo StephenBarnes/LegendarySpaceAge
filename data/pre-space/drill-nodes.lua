@@ -15,16 +15,35 @@ nodeProto.selection_box = {
 nodeProto.selection_priority = 41
 	-- So borehole mining drills, or other buildings on top of it, which are priority 50 get selected first, but it gets selected over ores (priority 40) that cover it. (Because I'm planning to make nodes generate under ore patches, maybe.)
 --nodeProto.render_layer = "above-tiles"
-nodeProto.stages = {
-	sheet = {
-		filename = "__LegendarySpaceAge__/graphics/drill-nodes/01.png",
-		priority = "extra-high",
-		size = 194,
-		frame_count = 1,
-		variation_count = 1,
-		scale = 1,
-	},
-	-- TODO add the rest of the pictures. Probably even in a spritesheet.
+nodeProto.stages = { -- Currently using graphics from Krastorio 2, edited and separated into 3 layers, of which the last 2 are tintable.
+	sheets = {
+			{
+				filename = "__LegendarySpaceAge__/graphics/drill-nodes/ent-1-rocks.png",
+				width = 500,
+				height = 500,
+				frame_count = 6, -- Not animation frames, actually number of variations.
+				variation_count = 1, -- Number of rows in the spritesheet. Each row is one stage (for ores that have multiple stages depending on richness).
+				scale = 0.5,
+			},
+			{
+				filename = "__LegendarySpaceAge__/graphics/drill-nodes/ent-2-dark-hue.png",
+				width = 500,
+				height = 500,
+				frame_count = 6,
+				variation_count = 1,
+				scale = 0.5,
+				tint_as_overlay = true, -- Not sure what this does, docs don't say, but from comparing true vs false, setting this to true definitely makes it look better somehow. Setting this to false makes it look grey, setting to true makes it bright.
+			},
+			{
+				filename = "__LegendarySpaceAge__/graphics/drill-nodes/ent-3-light-hue.png",
+				width = 500,
+				height = 500,
+				frame_count = 6,
+				variation_count = 1,
+				scale = 0.5,
+				tint_as_overlay = true,
+			},
+		},
 }
 nodeProto.autoplace = nil -- TODO add autoplace.
 nodeProto.infinite = true
@@ -41,7 +60,9 @@ nodeProto.placeable_by = { -- For picking.
 for _, spec in pairs(NodeVals.specs) do
 	local ent = copy(nodeProto)
 	ent.name = "drill-node-" .. spec.name
-	ent.stages.sheet.tint = spec.entTint
+	ent.stages.sheets[2].tint = spec.darkTint
+	ent.stages.sheets[3].tint = spec.lightTint
+	-- TODO add option for glow on the dark and light layers.
 	ent.icon = nil
 	ent.icons = {
 		{icon = "__LegendarySpaceAge__/graphics/drill-nodes/icon.png", icon_size = 64, tint = spec.iconTint},
@@ -64,7 +85,7 @@ for _, spec in pairs(NodeVals.specs) do
 				animation_speed = 0.18,
 				shift = {-0.3, -7.5},
 				scale = 2.7,
-				tint = util.multiply_color(spec.entTint, 0.12)
+				tint = util.multiply_color(spec.vaporTint, spec.vaporAlpha)
 			}
 		},
 		-- Crude oil also has "oil-smoke-inner", but I'm not using that here bc the drill node is bigger than a crude oil spot.
