@@ -176,6 +176,7 @@ for _, metal in pairs{"steel", "iron", "copper"} do
 	plateRecipe.category = "crafting"
 	plateRecipe.auto_recycle = true -- Allowing it, so that on Fulgora you can unmake plates for cold ingots, then heat those, then make parts/rods/wires/etc.
 	plateRecipe.allow_as_intermediate = true
+	plateRecipe.result_is_always_fresh = true
 	plateRecipe.allow_decomposition = true
 end
 
