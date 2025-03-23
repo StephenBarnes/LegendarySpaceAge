@@ -1,5 +1,5 @@
 -- This modpack renames "iron gear wheels" to "machine parts"; this file changes sprites to match that.
--- Then this file also creates "advanced parts", which are made from like hot steel + rubber + plastic + bit of lubricant, and will generally replace steel plates in recipes for infra.
+-- Then this file also creates "advanced parts", which are made from hot steel + rubber + plastic + resin, and are mostly used for actuators.
 
 -- Update icons for iron parts.
 Icon.set("iron-gear-wheel", "LSA/parts-basic/plain/pair-item")
@@ -26,7 +26,7 @@ advancedPartsRecipe.ingredients = {
 	{type="item", name="plastic-bar", amount=1},
 	{type="item", name="rubber", amount=1},
 	{type="item", name="resin", amount=1},
-	-- No lubricant here. Rather add lubricant in the recipe for gadgets.
+	-- No lubricant here. Rather add lubricant in the recipe for actuators.
 }
 advancedPartsRecipe.results = {{type="item", name="advanced-parts", amount=20}}
 advancedPartsRecipe.category = "crafting"

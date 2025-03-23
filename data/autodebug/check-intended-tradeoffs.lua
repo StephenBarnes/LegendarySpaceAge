@@ -12,7 +12,7 @@ local function checkHeavyOilCoking()
 	return true
 end
 
--- I want coal coking to be energy-positive, but only if you burn the sulfur. So this file checks things like that.
+-- I want coal coking to be energy-positive, but only if you burn the sulfur.
 local function checkCoalCoking()
 	local coalCokingRecipe = RECIPE["coal-coking"]
 	local ingredientJoules = 0

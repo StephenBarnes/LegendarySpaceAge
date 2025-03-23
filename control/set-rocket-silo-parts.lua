@@ -4,11 +4,16 @@
 ---@param event EventData.on_built_entity|EventData.on_robot_built_entity|EventData.on_space_platform_built_entity|EventData.script_raised_built|EventData.script_raised_revive|EventData.on_entity_cloned
 local function onBuilt(event)
 	local ent = event.entity
-	if ent == nil or not ent.valid then return end
-	if ent.type ~= "rocket-silo" or ent.name ~= "rocket-silo" then return end
+	if ((ent == nil)
+		or (not ent.valid)
+		or (ent.type ~= "rocket-silo")
+		or (ent.name ~= "rocket-silo")
+	) then return end
 	local surface = ent.surface
-	if not surface or not surface.valid then return end
-	if surface.name ~= "apollo" then return end
+	if ((surface == nil)
+		or (not surface.valid)
+		or (surface.name ~= "apollo")
+	) then return end
 	local info = {
         name = "rocket-silo-10parts",
         position = ent.position,
@@ -20,11 +25,10 @@ local function onBuilt(event)
 		direction = ent.direction,
 		mirroring = ent.mirroring,
     }
-	local mirroring = ent.mirroring
 	ent.destroy()
 	local newEnt = surface.create_entity(info)
 	if newEnt == nil or not newEnt.valid then return end
-	newEnt.mirroring = mirroring
+	newEnt.mirroring = info.mirroring
 end
 
 return {
