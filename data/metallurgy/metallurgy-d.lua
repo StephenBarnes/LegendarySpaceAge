@@ -191,6 +191,7 @@ for _, vals in pairs{
 	recipe.results = {{type="item", name=item, amount=num}}
 	recipe.energy_required = seconds
 	recipe.auto_recycle = true
+	recipe.result_is_always_fresh = true
 	recipe.category = "crafting"
 end
 
