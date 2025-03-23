@@ -32,7 +32,6 @@ nodeProto.stages = { -- Currently using graphics from Krastorio 2, edited and se
 				frame_count = 6,
 				variation_count = 1,
 				scale = 0.5,
-				tint_as_overlay = true, -- Not sure what this does, docs don't say, but from comparing true vs false, setting this to true definitely makes it look better somehow. Setting this to false makes it look grey, setting to true makes it bright.
 			},
 			{
 				filename = "__LegendarySpaceAge__/graphics/drill-nodes/ent-3-light-hue.png",
@@ -41,7 +40,6 @@ nodeProto.stages = { -- Currently using graphics from Krastorio 2, edited and se
 				frame_count = 6,
 				variation_count = 1,
 				scale = 0.5,
-				tint_as_overlay = true,
 			},
 		},
 }
@@ -60,9 +58,15 @@ nodeProto.placeable_by = { -- For picking.
 for _, spec in pairs(NodeVals.specs) do
 	local ent = copy(nodeProto)
 	ent.name = "drill-node-" .. spec.name
+	ent.stages.sheets[1].tint = spec.rockTint
+	ent.stages.sheets[1].tint_as_overlay = spec.rockTintAsOverlay
 	ent.stages.sheets[2].tint = spec.darkTint
+	ent.stages.sheets[2].draw_as_glow = spec.darkTintGlows
+	ent.stages.sheets[2].tint_as_overlay = spec.darkTintAsOverlay
 	ent.stages.sheets[3].tint = spec.lightTint
-	-- TODO add option for glow on the dark and light layers.
+	ent.stages.sheets[3].draw_as_glow = spec.lightTintGlows
+	ent.stages.sheets[3].tint_as_overlay = spec.lightTintAsOverlay
+		-- Not sure what this option does, docs don't say, but from comparing true vs false, setting this to true make it look better somehow for bright colors, worse for dark colors.
 	ent.icon = nil
 	ent.icons = {
 		{icon = "__LegendarySpaceAge__/graphics/drill-nodes/icon.png", icon_size = 64, tint = spec.iconTint},

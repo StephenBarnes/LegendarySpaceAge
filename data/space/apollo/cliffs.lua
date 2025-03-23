@@ -21,6 +21,7 @@ local function setTint(ar)
 	for _, pic in pairs(ar) do
 		pic.tint = tint
 		pic.surface = "any" -- Change surface hint to "any" instead of vulcanus.
+		pic.tint_as_overlay = true -- Slightly reduces the effect of cliffs having lines where they overlap from alphas adding. Not sure what this does, docs don't say, but I compared how they look. Still not perfect though.
 		if pic.layers then
 			setTint(pic.layers)
 		end
