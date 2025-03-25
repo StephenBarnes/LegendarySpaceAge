@@ -24,9 +24,11 @@ Icon.clear(recipe)
 -- TODO add to a tech, actually decide on ingredients, etc.
 extend{recipe}
 
--- Allow nuclear science pack in labs, except for basic lab.
-table.insert(RAW.lab.glebalab.inputs, 11, "nuclear-science-pack")
-table.insert(RAW.lab.biolab.inputs, 11, "nuclear-science-pack")
+-- Allow nuclear science pack in labs, including basic lab.
+-- Order in this list doesn't seem to do anything, instead it depends on the item's order.
+table.insert(RAW.lab.lab.inputs, "nuclear-science-pack")
+table.insert(RAW.lab.glebalab.inputs, "nuclear-science-pack")
+table.insert(RAW.lab.biolab.inputs, "nuclear-science-pack")
 
 -- Move uranium mining tech to after 3 sisters.
 TECH["uranium-mining"].prerequisites = {"agricultural-science-pack", "metallurgic-science-pack", "electromagnetic-science-pack"}

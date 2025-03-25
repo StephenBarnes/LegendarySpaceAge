@@ -1,8 +1,9 @@
 -- This file makes tech that unlocks asteroid belts, and adds science pack using asteroid chunks.
 
 -- Create tech for asteroid science.
-local tech = copy(TECH["space-science-pack"])
-tech.name = "asteroid-science-pack"
+-- Actually, rather overwriting the existing space-platform-thruster tech, so that tech dependencies are easier to manage.
+local tech = TECH["space-platform-thruster"]
+--tech.name = "asteroid-science-pack"
 tech.effects = {
 	{
 		type = "unlock-space-location",
@@ -24,8 +25,9 @@ tech.effects = {
 		recipe = "asteroid-science-pack",
 	},
 }
--- TODO rearrange the tech tree so it goes (space platform + thrusters) -> (Apollo + lunar science) -> (asteroid belts + crushers/grabbers + space science) -> planets.
 Icon.set(tech, "LSA/asteroid-science/tech")
+tech.prerequisites = {"space-science-pack"}
+tech.essential = true
 extend{tech}
 
 -- Create item for asteroid science.
@@ -49,3 +51,8 @@ Recipe.make{
 	clearSurfaceConditions = true,
 	main_product = "asteroid-science-pack",
 }
+
+-- Allow asteroid science pack in labs. Order in this list doesn't seem to do anything, instead it depends on the item's order.
+table.insert(RAW.lab.lab.inputs, "asteroid-science-pack")
+table.insert(RAW.lab.glebalab.inputs, "asteroid-science-pack")
+table.insert(RAW.lab.biolab.inputs, "asteroid-science-pack")

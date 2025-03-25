@@ -4,6 +4,5 @@ electrolysisTech.effects = {
 	{type = "unlock-recipe", recipe = "electrolysis"},
 }
 Icon.set(electrolysisTech, "LSA/techs/electrolysis")
--- TODO prereqs
+electrolysisTech.prerequisites = {"fluid-handling"}
 extend{electrolysisTech}
-Tech.addTechDependency("electrolysis", "planet-discovery-fulgora")

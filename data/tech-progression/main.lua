@@ -395,6 +395,74 @@ extend{cryo2Tech}
 -- Add dependency from fluid containers to rocket silo, since you need barrelled nitrogen for Apollo.
 Tech.addTechDependency("fluid-containers", "rocket-silo")
 
+--[[ Changes for lunar science and asteroid science.
+Overall progression goes (space platform + thrusters) -> (Apollo + lunar science) -> (asteroid belts + crushers/grabbers + space science) -> planets.
+Note that I'm reusing tech IDs to preserve tech dependencies etc, especially since other planet mods might use them:
+	* space-platform-thruster tech is reused for asteroid science pack.
+	* space-science-pack is reused for Apollo and lunar science pack.
+]]
+Tech.moveRecipeToTech("thruster", "space-platform-thruster", "space-platform")
+Tech.removeRecipeFromTech("ice-melting", "space-platform-thruster") -- Will add to Apollo tech when that's created.
+Tech.moveRecipeToTech("asteroid-collector", "space-platform", "space-platform-thruster")
+for _, recipeName in pairs{
+	"crusher",
+	"metallic-asteroid-crushing",
+	"oxide-asteroid-crushing",
+	"carbonic-asteroid-crushing",
+} do
+	Tech.removeRecipeFromTech(recipeName, "space-platform")
+end
+
+-- Make a new tech for asteroid crushing.
+local asteroidCrushingTech = copy(TECH["space-platform-thruster"])
+asteroidCrushingTech.name = "asteroid-crushing"
+asteroidCrushingTech.effects = {
+	{type = "unlock-recipe", recipe = "crusher"},
+	{type = "unlock-recipe", recipe = "metallic-asteroid-crushing"},
+	{type = "unlock-recipe", recipe = "oxide-asteroid-crushing"},
+	{type = "unlock-recipe", recipe = "carbonic-asteroid-crushing"},
+}
+Icon.set(asteroidCrushingTech, "SA/asteroid-productivity")
+asteroidCrushingTech.prerequisites = {"space-platform-thruster"}
+extend{asteroidCrushingTech}
+Tech.addTechDependency("asteroid-crushing", "advanced-asteroid-processing")
+Tech.addTechDependency("asteroid-crushing", "asteroid-reprocessing")
+
+-- Since we're adding asteroid science, make techs also require that. Add it to all techs that require lunar science pack, except a few specific ones.
+local function techUsesLunarScience(ingredients)
+	for _, ingredient in pairs(ingredients) do
+		if ingredient[1] == "space-science-pack" then
+			return true
+		end
+	end
+	return false
+end
+local lunarScienceOnlyTechs = Table.listToSet{
+	"electric-weapons-damage-2",
+	"worker-robots-speed-6",
+	"stronger-explosives-5",
+	"stronger-explosives-6",
+	"asteroid-science-pack",
+}
+for techName, tech in pairs(TECH) do
+	if not lunarScienceOnlyTechs[techName] then
+		if tech.unit ~= nil then
+			if techUsesLunarScience(tech.unit.ingredients) then
+				table.insert(tech.unit.ingredients, {"asteroid-science-pack", 1})
+			end
+		end
+	end
+end
+-- some techs that depended on lunar science pack now also need asteroid science pack, so replace the prereq.
+for _, techName in pairs{
+	"laser-weapons-damage-7",
+	"follower-robot-count-5",
+	"refined-flammables-6",
+	"physical-projectile-damage-7",
+} do
+	Tech.replacePrereq(techName, "space-science-pack", "space-platform-thruster")
+end
+
 -- Make tech for chem plant.
 -- TODO
 

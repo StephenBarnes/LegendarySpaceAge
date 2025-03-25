@@ -23,7 +23,7 @@ R.specs = {
 			{type = "item", name = "ice", amount = 10},
 			{type = "fluid", name = "water", amount = 10},
 		},
-		addToTech = nil, --"planet-discovery-apollo", -- Not adding yet, bc making tech after creating drill nodes.
+		addToTech = nil, -- Will add to Apollo tech. Not adding yet, bc making tech after creating drill nodes.
 		order = "2b",
 	},
 	{ -- TODO this is currently mostly placeholder to test graphics. Need to fully implement by deciding recipe results, adding autoplace, editing default borehole mining products (when not on node), etc.

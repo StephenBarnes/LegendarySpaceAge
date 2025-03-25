@@ -182,7 +182,16 @@ local fluidLogistics = {"pipe", "pipe-to-ground", "pump", "offshore-pump"}
 setSubgroupInOrder("fluid-logistics", {"item", "recipe"}, fluidLogistics)
 
 -- Move post-Nauvis science packs to the right row.
-local sciencePacks = {
+local earlySciencePacks = {
+	"automation-science-pack",
+	"logistic-science-pack",
+	"military-science-pack",
+	"chemical-science-pack",
+	"production-science-pack",
+	"utility-science-pack",
+	"space-science-pack",
+}
+local laterSciencePacks = {
 	"asteroid-science-pack",
 	"metallurgic-science-pack",
 	"agricultural-science-pack",
@@ -191,7 +200,8 @@ local sciencePacks = {
 	"cryogenic-science-pack",
 	"promethium-science-pack",
 }
-setSubgroupInOrder("alien-science-packs", {"tool", "recipe"}, sciencePacks)
+setSubgroupInOrder("science-pack", {"tool", "recipe"}, earlySciencePacks, "a") -- Prefix here to set order in lab inventory.
+setSubgroupInOrder("alien-science-packs", {"tool", "recipe"}, laterSciencePacks, "b")
 
 -- Move rocket parts to space section.
 local rocketParts = {"rocket-part", "assembled-rocket-part"}

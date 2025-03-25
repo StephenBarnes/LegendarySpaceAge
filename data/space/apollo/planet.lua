@@ -77,8 +77,9 @@ local apolloNauvis = {
 extend{apolloNauvis}
 
 -- Make tech.
-local tech = copy(TECH["planet-discovery-vulcanus"])
-tech.name = "planet-discovery-apollo"
+-- Decided to do this by overwriting space-science-pack tech, since this also unlocks space-science-pack (renamed to lunar science pack) and this way we don't need to mess with tech dependencies so much.
+local tech = TECH["space-science-pack"]
+--tech.name = "planet-discovery-apollo"
 tech.effects = {
 	{
 		type = "unlock-space-location",
@@ -97,6 +98,10 @@ tech.effects = {
 		type = "unlock-recipe",
 		recipe = "recipe-drill-node-ice",
 	},
+	{
+		type = "unlock-recipe",
+		recipe = "ice-melting",
+	},
 }
 tech.icon = nil
 tech.icons = {
@@ -111,5 +116,11 @@ tech.icons = {
 		shift = {50, 50},
 		floating = true
 	},
+}
+tech.prerequisites = {"space-platform", "electrolysis"}
+	-- We need the electrolysis tech to make liquid oxygen/hydrogen on Apollo, and also later for Fulgora.
+tech.research_trigger = {
+	type = "build-entity",
+	entity = "thruster",
 }
 extend{tech}

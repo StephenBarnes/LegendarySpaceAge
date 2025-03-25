@@ -5,9 +5,9 @@ Date: 2025-03-??
     - Added Apollo, moon of Nauvis.
     - Rearranged space map. Added asteroid belts.
     - Added telescopes for making lunar science.
-    - Added underground deposits for borehole drills - ice on Apollo, and (TODO Gleba, Vulcanus, etc.)
-    - TODO added asteroid science pack, made from asteroid chunks.
-    - TODO added vacuum assembler
+    - Added asteroid science pack, made from asteroid chunks.
+    - TODO Added underground deposits for borehole drills - ice on Apollo, and (TODO Gleba, Vulcanus, etc.)
+    - TODO added microgravity assembler
     - TODO add sugar system
     - TODO add resistances for enemies
     - TODO add bream

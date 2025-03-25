@@ -263,10 +263,10 @@ Tech.addTechDependency("deep-drill", "planet-discovery-gleba")
 
 -- Make the mining productivity techs also affect deep drills.
 for i = 1, 3 do
-	local tech = TECH["mining-productivity-"..i]
-	if tech then
-		for _, planet in pairs{"nauvis", "gleba", "vulcanus", "fulgora"} do
-			table.insert(tech.effects, {
+	local prodTech = TECH["mining-productivity-"..i]
+	if prodTech then
+		for _, planet in pairs{"nauvis", "gleba", "vulcanus", "fulgora", "apollo"} do
+			table.insert(prodTech.effects, {
 				type = "change-recipe-productivity",
 				recipe = "deep-drill-"..planet,
 				change = 0.1,

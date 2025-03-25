@@ -164,4 +164,16 @@ for _, spec in pairs(NodeVals.specs) do
 			secondary = spec.iconTint,
 		},
 	}
+
+	-- Make the mining productivity techs also affect these nodes.
+	for i = 1, 3 do
+		local prodTech = TECH["mining-productivity-"..i]
+		if prodTech then
+			table.insert(prodTech.effects, {
+				type = "change-recipe-productivity",
+				recipe = "recipe-drill-node-"..spec.name,
+				change = 0.1,
+			})
+		end
+	end
 end

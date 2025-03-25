@@ -47,7 +47,7 @@ u.setDefaultOrForce("use_dark_blue_waterways", "bool", false) -- Irrelevant, onl
 u.setDefaultOrForce("personal-burner-generator-power-output", "int", 200) -- 200kW, same as default.
 u.setDefaultOrForce("personal-burner-generator-pollution-output", "int", 10) -- Same as default, roughly commensurate with boilers.
 u.setDefaultOrForce("personal-burner-generator-fuel-efficiency", "double", 0.5) -- So consumes 400kW, provides 200kW.
-u.setDefaultOrForce("personal-burner-generator-inventory-size", "int", 4)
+u.setDefaultOrForce("personal-burner-generator-burner-inventory-size", "int", 4)
 
 -- For Gas Boiler.
 u.setDefaultOrForce("vanilla-fluid-fuel-values", "bool", false)

@@ -48,6 +48,20 @@ Tech.hideTech = function(techName)
 	tech.hidden = true
 end
 
+Tech.setEffects = function(techName, effects)
+	local tech = TECH[techName]
+	if tech == nil then
+		log("ERROR: Couldn't find tech "..techName.." to set effects for.")
+		return
+	end
+	tech.effects = effects
+end
+
+Tech.moveRecipeToTech = function(recipeName, oldTechName, newTechName, index)
+	Tech.removeRecipeFromTech(recipeName, oldTechName)
+	Tech.addRecipeToTech(recipeName, newTechName, index)
+end
+
 Tech.addTechDependency = function(firstTech, secondTech)
 	local secondTechData = TECH[secondTech]
 	if secondTechData == nil then
@@ -68,9 +82,17 @@ Tech.tryAddTechDependency = function(firstTech, secondTech)
 end
 
 Tech.replacePrereq = function(techName, oldPrereq, newPrereq)
-	for i, prereq in pairs(TECH[techName].prerequisites) do
+	local tech = TECH[techName]
+	if tech == nil then
+		log("ERROR: Couldn't find tech "..techName.." to replace prereq "..oldPrereq.." with "..newPrereq..".")
+		return
+	end
+	if tech.prerequisites == nil then
+		log("ERROR: Tech "..techName.." has no prerequisites.")
+	end
+	for i, prereq in pairs(tech.prerequisites or {}) do
 		if prereq == oldPrereq then
-			TECH[techName].prerequisites[i] = newPrereq
+			tech.prerequisites[i] = newPrereq
 			return
 		end
 	end
