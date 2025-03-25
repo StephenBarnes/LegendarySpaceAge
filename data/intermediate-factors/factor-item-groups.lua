@@ -14,9 +14,9 @@ extend{
 -- Create subgroup for each intermediate factor.
 for i, factor in pairs{
 	"resin",
+	"circuit-board",
 	"wiring",
 	"electronic-components",
-	"circuit-board",
 	"panel",
 	"frame",
 	"structure",

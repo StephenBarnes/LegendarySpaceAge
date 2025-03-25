@@ -41,6 +41,8 @@ local function isDeadTree(tree)
 		or (tree.minable.result and tree.minable.result == "wood" and tree.minable.count == 2))
 end
 local newTreeMinableResults = {
+	{type = "item", name = "wood", amount = 10},
+	{type = "item", name = "resin", amount = 2},
 	{
 		type = "item",
 		name = "tree-seed",
@@ -49,23 +51,10 @@ local newTreeMinableResults = {
 		--extra_count_fraction = 0.05,
 		-- Could make it very rarely give an extra seed, so you have to go harvest a ton of trees to set up big plantations.
 	},
-	{ -- Increase total wood yield, to reduce the number of trees you need to harvest to do the 1000-circuit challenge for red science.
-		type = "item",
-		name = "wood",
-		amount = 10,
-	},
-	{ -- Add resin, for early fluid fittings.
-		type = "item",
-		name = "resin",
-		amount = 1,
-	},
 }
 local newDeadTreeMinableResults = {
-	{
-		type = "item",
-		name = "wood",
-		amount = 5,
-	},
+	{type = "item", name = "wood", amount = 5},
+	{type = "item", name = "resin", amount = 2},
 }
 for _, tree in pairs(RAW.tree) do
 	if isNormalTree(tree) then

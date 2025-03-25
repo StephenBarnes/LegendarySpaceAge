@@ -15,10 +15,12 @@ local basicRecipe = Recipe.make{
 		{"frame", 1},
 	},
 	results = {{"mechanism", 1}},
+	main_product = "mechanism",
 	enabled = true,
 	time = 5,
 	category = "crafting",
 	allow_as_intermediate = true,
+	allow_decomposition = true,
 	icons = {"mechanism", "iron-gear-wheel"},
 	auto_recycle = false,
 }

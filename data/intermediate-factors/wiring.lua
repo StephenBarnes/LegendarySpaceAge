@@ -4,8 +4,6 @@
 local wiringItem = copy(ITEM["copper-cable"])
 wiringItem.name = "wiring"
 Icon.set(wiringItem, "LSA/intermediate-factors/wiring")
-wiringItem.subgroup = "wiring"
-wiringItem.order = "01"
 extend{wiringItem}
 
 -- Make recipe for wiring: 2 copper cable + 1 resin ---5s---> 2 wiring
@@ -14,18 +12,34 @@ resinRecipe.name = "wiring-from-resin"
 resinRecipe.category = "crafting"
 Icon.set(resinRecipe, {"wiring", "resin"})
 resinRecipe.ingredients = {
-	{type = "item", name = "copper-cable", amount = 2},
+	{type = "item", name = "copper-cable", amount = 5},
 	{type = "item", name = "resin", amount = 1},
 }
-resinRecipe.results = {{type = "item", name = "wiring", amount = 2}}
+resinRecipe.results = {{type = "item", name = "wiring", amount = 5}}
+resinRecipe.main_product = "wiring"
 resinRecipe.enabled = false
-resinRecipe.subgroup = "wiring"
-resinRecipe.order = "02"
 resinRecipe.energy_required = 5
-resinRecipe.allow_as_intermediate = true
+resinRecipe.allow_as_intermediate = false
 resinRecipe.auto_recycle = false
 extend{resinRecipe}
 Tech.addRecipeToTech("wiring-from-resin", "basic-electricity")
+
+-- Make recipe for makeshift wiring: 1 copper cable -> 1 wiring.
+local makeshiftWiringRecipe = Recipe.make{
+	copy = resinRecipe,
+	recipe = "makeshift-wiring",
+	ingredients = {"copper-cable"},
+	results = {"wiring"},
+	main_product = "wiring",
+	enabled = false,
+	allow_as_intermediate = true,
+	allow_decomposition = false,
+	auto_recycle = false, -- otherwise you can turn neurofibrils into copper cable.
+	icons = {"wiring", "LSA/misc/makeshift"},
+	category = "handcrafting-only",
+	time = 2,
+}
+Tech.addRecipeToTech("makeshift-wiring", "basic-electricity")
 
 -- Create a recipe with rubber insulation: 5 copper cable + 1 rubber ---2s---> 5 wiring
 local rubberRecipe = copy(resinRecipe)
@@ -33,10 +47,9 @@ rubberRecipe.name = "wiring-from-rubber"
 Icon.set(rubberRecipe, {"wiring", "rubber"})
 rubberRecipe.ingredients = {
 	{type = "item", name = "copper-cable", amount = 5},
-	{type = "item", name = "rubber", amount = 1},
+	{type = "item", name = "rubber", amount = 2},
 }
 rubberRecipe.results = {{type = "item", name = "wiring", amount = 5}}
-rubberRecipe.order = "03"
 rubberRecipe.enabled = false
 rubberRecipe.allow_as_intermediate = false
 rubberRecipe.energy_required = 2
@@ -52,7 +65,6 @@ plasticRecipe.ingredients = {
 	{type = "item", name = "plastic-bar", amount = 1},
 }
 plasticRecipe.results = {{type = "item", name = "wiring", amount = 10}}
-plasticRecipe.order = "04"
 plasticRecipe.enabled = false
 plasticRecipe.allow_as_intermediate = false
 plasticRecipe.energy_required = 5
@@ -68,8 +80,16 @@ neurofibrilRecipe.ingredients = {
 	{type = "item", name = "rubber", amount = 1},
 }
 neurofibrilRecipe.results = {{type = "item", name = "wiring", amount = 10}}
-neurofibrilRecipe.order = "05"
 neurofibrilRecipe.enabled = false
 neurofibrilRecipe.allow_as_intermediate = false
 extend{neurofibrilRecipe}
 -- Will be added to the tech by stingfronds.lua.
+
+Gen.order({
+	wiringItem,
+	makeshiftWiringRecipe,
+	resinRecipe,
+	rubberRecipe,
+	plasticRecipe,
+	neurofibrilRecipe,
+}, "wiring")

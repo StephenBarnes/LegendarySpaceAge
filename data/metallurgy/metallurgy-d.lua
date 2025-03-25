@@ -194,6 +194,9 @@ for _, vals in pairs{
 	recipe.auto_recycle = true
 	recipe.result_is_always_fresh = true
 	recipe.category = "crafting"
+	recipe.allow_decomposition = true
+	recipe.allow_as_intermediate = true
+	recipe.main_product = item
 end
 
 -- Put basic metal intermediates in their own subgroup.

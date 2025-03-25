@@ -12,7 +12,7 @@ local greenCircuitRecipe = Recipe.make{
 	recipe = "sensor-from-green-circuit",
 	ingredients = {
 		{"electronic-circuit", 5},
-		{"glass", 3},
+		{"glass", 2},
 		{"frame", 1},
 	},
 	results = {{"sensor", 1}},

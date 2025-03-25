@@ -34,6 +34,7 @@ advancedPartsRecipe.energy_required = 10
 advancedPartsRecipe.allow_decomposition = true
 advancedPartsRecipe.allow_as_intermediate = true
 advancedPartsRecipe.enabled = false
+advancedPartsRecipe.main_product = "advanced-parts"
 extend{advancedPartsRecipe}
 
 -- Add advanced parts recipe to actuator tech.

@@ -22,6 +22,15 @@ local function setStartItems()
 		['battery-equipment'] = 2,
 		-- Player has to make a personal burner generator to actually power the stuff.
 
+		--[[ TODO possible new numbers:
+		['mechanism'] = 50,
+		['structure'] = 10,
+		['frame'] = 50,
+		['wiring'] = 50,
+		['panel'] = 50,
+		['sensor'] = 20,
+		]]
+
 		-- Prefer to give factors rather than raw materials. Seems more appropriate.
 		-- Give some structures etc, so player doesn't need to chop a lot of trees for resin.
 		['mechanism'] = 12,

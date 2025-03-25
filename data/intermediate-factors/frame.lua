@@ -16,6 +16,7 @@ recipeFromWood.ingredients = {
 	{type = "item", name = "resin", amount = 1}
 }
 recipeFromWood.results = {{type = "item", name = "frame", amount = 1}}
+recipeFromWood.main_product = "frame"
 recipeFromWood.enabled = true
 recipeFromWood.energy_required = 10
 recipeFromWood.category = "crafting"
@@ -31,6 +32,7 @@ recipeFromIron.ingredients = {
 	{type = "item", name = "iron-stick", amount = 10}
 }
 recipeFromIron.results = {{type = "item", name = "frame", amount = 1}}
+recipeFromIron.main_product = "frame"
 recipeFromIron.enabled = true
 recipeFromIron.energy_required = 5
 recipeFromIron.category = "crafting"

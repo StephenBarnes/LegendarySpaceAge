@@ -16,6 +16,7 @@ recipeFromIron.ingredients = {
 	{type = "item", name = "iron-stick", amount = 5},
 }
 recipeFromIron.results = {{type = "item", name = "shielding", amount = 1}}
+recipeFromIron.main_product = "shielding"
 recipeFromIron.enabled = true
 recipeFromIron.energy_required = 5
 recipeFromIron.category = "crafting"

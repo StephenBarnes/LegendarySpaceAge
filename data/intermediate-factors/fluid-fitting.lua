@@ -15,6 +15,7 @@ recipeFromCopper.ingredients = {
 	{type = "item", name = "resin", amount = 2}
 }
 recipeFromCopper.results = {{type = "item", name = "fluid-fitting", amount = 1}}
+recipeFromCopper.main_product = "fluid-fitting"
 recipeFromCopper.enabled = true
 recipeFromCopper.energy_required = 5
 Icon.set(recipeFromCopper, {"fluid-fitting", "resin", "copper-plate"})

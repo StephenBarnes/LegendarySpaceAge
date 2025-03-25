@@ -40,7 +40,7 @@ for i, itemName in pairs{
 	recipe1.auto_recycle = false
 	recipe1.localised_name = {"recipe-name.sand-derust-X", {"item-name.compound-"..itemName}}
 	recipe1.category = "crafting"
-	recipe1.allow_as_intermediate = true
+	recipe1.allow_as_intermediate = false -- Otherwise the game gets confused, thinks this is the only way to get unrusted iron stuff, so it doesn't let you make eg iron frames from rods from ingots.
 	recipe1.allow_decomposition = false
 	extend{recipe1}
 

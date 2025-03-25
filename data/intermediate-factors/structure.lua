@@ -15,6 +15,7 @@ local recipeFromCement = Recipe.make{
 		{"cement", 20, type = "fluid"},
 	},
 	results = {{"structure", 1}},
+	main_product = "structure",
 	enabled = false,
 	time = 2,
 	category = "crafting-with-fluid",

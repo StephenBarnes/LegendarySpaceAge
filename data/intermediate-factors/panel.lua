@@ -13,6 +13,7 @@ recipeFromIron.ingredients = {
 	{type = "item", name = "iron-plate", amount = 1},
 }
 recipeFromIron.results = {{type = "item", name = "panel", amount = 1}}
+recipeFromIron.main_product = "panel"
 recipeFromIron.enabled = true
 recipeFromIron.energy_required = 0.25
 recipeFromIron.category = "crafting"
@@ -37,7 +38,7 @@ local recipeFromWood = copy(recipeFromIron)
 recipeFromWood.name = "panel-from-wood"
 recipeFromWood.ingredients = {
 	{type = "item", name = "wood", amount = 1},
-	{type = "item", name = "resin", amount = 1},
+	--{type = "item", name = "resin", amount = 1},
 }
 recipeFromWood.allow_as_intermediate = false
 Icon.set(recipeFromWood, {"LSA/intermediate-factors/panel/wooden-panel", "wood"})
@@ -46,7 +47,7 @@ extend{recipeFromWood}
 -- Create recipe: 1 glass -> 1 panel
 local recipeFromGlass = copy(recipeFromIron)
 recipeFromGlass.name = "panel-from-glass"
-recipeFromGlass.ingredients = {{type = "item", name = "glass", amount = 2}}
+recipeFromGlass.ingredients = {{type = "item", name = "glass", amount = 1}}
 recipeFromGlass.allow_as_intermediate = false
 recipeFromGlass.enabled = false
 Icon.set(recipeFromGlass, {"panel", "glass"})

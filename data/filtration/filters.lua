@@ -45,6 +45,7 @@ Recipe.make{
 	recipe = "filter",
 	ingredients = {"frame", "carbon"},
 	results = {"filter"},
+	main_product = "filter",
 	enabled = false,
 	auto_recycle = true,
 }
@@ -61,6 +62,7 @@ Recipe.make{
 		{"filter", 1, probability = .5},
 		{"frame", 1, probability = .5},
 	},
+	main_product = "filter",
 	enabled = false,
 	category = "crafting-with-fluid",
 	subgroup = "filtration",

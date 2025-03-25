@@ -7,8 +7,6 @@ TODO also add more complex but efficient recipes, like fiberglass circuit boards
 local circuitBoardItem = copy(ITEM["electronic-circuit"])
 circuitBoardItem.name = "circuit-board"
 Icon.set(circuitBoardItem, "LSA/circuit-boards/circuit-board-generic")
-circuitBoardItem.order = "b[circuits]-0"
-circuitBoardItem.subgroup = "circuit-board"
 Item.perRocket(circuitBoardItem, 4000)
 Item.copySoundsTo("copper-cable", circuitBoardItem)
 extend{circuitBoardItem}
@@ -25,8 +23,6 @@ woodCircuitBoardRecipe.results = {
 	{type = "item", name = "circuit-board", amount = 10},
 }
 woodCircuitBoardRecipe.energy_required = 5
-woodCircuitBoardRecipe.order = "b[circuits]-001"
-woodCircuitBoardRecipe.subgroup = "circuit-board"
 Icon.set(woodCircuitBoardRecipe, {"LSA/circuit-boards/wood-circuit-board", "wood"})
 woodCircuitBoardRecipe.auto_recycle = false
 extend{woodCircuitBoardRecipe}
@@ -44,8 +40,6 @@ plasticCircuitBoardRecipe.results = {
 	{type = "item", name = "circuit-board", amount = 10},
 }
 plasticCircuitBoardRecipe.energy_required = 1
-plasticCircuitBoardRecipe.order = "b[circuits]-002"
-plasticCircuitBoardRecipe.subgroup = "circuit-board"
 Icon.set(plasticCircuitBoardRecipe, {"LSA/circuit-boards/plastic-circuit-board", "plastic-bar"})
 plasticCircuitBoardRecipe.auto_recycle = false
 extend{plasticCircuitBoardRecipe}
@@ -63,8 +57,6 @@ calciteCircuitBoardRecipe.results = {
 	{type = "item", name = "circuit-board", amount = 10},
 }
 calciteCircuitBoardRecipe.energy_required = 2
-calciteCircuitBoardRecipe.order = "b[circuits]-003"
-calciteCircuitBoardRecipe.subgroup = "circuit-board"
 Icon.set(calciteCircuitBoardRecipe, {"LSA/circuit-boards/ceramic-circuit-board", "calcite"})
 calciteCircuitBoardRecipe.category = "metallurgy"
 calciteCircuitBoardRecipe.auto_recycle = false
@@ -75,23 +67,20 @@ Tech.addRecipeToTech("calcite-circuit-board", "calcite-processing") -- TODO rath
 	Makeshift circuit board: 1 stone brick -> 1 circuit board
 		Needed because all ways of making circuit boards require resin, which can't be obtained on Aquilo without buildings that require electronic circuits, creating a circular dependency. Also same on Nauvis at the start.
 ]]
-local makeshiftBoardRecipe = copy(RECIPE["electronic-circuit"])
-makeshiftBoardRecipe.name = "makeshift-circuit-board"
-makeshiftBoardRecipe.ingredients = {{type = "item", name = "stone-brick", amount = 1}}
-makeshiftBoardRecipe.results = {{type = "item", name = "circuit-board", amount = 1}}
-makeshiftBoardRecipe.order = "b[circuits]-004"
-makeshiftBoardRecipe.subgroup = "circuit-board"
-makeshiftBoardRecipe.icon = nil
-makeshiftBoardRecipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/circuit-boards/circuit-board-generic.png", icon_size = 64, scale = 0.5},
-	{icon = "__core__/graphics/icons/mip/slot-item-in-hand-black.png", icon_size = 64, mipmap_count = 2, scale = 0.4, shift = {5, 4}},
-	--{icon = "__core__/graphics/icons/mip/slot-item-in-hand.png", icon_size = 64, mipmap_count = 2, scale = 0.33, shift = {7, 6}},
+local makeshiftBoardRecipe = Recipe.make{
+	copy = "electronic-circuit",
+	recipe = "makeshift-circuit-board",
+	ingredients = {"stone-brick"},
+	results = {"circuit-board"},
+	main_product = "circuit-board",
+	icons = {"circuit-board", "LSA/misc/makeshift"},
+	enabled = false,
+	time = 1,
+	category = "handcrafting-only",
+	auto_recycle = false,
+	allow_as_intermediate = true,
+	allow_decomposition = false,
 }
-makeshiftBoardRecipe.enabled = false
-makeshiftBoardRecipe.energy_required = 1
-makeshiftBoardRecipe.category = "handcrafting-only"
-makeshiftBoardRecipe.auto_recycle = false
-extend{makeshiftBoardRecipe}
 Tech.addRecipeToTech("makeshift-circuit-board", "electronics")
 
 -- Create tech for wood circuit boards.
@@ -103,7 +92,7 @@ woodCircuitBoardTech.effects = {
 }
 Icon.set(woodCircuitBoardTech, "LSA/circuit-boards/wood-circuit-board-tech")
 woodCircuitBoardTech.prerequisites = {"steam-power"}
-woodCircuitBoardTech.ignore_tech_cost_multiplier = false
+woodCircuitBoardTech.ignore_tech_cost_multiplier = true -- Since it's needed for automating circuit boards, shouldn't require much science.
 woodCircuitBoardTech.unit = {
 	count = 15,
 	ingredients = {
@@ -113,3 +102,11 @@ woodCircuitBoardTech.unit = {
 }
 woodCircuitBoardTech.research_trigger = nil
 extend{woodCircuitBoardTech}
+
+Gen.order({
+	circuitBoardItem,
+	makeshiftBoardRecipe,
+	woodCircuitBoardRecipe,
+	plasticCircuitBoardRecipe,
+	calciteCircuitBoardRecipe,
+}, "circuit-board")
