@@ -4,7 +4,7 @@ RECIPE["burner-inserter"].ingredients = {
 }
 RECIPE["inserter"].ingredients = {
 	{type = "item", name = "mechanism", amount = 1},
-	{type = "item", name = "sensor", amount = 1},
+	{type = "item", name = "electronic-circuit", amount = 1}, -- Making it require a green circuit - sensors are too expensive, since you need a lot of inserters in early game before you can actually automate wirings and circuit boards.
 }
 RECIPE["long-handed-inserter"].ingredients = {
 	{type = "item", name = "frame", amount = 1},

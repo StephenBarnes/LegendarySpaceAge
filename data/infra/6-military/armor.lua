@@ -3,6 +3,7 @@ Recipe.edit{
 	recipe = "light-armor",
 	ingredients = { -- Originally 40 iron plate.
 		{"panel", 10},
+		{"wiring", 2},
 	},
 	time = 5,
 }

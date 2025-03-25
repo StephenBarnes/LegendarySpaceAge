@@ -80,9 +80,10 @@ charTech.effects = {
 	{type = "unlock-recipe", recipe = "char-carbon"},
 }
 charTech.prerequisites = {}
-charTech.research_trigger = {
-	type = "build-entity",
-	entity = "char-furnace",
+charTech.research_trigger = { -- Setting to craft-item instead of build-entity to avoid confusion.
+	type = "craft-item",
+	item = "char-furnace",
+	count = 1,
 }
 charTech.unit = nil
 Icon.set(charTech, "LSA/char-furnace/tech")

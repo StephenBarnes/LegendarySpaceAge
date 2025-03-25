@@ -98,14 +98,15 @@ RECIPE["nuclear-fuel"].hidden = true
 Tech.removeRecipeFromTech("nuclear-fuel", "kovarex-enrichment-process")
 
 -- Add spent fuel slots to everything.
-for _, type in pairs{"car", "locomotive", "inserter", "furnace", "assembling-machine", "boiler", "reactor"} do
+for _, type in pairs{"car", "locomotive", "inserter", "furnace", "assembling-machine", "boiler", "reactor", "mining-drill"} do
 	for _, burner in pairs(RAW[type]) do
-		if burner.energy_source and burner.energy_source.type == "burner" then
-			if (burner.energy_source.fuel_inventory_size or 1) < 2 then
-				burner.energy_source.fuel_inventory_size = 2
+		local energySource = burner.energy_source
+		if energySource and energySource.type == "burner" then
+			if (energySource.fuel_inventory_size or 1) < 2 then
+				energySource.fuel_inventory_size = 2
 			end
-			if (burner.energy_source.burnt_inventory_size or 0) < 2 then
-				burner.energy_source.burnt_inventory_size = 2
+			if (energySource.burnt_inventory_size or 0) < 2 then
+				energySource.burnt_inventory_size = 2
 			end
 		end
 	end

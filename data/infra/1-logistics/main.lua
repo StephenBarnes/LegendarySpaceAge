@@ -14,7 +14,7 @@ require("bots")
 RECIPE["stone-brick"].category = "smelting-or-handcrafting"
 
 -- Adjust recipe times.
-RECIPE["stone-brick"].energy_required = 2 -- Originally 3.2.
+RECIPE["stone-brick"].energy_required = 1 -- Originally 3.2. Making low since you need to do it a lot to make early furnaces.
 for _, recipeName in pairs{"hazard-concrete", "refined-hazard-concrete"} do
 	RECIPE[recipeName].energy_required = 10 -- Originally 0.25.
 end

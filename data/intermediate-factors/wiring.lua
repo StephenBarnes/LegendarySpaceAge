@@ -37,7 +37,7 @@ local makeshiftWiringRecipe = Recipe.make{
 	auto_recycle = false, -- otherwise you can turn neurofibrils into copper cable.
 	icons = {"wiring", "LSA/misc/makeshift"},
 	category = "handcrafting-only",
-	time = 2,
+	time = 0.5,
 }
 Tech.addRecipeToTech("makeshift-wiring", "basic-electricity")
 
