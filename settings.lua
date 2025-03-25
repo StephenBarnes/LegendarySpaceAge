@@ -18,6 +18,7 @@ function addSetting(name, default_value, type, stage)
     })
 end
 
+addSetting("force-settings", true, "bool", "startup")
 addSetting("remove-mapgen-presets", true, "bool", "startup")
 addSetting("enable-detailed-apollo-terrain-sliders", false, "bool", "startup")
 

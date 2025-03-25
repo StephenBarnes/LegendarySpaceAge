@@ -23,7 +23,7 @@ nodeProto.stages = { -- Currently using graphics from Krastorio 2, edited and se
 				height = 500,
 				frame_count = 6, -- Not animation frames, actually number of variations.
 				variation_count = 1, -- Number of rows in the spritesheet. Each row is one stage (for ores that have multiple stages depending on richness).
-				scale = 0.5,
+				scale = 0.7,
 			},
 			{
 				filename = "__LegendarySpaceAge__/graphics/drill-nodes/ent-2-dark-hue.png",
@@ -31,7 +31,7 @@ nodeProto.stages = { -- Currently using graphics from Krastorio 2, edited and se
 				height = 500,
 				frame_count = 6,
 				variation_count = 1,
-				scale = 0.5,
+				scale = 0.7,
 			},
 			{
 				filename = "__LegendarySpaceAge__/graphics/drill-nodes/ent-3-light-hue.png",
@@ -39,7 +39,7 @@ nodeProto.stages = { -- Currently using graphics from Krastorio 2, edited and se
 				height = 500,
 				frame_count = 6,
 				variation_count = 1,
-				scale = 0.5,
+				scale = 0.7,
 			},
 		},
 }

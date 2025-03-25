@@ -74,6 +74,6 @@ R.specs = {
 	},
 }
 
-R.sideLen = 7
+R.sideLen = 10
 
 return R

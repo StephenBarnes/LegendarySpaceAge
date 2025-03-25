@@ -20,6 +20,9 @@ u.setDefaultOrForce("data-dd-lampoff", "double", 0.3)
 u.setDefaultOrForce("large-storage-tank-fluid-size", "int", 100000)
 u.setDefaultOrForce("tiny-storage-tank-volume", "int", 2000)
 
+-- For est-tiny-storage-tank.
+u.setDefaultOrForce("tiny-storage-tank-unlock", "string", "with-fluid-handling")
+
 -- For hand-crank mod.
 u.setDefaultOrForce("er-hcg-run-time-in-seconds", "int", 200)
 u.setDefaultOrForce("er-hcg-crank-delay-in-ticks", "int", 5)
@@ -28,6 +31,7 @@ u.setDefaultOrForce("er-hcg-power-output-in-watts", "int", 500e3) -- Default is 
 u.setDefaultOrForce("er-hcg-recipe-enabled", "bool", false) -- Don't create the crank recipe or tech.
 
 -- Settings for Cargo Ships.
+u.setDefaultOrForce("floating_pole_enabled", "bool", true) -- Setting to false causes error on startup. Rather manually hiding it in data stage.
 u.setDefaultOrForce("offshore_oil_enabled", "bool", false) -- Disable the offshore oil and oil rig.
 u.setDefaultOrForce("oil_rig_capacity", "int", 100) -- Irrelevant bc no oil rigs.
 u.setDefaultOrForce("oil_rigs_require_external_power", "string", "disabled") -- Irrelevant bc no oil rigs.
@@ -39,9 +43,33 @@ u.setDefaultOrForce("tanker_capacity", "int", 250) -- Irrelevant, they're disabl
 u.setDefaultOrForce("no_catching_fish", "bool", false) -- Allow catching fish. No fish on Aquilo anyway.
 u.setDefaultOrForce("use_dark_blue_waterways", "bool", false) -- Irrelevant, only for legacy waterways.
 
+-- Settings for Personal Burner Generator.
+u.setDefaultOrForce("personal-burner-generator-power-output", "int", 200) -- 200kW, same as default.
+u.setDefaultOrForce("personal-burner-generator-pollution-output", "int", 10) -- Same as default, roughly commensurate with boilers.
+u.setDefaultOrForce("personal-burner-generator-fuel-efficiency", "double", 0.5) -- So consumes 400kW, provides 200kW.
+u.setDefaultOrForce("personal-burner-generator-inventory-size", "int", 4)
+
+-- For Gas Boiler.
+u.setDefaultOrForce("vanilla-fluid-fuel-values", "bool", false)
+
 -- For Gas Furnace mod.
 -- No settings.
 
 -- For Power Overload
--- TODO set pole maxes
--- TODO set transformer efficiency to 98% and hide it.
+for pole, maxPower in pairs{
+	["small-electric-pole"] = "10MW",  -- Default 10MW.
+	["medium-electric-pole"] = "50MW", -- Default 60MW.
+	["big-electric-pole"] = "500MW", -- Default 300MW.
+	["po-huge-electric-pole"] = "3GW", -- Default 3GW. Disabling.
+	["po-small-electric-fuse"] = "9MW", -- Default 8MW.
+	["po-medium-electric-fuse"] = "48MW", -- Default 48MW.
+	["po-big-electric-fuse"] = "480MW", -- Default 240MW.
+	["po-huge-electric-fuse"] = "2.4GW", -- Default 2.4GW. Disabling.
+	["substation"] = "100MW", -- Default 120MW.
+	["po-interface"] = "100GW", -- Default 100GW. Disabling.
+	["floating-electric-pole"] = "1.5GW", -- Default 1.5GW. Disabling so it doesn't matter.
+} do
+	u.setDefaultOrForce("power-overload-max-power-"..pole, "string", maxPower)
+end
+-- Transformer efficiency
+u.setDefaultOrForce("power-overload-transformer-efficiency", "double", 0.98)

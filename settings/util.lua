@@ -1,4 +1,7 @@
+--local FORCE_SETTINGS = settings.startup["LSA-force-settings"].value
 local FORCE_SETTINGS = true
+	-- Can't make this a setting, bc we need to use the value of it in settings stage.
+
 
 local Export = {}
 
