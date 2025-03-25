@@ -10,7 +10,8 @@ Date: 2025-03-??
     - TODO added microgravity assembler
     - TODO add sugar system
     - TODO add resistances for enemies
-    - TODO add bream
+    - TODO add different asteroid resistances
+    - TODO add dependency on Bream
 ---------------------------------------------------------------------------------------------------
 Version: 0.9.0
 Date: 2025-03-08

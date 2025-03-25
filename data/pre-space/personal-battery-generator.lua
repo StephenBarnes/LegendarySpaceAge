@@ -61,7 +61,7 @@ extend{item}
 local tech = copy(TECH["battery"])
 tech.name = "personal-battery-generator"
 tech.effects = {{type = "unlock-recipe", recipe = "personal-battery-generator"}}
-tech.prerequisites = {"battery"}
+tech.prerequisites = {"battery", "basic-equipment"}
 tech.icon = TECH_IMG
 extend{tech}
 

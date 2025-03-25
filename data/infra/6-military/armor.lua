@@ -15,7 +15,7 @@ Recipe.edit{
 	},
 	time = 10,
 }
-Tech.setPrereqs("heavy-armor", {"rubber-1", "steel-processing"})
+Tech.setPrereqs("heavy-armor", {"rubber-1", "steel-processing", "basic-equipment"})
 Recipe.edit{
 	recipe = "modular-armor",
 	ingredients = { -- Originally 50 steel plate, 30 advanced circuits.

@@ -3,8 +3,8 @@ local presets = RAW["map-gen-presets"]["default"]
 local custom = {order = "aaa", basic_settings = {autoplace_controls = {}, property_expression_names = {}}, advanced_settings = {difficulty_settings = {}, enemy_evolution = {}, asteroids = {}}}
 presets["LegendarySpaceAge"] = custom
 
--- Harder science
-custom.advanced_settings.difficulty_settings.technology_price_multiplier = 10
+-- Harder science - actually rather using multiplier 1 here, then recosting in tech-progression files, since I want to make only more advanced techs more expensive.
+custom.advanced_settings.difficulty_settings.technology_price_multiplier = 1
 
 -- Rail world defaults, copied from base game code.
 custom.basic_settings.autoplace_controls = {

@@ -442,7 +442,7 @@ local lunarScienceOnlyTechs = Table.listToSet{
 	"worker-robots-speed-6",
 	"stronger-explosives-5",
 	"stronger-explosives-6",
-	"asteroid-science-pack",
+	"space-platform-thruster",
 }
 for techName, tech in pairs(TECH) do
 	if not lunarScienceOnlyTechs[techName] then
@@ -463,12 +463,9 @@ for _, techName in pairs{
 	Tech.replacePrereq(techName, "space-science-pack", "space-platform-thruster")
 end
 
--- Make tech for chem plant.
--- TODO
+-- TODO Make tech for chemistry, and move chem plant to that.
 
 -- TODO make techs for electronics, unlocking extra recipes for sensors, electronic components, etc. Using graphics from 1.1 techs.
-
--- TODO Make tech for chemistry, and move chem plant to that.
 
 -- TODO edit recipes for other science packs.
 
@@ -481,3 +478,6 @@ end
 -- TODO write some code to toposort the whole tech tree and then assign order strings.
 
 -- TODO tech tree change - add nuclear science, move nuclear stuff to after first 3 planetary sciences, and then change all costs to include all science packs they're dependent on.
+
+-- After making changes to tech tree above, run recosting.
+require("recosting")
