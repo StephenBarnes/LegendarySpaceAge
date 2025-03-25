@@ -323,8 +323,8 @@ local CRAFTER_VALS = {
 				{"frame", 20},
 				{"fluid-fitting", 5},
 				{"electric-engine-unit", 20},
-				--{"holmium-plate", 10},
-					-- Adding this would mean you need to have Fulgora imports to get these. Kinda don't want that, eg if you go Fulgora first you should have EM plants on other planets before exporting science.
+				--{"holmium-plate", 100},
+					-- Adding this means you need to have imports on other planets to get EM plants there, eg if you land on Gleba you don't have EM plants until imports are enabled. Kinda don't want that, eg if you go Fulgora first you should have EM plants on Gleba or Vulcanus before exporting science.
 			},
 			time = 10,
 		},
@@ -373,6 +373,7 @@ for name, vals in pairs(CRAFTER_VALS) do
 
 	if vals.machine then
 		assert(vals.machine.kind == "assembling-machine" or vals.machine.kind == "furnace", "Invalid machine kind: " .. (vals.machine.kind or "nil") .. " for " .. name)
+		---@diagnostic disable-next-line: assign-type-mismatch
 		local ent = RAW[vals.machine.kind][name]
 		assert(ent ~= nil, "RAW[" .. vals.machine.kind .. "][" .. name .. "] not found")
 		if vals.machine.speed then ent.crafting_speed = vals.machine.speed end

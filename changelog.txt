@@ -1,17 +1,22 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.10.0
-Date: 2025-03-??
+Version: 0.11.0
+Date: 2025-??-??
   Features:
-    - Added Apollo, moon of Nauvis.
-    - Rearranged space map. Added asteroid belts.
-    - Added telescopes for making lunar science.
-    - Added asteroid science pack, made from asteroid chunks.
     - TODO Added underground deposits for borehole drills - ice on Apollo, and (TODO Gleba, Vulcanus, etc.)
     - TODO added microgravity assembler
     - TODO add sugar system
     - TODO add resistances for enemies
     - TODO add different asteroid resistances
     - TODO add dependency on Bream
+---------------------------------------------------------------------------------------------------
+Version: 0.10.0
+Date: 2025-03-25
+  Features:
+    - Added Apollo, moon of Nauvis.
+    - Rearranged space map. Added asteroid belts.
+    - Added telescopes for making lunar science.
+    - Added asteroid science pack, made from asteroid chunks.
+    - Miscellaneous other changes - bugfixes, balancing, etc.
 ---------------------------------------------------------------------------------------------------
 Version: 0.9.0
 Date: 2025-03-08

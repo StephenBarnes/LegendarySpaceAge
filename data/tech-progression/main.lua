@@ -401,9 +401,10 @@ Note that I'm reusing tech IDs to preserve tech dependencies etc, especially sin
 	* space-platform-thruster tech is reused for asteroid science pack.
 	* space-science-pack is reused for Apollo and lunar science pack.
 ]]
+Tech.moveRecipeToTech("cargo-landing-pad", "rocket-silo", "space-platform", 1)
 Tech.moveRecipeToTech("thruster", "space-platform-thruster", "space-platform")
-Tech.removeRecipeFromTech("ice-melting", "space-platform-thruster") -- Will add to Apollo tech when that's created.
 Tech.moveRecipeToTech("asteroid-collector", "space-platform", "space-platform-thruster")
+Tech.removeRecipeFromTech("ice-melting", "space-platform-thruster") -- Will add to Apollo tech when that's created.
 for _, recipeName in pairs{
 	"crusher",
 	"metallic-asteroid-crushing",
