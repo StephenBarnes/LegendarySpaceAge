@@ -45,20 +45,28 @@ extend{
 		order = "b3",
 	},
 
+	-- Create subgroup for petroleum materials (plastic, rubber, etc.)
+	{
+		type = "item-subgroup",
+		name = "petroleum-materials",
+		group = "intermediate-products",
+		order = "c6",
+	},
+
+	-- Create subgroup for circuits
+	{
+		type = "item-subgroup",
+		name = "circuits",
+		group = "intermediate-products",
+		order = "c7",
+	},
+
 	-- Create subgroup for fluid logistics items.
 	{
 		type = "item-subgroup",
 		name = "fluid-logistics",
 		group = "logistics",
 		order = "d2",
-	},
-
-	-- Create subgroup for petroleum materials (plastic, rubber, etc.)
-	{
-		type = "item-subgroup",
-		name = "petroleum-materials",
-		group = "intermediate-products",
-		order = "c7",
 	},
 
 	-- Create item subgroup for all complex fluid recipes, meaning not just fractionation and cracking.
@@ -256,7 +264,7 @@ for i = 2, 3 do
 	moduleSubgroup.order = "g" .. i
 	extend{moduleSubgroup}
 end
-Gen.orderKinds("module", {ITEM, RECIPE}, {
+Gen.orderKinds("circuits", {ITEM, RECIPE}, {
 	"electronic-circuit",
 	"advanced-circuit",
 	"processing-unit",
