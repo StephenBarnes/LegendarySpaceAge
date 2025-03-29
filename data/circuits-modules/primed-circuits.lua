@@ -37,6 +37,10 @@ So, effects I'll use:
 	red: +100/200% consumption, +10/20% prod, +10/20% pollution, no speed effect.
 	blue: +100/200% consumption, +50/100% speed, no quality effect.
 	white: +2.5/5% quality, no speed effect.
+
+For setting beacon tints: These are used for graphics of modules "plugged in" on beacons, and also the light wave in the advanced beacon animation.
+Primary color is used for the body of the module. Secondary is used for lights on the module, and tint of the light wave moving on beacon.
+In beacons.lua I switched beacons to using tertiary color for the light-wave.
 ]]
 local CIRCUITS = {
 	{
@@ -47,6 +51,11 @@ local CIRCUITS = {
 		copyModule = "efficiency-module",
 		primedEffect = {consumption = -.5},
 		superclockedEffect = {consumption = -1},
+		beaconTint = {
+			primary = MODULE["efficiency-module"].beacon_tint.primary,
+			secondary = MODULE["efficiency-module"].beacon_tint.secondary,
+			tertiary = {0, 1, 0},
+		},
 	},
 	{
 		name = "advanced-circuit",
@@ -56,6 +65,11 @@ local CIRCUITS = {
 		copyModule = "productivity-module",
 		primedEffect = {consumption = 1, productivity = .1, pollution = .1},
 		superclockedEffect = {consumption = 2, productivity = .2, pollution = .2},
+		beaconTint = {
+			primary = {.894, .42, .282},
+			secondary = {.988, .796, .078},
+			tertiary = {1, 0, 0},
+		},
 	},
 	{
 		name = "processing-unit",
@@ -65,6 +79,11 @@ local CIRCUITS = {
 		copyModule = "speed-module",
 		primedEffect = {speed = .5, consumption = 1},
 		superclockedEffect = {speed = 1, consumption = 2},
+		beaconTint = {
+			primary = MODULE["speed-module"].beacon_tint.primary,
+			secondary = MODULE["speed-module"].beacon_tint.secondary,
+			tertiary = {0, 0, 1},
+		},
 	},
 	{
 		name = "white-circuit",
@@ -74,6 +93,11 @@ local CIRCUITS = {
 		copyModule = "quality-module",
 		primedEffect = {quality = .25},
 		superclockedEffect = {quality = .5},
+		beaconTint = {
+			primary = {.796, .784, .761},
+			secondary = {.961, .2, .184},
+			tertiary = {1, 1, 1},
+		},
 	},
 }
 -- TODO add priming and superclocking for quantum circuits!
@@ -111,6 +135,8 @@ for _, vals in pairs(CIRCUITS) do
 	primedCirc.localised_description = nil
 	primedCirc.effect = vals.primedEffect
 	primedCirc.pick_sound = ITEM["nuclear-reactor"].pick_sound -- Default module pickup sound doesn't sound right.
+	primedCirc.beacon_tint = vals.beaconTint
+	primedCirc.art_style = "vanilla" -- To show graphics of it "plugged in" on advanced beacon.
 	extend{primedCirc}
 
 	-- Create module for superclocked circuit.
@@ -133,6 +159,8 @@ for _, vals in pairs(CIRCUITS) do
 	superclockedCirc.spoil_result = primedCircName
 	superclockedCirc.localised_description = {"item-description."..primedCircName}
 	superclockedCirc.effect = vals.superclockedEffect
+	superclockedCirc.beacon_tint = copy(vals.beaconTint)
+	superclockedCirc.art_style = "vanilla"
 	Item.copySoundsTo("energy-shield-equipment", superclockedCirc)
 	extend{superclockedCirc}
 

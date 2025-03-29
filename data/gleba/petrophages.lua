@@ -5,7 +5,8 @@ Petrophages are also the only way to get heavier petrochem fractions on spaceshi
 
 Petrophage breeding increases the number of petrophages, but they keep spoilage from ancestors. Have to sacrifice some to reduce spoilage or they all spoil and die out.
 
-Pitch is 3MJ. Dry gas is 800kJ. Recipe 1 -> 2 is actually ->3 from biochamber, so produces 6MJ, so should consume 7.5 dry gas.
+Pitch is 3MJ. Dry gas is 700kJ. Recipe converts 1 to 2 petrophages, with up to 50% prod, so produces up to 6MJ, so should consume at least 6 / .7 = 8.6 dry gas.
+	Unless we want it to be net positive carbon or energy, maybe? Positive-carbon could be interesting on Vulcanus. TODO think about this more
 ]]
 
 -- Create item.

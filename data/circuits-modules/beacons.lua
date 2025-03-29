@@ -52,10 +52,14 @@ local advancedEnt = RAW.beacon.beacon
 local basicEnt = copy(advancedEnt)
 basicEnt.name = "basic-beacon"
 local graphicsScale = 0.333 -- Beacon rebalance uses 0.5. I'm reducing it to make them 2x2.
-local animationSpeed = 0.25 -- Beacon rebalance uses 0.5.
+local baseAnimationSpeed = 0.25 -- Beacon rebalance uses 0.5.
+local lightAnimationSpeed = 0.35 -- Advanced beacon is 0.5.
 basicEnt.graphics_set = {
 	module_icons_suppressed = false,
 	random_animation_offset = true,
+	apply_module_tint = "tertiary",
+	module_tint_mode = "single-module",
+	no_modules_tint = {0, 0, 0}, -- Not red, since that's now for productivity. Could be {1,1,0} for yellow. Rather just doing black for no light animation.
 	animation_list = {
 		{ -- Beacon base
             render_layer = "lower-object-above-shadow",
@@ -80,7 +84,40 @@ basicEnt.graphics_set = {
                 }
             }
         },
-        { -- Beacon Antenna
+		{ -- Moving glow tinted, copied from vanilla beacon.
+			render_layer = "object",
+			apply_tint = true,
+			always_draw = false,
+			animation = {
+				filename = "__base__/graphics/entity/beacon/beacon-light.png",
+				line_length = 9,
+				width = 110,
+				height = 186,
+				frame_count = 45,
+				animation_speed = lightAnimationSpeed,
+				scale = 0.6,
+				shift = util.by_pixel(0.5, -30),
+				blend_mode = "additive"
+			},
+		},
+		{ -- Moving glow untinted, copied from vanilla beacon.
+			render_layer = "object",
+			apply_tint = false, -- light doesn't get tinted
+			always_draw = false,
+			animation = {
+				filename = "__base__/graphics/entity/beacon/beacon-light.png",
+				line_length = 9,
+				width = 110,
+				height = 186,
+				frame_count = 45,
+				animation_speed = lightAnimationSpeed,
+				scale = 0.6,
+				shift = util.by_pixel(0.5, -30),
+				draw_as_light = true,
+				blend_mode = "additive"
+			},
+		},
+        { -- Beacon antenna - putting this after the light animation so it's on top.
             render_layer = "object",
             always_draw = true,
             animation = {
@@ -91,7 +128,7 @@ basicEnt.graphics_set = {
 						height = 100,
 						line_length = 8,
 						frame_count = 32,
-						animation_speed = animationSpeed,
+						animation_speed = baseAnimationSpeed,
 						shift = util.by_pixel(-2*graphicsScale, -110*graphicsScale),
 						scale = graphicsScale,
                     },
@@ -101,7 +138,7 @@ basicEnt.graphics_set = {
 						height = 98,
 						line_length = 8,
 						frame_count = 32,
-						animation_speed = animationSpeed,
+						animation_speed = baseAnimationSpeed,
 						shift = util.by_pixel(201*graphicsScale, 31*graphicsScale),
 						draw_as_shadow = true,
 						scale = graphicsScale,
@@ -205,36 +242,9 @@ advancedEnt.supply_area_distance = 2
 advancedEnt.energy_usage = "250kW"
 advancedEnt.heating_energy = "250kW"
 advancedEnt.allowed_effects = basicEnt.allowed_effects
-advancedEnt.graphics_set.no_modules_tint = {1, 1, 0} -- Not red, since that's now for productivity.
+advancedEnt.graphics_set.no_modules_tint = {0, 0, 0} -- No lights when it has no modules.
 
 ------------------------------------------------------------------------
-
--- Give beacon-wave colors to the prod and quality modules, since they're now allowed in beacons.
--- Also show the graphics of the modules "plugged in" on beacons.
--- Primary color is used for the body of the module. Secondary is used for lights on the module, and tint of the light wave moving on beacon.
--- Actually I'll change beacons to instead use tertiary color for the light wave.
-for _, suffix in pairs{"", "-2", "-3"} do
-	local prodMod = RAW.module["productivity-module"..suffix]
-	prodMod.beacon_tint = {
-		primary = {.894, .42, .282},
-		secondary = {.988, .796, .078},
-	}
-	prodMod.beacon_tint.tertiary = prodMod.beacon_tint.primary
-	prodMod.art_style = "vanilla" -- To show graphics of it "plugged in" on beacons.
-	local qualMod = RAW.module["quality-module"..suffix]
-	qualMod.beacon_tint = {
-		primary = {.796, .784, .761},
-		secondary = {.961, .2, .184},
-	}
-	qualMod.beacon_tint.tertiary = qualMod.beacon_tint.primary
-	qualMod.art_style = "vanilla"
-
-	-- For efficiency and speed modules, copy secondary color to tertiary, for use as light-wave in beacon.
-	local effMod = RAW.module["efficiency-module"..suffix]
-	effMod.beacon_tint.tertiary = effMod.beacon_tint.secondary
-	local speedMod = RAW.module["speed-module"..suffix]
-	speedMod.beacon_tint.tertiary = speedMod.beacon_tint.secondary
-end
 
 -- Make beacon use module's tertiary color for the light wave.
 RAW.beacon.beacon.graphics_set.apply_module_tint = "tertiary"
