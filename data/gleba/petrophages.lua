@@ -3,7 +3,7 @@ Petrophages are the only way to get heavy petro fractions on Gleba, which are ne
 (After shipping Gleba science, you get techs that let you make plastic and lubricant more cheaply.)
 Petrophages are also the only way to get heavier petrochem fractions on spaceships, which are needed for explosives, which are needed for missiles, which are needed for the trip to Aquilo.
 
-Petrophage breeding increases the number of petrophages, but they keep spoilage from ancestors. Have to spend bioflux to refresh them.
+Petrophage breeding increases the number of petrophages, but they keep spoilage from ancestors. Have to sacrifice some to reduce spoilage or they all spoil and die out.
 
 Pitch is 3MJ. Dry gas is 800kJ. Recipe 1 -> 2 is actually ->3 from biochamber, so produces 6MJ, so should consume 7.5 dry gas.
 ]]

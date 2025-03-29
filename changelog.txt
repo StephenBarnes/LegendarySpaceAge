@@ -8,6 +8,9 @@ Date: 2025-??-??
     - TODO add resistances for enemies
     - TODO add different asteroid resistances
     - TODO add dependency on Bream
+    - TODO add more factor recipes - fluid fittings, and stuff using white circuits.
+    - TODO add titanium to Apollo
+    - TODO add more ores and ore processing?
 ---------------------------------------------------------------------------------------------------
 Version: 0.10.0
 Date: 2025-03-25

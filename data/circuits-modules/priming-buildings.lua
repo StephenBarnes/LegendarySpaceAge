@@ -238,14 +238,14 @@ superclockerEnt.icon = GRAPHICS_FOLDER.."2/icon.png"
 superclockerEnt.minable = {mining_time = 1, result = "superclocker"}
 superclockerEnt.placeable_by = {item = "superclocker", count = 1}
 superclockerEnt.selection_box = {{-3, -3}, {3, 3}}
---superclockerEnt.collision_box = {{-2.9, -2.3}, {2.9, 2.85}}
-superclockerEnt.collision_box = {{-2.9, -2.5}, {2.9, 2.85}}
+superclockerEnt.collision_box = {{-2.9, -2.9}, {2.9, 2.9}} -- Symmetric so it can be rotated.
 superclockerEnt.tile_height = 6
 superclockerEnt.tile_width = 6
 superclockerEnt.crafting_categories = {"circuit-superclocking"}
 superclockerEnt.energy_usage = "9MW"
 superclockerEnt.energy_source.drain = "1MW"
 superclockerEnt.heating_energy = "1MW"
+local superclockerGraphicsShift = {0, -0.17} -- Shifting graphics up so north pipe doesn't look too long.
 superclockerEnt.graphics_set = {
 	animation = {
 		layers = {
@@ -258,6 +258,7 @@ superclockerEnt.graphics_set = {
 				animation_speed = 1,
 				scale = 0.5,
 				draw_as_shadow = true,
+				shift = superclockerGraphicsShift,
 			},
 			{
 				width = 410,
@@ -265,6 +266,7 @@ superclockerEnt.graphics_set = {
 				frame_count = 100,
 				animation_speed = 1,
 				scale = 0.5,
+				shift = superclockerGraphicsShift,
 				stripes = {
 					{
 						filename = GRAPHICS_FOLDER.."2/animation-1.png",
@@ -291,6 +293,7 @@ superclockerEnt.graphics_set = {
 				frame_count = 100,
 				animation_speed = 1,
 				scale = 0.5,
+				shift = superclockerGraphicsShift,
 				draw_as_glow = true,
 				blend_mode = "additive",
 				stripes = {
@@ -324,29 +327,41 @@ superclockerEnt.working_sound = {
 		},
 	},
 }
-local pipeCovers = pipecoverspictures()
-superclockerEnt.fluid_boxes = {
+superclockerEnt.fluid_boxes = { -- Giving it 2 input fluid boxes, instead of 1 fluid box with 2 connections. Not sure if this has any benefits but it's what Wube did with their EM plant so probably better.
 	{
 		production_type = "input",
-		pipe_covers = pipeCovers,
+		pipe_covers = pipecoverspictures(),
 		volume = 200,
+		filter = "electrolyte",
         pipe_picture = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures,
         pipe_picture_frozen = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures_frozen,
-		secondary_draw_order = -1,
+		secondary_draw_orders = {north=-1, west=-1, south=1, east=-1},
 		pipe_connections = {
 			{
-				flow_direction = "input",
+				flow_direction = "input-output",
 				direction = NORTH,
-				positions = {
-					{-0.5, -2.5},
-					{2.5, 0.5},
-					{-0.5, 2.5},
-					{-2.5, 0.5},
-				},
+				position = {-0.5, -2.5},
+			},
+		},
+	},
+	{
+		production_type = "input",
+		pipe_covers = pipecoverspictures(),
+		volume = 200,
+		filter = "electrolyte",
+        pipe_picture = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures,
+        pipe_picture_frozen = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures_frozen,
+		secondary_draw_orders = {north=-1, west=-1, south=1, east=-1},
+		pipe_connections = {
+			{
+				flow_direction = "input-output",
+				direction = SOUTH,
+				position = {0.5, 2.5},
 			},
 		},
 	},
 }
+superclockerEnt.forced_symmetry = "horizontal"
 superclockerEnt.dying_explosion = "oil-refinery-explosion"
 superclockerEnt.corpse = "oil-refinery-remnants"
 ---@diagnostic disable-next-line: undefined-field, inject-field
