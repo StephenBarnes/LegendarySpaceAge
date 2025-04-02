@@ -22,6 +22,7 @@ woodCircuitBoardRecipe.ingredients = {
 woodCircuitBoardRecipe.results = {
 	{type = "item", name = "circuit-board", amount = 10},
 }
+woodCircuitBoardRecipe.allow_as_intermediate = false;
 woodCircuitBoardRecipe.energy_required = 5
 Icon.set(woodCircuitBoardRecipe, {"LSA/circuit-boards/wood-circuit-board", "wood"})
 woodCircuitBoardRecipe.auto_recycle = false
@@ -39,6 +40,7 @@ plasticCircuitBoardRecipe.ingredients = {
 plasticCircuitBoardRecipe.results = {
 	{type = "item", name = "circuit-board", amount = 10},
 }
+woodCircuitBoardRecipe.allow_as_intermediate = false;
 plasticCircuitBoardRecipe.energy_required = 1
 Icon.set(plasticCircuitBoardRecipe, {"LSA/circuit-boards/plastic-circuit-board", "plastic-bar"})
 plasticCircuitBoardRecipe.auto_recycle = false
@@ -56,6 +58,7 @@ calciteCircuitBoardRecipe.ingredients = {
 calciteCircuitBoardRecipe.results = {
 	{type = "item", name = "circuit-board", amount = 10},
 }
+woodCircuitBoardRecipe.allow_as_intermediate = false;
 calciteCircuitBoardRecipe.energy_required = 2
 Icon.set(calciteCircuitBoardRecipe, {"LSA/circuit-boards/ceramic-circuit-board", "calcite"})
 calciteCircuitBoardRecipe.category = "metallurgy"
