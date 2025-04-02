@@ -57,11 +57,11 @@ u.setDefaultOrForce("vanilla-fluid-fuel-values", "bool", false)
 
 -- For Power Overload
 for pole, maxPower in pairs{
-	["small-electric-pole"] = "10MW",  -- Default 10MW.
+	["small-electric-pole"] = "20MW",  -- Default 10MW.
 	["medium-electric-pole"] = "50MW", -- Default 60MW.
 	["big-electric-pole"] = "500MW", -- Default 300MW.
 	["po-huge-electric-pole"] = "3GW", -- Default 3GW. Disabling.
-	["po-small-electric-fuse"] = "9MW", -- Default 8MW.
+	["po-small-electric-fuse"] = "19MW", -- Default 8MW.
 	["po-medium-electric-fuse"] = "48MW", -- Default 48MW.
 	["po-big-electric-fuse"] = "480MW", -- Default 240MW.
 	["po-huge-electric-fuse"] = "2.4GW", -- Default 2.4GW. Disabling.

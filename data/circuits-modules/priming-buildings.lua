@@ -327,7 +327,8 @@ superclockerEnt.working_sound = {
 		},
 	},
 }
-superclockerEnt.fluid_boxes = { -- Giving it 2 input fluid boxes, instead of 1 fluid box with 2 connections. Not sure if this has any benefits but it's what Wube did with their EM plant so probably better.
+superclockerEnt.fluid_boxes = {
+	-- Wube's EM plant had 2 input fluid boxes, instead of 1 fluid box with 2 connections. I'm guessing that's so it can take 2 different fluid inputs. Since superclocker always uses electrolyte, it's probably better to have 1 input fluid box with 2 connections.
 	{
 		production_type = "input",
 		pipe_covers = pipecoverspictures(),
@@ -342,17 +343,6 @@ superclockerEnt.fluid_boxes = { -- Giving it 2 input fluid boxes, instead of 1 f
 				direction = NORTH,
 				position = {-0.5, -2.5},
 			},
-		},
-	},
-	{
-		production_type = "input",
-		pipe_covers = pipecoverspictures(),
-		volume = 200,
-		filter = "electrolyte",
-        pipe_picture = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures,
-        pipe_picture_frozen = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures_frozen,
-		secondary_draw_orders = {north=-1, west=-1, south=1, east=-1},
-		pipe_connections = {
 			{
 				flow_direction = "input-output",
 				direction = SOUTH,
@@ -361,7 +351,7 @@ superclockerEnt.fluid_boxes = { -- Giving it 2 input fluid boxes, instead of 1 f
 		},
 	},
 }
-superclockerEnt.forced_symmetry = "horizontal"
+superclockerEnt.forced_symmetry = "horizontal" -- Don't know exactly what this does, docs are missing, but it makes it possible to flip the entity.
 superclockerEnt.dying_explosion = "oil-refinery-explosion"
 superclockerEnt.corpse = "oil-refinery-remnants"
 ---@diagnostic disable-next-line: undefined-field, inject-field
