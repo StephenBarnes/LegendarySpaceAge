@@ -15,16 +15,16 @@ local function onBuilt(event)
 		or (surface.name ~= "apollo")
 	) then return end
 	local info = {
-        name = "rocket-silo-10parts",
-        position = ent.position,
-        quality = ent.quality,
-        force = ent.force,
-        fast_replace = true,
-        player = ent.last_user,
+		name = "rocket-silo-10parts",
+		position = ent.position,
+		quality = ent.quality,
+		force = ent.force,
+		fast_replace = true,
+		player = ent.last_user,
 		orientation = ent.orientation,
 		direction = ent.direction,
 		mirroring = ent.mirroring,
-    }
+	}
 	ent.destroy()
 	local newEnt = surface.create_entity(info)
 	if newEnt == nil or not newEnt.valid then return end

@@ -4,7 +4,7 @@ Initially this mod just used the chemical plant or assemblers for filtration, wi
 	spent filter + bit of clean water -> clean filter.
 But those recipes interact poorly with quality. If you have a high-quality filter item you can produce unlimited quality products. Which is unrealistic and overpowered.
 Could just make those recipes not output spent filters, so you can't reuse them. That reduces the quality problem (since you can't use a quality filter multiple times), but doesn't completely eliminate it, since quality filters still let you get quality stuff. It also makes the whole system a lot simpler. Having filter washing and reuse is a bit complicated because you have to eg avoid using all your water on other things leaving none for the filter washing.
-Plus, I ended up adding filtration as an important recipe to 4 of the 5 planets (not Vulcanus) so a separate building for it will see a lot of use.
+Plus, I ended up adding filtration as an important recipe to all 5 planets so a separate building for it will see a lot of use.
 ]]
 
 ---@type data.FurnacePrototype
@@ -51,14 +51,13 @@ ent.dying_explosion = "agricultural-tower-explosion"
 ent.corpse = "biochamber-remnants"
 -- Circuit connector looks fine.
 local pipeCovers = pipecoverspictures()
--- TODO make these fluid boxes passthrough, and add another output.
 ent.fluid_boxes = {
 	{
 		production_type = "input",
 		pipe_covers = pipeCovers,
 		volume = 2000,
-        pipe_picture = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures,
-        pipe_picture_frozen = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures_frozen,
+		pipe_picture = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures,
+		pipe_picture_frozen = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures_frozen,
 		secondary_draw_order = -1,
 		pipe_connections = {
 			{

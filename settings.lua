@@ -9,13 +9,13 @@ function getNextOrderString()
 end
 
 function addSetting(name, default_value, type, stage)
-    table.insert(updates, {
-        type = type.."-setting",
-        name = "LSA-"..name,
-        setting_type = stage,
-        default_value = default_value,
+	table.insert(updates, {
+		type = type.."-setting",
+		name = "LSA-"..name,
+		setting_type = stage,
+		default_value = default_value,
 		order = getNextOrderString(),
-    })
+	})
 end
 
 addSetting("force-settings", true, "bool", "startup")

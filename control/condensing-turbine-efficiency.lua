@@ -25,20 +25,20 @@ local function onBuilt(event)
 	if event.entity.name ~= "condensing-turbine" and event.entity.name ~= "condensing-turbine-evil" then return end
 	local entity = event.entity
 	-- The placed entity could be either a regular condensing-turbine, or a condensing-turbine-evil (via bots/blueprints).
-    local surface = entity.surface
-    if not surface.valid then return end
+	local surface = entity.surface
+	if not surface.valid then return end
 	local name = entity.name
-    local info = {
-        name = "condensing-turbine-evil",
-        position = entity.position,
-        quality = entity.quality,
-        force = entity.force,
-        fast_replace = true,
-        player = entity.last_user,
+	local info = {
+		name = "condensing-turbine-evil",
+		position = entity.position,
+		quality = entity.quality,
+		force = entity.force,
+		fast_replace = true,
+		player = entity.last_user,
 		orientation = entity.orientation,
 		direction = entity.direction,
 		mirroring = entity.mirroring,
-    }
+	}
 	local ctEvil = nil
 	if name == "condensing-turbine" then -- Regular condensing turbine: destroy it and replace with a condensing-turbine-evil.
 		entity.destroy()
@@ -48,13 +48,13 @@ local function onBuilt(event)
 	end
 	if ctEvil == nil or not ctEvil.valid then return end
 	ctEvil.mirroring = info.mirroring
-    setCondensingTurbineDeathRattle(ctEvil)
-    info.name = "steam-evilizer"
-    local evilizer = surface.create_entity(info)
-    if evilizer ~= nil and evilizer.valid then
-        evilizer.destructible = false
+	setCondensingTurbineDeathRattle(ctEvil)
+	info.name = "steam-evilizer"
+	local evilizer = surface.create_entity(info)
+	if evilizer ~= nil and evilizer.valid then
+		evilizer.destructible = false
 		evilizer.mirroring = info.mirroring
-    end
+	end
 end
 
 ---@param e EventData.on_object_destroyed
@@ -74,12 +74,12 @@ local function onObjectDestroyed(e)
 		-- Only destroy 1 of them, if there's multiple.
 		if #ents > 0 then
 			ents[1].destroy()
-            if #ents > 1 then
-                log("Multiple " .. name .. " found at " .. serpent.block(position) .. ", this should not happen")
-            end
-        else
-            log("No " .. name .. " found at " .. serpent.block(position) .. ", this should not happen")
-        end
+			if #ents > 1 then
+				log("Multiple " .. name .. " found at " .. serpent.block(position) .. ", this should not happen")
+			end
+		else
+			log("No " .. name .. " found at " .. serpent.block(position) .. ", this should not happen")
+		end
 	end
 	-- Un-store the deathrattle.
 	deathrattles[e.registration_number] = nil

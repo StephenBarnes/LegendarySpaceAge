@@ -62,28 +62,28 @@ basicEnt.graphics_set = {
 	no_modules_tint = {0, 0, 0}, -- Not red, since that's now for productivity. Could be {1,1,0} for yellow. Rather just doing black for no light animation.
 	animation_list = {
 		{ -- Beacon base
-            render_layer = "lower-object-above-shadow",
-            always_draw = true,
-            animation = {
-                layers = {
-                    { -- Base
-                        filename = "__LegendarySpaceAge__/graphics/beacons/beacon-base.png",
+			render_layer = "lower-object-above-shadow",
+			always_draw = true,
+			animation = {
+				layers = {
+					{ -- Base
+						filename = "__LegendarySpaceAge__/graphics/beacons/beacon-base.png",
 						width = 232,
 						height = 186,
 						shift = util.by_pixel(22*graphicsScale, 3*graphicsScale),
 						scale = graphicsScale,
-                    },
-                    { -- Shadow
-                        filename = "__LegendarySpaceAge__/graphics/beacons/beacon-base-shadow.png",
+					},
+					{ -- Shadow
+						filename = "__LegendarySpaceAge__/graphics/beacons/beacon-base-shadow.png",
 						width = 232,
 						height = 186,
 						shift = util.by_pixel(22*graphicsScale, 3*graphicsScale),
 						draw_as_shadow = true,
 						scale = graphicsScale,
-                    }
-                }
-            }
-        },
+					}
+				}
+			}
+		},
 		{ -- Moving glow tinted, copied from vanilla beacon.
 			render_layer = "object",
 			apply_tint = true,
@@ -117,13 +117,13 @@ basicEnt.graphics_set = {
 				blend_mode = "additive"
 			},
 		},
-        { -- Beacon antenna - putting this after the light animation so it's on top.
-            render_layer = "object",
-            always_draw = true,
-            animation = {
-                layers = {
-                    { -- Base
-                        filename = "__LegendarySpaceAge__/graphics/beacons/beacon-antenna.png",
+		{ -- Beacon antenna - putting this after the light animation so it's on top.
+			render_layer = "object",
+			always_draw = true,
+			animation = {
+				layers = {
+					{ -- Base
+						filename = "__LegendarySpaceAge__/graphics/beacons/beacon-antenna.png",
 						width = 108,
 						height = 100,
 						line_length = 8,
@@ -131,9 +131,9 @@ basicEnt.graphics_set = {
 						animation_speed = baseAnimationSpeed,
 						shift = util.by_pixel(-2*graphicsScale, -110*graphicsScale),
 						scale = graphicsScale,
-                    },
-                    { -- Shadow
-                        filename = "__LegendarySpaceAge__/graphics/beacons/beacon-antenna-shadow.png",
+					},
+					{ -- Shadow
+						filename = "__LegendarySpaceAge__/graphics/beacons/beacon-antenna-shadow.png",
 						width = 126,
 						height = 98,
 						line_length = 8,
@@ -142,30 +142,30 @@ basicEnt.graphics_set = {
 						shift = util.by_pixel(201*graphicsScale, 31*graphicsScale),
 						draw_as_shadow = true,
 						scale = graphicsScale,
-                    },
-                },
-            },
-        },
+					},
+				},
+			},
+		},
 	},
 }
 basicEnt.water_reflection = {
-    pictures = {
-        filename = "__LegendarySpaceAge__/graphics/beacons/beacon-reflection.png",
-        priority = "extra-high",
-        width = 24,
-        height = 28,
-        shift = util.by_pixel(0, 55),
-        variation_count = 1,
-        scale = 10 * graphicsScale,
-    },
-    rotate = false,
-    orientation_to_variation = false
+	pictures = {
+		filename = "__LegendarySpaceAge__/graphics/beacons/beacon-reflection.png",
+		priority = "extra-high",
+		width = 24,
+		height = 28,
+		shift = util.by_pixel(0, 55),
+		variation_count = 1,
+		scale = 10 * graphicsScale,
+	},
+	rotate = false,
+	orientation_to_variation = false
 }
 basicEnt.icon = "__LegendarySpaceAge__/graphics/beacons/icon.png"
 basicEnt.minable.result = "basic-beacon"
 basicEnt.placeable_by = {
-    item = "basic-beacon",
-    count = 1
+	item = "basic-beacon",
+	count = 1
 }
 basicEnt.fast_replaceable_group = nil
 extend{basicEnt}

@@ -1,19 +1,19 @@
 ---@param entity LuaEntity
 local function replaceWithLavaPump(entity)
 	-- Replace this offshore pump with a "lava-pump" entity.
-    local surface = entity.surface
-    local info = {
-        name = "lava-pump",
-        position = entity.position,
-        quality = entity.quality,
-        force = entity.force,
-        fast_replace = true,
-        player = entity.last_user,
+	local surface = entity.surface
+	local info = {
+		name = "lava-pump",
+		position = entity.position,
+		quality = entity.quality,
+		force = entity.force,
+		fast_replace = true,
+		player = entity.last_user,
 		orientation = entity.orientation,
 		direction = entity.direction,
-    }
-    entity.destroy()
-    surface.create_entity(info)
+	}
+	entity.destroy()
+	surface.create_entity(info)
 end
 
 -- When a pump is built on Vulcanus, replace it with a lava-pump.
