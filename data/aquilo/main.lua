@@ -1,9 +1,5 @@
---[[
-local mineralDustItem = copy(ITEM.stone)
-mineralDustItem.name = "mineral-dust"
-mineralDustItem.order = (mineralDustItem.order or "") .. "-b"
-extend({mineralDustItem})
-]]
+-- This folder will add new items/recipes/etc for Aquilo.
+-- TODO currently almost nothing has been implemented yet.
 
 -- Add heating energy to offshore pump and waste pump.
 RAW["offshore-pump"]["offshore-pump"].heating_energy = "50kW"
