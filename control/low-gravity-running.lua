@@ -44,8 +44,13 @@ local function swapCharacter(player, surface, prevChar, newCharName)
 	newChar.copy_settings(prevChar)
 
 	-- Copy over armor and guns.
-	-- (Don't need to copy main inventory or ammo since you can't land with that anyway.)
-	for _, inventorySlot in pairs{defines.inventory.character_guns, defines.inventory.character_armor} do
+	-- (Don't need to copy main inventory or ammo since you can't land with that anyway. But copying anyway for testing.)
+	for _, inventorySlot in pairs{
+		defines.inventory.character_guns,
+		defines.inventory.character_armor,
+		defines.inventory.character_main,
+		defines.inventory.character_ammo,
+	} do
 		local prevInv = prevChar.get_inventory(inventorySlot)
 		local newInv = newChar.get_inventory(inventorySlot)
 		if prevInv ~= nil and newInv ~= nil then
