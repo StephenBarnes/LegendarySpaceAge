@@ -1,13 +1,14 @@
--- This file adjusts items that are placed in the crashed ship, or given directly to player, if no ship.
--- Namely: some ammo, iron plates, starting equipment, etc.
--- These items aren't given again when player dies and respawns (checked).
+--[[ This file adjusts items that are placed in the crashed ship, or given directly to player, if no ship.
+Namely: some ammo, iron plates, starting equipment, etc.
+These items aren't given again when player dies and respawns (checked).
 
--- This file adds some starting equipment, intended to allow copy-paste construction from the start. Because we've all done the first 2 hours too many times to still find it interesting, and I don't want to have to click hundreds of times to build the first furnace stacks.
--- To do this, in data stage we add 4x4 equipment grids to light and heavy armor, which can only hold generator, batteries, and personal roboports. Then in control stage we put some of those in the initial player inventory.
+This file adds some starting equipment, intended to allow copy-paste construction from the start. Because this modpack requires production on a greater scale than the vanilla game, including before bots are unlocked, and without bots you would have to click hundreds of times to build the first furnace stacks etc.
+To do this, in data stage we add 4x4 equipment grids to light and heavy armor, which can only hold generator, batteries, and personal roboports. Then in control stage we put some of those in the initial player inventory.
 
--- Originally debris items was 8x iron plate and 1x hand-crank (from that mod).
--- Originally "created_items" was 1x burner mining drill, 1x hand-crank, 10x firearm-magazine, 8x iron-plate, 1x pistol, 1x stone-furnace, 1x wood.
--- So it seems created items includes everything in debris items too. They're not given to the first player, only put in crashed ship. Subsequent players get the starting items.
+Originally "debris_items" was 8x iron plate and 1x hand-crank (from that mod).
+Originally "created_items" was 1x burner mining drill, 1x hand-crank, 10x firearm-magazine, 8x iron-plate, 1x pistol, 1x stone-furnace, 1x wood.
+So it seems created_items is everything given to each player, and debris_items is the subset of that that's placed in the crashed ship debris for the first player. For subsequent players, all of the created_items are given directly, not placed in debris.
+]]
 
 local function setStartItems()
 	if not remote.interfaces.freeplay or not remote.interfaces.freeplay.set_debris_items or not remote.interfaces.freeplay.set_created_items then

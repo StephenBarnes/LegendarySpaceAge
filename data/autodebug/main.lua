@@ -1,4 +1,4 @@
--- This file will run automated checks. For example, checking that when the player unlocks a recipe, he has the ingredients available.
+-- This file runs automated checks for the modpack. For example, checking that when the player unlocks a recipe, he has the ingredients available.
 
 -- This controls whether to actually run the full debug. Takes like 30 seconds to run, mostly because of getTechPrePostSets().
 local RUN_FULL_DEBUG = false
@@ -73,12 +73,6 @@ local function runQuickDebug()
 	success = checkModulesBeaconsEnabled() and success
 	success = checkConservationRules() and success
 	success = checkIntendedTradeoffs() and success
-	-- TODO check all science packs required by techs are available before those techs.
-	-- TODO check that when a recipe is unlocked, at least one machine that can craft it has been unlocked.
-	-- TODO check that there are no items and fluids with the same name.
-	-- TODO check that all non-hidden enabled techs have all prerequisites non-hidden and enabled.
-	-- TODO check that there are no items or fluids (or item subtypes) that have no recipes producing them. Except for things only mined, etc.
-	-- TODO check that recipes in techs after the nth circuit use the most advanced circuit. Eg should use white circuits for centrifuges, not red circuits.
 	-- TODO add more checks here
 	return success
 end

@@ -1,3 +1,5 @@
+-- This file replaces offshore pumps on Vulcanus with lava-pumps to prevent lava from going in pipes. See other file data/vulcanus/no-lava-in-pipes.lua for more details.
+
 ---@param entity LuaEntity
 local function replaceWithLavaPump(entity)
 	-- Replace this offshore pump with a "lava-pump" entity.

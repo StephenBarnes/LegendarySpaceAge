@@ -1,5 +1,5 @@
 --[[ This file replaces half the crude oil wells on Nauvis with natural gas wells instead. It runs when chunks are generated.
-Aquilo also has natural gas wells, but since all of them get replaced, I'm rather doing that with autoplace, not control-stage code.
+This file does not run for Aquilo - Aquilo only has natural gas wells, so it's handled with autoplace instead of control-stage scripting.
 Could also do Nauvis with autoplace, but then I can't do stuff like converting exactly half the oil wells in each chunk to gas wells.
 ]]
 

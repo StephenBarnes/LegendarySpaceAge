@@ -1,6 +1,8 @@
 -- This file swaps rocket silo on build, depending on the surface, so that silos on Apollo only need 10 parts per rocket.
 
-local rocketSiloForSurface = {apollo = "rocket-silo-10parts"}
+local rocketSiloForSurface = {
+	apollo = "rocket-silo-10parts",
+}
 local rocketSiloDefault = "rocket-silo"
 
 -- When a rocket silo is built, replace it with a rocket-silo-10parts if surface is Apollo.

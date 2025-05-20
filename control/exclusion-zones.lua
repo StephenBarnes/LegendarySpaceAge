@@ -37,8 +37,8 @@ local function getExclusionPositions(pos, entName)
 	}
 end
 
--- Function to create exclusion zone around deep drill, preventing other deep drills from being built close to it.
--- Also works for ghosts of deep drills.
+-- Function to create exclusion zone around entity, preventing other entities from being built close to it.
+-- Also works for ghosts of entities.
 ---@param entity LuaEntity
 ---@param entityName string
 local function createExclusionZone(entity, entityName)
@@ -60,7 +60,7 @@ local function createExclusionZone(entity, entityName)
 	end
 end
 
--- Function to destroy exclusion zone around deep drill, or ghost of deep drill.
+-- Function to destroy exclusion zone around entity, or ghost of entity.
 local function destroyExclusionZone(e)
 	local deathrattles = getDeathRattles()
 	local deathrattle = deathrattles[e.registration_number]

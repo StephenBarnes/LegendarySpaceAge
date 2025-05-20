@@ -1,4 +1,4 @@
---[[ This file replaces player character when they land on low-gravity surfaces (currently only Apollo), to make them run faster but with slower animation.
+--[[ This file replaces player character when they land on low-gravity surfaces (currently only Apollo), to make them have slower run animation that looks more appropriate in low gravity.
 Uses the new character "low-gravity-character" that was added in data stage. We switch to the new character, and transfer over everything like inventory etc.
 ]]
 

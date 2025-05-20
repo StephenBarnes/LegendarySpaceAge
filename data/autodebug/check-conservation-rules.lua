@@ -3,7 +3,7 @@
 Currently conservation rules are:
 	* water - check that steam/ice/water is never created by any recipe (except if the recipe ingredients involve at least that much water).
 	* carbon - we assume there's a certain amount of carbon in each item/fluid, and then check that no recipes are net-positive. (This is important eg on Vulcanus, where there's lots of energy and fuel (sulfur) but we still want to make carbon scarce.)
-	* "fuel potential" - we assign a "fuel potential" to each item/fluid, measuring how much fuel it "could be made into". The item's actual fuel value, if it has one, should be at most this potential. Some fluids (eg tar) will have fuel value much lower than their potential, but can be converted to other items/fluids to realize that fuel potential. This ensures there's no loop of recipes you can do that will produce infinite fuel.
+	* "fuel potential" - we assign a "fuel potential" to each item/fluid, measuring how much fuel it "could be made into". The item's actual fuel value, if it has one, should be at most this potential. Some fluids (eg tar) will have fuel value much lower than their potential, but can be converted to other items/fluids to realize that fuel potential. This ensures there's no loop of recipes you can do that will produce infinite fuel. TODO this is not implemented yet.
 
 It's pretty easy to write recipes that follow all these conservation rules BUT then prod bonuses screw it all up. Often the way to fix this is to just limit the prod bonus for a recipe or for some of a recipe's products. I'm noting ALL of these prod limits in recipe/entity descriptions so players don't have to be surprised.
 ]]

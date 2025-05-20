@@ -10,7 +10,7 @@ We want to find the total production in maybe the last 3 minutes, or 5 minutes.
 So if we use a time-frame of 10 hours, each sample index gives (600 minutes / 300 = 2 minutes) of data.
 Could use a time-frame of 50 hours. Then each sample index gives 10 minutes of data, which is too high.
 If we use a time-frame of 1 hour, each sample index gives (60 minutes / 300 = 0.2 minutes) of data. So we need to add up 5 samples to get production over 1 minute.
-	Ok, we'll do that.
+	So, using 1-hour timeframe for 3-minute and 5-minute tech triggers. If you later add tech triggers with 10 minutes, then rather use the 10-hour timeframe.
 ]]
 
 local TECH_RATES = require("util.const.tech-rates")

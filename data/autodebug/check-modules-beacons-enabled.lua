@@ -67,6 +67,7 @@ local expectedRecipes = {
 	["petrophage-cultivation"] = {0.5, true}, -- Cap prod to conserve carbon.
 	["refresh-petrophages"] = {2, true}, -- Cap prod to conserve carbon.
 
+	-- Cryo gas recipes: block prod and quality for all of them.
 	["nitrogen-compression"] = {0, false},
 	["nitrogen-expansion"] = {0, false},
 	["oxygen-cascade-cooling"] = {0, false},
@@ -98,6 +99,7 @@ local expectedRecipes = {
 }
 
 -- Table of machines that should have prod/quality/beacons disabled or modified.
+-- TODO checks not implemented yet.
 local expectedMachines = {
 	["assembling-machine"] = {
 	},
@@ -205,12 +207,9 @@ local function checkModulesBeaconsEnabled()
 			success = checkMachine(proto) and success
 		end
 	end
-	-- TODO check that all recipes with water/steam/ice in both input and output have prod disabled.
 	return success
 end
 
 return checkModulesBeaconsEnabled
 
-
--- TODO also disable quality for some recipes, and check that. Eg battery charging.
 -- TODO allow beacons and quality and prod for (almost) all machines, eg furnaces.

@@ -1,4 +1,4 @@
---[[ This file replaces built entities with the appropriate quality variant, so that we can scale power consumption with quality.
+--[[ This file replaces built entities with the appropriate quality variant, so that we can scale power consumption with quality. This is necessary to prevent free-energy exploits using e.g. quality battery chargers that produce more energy than they consume.
 See data/final-fixes/quality-power-scaling.lua for the data-side of this and more explanation.
 ]]
 
