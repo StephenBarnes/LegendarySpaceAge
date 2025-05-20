@@ -1,5 +1,7 @@
--- This file handles fuel values, emissions multipliers, and vehicle stats for all solid and fluid fuels in the game. Mostly petrochem stuff but also some other fuels.
--- Fuel values for barrels and tanks are set in barrelling-dff.lua instead.
+--[[ This file handles fuel values, emissions multipliers, and vehicle stats for all solid and fluid fuels in the game. Mostly petrochem stuff but also some other fuels.
+Fuel values for barrels and tanks are set in barrelling-dff.lua instead.
+Heat shuttle "fuels" are handled in heat-shuttles.lua instead.
+]]
 
 local Const = require "util.const.fuel-const"
 
@@ -116,3 +118,15 @@ end
 ITEM["carbon"].stack_size = 100
 ITEM["solid-fuel"].stack_size = 100
 ITEM["rocket-fuel"].stack_size = 100
+
+-- Create a burner usage specifically for carbon-based fuels, so we can have custom description.
+local carbonBurnerUsage = copy(RAW["burner-usage"]["fuel"])
+carbonBurnerUsage.name = "carbon-fuel"
+carbonBurnerUsage.empty_slot_description = {"gui.carbon-fuel-description"}
+carbonBurnerUsage.accepted_fuel_key = "description.accepted-carbon-fuel"
+extend{carbonBurnerUsage}
+
+-- Some entities only allow carbon-based fuels, so set burner usage to have tooltip.
+charFurnace.energy_source.burner_usage = "carbon-fuel"
+FURNACE["stone-furnace"].energy_source.burner_usage = "carbon-fuel"
+FURNACE["steel-furnace"].energy_source.burner_usage = "carbon-fuel"

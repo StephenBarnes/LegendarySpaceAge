@@ -105,7 +105,7 @@ ent.energy_source.emissions_per_minute = {
 	spores = -4, -- For comparison, yumako tree is 15/harvest, and grows for 5m, so about 3/min spores.
 }
 ent.crafting_categories = {"air-separation"}
-ent.energy_usage = "200kW" -- So it's 5MW with drain.
+ent.energy_usage = "200kW"
 ent.energy_source.drain = "0W"
 ent.heating_energy = "200kW"
 ent.show_recipe_icon = false

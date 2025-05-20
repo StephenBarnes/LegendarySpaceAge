@@ -2,6 +2,9 @@
 Version: 0.11.0
 Date: 2025-??-??
   Features:
+    - TODO add heat shuttles.
+    - Added exothermic plant - used for recipes that charge heat shuttles.
+    - ...
     - TODO Added underground deposits for borehole drills - ice on Apollo, and (TODO Gleba, Vulcanus, etc.)
     - TODO added microgravity assembler
     - TODO add sugar system

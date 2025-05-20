@@ -23,7 +23,6 @@ woodResinRecipe.results = {
 	{type = "item", name = "carbon", amount = 1},
 }
 Icon.set(woodResinRecipe, {"resin", "wood"})
-woodResinRecipe.order = "01"
 woodResinRecipe.subgroup = "resin"
 woodResinRecipe.main_product = "resin"
 woodResinRecipe.energy_required = 5
@@ -40,7 +39,6 @@ pitchResinRecipe.results = {
 	{type = "item", name = "resin", amount = 2},
 }
 Icon.set(pitchResinRecipe, {"resin", "pitch"})
-pitchResinRecipe.order = "02"
 pitchResinRecipe.subgroup = "resin"
 pitchResinRecipe.main_product = "resin"
 pitchResinRecipe.energy_required = 2
@@ -60,7 +58,13 @@ richGasResinRecipe.results = {
 	{type = "item", name = "resin", amount = 1},
 }
 Icon.set(richGasResinRecipe, {"resin", "petroleum-gas"})
-richGasResinRecipe.order = "03"
 richGasResinRecipe.subgroup = "resin"
 richGasResinRecipe.energy_required = 2
 extend{richGasResinRecipe}
+
+Gen.order({
+	resinItem,
+	woodResinRecipe,
+	pitchResinRecipe,
+	richGasResinRecipe,
+}, "resin")

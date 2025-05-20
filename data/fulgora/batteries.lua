@@ -387,7 +387,7 @@ extend({
 			flags = {"gui-icon"},
 		},
 		empty_slot_caption = {"gui.discharge"},
-		empty_slot_description = {"gui.discharge-description"},
+		empty_slot_description = nil,
 		icon = {
 			filename = "__LegendarySpaceAge__/graphics/fulgora/batteries/battery-icon-red.png",
 			priority = "extra-high-no-scale",

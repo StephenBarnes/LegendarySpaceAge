@@ -120,7 +120,7 @@ local CRAFTER_VALS = {
 			kind = "furnace",
 			speed = 1,
 			drainKW = 0,
-			activeKW = 200,
+			activeKW = 250,
 		},
 		recipe = {
 			ingredients = {
@@ -136,7 +136,7 @@ local CRAFTER_VALS = {
 			kind = "furnace",
 			speed = 1,
 			drainKW = 0,
-			activeKW = 250, -- Slightly more energy than steel furnaces, to compensate for not having to put fuel in barrels/canisters.
+			activeKW = 250,
 		},
 		recipe = {
 			ingredients = {

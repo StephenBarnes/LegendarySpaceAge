@@ -21,7 +21,6 @@ Re stack sizes:
 	Give ingots the same stack size as plates etc, so they're 5x more compact to transport.
 	For weights for rockets, rather use correct ratios, eg 1 ingot has the same weight as 5 plates.
 ]]
-local INGOT_COOLING_TIME = 5 * MINUTES
 
 local ORE_STACK_SIZE = 50
 local INGOT_STACK_SIZE = 100
@@ -61,8 +60,7 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		}
 	}
 	hotIngot.icon = nil
-	hotIngot.spoil_ticks = INGOT_COOLING_TIME
-	hotIngot.spoil_result = coldIngotName
+	-- Spoil_ticks and spoil_result are handled in heat-shuttles.lua.
 	hotIngot.order = "a[smelting]-0-" .. i
 	hotIngot.stack_size = INGOT_STACK_SIZE
 	hotIngot.weight = INGOT_WEIGHT

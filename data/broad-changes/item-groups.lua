@@ -235,12 +235,12 @@ setSubgroupInOrder("planetary-special", {"item", "recipe"},
 setSubgroupInOrder("chemical-processing", {"item", "recipe"},
 	{
 		"chemical-plant",
+		"exothermic-plant",
 		"oil-refinery",
 		"filtration-plant",
 		"cryogenic-plant",
 		"gasifier",
 		"fluid-fuelled-gasifier",
-		"oil-refinery",
 	})
 ITEM["agricultural-tower"].subgroup = "extraction-machine"
 ITEM["agricultural-tower"].order = "c"
