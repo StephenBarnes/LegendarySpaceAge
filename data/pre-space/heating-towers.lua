@@ -44,9 +44,7 @@ fluidHeatingTowerEnt.heat_buffer.connections = {
 }
 extend{fluidHeatingTowerEnt}
 
-local towerItem = ITEM["heating-tower"]
-
-local fluidHeatingTowerItem = copy(towerItem)
+local fluidHeatingTowerItem = copy(ITEM["heating-tower"])
 fluidHeatingTowerItem.name = "fluid-heating-tower"
 fluidHeatingTowerItem.place_result = "fluid-heating-tower"
 fluidHeatingTowerItem.icons = fluidHeatingTowerEnt.icons

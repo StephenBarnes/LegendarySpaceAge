@@ -82,7 +82,7 @@ return {
 		["space-rocket"] = {},
 		["space-related"] = {},
 		["space-environment"] = {"small-metallic-asteroid", "medium-metallic-asteroid", "big-metallic-asteroid", "huge-metallic-asteroid", "small-carbonic-asteroid", "medium-carbonic-asteroid", "big-carbonic-asteroid", "huge-carbonic-asteroid"},
-		["space-environment-2"] = {"small-metallic-asteroid", "medium-metallic-asteroid", "big-metallic-asteroid", "huge-metallic-asteroid", "small-carbonic-asteroid", "medium-carbonic-asteroid", "big-carbonic-asteroid", "huge-carbonic-asteroid"},
+		["space-environment-2"] = {"small-oxide-asteroid", "medium-oxide-asteroid", "big-oxide-asteroid", "huge-oxide-asteroid", "small-promethium-asteroid", "medium-promethium-asteroid", "big-promethium-asteroid", "huge-promethium-asteroid"},
 		["space-material"] = {"metallic-asteroid-chunk", "carbonic-asteroid-chunk", "oxide-asteroid-chunk", "promethium-asteroid-chunk", },
 		["space-crushing"] = {"metallic-asteroid-crushing", "carbonic-asteroid-crushing", "oxide-asteroid-crushing", "metallic-asteroid-reprocessing", "carbonic-asteroid-reprocessing", "oxide-asteroid-reprocessing", "advanced-metallic-asteroid-crushing", "advanced-carbonic-asteroid-crushing", "advanced-oxide-asteroid-crushing", },
 		["space-processing"] = {},
@@ -122,7 +122,7 @@ return {
 		["ammo-category"] = {},
 	},
 	fluids = {
-		["nauvis-fluids"] = {"lake-water", "water", "steam", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant"},
+		["nauvis-fluids"] = {"air", "air-or-oxygen", "lake-water", "water", "steam", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant"},
 		["petrochem-fluids"] = {"crude-oil", "natural-gas", "tar", "heavy-oil", "light-oil", "petroleum-gas", "dry-gas", "syngas", "diesel"},
 		["cryo-fluids"] = {"nitrogen-gas", "compressed-nitrogen-gas", "oxygen-gas", "hydrogen-gas", "liquid-nitrogen", "thruster-oxidizer", "thruster-fuel"},
 		["vulcanus-fluids"] = {"lava", "volcanic-gas", "molten-iron", "molten-copper", "molten-steel", "molten-tungsten"},

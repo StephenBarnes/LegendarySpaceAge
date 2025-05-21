@@ -3,10 +3,8 @@ The actual order is defined in a giant table in util/const/item-recipe-arrangeme
 Also creates new groups (top-level tabs).
 
 Subgroup/order shouldn't be set anywhere else in the mod. This file handles everything.
-TODO look through other files setting .subgroup and .order, and remove that.
 
-TODO check that all non-hidden items/fluids/recipes are included in the ARRANGEMENT above. In auto-debugger.
-TODO remove Gen.orderKinds etc.
+TODO check that all non-hidden items/fluids/recipes are included in the ARRANGEMENT below. In auto-debugger.
 ]]
 
 
