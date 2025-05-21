@@ -122,7 +122,7 @@ return {
 		["ammo-category"] = {},
 	},
 	fluids = {
-		["nauvis-fluids"] = {"air", "air-or-oxygen", "lake-water", "water", "steam", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant"},
+		["nauvis-fluids"] = {"air", "air-or-oxygen", "lake-water", "water", "steam", "sulfurous-gas", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant"},
 		["petrochem-fluids"] = {"crude-oil", "natural-gas", "tar", "heavy-oil", "light-oil", "petroleum-gas", "dry-gas", "syngas", "diesel"},
 		["cryo-fluids"] = {"nitrogen-gas", "compressed-nitrogen-gas", "oxygen-gas", "hydrogen-gas", "liquid-nitrogen", "thruster-oxidizer", "thruster-fuel"},
 		["vulcanus-fluids"] = {"lava", "volcanic-gas", "molten-iron", "molten-copper", "molten-steel", "molten-tungsten"},

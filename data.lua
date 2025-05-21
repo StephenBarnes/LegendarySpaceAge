@@ -6,7 +6,7 @@ require("data.broad-changes.crafting-categories")
 require("data.broad-changes.fluid-boxes")
 
 -- Files that create new protos.
-require("data.pre-space.air")
+require("data.pre-space.gases")
 require("data.pre-space.char-furnace")
 require("data.broad-changes.map-gen-preset")
 require("data.broad-changes.remove-mapgen-presets")
