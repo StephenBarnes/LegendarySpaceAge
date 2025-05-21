@@ -35,7 +35,7 @@ RAW["infinity-cargo-wagon"]["infinity-cargo-wagon"].hidden = true
 RAW["infinity-cargo-wagon"]["infinity-cargo-wagon"].hidden_from_player_crafting = true
 
 -- Import big table of item/recipe/fluid/etc orders.
-local ARRANGEMENT = require("util.const.item-recipe-arrangement-const")
+local ARRANGEMENT = require("const.item-recipe-arrangement-const")
 -- Apply the big table, by creating subgroups and setting subgroups and orders.
 local groupCount = 0
 for groupName, subgroups in pairs(ARRANGEMENT) do

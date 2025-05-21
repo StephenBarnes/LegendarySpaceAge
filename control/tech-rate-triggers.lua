@@ -13,7 +13,7 @@ If we use a time-frame of 1 hour, each sample index gives (60 minutes / 300 = 0.
 	So, using 1-hour timeframe for 3-minute and 5-minute tech triggers. If you later add tech triggers with 10 minutes, then rather use the 10-hour timeframe.
 ]]
 
-local TECH_RATES = require("util.const.tech-rates")
+local TECH_RATES = require("const.tech-rates")
 
 ---@param force LuaForce
 local function techIsNext(force, techName)

@@ -1,6 +1,6 @@
 -- This file changes tech costs to encourage scaling in the late game while not making early game too slow.
 
-local techRates = require("util.const.tech-rates")
+local techRates = require("const.tech-rates")
 
 local multByPack = {
 	["automation-science-pack"] = 1,

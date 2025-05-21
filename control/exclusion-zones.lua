@@ -3,7 +3,7 @@ We register a death rattle for each entity, so we can destroy the exclusion zone
 Currently used for air separators, deep drills, telescopes.
 ]]
 
-local Const = require("util.const.exclusion-zones")
+local Const = require("const.exclusion-zones")
 for entName, vals in pairs(Const) do
 	-- Distance from center of entity to center of exclusion zone.
 	vals.exclusionCenterDist = prototypes.entity[entName .. "-exclusion-1"].collision_box.right_bottom.y + vals.size / 2

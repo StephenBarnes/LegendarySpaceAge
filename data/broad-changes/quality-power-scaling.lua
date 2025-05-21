@@ -9,7 +9,7 @@ So instead, this file makes a variant of these entities for each quality, with t
 
 local SPEED_PER_QUALITY = 0.3 -- Doesn't seem to be configurable.
 
-local QualityScalingPowerConsumption = require("util.const.quality-scaling-power-consumption")
+local QualityScalingPowerConsumption = require("const.quality-scaling-power-consumption")
 
 for _, vals in pairs(QualityScalingPowerConsumption) do
 	local normalEnt = RAW[vals[1]][vals[2]]

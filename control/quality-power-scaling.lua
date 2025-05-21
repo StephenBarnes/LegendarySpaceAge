@@ -2,7 +2,7 @@
 See data/final-fixes/quality-power-scaling.lua for the data-side of this and more explanation.
 ]]
 
-local QualityScalingPowerConsumption = require("util.const.quality-scaling-power-consumption")
+local QualityScalingPowerConsumption = require("const.quality-scaling-power-consumption")
 
 local entNameScales = {}
 for _, vals in pairs(QualityScalingPowerConsumption) do

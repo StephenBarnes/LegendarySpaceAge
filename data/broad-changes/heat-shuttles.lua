@@ -1,4 +1,4 @@
-local Const = require "util.const.heat-shuttle-const"
+local Const = require "const.heat-shuttle-const"
 
 -- Create heat/cold shuttle relations.
 for _, vals in pairs(Const.heatShuttles) do

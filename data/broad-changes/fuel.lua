@@ -3,7 +3,7 @@ Fuel values for barrels and tanks are set in barrelling-dff.lua instead.
 Heat shuttle "fuels" are handled in heat-shuttles.lua instead.
 ]]
 
-local Const = require "util.const.fuel-const"
+local Const = require "const.fuel-const"
 
 -- Set fuel values for fluids (for fluid-fuelled vehicles, gasifiers, heating towers, boilers)
 for fluidName, fuelValues in pairs(Const.fluidFuelValues) do

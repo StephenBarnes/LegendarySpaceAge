@@ -6,7 +6,7 @@ We create simple-entities for the exclusion zones. One is more horizontal, the o
 We place 4 of these around the entity, one on each side. That way we leave a gap in the middle for the entity to be built. This is necessary for ghosts to not get destroyed by their own exclusion zones.
 ]]
 
-local Const = require "util.const.exclusion-zones"
+local Const = require "const.exclusion-zones"
 
 local ALLOW_SELECT = false -- Whether to allow selecting the exclusion zones, for debugging.
 

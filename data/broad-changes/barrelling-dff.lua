@@ -1,7 +1,7 @@
 -- This file changes some barrelling recipes to use pressurized tanks instead of barrels.
 -- Note that I renamed the tank to just "pressurized tank" so it's not necessarily for gases, more just for anything that doesn't seem right in an ordinary barrel.
 
-local Const = require "util.const.fuel-const"
+local Const = require "const.fuel-const"
 
 -- Edit some of the barrelling recipes to instead have the icon for the pressurized tank, and use pressurized tank ingredient and result.
 local pressurizedFluids = Table.listToSet{

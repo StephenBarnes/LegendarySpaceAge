@@ -3,7 +3,7 @@ This file does data-stage changes for that, while control script actually unlock
 Seems we can't use research_triggers, or else it resets research progress to zero constantly. So instead consider these science packs, like IR3 Inspirations mod did.
 ]]
 
-local TECH_RATES = require("util.const.tech-rates")
+local TECH_RATES = require("const.tech-rates")
 
 for techName, vals in pairs(TECH_RATES) do
 	local tech = TECH[techName]
