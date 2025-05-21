@@ -21,7 +21,6 @@
 		, "gleba-lab"
 		, "cargo-ships"
 
-		, "gas-furnace"
 		, "gas-boiler"
 		, "electricboiler"
 
@@ -55,6 +54,7 @@
 
 		, "!Flare Stack"
 		, "! carbon"
+		, "! gas-furnace"
 
 		, "! FulgoraLives"
 		, "! battery-powered"

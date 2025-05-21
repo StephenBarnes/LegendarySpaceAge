@@ -20,7 +20,7 @@ return {
 		energy = {"er-hcg", "boiler", "electric-boiler", "gas-boiler", "steam-engine", "heating-tower", "fluid-heating-tower", "heat-pipe", "heat-exchanger", "steam-turbine", "condensing-turbine"},
 		["electricity-related"] = {"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector", "nuclear-reactor", "fusion-reactor", "fusion-generator"},
 		["extraction-machine"] = {"burner-mining-drill", "electric-mining-drill", "big-mining-drill", "deep-drill", "pumpjack", "agricultural-tower", "air-separator", "drill-node-dummy-miner"},
-		["smelting-machine"] = {"char-furnace", "stone-furnace", "steel-furnace", "gas-furnace", "electric-furnace", "arc-furnace"},
+		["smelting-machine"] = {"char-furnace", "stone-furnace", "steel-furnace", "ffc-furnace", "stone-furnace-heat", "steel-furnace-heat", "electric-furnace", "arc-furnace"},
 		["production-machine"] = {"assembling-machine-1", "assembling-machine-2", "assembling-machine-3"},
 		["chemical-processing"] = {"chemical-plant", "exothermic-plant", "oil-refinery", "filtration-plant", "cryogenic-plant", "gasifier", "fluid-fuelled-gasifier"},
 		["planetary-special"] = {"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge"},

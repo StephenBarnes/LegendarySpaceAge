@@ -11,7 +11,7 @@ extend({
 for _, typeAndName in pairs{
 	{"furnace", "stone-furnace"},
 	{"furnace", "steel-furnace"},
-	{"furnace", "gas-furnace"},
+	{"furnace", "ffc-furnace"},
 	{"furnace", "electric-furnace"},
 	{"assembling-machine", "foundry"},
 } do
@@ -28,7 +28,7 @@ extend({
 for _, typeAndName in pairs{
 	{"furnace", "stone-furnace"},
 	{"furnace", "steel-furnace"},
-	{"furnace", "gas-furnace"},
+	{"furnace", "ffc-furnace"},
 	{"furnace", "electric-furnace"},
 } do
 	table.insert(RAW[typeAndName[1] ][typeAndName[2] ].crafting_categories, "smelting-or-handcrafting")
@@ -46,7 +46,7 @@ extend({
 for _, typeAndName in pairs{
 	{"furnace", "stone-furnace"},
 	{"furnace", "steel-furnace"},
-	{"furnace", "gas-furnace"},
+	{"furnace", "ffc-furnace"},
 	{"furnace", "electric-furnace"},
 	{"assembling-machine", "foundry"},
 } do
@@ -142,3 +142,10 @@ end
 for name, _ in pairs(RAW["recipe-category"]) do
 	table.insert(RAW["god-controller"]["default"].crafting_categories, name)
 end
+
+-- Create recipe category for heat furnaces.
+extend{{
+	type = "recipe-category",
+	name = "heat-furnace",
+}}
+-- Can't add this to carbon furnaces, since they would be able to do heating recipes without oxygen/air.

@@ -103,6 +103,12 @@ local multiIconVals = {
 			{scale = 0.2, shift={-8,-8}},
 		},
 	},
+	heat = {
+		[2] = {
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.5, shift = {0, 0}},
+		},
+	},
 }
 local function getMultiIconBase(count, arrangement)
 	if arrangement == nil then

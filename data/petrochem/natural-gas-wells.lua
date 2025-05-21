@@ -1,7 +1,7 @@
 -- This file will create natural gas wells. Other files will make them autoplace on Nauvis (replacing some crude oil wells) and Aquilo (replacing all crude oil wells).
 -- Some code adapted from Adamo Carbon mod.
 
-local constants = require("data.petrochem.constants")
+local constants = require("const.petrochem-const")
 
 local gasWell = copy(RAW.resource["crude-oil"])
 gasWell.name = "natural-gas-well"

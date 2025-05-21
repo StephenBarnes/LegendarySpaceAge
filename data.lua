@@ -2,12 +2,10 @@ require("util.globals")
 require("util.globals-data")
 
 -- Files that create things needed in subsequent files.
-require("data.broad-changes.crafting-categories")
 require("data.broad-changes.fluid-boxes")
 
 -- Files that create new protos.
 require("data.pre-space.gases")
-require("data.pre-space.char-furnace")
 require("data.broad-changes.map-gen-preset")
 require("data.broad-changes.remove-mapgen-presets")
 require("data.pre-space.gunpowder")
@@ -15,6 +13,9 @@ require("data.pre-space.rubber")
 require("data.pre-space.sand-and-glass")
 require("data.pre-space.ash")
 require("data.misc")
+require("data.broad-changes.furnaces")
+require("data.pre-space.char-furnace")
+require("data.broad-changes.crafting-categories")
 require("data.broad-changes.gui")
 require("data.broad-changes.character-stats")
 require("data.broad-changes.diurnal-dynamics")

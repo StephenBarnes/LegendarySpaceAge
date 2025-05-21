@@ -1,4 +1,4 @@
-local constants = require("data.petrochem.constants")
+local constants = require("const.petrochem-const")
 
 -- Create natural gas fluid.
 local natgasFluid = copy(FLUID["crude-oil"])

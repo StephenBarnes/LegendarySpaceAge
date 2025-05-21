@@ -110,7 +110,20 @@ local CRAFTER_VALS = {
 			health = 50, -- Reduced from 200 to 50. To encourage building walls. For comparison, walls have health 350.
 		},
 		recipe = {
-			ingredients = {"structure"},
+			ingredients = {{"structure", 2}},
+			time = 2,
+		},
+	},
+	["stone-furnace-heat"] = {
+		machine = {
+			kind = "furnace",
+			speed = 0.5,
+			drainKW = 0,
+			activeKW = 200,
+			health = 50,
+		},
+		recipe = {
+			ingredients = {{"structure", 2}},
 			time = 2,
 		},
 	},
@@ -131,7 +144,22 @@ local CRAFTER_VALS = {
 			time = 5,
 		},
 	},
-	["gas-furnace"] = {
+	["steel-furnace-heat"] = {
+		machine = {
+			kind = "furnace",
+			speed = 1,
+			drainKW = 0,
+			activeKW = 250,
+		},
+		recipe = {
+			ingredients = {
+				{"frame", 5},
+				{"structure", 5},
+			},
+			time = 5,
+		},
+	},
+	["ffc-furnace"] = {
 		machine = {
 			kind = "furnace",
 			speed = 1,
@@ -168,8 +196,8 @@ local CRAFTER_VALS = {
 			time = 10,
 		},
 	},
-	
-	
+
+
 
 	------------------------------------------------------------------------
 	--- Assembling-machines that aren't called assemblers.
@@ -385,6 +413,14 @@ for name, vals in pairs(CRAFTER_VALS) do
 			end
 			if vals.machine.pollution then ent.energy_source.emissions_per_minute.pollution = vals.machine.pollution end
 			if vals.machine.spores then ent.energy_source.emissions_per_minute.spores = vals.machine.spores end
+		end
+
+		-- Add output slots to furnaces. Otherwise some recipe products just disappear.
+		-- TODO autodebugger should check number of output slots in all machines, and all recipes they can do, and ensure it's always enough.
+		if vals.machine.kind == "furnace" then
+			if ent.result_inventory_size == nil or ent.result_inventory_size < 2 then
+				ent.result_inventory_size = 2
+			end
 		end
 
 		-- All assemblers can get all beacon and module effects. No module slots. But ban some effects.

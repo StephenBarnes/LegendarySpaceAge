@@ -215,11 +215,6 @@ ITEM["iron-stick"].weight = INGOT_WEIGHT / 5
 ITEM["copper-cable"].weight = INGOT_WEIGHT / 10
 ITEM["iron-stick"].stack_size = 200
 
--- Add output slots to furnaces - otherwise some recipe products just disappear, apparently.
-for _, furnace in pairs{"stone-furnace", "steel-furnace", "gas-furnace", "electric-furnace"} do
-	FURNACE[furnace].result_inventory_size = 2
-end
-
 -- Move iron rod to be enabled from the start, and remove it from techs.
 RECIPE["iron-stick"].enabled = true
 Tech.removeRecipesFromTechs(
