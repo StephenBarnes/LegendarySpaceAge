@@ -18,6 +18,10 @@ item.icons = {
 	{icon = FLUID["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = FLUID["petroleum-gas"].icons[1].tint},
 }
 
+-- Change collision box so it can be rotated.
+gasFurnaceEnt.collision_box = {{-0.95, -0.95}, {0.95, 0.95}}
+gasFurnaceEnt.map_generator_bounding_box = {{-0.95, -0.95}, {0.95, 0.95}}
+
 -- Show arrows for fuel pipes.
 gasFurnaceEnt.energy_source.fluid_box.hide_connection_info = false
 
