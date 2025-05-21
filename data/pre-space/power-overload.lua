@@ -57,9 +57,6 @@ Tech.copyUnit("lightning-collector", "po-electric-energy-distribution-3")
 -- Actually rather make them only buildable in EM plants.
 RECIPE["po-huge-electric-pole"].category = "electromagnetics"
 RECIPE["po-huge-electric-fuse"].category = "electromagnetics"
-
--- Reorder pylon recipe to be after substation
-RECIPE["po-huge-electric-pole"].order = "a[energy]-e[huge]"
 ]]
 
 -- Reduce ingredients for fuses, since default is 20 times normal power pole which seems excessive. Rather just the pole plus a wiring. Must be in dff stage or data-updates.

@@ -117,7 +117,6 @@ Recipe.edit{
 local moltenSteelFluid = copy(FLUID["molten-iron"])
 moltenSteelFluid.name = "molten-steel"
 Icon.set(moltenSteelFluid, "LSA/vulcanus/molten-steel")
-moltenSteelFluid.order = "b[new-fluid]-b[vulcanus]-c[molten-steel]"
 moltenSteelFluid.base_color = {.3, .4, .4}
 moltenSteelFluid.flow_color = {.5, .7, .7}
 moltenSteelFluid.visualization_color = {.2, 1, 1} -- Cyan for the diagram-like lines drawn on pipes.
@@ -150,7 +149,6 @@ Recipe.make{
 local moltenTungstenFluid = copy(FLUID["molten-iron"])
 moltenTungstenFluid.name = "molten-tungsten"
 Icon.set(moltenTungstenFluid, "LSA/vulcanus/molten-tungsten")
-moltenTungstenFluid.order = "b[new-fluid]-b[vulcanus]-d[molten-tungsten]"
 moltenTungstenFluid.base_color = {.259, .239, .349} -- Measured on ore
 moltenTungstenFluid.flow_color = {.635, .584, .741}
 moltenTungstenFluid.visualization_color = {.478, .191, .682} -- Measured on ore and boosted saturation.

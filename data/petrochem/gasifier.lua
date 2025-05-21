@@ -178,8 +178,6 @@ gasifierItem.type = "item"
 gasifierItem.name = "gasifier"
 gasifierItem.icon = nil
 gasifierItem.icons = {{icon = GRAPHICS.."gasifier-item.png", icon_size = 64}}
-gasifierItem.order = "z"
-gasifierItem.subgroup = "chemical-processing"
 gasifierItem.place_result = "gasifier"
 gasifierItem.stack_size = 20
 extend{gasifierItem}
@@ -188,7 +186,6 @@ local fluidGasifierItem = copy(gasifierItem)
 fluidGasifierItem.name = "fluid-fuelled-gasifier"
 fluidGasifierItem.place_result = "fluid-fuelled-gasifier"
 fluidGasifierItem.icons = fluidGasifierEnt.icons
-fluidGasifierItem.order = "zz"
 extend{fluidGasifierItem}
 
 local gasifierRecipe = Recipe.make{
@@ -246,8 +243,6 @@ gasificationRecipe.allow_speed = false
 gasificationRecipe.allow_consumption = false -- No efficiency effects from beacons.
 gasificationRecipe.hidden = false
 gasificationRecipe.hide_from_player_crafting = false
-gasificationRecipe.subgroup = "complex-fluid-recipes"
-gasificationRecipe.order = "a[coal-liquefaction]-a"
 extend{gasificationRecipe}
 
 Tech.addRecipeToTech("make-syngas", "coal-liquefaction", 1)

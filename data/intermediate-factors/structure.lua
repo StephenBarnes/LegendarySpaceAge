@@ -112,13 +112,3 @@ Tech.addRecipeToTech("structure-from-refined-concrete", "concrete")
 -- TODO create casting recipes?
 
 -- TODO make a recipe with concrete and resin, for Fulgora.
-
-Gen.order({
-	structureItem,
-	recipeFromResin,
-	recipeFromVitrified,
-	recipeFromCement,
-	recipeFromConcrete,
-	recipeFromRefinedConcrete,
-	recipeFromChitin,
-}, "structure")

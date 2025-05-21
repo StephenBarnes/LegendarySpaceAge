@@ -64,8 +64,6 @@ extend({
 		},
 		result_is_always_fresh = true,
 		icon = "__LegendarySpaceAge__/graphics/fulgora/from_biochemistry/electrophage-cultivation.png",
-		subgroup = "fulgora-processes",
-		order = "c[organics]-c[electrophage-cultivation]",
 		allow_decomposition = false,
 	},
 	{
@@ -102,8 +100,6 @@ extend({
 				shift = {7, 7},
 			},
 		},
-		subgroup = "fulgora-processes",
-		order = "c[organics]-c[electrophage-cultivation]",
 		allow_decomposition = false,
 	},
 	{
@@ -116,8 +112,6 @@ extend({
 			{ size = 64, filename = "__LegendarySpaceAge__/graphics/fulgora/from_biochemistry/electrophage-2.png", scale = 0.5, mipmap_count = 4 },
 			{ size = 64, filename = "__LegendarySpaceAge__/graphics/fulgora/from_biochemistry/electrophage-3.png", scale = 0.5, mipmap_count = 4 },
 		},
-		subgroup = "fulgora-processes",
-		order = "c[organics]-b[electrophage]",
 		inventory_move_sound = ITEM["battery"].inventory_move_sound,
 		pick_sound = ITEM["battery"].pick_sound,
 		drop_sound = ITEM["battery"].drop_sound,
@@ -137,8 +131,6 @@ ITEM["electrophage"].spoil_result = "polysalt"
 local polysaltItem = copy(ITEM["nutrients"])
 polysaltItem.name = "polysalt"
 Icon.set(polysaltItem, "LSA/fulgora/polysalts")
-polysaltItem.subgroup = "fulgora-processes"
-polysaltItem.order = "c[organics]-b[polysalt]"
 polysaltItem.spoil_ticks = 1 * HOURS
 polysaltItem.spoil_result = "sand"
 polysaltItem.burnt_result = "sand"

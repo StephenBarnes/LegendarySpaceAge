@@ -10,14 +10,23 @@ TODO remove Gen.orderKinds etc.
 ]]
 
 
--- Create item group for other planets and Nauvis.
-extend{{
-	type = "item-group",
-	name = "post-space",
-	order = "d2",
-	icon = RAW["item-group"].space.icon,
-	icon_size = RAW["item-group"].space.icon_size,
-}}
+-- Create item groups.
+extend{
+	{
+		type = "item-group",
+		name = "post-space",
+		order = "d2",
+		icon = RAW["item-group"].space.icon,
+		icon_size = RAW["item-group"].space.icon_size,
+	},
+	{
+		type = "item-group",
+		name = "intermediate-factors",
+		order = "c2",
+		icon = "__LegendarySpaceAge__/graphics/intermediate-factors/factors-tab.png",
+		icon_size = 256,
+	},
+}
 
 -- Change the space tab's icon, from satellite to rocket silo, since it's now anything after Nauvis.
 RAW["item-group"]["space"].icon = "__base__/graphics/technology/rocket-silo.png"

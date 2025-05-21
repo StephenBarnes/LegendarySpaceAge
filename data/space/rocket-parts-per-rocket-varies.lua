@@ -13,4 +13,5 @@ rocketSilo10.name = "rocket-silo-10parts"
 rocketSilo10.localised_name = {"entity-name.rocket-silo"}
 rocketSilo10.localised_description = {"entity-description.rocket-silo"}
 rocketSilo10.placeable_by = {item="rocket-silo", count=1}
+rocketSilo10.hidden_in_factoriopedia = true
 extend{rocketSilo10}

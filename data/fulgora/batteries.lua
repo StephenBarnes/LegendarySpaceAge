@@ -21,7 +21,6 @@ Item.perRocket(batteryItem, 1000) -- Vanilla is 400 per rocket.
 local chargedBatteryItem = copy(batteryItem)
 chargedBatteryItem.name = "charged-battery"
 Icon.set(chargedBatteryItem, "LSA/fulgora/batteries/battery_short_charged")
-chargedBatteryItem.order = batteryItem.order .. '-2'
 chargedBatteryItem.burnt_result = "battery"
 chargedBatteryItem.fuel_category = "battery"
 chargedBatteryItem.fuel_emissions_multiplier = 0
@@ -37,11 +36,9 @@ chargedBatteryItem.fuel_value = "10MJ"
 local holmiumBatteryItem = copy(batteryItem)
 holmiumBatteryItem.name = "holmium-battery"
 Icon.set(holmiumBatteryItem, "LSA/fulgora/batteries/holmium_battery_short")
-holmiumBatteryItem.order = batteryItem.order .. '-3'
 local chargedHolmiumBatteryItem = copy(batteryItem)
 chargedHolmiumBatteryItem.name = "charged-holmium-battery"
 Icon.set(chargedHolmiumBatteryItem, "LSA/fulgora/batteries/holmium_battery_short_charged")
-chargedHolmiumBatteryItem.order = batteryItem.order .. '-4'
 chargedHolmiumBatteryItem.burnt_result = "holmium-battery"
 chargedHolmiumBatteryItem.fuel_category = "battery"
 chargedHolmiumBatteryItem.fuel_emissions_multiplier = 0
@@ -112,14 +109,12 @@ extend({
 		name = "battery-charger",
 		icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/from_battery_powered/icons/bp-battery-charger.png",
 		stack_size = 20,
-		subgroup = "electricity-related",
 	},
 	{
 		type = "item",
 		name = "battery-discharger",
 		icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/from_battery_powered/icons/bp-battery-discharger.png",
 		stack_size = 20,
-		subgroup = "electricity-related",
 	},
 	{
 		type = "recipe",
@@ -291,7 +286,6 @@ extend({
 		result_inventory_size = 1,
 		show_recipe_icon = false,
 		crafting_categories = { "charging" },
-		order = "z-1",
 		energy_usage = "1MW",
 		energy_source = {
 			type = "electric",
@@ -342,7 +336,6 @@ extend({
 			burner_usage = "discharge",
 		},
 		max_power_output = "2MW",
-		order = "z-2",
 		burner = {
 			emissions_per_minute = {},
 			fuel_categories = {"battery"},

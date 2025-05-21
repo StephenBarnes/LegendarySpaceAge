@@ -49,22 +49,6 @@ RECIPE["barrel"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 }
 
--- Create subgroup for recipes filling and emptying gas tanks.
-extend{
-	{
-		type = "item-subgroup",
-		name = "fill-gas-tank",
-		group = "intermediate-products",
-		order = "e2",
-	},
-	{
-		type = "item-subgroup",
-		name = "empty-gas-tank",
-		group = "intermediate-products",
-		order = "f2",
-	},
-}
-
 -- Hide fluid wagons.
 Tech.hideTech("fluid-wagon")
 Recipe.hide("fluid-wagon")

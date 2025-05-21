@@ -15,7 +15,6 @@ Icon.set(advancedPartsItem, "LSA/parts-advanced/3")
 advancedPartsItem.has_random_tint = true
 advancedPartsItem.random_tint_color = {r = .955, g = .96, b = 1.0, a=1}
 advancedPartsItem.spoil_ticks = nil
-advancedPartsItem.order = "7"
 extend{advancedPartsItem}
 
 -- Create recipe for advanced parts.

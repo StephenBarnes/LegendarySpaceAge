@@ -3,7 +3,6 @@
 -- Create fluorite item.
 local item = copy(ITEM["uranium-ore"])
 item.name = "fluorite"
-item.order = item.order .. "-2"
 Icon.set(item, "LSA/nuclear/fluorite-2")
 Icon.variants(item, "LSA/nuclear/fluorite-%", 3)
 extend{item}
@@ -48,5 +47,4 @@ RAW.resource["uranium-ore"].minable.results = {
 	{type = "item", name = "uranium-ore", amount = 1},
 	{type = "item", name = "fluorite", amount = 1, probability = 0.05},
 }
-RAW.resource["uranium-ore"].subgroup = ITEM["uranium-ore"].subgroup
 RAW.resource["uranium-ore"].category = "hard-solid" -- Only minable by tungsten mining drills.

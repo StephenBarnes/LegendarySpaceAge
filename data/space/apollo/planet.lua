@@ -6,8 +6,6 @@ local mapGen = require("map-gen")
 local apollo = {
 	name = "apollo",
 	type = "planet",
-	subgroup = "planets",
-	order = "05b", -- after Nauvis, before Vulcanus.
 	-- Setting orbit. This is for PlanetsLib, not technically part of Planet prototype.
 	orbit = {
 		parent = {
@@ -67,10 +65,8 @@ PlanetsLib:extend{apollo}
 local apolloNauvis = {
 	type = "space-connection",
 	name = "apollo-nauvis",
-	subgroup = "planet-connections",
 	from = "apollo",
 	to = "nauvis",
-	order = "05-2",
 	length = 1000,
 	asteroid_spawn_definitions = {},
 }

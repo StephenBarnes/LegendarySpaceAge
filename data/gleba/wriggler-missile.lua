@@ -9,7 +9,6 @@ ammo.name = "wriggler-missile"
 ---@diagnostic disable-next-line: assign-type-mismatch
 ammo.ammo_type = copy(RAW["spider-unit"]["small-strafer-pentapod"].attack_parameters.ammo_type)
 Icon.set(ammo, "LSA/gleba/wriggler-missile")
-ammo.order = "d[rocket-launcher]-d[b]"
 --[[ Could make it spoil into activated pentapod egg, then a big wriggler hostile to you. Tested, this works. But it makes it inconvenient to use, so rather turned off.
 ammo.spoil_ticks = 10 * MINUTES
 ammo.spoil_result = "activated-pentapod-egg"

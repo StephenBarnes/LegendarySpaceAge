@@ -6,23 +6,10 @@ filterFuelCategory.name = "filter"
 filterFuelCategory.fuel_value_type = {"description.filtration-energy-value"}
 extend{filterFuelCategory}
 
--- Create item-subgroup for filtration.
-local filtrationSubgroup = copy(RAW["item-subgroup"]["fluid-recipes"])
-filtrationSubgroup.name = "filtration"
-filtrationSubgroup.order = "c9"
-extend{filtrationSubgroup}
--- Also move the other water recipes to that line.
-RECIPE["steam-condensation"].subgroup = "filtration"
-RECIPE["ice-melting"].subgroup = "filtration"
-RECIPE["steam-condensation"].order = "05"
-RECIPE["ice-melting"].order = "06"
-
 -- Create filter item.
 local filterItem = copy(ITEM["battery"])
 filterItem.name = "filter"
 Icon.set(filterItem, "LSA/filtration/filter")
-filterItem.order = "01"
-filterItem.subgroup = "filtration"
 Item.perRocket(filterItem, 1000)
 filterItem.fuel_category = "filter"
 filterItem.fuel_value = "10J"
@@ -34,8 +21,6 @@ extend{filterItem}
 local spentFilterItem = copy(ITEM["battery"])
 spentFilterItem.name = "spent-filter"
 Icon.set(spentFilterItem, "LSA/filtration/spent-filter")
-spentFilterItem.order = "02"
-spentFilterItem.subgroup = "filtration"
 Item.perRocket(spentFilterItem, 1000)
 extend{spentFilterItem}
 
@@ -65,8 +50,6 @@ Recipe.make{
 	main_product = "filter",
 	enabled = false,
 	category = "crafting-with-fluid",
-	subgroup = "filtration",
-	order = "03",
 	show_amount_in_title = false,
 	time = 1,
 	auto_recycle = false,

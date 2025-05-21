@@ -37,38 +37,6 @@ Export.multWithUnits = function(s, x)
 	return num * x .. units
 end
 
----@param protos (data.ItemPrototype | data.RecipePrototype | data.FluidPrototype)[]
----@param subgroup string
-Export.order = function(protos, subgroup)
-	for i, proto in pairs(protos) do
-		proto.order = string.format("%02d", i)
-		proto.subgroup = subgroup
-	end
-end
-
----@param kind {[string]: data.Prototype}
----@param protoNames string[]
----@param subgroup string
----@param prefix string|nil
-Export.orderKind = function(subgroup, kind, protoNames, prefix)
-	prefix = prefix or ""
-	for i, protoName in pairs(protoNames) do
-		assert(kind[protoName] ~= nil, "OrderKind: kind["..protoName.."] is nil")
-		kind[protoName].order = prefix..string.format("%02d", i)
-		kind[protoName].subgroup = subgroup
-	end
-end
-
----@param subgroup string
----@param kinds {[string]: data.Prototype}[]
----@param protoNames string[]
----@param prefix string|nil
-Export.orderKinds = function(subgroup, kinds, protoNames, prefix)
-	for _, kind in pairs(kinds) do
-		Export.orderKind(subgroup, kind, protoNames, prefix)
-	end
-end
-
 -- Round `x` to `n` decimal places.
 ---@param x number
 ---@param n number

@@ -48,19 +48,6 @@ Recipe.setIngredient = function(recipeName, ingredientName, newIngredient)
 	log("Warning: ingredient not found: "..ingredientName.." in recipe "..recipeName)
 end
 
-Recipe.orderRecipes = function(recipeNames)
-	local order = 1
-	for _, recipeName in pairs(recipeNames) do
-		local recipe = RECIPE[recipeName]
-		if recipe == nil then
-			log("ERROR: Couldn't find recipe "..recipeName.." to order.")
-			return
-		end
-		recipe.order = string.format("%02d", order)
-		order = order + 1
-	end
-end
-
 Recipe.hide = function(recipeName)
 	local recipe = RECIPE[recipeName]
 	if recipe == nil then

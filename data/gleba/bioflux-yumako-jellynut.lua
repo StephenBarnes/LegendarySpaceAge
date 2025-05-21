@@ -34,7 +34,6 @@ initialBiofluxRecipe.ingredients = {
 	{type = "item", name = "jelly", amount = 4},
 }
 initialBiofluxRecipe.results = {{type = "item", name = "bioflux", amount = 1}}
-initialBiofluxRecipe.order = "a[organic-products]-a"
 Icon.set(initialBiofluxRecipe, {"bioflux", "pentapod-egg"})
 extend{initialBiofluxRecipe}
 Tech.addRecipeToTech("bioflux-from-eggs", "bioflux", 1)

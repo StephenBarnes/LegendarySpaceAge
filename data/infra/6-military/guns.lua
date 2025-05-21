@@ -44,14 +44,3 @@ Recipe.edit{
 -- Hide the pistol.
 RAW.gun["pistol"].hidden = true
 RAW.gun["pistol"].hidden_in_factoriopedia = true
-
-local gunsInOrder = {
-	"shotgun",
-	"combat-shotgun",
-	"submachine-gun",
-	"flamethrower",
-	"rocket-launcher",
-	"teslagun",
-	"railgun",
-}
-Gen.orderKinds("gun", {RECIPE, RAW.gun}, gunsInOrder)

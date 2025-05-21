@@ -72,11 +72,3 @@ local sencytiumRecipe = Recipe.make{
 }
 
 -- TODO more recipes?
-
-Gen.order({
-	sensorItem,
-	greenCircuitRecipe,
-	redCircuitRecipe,
-	blueCircuitRecipe,
-	sencytiumRecipe,
-}, "sensor")

@@ -10,7 +10,6 @@ assembledRocketPartItem.icons = {
 	{icon = "__base__/graphics/icons/rocket-part.png", icon_size = 64},
 	{icon = "__core__/graphics/icons/mip/recipe-arrow.png", icon_size = 32, shift = {0, 10}},
 }
-assembledRocketPartItem.order = ITEM["rocket-part"].order .. "-2"
 assembledRocketPartItem.hidden = false
 ITEM["rocket-part"].hidden = false
 assembledRocketPartItem.stack_size = 10

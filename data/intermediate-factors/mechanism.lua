@@ -58,10 +58,3 @@ local appendageRecipe = Recipe.make{
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?
-
-Gen.order({
-	mechanismItem,
-	basicRecipe,
-	advancedRecipe,
-	appendageRecipe,
-}, "mechanism")

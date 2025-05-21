@@ -17,7 +17,6 @@ local item = copy(ITEM["sulfur"])
 item.name = "ash"
 Icon.set(item, "LSA/ash/1")
 Icon.variants(item, "LSA/ash/%", 3)
-item.order = "0"
 extend{item}
 
 -- Create recipe for reprocessing ash.
@@ -45,7 +44,6 @@ Recipe.make{
 	category = "chemistry",
 	time = 2,
 	enabled = false,
-	subgroup = "raw-material",
 }
 
 -- Create tech for ash reprocessing.

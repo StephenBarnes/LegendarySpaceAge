@@ -84,12 +84,3 @@ neurofibrilRecipe.enabled = false
 neurofibrilRecipe.allow_as_intermediate = false
 extend{neurofibrilRecipe}
 -- Will be added to the tech by stingfronds.lua.
-
-Gen.order({
-	wiringItem,
-	makeshiftWiringRecipe,
-	resinRecipe,
-	rubberRecipe,
-	plasticRecipe,
-	neurofibrilRecipe,
-}, "wiring")

@@ -237,27 +237,17 @@ for i, planetData in pairs{
 		ingredients = {{"filter", filtersPer50s}},
 		results = results,
 		time = 50,
-		order = tostring(i),
 		localised_name = {"recipe-name.air-separation-planet", {"space-location-name."..planetName}},
 		localised_description = {"recipe-description.air-separation-planet", {"space-location-name."..planetName}},
 		category = "air-separation",
 		allow_productivity = true,
 		allow_quality = false,
 		hide_from_player_crafting = true,
-		subgroup = "air-separation",
 		show_amount_in_title = false,
 		icons = {"air-separator", "planet/"..planetName},
 		iconArrangement = "planetFixed",
 	}
 end
-
--- Create a subgroup for the air separator recipes
-extend{{
-	type = "item-subgroup",
-	name = "air-separation",
-	group = "intermediate-products",
-	order = "z",
-}}
 
 -- Create tech for the air separator recipe.
 local tech = copy(TECH["electric-mining-drill"])

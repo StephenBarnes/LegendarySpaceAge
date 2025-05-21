@@ -86,12 +86,3 @@ extend{recipeFromTubules}
 
 -- TODO create recipes for rigid structure
 -- TODO add recipes to techs
-
-Gen.order({
-	frame,
-	recipeFromWood,
-	recipeFromIron,
-	recipeFromIronAndSteel,
-	recipeFromSteel,
-	recipeFromTubules,
-}, "frame")

@@ -1,6 +1,4 @@
---[[ This file defines the order and item-groups and item-subgroups of all items, fluids, and recipes.
-]]
-
+-- This file defines the order and item-groups and item-subgroups of all items, fluids, and recipes.
 
 return {
 	logistics = {
@@ -14,8 +12,8 @@ return {
 		transport = {"car", "tank", "spidertron"},
 		["logistic-network"] = {"logistic-robot", "construction-robot", "active-provider-chest", "passive-provider-chest", "storage-chest", "buffer-chest", "requester-chest", "roboport"},
 		["circuit-network"] = {"small-lamp", "arithmetic-combinator", "decider-combinator", "selector-combinator", "constant-combinator", "power-switch", "programmable-speaker", "display-panel", "aai-signal-sender", "aai-signal-receiver"},
-		terrain = {"stone-brick", "concrete", "hazard-concrete", "refined-concrete", "refined-hazard-concrete", "landfill", "artificial-yumako-soil", "overgrowth-yumako-soil", "artificial-jellynut-soil", "overgrowth-jellynut-soil", "ice-platform", "foundation", "cliff-explosives", "make-cement"},
-			-- TODO separate this row into two lines, one with paving and one with the rest.
+		paving = {"stone-brick", "concrete", "hazard-concrete", "refined-concrete", "refined-hazard-concrete", "cliff-explosives", "make-cement"},
+		terrain = {"landfill", "artificial-yumako-soil", "overgrowth-yumako-soil", "artificial-jellynut-soil", "overgrowth-jellynut-soil", "ice-platform", "foundation"},
 	},
 	production = {
 		tool = {"repair-pack", "blueprint", "deconstruction-planner", "upgrade-planner", "blueprint-book"},
@@ -79,19 +77,20 @@ return {
 		["low-density-structure"] = {"low-density-structure", "low-density-structure-standard", "casting-low-density-structure", "lds-from-chitin-and-carbon-fiber"},
 	},
 	space = {
-		["space-interactors"] = {"rocket-silo", "cargo-bay", "space-platform-starter-pack", "cargo-landing-pad", "cargo-pod", "telescope", "rocket-part", "assembled-rocket-part", "cargo-pod-container", "rocket-silo-10parts"},
+		["space-interactors"] = {"rocket-silo", "cargo-bay", "space-platform-starter-pack", "cargo-landing-pad", "cargo-pod", "rocket-part", "assembled-rocket-part", "cargo-pod-container", "telescope"},
 		["space-platform"] = {"space-platform-foundation", "space-platform-hub", "asteroid-collector", "crusher", "thruster"},
 		["space-rocket"] = {},
 		["space-related"] = {},
-		["space-environment"] = {"small-metallic-asteroid", "medium-metallic-asteroid", "big-metallic-asteroid", "huge-metallic-asteroid", "small-carbonic-asteroid", "medium-carbonic-asteroid", "big-carbonic-asteroid", "huge-carbonic-asteroid", "small-oxide-asteroid", "medium-oxide-asteroid", "big-oxide-asteroid", "huge-oxide-asteroid", "small-promethium-asteroid", "medium-promethium-asteroid", "big-promethium-asteroid", "huge-promethium-asteroid", },
-			-- TODO split
+		["space-environment"] = {"small-metallic-asteroid", "medium-metallic-asteroid", "big-metallic-asteroid", "huge-metallic-asteroid", "small-carbonic-asteroid", "medium-carbonic-asteroid", "big-carbonic-asteroid", "huge-carbonic-asteroid"},
+		["space-environment-2"] = {"small-metallic-asteroid", "medium-metallic-asteroid", "big-metallic-asteroid", "huge-metallic-asteroid", "small-carbonic-asteroid", "medium-carbonic-asteroid", "big-carbonic-asteroid", "huge-carbonic-asteroid"},
 		["space-material"] = {"metallic-asteroid-chunk", "carbonic-asteroid-chunk", "oxide-asteroid-chunk", "promethium-asteroid-chunk", },
 		["space-crushing"] = {"metallic-asteroid-crushing", "carbonic-asteroid-crushing", "oxide-asteroid-crushing", "metallic-asteroid-reprocessing", "carbonic-asteroid-reprocessing", "oxide-asteroid-reprocessing", "advanced-metallic-asteroid-crushing", "advanced-carbonic-asteroid-crushing", "advanced-oxide-asteroid-crushing", },
 		["space-processing"] = {},
-		planets = {"vulcanus", "metallic-belt", "gleba", "carbonic-belt", "nauvis", "apollo", "ice-belt", "fulgora", "belt-of-aquilo", "aquilo", "shattered-planet", "solar-system-edge"},
-			-- TODO split into multiple.
+		planets = {"vulcanus", "gleba", "nauvis", "apollo", "fulgora", "aquilo"},
+		["space-locations"] = {"metallic-belt", "carbonic-belt", "ice-belt", "belt-of-aquilo", "shattered-planet", "solar-system-edge"},
 		satellites = {},
-		["planet-connections"] = {"vulcanus-metallic-belt", "metallic-belt-gleba", "gleba-carbonic-belt", "carbonic-belt-apollo", "apollo-ice-belt", "apollo-nauvis", "ice-belt-fulgora", "fulgora-belt-of-aquilo", "belt-of-aquilo-aquilo", "aquilo-shattered-planet", "metallic-belt-carbonic-belt", "carbonic-belt-ice-belt", "ice-belt-belt-of-aquilo", "belt-of-aquilo-shattered-planet", "solar-system-edge-shattered-planet"},
+		["belt-connections"] = {"metallic-belt-carbonic-belt", "carbonic-belt-ice-belt", "ice-belt-belt-of-aquilo", "belt-of-aquilo-shattered-planet", "solar-system-edge-shattered-planet"},
+		["planet-connections"] = {"vulcanus-metallic-belt", "metallic-belt-gleba", "gleba-carbonic-belt", "carbonic-belt-apollo", "apollo-nauvis", "apollo-ice-belt", "ice-belt-fulgora", "fulgora-belt-of-aquilo", "belt-of-aquilo-aquilo", "aquilo-shattered-planet"},
 	},
 	["post-space"] = {
 		["vulcanus-processes"] = {"calcite", "tungsten-ore", "tungsten-carbide", "tungsten-plate", "lava-water-heating", "metals-from-lava", "make-molten-iron", "make-molten-copper", "make-molten-steel", "make-molten-tungsten", "tungsten-heating"},
@@ -129,9 +128,9 @@ return {
 		["vulcanus-fluids"] = {"lava", "volcanic-gas", "molten-iron", "molten-copper", "molten-steel", "molten-tungsten"},
 		["gleba-fluids"] = {"slime", "geoplasm", "chitin-broth", "spore-gas"},
 		["fulgora-fluids"] = {"fulgoran-sludge", "holmium-solution", "electrolyte"},
-		["fluid"] = {"meat-paste", "uranium-hexafluoride", "hydrofluoric-acid", "ammoniacal-solution", "fluorine", "lithium-brine", "fusion-plasma"},
+		["nauvis-return-fluids"] = {"meat-paste", "uranium-hexafluoride", "hydrofluoric-acid"},
+		["fluid"] = {},
 			-- This is the default group. Will contain stuff from other mods.
-			-- TODO move out my stuff to a new group.
 		["aquilo-fluids"] = {"ammoniacal-solution", "fluorine", "lithium-brine", "fusion-plasma"},
 		["waste-pump"] = {"vent-ammonia", "vent-lubricant", "vent-molten-copper", "vent-lithium-brine", "vent-light-oil", "vent-liquid-nitrogen", "vent-lava", "vent-molten-iron", "vent-molten-tungsten", "vent-thruster-fuel", "vent-molten-steel", "vent-tar", "vent-slime", "vent-sulfuric-acid", "vent-thruster-oxidizer", "vent-latex", "vent-holmium-solution", "vent-crude-oil", "vent-diesel", "vent-chitin-broth", "vent-ammoniacal-solution", "vent-cement", "vent-lake-water", "vent-electrolyte", "vent-fluoroketone-hot", "vent-heavy-oil", "vent-fluoroketone-cold", "vent-geoplasm", "vent-fulgoran-sludge", "vent-water"},
 		["gas-vent-on-surface"] = {"gas-vent-ammonia", "gas-vent-petroleum-gas", "gas-vent-oxygen-gas", "gas-vent-spore-gas", "gas-vent-steam", "gas-vent-syngas", "gas-vent-nitrogen-gas", "gas-vent-hydrogen-gas", "gas-vent-compressed-nitrogen-gas", "gas-vent-natural-gas", "gas-vent-dry-gas", "gas-vent-fluorine", "gas-vent-volcanic-gas", },

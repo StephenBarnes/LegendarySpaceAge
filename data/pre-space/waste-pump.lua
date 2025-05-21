@@ -76,8 +76,6 @@ wastePumpItem.icons = {
 	{icon = "__base__/graphics/icons/offshore-pump.png", icon_size = 64, scale = 0.5},
 	{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.25, shift = {-8, 8}},
 }
-wastePumpItem.order = "b[pipe]-d"
-wastePumpItem.subgroup = "fluid-logistics"
 extend{wastePumpItem}
 
 -- Create fluid-venting recipes.
@@ -137,7 +135,6 @@ for _, effluentFluidAndPollution in pairs(effluentFluidsAndPollution) do
 		primary = fluid.base_color,
 	}
 	effluentRecipe.category = "waste-pump"
-	effluentRecipe.subgroup = "waste-pump"
 
 	local fluidIcon
 	if fluid.icons then

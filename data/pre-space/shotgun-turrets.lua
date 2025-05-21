@@ -57,7 +57,6 @@ local turret = copy(RAW["ammo-turret"]["gun-turret"])
 turret.name = "shotgun-turret"
 turret.icon = graphics .. "item.png"
 turret.minable.result = "shotgun-turret"
-turret.order = "z-b[turret]-0"
 turret.placeable_by = { item = "shotgun-turret", count = 1 }
 turret.max_health = 800 -- compare to 400 for gun turret, 350 for wall.
 turret.corpse = "medium-remnants"
@@ -118,7 +117,6 @@ local item = copy(ITEM["gun-turret"])
 item.name = "shotgun-turret"
 item.icon = graphics .. "item.png"
 item.place_result = "shotgun-turret"
-item.order = "b[turret]-0"
 extend{item}
 
 -- Create recipe.
@@ -131,7 +129,6 @@ recipe.ingredients = {
 	{type = "item", name = "mechanism", amount = 1},
 	{type = "item", name = "sensor", amount = 1},
 }
-recipe.order = "b[turret]-0"
 Icon.clear(recipe)
 extend{recipe}
 

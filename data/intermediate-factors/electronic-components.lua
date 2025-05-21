@@ -76,11 +76,3 @@ local recipeFromSilicon = Recipe.make{
 	category = "electronics-with-fluid",
 }
 Tech.addRecipeToTech("components-from-silicon", "processing-unit")
-
-Gen.order({
-	electronicComponents,
-	basicRecipe,
-	recipeFromPlastic,
-	recipeFromGlassPlastic,
-	recipeFromSilicon,
-}, "electronic-components")

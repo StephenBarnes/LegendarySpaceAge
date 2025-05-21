@@ -92,21 +92,3 @@ for _, vals in pairs{
 	}
 	proto.icon = nil
 end
-
--- Reorder. Put grenades after the poison/slowdown capsules, since I'm unlocking grenades later.
-Gen.orderKinds("capsule", {RAW.capsule, RECIPE}, {
-	"poison-capsule",
-	"slowdown-capsule",
-	"grenade",
-	"cluster-grenade",
-}, "1-")
-Gen.orderKinds("capsule", {RAW.capsule, RECIPE}, {
-	"defender-capsule",
-	"distractor-capsule",
-	"destroyer-capsule",
-}, "2-")
-Gen.orderKinds("capsule", {RAW["combat-robot"]}, {
-	"defender",
-	"distractor",
-	"destroyer",
-}, "2-")

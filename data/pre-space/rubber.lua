@@ -13,7 +13,6 @@ local rubberItem = copy(ITEM["plastic-bar"])
 rubberItem.name = "rubber"
 Icon.variants(rubberItem, "LSA/rubber/rubber-%", 3)
 Icon.set(rubberItem, "LSA/rubber/rubber-1")
-rubberItem.order = "b[chemistry]-a3"
 extend{rubberItem}
 
 -- Create latex fluid.
@@ -35,8 +34,6 @@ latexRecipe.ingredients = {
 }
 latexRecipe.results = {{type="fluid", name="latex", amount=50}}
 latexRecipe.category = "chemistry"
-latexRecipe.subgroup = nil
-latexRecipe.order = nil
 latexRecipe.hide_from_player_crafting = true
 latexRecipe.allow_quality = false
 extend{latexRecipe}
@@ -69,8 +66,6 @@ rubberFromPetrochemRecipe.results = {
 }
 rubberFromPetrochemRecipe.main_product = "rubber"
 rubberFromPetrochemRecipe.category = "chemistry"
-rubberFromPetrochemRecipe.subgroup = "raw-material"
-rubberFromPetrochemRecipe.order = "f3"
 Icon.set(rubberFromPetrochemRecipe, {"rubber", "light-oil"})
 extend{rubberFromPetrochemRecipe}
 

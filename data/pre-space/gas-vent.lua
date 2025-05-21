@@ -103,8 +103,6 @@ ventItem.icons = {
 	{icon = GRAPHICS.."gas-vent-item.png", icon_size = 64},
 	{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.25, shift = {-8, 8}},
 }
-ventItem.subgroup = "fluid-logistics"
-ventItem.order = "b[pipe]-e"
 ventItem.place_result = "gas-vent"
 ventItem.stack_size = 20
 extend{ventItem}
@@ -181,11 +179,9 @@ for _, fluidData in pairs(ventableFluids) do
 	if onlyInSpace then
 		thisGasVentRecipe.localised_name = {"recipe-name.gas-vent-space", {"fluid-name."..gasToVent}}
 		thisGasVentRecipe.localised_description = {"recipe-description.gas-vent-space"}
-		thisGasVentRecipe.subgroup = "gas-vent-in-space"
 	else
 		thisGasVentRecipe.localised_name = {"recipe-name.gas-vent", {"fluid-name."..gasToVent}}
 		thisGasVentRecipe.localised_description = {"recipe-description.gas-vent"}
-		thisGasVentRecipe.subgroup = "gas-vent-on-surface"
 	end
 	thisGasVentRecipe.category = "gas-venting"
 	thisGasVentRecipe.ingredients = {{type = "fluid", name = gasToVent, amount = 100}}

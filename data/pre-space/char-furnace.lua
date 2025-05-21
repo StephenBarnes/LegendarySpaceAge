@@ -66,7 +66,6 @@ Recipe.make{
 	ingredients = {},
 	time = 1,
 	enabled = false,
-	subgroup = "raw-material",
 	category = "char-furnace",
 	icons = {"carbon", "char-furnace"},
 	allow_productivity = false,

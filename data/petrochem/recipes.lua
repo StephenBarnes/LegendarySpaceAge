@@ -18,7 +18,6 @@ oilFractionationRecipe.results = {
 	{type = "item", name = "carbon", amount = 2, show_details_in_recipe_tooltip = false},
 }
 Icon.set(oilFractionationRecipe, {"crude-oil", "heavy-oil", "light-oil"}, "decomposition")
-oilFractionationRecipe.order = "a[oil-processing]-b1"
 oilFractionationRecipe.allow_quality = true
 oilFractionationRecipe.allow_productivity = true
 extend{oilFractionationRecipe}
@@ -36,7 +35,6 @@ gasFractionationRecipe.results = {
 	{type = "item", name = "sulfur", amount = 1, show_details_in_recipe_tooltip = false},
 }
 Icon.set(gasFractionationRecipe, {"natural-gas", "petroleum-gas", "dry-gas"}, "decomposition")
-gasFractionationRecipe.order = "a[oil-processing]-b2"
 gasFractionationRecipe.allow_quality = true
 gasFractionationRecipe.allow_productivity = true
 extend{gasFractionationRecipe}
@@ -100,8 +98,6 @@ tarDistillationRecipe.results = { -- Results have been increased so that carbon 
 }
 tarDistillationRecipe.energy_required = 5
 Icon.set(tarDistillationRecipe, {"tar", "heavy-oil", "light-oil", "pitch"}, "decomposition")
-tarDistillationRecipe.order = "a[oil-processing]-b5"
-tarDistillationRecipe.subgroup = "complex-fluid-recipes"
 tarDistillationRecipe.allow_productivity = true
 tarDistillationRecipe.maximum_productivity = 1
 tarDistillationRecipe.allow_quality = true
@@ -122,8 +118,6 @@ heavyOilCokingRecipe.results = {
 	{type = "fluid", name = "tar", amount = 25, show_details_in_recipe_tooltip = false},
 }
 Icon.set(heavyOilCokingRecipe, {"heavy-oil", "carbon", "tar"}, "decomposition")
-heavyOilCokingRecipe.order = "a[oil-processing]-b4"
-heavyOilCokingRecipe.subgroup = "complex-fluid-recipes"
 heavyOilCokingRecipe.energy_required = 5
 heavyOilCokingRecipe.allow_productivity = true
 heavyOilCokingRecipe.maximum_productivity = 1
@@ -143,8 +137,6 @@ pitchProcessingRecipe.results = {
 	{ type = "fluid", name = "light-oil", amount = 10, show_details_in_recipe_tooltip = false },
 }
 Icon.set(pitchProcessingRecipe, {"pitch", "tar", "light-oil", "heavy-oil"}, "decomposition")
-pitchProcessingRecipe.order = "a[oil-processing]-b6"
-pitchProcessingRecipe.subgroup = "complex-fluid-recipes"
 pitchProcessingRecipe.category = "oil-processing" -- Refinery.
 pitchProcessingRecipe.auto_recycle = false
 pitchProcessingRecipe.allow_productivity = false
@@ -174,8 +166,6 @@ coalCokingRecipe.results = {
 	--{type = "fluid", name = "tar", amount = 20}, -- Removed bc the player has no way to handle fluid waste yet, except waste pump I guess.
 }
 Icon.set(coalCokingRecipe, {"coal", "pitch", "sulfur", "carbon"}, "decomposition")
-coalCokingRecipe.order = "a[oil-processing]-b3"
-coalCokingRecipe.subgroup = "complex-fluid-recipes"
 coalCokingRecipe.category = "chemistry"
 coalCokingRecipe.allow_productivity = true
 coalCokingRecipe.allow_quality = true
@@ -224,8 +214,6 @@ syngasLiquefactionRecipe.results = {
 Icon.set(syngasLiquefactionRecipe, {"syngas", "heavy-oil", "light-oil"}, "decomposition")
 syngasLiquefactionRecipe.allow_productivity = false
 syngasLiquefactionRecipe.allow_quality = false
-syngasLiquefactionRecipe.order = "a[coal-liquefaction]-b4"
-syngasLiquefactionRecipe.subgroup = "complex-fluid-recipes"
 extend{syngasLiquefactionRecipe}
 
 --[[ Modify recipe for lubricant
@@ -334,7 +322,6 @@ Tech.removeRecipeFromTech("carbon", "tungsten-carbide")
 Recipe.make{
 	copy = "sulfuric-acid",
 	recipe = "make-sulfuric-acid",
-	subgroup = "raw-material",
 }
 Recipe.hide("sulfuric-acid")
 Tech.removeRecipeFromTech("sulfuric-acid", "sulfur-processing")

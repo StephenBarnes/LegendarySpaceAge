@@ -103,7 +103,6 @@ local item = copy(ITEM["steam-turbine"])
 item.name = "condensing-turbine"
 item.place_result = "condensing-turbine"
 Icon.set(item, {"steam-turbine", "water"})
-item.order = "g"
 extend{item}
 
 -- Create recipe.

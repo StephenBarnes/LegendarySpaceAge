@@ -3,7 +3,6 @@ local slimeFluid = copy(FLUID["water"])
 slimeFluid.name = "slime"
 Icon.set(slimeFluid, "LSA/filtration/slime")
 slimeFluid.auto_barrel = true
-slimeFluid.order = "b[new-fluid]-c2[gleba]-a"
 slimeFluid.base_color = {.176, .255, .200}
 slimeFluid.flow_color = {.393, .453, .333}
 slimeFluid.visualization_color = {.482, .745, .215}
@@ -26,8 +25,6 @@ Recipe.make{
 	},
 	main_product = "water",
 	category = "filtration",
-	subgroup = "gleba-non-agriculture",
-	order = "00",
 	enabled = false,
 	time = 1,
 	specialIcons = {

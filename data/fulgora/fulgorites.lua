@@ -10,9 +10,6 @@
 local fulgoriteShardItem = copy(ITEM["holmium-ore"])
 fulgoriteShardItem.name = "fulgorite-shard"
 fulgoriteShardItem.icon = ITEM["holmium-ore"].icon
-fulgoriteShardItem.subgroup = "fulgora-processes"
-fulgoriteShardItem.order = "a[raw-material]-b[fulgorite-shard]"
-fulgoriteShardItem.order = "c[organics]-c[fulgorite-shard]"
 extend({fulgoriteShardItem})
 
 -- Change holmium ore sprite to look like powder, since I'm renaming it to holmium powder.
@@ -36,8 +33,6 @@ RAW["simple-entity"]["fulgurite-small"].minable.results = { {type = "item", name
 local fulgoriteStarterItem = copy(ITEM["holmium-ore"])
 fulgoriteStarterItem.name = "fulgorite-starter"
 Icon.set(fulgoriteStarterItem, "LSA/fulgora/fulgorite-stuff/fulgorite-starter")
-fulgoriteStarterItem.subgroup = "fulgora-processes"
-fulgoriteStarterItem.order = "c[organics]-d[fulgorite-starter]"
 fulgoriteStarterItem.place_result = "fulgorite-plant"
 fulgoriteStarterItem.localised_name = {"item-name.fulgorite-starter"} -- Otherwise it gets entity name.
 fulgoriteStarterItem.spoil_ticks = 30 * MINUTES
@@ -77,7 +72,6 @@ RAW["simple-entity"].fulgurite.hidden_in_factoriopedia = true -- Because we're r
 RAW["simple-entity"].fulgurite.factoriopedia_alternative = "fulgorite-plant" -- Redirect to the plant.
 --fulgoritePlant.factoriopedia_simulation = RAW["simple-entity"].fulgurite.factoriopedia_simulation
 fulgoritePlant.factoriopedia_simulation = nil -- The simulation above looks stupid because it shows the tiny growing plant, not full-grown plant.
-fulgoritePlant.order = "a[tree]-b[fulgora]" -- Between Nauvis tree and Gleba trees.
 fulgoritePlant.pictures = {
 	sheet = {
 		filename = "__space-age__/graphics/decorative/fulgurite/fulgurite.png",

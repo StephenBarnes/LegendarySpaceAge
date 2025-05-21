@@ -152,7 +152,6 @@ item.icon = "__LegendarySpaceAge__/graphics/deep-drill/icon.png"
 item.place_result = "deep-drill"
 item.stack_size = 10
 item.weight = 1e7 -- Too heavy for rocket.
-item.order = "a[items]-d"
 extend{item}
 
 Recipe.make{
@@ -210,7 +209,6 @@ for i, planetData in pairs{
 		recipe = "deep-drill-"..planetName,
 		ingredients = {},
 		results = planetData[2],
-		order = tostring(i),
 		localised_name = {"recipe-name.deep-drill-planet", {"space-location-name."..planetName}},
 		localised_description = {"recipe-description.deep-drill-planet", {"space-location-name."..planetName}},
 		icons = {"deep-drill", "planet/"..planetName},
@@ -219,19 +217,10 @@ for i, planetData in pairs{
 		allow_productivity = true,
 		allow_quality = true,
 		hide_from_player_crafting = true,
-		subgroup = "deep-drilling",
 		show_amount_in_title = false,
 		time = 1,
 	}
 end
-
--- Create a subgroup for the drilling recipes
-extend{{
-	type = "item-subgroup",
-	name = "deep-drilling",
-	group = "intermediate-products",
-	order = "z",
-}}
 
 -- Create tech for the deep drill recipe.
 local tech = copy(TECH["electric-mining-drill"])

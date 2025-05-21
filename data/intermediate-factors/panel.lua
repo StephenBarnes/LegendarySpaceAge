@@ -79,13 +79,3 @@ Tech.addRecipeToTech("panel-from-steel", "steel-processing")
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?
-
-Gen.order({
-	panelItem,
-	recipeFromWood,
-	recipeFromIron,
-	recipeFromCopper,
-	recipeFromGlass,
-	recipeFromRubber,
-	recipeFromSteel,
-}, "panel")

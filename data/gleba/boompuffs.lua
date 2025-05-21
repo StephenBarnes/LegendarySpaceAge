@@ -82,8 +82,6 @@ sproutItem.localised_name = {"item-name.sprouted-boomnut"}
 sproutItem.localised_description = {"item-description.sprouted-boomnut"}
 Icon.variants(sproutItem, "LSA/gleba/boompuffs/sprout/%", 3)
 Icon.set(sproutItem, "LSA/gleba/boompuffs/sprout/1")
-sproutItem.subgroup = "slipstacks-and-boompuffs"
-sproutItem.order = "12"
 sproutItem.plant_result = "boompuff"
 sproutItem.place_result = "boompuff"
 sproutItem.spoil_ticks = 1 * HOURS
@@ -97,8 +95,6 @@ boomnutItem.name = "boomnut"
 boomnutItem.localised_name = {"item-name.boomnut"}
 boomnutItem.place_result = nil
 boomnutItem.plant_result = nil
-boomnutItem.subgroup = "slipstacks-and-boompuffs"
-boomnutItem.order = "11"
 Icon.set(boomnutItem, "LSA/gleba/boompuffs/nut/1")
 Icon.variants(boomnutItem, "LSA/gleba/boompuffs/nut/%", 3)
 Item.clearFuel(boomnutItem)
@@ -109,8 +105,6 @@ local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
 local sounds = require("__base__.prototypes.entity.sounds")
 local boomsacItem = copy(RAW.capsule["grenade"])
 boomsacItem.name = "boomsac"
-boomsacItem.subgroup = "slipstacks-and-boompuffs"
-boomsacItem.order = "13"
 boomsacItem.spoil_ticks = 2 * MINUTES
 boomsacItem.spoil_to_trigger_result = {
 	items_per_trigger = 5, -- So for a stack of 100, it triggers 20 times. For 1 item, it still triggers 1 time.
@@ -206,8 +200,6 @@ Recipe.make{
 	crafting_machine_tint = boompuffTint,
 	icons = {"boomnut", "niter", "LSA/gleba/sugar/1"},
 	iconArrangement = "decomposition",
-	subgroup = "slipstacks-and-boompuffs",
-	order = "14",
 	allow_decomposition = false, -- Otherwise it thinks spoilage comes from boomnut crushing by default.
 }
 
@@ -228,8 +220,6 @@ Recipe.make{
 	category = "chemistry",
 	crafting_machine_tint = boompuffTint,
 	icons = {"natural-gas", "boomsac"},
-	subgroup = "slipstacks-and-boompuffs",
-	order = "15",
 }
 
 ------------------------------------------------------------------------

@@ -13,9 +13,6 @@ RECIPE["tiny-4way-storage-tank"] = nil
 ITEM["tiny-4way-storage-tank"] = nil
 Tech.removeRecipeFromTech("tiny-4way-storage-tank", "fluid-handling")
 ITEM["tiny-inline-storage-tank"].weight = ITEM["pump"].weight
--- Move to pipe row, not storage row.
---ITEM["tiny-inline-storage-tank"].subgroup = "energy-pipe-distribution"
-ITEM["tiny-inline-storage-tank"].order = "b[fluid]-a[0]"
 ITEM["tiny-inline-storage-tank"].stack_size = 100
 Item.perRocket(ITEM["tiny-inline-storage-tank"], 100)
 

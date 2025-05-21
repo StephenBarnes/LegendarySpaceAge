@@ -64,16 +64,6 @@ extend({stingfrondPlant})
 ------------------------------------------------------------------------
 --- Create items for products of stingfrond farming.
 
--- Subgroup for stingfrond items and recipes.
-extend{
-	{
-		type = "item-subgroup",
-		name = "stingfrond-products",
-		group = "post-space",
-		order = "023",
-	},
-}
-
 -- Create cyclosomes
 ---@type data.Sprite[]
 local cyclosomePics = {} -- Picture variants
@@ -109,8 +99,6 @@ for i = 1, 5 do
 	cyclosome.icon = nil
 	cyclosome.icons = {{icon = "__LegendarySpaceAge__/graphics/gleba/stingfronds/cyclosomes/"..i..".png", icon_size = 64, scale = 0.5, icon_mipmaps = 4, tint = phaseTints[i]}}
 		-- Give each one a different variant as main icon.
-	cyclosome.subgroup = "stingfrond-products"
-	cyclosome.order = "z"..i
 	Item.clearFuel(cyclosome)
 	cyclosomeItems[i] = cyclosome
 end
@@ -123,8 +111,6 @@ stingfrondSprout.localised_name = {"item-name.stingfrond-sprout"}
 stingfrondSprout.plant_result = "stingfrond"
 stingfrondSprout.place_result = "stingfrond"
 Icon.set(stingfrondSprout, "SA/stingfrond")
-stingfrondSprout.subgroup = "stingfrond-products"
-stingfrondSprout.order = "a"
 Item.clearFuel(stingfrondSprout)
 extend{stingfrondSprout}
 
@@ -135,12 +121,7 @@ neurofibril.fuel_value = "1MJ"
 neurofibril.name = "neurofibril"
 Icon.set(neurofibril, "LSA/gleba/stingfronds/neurofibrils/1")
 Icon.variants(neurofibril, "LSA/gleba/stingfronds/neurofibrils/%", 6)
-neurofibril.subgroup = "stingfrond-products"
-neurofibril.order = "b"
 extend{neurofibril}
-
-ITEM["carbon-fiber"].subgroup = "stingfrond-products"
-ITEM["carbon-fiber"].order = "c"
 
 ------------------------------------------------------------------------
 --[[ Create techs.
@@ -225,8 +206,6 @@ sproutRecipe.results = {
 	{type = "item", name = "stingfrond-sprout", amount = 1},
 }
 Icon.clear(sproutRecipe)
-sproutRecipe.subgroup = "stingfrond-products"
-sproutRecipe.order = "a"
 sproutRecipe.energy_required = 5
 sproutRecipe.crafting_machine_tint = {
 	primary = phaseTints[1],
@@ -238,8 +217,6 @@ extend{sproutRecipe}
 RECIPE["carbon-fiber"].ingredients = {
 	{type = "item", name = "neurofibril", amount = 4},
 }
-RECIPE["carbon-fiber"].subgroup = "stingfrond-products"
-RECIPE["carbon-fiber"].order = "b"
 RECIPE["carbon-fiber"].category = "crafting"
 
 -- Resynchronization: 5 cyclosome A + ... + 5 cyclosome E + 2 neurofibrils -> 50 cyclosome C
@@ -261,8 +238,6 @@ resyncRecipe.show_amount_in_title = false
 resyncRecipe.allow_productivity = true
 resyncRecipe.maximum_productivity = nil
 resyncRecipe.allow_quality = true
-resyncRecipe.subgroup = "stingfrond-products"
-resyncRecipe.order = "c"
 resyncRecipe.energy_required = 10
 resyncRecipe.icon = nil
 local fifthRoots = { -- 5th roots of unity, forming a pentagon, used to make the icons of the cyclosome recipes.
@@ -304,7 +279,6 @@ desyncRecipe.results = {
 	{type = "item", name = "cyclosome-4", amount_min = 0, amount_max = 3, show_details_in_recipe_tooltip = false},
 	{type = "item", name = "cyclosome-5", amount_min = 0, amount_max = 3, show_details_in_recipe_tooltip = false},
 }
-desyncRecipe.order = "d"
 desyncRecipe.category = "crafting"
 desyncRecipe.icons = copy(resyncRecipe.icons)
 table.insert(desyncRecipe.icons, {

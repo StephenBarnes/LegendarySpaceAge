@@ -188,8 +188,6 @@ local item = copy(ITEM["assembling-machine-2"])
 item.name = "telescope"
 item.icon = "__space-exploration-graphics__/graphics/icons/telescope.png"
 item.place_result = "telescope"
-item.subgroup = ITEM["rocket-silo"].subgroup
-item.order = "e"
 extend{item}
 
 -- Create recipe for making telescopes.

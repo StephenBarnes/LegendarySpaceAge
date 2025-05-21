@@ -113,13 +113,3 @@ local recipeFromCastingTungsten = Recipe.make{
 }
 
 -- TODO make sprites for shielding different for different recipes.
-
-Gen.order({
-	shieldingItem,
-	recipeFromIron,
-	recipeFromSteel,
-	recipeFromCastingSteel,
-	recipeFromTungstenCarbide,
-	recipeFromTungstenSteel,
-	recipeFromCastingTungsten,
-}, "shielding")

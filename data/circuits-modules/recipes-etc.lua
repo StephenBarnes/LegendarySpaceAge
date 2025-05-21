@@ -59,7 +59,6 @@ Recipe.make{
 	clearIcons = true,
 	allow_decomposition = true,
 	allow_as_intermediate = true,
-	clearSubgroup = true,
 }
 Tech.addRecipeToTech("silicon", "advanced-circuit", 1)
 --Tech.addRecipeToTech("silicon", "solar-energy", 1)
@@ -78,7 +77,6 @@ Recipe.make{
 	},
 	clearIcons = true,
 	main_product = "doped-wafer",
-	clearSubgroup = true,
 	allow_decomposition = true,
 	allow_as_intermediate = true,
 	category = "chemistry-or-electronics",

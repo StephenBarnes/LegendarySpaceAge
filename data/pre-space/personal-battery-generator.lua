@@ -51,9 +51,7 @@ item.name = "personal-battery-generator"
 item.icon = ICON_IMG
 item.icon_size = 64
 item.place_as_equipment_result = "personal-battery-generator"
-item.subgroup = "equipment"
-item.order = "a[energy-source]-1"
-stack_size = 50
+item.stack_size = 20
 Item.copySoundsTo("battery-equipment", item)
 extend{item}
 

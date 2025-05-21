@@ -14,7 +14,6 @@ local function editBelt(vals)
 	belt.solar_power_in_space = vals.solarPowerInSpace
 	belt.draw_orbit = false
 	belt.parked_platforms_orientation = C.beltParkedPlatformsOrientation
-	belt.order = vals.order
 	if vals.iconMagnitude ~= nil then
 		belt.magnitude = vals.iconMagnitude
 	end
@@ -32,7 +31,6 @@ local function editPlanet(vals)
 	if vals.drawOrbit ~= nil then
 		loc.draw_orbit = vals.drawOrbit
 	end
-	loc.order = vals.order
 	if vals.iconMagnitude ~= nil then
 		loc.magnitude = vals.iconMagnitude
 	end
@@ -40,8 +38,7 @@ local function editPlanet(vals)
 	loc.asteroid_spawn_influence = vals.asteroid_spawn_influence -- This is always nil, currently. Default is 0.1.
 end
 
-for i, vals in pairs(C.planetsAndBelts) do
-	vals.order = string.format("%02d", i)
+for _, vals in pairs(C.planetsAndBelts) do
 	if vals.type == "belt" then
 		editBelt(vals)
 	elseif vals.type == "planet" then
@@ -75,11 +72,9 @@ for i, vals in pairs(C.connectionsData) do
 	local conn = {
 		type = "space-connection",
 		name = vals.a .. "-" .. vals.b,
-		subgroup = "planet-connections",
 		from = vals.a,
 		to = vals.b,
 		length = vals.length,
-		order = string.format("%02d", i),
 		--asteroid_spawn_definitions = nil,
 	}
 	extend{conn}

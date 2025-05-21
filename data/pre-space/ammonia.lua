@@ -57,8 +57,6 @@ Recipe.make{
 	},
 	show_amount_in_title = false,
 	category = "organic-or-chemistry",
-	subgroup = "early-agriculture",
-	order = "d1",
 	time = 20,
 	allow_quality = true,
 	icons = {"spoilage", "wood"},
@@ -77,7 +75,6 @@ Recipe.make{
 	},
 	icons = {"ammonia", "spoilage"},
 	time = 10,
-	order = "d2",
 }
 
 -- Create recipe for niter from ammonia and sand.
@@ -106,8 +103,6 @@ ammoniaSynthesisRecipe.results = {
 ammoniaSynthesisRecipe.main_product = "ammonia"
 ammoniaSynthesisRecipe.show_amount_in_title = false
 ammoniaSynthesisRecipe.category = "chemistry"
-ammoniaSynthesisRecipe.subgroup = "early-agriculture"
-ammoniaSynthesisRecipe.order = "d3"
 ammoniaSynthesisRecipe.allow_quality = false
 ammoniaSynthesisRecipe.allow_productivity = false
 Icon.set(ammoniaSynthesisRecipe, {"ammonia", "hydrogen-gas", "nitrogen-gas"})

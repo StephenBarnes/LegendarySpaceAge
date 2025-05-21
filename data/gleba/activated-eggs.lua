@@ -6,7 +6,6 @@ activatedEggItem.name = "activated-pentapod-egg"
 Icon.variants(activatedEggItem, "LSA/gleba/activated-pentapod-egg/%", 4, {draw_as_glow=true})
 Icon.set(activatedEggItem, "LSA/gleba/activated-pentapod-egg/1")
 activatedEggItem.spoil_ticks = 30 * SECONDS
-activatedEggItem.order = activatedEggItem.order .. "-2"
 -- activatedEggItem.fuel_category = "activated-pentapod-egg" -- Fuel category set in constants.lua.
 extend{activatedEggItem}
 
@@ -37,7 +36,6 @@ eggActivationRecipe.results = {
 }
 eggActivationRecipe.surface_conditions = nil
 Icon.clear(eggActivationRecipe) -- Remove icons so it defaults to the activated egg icon.
-eggActivationRecipe.order = eggActivationRecipe.order .. "-2"
 extend{eggActivationRecipe}
 
 -- Create new recipe for replicating activated eggs using slime and bioflux.

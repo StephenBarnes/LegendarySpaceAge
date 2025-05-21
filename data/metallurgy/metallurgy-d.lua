@@ -61,10 +61,8 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	}
 	hotIngot.icon = nil
 	-- Spoil_ticks and spoil_result are handled in heat-shuttles.lua.
-	hotIngot.order = "a[smelting]-0-" .. i
 	hotIngot.stack_size = INGOT_STACK_SIZE
 	hotIngot.weight = INGOT_WEIGHT
-	hotIngot.subgroup = "ingots"
 	extend{hotIngot}
 
 	local coldIngot = copy(hotIngot)
@@ -74,7 +72,6 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 	coldIngot.icons = {
 		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.5, tint=tint},
 	}
-	coldIngot.order = "a[smelting]-1-" .. i
 	extend{coldIngot}
 
 	---@type data.RecipePrototype
@@ -95,8 +92,6 @@ for i, metal in pairs{"iron", "copper", "steel"} do
 		{icon="__LegendarySpaceAge__/graphics/metallurgy/ingot.png", icon_size=64, scale=0.4, tint=tint},
 	}
 	ingotHeatingRecipe.result_is_always_fresh = true
-	ingotHeatingRecipe.subgroup = "ingots"
-	ingotHeatingRecipe.order = "a[smelting]-2-" .. i
 	extend{ingotHeatingRecipe}
 end
 
@@ -144,8 +139,6 @@ local copperMatte = copy(ITEM["copper-ore"])
 copperMatte.name = "copper-matte"
 Icon.set(copperMatte, "LSA/metallurgy/matte/matte1")
 Icon.variants(copperMatte, "LSA/metallurgy/matte/matte%", 12)
-copperMatte.subgroup = "raw-material"
-copperMatte.order = "a1"
 --copperMatte.factoriopedia_description = {"factoriopedia-description.copper-matte"}
 extend{copperMatte}
 
@@ -195,12 +188,6 @@ for _, vals in pairs{
 	recipe.allow_decomposition = true
 	recipe.allow_as_intermediate = true
 	recipe.main_product = item
-end
-
--- Put basic metal intermediates in their own subgroup.
-for i, itemName in pairs{"iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate"} do
-	ITEM[itemName].subgroup = "basic-metal-intermediates"
-	ITEM[itemName].order = ""..i
 end
 
 ------------------------------------------------------------------------

@@ -65,27 +65,9 @@ for _, tree in pairs(RAW.tree) do
 end
 RAW.plant["tree-plant"].minable.results = newTreeMinableResults
 
--- Create item subgroup for "early agriculture".
-extend{
-	{
-		type = "item-subgroup",
-		name = "early-agriculture",
-		group = "intermediate-products",
-		order = "gf",
-	},
-}
-RAW["item-subgroup"]["agriculture-processes"].order = "m2"
-
--- Organize agriculture row.
-ITEM["wood"].subgroup = "early-agriculture"
-ITEM["wood"].order = "001"
-ITEM["tree-seed"].subgroup = "early-agriculture"
-ITEM["tree-seed"].order = "002"
-
 -- Create fertilizer item.
 local fertilizerItem = copy(ITEM["wood"])
 fertilizerItem.name = "fertilizer"
-fertilizerItem.order = "003"
 Icon.set(fertilizerItem, "LSA/fertilizer/fertilizer-1")
 Icon.variants(fertilizerItem, "LSA/fertilizer/fertilizer-%", 3)
 Item.clearFuel(fertilizerItem)
@@ -100,8 +82,6 @@ local saplingItem = copy(ITEM["tree-seed"])
 saplingItem.name = "sapling"
 saplingItem.localised_name = {"item-name.sapling"} -- Seems to be necessary, else it takes name from planted/placed thing.
 saplingItem.localised_description = nil
-saplingItem.subgroup = "early-agriculture"
-saplingItem.order = "004"
 saplingItem.spoil_ticks = 1 * HOURS
 saplingItem.spoil_result = "wood"
 Item.clearFuel(saplingItem)
@@ -128,8 +108,6 @@ fertilizerRecipe.results = {
 	{type="item", name="fertilizer", amount=2},
 }
 fertilizerRecipe.category = "chemistry"
-fertilizerRecipe.subgroup = "early-agriculture"
-fertilizerRecipe.order = "005"
 Icon.clear(fertilizerRecipe)
 fertilizerRecipe.surface_conditions = nil
 fertilizerRecipe.allow_decomposition = true
@@ -146,9 +124,7 @@ saplingRecipe.ingredients = {
 saplingRecipe.results = {
 	{type="item", name="sapling", amount=1},
 }
-saplingRecipe.subgroup = "early-agriculture"
 saplingRecipe.category = "organic-or-assembling-with-fluid"
-saplingRecipe.order = "006"
 Icon.clear(saplingRecipe)
 saplingRecipe.surface_conditions = {{property = "pressure", min = 1000, max = 1000}}
 saplingRecipe.energy_required = 30

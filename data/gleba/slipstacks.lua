@@ -65,8 +65,6 @@ extend{slipstackPlant}
 local slipstackPearl = copy(ITEM.spoilage)
 slipstackPearl.name = "slipstack-pearl"
 Icon.set(slipstackPearl, "LSA/gleba/slipstacks/pearl")
-slipstackPearl.subgroup = "slipstacks-and-boompuffs"
-slipstackPearl.order = "01"
 slipstackPearl.spoil_ticks = 5 * MINUTES
 slipstackPearl.spoil_result = "spoilage"
 Item.clearFuel(slipstackPearl)
@@ -78,8 +76,6 @@ slipstackNest.name = "slipstack-nest"
 slipstackNest.localised_name = {"item-name.slipstack-nest"}
 Icon.set(slipstackNest, "LSA/gleba/slipstacks/nest")
 slipstackNest.pictures = nil
-slipstackNest.subgroup = "slipstacks-and-boompuffs"
-slipstackNest.order = "02"
 slipstackNest.spoil_ticks = 20 * MINUTES
 slipstackNest.spoil_result = "stone"
 -- Make the nests non-burnable, since thy're supposed to be mostly rock and there's no risk of having too many.
@@ -113,8 +109,6 @@ pearlSmeltRecipe.name = "smelt-slipstack-pearl"
 pearlSmeltRecipe.ingredients = {{type = "item", name = "slipstack-pearl", amount = 1}}
 pearlSmeltRecipe.results = {{type = "item", name = "resin", amount = 1}}
 pearlSmeltRecipe.category = "smelting"
-pearlSmeltRecipe.subgroup = "resin"
-pearlSmeltRecipe.order = "04"
 Icon.set(pearlSmeltRecipe, {"LSA/resin/resin-1", "slipstack-pearl"})
 extend{pearlSmeltRecipe}
 

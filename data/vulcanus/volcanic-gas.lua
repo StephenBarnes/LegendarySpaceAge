@@ -12,7 +12,6 @@ volcanicGas.icon = nil
 volcanicGas.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/fluids/gas-2.png", icon_size = 64, tint = brighterVolcanicGasColor},
 }
-volcanicGas.order = "b[new-fluid]-b[vulcanus]-0[volcanic-gas]"
 volcanicGas.max_temperature = nil
 volcanicGas.heat_capacity = nil
 extend{volcanicGas}
@@ -24,8 +23,6 @@ local separationRecipe = copy(RECIPE["steam-condensation"])
 separationRecipe.name = "volcanic-gas-separation"
 separationRecipe.localised_name = nil
 separationRecipe.category = "filtration"
-separationRecipe.subgroup = "vulcanus-processes"
-separationRecipe.order = "02"
 separationRecipe.energy_required = 1
 separationRecipe.ingredients = {
 	{type = "fluid", name = "volcanic-gas", amount = 100},

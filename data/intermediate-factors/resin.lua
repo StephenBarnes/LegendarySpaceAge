@@ -3,7 +3,6 @@ local resinItem = copy(ITEM["plastic-bar"])
 resinItem.name = "resin"
 Icon.set(resinItem, "LSA/resin/resin-1")
 Icon.variants(resinItem, "LSA/resin/resin-%", 3)
-resinItem.subgroup = "resin"
 Item.copySoundsTo(RAW.capsule["bioflux"], resinItem)
 extend{resinItem}
 
@@ -23,7 +22,6 @@ woodResinRecipe.results = {
 	{type = "item", name = "carbon", amount = 1},
 }
 Icon.set(woodResinRecipe, {"resin", "wood"})
-woodResinRecipe.subgroup = "resin"
 woodResinRecipe.main_product = "resin"
 woodResinRecipe.energy_required = 5
 extend{woodResinRecipe}
@@ -39,7 +37,6 @@ pitchResinRecipe.results = {
 	{type = "item", name = "resin", amount = 2},
 }
 Icon.set(pitchResinRecipe, {"resin", "pitch"})
-pitchResinRecipe.subgroup = "resin"
 pitchResinRecipe.main_product = "resin"
 pitchResinRecipe.energy_required = 2
 pitchResinRecipe.allow_quality = true
@@ -58,13 +55,5 @@ richGasResinRecipe.results = {
 	{type = "item", name = "resin", amount = 1},
 }
 Icon.set(richGasResinRecipe, {"resin", "petroleum-gas"})
-richGasResinRecipe.subgroup = "resin"
 richGasResinRecipe.energy_required = 2
 extend{richGasResinRecipe}
-
-Gen.order({
-	resinItem,
-	woodResinRecipe,
-	pitchResinRecipe,
-	richGasResinRecipe,
-}, "resin")

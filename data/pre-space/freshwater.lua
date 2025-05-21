@@ -45,8 +45,6 @@ Recipe.make{
 	},
 	main_product = "water",
 	category = "filtration",
-	subgroup = "filtration",
-	order = "04",
 	specialIcons = {
 		{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
 		{icon = "__LegendarySpaceAge__/graphics/filtration/lake-water.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
@@ -65,7 +63,6 @@ local lakeWaterFluid = copy(FLUID.water)
 lakeWaterFluid.name = "lake-water"
 Icon.set(lakeWaterFluid, "LSA/filtration/lake-water")
 lakeWaterFluid.auto_barrel = false
-lakeWaterFluid.order = "a[fluid]-a[water]-c"
 lakeWaterFluid.base_color = {0, .44, .6}
 lakeWaterFluid.flow_color = {.7, .7, .7}
 lakeWaterFluid.visualization_color = {.015, .681, .682} -- To differentiate from ordinary water.

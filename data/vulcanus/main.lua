@@ -30,9 +30,7 @@ Icon.set(TECH["calcite-processing"], "LSA/vulcanus/ceramic-board-tech")
 local lavaWaterHeatingRecipe = copy(RECIPE["steam-condensation"])
 lavaWaterHeatingRecipe.name = "lava-water-heating"
 lavaWaterHeatingRecipe.category = "chemistry"
-lavaWaterHeatingRecipe.subgroup = "vulcanus-processes"
 lavaWaterHeatingRecipe.localised_name = nil
-lavaWaterHeatingRecipe.order = "01"
 lavaWaterHeatingRecipe.energy_required = 5
 lavaWaterHeatingRecipe.ingredients = {
 	{type = "fluid", name = "lava", amount = 100},
@@ -99,7 +97,6 @@ inverseVulcanizationTech.unit = {
 }
 local inverseVulcanizationRecipe = copy(RECIPE["plastic-bar"])
 inverseVulcanizationRecipe.name = "inverse-vulcanization"
-inverseVulcanizationRecipe.subgroup = "raw-material"
 inverseVulcanizationRecipe.ingredients = {
 	{type = "item", name = "sulfur", amount = 5},
 	{type = "fluid", name = "tar", amount = 10},
@@ -109,7 +106,6 @@ inverseVulcanizationRecipe.results = {
 	{type = "item", name = "resin", amount = 1},
 }
 inverseVulcanizationRecipe.main_product = "plastic-bar"
-inverseVulcanizationRecipe.order = ITEM["plastic-bar"].order.."-2"
 Icon.set(inverseVulcanizationRecipe, {"plastic-bar", "tar"})
 extend({inverseVulcanizationTech, inverseVulcanizationRecipe})
 

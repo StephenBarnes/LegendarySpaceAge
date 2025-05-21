@@ -105,11 +105,3 @@ woodCircuitBoardTech.unit = {
 }
 woodCircuitBoardTech.research_trigger = nil
 extend{woodCircuitBoardTech}
-
-Gen.order({
-	circuitBoardItem,
-	makeshiftBoardRecipe,
-	woodCircuitBoardRecipe,
-	plasticCircuitBoardRecipe,
-	calciteCircuitBoardRecipe,
-}, "circuit-board")

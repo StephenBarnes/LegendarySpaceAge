@@ -28,7 +28,6 @@ When picking numbers for recipes etc:
 	We want the number of machines needed (for given output rate) to be lower for more advanced recipes, by reducing crafting times.
 ]]
 
-require("factor-item-groups")
 require("resin")
 require("wiring")
 require("electronic-components")

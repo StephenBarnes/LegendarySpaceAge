@@ -5,8 +5,6 @@ local gunpowderItem = copy(ITEM["sulfur"])
 gunpowderItem.name = "gunpowder"
 Icon.set(gunpowderItem, "LSA/gunpowder/gunpowder-1")
 Icon.variants(gunpowderItem, "LSA/gunpowder/gunpowder-%", 3)
-gunpowderItem.subgroup = "raw-material" -- Could put it with ammo, but it's really an intermediate.
-gunpowderItem.order = "b[chemistry]-a2"
 gunpowderItem.auto_recycle = true -- The item has auto_recycle (so it gets a recycling recipe), but the recipe doesn't, so quality mod doesn't see any recipe to reverse for recycling gunpowder, and therefore makes it recycle to itself.
 extend{gunpowderItem}
 

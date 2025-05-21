@@ -9,8 +9,6 @@ local sandItem = copy(ITEM["stone"])
 sandItem.name = "sand"
 Icon.set(sandItem, "LSA/glass-etc/sand/1")
 Icon.variants(sandItem, "LSA/glass-etc/sand/%", 3)
-sandItem.subgroup = "raw-material"
-sandItem.order = "a2"
 sandItem.stack_size = 100 -- Increase 50->100 vs stone and ores. So it makes sense to crush stone before shipping.
 extend{sandItem}
 
@@ -19,8 +17,6 @@ local glassBatchItem = copy(ITEM["sulfur"])
 glassBatchItem.name = "glass-batch"
 Icon.set(glassBatchItem, "LSA/glass-etc/batch/1")
 Icon.variants(glassBatchItem, "LSA/glass-etc/batch/%", 3)
-glassBatchItem.subgroup = "raw-material"
-glassBatchItem.order = "a3"
 extend{glassBatchItem}
 
 -- Create glass item.
@@ -28,8 +24,6 @@ local glassItem = copy(ITEM["iron-plate"])
 glassItem.name = "glass"
 Icon.set(glassItem, "LSA/glass-etc/glass/1")
 Icon.variants(glassItem, "LSA/glass-etc/glass/%", 6)
-glassItem.subgroup = "raw-material"
-glassItem.order = "a4"
 extend{glassItem}
 
 -- Create recipe for stone -> sand.
@@ -38,7 +32,6 @@ sandRecipe.name = "sand"
 sandRecipe.ingredients = {{type="item", name="stone", amount=1}}
 sandRecipe.results = {{type="item", name="sand", amount=1}}
 sandRecipe.category = "crafting"
-sandRecipe.subgroup = "raw-material"
 sandRecipe.enabled = true
 sandRecipe.allow_decomposition = true
 sandRecipe.allow_as_intermediate = true
@@ -50,7 +43,6 @@ glassBatchRecipe.name = "glass-batch"
 glassBatchRecipe.ingredients = {{type="item", name="sand", amount=1}, {type="item", name="ash", amount=1}}
 glassBatchRecipe.results = {{type="item", name="glass-batch", amount=1}}
 glassBatchRecipe.category = "crafting"
-glassBatchRecipe.subgroup = "raw-material"
 glassBatchRecipe.enabled = false
 glassBatchRecipe.energy_required = 0.5
 glassBatchRecipe.allow_decomposition = true
@@ -64,7 +56,6 @@ glassRecipe.name = "glass"
 glassRecipe.ingredients = {{type="item", name="glass-batch", amount=1}}
 glassRecipe.results = {{type="item", name="glass", amount=1}}
 glassRecipe.category = "smelting-or-metallurgy"
-glassRecipe.subgroup = "raw-material"
 glassRecipe.enabled = false
 glassRecipe.energy_required = 2
 glassRecipe.allow_decomposition = true

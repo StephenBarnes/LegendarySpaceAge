@@ -41,9 +41,3 @@ extend{recipeFromPlastic}
 Tech.addRecipeToTech("fluid-fitting-from-plastic", "plastics")
 
 -- TODO make more recipes, and add them to techs.
-
-Gen.order({
-	fluidFitting,
-	recipeFromCopper,
-	recipeFromPlastic,
-}, "fluid-fitting")

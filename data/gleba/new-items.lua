@@ -1,16 +1,6 @@
 --[[ This file creates new items and recipes, eg for products of borehole drills on Gleba - geoplasm, chitin, marrow.
 ]]
 
--- Make the subgroup
-extend{
-	{
-		type = "item-subgroup",
-		name = "gleba-non-agriculture",
-		group = "post-space",
-		order = "0211",
-	}
-}
-
 -- Create geoplasm fluid
 local geoplasmFluid = copy(FLUID["lubricant"])
 geoplasmFluid.name = "geoplasm"
@@ -27,7 +17,6 @@ local chitinFragments = copy(ITEM["calcite"])
 chitinFragments.name = "chitin-fragments"
 Icon.set(chitinFragments, "LSA/gleba/chitin-fragments/3")
 Icon.variants(chitinFragments, "LSA/gleba/chitin-fragments/%", 3)
-chitinFragments.subgroup = "gleba-non-agriculture"
 extend{chitinFragments}
 
 -- Create chitin block item
@@ -35,7 +24,6 @@ local chitinBlock = copy(ITEM["calcite"])
 chitinBlock.name = "chitin-block"
 Icon.set(chitinBlock, "LSA/gleba/chitin-block/3")
 Icon.variants(chitinBlock, "LSA/gleba/chitin-block/%", 3)
-chitinBlock.subgroup = "gleba-non-agriculture"
 extend{chitinBlock}
 
 -- Create marrow item
@@ -43,7 +31,6 @@ local marrowItem = copy(ITEM["spoilage"])
 marrowItem.name = "marrow"
 Icon.set(marrowItem, "LSA/gleba/marrow/2")
 Icon.variants(marrowItem, "LSA/gleba/marrow/%", 12)
-marrowItem.subgroup = "gleba-non-agriculture"
 marrowItem.spoil_ticks = 20 * MINUTES
 marrowItem.spoil_result = "spoilage"
 Item.clearFuel(marrowItem)
@@ -56,7 +43,6 @@ local tubuleItem = copy(ITEM["calcite"])
 tubuleItem.name = "tubule"
 Icon.set(tubuleItem, "LSA/gleba/tubule/1")
 Icon.variants(tubuleItem, "LSA/gleba/tubule/%", 3)
-tubuleItem.subgroup = "gleba-non-agriculture"
 extend{tubuleItem}
 
 -- Create chitin-broth fluid.
@@ -78,7 +64,6 @@ local appendageItem = copy(marrowItem)
 appendageItem.name = "appendage"
 Icon.set(appendageItem, "LSA/gleba/appendage/1")
 Icon.variants(appendageItem, "LSA/gleba/appendage/%", 9)
-appendageItem.subgroup = "gleba-non-agriculture"
 appendageItem.spoil_ticks = 10 * MINUTES
 appendageItem.spoil_result = "spoilage"
 extend{appendageItem}
@@ -88,7 +73,6 @@ local sencytiumItem = copy(appendageItem)
 sencytiumItem.name = "sencytium"
 Icon.set(sencytiumItem, "LSA/gleba/sencytium/1")
 Icon.variants(sencytiumItem, "LSA/gleba/sencytium/%", 11, {draw_as_glow = true})
-sencytiumItem.subgroup = "gleba-non-agriculture"
 sencytiumItem.spoil_ticks = 10 * MINUTES
 sencytiumItem.spoil_result = "spoilage"
 extend{sencytiumItem}
@@ -108,7 +92,6 @@ chitinBrothRecipe.results = {{type = "fluid", name = "chitin-broth", amount = 10
 chitinBrothRecipe.main_product = "chitin-broth"
 chitinBrothRecipe.energy_required = 1
 chitinBrothRecipe.enabled = false
-chitinBrothRecipe.subgroup = "gleba-non-agriculture"
 chitinBrothRecipe.crafting_machine_tint = {
 	primary = chitinLightColor,
 	secondary = chitinDarkColor,
@@ -134,7 +117,6 @@ tubuleRecipe.main_product = "tubule"
 tubuleRecipe.energy_required = 10
 tubuleRecipe.enabled = false
 Icon.clear(tubuleRecipe)
-tubuleRecipe.subgroup = "gleba-non-agriculture"
 tubuleRecipe.crafting_machine_tint = copy(chitinBrothRecipe.crafting_machine_tint)
 extend{tubuleRecipe}
 
@@ -147,7 +129,6 @@ chitinBlockRecipe.ingredients = {
 chitinBlockRecipe.results = {{type = "item", name = "chitin-block", amount = 1}}
 chitinBlockRecipe.enabled = false
 chitinBlockRecipe.auto_recycle = true
-chitinBlockRecipe.subgroup = "gleba-non-agriculture"
 chitinBlockRecipe.crafting_machine_tint = copy(chitinBrothRecipe.crafting_machine_tint)
 extend{chitinBlockRecipe}
 
@@ -162,7 +143,6 @@ appendageRecipe.results = {{type = "item", name = "appendage", amount = 1}}
 appendageRecipe.main_product = "appendage"
 appendageRecipe.energy_required = 5
 appendageRecipe.enabled = false
-appendageRecipe.subgroup = "gleba-non-agriculture"
 appendageRecipe.crafting_machine_tint = {
 	primary = geoplasmGreenColor,
 	secondary = geoplasmPinkColor,
@@ -181,7 +161,6 @@ sencytiumRecipe.results = {{type = "item", name = "sencytium", amount = 1}}
 sencytiumRecipe.main_product = "sencytium"
 sencytiumRecipe.energy_required = 10
 sencytiumRecipe.enabled = false
-sencytiumRecipe.subgroup = "gleba-non-agriculture"
 Icon.clear(sencytiumRecipe)
 sencytiumRecipe.crafting_machine_tint = copy(appendageRecipe.crafting_machine_tint)
 extend{sencytiumRecipe}
@@ -197,7 +176,6 @@ nutrientsFromMarrowRecipe.ingredients = {
 }
 nutrientsFromMarrowRecipe.results = {{type = "item", name = "nutrients", amount = 40}}
 nutrientsFromMarrowRecipe.enabled = false
-nutrientsFromMarrowRecipe.subgroup = "gleba-non-agriculture"
 Icon.set(nutrientsFromMarrowRecipe, {"nutrients", "marrow"})
 nutrientsFromMarrowRecipe.crafting_machine_tint = copy(RECIPE["sulfuric-acid"].crafting_machine_tint)
 extend{nutrientsFromMarrowRecipe}
@@ -215,23 +193,7 @@ landfillFromChitinRecipe.ingredients = {
 	{type = "item", name = "chitin-fragments", amount = 20},
 }
 Icon.set(landfillFromChitinRecipe, {"landfill", "marrow", "chitin-fragments"})
-landfillFromChitinRecipe.subgroup = "gleba-non-agriculture"
-landfillFromChitinRecipe.order = "d"
 extend{landfillFromChitinRecipe}
-
-------------------------------------------------------------------------
-
--- Set orders for items. (TODO later recipes too?)
-for i, itemName in pairs{
-	"marrow",
-	"chitin-fragments",
-	"chitin-block",
-	"tubule",
-	"appendage",
-	"sencytium",
-} do
-	ITEM[itemName].order = string.format("%02d", i)
-end
 
 ------------------------------------------------------------------------
 

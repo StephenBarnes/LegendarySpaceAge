@@ -5,7 +5,6 @@ TODO
 -- Create nuclear science pack.
 local item = copy(RAW.tool["agricultural-science-pack"])
 item.name = "nuclear-science-pack"
-item.order = "j2"
 item.spoil_ticks = 20 * MINUTES
 item.spoil_result = "uranium-238"
 extend{item}

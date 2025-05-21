@@ -18,8 +18,6 @@ petrophage.spoil_ticks = 2 * MINUTES
 petrophage.spoil_result = "pitch"
 petrophage.hidden = false
 petrophage.hidden_in_factoriopedia = false
-petrophage.subgroup = "slipstacks-and-boompuffs"
-petrophage.order = "21"
 extend{petrophage}
 
 -- Create recipe for breeding petrophages.
@@ -39,8 +37,6 @@ local cultivationRecipe = Recipe.make{
 	allow_quality = true,
 	hidden = false,
 	hidden_in_factoriopedia = false,
-	subgroup = "slipstacks-and-boompuffs",
-	order = "22",
 }
 cultivationRecipe.surface_conditions = nil
 cultivationRecipe.icon = nil
@@ -67,8 +63,6 @@ Recipe.make{
 	allow_quality = true,
 	maximum_productivity = 2,
 	icon = "LSA/gleba/petrophages/refresh",
-	subgroup = "slipstacks-and-boompuffs",
-	order = "23",
 }
 
 -- Adjust the bacteria-cultivation tech to include the new recipes.
