@@ -11,7 +11,7 @@ extend({
 for _, typeAndName in pairs{
 	{"furnace", "stone-furnace"},
 	{"furnace", "steel-furnace"},
-	{"furnace", "ffc-furnace"},
+	{"furnace", "ff-furnace"},
 	{"furnace", "electric-furnace"},
 	{"assembling-machine", "foundry"},
 } do
@@ -28,7 +28,7 @@ extend({
 for _, typeAndName in pairs{
 	{"furnace", "stone-furnace"},
 	{"furnace", "steel-furnace"},
-	{"furnace", "ffc-furnace"},
+	{"furnace", "ff-furnace"},
 	{"furnace", "electric-furnace"},
 } do
 	table.insert(RAW[typeAndName[1] ][typeAndName[2] ].crafting_categories, "smelting-or-handcrafting")
@@ -46,7 +46,7 @@ extend({
 for _, typeAndName in pairs{
 	{"furnace", "stone-furnace"},
 	{"furnace", "steel-furnace"},
-	{"furnace", "ffc-furnace"},
+	{"furnace", "ff-furnace"},
 	{"furnace", "electric-furnace"},
 	{"assembling-machine", "foundry"},
 } do

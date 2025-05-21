@@ -114,19 +114,6 @@ local CRAFTER_VALS = {
 			time = 2,
 		},
 	},
-	["stone-furnace-heat"] = {
-		machine = {
-			kind = "furnace",
-			speed = 0.5,
-			drainKW = 0,
-			activeKW = 200,
-			health = 50,
-		},
-		recipe = {
-			ingredients = {{"structure", 2}},
-			time = 2,
-		},
-	},
 	["steel-furnace"] = {
 		-- Steel furnaces have similar fuel usage to stone furnaces, but double speed and pollution, and much greater initial infra cost.
 		machine = {
@@ -144,22 +131,7 @@ local CRAFTER_VALS = {
 			time = 5,
 		},
 	},
-	["steel-furnace-heat"] = {
-		machine = {
-			kind = "furnace",
-			speed = 1,
-			drainKW = 0,
-			activeKW = 250,
-		},
-		recipe = {
-			ingredients = {
-				{"frame", 5},
-				{"structure", 5},
-			},
-			time = 5,
-		},
-	},
-	["ffc-furnace"] = {
+	["ff-furnace"] = {
 		machine = {
 			kind = "furnace",
 			speed = 1,

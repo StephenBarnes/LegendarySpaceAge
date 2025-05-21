@@ -1,14 +1,11 @@
---[[ This file creates duplicates of the stone-furnace and steel-furnace that use heat shuttles as fuel.
-]]
+--[[ This file creates the fluid-fuelled furnace, mostly copied from Adamo's Gas Furnace mod - https://mods.factorio.com/mod/gas-furnace.
+Also edits other furnaces.]]
 
 local PetrochemConst = require("const.petrochem-const")
 local FurnaceConst = require("const.furnace-const")
 
--- Heat icon, for "subscript" on heat furnaces.
-local heatIcon = "LSA/heat-shuttles/heat-red"
 
-
--- Graphics set for steel furnaces, giving them visible pipes. Mostly copied from Adamo's Gas Furnace mod - https://mods.factorio.com/mod/gas-furnace
+-- Graphics set for steel furnaces, giving them visible pipes. Mostly copied from Adamo's Gas Furnace mod.
 local advancedFurnaceGraphicsSet = {
 	working_visualisations = {
 		{
@@ -98,12 +95,12 @@ local advancedFurnaceGraphicsSet = {
 	},
 }
 
--- Create fluid-fuelled carbon furnace. Code and graphics mostly copied from Adamo's Gas Furnace mod - https://mods.factorio.com/mod/gas-furnace
-local ffcFurnace = copy(FURNACE["steel-furnace"])
-ffcFurnace.name = "ffc-furnace"
-ffcFurnace.minable.result = "ffc-furnace"
-ffcFurnace.placeable_by = {item = "ffc-furnace", count = 1}
-ffcFurnace.energy_source = {
+-- Create fluid-fuelled carbon furnace. Code and graphics mostly copied from Adamo's Gas Furnace mod.
+local ffFurnace = copy(FURNACE["steel-furnace"])
+ffFurnace.name = "ff-furnace"
+ffFurnace.minable.result = "ff-furnace"
+ffFurnace.placeable_by = {item = "ff-furnace", count = 1}
+ffFurnace.energy_source = {
 	type = "fluid",
 	fluid_box = {
 		base_area = 1,
@@ -137,44 +134,44 @@ ffcFurnace.energy_source = {
 		light_intensity_to_size_coefficient = 1
 	},
 }
-ffcFurnace.graphics_set = advancedFurnaceGraphicsSet
-ffcFurnace.fluid_boxes = nil -- TODO
-ffcFurnace.collision_box = FurnaceConst.boundingBox
-ffcFurnace.map_generator_bounding_box = FurnaceConst.boundingBox
-ffcFurnace.icon = nil
-ffcFurnace.icons = {
+ffFurnace.graphics_set = advancedFurnaceGraphicsSet
+ffFurnace.fluid_boxes = nil -- TODO
+ffFurnace.collision_box = FurnaceConst.boundingBox
+ffFurnace.map_generator_bounding_box = FurnaceConst.boundingBox
+ffFurnace.icon = nil
+ffFurnace.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/from_gas_furnace/icon.png", icon_size = 64, scale = .5, shift = {2, 0}},
 	{icon = "__LegendarySpaceAge__/graphics/fluids/gas-2.png", icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = PetrochemConst.richgasColor},
 }
 -- Should only be able to place where there's oxygen/air? (TODO later allow anywhere, with oxygen/air input.)
-ffcFurnace.surface_conditions = RAW["mining-drill"]["burner-mining-drill"].surface_conditions
-extend{ffcFurnace}
+ffFurnace.surface_conditions = RAW["mining-drill"]["burner-mining-drill"].surface_conditions
+extend{ffFurnace}
 
--- Create item for ffc-furnace.
-local ffcFurnaceItem = copy(ITEM["steel-furnace"])
-ffcFurnaceItem.name = "ffc-furnace"
-ffcFurnaceItem.place_result = "ffc-furnace"
-ffcFurnaceItem.icon = nil
-ffcFurnaceItem.icons = copy(ffcFurnace.icons)
-extend{ffcFurnaceItem}
+-- Create item for ff-furnace.
+local ffFurnaceItem = copy(ITEM["steel-furnace"])
+ffFurnaceItem.name = "ff-furnace"
+ffFurnaceItem.place_result = "ff-furnace"
+ffFurnaceItem.icon = nil
+ffFurnaceItem.icons = copy(ffFurnace.icons)
+extend{ffFurnaceItem}
 
--- Create recipe for ffc-furnace. Will be edited in infra/.
+-- Create recipe for ff-furnace. Will be edited in infra/.
 Recipe.make{
-	recipe = "ffc-furnace",
+	recipe = "ff-furnace",
 	copy = "steel-furnace",
-	results = {"ffc-furnace"},
-	main_product = "ffc-furnace",
+	results = {"ff-furnace"},
+	main_product = "ff-furnace",
 	clearIcons = true,
 	addToTech = "advanced-material-processing",
 }
 
--- Edit the base steel furnace to use the same graphics, collision box, and smoke as the ffc-furnace.
+-- Edit the base steel furnace to use the same graphics, collision box, and smoke as the ff-furnace.
 local steelFurnace = FURNACE["steel-furnace"]
 steelFurnace.graphics_set = advancedFurnaceGraphicsSet
 steelFurnace.collision_box = FurnaceConst.boundingBox
 steelFurnace.map_generator_bounding_box = FurnaceConst.boundingBox
-steelFurnace.energy_source.smoke = copy(ffcFurnace.energy_source.smoke)
-steelFurnace.energy_source.light_flicker = copy(ffcFurnace.energy_source.light_flicker)
+steelFurnace.energy_source.smoke = copy(ffFurnace.energy_source.smoke)
+steelFurnace.energy_source.light_flicker = copy(ffFurnace.energy_source.light_flicker)
 Icon.set(steelFurnace, "LSA/from_gas_furnace/icon")
 local steelFurnaceItem = ITEM["steel-furnace"]
 Icon.set(steelFurnaceItem, "LSA/from_gas_furnace/icon")
@@ -184,59 +181,5 @@ local stoneFurnace = FURNACE["stone-furnace"]
 stoneFurnace.collision_box = FurnaceConst.boundingBox
 stoneFurnace.map_generator_bounding_box = FurnaceConst.boundingBox
 
--- Create basic heat furnace entity.
-local stoneHeatEnt = copy(FURNACE["stone-furnace"])
-stoneHeatEnt.name = "stone-furnace-heat"
-stoneHeatEnt.minable.result = "stone-furnace-heat"
-stoneHeatEnt.placeable_by = {item = "stone-furnace-heat", count = 1}
-stoneHeatEnt.energy_source.burner_usage = "heat-provider"
-stoneHeatEnt.energy_source.fuel_categories = {"heat-provider"}
-stoneHeatEnt.crafting_categories = {"heat-furnace"}
-Icon.set(stoneHeatEnt, {"base/stone-furnace", heatIcon}, "heat")
-extend{stoneHeatEnt}
-
--- Create item for basic heat furnace.
-local stoneHeatItem = copy(ITEM["stone-furnace"])
-stoneHeatItem.name = "stone-furnace-heat"
-stoneHeatItem.place_result = "stone-furnace-heat"
-Icon.set(stoneHeatItem, {"base/stone-furnace", heatIcon}, "heat")
-extend{stoneHeatItem}
-
--- Create steel heat furnace entity.
-local steelHeatEnt = copy(FURNACE["steel-furnace"])
-steelHeatEnt.name = "steel-furnace-heat"
-steelHeatEnt.minable.result = "steel-furnace-heat"
-steelHeatEnt.placeable_by = {item = "steel-furnace-heat", count = 1}
-steelHeatEnt.energy_source.burner_usage = "heat-provider"
-steelHeatEnt.energy_source.fuel_categories = {"heat-provider"}
-steelHeatEnt.crafting_categories = {"heat-furnace"}
-Icon.set(steelHeatEnt, {"LSA/from_gas_furnace/icon", heatIcon}, "heat")
--- TODO adjust steel carbon furnace and steel heat furnace to rather use graphics same as fluid-fuelled carbon furnace, since I want to give them fluid inputs/outputs.
-extend{steelHeatEnt}
-
--- Create item for steel heat furnace.
-local steelHeatItem = copy(ITEM["steel-furnace"])
-steelHeatItem.name = "steel-furnace-heat"
-steelHeatItem.place_result = "steel-furnace-heat"
-Icon.set(steelHeatItem, {"LSA/from_gas_furnace/icon", heatIcon}, "heat")
-extend{steelHeatItem}
-
--- Create recipes. These will be edited in infra/.
-Recipe.make{
-	recipe = "stone-furnace-heat",
-	copy = "stone-furnace",
-	results = {"stone-furnace-heat"},
-	main_product = "stone-furnace-heat",
-	clearIcons = true,
-	enabled = true,
-}
-Recipe.make{
-	recipe = "steel-furnace-heat",
-	copy = "steel-furnace",
-	results = {"steel-furnace-heat"},
-	main_product = "steel-furnace-heat",
-	clearIcons = true,
-	addToTech = "advanced-material-processing",
-}
-
--- TODO later we need to change all of these to assembling-machine, probably.
+-- TODO later we need to change all of these furnaces to assembling-machine, probably.
+-- TODO should adjust graphics of steel furnace and ff-furnace to make them look different.
