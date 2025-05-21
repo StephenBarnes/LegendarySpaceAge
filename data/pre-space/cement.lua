@@ -25,7 +25,7 @@ extend{cementFluid}
 
 -- Create recipe for cement.
 Recipe.make{
-	copy = "lubricant",
+	copy = "make-lubricant",
 	recipe = "make-cement", -- Must be different from cement so it appears in factoriopedia correctly.
 	subgroup = "terrain",
 	order = "e", -- After other stuff, since it'll be moved to the end in factoriopedia anyway because it's a recipe.

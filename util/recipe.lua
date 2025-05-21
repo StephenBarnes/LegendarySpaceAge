@@ -340,5 +340,18 @@ Recipe.getResult = function(recipe, resultName)
 	return Recipe.getIngredientOrResult(recipe, "results", resultName)
 end
 
+---@param oldName string
+---@param newName string
+Recipe.renameRecipe = function(oldName, newName, copyKind)
+	local recipe = RECIPE[oldName]
+	recipe.name = newName
+	extend{recipe}
+	RECIPE[oldName] = nil
+	if copyKind ~= nil then
+		recipe.localised_name = {copyKind.."-name."..oldName}
+		recipe.localised_description = {copyKind.."-description."..oldName}
+	end
+end
+
 
 return Recipe

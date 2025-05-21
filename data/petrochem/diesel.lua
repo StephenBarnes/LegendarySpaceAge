@@ -19,6 +19,7 @@ extend{fluid}
 -- Create diesel recipe: 100 light oil + 50 rich gas -> 100 diesel.
 local recipe = copy(RECIPE["rocket-fuel"])
 recipe.name = "make-diesel" -- Not just "diesel" bc that merges it with the fluid in factoriopedia.
+recipe.show_amount_in_title = false
 recipe.ingredients = {
 	{type = "fluid", name = "light-oil", amount = 100},
 	{type = "fluid", name = "petroleum-gas", amount = 50},

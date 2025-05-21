@@ -89,18 +89,3 @@ end)
 script.on_event(defines.events.on_player_changed_surface, function(e)
 	lowGravityRunning.onPlayerChangedSurface(e)
 end)
-
--- Temporary code to output recipes, for rewriting.
---[[
-log("SABBB2 military recipes:")
-for _, recipe in pairs(prototypes.recipe) do
-	local subgroup = recipe.subgroup
-	local group = subgroup.group
-	--log(group.name)
-	if group.name == "combat" then
-		log(recipe.name)
-		log(serpent.line(recipe.ingredients))
-		log(serpent.line(recipe.products))
-	end
-end
-]]

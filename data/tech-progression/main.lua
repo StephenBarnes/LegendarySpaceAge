@@ -107,9 +107,10 @@ TECH["advanced-oil-processing"].unit = {
 
 -- Remove the lubricant tech. Rather merge it with actuator / advanced robotics.
 Tech.hideTech("lubricant")
+TECH["lubricant"].effects = {}
 Tech.replacePrereq("logistics-3", "lubricant", "electric-engine")
 Tech.setPrereqs("electric-engine", {"processing-unit", "steel-processing"})
-Tech.addRecipeToTech("lubricant", "electric-engine", 1)
+Tech.addRecipeToTech("make-lubricant", "electric-engine", 1)
 
 -- Rubber-2 is needed to make rubber from petrochems on Vulcanus and Fulgora.
 Tech.addTechDependency("rubber-2", "planet-discovery-vulcanus")

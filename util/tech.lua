@@ -303,4 +303,14 @@ Tech.replaceSciencePack = function(techName, oldSciencePackName, newSciencePackN
 	assert(found, "Science pack "..oldSciencePackName.." not found in tech "..techName..".")
 end
 
+Tech.replaceRecipeInTech = function(oldRecipeName, newRecipeName, techName)
+	for _, effect in pairs(TECH[techName].effects) do
+		if effect.type == "unlock-recipe" and effect.recipe == oldRecipeName then
+			effect.recipe = newRecipeName
+			return
+		end
+	end
+	log("ERROR: Couldn't find recipe "..oldRecipeName.." in tech "..techName.." to replace with "..newRecipeName..".")
+end
+
 return Tech

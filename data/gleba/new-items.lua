@@ -96,7 +96,7 @@ extend{sencytiumItem}
 ------------------------------------------------------------------------
 
 -- Create chitin-broth recipe: 5 chitin fragments + 100 water + 5 nutrients -> 100 chitin-broth.
-local chitinBrothRecipe = copy(RECIPE["lubricant"])
+local chitinBrothRecipe = copy(RECIPE["make-lubricant"])
 chitinBrothRecipe.name = "making-chitin-broth" -- Different name from fluid, so it doesn't get combined in factoriopedia.
 chitinBrothRecipe.category = "chemistry"
 chitinBrothRecipe.ingredients = {

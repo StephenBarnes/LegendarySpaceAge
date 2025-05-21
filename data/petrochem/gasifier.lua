@@ -6,7 +6,7 @@ local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 local gasifierEnt = copy(FURNACE["steel-furnace"])
 gasifierEnt.type = "assembling-machine"
 gasifierEnt.name = "gasifier"
-gasifierEnt.fixed_recipe = "syngas"
+gasifierEnt.fixed_recipe = "make-syngas"
 gasifierEnt.placeable_by = {item = "gasifier", count = 1}
 gasifierEnt.icon = nil
 gasifierEnt.icons = {{icon = GRAPHICS.."gasifier-item.png", icon_size = 64}}
@@ -225,7 +225,7 @@ extend{gasifierRecipeCategory}
 ]]
 local gasificationRecipe = copy(RECIPE["solid-fuel-from-light-oil"])
 gasificationRecipe.type = "recipe"
-gasificationRecipe.name = "syngas"
+gasificationRecipe.name = "make-syngas"
 gasificationRecipe.enabled = false
 gasificationRecipe.category = "gasifier"
 gasificationRecipe.ingredients = {
@@ -250,7 +250,7 @@ gasificationRecipe.subgroup = "complex-fluid-recipes"
 gasificationRecipe.order = "a[coal-liquefaction]-a"
 extend{gasificationRecipe}
 
-Tech.addRecipeToTech("syngas", "coal-liquefaction", 1)
+Tech.addRecipeToTech("make-syngas", "coal-liquefaction", 1)
 Tech.addRecipeToTech("gasifier", "coal-liquefaction")
 Tech.addRecipeToTech("fluid-fuelled-gasifier", "coal-liquefaction")
 

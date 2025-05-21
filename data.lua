@@ -75,7 +75,6 @@ require("data.vulcanus.no-lava-in-pipes")
 
 -- Files that adjust protos
 require("data.circuits-modules.remove-modules")
-require("data.broad-changes.item-groups")
 require("data.broad-changes.surface-properties")
 require("data.tech-progression.advanced-logistics")
 require("data.infra.main")

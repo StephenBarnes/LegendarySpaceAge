@@ -304,7 +304,7 @@ local function initializeCarbonConservation()
 	assert(ASSEMBLER["gasifier"].crafting_speed == 1, "Gasifier should have speed 1.")
 	assert(ASSEMBLER["fluid-fuelled-gasifier"].crafting_speed == 1, "Fluid-fuelled gasifier should have speed 1.")
 	local gasifierJoulesPerSecond = Gen.toJoules(ASSEMBLER["gasifier"].energy_usage)
-	local syngasRecipeSeconds = RECIPE["syngas"].energy_required
+	local syngasRecipeSeconds = RECIPE["make-syngas"].energy_required
 	local fuelPerRecipe = gasifierJoulesPerSecond * syngasRecipeSeconds / mostEfficientFuelJoules
 	carbonRecipeAdditions["syngas"] = {{type = mostEfficientFuel.type, name = mostEfficientFuel.name, amount = fuelPerRecipe}}
 

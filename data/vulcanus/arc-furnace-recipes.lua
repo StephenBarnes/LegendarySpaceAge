@@ -38,6 +38,12 @@ extend{{
 	type = "recipe-category",
 }}
 
+-- Rename fluid recipes, so fluids go in fluids tab and recipes for making them go in different tabs.
+Recipe.renameRecipe("molten-iron", "make-molten-iron", "fluid")
+Recipe.renameRecipe("molten-copper", "make-molten-copper", "fluid")
+Tech.replaceRecipeInTech("molten-iron", "make-molten-iron", "foundry")
+Tech.replaceRecipeInTech("molten-copper", "make-molten-copper", "foundry")
+
 -- Make recipe for metals-from-lava.
 Recipe.make{
 	copy = "molten-iron-from-lava",
@@ -69,11 +75,11 @@ Tech.removeRecipesFromTechs({"molten-iron-from-lava", "molten-copper-from-lava"}
 
 -- Make molten iron use new icon.
 Icon.set(FLUID["molten-iron"], "LSA/vulcanus/molten-iron")
-Icon.clear(RECIPE["molten-iron"])
+Icon.clear(RECIPE["make-molten-iron"])
 
 -- Edit recipe for copper-ore-to-molten-copper.
 Recipe.edit{
-	recipe = "molten-copper",
+	recipe = "make-molten-copper",
 	category = "arc-furnace",
 	ingredients = {
 		{"copper-ore", 10},
@@ -91,7 +97,7 @@ Recipe.edit{
 
 -- Edit recipe for iron-ore-to-molten-iron.
 Recipe.edit{
-	recipe = "molten-iron",
+	recipe = "make-molten-iron",
 	category = "arc-furnace",
 	ingredients = {
 		{"iron-ore", 10},
@@ -119,8 +125,8 @@ extend{moltenSteelFluid}
 
 -- Make recipe for molten steel.
 Recipe.make{
-	copy = "molten-iron",
-	recipe = "molten-steel",
+	copy = "make-molten-iron",
+	recipe = "make-molten-steel",
 	category = "arc-furnace",
 	ingredients = {
 		{"molten-iron", 200},
@@ -136,8 +142,9 @@ Recipe.make{
 	main_product = "molten-steel",
 	order = "a[melting]-d[molten-steel]",
 	icon = "LSA/vulcanus/molten-steel",
+	addToTech = "foundry",
+	addToTechIndex = 7,
 }
-Tech.addRecipeToTech("molten-steel", "foundry", 7)
 
 -- Create molten tungsten fluid.
 local moltenTungstenFluid = copy(FLUID["molten-iron"])
@@ -152,8 +159,8 @@ extend{moltenTungstenFluid}
 
 -- Create recipe for molten tungsten.
 Recipe.make{
-	copy = "molten-iron",
-	recipe = "molten-tungsten",
+	copy = "make-molten-iron",
+	recipe = "make-molten-tungsten",
 	category = "arc-furnace",
 	ingredients = {
 		{"tungsten-ore", 10},
@@ -170,12 +177,12 @@ Recipe.make{
 	time = 10,
 	clearIcons = true,
 }
-Tech.addRecipeToTech("molten-tungsten", "tungsten-steel", 1)
+Tech.addRecipeToTech("make-molten-tungsten", "tungsten-steel", 1)
 
 
 -- Create recipe for heating molten tungsten.
 Recipe.make{
-	copy = "molten-iron",
+	copy = "make-molten-iron",
 	recipe = "tungsten-heating",
 	category = "arc-furnace",
 	ingredients = {

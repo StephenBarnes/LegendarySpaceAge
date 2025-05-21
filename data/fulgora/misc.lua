@@ -1,11 +1,15 @@
 -- Change holmium solution recipe to require sulfuric acid instead of water.
-RECIPE["holmium-solution"].ingredients = {
+Recipe.renameRecipe("holmium-solution", "make-holmium-solution", "fluid")
+Tech.replaceRecipeInTech("holmium-solution", "make-holmium-solution", "holmium-processing")
+RECIPE["make-holmium-solution"].ingredients = {
 	{type = "fluid", name = "sulfuric-acid", amount = 10},
 	{type = "item", name = "holmium-ore", amount = 2},
 }
 
 -- Change electrolyte solution - previously stone, heavy oil, holmium solution.
-RECIPE["electrolyte"].ingredients = {
+Recipe.renameRecipe("electrolyte", "make-electrolyte", "fluid")
+Tech.replaceRecipeInTech("electrolyte", "make-electrolyte", "electromagnetic-plant")
+RECIPE["make-electrolyte"].ingredients = {
 	{type = "item", name = "sand", amount = 1},
 	{type = "fluid", name = "holmium-solution", amount = 10},
 	{type = "fluid", name = "water", amount = 10},

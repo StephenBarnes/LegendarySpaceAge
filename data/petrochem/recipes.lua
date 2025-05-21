@@ -232,7 +232,8 @@ extend{syngasLiquefactionRecipe}
 	10 heavy oil + 1 sulfuric acid -> 8 lubricant + 1 tar
 		Meant to resemble vacuum distillation - heavy oil is distilled, sulfuric acid is used for acid-washing impurities.
 ]]
-local lubricantRecipe = RECIPE["lubricant"]
+Recipe.renameRecipe("lubricant", "make-lubricant", "fluid")
+local lubricantRecipe = RECIPE["make-lubricant"]
 lubricantRecipe.ingredients = {
 	{ type = "fluid", name = "heavy-oil",     amount = 100 },
 	{ type = "fluid", name = "sulfuric-acid", amount = 10 },
