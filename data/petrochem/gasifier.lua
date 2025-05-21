@@ -2,9 +2,7 @@
 
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 ---@type data.AssemblingMachinePrototype
----@diagnostic disable-next-line: assign-type-mismatch
-local gasifierEnt = copy(FURNACE["steel-furnace"])
-gasifierEnt.type = "assembling-machine"
+local gasifierEnt = copy(ASSEMBLER["steel-furnace"])
 gasifierEnt.name = "gasifier"
 gasifierEnt.fixed_recipe = "make-syngas"
 gasifierEnt.placeable_by = {item = "gasifier", count = 1}
@@ -44,7 +42,7 @@ gasifierEnt.energy_source = {
 		light_intensity_to_size_coefficient = 0.6,
 		-- Sucks there's no way to move the light flicker up to the top of the sprite.
 	},
-	fuel_categories = {"chemical", "pure-carbon"},
+	fuel_categories = {"chemical"},
 }
 gasifierEnt.energy_usage = "20MW" -- TODO check for balance.
 gasifierEnt.trash_inventory_size = 0
@@ -217,7 +215,6 @@ extend{gasifierRecipeCategory}
 
 --[[ Steam gasification: 20 fuel + 10 steam -> 10 syngas + 1 pitch + 1 sulfur
 		This fuel can be coal, wood, spoilage, or burnable liquids like syngas or crude oil.
-		However, it can't be sulfur (since that would burn to SO2, not CO).
 		We want to keep it so 1 unit of every petro fluid is roughly equivalent, so this recipe must produce less syngas+tar than the input fuel; it's a lossy conversion to avoid a loop that creates infinite free fluids.
 ]]
 local gasificationRecipe = copy(RECIPE["solid-fuel-from-light-oil"])

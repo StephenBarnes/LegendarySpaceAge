@@ -5,9 +5,7 @@ Using graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 local GRAPHICS_FOLDER = "__LegendarySpaceAge__/graphics/primer/"
 
 -- Create circuit primer entity.
----@diagnostic disable-next-line: assign-type-mismatch
-local primerEnt = copy(FURNACE["electric-furnace"]) ---@type data.AssemblingMachinePrototype
-primerEnt.type = "assembling-machine"
+local primerEnt = copy(ASSEMBLER["electric-furnace"])
 primerEnt.name = "circuit-primer"
 primerEnt.icon = GRAPHICS_FOLDER.."1/icon.png"
 primerEnt.minable = {mining_time = 1, result = "circuit-primer"}
@@ -230,10 +228,8 @@ Recipe.make{
 }
 
 -- Create superclocker entity.
----@diagnostic disable-next-line: assign-type-mismatch
-local superclockerEnt = copy(primerEnt) ---@type data.AssemblingMachinePrototype
+local superclockerEnt = copy(primerEnt)
 superclockerEnt.name = "superclocker"
-superclockerEnt.type = "assembling-machine"
 superclockerEnt.icon = GRAPHICS_FOLDER.."2/icon.png"
 superclockerEnt.minable = {mining_time = 1, result = "superclocker"}
 superclockerEnt.placeable_by = {item = "superclocker", count = 1}

@@ -5,7 +5,8 @@
 -- This modpack has gas heating tower for burnable gases, gas vent for non-burnable gases, fluid dump for fluids, and tossing-into-sea for items.
 
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
-local ventEnt = copy(FURNACE["steel-furnace"])
+---@diagnostic disable-next-line: assign-type-mismatch
+local ventEnt = copy(ASSEMBLER["steel-furnace"]) ---@type data.FurnacePrototype
 ventEnt.type = "furnace"
 ventEnt.name = "gas-vent"
 ventEnt.icon = nil

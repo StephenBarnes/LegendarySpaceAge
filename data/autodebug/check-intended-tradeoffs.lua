@@ -13,7 +13,9 @@ local function checkHeavyOilCoking()
 end
 
 -- I want coal coking to be energy-positive, but only if you burn the sulfur.
+-- TODO rewrite this now that I've removed fuel value from sulfur.
 local function checkCoalCoking()
+	--[[
 	local coalCokingRecipe = RECIPE["coal-coking"]
 	local ingredientJoules = 0
 	local resultJoulesCarbonic = 0
@@ -38,6 +40,7 @@ local function checkCoalCoking()
 	assert(resultJoulesCarbonic > 0, "Coal coking should produce carbonic fuel.")
 	assert(resultJoulesCarbonic <= ingredientJoules, "Coal coking shouldn't be energy-positive with only carbonic fuel.")
 	assert(resultJoulesCarbonic + resultJoulesSulfur > ingredientJoules, "Coal coking should be energy-positive if you burn the sulfur.")
+	]]
 	return true
 end
 

@@ -1,6 +1,9 @@
 --[[ This file handles fuel values, emissions multipliers, and vehicle stats for all solid and fluid fuels in the game. Mostly petrochem stuff but also some other fuels.
 Fuel values for barrels and tanks are set in barrelling-dff.lua instead.
 Heat shuttle "fuels" are handled in heat-shuttles.lua instead.
+
+Previously I had sulfur as a non-carbon fuel, and had separate categories for carbon fuel, non-carbon fuel, and pure-carbon fuel (so it can't be used to fuel char furnaces).
+	But, I removed all of that, rather just making sulfur not a fuel, so all fuels for furnaces etc are carbon-based, and removing char-furnace, moving recipe to regular furnaces.
 ]]
 
 local Const = require "const.fuel-const"
@@ -26,43 +29,9 @@ for itemName, fuelValues in pairs(Const.itemFuelValues) do
 		item.fuel_glow_color = ITEM["coal"].fuel_glow_color
 	end
 end
-ITEM["sulfur"].fuel_glow_color = {r=.3, g=.3, b=1, a=.2} -- Sulfur burns blue in real life.
 
--- Create fuel category for non-carbon fuels like soldReplicationRecipeulfur, which can't be used in some places where carbon is needed (eg furnaces need carbon as reducing agent).
--- Mostly this is to prevent using sulfur to make syngas in a gasifier, since that would create carbon out of nothing, which breaks Vulcanus.
-local nonCarbonFuelCategory = copy(RAW["fuel-category"]["chemical"])
-nonCarbonFuelCategory.name = "non-carbon"
-extend{nonCarbonFuelCategory}
-
--- Create fuel category for pure carbon. Because we want to allow char furnaces to use all carbon-based fuels except actual carbon.
-local pureCarbonFuelCategory = copy(RAW["fuel-category"]["chemical"])
-pureCarbonFuelCategory.name = "pure-carbon"
-extend{pureCarbonFuelCategory}
-
--- Set fuel categories for some entities to allow non-carbon-based fuels (sulfur, hydrogen).
-local expandedFuelCategories = {"chemical", "non-carbon"}
-for _, typeAndName in pairs{
-	{"reactor", "heating-tower"},
-	{"boiler", "boiler"},
-	{"inserter", "burner-inserter"},
-	{"mining-drill", "burner-mining-drill"},
-} do
-	RAW[typeAndName[1]][typeAndName[2]].energy_source.fuel_categories = copy(expandedFuelCategories)
-end
-for _, typeAll in pairs{ -- Handle all cars (including tanks, boats) and locomotives (including big cargo ships)
-	"car",
-	"locomotive"
-} do
-	for ent in pairs(RAW[typeAll]) do
-		if ent.burner then
-			ent.burner.fuel_categories = copy(expandedFuelCategories)
-		end
-	end
-end
-RAW["generator-equipment"]["personal-burner-generator"].burner.fuel_categories = copy(expandedFuelCategories)
-
--- Since pentapod eggs and biter eggs and carbon are now in different fuel categories, but should count as carbon-based, we need to make them burnable in heating towers etc.
-local otherCarbonicFuels = {"activated-pentapod-egg", "biter-egg", "pure-carbon"}
+-- Since pentapod eggs and biter eggs are now in different fuel categories, but should count as burnable (carbon-based) fuel, we need to make them burnable in heating towers etc.
+local otherCarbonicFuels = {"activated-pentapod-egg", "biter-egg"}
 local function addOtherCarbonicFuelsToBurner(burner)
 	if burner.fuel_categories ~= nil and Table.hasEntry("chemical", burner.fuel_categories) then
 		for _, fuel in pairs(otherCarbonicFuels) do
@@ -82,15 +51,6 @@ for kind, ents in pairs(data.raw) do
 		for _, ent in pairs(ents) do
 			addOtherCarbonicFuelsToEnt(ent)
 		end
-	end
-end
-
--- But, char furnace should only accept carbonic fuels except pure carbon.
-local charFurnace = ASSEMBLER["char-furnace"]
-charFurnace.energy_source.fuel_categories = {"chemical"}
-for _, fuel in pairs(otherCarbonicFuels) do
-	if fuel ~= "pure-carbon" then
-		table.insert(charFurnace.energy_source.fuel_categories, fuel)
 	end
 end
 
@@ -115,18 +75,6 @@ for _, type in pairs{"car", "locomotive", "inserter", "furnace", "assembling-mac
 end
 
 -- Boost stack sizes of some fuels.
-ITEM["carbon"].stack_size = 100
+ITEM["carbon"].stack_size = 200
 ITEM["solid-fuel"].stack_size = 100
 ITEM["rocket-fuel"].stack_size = 100
-
--- Create a burner usage specifically for carbon-based fuels, so we can have custom description.
-local carbonBurnerUsage = copy(RAW["burner-usage"]["fuel"])
-carbonBurnerUsage.name = "carbon-fuel"
-carbonBurnerUsage.empty_slot_description = {"gui.carbon-fuel-description"}
-carbonBurnerUsage.accepted_fuel_key = "description.accepted-carbon-fuel"
-extend{carbonBurnerUsage}
-
--- Some entities only allow carbon-based fuels, so set burner usage to have tooltip.
-charFurnace.energy_source.burner_usage = "carbon-fuel"
-FURNACE["stone-furnace"].energy_source.burner_usage = "carbon-fuel"
-FURNACE["steel-furnace"].energy_source.burner_usage = "carbon-fuel"

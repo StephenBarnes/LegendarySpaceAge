@@ -95,8 +95,16 @@ local advancedFurnaceGraphicsSet = {
 	},
 }
 
+-- Convert stone-furnace and steel-furnace to internally be assembling-machine, so that we can set eg char recipe.
+for _, furnaceName in pairs{"stone-furnace", "steel-furnace", "electric-furnace"} do
+	local furnace = FURNACE[furnaceName]
+	furnace.type = "assembling-machine"
+	extend{furnace}
+	FURNACE[furnaceName] = nil
+end
+
 -- Create fluid-fuelled carbon furnace. Code and graphics mostly copied from Adamo's Gas Furnace mod.
-local ffFurnace = copy(FURNACE["steel-furnace"])
+local ffFurnace = copy(ASSEMBLER["steel-furnace"])
 ffFurnace.name = "ff-furnace"
 ffFurnace.minable.result = "ff-furnace"
 ffFurnace.placeable_by = {item = "ff-furnace", count = 1}
@@ -166,7 +174,7 @@ Recipe.make{
 }
 
 -- Edit the base steel furnace to use the same graphics, collision box, and smoke as the ff-furnace.
-local steelFurnace = FURNACE["steel-furnace"]
+local steelFurnace = ASSEMBLER["steel-furnace"]
 steelFurnace.graphics_set = advancedFurnaceGraphicsSet
 steelFurnace.collision_box = FurnaceConst.boundingBox
 steelFurnace.map_generator_bounding_box = FurnaceConst.boundingBox
@@ -177,9 +185,17 @@ local steelFurnaceItem = ITEM["steel-furnace"]
 Icon.set(steelFurnaceItem, "LSA/from_gas_furnace/icon")
 
 -- Edit the base stone furnace to use the same collision box as the rest of them.
-local stoneFurnace = FURNACE["stone-furnace"]
+local stoneFurnace = ASSEMBLER["stone-furnace"]
 stoneFurnace.collision_box = FurnaceConst.boundingBox
 stoneFurnace.map_generator_bounding_box = FurnaceConst.boundingBox
 
+-- Add factoriopedia descriptions.
+for _, name in pairs{"stone-furnace", "steel-furnace", "ff-furnace"} do
+	local furnace = ASSEMBLER[name]
+	furnace.factoriopedia_description = {"factoriopedia-description." .. name}
+end
+
 -- TODO later we need to change all of these furnaces to assembling-machine, probably.
 -- TODO should adjust graphics of steel furnace and ff-furnace to make them look different.
+
+-- TODO add automatic check that we can't make 

@@ -22,14 +22,12 @@ Export.fluidFuelValues = { -- Maps from fluid name to fuel value, pollution mult
 }
 
 Export.itemFuelValues = { -- Maps from fluid name to fuel value, pollution multiplier, vehicle acceleration mult, vehicle top-speed mult, fuel category, whether it should produce ash, and type name.
-	["sulfur"] = {"1MJ", 8, .5, .5, "non-carbon", false, "item"},
-
 	["pitch"] = {"3MJ", 2.5, .5, .5, "chemical", false, "item"},
 	["resin"] = {"1MJ", 2, .5, .5, "chemical", false, "item"},
 
 	["solid-fuel"] = {"15MJ", 1.5, 1.1, 1.1, "chemical", false, "item"},
 
-	["carbon"] = {"1MJ", .6, .7, .7, "pure-carbon", false, "item"},
+	["carbon"] = {"500kJ", .6, .7, .7, "chemical", false, "item"},
 
 	["coal"] = {"4MJ", 1, .5, .5, "chemical", true, "item"},
 	["wood"] = {"2MJ", 1, .4, .4, "chemical", true, "item"},

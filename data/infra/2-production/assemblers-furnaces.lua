@@ -103,7 +103,7 @@ local CRAFTER_VALS = {
 	
 	["stone-furnace"] = {
 		machine = {
-			kind = "furnace",
+			kind = "assembling-machine",
 			speed = 0.5,
 			drainKW = 0,
 			activeKW = 200,
@@ -117,7 +117,7 @@ local CRAFTER_VALS = {
 	["steel-furnace"] = {
 		-- Steel furnaces have similar fuel usage to stone furnaces, but double speed and pollution, and much greater initial infra cost.
 		machine = {
-			kind = "furnace",
+			kind = "assembling-machine",
 			speed = 1,
 			drainKW = 0,
 			activeKW = 250,
@@ -133,7 +133,7 @@ local CRAFTER_VALS = {
 	},
 	["ff-furnace"] = {
 		machine = {
-			kind = "furnace",
+			kind = "assembling-machine",
 			speed = 1,
 			drainKW = 0,
 			activeKW = 250,
@@ -153,7 +153,7 @@ local CRAFTER_VALS = {
 		-- But make them have high drain so they're bad when not needed.
 		-- Giving them the same overall energy consumption, since energy gen from steam engines/turbines is only 50% efficient in this modpack, so that's effectively double the energy consumption unless you use nuclear or solar or lava heating etc.
 		machine = {
-			kind = "furnace",
+			kind = "assembling-machine",
 			speed = 1,
 			drainKW = 50,
 			activeKW = 200,
@@ -174,18 +174,6 @@ local CRAFTER_VALS = {
 	------------------------------------------------------------------------
 	--- Assembling-machines that aren't called assemblers.
 
-	["char-furnace"] = { -- Technically an assembling machine.
-		machine = {
-			kind = "assembling-machine",
-			-- TODO more vals
-			forbid_consumption = true,
-			forbid_productivity = true,
-		},
-		recipe = {
-			ingredients = {"structure"},
-			time = 2,
-		},
-	},
 	["filtration-plant"] = {
 		machine = {
 			kind = "furnace",

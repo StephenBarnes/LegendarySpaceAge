@@ -4,6 +4,7 @@ Currently conservation rules are:
 	* water - check that steam/ice/water is never created by any recipe (except if the recipe ingredients involve at least that much water).
 	* carbon - we assume there's a certain amount of carbon in each item/fluid, and then check that no recipes are net-positive. (This is important eg on Vulcanus, where there's lots of energy and fuel (sulfur) but we still want to make carbon scarce.)
 	* "fuel potential" - we assign a "fuel potential" to each item/fluid, measuring how much fuel it "could be made into". The item's actual fuel value, if it has one, should be at most this potential. Some fluids (eg tar) will have fuel value much lower than their potential, but can be converted to other items/fluids to realize that fuel potential. This ensures there's no loop of recipes you can do that will produce infinite fuel. TODO this is not implemented yet.
+	* TODO planning to implement similar checks for various elements like nitrogen, oxygen, hydrogen, phosphorus, etc.
 
 It's pretty easy to write recipes that follow all these conservation rules BUT then prod bonuses screw it all up. Often the way to fix this is to just limit the prod bonus for a recipe or for some of a recipe's products. I'm noting ALL of these prod limits in recipe/entity descriptions so players don't have to be surprised.
 ]]
@@ -257,13 +258,20 @@ local function initializeCarbonConservation()
 	addBarrelContent(carbonContent)
 
 	-- The gasifier turns steam into syngas (which contains carbon). It consumes fuel which contains carbon, so we need to find out the most carbon-efficient fuel it can be fed, to add that to the syngas recipe.
-	-- The char furnace is similar.
+	-- Furnaces are similar, running the char recipe.
 	local fuelCategoryAllowedInGasifier = Table.listToSet(ASSEMBLER["gasifier"].energy_source.fuel_categories)
 	for _, effect in pairs{"consumption", "productivity"} do
 		-- We can allow speed, since the speed modules give greater increase to energy consumption than to speed.
-		assert(not Gen.effectAllowed(ASSEMBLER["gasifier"], effect), "Gasifier should not allow " .. effect .. " modules.")
-		assert(not Gen.effectAllowed(ASSEMBLER["fluid-fuelled-gasifier"], effect), "Gasifier should not allow " .. effect .. " modules.")
-		assert(not Gen.effectAllowed(ASSEMBLER["char-furnace"], effect), "Char furnace should not allow " .. effect .. " modules.")
+		for _, ent in pairs{
+			{ASSEMBLER, "gasifier"},
+			{ASSEMBLER, "fluid-fuelled-gasifier"},
+			--{ASSEMBLER, "stone-furnace"},
+			--{ASSEMBLER, "steel-furnace"},
+			--{ASSEMBLER, "ff-furnace"},
+		} do
+			assert(not Gen.effectAllowed(ent[1][ent[2] ], effect), ent[2] .. " should not allow " .. effect .. " modules.")
+		end
+		-- Note we can ban consumption effect per-recipe, seems like it works. So, allowing consumption/prod for furnaces, but not for the char recipe.
 	end
 	local mostEfficientFuel = nil
 	local mostEfficientFuelCarbonPerJoule = nil
@@ -309,11 +317,14 @@ local function initializeCarbonConservation()
 	carbonRecipeAdditions["syngas"] = {{type = mostEfficientFuel.type, name = mostEfficientFuel.name, amount = fuelPerRecipe}}
 
 	-- Do the same for the char furnace.
+	-- TODO rewrite this now that I've removed char-furnace.
+	--[[
 	assert(ASSEMBLER["char-furnace"].crafting_speed == 1, "Char furnace should have speed 1.")
 	local charFurnaceJoulesPerSecond = Gen.toJoules(ASSEMBLER["char-furnace"].energy_usage)
 	local charFurnaceRecipeSeconds = RECIPE["char-carbon"].energy_required
 	local fuelPerCharCarbonRecipe = charFurnaceJoulesPerSecond * charFurnaceRecipeSeconds / mostEfficientFuelJoules
 	carbonRecipeAdditions["char-carbon"] = {{type = mostEfficientFuel.type, name = mostEfficientFuel.name, amount = fuelPerCharCarbonRecipe}}
+	]]
 end
 
 ---@param recipe data.RecipePrototype

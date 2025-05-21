@@ -90,8 +90,8 @@ for _, planetName in pairs{"aquilo", "vulcanus", "fulgora", "gleba"} do
 end
 -- Add implicit unlocks for wood/coal to ash, except on Fulgora and in space.
 for _, planetName in pairs{"nauvis", "vulcanus", "gleba", "aquilo"} do
-	table.insert(implicitUnlocks, {{planetName..":item:wood", planetName..":item:char-furnace"}, {planetName..":item:ash"}})
-	table.insert(implicitUnlocks, {{planetName..":item:coal", planetName..":item:char-furnace"}, {planetName..":item:ash"}})
+	table.insert(implicitUnlocks, {{planetName..":item:wood", planetName..":item:carbon"}, {planetName..":item:ash"}})
+	table.insert(implicitUnlocks, {{planetName..":item:coal", planetName..":item:carbon"}, {planetName..":item:ash"}})
 end
 -- Add implicit unlocks for minable rocks, on each planet.
 -- TODO
