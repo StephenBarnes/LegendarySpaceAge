@@ -9,7 +9,7 @@ local noLavaInPipes = require("control.no-lava-in-pipes")
 local condensingTurbineEfficiency = require("control.condensing-turbine-efficiency")
 local lowGravityRunning = require("control.low-gravity-running")
 local techRateTriggers = require("control.tech-rate-triggers")
-local setRocketSiloParts = require("control.set-rocket-silo-parts")
+local planetMachineSubstitutions = require("control.planet-machine-substitutions")
 
 script.on_nth_tick(60 * 10, function()
 	techRateTriggers.onNthTick()
@@ -54,8 +54,8 @@ for _, event in ipairs({
 	defines.events.on_entity_cloned,
 }) do
 	script.on_event(event, function(e)
+		planetMachineSubstitutions.onBuilt(e)
 		setRecipeOnBuild.onBuilt(e)
-		setRocketSiloParts.onBuilt(e)
 		exclusionZones.onBuilt(e)
 		apprenticeFoundry.on_created_entity(e)
 		qualityPowerScaling.onBuilt(e)
