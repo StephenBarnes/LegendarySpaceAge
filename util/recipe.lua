@@ -5,13 +5,42 @@ Recipe.addIngredients = function(recipeName, extraIngredients)
 	Table.extend(recipe.ingredients, extraIngredients)
 end
 
-Recipe.removeIngredient = function(recipeName, ingredientName)
-	RECIPE[recipeName].ingredients = Table.filter(
-			RECIPE[recipeName].ingredients,
-			function(ingredient)
-				return ingredientName ~= (ingredient.name or ingredient[1])
-			end
-		)
+---@param recipe data.RecipePrototype|string
+---@param sideName "ingredients"|"results"
+---@param name string
+---@return data.IngredientPrototype|data.ProductPrototype?
+Recipe.removeFromSide = function(recipe, sideName, name)
+	if type(recipe) == "string" then
+		recipe = RECIPE[recipe]
+		assert(recipe ~= nil)
+	end
+	local newSide = {}
+	local haveRemoved = nil
+	for _, ingredientOrResult in pairs(recipe[sideName]) do
+		if name ~= ingredientOrResult.name then
+			table.insert(newSide, ingredientOrResult)
+		else
+			haveRemoved = ingredientOrResult
+		end
+	end
+	assert(haveRemoved ~= nil, "Recipe.removeFromSide: side "..sideName.." item "..name.." not found")
+	recipe[sideName] = newSide
+	return haveRemoved
+end
+
+---@param recipe data.RecipePrototype|string
+---@param name string
+---@return data.IngredientPrototype?
+Recipe.removeIngredient = function(recipe, name)
+	---@diagnostic disable-next-line: return-type-mismatch
+	return Recipe.removeFromSide(recipe, "ingredients", name)
+end
+---@param recipe data.RecipePrototype|string
+---@param name string
+---@return data.ProductPrototype?
+Recipe.removeResult = function(recipe, name)
+	---@diagnostic disable-next-line: return-type-mismatch
+	return Recipe.removeFromSide(recipe, "results", name)
 end
 
 Recipe.substituteIngredient = function(recipeName, ingredientName, newIngredientName, newAmount)
@@ -349,14 +378,14 @@ end
 
 ---@param recipe data.RecipePrototype|string
 ---@return data.IngredientPrototype?
-Recipe.hasFluidInput = function(recipe)
+Recipe.getFluidInput = function(recipe)
 	---@diagnostic disable-next-line: return-type-mismatch
 	return Recipe.getTypeIngredientOrResult(recipe, "ingredients", "fluid")
 end
 
 ---@param recipe data.RecipePrototype|string
 ---@return data.ProductPrototype?
-Recipe.hasFluidOutput = function(recipe)
+Recipe.getFluidOutput = function(recipe)
 	---@diagnostic disable-next-line: return-type-mismatch
 	return Recipe.getTypeIngredientOrResult(recipe, "results", "fluid")
 end

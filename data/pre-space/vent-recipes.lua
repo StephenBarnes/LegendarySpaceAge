@@ -1,6 +1,9 @@
 -- This file creates the recipes for venting gases and liquids, in the gas vent and waste pump.
 
 local VentableConst = require("const.ventable-const")
+local MiscConst = require("const.misc-const")
+local gasVentEmissionsMult = MiscConst.gasVentRate / 100
+local wastePumpEmissionsMult = MiscConst.wastePumpRate * MiscConst.wastePumpPollutionMult / 100
 
 -- Create recipe categories and subgroups.
 extend{
@@ -51,7 +54,7 @@ for fluidName, ventData in pairs(VentableConst) do
 		Recipe.make{
 			recipe = "gas-vent-"..fluidName,
 			category = "gas-venting",
-			ingredients = {{type = "fluid", name = fluidName, amount = 100}},
+			ingredients = {{type = "fluid", name = fluidName, amount = MiscConst.gasVentRate}},
 			results = {},
 			enabled = true,
 			localised_name = {"recipe-name.gas-vent", {"fluid-name."..fluidName}},
@@ -62,7 +65,7 @@ for fluidName, ventData in pairs(VentableConst) do
 			hide_from_player_crafting = true,
 			allow_productivity = false,
 			allow_quality = false,
-			emissions_multiplier = emissionsMult,
+			emissions_multiplier = emissionsMult * gasVentEmissionsMult,
 			crafting_machine_tint = {
 				primary = FLUID[fluidName].base_color,
 			},
@@ -77,7 +80,7 @@ for fluidName, ventData in pairs(VentableConst) do
 		Recipe.make{ -- Make recipe for venting in space.
 			recipe = "gas-vent-"..fluidName,
 			category = "gas-venting",
-			ingredients = {{type = "fluid", name = fluidName, amount = 100}},
+			ingredients = {{type = "fluid", name = fluidName, amount = MiscConst.gasVentRate}},
 			results = {},
 			enabled = true,
 			localised_name = {"recipe-name.gas-vent-space", {"fluid-name."..fluidName}},
@@ -100,7 +103,7 @@ for fluidName, ventData in pairs(VentableConst) do
 		Recipe.make{ -- Make recipe for waste pump.
 			recipe = "waste-pump-"..fluidName,
 			category = "waste-pump",
-			ingredients = {{type = "fluid", name = fluidName, amount = 1000}},
+			ingredients = {{type = "fluid", name = fluidName, amount = MiscConst.wastePumpRate}},
 			results = {},
 			enabled = true,
 			localised_name = {"recipe-name.waste-pumping", {"fluid-name."..fluidName}},
@@ -111,7 +114,7 @@ for fluidName, ventData in pairs(VentableConst) do
 			hide_from_player_crafting = true,
 			allow_productivity = false,
 			allow_quality = false,
-			emissions_multiplier = emissionsMult * 2, -- Waste pump vents 10x as fast, so double emissions mult.
+			emissions_multiplier = emissionsMult * wastePumpEmissionsMult,
 			time = 1,
 			iconsLiteral = {
 				fluidIcon,

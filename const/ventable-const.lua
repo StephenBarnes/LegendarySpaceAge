@@ -1,6 +1,9 @@
 --[[ This file defines all ventable gases and liquids, with pollution mults and whether they're only ventable in space.
-Maps fluid name => {emissions mult, is liquid}
+Maps fluid name => {emissions, is liquid}
+Emissions is pollution per 100*60 fluid units for gas venting, or reduced for waste pumping. Also see misc-const.lua.
+	This is because we specify pollution per minute as 1, and each vent recipe takes 1 second.
 If it's liquid, then it's ventable by waste pump, or by gas-vent in space.
+These numbers are also used for stone furnaces that automatically vent their waste gases.
 ]]
 
 ---@type table<string, {[1]: number, [2]: boolean}>

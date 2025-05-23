@@ -4,6 +4,35 @@ Also edits other furnaces.]]
 local PetrochemConst = require("const.petrochem-const")
 local FurnaceConst = require("const.furnace-const")
 
+-- Give fluid I/O to steel furnace. Also inherited by fluid-fuelled furnace.
+FURNACE["steel-furnace"].fluid_boxes = { -- TODO do these better, this is temporary.
+	{
+		production_type = "input",
+		pipe_picture = nil,
+		pipe_covers = nil,
+		pipe_connections = {
+			{
+				flow_direction = "input",
+				position = {0.5, 0.5},
+				direction = SOUTH,
+			}
+		},
+		volume = 100,
+	},
+	{
+		production_type = "output",
+		pipe_picture = nil,
+		pipe_covers = nil,
+		pipe_connections = {
+			{
+				flow_direction = "output",
+				position = {-0.5, -0.5},
+				direction = NORTH,
+			}
+		},
+		volume = 100,
+	},
+}
 
 -- Graphics set for steel furnaces, giving them visible pipes. Mostly copied from Adamo's Gas Furnace mod.
 local advancedFurnaceGraphicsSet = {
@@ -95,7 +124,7 @@ local advancedFurnaceGraphicsSet = {
 	},
 }
 
--- Create fluid-fuelled carbon furnace. Code and graphics mostly copied from Adamo's Gas Furnace mod.
+-- Create fluid-fuelled furnace. Code and graphics mostly copied from Adamo's Gas Furnace mod.
 local ffFurnace = copy(FURNACE["steel-furnace"])
 ffFurnace.name = "ff-furnace"
 ffFurnace.minable.result = "ff-furnace"
@@ -135,7 +164,7 @@ ffFurnace.energy_source = {
 	},
 }
 ffFurnace.graphics_set = advancedFurnaceGraphicsSet
-ffFurnace.fluid_boxes = nil -- TODO
+ffFurnace.selection_box = FurnaceConst.boundingBox
 ffFurnace.collision_box = FurnaceConst.boundingBox
 ffFurnace.map_generator_bounding_box = FurnaceConst.boundingBox
 ffFurnace.icon = nil
@@ -168,6 +197,7 @@ Recipe.make{
 -- Edit the base steel furnace to use the same graphics, collision box, and smoke as the ff-furnace.
 local steelFurnace = FURNACE["steel-furnace"]
 steelFurnace.graphics_set = advancedFurnaceGraphicsSet
+steelFurnace.selection_box = FurnaceConst.boundingBox
 steelFurnace.collision_box = FurnaceConst.boundingBox
 steelFurnace.map_generator_bounding_box = FurnaceConst.boundingBox
 steelFurnace.energy_source.smoke = copy(ffFurnace.energy_source.smoke)
@@ -178,6 +208,7 @@ Icon.set(steelFurnaceItem, "LSA/from_gas_furnace/icon")
 
 -- Edit the base stone furnace to use the same collision box as the rest of them.
 local stoneFurnace = FURNACE["stone-furnace"]
+stoneFurnace.selection_box = FurnaceConst.boundingBox
 stoneFurnace.collision_box = FurnaceConst.boundingBox
 stoneFurnace.map_generator_bounding_box = FurnaceConst.boundingBox
 

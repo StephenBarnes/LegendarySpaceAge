@@ -20,6 +20,12 @@ Ratios:
 Re stack sizes:
 	Give ingots the same stack size as plates etc, so they're 5x more compact to transport.
 	For weights for rockets, rather use correct ratios, eg 1 ingot has the same weight as 5 plates.
+
+TODO major update:
+* add item-group for material processing, separate from intermediate items.
+* add input air and output flue gas / sulfurous gas.
+* add variants using oxygen.
+* add variants for crushed and pure ores.
 ]]
 
 local ORE_STACK_SIZE = 50
@@ -108,25 +114,51 @@ extend{steelIngotRecipe}
 -- Make recipe for iron ore -> iron ingot.
 local ironIngotRecipe = copy(steelIngotRecipe)
 ironIngotRecipe.name = "ingot-iron-hot"
-ironIngotRecipe.ingredients = {{type="item", name="iron-ore", amount=5}}
+ironIngotRecipe.ingredients = {
+	{type="item", name="iron-ore", amount=5},
+	{type="fluid", name="air", amount=10, show_details_in_recipe_tooltip=false},
+}
 ironIngotRecipe.results = {
 	{type="item", name="ingot-iron-hot", amount=1},
 	{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
+	{type="fluid", name="flue-gas", amount=10, show_details_in_recipe_tooltip=false},
 }
 ironIngotRecipe.main_product = "ingot-iron-hot"
 ironIngotRecipe.energy_required = 5
 ironIngotRecipe.enabled = true
 ironIngotRecipe.hide_from_player_crafting = true
+ironIngotRecipe.always_show_made_in = true
 extend{ironIngotRecipe}
+
+-- TODO testing: make recipe for iron ore smelting with pure oxygen.
+local ironIngotRecipeOxygen = copy(ironIngotRecipe)
+ironIngotRecipeOxygen.name = "ingot-iron-ox"
+ironIngotRecipeOxygen.ingredients = {
+	{type="item", name="iron-ore", amount=5},
+	{type="fluid", name="oxygen-gas", amount=10, show_details_in_recipe_tooltip=false},
+}
+ironIngotRecipeOxygen.results = {
+	{type="item", name="ingot-iron-hot", amount=1},
+	{type="fluid", name="flue-gas", amount=10, show_details_in_recipe_tooltip=false},
+}
+ironIngotRecipeOxygen.main_product = "ingot-iron-hot"
+ironIngotRecipeOxygen.energy_required = 5
+ironIngotRecipeOxygen.enabled = true
+ironIngotRecipeOxygen.hide_from_player_crafting = true
+extend{ironIngotRecipeOxygen}
 
 -- Make recipe for copper ore -> copper matte.
 local copperMatteRecipe = copy(ironIngotRecipe)
 copperMatteRecipe.name = "copper-matte"
 --copperMatteRecipe.factoriopedia_description = {"factoriopedia-description.copper-matte"}
-copperMatteRecipe.ingredients = {{type="item", name="copper-ore", amount=5}}
+copperMatteRecipe.ingredients = {
+	{type="item", name="copper-ore", amount=5},
+	{type="fluid", name="air", amount=10, show_details_in_recipe_tooltip=false},
+}
 copperMatteRecipe.results = {
 	{type="item", name="copper-matte", amount=1},
 	{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
+	{type="fluid", name="sulfurous-gas", amount=10, show_details_in_recipe_tooltip=false},
 }
 copperMatteRecipe.main_product = "copper-matte"
 copperMatteRecipe.energy_required = 5
