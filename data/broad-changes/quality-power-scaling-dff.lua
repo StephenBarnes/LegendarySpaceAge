@@ -6,12 +6,16 @@ Higher-quality entities have higher speed, but don't have higher energy consumpt
 
 So instead, this file makes a variant of these entities for each quality, with the same properties except different energy consumption. Then in control stage, we run a script to replace built entities with the appropriate quality variant.
 
-This runs in data-final-fixes stage, so that it takes place after other mods have made changes.
+This runs in data-final-fixes stage, so that it takes place after other changes to the entities.
 ]]
 
 local SPEED_PER_QUALITY = 0.3 -- Doesn't seem to be configurable.
 
 local QualityScalingPowerConsumption = require("const.quality-scaling-power-consumption")
+
+local MiscConst = require("const.misc-const")
+local qualitySeparator = MiscConst.qualitySeparator
+local qualityNumDigits = MiscConst.qualityNumDigits
 
 for entType, entNameSet in pairs(QualityScalingPowerConsumption) do
 	for entName, _ in pairs(entNameSet) do
@@ -20,10 +24,11 @@ for entType, entNameSet in pairs(QualityScalingPowerConsumption) do
 		for _, q in pairs(RAW.quality) do
 			if q.level ~= 0 then -- Skip normal quality
 				local newEnt = copy(normalEnt)
-				newEnt.name = newEnt.name.."__"..q.name
-				newEnt.localised_name = {"entity-name."..normalEnt.name}
-				newEnt.localised_description = {"entity-description."..normalEnt.name}
-				newEnt.placeable_by = {item = normalEnt.name, count = 1}
+				newEnt.name = normalEnt.name..qualitySeparator..string.format("%0"..qualityNumDigits.."d", q.level)
+				newEnt.localised_name = normalEnt.localised_name or {"entity-name."..normalEnt.name}
+				newEnt.localised_description = normalEnt.localised_description or {"entity-description."..normalEnt.name}
+				assert(normalEnt.placeable_by ~= nil, "placeable_by is nil for "..normalEnt.name)
+				newEnt.placeable_by = normalEnt.placeable_by
 					--[[ Other mods that do this kind of one-proto-per-quality thing have a quality= field here. But that field does not exist. https://lua-api.factorio.com/latest/types/ItemToPlace.html
 					Despite the non-existence of that field, those other mods mostly work anyway because the player has no way to copy an XYZ-legendary with normal quality unless one has already been placed.
 					But there's a way around that. Make an upgrade planner that replaces XYZ-legendary (legendary) with XYZ-legendary (normal). Then you can copy-paste that one to place unlimited XYZ-legendary (normal) using only normal quality XYZ-normal items.
