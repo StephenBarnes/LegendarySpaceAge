@@ -5,7 +5,7 @@ Using graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 local GRAPHICS_FOLDER = "__LegendarySpaceAge__/graphics/primer/"
 
 -- Create circuit primer entity.
-local primerEnt = copy(ASSEMBLER["electric-furnace"])
+local primerEnt = copy(FURNACE["electric-furnace"])
 primerEnt.name = "circuit-primer"
 primerEnt.icon = GRAPHICS_FOLDER.."1/icon.png"
 primerEnt.minable = {mining_time = 1, result = "circuit-primer"}

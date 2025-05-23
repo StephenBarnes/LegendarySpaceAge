@@ -6,7 +6,7 @@
 
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 ---@diagnostic disable-next-line: assign-type-mismatch
-local ventEnt = copy(ASSEMBLER["steel-furnace"]) ---@type data.FurnacePrototype
+local ventEnt = copy(FURNACE["steel-furnace"]) ---@type data.FurnacePrototype
 ventEnt.type = "furnace"
 ventEnt.name = "gas-vent"
 ventEnt.icon = nil

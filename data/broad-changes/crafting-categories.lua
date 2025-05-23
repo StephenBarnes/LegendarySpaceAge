@@ -9,10 +9,10 @@ extend({
 	},
 })
 for _, typeAndName in pairs{
-	{"assembling-machine", "stone-furnace"},
-	{"assembling-machine", "steel-furnace"},
-	{"assembling-machine", "ff-furnace"},
-	{"assembling-machine", "electric-furnace"},
+	{"furnace", "stone-furnace"},
+	{"furnace", "steel-furnace"},
+	{"furnace", "ff-furnace"},
+	{"furnace", "electric-furnace"},
 	{"assembling-machine", "foundry"},
 } do
 	table.insert(RAW[typeAndName[1]][typeAndName[2]].crafting_categories, "smelting-or-metallurgy")
@@ -26,10 +26,10 @@ extend({
 	},
 })
 for _, typeAndName in pairs{
-	{"assembling-machine", "stone-furnace"},
-	{"assembling-machine", "steel-furnace"},
-	{"assembling-machine", "ff-furnace"},
-	{"assembling-machine", "electric-furnace"},
+	{"furnace", "stone-furnace"},
+	{"furnace", "steel-furnace"},
+	{"furnace", "ff-furnace"},
+	{"furnace", "electric-furnace"},
 } do
 	table.insert(RAW[typeAndName[1] ][typeAndName[2] ].crafting_categories, "smelting-or-handcrafting")
 end
@@ -44,10 +44,10 @@ extend({
 	},
 })
 for _, typeAndName in pairs{
-	{"assembling-machine", "stone-furnace"},
-	{"assembling-machine", "steel-furnace"},
-	{"assembling-machine", "ff-furnace"},
-	{"assembling-machine", "electric-furnace"},
+	{"furnace", "stone-furnace"},
+	{"furnace", "steel-furnace"},
+	{"furnace", "ff-furnace"},
+	{"furnace", "electric-furnace"},
 	{"assembling-machine", "foundry"},
 } do
 	table.insert(RAW[typeAndName[1] ][typeAndName[2] ].crafting_categories, "smelting-or-metallurgy-or-handcrafting")

@@ -2,8 +2,10 @@
 
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 ---@type data.AssemblingMachinePrototype
-local gasifierEnt = copy(ASSEMBLER["steel-furnace"])
+---@diagnostic disable-next-line: assign-type-mismatch
+local gasifierEnt = copy(FURNACE["steel-furnace"])
 gasifierEnt.name = "gasifier"
+gasifierEnt.type = "assembling-machine"
 gasifierEnt.fixed_recipe = "make-syngas"
 gasifierEnt.placeable_by = {item = "gasifier", count = 1}
 gasifierEnt.icon = nil

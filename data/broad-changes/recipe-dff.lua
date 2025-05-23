@@ -3,6 +3,7 @@
 -- All recipes that have multiple products, or non-1 count, or probability, should always show products in the tooltip.
 ---@param recipe data.RecipePrototype
 local function recipeShouldAlwaysShowProducts(recipe)
+	-- Would be nice to return false if recipe was added by another mod, but we can't access prototype history in data stage, it seems.
 	if recipe.results == nil then
 		log("recipe " .. recipe.name .. " has no results")
 		return false
