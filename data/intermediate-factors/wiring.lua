@@ -25,7 +25,7 @@ extend{resinRecipe}
 Tech.addRecipeToTech("wiring-from-resin", "basic-electricity")
 
 -- Make recipe for makeshift wiring: 1 copper cable -> 1 wiring.
-local makeshiftWiringRecipe = Recipe.make{
+Recipe.make{
 	copy = resinRecipe,
 	recipe = "makeshift-wiring",
 	ingredients = {"copper-cable"},
@@ -36,7 +36,7 @@ local makeshiftWiringRecipe = Recipe.make{
 	allow_decomposition = false,
 	auto_recycle = false, -- otherwise you can turn neurofibrils into copper cable.
 	icons = {"wiring", "LSA/misc/makeshift"},
-	category = "handcrafting-only",
+	category = "handcrafting",
 	time = 0.5,
 }
 Tech.addRecipeToTech("makeshift-wiring", "basic-electricity")

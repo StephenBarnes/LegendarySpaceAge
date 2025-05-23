@@ -95,7 +95,7 @@ local function onBuilt(event)
 		direction = ent.direction,
 		mirroring = ent.mirroring,
 	}
-	if entType == "assembling-machine" then
+	if ent.get_recipe ~= nil then -- Only available for CraftingMachine subtypes.
 		info.recipe = ent.get_recipe()
 	end
 

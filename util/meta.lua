@@ -1,6 +1,7 @@
 ---@meta
 ---This file is to fix LSP / type checker issues.
 
+
 --- LSP thinks defines.direction.south etc. aren't valid directions. This fixes that:
 
 ---@class defines
@@ -15,6 +16,7 @@ defines.direction = {
 	west = 12,
 }
 
+
 --- LSP doesn't recognize auto_recycle, so this fixes that:
 
 ---@class data.RecipePrototype
@@ -22,3 +24,9 @@ defines.direction = {
 
 ---@class data.ItemPrototype
 ---@field auto_recycle boolean Whether the item should automatically get recycling recipes.
+
+
+--- LSP doesn't recognize the new additional_categories field, so this fixes that:
+
+---@class data.RecipePrototype
+---@field additional_categories? string[]

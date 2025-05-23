@@ -124,7 +124,7 @@ saplingRecipe.ingredients = {
 saplingRecipe.results = {
 	{type="item", name="sapling", amount=1},
 }
-saplingRecipe.category = "organic-or-assembling-with-fluid"
+Recipe.setCategories(saplingRecipe, {"organic", "crafting-with-fluid"})
 Icon.clear(saplingRecipe)
 saplingRecipe.surface_conditions = {{property = "pressure", min = 1000, max = 1000}}
 saplingRecipe.energy_required = 30

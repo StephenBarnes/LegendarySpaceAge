@@ -25,7 +25,7 @@ recipe.ingredients = {
 	{type = "item", name = "panel", amount = 1},
 }
 recipe.results = {{type = "item", name = "wriggler-missile", amount = 1}}
-recipe.category = "organic-or-assembling" -- TODO check
+Recipe.setCategories(recipe, {"organic", "crafting"})
 extend{recipe}
 
 -- Create tech

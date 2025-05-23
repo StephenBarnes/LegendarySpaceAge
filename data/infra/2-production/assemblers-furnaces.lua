@@ -28,7 +28,7 @@ Re furnace energy consumption:
 -- TODO check all of these have all of these fields.
 
 ---@alias CrafterMachineVals {kind: string, speed: number, drainKW: number, activeKW: number, pollution: number, spores: number?, effects: table?, forbid_quality: boolean?, forbid_productivity: boolean?, clearDescription: boolean?}
----@alias CrafterRecipeVals {ingredients: table, time: number, category: string?}
+---@alias CrafterRecipeVals {ingredients: table, time: number, category: string?, categories: string[]?}
 ---@alias CrafterItemVals {perRocket: number, stackSize: number}
 ---@type table<string, {machine: CrafterMachineVals, recipe: CrafterRecipeVals, item:CrafterItemVals}>
 local CRAFTER_VALS = {
@@ -268,7 +268,7 @@ local CRAFTER_VALS = {
 				{"nutrients", 10},
 				--{"slime", 20}, -- No fluid, rather make it hand-craftable.
 			},
-			category = "organic-or-assembling",
+			categories = {"organic", "crafting"},
 		},
 	},
 	["cryogenic-plant"] = {

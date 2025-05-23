@@ -79,7 +79,7 @@ Recipe.make{
 	main_product = "doped-wafer",
 	allow_decomposition = true,
 	allow_as_intermediate = true,
-	category = "chemistry-or-electronics",
+	categories = {"chemistry", "electronics"},
 	time = 20,
 }
 Tech.addRecipeToTech("doped-wafer", "advanced-circuit", 2)

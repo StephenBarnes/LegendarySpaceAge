@@ -55,7 +55,7 @@ local glassRecipe = copy(RECIPE["iron-plate"])
 glassRecipe.name = "glass"
 glassRecipe.ingredients = {{type="item", name="glass-batch", amount=1}}
 glassRecipe.results = {{type="item", name="glass", amount=1}}
-glassRecipe.category = "smelting-or-metallurgy"
+Recipe.setCategories(glassRecipe, {"smelting", "metallurgy"})
 glassRecipe.enabled = false
 glassRecipe.energy_required = 2
 glassRecipe.allow_decomposition = true

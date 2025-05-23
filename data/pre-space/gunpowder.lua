@@ -20,7 +20,7 @@ Recipe.make{
 	},
 	resultCount = 10,
 	enabled = false, -- Enabled by coal coking tech.
-	category = "chemistry-or-handcrafting",
+	categories = {"chemistry", "handcrafting"},
 	auto_recycle = false,
 }
 

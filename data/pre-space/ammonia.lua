@@ -56,7 +56,7 @@ Recipe.make{
 		{"spoilage", 5},
 	},
 	show_amount_in_title = false,
-	category = "organic-or-chemistry",
+	categories = {"organic", "chemistry"},
 	time = 20,
 	allow_quality = true,
 	icons = {"spoilage", "wood"},

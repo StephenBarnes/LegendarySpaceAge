@@ -10,8 +10,8 @@ require("vehicles")
 require("circuit-stuff")
 require("bots")
 
--- Stone bricks - allowed in foundry and handcrafting.
-RECIPE["stone-brick"].category = "smelting-or-handcrafting"
+-- Stone bricks - allow handcrafting.
+Recipe.setCategories("stone-brick", {"smelting", "handcrafting"})
 
 -- Adjust recipe times.
 RECIPE["stone-brick"].energy_required = 1 -- Originally 3.2. Making low since you need to do it a lot to make early furnaces.

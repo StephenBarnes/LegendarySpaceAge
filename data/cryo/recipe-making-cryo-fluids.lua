@@ -61,7 +61,7 @@ Recipe.make{
 	time = 10,
 	icons = {"water", "hydrogen-gas", "oxygen-gas"}, -- TODO better icons
 	iconArrangement = "decomposition",
-	category = "chemistry-or-electronics",
+	categories = {"chemistry", "electronics"},
 	allow_speed = true,
 }
 -- Added to tech in cryo/techs.lua.
