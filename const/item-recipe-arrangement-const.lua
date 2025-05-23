@@ -1,4 +1,4 @@
--- This file defines the order and item-groups and item-subgroups of all items, fluids, and recipes.
+-- This file defines the order and item-groups and item-subgroups of all items, fluids, and recipes, in Factoriopedia and in crafting menu for players and machines.
 
 return {
 	logistics = {
@@ -122,7 +122,8 @@ return {
 		["ammo-category"] = {},
 	},
 	fluids = {
-		["nauvis-fluids"] = {"air", "air-or-oxygen", "lake-water", "water", "steam", "sulfurous-gas", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant"},
+		["nauvis-fluids"] = {"lake-water", "water", "steam", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant"},
+		["mixed-gases"] = {"air", "flue-gas", "sulfurous-gas"},
 		["petrochem-fluids"] = {"crude-oil", "natural-gas", "tar", "heavy-oil", "light-oil", "petroleum-gas", "dry-gas", "syngas", "diesel"},
 		["cryo-fluids"] = {"nitrogen-gas", "compressed-nitrogen-gas", "oxygen-gas", "hydrogen-gas", "liquid-nitrogen", "thruster-oxidizer", "thruster-fuel"},
 		["vulcanus-fluids"] = {"lava", "volcanic-gas", "molten-iron", "molten-copper", "molten-steel", "molten-tungsten"},

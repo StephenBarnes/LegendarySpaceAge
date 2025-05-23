@@ -112,7 +112,7 @@ local function onBuilt(event)
 	if newEnt == nil or not newEnt.valid then return end
 	newEnt.mirroring = info.mirroring
 	-- Issue: this doesn't work for rocket-silo. Something weird about flipping/rotating rocket silos specifically, can't flip them once placed. So I'm rather just making rocket silos vertically symmetric.
-	-- TODO when using this for furnaces etc, check if the mirroring issue appears there too.
+	-- Checked: when using this for furnaces etc, there's no mirroring issue.
 end
 
 return {
