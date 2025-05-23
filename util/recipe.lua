@@ -138,9 +138,9 @@ end
 	.category, .enabled, .auto_recycle, .subgroup, .order, .localised_name, .localised_description, .main_product, .allow_decomposition, .allow_as_intermediate, .show_amount_in_title, .crafting_machine_tint (just copied over)
 ]]
 local allowedFieldsEdit = Table.listToSet{ -- Apparently the LSP's type-checking doesn't notice non-existent fields in the arg (?????), so we need to check them here.
-	"recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "categories", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearSurfaceConditions", "clearLocalisedName", "hide_from_player_crafting", "iconsLiteral",
+	"recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "categories", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearSurfaceConditions", "clearLocalisedName", "hide_from_player_crafting", "iconsLiteral", "emissions_multiplier",
 }
----@param a {recipe: string|data.RecipePrototype, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, categories?: string[], enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearSurfaceConditions?: boolean, clearLocalisedName?: boolean, hide_from_player_crafting?: boolean, iconsLiteral?: any}
+---@param a {recipe: string|data.RecipePrototype, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, categories?: string[], enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearSurfaceConditions?: boolean, clearLocalisedName?: boolean, hide_from_player_crafting?: boolean, iconsLiteral?: any, emissions_multiplier?: number}
 ---@return data.RecipePrototype
 Recipe.edit = function(a)
 	for field, _ in pairs(a) do
@@ -191,7 +191,7 @@ Recipe.edit = function(a)
 	end
 
 	-- Some fields just get copied over.
-	for _, field in pairs{"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "hide_from_player_crafting"} do
+	for _, field in pairs{"category", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "hide_from_player_crafting", "emissions_multiplier"} do
 		if a[field] ~= nil then
 			recipe[field] = a[field]
 		end
@@ -222,14 +222,13 @@ end
 
 -- Create a recipe by copying an existing recipe and adjusting it. The a.copy field is the recipe to copy, rest of args the same as Recipe.edit.
 local allowedFieldsMake = Table.listToSet{
-	"copy", "recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "categories", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearSurfaceConditions", "clearLocalisedName", "hide_from_player_crafting", "addToTech", "addToTechIndex"
+	"copy", "recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "categories", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearSurfaceConditions", "clearLocalisedName", "hide_from_player_crafting", "addToTech", "addToTechIndex", "emissions_multiplier", "iconsLiteral",
 }
----@param a {copy: string|data.RecipePrototype, recipe: string, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, categories?: string[], enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearSurfaceConditions?: boolean, clearLocalisedName?: boolean, hide_from_player_crafting?: boolean, addToTech?: string, addToTechIndex?: number}
+---@param a {copy?: string|data.RecipePrototype, recipe: string, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, categories?: string[], enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearSurfaceConditions?: boolean, clearLocalisedName?: boolean, hide_from_player_crafting?: boolean, addToTech?: string, addToTechIndex?: number, emissions_multiplier?: number, iconsLiteral?: any}
 Recipe.make = function(a)
 	for field, _ in pairs(a) do
 		assert(allowedFieldsMake[field], "Recipe.make: unknown field \""..field.."\" in arguments: ".. serpent.block(a))
 	end
-	assert(a.copy ~= nil, "Recipe.make: copy is required, arguments: ".. serpent.block(a))
 	assert(a.recipe ~= nil, "Recipe.make: recipe name is required, arguments: ".. serpent.block(a))
 	assert(type(a.recipe) == "string", "Recipe.make: recipe name must be a string, arguments: ".. serpent.block(a))
 
@@ -244,7 +243,11 @@ Recipe.make = function(a)
 	end
 
 	local recipe
-	if type(a.copy) == "string" then
+	if a.copy == nil then
+		recipe = {
+			type = "recipe",
+		}
+	elseif type(a.copy) == "string" then
 		assert(RECIPE[a.copy] ~= nil, "Recipe.make: asked to copy non-existent recipe "..a.copy)
 		recipe = copy(RECIPE[a.copy])
 	else
@@ -329,6 +332,33 @@ end
 Recipe.getResult = function(recipe, resultName)
 	---@diagnostic disable-next-line: return-type-mismatch
 	return Recipe.getIngredientOrResult(recipe, "results", resultName)
+end
+
+---@param recipe data.RecipePrototype|string
+---@param sideName "ingredients"|"results"
+---@param typeName "fluid"|"item"
+---@return data.IngredientPrototype|data.ProductPrototype?
+Recipe.getTypeIngredientOrResult = function(recipe, sideName, typeName)
+	for _, ingredientOrResult in pairs(recipe[sideName]) do
+		if ingredientOrResult.type == typeName then
+			return ingredientOrResult
+		end
+	end
+	return nil
+end
+
+---@param recipe data.RecipePrototype|string
+---@return data.IngredientPrototype?
+Recipe.hasFluidInput = function(recipe)
+	---@diagnostic disable-next-line: return-type-mismatch
+	return Recipe.getTypeIngredientOrResult(recipe, "ingredients", "fluid")
+end
+
+---@param recipe data.RecipePrototype|string
+---@return data.ProductPrototype?
+Recipe.hasFluidOutput = function(recipe)
+	---@diagnostic disable-next-line: return-type-mismatch
+	return Recipe.getTypeIngredientOrResult(recipe, "results", "fluid")
 end
 
 ---@param oldName string

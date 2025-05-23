@@ -10,7 +10,7 @@ wastePump.crafting_speed = 1
 wastePump.source_inventory_size = 0
 wastePump.result_inventory_size = 0
 wastePump.energy_source = copy(RAW.pump.pump.energy_source)
-wastePump.energy_source.emissions_per_minute = {pollution = 1} -- This gets multiplied by the emissions multiplier for the specific venting recipe.
+wastePump.energy_source.emissions_per_minute = {pollution = 1, spores = 1} -- This gets multiplied by the emissions multiplier for the specific venting recipe.
 wastePump.energy_source.drain = "0W"
 wastePump.energy_usage = "50kW"
 wastePump.heating_energy = "50kW"
@@ -56,10 +56,6 @@ for _, dir in pairs(wastePump.graphics_set.animation) do
 end
 extend{wastePump}
 
-local wastePumpCraftingCategory = copy(RAW["recipe-category"]["crafting"])
-wastePumpCraftingCategory.name = "waste-pump"
-extend{wastePumpCraftingCategory}
-
 -- Create recipe.
 local wastePumpRecipe = copy(RECIPE["pump"])
 wastePumpRecipe.name = "waste-pump"
@@ -78,79 +74,6 @@ wastePumpItem.icons = {
 }
 extend{wastePumpItem}
 
--- Create fluid-venting recipes.
-local effluentFluidsAndPollution = {
-	{"water", 0},
-	{"lake-water", 0},
-	{"latex", 5},
-	{"cement", 0},
-	{"sulfuric-acid", 20},
-	{"crude-oil", 20},
-	{"tar", 30},
-	{"heavy-oil", 25},
-	{"light-oil", 15},
-	{"diesel", 20},
-	{"lubricant", 20},
-	{"slime", 0},
-	{"geoplasm", 5},
-	{"chitin-broth", 0},
-	{"thruster-fuel", 0}, -- hydrogen
-	{"thruster-oxidizer", 0}, -- oxygen
-	{"liquid-nitrogen", 0},
-	{"lava", 0},
-	{"molten-iron", 20},
-	{"molten-copper", 20},
-	{"molten-steel", 20},
-	{"molten-tungsten", 20},
-	{"holmium-solution", 0},
-	{"fulgoran-sludge", 0},
-	{"electrolyte", 0},
-	{"ammoniacal-solution", 0},
-	{"ammonia", 0},
-	{"fluoroketone-hot", 0}, -- TODO remove this later, will replace fluoroketone with refrigerant and liquid nitrogen
-	{"fluoroketone-cold", 0}, -- TODO remove this later, will replace fluoroketone with refrigerant and liquid nitrogen
-	{"lithium-brine", 0},
-	-- TODO check that all liquids are included here.
-}
-for _, effluentFluidAndPollution in pairs(effluentFluidsAndPollution) do
-	local effluentFluid = effluentFluidAndPollution[1]
-	local effluentPollution = effluentFluidAndPollution[2]
-	local fluid = FLUID[effluentFluid]
-	local effluentRecipe = copy(RECIPE["offshore-pump"])
-	effluentRecipe.name = "vent-" .. effluentFluid
-	effluentRecipe.localised_name = {"recipe-name.waste-pumping", {"fluid-name."..effluentFluid}}
-	effluentRecipe.localised_description = {"recipe-description.waste-pumping"}
-	effluentRecipe.enabled = true
-	effluentRecipe.ingredients = {{type = "fluid", name = effluentFluid, amount = 1000}}
-	effluentRecipe.results = {}
-	effluentRecipe.energy_required = 1
-	effluentRecipe.allow_productivity = false
-	effluentRecipe.allow_quality = false
-	-- I'm not hiding these recipes - rather show the player eg what pollution mult will be, and keep it as reminder that fluids can be vented.
-	effluentRecipe.hidden = false
-	effluentRecipe.hidden_in_factoriopedia = false
-	effluentRecipe.hide_from_player_crafting = true
-	effluentRecipe.emissions_multiplier = effluentPollution
-	effluentRecipe.crafting_machine_tint = { -- This is shown on the waste pump graphics.
-		primary = fluid.base_color,
-	}
-	effluentRecipe.category = "waste-pump"
-
-	local fluidIcon
-	if fluid.icons then
-		fluidIcon = copy(fluid.icons[1])
-	else
-		fluidIcon = {icon = fluid.icon, icon_size = fluid.icon_size}
-	end
-	fluidIcon.scale = 0.3
-	fluidIcon.shift = {4, -4}
-	effluentRecipe.icons = {
-		fluidIcon,
-		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.21, shift = {4, -4}},
-		{icon = "__base__/graphics/icons/offshore-pump.png", icon_size = 64, scale = 0.2, shift = {-4, 4}},
-	}
-
-	extend{effluentRecipe}
-end
+-- Recipes for venting will be created in vent-recipes.lua.
 
 -- Will add to tech in tech-progression.lua.

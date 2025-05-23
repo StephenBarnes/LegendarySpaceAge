@@ -107,3 +107,34 @@ for groupName, subgroups in pairs(ARRANGEMENT) do
 		end
 	end
 end
+
+-- Assign orders to waste pump recipes, to be the same as the fluids.
+local excludedFluids = Table.listToSet{"fluid-unknown", "plasma"}
+local function assignVentRecipeOrder(fluidName, fluid)
+	if excludedFluids[fluidName] == nil then return end
+	local fluidOrder = fluid.order
+	if fluid.subgroup == nil then
+		log("Warning: fluid "..fluidName.." has no subgroup")
+		return
+	end
+	local subgroupOrder = RAW["item-subgroup"][fluid.subgroup].order
+	if subgroupOrder == nil then
+		log("Warning: fluid "..fluidName.." has subgroup "..fluid.subgroup.." which has no order")
+		return
+	end
+	local ventRecipeOrder = subgroupOrder .. "-" .. fluidOrder
+
+	local gasVentRecipe = RECIPE["gas-vent-"..fluidName]
+	if gasVentRecipe ~= nil then
+		gasVentRecipe.order = ventRecipeOrder
+	else
+		log("Warning: fluid "..fluidName.." has no gas vent recipe")
+	end
+	local wastePumpRecipe = RECIPE["waste-pump-"..fluidName]
+	if wastePumpRecipe ~= nil then
+		wastePumpRecipe.order = ventRecipeOrder
+	end
+end
+for fluidName, fluid in pairs(FLUID) do
+	assignVentRecipeOrder(fluidName, fluid)
+end

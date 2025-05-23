@@ -23,6 +23,14 @@ extend{{
 	name = "heat-furnace",
 }}
 
+-- Create recipe categories for furnace variants (auto-venting output gases, and with free air).
+for _, categoryName in pairs{"smelting-free-air", "smelting-venting", "smelting-free-air-venting"} do
+	extend{{
+		type = "recipe-category",
+		name = categoryName,
+	}}
+end
+
 -- Let god-controller do all crafting categories.
 local godController = RAW["god-controller"]["default"]
 godController.crafting_categories = {}

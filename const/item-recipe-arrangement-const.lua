@@ -133,9 +133,11 @@ return {
 		["fluid"] = {},
 			-- This is the default group. Will contain stuff from other mods.
 		["aquilo-fluids"] = {"ammoniacal-solution", "fluorine", "lithium-brine", "fusion-plasma"},
-		["waste-pump"] = {"vent-ammonia", "vent-lubricant", "vent-molten-copper", "vent-lithium-brine", "vent-light-oil", "vent-liquid-nitrogen", "vent-lava", "vent-molten-iron", "vent-molten-tungsten", "vent-thruster-fuel", "vent-molten-steel", "vent-tar", "vent-slime", "vent-sulfuric-acid", "vent-thruster-oxidizer", "vent-latex", "vent-holmium-solution", "vent-crude-oil", "vent-diesel", "vent-chitin-broth", "vent-ammoniacal-solution", "vent-cement", "vent-lake-water", "vent-electrolyte", "vent-fluoroketone-hot", "vent-heavy-oil", "vent-fluoroketone-cold", "vent-geoplasm", "vent-fulgoran-sludge", "vent-water"},
-		["gas-vent-on-surface"] = {"gas-vent-ammonia", "gas-vent-petroleum-gas", "gas-vent-oxygen-gas", "gas-vent-spore-gas", "gas-vent-steam", "gas-vent-syngas", "gas-vent-nitrogen-gas", "gas-vent-hydrogen-gas", "gas-vent-compressed-nitrogen-gas", "gas-vent-natural-gas", "gas-vent-dry-gas", "gas-vent-fluorine", "gas-vent-volcanic-gas", },
-		["gas-vent-in-space"] = {"gas-vent-cement", "gas-vent-molten-copper", "gas-vent-molten-iron", "gas-vent-lubricant", "gas-vent-lithium-brine", "gas-vent-liquid-nitrogen", "gas-vent-molten-steel", "gas-vent-slime", "gas-vent-thruster-fuel", "gas-vent-molten-tungsten", "gas-vent-tar", "gas-vent-sulfuric-acid", "gas-vent-thruster-oxidizer", "gas-vent-light-oil", "gas-vent-holmium-solution", "gas-vent-diesel", "gas-vent-electrolyte", "gas-vent-crude-oil", "gas-vent-chitin-broth", "gas-vent-latex", "gas-vent-fluoroketone-cold", "gas-vent-fulgoran-sludge", "gas-vent-fluoroketone-hot", "gas-vent-heavy-oil", "gas-vent-geoplasm", "gas-vent-water"},
+		
+		-- Waste pump categories: orders get set the same as the fluids.
+		["waste-pump"] = {},
+		["gas-vent-on-surface"] = {},
+		["gas-vent-in-space"] = {},
 	},
 	signals = {},
 	enemies = {},
