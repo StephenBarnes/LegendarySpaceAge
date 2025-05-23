@@ -13,28 +13,30 @@ local SPEED_PER_QUALITY = 0.3 -- Doesn't seem to be configurable.
 
 local QualityScalingPowerConsumption = require("const.quality-scaling-power-consumption")
 
-for _, vals in pairs(QualityScalingPowerConsumption) do
-	local normalEnt = RAW[vals[1]][vals[2]]
-	assert(normalEnt ~= nil, "Entity not found: "..vals[1].." "..vals[2])
-	for _, q in pairs(RAW.quality) do
-		if q.level ~= 0 then -- Skip normal quality
-			local newEnt = copy(normalEnt)
-			newEnt.name = newEnt.name.."-"..q.name
-			newEnt.localised_name = {"entity-name."..normalEnt.name}
-			newEnt.localised_description = {"entity-description."..normalEnt.name}
-			newEnt.placeable_by = {item = normalEnt.name, count = 1}
-				--[[ Other mods that do this kind of one-proto-per-quality thing have a quality= field here. But that field does not exist. https://lua-api.factorio.com/latest/types/ItemToPlace.html
-				Despite the non-existence of that field, those other mods mostly work anyway because the player has no way to copy an XYZ-legendary with normal quality unless one has already been placed.
-				But there's a way around that. Make an upgrade planner that replaces XYZ-legendary (legendary) with XYZ-legendary (normal). Then you can copy-paste that one to place unlimited XYZ-legendary (normal) using only normal quality XYZ-normal items.
-				That's a minor exploit, not crucial to fix. And in fact since I'm making higher-quality items WORSE in this way (increased power consumption) I don't think this exploit actually offers any advantage in this mod.
-				]]
-			newEnt.hidden_in_factoriopedia = true
-			newEnt.hidden = true -- This actually makes it unselectable in upgrade planner, so I think it closes the loophole explained above.
-			local energyUsage = Gen.multWithUnits(normalEnt.energy_usage, 1 + SPEED_PER_QUALITY * q.level)
-			assert(energyUsage ~= nil, "energy_usage is nil for "..normalEnt.name) -- Returns nil if the number is 0, in which case the ent shouldn't be on the list above.
-			---@diagnostic disable-next-line: assign-type-mismatch
-			newEnt.energy_usage = energyUsage
-			data:extend{newEnt}
+for entType, entNameSet in pairs(QualityScalingPowerConsumption) do
+	for entName, _ in pairs(entNameSet) do
+		local normalEnt = RAW[entType][entName]
+		assert(normalEnt ~= nil, "Entity not found: "..entType.." "..entName)
+		for _, q in pairs(RAW.quality) do
+			if q.level ~= 0 then -- Skip normal quality
+				local newEnt = copy(normalEnt)
+				newEnt.name = newEnt.name.."__"..q.name
+				newEnt.localised_name = {"entity-name."..normalEnt.name}
+				newEnt.localised_description = {"entity-description."..normalEnt.name}
+				newEnt.placeable_by = {item = normalEnt.name, count = 1}
+					--[[ Other mods that do this kind of one-proto-per-quality thing have a quality= field here. But that field does not exist. https://lua-api.factorio.com/latest/types/ItemToPlace.html
+					Despite the non-existence of that field, those other mods mostly work anyway because the player has no way to copy an XYZ-legendary with normal quality unless one has already been placed.
+					But there's a way around that. Make an upgrade planner that replaces XYZ-legendary (legendary) with XYZ-legendary (normal). Then you can copy-paste that one to place unlimited XYZ-legendary (normal) using only normal quality XYZ-normal items.
+					That's a minor exploit, not crucial to fix. And in fact since I'm making higher-quality items WORSE in this way (increased power consumption) I don't think this exploit actually offers any advantage in this mod.
+					]]
+				newEnt.hidden_in_factoriopedia = true
+				newEnt.hidden = true -- This actually makes it unselectable in upgrade planner, so I think it closes the loophole explained above.
+				local energyUsage = Gen.multWithUnits(normalEnt.energy_usage, 1 + SPEED_PER_QUALITY * q.level)
+				assert(energyUsage ~= nil, "energy_usage is nil for "..normalEnt.name) -- Returns nil if the number is 0, in which case the ent shouldn't be on the list above.
+				---@diagnostic disable-next-line: assign-type-mismatch
+				newEnt.energy_usage = energyUsage
+				data:extend{newEnt}
+			end
 		end
 	end
 end

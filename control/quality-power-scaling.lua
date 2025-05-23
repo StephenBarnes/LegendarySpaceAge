@@ -1,24 +1,25 @@
 --[[ This file replaces built entities with the appropriate quality variant, so that we can scale power consumption with quality. This is necessary to prevent free-energy exploits using e.g. quality battery chargers that produce more energy than they consume.
 See data/final-fixes/quality-power-scaling.lua for the data-side of this and more explanation.
+
+TODO this should be merged with the planet-machine-substitutions script, since I want furnaces to both quality-scale and be substituted by surface.
 ]]
 
 local QualityScalingPowerConsumption = require("const.quality-scaling-power-consumption")
 
-local entNameScales = {}
-for _, vals in pairs(QualityScalingPowerConsumption) do
-	entNameScales[vals[2]] = true
+local function entityScales(entType, entName)
+	return (QualityScalingPowerConsumption[entType] ~= nil) and QualityScalingPowerConsumption[entType][entName]
 end
 
 ---@param e EventData.on_built_entity|EventData.on_robot_built_entity|EventData.on_space_platform_built_entity|EventData.script_raised_built|EventData.script_raised_revive|EventData.on_entity_cloned
 local function onBuilt(e)
 	local entity = e.entity
 	if entity == nil or not entity.valid then return end
-	if entNameScales[entity.name] then
+	if entityScales(entity.type, entity.name) then
 		-- If it's an entity that quality scaling should apply to, then replace it with the quality variant.
 		if entity.quality.level == 0 then return end
 		local surface = entity.surface
 		local info = {
-			name = entity.name.."-"..entity.quality.name,
+			name = entity.name.."__"..entity.quality.name,
 			position = entity.position,
 			quality = entity.quality,
 			force = entity.force,
@@ -27,13 +28,13 @@ local function onBuilt(e)
 		}
 		entity.destroy()
 		surface.create_entity(info)
-	elseif entity.name == "entity-ghost" and entNameScales[entity.ghost_name] then
+	elseif entity.name == "entity-ghost" and entityScales(entity.ghost_type, entity.ghost_name) then
 		-- Also replace ghosts with quality variants too, so they show power consumption etc correctly.
 		if entity.quality.level == 0 then return end
 		local surface = entity.surface
 		local info = {
 			name = "entity-ghost",
-			ghost_name = entity.ghost_name .. "-" .. entity.quality.name,
+			ghost_name = entity.ghost_name .. "__" .. entity.quality.name,
 			position = entity.position,
 			quality = entity.quality,
 			force = entity.force,
