@@ -61,6 +61,12 @@ for _, fluidBox in pairs(ASSEMBLER["assembling-machine-1"].fluid_boxes) do
 	fluidBox.pipe_picture = GreyPipes.pipeBlocks()
 end
 
+-- Make rocket silos not rotatable or flippable, because otherwise mirroring doesn't get copied correctly. Seems there's something weird about flipping/rotating rocket silos specifically, maybe engine checks type and blocks it in some situations.
+--[[table.insert(rocketSilo.flags, "not-rotatable")
+rocketSilo.forced_symmetry = "diagonal-pos"
+rocketSilo.collision_box = {{-4.2, -4.2}, {4.215, 4.2}}]]
+-- None of these work, so instead I'm just making fluid-boxes vertically symmetric.
+
 -- Add fluid inputs to the rocket silo, needed for assembling rocket parts. Seems like rocket silo can't be rotated, so I'm adding all of them on all sides.
 local emPipePictures = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures")
 local rocketSilo = RAW["rocket-silo"]["rocket-silo"]
@@ -82,6 +88,16 @@ rocketSilo.fluid_boxes = {
 				direction = SOUTH,
 				flow_direction = "input-output",
 				position = {-2, 4},
+			},
+			{
+				direction = NORTH,
+				flow_direction = "input-output",
+				position = {2, -4},
+			},
+			{
+				direction = SOUTH,
+				flow_direction = "input-output",
+				position = {2, 4},
 			},
 			{
 				direction = EAST,
@@ -106,12 +122,12 @@ rocketSilo.fluid_boxes = {
 			{
 				direction = NORTH,
 				flow_direction = "input-output",
-				position = {2, -4},
+				position = {0, -4},
 			},
 			{
 				direction = SOUTH,
 				flow_direction = "input-output",
-				position = {2, 4},
+				position = {0, 4},
 			},
 			{
 				direction = EAST,
