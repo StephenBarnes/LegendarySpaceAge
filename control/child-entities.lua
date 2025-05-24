@@ -1,9 +1,7 @@
 --[[ This file creates "child entities" that get created alongside entities, move around with them, get destroyed when the parent is destroyed, etc.
 For example: this is used to create invisible entities that provide air to furnaces on planets with air in the atmosphere.
 
-TODO: refactor other stuff to use this mechanism.
-* condensing-turbine's evilizer, etc.
-* exclusion zones
+TODO: refactor exclusion zones to use this mechanism maybe.
 ]]
 
 local Req = require("const.child-entity-const") -- Table of required child entities for each entity.
@@ -133,11 +131,14 @@ local function onObjectDestroyed(e)
 			if #children == 0 then
 				log("Warning: No child " .. reqName .. " found at " .. serpent.line(position) .. ", this should not happen")
 			else
-				-- There can be multiple children at the same position, if the entity was fast-replaced; seems on-built handler runs before on-object-destroyed. So we'll delete the oldest child at this position.
+				-- There can be multiple children at the same position, if the entity was fast-replaced; seems on-built handler runs before on-object-destroyed. So we'll delete the oldest child at this position, by checking the unit_number.
+				-- Simple entities don't have unit numbers, so we just delete the first one found. Probably not an issue since they're interchangeable, unlike entities with eg linked fluid boxes.
 				child = children[1]
-				for i = 2, #children do
-					if children[i].unit_number < child.unit_number then
-						child = children[i]
+				if child.type ~= "simple-entity" then
+					for i = 2, #children do
+						if children[i].unit_number < child.unit_number then
+							child = children[i]
+						end
 					end
 				end
 

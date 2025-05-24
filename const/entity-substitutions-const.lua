@@ -9,8 +9,6 @@ Details can contain:
 	* onlyGhosts: if true, only substitute ghosts.
 
 Note this file ignores the quality scaling stuff. That's applied after the surface substitutions. So you don't need to add substitutions for quality-variants here.
-
-TODO add option for not handling ghosts, eg for condensing-turbine-evil.
 ]]
 
 ---@type { [string]: { [string]: { bySurface: { [string]: string }, excludeGhosts?: boolean } } }

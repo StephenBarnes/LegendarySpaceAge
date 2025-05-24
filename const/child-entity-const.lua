@@ -5,7 +5,7 @@ Returned table maps entity name => child name => list of child requirements.
 The child name is the name of the child entity to create.
 You can require multiple children of the same name, but they should have different positions.
 Each child requirement can have fields:
-* pos - position relative to parent. Should be a tile center or we won't be able to find it to update/delete.
+* pos - position relative to parent. Should be a tile center, or allow placing off-grid, otherwise we won't be able to find it to update/delete.
 * adjustForOrientation - if we should move the child when parent rotates.
 * createdHandler - function to call when child is created. Called as createdHandler(parent, child).
 * destroyedHandler - function to call right before child is destroyed. Called as destroyedHandler(parentName, child).
@@ -13,7 +13,7 @@ Each child requirement can have fields:
 
 local Export = {}
 
--- Create steam-evilizers for condensing turbines. This is so we can give it lower efficiency than normal steam turbines, see data/pre-space/condensing-turbine.lua.
+-- Create steam-evilizers for condensing turbines. This is so we can give condensing turbines lower efficiency than normal steam turbines, see data/pre-space/condensing-turbine.lua.
 Export["condensing-turbine-evil"] = {
 	["steam-evilizer"] = {{
 		pos = {0, 0},
@@ -42,6 +42,42 @@ for _, furnaceName in pairs{"stone-furnace-air", "steel-furnace-air", "ff-furnac
 end
 
 -- TODO later I'll add invisible vents to stone furnaces.
+
+-- TODO later I'll add checkerboard beacons for furnaces, so they give a speed bonus to adjacent furnaces (but checkerboard so they don't affect themselves).
+
+-- Create exclusion zones for some entities, to prevent them from being built too close to each other.
+local ExclusionZoneConst = require("const.exclusion-zones")
+local function handleExclusionZoneCreation(parent, child)
+	child.destructible = false
+end
+for entName, exclusionZoneConst in pairs(ExclusionZoneConst) do
+	exclusionCenterDist = prototypes.entity[entName .. "-exclusion-1"].collision_box.right_bottom.y + exclusionZoneConst.size / 2
+	if Export[entName] == nil then Export[entName] = {} end
+	Export[entName][entName .. "-exclusion-1"] = { -- Create vertical exclusion zones.
+		{
+			pos = {0, exclusionCenterDist},
+			adjustForOrientation = false,
+			createdHandler = handleExclusionZoneCreation,
+		},
+		{
+			pos = {0, -exclusionCenterDist},
+			adjustForOrientation = false,
+			createdHandler = handleExclusionZoneCreation,
+		},
+	}
+	Export[entName][entName .. "-exclusion-2"] = { -- Create horizontal exclusion zones.
+		{
+			pos = {exclusionCenterDist, 0},
+			adjustForOrientation = false,
+			createdHandler = handleExclusionZoneCreation,
+		},
+		{
+			pos = {-exclusionCenterDist, 0},
+			adjustForOrientation = false,
+			createdHandler = handleExclusionZoneCreation,
+		},
+	}
+end
 
 -- Add quality variants.
 local QualityScaling = require("const.quality-scaling-power-consumption")
