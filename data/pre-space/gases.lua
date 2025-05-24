@@ -16,7 +16,7 @@ airFluid.icons = {
 }
 extend{airFluid}
 
--- Create "sulfurous gas" fluid, for mixture of sulfur dioxide and flue gas, produced by smelting sulfate ores.
+-- Create "sulfurous gas" fluid, for mixture of sulfur dioxide and flue gas, produced by smelting sulfide ores.
 -- TODO move the colours out to a const file.
 local sulfurousGasColor = {0.788, 0.627, 0.167}
 local brighterSulfurousGasColor = {0.996, 0.859, 0.31}

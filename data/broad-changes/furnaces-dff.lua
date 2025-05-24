@@ -8,7 +8,7 @@ for _, furnaceName in pairs{"stone-furnace", "steel-furnace", "ff-furnace", "ele
 	FURNACE[furnaceName] = nil
 end
 
--- Edit pollution to be zero for steel/ff furnaces.
+-- Edit pollution to be zero for steel/ff furnaces, since they capture the waste gases.
 for _, furnaceName in pairs{"steel-furnace", "ff-furnace"} do
 	local furnace = ASSEMBLER[furnaceName]
 	furnace.energy_source.emissions_per_minute = {}
@@ -82,7 +82,8 @@ Two reasons:
 
 Given a recipe for furnaces, with gas input (air or oxygen) and gas outputs (flue gas etc), we want these recipes:
 * If the input gas is air:
-	* "Canonical" recipe with air input and gas output, shown in Factoriopedia. Used for steel/ff furnace on planets without air.
+	* "Canonical" recipe with air input and gas output, shown in Factoriopedia. 
+	* Recipe that's the same as canonical, used for steel/ff furnace on planets without air. (Could just use canonical recipe, but this way we keep "smelting" category as purely for Factoriopedia.)
 	* Recipe with air input removed, and gas output, used for steel/ff furnace on planets with air.
 	* Recipe with air input removed, and gas output removed, used for stone furnaces on planets with air.
 	* Recipe with air input, and gas output removed, used for stone furnaces on planets without air.

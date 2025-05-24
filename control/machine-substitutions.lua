@@ -12,34 +12,25 @@ This file swaps buildings on build, for 2 cases:
 local SurfaceSubstitutions = require("const.planet-machine-substitutions-const")
 local QualitySubstitutions = require("const.quality-scaling-power-consumption")
 
-local MiscConst = require("const.misc-const")
-local qualitySeparator = MiscConst.qualitySeparator
-local qualitySuffixLen = #qualitySeparator + MiscConst.qualityNumDigits
-
 -- Given entity base name (quality suffix removed), returns true if it's subject to quality scaling.
 local function entityQualityScales(entType, entName)
-	return (QualitySubstitutions[entType] ~= nil) and QualitySubstitutions[entType][entName]
+	return (QualitySubstitutions.qualityVersions[entType] ~= nil) and (QualitySubstitutions.qualityVersions[entType][entName] ~= nil)
 end
 
 -- Given entity name, removes quality suffix, if any.
 ---@param entName string
 ---@return string
 local function trimQualitySuffix(entName)
-	-- Check if the name ends with the quality separator followed by number.
-	if #entName <= qualitySuffixLen then return entName end
-	local qualitySeparatorPlusNumber = entName:sub(-qualitySuffixLen)
-	local possibleQualitySeparator = qualitySeparatorPlusNumber:sub(1, #qualitySeparator)
-	if possibleQualitySeparator ~= qualitySeparator then return entName end
-	return entName:sub(1, -qualitySuffixLen-1)
+	return QualitySubstitutions.qualityToOriginal[entName] or entName
 end
 
 -- Given entity name and quality, add quality suffix. For normal quality, doesn't add anything.
+---@param entType string
 ---@param entName string
 ---@param quality LuaQualityPrototype
 ---@return string
-local function addQualitySuffx(entName, quality)
-	if quality.level == 0 then return entName end
-	return entName..qualitySeparator..string.format("%0"..MiscConst.qualityNumDigits.."d", quality.level)
+local function addQualitySuffx(entType, entName, quality)
+	return QualitySubstitutions.qualityVersions[entType][entName][quality.level]
 end
 
 -- When an entity is built, replace it with other entity, applying surface and quality substitutions.
@@ -80,7 +71,7 @@ local function onBuilt(event)
 
 	local correctName = nameAfterSurfaceSubst
 	if entityQualityScales(entType, nameAfterSurfaceSubst) then
-		correctName = addQualitySuffx(nameAfterSurfaceSubst, ent.quality)
+		correctName = addQualitySuffx(entType, nameAfterSurfaceSubst, ent.quality)
 	end
 
 	if entName == correctName then return end
