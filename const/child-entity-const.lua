@@ -30,4 +30,12 @@ end
 
 -- TODO later I'll add invisible vents to stone furnaces.
 
+-- Add quality variants.
+local QualityScaling = require("const.quality-scaling-power-consumption")
+for entName, originalName in pairs(QualityScaling.qualityToOriginal) do
+	if Export[originalName] ~= nil then
+		Export[entName] = Export[originalName]
+	end
+end
+
 return Export
