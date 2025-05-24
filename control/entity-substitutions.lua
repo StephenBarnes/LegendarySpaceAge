@@ -33,11 +33,12 @@ local function addQualitySuffx(entType, entName, quality)
 	return QualitySubstitutions.qualityVersions[entType][entName][quality.level]
 end
 
--- When an entity is built, replace it with other entity, applying surface and quality substitutions.
+-- When an entity is built, replace it with other entity, applying surface and quality substitutions. Return the modified entity, if any.
 ---@param event EventData.on_built_entity|EventData.on_robot_built_entity|EventData.on_space_platform_built_entity|EventData.script_raised_built|EventData.script_raised_revive|EventData.on_entity_cloned
+---@return LuaEntity|nil
 local function onBuilt(event)
 	local ent = event.entity
-	if ent == nil or not ent.valid then return end
+	if ent == nil or not ent.valid then return nil end
 	local surface = ent.surface
 	if surface == nil or not surface.valid then return end
 
@@ -87,7 +88,10 @@ local function onBuilt(event)
 		mirroring = ent.mirroring,
 	}
 	if ent.get_recipe ~= nil then -- Only available for CraftingMachine subtypes.
-		info.recipe = ent.get_recipe()
+		local recipe = ent.get_recipe()
+		if recipe ~= nil then
+			info.recipe = recipe.name
+		end
 	end
 
 	if not isGhost then
@@ -104,6 +108,8 @@ local function onBuilt(event)
 	newEnt.mirroring = info.mirroring
 	-- Issue: this doesn't work for rocket-silo. Something weird about flipping/rotating rocket silos specifically, can't flip them once placed. So I'm rather just making rocket silos vertically symmetric.
 	-- Checked: when using this for furnaces etc, there's no mirroring issue.
+
+	return newEnt
 end
 
 return {

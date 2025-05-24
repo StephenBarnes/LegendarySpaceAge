@@ -54,6 +54,7 @@ require("data.pre-space.landmines")
 require("data.pre-space.water-etc")
 require("data.pre-space.condensing-turbine")
 require("data.pre-space.drill-nodes")
+require("data.broad-changes.invisible-fluid-connectors")
 
 -- Editing planets
 require("data.pre-space.misc")

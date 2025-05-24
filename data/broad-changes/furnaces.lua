@@ -4,35 +4,11 @@ Also edits other furnaces.]]
 local PetrochemConst = require("const.petrochem-const")
 local FurnaceConst = require("const.furnace-const")
 
--- Give fluid I/O to steel furnace. Also inherited by fluid-fuelled furnace.
-FURNACE["steel-furnace"].fluid_boxes = { -- TODO do these better, this is temporary.
-	{
-		production_type = "input",
-		pipe_picture = nil,
-		pipe_covers = nil,
-		pipe_connections = {
-			{
-				flow_direction = "input",
-				position = {0.5, 0.5},
-				direction = SOUTH,
-			}
-		},
-		volume = 100,
-	},
-	{
-		production_type = "output",
-		pipe_picture = nil,
-		pipe_covers = nil,
-		pipe_connections = {
-			{
-				flow_direction = "output",
-				position = {-0.5, -0.5},
-				direction = NORTH,
-			}
-		},
-		volume = 100,
-	},
-}
+-- Create crafting category for advanced-smelting, only doable in steel/ff furnaces.
+extend{{
+	type = "recipe-category",
+	name = "advanced-smelting",
+}}
 
 -- Graphics set for steel furnaces, giving them visible pipes. Mostly copied from Adamo's Gas Furnace mod.
 local advancedFurnaceGraphicsSet = {
@@ -138,8 +114,8 @@ ffFurnace.energy_source = {
 		pipe_picture = GreyPipes.pipeBlocks(),
 		pipe_covers = pipecoverspictures(),
 		pipe_connections = {
-			{flow_direction = "input-output", position = {0.5, -0.5}, direction = EAST},
-			{flow_direction = "input-output", position = {-0.5, -0.5}, direction = WEST},
+			{flow_direction = "input-output", position = {-0.5, -0.5}, direction = NORTH},
+			{flow_direction = "input-output", position = {-0.5, 0.5}, direction = SOUTH},
 		},
 		secondary_draw_orders = {north = -16, east = -1, west = -1, south = -2},
 	},
@@ -174,6 +150,7 @@ ffFurnace.icons = {
 }
 -- Should only be able to place where there's oxygen/air? (TODO later allow anywhere, with oxygen/air input.)
 ffFurnace.surface_conditions = RAW["mining-drill"]["burner-mining-drill"].surface_conditions
+table.insert(ffFurnace.crafting_categories, "advanced-smelting")
 extend{ffFurnace}
 
 -- Create item for ff-furnace.
@@ -205,6 +182,7 @@ steelFurnace.energy_source.light_flicker = copy(ffFurnace.energy_source.light_fl
 Icon.set(steelFurnace, "LSA/from_gas_furnace/icon")
 local steelFurnaceItem = ITEM["steel-furnace"]
 Icon.set(steelFurnaceItem, "LSA/from_gas_furnace/icon")
+table.insert(steelFurnace.crafting_categories, "advanced-smelting")
 
 -- Edit the base stone furnace to use the same collision box as the rest of them.
 local stoneFurnace = FURNACE["stone-furnace"]
@@ -219,5 +197,3 @@ end
 
 -- TODO later we need to change all of these furnaces to assembling-machine, probably.
 -- TODO should adjust graphics of steel furnace and ff-furnace to make them look different.
-
--- TODO add automatic check that we can't make 

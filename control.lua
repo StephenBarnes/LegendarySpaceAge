@@ -7,7 +7,8 @@ local exclusionZones = require("control.exclusion-zones")
 local condensingTurbineEfficiency = require("control.condensing-turbine-efficiency")
 local lowGravityRunning = require("control.low-gravity-running")
 local techRateTriggers = require("control.tech-rate-triggers")
-local entitySubstitutions = require("control.machine-substitutions")
+local entitySubstitutions = require("control.entity-substitutions")
+local childEntities = require("control.child-entities")
 
 script.on_nth_tick(60 * 10, function()
 	techRateTriggers.onNthTick()
@@ -18,6 +19,7 @@ end)
 
 local function handlePickerDolliesEvent(e)
 	condensingTurbineEfficiency.onPickerDollyMoved(e)
+	childEntities.onPickerDollyMoved(e)
 end
 
 local function registerForPickerDollies()
@@ -52,11 +54,15 @@ for _, event in ipairs({
 	defines.events.on_entity_cloned,
 }) do
 	script.on_event(event, function(e)
-		entitySubstitutions.onBuilt(e)
+		local newEnt = entitySubstitutions.onBuilt(e)
+		if newEnt ~= nil then
+			e.entity = newEnt
+		end
 		setRecipeOnBuild.onBuilt(e)
 		exclusionZones.onBuilt(e)
 		apprenticeFoundry.on_created_entity(e)
 		condensingTurbineEfficiency.onBuilt(e)
+		childEntities.onBuilt(e)
 	end)
 end
 
@@ -69,6 +75,7 @@ script.on_event(defines.events.on_player_created, function(e)
 end)
 
 script.on_event(defines.events.on_object_destroyed, function(e)
+	childEntities.onObjectDestroyed(e)
 	apprenticeFoundry.on_object_destroyed(e)
 	exclusionZones.onObjectDestroyed(e)
 	condensingTurbineEfficiency.onObjectDestroyed(e)
@@ -76,10 +83,12 @@ end)
 
 script.on_event(defines.events.on_player_rotated_entity, function(e)
 	condensingTurbineEfficiency.onRotated(e)
+	childEntities.onRotated(e)
 end)
 
 script.on_event(defines.events.on_player_flipped_entity, function(e)
 	condensingTurbineEfficiency.onFlipped(e)
+	childEntities.onFlipped(e)
 end)
 
 script.on_event(defines.events.on_player_changed_surface, function(e)

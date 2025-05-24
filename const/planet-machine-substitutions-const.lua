@@ -23,6 +23,8 @@ local Export = {
 		},
 	},
 	["assembling-machine"] = {
+
+		-- Furnaces: We use a -air variant for furnaces on planets with air in the atmosphere, and -noair for planets without air.
 		["stone-furnace"] = {
 			nauvis = "stone-furnace-air",
 			gleba = "stone-furnace-air",

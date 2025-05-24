@@ -1,4 +1,5 @@
 require("util.globals")
+require("util.globals-data")
 
 local updates = {}
 local nextOrder = 0

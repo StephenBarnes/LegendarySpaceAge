@@ -23,10 +23,12 @@ Re stack sizes:
 
 TODO major update:
 * add item-group for material processing, separate from intermediate items.
-* add input air and output flue gas / sulfurous gas.
+* add input air and output flue gas / sulfurous gas / coke gas.
 * add variants using oxygen.
 * add variants for crushed and pure ores.
 ]]
+
+local FurnaceConst = require("const.furnace-const")
 
 local ORE_STACK_SIZE = 50
 local INGOT_STACK_SIZE = 100
@@ -116,12 +118,12 @@ local ironIngotRecipe = copy(steelIngotRecipe)
 ironIngotRecipe.name = "ingot-iron-hot"
 ironIngotRecipe.ingredients = {
 	{type="item", name="iron-ore", amount=5},
-	{type="fluid", name="air", amount=10, show_details_in_recipe_tooltip=false},
+	{type="fluid", name="air", amount=10, show_details_in_recipe_tooltip=false, fluidbox_index=FurnaceConst.airFluidBoxIdx},
 }
 ironIngotRecipe.results = {
 	{type="item", name="ingot-iron-hot", amount=1},
 	{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
-	{type="fluid", name="flue-gas", amount=10, show_details_in_recipe_tooltip=false},
+	{type="fluid", name="flue-gas", amount=10, show_details_in_recipe_tooltip=false, fluidbox_index=FurnaceConst.outputGasFluidBoxIdx},
 }
 ironIngotRecipe.main_product = "ingot-iron-hot"
 ironIngotRecipe.energy_required = 5
@@ -135,16 +137,17 @@ local ironIngotRecipeOxygen = copy(ironIngotRecipe)
 ironIngotRecipeOxygen.name = "ingot-iron-ox"
 ironIngotRecipeOxygen.ingredients = {
 	{type="item", name="iron-ore", amount=5},
-	{type="fluid", name="oxygen-gas", amount=10, show_details_in_recipe_tooltip=false},
+	{type="fluid", name="oxygen-gas", amount=10, show_details_in_recipe_tooltip=false, fluidbox_index=FurnaceConst.oxygenFluidBoxIdx},
 }
 ironIngotRecipeOxygen.results = {
 	{type="item", name="ingot-iron-hot", amount=1},
-	{type="fluid", name="flue-gas", amount=10, show_details_in_recipe_tooltip=false},
+	{type="fluid", name="flue-gas", amount=10, show_details_in_recipe_tooltip=false, fluidbox_index=FurnaceConst.outputGasFluidBoxIdx},
 }
 ironIngotRecipeOxygen.main_product = "ingot-iron-hot"
 ironIngotRecipeOxygen.energy_required = 5
 ironIngotRecipeOxygen.enabled = true
 ironIngotRecipeOxygen.hide_from_player_crafting = true
+ironIngotRecipeOxygen.category = "advanced-smelting"
 extend{ironIngotRecipeOxygen}
 
 -- Make recipe for copper ore -> copper matte.
@@ -153,12 +156,12 @@ copperMatteRecipe.name = "copper-matte"
 --copperMatteRecipe.factoriopedia_description = {"factoriopedia-description.copper-matte"}
 copperMatteRecipe.ingredients = {
 	{type="item", name="copper-ore", amount=5},
-	{type="fluid", name="air", amount=10, show_details_in_recipe_tooltip=false},
+	{type="fluid", name="air", amount=10, show_details_in_recipe_tooltip=false, fluidbox_index=FurnaceConst.airFluidBoxIdx},
 }
 copperMatteRecipe.results = {
 	{type="item", name="copper-matte", amount=1},
 	{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
-	{type="fluid", name="sulfurous-gas", amount=10, show_details_in_recipe_tooltip=false},
+	{type="fluid", name="sulfurous-gas", amount=10, show_details_in_recipe_tooltip=false, fluidbox_index=FurnaceConst.outputGasFluidBoxIdx},
 }
 copperMatteRecipe.main_product = "copper-matte"
 copperMatteRecipe.energy_required = 5

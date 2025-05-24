@@ -1,6 +1,9 @@
 --[[ This file replaces condensing-turbines placed by the player with a "condensing-turbine-evil" entity plus a steam-evilizer.
 This is necessary to make the condensing turbine have efficiency 40%, because the fusion-generator prototype doesn't support efficiencies.
 We also register deathrattles for the created condensing-turbine-evil, so that we can remove it and the steam-evilizer on destruction.
+
+TODO eliminate this and rather use the more general child entity code.
+TODO this should rather use fluid links, not literally positioning the fluid ports next to each other.
 ]]
 
 
