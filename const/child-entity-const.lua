@@ -13,18 +13,14 @@ Each child requirement can have fields:
 
 local Export = {}
 
--- Add steam-evilizer to condensing-turbine.
+-- Create steam-evilizers for condensing turbines. This is so we can give it lower efficiency than normal steam turbines, see data/pre-space/condensing-turbine.lua.
 Export["condensing-turbine-evil"] = {
 	["steam-evilizer"] = {{
 		pos = {0, 0},
 		adjustForOrientation = false,
 		createdHandler = function(parent, child)
-			game.print("Created steam-evilizer for condensing-turbine-evil")
 			child.destructible = false
 			parent.fluidbox.add_linked_connection(1, child, 1)
-		end,
-		destroyedHandler = function(parentName, child)
-			game.print("Destroyed steam-evilizer for condensing-turbine-evil")
 		end,
 	}},
 }

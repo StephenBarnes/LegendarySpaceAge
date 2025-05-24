@@ -9,7 +9,7 @@ This file swaps buildings on build, for 2 cases:
 			See data/final-fixes/quality-power-scaling.lua for the data-side of this and more explanation.
 ]]
 
-local SurfaceSubstitutions = require("const.planet-machine-substitutions-const")
+local EntitySubstitutions = require("const.entity-substitutions-const")
 local QualitySubstitutions = require("const.quality-scaling-power-consumption")
 
 -- Given entity base name (quality suffix removed), returns true if it's subject to quality scaling.
@@ -31,6 +31,25 @@ end
 ---@return string
 local function addQualitySuffx(entType, entName, quality)
 	return QualitySubstitutions.qualityVersions[entType][entName][quality.level]
+end
+
+-- Perform surface substitutions.
+---@param entType string
+---@param nameWithoutQuality string
+---@param surface LuaSurface
+---@param isGhost boolean
+---@return string
+local function performSurfaceSubstitutions(entType, nameWithoutQuality, surface, isGhost)
+	local typeSubstitutions = EntitySubstitutions[entType]
+	if typeSubstitutions == nil then return nameWithoutQuality end
+	local substitutions = typeSubstitutions[nameWithoutQuality]
+	if substitutions == nil then return nameWithoutQuality end
+	if isGhost and substitutions.excludeGhosts then return nameWithoutQuality end
+	if not isGhost and substitutions.onlyGhosts then return nameWithoutQuality end
+	local nameAfterSurfaceSubst = substitutions.bySurface[surface.name]
+	if nameAfterSurfaceSubst == nil then nameAfterSurfaceSubst = substitutions.bySurface["default"] end
+	assert(nameAfterSurfaceSubst ~= nil, "No substitution found for " .. entType .. " " .. nameWithoutQuality .. " on surface " .. surface.name)
+	return nameAfterSurfaceSubst
 end
 
 -- When an entity is built, replace it with other entity, applying surface and quality substitutions. Return the modified entity, if any.
@@ -58,17 +77,7 @@ local function onBuilt(event)
 	end
 
 	local nameWithoutQuality = trimQualitySuffix(entName)
-
-	local nameAfterSurfaceSubst = nameWithoutQuality
-	local typeSubstitutions = SurfaceSubstitutions[entType]
-	if typeSubstitutions ~= nil then
-		local substitutions = typeSubstitutions[nameWithoutQuality]
-		if substitutions ~= nil then
-			nameAfterSurfaceSubst = substitutions[surface.name]
-			if nameAfterSurfaceSubst == nil then nameAfterSurfaceSubst = substitutions["default"] end
-			assert(nameAfterSurfaceSubst ~= nil, "No substitution found for " .. entType .. " " .. nameWithoutQuality .. " on surface " .. surface.name)
-		end
-	end
+	local nameAfterSurfaceSubst = performSurfaceSubstitutions(entType, nameWithoutQuality, surface, isGhost)
 
 	local correctName = nameAfterSurfaceSubst
 	if entityQualityScales(entType, nameAfterSurfaceSubst) then
