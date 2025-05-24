@@ -52,15 +52,14 @@ end
 Export.qualityVersions = qualityVersions
 
 -- Make a table mapping back from quality-scaled ents' names to the original names.
--- Exported table is entity type => entity name => original name.
+-- Exported table is entity name => original name.
 local qualityToOriginal = {}
-for entType, entNamesToQualityToName in pairs(qualityVersions) do
-	if qualityToOriginal[entType] == nil then
-		qualityToOriginal[entType] = {}
-	end
+for _, entNamesToQualityToName in pairs(qualityVersions) do
 	for originalName, qualityToName in pairs(entNamesToQualityToName) do
 		for _, name in pairs(qualityToName) do
-			qualityToOriginal[entType][name] = originalName
+			if name ~= originalName then
+				qualityToOriginal[name] = originalName
+			end
 		end
 	end
 end

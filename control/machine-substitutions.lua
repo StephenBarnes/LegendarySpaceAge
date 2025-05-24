@@ -58,14 +58,14 @@ local function onBuilt(event)
 
 	local nameWithoutQuality = trimQualitySuffix(entName)
 
-	local nameAfterSurfaceSubst = entName
+	local nameAfterSurfaceSubst = nameWithoutQuality
 	local typeSubstitutions = SurfaceSubstitutions[entType]
 	if typeSubstitutions ~= nil then
 		local substitutions = typeSubstitutions[nameWithoutQuality]
 		if substitutions ~= nil then
 			nameAfterSurfaceSubst = substitutions[surface.name]
 			if nameAfterSurfaceSubst == nil then nameAfterSurfaceSubst = substitutions["default"] end
-			assert(nameAfterSurfaceSubst ~= nil, "No substitution found for " .. entType .. " " .. entName .. " on surface " .. surface.name)
+			assert(nameAfterSurfaceSubst ~= nil, "No substitution found for " .. entType .. " " .. nameWithoutQuality .. " on surface " .. surface.name)
 		end
 	end
 

@@ -11,7 +11,7 @@ return {
 		water_transport = {"port", "buoy", "chain_buoy", "boat", "cargo_ship", "oil_tanker", "waterway", "straight-waterway", "half-diagonal-waterway", "curved-waterway-a", "curved-waterway-b"},
 		transport = {"car", "tank", "spidertron"},
 		["logistic-network"] = {"logistic-robot", "construction-robot", "active-provider-chest", "passive-provider-chest", "storage-chest", "buffer-chest", "requester-chest", "roboport"},
-		["circuit-network"] = {"small-lamp", "arithmetic-combinator", "decider-combinator", "selector-combinator", "constant-combinator", "power-switch", "programmable-speaker", "display-panel", "aai-signal-sender", "aai-signal-receiver"},
+		["circuit-network"] = {"small-lamp", "arithmetic-combinator", "decider-combinator", "selector-combinator", "constant-combinator", "power-switch", "programmable-speaker", "display-panel", "aai-signal-sender", "aai-signal-receiver", "aai-filter"},
 		paving = {"stone-brick", "concrete", "hazard-concrete", "refined-concrete", "refined-hazard-concrete", "cliff-explosives", "make-cement"},
 		terrain = {"landfill", "artificial-yumako-soil", "overgrowth-yumako-soil", "artificial-jellynut-soil", "overgrowth-jellynut-soil", "ice-platform", "foundation"},
 	},
