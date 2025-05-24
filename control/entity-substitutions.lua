@@ -87,7 +87,8 @@ local function onBuilt(event)
 		direction = ent.direction,
 		mirroring = ent.mirroring,
 	}
-	if ent.get_recipe ~= nil then -- Only available for CraftingMachine subtypes.
+	-- Copy recipe, if available. Only available for CraftingMachine subtypes.
+	if ent.type == "assembling-machine" or ent.type == "furnace" then
 		local recipe = ent.get_recipe()
 		if recipe ~= nil then
 			info.recipe = recipe.name

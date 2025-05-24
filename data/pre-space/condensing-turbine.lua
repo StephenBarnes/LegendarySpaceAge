@@ -154,6 +154,8 @@ ctEvilEnt.name = "condensing-turbine-evil"
 ctEvilEnt.input_fluid_box.pipe_connections[1].position = {0, 0}
 ctEvilEnt.input_fluid_box.pipe_covers = nil
 ctEvilEnt.input_fluid_box.filter = "steam-evil"
+ctEvilEnt.input_fluid_box.pipe_connections[1].connection_type = "linked"
+ctEvilEnt.input_fluid_box.pipe_connections[1].linked_connection_id = 1
 ctEvilEnt.placeable_by = {item = "condensing-turbine", count = 1}
 --table.insert(ctEvilEnt.flags, "not-rotatable")
 	-- Used to use this, but disabling now bc I'll rather respond to rotation and flip events.
@@ -198,6 +200,10 @@ local evilRecipe = {
 	allow_speed = false,
 	allow_quality = false,
 	category = "steam-evilizing",
+	icons = ent.icons,
+	hide_from_player_crafting = true,
+	hide_from_stats = true,
+	-- Note that water produced by the condensing-turbine-evil, and steam-evil consumed by it, are hidden from stats. Seems to be an engine bug/feature. Also applies to base-game's fusion-generators consuming plasma and making hot fluoroketone. Hiding the steam consumption here to match that behavior.
 }
 if HIDE_EVIL then
 	evilRecipe.hidden = true
@@ -244,7 +250,7 @@ local steamEvilizerEnt = {
 			production_type = "output",
 			filter = "steam-evil",
 			pipe_connections = {
-				{ flow_direction = "output", direction = defines.direction.north, position = {0, 1} }
+				{ flow_direction = "output", direction = defines.direction.north, position = {0, 1}, connection_type = "linked", linked_connection_id = 1 }
 			},
 			volume = 10,
 			hide_connection_info = HIDE_EVIL,

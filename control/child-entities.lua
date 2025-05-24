@@ -36,10 +36,10 @@ end
 ---@param displacement table
 ---@param orientation float -- This is a number 0 - 1, not a direction.
 ---@param mirroring boolean
----@param adjustForOrientationAndMirroring boolean
+---@param adjustForOrientation boolean
 ---@return table
-local function adjustDisplacementForOrientationAndMirroring(displacement, orientation, mirroring, adjustForOrientationAndMirroring)
-	if not adjustForOrientationAndMirroring then return displacement end
+local function adjustDisplacementForOrientationAndMirroring(displacement, orientation, mirroring, adjustForOrientation)
+	if not adjustForOrientation then return displacement end
 	assert(orientation ~= nil)
 	if not mirroring then
 		if orientation == SOUTH_FLOAT then
@@ -85,7 +85,7 @@ local function onBuilt(event)
 		for _, req in pairs(reqSet) do
 			assert(ent.orientation ~= nil)
 			assert(ent.mirroring ~= nil)
-			local disp = adjustDisplacementForOrientationAndMirroring(req.pos, ent.orientation, ent.mirroring, req.adjustForOrientationAndMirroring)
+			local disp = adjustDisplacementForOrientationAndMirroring(req.pos, ent.orientation, ent.mirroring, req.adjustForOrientation)
 			local info = {
 				name = reqName,
 				position = {ent.position.x + disp[1], ent.position.y + disp[2]},
@@ -124,7 +124,7 @@ local function onObjectDestroyed(e)
 	if destroyedReqs == nil then return end
 	for reqName, reqSet in pairs(destroyedReqs) do
 		for _, req in pairs(reqSet) do
-			local disp = adjustDisplacementForOrientationAndMirroring(req.pos, deathrattle.orientation, deathrattle.mirroring, req.adjustForOrientationAndMirroring)
+			local disp = adjustDisplacementForOrientationAndMirroring(req.pos, deathrattle.orientation, deathrattle.mirroring, req.adjustForOrientation)
 			local children = surface.find_entities_filtered{
 				name = reqName,
 				position = {position.x + disp[1], position.y + disp[2]},
@@ -162,7 +162,7 @@ local function updateChild(child, entity, updatePos, req)
 	child.mirroring = entity.mirroring
 	child.orientation = entity.orientation
 	if updatePos then
-		local newDisp = adjustDisplacementForOrientationAndMirroring(req.pos, entity.orientation, entity.mirroring, req.adjustForOrientationAndMirroring)
+		local newDisp = adjustDisplacementForOrientationAndMirroring(req.pos, entity.orientation, entity.mirroring, req.adjustForOrientation)
 		local newPos = {entity.position.x + newDisp[1], entity.position.y + newDisp[2]}
 		--child.position = entity.position -- Can't, it's read-only.
 		local success = child.teleport(newPos)
@@ -185,7 +185,7 @@ local function findAndUpdateChildren(entity, searchPos, updatePos, req, reqName,
 	if not surface.valid then return end
 	assert(oldOrientation ~= nil)
 	assert(oldMirroring ~= nil)
-	local oldDisp = adjustDisplacementForOrientationAndMirroring(req.pos, oldOrientation, oldMirroring, req.adjustForOrientationAndMirroring)
+	local oldDisp = adjustDisplacementForOrientationAndMirroring(req.pos, oldOrientation, oldMirroring, req.adjustForOrientation)
 	local children = surface.find_entities_filtered{
 		name = reqName,
 		position = {searchPos.x + oldDisp[1], searchPos.y + oldDisp[2]},
@@ -241,7 +241,7 @@ local function onRotatedOrFlipped(e, wasRotated)
 	for reqName, reqSet in pairs(reqs) do
 		for _, req in pairs(reqSet) do
 			---@diagnostic disable-next-line: param-type-mismatch
-			findAndUpdateChildren(ent, ent.position, req.adjustForOrientationAndMirroring, req, reqName, dirToOrientation(previousDirection), previousMirroring)
+			findAndUpdateChildren(ent, ent.position, req.adjustForOrientation, req, reqName, dirToOrientation(previousDirection), previousMirroring)
 		end
 	end
 end

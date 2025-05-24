@@ -4,7 +4,6 @@ local notifyIncorrectMapgenPreset = require("control.notify-incorrect-mapgen-pre
 local apprenticeFoundry = require("control.apprentice-arc-furnace")
 local setRecipeOnBuild = require("control.set-recipe-on-build")
 local exclusionZones = require("control.exclusion-zones")
-local condensingTurbineEfficiency = require("control.condensing-turbine-efficiency")
 local lowGravityRunning = require("control.low-gravity-running")
 local techRateTriggers = require("control.tech-rate-triggers")
 local entitySubstitutions = require("control.entity-substitutions")
@@ -18,7 +17,6 @@ script.on_nth_tick(30, function()
 end)
 
 local function handlePickerDolliesEvent(e)
-	condensingTurbineEfficiency.onPickerDollyMoved(e)
 	childEntities.onPickerDollyMoved(e)
 end
 
@@ -61,7 +59,6 @@ for _, event in ipairs({
 		setRecipeOnBuild.onBuilt(e)
 		exclusionZones.onBuilt(e)
 		apprenticeFoundry.on_created_entity(e)
-		condensingTurbineEfficiency.onBuilt(e)
 		childEntities.onBuilt(e)
 	end)
 end
@@ -78,16 +75,13 @@ script.on_event(defines.events.on_object_destroyed, function(e)
 	childEntities.onObjectDestroyed(e)
 	apprenticeFoundry.on_object_destroyed(e)
 	exclusionZones.onObjectDestroyed(e)
-	condensingTurbineEfficiency.onObjectDestroyed(e)
 end)
 
 script.on_event(defines.events.on_player_rotated_entity, function(e)
-	condensingTurbineEfficiency.onRotated(e)
 	childEntities.onRotated(e)
 end)
 
 script.on_event(defines.events.on_player_flipped_entity, function(e)
-	condensingTurbineEfficiency.onFlipped(e)
 	childEntities.onFlipped(e)
 end)
 

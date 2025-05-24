@@ -13,6 +13,22 @@ Each child requirement can have fields:
 
 local Export = {}
 
+-- Add steam-evilizer to condensing-turbine.
+Export["condensing-turbine-evil"] = {
+	["steam-evilizer"] = {{
+		pos = {0, 0},
+		adjustForOrientation = false,
+		createdHandler = function(parent, child)
+			game.print("Created steam-evilizer for condensing-turbine-evil")
+			child.destructible = false
+			parent.fluidbox.add_linked_connection(1, child, 1)
+		end,
+		destroyedHandler = function(parentName, child)
+			game.print("Destroyed steam-evilizer for condensing-turbine-evil")
+		end,
+	}},
+}
+
 -- Add air input for furnaces on planets with air in the atmosphere.
 local FurnaceConst = require("const.furnace-const")
 for _, furnaceName in pairs{"stone-furnace-air", "steel-furnace-air", "ff-furnace-air"} do
@@ -21,6 +37,7 @@ for _, furnaceName in pairs{"stone-furnace-air", "steel-furnace-air", "ff-furnac
 			pos = {.5, .5},
 			adjustForOrientation = false,
 			createdHandler = function(parent, child)
+				child.destructible = false
 				child.set_infinity_pipe_filter({name = "air", percentage = 1})
 				parent.fluidbox.add_linked_connection(FurnaceConst.airLinkId, child, 1)
 			end,

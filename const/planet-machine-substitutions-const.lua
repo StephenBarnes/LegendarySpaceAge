@@ -5,6 +5,8 @@ The table maps ent type => name => surface => correct building for that surface.
 We use surface "default" for all other surfaces.
 
 Note this file ignores the quality scaling stuff. That's applied after the surface substitutions. So you don't need to add substitutions for quality-variants here.
+
+TODO add option for not handling ghosts, eg for condensing-turbine-evil.
 ]]
 
 local Export = {
@@ -23,7 +25,6 @@ local Export = {
 		},
 	},
 	["assembling-machine"] = {
-
 		-- Furnaces: We use a -air variant for furnaces on planets with air in the atmosphere, and -noair for planets without air.
 		["stone-furnace"] = {
 			nauvis = "stone-furnace-air",
@@ -39,6 +40,12 @@ local Export = {
 			nauvis = "ff-furnace-air",
 			gleba = "ff-furnace-air",
 			default = "ff-furnace-noair",
+		},
+	},
+	-- Replace condensing turbines (on all planets) with evil version.
+	["fusion-generator"] = {
+		["condensing-turbine"] = {
+			default = "condensing-turbine-evil",
 		},
 	},
 }
