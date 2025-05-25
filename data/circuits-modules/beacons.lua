@@ -84,12 +84,12 @@ basicEnt.graphics_set = {
 				}
 			}
 		},
-		{ -- Moving glow tinted, copied from vanilla beacon.
+		{ -- Moving glow tinted, copied from vanilla beacon, modified slightly.
 			render_layer = "object",
 			apply_tint = true,
 			always_draw = false,
 			animation = {
-				filename = "__base__/graphics/entity/beacon/beacon-light.png",
+				filename = "__LegendarySpaceAge__/graphics/beacons/beacon-light.png",
 				line_length = 9,
 				width = 110,
 				height = 186,
@@ -167,7 +167,7 @@ basicEnt.placeable_by = {
 	item = "basic-beacon",
 	count = 1
 }
-basicEnt.fast_replaceable_group = nil
+basicEnt.fast_replaceable_group = "beacon-2x2"
 extend{basicEnt}
 
 ------------------------------------------------------------------------
@@ -245,6 +245,13 @@ advancedEnt.allowed_effects = basicEnt.allowed_effects
 advancedEnt.graphics_set.no_modules_tint = {0, 0, 0} -- No lights when it has no modules.
 
 ------------------------------------------------------------------------
+
+-- Make advanced beacon use the edited light animation.
+if advancedEnt.graphics_set.animation_list[3].animation.filename == "__base__/graphics/entity/beacon/beacon-light.png" then
+	advancedEnt.graphics_set.animation_list[3].animation.filename = "__LegendarySpaceAge__/graphics/beacons/beacon-light.png"
+else
+	log("Warning: did not replace advanced beacon light animation.")
+end
 
 -- Make beacon use module's tertiary color for the light wave.
 RAW.beacon.beacon.graphics_set.apply_module_tint = "tertiary"

@@ -15,7 +15,16 @@ local dirCodeToPath = {
 	SA = "__space-age__/graphics/",
 }
 
+---@param pathCode string | table
+---@param proto data.ItemPrototype | data.RecipePrototype | data.FluidPrototype | data.TechnologyPrototype
+---@return {path: string, tint: table?}
 Icon.getIconInfo = function(pathCode, proto)
+	local tint = nil
+	if type(pathCode) == "table" then
+		tint = pathCode.tint
+		pathCode = pathCode[1]
+	end
+
 	local dirCode, rest = pathCode:match "^([^/]+)/(.+)" -- Split path by first '/' into 2 segments.
 	if dirCode == nil then -- If no '/' found, then check items and fluids.
 		rest = pathCode
@@ -35,22 +44,23 @@ Icon.getIconInfo = function(pathCode, proto)
 				path = path .. "icons/"
 			end
 		end
-		return {path = path .. rest .. ".png"}
+		return {path = path .. rest .. ".png", tint = tint}
 	else
 		for _, t in pairs{"item", "fluid", "recipe", "capsule", "resource"} do
 			if RAW[t][rest] ~= nil and (RAW[t][rest].icon ~= nil or RAW[t][rest].icons ~= nil) then
 				if RAW[t][rest].icon ~= nil then
 					---@diagnostic disable-next-line: return-type-mismatch
-					return {path = RAW[t][rest].icon}
+					return {path = RAW[t][rest].icon, tint = tint}
 				else
 					assert(#RAW[t][rest].icons == 1, "Multi-icon must have exactly 1 icon, but " .. #RAW[t][rest].icons .. " found for " .. serpent.block(RAW[t][rest]) .. " (" .. t .. " " .. rest .. ")")
 					local sourceIcon = RAW[t][rest].icons[1]
 					---@diagnostic disable-next-line: return-type-mismatch
-					return {path = sourceIcon.icon, tint = sourceIcon.tint}
+					return {path = sourceIcon.icon, tint = tint or sourceIcon.tint}
 				end
 			end
 		end
 	end
+	---@diagnostic disable-next-line: missing-return
 	assert(false, "No icon found for " .. pathCode)
 end
 
@@ -109,6 +119,12 @@ local multiIconVals = {
 			{scale = 0.5, shift = {0, 0}},
 		},
 	},
+	overlay = {
+		[2] = {
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.5, shift = {0, 0}},
+		},
+	},
 }
 local function getMultiIconBase(count, arrangement)
 	if arrangement == nil then
@@ -125,12 +141,12 @@ local function getMultiIcon(iconInfo, proto, arrangement)
 	local vals = getMultiIconBase(#iconInfo, arrangement)
 	assert(vals ~= nil, "No multi-icon values found for " .. #iconInfo .. " icons with arrangement " .. (arrangement or "nil"))
 	for i, pathCode in ipairs(iconInfo) do
-		local iconInfo = Icon.getIconInfo(pathCode, proto)
+		local thisIconInfo = Icon.getIconInfo(pathCode, proto)
 		local val = copy(vals[i])
-		val.icon = iconInfo.path
+		val.icon = thisIconInfo.path
 		val.icon_size = size
 		val.icon_mipmaps = 4
-		val.tint = iconInfo.tint
+		val.tint = thisIconInfo.tint
 		newIcons[#newIcons + 1] = val
 	end
 	return newIcons
@@ -149,9 +165,12 @@ Icon.set = function(thing, iconInfo, arrangement)
 	local newIcon = nil
 	if type(iconInfo) == "string" then
 		assert(arrangement == nil, "Cannot specify arrangement for single icon")
-		local iconInfo = Icon.getIconInfo(iconInfo, proto)
-		newIcon = iconInfo.path
-		assert(iconInfo.tint == nil, "Tint not supported for single icon; could add support by setting it as .icons rather than .icon.")
+		local thisIconInfo = Icon.getIconInfo(iconInfo, proto)
+		if thisIconInfo.tint ~= nil then
+			newIcons = {path = thisIconInfo.path, tint = thisIconInfo.tint}
+		else
+			newIcon = thisIconInfo.path
+		end
 	else
 		newIcons = getMultiIcon(iconInfo, proto, arrangement)
 	end

@@ -9,6 +9,9 @@ Each child requirement can have fields:
 * adjustForOrientation - if we should move the child when parent rotates.
 * createdHandler - function to call when child is created. Called as createdHandler(parent, child).
 * destroyedHandler - function to call right before child is destroyed. Called as destroyedHandler(parentName, child).
+
+Note that if children have the same name and position, we can get confused about which one to update/delete, so preferably don't do that. Position invisible children inside the parent entity.
+	TODO maybe add table to record unit_number of children linking back to unit_number or position of parent, so we can find the correct child to update/delete. Still won't work for simple-entity children, but in that case they're probably interchangeable anyway. I don't think I actually need this for anything I want to implement though.
 ]]
 
 local Export = {}
