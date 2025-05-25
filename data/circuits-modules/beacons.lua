@@ -167,7 +167,7 @@ basicEnt.placeable_by = {
 	item = "basic-beacon",
 	count = 1
 }
-basicEnt.fast_replaceable_group = "beacon-2x2"
+basicEnt.fast_replaceable_group = nil
 extend{basicEnt}
 
 ------------------------------------------------------------------------

@@ -3,8 +3,11 @@ Graphics taken from Krastorio2's "singularity beacons" and modified.
 Some code from Krastorio2.
 ]]
 
--- Tint for highlights. TODO later expand to 4 color variants.
-local tint = {1, 0, 0}
+-- Tint for highlights. TODO later expand to color variants (efficiency/speed/prod/quality, also pollution).
+--local tint = {.1, .1, .8}
+local tint = {.9, .1, .1}
+
+-- TODO set profiles to allow say 4 per machine, linear gains.
 
 -- Create item.
 local regulatorItem = copy(RAW.item.beacon)
@@ -16,18 +19,17 @@ extend{regulatorItem}
 -- Create entity.
 local graphicsScale = 0.25
 local animationSpeed = 0.25
-local baseGraphicsShift = util.by_pixel(0, -7)
-local animationGraphicsShift = util.by_pixel(0, -13.5)
-local reflectionShift = util.by_pixel(0, 50)
+local baseGraphicsShift = util.by_pixel(0, -3.5)
+local animationGraphicsShift = util.by_pixel(0, -6.75)
+local reflectionShift = util.by_pixel(0, 25)
 local regulatorEnt = copy(RAW.beacon.beacon)
 regulatorEnt.name = "regulator"
 regulatorEnt.minable = {mining_time = 0.5, result = "regulator"}
-regulatorEnt.max_health = 300
-regulatorEnt.collision_box = {{-0.75, -0.75}, {0.75, 0.75}}
-regulatorEnt.selection_box = {{-1, -1}, {1, 1}}
-regulatorEnt.corpse = "medium-remnants"
-regulatorEnt.supply_area_distance = 2.0
--- TODO edit graphics to look less advanced.
+regulatorEnt.max_health = 100
+regulatorEnt.collision_box = {{-.4, -.4}, {.4, .4}}
+regulatorEnt.selection_box = {{-.5, -.5}, {.5, .5}}
+regulatorEnt.corpse = "small-remnants"
+regulatorEnt.supply_area_distance = 1.0
 regulatorEnt.graphics_set = {
 	module_icons_suppressed = true,
 	random_animation_offset = true,
@@ -42,23 +44,23 @@ regulatorEnt.graphics_set = {
 				layers = {
 					{ -- Base
 						filename = "__LegendarySpaceAge__/graphics/regulator/base.png",
-						width = 230,
-						height = 290,
+						width = 115,
+						height = 145,
 						shift = baseGraphicsShift,
 						scale = graphicsScale,
 					},
 					{ -- Color overlay
 						filename = "__LegendarySpaceAge__/graphics/regulator/base-tint.png",
-						width = 210,
-						height = 248,
+						width = 105,
+						height = 124,
 						shift = baseGraphicsShift,
 						scale = graphicsScale,
 						tint = tint,
 					},
 					{ -- Shadow
 						filename = "__LegendarySpaceAge__/graphics/regulator/shadow.png",
-						width = 358,
-						height = 290,
+						width = 179,
+						height = 145,
 						shift = baseGraphicsShift,
 						scale = graphicsScale,
 						draw_as_shadow = true,
@@ -73,8 +75,8 @@ regulatorEnt.graphics_set = {
 			animation = {
 				filename = "__LegendarySpaceAge__/graphics/regulator/lights.png",
 				line_length = 5,
-				width = 190,
-				height = 214,
+				width = 95,
+				height = 107,
 				frame_count = 10,
 				animation_speed = animationSpeed,
 				scale = graphicsScale,
@@ -90,8 +92,8 @@ regulatorEnt.water_reflection = {
 	pictures = {
 		filename = "__LegendarySpaceAge__/graphics/regulator/reflection.png",
 		priority = "extra-high",
-		width = 20,
-		height = 25,
+		width = 10,
+		height = 12.5,
 		shift = reflectionShift,
 		variation_count = 1,
 		scale = 10 * graphicsScale,
@@ -106,5 +108,5 @@ regulatorEnt.placeable_by = {
 	item = "regulator",
 	count = 1,
 }
-regulatorEnt.fast_replaceable_group = "beacon-2x2"
+regulatorEnt.fast_replaceable_group = nil
 extend{regulatorEnt}
