@@ -8,6 +8,7 @@ local lowGravityRunning = require("control.low-gravity-running")
 local techRateTriggers = require("control.tech-rate-triggers")
 local entitySubstitutions = require("control.entity-substitutions")
 local childEntities = require("control.child-entities")
+local regulators = require("control.regulators")
 
 script.on_nth_tick(60 * 10, function()
 	techRateTriggers.onNthTick()
@@ -56,9 +57,10 @@ for _, event in ipairs({
 		if newEnt ~= nil then
 			e.entity = newEnt
 		end
+		childEntities.onBuilt(e)
+		regulators.onBuilt(e)
 		setRecipeOnBuild.onBuilt(e)
 		apprenticeFoundry.on_created_entity(e)
-		childEntities.onBuilt(e)
 	end)
 end
 

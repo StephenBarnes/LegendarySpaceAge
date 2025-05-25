@@ -82,6 +82,26 @@ for entName, exclusionZoneConst in pairs(ExclusionZoneConst) do
 	}
 end
 
+-- Add hidden beacons for regulators.
+Export["regulator"] = {
+	["regulator-hidden-beacon"] = {{
+		pos = {0, 0},
+		adjustForOrientation = false,
+		createdHandler = function(parent, child)
+			child.destructible = false
+			child.operable = false
+			--parent.operable = false
+			local moduleInventory = child.get_inventory(defines.inventory.beacon_modules)
+			if moduleInventory == nil then
+				log("ERROR: Regulator hidden beacon has no module inventory.")
+			else
+				moduleInventory.insert{name = "regulator-module", count = 1}
+				-- Not giving parent's quality to module, since it's already affecting beacon's effectiveness.
+			end
+		end,
+	}},
+}
+
 -- Add quality variants.
 local QualityScaling = require("const.quality-scaling-power-consumption")
 for entName, originalName in pairs(QualityScaling.qualityToOriginal) do
