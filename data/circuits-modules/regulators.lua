@@ -11,13 +11,13 @@ local collisionBox = {{-.45, -.45}, {.45, .45}}
 
 -- Graphics constants.
 local graphicsScale = 0.28
-local animationSpeed = 0.25
+local defaultAnimationSpeed = 0.3
 local baseGraphicsShift = util.by_pixel(0, -5.5)
 local animationGraphicsShift = util.by_pixel(0, -8.75)
 local reflectionShift = util.by_pixel(0, 15)
 
--- Create profile: linear up to 5, then we want num*profile = 5, so profile = 5/num.
-local maxRegulators = 4
+-- Create profile: linear up to max number of regulators, then we want num*profile = maxRegulators, so profile = maxRegulators/num.
+local maxRegulators = 1
 local regulatorProfile = {}
 for i = 1, 50 do
 	if i <= maxRegulators then
@@ -31,11 +31,12 @@ for regulatorName, regulatorVals in pairs(Const) do
 	-- Create item.
 	local regulatorItem = copy(RAW.item.beacon)
 	regulatorItem.name = regulatorName .. "-regulator"
-	Icon.set(regulatorItem, {{"LSA/regulator/icon-base"}, {"LSA/regulator/icon-tint", tint=regulatorVals.color}}, "overlay")
+	Icon.set(regulatorItem, {{"LSA/regulator/icon-base"}, {"LSA/regulator/icon-tint", tint=regulatorVals.baseColor}}, "overlay")
 	regulatorItem.place_result = regulatorName .. "-regulator"
 	extend{regulatorItem}
 
 	-- Create entity.
+	local animationSpeed = defaultAnimationSpeed * (regulatorVals.animationSpeedMult or 1)
 	local regulatorEnt = copy(RAW.beacon.beacon)
 	regulatorEnt.name = regulatorName .. "-regulator"
 	regulatorEnt.localised_name = {"entity-name.x-regulator", {"regulator-type." .. regulatorName}}
@@ -77,7 +78,7 @@ for regulatorName, regulatorVals in pairs(Const) do
 							height = 124,
 							shift = baseGraphicsShift,
 							scale = graphicsScale,
-							tint = regulatorVals.color,
+							tint = regulatorVals.baseColor,
 						},
 						{ -- Shadow
 							filename = "__LegendarySpaceAge__/graphics/regulator/shadow.png",
@@ -105,7 +106,7 @@ for regulatorName, regulatorVals in pairs(Const) do
 					shift = animationGraphicsShift,
 					--blend_mode = "additive",
 					draw_as_glow = true,
-					tint = regulatorVals.color,
+					tint = regulatorVals.lightColor,
 				},
 			},
 		},
