@@ -56,6 +56,7 @@ require("data.pre-space.condensing-turbine")
 require("data.pre-space.drill-nodes")
 require("data.broad-changes.invisible-fluid-connectors")
 require("data.circuits-modules.regulators")
+require("data.circuits-modules.silicon")
 
 -- Editing planets
 require("data.pre-space.misc")
