@@ -13,7 +13,7 @@ return {
 	["natural-gas"] = {2, false},
 	["petroleum-gas"] = {3, false},
 	["dry-gas"] = {4, false},
-	["syngas"] = {4, false},
+	["syngas"] = {5, false},
 	["ammonia"] = {10, false},
 	["volcanic-gas"] = {10, false},
 	["spore-gas"] = {20, false},
@@ -25,6 +25,8 @@ return {
 	["air"] = {0, false},
 	["flue-gas"] = {3, false},
 	["sulfurous-gas"] = {4, false},
+	["silicon-gas"] = {10, false},
+	["silicon-waste-gas"] = {10, false},
 
 	-- Liquids - only gas-ventable in space (no pollution), and only pump-ventable on planets.
 	["thruster-fuel"] = {0, true}, -- hydrogen

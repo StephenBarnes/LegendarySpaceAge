@@ -15,6 +15,7 @@ The initial silicon seed crystal is obtained from the silica recipe above, but i
 Cutting into wafers or seeds: silicon crystal ingot + carborundum -> (silicon seed crystals or silicon wafers) + crude silicon (dust)
 ]]
 
+local silicaTint = {.533, .604, .569}
 local crudeSiliconTint = {.349, .51, .431}
 local polysiliconTint = {.302, .455, .373}
 local siliconGasTint = polysiliconTint
@@ -38,6 +39,14 @@ crudeSiliconItem.hidden_in_factoriopedia = false
 crudeSiliconItem.spoil_ticks = nil
 crudeSiliconItem.spoil_result = nil
 extend{crudeSiliconItem}
+
+-- Create silica item.
+local silicaItem = copy(crudeSiliconItem)
+silicaItem.name = "silica"
+Icon.set(silicaItem, "LSA/silicon/silica")
+silicaItem.random_tint_color = silicaTint
+silicaItem.has_random_tint = true
+extend{silicaItem}
 
 -- Create polysilicon item.
 local polysiliconItem = copy(crudeSiliconItem)

@@ -37,7 +37,7 @@ return {
 		["basic-metal-intermediates"] = {"test-exothermic", "iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate", "advanced-parts"},
 		rust = {"rusty-ingot-iron-cold", "rusty-iron-plate", "rusty-iron-gear-wheel", "rusty-iron-stick", "sand-derust-ingot-iron-cold", "sand-derust-iron-plate", "sand-derust-iron-gear-wheel", "sand-derust-iron-stick", "acid-derust-ingot-iron-cold", "acid-derust-iron-plate", "acid-derust-iron-gear-wheel", "acid-derust-iron-stick"},
 		["raw-material"] = {"stone-brick", "ash", "sand", "glass", "copper-matte", "sulfur", "niter", "gunpowder", "ash-reprocessing"},
-		silicon = {"crude-silicon", "polysilicon", "silicon-gas", "silicon-waste-gas"},
+		silicon = {"silica", "crude-silicon", "polysilicon", "silicon-gas", "silicon-waste-gas"},
 		["petroleum-materials"] = {"pitch", "carbon", "solid-fuel", "explosives", "plastic-bar", "rubber", "rubber-from-latex", "rubber-from-oil", "char-carbon", "inverse-vulcanization"},
 		circuits = {"electronic-circuit", "advanced-circuit", "processing-unit", "white-circuit"},
 		["intermediate-product"] = {"doped-wafer", "microchip", "engine-unit", "flying-robot-frame", "barrel", "gas-tank", "battery", "charged-battery", "holmium-battery", "charged-holmium-battery"},
