@@ -18,7 +18,7 @@ Recipe.edit{
 	recipe = "solar-panel",
 	ingredients = {
 		{"glass", 10},
-		{"silicon", 10},
+		{"polysilicon", 10},
 		{"processing-unit", 2},
 		{"frame", 2},
 	},

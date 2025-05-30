@@ -27,12 +27,6 @@ Circuit recipes:
 
 -- Create new intermediate items: silicon, doped wafers, microchips.
 
-local silicon = copy(ITEM["plastic-bar"])
-silicon.name = "silicon"
-Icon.set(silicon, "LSA/circuit-chains/silicon")
-silicon.stack_size = 200
-extend{silicon}
-
 local dopedWafer = copy(ITEM["plastic-bar"])
 dopedWafer.name = "doped-wafer"
 Icon.set(dopedWafer, "LSA/circuit-chains/doped-wafer")
@@ -50,7 +44,7 @@ extend{microchip}
 
 Recipe.make{
 	copy = "plastic-bar",
-	recipe = "silicon",
+	recipe = "polysilicon",
 	ingredients = {
 		{"sand", 2},
 		{"sulfuric-acid", 10},
@@ -60,14 +54,14 @@ Recipe.make{
 	allow_decomposition = true,
 	allow_as_intermediate = true,
 }
-Tech.addRecipeToTech("silicon", "advanced-circuit", 1)
---Tech.addRecipeToTech("silicon", "solar-energy", 1)
+Tech.addRecipeToTech("polysilicon", "advanced-circuit", 1)
+--Tech.addRecipeToTech("polysilicon", "solar-energy", 1)
 
 Recipe.make{
 	copy = "plastic-bar",
 	recipe = "doped-wafer",
 	ingredients = {
-		{"silicon", 1},
+		{"polysilicon", 1},
 		{"carbon", 1},
 		{"liquid-nitrogen", 10},
 	},

@@ -15,11 +15,22 @@ The initial silicon seed crystal is obtained from the silica recipe above, but i
 Cutting into wafers or seeds: silicon crystal ingot + carborundum -> (silicon seed crystals or silicon wafers) + crude silicon (dust)
 ]]
 
+local crudeSiliconTint = {.349, .51, .431}
+local polysiliconTint = {.302, .455, .373}
+local siliconGasTint = polysiliconTint
+local siliconGasFlowTint = {.207, .311, .255}
+local siliconWasteGasTint = {.557, .569, .345}
+local siliconWasteGasFlowTint = {.462, .472, .286}
+
+-- TODO create silica item (probably in stone processing file)
+
 -- Create crude silicon item.
 local crudeSiliconItem = copy(RAW.item["iron-plate"])
 crudeSiliconItem.name = "crude-silicon"
 Icon.set(crudeSiliconItem, "LSA/silicon/crude/1")
 Icon.variants(crudeSiliconItem, "LSA/silicon/crude/%", 3)
+crudeSiliconItem.random_tint_color = crudeSiliconTint
+crudeSiliconItem.has_random_tint = true
 crudeSiliconItem.localised_name = nil
 crudeSiliconItem.localised_description = nil
 crudeSiliconItem.hidden = false
@@ -28,11 +39,37 @@ crudeSiliconItem.spoil_ticks = nil
 crudeSiliconItem.spoil_result = nil
 extend{crudeSiliconItem}
 
--- TODO create silica item (probably in stone processing file)
+-- Create polysilicon item.
+local polysiliconItem = copy(crudeSiliconItem)
+polysiliconItem.name = "polysilicon"
+Icon.set(polysiliconItem, "LSA/silicon/poly/1")
+Icon.variants(polysiliconItem, "LSA/silicon/poly/%", 2)
+polysiliconItem.random_tint_color = polysiliconTint
+polysiliconItem.has_random_tint = true
+extend{polysiliconItem}
 
--- TODO create silicon gas.
--- TODO create silicon waste gas.
--- TODO create polysilicon.
+-- Create silicon gas fluid.
+local siliconGasFluid = copy(RAW.fluid.steam)
+siliconGasFluid.name = "silicon-gas"
+Icon.set(siliconGasFluid, {{"LSA/fluids/gas-2", tint = siliconGasTint}})
+Fluid.setSimpleTemp(siliconGasFluid, 1000)
+siliconGasFluid.base_color = siliconGasTint
+siliconGasFluid.visualization_color = siliconGasTint
+siliconGasFluid.flow_color = siliconGasFlowTint
+siliconGasFluid.auto_barrel = false
+extend{siliconGasFluid}
+
+-- Create silicon waste gas fluid.
+local siliconWasteGasFluid = copy(RAW.fluid.steam)
+siliconWasteGasFluid.name = "silicon-waste-gas"
+Icon.set(siliconWasteGasFluid, {{"LSA/fluids/gas-2", tint = siliconWasteGasTint}})
+Fluid.setSimpleTemp(siliconWasteGasFluid, 1000)
+siliconWasteGasFluid.base_color = siliconWasteGasTint
+siliconWasteGasFluid.visualization_color = siliconWasteGasTint
+siliconWasteGasFluid.flow_color = siliconWasteGasFlowTint
+siliconWasteGasFluid.auto_barrel = false
+extend{siliconWasteGasFluid}
+
 -- TODO create silicon crystal ingot.
 -- TODO create silicon seed crystal.
 -- TODO create silicon wafer.

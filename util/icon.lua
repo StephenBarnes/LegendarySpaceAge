@@ -67,6 +67,9 @@ end
 -- Table that specifies the layout of multi-icons, by arrangement and number of icons.
 local multiIconVals = {
 	default = { -- Default: 1st is product, 2nd is ingredient in top-left, 3rd is ingredient in top-right.
+		[1] = {
+			{scale = 0.5, shift = {0, 0}},
+		},
 		[2] = {
 			{scale = 0.46, shift = {5, 5}},
 			{scale = 0.3, shift = {-5, -4}},
@@ -135,7 +138,7 @@ local function getMultiIconBase(count, arrangement)
 	end
 end
 local function getMultiIcon(iconInfo, proto, arrangement)
-	assert(#iconInfo > 1, "Multi-icon must have at least 2 icons")
+	-- Note we can have a "multi-icon" with only 1 icon, eg because we want to tint it.
 	local newIcons = {}
 	local size = Icon.iconSize(proto)
 	local vals = getMultiIconBase(#iconInfo, arrangement)

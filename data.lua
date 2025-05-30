@@ -57,6 +57,7 @@ require("data.pre-space.drill-nodes")
 require("data.broad-changes.invisible-fluid-connectors")
 require("data.circuits-modules.regulators")
 require("data.circuits-modules.silicon")
+require("data.circuits-modules.clean-assemblers")
 
 -- Editing planets
 require("data.pre-space.misc")

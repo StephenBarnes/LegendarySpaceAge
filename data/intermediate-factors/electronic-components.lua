@@ -63,7 +63,7 @@ local recipeFromSilicon = Recipe.make{
 	copy = recipeFromPlastic,
 	recipe = "components-from-silicon",
 	ingredients = {
-		{"silicon", 2},
+		{"polysilicon", 2},
 		{"glass", 1},
 		{"plastic-bar", 1},
 		{"carbon", 1},
@@ -72,7 +72,7 @@ local recipeFromSilicon = Recipe.make{
 	},
 	results = {{"electronic-components", 20}},
 	time = 2.5,
-	icons = {"electronic-components", "glass", "plastic-bar", "silicon"},
+	icons = {"electronic-components", "glass", "plastic-bar", "polysilicon"},
 	category = "electronics-with-fluid",
 }
 Tech.addRecipeToTech("components-from-silicon", "processing-unit")
