@@ -83,3 +83,4 @@ extend{siliconWasteGasFluid}
 -- TODO create silicon seed crystal.
 -- TODO create silicon wafer.
 -- TODO create recipes.
+-- TODO create tech/s.
