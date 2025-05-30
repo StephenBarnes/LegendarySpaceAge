@@ -1,7 +1,7 @@
---[[ This file will create items for sand, glass, and glass batch, and recipes for them, and techs.
+--[[ This file will create items for sand and glass, and recipes for them, and techs.
 Stone can be crushed into sand in an assembling machine: 1 stone -> 1 sand
-Sand can then be combined with ash to make glass batch: 1 sand + 1 ash -> 1 glass-batch
-Glass batch can be smelted to glass in a furnace or foundry: 1 glass-batch -> 1 glass
+Sand and ash can be smelted to glass in a furnace or foundry: 1 sand + 1 ash -> 1 glass
+Later TODO add more efficient alternative recipes for glass.
 ]]
 
 -- Create sand item.
@@ -11,13 +11,6 @@ Icon.set(sandItem, "LSA/glass-etc/sand/1")
 Icon.variants(sandItem, "LSA/glass-etc/sand/%", 3)
 sandItem.stack_size = 100 -- Increase 50->100 vs stone and ores. So it makes sense to crush stone before shipping.
 extend{sandItem}
-
--- Create glass batch item.
-local glassBatchItem = copy(ITEM["sulfur"])
-glassBatchItem.name = "glass-batch"
-Icon.set(glassBatchItem, "LSA/glass-etc/batch/1")
-Icon.variants(glassBatchItem, "LSA/glass-etc/batch/%", 3)
-extend{glassBatchItem}
 
 -- Create glass item.
 local glassItem = copy(ITEM["iron-plate"])
@@ -37,23 +30,10 @@ sandRecipe.allow_decomposition = true
 sandRecipe.allow_as_intermediate = true
 extend{sandRecipe}
 
--- Create recipe for sand + ash -> glass batch.
-local glassBatchRecipe = copy(RECIPE["iron-plate"])
-glassBatchRecipe.name = "glass-batch"
-glassBatchRecipe.ingredients = {{type="item", name="sand", amount=1}, {type="item", name="ash", amount=1}}
-glassBatchRecipe.results = {{type="item", name="glass-batch", amount=1}}
-glassBatchRecipe.category = "crafting"
-glassBatchRecipe.enabled = false
-glassBatchRecipe.energy_required = 0.5
-glassBatchRecipe.allow_decomposition = true
-glassBatchRecipe.allow_as_intermediate = true
-glassBatchRecipe.auto_recycle = true
-extend{glassBatchRecipe}
-
--- Create recipe for glass batch -> glass.
+-- Create recipe for sand + ash -> glass.
 local glassRecipe = copy(RECIPE["iron-plate"])
 glassRecipe.name = "glass"
-glassRecipe.ingredients = {{type="item", name="glass-batch", amount=1}}
+glassRecipe.ingredients = {{type="item", name="sand", amount=1}, {type="item", name="ash", amount=1}}
 glassRecipe.results = {{type="item", name="glass", amount=1}}
 Recipe.setCategories(glassRecipe, {"smelting", "metallurgy"})
 glassRecipe.enabled = false
@@ -66,10 +46,6 @@ extend{glassRecipe}
 local glassTech = copy(TECH["logistics"])
 glassTech.name = "glass"
 glassTech.effects = {
-	{
-		type = "unlock-recipe",
-		recipe = "glass-batch",
-	},
 	{
 		type = "unlock-recipe",
 		recipe = "glass",
