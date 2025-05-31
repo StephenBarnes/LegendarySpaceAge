@@ -4,6 +4,8 @@ Also creates new groups (top-level tabs).
 
 Subgroup/order shouldn't be set anywhere else in the mod. This file handles everything.
 
+NOTE that we want 6 groups per row in Factoriopedia and in player inventory, and preferably it should fill up a whole number of rows.
+
 TODO check that all non-hidden items/fluids/recipes are included in the ARRANGEMENT below. In auto-debugger.
 ]]
 
@@ -12,10 +14,38 @@ TODO check that all non-hidden items/fluids/recipes are included in the ARRANGEM
 extend{
 	{
 		type = "item-group",
-		name = "post-space",
+		name = "material-processing",
+		order = "c3",
+		icon = "__LegendarySpaceAge__/graphics/tabs/material-processing.png",
+		icon_size = 256,
+	},
+	{
+		type = "item-group",
+		name = "metallurgy",
+		order = "c3",
+		icon = "__LegendarySpaceAge__/graphics/tabs/metallurgy.png",
+		icon_size = 256,
+	},
+	{
+		type = "item-group",
+		name = "petrochemistry",
+		order = "c3",
+		icon = "__base__/graphics/technology/advanced-oil-processing.png",
+		icon_size = 256,
+	},
+	{
+		type = "item-group",
+		name = "chemistry",
+		order = "c3",
+		icon = "__space-age__/graphics/technology/research-productivity.png",
+		icon_size = 256,
+	},
+	{
+		type = "item-group",
+		name = "heat",
 		order = "d2",
-		icon = RAW["item-group"].space.icon,
-		icon_size = RAW["item-group"].space.icon_size,
+		icon = "__LegendarySpaceAge__/graphics/tabs/heat.png",
+		icon_size = 256,
 	},
 	{
 		type = "item-group",
@@ -24,7 +54,25 @@ extend{
 		icon = "__LegendarySpaceAge__/graphics/intermediate-factors/factors-tab.png",
 		icon_size = 256,
 	},
+	{
+		type = "item-group",
+		name = "bio-processing",
+		order = "d1",
+		icon = "__space-age__/graphics/technology/tree-seeding.png",
+		icon_size = 256,
+	},
 }
+
+-- Change logistics and production tabs to use new icons, so they fit better with the rest of the tabs' icons.
+RAW["item-group"]["logistics"].icon = "__LegendarySpaceAge__/graphics/tabs/logistics.png"
+RAW["item-group"]["logistics"].icon_size = 256
+RAW["item-group"]["production"].icon = "__LegendarySpaceAge__/graphics/tabs/production.png"
+RAW["item-group"]["production"].icon_size = 256
+
+-- Change intermediate-products tab to use manufacturing icon.
+-- (Could create a new tab, but rather reusing it in case other mods want to put stuff in there.)
+RAW["item-group"]["intermediate-products"].icon = "__LegendarySpaceAge__/graphics/tabs/manufacturing.png"
+RAW["item-group"]["intermediate-products"].icon_size = 256
 
 -- Change the space tab's icon, from satellite to rocket silo, since it's now anything after Nauvis.
 RAW["item-group"]["space"].icon = "__base__/graphics/technology/rocket-silo.png"
@@ -42,7 +90,7 @@ for groupName, subgroups in pairs(ARRANGEMENT) do
 	local group = RAW["item-group"][groupName]
 	assert(group ~= nil, "Group " .. groupName .. " not found")
 	groupCount = groupCount + 1
-	group.order = string.format("%02d", groupCount)
+	group.order = string.format("a-%02d", groupCount)
 	local subgroupCount = 0
 	for subgroupName, entries in pairs(subgroups) do
 		subgroupCount = subgroupCount + 1
@@ -64,7 +112,7 @@ for groupName, subgroups in pairs(ARRANGEMENT) do
 			entryCount = entryCount + 1
 			local thing = nil
 			local thingType = nil
-			for _, kind in pairs{"item", "fluid", "recipe", "module", "tool"} do -- Prefer using item, then fluid, etc.
+			for _, kind in pairs{"item", "fluid", "recipe", "module", "tool", "ammo", "gun"} do -- Prefer using item, then fluid, etc.
 				if RAW[kind][entry] ~= nil then
 					thing = RAW[kind][entry]
 					thingType = kind
@@ -90,10 +138,10 @@ for groupName, subgroups in pairs(ARRANGEMENT) do
 				-- Copy the subgroup and order to recipes (and some other types) of the same name. (Could zero it out, but that doesn't always seem to work, eg for rail planners.)
 				-- for mimicKind, _ in pairs(RAW) do -- This somehow makes the game hang at "loading prototypes", weird.
 				for _, mimicKind in pairs{
-					"fluid", "recipe", "module", "tool",
+					"fluid", "recipe", "module", "tool", "resource",
 					"rail-planner", "straight-rail", "item-with-entity-data",
 					"space-platform-starter-pack", "space-platform-hub",
-					"combat-robot", "capsule",
+					"combat-robot", "capsule", "ammo", "gun",
 				} do
 					if thingType ~= mimicKind then
 						local mimicThing = RAW[mimicKind][thing.name]

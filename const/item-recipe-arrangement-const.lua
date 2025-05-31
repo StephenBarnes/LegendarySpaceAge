@@ -1,4 +1,9 @@
--- This file defines the order and item-groups and item-subgroups of all items, fluids, and recipes, in Factoriopedia and in crafting menu for players and machines.
+--[[ This file defines the order and item-groups and item-subgroups of all items, fluids, and recipes, in Factoriopedia and in crafting menu for players and machines.
+See data/broad-changes/item-recipe-arrangement.lua for the actual code that applies this file.
+	Orders of items/recipe/etc, subgroups, and groups (tabs) are set based on order in this file.
+	Item-subgroups named in this file are automatically created if they don't already exist.
+	Item-groups named in this file are not automatically created, they're explicitly created in data/broad-changes/item-recipe-arrangement.lua.
+]]
 
 return {
 	logistics = {
@@ -31,37 +36,53 @@ return {
 		["module-2"] = {"electronic-circuit-primed", "advanced-circuit-primed", "processing-unit-primed", "white-circuit-primed", "circuit-primer"},
 		["module-3"] = {"electronic-circuit-superclocked", "advanced-circuit-superclocked", "processing-unit-superclocked", "white-circuit-superclocked", "superclocker"},
 	},
-	["intermediate-products"] = {
-		["raw-resource"] = {"coal", "stone", "iron-ore", "copper-ore", "uranium-ore", "fluorite", "raw-fish", "ice"},
-		ingots = {"ingot-iron-hot", "ingot-copper-hot", "ingot-steel-hot", "ingot-iron-cold", "ingot-copper-cold", "ingot-steel-cold", "heat-ingot-iron", "heat-ingot-copper", "heat-ingot-steel"},
-		["basic-metal-intermediates"] = {"test-exothermic", "iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate", "advanced-parts"},
-		rust = {"rusty-ingot-iron-cold", "rusty-iron-plate", "rusty-iron-gear-wheel", "rusty-iron-stick", "sand-derust-ingot-iron-cold", "sand-derust-iron-plate", "sand-derust-iron-gear-wheel", "sand-derust-iron-stick", "acid-derust-ingot-iron-cold", "acid-derust-iron-plate", "acid-derust-iron-gear-wheel", "acid-derust-iron-stick"},
-		["raw-material"] = {"stone-brick", "ash", "sand", "glass", "copper-matte", "sulfur", "niter", "gunpowder", "ash-reprocessing"},
-		silicon = {"silica", "crude-silicon", "polysilicon", "silicon-gas", "silicon-waste-gas"},
-		["petroleum-materials"] = {"pitch", "carbon", "solid-fuel", "explosives", "plastic-bar", "rubber", "rubber-from-latex", "rubber-from-oil", "char-carbon", "inverse-vulcanization"},
-		circuits = {"electronic-circuit", "advanced-circuit", "processing-unit", "white-circuit"},
-		["intermediate-product"] = {"doped-wafer", "microchip", "engine-unit", "flying-robot-frame", "barrel", "gas-tank", "battery", "charged-battery", "holmium-battery", "charged-holmium-battery"},
-		filtration = {"filter", "spent-filter", "clean-filter", "steam-condensation", "ice-melting"},
+	["material-processing"] = {
+		["raw-resource"] = {"stone", "calcite", "uranium-ore", "fluorite", "ice"},
+		["raw-material"] = {"stone-brick", "ash", "sand", "glass", "sulfur", "niter", "gunpowder", "ash-reprocessing"},
+		rubber = {"rubber", "rubber-from-latex", "rubber-from-oil"},
+		["silicon-processing"] = {"silica", "crude-silicon", "polysilicon", "silicon-gas", "silicon-waste-gas"},
+		["uranium-processing"] = {"uranium-processing", "plutonium", "uranium-235", "uranium-238", "yellowcake", "fuel-rod", "uranium-fuel-cell", "depleted-uranium-fuel-cell", "depleted-fuel-rod", "nuclear-fuel-reprocessing", "kovarex-enrichment-process"},
 
-		["fluid-recipes"] = {"oil-fractionation", "gas-fractionation", "heavy-oil-cracking", "rich-gas-cracking", "light-oil-cracking", "make-sulfuric-acid"},
-		["complex-fluid-recipes"] = {"syngas-liquefaction", "coal-coking", "heavy-oil-coking", "tar-distillation", "pitch-processing", "make-lubricant", "make-diesel"},
-		["early-agriculture"] = {"wood", "tree-seed", "fertilizer", "sapling", "spoilage-from-wood", "ammonia-from-spoilage", "ammonia-synthesis"},
-		["cryo-recipes"] = {"syngas-reforming", "ammonia-cracking", "electrolysis", "nitrogen-compression", "nitrogen-expansion", "oxygen-cascade-cooling", "hydrogen-cascade-cooling", "regenerative-cooling"},
-		["intermediate-recipe"] = {},
-		["science-pack"] = {"automation-science-pack", "logistic-science-pack", "military-science-pack", "chemical-science-pack", "production-science-pack", "utility-science-pack", "space-science-pack"},
-		["alien-science-packs"] = {"asteroid-science-pack", "metallurgic-science-pack", "agricultural-science-pack", "electromagnetic-science-pack", "nuclear-science-pack", "cryogenic-science-pack", "promethium-science-pack"},
+		-- TODO move these to better places.
+		["fulgora-processes"] = {"scrap", "scrap-recycling", "holmium-ore", "make-holmium-solution", "holmium-plate", "superconductor", "make-electrolyte", "supercapacitor"},
+		["aquilo-processes"] = {"ammoniacal-solution", "fluorine", "lithium-brine", "fusion-plasma"},
+
+		["filter-meta"] = {"filter", "spent-filter", "clean-filter"},
 		["planet-filtration"] = {"filter-lake-water", "volcanic-gas-separation", "filter-slime", "fulgoran-sludge-filtration", "ammoniacal-solution-separation"},
 		["air-separation"] = {"air-separation-nauvis", "air-separation-vulcanus", "air-separation-gleba", "air-separation-fulgora", "air-separation-aquilo"},
 		["deep-drilling"] = {"deep-drill-nauvis", "deep-drill-apollo", "recipe-drill-node-ice", "recipe-drill-node-carbon", "deep-drill-vulcanus", "deep-drill-gleba", "recipe-drill-node-geoplasm", "deep-drill-fulgora"},
+	},
+	metallurgy = {
+		ores = {"iron-ore", "copper-ore", "tungsten-ore"},
+		["ore-intermediates"] = {"copper-matte"},
+		ingots = {"ingot-iron-hot", "ingot-copper-hot", "ingot-steel-hot", "ingot-iron-cold", "ingot-copper-cold", "ingot-steel-cold"},
+		["basic-metal-intermediates"] = {"test-exothermic", "iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate", "advanced-parts"},
+		rust = {"rusty-ingot-iron-cold", "rusty-iron-plate", "rusty-iron-gear-wheel", "rusty-iron-stick"},
+		derusting = {"sand-derust-ingot-iron-cold", "sand-derust-iron-plate", "sand-derust-iron-gear-wheel", "sand-derust-iron-stick", "acid-derust-ingot-iron-cold", "acid-derust-iron-plate", "acid-derust-iron-gear-wheel", "acid-derust-iron-stick"},
+		["tungsten-metallurgy"] = {"tungsten-carbide", "tungsten-plate", "tungsten-steel"},
+
+		["vulcanus-processes"] = {"metals-from-lava", "make-molten-iron", "make-molten-copper", "make-molten-steel", "make-molten-tungsten", "tungsten-heating"},
+		["vulcanus-casting"] = {"casting-iron", "casting-copper", "casting-steel", "casting-brick", "sulfur-concrete", "sulfur-refined-concrete", "casting-iron-gear-wheel", "casting-iron-stick", "casting-copper-cable", "casting-advanced-parts", "tungsten-carbide-from-molten", "tungsten-steel-from-molten"},
+	},
+	petrochemistry = {
+		["petroleum-materials"] = {"coal", "pitch", "carbon", "solid-fuel", "explosives", "plastic-bar", "char-carbon", "inverse-vulcanization"},
+		["petrochem-processing"] = {"oil-fractionation", "gas-fractionation", "heavy-oil-cracking", "rich-gas-cracking", "light-oil-cracking"},
+		["petrochem-processing-2"] = {"make-syngas", "syngas-liquefaction", "coal-coking", "heavy-oil-coking", "tar-distillation", "pitch-processing", "make-lubricant", "make-diesel"},
+	},
+	chemistry = {
+		["fluid-recipes"] = {"make-sulfuric-acid"},
+		["ammonia-recipes"] = {"ammonia-synthesis", "ammonia-cracking"},
+		["misc-chem"] = {"syngas-reforming", "electrolysis"},
 		["internal-process"] = {},
 
 		-- Barrel / gas tank recipes: hidden in factoriopedia.
+		-- TODO maybe move these to a separate tab entirely?
+		-- TODO maybe remove these from here, and set orders programatically to be the same as the fluids.
 		barrel = {"crude-oil-barrel", "nitrogen-gas-barrel", "slime-barrel", "fulgoran-sludge-barrel", "natural-gas-barrel", "water-barrel", "geoplasm-barrel", "holmium-solution-barrel", "fluorine-barrel", "compressed-nitrogen-gas-barrel", "tar-barrel", "oxygen-gas-barrel", "electrolyte-barrel", "chitin-broth-barrel", "spore-gas-barrel", "hydrogen-gas-barrel", "heavy-oil-barrel", "ammonia-barrel", "liquid-nitrogen-barrel", "light-oil-barrel", "lithium-brine-barrel", "latex-barrel", "petroleum-gas-barrel", "thruster-oxidizer-barrel", "thruster-fuel-barrel", "sulfuric-acid-barrel", "dry-gas-barrel", "lubricant-barrel", "syngas-barrel", "diesel-barrel", "meat-paste-barrel", "hydrofluoric-acid-barrel"},
 		["fill-barrel"] = {"fulgoran-sludge-barrel", "slime-barrel", "crude-oil-barrel", "water-barrel", "holmium-solution-barrel", "geoplasm-barrel", "electrolyte-barrel", "tar-barrel", "chitin-broth-barrel", "heavy-oil-barrel", "lithium-brine-barrel", "light-oil-barrel", "latex-barrel", "sulfuric-acid-barrel", "lubricant-barrel", "diesel-barrel", "meat-paste-barrel"},
 		["fill-gas-tank"] = {"nitrogen-gas-barrel", "natural-gas-barrel", "fluorine-barrel", "compressed-nitrogen-gas-barrel", "oxygen-gas-barrel", "hydrogen-gas-barrel", "spore-gas-barrel", "ammonia-barrel", "liquid-nitrogen-barrel", "thruster-oxidizer-barrel", "petroleum-gas-barrel", "dry-gas-barrel", "thruster-fuel-barrel", "syngas-barrel", "hydrofluoric-acid-barrel"},
 		["empty-barrel"] = {"empty-crude-oil-barrel", "empty-slime-barrel", "empty-fulgoran-sludge-barrel", "empty-holmium-solution-barrel", "empty-geoplasm-barrel", "empty-water-barrel", "empty-electrolyte-barrel", "empty-tar-barrel", "empty-chitin-broth-barrel", "empty-heavy-oil-barrel", "empty-lithium-brine-barrel", "empty-light-oil-barrel", "empty-latex-barrel", "empty-sulfuric-acid-barrel", "empty-lubricant-barrel", "empty-diesel-barrel", "empty-meat-paste-barrel"},
 		["empty-gas-tank"] = {"empty-nitrogen-gas-barrel", "empty-natural-gas-barrel", "empty-fluorine-barrel", "empty-compressed-nitrogen-gas-barrel", "empty-oxygen-gas-barrel", "empty-hydrogen-gas-barrel", "empty-spore-gas-barrel", "empty-ammonia-barrel", "empty-liquid-nitrogen-barrel", "empty-thruster-oxidizer-barrel", "empty-petroleum-gas-barrel", "empty-dry-gas-barrel", "empty-thruster-fuel-barrel", "empty-syngas-barrel", "empty-hydrofluoric-acid-barrel"},
-		-- TODO maybe remove these from here, and set orders programatically to be the same as the fluids.
 	},
 	["intermediate-factors"] = {
 		resin = {"resin", "wood-resin", "pitch-resin", "rich-gas-resin", "smelt-slipstack-pearl"},
@@ -77,6 +98,25 @@ return {
 		sensor = {"sensor", "sensor-from-green-circuit", "sensor-from-red-circuit", "sensor-from-blue-circuit", "sensor-from-sencytium"},
 		actuator = {"electric-engine-unit", "actuator-standard", "actuator-from-blue-circuit", "actuator-augmented", "actuator-from-appendage"},
 		["low-density-structure"] = {"low-density-structure", "low-density-structure-standard", "casting-low-density-structure", "lds-from-chitin-and-carbon-fiber"},
+	},
+	["intermediate-products"] = { -- Renamed to "manufacturing" via localized strings, but reusing the existing item-group internal name in case other mods want to put stuff in there.
+		circuits = {"electronic-circuit", "advanced-circuit", "processing-unit", "white-circuit"},
+		["intermediate-product"] = {"doped-wafer", "microchip", "engine-unit", "flying-robot-frame", "barrel", "gas-tank", "battery", "charged-battery", "holmium-battery", "charged-holmium-battery"},
+		["intermediate-recipe"] = {},
+		["science-pack"] = {"automation-science-pack", "logistic-science-pack", "military-science-pack", "chemical-science-pack", "production-science-pack", "utility-science-pack", "space-science-pack"},
+		["alien-science-packs"] = {"asteroid-science-pack", "metallurgic-science-pack", "agricultural-science-pack", "electromagnetic-science-pack", "nuclear-science-pack", "cryogenic-science-pack", "promethium-science-pack"},
+	},
+	["bio-processing"] = {
+		["early-agriculture"] = {"wood", "tree-seed", "fertilizer", "sapling", "spoilage-from-wood", "ammonia-from-spoilage"},
+		["nauvis-agriculture"] = {"raw-fish", "fish-breeding", "nutrients-from-fish", "nutrients-from-biter-egg", "biter-egg"},
+		["spoilage-and-nutrients"] = {"spoilage", "nutrients-from-spoilage", "sugar", "nutrients-from-yumako-mash", "nutrients-from-bioflux", "nutrients", "nutrients-from-marrow"},
+		["yumako-and-jellynut"] = {"yumako-seed", "jellynut-seed", "fertilized-yumako-seed", "fertilized-jellynut-seed", "yumako", "jellynut", "yumako-mash", "jelly", "yumako-processing", "jellynut-processing"},
+		["agriculture-processes"] = {"pentapod-egg", "activated-pentapod-egg"},
+		["gleba-non-agriculture"] = {"marrow", "chitin-fragments", "chitin-block", "tubule", "appendage", "sencytium", "making-chitin-broth", "landfill-from-chitin"},
+		["agriculture-products"] = {"bioflux", "bioflux-from-eggs", "biolubricant", "bioplastic", "slipstack-nest", "sprouted-boomnut", "pentapod-egg", "activated-pentapod-egg"},
+		["slipstacks-and-boompuffs"] = {"slipstack-pearl", "slipstack-nest", "boomnut", "sprouted-boomnut", "boomsac", "crush-boomnut", "boomsac-deflation", "petrophage", "petrophage-cultivation", "refresh-petrophages"},
+		["stingfrond-products"] = {"stingfrond-sprout", "neurofibril", "cyclosome-resynchronization", "carbon-fiber", "explosive-desynchronization", "cyclosome-1", "cyclosome-2", "cyclosome-3", "cyclosome-4", "cyclosome-5"},
+		["fulgora-agriculture"] = {"fulgorite-shard", "electrophage", "polysalt", "fulgorite-starter", "electrophage-cultivation", "electrophage-cultivation-holmium"},
 	},
 	space = {
 		["space-interactors"] = {"rocket-silo", "cargo-bay", "space-platform-starter-pack", "cargo-landing-pad", "cargo-pod", "rocket-part", "assembled-rocket-part", "cargo-pod-container", "telescope"},
@@ -94,36 +134,26 @@ return {
 		["belt-connections"] = {"metallic-belt-carbonic-belt", "carbonic-belt-ice-belt", "ice-belt-belt-of-aquilo", "belt-of-aquilo-shattered-planet", "solar-system-edge-shattered-planet"},
 		["planet-connections"] = {"vulcanus-metallic-belt", "metallic-belt-gleba", "gleba-carbonic-belt", "carbonic-belt-apollo", "apollo-nauvis", "apollo-ice-belt", "ice-belt-fulgora", "fulgora-belt-of-aquilo", "belt-of-aquilo-aquilo", "aquilo-shattered-planet"},
 	},
-	["post-space"] = {
-		["vulcanus-processes"] = {"calcite", "tungsten-ore", "tungsten-carbide", "tungsten-plate", "lava-water-heating", "metals-from-lava", "make-molten-iron", "make-molten-copper", "make-molten-steel", "make-molten-tungsten", "tungsten-heating"},
-		["vulcanus-casting"] = {"casting-iron", "casting-copper", "casting-steel", "casting-brick", "sulfur-concrete", "sulfur-refined-concrete", "casting-iron-gear-wheel", "casting-iron-stick", "casting-copper-cable", "casting-advanced-parts", "tungsten-carbide-from-molten", "tungsten-steel-from-molten"},
-		["spoilage-and-nutrients"] = {"spoilage", "nutrients-from-spoilage", "sugar", "nutrients-from-yumako-mash", "nutrients-from-bioflux", "nutrients", "nutrients-from-marrow"},
-		["yumako-and-jellynut"] = {"yumako-seed", "jellynut-seed", "fertilized-yumako-seed", "fertilized-jellynut-seed", "yumako", "jellynut", "yumako-mash", "jelly", "yumako-processing", "jellynut-processing"},
-		["agriculture-processes"] = {"pentapod-egg", "activated-pentapod-egg"},
-		["gleba-non-agriculture"] = {"marrow", "chitin-fragments", "chitin-block", "tubule", "appendage", "sencytium", "making-chitin-broth", "landfill-from-chitin"},
-		["agriculture-products"] = {"bioflux", "bioflux-from-eggs", "biolubricant", "bioplastic", "slipstack-nest", "sprouted-boomnut", "pentapod-egg", "activated-pentapod-egg"},
-		["slipstacks-and-boompuffs"] = {"slipstack-pearl", "slipstack-nest", "boomnut", "sprouted-boomnut", "boomsac", "crush-boomnut", "boomsac-deflation", "petrophage", "petrophage-cultivation", "refresh-petrophages"},
-		["stingfrond-products"] = {"stingfrond-sprout", "neurofibril", "cyclosome-resynchronization", "carbon-fiber", "explosive-desynchronization", "cyclosome-1", "cyclosome-2", "cyclosome-3", "cyclosome-4", "cyclosome-5"},
-		["fulgora-processes"] = {"scrap", "scrap-recycling", "holmium-ore", "make-holmium-solution", "holmium-plate", "superconductor", "make-electrolyte", "supercapacitor"},
-		["fulgora-agriculture"] = {"fulgorite-shard", "electrophage", "polysalt", "fulgorite-starter", "electrophage-cultivation", "electrophage-cultivation-holmium"},
-		["nauvis-agriculture"] = {"fish-breeding", "nutrients-from-fish", "nutrients-from-biter-egg", "biter-egg"},
-		["uranium-processing"] = {"uranium-processing", "plutonium", "uranium-235", "uranium-238", "yellowcake", "fuel-rod", "uranium-fuel-cell", "depleted-uranium-fuel-cell", "depleted-fuel-rod", "nuclear-fuel-reprocessing", "kovarex-enrichment-process"},
-		["aquilo-processes"] = {"solid-fuel-from-ammonia", "lithium", "lithium-plate", "quantum-processor", "fusion-power-cell"},
-	},
 	combat = {
 		gun = {"shotgun", "combat-shotgun", "submachine-gun", "flamethrower", "rocket-launcher", "teslagun", "railgun"},
-		ammo = {"shotgun-shell", "piercing-shotgun-shell", "firearm-magazine", "piercing-rounds-magazine", "uranium-rounds-magazine", "cannon-shell", "explosive-cannon-shell", "uranium-cannon-shell", "explosive-uranium-cannon-shell", "artillery-shell"},
-		["ammo-2"] = {"flamethrower-ammo", "wriggler-missile", "rocket", "explosive-rocket", "atomic-bomb", "capture-robot-rocket", "tesla-ammo", "railgun-ammo"},
+		ammo = {"shotgun-shell", "piercing-shotgun-shell", "firearm-magazine", "piercing-rounds-magazine", "uranium-rounds-magazine", "flamethrower-ammo", "tesla-ammo", "wriggler-missile", "capture-robot-rocket", "railgun-ammo"},
+		["ammo-2"] = {"rocket", "explosive-rocket", "atomic-bomb", "cannon-shell", "explosive-cannon-shell", "uranium-cannon-shell", "explosive-uranium-cannon-shell", "artillery-shell"},
 		capsule = {"poison-capsule", "slowdown-capsule", "grenade", "cluster-grenade", "defender-capsule", "defender", "distractor-capsule", "distractor", "destroyer", "destroyer-capsule"},
 		armor = {"light-armor", "heavy-armor", "modular-armor", "power-armor", "power-armor-mk2", "mech-armor"},
 		equipment = {"personal-burner-generator", "personal-battery-generator", "solar-panel-equipment", "fission-reactor-equipment", "fusion-reactor-equipment", "battery-equipment", "battery-mk2-equipment", "battery-mk3-equipment"},
 		["utility-equipment"] = {"belt-immunity-equipment", "exoskeleton-equipment", "personal-roboport-equipment", "personal-roboport-mk2-equipment", "night-vision-equipment", "toolbelt-equipment"},
 		["military-equipment"] = {"energy-shield-equipment", "energy-shield-mk2-equipment", "personal-laser-defense-equipment", "discharge-defense-equipment"},
-		["defensive-structure"] = {"stone-wall", "gate", "radar", "slowdown-land-mine", "poison-land-mine", "land-mine"},
+		["defensive-structure"] = {"stone-wall", "gate", "radar", "land-mine", "poison-land-mine", "slowdown-land-mine"},
 		["turret"] = {"shotgun-turret", "gun-turret", "laser-turret", "flamethrower-turret", "artillery-turret", "rocket-turret", "tesla-turret", "railgun-turret"},
 		["ammo-category"] = {},
 	},
+	heat = {
+		["heat-ingots"] = {"heat-ingot-iron", "heat-ingot-copper", "heat-ingot-steel"},
+		["water-heat"] = {"steam-condensation", "ice-melting", "lava-water-heating"},
+		["cryo-gas-recipes"] = {"nitrogen-compression", "nitrogen-expansion", "oxygen-cascade-cooling", "hydrogen-cascade-cooling", "regenerative-cooling"},
+	},
 	fluids = {
+		-- TODO basically all of this should be moved to other groups. Fluid item-group should be mostly just un/barrelling and venting.
 		["nauvis-fluids"] = {"lake-water", "water", "steam", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant"},
 		["mixed-gases"] = {"air", "flue-gas", "sulfurous-gas"},
 		["petrochem-fluids"] = {"crude-oil", "natural-gas", "tar", "heavy-oil", "light-oil", "petroleum-gas", "dry-gas", "syngas", "diesel"},

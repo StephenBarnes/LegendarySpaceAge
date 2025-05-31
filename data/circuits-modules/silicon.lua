@@ -60,7 +60,7 @@ extend{polysiliconItem}
 -- Create silicon gas fluid.
 local siliconGasFluid = copy(RAW.fluid.steam)
 siliconGasFluid.name = "silicon-gas"
-Icon.set(siliconGasFluid, {{"LSA/fluids/gas-2", tint = siliconGasTint}})
+Icon.set(siliconGasFluid, {{"LSA/fluids/gas-3", tint = siliconGasTint}})
 Fluid.setSimpleTemp(siliconGasFluid, 1000)
 siliconGasFluid.base_color = siliconGasTint
 siliconGasFluid.visualization_color = siliconGasTint
@@ -71,7 +71,7 @@ extend{siliconGasFluid}
 -- Create silicon waste gas fluid.
 local siliconWasteGasFluid = copy(RAW.fluid.steam)
 siliconWasteGasFluid.name = "silicon-waste-gas"
-Icon.set(siliconWasteGasFluid, {{"LSA/fluids/gas-2", tint = siliconWasteGasTint}})
+Icon.set(siliconWasteGasFluid, {{"LSA/fluids/gas-3", tint = siliconWasteGasTint}})
 Fluid.setSimpleTemp(siliconWasteGasFluid, 1000)
 siliconWasteGasFluid.base_color = siliconWasteGasTint
 siliconWasteGasFluid.visualization_color = siliconWasteGasTint

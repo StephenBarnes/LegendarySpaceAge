@@ -19,6 +19,8 @@ gasifierEnt.show_recipe_icon = false -- Since there's only 1 recipe.
 gasifierEnt.show_recipe_icon_on_map = true
 gasifierEnt.allowed_effects = {"speed", "pollution", "quality"}
 gasifierEnt.drawing_box_vertical_extension = 3
+gasifierEnt.hidden = false
+gasifierEnt.hidden_in_factoriopedia = false
 gasifierEnt.energy_source = {
 	type = "burner",
 	emissions_per_minute = {
@@ -213,6 +215,8 @@ local fluidGasifierRecipe = Recipe.make{
 
 local gasifierRecipeCategory = copy(RAW["recipe-category"]["crafting"])
 gasifierRecipeCategory.name = "gasifier"
+gasifierRecipeCategory.hidden = false
+gasifierRecipeCategory.hidden_in_factoriopedia = false
 extend{gasifierRecipeCategory}
 
 --[[ Steam gasification: 20 fuel + 10 steam -> 10 syngas + 1 pitch + 1 sulfur
@@ -241,7 +245,9 @@ gasificationRecipe.allow_productivity = false
 gasificationRecipe.allow_speed = false
 gasificationRecipe.allow_consumption = false -- No efficiency effects from beacons.
 gasificationRecipe.hidden = false
+gasificationRecipe.hidden_in_factoriopedia = false
 gasificationRecipe.hide_from_player_crafting = false
+gasificationRecipe.always_show_made_in = true
 extend{gasificationRecipe}
 
 Tech.addRecipeToTech("make-syngas", "coal-liquefaction", 1)

@@ -18,24 +18,26 @@ for entType, entNamesToQualityToName in pairs(QualityScalingPowerConsumption.qua
 		local normalEnt = RAW[entType][entName]
 		assert(normalEnt ~= nil, "Entity not found: "..entType.." "..entName)
 		for qualityLevel, qualityName in pairs(qualityToName) do
-			local newEnt = copy(normalEnt)
-			newEnt.name = qualityName
-			newEnt.localised_name = normalEnt.localised_name or {"entity-name."..normalEnt.name}
-			newEnt.localised_description = normalEnt.localised_description or {"entity-description."..normalEnt.name}
-			assert(normalEnt.placeable_by ~= nil, "placeable_by is nil for "..normalEnt.name)
-			newEnt.placeable_by = normalEnt.placeable_by
-				--[[ Other mods that do this kind of one-proto-per-quality thing have a quality= field here. But that field does not exist. https://lua-api.factorio.com/latest/types/ItemToPlace.html
-				Despite the non-existence of that field, those other mods mostly work anyway because the player has no way to copy an XYZ-legendary with normal quality unless one has already been placed.
-				But there's a way around that. Make an upgrade planner that replaces XYZ-legendary (legendary) with XYZ-legendary (normal). Then you can copy-paste that one to place unlimited XYZ-legendary (normal) using only normal quality XYZ-normal items.
-				That's a minor exploit, not crucial to fix. And in fact since I'm making higher-quality items WORSE in this way (increased power consumption) I don't think this exploit actually offers any advantage in this mod.
-				]]
-			newEnt.hidden_in_factoriopedia = true
-			newEnt.hidden = true -- This actually makes it unselectable in upgrade planner, so I think it closes the loophole explained above.
-			local energyUsage = Gen.multWithUnits(normalEnt.energy_usage, 1 + SPEED_PER_QUALITY * qualityLevel)
-			assert(energyUsage ~= nil, "energy_usage is nil for "..normalEnt.name) -- Returns nil if the number is 0, in which case the ent shouldn't be on the list above.
-			---@diagnostic disable-next-line: assign-type-mismatch
-			newEnt.energy_usage = energyUsage
-			data:extend{newEnt}
+			if qualityName ~= entName then -- Don't need to hide normal ent.
+				local newEnt = copy(normalEnt)
+				newEnt.name = qualityName
+				newEnt.localised_name = normalEnt.localised_name or {"entity-name."..normalEnt.name}
+				newEnt.localised_description = normalEnt.localised_description or {"entity-description."..normalEnt.name}
+				assert(normalEnt.placeable_by ~= nil, "placeable_by is nil for "..normalEnt.name)
+				newEnt.placeable_by = normalEnt.placeable_by
+					--[[ Other mods that do this kind of one-proto-per-quality thing have a quality= field here. But that field does not exist. https://lua-api.factorio.com/latest/types/ItemToPlace.html
+					Despite the non-existence of that field, those other mods mostly work anyway because the player has no way to copy an XYZ-legendary with normal quality unless one has already been placed.
+					But there's a way around that. Make an upgrade planner that replaces XYZ-legendary (legendary) with XYZ-legendary (normal). Then you can copy-paste that one to place unlimited XYZ-legendary (normal) using only normal quality XYZ-normal items.
+					That's a minor exploit, not crucial to fix. And in fact since I'm making higher-quality items WORSE in this way (increased power consumption) I don't think this exploit actually offers any advantage in this mod.
+					]]
+				newEnt.hidden_in_factoriopedia = true
+				newEnt.hidden = true -- This actually makes it unselectable in upgrade planner, so I think it closes the loophole explained above.
+				local energyUsage = Gen.multWithUnits(normalEnt.energy_usage, 1 + SPEED_PER_QUALITY * qualityLevel)
+				assert(energyUsage ~= nil, "energy_usage is nil for "..normalEnt.name) -- Returns nil if the number is 0, in which case the ent shouldn't be on the list above.
+				---@diagnostic disable-next-line: assign-type-mismatch
+				newEnt.energy_usage = energyUsage
+				data:extend{newEnt}
+			end
 		end
 	end
 end
