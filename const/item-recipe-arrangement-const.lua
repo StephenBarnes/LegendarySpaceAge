@@ -73,6 +73,8 @@ return {
 	chemistry = {
 		acids = {"nitric-acid", "sulfuric-acid", "chloric-acid", "phosphoric-acid", "fluoric-acid"},
 		salts = {"niter", "salt-cake", "salt", "phosphate-salt", "fluoride-salt"},
+		["acid-gases"] = {"nox-gas", "sulfur-dioxide", "chlorine-gas", "phosphine-gas", "fluorine-gas"},
+
 		["fluid-recipes"] = {"make-sulfuric-acid"},
 		["ammonia-related"] = {"ammonia", "ammonia-synthesis", "ammonia-cracking"},
 		["misc-chem"] = {"syngas-reforming", "electrolysis"},
