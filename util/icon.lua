@@ -17,8 +17,8 @@ local dirCodeToPath = {
 
 ---@param pathCode string | table
 ---@param proto data.ItemPrototype | data.RecipePrototype | data.FluidPrototype | data.TechnologyPrototype
----@return {path: string, tint: table?}
-Icon.getIconInfo = function(pathCode, proto)
+---@return {path: string, tint: table?}[]
+Icon.getIconsInfo = function(pathCode, proto)
 	local tint = nil
 	if type(pathCode) == "table" then
 		tint = pathCode.tint
@@ -34,7 +34,7 @@ Icon.getIconInfo = function(pathCode, proto)
 		if rest == "apollo" then return {path = "__LegendarySpaceAge__/graphics/apollo/icon.png"} end
 		local planetIcon = RAW.planet[rest].icon
 		assert(planetIcon ~= nil, "No icon found for planet "..rest)
-		return {path = planetIcon}
+		return {{path = planetIcon}}
 	elseif dirCode ~= nil and dirCodeToPath[dirCode] ~= nil then
 		local path = dirCodeToPath[dirCode]
 		if dirCode ~= "LSA" then
@@ -44,18 +44,22 @@ Icon.getIconInfo = function(pathCode, proto)
 				path = path .. "icons/"
 			end
 		end
-		return {path = path .. rest .. ".png", tint = tint}
+		return {{path = path .. rest .. ".png", tint = tint}}
 	else
 		for _, t in pairs{"item", "fluid", "recipe", "capsule", "resource"} do
 			if RAW[t][rest] ~= nil and (RAW[t][rest].icon ~= nil or RAW[t][rest].icons ~= nil) then
 				if RAW[t][rest].icon ~= nil then
 					---@diagnostic disable-next-line: return-type-mismatch
-					return {path = RAW[t][rest].icon, tint = tint}
+					return {{path = RAW[t][rest].icon, tint = tint}}
 				else
-					assert(#RAW[t][rest].icons == 1, "Multi-icon must have exactly 1 icon, but " .. #RAW[t][rest].icons .. " found for " .. serpent.block(RAW[t][rest]) .. " (" .. t .. " " .. rest .. ")")
-					local sourceIcon = RAW[t][rest].icons[1]
-					---@diagnostic disable-next-line: return-type-mismatch
-					return {path = sourceIcon.icon, tint = tint or sourceIcon.tint}
+					if #RAW[t][rest].icons ~= 1 then
+						log("Warning: Multi-icon must have exactly 1 icon, but " .. #RAW[t][rest].icons .. " found for " .. serpent.block(RAW[t][rest]) .. " (" .. t .. " " .. rest .. ")")
+					end
+					local icons = {}
+					for _, icon in ipairs(RAW[t][rest].icons) do
+						table.insert(icons, {path = icon.icon, tint = tint or icon.tint})
+					end
+					return icons
 				end
 			end
 		end
@@ -144,13 +148,15 @@ local function getMultiIcon(iconInfo, proto, arrangement)
 	local vals = getMultiIconBase(#iconInfo, arrangement)
 	assert(vals ~= nil, "No multi-icon values found for " .. #iconInfo .. " icons with arrangement " .. (arrangement or "nil"))
 	for i, pathCode in ipairs(iconInfo) do
-		local thisIconInfo = Icon.getIconInfo(pathCode, proto)
-		local val = copy(vals[i])
-		val.icon = thisIconInfo.path
-		val.icon_size = size
-		val.icon_mipmaps = 4
-		val.tint = thisIconInfo.tint
-		newIcons[#newIcons + 1] = val
+		local thisIconsInfo = Icon.getIconsInfo(pathCode, proto)
+		for _, thisIconInfo in ipairs(thisIconsInfo) do
+			local val = copy(vals[i])
+			val.icon = thisIconInfo.path
+			val.icon_size = size
+			val.icon_mipmaps = 4
+			val.tint = thisIconInfo.tint
+			table.insert(newIcons, val)
+		end
 	end
 	return newIcons
 end
@@ -165,25 +171,26 @@ Icon.set = function(thing, iconInfo, arrangement)
 	end
 
 	local newIcons = nil
-	local newIcon = nil
 	if type(iconInfo) == "string" then
 		assert(arrangement == nil, "Cannot specify arrangement for single icon")
-		local thisIconInfo = Icon.getIconInfo(iconInfo, proto)
-		if thisIconInfo.tint ~= nil then
-			newIcons = {path = thisIconInfo.path, tint = thisIconInfo.tint}
-		else
-			newIcon = thisIconInfo.path
+		local thisIconsInfo = Icon.getIconsInfo(iconInfo, proto)
+		newIcons = {}
+		for _, thisIconInfo in ipairs(thisIconsInfo) do
+			table.insert(newIcons, {path = thisIconInfo.path, tint = thisIconInfo.tint})
 		end
 	else
 		newIcons = getMultiIcon(iconInfo, proto, arrangement)
 	end
 
-	proto.icons = newIcons
-	proto.icon = newIcon
-	if newIcon ~= nil then
+	if #newIcons == 1 and newIcons[1].tint == nil then
+		proto.icons = nil
+		proto.icon = newIcons[1].path or newIcons[1].icon
 		proto.icon_size = Icon.iconSize(proto)
 		proto.icon_mipmaps = 4
 		proto.scale = 0.5
+	else
+		proto.icons = newIcons
+		proto.icon = nil
 	end
 end
 
@@ -201,7 +208,11 @@ Icon.variants = function(protoOrName, dirCode, count, additional)
 	end
 
 	local variants = {}
-	local iconInfo = Icon.getIconInfo(dirCode, proto)
+	local iconsInfo = Icon.getIconsInfo(dirCode, proto)
+	if #iconsInfo ~= 1 then
+		log("Icon.variants expects 1 icon, but " .. #iconsInfo .. " found for " .. dirCode)
+	end
+	local iconInfo = iconsInfo[1]
 	assert(iconInfo.path ~= nil, "No path found for " .. dirCode)
 	for i = 1, count do
 		local variant = {

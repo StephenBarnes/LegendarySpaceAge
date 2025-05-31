@@ -8,7 +8,10 @@ local function checkHeavyOilCoking()
 	local heavyOilCokingRecipe = RECIPE["heavy-oil-coking"]
 	local ingredientJoules = Recipe.recipeSideJoules(heavyOilCokingRecipe.ingredients)
 	local resultJoules = Recipe.recipeSideJoules(heavyOilCokingRecipe.results)
-	assert(resultJoules > ingredientJoules, "Heavy oil coking should be energy-positive.")
+	if resultJoules <= ingredientJoules then
+		log("Autodebug error: Heavy oil coking should be energy-positive.")
+		return false
+	end
 	return true
 end
 

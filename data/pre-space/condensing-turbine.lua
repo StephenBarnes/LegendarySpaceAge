@@ -96,6 +96,7 @@ ent.graphics_set = {
 	west_graphics_set = horizontalGraphicsSet,
 }
 Icon.set(ent, {"steam-turbine", "water"})
+-- TODO edit the icon to add the lid.
 extend{ent}
 
 -- Create item.
