@@ -22,7 +22,8 @@ return {
 	},
 	production = {
 		tool = {"repair-pack", "blueprint", "deconstruction-planner", "upgrade-planner", "blueprint-book"},
-		energy = {"er-hcg", "boiler", "electric-boiler", "gas-boiler", "steam-engine", "heating-tower", "fluid-heating-tower", "heat-pipe", "heat-exchanger", "steam-turbine", "condensing-turbine"},
+		energy = {"boiler", "electric-boiler", "gas-boiler", "heating-tower", "fluid-heating-tower", "heat-pipe", "heat-exchanger"},
+		generator = {"er-hcg", "steam-engine", "steam-turbine", "condensing-turbine"},
 		["electricity-related"] = {"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector", "nuclear-reactor", "fusion-reactor", "fusion-generator"},
 		["extraction-machine"] = {"burner-mining-drill", "electric-mining-drill", "big-mining-drill", "deep-drill", "pumpjack", "agricultural-tower", "air-separator", "drill-node-dummy-miner"},
 		["smelting-machine"] = {"stone-furnace", "steel-furnace", "ff-furnace", "electric-furnace", "arc-furnace"},
@@ -70,19 +71,12 @@ return {
 		["petrochem-processing-2"] = {"make-syngas", "syngas-liquefaction", "coal-coking", "heavy-oil-coking", "tar-distillation", "pitch-processing", "make-lubricant", "make-diesel"},
 	},
 	chemistry = {
+		acids = {"nitric-acid", "sulfuric-acid", "chloric-acid", "phosphoric-acid", "fluoric-acid"},
+		salts = {"niter", "salt-cake", "salt", "phosphate-salt", "fluoride-salt"},
 		["fluid-recipes"] = {"make-sulfuric-acid"},
-		["ammonia-recipes"] = {"ammonia-synthesis", "ammonia-cracking"},
+		["ammonia-related"] = {"ammonia", "ammonia-synthesis", "ammonia-cracking"},
 		["misc-chem"] = {"syngas-reforming", "electrolysis"},
 		["internal-process"] = {},
-
-		-- Barrel / gas tank recipes: hidden in factoriopedia.
-		-- TODO maybe move these to a separate tab entirely?
-		-- TODO maybe remove these from here, and set orders programatically to be the same as the fluids.
-		barrel = {"crude-oil-barrel", "nitrogen-gas-barrel", "slime-barrel", "fulgoran-sludge-barrel", "natural-gas-barrel", "water-barrel", "geoplasm-barrel", "holmium-solution-barrel", "fluorine-barrel", "compressed-nitrogen-gas-barrel", "tar-barrel", "oxygen-gas-barrel", "electrolyte-barrel", "chitin-broth-barrel", "spore-gas-barrel", "hydrogen-gas-barrel", "heavy-oil-barrel", "ammonia-barrel", "liquid-nitrogen-barrel", "light-oil-barrel", "lithium-brine-barrel", "latex-barrel", "petroleum-gas-barrel", "thruster-oxidizer-barrel", "thruster-fuel-barrel", "sulfuric-acid-barrel", "dry-gas-barrel", "lubricant-barrel", "syngas-barrel", "diesel-barrel", "meat-paste-barrel", "hydrofluoric-acid-barrel"},
-		["fill-barrel"] = {"fulgoran-sludge-barrel", "slime-barrel", "crude-oil-barrel", "water-barrel", "holmium-solution-barrel", "geoplasm-barrel", "electrolyte-barrel", "tar-barrel", "chitin-broth-barrel", "heavy-oil-barrel", "lithium-brine-barrel", "light-oil-barrel", "latex-barrel", "sulfuric-acid-barrel", "lubricant-barrel", "diesel-barrel", "meat-paste-barrel"},
-		["fill-gas-tank"] = {"nitrogen-gas-barrel", "natural-gas-barrel", "fluorine-barrel", "compressed-nitrogen-gas-barrel", "oxygen-gas-barrel", "hydrogen-gas-barrel", "spore-gas-barrel", "ammonia-barrel", "liquid-nitrogen-barrel", "thruster-oxidizer-barrel", "petroleum-gas-barrel", "dry-gas-barrel", "thruster-fuel-barrel", "syngas-barrel", "hydrofluoric-acid-barrel"},
-		["empty-barrel"] = {"empty-crude-oil-barrel", "empty-slime-barrel", "empty-fulgoran-sludge-barrel", "empty-holmium-solution-barrel", "empty-geoplasm-barrel", "empty-water-barrel", "empty-electrolyte-barrel", "empty-tar-barrel", "empty-chitin-broth-barrel", "empty-heavy-oil-barrel", "empty-lithium-brine-barrel", "empty-light-oil-barrel", "empty-latex-barrel", "empty-sulfuric-acid-barrel", "empty-lubricant-barrel", "empty-diesel-barrel", "empty-meat-paste-barrel"},
-		["empty-gas-tank"] = {"empty-nitrogen-gas-barrel", "empty-natural-gas-barrel", "empty-fluorine-barrel", "empty-compressed-nitrogen-gas-barrel", "empty-oxygen-gas-barrel", "empty-hydrogen-gas-barrel", "empty-spore-gas-barrel", "empty-ammonia-barrel", "empty-liquid-nitrogen-barrel", "empty-thruster-oxidizer-barrel", "empty-petroleum-gas-barrel", "empty-dry-gas-barrel", "empty-thruster-fuel-barrel", "empty-syngas-barrel", "empty-hydrofluoric-acid-barrel"},
 	},
 	["intermediate-factors"] = {
 		resin = {"resin", "wood-resin", "pitch-resin", "rich-gas-resin", "smelt-slipstack-pearl"},
@@ -154,7 +148,7 @@ return {
 	},
 	fluids = {
 		-- TODO basically all of this should be moved to other groups. Fluid item-group should be mostly just un/barrelling and venting.
-		["nauvis-fluids"] = {"lake-water", "water", "steam", "ammonia", "latex", "cement", "sulfuric-acid", "lubricant"},
+		["nauvis-fluids"] = {"lake-water", "water", "steam", "latex", "cement", "lubricant"},
 		["mixed-gases"] = {"air", "flue-gas", "sulfurous-gas"},
 		["petrochem-fluids"] = {"crude-oil", "natural-gas", "tar", "heavy-oil", "light-oil", "petroleum-gas", "dry-gas", "syngas", "diesel"},
 		["cryo-fluids"] = {"nitrogen-gas", "compressed-nitrogen-gas", "oxygen-gas", "hydrogen-gas", "liquid-nitrogen", "thruster-oxidizer", "thruster-fuel"},
@@ -165,6 +159,15 @@ return {
 		["fluid"] = {},
 			-- This is the default group. Will contain stuff from other mods.
 		["aquilo-fluids"] = {"ammoniacal-solution", "fluorine", "lithium-brine", "fusion-plasma"},
+
+		-- Barrel / gas tank recipes: hidden in factoriopedia.
+		-- TODO maybe move these to a separate tab entirely?
+		-- TODO maybe remove these from here, and set orders programatically to be the same as the fluids.
+		barrel = {"crude-oil-barrel", "nitrogen-gas-barrel", "slime-barrel", "fulgoran-sludge-barrel", "natural-gas-barrel", "water-barrel", "geoplasm-barrel", "holmium-solution-barrel", "fluorine-barrel", "compressed-nitrogen-gas-barrel", "tar-barrel", "oxygen-gas-barrel", "electrolyte-barrel", "chitin-broth-barrel", "spore-gas-barrel", "hydrogen-gas-barrel", "heavy-oil-barrel", "ammonia-barrel", "liquid-nitrogen-barrel", "light-oil-barrel", "lithium-brine-barrel", "latex-barrel", "petroleum-gas-barrel", "thruster-oxidizer-barrel", "thruster-fuel-barrel", "sulfuric-acid-barrel", "dry-gas-barrel", "lubricant-barrel", "syngas-barrel", "diesel-barrel", "meat-paste-barrel", "hydrofluoric-acid-barrel"},
+		["fill-barrel"] = {"fulgoran-sludge-barrel", "slime-barrel", "crude-oil-barrel", "water-barrel", "holmium-solution-barrel", "geoplasm-barrel", "electrolyte-barrel", "tar-barrel", "chitin-broth-barrel", "heavy-oil-barrel", "lithium-brine-barrel", "light-oil-barrel", "latex-barrel", "sulfuric-acid-barrel", "lubricant-barrel", "diesel-barrel", "meat-paste-barrel"},
+		["fill-gas-tank"] = {"nitrogen-gas-barrel", "natural-gas-barrel", "fluorine-barrel", "compressed-nitrogen-gas-barrel", "oxygen-gas-barrel", "hydrogen-gas-barrel", "spore-gas-barrel", "ammonia-barrel", "liquid-nitrogen-barrel", "thruster-oxidizer-barrel", "petroleum-gas-barrel", "dry-gas-barrel", "thruster-fuel-barrel", "syngas-barrel", "hydrofluoric-acid-barrel"},
+		["empty-barrel"] = {"empty-crude-oil-barrel", "empty-slime-barrel", "empty-fulgoran-sludge-barrel", "empty-holmium-solution-barrel", "empty-geoplasm-barrel", "empty-water-barrel", "empty-electrolyte-barrel", "empty-tar-barrel", "empty-chitin-broth-barrel", "empty-heavy-oil-barrel", "empty-lithium-brine-barrel", "empty-light-oil-barrel", "empty-latex-barrel", "empty-sulfuric-acid-barrel", "empty-lubricant-barrel", "empty-diesel-barrel", "empty-meat-paste-barrel"},
+		["empty-gas-tank"] = {"empty-nitrogen-gas-barrel", "empty-natural-gas-barrel", "empty-fluorine-barrel", "empty-compressed-nitrogen-gas-barrel", "empty-oxygen-gas-barrel", "empty-hydrogen-gas-barrel", "empty-spore-gas-barrel", "empty-ammonia-barrel", "empty-liquid-nitrogen-barrel", "empty-thruster-oxidizer-barrel", "empty-petroleum-gas-barrel", "empty-dry-gas-barrel", "empty-thruster-fuel-barrel", "empty-syngas-barrel", "empty-hydrofluoric-acid-barrel"},
 		
 		-- Waste pump categories: orders get set the same as the fluids.
 		["waste-pump"] = {},

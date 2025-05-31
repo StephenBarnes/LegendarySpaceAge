@@ -161,6 +161,7 @@ local function getMultiIcon(iconInfo, proto, arrangement)
 	return newIcons
 end
 
+---@param arrangement string?
 Icon.set = function(thing, iconInfo, arrangement)
 	---@type data.ItemPrototype | data.RecipePrototype | data.FluidPrototype | data.TechnologyPrototype
 	local proto
