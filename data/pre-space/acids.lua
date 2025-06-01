@@ -1,38 +1,81 @@
---[[ This file makes acids and related items.
+--[[ This file makes acid fluids and corresponding salts and gases, as well as recipes for gas->acid and acid-salt shifts.
 ]]
 
--- TODO adjust colors a bit so phosphoric and fluoric are further from chloric.
-
 local acidData = {
-	nitric = {
-		acidLiquidColor = {.8784, .349, .3137},
-		saltName = "niter",
-		saltColor = {176, 47, 40},
-		gasName = "nox-gas",
+	chloric = {
+		strength = 5,
+		saltName = "chloride-salt",
+		gasName = "chlorine-gas",
+		acidLightColor = {.969, .427, .384},
+		acidLiquidColor = {.878, .349, .314},
+		saltColor = {.690, .184, .157},
+		gasColor = {.722, .333, .306},
+		gasToAcidRecipe = {
+			ingredients = {{"chlorine-gas", 10}, {"hydrogen-gas", 5}, {"water", 5}},
+			results = {{"chloric-acid", 20}},
+			icons = {"exo", "chlorine-gas", "hydrogen-gas", "chloric-acid"},
+			iconArrangement = "exoEndo",
+		},
 	},
 	sulfuric = {
-		acidLiquidColor = {.9961, .8588, .3098},
+		strength = 4,
 		saltName = "salt-cake",
-		saltColor = {184, 152, 33},
 		gasName = "sulfur-dioxide",
+		acidLightColor = {.996, .859, .310},
+		acidLiquidColor = {.996, .859, .310},
+		saltColor = {.722, .596, .129},
+		gasColor = {.753, .663, .282},
+		gasToAcidRecipe = {
+			ingredients = {{"sulfur-dioxide", 10}, {"water", 10}},
+			results = {{"sulfuric-acid", 20}},
+			icons = {"exo", "sulfur-dioxide", "sulfuric-acid"},
+			iconArrangement = "exoEndo",
+		},
 	},
-	chloric = {
-		acidLiquidColor = {.651, .8078, .3686},
-		saltName = "salt",
-		saltColor = {121, 158, 52},
-		gasName = "chlorine-gas",
-	},
-	phosphoric = {
-		acidLiquidColor = {71, 200, 167},
-		saltName = "phosphate-salt",
-		saltColor = {34, 152, 121},
-		gasName = "phosphine-gas",
+	nitric = {
+		strength = 3,
+		saltName = "niter",
+		gasName = "nox-gas",
+		acidLightColor = {.729, .898, .447},
+		acidLiquidColor = {.651, .808, .369},
+		saltColor = {.475, .620, .204},
+		gasColor = {.537, .651, .341},
+		gasToAcidRecipe = {
+			ingredients = {{"nox-gas", 10}, {"water", 10}},
+			results = {{"nitric-acid", 20}},
+			icons = {"exo", "nox-gas", "nitric-acid"},
+			iconArrangement = "exoEndo",
+		},
 	},
 	fluoric = {
-		acidLiquidColor = {79, 152, 234},
+		strength = 2,
 		saltName = "fluoride-salt",
-		saltColor = {38, 108, 184},
 		gasName = "fluorine-gas",
+		acidLightColor = {.58, .875, .745},
+		acidLiquidColor = {.278, .784, .655},
+		saltColor = {.133, .596, .475},
+		gasColor = {.263, .627, .537},
+		gasToAcidRecipe = {
+			ingredients = {{"fluorine-gas", 10}, {"water", 10}},
+			results = {{"fluoric-acid", 10}, {"oxygen-gas", 10}},
+			icons = {"exo", "fluorine-gas", "fluoric-acid", "oxygen-gas"},
+			iconArrangement = "exoEndoDoubleProduct",
+		},
+	},
+	phosphoric = {
+		strength = 1,
+		saltName = "phosphate-salt",
+		gasName = "phosphine-gas",
+		acidLightColor = {.376, .663, 1},
+		acidLiquidColor = {.310, .596, .918},
+		saltColor = {.149, .424, .722},
+		gasColor = {.024, .294, .831},
+		gasToAcidRecipe = {
+			ingredients = {{"phosphine-gas", 10}, {"oxygen-gas", 5}, {"water", 5}},
+			results = {{"phosphoric-acid", 20}},
+			icons = {"exo", "phosphine-gas", "oxygen-gas", "phosphoric-acid"},
+			iconArrangement = "exoEndo",
+		},
 	},
 }
 
@@ -82,8 +125,71 @@ for name, data in pairs(acidData) do
 		extend{gasFluid}
 		gasFluid = FLUID[gasName]
 	end
-	gasFluid.base_color = data.acidLiquidColor
-	gasFluid.visualization_color = data.acidLiquidColor -- TODO get lighter color for this, so it's not the same as the acid liquid.
+	gasFluid.base_color = data.gasColor
+	gasFluid.visualization_color = data.gasColor
 	gasFluid.flow_color = {1, 1, 1}
-	Icon.set(gasFluid, {{"LSA/fluids/gas-3", tint = data.acidLiquidColor}})
+	Icon.set(gasFluid, {{"LSA/fluids/gas-3", tint = data.gasColor}})
+end
+
+-- TODO check crafting machine tints.
+
+-- Create gas-to-acid recipes.
+for name, data in pairs(acidData) do
+	Recipe.make{
+		recipe = name.."-acid-from-gas",
+		copy = "sulfuric-acid",
+		ingredients = data.gasToAcidRecipe.ingredients,
+		results = data.gasToAcidRecipe.results,
+		time = 1,
+		main_product = name.."-acid",
+		category = "chemistry", -- TODO exo category
+		icons = data.gasToAcidRecipe.icons,
+		iconArrangement = data.gasToAcidRecipe.iconArrangement,
+		enabled = true, -- TODO tech
+		hidden = false,
+		hidden_in_factoriopedia = false,
+		hide_from_player_crafting = false,
+		localised_name = {"recipe-name.acid-from-gas", {"acid-prefix-cap."..name}},
+		crafting_machine_tint = {
+			primary = data.acidLiquidColor,
+			secondary = data.gasColor,
+		},
+	}
+end
+
+-- Create recipes for acid-salt shifts.
+for name, data in pairs(acidData) do
+	for otherName, otherData in pairs(acidData) do
+		if otherName ~= name then
+			local recipeName = "acid-salt-shift-"..name.."-"..otherName
+			local exoEndo = Gen.ifThenElse(data.strength > otherData.strength, "exo", "endo")
+			Recipe.make{
+				recipe = recipeName,
+				copy = "sulfuric-acid",
+				ingredients = {
+					{otherName.."-acid", 10},
+					{data.saltName, 1},
+				},
+				results = {
+					{name.."-acid", 10},
+					{otherData.saltName, 1},
+					--{data.gasName, 5},
+				},
+				main_product = name.."-acid",
+				category = "chemistry", -- TODO exo/endo category
+				icons = {exoEndo, otherName.."-acid", data.saltName, otherData.saltName, name.."-acid"},
+				iconArrangement = "exoEndo",
+				enabled = true, -- TODO tech
+				time = 1, -- TODO
+				hidden = false,
+				hidden_in_factoriopedia = false,
+				hide_from_player_crafting = false,
+				localised_name = {"recipe-name.acid-salt-shift", {"acid-prefix-cap."..otherName}, {"acid-prefix."..name}},
+				crafting_machine_tint = {
+					primary = data.acidLiquidColor,
+					secondary = otherData.acidLiquidColor,
+				},
+			}
+		end
+	end
 end

@@ -8,6 +8,7 @@ Icon.iconSize = function(proto)
 	end
 end
 
+-- Table of allowed prefixes for path codes.
 local dirCodeToPath = {
 	LSA = "__LegendarySpaceAge__/graphics/",
 	base = "__base__/graphics/",
@@ -15,10 +16,20 @@ local dirCodeToPath = {
 	SA = "__space-age__/graphics/",
 }
 
+-- Table of special path codes.
+local specialPathCodes = {
+	exo = "__LegendarySpaceAge__/graphics/heat-shuttles/exo.png",
+	endo = "__LegendarySpaceAge__/graphics/heat-shuttles/endo.png",
+}
+
 ---@param pathCode string | table
 ---@param proto data.ItemPrototype | data.RecipePrototype | data.FluidPrototype | data.TechnologyPrototype
 ---@return {path: string, tint: table?}[]
 Icon.getIconsInfo = function(pathCode, proto)
+	if specialPathCodes[pathCode] ~= nil then
+		return {{path = specialPathCodes[pathCode]}}
+	end
+
 	local tint = nil
 	if type(pathCode) == "table" then
 		tint = pathCode.tint
@@ -68,7 +79,7 @@ Icon.getIconsInfo = function(pathCode, proto)
 	assert(false, "No icon found for " .. pathCode)
 end
 
--- Table that specifies the layout of multi-icons, by arrangement and number of icons.
+-- Table that specifies the layout of multi-icons, by arrangement code and number of icons.
 local multiIconVals = {
 	default = { -- Default: 1st is product, 2nd is ingredient in top-left, 3rd is ingredient in top-right.
 		[1] = {
@@ -130,6 +141,34 @@ local multiIconVals = {
 		[2] = {
 			{scale = 0.5, shift = {0, 0}},
 			{scale = 0.5, shift = {0, 0}},
+		},
+	},
+	exoEndo = {
+		[3] = {
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.3, shift = {-5, -4}},
+			{scale = 0.46, shift = {5, 5}},
+		},
+		[4] = {
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.25, shift = {-8, -8}},
+			{scale = 0.25, shift = {8, -8}},
+			{scale = 0.4, shift = {0, 4}},
+		},
+		[5] = {
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.22, shift = {-7, -7}},
+			{scale = 0.20, shift = {7, -7}},
+			{scale = 0.20, shift = {-7, 7}},
+			{scale = 0.22, shift = {7, 7}},
+		},
+	},
+	exoEndoDoubleProduct = {
+		[4] = {
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.4, shift = {0, -4}},
+			{scale = 0.25, shift = {-8, 8}},
+			{scale = 0.25, shift = {8, 8}},
 		},
 	},
 }
