@@ -29,7 +29,11 @@ for _, recipe in pairs(RECIPE) do
 	if not recipe.parameter and (recipe.hidden == false or recipe.hidden == nil) then
 		if (recipe.allow_productivity == nil) then
 			recipe.allow_productivity = true
-			assert(recipe.maximum_productivity == nil or recipe.maximum_productivity == 3)
+
+			-- Check that if allow_productivity was never explicitly set, then maximum_productivity is set to nil or 3. Because all recipes modified by this mod should obey that. Recipes from other mods could trigger this.
+			if recipe.maximum_productivity ~= nil and recipe.maximum_productivity ~= 3 then
+				log("WARNING: recipe "..recipe.name.." has maximum_productivity set to "..serpent.line(recipe.maximum_productivity))
+			end
 		end
 	end
 end

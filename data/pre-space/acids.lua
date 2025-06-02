@@ -1,4 +1,19 @@
 --[[ This file makes acid fluids and corresponding salts and gases, as well as recipes for gas->acid and acid-salt shifts.
+Note that this mod deliberately conflates sodium and potassium in many items/fluids, because they have almost the same sources and uses, and conflating them reduces the number of items/recipes we need.
+There are 5 acids, each with a corresponding salt and gas.
+Namely, from strongest to weakest:
+* "Chloric acid" (hydrochloric acid) - "chloride salt" (sodium/potassium chloride) - "chlorine gas"
+* "Sulfuric acid" (sulfuric acid) - "salt cake" (sodium/potassium sulfate) - "sulfur gas" (sulfur dioxide)
+* "Nitric acid" (nitric acid) - "niter" (sodium/potassium nitrate) - "nox gas"
+* "Fluoric acid" (hydrofluoric acid) - "fluoride salt" - "fluorine gas"
+* "Phosphoric acid" (phosphoric acid) - "phosphate salt" - "phosphine gas"
+
+Recipes:
+* Acid from gas: gas + water + optional extra ingredient -> acid + optional extra product + heat.
+* Acid-salt shift: acid A + salt B -> acid B + salt A.
+	This is exo/endothermic depending on relative strengths of the acids.
+	The intention of this (besides realism) is to create multiple options for players. The recipe converts an acid to salt, and in parallel converts a different salt to its acid. So if you want to e.g. use nitric acid to make niter for gunpowder, you can choose which other salt to turn into its acid. And you can do interesting things like building a circuit system that automatically switches between options for that second parallel salt->acid recipe.
+* TODO more?
 ]]
 
 local acidData = {
