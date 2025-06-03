@@ -70,6 +70,7 @@ return {
 		["petroleum-materials"] = {"coal", "pitch", "carbon", "solid-fuel", "explosives", "plastic-bar", "char-carbon", "inverse-vulcanization"},
 		["petrochem-processing"] = {"oil-fractionation", "gas-fractionation", "heavy-oil-cracking", "rich-gas-cracking", "light-oil-cracking"},
 		["petrochem-processing-2"] = {"make-syngas", "syngas-liquefaction", "coal-coking", "heavy-oil-coking", "tar-distillation", "pitch-processing", "make-lubricant", "make-diesel"},
+		["phenox-stuff"] = {"phenol-acetone-barrel", "acetone-barrel"},
 	},
 	chemistry = {
 		chloric = {"chloric-acid", "chloride-salt", "chlorine-gas", "chloric-acid-from-gas", "acid-salt-shift-chloric-nitric", "acid-salt-shift-chloric-sulfuric", "acid-salt-shift-chloric-fluoric", "acid-salt-shift-chloric-phosphoric"},

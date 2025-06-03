@@ -142,6 +142,17 @@ local multiIconVals = {
 			{scale = 0.5, shift = {0, 0}},
 			{scale = 0.5, shift = {0, 0}},
 		},
+		[3] = {
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.5, shift = {0, 0}},
+		},
+		[4] = {
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.5, shift = {0, 0}},
+		},
 	},
 	exoEndo = {
 		[3] = {
@@ -277,6 +288,47 @@ end
 Icon.clear = function(proto)
 	proto.icons = nil
 	proto.icon = nil
+end
+
+local barrel_side_alpha = 0.75 -- Same as in __base__/data-updates.lua.
+local barrel_top_hoop_alpha = 0.75
+-- Creates barrel icon similar to vanilla - one color on side (fluid.base_color for vanilla) and optionally one on top (fluid.flow_color for vanilla).
+Icon.set2ColorBarrel = function(proto, sideColor, topColor, sideAlpha, topAlpha)
+	local sideColorA = util.get_color_with_alpha(sideColor, sideAlpha or barrel_side_alpha)
+	local topColorA = nil
+	if topColor ~= nil then
+		topColorA = util.get_color_with_alpha(topColor, topAlpha or barrel_top_hoop_alpha)
+	end
+	local icons = {
+		"base/fluid/barreling/empty-barrel",
+		{"base/fluid/barreling/barrel-side-mask", tint = sideColorA},
+	}
+	if topColor ~= nil then
+		table.insert(icons, {"base/fluid/barreling/barrel-hoop-top-mask", tint = topColorA})
+	end
+	Icon.set(proto, icons, "overlay")
+end
+-- Creates barrel icon but with 2 colors on the sides, and optionally one on top.
+Icon.set3ColorBarrel = function(proto, sideColor1, sideColor2, topColor, sideAlpha1, sideAlpha2, topAlpha)
+	local sideColor1A = util.get_color_with_alpha(sideColor1, sideAlpha1 or barrel_side_alpha)
+	local sideColor2A = util.get_color_with_alpha(sideColor2, sideAlpha2 or barrel_side_alpha)
+	local topColorA = topColor
+	if topColor ~= nil then
+		topColorA = util.get_color_with_alpha(topColor, topAlpha or barrel_top_hoop_alpha)
+	end
+	local icons = {
+		"base/fluid/barreling/empty-barrel",
+		{"LSA/barreling/barrel-side-mask-bottom", tint = sideColor1A},
+		{"LSA/barreling/barrel-side-mask-top", tint = sideColor2A}
+	}
+	if topColor ~= nil then
+		table.insert(icons, {"base/fluid/barreling/barrel-hoop-top-mask", tint = topColorA})
+	end
+	Icon.set(proto, icons, "overlay")
+end
+-- Creates barrel icon with 1 color on side (fluid.base_color for vanilla) and no top color.
+Icon.set1ColorBarrel = function(proto, sideColor, sideAlpha)
+	Icon.set2ColorBarrel(proto, sideColor, nil, sideAlpha)
 end
 
 return Icon
