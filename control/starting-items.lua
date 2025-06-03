@@ -18,24 +18,31 @@ local function setStartItems()
 	local items = {
 		-- No starting pistol or firearm-magazine, because I'm rather making players begin with shotguns when they unlock gunpowder.
 
-		['construction-robot'] = 50,
-		['personal-roboport-equipment'] = 2,
-		['battery-equipment'] = 2,
+		["construction-robot"] = 50,
+		["personal-roboport-equipment"] = 2,
+		["battery-equipment"] = 2,
 		-- Player has to make a personal burner generator to actually power the stuff.
 
 		-- Prefer to give factors rather than raw materials. Seems more appropriate.
 		-- Give some structures etc, so player doesn't need to chop a lot of trees for resin.
-		['mechanism'] = 20,
-		['structure'] = 10,
-		['frame'] = 50,
-		['wiring'] = 50,
-		['panel'] = 20,
-		['sensor'] = 20,
+		mechanism = 10,
+		frame = 20,
+		wiring = 20,
+		panel = 10,
+		sensor = 10,
 	}
 	remote.call('freeplay', 'set_debris_items', items)
 	remote.call('freeplay', 'set_created_items', items)
 	remote.call('freeplay', 'set_respawn_items', {})
-	remote.call('freeplay', 'set_ship_items', {})
+	remote.call('freeplay', 'set_ship_items', {
+		photograph = 1,
+		sensor = 10,
+		panel = 10,
+		frame = 20,
+		wiring = 20,
+		mechanism = 10,
+		structure = 10,
+	})
 end
 
 return {
