@@ -92,6 +92,22 @@ Export["mini-assembler"] = {
 	},
 }
 
+-- TODO example of a child entity that doesn't work.
+--[[
+Export["burner inserter"] = {
+	["fast-inserter"] = {{
+		pos = {2, 1},
+		adjustForOrientation = true,
+		createdHandler = function(parent, child)
+			log("For parent position " .. serpent.line(parent.position) .. ", child position " .. serpent.line(child.position))
+		end,
+		adjustedHandler = function(parent, child, wasRotated, wasFlipped)
+			log("Adjusted, child position " .. serpent.line(child.position))
+		end,
+	}},
+}
+]]
+
 -- Create exclusion zones for some entities, to prevent them from being built too close to each other.
 local ExclusionZoneConst = require("const.exclusion-zones")
 local function handleExclusionZoneCreation(parent, child)

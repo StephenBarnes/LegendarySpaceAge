@@ -1,7 +1,5 @@
 --[[ This file creates "child entities" that get created alongside entities, move around with them, get destroyed when the parent is destroyed, etc.
 For example: this is used to create invisible entities that provide air to furnaces on planets with air in the atmosphere.
-
-TODO: refactor exclusion zones to use this mechanism maybe.
 ]]
 
 local Req = require("const.child-entity-const") -- Table of required child entities for each entity.
@@ -31,30 +29,31 @@ local setDeathRattle = function(entity)
 	}
 end
 
--- Convert a direction to an orientation.
----@param direction defines.direction
+-- Convert a defines.direction (NORTH, SOUTH, EAST, WEST) to an orientation (0 - 1).
+---@param dir defines.direction
 ---@return float
-local function directionToOrientation(direction)
-	if direction == NORTH then return NORTH_FLOAT
-	elseif direction == SOUTH then return SOUTH_FLOAT
-	elseif direction == EAST then return EAST_FLOAT
-	elseif direction == WEST then return WEST_FLOAT
+local function dirToOrientation(dir)
+	assert(dir ~= nil)
+	if dir == NORTH then return NORTH_FLOAT
+	elseif dir == SOUTH then return SOUTH_FLOAT
+	elseif dir == EAST then return EAST_FLOAT
+	elseif dir == WEST then return WEST_FLOAT
 	else
-		log("Error: Unknown direction: " .. serpent.line(direction))
-		return NORTH
+		log("Error: Unknown direction: " .. serpent.line(dir))
 	end
+	return NORTH_FLOAT
 end
 
 -- Function to adjust the displacement of a child entity for the parent's orientation and mirroring.
 ---@param displacement table
----@param orientation float -- This is a number 0 - 1, not a direction.
----@param mirroring boolean
+---@param orientation float? -- This is a number 0 - 1, not a direction.
+---@param mirroring boolean?
 ---@param adjustForOrientation boolean
 ---@return table
-local function adjustDisplacementForOrientationAndMirroring(displacement, orientation, mirroring, direction, adjustForOrientation)
+local function adjustDisplacement(displacement, orientation, mirroring, direction, adjustForOrientation)
 	if not adjustForOrientation then return displacement end
 	if orientation == nil and direction ~= nil then -- Happens for eg mini-assemblers, since they're not square.
-		orientation = directionToOrientation(direction)
+		orientation = dirToOrientation(direction)
 	end
 	if not mirroring then
 		if orientation == SOUTH_FLOAT then
@@ -100,7 +99,7 @@ local function onBuilt(event)
 		for _, req in pairs(reqSet) do
 			assert(ent.orientation ~= nil)
 			assert(ent.mirroring ~= nil)
-			local disp = adjustDisplacementForOrientationAndMirroring(req.pos, ent.orientation, ent.mirroring, ent.direction, req.adjustForOrientation)
+			local disp = adjustDisplacement(req.pos, ent.orientation, ent.mirroring, ent.direction, req.adjustForOrientation)
 			local info = {
 				name = reqName,
 				position = {ent.position.x + disp[1], ent.position.y + disp[2]},
@@ -139,8 +138,7 @@ local function onObjectDestroyed(e)
 	if destroyedReqs == nil then return end
 	for reqName, reqSet in pairs(destroyedReqs) do
 		for _, req in pairs(reqSet) do
-			local disp = adjustDisplacementForOrientationAndMirroring(req.pos, deathrattle.orientation, deathrattle.mirroring, deathrattle.direction, req.adjustForOrientation)
-				-- TODO something wrong here - deathrattles don't store orientation, mirroring, or direction.
+			local disp = adjustDisplacement(req.pos, nil, nil, deathrattle.direction, req.adjustForOrientation)
 			local children = surface.find_entities_filtered{
 				name = reqName,
 				position = {position.x + disp[1], position.y + disp[2]},
@@ -181,7 +179,7 @@ local function updateChild(child, entity, updatePos, req)
 	child.mirroring = entity.mirroring
 	child.orientation = entity.orientation
 	if updatePos and (req.shouldTeleport == nil or req.shouldTeleport) then
-		local newDisp = adjustDisplacementForOrientationAndMirroring(req.pos, entity.orientation, entity.mirroring, entity.direction, req.adjustForOrientation)
+		local newDisp = adjustDisplacement(req.pos, entity.orientation, entity.mirroring, entity.direction, req.adjustForOrientation)
 		local newPos = {entity.position.x + newDisp[1], entity.position.y + newDisp[2]}
 		--child.position = entity.position -- Can't, it's read-only.
 		local success = child.teleport(newPos)
@@ -204,7 +202,7 @@ local function findAndUpdateChildren(entity, searchPos, updatePos, req, reqName,
 	if not surface.valid then return end
 	assert(oldOrientation ~= nil)
 	assert(oldMirroring ~= nil)
-	local oldDisp = adjustDisplacementForOrientationAndMirroring(req.pos, oldOrientation, oldMirroring, entity.direction, req.adjustForOrientation)
+	local oldDisp = adjustDisplacement(req.pos, oldOrientation, oldMirroring, entity.direction, req.adjustForOrientation)
 	local children = surface.find_entities_filtered{
 		name = reqName,
 		position = {searchPos.x + oldDisp[1], searchPos.y + oldDisp[2]},
@@ -222,21 +220,6 @@ local function findAndUpdateChildren(entity, searchPos, updatePos, req, reqName,
 	if req.adjustedHandler ~= nil then
 		req.adjustedHandler(entity, child, wasRotated, wasFlipped)
 	end
-end
-
--- Convert a defines.direction (NORTH, SOUTH, EAST, WEST) to an orientation (0 - 1).
----@param dir defines.direction
----@return float
-local function dirToOrientation(dir)
-	assert(dir ~= nil)
-	if dir == NORTH then return NORTH_FLOAT
-	elseif dir == SOUTH then return SOUTH_FLOAT
-	elseif dir == EAST then return EAST_FLOAT
-	elseif dir == WEST then return WEST_FLOAT
-	else
-		log("Error: Unknown direction: " .. serpent.line(dir))
-	end
-	return NORTH_FLOAT
 end
 
 ---@param e EventData.on_player_rotated_entity|EventData.on_player_flipped_entity
