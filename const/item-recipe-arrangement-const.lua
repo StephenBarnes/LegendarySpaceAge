@@ -139,7 +139,7 @@ return {
 		gun = {"shotgun", "combat-shotgun", "submachine-gun", "flamethrower", "rocket-launcher", "teslagun", "railgun"},
 		ammo = {"shotgun-shell", "piercing-shotgun-shell", "firearm-magazine", "piercing-rounds-magazine", "uranium-rounds-magazine", "flamethrower-ammo", "tesla-ammo", "wriggler-missile", "capture-robot-rocket", "railgun-ammo"},
 		["ammo-2"] = {"rocket", "explosive-rocket", "atomic-bomb", "cannon-shell", "explosive-cannon-shell", "uranium-cannon-shell", "explosive-uranium-cannon-shell", "artillery-shell"},
-		capsule = {"poison-capsule", "slowdown-capsule", "grenade", "cluster-grenade", "defender-capsule", "defender", "distractor-capsule", "distractor", "destroyer", "destroyer-capsule"},
+		capsule = {"poison-capsule", "slowdown-capsule", "grenade", "cluster-grenade", "defender-capsule", "defender", "distractor-capsule", "distractor", "destroyer-capsule", "destroyer"},
 		armor = {"light-armor", "heavy-armor", "modular-armor", "power-armor", "power-armor-mk2", "mech-armor"},
 		equipment = {"personal-burner-generator", "personal-battery-generator", "solar-panel-equipment", "fission-reactor-equipment", "fusion-reactor-equipment", "battery-equipment", "battery-mk2-equipment", "battery-mk3-equipment"},
 		["utility-equipment"] = {"belt-immunity-equipment", "exoskeleton-equipment", "personal-roboport-equipment", "personal-roboport-mk2-equipment", "night-vision-equipment", "toolbelt-equipment"},

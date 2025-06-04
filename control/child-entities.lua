@@ -38,7 +38,10 @@ end
 ---@return table
 local function adjustDisplacementForOrientationAndMirroring(displacement, orientation, mirroring, adjustForOrientation)
 	if not adjustForOrientation then return displacement end
-	assert(orientation ~= nil)
+	if orientation == nil then
+		log("Error: Orientation is nil for parent entity")
+		return displacement
+	end
 	if not mirroring then
 		if orientation == SOUTH_FLOAT then
 			return {-displacement[1], -displacement[2]}

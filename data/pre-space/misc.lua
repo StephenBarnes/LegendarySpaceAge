@@ -11,6 +11,8 @@ local photographItem = {
 	stack_size = 100,
 	weight = ROCKET / 1000,
 	auto_recycle = false,
+	fuel_category = "chemical",
+	fuel_value = "100kJ",
 }
--- Considered making it usable in equipment grids, but it's not possible in a clean way. Eg inventory-bonus-equipment will display the bonus even if it's 0, and movement-bonus-equipment requires nonzero electricity consumption.
+-- Considered making it placeable in equipment grids, but it's not possible in a clean way. Eg inventory-bonus-equipment will display the bonus even if it's 0, and movement-bonus-equipment requires nonzero electricity consumption.
 extend{photographItem}
