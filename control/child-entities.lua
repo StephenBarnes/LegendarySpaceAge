@@ -184,7 +184,7 @@ end
 ---@param reqName string
 ---@param oldOrientation float
 ---@param oldMirroring boolean
-local function findAndUpdateChildren(entity, searchPos, updatePos, req, reqName, oldOrientation, oldMirroring)
+local function findAndUpdateChildren(entity, searchPos, updatePos, req, reqName, oldOrientation, oldMirroring, wasRotated, wasFlipped)
 	local surface = entity.surface
 	if not surface.valid then return end
 	assert(oldOrientation ~= nil)
@@ -204,6 +204,9 @@ local function findAndUpdateChildren(entity, searchPos, updatePos, req, reqName,
 		return
 	end
 	updateChild(child, entity, updatePos, req)
+	if req.adjustedHandler ~= nil then
+		req.adjustedHandler(entity, child, wasRotated, wasFlipped)
+	end
 end
 
 -- Convert a defines.direction (NORTH, SOUTH, EAST, WEST) to an orientation (0 - 1).
@@ -245,7 +248,7 @@ local function onRotatedOrFlipped(e, wasRotated)
 	for reqName, reqSet in pairs(reqs) do
 		for _, req in pairs(reqSet) do
 			---@diagnostic disable-next-line: param-type-mismatch
-			findAndUpdateChildren(ent, ent.position, req.adjustForOrientation, req, reqName, dirToOrientation(previousDirection), previousMirroring)
+			findAndUpdateChildren(ent, ent.position, req.adjustForOrientation, req, reqName, dirToOrientation(previousDirection), previousMirroring, wasRotated, not wasRotated)
 		end
 	end
 end
@@ -259,7 +262,7 @@ local function onPickerDollyMoved(e)
 	for reqName, reqSet in pairs(reqs) do
 		for _, req in pairs(reqSet) do
 			assert(e.moved_entity.direction ~= nil)
-			findAndUpdateChildren(e.moved_entity, e.start_pos, true, req, reqName, e.moved_entity.orientation, e.moved_entity.mirroring)
+			findAndUpdateChildren(e.moved_entity, e.start_pos, true, req, reqName, e.moved_entity.orientation, e.moved_entity.mirroring, false, false)
 		end
 	end
 end

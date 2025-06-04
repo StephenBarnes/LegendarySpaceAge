@@ -9,6 +9,8 @@ local function onInitOrLoad()
 		for entName, _ in pairs(ExclusionZoneConst) do
 			remote.call('PickerDollies', 'add_blacklist_name', entName)
 		end
+		-- Blacklist mini-assemblers, since teleporting isompletely banned for loaders and transport belts, so we can't teleport the mini-assembler's child loader ents.
+		remote.call('PickerDollies', 'add_blacklist_name', 'mini-assembler')
 	end
 end
 

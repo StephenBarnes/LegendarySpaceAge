@@ -91,4 +91,5 @@ hiddenLoader.flags = {
 	"not-on-map",
 	--"not-selectable-in-game",
 }
+hiddenLoader.collision_mask = {layers={transport_belt=true}}
 extend{hiddenLoader}

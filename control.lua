@@ -1,3 +1,5 @@
+ControlUtils = require("util.control-utils")
+
 local startingEquipment = require("control.starting-items")
 local natGasWells = require("control.natural-gas-wells")
 local notifyIncorrectMapgenPreset = require("control.notify-incorrect-mapgen-preset")
