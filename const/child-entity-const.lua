@@ -10,12 +10,13 @@ Each child requirement can have fields:
 * createdHandler - function to call when child is created. Called as createdHandler(parent, child).
 * destroyedHandler - function to call right before child is destroyed. Called as destroyedHandler(parentName, child).
 * adjustedHandler - function to call when parent is changed (rotated, flipped, moved). Called as adjustedHandler(parent, child, wasRotated, wasFlipped). Needed for loaders, since they have direction independent of "rotating" them (changing from input to output).
+* shouldTeleport - if we should teleport the child when parent rotates or moves. (Can't teleport loaders and transport belts.)
 
 Note that if children have the same name and position, we can get confused about which one to update/delete, so preferably don't do that. Position invisible children inside the parent entity.
 	TODO maybe add table to record unit_number of children linking back to unit_number or position of parent, so we can find the correct child to update/delete. Still won't work for simple-entity children, but in that case they're probably interchangeable anyway. I don't think I actually need this for anything I want to implement though.
 ]]
 
----@type table<string, table<string, {pos: {[1]: number, [2]: number}, adjustForOrientation: boolean, createdHandler: fun(parent: LuaEntity, child: LuaEntity), destroyedHandler: fun(parentName: string, child: LuaEntity), adjustedHandler: fun(parent: LuaEntity, child: LuaEntity, wasRotated: boolean, wasFlipped: boolean)}[]>>
+---@type table<string, table<string, {pos: {[1]: number, [2]: number}, adjustForOrientation: boolean, createdHandler: fun(parent: LuaEntity, child: LuaEntity), destroyedHandler: fun(parentName: string, child: LuaEntity), adjustedHandler: fun(parent: LuaEntity, child: LuaEntity, wasRotated: boolean, wasFlipped: boolean), shouldTeleport: boolean}[]>>
 local Export = {}
 
 -- Create steam-evilizers for condensing turbines. This is so we can give condensing turbines lower efficiency than normal steam turbines, see data/pre-space/condensing-turbine.lua.
@@ -56,6 +57,7 @@ Export["mini-assembler"] = {
 		{ -- Front loader (top in default orientation) (input or output)
 			pos = {0, -0.5},
 			adjustForOrientation = true,
+			shouldTeleport = false,
 			createdHandler = function(parent, child)
 				child.destructible = false
 				child.loader_type = "input"
@@ -72,6 +74,7 @@ Export["mini-assembler"] = {
 		{ -- Bottom loader (can be input or output)
 			pos = {0, 0.5},
 			adjustForOrientation = true,
+			shouldTeleport = false,
 			createdHandler = function(parent, child)
 				child.destructible = false
 				child.direction = ControlUtils.flipDirection(parent.direction)

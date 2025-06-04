@@ -27,7 +27,22 @@ local setDeathRattle = function(entity)
 		name = entity.name,
 		surface = entity.surface,
 		position = entity.position,
+		direction = entity.direction,
 	}
+end
+
+-- Convert a direction to an orientation.
+---@param direction defines.direction
+---@return float
+local function directionToOrientation(direction)
+	if direction == NORTH then return NORTH_FLOAT
+	elseif direction == SOUTH then return SOUTH_FLOAT
+	elseif direction == EAST then return EAST_FLOAT
+	elseif direction == WEST then return WEST_FLOAT
+	else
+		log("Error: Unknown direction: " .. serpent.line(direction))
+		return NORTH
+	end
 end
 
 -- Function to adjust the displacement of a child entity for the parent's orientation and mirroring.
@@ -36,11 +51,10 @@ end
 ---@param mirroring boolean
 ---@param adjustForOrientation boolean
 ---@return table
-local function adjustDisplacementForOrientationAndMirroring(displacement, orientation, mirroring, adjustForOrientation)
+local function adjustDisplacementForOrientationAndMirroring(displacement, orientation, mirroring, direction, adjustForOrientation)
 	if not adjustForOrientation then return displacement end
-	if orientation == nil then
-		log("Error: Orientation is nil for parent entity")
-		return displacement
+	if orientation == nil and direction ~= nil then -- Happens for eg mini-assemblers, since they're not square.
+		orientation = directionToOrientation(direction)
 	end
 	if not mirroring then
 		if orientation == SOUTH_FLOAT then
@@ -86,7 +100,7 @@ local function onBuilt(event)
 		for _, req in pairs(reqSet) do
 			assert(ent.orientation ~= nil)
 			assert(ent.mirroring ~= nil)
-			local disp = adjustDisplacementForOrientationAndMirroring(req.pos, ent.orientation, ent.mirroring, req.adjustForOrientation)
+			local disp = adjustDisplacementForOrientationAndMirroring(req.pos, ent.orientation, ent.mirroring, ent.direction, req.adjustForOrientation)
 			local info = {
 				name = reqName,
 				position = {ent.position.x + disp[1], ent.position.y + disp[2]},
@@ -125,7 +139,8 @@ local function onObjectDestroyed(e)
 	if destroyedReqs == nil then return end
 	for reqName, reqSet in pairs(destroyedReqs) do
 		for _, req in pairs(reqSet) do
-			local disp = adjustDisplacementForOrientationAndMirroring(req.pos, deathrattle.orientation, deathrattle.mirroring, req.adjustForOrientation)
+			local disp = adjustDisplacementForOrientationAndMirroring(req.pos, deathrattle.orientation, deathrattle.mirroring, deathrattle.direction, req.adjustForOrientation)
+				-- TODO something wrong here - deathrattles don't store orientation, mirroring, or direction.
 			local children = surface.find_entities_filtered{
 				name = reqName,
 				position = {position.x + disp[1], position.y + disp[2]},
@@ -165,8 +180,8 @@ local function updateChild(child, entity, updatePos, req)
 	child.direction = entity.direction
 	child.mirroring = entity.mirroring
 	child.orientation = entity.orientation
-	if updatePos then
-		local newDisp = adjustDisplacementForOrientationAndMirroring(req.pos, entity.orientation, entity.mirroring, req.adjustForOrientation)
+	if updatePos and (req.shouldTeleport == nil or req.shouldTeleport) then
+		local newDisp = adjustDisplacementForOrientationAndMirroring(req.pos, entity.orientation, entity.mirroring, entity.direction, req.adjustForOrientation)
 		local newPos = {entity.position.x + newDisp[1], entity.position.y + newDisp[2]}
 		--child.position = entity.position -- Can't, it's read-only.
 		local success = child.teleport(newPos)
@@ -189,7 +204,7 @@ local function findAndUpdateChildren(entity, searchPos, updatePos, req, reqName,
 	if not surface.valid then return end
 	assert(oldOrientation ~= nil)
 	assert(oldMirroring ~= nil)
-	local oldDisp = adjustDisplacementForOrientationAndMirroring(req.pos, oldOrientation, oldMirroring, req.adjustForOrientation)
+	local oldDisp = adjustDisplacementForOrientationAndMirroring(req.pos, oldOrientation, oldMirroring, entity.direction, req.adjustForOrientation)
 	local children = surface.find_entities_filtered{
 		name = reqName,
 		position = {searchPos.x + oldDisp[1], searchPos.y + oldDisp[2]},
