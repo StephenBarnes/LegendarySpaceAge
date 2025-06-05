@@ -17,7 +17,8 @@ miniAssembler.crafting_categories = {"crafting"}
 miniAssembler.placeable_by = {item = "mini-assembler", count = 1}
 local graphicsDir = "__LegendarySpaceAge__/graphics/mini-assembler/"
 local graphicsScale = 0.55
-local graphicsShift = {0, -0.03}
+local graphicsShiftEW = {0, 0}
+local graphicsShiftNS = {0, -0.03}
 miniAssembler.graphics_set = {
 	animation = {
 		north = {
@@ -28,7 +29,7 @@ miniAssembler.graphics_set = {
 					height = 138,
 					frame_count = 1,
 					line_length = 1,
-					shift = graphicsShift,
+					shift = graphicsShiftNS,
 					scale = graphicsScale,
 				}
 			}
@@ -41,7 +42,7 @@ miniAssembler.graphics_set = {
 					height = 138,
 					frame_count = 1,
 					line_length = 1,
-					shift = graphicsShift,
+					shift = graphicsShiftNS,
 					scale = graphicsScale,
 				}
 			}
@@ -54,7 +55,7 @@ miniAssembler.graphics_set = {
 					height = 78,
 					frame_count = 1,
 					line_length = 1,
-					shift = graphicsShift,
+					shift = graphicsShiftEW,
 					scale = graphicsScale,
 				}
 			}
@@ -67,13 +68,12 @@ miniAssembler.graphics_set = {
 					height = 78,
 					frame_count = 1,
 					line_length = 1,
-					shift = graphicsShift,
+					shift = graphicsShiftEW,
 					scale = graphicsScale,
 				}
 			}
 		},
 		-- TODO shadow layers.
-		-- TODO currently the machine graphics doesn't change when it's flipped/rotated. Assembler's direction doesn't change when it's rotated, or when you assign .direction at runtime.
 	}
 	--[[
 		layers = {
@@ -121,6 +121,22 @@ miniAssembler.graphics_set = {
 		}
 	}
 	]]
+}
+-- NOTE there's weird engine behavior where 2x1 assemblers with no fluidboxes behave weirdly when you rotate them. Rotation event gets fired but the assembler's .direction doesn't change, and directional sprites don't update, and assigning assembler.direction / .mirroring / .orientation does nothing, value stays the same. So I'll add a fluidbox so that rotations work as expected.
+miniAssembler.fluid_boxes_off_when_no_fluid_recipe = false
+miniAssembler.fluid_boxes = {
+	{
+		production_type = "input",
+		volume = 10,
+		pipe_connections = {
+			{
+				position = {0, 0.5},
+				direction = WEST,
+				connection_type = "linked",
+				linked_connection_id = 1,
+			}
+		}
+	}
 }
 miniAssembler.selection_box = {{-0.5, -1}, {0.5, 1}}
 miniAssembler.collision_box = {{-0.45, -1}, {0.45, 1}}

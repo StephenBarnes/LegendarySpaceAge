@@ -216,7 +216,9 @@ local function findAndUpdateChildren(entity, searchPos, updatePos, req, reqName,
 		log("Error: Child " .. reqName .. " at " .. serpent.line(searchPos) .. " is invalid, this should not happen")
 		return
 	end
-	updateChild(child, entity, updatePos, req)
+	if req.suppressRotationsAndFlips ~= true then
+		updateChild(child, entity, updatePos, req)
+	end
 	if req.adjustedHandler ~= nil then
 		req.adjustedHandler(entity, child, wasRotated, wasFlipped)
 	end

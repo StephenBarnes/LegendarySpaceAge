@@ -11,12 +11,13 @@ Each child requirement can have fields:
 * destroyedHandler - function to call right before child is destroyed. Called as destroyedHandler(parentName, child).
 * adjustedHandler - function to call when parent is changed (rotated, flipped, moved). Called as adjustedHandler(parent, child, wasRotated, wasFlipped). Needed for loaders, since they have direction independent of "rotating" them (changing from input to output).
 * shouldTeleport - if we should teleport the child when parent rotates or moves. (Can't teleport loaders and transport belts.)
+* suppressRotationsAndFlips - if false/nil, rotating/flipping the parent will also rotate/flip the child. If true, that won't happen, but the adjustedHandler will still be called.
 
 Note that if children have the same name and position, we can get confused about which one to update/delete, so preferably don't do that. Position invisible children inside the parent entity.
 	TODO maybe add table to record unit_number of children linking back to unit_number or position of parent, so we can find the correct child to update/delete. Still won't work for simple-entity children, but in that case they're probably interchangeable anyway. I don't think I actually need this for anything I want to implement though.
 ]]
 
----@type table<string, table<string, {pos: {[1]: number, [2]: number}, adjustForOrientation: boolean, createdHandler: fun(parent: LuaEntity, child: LuaEntity), destroyedHandler: fun(parentName: string, child: LuaEntity), adjustedHandler: fun(parent: LuaEntity, child: LuaEntity, wasRotated: boolean, wasFlipped: boolean), shouldTeleport: boolean}[]>>
+---@type table<string, table<string, {pos: {[1]: number, [2]: number}, adjustForOrientation: boolean, createdHandler: fun(parent: LuaEntity, child: LuaEntity), destroyedHandler: fun(parentName: string, child: LuaEntity), adjustedHandler: fun(parent: LuaEntity, child: LuaEntity, wasRotated: boolean, wasFlipped: boolean), shouldTeleport: boolean?, suppressRotationsAndFlips: boolean?}[]>>
 local Export = {}
 
 -- Create steam-evilizers for condensing turbines. This is so we can give condensing turbines lower efficiency than normal steam turbines, see data/pre-space/condensing-turbine.lua.
@@ -54,10 +55,12 @@ end
 -- Add hidden loader for mini-assembler.
 Export["mini-assembler"] = {
 	["lsa-loader"] = {
-		{ -- Front loader (top in default orientation) (input or output)
+		{ -- Front loader (top in default orientation) - initially input, can be output if rotated/flipped.
+			-- Note that since loaders can't be teleported, we reuse this child for both input and output, adjusting it to be input or output when assembler is rotated/flipped.
 			pos = {0, -0.5},
 			adjustForOrientation = true,
 			shouldTeleport = false,
+			suppressRotationsAndFlips = true,
 			createdHandler = function(parent, child)
 				child.destructible = false
 				child.loader_type = "input"
@@ -66,41 +69,24 @@ Export["mini-assembler"] = {
 				if wasRotated then
 					if child.loader_type == "input" then
 						child.loader_type = "output"
-						child.direction = ControlUtils.flipDirection(child.direction)
 					else
 						child.loader_type = "input"
 					end
-				else
+				elseif wasFlipped and (child.direction == EAST or child.direction == WEST) then
 					if child.loader_type == "input" then
 						child.loader_type = "output"
-						if child.direction == NORTH or child.direction == SOUTH then
-							child.direction = ControlUtils.flipDirection(child.direction)
-						end
 					else
 						child.loader_type = "input"
-						if child.direction == EAST or child.direction == WEST then
-							child.direction = ControlUtils.flipDirection(child.direction)
-						end
+						child.direction = ControlUtils.flipDirection(child.direction)
 					end
 				end
-				-- Apparently the assembler's direction actually isn't changed even when you rotate or flip it, and this event gets called. So the arrows of the assembler point the wrong way.
-				-- So we also flip the parent's direction here. (But not in the back loader's adjustedHandler, since that would flip it twice.)
-				-- Setting parent.direction does nothing. Setting parent.orientation does nothing.
-				log("Adjusting parent direction " .. serpent.line(parent.direction) .. ", parent orientation " .. serpent.line(parent.orientation))
-				log("Parent.supports_direction " .. serpent.line(parent.supports_direction))
-				--parent.direction = ControlUtils.flipDirection(parent.direction)
-				--parent.direction = EAST
-				--parent.orientation = ControlUtils.flipOrientation(parent.orientation)
-				--parent.rotate()
-				parent.mirroring = not parent.mirroring
-				log("Adjusted, parent direction " .. serpent.line(parent.direction) .. ", parent orientation " .. serpent.line(parent.orientation))
-				assert(parent.name == "mini-assembler")
 			end,
 		},
-		{ -- Back loader (bottom in default orientation) (can be input or output)
+		{ -- Back loader (bottom in default orientation) - initially output, can be input if flipped/mirrored.
 			pos = {0, 0.5},
 			adjustForOrientation = true,
 			shouldTeleport = false,
+			suppressRotationsAndFlips = true,
 			createdHandler = function(parent, child)
 				child.destructible = false
 				child.direction = ControlUtils.flipDirection(parent.direction)
@@ -110,21 +96,15 @@ Export["mini-assembler"] = {
 				if wasRotated then
 					if child.loader_type == "output" then
 						child.loader_type = "input"
-						child.direction = ControlUtils.flipDirection(child.direction)
 					else
 						child.loader_type = "output"
 					end
-				else
+				elseif wasFlipped and (child.direction == EAST or child.direction == WEST) then
 					if child.loader_type == "output" then
 						child.loader_type = "input"
-						if child.direction == NORTH or child.direction == SOUTH then
-							child.direction = ControlUtils.flipDirection(child.direction)
-						end
 					else
 						child.loader_type = "output"
-						if child.direction == EAST or child.direction == WEST then
-							child.direction = ControlUtils.flipDirection(child.direction)
-						end
+						child.direction = ControlUtils.flipDirection(child.direction)
 					end
 				end
 			end,
