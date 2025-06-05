@@ -63,15 +63,41 @@ Export["mini-assembler"] = {
 				child.loader_type = "input"
 			end,
 			adjustedHandler = function(parent, child, wasRotated, wasFlipped)
-				if child.loader_type == "input" then
-					child.loader_type = "output"
-					child.direction = ControlUtils.flipDirection(child.direction)
+				if wasRotated then
+					if child.loader_type == "input" then
+						child.loader_type = "output"
+						child.direction = ControlUtils.flipDirection(child.direction)
+					else
+						child.loader_type = "input"
+					end
 				else
-					child.loader_type = "input"
+					if child.loader_type == "input" then
+						child.loader_type = "output"
+						if child.direction == NORTH or child.direction == SOUTH then
+							child.direction = ControlUtils.flipDirection(child.direction)
+						end
+					else
+						child.loader_type = "input"
+						if child.direction == EAST or child.direction == WEST then
+							child.direction = ControlUtils.flipDirection(child.direction)
+						end
+					end
 				end
+				-- Apparently the assembler's direction actually isn't changed even when you rotate or flip it, and this event gets called. So the arrows of the assembler point the wrong way.
+				-- So we also flip the parent's direction here. (But not in the back loader's adjustedHandler, since that would flip it twice.)
+				-- Setting parent.direction does nothing. Setting parent.orientation does nothing.
+				log("Adjusting parent direction " .. serpent.line(parent.direction) .. ", parent orientation " .. serpent.line(parent.orientation))
+				log("Parent.supports_direction " .. serpent.line(parent.supports_direction))
+				--parent.direction = ControlUtils.flipDirection(parent.direction)
+				--parent.direction = EAST
+				--parent.orientation = ControlUtils.flipOrientation(parent.orientation)
+				--parent.rotate()
+				parent.mirroring = not parent.mirroring
+				log("Adjusted, parent direction " .. serpent.line(parent.direction) .. ", parent orientation " .. serpent.line(parent.orientation))
+				assert(parent.name == "mini-assembler")
 			end,
 		},
-		{ -- Bottom loader (can be input or output)
+		{ -- Back loader (bottom in default orientation) (can be input or output)
 			pos = {0, 0.5},
 			adjustForOrientation = true,
 			shouldTeleport = false,
@@ -81,11 +107,25 @@ Export["mini-assembler"] = {
 				child.loader_type = "output"
 			end,
 			adjustedHandler = function(parent, child, wasRotated, wasFlipped)
-				if child.loader_type == "output" then
-					child.loader_type = "input"
-					child.direction = ControlUtils.flipDirection(child.direction)
+				if wasRotated then
+					if child.loader_type == "output" then
+						child.loader_type = "input"
+						child.direction = ControlUtils.flipDirection(child.direction)
+					else
+						child.loader_type = "output"
+					end
 				else
-					child.loader_type = "output"
+					if child.loader_type == "output" then
+						child.loader_type = "input"
+						if child.direction == NORTH or child.direction == SOUTH then
+							child.direction = ControlUtils.flipDirection(child.direction)
+						end
+					else
+						child.loader_type = "output"
+						if child.direction == EAST or child.direction == WEST then
+							child.direction = ControlUtils.flipDirection(child.direction)
+						end
+					end
 				end
 			end,
 		},
