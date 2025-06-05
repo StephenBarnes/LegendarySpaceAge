@@ -21,24 +21,28 @@ local tiers = {
 		speed = 10,
 		splitter = "splitter",
 		techName = "logistics",
+		simulation = "0eNqllNtuwyAMht/F16QKWdI2eZWpimjidkgEEDjVqirvPkh26HrQEu0S/Pv7sTFcYK96tE5qguoCsjHaQ/V6AS+PWqi4p0WHUAE5ob01jpI9KoKBgdQtvkPFB/ZAroxo0V3JsmHHADVJkjhZjItzrftuH5QVZ1+5Uh+kDqGkeUNPwMAaH9KMjvyAWq8KBmeoknxVjAaTvPZIJPXRR5nDzpyw7kNMETpsa0nYhdBBKI8Mpu3pIJ+2jbEWXWKVIAymjeljU3iaMuhMGxWCEoViPNJ38bsh1n9TS8Zu+nBXw/a6glY6bKZgzoDONmaanmwfG31Hf2FPLuXOpfzdqWufB9x8NpfzReBiPjhdBF7PBxeLwJv54HwReDsfvF4ELv8cOf73zEn9ZOR4Ovt18vI/z5Ncj0P8KuI6uP18TwxO4cGOPsU6K/OyLDZpVmzKbBg+AMnoliQ=",
 	},
 	[2] = {
 		tint = {1, .109, 0},
 		speed = 20,
 		splitter = "fast-splitter",
 		techName = "logistics-2",
+		simulation = "0eNqllFtugzAQRfcy3ybCFEhgK1WEHJiklsC27CFqFLH32tBH2iRtrH4yj3M9l7HPsOtHNFYqgvoMstXKQf18BicPSvQhpsSAUMNeOErICuWMtpTssCeYGEjV4SvUfGL3enotOrQXtdm0ZYCKJElcxOaPU6PGYecra84+AFLtpfKppH1BR8DAaOfbtAoiHlWuCgYnqJN0VcwCS3njkEiqgwtlFgd9xGb0uZ7QYtdIwsGn9qJ3yGAJLwd5l221MWgT0wtCL9rqMdjD05TBoLtQIfxcKOYjfTqwnYIJP2bJ2C0zrgbZXI7RSYvtkswZ0MmEdj2SGYPlVxJP7Ld/dCVVfffsUuwGPI+Dcx5FLyLpaRS9jKQXUfR1JD2Pom8i6WUUvXpsK/nfaynVna3k6cO3mFf/vsZTeFNCwMt9vWgMjv5mz0JFmVV5VRXrNCvWVTZNb8AoqNU=",
 	},
 	[3] = {
 		tint = {.02, .788, .961},
 		speed = 50,
 		splitter = "express-splitter",
 		techName = "logistics-3",
+		simulation = "0eNqllN2OwiAQhd9lrqkptVXbV9mYprajS0KBwNRoTN99od0fd11XyV7CDN9hDjNcYCcHNFYoguoCotXKQfVyAScOqpFhTzU9QgV4MhadS8g2yhltKdmhJBgZCNXhCSo+sj+OSd10aK/Ss3HLABUJEjhLTotzrYZ+5zMrzj4YQu2F8qGkfUVHwMBo549pFXQ8arUoGJyhWi6KiT9n1w6JhDq4kGWx10esBx+ThBa7WhD2PrRvpEMG8/Z8j3fVVhuDNjGyIfSarR6CRzxNGfS6CxkNJRKb6UafHmzHYMOPUjJ2x46bUjZXhXTCYjvHcgZ0NgGgBzJDsP1GZMkePNWNWPnNt2u5X/B5NJ6nMfwins9j+Kt4fh7DX8fzixj+Jp6/iuGXT/cof9ikQt3pUZ4+PdS8/MdUkx1wDB9MWHuxr0+OwdHP+SRTrLIyL8tinWbFuszG8Q1MZrR+",
 	},
 	[4] = {
 		tint = {.647, .839, .310},
 		speed = 100,
 		splitter = "turbo-splitter",
 		techName = "turbo-transport-belt",
+		simulation = "0eNqllNtuwyAMht/F16QKWQ5NXmWqIpK4HVICiDjVqirvPkh26NZ2K9ol2P5+/GM4Q9NPaKxUBNUZZKvVCNXzGUZ5UKL3e0oMCBXQZBsdkRVqNNpS1GBPMDOQqsNXqPjM7hb1WnRoL5KTeccAFUmSuMoti1OtpqFxmRVnHwSp9lK5UNS+4EjAwOjRlWnlVRwq32QMTlAVm2zhr9n1iERSHUafZXHQR6wnF+sJLXa1JBxcaC/6ERms2+s53lVbbQzayPSC0Gm2evL+8DhmMOjOZwiKehTLiT4d2M3ehB+tJOymGVeNbC/a6KTFdo2lDOhkfLmeyEze8iuJJ/brJV1Jld88uxS7AU8D4ZyH0LNQehxCz0PpWQi9CKWnIfRtKD0PoZcPTiX/cyylujOVPH74EfPyH6+Y7ISz/1D82ol9fWgMju5dLzJZnpRpWWZFnGRFmczzG2Y3q/o=",
 	},
 }
 
@@ -56,6 +60,12 @@ for tier, tierVals in pairs(tiers) do
 	miniAssembler.placeable_by = {item = "mini-assembler-" .. tier, count = 1}
 	miniAssembler.source_inventory_size = 1
 	miniAssembler.result_inventory_size = 1
+	miniAssembler.fast_replaceable_group = "mini-assembler"
+	if tiers[tier + 1] ~= nil then
+		miniAssembler.next_upgrade = "mini-assembler-" .. (tier + 1)
+	else
+		miniAssembler.next_upgrade = nil
+	end
 	local graphicsDir = "__LegendarySpaceAge__/graphics/mini-assembler/"
 	local graphicsScale = 0.5
 	local graphicsShiftEW = {0, 0.05} -- Looks fine.
@@ -214,8 +224,6 @@ for tier, tierVals in pairs(tiers) do
 	}
 	miniAssembler.selection_box = {{-0.5, -1}, {0.5, 1}}
 	miniAssembler.collision_box = {{-0.45, -1}, {0.45, 1}}
-	miniAssembler.next_upgrade = nil
-	miniAssembler.fast_replaceable_group = nil
 	miniAssembler.crafting_speed = tierVals.speed * 0.1 -- All of these recipes take 0.1 seconds.
 	miniAssembler.open_sound = copy(data.raw.container["iron-chest"].open_sound)
 	miniAssembler.close_sound = copy(data.raw.container["iron-chest"].close_sound)
@@ -246,6 +254,24 @@ for tier, tierVals in pairs(tiers) do
 	miniAssembler.allowed_effects = {}
 	miniAssembler.allowed_module_categories = {}
 	miniAssembler.localised_description = {"entity-description.mini-assembler"}
+	miniAssembler.factoriopedia_simulation = { init = [[
+		game.simulation.camera_position = {0, 0.5}
+		game.simulation.camera_zoom = 3.5
+		game.surfaces[1].create_entities_from_blueprint_string{
+			string = "]]
+			.. tierVals.simulation .. [[",
+			position = {0, 0}
+		}
+		local ma = game.surfaces[1].create_entity{name = "mini-assembler-]] .. tier .. [[", position = {-0.5, 0}, direction = 12}
+		local l1 = game.surfaces[1].create_entity{name = "lsa-loader-]] .. tier .. [[", position = {0, 0}, direction = 4}
+		local l2 = game.surfaces[1].create_entity{name = "lsa-loader-]] .. tier .. [[", position = {-1, 0}, direction = 12}
+		l1.loader_type = "output"
+		l2.loader_type = "input"
+		l1.update_connections()
+		l2.update_connections()
+		ma.update_connections()
+		]]
+	}
 	extend{miniAssembler}
 
 	local miniAssemblerItem = copy(ITEM["assembling-machine-1"])
