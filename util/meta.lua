@@ -30,3 +30,7 @@ defines.direction = {
 
 ---@class data.RecipePrototype
 ---@field additional_categories? string[]
+
+--- LSP doesn't recognize FurnacePrototype.circuit_connector.
+---@class data.FurnacePrototype
+---@field circuit_connector? data.CircuitConnectorDefinition

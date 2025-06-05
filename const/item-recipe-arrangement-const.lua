@@ -1,6 +1,6 @@
 --[[ This file defines the order and item-groups and item-subgroups of all items, fluids, and recipes, in Factoriopedia and in crafting menu for players and machines.
 See data/broad-changes/item-recipe-arrangement.lua for the actual code that applies this file.
-	Orders of items/recipe/etc, subgroups, and groups (tabs) are set based on order in this file.
+	Orders of items/recipes/etc, subgroups, and groups (tabs) are set based on order in this file.
 	Item-subgroups named in this file are automatically created if they don't already exist.
 	Item-groups named in this file are not automatically created, they're explicitly created in data/broad-changes/item-recipe-arrangement.lua.
 ]]

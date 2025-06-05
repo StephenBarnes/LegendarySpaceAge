@@ -27,7 +27,7 @@ Re furnace energy consumption:
 -- TODO add mandatory perRocket field.
 -- TODO check all of these have all of these fields.
 
----@alias CrafterMachineVals {kind: string, speed: number?, drainKW: number, activeKW: number, pollution: number, spores: number?, effects: table?, forbid_quality: boolean?, forbid_productivity: boolean?, clearDescription: boolean?, forbidModules: boolean?}
+---@alias CrafterMachineVals {kind: string, speed: number?, drainKW: number, activeKW: number, pollution: number, spores: number?, effects: table?, forbid_quality: boolean?, forbid_productivity: boolean?, clearDescription: boolean?, forbidModules: boolean?, adjustSlots: boolean?}
 ---@alias CrafterRecipeVals {ingredients: table, time: number, category: string?, categories: string[]?}
 ---@alias CrafterItemVals {perRocket: number, stackSize: number}
 ---@type table<string, {machine: CrafterMachineVals, recipe: CrafterRecipeVals, item:CrafterItemVals}>
@@ -36,8 +36,9 @@ local CRAFTER_VALS = {
 	--- Mini-assemblers.
 	["mini-assembler-1"] = {
 		machine = {
-			kind = "assembling-machine",
+			kind = "furnace",
 			forbidModules = true,
+			adjustSlots = false,
 		},
 		recipe = {
 			ingredients = {
@@ -49,8 +50,9 @@ local CRAFTER_VALS = {
 	},
 	["mini-assembler-2"] = {
 		machine = {
-			kind = "assembling-machine",
+			kind = "furnace",
 			forbidModules = true,
+			adjustSlots = false,
 		},
 		recipe = {
 			ingredients = {
@@ -62,8 +64,9 @@ local CRAFTER_VALS = {
 	},
 	["mini-assembler-3"] = {
 		machine = {
-			kind = "assembling-machine",
+			kind = "furnace",
 			forbidModules = true,
+			adjustSlots = false,
 		},
 		recipe = {
 			ingredients = {
@@ -74,8 +77,9 @@ local CRAFTER_VALS = {
 	},
 	["mini-assembler-4"] = {
 		machine = {
-			kind = "assembling-machine",
+			kind = "furnace",
 			forbidModules = true,
+			adjustSlots = false,
 		},
 		recipe = {
 			ingredients = {
@@ -426,7 +430,7 @@ for name, vals in pairs(CRAFTER_VALS) do
 
 		-- Add output slots to furnaces. Otherwise some recipe products just disappear.
 		-- TODO autodebugger should check number of output slots in all machines, and all recipes they can do, and ensure it's always enough.
-		if vals.machine.kind == "furnace" then
+		if vals.machine.kind == "furnace" and vals.machine.adjustSlots ~= false then
 			if ent.result_inventory_size == nil or ent.result_inventory_size < 2 then
 				ent.result_inventory_size = 2
 			end

@@ -44,13 +44,18 @@ local tiers = {
 
 for tier, tierVals in pairs(tiers) do
 	-- Create mini-assembler.
+	---@type data.FurnacePrototype
+	---@diagnostic disable-next-line: assign-type-mismatch
 	local miniAssembler = copy(ASSEMBLER["assembling-machine-1"])
 	miniAssembler.name = "mini-assembler-" .. tier
+	miniAssembler.type = "furnace"
 	miniAssembler.tile_height = 2
 	miniAssembler.tile_width = 1
 	miniAssembler.minable = {mining_time = 0.1, result = "mini-assembler-" .. tier}
 	miniAssembler.crafting_categories = {"mini-assembling"}
 	miniAssembler.placeable_by = {item = "mini-assembler-" .. tier, count = 1}
+	miniAssembler.source_inventory_size = 1
+	miniAssembler.result_inventory_size = 1
 	local graphicsDir = "__LegendarySpaceAge__/graphics/mini-assembler/"
 	local graphicsScale = 0.5
 	local graphicsShiftEW = {0, 0.05} -- Looks fine.
@@ -192,10 +197,10 @@ for tier, tierVals in pairs(tiers) do
 		}
 	}
 	-- NOTE there's weird engine behavior where 2x1 assemblers with no fluidboxes behave weirdly when you rotate them. Rotation event gets fired but the assembler's .direction doesn't change, and directional sprites don't update, and assigning assembler.direction / .mirroring / .orientation does nothing, value stays the same. So I'll add a fluidbox so that rotations work as expected.
-	miniAssembler.fluid_boxes_off_when_no_fluid_recipe = false
 	miniAssembler.fluid_boxes = {
 		{
-			production_type = "input",
+			production_type = "output",
+			hide_connection_info = true,
 			volume = 10,
 			pipe_connections = {
 				{
