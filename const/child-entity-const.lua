@@ -7,6 +7,7 @@ You can require multiple children of the same name, but they should have differe
 Each child requirement can have fields:
 * pos - position relative to parent. Should be a tile center, or allow placing off-grid, otherwise we won't be able to find it to update/delete.
 * adjustForOrientation - if we should move the child when parent rotates.
+* preCreatedHandler - function to call before trying to create the child. Called as preCreatedHandler(parent, info that will be used to create child).
 * createdHandler - function to call when child is created. Called as createdHandler(parent, child).
 * destroyedHandler - function to call right before child is destroyed. Called as destroyedHandler(parentName, child).
 * adjustedHandler - function to call when parent is changed (rotated, flipped, moved). Called as adjustedHandler(parent, child, wasRotated, wasFlipped). Needed for loaders, since they have direction independent of "rotating" them (changing from input to output).
@@ -94,6 +95,14 @@ local function backLoaderAdjustedHandler(parent, child, wasRotated, wasFlipped)
 		end
 	end
 end
+local function preCreatedHandler(parent, info)
+	-- When fast-replacing, the onBuilt gets run before the onDestroyed handler. So it tries to build loader on top of previous loader, and fails.
+	-- So instead we need to find and delete the previous loader before placing the new one.
+	local prevLoader = parent.surface.find_entities_filtered{type = "loader-1x1", position = info.position}[1]
+	if prevLoader ~= nil then
+		prevLoader.destroy()
+	end
+end
 for i = 1, 4 do
 	Export["mini-assembler-" .. i] = {
 		["lsa-loader-" .. i] = {
@@ -105,6 +114,7 @@ for i = 1, 4 do
 				suppressRotationsAndFlips = true,
 				createdHandler = frontLoaderCreatedHandler,
 				adjustedHandler = frontLoaderAdjustedHandler,
+				preCreatedHandler = preCreatedHandler,
 			},
 			{ -- Back loader (bottom in default orientation) - initially output, can be input if flipped/mirrored.
 				pos = {0, 0.5},
@@ -113,6 +123,7 @@ for i = 1, 4 do
 				suppressRotationsAndFlips = true,
 				createdHandler = backLoaderCreatedHandler,
 				adjustedHandler = backLoaderAdjustedHandler,
+				preCreatedHandler = preCreatedHandler,
 			},
 		},
 	}

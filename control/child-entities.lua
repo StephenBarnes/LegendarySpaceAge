@@ -111,6 +111,9 @@ local function onBuilt(event)
 				direction = ent.direction,
 				mirroring = ent.mirroring,
 			}
+			if req.preCreatedHandler ~= nil then
+				req.preCreatedHandler(ent, info)
+			end
 			local newEnt = surface.create_entity(info)
 			if newEnt == nil or not newEnt.valid then
 				log("Error: Failed to create child " .. reqName .. " for " .. ent.name)
