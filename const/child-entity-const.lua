@@ -53,64 +53,66 @@ end
 -- TODO later I might (?) add hidden beacons for furnaces, so they give a speed bonus to adjacent furnaces. Also exo/endo plants, maybe reducing fuel consumption. Probably adjust beacons' modules in on_built event, using Beacon Interface mod.
 
 -- Add hidden loader for mini-assembler.
-Export["mini-assembler"] = {
-	["lsa-loader"] = {
-		{ -- Front loader (top in default orientation) - initially input, can be output if rotated/flipped.
-			-- Note that since loaders can't be teleported, we reuse this child for both input and output, adjusting it to be input or output when assembler is rotated/flipped.
-			pos = {0, -0.5},
-			adjustForOrientation = true,
-			shouldTeleport = false,
-			suppressRotationsAndFlips = true,
-			createdHandler = function(parent, child)
-				child.destructible = false
-				child.loader_type = "input"
-			end,
-			adjustedHandler = function(parent, child, wasRotated, wasFlipped)
-				if wasRotated then
-					if child.loader_type == "input" then
-						child.loader_type = "output"
-					else
-						child.loader_type = "input"
+for i = 1, 4 do
+	Export["mini-assembler-" .. i] = {
+		["lsa-loader-" .. i] = {
+			{ -- Front loader (top in default orientation) - initially input, can be output if rotated/flipped.
+				-- Note that since loaders can't be teleported, we reuse this child for both input and output, adjusting it to be input or output when assembler is rotated/flipped.
+				pos = {0, -0.5},
+				adjustForOrientation = true,
+				shouldTeleport = false,
+				suppressRotationsAndFlips = true,
+				createdHandler = function(parent, child)
+					child.destructible = false
+					child.loader_type = "input"
+				end,
+				adjustedHandler = function(parent, child, wasRotated, wasFlipped)
+					if wasRotated then
+						if child.loader_type == "input" then
+							child.loader_type = "output"
+						else
+							child.loader_type = "input"
+						end
+					elseif wasFlipped and (child.direction == EAST or child.direction == WEST) then
+						if child.loader_type == "input" then
+							child.loader_type = "output"
+						else
+							child.loader_type = "input"
+							child.direction = ControlUtils.flipDirection(child.direction)
+						end
 					end
-				elseif wasFlipped and (child.direction == EAST or child.direction == WEST) then
-					if child.loader_type == "input" then
-						child.loader_type = "output"
-					else
-						child.loader_type = "input"
-						child.direction = ControlUtils.flipDirection(child.direction)
+				end,
+			},
+			{ -- Back loader (bottom in default orientation) - initially output, can be input if flipped/mirrored.
+				pos = {0, 0.5},
+				adjustForOrientation = true,
+				shouldTeleport = false,
+				suppressRotationsAndFlips = true,
+				createdHandler = function(parent, child)
+					child.destructible = false
+					child.direction = ControlUtils.flipDirection(parent.direction)
+					child.loader_type = "output"
+				end,
+				adjustedHandler = function(parent, child, wasRotated, wasFlipped)
+					if wasRotated then
+						if child.loader_type == "output" then
+							child.loader_type = "input"
+						else
+							child.loader_type = "output"
+						end
+					elseif wasFlipped and (child.direction == EAST or child.direction == WEST) then
+						if child.loader_type == "output" then
+							child.loader_type = "input"
+						else
+							child.loader_type = "output"
+							child.direction = ControlUtils.flipDirection(child.direction)
+						end
 					end
-				end
-			end,
+				end,
+			},
 		},
-		{ -- Back loader (bottom in default orientation) - initially output, can be input if flipped/mirrored.
-			pos = {0, 0.5},
-			adjustForOrientation = true,
-			shouldTeleport = false,
-			suppressRotationsAndFlips = true,
-			createdHandler = function(parent, child)
-				child.destructible = false
-				child.direction = ControlUtils.flipDirection(parent.direction)
-				child.loader_type = "output"
-			end,
-			adjustedHandler = function(parent, child, wasRotated, wasFlipped)
-				if wasRotated then
-					if child.loader_type == "output" then
-						child.loader_type = "input"
-					else
-						child.loader_type = "output"
-					end
-				elseif wasFlipped and (child.direction == EAST or child.direction == WEST) then
-					if child.loader_type == "output" then
-						child.loader_type = "input"
-					else
-						child.loader_type = "output"
-						child.direction = ControlUtils.flipDirection(child.direction)
-					end
-				end
-			end,
-		},
-	},
-}
+	}
+end
 
 -- TODO example of a child entity that doesn't work.
 --[[

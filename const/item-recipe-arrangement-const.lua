@@ -7,9 +7,10 @@ See data/broad-changes/item-recipe-arrangement.lua for the actual code that appl
 
 return {
 	logistics = {
-		storage = {"steel-chest", "tiny-inline-storage-tank", "storage-tank", "large-storage-tank"},
+		storage = {"steel-chest", "tiny-inline-storage-tank", "storage-tank", "large-strage-tank"},
 		belt = {"transport-belt", "fast-transport-belt", "express-transport-belt", "turbo-transport-belt", "underground-belt", "fast-underground-belt", "express-underground-belt", "turbo-underground-belt"},
-		inserter = {"splitter", "fast-splitter", "express-splitter", "turbo-splitter", "inserter", "long-handed-inserter", "fast-inserter", "bulk-inserter", "stack-inserter", "burner-inserter"},
+		["splitters-and-mini-assemblers"] = {"splitter", "fast-splitter", "express-splitter", "turbo-splitter", "mini-assembler-1", "mini-assembler-2", "mini-assembler-3", "mini-assembler-4"},
+		inserter = {"inserter", "long-handed-inserter", "fast-inserter", "bulk-inserter", "stack-inserter", "burner-inserter"},
 		["energy-pipe-distribution"] = {"small-electric-pole", "medium-electric-pole", "big-electric-pole", "substation", "po-small-electric-fuse", "po-medium-electric-fuse", "po-big-electric-fuse", "po-transformer"},
 		["fluid-logistics"] = {"pipe", "pipe-to-ground", "pump", "offshore-pump", "waste-pump", "gas-vent"},
 		["train-transport"] = {"train-stop", "rail-signal", "rail-chain-signal", "locomotive", "cargo-wagon", "artillery-wagon", "rail", "rail-ramp", "rail-support"},
@@ -27,7 +28,7 @@ return {
 		["electricity-related"] = {"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector", "nuclear-reactor", "fusion-reactor", "fusion-generator"},
 		["extraction-machine"] = {"burner-mining-drill", "electric-mining-drill", "big-mining-drill", "deep-drill", "pumpjack", "agricultural-tower", "air-separator", "drill-node-dummy-miner"},
 		["smelting-machine"] = {"stone-furnace", "steel-furnace", "ff-furnace", "arc-furnace"},
-		["production-machine"] = {"mini-assembler", "assembling-machine-1", "assembling-machine-2", "assembling-machine-3", "clean-assembler"},
+		["production-machine"] = {"assembling-machine-1", "assembling-machine-2", "assembling-machine-3", "clean-assembler"},
 		["chemical-processing"] = {"chemical-plant", "oil-refinery", "filtration-plant", "cryogenic-plant", "gasifier", "fluid-fuelled-gasifier"},
 		["heat-processing"] = {"electric-furnace", "exothermic-plant"},
 		["planetary-special"] = {"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge"},

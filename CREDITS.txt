@@ -8,7 +8,7 @@ This file is to keep track of other people's stuff that I've used.
 * Flare Stack by GotLag, snouz, and others - mods.factorio.com/mod/Flare%20Stack - Used graphics and code.
 * Battery Powered by harag - mods.factorio.com/mod/battery-powered - Charger/discharger graphics, code, ideas.
 * Apprentice Assembler by Quezler - mods.factorio.com/mod/apprentice-assembler - Copied the code from this and modified slightly to apply the effect to arc furnaces. Relies on Beacon Interface mod also by Quezler - mods.factorio.com/mod/beacon-interface
-* Krastorio 2 by raiguard and others - mods.factorio.com/mod/Krastorio2 - Using graphics for imersite deposits, regulators, crude silicon.
+* Krastorio 2 by raiguard and others - mods.factorio.com/mod/Krastorio2 - Using graphics for imersite deposits, regulators, crude silicon, classifier.
 * Beacon Rebalance by wretlaw120 with some spritework by Sir-Lags-A-Lot - mods.factorio.com/mod/wret-beacon-rebalance-mod - Using high-res old-beacon graphics and code.
 * Gleba crop mods by LordMiguel (slipstacks, boompuffs, stingfronds) - Took ideas and bits of code for the Gleba crops.
 * Carbon by ElAdamo - mods.factorio.com/mod/carbon - Stole several ideas for the petrochem system, plus some code and graphics.

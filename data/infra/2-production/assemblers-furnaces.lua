@@ -27,26 +27,65 @@ Re furnace energy consumption:
 -- TODO add mandatory perRocket field.
 -- TODO check all of these have all of these fields.
 
----@alias CrafterMachineVals {kind: string, speed: number, drainKW: number, activeKW: number, pollution: number, spores: number?, effects: table?, forbid_quality: boolean?, forbid_productivity: boolean?, clearDescription: boolean?, forbidModules: boolean?}
+---@alias CrafterMachineVals {kind: string, speed: number?, drainKW: number, activeKW: number, pollution: number, spores: number?, effects: table?, forbid_quality: boolean?, forbid_productivity: boolean?, clearDescription: boolean?, forbidModules: boolean?}
 ---@alias CrafterRecipeVals {ingredients: table, time: number, category: string?, categories: string[]?}
 ---@alias CrafterItemVals {perRocket: number, stackSize: number}
 ---@type table<string, {machine: CrafterMachineVals, recipe: CrafterRecipeVals, item:CrafterItemVals}>
 local CRAFTER_VALS = {
-	["mini-assembler"] = {
+	------------------------------------------------------------------------
+	--- Mini-assemblers.
+	["mini-assembler-1"] = {
 		machine = {
 			kind = "assembling-machine",
-			speed = 1,
 			forbidModules = true,
 		},
 		recipe = {
 			ingredients = {
 				{"panel", 2},
-				{"frame", 1},
 				{"transport-belt", 2},
 			},
 			time = 1,
 		},
 	},
+	["mini-assembler-2"] = {
+		machine = {
+			kind = "assembling-machine",
+			forbidModules = true,
+		},
+		recipe = {
+			ingredients = {
+				{"panel", 2},
+				{"fast-transport-belt", 2},
+			},
+			time = 1,
+		},
+	},
+	["mini-assembler-3"] = {
+		machine = {
+			kind = "assembling-machine",
+			forbidModules = true,
+		},
+		recipe = {
+			ingredients = {
+				{"panel", 2},
+				{"express-transport-belt", 2},
+			},
+		},
+	},
+	["mini-assembler-4"] = {
+		machine = {
+			kind = "assembling-machine",
+			forbidModules = true,
+		},
+		recipe = {
+			ingredients = {
+				{"panel", 2},
+				{"turbo-transport-belt", 2},
+			},
+		},
+	},
+	------------------------------------------------------------------------
+	--- Assembling-machines.
 	["assembling-machine-1"] = {
 		machine = {
 			kind = "assembling-machine",
@@ -112,10 +151,8 @@ local CRAFTER_VALS = {
 			time = 20,
 		},
 	},
-
 	------------------------------------------------------------------------
-	--- Furnaces.
-	
+	--- Furnaces
 	["stone-furnace"] = {
 		machine = {
 			kind = "furnace",
@@ -184,11 +221,8 @@ local CRAFTER_VALS = {
 		},
 	},
 
-
-
 	------------------------------------------------------------------------
-	--- Assembling-machines that aren't called assemblers.
-
+	--- Misc other assembling-machines.
 	["filtration-plant"] = {
 		machine = {
 			kind = "furnace",
@@ -379,7 +413,7 @@ for name, vals in pairs(CRAFTER_VALS) do
 		---@diagnostic disable-next-line: assign-type-mismatch
 		local ent = RAW[vals.machine.kind][name]
 		assert(ent ~= nil, "RAW[" .. vals.machine.kind .. "][" .. name .. "] not found")
-		if vals.machine.speed then ent.crafting_speed = vals.machine.speed end
+		if vals.machine.speed ~= nil then ent.crafting_speed = vals.machine.speed end
 		if vals.machine.drainKW then ent.energy_source.drain = vals.machine.drainKW .. "kW" end
 		if vals.machine.activeKW then ent.energy_usage = (vals.machine.activeKW - vals.machine.drainKW) .. "kW" end
 		if vals.machine.pollution or vals.machine.spores then
