@@ -59,7 +59,7 @@ require("data.broad-changes.invisible-fluid-connectors")
 require("data.circuits-modules.regulators")
 require("data.circuits-modules.silicon")
 require("data.circuits-modules.clean-assemblers")
-require("data.pre-space.assembler-2x1")
+require("data.pre-space.mini-assembler")
 
 -- Editing planets
 require("data.pre-space.misc")

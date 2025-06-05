@@ -15,8 +15,9 @@ recipeFromIron.ingredients = {
 recipeFromIron.results = {{type = "item", name = "panel", amount = 1}}
 recipeFromIron.main_product = "panel"
 recipeFromIron.enabled = true
-recipeFromIron.energy_required = 0.25
+recipeFromIron.energy_required = 0.1
 recipeFromIron.category = "crafting"
+recipeFromIron.additional_categories = {"mini-assembling"}
 recipeFromIron.auto_recycle = false
 Icon.set(recipeFromIron, {"LSA/intermediate-factors/panel/iron-panel", "iron-plate"})
 recipeFromIron.allow_as_intermediate = true
@@ -38,8 +39,11 @@ local recipeFromWood = copy(recipeFromIron)
 recipeFromWood.name = "panel-from-wood"
 recipeFromWood.ingredients = {
 	{type = "item", name = "wood", amount = 1},
-	--{type = "item", name = "resin", amount = 1},
+	{type = "item", name = "resin", amount = 1},
 }
+recipeFromWood.results = {{type = "item", name = "panel", amount = 2}}
+recipeFromWood.energy_required = 0.25
+recipeFromWood.additional_categories = nil
 recipeFromWood.allow_as_intermediate = false
 Icon.set(recipeFromWood, {"LSA/intermediate-factors/panel/wooden-panel", "wood"})
 extend{recipeFromWood}
@@ -62,20 +66,22 @@ recipeFromRubber.ingredients = {
 	{type = "item", name = "rubber", amount = 1},
 }
 recipeFromRubber.allow_as_intermediate = false
+recipeFromRubber.additional_categories = nil
+recipeFromRubber.energy_required = 0.2
 recipeFromRubber.enabled = false
 Icon.set(recipeFromRubber, {"panel", "rubber"}) -- TODO get custom rubber-panel icon.
 extend{recipeFromRubber}
 
 -- Create recipe: 1 steel plate -> 1 panel
-local recipeFromSteel = Recipe.make{
+Recipe.make{
 	copy = recipeFromIron,
 	recipe = "panel-from-steel",
 	ingredients = {"steel-plate"},
 	allow_as_intermediate = false,
 	-- TODO custom icon.
 	icons = {"panel", "steel-plate"},
+	addToTech = "steel-processing",
 }
-Tech.addRecipeToTech("panel-from-steel", "steel-processing")
 
 -- TODO make more recipes, and add them to techs.
 -- TODO create casting recipes?

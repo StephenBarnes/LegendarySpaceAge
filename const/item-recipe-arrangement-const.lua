@@ -27,7 +27,7 @@ return {
 		["electricity-related"] = {"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector", "nuclear-reactor", "fusion-reactor", "fusion-generator"},
 		["extraction-machine"] = {"burner-mining-drill", "electric-mining-drill", "big-mining-drill", "deep-drill", "pumpjack", "agricultural-tower", "air-separator", "drill-node-dummy-miner"},
 		["smelting-machine"] = {"stone-furnace", "steel-furnace", "ff-furnace", "arc-furnace"},
-		["production-machine"] = {"assembling-machine-1", "assembling-machine-2", "assembling-machine-3", "clean-assembler"},
+		["production-machine"] = {"mini-assembler", "assembling-machine-1", "assembling-machine-2", "assembling-machine-3", "clean-assembler"},
 		["chemical-processing"] = {"chemical-plant", "oil-refinery", "filtration-plant", "cryogenic-plant", "gasifier", "fluid-fuelled-gasifier"},
 		["heat-processing"] = {"electric-furnace", "exothermic-plant"},
 		["planetary-special"] = {"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge"},

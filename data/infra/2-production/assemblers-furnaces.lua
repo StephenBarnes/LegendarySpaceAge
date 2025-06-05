@@ -27,11 +27,26 @@ Re furnace energy consumption:
 -- TODO add mandatory perRocket field.
 -- TODO check all of these have all of these fields.
 
----@alias CrafterMachineVals {kind: string, speed: number, drainKW: number, activeKW: number, pollution: number, spores: number?, effects: table?, forbid_quality: boolean?, forbid_productivity: boolean?, clearDescription: boolean?}
+---@alias CrafterMachineVals {kind: string, speed: number, drainKW: number, activeKW: number, pollution: number, spores: number?, effects: table?, forbid_quality: boolean?, forbid_productivity: boolean?, clearDescription: boolean?, forbidModules: boolean?}
 ---@alias CrafterRecipeVals {ingredients: table, time: number, category: string?, categories: string[]?}
 ---@alias CrafterItemVals {perRocket: number, stackSize: number}
 ---@type table<string, {machine: CrafterMachineVals, recipe: CrafterRecipeVals, item:CrafterItemVals}>
 local CRAFTER_VALS = {
+	["mini-assembler"] = {
+		machine = {
+			kind = "assembling-machine",
+			speed = 1,
+			forbidModules = true,
+		},
+		recipe = {
+			ingredients = {
+				{"panel", 2},
+				{"frame", 1},
+				{"transport-belt", 2},
+			},
+			time = 1,
+		},
+	},
 	["assembling-machine-1"] = {
 		machine = {
 			kind = "assembling-machine",
@@ -384,20 +399,27 @@ for name, vals in pairs(CRAFTER_VALS) do
 		end
 
 		-- All assemblers can get all beacon and module effects. No module slots. But ban some effects.
-		ent.effect_receiver = {
-			uses_beacon_effects = true,
-			uses_module_effects = true,
-			uses_surface_effects = true,
-			base_effect = vals.machine.effects,
-		}
-		allowed_effects = {}
-		for _, effect in pairs{"speed", "productivity", "consumption", "pollution", "quality"} do
-			if vals.machine["forbid_" .. effect] ~= true then
-				table.insert(allowed_effects, effect)
+		if vals.machine.forbidModules then
+			ent.effect_receiver = {base_effect = vals.machine.effects}
+			ent.allowed_effects = {}
+			ent.allowed_module_categories = {}
+		else
+			ent.effect_receiver = {
+				uses_beacon_effects = true,
+				uses_module_effects = true,
+				uses_surface_effects = true,
+				base_effect = vals.machine.effects,
+			}
+			allowed_effects = {}
+			for _, effect in pairs{"speed", "productivity", "consumption", "pollution", "quality"} do
+				if vals.machine["forbid_" .. effect] ~= true then
+					table.insert(allowed_effects, effect)
+				end
 			end
+			ent.allowed_effects = allowed_effects
+			ent.allowed_module_categories = nil -- Allows all by default.
 		end
-		ent.allowed_effects = allowed_effects
-		ent.allowed_module_categories = nil -- Allows all by default.
+
 		if vals.machine.clearDescription then
 			ent.localised_description = {"entity-description.no-description"}
 		end
