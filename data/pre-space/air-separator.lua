@@ -1,9 +1,9 @@
 --[[ This file creates the "air separator", a building that produces gases appropriate to whatever planet it's built on.
 The air separator can't be placed within some area of any other air separator.
-	This is interesting bc it gives the player reason to build lots of them everywhere, which means their buildable land for other uses now has a bunch of holes in it.
-There's a separate runtime script in control/air-separator.lua which:
-	* sets the recipe for the air separator according to the surface it was built on, similar to the borehole mining drill.
-	* creates or destroys the "air-separator-exclusion" entities when air separators are built or destroyed, including blueprints.
+	This is interesting bc it gives the player reason to scatter them throughout the factory, which means their buildable land for other uses now has a bunch of holes in it.
+		Or they can build them apart from the rest of the factory, using a lot of space.
+	This is implemented using exclusion-zones.lua, which is read by child-entity-const.lua to add exclusion zone entities to the table of required child entities, which is then read by child-entities.lua which actually creates the exclusion zones and deletes them when the air separator is destroyed.
+There's a separate runtime script in control/set-recipe-on-build.lua which sets the recipe for the air separator according to the surface it was built on.
 Graphics from Hurricane046 - https://mods.factorio.com/user/Hurricane046
 ]]
 

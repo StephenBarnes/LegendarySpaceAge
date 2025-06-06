@@ -1,10 +1,13 @@
---[[ This file is experimental. Want to see if it's possible to make a 1x1 assembler that gets automatically loaded by belt, and unloads into another belt.
+--[[ This file creates mini-assemblers / classifiers, which are 2x1 furnaces with 2 loaders (input and output) automatically created.
+The loaders are specified in child-entity-const.lua, which is then read by child-entities.lua, which creates the loaders.
+
+These are used for "classifying" items into factor intermediates, for recipes that don't logically require any assembling work. (For example classifying sand as "filler" so it can be used to make plastic or concrete.)
 
 Observations while trying to make this:
 * In control-stage code (child-created handler), setting loader.drop_target to the parent entity doesn't work, value stores nil after setting it.
 * In control-stage code (child-created handler), setting loader.drop_position to the parent entity's position doesn't work, throws error saying it's "not an inserter".
 * Trying to put a loader at non-integer coordinates doesn't work, it gets rounded to nearest map tile.
-* Can create loader on top of assembler, but it still belongs to a specific tile, so can't put 2 in one tile.
+* Can create loader on top of assembler, but it still belongs to a specific tile, so can't put 2 loaders in one tile.
 * By setting loader.container_distance = 0, it outputs into the same tile it's currently on, which is inside the assembler. So this is the solution used here - make assembler 2x1, with 2 loaders overlapping the assembler, each loader loading into its own tile (ie into the assembler).
 ]]
 
@@ -45,6 +48,16 @@ local tiers = {
 		simulation = "0eNqllNtuwyAMht/F16QKWQ5NXmWqIpK4HVICiDjVqirvPkh26NZ2K9ol2P5+/GM4Q9NPaKxUBNUZZKvVCNXzGUZ5UKL3e0oMCBXQZBsdkRVqNNpS1GBPMDOQqsNXqPjM7hb1WnRoL5KTeccAFUmSuMoti1OtpqFxmRVnHwSp9lK5UNS+4EjAwOjRlWnlVRwq32QMTlAVm2zhr9n1iERSHUafZXHQR6wnF+sJLXa1JBxcaC/6ERms2+s53lVbbQzayPSC0Gm2evL+8DhmMOjOZwiKehTLiT4d2M3ehB+tJOymGVeNbC/a6KTFdo2lDOhkfLmeyEze8iuJJ/brJV1Jld88uxS7AU8D4ZyH0LNQehxCz0PpWQi9CKWnIfRtKD0PoZcPTiX/cyylujOVPH74EfPyH6+Y7ISz/1D82ol9fWgMju5dLzJZnpRpWWZFnGRFmczzG2Y3q/o=",
 	},
 }
+
+local circuitConnectors = circuit_connector_definitions.create_vector(
+	universal_connector_template,
+	{
+		{ variation = 2,  main_offset = util.by_pixel(0.75, -18),       shadow_offset = util.by_pixel(0.75, -18),       show_shadow = true },
+		{ variation = 2,  main_offset = util.by_pixel(-8.375, -11.625), shadow_offset = util.by_pixel(-8.375, -11.625), show_shadow = true },
+		{ variation = 2,  main_offset = util.by_pixel(0.75, -18),       shadow_offset = util.by_pixel(0.75, -18),       show_shadow = true },
+		{ variation = 2,  main_offset = util.by_pixel(-8.375, -11.625), shadow_offset = util.by_pixel(-8.375, -11.625), show_shadow = true },
+	}
+)
 
 for tier, tierVals in pairs(tiers) do
 	-- Create mini-assembler.
@@ -228,18 +241,10 @@ for tier, tierVals in pairs(tiers) do
 	miniAssembler.open_sound = copy(data.raw.container["iron-chest"].open_sound)
 	miniAssembler.close_sound = copy(data.raw.container["iron-chest"].close_sound)
 	miniAssembler.working_sound = nil
-	miniAssembler.build_sound = nil -- I think it's by default set to iron-chest sound? TODO
-	miniAssembler.mined_sound = nil -- I think it's by default set to iron-chest sound? TODO
+	miniAssembler.build_sound = nil
+	miniAssembler.mined_sound = nil
 	-- Circuit connectors, using https://mods.factorio.com/mod/circuit-connector-placement-helper
-	miniAssembler.circuit_connector = circuit_connector_definitions.create_vector(
-		universal_connector_template,
-		{
-			{ variation = 28, main_offset = util.by_pixel( 17.25, -0.25), shadow_offset = util.by_pixel( 17.25, -0.25), show_shadow = true },
-			{ variation = 0,  main_offset = util.by_pixel(5.375, 12.875),   shadow_offset = util.by_pixel(5.375, 12.875),   show_shadow = true },
-			{ variation = 28, main_offset = util.by_pixel( 17.25, -0.25), shadow_offset = util.by_pixel( 17.25, -0.25), show_shadow = true },
-			{ variation = 0,  main_offset = util.by_pixel(5.375, 12.875),   shadow_offset = util.by_pixel(5.375, 12.875),   show_shadow = true },
-		}
-	)
+	miniAssembler.circuit_connector = circuitConnectors
 	miniAssembler.alert_icon_shift = {0, -0.2}
 	miniAssembler.icon_draw_specification.shift = {0, -0.15}
 	miniAssembler.energy_source = {

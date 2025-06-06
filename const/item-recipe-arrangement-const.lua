@@ -80,7 +80,16 @@ return {
 		nitric = {"nitric-acid", "niter", "nox-gas", "nitric-acid-from-gas", "acid-salt-shift-nitric-chloric", "acid-salt-shift-nitric-sulfuric", "acid-salt-shift-nitric-fluoric", "acid-salt-shift-nitric-phosphoric"},
 		fluoric = {"fluoric-acid", "fluoride-salt", "fluorine-gas", "fluoric-acid-from-gas", "acid-salt-shift-fluoric-chloric", "acid-salt-shift-fluoric-sulfuric", "acid-salt-shift-fluoric-nitric", "acid-salt-shift-fluoric-phosphoric"},
 		phosphoric = {"phosphoric-acid", "phosphate-salt", "phosphine-gas", "phosphoric-acid-from-gas", "acid-salt-shift-phosphoric-chloric", "acid-salt-shift-phosphoric-sulfuric", "acid-salt-shift-phosphoric-nitric", "acid-salt-shift-phosphoric-fluoric"},
-		bases = {"lye", "alkali-ash", "quicklime", "slaked-lime"},
+		bases = {"quicklime", "slaked-lime", "alkali-ash", "lye"},
+
+		["chloric-waste"] = {"chloric-wastewater"},
+		["sulfuric-waste"] = {"sulfuric-wastewater"},
+		["nitric-waste"] = {"nitric-wastewater"},
+		["fluoric-waste"] = {"fluoric-wastewater"},
+		["phosphoric-waste"] = {"phosphoric-wastewater"},
+		--["lime-waste"] = {"lime-wastewater"},
+		--["alkali-waste"] = {"alkali-wastewater"},
+		--["ammonia-waste"] = {"ammonia-wastewater"},
 
 		["ammonia-related"] = {"ammonia", "ammonia-synthesis", "ammonia-cracking"},
 		["misc-chem"] = {"syngas-reforming", "electrolysis"},
