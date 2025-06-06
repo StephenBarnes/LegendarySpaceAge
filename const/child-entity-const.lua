@@ -18,7 +18,7 @@ Note that if children have the same name and position, we can get confused about
 	TODO maybe add table to record unit_number of children linking back to unit_number or position of parent, so we can find the correct child to update/delete. Still won't work for simple-entity children, but in that case they're probably interchangeable anyway. I don't think I actually need this for anything I want to implement though.
 ]]
 
----@type table<string, table<string, {pos: {[1]: number, [2]: number}, adjustForOrientation: boolean, createdHandler: fun(parent: LuaEntity, child: LuaEntity), destroyedHandler: fun(parentName: string, child: LuaEntity), adjustedHandler: fun(parent: LuaEntity, child: LuaEntity, wasRotated: boolean, wasFlipped: boolean), shouldTeleport: boolean?, suppressRotationsAndFlips: boolean?}[]>>
+---@type table<string, table<string, {pos: {[1]: number, [2]: number}, adjustForOrientation: boolean, createdHandler?: fun(parent: LuaEntity, child: LuaEntity), destroyedHandler?: fun(parentName: string, child: LuaEntity), adjustedHandler?: fun(parent: LuaEntity, child: LuaEntity, wasRotated: boolean, wasFlipped: boolean), shouldTeleport: boolean?, suppressRotationsAndFlips: boolean?, preCreatedHandler?: fun(parent: LuaEntity, info: table)}[]>>
 local Export = {}
 
 -- Create steam-evilizers for condensing turbines. This is so we can give condensing turbines lower efficiency than normal steam turbines, see data/pre-space/condensing-turbine.lua.
