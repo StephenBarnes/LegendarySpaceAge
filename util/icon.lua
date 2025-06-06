@@ -24,15 +24,17 @@ local specialPathCodes = {
 
 ---@param pathCode string | table
 ---@param proto data.ItemPrototype | data.RecipePrototype | data.FluidPrototype | data.TechnologyPrototype
----@return {path: string, tint: table?}[]
+---@return {path: string, tint: table?, scale: number?, shift?: {[1]: number, [2]: number}}[]
 Icon.getIconsInfo = function(pathCode, proto)
 	if specialPathCodes[pathCode] ~= nil then
 		return {{path = specialPathCodes[pathCode]}}
 	end
 
-	local tint = nil
+	local tint, scale, shift = nil, 1, {0, 0}
 	if type(pathCode) == "table" then
 		tint = pathCode.tint
+		scale = pathCode.scale or 1
+		shift = pathCode.shift or {0, 0}
 		pathCode = pathCode[1]
 	end
 
@@ -55,20 +57,19 @@ Icon.getIconsInfo = function(pathCode, proto)
 				path = path .. "icons/"
 			end
 		end
-		return {{path = path .. rest .. ".png", tint = tint}}
+		return {{path = path .. rest .. ".png", tint = tint, scale = scale, shift = shift}}
 	else
 		for _, t in pairs{"item", "fluid", "recipe", "capsule", "resource"} do
-			if RAW[t][rest] ~= nil and (RAW[t][rest].icon ~= nil or RAW[t][rest].icons ~= nil) then
-				if RAW[t][rest].icon ~= nil then
+			local raw = RAW[t][rest]
+			if raw ~= nil and (raw.icon ~= nil or raw.icons ~= nil) then
+				if raw.icon ~= nil then
 					---@diagnostic disable-next-line: return-type-mismatch
-					return {{path = RAW[t][rest].icon, tint = tint}}
+					return {{path = raw.icon, tint = tint, scale = scale, shift = shift}}
 				else
-					if #RAW[t][rest].icons ~= 1 then
-						log("Warning: Multi-icon must have exactly 1 icon, but " .. #RAW[t][rest].icons .. " found for " .. serpent.block(RAW[t][rest]) .. " (" .. t .. " " .. rest .. ")")
-					end
 					local icons = {}
-					for _, icon in ipairs(RAW[t][rest].icons) do
-						table.insert(icons, {path = icon.icon, tint = tint or icon.tint})
+					for _, icon in ipairs(raw.icons) do
+						local thisScale = scale * (icon.scale or 0.5) * 2 -- Multiply by 2 because most icons are scale 0.5.
+						table.insert(icons, {path = icon.icon, tint = tint or icon.tint, scale = thisScale, shift = shift or icon.shift})
 					end
 					return icons
 				end
@@ -205,6 +206,12 @@ local function getMultiIcon(iconInfo, proto, arrangement)
 			val.icon_size = size
 			val.icon_mipmaps = 4
 			val.tint = thisIconInfo.tint
+			if thisIconInfo.scale ~= nil then
+				val.scale = val.scale * thisIconInfo.scale
+			end
+			if thisIconInfo.shift ~= nil then
+				val.shift = {val.shift[1] + thisIconInfo.shift[1], val.shift[2] + thisIconInfo.shift[2]}
+			end
 			table.insert(newIcons, val)
 		end
 	end

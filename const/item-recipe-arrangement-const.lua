@@ -121,7 +121,7 @@ return {
 	["bio-processing"] = {
 		["early-agriculture"] = {"wood", "tree-seed", "fertilizer", "sapling", "spoilage-from-wood", "ammonia-from-spoilage"},
 		["nauvis-agriculture"] = {"raw-fish", "fish-breeding", "nutrients-from-fish", "nutrients-from-biter-egg", "biter-egg"},
-		["spoilage-and-nutrients"] = {"spoilage", "nutrients-from-spoilage", "sugar", "nutrients-from-yumako-mash", "nutrients-from-bioflux", "nutrients", "nutrients-from-marrow"},
+		["spoilage-and-nutrients"] = {"spoilage", "nutrients-from-spoilage", "sugar", "nutrients", "nutrients-from-yumako-mash", "nutrients-from-bioflux", "nutrients-from-marrow"},
 		["yumako-and-jellynut"] = {"yumako-seed", "jellynut-seed", "fertilized-yumako-seed", "fertilized-jellynut-seed", "yumako", "jellynut", "yumako-mash", "jelly", "yumako-processing", "jellynut-processing"},
 		["agriculture-processes"] = {"pentapod-egg", "activated-pentapod-egg"},
 		["gleba-non-agriculture"] = {"marrow", "chitin-fragments", "chitin-block", "tubule", "appendage", "sencytium", "making-chitin-broth", "landfill-from-chitin"},
@@ -129,6 +129,7 @@ return {
 		["slipstacks-and-boompuffs"] = {"slipstack-pearl", "slipstack-nest", "boomnut", "sprouted-boomnut", "boomsac", "crush-boomnut", "boomsac-deflation", "petrophage", "petrophage-cultivation", "refresh-petrophages"},
 		["stingfrond-products"] = {"stingfrond-sprout", "neurofibril", "cyclosome-resynchronization", "carbon-fiber", "explosive-desynchronization", "cyclosome-1", "cyclosome-2", "cyclosome-3", "cyclosome-4", "cyclosome-5"},
 		["fulgora-agriculture"] = {"fulgorite-shard", "electrophage", "polysalt", "fulgorite-starter", "electrophage-cultivation", "electrophage-cultivation-holmium"},
+		["frozen"] = {"frozen-nutrients"},
 	},
 	space = {
 		["space-interactors"] = {"rocket-silo", "cargo-bay", "space-platform-starter-pack", "cargo-landing-pad", "cargo-pod", "rocket-part", "assembled-rocket-part", "cargo-pod-container", "telescope"},

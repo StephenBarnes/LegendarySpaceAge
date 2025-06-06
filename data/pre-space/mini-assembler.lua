@@ -237,7 +237,7 @@ for tier, tierVals in pairs(tiers) do
 	}
 	miniAssembler.selection_box = {{-0.5, -1}, {0.5, 1}}
 	miniAssembler.collision_box = {{-0.45, -1}, {0.45, 1}}
-	miniAssembler.crafting_speed = tierVals.speed * 0.1 -- All of these recipes take 0.1 seconds.
+	miniAssembler.crafting_speed = tierVals.speed * 0.1 * 4 -- All of these recipes take 0.1 seconds. Belts can stack to 4x item/second speed.
 	miniAssembler.open_sound = copy(data.raw.container["iron-chest"].open_sound)
 	miniAssembler.close_sound = copy(data.raw.container["iron-chest"].close_sound)
 	miniAssembler.working_sound = nil
