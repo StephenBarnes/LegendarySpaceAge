@@ -183,6 +183,13 @@ local multiIconVals = {
 			{scale = 0.25, shift = {8, 8}},
 		},
 	},
+	crossNeutralization = {
+		[3] = {
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.4, shift = {-9, 0}},
+			{scale = 0.4, shift = {9, 0}},
+		},
+	},
 }
 local function getMultiIconBase(count, arrangement)
 	if arrangement == nil then
