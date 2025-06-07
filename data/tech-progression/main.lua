@@ -450,7 +450,7 @@ for techName, tech in pairs(TECH) do
 	if not lunarScienceOnlyTechs[techName] then
 		if tech.unit ~= nil then
 			if techUsesLunarScience(tech.unit.ingredients) then
-				table.insert(tech.unit.ingredients, {"asteroid-science-pack", 1})
+				Tech.addSciencePack(techName, "asteroid-science-pack")
 			end
 		end
 	end

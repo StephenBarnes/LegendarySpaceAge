@@ -1,5 +1,23 @@
 local Tech = {}
 
+-- Table of science packs in order of progression. Some are at the same level, eg the planetary science packs.
+Tech.sciencePackOrder = {
+	automation = 1,
+	logistic = 2,
+	military = 3,
+	chemical = 3,
+	production = 4,
+	utility = 5,
+	space = 6,
+	asteroid = 7,
+	metallurgic = 8,
+	agricultural = 8,
+	electromagnetic = 8,
+	nuclear = 9,
+	cryogenic = 10,
+	promethium = 11,
+}
+
 ---@param recipeName string
 ---@param techName string
 ---@param index number?
@@ -34,6 +52,12 @@ Tech.addSciencePack = function(techName, sciencePackName)
 	if tech == nil then
 		log("ERROR: Couldn't find tech "..techName.." to add science pack "..sciencePackName.." to.")
 		return
+	end
+	-- Check if it already has the science pack.
+	for _, ingredient in pairs(tech.unit.ingredients) do
+		if ingredient[1] == sciencePackName then
+			return
+		end
 	end
 	table.insert(tech.unit.ingredients, {sciencePackName, 1})
 end
@@ -311,6 +335,36 @@ Tech.replaceRecipeInTech = function(oldRecipeName, newRecipeName, techName)
 		end
 	end
 	log("ERROR: Couldn't find recipe "..oldRecipeName.." in tech "..techName.." to replace with "..newRecipeName..".")
+end
+
+---@param maxSciencePacks string|string[]
+---@param count number
+---@return data.TechnologyUnit
+Tech.makeUnit = function(maxSciencePacks, count)
+	if type(maxSciencePacks) == "string" then
+		maxSciencePacks = {maxSciencePacks}
+	end
+	local maxSciencePackLevel = -1
+	for _, sciencePackPrefix in pairs(maxSciencePacks) do
+		local sciencePackLevel = Tech.sciencePackOrder[sciencePackPrefix]
+		assert(sciencePackLevel ~= nil, "Science pack \""..sciencePackPrefix.."\" not found in order.")
+		maxSciencePackLevel = math.max(maxSciencePackLevel, sciencePackLevel)
+	end
+	assert(maxSciencePackLevel ~= -1, "No science packs found in order.")
+	local ingredients = {}
+	for sciencePack, level in pairs(Tech.sciencePackOrder) do
+		if level < maxSciencePackLevel then
+			ingredients[sciencePack] = 1
+		end
+	end
+	for _, sciencePack in pairs(maxSciencePacks) do
+		ingredients[sciencePack] = 1
+	end
+	local ingredientsList = {}
+	for sciencePack, amount in pairs(ingredients) do
+		table.insert(ingredientsList, {sciencePack .. "-science-pack", amount})
+	end
+	return {count = count, ingredients = ingredientsList, time = 3600} -- 3600 ticks = 60 seconds.
 end
 
 return Tech
