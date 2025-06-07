@@ -93,4 +93,48 @@ Export.baseWastewaters = {
 	},
 }
 
+---@type table<string, {type: "item" | "fluid", quantityToNeutralize: number, category: string, color: Color, lowercaseName: LocalisedString}>
+Export.bases = {
+	["alkali-ash"] = {
+		type = "item",
+		quantityToNeutralize = 1,
+		category = "alkali",
+		color = {0.420, 0.169, 0.584},
+		lowercaseName = {"item-name.alkali-ash-lowercase"},
+	},
+	["slaked-lime"] = {
+		type = "item",
+		quantityToNeutralize = 2,
+		category = "lime",
+		color = {0.322, 0.298, 0.773},
+		lowercaseName = {"item-name.slaked-lime-lowercase"},
+	},
+	["quicklime"] = {
+		type = "item",
+		quantityToNeutralize = 1,
+		category = "lime",
+		color = {0.208, 0.188, 0.557},
+		lowercaseName = {"item-name.quicklime-lowercase"},
+	},
+	["lye"] = {
+		type = "fluid",
+		quantityToNeutralize = 5,
+		category = "alkali",
+		color = {0.518, 0.196, 0.459},
+		lowercaseName = {"fluid-name.lye-lowercase"},
+	},
+}
+
+---@type table<string, {acidSalt: number, gypsum: number, carbonDioxide: number}>
+Export.neutralizationResultsByCategory = {
+	lime = {
+		acidSalt = 1,
+		gypsum = 1,
+	},
+	alkali = {
+		acidSalt = 2,
+		carbonDioxide = 10,
+	},
+}
+
 return Export

@@ -43,4 +43,5 @@ local lyeColor = {0.518, 0.196, 0.459}
 lye.base_color = lyeColor
 lye.flow_color = {1, 1, 1}
 lye.visualization_color = lyeColor
+lye.auto_barrel = true
 extend{lye}

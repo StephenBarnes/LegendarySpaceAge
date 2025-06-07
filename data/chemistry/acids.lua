@@ -93,6 +93,7 @@ for name, data in pairs(acidData) do
 			primary = data.acidLiquidColor,
 			secondary = data.gasColor,
 		},
+		showResultDetails = false,
 	}
 end
 
@@ -128,6 +129,7 @@ for name, data in pairs(acidData) do
 					primary = data.acidLiquidColor,
 					secondary = otherData.acidLiquidColor,
 				},
+				showResultDetails = false,
 			}
 		end
 	end
