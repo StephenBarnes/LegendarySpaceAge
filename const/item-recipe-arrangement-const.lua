@@ -27,6 +27,7 @@ return {
 		generator = {"er-hcg", "steam-engine", "steam-turbine", "condensing-turbine"},
 		["electricity-related"] = {"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector", "nuclear-reactor", "fusion-reactor", "fusion-generator"},
 		["extraction-machine"] = {"burner-mining-drill", "electric-mining-drill", "big-mining-drill", "deep-drill", "pumpjack", "agricultural-tower", "air-separator", "drill-node-dummy-miner"},
+		["crushing-machine"] = {"basic-crusher", "big-crusher"},
 		["smelting-machine"] = {"stone-furnace", "steel-furnace", "ff-furnace", "arc-furnace"},
 		["production-machine"] = {"assembling-machine-1", "assembling-machine-2", "assembling-machine-3", "clean-assembler"},
 		["chemical-processing"] = {"chemical-plant", "oil-refinery", "filtration-plant", "cryogenic-plant", "gasifier", "fluid-fuelled-gasifier"},

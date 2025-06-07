@@ -61,6 +61,7 @@ require("data.circuits-modules.regulators")
 require("data.circuits-modules.silicon")
 require("data.circuits-modules.clean-assemblers")
 require("data.pre-space.mini-assembler")
+require("data.crushing.main")
 
 -- Editing planets
 require("data.pre-space.misc")
