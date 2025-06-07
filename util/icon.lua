@@ -20,6 +20,7 @@ local dirCodeToPath = {
 local specialPathCodes = {
 	exo = "__LegendarySpaceAge__/graphics/heat-shuttles/exo.png",
 	endo = "__LegendarySpaceAge__/graphics/heat-shuttles/endo.png",
+	crush = "__LegendarySpaceAge__/graphics/crushers/recipe-overlay.png",
 }
 
 ---@param pathCode string | table
@@ -132,13 +133,7 @@ local multiIconVals = {
 			{scale = 0.2, shift={-8,-8}},
 		},
 	},
-	heat = {
-		[2] = {
-			{scale = 0.5, shift = {0, 0}},
-			{scale = 0.5, shift = {0, 0}},
-		},
-	},
-	overlay = {
+	overlay = { -- Just overlays all icons.
 		[2] = {
 			{scale = 0.5, shift = {0, 0}},
 			{scale = 0.5, shift = {0, 0}},
@@ -155,7 +150,7 @@ local multiIconVals = {
 			{scale = 0.5, shift = {0, 0}},
 		},
 	},
-	exoEndo = {
+	exoEndo = { -- Recipes with exo/endo backdrop.
 		[3] = {
 			{scale = 0.5, shift = {0, 0}},
 			{scale = 0.3, shift = {-5, -4}},
@@ -175,7 +170,7 @@ local multiIconVals = {
 			{scale = 0.22, shift = {7, 7}},
 		},
 	},
-	exoEndoDoubleProduct = {
+	exoEndoDoubleProduct = { -- Recipes with exo/endo backdrop, and 2 products.
 		[4] = {
 			{scale = 0.5, shift = {0, 0}},
 			{scale = 0.4, shift = {0, -4}},
@@ -183,11 +178,29 @@ local multiIconVals = {
 			{scale = 0.25, shift = {8, 8}},
 		},
 	},
-	crossNeutralization = {
+	crossNeutralization = { -- Recipes for acid-base neutralization - exo backdrop plus 2 ingredients (acid and base).
 		[3] = {
 			{scale = 0.5, shift = {0, 0}},
 			{scale = 0.4, shift = {-9, 0}},
 			{scale = 0.4, shift = {9, 0}},
+		},
+	},
+	crushing = { -- Recipes for crushing - last icon is crusher overlay, other icons are as in default.
+		[2] = {
+			{scale = 0.5, shift = {0, 0}},
+			{scale = 0.5, shift = {0, 0}},
+		},
+		[3] = {
+			--[[
+			{scale = 0.368, shift = {0, 0}},
+			{scale = 0.24, shift = {-8, -7.2}},
+			{scale = 0.5, shift = {0, 0}},
+			]]
+			-- Maybe try putting them in a line downward?
+			{scale = 0.3, shift = {0, 8}}, -- Proudct, at the bottom.
+			{scale = 0.3, shift = {0, -8}}, -- Ingredient, at the top.
+			{scale = 0.4, shift = {0, -6.5}}, -- Crusher overlay on top.
+			-- TODO to get recipe shadow right, maybe we need to add a back layer that's empty? Might need to do this for multiple of these.
 		},
 	},
 }

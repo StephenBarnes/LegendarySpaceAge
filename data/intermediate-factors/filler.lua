@@ -1,7 +1,7 @@
 --[[ This file creates the "filler" intermediate and its multiple recipes. See main.lua in this folder for more info.
 Filler represents any fine powder that's mostly chemically inert, usable for eg making plastic or landfill or concrete.
-Made from: sand, gravel, silica, gypsum, ash, smelting slags, crushed ores, resin powder, crushed wood, clay, maybe more.
-NOT made from alkali ash (not chemically inert), ice (melts).
+Made from: sand, gravel, silica, gypsum, ash, smelting slags, crushed ores, resin powder, sawdust (crushed wood chips), clay, maybe more.
+NOT made from alkali ash (not chemically inert), ice (melts). Probably not acid-salts?
 ]]
 
 -- Create item.
@@ -23,7 +23,7 @@ local fillerFromSand = Recipe.make{
 	additional_categories = {"mini-assembling"},
 	icons = {"filler", "sand"},
 	allow_as_intermediate = true,
-	enabled = true, -- TODO tech?
+	enabled = true, -- TODO techs
 }
 
 -- Create recipe: ash -> filler
@@ -41,6 +41,18 @@ Recipe.make{
 	ingredients = {"silica"},
 	icons = {"filler", "silica"},
 }
+
+-- Create recipe: crushing gypsum -> filler
+Recipe.make{
+	copy = fillerFromSand,
+	recipe = "filler-from-gypsum",
+	ingredients = {"gypsum"},
+	icons = {"filler", "gypsum", "crush"},
+	iconArrangement = "crushing",
+	category = "crushing",
+	additional_categories = {},
+}
+
 
 -- TODO create more recipes, once items exist.
 -- TODO add recipe for crushed ores -> filler.

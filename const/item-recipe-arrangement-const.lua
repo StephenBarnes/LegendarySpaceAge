@@ -116,7 +116,7 @@ return {
 		sensor = {"sensor", "sensor-from-green-circuit", "sensor-from-red-circuit", "sensor-from-blue-circuit", "sensor-from-sencytium"},
 		actuator = {"electric-engine-unit", "actuator-standard", "actuator-from-blue-circuit", "actuator-augmented", "actuator-from-appendage"},
 		["low-density-structure"] = {"low-density-structure", "low-density-structure-standard", "casting-low-density-structure", "lds-from-chitin-and-carbon-fiber"},
-		filler = {"filler", "filler-from-sand", "filler-from-ash", "filler-from-silica"},
+		filler = {"filler", "filler-from-sand", "filler-from-ash", "filler-from-silica", "filler-from-gypsum"},
 	},
 	["intermediate-products"] = { -- Renamed to "manufacturing" via localized strings, but reusing the existing item-group internal name in case other mods want to put stuff in there.
 		circuits = {"electronic-circuit", "advanced-circuit", "processing-unit", "white-circuit", "quantum-processor"},
