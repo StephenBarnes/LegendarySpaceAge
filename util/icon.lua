@@ -34,11 +34,12 @@ Icon.getIconsInfo = function(pathCode, proto)
 		tint = pathCode.tint
 		scale = pathCode.scale or 1
 		shift = pathCode.shift or {0, 0}
+		draw_background = pathCode.draw_background or nil
 		pathCode = pathCode[1]
 	end
 
 	if specialPathCodes[pathCode] ~= nil then
-		return {{path = specialPathCodes[pathCode], tint = tint, scale = scale, shift = shift}}
+		return {{path = specialPathCodes[pathCode], tint = tint, scale = scale, shift = shift, draw_background = draw_background}}
 	end
 
 	local dirCode, rest = pathCode:match "^([^/]+)/(.+)" -- Split path by first '/' into 2 segments.
@@ -50,7 +51,7 @@ Icon.getIconsInfo = function(pathCode, proto)
 		if rest == "apollo" then return {path = "__LegendarySpaceAge__/graphics/apollo/icon.png"} end
 		local planetIcon = RAW.planet[rest].icon
 		assert(planetIcon ~= nil, "No icon found for planet "..rest)
-		return {{path = planetIcon}}
+		return {{path = planetIcon, scale = scale, shift = shift, tint = tint, draw_background = draw_background}}
 	elseif dirCode ~= nil and dirCodeToPath[dirCode] ~= nil then
 		local path = dirCodeToPath[dirCode]
 		if dirCode ~= "LSA" then
@@ -60,19 +61,19 @@ Icon.getIconsInfo = function(pathCode, proto)
 				path = path .. "icons/"
 			end
 		end
-		return {{path = path .. rest .. ".png", tint = tint, scale = scale, shift = shift}}
+		return {{path = path .. rest .. ".png", tint = tint, scale = scale, shift = shift, draw_background = draw_background}}
 	else
 		for _, t in pairs{"item", "fluid", "recipe", "capsule", "resource"} do
 			local raw = RAW[t][rest]
 			if raw ~= nil and (raw.icon ~= nil or raw.icons ~= nil) then
 				if raw.icon ~= nil then
 					---@diagnostic disable-next-line: return-type-mismatch
-					return {{path = raw.icon, tint = tint, scale = scale, shift = shift}}
+					return {{path = raw.icon, tint = tint, scale = scale, shift = shift, draw_background = draw_background}}
 				else
 					local icons = {}
 					for _, icon in ipairs(raw.icons) do
 						local thisScale = scale * (icon.scale or 0.5) * 2 -- Multiply by 2 because most icons are scale 0.5.
-						table.insert(icons, {path = icon.icon, tint = tint or icon.tint, scale = thisScale, shift = shift or icon.shift})
+						table.insert(icons, {path = icon.icon, tint = tint or icon.tint, scale = thisScale, shift = shift or icon.shift, draw_background = draw_background})
 					end
 					return icons
 				end
@@ -218,8 +219,8 @@ local multiIconVals = {
 	},
 	crushing = { -- Recipes for crushing - last icon is crusher overlay, other icons are as in default.
 		[1] = {
-			{scale = 0.36, shift = {0, -5}, draw_background = true},
-			extraSuffix = {{"crush", scale = 0.5, shift = {0, -3}}},
+			{scale = 0.36, shift = {0, -7}, draw_background = true},
+			extraSuffix = {{"crush", scale = 0.8, shift = {0, -4}}},
 		},
 		[2] = { -- Line downward, with product at bottom, ingredient at top, and crusher overlay in the middle.
 			extraPrefix = {"blank"}, -- Black background to create shadow.
