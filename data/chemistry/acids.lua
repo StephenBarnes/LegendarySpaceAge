@@ -118,8 +118,8 @@ for name, data in pairs(acidData) do
 				},
 				main_product = name.."-acid",
 				category = "chemistry", -- TODO exo/endo category
-				icons = {exoEndo, otherName.."-acid", data.saltName, otherData.saltName, name.."-acid"},
-				iconArrangement = "exoEndo",
+				icons = {otherName.."-acid", data.saltName, otherData.saltName, name.."-acid"},
+				iconArrangement = exoEndo,
 				enabled = true, -- TODO tech
 				time = 1, -- TODO
 				hidden = false,

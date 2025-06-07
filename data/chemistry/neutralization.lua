@@ -63,11 +63,7 @@ for acidName, acidData in pairs(allAcids) do
 			},
 			results = getResults(baseData.category, acidData),
 			main_product = "water",
-			icons = {
-				"exo",
-				acidName,
-				baseName,
-			},
+			icons = {acidName, baseName},
 			iconArrangement = "crossNeutralization",
 			crafting_machine_tint = {
 				primary = acidData.acidLiquidColor,

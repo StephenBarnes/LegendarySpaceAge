@@ -16,8 +16,8 @@ Export.acids = {
 		gasToAcidRecipe = {
 			ingredients = {{"chlorine-gas", 10}, {"hydrogen-gas", 5}, {"water", 5}},
 			results = {{"chloric-acid", 20}},
-			icons = {"exo", "chlorine-gas", "hydrogen-gas", "chloric-acid"},
-			iconArrangement = "exoEndo",
+			icons = {"chlorine-gas", "hydrogen-gas", "chloric-acid"},
+			iconArrangement = "exo",
 		},
 	},
 	sulfuric = {
@@ -31,8 +31,8 @@ Export.acids = {
 		gasToAcidRecipe = {
 			ingredients = {{"sulfur-dioxide", 10}, {"water", 10}},
 			results = {{"sulfuric-acid", 20}},
-			icons = {"exo", "sulfur-dioxide", "sulfuric-acid"},
-			iconArrangement = "exoEndo",
+			icons = {"sulfur-dioxide", "sulfuric-acid"},
+			iconArrangement = "exo",
 		},
 	},
 	nitric = {
@@ -46,8 +46,8 @@ Export.acids = {
 		gasToAcidRecipe = {
 			ingredients = {{"nox-gas", 10}, {"water", 10}},
 			results = {{"nitric-acid", 20}},
-			icons = {"exo", "nox-gas", "nitric-acid"},
-			iconArrangement = "exoEndo",
+			icons = {"nox-gas", "nitric-acid"},
+			iconArrangement = "exo",
 		},
 	},
 	fluoric = {
@@ -61,8 +61,8 @@ Export.acids = {
 		gasToAcidRecipe = {
 			ingredients = {{"fluorine-gas", 10}, {"water", 10}},
 			results = {{"fluoric-acid", 10}, {"oxygen-gas", 10}},
-			icons = {"exo", "fluorine-gas", "fluoric-acid", "oxygen-gas"},
-			iconArrangement = "exoEndoDoubleProduct",
+			icons = {"fluorine-gas", "fluoric-acid", "oxygen-gas"},
+			iconArrangement = "exoDoubleProduct",
 		},
 	},
 	phosphoric = {
@@ -76,8 +76,8 @@ Export.acids = {
 		gasToAcidRecipe = {
 			ingredients = {{"phosphine-gas", 10}, {"oxygen-gas", 5}, {"water", 5}},
 			results = {{"phosphoric-acid", 20}},
-			icons = {"exo", "phosphine-gas", "oxygen-gas", "phosphoric-acid"},
-			iconArrangement = "exoEndo",
+			icons = {"phosphine-gas", "oxygen-gas", "phosphoric-acid"},
+			iconArrangement = "exo",
 		},
 	},
 }

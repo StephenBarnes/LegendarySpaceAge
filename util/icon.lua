@@ -91,53 +91,56 @@ local multiIconVals = {
 			{scale = 0.5, shift = {0, 0}},
 		},
 		[2] = {
+			extraPrefix = {"blank"},
 			{scale = 0.46, shift = {3, 3}, draw_background = true},
 			{scale = 0.3, shift = {-7, -6}},
-			extraPrefix = {"blank"},
 		},
 		[3] = {
-			{scale = 0.4, shift = {0, 5}},
+			extraPrefix = {"blank"},
+			{scale = 0.4, shift = {0, 5}, draw_background = true},
 			{scale = 0.25, shift = {-8, -7}},
 			{scale = 0.25, shift = {8, -7}},
-			extraPrefix = {"blank"},
 		},
 		[4] = {
-			{scale = 0.33, shift = {0, 4.5}},
+			extraPrefix = {"blank"},
+			{scale = 0.33, shift = {0, 4.5}, draw_background = true},
 			{scale = 0.18, shift = {-8, -3.5}},
 			{scale = 0.18, shift = {8, -3.5}},
 			{scale = 0.22, shift = {0, -6}},
-			extraPrefix = {"blank"},
 		},
 	},
 	decomposition = { -- Used for recipes where one item is decomposed into multiple items, eg oil cracking. 1st is ingredient, other 2-3 are products. If only one product, repeat it.
 		[3] = {
-			{scale = 0.3, shift = {0, -4}},
+			extraPrefix = {"blank"},
+			{scale = 0.3, shift = {0, -4}, draw_background = true},
 			{scale = 0.2, shift = {-7, 4}},
 			{scale = 0.2, shift = {7, 4}},
-			extraPrefix = {"blank"},
 		},
 		[4] = {
-			{scale = 0.3, shift = {0, -4.5}},
+			extraPrefix = {"blank"},
+			{scale = 0.3, shift = {0, -4.5}, draw_background = true},
 			{scale = 0.18, shift = {-8, 3.5}},
 			{scale = 0.18, shift = {8, 3.5}},
 			{scale = 0.22, shift = {0, 6}},
-			extraPrefix = {"blank"},
 		},
 	},
 	casting = { -- Used for foundry casting recipes. 1st is product, 2nd is casting-bucket icon, 3rd is optional second casting-bucket icon in front of the 2nd one.
 		[2] = {
-			{scale = 0.5, shift = {-4, 4}},
+			extraPrefix = {"blank"},
+			{scale = 0.5, shift = {-4, 4}, draw_background = true},
 			{scale = 0.5, shift = {4, -4}},
 		},
 		[3] = {
-			{scale = 0.5, shift = {-4, 4}},
+			extraPrefix = {"blank"},
+			{scale = 0.5, shift = {-4, 4}, draw_background = true},
 			{scale = 0.3, shift = {6, -6}},
 			{scale = 0.33, shift = {-3, -4}},
 		},
 	},
 	planetFixed = { -- For recipes that are fixed per-planet, eg air collecting and general borehole mining.
 		[2] = {
-			{scale = 0.37, shift = {3, 3}},
+			extraPrefix = {"blank"},
+			{scale = 0.37, shift = {3, 3}, draw_background = true},
 			{scale = 0.2, shift={-8,-8}},
 		},
 	},
@@ -158,37 +161,37 @@ local multiIconVals = {
 			{scale = 0.5, shift = {0, 0}},
 		},
 	},
-	exoEndo = { -- Recipes with exo/endo backdrop.
-		[3] = {
-			{scale = 0.5, shift = {0, 0}},
+	exo = { -- Recipes with exo backdrop.
+		[2] = {
+			extraPrefix = {"exo"},
 			{scale = 0.3, shift = {-5, -4}},
 			{scale = 0.46, shift = {5, 5}},
 		},
-		[4] = {
-			{scale = 0.5, shift = {0, 0}},
+		[3] = {
+			extraPrefix = {"exo"},
 			{scale = 0.25, shift = {-8, -8}},
 			{scale = 0.25, shift = {8, -8}},
 			{scale = 0.4, shift = {0, 4}},
 		},
-		[5] = {
-			{scale = 0.5, shift = {0, 0}},
+		[4] = {
+			extraPrefix = {"exo"},
 			{scale = 0.22, shift = {-7, -7}},
 			{scale = 0.20, shift = {7, -7}},
 			{scale = 0.20, shift = {-7, 7}},
 			{scale = 0.22, shift = {7, 7}},
 		},
 	},
-	exoEndoDoubleProduct = { -- Recipes with exo/endo backdrop, and 2 products.
-		[4] = {
-			{scale = 0.5, shift = {0, 0}},
+	exoDoubleProduct = { -- Recipes with exo/endo backdrop, and 2 products.
+		[3] = {
+			extraPrefix = {"exo"},
 			{scale = 0.4, shift = {0, -4}},
 			{scale = 0.25, shift = {-8, 8}},
 			{scale = 0.25, shift = {8, 8}},
 		},
 	},
 	crossNeutralization = { -- Recipes for acid-base neutralization - exo backdrop plus 2 ingredients (acid and base).
-		[3] = {
-			{scale = 0.5, shift = {0, 0}},
+		[2] = {
+			extraPrefix = {"exo"},
 			{scale = 0.4, shift = {-9, 0}},
 			{scale = 0.4, shift = {9, 0}},
 		},
@@ -206,6 +209,12 @@ local multiIconVals = {
 		},
 	},
 }
+-- Add endo arrangement, same as exo but with endo backdrop.
+multiIconVals.endo = copy(multiIconVals.exo)
+for numIcons, vals in pairs(multiIconVals.endo) do
+	vals.extraPrefix = {"endo"}
+end
+
 local function getMultiIconBase(count, arrangement)
 	if arrangement == nil then
 		return multiIconVals.default[count]
