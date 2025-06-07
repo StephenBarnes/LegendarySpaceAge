@@ -67,6 +67,7 @@ for name, data in pairs(acidData) do
 	gasFluid.base_color = data.gasColor
 	gasFluid.visualization_color = data.gasColor
 	gasFluid.flow_color = {1, 1, 1}
+	gasFluid.auto_barrel = true
 	Icon.set(gasFluid, {{"LSA/fluids/gas-3", tint = data.gasColor}})
 end
 

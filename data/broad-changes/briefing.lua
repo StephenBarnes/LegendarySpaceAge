@@ -69,8 +69,8 @@ for i, section in pairs{
 		trigger = {type = "research", technology = "fluid-handling"},
 	},
 	{
-		name = "fluid-wagons",
-		trigger = {type = "research", technology = "railway"},
+		name = "acid-base-chemistry"
+		-- TODO add trigger and tech.
 	},
 	{
 		name = "advanced-logistics",

@@ -30,6 +30,7 @@ This file is to keep track of other people's stuff that I've used.
 Only ideas taken:
 
 * Galdoc's Manufacturing - mods.factorio.com/mod/galdocs-manufacturing - Stole the idea of having intermediate factors with multiple recipes, though I'm simplifying it. Planning to also copy some graphics.
+* Angel's mods by Arch666Angel - mods.factorio.com/mod/angelsrefining - Idea of having multiple flavors of acidic wastewater.
 * Roc's Rusting Iron by thesixthroc - mods.factorio.com/mod/Rocs-Rusting-Iron - for rusting iron idea, and idea for acid derusting from NOiZE.
 * Meifray's condenser turbine proof of concept - mods.factorio.com/mod/condenser_turbine_proof_of_concept - for the idea.
 * Fulgoran Sludge by Tatticky - mods.factorio.com/mod/fulgoran-sludge - Sludge idea.

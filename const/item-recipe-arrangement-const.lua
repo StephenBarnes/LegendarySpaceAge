@@ -13,7 +13,7 @@ return {
 		inserter = {"inserter", "long-handed-inserter", "fast-inserter", "bulk-inserter", "stack-inserter", "burner-inserter"},
 		["energy-pipe-distribution"] = {"small-electric-pole", "medium-electric-pole", "big-electric-pole", "substation", "po-small-electric-fuse", "po-medium-electric-fuse", "po-big-electric-fuse", "po-transformer"},
 		["fluid-logistics"] = {"pipe", "pipe-to-ground", "pump", "offshore-pump", "waste-pump", "gas-vent"},
-		["train-transport"] = {"train-stop", "rail-signal", "rail-chain-signal", "locomotive", "cargo-wagon", "artillery-wagon", "rail", "rail-ramp", "rail-support"},
+		["train-transport"] = {"train-stop", "rail-signal", "rail-chain-signal", "locomotive", "cargo-wagon", "fluid-wagon", "artillery-wagon", "rail", "rail-ramp", "rail-support"},
 		water_transport = {"port", "buoy", "chain_buoy", "boat", "cargo_ship", "oil_tanker", "waterway", "straight-waterway", "half-diagonal-waterway", "curved-waterway-a", "curved-waterway-b"},
 		transport = {"car", "tank", "spidertron"},
 		["logistic-network"] = {"logistic-robot", "construction-robot", "active-provider-chest", "passive-provider-chest", "storage-chest", "buffer-chest", "requester-chest", "roboport"},

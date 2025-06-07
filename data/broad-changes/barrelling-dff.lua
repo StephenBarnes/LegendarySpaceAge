@@ -4,6 +4,7 @@
 local Const = require "const.fuel-const"
 
 -- Edit some of the barrelling recipes to instead have the icon for the pressurized tank, and use pressurized tank ingredient and result.
+-- TODO factor this out into a const file.
 local pressurizedFluids = Table.listToSet{
 	--"steam", -- Not barrellable.
 	"petroleum-gas",
@@ -24,6 +25,15 @@ local pressurizedFluids = Table.listToSet{
 
 	"fluorine",
 	"hydrofluoric-acid",
+
+	-- Acid gases.
+	"chlorine-gas", "sulfur-dioxide", "nox-gas", "fluorine-gas", "phosphine-gas",
+	-- Fluoric acid? Maybe require special glass canisters, TODO.
+	"fluoric-acid",
+
+	--[[TODO: Make this more systematic with like 4 different types: barrels, gas tanks, glass tanks (for fluoric acid), tungsten canisters (for lava), maybe a special tank for heat shuttles like molten salt and steam/water?
+		Specify them in a const file.
+	]]
 }
 local function makeGasTankIcons(fluid, straight)
 	local kind = straight and "straight" or "angled"

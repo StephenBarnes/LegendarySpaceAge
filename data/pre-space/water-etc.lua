@@ -21,6 +21,8 @@ Should we change the 1-to-10 water-to-steam ratio to 1-to-1?
 			I think that's reasonable, especially since you could instead use the condenser turbines to get the water back.
 		Hm, could get the best of both by increasing steam's specific heat 10x too, then making storage tanks smaller.
 			I think I'll do that. Can't see any drawbacks, except no longer encouraging water over steam tanks, but that's small.
+	Update: we don't actually need 1-to-1 for the condenser turbine, since I'm using the hidden entity with evil-steam anyway to give it lower efficiency. Could just make evil-steam have lower volume.
+		So TODO: re-analyze this and maybe undo the change. Maybe even change it to 1 water = 1000 steam, to make steam tanks more realistic at 12.5MJ.
 ]]
 
 
