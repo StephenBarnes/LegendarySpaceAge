@@ -7,7 +7,7 @@ See data/broad-changes/item-recipe-arrangement.lua for the actual code that appl
 
 return {
 	logistics = {
-		storage = {"steel-chest", "tiny-inline-storage-tank", "storage-tank", "large-strage-tank"},
+		storage = {"steel-chest", "tiny-inline-storage-tank", "storage-tank", "large-storage-tank"},
 		belt = {"transport-belt", "fast-transport-belt", "express-transport-belt", "turbo-transport-belt", "underground-belt", "fast-underground-belt", "express-underground-belt", "turbo-underground-belt"},
 		["splitters-and-mini-assemblers"] = {"splitter", "fast-splitter", "express-splitter", "turbo-splitter", "mini-assembler-1", "mini-assembler-2", "mini-assembler-3", "mini-assembler-4"},
 		inserter = {"inserter", "long-handed-inserter", "fast-inserter", "bulk-inserter", "stack-inserter", "burner-inserter"},
