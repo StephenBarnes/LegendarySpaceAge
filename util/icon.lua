@@ -21,22 +21,24 @@ local specialPathCodes = {
 	exo = "__LegendarySpaceAge__/graphics/heat-shuttles/exo.png",
 	endo = "__LegendarySpaceAge__/graphics/heat-shuttles/endo.png",
 	crush = "__LegendarySpaceAge__/graphics/crushers/recipe-overlay.png",
+	blank = "__LegendarySpaceAge__/graphics/misc/almost-blank.png",
+		-- It's an image with very faint color, used to create recipe shadows. (Otherwise the shadow only gets created over the first icon in .icons.)
 }
 
 ---@param pathCode string | table
 ---@param proto data.ItemPrototype | data.RecipePrototype | data.FluidPrototype | data.TechnologyPrototype
----@return {path: string, tint: table?, scale: number?, shift?: {[1]: number, [2]: number}}[]
+---@return {path: string, tint: table?, scale: number?, shift?: {[1]: number, [2]: number}, draw_background?: boolean}[]
 Icon.getIconsInfo = function(pathCode, proto)
-	if specialPathCodes[pathCode] ~= nil then
-		return {{path = specialPathCodes[pathCode]}}
-	end
-
 	local tint, scale, shift = nil, 1, {0, 0}
 	if type(pathCode) == "table" then
 		tint = pathCode.tint
 		scale = pathCode.scale or 1
 		shift = pathCode.shift or {0, 0}
 		pathCode = pathCode[1]
+	end
+
+	if specialPathCodes[pathCode] ~= nil then
+		return {{path = specialPathCodes[pathCode], tint = tint, scale = scale, shift = shift}}
 	end
 
 	local dirCode, rest = pathCode:match "^([^/]+)/(.+)" -- Split path by first '/' into 2 segments.
@@ -81,26 +83,30 @@ Icon.getIconsInfo = function(pathCode, proto)
 	assert(false, "No icon found for " .. pathCode)
 end
 
--- Table that specifies the layout of multi-icons, by arrangement code and number of icons.
+-- Table that specifies the layout of multi-icons, by arrangement code and number of icons. Also specifies additional icon layers that should be added, e.g. to get the recipe shadow right.
+---@type table<string, table<number, string|{scale: number, shift: {[1]: number, [2]: number}, draw_background?: boolean, extraPrefix?: string[]|{[1]: string, scale: number, shift: {[1]: number, [2]: number}}[], extraSuffix?: string[]|{[1]: string, scale: number, shift: {[1]: number, [2]: number}}[]}>>
 local multiIconVals = {
 	default = { -- Default: 1st is product, 2nd is ingredient in top-left, 3rd is ingredient in top-right.
 		[1] = {
 			{scale = 0.5, shift = {0, 0}},
 		},
 		[2] = {
-			{scale = 0.46, shift = {5, 5}},
-			{scale = 0.3, shift = {-5, -4}},
+			{scale = 0.46, shift = {3, 3}, draw_background = true},
+			{scale = 0.3, shift = {-7, -6}},
+			extraPrefix = {"blank"},
 		},
 		[3] = {
-			{scale = 0.4, shift = {0, 4}},
-			{scale = 0.25, shift = {-8, -8}},
-			{scale = 0.25, shift = {8, -8}},
+			{scale = 0.4, shift = {0, 5}},
+			{scale = 0.25, shift = {-8, -7}},
+			{scale = 0.25, shift = {8, -7}},
+			extraPrefix = {"blank"},
 		},
 		[4] = {
 			{scale = 0.33, shift = {0, 4.5}},
 			{scale = 0.18, shift = {-8, -3.5}},
 			{scale = 0.18, shift = {8, -3.5}},
 			{scale = 0.22, shift = {0, -6}},
+			extraPrefix = {"blank"},
 		},
 	},
 	decomposition = { -- Used for recipes where one item is decomposed into multiple items, eg oil cracking. 1st is ingredient, other 2-3 are products. If only one product, repeat it.
@@ -108,12 +114,14 @@ local multiIconVals = {
 			{scale = 0.3, shift = {0, -4}},
 			{scale = 0.2, shift = {-7, 4}},
 			{scale = 0.2, shift = {7, 4}},
+			extraPrefix = {"blank"},
 		},
 		[4] = {
 			{scale = 0.3, shift = {0, -4.5}},
 			{scale = 0.18, shift = {-8, 3.5}},
 			{scale = 0.18, shift = {8, 3.5}},
 			{scale = 0.22, shift = {0, 6}},
+			extraPrefix = {"blank"},
 		},
 	},
 	casting = { -- Used for foundry casting recipes. 1st is product, 2nd is casting-bucket icon, 3rd is optional second casting-bucket icon in front of the 2nd one.
@@ -127,7 +135,7 @@ local multiIconVals = {
 			{scale = 0.33, shift = {-3, -4}},
 		},
 	},
-	planetFixed = {
+	planetFixed = { -- For recipes that are fixed per-planet, eg air collecting and general borehole mining.
 		[2] = {
 			{scale = 0.37, shift = {3, 3}},
 			{scale = 0.2, shift={-8,-8}},
@@ -186,21 +194,15 @@ local multiIconVals = {
 		},
 	},
 	crushing = { -- Recipes for crushing - last icon is crusher overlay, other icons are as in default.
-		[2] = {
-			{scale = 0.5, shift = {0, 0}},
-			{scale = 0.5, shift = {0, 0}},
+		[1] = {
+			{scale = 0.36, shift = {0, -3}},
+			extraSuffix = {"crush"},
 		},
-		[3] = {
-			--[[
-			{scale = 0.368, shift = {0, 0}},
-			{scale = 0.24, shift = {-8, -7.2}},
-			{scale = 0.5, shift = {0, 0}},
-			]]
-			-- Maybe try putting them in a line downward?
-			{scale = 0.3, shift = {0, 8}}, -- Proudct, at the bottom.
-			{scale = 0.3, shift = {0, -8}}, -- Ingredient, at the top.
-			{scale = 0.4, shift = {0, -6.5}}, -- Crusher overlay on top.
-			-- TODO to get recipe shadow right, maybe we need to add a back layer that's empty? Might need to do this for multiple of these.
+		[2] = { -- Line downward, with product at bottom, ingredient at top, and crusher overlay in the middle.
+			extraPrefix = {"blank"}, -- Black background to create shadow.
+			{scale = 0.3, shift = {0, 7}, draw_background = true}, -- Product, at the bottom.
+			{scale = 0.3, shift = {0, -8}, draw_background = true}, -- Ingredient, at the top.
+			extraSuffix = {{"crush", scale = 0.8, shift = {0, -6.5}}}, -- Crush wheels overlay on top.
 		},
 	},
 }
@@ -212,27 +214,46 @@ local function getMultiIconBase(count, arrangement)
 		return multiIconVals[arrangement][count]
 	end
 end
+---@param thisVals {scale: number, shift: {[1]: number, [2]: number}, draw_background?: boolean, icon?: string, icon_size?: number, icon_mipmaps?: number, tint?: table?}
+local function addToMultiIcon(thisVals, pathCode, newIcons, proto, size)
+	local thisIconsInfo = Icon.getIconsInfo(pathCode, proto)
+	for _, thisIconInfo in ipairs(thisIconsInfo) do
+		local val = copy(thisVals)
+		val.icon = thisIconInfo.path
+		val.icon_size = size
+		val.icon_mipmaps = 4
+		val.tint = thisIconInfo.tint
+		if thisIconInfo.scale ~= nil then
+			val.scale = val.scale * thisIconInfo.scale
+		end
+		if thisIconInfo.shift ~= nil then
+			val.shift = {val.shift[1] + thisIconInfo.shift[1], val.shift[2] + thisIconInfo.shift[2]}
+		end
+		if thisIconInfo.draw_background ~= nil then
+			val.draw_background = thisIconInfo.draw_background
+		end
+		table.insert(newIcons, val)
+	end
+end
 local function getMultiIcon(iconInfo, proto, arrangement)
 	-- Note we can have a "multi-icon" with only 1 icon, eg because we want to tint it.
 	local newIcons = {}
 	local size = Icon.iconSize(proto)
 	local vals = getMultiIconBase(#iconInfo, arrangement)
 	assert(vals ~= nil, "No multi-icon values found for " .. #iconInfo .. " icons with arrangement " .. (arrangement or "nil"))
+	if vals.extraPrefix ~= nil then
+		for _, pathCode in ipairs(vals.extraPrefix) do
+			addToMultiIcon({scale = 0.5, shift = {0, 0}}, pathCode, newIcons, proto, size)
+		end
+	end
 	for i, pathCode in ipairs(iconInfo) do
-		local thisIconsInfo = Icon.getIconsInfo(pathCode, proto)
-		for _, thisIconInfo in ipairs(thisIconsInfo) do
-			local val = copy(vals[i])
-			val.icon = thisIconInfo.path
-			val.icon_size = size
-			val.icon_mipmaps = 4
-			val.tint = thisIconInfo.tint
-			if thisIconInfo.scale ~= nil then
-				val.scale = val.scale * thisIconInfo.scale
-			end
-			if thisIconInfo.shift ~= nil then
-				val.shift = {val.shift[1] + thisIconInfo.shift[1], val.shift[2] + thisIconInfo.shift[2]}
-			end
-			table.insert(newIcons, val)
+		if type(i) == "number" then -- Ignore special fields like "extraPrefix".
+			addToMultiIcon(vals[i], pathCode, newIcons, proto, size)
+		end
+	end
+	if vals.extraSuffix ~= nil then
+		for _, pathCode in ipairs(vals.extraSuffix) do
+			addToMultiIcon({scale = 0.5, shift = {0, 0}}, pathCode, newIcons, proto, size)
 		end
 	end
 	return newIcons

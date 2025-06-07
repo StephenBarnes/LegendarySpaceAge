@@ -47,7 +47,7 @@ Recipe.make{
 	copy = fillerFromSand,
 	recipe = "filler-from-gypsum",
 	ingredients = {"gypsum"},
-	icons = {"filler", "gypsum", "crush"},
+	icons = {"filler", "gypsum"},
 	iconArrangement = "crushing",
 	category = "crushing",
 	additional_categories = {},
