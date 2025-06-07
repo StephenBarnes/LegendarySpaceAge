@@ -38,6 +38,7 @@ extend{quicklime}
 local lye = copy(FLUID.electrolyte)
 lye.name = "lye"
 Icon.set(lye, "LSA/bases/lye")
+Fluid.setSimpleTemp(lye, 0, false)
 local lyeColor = {0.518, 0.196, 0.459}
 lye.base_color = lyeColor
 lye.flow_color = {1, 1, 1}

@@ -37,7 +37,7 @@ extend{
 		type = "item-group",
 		name = "chemistry",
 		order = "c3",
-		icon = "__space-age__/graphics/technology/research-productivity.png",
+		icon = "__LegendarySpaceAge__/graphics/tabs/chemistry.png",
 		icon_size = 256,
 	},
 	{

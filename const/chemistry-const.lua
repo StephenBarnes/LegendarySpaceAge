@@ -83,13 +83,13 @@ Export.acids = {
 }
 
 Export.baseWastewaters = {
-	alkali = {
-		color = {0.588, 0.271, 0.800},
-		darkerColor = {0.420, 0.169, 0.584},
-	},
 	lime = {
 		color = {0.322, 0.298, 0.773},
 		darkerColor = {0.208, 0.188, 0.557},
+	},
+	alkali = {
+		color = {0.588, 0.271, 0.800},
+		darkerColor = {0.420, 0.169, 0.584},
 	},
 }
 

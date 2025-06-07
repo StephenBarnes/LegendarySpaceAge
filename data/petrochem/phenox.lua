@@ -16,7 +16,7 @@ local acetoneFlowColor = {0.249, 0.729, 0.702} -- TODO decide on a flow color, t
 -- Create phenol-acetone barrel item.
 local phenolAcetoneBarrel = copy(ITEM.barrel)
 phenolAcetoneBarrel.name = "phenol-acetone-barrel"
-Icon.set3ColorBarrel(phenolAcetoneBarrel, acetoneColor, phenolColor, nil, 1, 1)
+Icon.set3ColorBarrel(phenolAcetoneBarrel, acetoneColor, phenolColor, acetoneFlowColor, 1, 1)
 extend{phenolAcetoneBarrel}
 
 -- Create acetone barrel item.

@@ -11,6 +11,8 @@ Observations while trying to make this:
 * By setting loader.container_distance = 0, it outputs into the same tile it's currently on, which is inside the assembler. So this is the solution used here - make assembler 2x1, with 2 loaders overlapping the assembler, each loader loading into its own tile (ie into the assembler).
 ]]
 
+local MAX_BELT_STACK_SIZE = 4 -- Max stack height for belts. With vanilla techs this is 4.
+
 -- Create recipe category.
 extend{{
 	type = "recipe-category",
@@ -237,7 +239,7 @@ for tier, tierVals in pairs(tiers) do
 	}
 	miniAssembler.selection_box = {{-0.5, -1}, {0.5, 1}}
 	miniAssembler.collision_box = {{-0.45, -1}, {0.45, 1}}
-	miniAssembler.crafting_speed = tierVals.speed * 0.1 * 4 -- All of these recipes take 0.1 seconds. Belts can stack to 4x item/second speed.
+	miniAssembler.crafting_speed = tierVals.speed * 0.1 * MAX_BELT_STACK_SIZE -- All of these recipes take 0.1 seconds.
 	miniAssembler.open_sound = copy(data.raw.container["iron-chest"].open_sound)
 	miniAssembler.close_sound = copy(data.raw.container["iron-chest"].close_sound)
 	miniAssembler.working_sound = nil
@@ -308,6 +310,7 @@ for tier, tierVals in pairs(tiers) do
 	hiddenLoader.collision_mask = {layers={transport_belt=true}}
 	hiddenLoader.speed = tierVals.speed / 480 -- This speed property holds 1/480 of items per second according to docs.
 	hiddenLoader.belt_animation_set = data.raw.splitter[tierVals.splitter].belt_animation_set
+	hiddenLoader.max_belt_stack_size = MAX_BELT_STACK_SIZE
 	extend{hiddenLoader}
 
 	-- Create recipe. Will be edited in infra files.

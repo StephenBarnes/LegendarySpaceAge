@@ -62,10 +62,15 @@ return {
 		["basic-metal-intermediates"] = {"test-exothermic", "iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate", "advanced-parts"},
 		rust = {"rusty-ingot-iron-cold", "rusty-iron-plate", "rusty-iron-gear-wheel", "rusty-iron-stick"},
 		derusting = {"sand-derust-ingot-iron-cold", "sand-derust-iron-plate", "sand-derust-iron-gear-wheel", "sand-derust-iron-stick", "acid-derust-ingot-iron-cold", "acid-derust-iron-plate", "acid-derust-iron-gear-wheel", "acid-derust-iron-stick"},
+
+		["rare-earths"] = {"holmium-ore", "holmium-plate"},
+
 		["tungsten-metallurgy"] = {"tungsten-carbide", "tungsten-plate", "tungsten-steel"},
 
 		["vulcanus-processes"] = {"metals-from-lava", "make-molten-iron", "make-molten-copper", "make-molten-steel", "make-molten-tungsten", "tungsten-heating"},
 		["vulcanus-casting"] = {"casting-iron", "casting-copper", "casting-steel", "casting-brick", "sulfur-concrete", "sulfur-refined-concrete", "casting-iron-gear-wheel", "casting-iron-stick", "casting-copper-cable", "casting-advanced-parts", "tungsten-carbide-from-molten", "tungsten-steel-from-molten"},
+
+		["lithium-processing"] = {"lithium", "lithium-plate"},
 	},
 	petrochemistry = {
 		["petroleum-materials"] = {"coal", "pitch", "carbon", "solid-fuel", "explosives", "plastic-bar", "char-carbon", "inverse-vulcanization"},
@@ -82,14 +87,10 @@ return {
 		phosphoric = {"phosphoric-acid", "phosphate-salt", "phosphine-gas", "phosphoric-acid-from-gas", "acid-salt-shift-phosphoric-chloric", "acid-salt-shift-phosphoric-sulfuric", "acid-salt-shift-phosphoric-nitric", "acid-salt-shift-phosphoric-fluoric"},
 		bases = {"quicklime", "slaked-lime", "alkali-ash", "lye"},
 
-		["chloric-waste"] = {"chloric-wastewater"},
-		["sulfuric-waste"] = {"sulfuric-wastewater"},
-		["nitric-waste"] = {"nitric-wastewater"},
-		["fluoric-waste"] = {"fluoric-wastewater"},
-		["phosphoric-waste"] = {"phosphoric-wastewater"},
-		["alkali-waste"] = {"alkali-wastewater", "neutralize-chloric-alkali-wastewaters", "neutralize-sulfuric-alkali-wastewaters", "neutralize-nitric-alkali-wastewaters", "neutralize-fluoric-alkali-wastewaters", "neutralize-phosphoric-alkali-wastewaters"},
-		["lime-waste"] = {"lime-wastewater", "neutralize-chloric-lime-wastewaters", "neutralize-sulfuric-lime-wastewaters", "neutralize-nitric-lime-wastewaters", "neutralize-fluoric-lime-wastewaters", "neutralize-phosphoric-lime-wastewaters"},
-		--["ammonia-waste"] = {"ammonia-wastewater"},
+		["wastewaters"] = {"chloric-wastewater", "sulfuric-wastewater", "nitric-wastewater", "fluoric-wastewater", "phosphoric-wastewater", "lime-wastewater", "alkali-wastewater"},
+
+		["lime-wastewater-neutralization"] = {"neutralize-chloric-lime-wastewaters", "neutralize-sulfuric-lime-wastewaters", "neutralize-nitric-lime-wastewaters", "neutralize-fluoric-lime-wastewaters", "neutralize-phosphoric-lime-wastewaters"},
+		["alkali-wastewater-neutralization"] = {"neutralize-chloric-alkali-wastewaters", "neutralize-sulfuric-alkali-wastewaters", "neutralize-nitric-alkali-wastewaters", "neutralize-fluoric-alkali-wastewaters", "neutralize-phosphoric-alkali-wastewaters"},
 
 		["ammonia-related"] = {"ammonia", "ammonia-synthesis", "ammonia-cracking"},
 		["misc-chem"] = {"syngas-reforming", "electrolysis"},
@@ -112,8 +113,11 @@ return {
 		filler = {"filler", "filler-from-sand", "filler-from-ash", "filler-from-silica"},
 	},
 	["intermediate-products"] = { -- Renamed to "manufacturing" via localized strings, but reusing the existing item-group internal name in case other mods want to put stuff in there.
-		circuits = {"electronic-circuit", "advanced-circuit", "processing-unit", "white-circuit"},
-		["intermediate-product"] = {"doped-wafer", "microchip", "engine-unit", "flying-robot-frame", "barrel", "gas-tank", "battery", "charged-battery", "holmium-battery", "charged-holmium-battery"},
+		circuits = {"electronic-circuit", "advanced-circuit", "processing-unit", "white-circuit", "quantum-processor"},
+		electronics = {"doped-wafer", "microchip", "superconductor", "supercapacitor", "quantum-processor"},
+		["batteries"] = {"battery", "charged-battery", "holmium-battery", "charged-holmium-battery"},
+		["barrels"] = {"barrel", "gas-tank"},
+		["intermediate-product"] = {"engine-unit", "flying-robot-frame"},
 		["intermediate-recipe"] = {},
 		["science-pack"] = {"automation-science-pack", "logistic-science-pack", "military-science-pack", "chemical-science-pack", "production-science-pack", "utility-science-pack", "space-science-pack"},
 		["alien-science-packs"] = {"asteroid-science-pack", "metallurgic-science-pack", "agricultural-science-pack", "electromagnetic-science-pack", "nuclear-science-pack", "cryogenic-science-pack", "promethium-science-pack"},
