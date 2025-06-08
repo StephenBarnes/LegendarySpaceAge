@@ -182,26 +182,6 @@ local multiIconVals = {
 			{scale = 0.22, shift = {7, 7}},
 		},
 	},
-	endo = { -- Recipes with exo backdrop.
-		[2] = {
-			extraPrefix = {"endo"},
-			{scale = 0.3, shift = {-5, -4}},
-			{scale = 0.46, shift = {5, 5}},
-		},
-		[3] = {
-			extraPrefix = {"endo"},
-			{scale = 0.25, shift = {-8, -8}},
-			{scale = 0.25, shift = {8, -8}},
-			{scale = 0.4, shift = {0, 4}},
-		},
-		[4] = {
-			extraPrefix = {"endo"},
-			{scale = 0.22, shift = {-7, -7}},
-			{scale = 0.20, shift = {7, -7}},
-			{scale = 0.20, shift = {-7, 7}},
-			{scale = 0.22, shift = {7, 7}},
-		},
-	},
 	exoDoubleProduct = { -- Recipes with exo/endo backdrop, and 2 products.
 		[3] = {
 			extraPrefix = {"exo"},
@@ -230,10 +210,12 @@ local multiIconVals = {
 		},
 	},
 }
+-- Create "endo" arrangement, same as exo but with endo backdrop.
+multiIconVals.endo = copy(multiIconVals.exo)
+for _, val in pairs(multiIconVals.endo) do
+	val.extraPrefix = {"endo"}
+end
 
--- Apparently table.deepcopy is nil at this point in the code? But then gets defined later, somehow, when all the other files are loaded? Baffling.
--- log("TABLE: " .. serpent.block(table)) -- Prints out `table`, showing it has deepcopy.
--- assert(table.deepcopy ~= nil, "table.deepcopy not found") -- Fails.
 
 local function getMultiIconBase(count, arrangement)
 	if arrangement == nil then

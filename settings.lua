@@ -1,5 +1,7 @@
 require("util.globals")
-require("util.globals-data")
+
+-- Globals for settings stage.
+RAW = data.raw
 
 local updates = {}
 local nextOrder = 0
