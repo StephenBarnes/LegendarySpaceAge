@@ -123,37 +123,6 @@ Recipe.edit{
 ------------------------------------------------------------------------
 --- Editing entity values.
 
--- Edit boilers.
-for _, vals in pairs{
-	{
-		name = "boiler",
-		consumption = "2MW", -- Originally 1.8MW.
-		effectivity = 1, -- Originally 1.
-		targetTemp = 200, -- Originally 165.
-		pollution = 20, -- Originally 30.
-	},
-	{
-		name = "electric-boiler",
-		consumption = "2MW", -- Originally 1.8MW.
-		effectivity = 1,
-		targetTemp = 200,
-		pollution = 20, -- Originally 30.
-	},
-	{
-		name = "gas-boiler",
-		consumption = "2MW", -- Originally 1.8MW.
-		effectivity = 1,
-		targetTemp = 200,
-		pollution = 20, -- Originally 30.
-	},
-} do
-	local ent = RAW.boiler[vals.name]
-	ent.energy_consumption = vals.consumption
-	ent.energy_source.effectivity = vals.effectivity
-	ent.target_temperature = vals.targetTemp
-	ent.energy_source.emissions_per_minute = {pollution = vals.pollution}
-end
-
 -- Edit generators (steam engines and turbine).
 for _, vals in pairs{
 	{
