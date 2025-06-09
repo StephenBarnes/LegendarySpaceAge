@@ -1,13 +1,7 @@
 --[[ This file makes recipes for boilers.
 ]]
 
--- Indices of fluid boxes in the fluid_boxes table of the new assembling-machine boilers. NOTE this must match up with the table in boiler-entities-dff.lua.
-local fluidBoxIndex = {
-	liquidToBoil = 1,
-	boiledGasOutput = 1,
-	airInput = 2,
-	flueOutput = 2,
-}
+local fluidBoxIndex = require("const.boiler-const").fluidBoxIndex
 
 -- Create recipe categories.
 extend{
@@ -23,8 +17,10 @@ local airCombustionWaterBoiling = Recipe.make{
 	recipe = "air-burner-water-boiling",
 	category = "combustion-boiling",
 	ingredients = {
-		{"water", 5, fluidbox_index = fluidBoxIndex.liquidToBoil},
-		{"air", 10, type = "fluid", fluidbox_index = fluidBoxIndex.airInput},
+		-- No fluidbox indices, so it automatically assigns them. It happens to assign them in a way that everything works out.
+		-- (We can't assign one specifically and leave the rest to be assigned automatically - causes error on startup.)
+		{"water", 5},
+		{"air", 10, type = "fluid"},
 	},
 	results = {
 		{"steam", 5, temperature = 200, fluidbox_index = fluidBoxIndex.boiledGasOutput},

@@ -49,6 +49,19 @@ for _, furnaceName in pairs{"stone-furnace-air", "steel-furnace-air"} do
 	}
 end
 
+-- Add air input for burner boilers on planets with air in the atmosphere.
+Export["boiler-lsa-air"] = {
+	["invisible-fluid-supplier"] = {{
+		pos = {.5, 0},
+		adjustForOrientation = false,
+		createdHandler = function(parent, child)
+			child.destructible = false
+			child.set_infinity_pipe_filter({name = "air", percentage = 1})
+			parent.fluidbox.add_linked_connection(FurnaceConst.airLinkId, child, 1)
+		end,
+	}},
+}
+
 -- TODO later I'll add invisible vents to stone furnaces.
 
 -- TODO later I might (?) add hidden beacons for furnaces, so they give a speed bonus to adjacent furnaces. Also exo/endo plants, maybe reducing fuel consumption. Probably adjust beacons' modules in on_built event, using Beacon Interface mod.

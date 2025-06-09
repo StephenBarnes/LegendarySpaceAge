@@ -39,6 +39,11 @@ local Export = {
 			gleba = "steel-furnace-air",
 			default = "steel-furnace",
 		}},
+		["boiler"] = {bySurface = {
+			nauvis = "boiler-lsa-air",
+			gleba = "boiler-lsa-air",
+			default = "boiler-lsa",
+		}},
 	},
 	-- Replace condensing turbines (on all planets) with evil version. Also replace ghosts with normal version, to show steam input port.
 	["fusion-generator"] = {

@@ -8,6 +8,8 @@ Note boilers are kinda just like furnaces, or the electric heater - they use com
 This mod has a dependency on Electric Boiler.
 ]]
 
+local BoilerConst = require("const.boiler-const")
+
 -- Function to convert graphics of boilers into assembling-machine graphics.
 ---@param boilerPictures data.BoilerPictureSet
 ---@return data.CraftingMachineGraphicsSet
@@ -92,6 +94,16 @@ local flueOutputFluidBox = {
 	pipe_picture = GreyPipes.pipeBlocksEMPlantLong(),
 	secondary_draw_orders = {north = -1, east = -1, south = -1, west = -1}, -- South is -1 too, looks better.
 }
+---@type data.FluidBox
+local linkedAirInputFluidBox = {
+	volume = 200,
+	pipe_covers = nil,
+	pipe_picture = nil,
+	pipe_connections = {
+		{ flow_direction = "input", position = {0.5, 0}, direction = NORTH, connection_type = "linked", linked_connection_id = BoilerConst.airLinkId },
+	},
+	production_type = "input",
+}
 
 -- Table of boiler names and params for creating the new assembling-machine versions.
 -- NOTE fluid_boxes order must match up with the table in boiler-recipes.lua.
@@ -132,6 +144,7 @@ for name, vals in pairs(boilers) do
 	amBoiler.fluid_boxes = vals.fluid_boxes
 	amBoiler.energy_source.emissions_per_minute = {pollution = vals.pollution}
 	amBoiler.placeable_by = {item = vals.newName, count = 1}
+	amBoiler.surface_conditions = nil
 	extend{amBoiler}
 
 	-- Hide original boiler, and make item place new assembling-machine boiler.
@@ -144,6 +157,21 @@ for name, vals in pairs(boilers) do
 	Recipe.renameAndChangeResult(name, vals.newName)
 end
 
--- TODO add invisible air provider to boilers.
--- TODO do substitutions by planet? so air input isn't needed on Nauvis/Gleba.
--- TODO do quality substitutions. (Boilers scale correctly, but assembling-machines don't.)
+-- Remove smoke from the burner-boiler.
+local burnerBoiler = ASSEMBLER["boiler-lsa"]
+burnerBoiler.created_smoke = nil
+burnerBoiler.energy_source.smoke = nil
+extend{burnerBoiler}
+
+-- Create alternate version of the burner boiler for planets with air in the atmosphere.
+local airBoiler = copy(ASSEMBLER["boiler-lsa"])
+airBoiler.name = "boiler-lsa-air"
+airBoiler.localised_name = {"entity-name."..airBoiler.name} -- TODO give it a different icon, so we can tell them apart in signal GUI etc.
+airBoiler.localised_description = {"entity-description."..airBoiler.name}
+airBoiler.hidden_in_factoriopedia = true
+airBoiler.hidden = true
+airBoiler.factoriopedia_alternative = "boiler-lsa"
+airBoiler.minable.result = "boiler-lsa"
+airBoiler.fluid_boxes_off_when_no_fluid_recipe = false
+airBoiler.fluid_boxes = {waterIOFluidBox, steamOutputFluidBox, airCenterInputFluidBox, flueOutputFluidBox, linkedAirInputFluidBox}
+extend{airBoiler}
