@@ -3,5 +3,6 @@ Note the recipes for crushing ores etc. are in ore-processing directory, and the
 ]]
 
 require("data.crushing.crushers")
+require("data.crushing.crusher-wheels")
 
 -- TODO either make the basic crusher an assembling-machine, or only allow advanced asteroid crushing in the big and space crushers (ie move advanced asteroid crushing recipes to new recipe-category).

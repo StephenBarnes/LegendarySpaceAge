@@ -153,6 +153,8 @@ moltenTungstenFluid.base_color = {.259, .239, .349} -- Measured on ore
 moltenTungstenFluid.flow_color = {.635, .584, .741}
 moltenTungstenFluid.visualization_color = {.478, .191, .682} -- Measured on ore and boosted saturation.
 moltenTungstenFluid.heat_capacity = nil
+moltenTungstenFluid.localised_name = nil
+moltenTungstenFluid.localised_description = nil
 extend{moltenTungstenFluid}
 
 -- Create recipe for molten tungsten.
@@ -197,6 +199,8 @@ Recipe.make{
 	hide_from_stats = true,
 	allow_productivity = false,
 	allow_quality = false,
+	clearLocalisedName = true,
+	localised_description = nil,
 }
 Tech.addRecipeToTech("tungsten-heating", "tungsten-steel")
 

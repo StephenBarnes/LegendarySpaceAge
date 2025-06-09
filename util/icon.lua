@@ -289,6 +289,7 @@ Icon.set = function(thing, iconInfo, arrangement)
 			table.insert(newIcons, {path = thisIconInfo.path, tint = thisIconInfo.tint})
 		end
 	else
+		if iconInfo.tint ~= nil then iconInfo = {iconInfo} end
 		newIcons = getMultiIcon(iconInfo, proto, arrangement)
 	end
 

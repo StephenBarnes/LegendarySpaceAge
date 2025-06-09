@@ -42,6 +42,7 @@ return {
 	},
 	["material-processing"] = {
 		["raw-resource"] = {"stone", "calcite", "uranium-ore", "fluorite", "ice"},
+		["stone-processing"] = {"stone-crushing"},
 		["raw-material"] = {"stone-brick", "ash", "sand", "glass", "sulfur", "niter", "gunpowder", "ash-reprocessing"},
 		rubber = {"rubber", "rubber-from-latex", "rubber-from-oil"},
 		["silicon-processing"] = {"silica", "crude-silicon", "polysilicon", "silicon-gas", "silicon-waste-gas"},
@@ -119,6 +120,7 @@ return {
 		filler = {"filler", "filler-from-sand", "filler-from-ash", "filler-from-silica", "filler-from-gypsum"},
 	},
 	["intermediate-products"] = { -- Renamed to "manufacturing" via localized strings, but reusing the existing item-group internal name in case other mods want to put stuff in there.
+		["material-processing-tools"] = {"iron-crusher-wheel", "steel-crusher-wheel", "tungsten-crusher-wheel"},
 		circuits = {"electronic-circuit", "advanced-circuit", "processing-unit", "white-circuit", "quantum-processor"},
 		electronics = {"doped-wafer", "microchip", "superconductor", "supercapacitor", "quantum-processor"},
 		["batteries"] = {"battery", "charged-battery", "holmium-battery", "charged-holmium-battery"},

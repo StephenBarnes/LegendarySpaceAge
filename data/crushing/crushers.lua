@@ -30,11 +30,13 @@ local basicCrusherEnt = {
 	alert_icon_shift = util.by_pixel(0, -12),
 	icon_draw_specification = { scale = 2 / 3, shift = { 0, -0.3 } },
 	crafting_categories = { "crushing" },
-	crafting_speed = 0.75,
-	energy_source = { -- TODO change to crusher energy source.
-		type = "electric",
-		usage_priority = "secondary-input",
-		emissions_per_minute = { pollution = 1 }
+	crafting_speed = 1,
+	energy_source = {
+		type = "burner",
+		emissions_per_minute = {},
+		fuel_categories = {"crusher-wheel"},
+		fuel_inventory_size = 2,
+		burnt_inventory_size = 2,
 	},
 	energy_usage = "100kW",
 	source_inventory_size = 1,
@@ -93,7 +95,7 @@ local bigCrusherEnt = {
 	icon = "__LegendarySpaceAge__/graphics/crushers/big-crusher/icon.png",
 	flags = { "placeable-neutral", "placeable-player", "player-creation" },
 	minable = { mining_time = 0.2, result = "big-crusher" },
-	max_health = 250,
+	max_health = 500,
 	corpse = "big-crusher-remnants",
 	dying_explosion = "big-mining-drill-explosion",
 	resistances = { { type = "fire", percent = 70 } },
@@ -114,11 +116,13 @@ local bigCrusherEnt = {
 		{ inventory_index = defines.inventory.assembling_machine_modules, shift = { 0, 1 } }
 	},
 	crafting_categories = { "crushing" },
-	crafting_speed = 2.5,
-	energy_source = { -- TODO change to crusher energy source.
-		type = "electric",
-		usage_priority = "secondary-input",
-		emissions_per_minute = { pollution = 1 }
+	crafting_speed = 2,
+	energy_source = {
+		type = "burner",
+		emissions_per_minute = {},
+		fuel_categories = {"crusher-wheel"},
+		fuel_inventory_size = 2,
+		burnt_inventory_size = 2,
 	},
 	energy_usage = "500kW",
 	open_sound = sounds.mech_large_open,

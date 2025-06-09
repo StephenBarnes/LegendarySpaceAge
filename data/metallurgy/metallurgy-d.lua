@@ -30,6 +30,8 @@ TODO major update:
 
 local FurnaceConst = require("const.furnace-const")
 
+local MetalTints = require("const.metal-tints")
+
 local ORE_STACK_SIZE = 50
 local INGOT_STACK_SIZE = 100
 
@@ -41,17 +43,11 @@ local ORE_WEIGHT = ROCKET / 500
 local INGOT_TO_ITEM_SECONDS = 2.5
 	-- For recipes turning ingots into plates/machine parts/rods etc. They produce 5 output items, so this means assemblers are 1/s, 2/s, 4/s.
 
-local metalTint = {
-	copper = {r = 1, g = .639, b = .483, a=1},
-	iron = {r = 0.65, g = 0.65, b = 0.65, a=1},
-	steel = {r = .955, g = .96, b = 1.0, a=1},
-}
-
 -- Make ingots and ingot-reheating recipes.
 for i, metal in pairs{"iron", "copper", "steel"} do
 	local hotIngotName = "ingot-" .. metal .. "-hot"
 	local coldIngotName = "ingot-" .. metal .. "-cold"
-	local tint = metalTint[metal]
+	local tint = MetalTints[metal]
 
 	local hotIngot = copy(ITEM["iron-plate"])
 	hotIngot.name = hotIngotName
