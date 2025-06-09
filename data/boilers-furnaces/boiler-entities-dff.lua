@@ -144,6 +144,7 @@ for name, vals in pairs(boilers) do
 	amBoiler.fluid_boxes = vals.fluid_boxes
 	amBoiler.energy_source.emissions_per_minute = {pollution = vals.pollution}
 	amBoiler.placeable_by = {item = vals.newName, count = 1}
+	amBoiler.minable.result = vals.newName
 	amBoiler.surface_conditions = nil
 	amBoiler.factoriopedia_description = {"factoriopedia-description."..name}
 	extend{amBoiler}

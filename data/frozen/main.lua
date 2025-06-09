@@ -11,4 +11,6 @@ Icon.set(frozenNutrients, {
 	{"ice", tint = {.6,.6,.6,.6}},
 }, "overlay")
 frozenNutrients.spoil_ticks = 60 * MINUTES
+frozenNutrients.fuel_value = nil
+frozenNutrients.fuel_category = nil
 extend{frozenNutrients}

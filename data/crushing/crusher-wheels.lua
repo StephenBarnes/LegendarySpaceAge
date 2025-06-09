@@ -13,6 +13,37 @@ extend{{
 	name = "crusher-wheel",
 }}
 
+-- Create burner usage.
+extend{{
+	type = "burner-usage",
+	name = "crusher-wheel-usage",
+	--[[
+	empty_slot_sprite = {
+		filename = "__LegendarySpaceAge__/graphics/fulgora/batteries/empty-battery-slot.png",
+		priority = "extra-high-no-scale",
+		size = 64,
+		mipmap_count = 2,
+		flags = {"gui-icon"},
+	},
+	]]
+	empty_slot_sprite = RAW["burner-usage"]["fuel"].empty_slot_sprite, -- TODO custom icon?
+	empty_slot_caption = {"gui.use"},
+	empty_slot_description = nil,
+	--[[
+	icon = {
+		filename = "__LegendarySpaceAge__/graphics/fulgora/batteries/battery-icon-red.png",
+		priority = "extra-high-no-scale",
+		width = 64,
+		height = 64,
+		flags = {"icon"}
+	},
+	]]
+	icon = RAW["burner-usage"]["fuel"].icon, -- TODO custom icon? Don't really have anything good.
+	no_fuel_status = {"entity-status.no-crusher-wheels"},
+	accepted_fuel_key = "description.accepted-crusher-wheels",
+	burned_in_key = "used-by", -- factoriopedia
+}}
+
 -- TODO burner usage strings, warning sprites, etc.
 
 -- Create crusher-wheel items.
@@ -49,7 +80,7 @@ local ironRecipe = Recipe.make{
 	ingredients = {"ingot-iron-hot"},
 	resultCount = 1,
 	enabled = true, -- TODO
-	time = 5,
+	time = 2,
 	category = "crafting",
 }
 Recipe.make{
@@ -58,7 +89,7 @@ Recipe.make{
 	ingredients = {"ingot-steel-hot"},
 	resultCount = 1,
 	enabled = true, -- TODO
-	time = 10,
+	time = 5,
 }
 Recipe.make{
 	copy = ironRecipe,
