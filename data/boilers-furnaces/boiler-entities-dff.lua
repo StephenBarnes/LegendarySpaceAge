@@ -5,8 +5,10 @@ We change boilers to have type assembling-machine, so that we can do arbitrary r
 Note boilers are kinda just like furnaces, or the electric heater - they use combustion or electricity to heat things up. So we could actually remove them entirely and just use furnaces.
 	But I think I'll rather keep them in the game, and use them specifically for recipes that heat up fluids. Because we already have the graphics etc, and it looks a bit nicer to have boilers as a separate thing.
 
-This mod has dependencies on Electric Boiler and Gas Boiler mods.
+This mod has a dependency on Electric Boiler.
 ]]
+
+local GreyPipes = require("util.grey-pipes")
 
 -- Function to convert graphics of boilers into assembling-machine graphics.
 ---@param boilerPictures data.BoilerPictureSet
@@ -49,7 +51,52 @@ local function convertBoilerGraphics(boilerPictures)
 	return {animation = animation, working_visualisations = workingVisualisations}
 end
 
+-- Fluid boxes.
+---@type data.FluidBox
+local waterIOFluidBox = {
+	volume = 200,
+	pipe_covers = pipecoverspictures(),
+	pipe_connections = {
+		{flow_direction = "input-output", direction = WEST, position = {-1, 0.5}},
+		{flow_direction = "input-output", direction = EAST, position = {1, 0.5}}
+	},
+	production_type = "input",
+}
+---@type data.FluidBox
+local steamOutputFluidBox = {
+	volume = 200,
+	pipe_covers = pipecoverspictures(),
+	pipe_connections = {
+		{flow_direction = "output", direction = NORTH, position = {0, -0.5}}
+	},
+	production_type = "output",
+}
+---@type data.FluidBox
+local airCenterInputFluidBox = {
+	volume = 200,
+	pipe_covers = pipecoverspictures(),
+	pipe_connections = {
+		{flow_direction = "input", direction = SOUTH, position = {0, 0.5}}
+	},
+	production_type = "input",
+	pipe_picture = GreyPipes.pipeBlocks(),
+	secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
+}
+---@type data.FluidBox
+local flueOutputFluidBox = {
+	volume = 200,
+	pipe_covers = pipecoverspictures(),
+	pipe_connections = {
+		{flow_direction = "input-output", direction = WEST, position = {-1, -0.5}},
+		{flow_direction = "input-output", direction = EAST, position = {1, -0.5}},
+	},
+	production_type = "output",
+	pipe_picture = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures,
+	secondary_draw_orders = {north = -1, east = -1, south = -1, west = -1}, -- South is -1 too, looks better.
+}
+
 -- Table of boiler names and params for creating the new assembling-machine versions.
+-- NOTE fluid_boxes order must match up with the table in boiler-recipes.lua.
 ---@type table<string, {newName: string, crafting_categories: string[], energy_usage: string}>
 local boilers = {
 	["boiler"] = {
@@ -57,18 +104,14 @@ local boilers = {
 		crafting_categories = {"combustion-boiling"},
 		energy_usage = "2MW",
 		pollution = 20,
-	},
-	["gas-boiler"] = {
-		newName = "gas-boiler-lsa",
-		crafting_categories = {"combustion-boiling"},
-		energy_usage = "2MW",
-		pollution = 20,
+		fluid_boxes = {waterIOFluidBox, steamOutputFluidBox, airCenterInputFluidBox, flueOutputFluidBox},
 	},
 	["electric-boiler"] = {
 		newName = "electric-boiler-lsa",
 		crafting_categories = {"electric-boiling"},
 		energy_usage = "2MW",
 		pollution = 0,
+		fluid_boxes = {waterIOFluidBox, steamOutputFluidBox},
 	},
 }
 
@@ -88,30 +131,20 @@ for name, vals in pairs(boilers) do
 	amBoiler.localised_name = boiler.localised_name or {"entity-name." .. name}
 	---@diagnostic disable-next-line: assign-type-mismatch
 	amBoiler.graphics_set = convertBoilerGraphics(boiler.pictures)
-	amBoiler.fluid_boxes = {
-		boiler.fluid_box,
-		boiler.output_fluid_box,
-	}
+	amBoiler.fluid_boxes = vals.fluid_boxes
 	amBoiler.energy_source.emissions_per_minute = {pollution = vals.pollution}
+	amBoiler.placeable_by = {item = vals.newName, count = 1}
 	extend{amBoiler}
 
 	-- Hide original boiler, and make item place new assembling-machine boiler.
 	boiler.hidden = true
+	boiler.hidden_in_factoriopedia = true
+	boiler.factoriopedia_alternative = vals.newName
 	ITEM[name].place_result = vals.newName
+	-- Rename item and recipe, so they merge with the right entity.
+	Item.renameAndHide(name, vals.newName)
+	Recipe.renameAndChangeResult(name, vals.newName)
 end
-
--- Move gas boiler to steam-power tech.
-Tech.removeRecipeFromTech("gas-boiler", "fluid-handling")
--- Adding it to steam-power in tech-progression.lua.
-
--- Gas boiler smoke shoots out much faster than burner boiler, so change it back.
-ASSEMBLER["gas-boiler-lsa"].energy_source.smoke = RAW.boiler.boiler.energy_source.smoke
-
--- Change gas-boiler icon to be consistent with other fluid-fuelled stuff.
-ITEM["gas-boiler"].icons = {
-	{icon = "__gas-boiler__/graphics/icons/gas-boiler.png", icon_size = 32, scale = 1, shift = {2, 0}},
-	{icon = FLUID["petroleum-gas"].icons[1].icon, icon_size = 64, scale = 0.3, shift = {-5, 6}, tint = FLUID["petroleum-gas"].icons[1].tint},
-}
 
 -- TODO add invisible air provider to boilers.
 -- TODO do substitutions by planet? so air input isn't needed on Nauvis/Gleba.

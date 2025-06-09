@@ -1,6 +1,14 @@
 --[[ This file makes recipes for boilers.
 ]]
 
+-- Indices of fluid boxes in the fluid_boxes table of the new assembling-machine boilers. NOTE this must match up with the table in boiler-entities-dff.lua.
+local fluidBoxIndex = {
+	liquidToBoil = 1,
+	boiledGasOutput = 1,
+	airInput = 2,
+	flueOutput = 2,
+}
+
 -- Create recipe categories.
 extend{
 	{ type = "recipe-category", name = "combustion-boiling", },
@@ -10,24 +18,48 @@ extend{
 --[[ Create pure water boiling recipes.
 We want to boil 10/s water and produce 10/s steam.
 ]]
-local combustionWaterBoiling = Recipe.make{
+local airCombustionWaterBoiling = Recipe.make{
 	copy = "ice-melting",
 	recipe = "air-burner-water-boiling",
 	category = "combustion-boiling",
-	ingredients = {{"water", 10}},
-	results = {{"steam", 10, temperature = 200}},
+	ingredients = {
+		{"water", 5, fluidbox_index = fluidBoxIndex.liquidToBoil},
+		{"air", 10, type = "fluid", fluidbox_index = fluidBoxIndex.airInput},
+	},
+	results = {
+		{"steam", 5, temperature = 200, fluidbox_index = fluidBoxIndex.boiledGasOutput},
+		{"flue-gas", 10, type = "fluid", fluidbox_index = fluidBoxIndex.flueOutput},
+	},
 	time = 1,
 	enabled = true,
-	-- TODO add gas I/O.
 	-- TODO icons
 }
--- TODO pure-oxygen combustion boiling.
+local oxCombustionWaterBoiling = Recipe.make{
+	copy = airCombustionWaterBoiling,
+	recipe = "ox-burner-water-boiling",
+	category = "combustion-boiling",
+	ingredients = {
+		{"water", 10, fluidbox_index = fluidBoxIndex.liquidToBoil},
+		{"oxygen-gas", 10, type = "fluid", fluidbox_index = fluidBoxIndex.airInput},
+	},
+	results = {
+		{"steam", 10, temperature = 200, fluidbox_index = fluidBoxIndex.boiledGasOutput},
+		{"carbon-dioxide", 10, type = "fluid", fluidbox_index = fluidBoxIndex.flueOutput},
+	},
+	time = 1,
+	enabled = true,
+	-- TODO icons
+}
 Recipe.make{
-	copy = combustionWaterBoiling,
+	copy = airCombustionWaterBoiling,
 	recipe = "electric-water-boiling",
 	category = "electric-boiling",
-	ingredients = {{"water", 10}},
-	results = {{"steam", 10, temperature = 200}},
+	ingredients = {
+		{"water", 10, fluidbox_index = fluidBoxIndex.liquidToBoil},
+	},
+	results = {
+		{"steam", 10, temperature = 200, fluidbox_index = fluidBoxIndex.boiledGasOutput},
+	},
 	time = 1,
 	enabled = true,
 	-- TODO icons

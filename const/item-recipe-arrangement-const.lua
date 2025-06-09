@@ -23,7 +23,7 @@ return {
 	},
 	production = {
 		tool = {"repair-pack", "blueprint", "deconstruction-planner", "upgrade-planner", "blueprint-book"},
-		energy = {"boiler", "electric-boiler", "gas-boiler", "heating-tower", "fluid-heating-tower", "heat-pipe", "heat-exchanger"},
+		energy = {"boiler-lsa", "electric-boiler-lsa", "heating-tower", "fluid-heating-tower", "heat-pipe", "heat-exchanger"},
 		generator = {"er-hcg", "steam-engine", "steam-turbine", "condensing-turbine"},
 		["electricity-related"] = {"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector", "nuclear-reactor", "fusion-reactor", "fusion-generator"},
 		["extraction-machine"] = {"burner-mining-drill", "electric-mining-drill", "big-mining-drill", "deep-drill", "pumpjack", "agricultural-tower", "air-separator", "drill-node-dummy-miner"},
@@ -173,6 +173,7 @@ return {
 	heat = {
 		["heat-ingots"] = {"heat-ingot-iron", "heat-ingot-copper", "heat-ingot-steel"},
 		["water-heat"] = {"steam-condensation", "ice-melting", "lava-water-heating"},
+		["boiling"] = {"air-burner-water-boiling", "ox-burner-water-boiling", "electric-water-boiling"},
 		["cryo-gas-recipes"] = {"nitrogen-compression", "nitrogen-expansion", "oxygen-cascade-cooling", "hydrogen-cascade-cooling", "regenerative-cooling"},
 	},
 	fluids = {

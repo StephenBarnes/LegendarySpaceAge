@@ -73,9 +73,9 @@ for i, section in pairs{
 		-- TODO add trigger and tech.
 	},
 	{
-		name = "solar-power",
+		name = "balance-changes",
 		simulation = solarSimulation,
-		trigger = {type = "unlock-recipe", recipe = "solar-panel"},
+		trigger = {type = "research", technology = "automation-science-pack"},
 	},
 	{
 		name = "space-platforms",

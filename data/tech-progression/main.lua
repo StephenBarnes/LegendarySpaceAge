@@ -40,11 +40,12 @@ TECH["electronics"].research_trigger = {
 
 -- Move pipe recipes from steam power to automation.
 -- Remove offshore pump recipe from steam power, will add to filtration.
+-- Adding gas vent too, since it's needed for the burner boiler.
 TECH["steam-power"].effects = {
-	{type = "unlock-recipe", recipe = "boiler"},
-	{type = "unlock-recipe", recipe = "gas-boiler"},
-	{type = "unlock-recipe", recipe = "electric-boiler"},
+	{type = "unlock-recipe", recipe = "boiler-lsa"},
+	{type = "unlock-recipe", recipe = "electric-boiler-lsa"},
 	{type = "unlock-recipe", recipe = "steam-engine"},
+	{type = "unlock-recipe", recipe = "gas-vent"},
 }
 -- Remove tech for electric boiler, rather putting recipe in steam-power tech.
 Tech.hideTech("electric-boiler")
@@ -246,9 +247,8 @@ TECH["lamp"].research_trigger = {
 	count = 1,
 }
 
--- Add gas vent and waste pump to fluid-handling tech.
+-- Add waste pump to fluid-handling tech.
 Tech.addRecipeToTech("waste-pump", "fluid-handling")
-Tech.addRecipeToTech("gas-vent", "fluid-handling")
 
 -- Gleba needs advanced oil processing, to turn pitch (from petrophages) into light oil for explosives etc.
 Tech.addTechDependency("advanced-oil-processing", "planet-discovery-gleba")

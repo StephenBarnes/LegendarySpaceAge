@@ -408,6 +408,19 @@ Recipe.renameRecipe = function(oldName, newName, copyKind)
 	end
 end
 
+-- Function to rename a recipe and change its result, due to result item being renamed.
+---@param oldName string
+---@param newName string
+Recipe.renameAndChangeResult = function(oldName, newName)
+	local recipe = copy(RECIPE[oldName])
+	recipe.name = newName
+	assert(#recipe.results == 1)
+	recipe.results = {{type = "item", name = newName, amount = 1}}
+	recipe.main_product = newName
+	extend{recipe}
+	RECIPE[oldName].hidden = true
+end
+
 ---@param recipe data.RecipePrototype|string
 ---@param categories string[]
 Recipe.setCategories = function(recipe, categories)

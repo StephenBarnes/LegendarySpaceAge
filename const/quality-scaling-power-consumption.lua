@@ -20,6 +20,9 @@ local qualityScalers = {
 	{"assembling-machine", "gasifier"},
 	{"assembling-machine", "fluid-fuelled-gasifier"},
 	{"furnace", "battery-charger"},
+
+	{"assembling-machine", "boiler-lsa"},
+	{"assembling-machine", "electric-boiler-lsa"},
 }
 
 -- Convert to a set for fast lookups, and then explicitly map quality to modified strings so we don't need to build strings at runtime.

@@ -17,6 +17,8 @@ end
 
 Item.multiplyWeight = function(itemName, multiplier, typeName)
 	typeName = typeName or "item"
+	---@type data.ItemPrototype
+	---@diagnostic disable-next-line: assign-type-mismatch
 	local item = RAW[typeName][itemName]
 	if item == nil then
 		log("ERROR: Couldn't find item "..itemName.." to multiply weight of.")
@@ -75,9 +77,9 @@ Item.forAllIncludingSubtypes = function(func)
 			for _, item in pairs(RAW[itemType]) do
 				---@type data.ItemPrototype
 				---@diagnostic disable-next-line: assign-type-mismatch
-				item = item
-				if not item.parameter then
-					func(item, itemType)
+				local thisItem = item
+				if not thisItem.parameter then
+					func(thisItem, itemType)
 				end
 			end
 		end
@@ -123,6 +125,19 @@ Item.perRocket = function(item, amount)
 	assert(item ~= nil, "Item "..serpent.block(item).." not found.")
 	local ROCKET_WEIGHT = 1e6
 	item.weight = ROCKET_WEIGHT / amount
+end
+
+---@param oldName string
+---@param newName string
+-- Rename an item and hide the old one.
+Item.renameAndHide = function(oldName, newName)
+	local oldItem = ITEM[oldName]
+	local newItem = copy(oldItem)
+	newItem.name = newName
+	extend{newItem}
+	oldItem.hidden = true
+	oldItem.hidden_in_factoriopedia = true
+	oldItem.factoriopedia_alternative = newName
 end
 
 return Item

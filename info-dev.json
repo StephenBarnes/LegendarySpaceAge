@@ -21,7 +21,7 @@
 		, "gleba-lab"
 		, "cargo-ships"
 
-		, "gas-boiler"
+		, "! gas-boiler"
 		, "electricboiler"
 
 		, "eradicators-hand-crank-redux"

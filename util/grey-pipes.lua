@@ -74,10 +74,20 @@ local function pipeBlocksShortWest()
 	return r
 end
 
+-- Function to get grey blocks of pipes, but the north and south ones are empty.
+---@return data.Sprite4Way
+local function pipeBlocksEmptyNS()
+	local r = pipeBlocks()
+	r.north = util.empty_sprite()
+	r.south = util.empty_sprite()
+	return r
+end
+
 return {
 	pipeBlocks = pipeBlocks,
 	pipeBlocksLongNorth = pipeBlocksLongNorth,
 	pipeBlocksDeepDrill = pipeBlocksDeepDrill,
 	pipeBlocksShortNorthWest = pipeBlocksShortNorthWest,
 	pipeBlocksShortWest = pipeBlocksShortWest,
+	pipeBlocksEmptyNS = pipeBlocksEmptyNS,
 }

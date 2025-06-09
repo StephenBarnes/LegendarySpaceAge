@@ -25,7 +25,7 @@ Recipe.edit{
 	time = 5,
 	ingredients = {
 		{"structure", 1},
-		{"fluid-fitting", 5},
+		{"fluid-fitting", 10},
 		{"shielding", 1},
 	},
 }
@@ -34,18 +34,9 @@ Recipe.edit{
 	time = 5,
 	ingredients = {
 		{"structure", 1},
-		{"fluid-fitting", 5},
-		{"shielding", 1},
-		{"electronic-components", 2},
-	},
-}
-Recipe.edit{
-	recipe = "gas-boiler",
-	time = 5,
-	ingredients = {
-		{"structure", 1},
 		{"fluid-fitting", 10},
 		{"shielding", 1},
+		{"electronic-components", 10},
 	},
 }
 
@@ -53,8 +44,8 @@ Recipe.edit{
 	recipe = "steam-engine",
 	ingredients = {
 		{"frame", 1},
-		{"electronic-components", 5},
-		{"mechanism", 2},
+		{"electronic-components", 10},
+		{"mechanism", 5},
 		{"fluid-fitting", 5},
 	},
 	time = 5,
@@ -63,7 +54,7 @@ Recipe.edit{
 	recipe = "steam-turbine",
 	ingredients = { -- Steam turbine is much more efficient than steam engine, so giving it much greater material cost as the tradeoff.
 		{"frame", 10},
-		{"electronic-components", 20},
+		{"electronic-components", 50},
 		{"fluid-fitting", 20},
 		{"shielding", 20}, -- High-pressure and high-temperature steam.
 	},
