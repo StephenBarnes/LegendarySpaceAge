@@ -28,16 +28,16 @@ local Export = {
 		}},
 	},
 	["assembling-machine"] = {
-		-- Furnaces: We use a -air variant for furnaces on planets with air in the atmosphere, and -noair for planets without air.
+		-- Furnaces: We use a -air variant for furnaces on planets with air in the atmosphere, and default for planets without air.
 		["stone-furnace"] = {bySurface = {
 			nauvis = "stone-furnace-air",
 			gleba = "stone-furnace-air",
-			default = "stone-furnace-noair",
+			default = "stone-furnace",
 		}},
 		["steel-furnace"] = {bySurface = {
 			nauvis = "steel-furnace-air",
 			gleba = "steel-furnace-air",
-			default = "steel-furnace-noair",
+			default = "steel-furnace",
 		}},
 	},
 	-- Replace condensing turbines (on all planets) with evil version. Also replace ghosts with normal version, to show steam input port.

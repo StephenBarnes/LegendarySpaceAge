@@ -62,6 +62,10 @@ end
 -- Search for things requiring pressure over 10hPa, and change them to require oxygen-pressure over 10hPa.
 local excluded = {
 	["air-separator"] = true,
+	["stone-furnace"] = true,
+	["steel-furnace"] = true,
+	["boiler"] = true,
+	["electric-boiler"] = true,
 }
 for _, typeName in pairs{
 	"recipe",

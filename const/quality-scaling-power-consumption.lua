@@ -10,9 +10,9 @@ local qualitySeparator = "-LSA_"
 
 
 local qualityScalers = {
-	{"assembling-machine", "stone-furnace-noair"},
+	{"assembling-machine", "stone-furnace"},
 	{"assembling-machine", "stone-furnace-air"},
-	{"assembling-machine", "steel-furnace-noair"},
+	{"assembling-machine", "steel-furnace"},
 	{"assembling-machine", "steel-furnace-air"},
 
 	{"assembling-machine", "gasifier"},

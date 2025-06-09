@@ -23,19 +23,19 @@ ASSEMBLER["steel-furnace"].energy_source.emissions_per_minute = {}
 for _, furnaceName in pairs{"stone-furnace", "steel-furnace"} do
 	local furnace = ASSEMBLER[furnaceName]
 	furnace.fluid_boxes_off_when_no_fluid_recipe = true
-	for _, suffix in pairs{"-noair", "-air"} do
-		local newFurnace = copy(furnace)
-		newFurnace.name = newFurnace.name..suffix
-		newFurnace.localised_name = {"entity-name."..furnace.name} -- TODO give them different names and icons, so we can tell them apart in signal GUI etc.
-		newFurnace.localised_description = {"entity-description."..furnace.name}
-		newFurnace.hidden_in_factoriopedia = true
-		newFurnace.hidden = true
-		newFurnace.factoriopedia_alternative = furnace.name
-		newFurnace.placeable_by = {item = furnace.name, count = 1}
-		newFurnace.minable.result = furnace.name
-		newFurnace.fluid_boxes_off_when_no_fluid_recipe = true
-		extend{newFurnace}
-	end
+	furnace.placeable_by = {item = furnace.name, count = 1}
+	furnace.surface_conditions = nil
+
+	local newFurnace = copy(furnace)
+	newFurnace.name = newFurnace.name.."-air"
+	newFurnace.localised_name = {"entity-name."..furnace.name} -- TODO give it a different name and icon, so we can tell them apart in signal GUI etc.
+	newFurnace.localised_description = {"entity-description."..furnace.name}
+	newFurnace.hidden_in_factoriopedia = true
+	newFurnace.hidden = true
+	newFurnace.factoriopedia_alternative = furnace.name
+	newFurnace.minable.result = furnace.name
+	newFurnace.fluid_boxes_off_when_no_fluid_recipe = true
+	extend{newFurnace}
 end
 
 -- Give fluid input and output to all furnaces.
@@ -97,7 +97,5 @@ local gasOutputLinked = { --- @type data.FluidBox
 }
 ASSEMBLER["stone-furnace"].fluid_boxes = {airInputExplicit, oxygenInput, gasOutputLinked}
 ASSEMBLER["stone-furnace-air"].fluid_boxes = {airInputLinked, oxygenInput, gasOutputLinked}
-ASSEMBLER["stone-furnace-noair"].fluid_boxes = {airInputExplicit, oxygenInput, gasOutputLinked}
 ASSEMBLER["steel-furnace"].fluid_boxes = {airInputExplicit, oxygenInput, gasOutputExplicit}
 ASSEMBLER["steel-furnace-air"].fluid_boxes = {airInputLinked, oxygenInput, gasOutputExplicit}
-ASSEMBLER["steel-furnace-noair"].fluid_boxes = {airInputExplicit, oxygenInput, gasOutputExplicit}
