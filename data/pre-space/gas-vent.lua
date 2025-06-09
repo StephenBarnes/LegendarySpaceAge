@@ -4,6 +4,8 @@
 
 -- This modpack has gas heating tower for burnable gases, gas vent for non-burnable gases, fluid dump for fluids, and tossing-into-sea for items.
 
+local FurnaceConst = require("const.furnace-const")
+
 local GRAPHICS = "__LegendarySpaceAge__/graphics/gas-vent/"
 ---@diagnostic disable-next-line: assign-type-mismatch
 local ventEnt = copy(FURNACE["steel-furnace"]) ---@type data.FurnacePrototype
@@ -118,5 +120,40 @@ local ventRecipe = Recipe.make{
 	resultCount = 1,
 	time = 5,
 }
+
+-- Create invisible entity to automatically vent gases for stone furnaces.
+---@type data.FurnacePrototype
+local stoneFurnaceGasVent = {
+	type = "furnace",
+	name = "stone-furnace-gas-vent",
+	icon = nil,
+	icons = {
+		{icon = "__base__/graphics/icons/stone-furnace.png", icon_size = 64},
+		{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.25, shift = {-8, 8}},
+	},
+	crafting_categories = {"gas-venting"},
+	crafting_speed = 1,
+	energy_source = {
+		type = "void",
+	},
+	energy_usage = "1W",
+	hidden = true,
+	hidden_in_factoriopedia = true,
+	fluid_boxes = {
+		{
+			production_type = "input",
+			volume = 1000,
+			hide_connection_info = true,
+			pipe_connections = { { flow_direction = "input", direction = SOUTH, position = {0, 0}, connection_type = "linked", linked_connection_id = FurnaceConst.outputLinkId } },
+		}
+	},
+	source_inventory_size = 0,
+	result_inventory_size = 0,
+	selectable_in_game = false,
+	flags = {"hide-alt-info", "not-rotatable", "not-blueprintable", "not-deconstructable", "not-flammable", "not-repairable", "not-on-map"},
+	collision_mask = {layers={}},
+	quality_indicator_scale = 0,
+}
+extend{stoneFurnaceGasVent}
 
 -- Recipes for venting added in vent-recipes.lua.

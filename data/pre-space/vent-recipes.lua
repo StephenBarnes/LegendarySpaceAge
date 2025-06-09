@@ -2,8 +2,8 @@
 
 local VentableConst = require("const.ventable-const")
 local MiscConst = require("const.misc-const")
-local gasVentEmissionsMult = MiscConst.gasVentRate / 100
-local wastePumpEmissionsMult = MiscConst.wastePumpRate * MiscConst.wastePumpPollutionMult / 100
+local gasVentEmissionsMult = MiscConst.gasVentAmount / (100 * MiscConst.gasVentTime)
+local wastePumpEmissionsMult = MiscConst.wastePumpAmount / (100 * MiscConst.wastePumpTime)
 
 -- Create recipe categories and subgroups.
 extend{
@@ -54,7 +54,7 @@ for fluidName, ventData in pairs(VentableConst) do
 		Recipe.make{
 			recipe = "gas-vent-"..fluidName,
 			category = "gas-venting",
-			ingredients = {{type = "fluid", name = fluidName, amount = MiscConst.gasVentRate}},
+			ingredients = {{type = "fluid", name = fluidName, amount = MiscConst.gasVentAmount}},
 			results = {},
 			enabled = true,
 			localised_name = {"recipe-name.gas-vent", {"fluid-name."..fluidName}},
@@ -69,7 +69,7 @@ for fluidName, ventData in pairs(VentableConst) do
 			crafting_machine_tint = {
 				primary = FLUID[fluidName].base_color,
 			},
-			time = 1,
+			time = MiscConst.gasVentTime,
 			iconsLiteral = {
 				fluidIcon,
 				{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.21, shift = {4, -4}},
@@ -80,7 +80,7 @@ for fluidName, ventData in pairs(VentableConst) do
 		Recipe.make{ -- Make recipe for venting in space.
 			recipe = "gas-vent-"..fluidName,
 			category = "gas-venting",
-			ingredients = {{type = "fluid", name = fluidName, amount = MiscConst.gasVentRate}},
+			ingredients = {{type = "fluid", name = fluidName, amount = MiscConst.gasVentAmount}},
 			results = {},
 			enabled = true,
 			localised_name = {"recipe-name.gas-vent-space", {"fluid-name."..fluidName}},
@@ -92,8 +92,9 @@ for fluidName, ventData in pairs(VentableConst) do
 			allow_productivity = false,
 			allow_quality = false,
 			emissions_multiplier = nil, -- No pollution in space.
-			time = 1,
+			time = MiscConst.gasVentTime,
 			iconsLiteral = {
+				{icon = "__space-age__/graphics/icons/space-platform-surface.png", icon_size = 64, scale = 0.25, shift = {4, 4}},
 				fluidIcon,
 				{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.21, shift = {4, -4}},
 				{icon = "__LegendarySpaceAge__/graphics/gas-vent/gas-vent-item.png", icon_size = 64, scale = 0.25, shift = {-4, 4}},
@@ -103,7 +104,7 @@ for fluidName, ventData in pairs(VentableConst) do
 		Recipe.make{ -- Make recipe for waste pump.
 			recipe = "waste-pump-"..fluidName,
 			category = "waste-pump",
-			ingredients = {{type = "fluid", name = fluidName, amount = MiscConst.wastePumpRate}},
+			ingredients = {{type = "fluid", name = fluidName, amount = MiscConst.wastePumpAmount}},
 			results = {},
 			enabled = true,
 			localised_name = {"recipe-name.waste-pumping", {"fluid-name."..fluidName}},
@@ -115,7 +116,7 @@ for fluidName, ventData in pairs(VentableConst) do
 			allow_productivity = false,
 			allow_quality = false,
 			emissions_multiplier = emissionsMult * wastePumpEmissionsMult,
-			time = 1,
+			time = MiscConst.wastePumpTime,
 			iconsLiteral = {
 				fluidIcon,
 				{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.21, shift = {4, -4}},

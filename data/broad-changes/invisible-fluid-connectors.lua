@@ -12,7 +12,7 @@ local ALLOW_SELECTING_INVISIBLE_FLUID_PORTS = false
 local boundingBox = {{-.1, -.1}, {.1, .1}}
 local pos = {0, 0}
 ---@type data.InfinityPipePrototype
-local airSupplier = {
+local invisibleInfinityPipe = {
 	name = "invisible-infinity-pipe",
 	type = "infinity-pipe",
 	gui_mode = Gen.ifThenElse(ALLOW_INSPECTING_PIPES, "all", "none"),
@@ -37,8 +37,9 @@ local airSupplier = {
 	selectable_in_game = ALLOW_SELECTING_INVISIBLE_FLUID_PORTS,
 	collision_mask = {layers={}},
 	flags = {"hide-alt-info", "not-rotatable", "not-blueprintable", "not-deconstructable", "not-flammable", "not-repairable", "not-on-map"},
+	quality_indicator_scale = 0,
 }
-airSupplier.icon = RAW.pipe.pipe.icon
-extend{airSupplier}
+invisibleInfinityPipe.icon = RAW.pipe.pipe.icon
+extend{invisibleInfinityPipe}
 -- TODO hide icon.
 -- TODO make immune to attacks, mining, explosions.

@@ -28,8 +28,8 @@ for _, furnaceName in pairs{"stone-furnace", "steel-furnace"} do
 
 	local newFurnace = copy(furnace)
 	newFurnace.name = newFurnace.name.."-air"
-	newFurnace.localised_name = {"entity-name."..furnace.name} -- TODO give it a different name and icon, so we can tell them apart in signal GUI etc.
-	newFurnace.localised_description = {"entity-description."..furnace.name}
+	newFurnace.localised_name = {"entity-name."..newFurnace.name}
+	newFurnace.localised_description = {"entity-description."..newFurnace.name}
 	newFurnace.hidden_in_factoriopedia = true
 	newFurnace.hidden = true
 	newFurnace.factoriopedia_alternative = furnace.name

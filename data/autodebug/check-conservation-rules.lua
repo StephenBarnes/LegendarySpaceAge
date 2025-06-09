@@ -18,9 +18,10 @@ local Util = require("data.autodebug.util")
 ---@param side data.IngredientPrototype[]|data.ProductPrototype[]
 ---@param includeProd boolean
 ---@param maxProd number?
+---@param recipeName string?
 ---@return number
 ---Counts how much of some conserved quantity is on one side (ingredients or results) of a recipe. Prod should only be included for results, not ingredients.
-local function countRecipeSide(content, side, includeProd, maxProd)
+local function countRecipeSide(content, side, includeProd, maxProd, recipeName)
 	local total = 0
 	for _, item in pairs(side) do
 		local itemContent = content[item.name]
@@ -32,7 +33,7 @@ local function countRecipeSide(content, side, includeProd, maxProd)
 				assert(item.amount == nil)
 				amount = (item.amount_min + item.amount_max) * 0.5
 			else
-				error("Invalid recipe side item: " .. serpent.block(item))
+				error("Invalid recipe side item recipe " .. recipeName .. ": " .. serpent.block(item))
 			end
 
 			if item.probability ~= nil then
@@ -70,7 +71,7 @@ local function checkConservationRule(conservedName, recipe, contentTable, nonCon
 
 	local totalIn
 	if recipeAdditions == nil or recipeAdditions[recipe.name] == nil then
-		totalIn = countRecipeSide(contentTable, recipe.ingredients, false)
+		totalIn = countRecipeSide(contentTable, recipe.ingredients, false, nil, recipe.name)
 	else
 		local ingredients = copy(recipe.ingredients or {})
 		for _, addition in pairs(recipeAdditions[recipe.name]) do
@@ -79,7 +80,7 @@ local function checkConservationRule(conservedName, recipe, contentTable, nonCon
 		totalIn = countRecipeSide(contentTable, ingredients, false)
 	end
 
-	local totalOut = countRecipeSide(contentTable, recipe.results, false)
+	local totalOut = countRecipeSide(contentTable, recipe.results, false, nil, recipe.name)
 	if totalOut > totalIn then
 		if recipe.allow_productivity then
 			log("Recipe " .. recipe.name .. " consumes " .. totalIn .. " " .. conservedName .. " but produces " .. totalOut .. " even before prod bonus.")
@@ -91,7 +92,7 @@ local function checkConservationRule(conservedName, recipe, contentTable, nonCon
 	if recipe.allow_productivity then
 		local maxProd = recipe.maximum_productivity
 		if maxProd == nil then maxProd = 3 end
-		local totalOutWithProd = countRecipeSide(contentTable, recipe.results, true, maxProd)
+		local totalOutWithProd = countRecipeSide(contentTable, recipe.results, true, maxProd, recipe.name)
 		if totalOutWithProd > totalIn then
 			log("Recipe " .. recipe.name .. " consumes " .. totalIn .. " " .. conservedName .. " and produces " .. totalOut .. ", but with +" .. maxProd * 100 .. "% prod bonus produces " .. totalOutWithProd .. ".")
 			return false

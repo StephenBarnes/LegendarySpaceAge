@@ -173,7 +173,7 @@ return {
 	heat = {
 		["heat-ingots"] = {"heat-ingot-iron", "heat-ingot-copper", "heat-ingot-steel"},
 		["water-heat"] = {"steam-condensation", "ice-melting", "lava-water-heating"},
-		["boiling"] = {"air-burner-water-boiling", "ox-burner-water-boiling", "electric-water-boiling"},
+		["boiling"] = {"air-burner-water-boiling", "ox-burner-water-boiling", "non-burner-water-boiling"},
 		["cryo-gas-recipes"] = {"nitrogen-compression", "nitrogen-expansion", "oxygen-cascade-cooling", "hydrogen-cascade-cooling", "regenerative-cooling"},
 	},
 	fluids = {

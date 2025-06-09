@@ -5,8 +5,8 @@ local fluidBoxIndex = require("const.boiler-const").fluidBoxIndex
 
 -- Create recipe categories.
 extend{
-	{ type = "recipe-category", name = "combustion-boiling", },
-	{ type = "recipe-category", name = "electric-boiling", },
+	{ type = "recipe-category", name = "burner-boiling", },
+	{ type = "recipe-category", name = "non-burner-boiling", },
 }
 
 --[[ Create pure water boiling recipes.
@@ -15,7 +15,7 @@ We want to boil 10/s water and produce 10/s steam.
 local airCombustionWaterBoiling = Recipe.make{
 	copy = "ice-melting",
 	recipe = "air-burner-water-boiling",
-	category = "combustion-boiling",
+	category = "burner-boiling",
 	ingredients = {
 		-- No fluidbox indices, so it automatically assigns them. It happens to assign them in a way that everything works out.
 		-- (We can't assign one specifically and leave the rest to be assigned automatically - causes error on startup.)
@@ -33,7 +33,7 @@ local airCombustionWaterBoiling = Recipe.make{
 local oxCombustionWaterBoiling = Recipe.make{
 	copy = airCombustionWaterBoiling,
 	recipe = "ox-burner-water-boiling",
-	category = "combustion-boiling",
+	category = "burner-boiling",
 	ingredients = {
 		{"water", 10, fluidbox_index = fluidBoxIndex.liquidToBoil},
 		{"oxygen-gas", 10, type = "fluid", fluidbox_index = fluidBoxIndex.airInput},
@@ -48,8 +48,8 @@ local oxCombustionWaterBoiling = Recipe.make{
 }
 Recipe.make{
 	copy = airCombustionWaterBoiling,
-	recipe = "electric-water-boiling",
-	category = "electric-boiling",
+	recipe = "non-burner-water-boiling",
+	category = "non-burner-boiling",
 	ingredients = {
 		{"water", 10, fluidbox_index = fluidBoxIndex.liquidToBoil},
 	},

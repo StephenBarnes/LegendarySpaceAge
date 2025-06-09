@@ -49,21 +49,18 @@ for _, furnaceName in pairs{"stone-furnace-air", "steel-furnace-air"} do
 	}
 end
 
--- For stone furnace, add an invisible infinity pipe to automatically vent gases.
+-- For stone furnace, add an fluid-vent entity to automatically vent gases.
+-- Could use infinity pipes, but they need to be set to a specific fluid, and can only destroy that one fluid, and we can't connect multiple to the same fluid output because the filters conflict.
 for _, furnaceName in pairs{"stone-furnace", "stone-furnace-air"} do
-	if Export[furnaceName] == nil then Export[furnaceName] = {["invisible-infinity-pipe"] = {}} end
-	-- Ugh, seems we have to have a separate infinity pipe for every possible exhaust gas.
-	for _, gasName in pairs{"flue-gas", "carbon-dioxide", "sulfurous-gas", "sulfur-dioxide"} do
-		table.insert(Export[furnaceName]["invisible-infinity-pipe"], {
-			pos = {-.5, -.5},
-			adjustForOrientation = false,
-			createdHandler = function(parent, child)
-				child.destructible = false
-				child.set_infinity_pipe_filter({name = gasName, percentage = 1, mode = "remove"})
-				parent.fluidbox.add_linked_connection(FurnaceConst.outputLinkId, child, 1)
-			end,
-		})
-	end
+	if Export[furnaceName] == nil then Export[furnaceName] = {} end
+	Export[furnaceName]["stone-furnace-gas-vent"] = {{
+		pos = {-.5, -.5},
+		adjustForOrientation = false,
+		createdHandler = function(parent, child)
+			child.destructible = false
+			parent.fluidbox.add_linked_connection(FurnaceConst.outputLinkId, child, FurnaceConst.outputLinkId)
+		end,
+	}}
 end
 
 -- Add air input for burner boilers on planets with air in the atmosphere.

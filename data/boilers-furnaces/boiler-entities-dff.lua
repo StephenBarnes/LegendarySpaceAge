@@ -111,14 +111,14 @@ local linkedAirInputFluidBox = {
 local boilers = {
 	["boiler"] = {
 		newName = "boiler-lsa",
-		crafting_categories = {"combustion-boiling"},
+		crafting_categories = {"burner-boiling"},
 		energy_usage = "2MW",
 		pollution = 20,
 		fluid_boxes = {waterIOFluidBox, steamOutputFluidBox, airCenterInputFluidBox, flueOutputFluidBox},
 	},
 	["electric-boiler"] = {
 		newName = "electric-boiler-lsa",
-		crafting_categories = {"electric-boiling"},
+		crafting_categories = {"non-burner-boiling"},
 		energy_usage = "2MW",
 		pollution = 0,
 		fluid_boxes = {waterIOFluidBox, steamOutputFluidBox},
@@ -145,6 +145,7 @@ for name, vals in pairs(boilers) do
 	amBoiler.energy_source.emissions_per_minute = {pollution = vals.pollution}
 	amBoiler.placeable_by = {item = vals.newName, count = 1}
 	amBoiler.surface_conditions = nil
+	amBoiler.factoriopedia_description = {"factoriopedia-description."..name}
 	extend{amBoiler}
 
 	-- Hide original boiler, and make item place new assembling-machine boiler.
@@ -175,3 +176,5 @@ airBoiler.minable.result = "boiler-lsa"
 airBoiler.fluid_boxes_off_when_no_fluid_recipe = false
 airBoiler.fluid_boxes = {waterIOFluidBox, steamOutputFluidBox, airCenterInputFluidBox, flueOutputFluidBox, linkedAirInputFluidBox}
 extend{airBoiler}
+
+-- TODO heat exchanger needs to also be changed to assembling-machine.
