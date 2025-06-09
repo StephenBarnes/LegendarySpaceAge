@@ -267,7 +267,6 @@ local function initializeCarbonConservation()
 			{ASSEMBLER, "fluid-fuelled-gasifier"},
 			--{ASSEMBLER, "stone-furnace"},
 			--{ASSEMBLER, "steel-furnace"},
-			--{ASSEMBLER, "ff-furnace"},
 		} do
 			assert(not Gen.effectAllowed(ent[1][ent[2] ], effect), ent[2] .. " should not allow " .. effect .. " modules.")
 		end

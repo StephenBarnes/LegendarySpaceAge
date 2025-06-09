@@ -8,8 +8,6 @@ Note boilers are kinda just like furnaces, or the electric heater - they use com
 This mod has a dependency on Electric Boiler.
 ]]
 
-local GreyPipes = require("util.grey-pipes")
-
 -- Function to convert graphics of boilers into assembling-machine graphics.
 ---@param boilerPictures data.BoilerPictureSet
 ---@return data.CraftingMachineGraphicsSet
@@ -91,7 +89,7 @@ local flueOutputFluidBox = {
 		{flow_direction = "input-output", direction = EAST, position = {1, -0.5}},
 	},
 	production_type = "output",
-	pipe_picture = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures,
+	pipe_picture = GreyPipes.pipeBlocksEMPlantLong(),
 	secondary_draw_orders = {north = -1, east = -1, south = -1, west = -1}, -- South is -1 too, looks better.
 }
 

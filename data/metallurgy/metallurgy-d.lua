@@ -147,7 +147,6 @@ ironIngotRecipeOxygen.main_product = "ingot-iron-hot"
 ironIngotRecipeOxygen.energy_required = 5
 ironIngotRecipeOxygen.enabled = true
 ironIngotRecipeOxygen.hide_from_player_crafting = true
-ironIngotRecipeOxygen.category = "advanced-smelting"
 extend{ironIngotRecipeOxygen}
 
 -- Make recipe for copper ore -> copper matte.

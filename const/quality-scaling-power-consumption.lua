@@ -14,8 +14,6 @@ local qualityScalers = {
 	{"assembling-machine", "stone-furnace-air"},
 	{"assembling-machine", "steel-furnace-noair"},
 	{"assembling-machine", "steel-furnace-air"},
-	{"assembling-machine", "ff-furnace-noair"},
-	{"assembling-machine", "ff-furnace-air"},
 
 	{"assembling-machine", "gasifier"},
 	{"assembling-machine", "fluid-fuelled-gasifier"},

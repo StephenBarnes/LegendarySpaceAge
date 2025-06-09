@@ -4,7 +4,10 @@ Doing this in data-final-fixes stage, so that other mods are less likely to cras
 
 local FurnaceConst = require("const.furnace-const")
 
-for _, furnaceName in pairs{"stone-furnace", "steel-furnace", "ff-furnace", "electric-furnace"} do
+local pipePictures = GreyPipes.pipeBlocksEMPlantLong()
+local drawOrders = {north = -1, east = -1, south = 10, west = -1}
+
+for _, furnaceName in pairs{"stone-furnace", "steel-furnace", "electric-furnace"} do
 	local furnace = FURNACE[furnaceName]
 	furnace.type = "assembling-machine"
 	extend{furnace}
@@ -13,15 +16,13 @@ end
 
 -- Edit pollution for stone furnace. This gets multiplied by the emissions multiplier for the specific vented gas.
 ASSEMBLER["stone-furnace"].energy_source.emissions_per_minute = {pollution = 1}
--- Edit pollution to be zero for steel/ff furnaces, since they capture the waste gases.
-for _, furnaceName in pairs{"steel-furnace", "ff-furnace"} do
-	local furnace = ASSEMBLER[furnaceName]
-	furnace.energy_source.emissions_per_minute = {}
-end
+-- Edit pollution to be zero for steel furnaces, since they capture the waste gases.
+ASSEMBLER["steel-furnace"].energy_source.emissions_per_minute = {}
 
 -- Create alternate versions of the furnaces for planets with air in the atmosphere.
-for _, furnaceName in pairs{"stone-furnace", "steel-furnace", "ff-furnace"} do
+for _, furnaceName in pairs{"stone-furnace", "steel-furnace"} do
 	local furnace = ASSEMBLER[furnaceName]
+	furnace.fluid_boxes_off_when_no_fluid_recipe = true
 	for _, suffix in pairs{"-noair", "-air"} do
 		local newFurnace = copy(furnace)
 		newFurnace.name = newFurnace.name..suffix
@@ -32,6 +33,7 @@ for _, furnaceName in pairs{"stone-furnace", "steel-furnace", "ff-furnace"} do
 		newFurnace.factoriopedia_alternative = furnace.name
 		newFurnace.placeable_by = {item = furnace.name, count = 1}
 		newFurnace.minable.result = furnace.name
+		newFurnace.fluid_boxes_off_when_no_fluid_recipe = true
 		extend{newFurnace}
 	end
 end
@@ -40,7 +42,6 @@ end
 local oxygenInput = { --- @type data.FluidBox
 	production_type = "input",
 	filter = "oxygen-gas",
-	pipe_picture = furnacepipepictures,
 	pipe_covers = pipecoverspictures(),
 	always_draw_covers = false,
 	pipe_connections = {
@@ -48,11 +49,12 @@ local oxygenInput = { --- @type data.FluidBox
 		{ flow_direction = "input-output", position = {0.5, 0.5}, direction = EAST },
 	},
 	volume = 100,
+	pipe_picture = pipePictures,
+	secondary_draw_orders = drawOrders,
 }
 local airInputExplicit = { --- @type data.FluidBox
 	production_type = "input",
 	filter = "air",
-	pipe_picture = furnacepipepictures,
 	pipe_covers = pipecoverspictures(),
 	always_draw_covers = false,
 	pipe_connections = {
@@ -60,6 +62,8 @@ local airInputExplicit = { --- @type data.FluidBox
 		{ flow_direction = "input-output", position = {0.5, -0.5}, direction = EAST },
 	},
 	volume = 100,
+	pipe_picture = pipePictures,
+	secondary_draw_orders = drawOrders,
 }
 local airInputLinked = { --- @type data.FluidBox
 	production_type = "input",
@@ -72,7 +76,6 @@ local airInputLinked = { --- @type data.FluidBox
 }
 local gasOutputExplicit = { --- @type data.FluidBox
 	production_type = "output",
-	pipe_picture = furnacepipepictures,
 	pipe_covers = pipecoverspictures(),
 	always_draw_covers = false,
 	pipe_connections = {
@@ -80,6 +83,8 @@ local gasOutputExplicit = { --- @type data.FluidBox
 		{ flow_direction = "input-output", position = {0.5, 0.5}, direction = SOUTH},
 	},
 	volume = 100,
+	pipe_picture = pipePictures,
+	secondary_draw_orders = drawOrders,
 }
 local gasOutputLinked = { --- @type data.FluidBox
 	production_type = "output",
@@ -90,12 +95,9 @@ local gasOutputLinked = { --- @type data.FluidBox
 	},
 	volume = 1000,
 }
-ASSEMBLER["stone-furnace"].fluid_boxes = {airInputExplicit, gasOutputLinked}
-ASSEMBLER["stone-furnace-air"].fluid_boxes = {airInputLinked, gasOutputLinked}
-ASSEMBLER["stone-furnace-noair"].fluid_boxes = {airInputExplicit, gasOutputLinked}
+ASSEMBLER["stone-furnace"].fluid_boxes = {airInputExplicit, oxygenInput, gasOutputLinked}
+ASSEMBLER["stone-furnace-air"].fluid_boxes = {airInputLinked, oxygenInput, gasOutputLinked}
+ASSEMBLER["stone-furnace-noair"].fluid_boxes = {airInputExplicit, oxygenInput, gasOutputLinked}
 ASSEMBLER["steel-furnace"].fluid_boxes = {airInputExplicit, oxygenInput, gasOutputExplicit}
 ASSEMBLER["steel-furnace-air"].fluid_boxes = {airInputLinked, oxygenInput, gasOutputExplicit}
 ASSEMBLER["steel-furnace-noair"].fluid_boxes = {airInputExplicit, oxygenInput, gasOutputExplicit}
-ASSEMBLER["ff-furnace"].fluid_boxes = {airInputExplicit, oxygenInput, gasOutputExplicit}
-ASSEMBLER["ff-furnace-air"].fluid_boxes = {airInputLinked, oxygenInput, gasOutputExplicit}
-ASSEMBLER["ff-furnace-noair"].fluid_boxes = {airInputExplicit, oxygenInput, gasOutputExplicit}

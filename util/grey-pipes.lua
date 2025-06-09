@@ -83,6 +83,26 @@ local function pipeBlocksEmptyNS()
 	return r
 end
 
+-- Function to get EM-plant-like pipes but longer (manually edited).
+---@return data.Sprite4Way
+local function pipeBlocksEMPlantLong()
+	---@type data.Sprite4Way
+	local r = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures
+	-- North: added 26 pixels at the bottom.
+	-- Not sure why the shift isn't half the added height; values here found by trial and error.
+	r.north.layers[1].filename = "__LegendarySpaceAge__/graphics/pipes/EM-plant-modified/N.png"
+	r.north.layers[1].height = 100
+	r.north.layers[1].shift = util.by_pixel(-1, 22.5 + 10)
+	-- East and west: added 6 pixels on left and right side respectively.
+	r.east.layers[1].filename = "__LegendarySpaceAge__/graphics/pipes/EM-plant-modified/E.png"
+	r.east.layers[1].width = 32 + 6
+	r.east.layers[1].shift = util.by_pixel(-20.5 - 2, 0.5)
+	r.west.layers[1].filename = "__LegendarySpaceAge__/graphics/pipes/EM-plant-modified/W.png"
+	r.west.layers[1].width = 38 + 6
+	r.west.layers[1].shift = util.by_pixel(22.5 + 2, 2)
+	return r
+end
+
 return {
 	pipeBlocks = pipeBlocks,
 	pipeBlocksLongNorth = pipeBlocksLongNorth,
@@ -90,4 +110,5 @@ return {
 	pipeBlocksShortNorthWest = pipeBlocksShortNorthWest,
 	pipeBlocksShortWest = pipeBlocksShortWest,
 	pipeBlocksEmptyNS = pipeBlocksEmptyNS,
+	pipeBlocksEMPlantLong = pipeBlocksEMPlantLong,
 }

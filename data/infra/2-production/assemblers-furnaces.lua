@@ -187,23 +187,6 @@ local CRAFTER_VALS = {
 			time = 5,
 		},
 	},
-	["ff-furnace"] = {
-		machine = {
-			kind = "furnace",
-			speed = 1,
-			drainKW = 0,
-			activeKW = 250,
-		},
-		recipe = {
-			ingredients = {
-				{"frame", 5},
-				{"structure", 5},
-				{"shielding", 5},
-				{"fluid-fitting", 5},
-			},
-			time = 5,
-		},
-	},
 	["electric-furnace"] = {
 		-- Electric furnaces: same speed as steel furnaces, lower pollution (though electricity gen generates pollution).
 		-- But make them have high drain so they're bad when not needed.

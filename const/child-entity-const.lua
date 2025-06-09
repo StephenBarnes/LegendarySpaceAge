@@ -35,7 +35,7 @@ Export["condensing-turbine-evil"] = {
 
 -- Add air input for furnaces on planets with air in the atmosphere.
 local FurnaceConst = require("const.furnace-const")
-for _, furnaceName in pairs{"stone-furnace-air", "steel-furnace-air", "ff-furnace-air"} do
+for _, furnaceName in pairs{"stone-furnace-air", "steel-furnace-air"} do
 	Export[furnaceName] = {
 		["invisible-fluid-supplier"] = {{
 			pos = {.5, .5},
