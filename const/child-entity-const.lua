@@ -37,7 +37,7 @@ Export["condensing-turbine-evil"] = {
 local FurnaceConst = require("const.furnace-const")
 for _, furnaceName in pairs{"stone-furnace-air", "steel-furnace-air"} do
 	Export[furnaceName] = {
-		["invisible-fluid-supplier"] = {{
+		["invisible-infinity-pipe"] = {{
 			pos = {.5, .5},
 			adjustForOrientation = false,
 			createdHandler = function(parent, child)
@@ -49,9 +49,26 @@ for _, furnaceName in pairs{"stone-furnace-air", "steel-furnace-air"} do
 	}
 end
 
+-- For stone furnace, add an invisible infinity pipe to automatically vent gases.
+for _, furnaceName in pairs{"stone-furnace", "stone-furnace-air"} do
+	if Export[furnaceName] == nil then Export[furnaceName] = {["invisible-infinity-pipe"] = {}} end
+	-- Ugh, seems we have to have a separate infinity pipe for every possible exhaust gas.
+	for _, gasName in pairs{"flue-gas", "carbon-dioxide", "sulfurous-gas", "sulfur-dioxide"} do
+		table.insert(Export[furnaceName]["invisible-infinity-pipe"], {
+			pos = {-.5, -.5},
+			adjustForOrientation = false,
+			createdHandler = function(parent, child)
+				child.destructible = false
+				child.set_infinity_pipe_filter({name = gasName, percentage = 1, mode = "remove"})
+				parent.fluidbox.add_linked_connection(FurnaceConst.outputLinkId, child, 1)
+			end,
+		})
+	end
+end
+
 -- Add air input for burner boilers on planets with air in the atmosphere.
 Export["boiler-lsa-air"] = {
-	["invisible-fluid-supplier"] = {{
+	["invisible-infinity-pipe"] = {{
 		pos = {.5, 0},
 		adjustForOrientation = false,
 		createdHandler = function(parent, child)

@@ -13,7 +13,7 @@ local boundingBox = {{-.1, -.1}, {.1, .1}}
 local pos = {0, 0}
 ---@type data.InfinityPipePrototype
 local airSupplier = {
-	name = "invisible-fluid-supplier",
+	name = "invisible-infinity-pipe",
 	type = "infinity-pipe",
 	gui_mode = Gen.ifThenElse(ALLOW_INSPECTING_PIPES, "all", "none"),
 	fluid_box = {
