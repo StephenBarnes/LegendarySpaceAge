@@ -58,7 +58,7 @@ for fluidName, ventData in pairs(VentableConst) do
 			results = {},
 			enabled = true,
 			localised_name = {"recipe-name.gas-vent", {"fluid-name."..fluidName}},
-			localised_description = {"recipe-description.gas-vent"},
+			localised_description = {"recipe-description.gas-venting"},
 			subgroup = "gas-vent-on-surface",
 			hidden = false,
 			hidden_in_factoriopedia = false, -- I'm not hiding these recipes - rather show the player eg what pollution mult will be, whether it's a gas or not, etc.
@@ -99,7 +99,7 @@ for fluidName, ventData in pairs(VentableConst) do
 				{icon = "__LegendarySpaceAge__/graphics/misc/no.png", icon_size = 64, scale = 0.21, shift = {4, -4}},
 				{icon = "__LegendarySpaceAge__/graphics/gas-vent/gas-vent-item.png", icon_size = 64, scale = 0.25, shift = {-4, 4}},
 			},
-			surface_conditions = {{property = "gravity", max = 0}},
+			surface_conditions = {{property = "gravity", max = 1}},
 		}
 		Recipe.make{ -- Make recipe for waste pump.
 			recipe = "waste-pump-"..fluidName,

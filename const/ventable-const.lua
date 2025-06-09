@@ -2,7 +2,7 @@
 Maps fluid name => {emissions, is liquid}
 Emissions is pollution per 100*60 fluid units for gas venting, or reduced for waste pumping. Also see misc-const.lua.
 	This is because we specify pollution per minute as 1, and each vent recipe takes 1 second.
-If it's liquid, then it's ventable by waste pump, or by gas-vent in space.
+If it's liquid, then it's ventable by waste pump, or by gas-vent in space / Apollo.
 These numbers are also used for stone furnaces that automatically vent their waste gases.
 ]]
 
@@ -28,7 +28,7 @@ return {
 	["silicon-gas"] = {10, false},
 	["silicon-waste-gas"] = {10, false},
 
-	-- Liquids - only gas-ventable in space (no pollution), and only pump-ventable on planets.
+	-- Liquids - only gas-ventable in space/Apollo (no pollution), and only pump-ventable on planets.
 	["thruster-fuel"] = {0, true}, -- hydrogen
 	["thruster-oxidizer"] = {0, true}, -- oxygen
 	["liquid-nitrogen"] = {0, true},

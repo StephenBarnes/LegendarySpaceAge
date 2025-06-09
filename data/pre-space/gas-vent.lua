@@ -23,6 +23,7 @@ ventEnt.crafting_categories = {"gas-venting"}
 ventEnt.crafting_speed = 1
 ventEnt.show_recipe_icon = false -- Don't show the "void X" icon on the entity.
 ventEnt.show_recipe_icon_on_map = false
+ventEnt.factoriopedia_description = nil
 ventEnt.energy_source = {
 	type = "void",
 	emissions_per_minute = {pollution = 1, spores = 1}, -- This gets multiplied by the emissions multiplier for the specific venting recipe.
