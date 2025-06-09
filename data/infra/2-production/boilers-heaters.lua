@@ -19,26 +19,7 @@ For fluid I/O, the current numbers (6/s, 60/s, 30/s) are related to 60. I want t
 		Steam engine produces 1MW from 50/s steam.
 ]]
 
--- Boiler recipes.
-Recipe.edit{
-	recipe = "boiler",
-	time = 5,
-	ingredients = {
-		{"structure", 1},
-		{"fluid-fitting", 10},
-		{"shielding", 1},
-	},
-}
-Recipe.edit{
-	recipe = "electric-boiler",
-	time = 5,
-	ingredients = {
-		{"structure", 1},
-		{"fluid-fitting", 10},
-		{"shielding", 1},
-		{"electronic-components", 10},
-	},
-}
+-- Boiler recipes edited in file that creates them, boiler-entities-dff.lua.
 
 Recipe.edit{
 	recipe = "steam-engine",

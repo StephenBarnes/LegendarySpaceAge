@@ -44,8 +44,6 @@ extend{{
 	burned_in_key = "used-by", -- factoriopedia
 }}
 
--- TODO burner usage strings, warning sprites, etc.
-
 -- Create crusher-wheel items.
 local ironItem = copy(ITEM["iron-gear-wheel"])
 ironItem.name = "iron-crusher-wheel"

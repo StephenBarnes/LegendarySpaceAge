@@ -6,6 +6,8 @@ Note boilers are kinda just like furnaces, or the electric heater - they use com
 	But I think I'll rather keep them in the game, and use them specifically for recipes that heat up fluids. Because we already have the graphics etc, and it looks a bit nicer to have boilers as a separate thing.
 
 This mod has a dependency on Electric Boiler.
+
+NOTE the order of fluid_boxes defined in this file must match up with the table in const/boiler-const.lua.
 ]]
 
 local BoilerConst = require("const.boiler-const")
@@ -52,120 +54,142 @@ local function convertBoilerGraphics(boilerPictures)
 end
 
 -- Fluid boxes.
----@type data.FluidBox
-local waterIOFluidBox = {
-	volume = 200,
-	pipe_covers = pipecoverspictures(),
-	pipe_connections = {
-		{flow_direction = "input-output", direction = WEST, position = {-1, 0.5}},
-		{flow_direction = "input-output", direction = EAST, position = {1, 0.5}}
+---@type table<"x3x2"|"x5x3", table<"input"|"output", table<string, data.FluidBox>>>
+local fluidBoxes = {
+	x3x2 = { -- For 3x2 boilers: electric boiler and heat-shuttle boiler.
+		input = {
+			water = {
+				volume = 200,
+				pipe_covers = pipecoverspictures(),
+				pipe_connections = {
+					{flow_direction = "input-output", direction = WEST, position = {-1, 0.5}},
+					{flow_direction = "input-output", direction = EAST, position = {1, 0.5}}
+				},
+				production_type = "input",
+			},
+			air = {
+				volume = 200,
+				pipe_covers = pipecoverspictures(),
+				pipe_connections = {
+					{flow_direction = "input", direction = SOUTH, position = {0, 0.5}}
+				},
+				production_type = "input",
+				pipe_picture = GreyPipes.pipeBlocks(),
+				secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
+			},
+			linkedAir = {
+				volume = 200,
+				pipe_covers = nil,
+				pipe_picture = nil,
+				pipe_connections = {
+					{ flow_direction = "input", position = {0.5, 0}, direction = NORTH, connection_type = "linked", linked_connection_id = BoilerConst.airLinkId },
+				},
+				production_type = "input",
+			},
+		},
+		output = {
+			steam = {
+				volume = 200,
+				pipe_covers = pipecoverspictures(),
+				pipe_connections = {
+					{flow_direction = "output", direction = NORTH, position = {0, -0.5}}
+				},
+				production_type = "output",
+			},
+			flue = {
+				volume = 200,
+				pipe_covers = pipecoverspictures(),
+				pipe_connections = {
+					{flow_direction = "input-output", direction = WEST, position = {-1, -0.5}},
+					{flow_direction = "input-output", direction = EAST, position = {1, -0.5}},
+				},
+				production_type = "output",
+				pipe_picture = GreyPipes.pipeBlocksEMPlantLong(),
+				secondary_draw_orders = {north = -1, east = -1, south = -1, west = -1}, -- South is -1 too, looks better.
+			},
+			-- TODO add brine / bitterns output.
+		},
 	},
-	production_type = "input",
-}
----@type data.FluidBox
-local steamOutputFluidBox = {
-	volume = 200,
-	pipe_covers = pipecoverspictures(),
-	pipe_connections = {
-		{flow_direction = "output", direction = NORTH, position = {0, -0.5}}
-	},
-	production_type = "output",
-}
----@type data.FluidBox
-local airCenterInputFluidBox = {
-	volume = 200,
-	pipe_covers = pipecoverspictures(),
-	pipe_connections = {
-		{flow_direction = "input", direction = SOUTH, position = {0, 0.5}}
-	},
-	production_type = "input",
-	pipe_picture = GreyPipes.pipeBlocks(),
-	secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
-}
----@type data.FluidBox
-local flueOutputFluidBox = {
-	volume = 200,
-	pipe_covers = pipecoverspictures(),
-	pipe_connections = {
-		{flow_direction = "input-output", direction = WEST, position = {-1, -0.5}},
-		{flow_direction = "input-output", direction = EAST, position = {1, -0.5}},
-	},
-	production_type = "output",
-	pipe_picture = GreyPipes.pipeBlocksEMPlantLong(),
-	secondary_draw_orders = {north = -1, east = -1, south = -1, west = -1}, -- South is -1 too, looks better.
-}
----@type data.FluidBox
-local linkedAirInputFluidBox = {
-	volume = 200,
-	pipe_covers = nil,
-	pipe_picture = nil,
-	pipe_connections = {
-		{ flow_direction = "input", position = {0.5, 0}, direction = NORTH, connection_type = "linked", linked_connection_id = BoilerConst.airLinkId },
-	},
-	production_type = "input",
-}
+	x5x3 = { -- For the 5x3 combustion boiler.
+		input = {
 
--- Table of boiler names and params for creating the new assembling-machine versions.
--- NOTE fluid_boxes order must match up with the table in boiler-recipes.lua.
----@type table<string, {newName: string, crafting_categories: string[], energy_usage: string}>
-local boilers = {
-	["boiler"] = {
-		newName = "boiler-lsa",
-		crafting_categories = {"burner-boiling"},
-		energy_usage = "2MW",
-		pollution = 20,
-		fluid_boxes = {waterIOFluidBox, steamOutputFluidBox, airCenterInputFluidBox, flueOutputFluidBox},
-	},
-	["electric-boiler"] = {
-		newName = "electric-boiler-lsa",
-		crafting_categories = {"non-burner-boiling"},
-		energy_usage = "2MW",
-		pollution = 0,
-		fluid_boxes = {waterIOFluidBox, steamOutputFluidBox},
+		},
+		output = {
+
+		},
 	},
 }
 
--- Convert all 3 boiler types to assembling-machine.
-for name, vals in pairs(boilers) do
-	local boiler = RAW.boiler[name]
+-- Create the heat-shuttle boiler: 3x2, with the same graphics as the base-game's heat-shuttle boiler.
+local baseBoiler = RAW.boiler.boiler
+---@type data.AssemblingMachinePrototype
+---@diagnostic disable-next-line: assign-type-mismatch
+local shuttleBoiler = copy(baseBoiler)
+shuttleBoiler.name = "shuttle-boiler"
+shuttleBoiler.localised_name = nil
+shuttleBoiler.type = "assembling-machine"
+shuttleBoiler.crafting_categories = {"non-burner-boiling"}
+shuttleBoiler.crafting_speed = 1
+shuttleBoiler.energy_source = {
+	type = "burner",
+	emissions_per_minute = {pollution = 0},
+	burner_usage = "heat-provider",
+	fuel_inventory_size = 2,
+	burnt_inventory_size = 2,
+	smoke = nil,
+	fuel_categories = {"heat-provider"},
+	light_flicker = baseBoiler.energy_source.light_flicker,
+	initial_fuel = nil,
+	initial_fuel_percent = 0.1, -- Must be greater than 0.
+}
+shuttleBoiler.energy_usage = "2MW"
+---@diagnostic disable-next-line: assign-type-mismatch
+shuttleBoiler.graphics_set = convertBoilerGraphics(baseBoiler.pictures)
+shuttleBoiler.placeable_by = {item = "shuttle-boiler", count = 1}
+shuttleBoiler.minable.result = "shuttle-boiler"
+shuttleBoiler.surface_conditions = nil
+shuttleBoiler.factoriopedia_description = {"factoriopedia-description.shuttle-boiler"}
+shuttleBoiler.fluid_boxes = {
+	fluidBoxes.x3x2.input.water,
+	fluidBoxes.x3x2.output.steam,
+}
+extend{shuttleBoiler}
+-- Create item for shuttle boiler.
+local shuttleBoilerItem = copy(ITEM.boiler)
+shuttleBoilerItem.name = "shuttle-boiler"
+shuttleBoilerItem.localised_name = nil
+shuttleBoilerItem.localised_description = nil
+shuttleBoilerItem.place_result = "shuttle-boiler"
+extend{shuttleBoilerItem}
+-- Create recipe for shuttle boiler.
+Recipe.make{
+	copy = "boiler",
+	recipe = "shuttle-boiler",
+	resultCount = 1,
+	time = 5,
+	ingredients = {
+		{"structure", 1},
+		{"fluid-fitting", 10},
+		{"shielding", 1},
+	},
+	category = "crafting",
+}
 
-	---@type data.AssemblingMachinePrototype
-	---@diagnostic disable-next-line: assign-type-mismatch
-	local amBoiler = copy(boiler)
-	amBoiler.name = vals.newName
-	amBoiler.type = "assembling-machine"
-	amBoiler.crafting_categories = vals.crafting_categories
-	amBoiler.crafting_speed = 1
-	amBoiler.energy_source = boiler.energy_source
-	amBoiler.energy_usage = vals.energy_usage
-	amBoiler.localised_name = boiler.localised_name or {"entity-name." .. name}
-	---@diagnostic disable-next-line: assign-type-mismatch
-	amBoiler.graphics_set = convertBoilerGraphics(boiler.pictures)
-	amBoiler.fluid_boxes = vals.fluid_boxes
-	amBoiler.energy_source.emissions_per_minute = {pollution = vals.pollution}
-	amBoiler.placeable_by = {item = vals.newName, count = 1}
-	amBoiler.minable.result = vals.newName
-	amBoiler.surface_conditions = nil
-	amBoiler.factoriopedia_description = {"factoriopedia-description."..name}
-	extend{amBoiler}
+-- TODO create electric boiler
 
-	-- Hide original boiler, and make item place new assembling-machine boiler.
-	boiler.hidden = true
-	boiler.hidden_in_factoriopedia = true
-	boiler.factoriopedia_alternative = vals.newName
-	ITEM[name].place_result = vals.newName
-	-- Rename item and recipe, so they merge with the right entity.
-	Item.renameAndHide(name, vals.newName)
-	Recipe.renameAndChangeResult(name, vals.newName)
-end
+-- TODO create 5x3 burner boiler.
 
--- Remove smoke from the burner-boiler.
-local burnerBoiler = ASSEMBLER["boiler-lsa"]
-burnerBoiler.created_smoke = nil
-burnerBoiler.energy_source.smoke = nil
-extend{burnerBoiler}
+-- Hide the original boiler item, entity, and recipe.
+baseBoiler.hidden = true-- TODO heat exchanger needs to also be changed to assembling-machine.e
+baseBoiler.hidden_in_factoriopedia = true
+ITEM["boiler"].hidden = true
+ITEM["boiler"].hidden_in_factoriopedia = true
+RECIPE["boiler"].hidden = true
+RECIPE["boiler"].hidden_in_factoriopedia = true
+-- TODO hide heat exchanger too.
 
--- Create alternate version of the burner boiler for planets with air in the atmosphere.
+-- Create alternate version of the burner boiler for planets w-- TODO heat exchanger needs to also be changed to assembling-machine.ith air in the atmosphere.
+--[[
 local airBoiler = copy(ASSEMBLER["boiler-lsa"])
 airBoiler.name = "boiler-lsa-air"
 airBoiler.localised_name = {"entity-name."..airBoiler.name} -- TODO give it a different icon, so we can tell them apart in signal GUI etc.
@@ -177,5 +201,4 @@ airBoiler.minable.result = "boiler-lsa"
 airBoiler.fluid_boxes_off_when_no_fluid_recipe = false
 airBoiler.fluid_boxes = {waterIOFluidBox, steamOutputFluidBox, airCenterInputFluidBox, flueOutputFluidBox, linkedAirInputFluidBox}
 extend{airBoiler}
-
--- TODO heat exchanger needs to also be changed to assembling-machine.
+]]

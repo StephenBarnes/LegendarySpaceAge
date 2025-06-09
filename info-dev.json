@@ -22,7 +22,7 @@
 		, "cargo-ships"
 
 		, "! gas-boiler"
-		, "electricboiler"
+		, "! electricboiler"
 
 		, "eradicators-hand-crank-redux"
 		, "PersonalBurnerGenerator"

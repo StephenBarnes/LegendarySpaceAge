@@ -16,13 +16,14 @@
 		, "space-age"
 
 		, "space-exploration-graphics"
+		, "space-exploration-graphics-3"
 		, "space-exploration-graphics-4"
 
 		, "gleba-lab"
 		, "cargo-ships"
 
 		, "! gas-boiler"
-		, "electricboiler"
+		, "! electricboiler"
 
 		, "eradicators-hand-crank-redux"
 		, "PersonalBurnerGenerator"

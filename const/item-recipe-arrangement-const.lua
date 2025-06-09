@@ -23,7 +23,7 @@ return {
 	},
 	production = {
 		tool = {"repair-pack", "blueprint", "deconstruction-planner", "upgrade-planner", "blueprint-book"},
-		energy = {"boiler-lsa", "electric-boiler-lsa", "heating-tower", "fluid-heating-tower", "heat-pipe", "heat-exchanger"},
+		energy = {"burner-boiler", "shuttle-boiler", "electric-boiler", "heating-tower", "fluid-heating-tower", "heat-pipe", "heat-exchanger"},
 		generator = {"er-hcg", "steam-engine", "steam-turbine", "condensing-turbine"},
 		["electricity-related"] = {"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector", "nuclear-reactor", "fusion-reactor", "fusion-generator"},
 		["extraction-machine"] = {"burner-mining-drill", "electric-mining-drill", "big-mining-drill", "deep-drill", "pumpjack", "agricultural-tower", "air-separator", "drill-node-dummy-miner"},

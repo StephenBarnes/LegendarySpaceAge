@@ -64,6 +64,7 @@ for _, furnaceName in pairs{"stone-furnace", "stone-furnace-air"} do
 end
 
 -- Add air input for burner boilers on planets with air in the atmosphere.
+--[[
 Export["boiler-lsa-air"] = {
 	["invisible-infinity-pipe"] = {{
 		pos = {.5, 0},
@@ -75,6 +76,7 @@ Export["boiler-lsa-air"] = {
 		end,
 	}},
 }
+]]
 
 -- TODO later I'll add invisible vents to stone furnaces.
 

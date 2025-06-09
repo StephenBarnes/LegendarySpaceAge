@@ -42,8 +42,9 @@ TECH["electronics"].research_trigger = {
 -- Remove offshore pump recipe from steam power, will add to filtration.
 -- Adding gas vent too, since it's needed for the burner boiler.
 TECH["steam-power"].effects = {
-	{type = "unlock-recipe", recipe = "boiler-lsa"},
-	{type = "unlock-recipe", recipe = "electric-boiler-lsa"},
+	{type = "unlock-recipe", recipe = "shuttle-boiler"},
+	--{type = "unlock-recipe", recipe = "electric-boiler"},
+	--{type = "unlock-recipe", recipe = "burner-boiler"},
 	{type = "unlock-recipe", recipe = "steam-engine"},
 	{type = "unlock-recipe", recipe = "gas-vent"},
 }
