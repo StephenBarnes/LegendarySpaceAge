@@ -8,7 +8,7 @@ local Export = {}
 -- Separator between entity name and quality suffix. Chosen to hopefully not appear in the IDs of any modded entities.
 local qualitySeparator = "-LSA_"
 
-
+-- Type and name of entities that need to have their power consumption scaled with quality.
 local qualityScalers = {
 	{"assembling-machine", "stone-furnace"},
 	{"assembling-machine", "stone-furnace-air"},
@@ -21,8 +21,8 @@ local qualityScalers = {
 
 	{"assembling-machine", "shuttle-boiler"},
 	{"assembling-machine", "electric-boiler"},
-	{"assembling-machine", "burner-boiler"},
-	{"assembling-machine", "burner-boiler-air"},
+	--{"assembling-machine", "burner-boiler"},
+	--{"assembling-machine", "burner-boiler-air"},
 }
 
 -- Convert to a set for fast lookups, and then explicitly map quality to modified strings so we don't need to build strings at runtime.

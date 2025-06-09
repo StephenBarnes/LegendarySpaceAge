@@ -14,6 +14,11 @@ local dirCodeToPath = {
 	base = "__base__/graphics/",
 	core = "__core__/graphics/",
 	SA = "__space-age__/graphics/",
+	SE = "__space-exploration-graphics__/graphics/",
+	SE2 = "__space-exploration-graphics-2__/graphics/",
+	SE3 = "__space-exploration-graphics-3__/graphics/",
+	SE4 = "__space-exploration-graphics-4__/graphics/",
+	SE5 = "__space-exploration-graphics-5__/graphics/",
 }
 
 -- Table of special path codes.

@@ -3,7 +3,7 @@
 Note that this mod deliberately conflates sodium and potassium in many chemicals, because they have almost the same sources and uses, and conflating them reduces the number of items/recipes we need.
 
 Namely:
-	"Alkali ash" represents soda and and potash, ie sodium/potassium carbonate.
+	"Alkali ash" represents soda ash and potash, ie sodium/potassium carbonate.
 	"Lye" is sodium/potassium hydroxide in water. It's always a fluid. It's more efficient in some recipes, to balance against the extra logistical burden of using fluids instead of items.
 	"Quicklime" (calcium oxide) is a solid that you make by heating calcite.
 	"Slaked lime" (calcium hydroxide) is a solid that you can make by mixing quicklime with water.

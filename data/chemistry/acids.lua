@@ -13,6 +13,7 @@ Recipes:
 * Acid-salt shift: acid A + salt B -> acid B + salt A.
 	This is exo/endothermic depending on relative strengths of the acids.
 	The intention of this (besides realism) is to create multiple options for players. The recipe converts an acid to salt, and in parallel converts a different salt to its acid. So if you want to e.g. use nitric acid to make niter for gunpowder, you can choose which other salt to turn into its acid. And you can do interesting things like building a circuit system that automatically switches between options for that second parallel salt->acid recipe.
+	This is inspired by real chemistry, but fairly unrealistic - for most of these pairs you can't do these reactions IRL by just adding/removing heat, and the reaction won't go to completion.
 * TODO more?
 ]]
 

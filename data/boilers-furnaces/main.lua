@@ -3,4 +3,5 @@ We change both boilers and furnaces to be assembling-machines, so that we can do
 ]]
 
 require("data.boilers-furnaces.furnaces")
+require("data.boilers-furnaces.boiler-entities")
 require("data.boilers-furnaces.boiler-recipes")
