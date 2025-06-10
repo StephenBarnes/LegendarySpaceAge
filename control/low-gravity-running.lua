@@ -98,49 +98,28 @@ local function swapCharacter(player, surface, prevChar, newCharName)
 	end
 end
 
----@param e EventData.on_player_changed_surface
-local function onPlayerChangedSurface(e)
-	if e.surface_index == nil then return end
-	local prevSurface = game.get_surface(e.surface_index)
-	if prevSurface == nil or not prevSurface.valid then return end
-	local player = game.get_player(e.player_index)
+---@param player LuaPlayer?
+local function updatePlayer(player)
 	if player == nil or not player.valid then return end
+	if player.controller_type ~= defines.controllers.character then return end
+	if player.vehicle ~= nil or player.physical_vehicle ~= nil or player.cargo_pod ~= nil then return end
 	local prevCharacter = player.character
 	if prevCharacter == nil or not prevCharacter.valid then return end
 	local newSurface = prevCharacter.surface
 	if newSurface == nil or not newSurface.valid then return end
-	-- Don't run if we went to a space platform.
-	if newSurface.platform ~= nil then return end
-
-	-- Store the player with changed surface. Issue is we can't swap character instantly, need to wait for cargo pod to actually land. So instead we store players to check, then check that list every 60 ticks.
-	if storage.lowGravityChanges == nil then
-		storage.lowGravityChanges = {}
+	if newSurface.name == "apollo" and prevCharacter.name == "character" then
+		swapCharacter(player, newSurface, prevCharacter, "low-gravity-character")
+	elseif newSurface.name ~= "apollo" and prevCharacter.name == "low-gravity-character" then
+		swapCharacter(player, newSurface, prevCharacter, "character")
 	end
-	storage.lowGravityChanges[player.index] = true
 end
 
-local function onNthTick()
-	if storage.lowGravityChanges == nil then return end
-	for playerIndex, _ in pairs(storage.lowGravityChanges) do
-		local player = game.get_player(playerIndex)
-		if (player ~= nil and player.valid and player.character ~= nil and player.character.valid
-			and player.controller_type == defines.controllers.character
-			and player.cargo_pod == nil) then
-			local prevCharacter = player.character
-			---@cast prevCharacter LuaEntity
-			local prevCharName = prevCharacter.name
-			local newSurface = prevCharacter.surface
-			if newSurface.name == "apollo" and prevCharName == "character" then
-				swapCharacter(player, newSurface, prevCharacter, "low-gravity-character")
-			elseif newSurface.name ~= "apollo" and prevCharName == "low-gravity-character" then
-				swapCharacter(player, newSurface, prevCharacter, "character")
-			end
-			storage.lowGravityChanges[playerIndex] = nil
-		end
-	end
+---@param e EventData.on_player_changed_surface|EventData.on_player_respawned|EventData.on_player_driving_changed_state|EventData.on_player_cheat_mode_enabled|EventData.on_player_controller_changed
+local function onPlayerChange(e)
+	local player = game.get_player(e.player_index)
+	updatePlayer(player)
 end
 
 return {
-	onPlayerChangedSurface = onPlayerChangedSurface,
-	onNthTick = onNthTick,
+	onPlayerChange = onPlayerChange,
 }

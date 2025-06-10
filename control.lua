@@ -14,8 +14,16 @@ local childEntities = require("control.child-entities")
 script.on_nth_tick(60 * 10, function()
 	techRateTriggers.onNthTick()
 end)
-script.on_nth_tick(30, function()
-	lowGravityRunning.onNthTick()
+
+script.on_event({
+    defines.events.on_player_changed_surface,
+    defines.events.on_player_respawned,
+    defines.events.on_player_driving_changed_state,
+    defines.events.on_player_cheat_mode_enabled,
+    defines.events.on_player_controller_changed,
+}, function(e)
+	---@diagnostic disable-next-line: param-type-mismatch
+    lowGravityRunning.onPlayerChange(e)
 end)
 
 local function handlePickerDolliesEvent(e)
@@ -83,8 +91,4 @@ end)
 
 script.on_event(defines.events.on_player_flipped_entity, function(e)
 	childEntities.onFlipped(e)
-end)
-
-script.on_event(defines.events.on_player_changed_surface, function(e)
-	lowGravityRunning.onPlayerChangedSurface(e)
 end)
