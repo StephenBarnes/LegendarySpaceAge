@@ -67,25 +67,6 @@ local fluidBoxes = {
 				},
 				production_type = "input",
 			},
-			air = {
-				volume = 200,
-				pipe_covers = pipecoverspictures(),
-				pipe_connections = {
-					{flow_direction = "input", direction = SOUTH, position = {0, 0.5}}
-				},
-				production_type = "input",
-				pipe_picture = GreyPipes.pipeBlocks(),
-				secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
-			},
-			linkedAir = {
-				volume = 200,
-				pipe_covers = nil,
-				pipe_picture = nil,
-				pipe_connections = {
-					{ flow_direction = "input", position = {0.5, 0}, direction = NORTH, connection_type = "linked", linked_connection_id = BoilerConst.airLinkId },
-				},
-				production_type = "input",
-			},
 		},
 		output = {
 			steam = {
@@ -96,26 +77,71 @@ local fluidBoxes = {
 				},
 				production_type = "output",
 			},
+			brine = {
+				volume = 200,
+				pipe_covers = pipecoverspictures(),
+				pipe_connections = {
+					{flow_direction = "output", direction = SOUTH, position = {0, 0.5}},
+				},
+				production_type = "output",
+				pipe_picture = GreyPipes.pipeBlocksEMPlantLongGraySouth(),
+				secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
+			},
+		},
+	},
+	x5x3 = { -- For the 5x3 combustion boiler. Generally want to put main input (water) on one side, main output (steam) on the other side, and then the rest are passthrough.
+		input = {
+			water = {
+				volume = 200,
+				pipe_covers = pipecoverspictures(),
+				pipe_connections = {
+					{flow_direction = "input", direction = NORTH, position = {0, -2}},
+				},
+				production_type = "input",
+			},
+			air = {
+				volume = 200,
+				pipe_covers = pipecoverspictures(),
+				pipe_connections = {
+					{flow_direction = "input-output", direction = WEST, position = {-1, 0}},
+					{flow_direction = "input-output", direction = EAST, position = {1, 0}},
+				},
+				production_type = "input",
+				pipe_picture = GreyPipes.pipeBlocksEMPlantLongGraySouth(),
+				secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
+			},
+		},
+		output = {
+			steam = {
+				volume = 200,
+				pipe_covers = pipecoverspictures(),
+				pipe_connections = {
+					{flow_direction = "output", direction = SOUTH, position = {0, 2}},
+				},
+				production_type = "output",
+			},
 			flue = {
 				volume = 200,
 				pipe_covers = pipecoverspictures(),
 				pipe_connections = {
-					{flow_direction = "input-output", direction = WEST, position = {-1, -0.5}},
-					{flow_direction = "input-output", direction = EAST, position = {1, -0.5}},
+					{flow_direction = "input-output", direction = WEST, position = {-1, 1}},
+					{flow_direction = "input-output", direction = EAST, position = {1, 1}}
 				},
 				production_type = "output",
-				pipe_picture = GreyPipes.pipeBlocksEMPlantLong(),
-				secondary_draw_orders = {north = -1, east = -1, south = -1, west = -1}, -- South is -1 too, looks better.
+				pipe_picture = GreyPipes.pipeBlocksEMPlantLongGraySouth(),
+				secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
 			},
-			-- TODO add brine / bitterns output.
-		},
-	},
-	x5x3 = { -- For the 5x3 combustion boiler.
-		input = {
-
-		},
-		output = {
-
+			brine = {
+				volume = 200,
+				pipe_covers = pipecoverspictures(),
+				pipe_connections = {
+					{flow_direction = "input-output", direction = WEST, position = {-1, -1}},
+					{flow_direction = "input-output", direction = EAST, position = {1, -1}}
+				},
+				production_type = "output",
+				pipe_picture = GreyPipes.pipeBlocksEMPlantLongGraySouth(),
+				secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
+			},
 		},
 	},
 }
@@ -130,6 +156,7 @@ shuttleBoiler.localised_name = nil
 shuttleBoiler.type = "assembling-machine"
 shuttleBoiler.crafting_categories = {"non-burner-boiling"}
 shuttleBoiler.crafting_speed = 1
+shuttleBoiler.fast_replaceable_group = "boiler"
 shuttleBoiler.energy_source = {
 	type = "burner",
 	emissions_per_minute = {pollution = 0},
@@ -152,6 +179,7 @@ shuttleBoiler.factoriopedia_description = {"factoriopedia-description.shuttle-bo
 shuttleBoiler.fluid_boxes = {
 	fluidBoxes.x3x2.input.water,
 	fluidBoxes.x3x2.output.steam,
+	fluidBoxes.x3x2.output.brine,
 }
 shuttleBoiler.allowed_effects = {"speed", "pollution"}
 shuttleBoiler.module_slots = 0
@@ -187,13 +215,13 @@ electricBoiler.energy_source = {
 	emissions_per_minute = {pollution = 0},
 	drain = "0W",
 }
-electricBoiler.energy_usage = "2MW"
 electricBoiler.placeable_by = {item = "electric-boiler", count = 1}
 electricBoiler.minable.result = "electric-boiler"
 electricBoiler.factoriopedia_description = {"factoriopedia-description.electric-boiler"}
 electricBoiler.fluid_boxes = {
 	fluidBoxes.x3x2.input.water,
 	fluidBoxes.x3x2.output.steam,
+	fluidBoxes.x3x2.output.brine,
 }
 Icon.set(electricBoiler, "SE/electric-boiler")
 electricBoiler.allowed_effects = {"speed", "pollution"}
@@ -369,7 +397,126 @@ Recipe.make{
 	},
 }
 
--- TODO create 5x3 burner boiler.
+-- Create 5x3 burner boiler, using graphics from Space Exploration's fluid-burner-generator.
+-- I'm making it bigger and using SE's graphics, because we need to fit in like 3 fluid outputs (steam, flue, and brine) and 2 inputs (air/oxygen and water), and ideally the water and flue would be passthrough, so we need like 7 fluid connections, which can't fit on the 3x2 boiler (only has space for 6 without overlaps).
+local burnerBoiler = copy(shuttleBoiler)
+burnerBoiler.name = "burner-boiler"
+burnerBoiler.crafting_categories = {"burner-boiling"}
+burnerBoiler.energy_source = {
+	type = "burner",
+	emissions_per_minute = {},
+	burner_usage = "fuel",
+	fuel_inventory_size = 2,
+	burnt_inventory_size = 2,
+	smoke = nil,
+	fuel_categories = {"chemical"},
+}
+burnerBoiler.minable.result = "burner-boiler"
+burnerBoiler.factoriopedia_description = {"factoriopedia-description.burner-boiler"}
+burnerBoiler.fluid_boxes = {
+	fluidBoxes.x5x3.input.water,
+	fluidBoxes.x5x3.input.air,
+	fluidBoxes.x5x3.output.steam,
+	fluidBoxes.x5x3.output.flue,
+	fluidBoxes.x5x3.output.brine,
+}
+burnerBoiler.fast_replaceable_group = nil
+Icon.set(burnerBoiler, "SE/fluid-burner-generator")
+burnerBoiler.allowed_effects = {"speed", "pollution"}
+burnerBoiler.module_slots = 0
+burnerBoiler.allowed_module_categories = {"speed"}
+burnerBoiler.collision_box = {{-1.35, -2.35}, {1.35, 2.35}}
+burnerBoiler.selection_box = {{-1.5, -2.5}, {1.5, 2.5}}
+-- Sounds - copying from SE, TODO check if this is suitable.
+burnerBoiler.working_sound = {
+	sound = {
+		filename = "__base__/sound/steam-engine-90bpm.ogg",
+		volume = 0.6,
+	},
+	match_speed_to_activity = true,
+}
+burnerBoiler.perceived_performance = {
+	minimum = 0.25,
+	performance_to_activity_rate = 0.5,
+}
+-- Set graphics of burner boiler - using Space Exploration's graphics.
+local verticalAnimation = {layers = {
+	{
+		filename = "__space-exploration-graphics-3__/graphics/entity/fluid-burner-generator/fluid-burner-generator-v.png",
+		width = 864/4,
+		height = 692/2,
+		frame_count = 8,
+		line_length = 4,
+		shift = util.by_pixel(5, 6.5),
+		animation_speed = 0.5,
+		scale = 0.5,
+	},
+	{
+		filename = "__space-exploration-graphics-3__/graphics/entity/fluid-burner-generator/fluid-burner-generator-v-shadow.png",
+		width = 256,
+		height = 260,
+		frame_count = 1,
+		repeat_count = 8,
+		line_length = 1,
+		draw_as_shadow = true,
+		shift = util.by_pixel(9.5, 14.5),
+		animation_speed = 0.5,
+		scale = 0.5,
+	},
+}}
+local horizontalAnimation = {layers = {
+	{
+		filename = "__space-exploration-graphics-3__/graphics/entity/fluid-burner-generator/fluid-burner-generator-h.png",
+		width = 320,
+		height = 244,
+		frame_count = 8,
+		line_length = 4,
+		shift = util.by_pixel(0, -2.75),
+		animation_speed = 0.5,
+		scale = 0.5,
+	},
+	{
+		filename = "__space-exploration-graphics-3__/graphics/entity/fluid-burner-generator/fluid-burner-generator-h-shadow.png",
+		width = 434,
+		height = 150,
+		frame_count = 1,
+		repeat_count = 8,
+		line_length = 1,
+		draw_as_shadow = true,
+		shift = util.by_pixel(28.5, 18),
+		animation_speed = 0.5,
+		scale = 0.5,
+	},
+}}
+burnerBoiler.graphics_set = {
+	animation = {
+		north = verticalAnimation,
+		south = verticalAnimation,
+		east = horizontalAnimation,
+		west = horizontalAnimation,
+	},
+	-- TODO check
+}
+extend{burnerBoiler}
+-- Create item for burner boiler.
+local burnerBoilerItem = copy(shuttleBoilerItem)
+burnerBoilerItem.name = "burner-boiler"
+burnerBoilerItem.place_result = "burner-boiler"
+Icon.set(burnerBoilerItem, "SE/fluid-burner-generator")
+extend{burnerBoilerItem}
+-- Create recipe for burner boiler.
+Recipe.make{
+	copy = "shuttle-boiler",
+	recipe = "burner-boiler",
+	resultCount = 1,
+	time = 5,
+	ingredients = {
+		{"structure", 1},
+		{"fluid-fitting", 20},
+		{"shielding", 5},
+	},
+}
+
 
 -- Hide the original boiler item, entity, and recipe.
 baseBoiler.hidden = true-- TODO heat exchanger needs to also be changed to assembling-machine.e

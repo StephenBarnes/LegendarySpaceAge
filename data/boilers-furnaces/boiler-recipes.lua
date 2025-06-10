@@ -1,7 +1,7 @@
 --[[ This file makes recipes for boilers.
 ]]
 
-local fluidBoxIndex = require("const.boiler-const").fluidBoxIndex
+local Const = require("const.boiler-const")
 
 -- Create recipe categories.
 extend{
@@ -23,8 +23,9 @@ local airCombustionWaterBoiling = Recipe.make{
 		{"air", 10, type = "fluid"},
 	},
 	results = {
-		{"steam", 5, temperature = 200, fluidbox_index = fluidBoxIndex.boiledGasOutput},
-		{"flue-gas", 10, type = "fluid", fluidbox_index = fluidBoxIndex.flueOutput},
+		{"steam", 5, temperature = 200, fluidbox_index = Const.burnerFluidBoxIndex.boiledGasOutput},
+		{"flue-gas", 10, type = "fluid", fluidbox_index = Const.burnerFluidBoxIndex.flueOutput},
+		{"water", 10, type = "fluid", fluidbox_index = Const.burnerFluidBoxIndex.brineOutput}, -- TODO change to brine when that exists.
 	},
 	time = 1,
 	enabled = true,
@@ -35,12 +36,13 @@ local oxCombustionWaterBoiling = Recipe.make{
 	recipe = "ox-burner-water-boiling",
 	category = "burner-boiling",
 	ingredients = {
-		{"water", 10, fluidbox_index = fluidBoxIndex.liquidToBoil},
-		{"oxygen-gas", 10, type = "fluid", fluidbox_index = fluidBoxIndex.airInput},
+		{"water", 10, fluidbox_index = Const.burnerFluidBoxIndex.liquidToBoil},
+		{"oxygen-gas", 10, type = "fluid", fluidbox_index = Const.burnerFluidBoxIndex.airInput},
 	},
 	results = {
-		{"steam", 10, temperature = 200, fluidbox_index = fluidBoxIndex.boiledGasOutput},
-		{"carbon-dioxide", 10, type = "fluid", fluidbox_index = fluidBoxIndex.flueOutput},
+		{"steam", 10, temperature = 200, fluidbox_index = Const.burnerFluidBoxIndex.boiledGasOutput},
+		{"carbon-dioxide", 10, type = "fluid", fluidbox_index = Const.burnerFluidBoxIndex.flueOutput},
+		{"water", 10, type = "fluid", fluidbox_index = Const.burnerFluidBoxIndex.brineOutput}, -- TODO change to brine when that exists.
 	},
 	time = 1,
 	enabled = true,
@@ -51,10 +53,11 @@ Recipe.make{
 	recipe = "non-burner-water-boiling",
 	category = "non-burner-boiling",
 	ingredients = {
-		{"water", 10, fluidbox_index = fluidBoxIndex.liquidToBoil},
+		{"water", 10, fluidbox_index = Const.nonBurnerFluidBoxIndex.liquidToBoil},
 	},
 	results = {
-		{"steam", 10, temperature = 200, fluidbox_index = fluidBoxIndex.boiledGasOutput},
+		{"steam", 10, temperature = 200, fluidbox_index = Const.nonBurnerFluidBoxIndex.boiledGasOutput},
+		{"water", 10, type = "fluid", fluidbox_index = Const.nonBurnerFluidBoxIndex.brineOutput}, -- TODO change to brine when that exists.
 	},
 	time = 1,
 	enabled = true,

@@ -44,7 +44,7 @@ TECH["electronics"].research_trigger = {
 TECH["steam-power"].effects = {
 	{type = "unlock-recipe", recipe = "shuttle-boiler"},
 	{type = "unlock-recipe", recipe = "electric-boiler"},
-	--{type = "unlock-recipe", recipe = "burner-boiler"},
+	{type = "unlock-recipe", recipe = "burner-boiler"},
 	{type = "unlock-recipe", recipe = "steam-engine"},
 	{type = "unlock-recipe", recipe = "gas-vent"},
 }

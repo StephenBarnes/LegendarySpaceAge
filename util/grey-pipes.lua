@@ -87,7 +87,7 @@ end
 ---@return data.Sprite4Way
 local function pipeBlocksEMPlantLong()
 	---@type data.Sprite4Way
-	local r = require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures
+	local r = copy(require("__space-age__.prototypes.entity.electromagnetic-plant-pictures").pipe_pictures)
 	-- North: added 26 pixels at the bottom.
 	-- Not sure why the shift isn't half the added height; values here found by trial and error.
 	r.north.layers[1].filename = "__LegendarySpaceAge__/graphics/pipes/EM-plant-modified/N.png"
@@ -103,6 +103,21 @@ local function pipeBlocksEMPlantLong()
 	return r
 end
 
+-- Function to get EM-plant-like pipes but longer (manually edited), and use grey cover for south-facing.
+---@return data.Sprite4Way
+local function pipeBlocksEMPlantLongGraySouth()
+	local r = copy(pipeBlocksEMPlantLong())
+	r.south = {
+		filename = "__LegendarySpaceAge__/graphics/pipes/assembling-machine-1-pipe-S.png",
+		priority = "extra-high",
+		width = 88,
+		height = 61,
+		shift = util.by_pixel(0, -31.25),
+		scale = 0.5
+	}
+	return r
+end
+
 return {
 	pipeBlocks = pipeBlocks,
 	pipeBlocksLongNorth = pipeBlocksLongNorth,
@@ -111,4 +126,5 @@ return {
 	pipeBlocksShortWest = pipeBlocksShortWest,
 	pipeBlocksEmptyNS = pipeBlocksEmptyNS,
 	pipeBlocksEMPlantLong = pipeBlocksEMPlantLong,
+	pipeBlocksEMPlantLongGraySouth = pipeBlocksEMPlantLongGraySouth,
 }
