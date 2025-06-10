@@ -13,12 +13,13 @@ Each child requirement can have fields:
 * adjustedHandler - function to call when parent is changed (rotated, flipped, moved). Called as adjustedHandler(parent, child, wasRotated, wasFlipped). Needed for loaders, since they have direction independent of "rotating" them (changing from input to output).
 * shouldTeleport - if we should teleport the child when parent rotates or moves. (Can't teleport loaders and transport belts.)
 * suppressRotationsAndFlips - if false/nil, rotating/flipping the parent will also rotate/flip the child. If true, that won't happen, but the adjustedHandler will still be called.
+* surfaceSet - if specified, only create the child on these surfaces.
 
 Note that if children have the same name and position, we can get confused about which one to update/delete, so preferably don't do that. Position invisible children inside the parent entity.
 	TODO maybe add table to record unit_number of children linking back to unit_number or position of parent, so we can find the correct child to update/delete. Still won't work for simple-entity children, but in that case they're probably interchangeable anyway. I don't think I actually need this for anything I want to implement though.
 ]]
 
----@type table<string, table<string, {pos: {[1]: number, [2]: number}, adjustForOrientation: boolean, createdHandler?: fun(parent: LuaEntity, child: LuaEntity), destroyedHandler?: fun(parentName: string, child: LuaEntity), adjustedHandler?: fun(parent: LuaEntity, child: LuaEntity, wasRotated: boolean, wasFlipped: boolean), shouldTeleport: boolean?, suppressRotationsAndFlips: boolean?, preCreatedHandler?: fun(parent: LuaEntity, info: table)}[]>>
+---@type table<string, table<string, {pos: {[1]: number, [2]: number}, adjustForOrientation: boolean, surfaceSet: table<string, boolean>?, createdHandler?: fun(parent: LuaEntity, child: LuaEntity), destroyedHandler?: fun(parentName: string, child: LuaEntity), adjustedHandler?: fun(parent: LuaEntity, child: LuaEntity, wasRotated: boolean, wasFlipped: boolean), shouldTeleport: boolean?, suppressRotationsAndFlips: boolean?, preCreatedHandler?: fun(parent: LuaEntity, info: table)}[]>>
 local Export = {}
 
 -- Create steam-evilizers for condensing turbines. This is so we can give condensing turbines lower efficiency than normal steam turbines, see data/pre-space/condensing-turbine.lua.
@@ -64,19 +65,18 @@ for _, furnaceName in pairs{"stone-furnace", "stone-furnace-air"} do
 end
 
 -- Add air input for burner boilers on planets with air in the atmosphere.
---[[
-Export["boiler-lsa-air"] = {
+local BoilerConst = require("const.boiler-const")
+Export["burner-boiler-air"] = {
 	["invisible-infinity-pipe"] = {{
-		pos = {.5, 0},
+		pos = {0, 0},
 		adjustForOrientation = false,
 		createdHandler = function(parent, child)
 			child.destructible = false
 			child.set_infinity_pipe_filter({name = "air", percentage = 1})
-			parent.fluidbox.add_linked_connection(FurnaceConst.airLinkId, child, 1)
+			parent.fluidbox.add_linked_connection(BoilerConst.airLinkId, child, 1)
 		end,
 	}},
 }
-]]
 
 -- TODO later I'll add invisible vents to stone furnaces.
 

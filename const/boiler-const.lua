@@ -19,6 +19,6 @@ Export.burnerFluidBoxIndex = {
 }
 
 -- Link ID for the air input fluid box for burner boiler on planets with air in the atmosphere.
-Export.airLinkId = 1
+Export.airLinkId = 3
 
 return Export

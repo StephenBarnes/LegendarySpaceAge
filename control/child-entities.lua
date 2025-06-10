@@ -29,6 +29,17 @@ local setDeathRattle = function(entity)
 	}
 end
 
+-- Check if a parent entity is on a surface where a given child-entity requirement applies.
+---@param entity LuaEntity
+---@param surfaceSet table<string, boolean>?
+---@return boolean
+local function inSurfaceSet(entity, surfaceSet)
+	if surfaceSet == nil then return true end
+	local surface = entity.surface
+	if surface == nil or not surface.valid then return false end
+	return surfaceSet[surface.name] == true
+end
+
 -- Convert a defines.direction (NORTH, SOUTH, EAST, WEST) to an orientation (0 - 1).
 ---@param dir defines.direction
 ---@return float
@@ -97,6 +108,7 @@ local function onBuilt(event)
 
 	for reqName, reqSet in pairs(reqs) do
 		for _, req in pairs(reqSet) do
+			if not inSurfaceSet(ent, req.surfaceSet) then goto continue end
 			assert(ent.orientation ~= nil)
 			assert(ent.mirroring ~= nil)
 			local disp = adjustDisplacement(req.pos, ent.orientation, ent.mirroring, ent.direction, req.adjustForOrientation)
@@ -123,6 +135,7 @@ local function onBuilt(event)
 					req.createdHandler(ent, newEnt)
 				end
 			end
+			::continue::
 		end
 	end
 	setDeathRattle(ent)
@@ -141,6 +154,7 @@ local function onObjectDestroyed(e)
 	if destroyedReqs == nil then return end
 	for reqName, reqSet in pairs(destroyedReqs) do
 		for _, req in pairs(reqSet) do
+			if not inSurfaceSet(deathrattle, req.surfaceSet) then goto continue end
 			local disp = adjustDisplacement(req.pos, nil, nil, deathrattle.direction, req.adjustForOrientation)
 			local children = surface.find_entities_filtered{
 				name = reqName,
@@ -166,6 +180,7 @@ local function onObjectDestroyed(e)
 				end
 				child.destroy()
 			end
+			::continue::
 		end
 	end
 	-- Delete the deathrattle.
@@ -233,6 +248,9 @@ local function onRotatedOrFlipped(e, wasRotated)
 	local ent = e.entity
 	if ent == nil or not ent.valid then return end
 
+	local reqs = Req[ent.name]
+	if reqs == nil then return end
+
 	local previousDirection, previousMirroring
 	if wasRotated then
 		previousDirection = e.previous_direction
@@ -246,12 +264,12 @@ local function onRotatedOrFlipped(e, wasRotated)
 		previousMirroring = not e.entity.mirroring
 	end
 
-	local reqs = Req[ent.name]
-	if reqs == nil then return end
 	for reqName, reqSet in pairs(reqs) do
 		for _, req in pairs(reqSet) do
-			---@diagnostic disable-next-line: param-type-mismatch
-			findAndUpdateChildren(ent, ent.position, req.adjustForOrientation, req, reqName, dirToOrientation(previousDirection), previousMirroring, wasRotated, not wasRotated)
+			if inSurfaceSet(ent, req.surfaceSet) then
+				---@diagnostic disable-next-line: param-type-mismatch
+				findAndUpdateChildren(ent, ent.position, req.adjustForOrientation, req, reqName, dirToOrientation(previousDirection), previousMirroring, wasRotated, not wasRotated)
+			end
 		end
 	end
 end
@@ -264,8 +282,10 @@ local function onPickerDollyMoved(e)
 	if reqs == nil then return end
 	for reqName, reqSet in pairs(reqs) do
 		for _, req in pairs(reqSet) do
-			assert(e.moved_entity.direction ~= nil)
-			findAndUpdateChildren(e.moved_entity, e.start_pos, true, req, reqName, e.moved_entity.orientation, e.moved_entity.mirroring, false, false)
+			if inSurfaceSet(e.moved_entity, req.surfaceSet) then
+				assert(e.moved_entity.direction ~= nil)
+				findAndUpdateChildren(e.moved_entity, e.start_pos, true, req, reqName, e.moved_entity.orientation, e.moved_entity.mirroring, false, false)
+			end
 		end
 	end
 end

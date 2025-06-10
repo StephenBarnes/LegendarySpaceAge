@@ -1,14 +1,22 @@
--- Create alternate version of the burner boiler for planets w-- TODO heat exchanger needs to also be changed to assembling-machine.ith air in the atmosphere.
---[[
-local airBoiler = copy(ASSEMBLER["boiler-lsa"])
-airBoiler.name = "boiler-lsa-air"
-airBoiler.localised_name = {"entity-name."..airBoiler.name} -- TODO give it a different icon, so we can tell them apart in signal GUI etc.
-airBoiler.localised_description = {"entity-description."..airBoiler.name}
-airBoiler.hidden_in_factoriopedia = true
-airBoiler.hidden = true
-airBoiler.factoriopedia_alternative = "boiler-lsa"
-airBoiler.minable.result = "boiler-lsa"
-airBoiler.fluid_boxes_off_when_no_fluid_recipe = false
-airBoiler.fluid_boxes = {waterIOFluidBox, steamOutputFluidBox, airCenterInputFluidBox, flueOutputFluidBox, linkedAirInputFluidBox}
-extend{airBoiler}
-]]
+local fluidBoxes = require("const.boiler-const-data").fluidBoxes
+
+-- Create alternate version of the burner boiler for planets with air. (This shouldn't be necessary because we use the same fluid input for air and oxygen. But we still need it, because otherwise it won't assign air input to the right fluidbox on planets without air, for some reason.)
+local burnerBoilerAir = copy(ASSEMBLER["burner-boiler"])
+burnerBoilerAir.name = "burner-boiler-air"
+burnerBoilerAir.localised_name = {"entity-name.burner-boiler-air"} -- TODO give it a different icon, so we can tell them apart in signal GUI etc.
+burnerBoilerAir.localised_description = {"entity-description.burner-boiler-air"}
+burnerBoilerAir.hidden_in_factoriopedia = true
+burnerBoilerAir.hidden = true
+burnerBoilerAir.factoriopedia_alternative = "burner-boiler"
+--burnerBoilerAir.fluid_boxes_off_when_no_fluid_recipe = false
+burnerBoilerAir.fluid_boxes = {
+	fluidBoxes.x5x3.input.water,
+	fluidBoxes.x5x3.input.air,
+	fluidBoxes.x5x3.input.airLinked,
+	fluidBoxes.x5x3.output.steam,
+	fluidBoxes.x5x3.output.flue,
+	fluidBoxes.x5x3.output.brine,
+}
+extend{burnerBoilerAir}
+
+-- TODO remove heat exchanger.

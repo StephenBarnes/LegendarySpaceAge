@@ -97,7 +97,7 @@ local function onBuilt(event)
 		mirroring = ent.mirroring,
 	}
 	-- Copy recipe, if available. Only available for CraftingMachine subtypes.
-	if ent.type == "assembling-machine" or ent.type == "furnace" then
+	if entType == "assembling-machine" or entType == "furnace" then
 		local recipe = ent.get_recipe()
 		if recipe ~= nil then
 			info.recipe = recipe.name
@@ -116,6 +116,9 @@ local function onBuilt(event)
 	local newEnt = surface.create_entity(info)
 	if newEnt == nil or not newEnt.valid then return end
 	newEnt.mirroring = info.mirroring
+	if info.recipe ~= nil then
+		newEnt.set_recipe(info.recipe)
+	end
 	-- Issue: this doesn't work for rocket-silo. Something weird about flipping/rotating rocket silos specifically, can't flip them once placed. So I'm rather just making rocket silos vertically symmetric.
 	-- Checked: when using this for furnaces etc, there's no mirroring issue.
 

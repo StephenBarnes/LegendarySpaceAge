@@ -10,7 +10,7 @@ This mod has a dependency on Electric Boiler.
 NOTE the order of fluid_boxes defined in this file must match up with the table in const/boiler-const.lua.
 ]]
 
-local BoilerConst = require("const.boiler-const")
+local fluidBoxes = require("const.boiler-const-data").fluidBoxes
 
 -- Function to convert graphics of boilers into assembling-machine graphics.
 ---@param boilerPictures data.BoilerPictureSet
@@ -52,99 +52,6 @@ local function convertBoilerGraphics(boilerPictures)
 	}
 	return {animation = animation, working_visualisations = workingVisualisations}
 end
-
--- Fluid boxes.
----@type table<"x3x2"|"x5x3", table<"input"|"output", table<string, data.FluidBox>>>
-local fluidBoxes = {
-	x3x2 = { -- For 3x2 boilers: electric boiler and heat-shuttle boiler.
-		input = {
-			water = {
-				volume = 200,
-				pipe_covers = pipecoverspictures(),
-				pipe_connections = {
-					{flow_direction = "input-output", direction = WEST, position = {-1, 0.5}},
-					{flow_direction = "input-output", direction = EAST, position = {1, 0.5}}
-				},
-				production_type = "input",
-			},
-		},
-		output = {
-			steam = {
-				volume = 200,
-				pipe_covers = pipecoverspictures(),
-				pipe_connections = {
-					{flow_direction = "output", direction = NORTH, position = {0, -0.5}}
-				},
-				production_type = "output",
-			},
-			brine = {
-				volume = 200,
-				pipe_covers = pipecoverspictures(),
-				pipe_connections = {
-					{flow_direction = "output", direction = SOUTH, position = {0, 0.5}},
-				},
-				production_type = "output",
-				pipe_picture = GreyPipes.pipeBlocksEMPlantLongGraySouth(),
-				secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
-			},
-		},
-	},
-	x5x3 = { -- For the 5x3 combustion boiler. Generally want to put main input (water) on one side, main output (steam) on the other side, and then the rest are passthrough.
-		input = {
-			water = {
-				volume = 200,
-				pipe_covers = pipecoverspictures(),
-				pipe_connections = {
-					{flow_direction = "input", direction = NORTH, position = {0, -2}},
-				},
-				production_type = "input",
-			},
-			air = {
-				volume = 200,
-				pipe_covers = pipecoverspictures(),
-				pipe_connections = {
-					{flow_direction = "input-output", direction = WEST, position = {-1, 0}},
-					{flow_direction = "input-output", direction = EAST, position = {1, 0}},
-				},
-				production_type = "input",
-				pipe_picture = GreyPipes.pipeBlocksEMPlantLongGraySouth(),
-				secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
-			},
-		},
-		output = {
-			steam = {
-				volume = 200,
-				pipe_covers = pipecoverspictures(),
-				pipe_connections = {
-					{flow_direction = "output", direction = SOUTH, position = {0, 2}},
-				},
-				production_type = "output",
-			},
-			flue = {
-				volume = 200,
-				pipe_covers = pipecoverspictures(),
-				pipe_connections = {
-					{flow_direction = "input-output", direction = WEST, position = {-1, 1}},
-					{flow_direction = "input-output", direction = EAST, position = {1, 1}}
-				},
-				production_type = "output",
-				pipe_picture = GreyPipes.pipeBlocksEMPlantLongGraySouth(),
-				secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
-			},
-			brine = {
-				volume = 200,
-				pipe_covers = pipecoverspictures(),
-				pipe_connections = {
-					{flow_direction = "input-output", direction = WEST, position = {-1, -1}},
-					{flow_direction = "input-output", direction = EAST, position = {1, -1}}
-				},
-				production_type = "output",
-				pipe_picture = GreyPipes.pipeBlocksEMPlantLongGraySouth(),
-				secondary_draw_orders = {north = -1, east = -1, south = 10, west = -1},
-			},
-		},
-	},
-}
 
 -- Create the heat-shuttle boiler: 3x2, with the same graphics as the base-game's heat-shuttle boiler.
 local baseBoiler = RAW.boiler.boiler
@@ -412,10 +319,13 @@ burnerBoiler.energy_source = {
 	fuel_categories = {"chemical"},
 }
 burnerBoiler.minable.result = "burner-boiler"
+burnerBoiler.placeable_by = {item = "burner-boiler", count = 1}
 burnerBoiler.factoriopedia_description = {"factoriopedia-description.burner-boiler"}
 burnerBoiler.fluid_boxes = {
 	fluidBoxes.x5x3.input.water,
 	fluidBoxes.x5x3.input.air,
+	--fluidBoxes.x5x3.input.airLinked, -- No air link, since this is the version for planets without ambient air.
+
 	fluidBoxes.x5x3.output.steam,
 	fluidBoxes.x5x3.output.flue,
 	fluidBoxes.x5x3.output.brine,
