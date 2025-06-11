@@ -27,6 +27,8 @@ Item.multiplyWeight = function(itemName, multiplier, typeName)
 	item.weight = item.weight * multiplier
 end
 
+---@param a data.ItemPrototype|string
+---@param b data.ItemPrototype|string
 Item.copySoundsTo = function(a, b)
 	if type(a) == "string" then a = ITEM[a] end
 	if type(b) == "string" then b = ITEM[b] end
