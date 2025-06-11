@@ -33,6 +33,7 @@ for _, vals in pairs{
 			{type="item", name="mechanism", amount=1},
 		},
 		time = 5,
+		animationSpeedCoefficient = 30, -- Originally 32.
 	},
 	{
 		prefix = "fast-",
@@ -43,6 +44,7 @@ for _, vals in pairs{
 			{type="item", name="rubber", amount=1},
 		},
 		time = 1,
+		animationSpeedCoefficient = 30, -- Originally 32.
 	},
 	{
 		prefix = "express-",
@@ -53,6 +55,7 @@ for _, vals in pairs{
 			{type="item", name="rubber", amount=1},
 		},
 		time = 1,
+		animationSpeedCoefficient = 31, -- Originally 32.
 	},
 	{
 		prefix = "turbo-",
@@ -63,6 +66,7 @@ for _, vals in pairs{
 			{type="item", name="tungsten-plate", amount=2},
 		},
 		time = 1,
+		animationSpeedCoefficient = 32, -- Originally 32.
 	},
 } do
 	local beltName = vals.prefix .. "transport-belt"
@@ -84,14 +88,17 @@ for _, vals in pairs{
 	-- Set speeds.
 	for _, ent in pairs{beltEnt, undergroundEnt, splitterEnt} do
 		ent.speed = vals.speed / (60 * 8)
-		ent.animation_speed_coefficient = vals.speed / (60 * 8) -- TODO
 	end
+
+	-- Adjust animation speed, otherwise the belts move a bit faster than items on the belt.
+	-- I have no idea why the specific values in the table above work. Base game + DLC has them all at coefficient 32, and that seems to work with base-game belt speeds, but when speeds are changed the belt looks like it's moving too fast underneath the items.
+	beltEnt.animation_speed_coefficient = vals.animationSpeedCoefficient
 
 	-- Set stack sizes and weights.
 	beltItem.stack_size = 200
 	Item.perRocket(beltItem, 400)
 	undergroundItem.stack_size = 100
-	Item.perRocket(undergroundItem, 200)
+	Item.perRocket(undergroundItem, 100)
 	splitterItem.stack_size = 50
 	Item.perRocket(splitterItem, 100)
 
