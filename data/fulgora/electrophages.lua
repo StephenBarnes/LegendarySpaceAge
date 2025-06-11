@@ -1,3 +1,5 @@
+local Const = require("data.fulgora.const")
+
 -- Create electrophage tech, recipe, item. Mostly taken from Biochemistry mod by Tenebrais.
 extend({
 	{
@@ -95,9 +97,16 @@ extend({
 				icon = "__LegendarySpaceAge__/graphics/fulgora/from_biochemistry/electrophage-cultivation.png",
 			},
 			{
-				icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/holmium_battery_short_charged.png",
+				icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/holmium_battery_short.png",
 				scale = 0.3,
 				shift = {7, 7},
+			},
+			{
+				icon = "__LegendarySpaceAge__/graphics/fulgora/batteries/glow.png",
+				scale = 0.3,
+				shift = {7, 7},
+				tint = Const.holmiumBatteryGlowTint,
+				draw_as_glow = true,
 			},
 		},
 		allow_decomposition = false,

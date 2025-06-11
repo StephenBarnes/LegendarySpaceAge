@@ -1,10 +1,13 @@
--- Some code and graphics are copied from the Battery Powered mod by harag.
+--[[ Some code and graphics are copied from the Battery Powered mod by harag.
 
--- I'm using 1 charger and 1 discharger building. Chargers run at 1MW, generators at 2MW.
--- I'm making 2 types of batteries: normal battery is 10MJ and holmium battery is 100MJ.
--- Crafting speed of charger/discharger are 1. So charging the batteries needs to take 10 and 100 seconds respectively.
--- Compare to vanilla accumulators, which hold 5MJ and have max input/output of 300kW.
--- So compared to accumulators, you need fewer chargers/dischargers, but a much more complex setup to load batteries into chargers/dischargers and return used ones, etc.
+I'm using 1 charger and 1 discharger building. Chargers run at 1MW, generators at 2MW.
+I'm making 2 types of batteries: normal battery is 10MJ and holmium battery is 100MJ.
+Crafting speed of charger/discharger are 1. So charging the batteries needs to take 10 and 100 seconds respectively.
+Compare to vanilla accumulators, which hold 5MJ and have max input/output of 300kW.
+So compared to accumulators, you need fewer chargers/dischargers, but a much more complex setup to load batteries into chargers/dischargers and return used ones, etc.
+]]
+
+local Const = require("data.fulgora.const")
 
 -- Create recipe category for charging, fuel category for batteries.
 extend({
@@ -20,7 +23,13 @@ batteryItem.stack_size = 200 -- Vanilla is 200. This carries through to other cl
 Item.perRocket(batteryItem, 1000) -- Vanilla is 400 per rocket.
 local chargedBatteryItem = copy(batteryItem)
 chargedBatteryItem.name = "charged-battery"
-Icon.set(chargedBatteryItem, "LSA/fulgora/batteries/battery_short_charged")
+Icon.set(chargedBatteryItem, {"LSA/fulgora/batteries/battery_short", {"LSA/fulgora/batteries/glow", draw_as_glow = true, tint = Const.batteryGlowTint}}, "overlay")
+chargedBatteryItem.pictures = {
+	{layers = {
+		{filename = "__LegendarySpaceAge__/graphics/fulgora/batteries/battery_short.png", size = 64, scale = 0.5},
+		{filename = "__LegendarySpaceAge__/graphics/fulgora/batteries/glow.png", draw_as_glow = true, size = 64, scale = 0.5, tint = Const.batteryGlowTintWithAlpha},
+	}},
+}
 chargedBatteryItem.burnt_result = "battery"
 chargedBatteryItem.fuel_category = "battery"
 chargedBatteryItem.fuel_emissions_multiplier = 0
@@ -38,7 +47,13 @@ holmiumBatteryItem.name = "holmium-battery"
 Icon.set(holmiumBatteryItem, "LSA/fulgora/batteries/holmium_battery_short")
 local chargedHolmiumBatteryItem = copy(batteryItem)
 chargedHolmiumBatteryItem.name = "charged-holmium-battery"
-Icon.set(chargedHolmiumBatteryItem, "LSA/fulgora/batteries/holmium_battery_short_charged")
+Icon.set(chargedHolmiumBatteryItem, {"LSA/fulgora/batteries/holmium_battery_short", {"LSA/fulgora/batteries/glow", draw_as_glow = true, tint = Const.holmiumBatteryGlowTint}}, "overlay")
+chargedHolmiumBatteryItem.pictures = {
+	{layers = {
+		{filename = "__LegendarySpaceAge__/graphics/fulgora/batteries/holmium_battery_short.png", size = 64, scale = 0.5},
+		{filename = "__LegendarySpaceAge__/graphics/fulgora/batteries/glow.png", draw_as_glow = true, size = 64, scale = 0.5, tint = Const.holmiumBatteryGlowTintWithAlpha},
+	}},
+}
 chargedHolmiumBatteryItem.burnt_result = "holmium-battery"
 chargedHolmiumBatteryItem.fuel_category = "battery"
 chargedHolmiumBatteryItem.fuel_emissions_multiplier = 0
@@ -395,9 +410,6 @@ extend({
 })
 ITEM["battery-charger"].place_result = "battery-charger"
 ITEM["battery-discharger"].place_result = "battery-discharger"
-
--- Quality shouldn't give the chargers greater charge speed, or you could make a loop for free energy, since their energy consumption isn't changed by quality.
--- TODO write control script to replace chargers on placement, and then remove no-quality mod as prereq.
 
 -- Create recipes for charging batteries.
 Recipe.make{
