@@ -16,6 +16,7 @@ This file is to keep track of other people's stuff that I've used.
 	* Carbon - mods.factorio.com/mod/carbon - Stole several ideas for the petrochem system, plus some code and graphics.
 	* Gas Furnace - mods.factorio.com/mod/gas-furnace - Using code and graphics for the gas furnace, repurposed as normal steel furnace with extra fluid I/O (because I need air/oxygen input and flue/CO2 output).
 	* Gas Boiler - mods.factorio.com/mod/gas-boiler - Originally a dependency, but removed because I couldn't fit in the extra fluid I/O.
+* Artisanal Reskins: Bob's Mods by Kirazy, snouz, Vigil, YuokiTani - mods.factorio.com/mod/reskins-bobs - Graphics for electrolysis plant.
 * Biochemistry by Tenebrais - mods.factorio.com/mod/biochemistry - Electrophage graphics, and ideas.
 * Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above. Copied deep drill, maybe more later.
 * Lunar Landings by Xorimuth - mods.factorio.com/mod/LunarLandings - Apollo icon. Also using some ideas, such as ice nodes and telescopes on lunar mountains.

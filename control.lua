@@ -11,7 +11,7 @@ local techRateTriggers = require("control.tech-rate-triggers")
 local entitySubstitutions = require("control.entity-substitutions")
 local childEntities = require("control.child-entities")
 
-script.on_nth_tick(60 * 10, function()
+script.on_nth_tick(60 * 5, function()
 	techRateTriggers.onNthTick()
 end)
 

@@ -30,7 +30,7 @@ return {
 		["crushing-machine"] = {"basic-crusher", "big-crusher"},
 		["smelting-machine"] = {"stone-furnace", "steel-furnace", "arc-furnace"},
 		["production-machine"] = {"assembling-machine-1", "assembling-machine-2", "assembling-machine-3", "clean-assembler"},
-		["chemical-processing"] = {"chemical-plant", "oil-refinery", "filtration-plant", "cryogenic-plant", "gasifier", "fluid-fuelled-gasifier"},
+		["chemical-processing"] = {"chemical-plant", "oil-refinery", "filtration-plant", "cryogenic-plant", "gasifier", "fluid-fuelled-gasifier", "electrolysis-plant"},
 		["heat-processing"] = {"electric-furnace", "exothermic-plant"},
 		["planetary-special"] = {"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge"},
 		["environmental-protection"] = {},
