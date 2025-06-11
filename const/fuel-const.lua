@@ -30,7 +30,8 @@ Export.itemFuelValues = { -- Maps from fluid name to fuel value, pollution multi
 	["carbon"] = {"500kJ", .6, .7, .7, "chemical", false, "item"},
 
 	["coal"] = {"4MJ", 1, .5, .5, "chemical", true, "item"},
-	["wood"] = {"2MJ", 1, .4, .4, "chemical", true, "item"},
+	["wood"] = {"2MJ", 1, .3, .3, "chemical", true, "item"},
+	["wood-chips"] = {"1.5MJ", 1, .4, .4, "chemical", true, "item"},
 	["tree-seed"] = {"100kJ", 1, .4, .4, "chemical", true, "item"},
 
 	["spoilage"] = {"250kJ", 1, .4, .4, "chemical", true, "item"},

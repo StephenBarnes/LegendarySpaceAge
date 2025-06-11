@@ -110,21 +110,22 @@ ent.fluid_boxes = {
 		}
 	},
 }
+local lightningSound = sound_variations("__space-age__/sound/entity/lightning-attractor/lightning-attractor-charge", 5, 0.3)
 ent.working_sound = {
 	main_sounds = {
 		{
-			sound = sound_variations("__base__/sound/chemical-plant", 3, 0.5),
+			sound = sound_variations("__base__/sound/chemical-plant", 3, 0.4),
 			fade_in_ticks = 4,
 			fade_out_ticks = 20,
 		},
 		{
-			sound = sound_variations("__space-age__/sound/entity/lightning-attractor/lightning-attractor-charge", 5, 0.3),
+			sound = lightningSound,
 			--audible_distance_modifier = 0.5,
 			probability = 1 / (10 * 60), -- 1 per 10 seconds on average.
 		},
 	},
 	max_sounds_per_type = 3,
-	activate_sound = sound_variations("__space-age__/sound/entity/lightning-attractor/lightning-attractor-charge", 5, 0.3),
+	activate_sound = lightningSound,
 }
 extend{ent}
 

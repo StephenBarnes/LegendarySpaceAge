@@ -131,7 +131,7 @@ return {
 		["alien-science-packs"] = {"asteroid-science-pack", "metallurgic-science-pack", "agricultural-science-pack", "electromagnetic-science-pack", "nuclear-science-pack", "cryogenic-science-pack", "promethium-science-pack"},
 	},
 	["bio-processing"] = {
-		["early-agriculture"] = {"wood", "tree-seed", "fertilizer", "sapling", "spoilage-from-wood", "ammonia-from-spoilage"},
+		["early-agriculture"] = {"wood", "wood-chips", "tree-seed", "fertilizer", "sapling", "spoilage-from-wood", "ammonia-from-spoilage"},
 		["nauvis-agriculture"] = {"raw-fish", "fish-breeding", "nutrients-from-fish", "nutrients-from-biter-egg", "biter-egg"},
 		["spoilage-and-nutrients"] = {"spoilage", "nutrients-from-spoilage", "sugar", "nutrients", "nutrients-from-yumako-mash", "nutrients-from-bioflux", "nutrients-from-marrow"},
 		["yumako-and-jellynut"] = {"yumako-seed", "jellynut-seed", "fertilized-yumako-seed", "fertilized-jellynut-seed", "yumako", "jellynut", "yumako-mash", "jelly", "yumako-processing", "jellynut-processing"},

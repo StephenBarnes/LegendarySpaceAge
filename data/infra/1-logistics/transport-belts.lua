@@ -18,6 +18,8 @@ Adjust recipes:
 TODO: compare all these recipes to base-game, and number per belt.
 
 TODO edit max healths of belts/undergrounds/splitters, they're very high and vary seemingly randomly.
+
+TODO: currently the animation of the yellow belts moves a bit faster than items on the belt. Not sure why.
 ]]
 for _, vals in pairs{
 	{
@@ -82,6 +84,7 @@ for _, vals in pairs{
 	-- Set speeds.
 	for _, ent in pairs{beltEnt, undergroundEnt, splitterEnt} do
 		ent.speed = vals.speed / (60 * 8)
+		ent.animation_speed_coefficient = vals.speed / (60 * 8) -- TODO
 	end
 
 	-- Set stack sizes and weights.
