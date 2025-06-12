@@ -103,9 +103,9 @@ local multiIconVals = {
 		},
 		[3] = {
 			extraPrefix = {"blank"},
-			{scale = 0.4, shift = {0, 5}, draw_background = true},
-			{scale = 0.25, shift = {-8, -7}},
-			{scale = 0.25, shift = {8, -7}},
+			{scale = 0.4, shift = {0, 6}, draw_background = true},
+			{scale = 0.25, shift = {-8, -6}},
+			{scale = 0.25, shift = {8, -6}},
 		},
 		[4] = {
 			extraPrefix = {"blank"},
@@ -118,9 +118,9 @@ local multiIconVals = {
 	decomposition = { -- Used for recipes where one item is decomposed into multiple items, eg oil cracking. 1st is ingredient, other 2-3 are products. If only one product, repeat it.
 		[3] = {
 			extraPrefix = {"blank"},
-			{scale = 0.3, shift = {0, -4}, draw_background = true},
-			{scale = 0.2, shift = {-7, 4}},
-			{scale = 0.2, shift = {7, 4}},
+			{scale = 0.3, shift = {0, -3}, draw_background = true},
+			{scale = 0.2, shift = {-7, 5.5}},
+			{scale = 0.2, shift = {7, 5.5}},
 		},
 		[4] = {
 			extraPrefix = {"blank"},

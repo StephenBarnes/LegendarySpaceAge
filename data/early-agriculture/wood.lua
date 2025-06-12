@@ -7,7 +7,6 @@ local woodChipsItem = copy(ITEM.wood)
 woodChipsItem.name = "wood-chips"
 Icon.set(woodChipsItem, "LSA/wood-chips/1")
 Icon.variants(woodChipsItem, "LSA/wood-chips/%", 3)
--- TODO fuel value
 extend{woodChipsItem}
 
 -- Create recipe for wood chips.

@@ -107,12 +107,31 @@ TECH["advanced-oil-processing"].unit = {
 	},
 }
 
--- Remove the lubricant tech. Rather merge it with actuator / advanced robotics.
+-- Remove the lubricant tech. Rather merge it with actuator / electric-engine tech.
 Tech.hideTech("lubricant")
 TECH["lubricant"].effects = {}
-Tech.replacePrereq("logistics-3", "lubricant", "electric-engine")
-Tech.setPrereqs("electric-engine", {"processing-unit", "steel-processing"})
 Tech.addRecipeToTech("make-lubricant", "electric-engine", 1)
+Tech.replacePrereq("logistics-3", "lubricant", "electric-engine-2")
+Tech.setPrereqs("electric-engine", {"steel-processing", "advanced-circuit"})
+-- Create a separate tech for robotics 2. Mostly so that we can move bots to after red circuits instead of after blue.
+local robotics2Tech = copy(TECH["electric-engine"])
+robotics2Tech.name = "electric-engine-2"
+robotics2Tech.effects = {
+	{type = "unlock-recipe", recipe = "actuator-from-blue-circuit"},
+	{type = "unlock-recipe", recipe = "actuator-augmented"},
+}
+extend{robotics2Tech}
+Tech.setPrereqs("electric-engine-2", {"processing-unit", "electric-engine"})
+Tech.setUnit("electric-engine", {count = 400, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 30})
+Tech.replacePrereq("exoskeleton-equipment", "electric-engine", "electric-engine-2")
+Tech.replacePrereq("power-armor", "electric-engine", "electric-engine-2")
+
+-- Move bots a bit earlier by removing chem science pack requirement.
+Tech.removeSciencePack("chemical-science-pack", "robotics")
+Tech.removeSciencePack("chemical-science-pack", "logistic-robotics")
+Tech.removeSciencePack("chemical-science-pack", "construction-robotics")
+Tech.removeSciencePack("chemical-science-pack", "personal-roboport-equipment")
+Tech.removePrereq("personal-roboport-equipment", "solar-panel-equipment")
 
 -- Rubber-2 is needed to make rubber from petrochems on Vulcanus and Fulgora.
 Tech.addTechDependency("rubber-2", "planet-discovery-vulcanus")
@@ -129,7 +148,7 @@ Tech.removeRecipeFromTech("long-handed-inserter", "automation")
 Tech.addRecipeToTech("long-handed-inserter", "logistics-2")
 
 -- Fast inserter should go after actuator.
-Tech.setPrereqs("fast-inserter", {"electric-engine"})
+Tech.setPrereqs("fast-inserter", {"electric-engine-2"})
 TECH["fast-inserter"].unit = {count = 50, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 Tech.setPrereqs("bulk-inserter", {"fast-inserter"})
 TECH["bulk-inserter"].unit = {count = 100, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
@@ -356,7 +375,7 @@ table.insert(assembler3Tech.effects, {
 -- Make assembler 3 mandatory before Fulgora, since white circuits add quality, so we need quality to be unlocked by then.
 Tech.addTechDependency("automation-3", "planet-discovery-fulgora")
 -- Make assembler 3 tech not require purple science, so you can do Fulgora before purple science.
-Tech.setPrereqs("automation-3", {"automation-2", "electric-engine"})
+Tech.setPrereqs("automation-3", {"automation-2", "electric-engine-2"})
 Tech.removeSciencePack("production-science-pack", "automation-3")
 
 -- Logistics 1 tech doesn't give "faster ways of transportation".

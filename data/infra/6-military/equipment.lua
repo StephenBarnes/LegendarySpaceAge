@@ -80,7 +80,6 @@ Recipe.edit{
 	recipe = "personal-roboport-equipment",
 	ingredients = { -- Originally 40 iron gear wheel + 20 steel plate + 45 battery + 10 advanced circuit.
 		{"sensor", 10},
-		{"processing-unit", 10},
 		{"battery", 25},
 	},
 	time = 10,

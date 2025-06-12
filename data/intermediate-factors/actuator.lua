@@ -31,7 +31,6 @@ advancedRecipe.ingredients = {
 }
 Icon.set(advancedRecipe, {"electric-engine-unit", "LSA/parts-advanced/3", "processing-unit"})
 extend{advancedRecipe}
-Tech.addRecipeToTech("actuator-from-blue-circuit", "electric-engine")
 
 -- Create recipe for augmented actuator: 1 mechanism + 5 lubricant + 1 blue circuit + 1 advanced part -> 1 actuator
 local augmentedRecipe = copy(standardRecipe)
@@ -44,7 +43,10 @@ augmentedRecipe.ingredients = {
 }
 Icon.set(augmentedRecipe, {"electric-engine-unit", "LSA/intermediate-factors/mechanism", "processing-unit"})
 extend{augmentedRecipe}
-Tech.addRecipeToTech("actuator-augmented", "electric-engine")
+
+-- Will add to techs in tech-progression folder.
+--Tech.addRecipeToTech("actuator-from-blue-circuit", "electric-engine-2")
+--Tech.addRecipeToTech("actuator-augmented", "electric-engine-2")
 
 -- Create recipe: 1 frame + 8 appendage + 1 sencytium + 1 red circuit -> 1 actuator
 local recipeFromAppendage = copy(standardRecipe)
