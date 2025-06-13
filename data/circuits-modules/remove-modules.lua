@@ -25,19 +25,19 @@ Tech.replaceSciencePack("epic-quality", "agricultural-science-pack", "electromag
 for _, category in pairs{"speed", "efficiency", "productivity", "quality"} do
 	for tier = 2, 3 do
 		local moduleName = category.."-module-"..tier
-		Tech.hideTech(moduleName)
+		Tech.hide(moduleName)
 	end
 end
-Tech.hideTech("quality-module")
+Tech.hide("quality-module")
 
 Tech.removePrereq("destroyer", "speed-module")
 Tech.removePrereq("power-armor-mk2", "speed-module")
-Tech.hideTech("speed-module")
+Tech.hide("speed-module")
 
 Tech.removePrereq("power-armor-mk2", "efficiency-module")
-Tech.hideTech("efficiency-module")
+Tech.hide("efficiency-module")
 
 Tech.removePrereq("production-science-pack", "productivity-module")
-Tech.hideTech("productivity-module")
+Tech.hide("productivity-module")
 
-Tech.hideTech("modules")
+Tech.hide("modules")

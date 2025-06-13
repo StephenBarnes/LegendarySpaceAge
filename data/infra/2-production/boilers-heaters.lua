@@ -61,16 +61,6 @@ Recipe.edit{
 		{"heat-pipe", 20},
 	},
 }
-Recipe.edit{
-	recipe = "fluid-heating-tower",
-	time = 10,
-	ingredients = {
-		{"structure", 50},
-		{"shielding", 50},
-		{"heat-pipe", 20},
-		{"fluid-fitting", 10},
-	},
-}
 
 -- Heat pipe is originally 20 copper plate + 10 steel plate for 1. That seems very expensive for the size. Would make Aquilo and Gleba annoying. So I'll make it a lot cheaper.
 Recipe.edit{
@@ -115,30 +105,3 @@ for _, vals in pairs{
 	ent.maximum_temperature = vals.maxTemp
 	ent.effectivity = vals.effectivity
 end
-
--- Edit heating towers.
--- Nerf heating towers' effictivity, and reduce energy consumption. Because they're no longer late-game, and because the base game's values are just absurdly high.
-for _, vals in pairs{
-	{
-		name = "heating-tower",
-		effectivity = 1, -- Originally 2.5.
-		consumption = "5MW", -- Originally 40MW. Compare 2MW for a boiler.
-		pollution = 50, -- Originally 100.
-	},
-	{
-		name = "fluid-heating-tower",
-		effectivity = 1,
-		consumption = "5MW",
-		pollution = 50,
-	},
-} do
-	local ent = RAW.reactor[vals.name]
-	ent.energy_source.effectivity = vals.effectivity
-	ent.consumption = vals.consumption
-	ent.energy_source.emissions_per_minute = {pollution = vals.pollution}
-end
-
---[[ Edit heat exchanger to have the same fluid stats as a boiler.
-Could make it 2MW, which would be 4/s water -> 40/s steam.
-But rather making it 5MW, for 10 water -> 100 steam (at 500C). So the ratio is 1 heating tower to 1 heat exchanger.]]
-RAW.boiler["heat-exchanger"].energy_consumption = "5MW" -- Originally 10MW I think.

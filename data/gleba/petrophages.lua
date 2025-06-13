@@ -16,8 +16,7 @@ Icon.set(petrophage, "LSA/gleba/petrophages/1")
 Icon.variants(petrophage, "LSA/gleba/petrophages/%", 4)
 petrophage.spoil_ticks = 2 * MINUTES
 petrophage.spoil_result = "pitch"
-petrophage.hidden = false
-petrophage.hidden_in_factoriopedia = false
+Item.unhide(petrophage)
 extend{petrophage}
 
 -- Create recipe for breeding petrophages.
@@ -35,8 +34,7 @@ local cultivationRecipe = Recipe.make{
 	allow_productivity = true,
 	maximum_productivity = 0.5,
 	allow_quality = true,
-	hidden = false,
-	hidden_in_factoriopedia = false,
+	unhide = true,
 }
 cultivationRecipe.surface_conditions = nil
 cultivationRecipe.icon = nil

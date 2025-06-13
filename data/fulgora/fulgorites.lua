@@ -95,8 +95,7 @@ fulgoritePlant.minable.mining_particle = "stone-particle"
 extend({fulgoritePlant})
 
 -- Hide "fulgorite pieces" simple entity from Factoriopedia to not confuse people.
-RAW["simple-entity"]["fulgurite-small"].hidden_in_factoriopedia = true
-RAW["simple-entity"]["fulgurite-small"].factoriopedia_alternative = "fulgorite-plant"
+Entity.hide("simple-entity", "fulgurite-small", "fulgorite-plant")
 
 -- Create recipe for making fulgorite starters from electrophages plus fulgorite shards.
 local fulgoriteStarterRecipe = copy(RECIPE["electrophage-cultivation"])

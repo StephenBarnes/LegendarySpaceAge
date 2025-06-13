@@ -29,7 +29,7 @@ RAW["electric-pole"]["po-interface-south"].hidden_in_factoriopedia = true
 -- Big plant might be like 8 reactors? So 100MW * 7 * 8 = 5.6GW.
 -- Although, each generator only gives 50MW (assuming no quality) so it's still entirely doable with big poles around 500MW. Just need to connect one fusion power plant to multiple networks.
 -- So, let's remove the big pylons.
-Tech.hideTech("po-electric-energy-distribution-3")
+Tech.hide("po-electric-energy-distribution-3")
 Recipe.hide("po-huge-electric-pole")
 ITEM["po-huge-electric-pole"].hidden = true
 RAW["electric-pole"]["po-huge-electric-pole"].hidden = true

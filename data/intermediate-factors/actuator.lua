@@ -15,8 +15,7 @@ extend{standardRecipe}
 Tech.addRecipeToTech("actuator-standard", "electric-engine")
 
 -- Hide the default recipe.
-RECIPE["electric-engine-unit"].hidden = true
-RECIPE["electric-engine-unit"].hidden_in_factoriopedia = true
+Recipe.hide("electric-engine-unit")
 RECIPE["electric-engine-unit"].auto_recycle = false
 Tech.removeRecipeFromTech("electric-engine-unit", "electric-engine")
 

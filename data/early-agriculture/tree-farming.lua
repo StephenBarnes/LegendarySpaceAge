@@ -18,7 +18,7 @@ RAW["agricultural-tower"]["agricultural-tower"].surface_conditions = nil
 Tech.addTechDependency("tree-seeding", "planet-discovery-gleba")
 
 -- Cut out the agriculture tech on Gleba.
-Tech.hideTech("agriculture")
+Tech.hide("agriculture")
 for _, techName in pairs{"jellynut", "yumako"} do
 	TECH[techName].prerequisites = {"planet-discovery-gleba"}
 end

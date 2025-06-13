@@ -94,6 +94,7 @@ shuttleBoiler.fluid_boxes = {
 shuttleBoiler.allowed_effects = {"speed", "pollution"}
 shuttleBoiler.module_slots = 0
 shuttleBoiler.allowed_module_categories = {"speed"}
+Entity.unhide(shuttleBoiler)
 extend{shuttleBoiler}
 -- Create item for shuttle boiler.
 local shuttleBoilerItem = copy(ITEM.boiler)
@@ -433,12 +434,7 @@ Recipe.make{
 	},
 }
 
-
 -- Hide the original boiler item, entity, and recipe.
-baseBoiler.hidden = true-- TODO heat exchanger needs to also be changed to assembling-machine.e
-baseBoiler.hidden_in_factoriopedia = true
-ITEM["boiler"].hidden = true
-ITEM["boiler"].hidden_in_factoriopedia = true
-RECIPE["boiler"].hidden = true
-RECIPE["boiler"].hidden_in_factoriopedia = true
--- TODO hide heat exchanger too.
+Entity.hide(baseBoiler)
+Item.hide("boiler")
+Recipe.hide("boiler")

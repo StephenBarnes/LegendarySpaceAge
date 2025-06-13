@@ -62,10 +62,15 @@ Tech.addSciencePack = function(techName, sciencePackName)
 	table.insert(tech.unit.ingredients, {sciencePackName, 1})
 end
 
-Tech.hideTech = function(techName)
-	local tech = TECH[techName]
+Tech.hide = function(techOrName)
+	local tech = nil
+	if type(techOrName) == "string" then
+		tech = TECH[techOrName]
+	else
+		tech = techOrName
+	end
 	if tech == nil then
-		log("Couldn't find tech "..techName.." to hide.")
+		log("Couldn't find tech "..serpent.line(techOrName).." to hide.")
 		return
 	end
 	tech.enabled = false

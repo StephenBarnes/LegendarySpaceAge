@@ -2,13 +2,13 @@
 -- TODO
 
 -- Remove the oversea energy distribution tech, and the floating electric pole - removes the Fulgora power challenge, and makes Aquilo boring.
-Tech.hideTech("oversea-energy-distribution")
+Tech.hide("oversea-energy-distribution")
 Recipe.hide("floating-electric-pole")
 ITEM["floating-electric-pole"].hidden = true
 RAW["electric-pole"]["floating-electric-pole"].hidden = true
 
 -- Remove tech and recipes for automated bridges.
-Tech.hideTech("automated_bridges")
+Tech.hide("automated_bridges")
 Recipe.hide("bridge_base")
 ITEM["bridge_base"].hidden = true
 RAW["train-stop"]["bridge_base"].hidden = true

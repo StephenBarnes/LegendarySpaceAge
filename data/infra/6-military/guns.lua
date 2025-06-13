@@ -42,5 +42,4 @@ Recipe.edit{
 }
 
 -- Hide the pistol.
-RAW.gun["pistol"].hidden = true
-RAW.gun["pistol"].hidden_in_factoriopedia = true
+Item.hide(RAW.gun["pistol"])

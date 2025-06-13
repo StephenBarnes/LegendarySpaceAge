@@ -5,8 +5,7 @@ local burnerBoilerAir = copy(ASSEMBLER["burner-boiler"])
 burnerBoilerAir.name = "burner-boiler-air"
 burnerBoilerAir.localised_name = {"entity-name.burner-boiler-air"} -- TODO give it a different icon, so we can tell them apart in signal GUI etc.
 burnerBoilerAir.localised_description = {"entity-description.burner-boiler-air"}
-burnerBoilerAir.hidden_in_factoriopedia = true
-burnerBoilerAir.hidden = true
+Entity.hide(burnerBoilerAir)
 burnerBoilerAir.factoriopedia_alternative = "burner-boiler"
 --burnerBoilerAir.fluid_boxes_off_when_no_fluid_recipe = false
 burnerBoilerAir.fluid_boxes = {

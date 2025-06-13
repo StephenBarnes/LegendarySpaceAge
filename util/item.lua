@@ -51,14 +51,37 @@ Item.clearFuel = function(item)
 	item.fuel_glow_color = nil
 end
 
-Item.hide = function(itemName)
-	local item = ITEM[itemName]
+Item.hide = function(itemOrName, alternativeName)
+	local item
+	if type(itemOrName) == "string" then
+		item = ITEM[itemOrName]
+	else
+		item = itemOrName
+	end
 	if item == nil then
-		log("ERROR: Couldn't find item "..itemName.." to hide.")
+		log("ERROR: Couldn't find item "..serpent.line(itemOrName).." to hide.")
 		return
 	end
 	item.hidden = true
 	item.hidden_in_factoriopedia = true
+	if alternativeName ~= nil then
+		item.factoriopedia_alternative = alternativeName
+	end
+end
+
+Item.unhide = function(itemOrName)
+	local item
+	if type(itemOrName) == "string" then
+		item = ITEM[itemOrName]
+	else
+		item = itemOrName
+	end
+	if item == nil then
+		log("ERROR: Couldn't find item "..serpent.line(itemOrName).." to unhide.")
+		return
+	end
+	item.hidden = false
+	item.hidden_in_factoriopedia = false
 end
 
 -- Check whether an item exists, checking all item subtypes.

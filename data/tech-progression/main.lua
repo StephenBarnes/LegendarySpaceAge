@@ -7,7 +7,7 @@ Tech.addTechDependency("filtration-lake-water", "steam-power")
 TECH["steam-power"].unit = nil
 TECH["steam-power"].research_trigger = {
 	type = "craft-fluid",
-	fluid = "water",
+	fluid = "lake-water",
 	amount = 1000,
 }
 TECH["automation"].unit = nil
@@ -48,8 +48,6 @@ TECH["steam-power"].effects = {
 	{type = "unlock-recipe", recipe = "steam-engine"},
 	{type = "unlock-recipe", recipe = "gas-vent"},
 }
--- Remove tech for electric boiler, rather putting recipe in steam-power tech.
-Tech.hideTech("electric-boiler")
 
 -- Tank ship shouldn't depend on Fluid handling 2. 
 Tech.setPrereqs("tank_ship", {"automated_water_transport", "fluid-handling"})
@@ -90,7 +88,7 @@ TECH["sulfur-processing"].unit = TECH["ammonia-1"].unit
 Tech.setPrereqs("explosives", {"coal-liquefaction", "ammonia-1"}) -- Previously sulfur-processing
 
 -- Remove pointless "gas and oil gathering" tech, merge with petrochemistry 1.
-Tech.hideTech("oil-gathering")
+Tech.hide("oil-gathering")
 TECH["oil-processing"].unit = TECH["oil-gathering"].unit
 TECH["oil-processing"].research_trigger = nil
 TECH["oil-processing"].prerequisites = {"fluid-handling"}
@@ -108,7 +106,7 @@ TECH["advanced-oil-processing"].unit = {
 }
 
 -- Remove the lubricant tech. Rather merge it with actuator / electric-engine tech.
-Tech.hideTech("lubricant")
+Tech.hide("lubricant")
 TECH["lubricant"].effects = {}
 Tech.addRecipeToTech("make-lubricant", "electric-engine", 1)
 Tech.replacePrereq("logistics-3", "lubricant", "electric-engine-2")
@@ -157,7 +155,7 @@ TECH["inserter-capacity-bonus-1"].unit = {count = 150, ingredients = {{"automati
 TECH["inserter-capacity-bonus-2"].unit = {count = 200, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}, time = 30}
 
 -- Remove tech for advanced combinators, and move selector combinator recipe.
-Tech.hideTech("advanced-combinators")
+Tech.hide("advanced-combinators")
 Tech.addRecipeToTech("selector-combinator", "circuit-network", 4)
 -- Move circuit network to after electric-energy-distribution-1, so there's not so much right after green science.
 Tech.removePrereq("circuit-network", "logistic-science-pack")
@@ -169,14 +167,11 @@ Tech.addTechDependency("advanced-circuit", "laser")
 -- Automation 2 after green science.
 Tech.setPrereqs("automation-2", {"logistic-science-pack"})
 
--- Heating tower tech should be fairly early.
-Tech.setPrereqs("heating-tower", {"steel-processing", "fluid-handling", "advanced-material-processing"})
-TECH["heating-tower"].unit = {count = 300, ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}, time = 30}
-TECH["heating-tower"].research_trigger = nil
-
--- Heating tower doesn't need to go to Aquilo, since we now have heating tower -> condensing turbine -> space platforms.
+-- Remove heating tower tech, move recipe to Aquilo, since I'm removing heat pipes, so heating tower is just for heating.
+Tech.hide("heating-tower")
 Tech.removePrereq("planet-discovery-aquilo", "heating-tower")
-Tech.addTechDependency("condensing-turbine", "rocket-silo")
+Tech.addRecipeToTech("heating-tower", "planet-discovery-aquilo", nil, true)
+Tech.addTechDependency("steam-power-3", "rocket-silo")
 
 -- Nuclear is going to post-triplets, and heating tower is early, so remove heating tower stuff fom nuclear tech.
 Tech.removeRecipesFromTechs({"heat-exchanger", "heat-pipe", "steam-turbine"}, {"nuclear-power"})
@@ -274,7 +269,7 @@ Tech.addRecipeToTech("waste-pump", "fluid-handling")
 Tech.addTechDependency("advanced-oil-processing", "planet-discovery-gleba")
 
 -- Hide health techs.
-Tech.hideTech("health")
+Tech.hide("health")
 
 -- Rocket silo shouldn't depend on rocket fuel. Should depend on hydrogen/oxygen techs.
 Tech.removePrereq("rocket-silo", "rocket-fuel")

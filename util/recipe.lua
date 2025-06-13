@@ -77,14 +77,21 @@ Recipe.setIngredient = function(recipeName, ingredientName, newIngredient)
 	log("Warning: ingredient not found: "..ingredientName.." in recipe "..recipeName)
 end
 
-Recipe.hide = function(recipeName)
-	local recipe = RECIPE[recipeName]
-	if recipe == nil then
-		log("ERROR: Couldn't find recipe "..recipeName.." to hide.")
-		return
+Recipe.hide = function(recipeOrName, alternativeName)
+	local recipe = nil
+	if type(recipeOrName) == "string" then
+		recipe = RECIPE[recipeOrName]
 	else
-		recipe.hidden = true
-		recipe.hidden_in_factoriopedia = true
+		recipe = recipeOrName
+	end
+	if recipe == nil then
+		log("ERROR: Couldn't find recipe "..serpent.line(recipeOrName).." to hide.")
+		return
+	end
+	recipe.hidden = true
+	recipe.hidden_in_factoriopedia = true
+	if alternativeName ~= nil then
+		recipe.factoriopedia_alternative = alternativeName
 	end
 end
 
@@ -167,13 +174,19 @@ end
 	.category, .enabled, .auto_recycle, .subgroup, .order, .localised_name, .localised_description, .main_product, .allow_decomposition, .allow_as_intermediate, .show_amount_in_title, .crafting_machine_tint (just copied over)
 ]]
 local allowedFieldsEdit = Table.listToSet{ -- Apparently the LSP's type-checking doesn't notice non-existent fields in the arg (?????), so we need to check them here.
-	"recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "categories", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearSurfaceConditions", "clearLocalisedName", "hide_from_player_crafting", "iconsLiteral", "emissions_multiplier", "additional_categories", "showResultDetails",
+	"recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "categories", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearSurfaceConditions", "clearLocalisedName", "hide_from_player_crafting", "iconsLiteral", "emissions_multiplier", "additional_categories", "showResultDetails", "unhide",
 }
----@param a {recipe: string|data.RecipePrototype, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, categories?: string[], enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearSurfaceConditions?: boolean, clearLocalisedName?: boolean, hide_from_player_crafting?: boolean, iconsLiteral?: any, emissions_multiplier?: number, additional_categories?: string[], showResultDetails?: boolean}
+---@param a {recipe: string|data.RecipePrototype, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, categories?: string[], enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearSurfaceConditions?: boolean, clearLocalisedName?: boolean, hide_from_player_crafting?: boolean, iconsLiteral?: any, emissions_multiplier?: number, additional_categories?: string[], showResultDetails?: boolean, unhide?: boolean}
 ---@return data.RecipePrototype
 Recipe.edit = function(a)
 	for field, _ in pairs(a) do
 		assert(allowedFieldsEdit[field], "Recipe.edit: unknown field \""..field.."\" in arguments: ".. serpent.block(a))
+	end
+	if a.unhide then
+		assert(a.hidden ~= true)
+		assert(a.hidden_in_factoriopedia ~= true)
+		a.hidden = false
+		a.hidden_in_factoriopedia = false
 	end
 	local recipe = nil
 	assert(a.recipe ~= nil, "Recipe.edit: recipe proto or name is required, arguments: ".. serpent.block(a))
@@ -256,7 +269,7 @@ end
 
 -- Create a recipe by copying an existing recipe and adjusting it. The a.copy field is the recipe to copy, rest of args the same as Recipe.edit.
 local allowedFieldsMake = Table.listToSet{
-	"copy", "recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "categories", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearSurfaceConditions", "clearLocalisedName", "hide_from_player_crafting", "addToTech", "addToTechIndex", "emissions_multiplier", "iconsLiteral", "additional_categories", "showResultDetails",
+	"copy", "recipe", "ingredients", "results", "resultCount", "time", "icons", "icon", "iconArrangement", "clearIcons", "specialIcons", "clearSubgroup", "category", "categories", "enabled", "auto_recycle", "subgroup", "order", "localised_name", "localised_description", "main_product", "allow_decomposition", "allow_as_intermediate", "show_amount_in_title", "crafting_machine_tint", "allow_productivity", "allow_quality", "maximum_productivity", "result_is_always_fresh", "hide_from_stats", "allow_speed", "allow_consumption", "allow_pollution", "hidden", "hidden_in_factoriopedia", "surface_conditions", "clearSurfaceConditions", "clearLocalisedName", "hide_from_player_crafting", "addToTech", "addToTechIndex", "emissions_multiplier", "iconsLiteral", "additional_categories", "showResultDetails", "unhide",
 }
 ---@param a {copy?: string|data.RecipePrototype, recipe: string, ingredients?: any[], results?: any[], resultCount?: number, time?: number, icons?: any[], icon?: string, iconArrangement?: any, clearIcons?: boolean, specialIcons?: any[], clearSubgroup?: boolean, category?: string, categories?: string[], enabled?: boolean, auto_recycle?: boolean, subgroup?: string, order?: string, localised_name?: data.LocalisedString, localised_description?: data.LocalisedString, main_product?: string, allow_decomposition?: boolean, allow_as_intermediate?: boolean, show_amount_in_title?: boolean, crafting_machine_tint?: any, allow_productivity?: boolean, allow_quality?: boolean, maximum_productivity?: number, result_is_always_fresh?: boolean, hide_from_stats?: boolean, allow_speed?: boolean, allow_consumption?: boolean, allow_pollution?: boolean, hidden?: boolean, hidden_in_factoriopedia?: boolean, surface_conditions?: data.SurfaceCondition[], clearSurfaceConditions?: boolean, clearLocalisedName?: boolean, hide_from_player_crafting?: boolean, addToTech?: string, addToTechIndex?: number, emissions_multiplier?: number, iconsLiteral?: any, additional_categories?: string[], showResultDetails?: boolean}
 Recipe.make = function(a)

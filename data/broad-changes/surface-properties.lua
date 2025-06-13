@@ -171,5 +171,4 @@ end
 -- Hide some surface properties.
 
 -- Magnetic field is not used.
-RAW["surface-property"]["magnetic-field"].hidden = true
-RAW["surface-property"]["magnetic-field"].hidden_in_factoriopedia = true
+Entity.hide("surface-property", "magnetic-field")

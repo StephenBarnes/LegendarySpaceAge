@@ -23,7 +23,7 @@ return {
 	},
 	production = {
 		tool = {"repair-pack", "blueprint", "deconstruction-planner", "upgrade-planner", "blueprint-book"},
-		energy = {"burner-boiler", "shuttle-boiler", "electric-boiler", "heating-tower", "fluid-heating-tower", "heat-pipe", "heat-exchanger"},
+		energy = {"burner-boiler", "shuttle-boiler", "electric-boiler"},
 		generator = {"er-hcg", "steam-engine", "steam-turbine", "condensing-turbine"},
 		["electricity-related"] = {"solar-panel", "battery-charger", "battery-discharger", "accumulator", "lightning-rod", "lightning-collector", "nuclear-nonreactor", "fusion-reactor", "fusion-generator"},
 		["extraction-machine"] = {"burner-mining-drill", "electric-mining-drill", "big-mining-drill", "deep-drill", "pumpjack", "agricultural-tower", "air-separator", "drill-node-dummy-miner"},
@@ -31,7 +31,7 @@ return {
 		["smelting-machine"] = {"stone-furnace", "steel-furnace", "arc-furnace"},
 		["production-machine"] = {"assembling-machine-1", "assembling-machine-2", "assembling-machine-3", "clean-assembler"},
 		["chemical-processing"] = {"chemical-plant", "oil-refinery", "filtration-plant", "cryogenic-plant", "gasifier", "fluid-fuelled-gasifier", "electrolysis-plant"},
-		["heat-processing"] = {"electric-furnace", "exothermic-plant"},
+		["heat-processing"] = {"electric-furnace", "exothermic-plant", "heating-tower"},
 		["planetary-special"] = {"foundry", "biochamber", "recycler", "electromagnetic-plant", "captive-biter-spawner", "centrifuge"},
 		["environmental-protection"] = {},
 		lab = {"lab", "glebalab", "biolab"},

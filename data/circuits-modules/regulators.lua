@@ -144,8 +144,7 @@ for regulatorName, regulatorVals in pairs(Const) do
 	local hiddenModule = copy(RAW.module[regulatorName .. "-module"])
 	hiddenModule.name = regulatorName .. "-regulator-module"
 	hiddenModule.localised_name = {"item-name.hidden-regulator-module", {"regulator-type." .. regulatorName}}
-	hiddenModule.hidden = true
-	hiddenModule.hidden_in_factoriopedia = true
+	Item.hide(hiddenModule)
 	hiddenModule.effect = regulatorVals.effect
 	extend{hiddenModule}
 

@@ -115,16 +115,42 @@ Recipe.make{
 	-- Will set ingredients later, in infra.
 }
 
--- Create tech.
-local tech = copy(RAW["technology"]["steam-power"])
-tech.name = "condensing-turbine"
-tech.effects = {
+--[[ Move steam turbine to a new tech.
+Its advantages over the steam engine are: (1) has higher efficiency, and (2) can process hotter steam.
+LSA removes heat pipes, so there isn't really hotter steam. Could add that back I guess?
+]]
+
+-- Create tech for steam power 2.
+local tech2 = copy(RAW["technology"]["steam-power"])
+tech2.name = "steam-power-2"
+tech2.effects = {
+	{
+		type = "unlock-recipe",
+		recipe = "steam-turbine",
+	}
+}
+tech2.unit = {
+	count = 250,
+	ingredients = {
+		{"automation-science-pack", 1},
+		{"logistic-science-pack", 1},
+	},
+	time = 30,
+}
+tech2.localised_description = {"technology-description.steam-power-2"}
+tech2.prerequisites = {"steam-power", "fluid-handling"}
+extend{tech2}
+
+-- Create tech steam-power-3 for condensing turbine.
+local tech3 = copy(RAW["technology"]["steam-power"])
+tech3.name = "steam-power-3"
+tech3.effects = {
 	{
 		type = "unlock-recipe",
 		recipe = "condensing-turbine",
 	},
 }
-tech.unit = {
+tech3.unit = {
 	count = 250,
 	ingredients = {
 		{"automation-science-pack", 1},
@@ -133,9 +159,10 @@ tech.unit = {
 	},
 	time = 30,
 }
-tech.research_trigger = nil
-tech.prerequisites = {"heating-tower"}
-extend{tech}
+tech3.research_trigger = nil
+tech3.prerequisites = {"steam-power-2", "chemical-science-pack"}
+tech3.localised_description = {"technology-description.steam-power-3"}
+extend{tech3}
 
 ------------------------------------------------------------------------
 --[[ Rest of this file uses evil tricks to make the condensing turbine not have 100% efficiency.
@@ -207,8 +234,7 @@ local evilRecipe = {
 	-- Note that water produced by the condensing-turbine-evil, and steam-evil consumed by it, are hidden from stats. Seems to be an engine bug/feature. Also applies to base-game's fusion-generators consuming plasma and making hot fluoroketone. Hiding the steam consumption here to match that behavior.
 }
 if HIDE_EVIL then
-	evilRecipe.hidden = true
-	evilRecipe.hidden_in_factoriopedia = true
+	Recipe.hide(evilRecipe)
 end
 ---@type data.RecipeCategory
 local evilCategory = {

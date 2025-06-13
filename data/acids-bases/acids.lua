@@ -87,9 +87,7 @@ for name, data in pairs(acidData) do
 		icons = data.gasToAcidRecipe.icons,
 		iconArrangement = data.gasToAcidRecipe.iconArrangement,
 		enabled = true, -- TODO tech
-		hidden = false,
-		hidden_in_factoriopedia = false,
-		hide_from_player_crafting = false,
+		unhide = true,
 		localised_name = {"recipe-name.acid-from-gas", {"acid-prefix-cap."..name}},
 		crafting_machine_tint = {
 			primary = data.acidLiquidColor,
@@ -123,8 +121,7 @@ for name, data in pairs(acidData) do
 				iconArrangement = exoEndo,
 				enabled = true, -- TODO tech
 				time = 1, -- TODO
-				hidden = false,
-				hidden_in_factoriopedia = false,
+				unhide = true,
 				hide_from_player_crafting = false,
 				localised_name = {"recipe-name.acid-salt-shift", {"acid-prefix-cap."..otherName}, {"acid-prefix."..name}},
 				crafting_machine_tint = {

@@ -34,8 +34,7 @@ crudeSiliconItem.random_tint_color = crudeSiliconTint
 crudeSiliconItem.has_random_tint = true
 crudeSiliconItem.localised_name = nil
 crudeSiliconItem.localised_description = nil
-crudeSiliconItem.hidden = false
-crudeSiliconItem.hidden_in_factoriopedia = false
+Item.unhide(crudeSiliconItem)
 crudeSiliconItem.spoil_ticks = nil
 crudeSiliconItem.spoil_result = nil
 extend{crudeSiliconItem}

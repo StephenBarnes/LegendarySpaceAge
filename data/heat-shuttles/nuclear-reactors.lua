@@ -2,8 +2,6 @@
 Basically we want to hide the vanilla "reactor"-type nuclear reactor, and create a new one that's a crafting machine, which burns nuclear fuel and does heating recipes.
 ]]
 
--- TODO everything
-
 -- Create nuclear-nonreactor entity.
 local baseNuclearReactor = RAW.reactor["nuclear-reactor"]
 ---@type data.FurnacePrototype
@@ -122,10 +120,6 @@ Recipe.make{
 Tech.replaceRecipeInTech("nuclear-reactor", "nuclear-nonreactor", "nuclear-power")
 
 -- Hide the old nuclear reactor item, entity, recipe.
-Item.hide("nuclear-reactor")
-ITEM["nuclear-reactor"].factoriopedia_alternative = "nuclear-nonreactor"
-Recipe.hide("nuclear-reactor")
-RECIPE["nuclear-reactor"].factoriopedia_alternative = "nuclear-nonreactor"
-baseNuclearReactor.hidden = true
-baseNuclearReactor.hidden_in_factoriopedia = true
-baseNuclearReactor.factoriopedia_alternative = "nuclear-nonreactor"
+Item.hide("nuclear-reactor", "nuclear-nonreactor")
+Recipe.hide("nuclear-reactor", "nuclear-nonreactor")
+Entity.hide(baseNuclearReactor, nil, "nuclear-nonreactor")

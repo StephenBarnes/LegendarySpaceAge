@@ -1,8 +1,7 @@
 -- Remove chest recipes, instead only use the steel one, and make it from factor intermediates.
 for _, chestname in pairs{"wooden-chest", "iron-chest"} do
 	for _, t in pairs{"item", "recipe", "container"} do
-		RAW[t][chestname].hidden = true
-		RAW[t][chestname].hidden_in_factoriopedia = true
+		Entity.hide(RAW[t][chestname], nil, "steel-chest")
 	end
 end
 RECIPE["steel-chest"].ingredients = {
