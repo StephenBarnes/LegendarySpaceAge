@@ -66,6 +66,7 @@ require("data.pre-space.mini-assembler")
 require("data.crushing.main")
 require("data.heat-shuttles.nuclear-reactors")
 require("data.heat-shuttles.remove-heat-pipes")
+require("data.heat-shuttles.heating-towers")
 
 -- Editing planets
 require("data.pre-space.misc")
