@@ -6,6 +6,9 @@ Credit to meifray for the idea, in this mod: mods.factorio.com/mod/condenser_tur
 NOTE turns out Space Exploration also has condensing turbines, with a different implementation. The main entity is a furnace turning steam into water and "internal steam", which gets outputted into a fluid tank buffer, then goes into a generator that consumes internal steam. Not sure which approach is better between the two. If I didn't want to add effectivity then the fusion-generator approach would be simpler, with no hidden ents. But since I want effectivity under 100%, I have to use hidden ents below, and then both approaches seem to have the same complexity. SE also has "big turbine" converting hot steam to cold steam and water, using same system.
 ]]
 
+local MIN_TEMP = 100
+local MAX_TEMP = 500
+
 -- Create entity.
 ---@type data.FusionGeneratorPrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
@@ -19,9 +22,8 @@ ent.fluid_box = nil
 ent.max_fluid_usage = 5.0/60.0 -- 5 per second.
 ent.input_fluid_box = {
 	filter = "steam",
-	maximum_temperature = 500.0,
-		-- TODO testing.
-	minimum_temperature = 500.0,
+	maximum_temperature = MAX_TEMP,
+	minimum_temperature = MIN_TEMP,
 	pipe_covers = pipecoverspictures(),
 	pipe_connections = {
 		{ flow_direction = "input", direction = defines.direction.south, position = {0, 2} },
@@ -95,7 +97,7 @@ ent.graphics_set = {
 	south_graphics_set = verticalGraphicsSet,
 	west_graphics_set = horizontalGraphicsSet,
 }
-Icon.set(ent, {"steam-turbine", "water"})
+Icon.set(ent, "LSA/condensing-turbine/icon")
 -- TODO edit the icon to add the lid.
 extend{ent}
 
@@ -103,7 +105,7 @@ extend{ent}
 local item = copy(ITEM["steam-turbine"])
 item.name = "condensing-turbine"
 item.place_result = "condensing-turbine"
-Icon.set(item, {"steam-turbine", "water"})
+Icon.set(item, "LSA/condensing-turbine/icon")
 extend{item}
 
 -- Create recipe.
@@ -167,11 +169,11 @@ extend{tech3}
 ------------------------------------------------------------------------
 --[[ Rest of this file uses evil tricks to make the condensing turbine not have 100% efficiency.
 Namely:
-	* Create condensing-turbine-evil, which is a copy of condensing-turbine, except its input fluidbox is moved 1 tile inwards, and it consumes steam-evil.
-	* Create steam-evil, which is a fluid that's like steam, but with specific heat changed so that 500C steam-evil has the same energy as 200C steam.
-	* Create steam-evilizer, which turns steam into steam-evil. Intake is at condensing-turbine's input, outputs 1 tile inward.
+	* Create condensing-turbine-evil, which is a copy of condensing-turbine, except its input fluidbox is linked, and consumes steam-evil.
+	* Create steam-evil, which is a fluid that's like steam, but with specific heat changed so that steam-evil has 40% of the energy of steam at a given temperature.
+	* Create steam-evilizer, which turns steam into steam-evil. Intake is at condensing-turbine's input, outputs into linked input of the condensing-turbine-evil.
 	* In control stage, when player places a condensing-turbine, we replace it with a condensing-turbine-evil plus a steam-evilizer. So the steam gets converted to steam-evil before being used to power the condensing-turbine-evil.
-This is all so that it looks like the condensing turbine is consuming 500C steam (actually steam-evil) and generating energy with 40% efficiency.
+This is all so that it looks like the condensing turbine is consuming steam (actually steam-evil) and generating energy with 40% efficiency.
 ]]
 
 local HIDE_EVIL = true -- Whether to hide all of these entities, etc. Set to false for debugging.
@@ -211,31 +213,44 @@ if HIDE_EVIL then
 end
 extend{steamEvil}
 
--- Create recipe and crafting category for evilizing steam.
----@type data.RecipePrototype
-local evilRecipe = {
-	type = "recipe",
-	name = "steam-evilizing",
-	ingredients = {
-		{type = "fluid", name = "steam", amount = 5, minimum_temperature = 490}, -- Making it 490 in case someone's network has a bit of leftover cold water.
-	},
-	results = {
-		{type = "fluid", name = "steam-evil", amount = 5, temperature = 500},
-	},
-	energy_required = 0.1,
-	auto_recycle = false,
-	allow_productivity = false,
-	allow_speed = false,
-	allow_quality = false,
-	category = "steam-evilizing",
-	icons = ent.icons,
-	hide_from_player_crafting = true,
-	hide_from_stats = true,
-	-- Note that water produced by the condensing-turbine-evil, and steam-evil consumed by it, are hidden from stats. Seems to be an engine bug/feature. Also applies to base-game's fusion-generators consuming plasma and making hot fluoroketone. Hiding the steam consumption here to match that behavior.
-}
-if HIDE_EVIL then
-	Recipe.hide(evilRecipe)
+-- Create multiple recipes for evilizing steam. It's a furnace, so it'll automatically choose the right one. This allows processing 200C steam as well as 500C steam.
+for _, data in pairs{
+	{outputTemp = MAX_TEMP, minTemp = MAX_TEMP, maxTemp = MAX_TEMP},
+	{outputTemp = 450, minTemp = 450, maxTemp = 499.99},
+	{outputTemp = 400, minTemp = 400, maxTemp = 449.99},
+	{outputTemp = 300, minTemp = 300, maxTemp = 399.99},
+	{outputTemp = 200, minTemp = 200, maxTemp = 299.99},
+	{outputTemp = MIN_TEMP, minTemp = MIN_TEMP, maxTemp = 199.99},
+} do
+	---@type data.RecipePrototype
+	local evilRecipe = {
+		type = "recipe",
+		name = "steam-evilizing-" .. data.outputTemp,
+		ingredients = {
+			{type = "fluid", name = "steam", amount = 5, minimum_temperature = data.minTemp, maximum_temperature = data.maxTemp},
+		},
+		results = {
+			{type = "fluid", name = "steam-evil", amount = 5, temperature = data.outputTemp},
+		},
+		energy_required = 0.1,
+		auto_recycle = false,
+		allow_productivity = false,
+		allow_speed = false,
+		allow_quality = false,
+		allowed_module_categories = {},
+		category = "steam-evilizing",
+		icons = ent.icons,
+		hide_from_player_crafting = true,
+		hide_from_stats = true,
+		-- Note that water produced by the condensing-turbine-evil, and steam-evil consumed by it, are hidden from stats. Seems to be an engine bug/feature. Also applies to base-game's fusion-generators consuming plasma and making hot fluoroketone. Hiding the steam consumption here to match that behavior.
+	}
+	if HIDE_EVIL then
+		Recipe.hide(evilRecipe)
+	end
+	extend{evilRecipe}
 end
+
+-- Create crafting category.
 ---@type data.RecipeCategory
 local evilCategory = {
 	type = "recipe-category",
@@ -245,17 +260,16 @@ if HIDE_EVIL then
 	evilCategory.hidden = true
 	evilCategory.hidden_in_factoriopedia = true
 end
-extend{evilRecipe, evilCategory}
+extend{evilCategory}
 
 -- Create steam-evilizer.
----@type data.AssemblingMachinePrototype
+---@type data.FurnacePrototype
 local steamEvilizerEnt = {
-	type = "assembling-machine",
+	type = "furnace",
 	name = "steam-evilizer",
 	icon = "__core__/graphics/empty.png",
 	icon_size = 64,
 	icon_mipmaps = 4,
-	fixed_recipe = "steam-evilizing",
 	crafting_categories = {"steam-evilizing"},
 	crafting_speed = 1,
 	energy_usage = "1W",
@@ -263,6 +277,8 @@ local steamEvilizerEnt = {
 		type = "void",
 	},
 	allowed_effects = {},
+	source_inventory_size = 0,
+	result_inventory_size = 0,
 	fluid_boxes = {
 		{
 			production_type = "input",
@@ -272,6 +288,8 @@ local steamEvilizerEnt = {
 				{ flow_direction = "input", direction = defines.direction.south, position = {0, 2} },
 			},
 			volume = 10,
+			minimum_temperature = MIN_TEMP,
+			maximum_temperature = MAX_TEMP,
 		},
 		{
 			production_type = "output",
@@ -284,14 +302,15 @@ local steamEvilizerEnt = {
 		},
 	},
 	collision_box = ent.collision_box,
-	selection_box = ent.selection_box,
+	selection_box = {{-1, -1}, {1, 1}},
 	show_recipe_icon_on_map = false,
 	show_recipe_icon = false,
-	selection_priority = 1,
+	selection_priority = Gen.ifThenElse(HIDE_EVIL, 1, 100),
 	collision_mask = {layers={}},
 	remove_decoratives = "false",
 	allow_copy_paste = false,
-	flags = {"not-on-map", "not-repairable", "not-deconstructable", "not-flammable", "not-blueprintable", "placeable-neutral"},
+	allowed_module_categories = {},
+	flags = {"not-on-map", "not-repairable", "not-deconstructable", "not-flammable", "not-blueprintable", "placeable-neutral", "no-copy-paste"},
 }
 if HIDE_EVIL then
 	steamEvilizerEnt.hidden = true
