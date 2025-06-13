@@ -1,3 +1,8 @@
+--[[ This file creates fuel categories and burner usages for heat providers, heat absorbers, and cooling providers.
+This is for the "heat shuttle" system in LSA, where hot items are used to provide heat, and cold items absorb heat.
+This is implemented by making hot/cold items "fuels" which have burnt_result set to the opposite version (cold/hot) of the same item.
+]]
+
 local Const = require "const.heat-shuttle-const"
 
 -- Create heat/cold shuttle relations.

@@ -65,6 +65,8 @@ require("data.circuits-modules.silicon")
 require("data.circuits-modules.clean-assemblers")
 require("data.pre-space.mini-assembler")
 require("data.crushing.main")
+require("data.heat-shuttles.nuclear-reactors")
+require("data.heat-shuttles.heat-pipes")
 
 -- Editing planets
 require("data.pre-space.misc")
@@ -83,7 +85,7 @@ require("data.pre-space.vent-recipes")
 require("data.broad-changes.barrelling")
 require("data.intermediate-factors.main")
 require("data.broad-changes.fuel")
-require("data.broad-changes.heat-shuttles")
+require("data.heat-shuttles.fuels")
 require("data.tech-progression.tech-rate-triggers")
 require("data.vulcanus.no-lava-in-pipes")
 

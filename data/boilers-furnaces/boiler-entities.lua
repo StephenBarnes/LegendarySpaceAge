@@ -55,6 +55,7 @@ end
 
 -- Create the heat-shuttle boiler: 3x2, with the same graphics as the base-game's heat-shuttle boiler.
 local baseBoiler = RAW.boiler.boiler
+local baseHeatExchanger = RAW.boiler["heat-exchanger"]
 ---@type data.AssemblingMachinePrototype
 ---@diagnostic disable-next-line: assign-type-mismatch
 local shuttleBoiler = copy(baseBoiler)
@@ -79,6 +80,8 @@ shuttleBoiler.energy_source = {
 shuttleBoiler.energy_usage = "2MW"
 ---@diagnostic disable-next-line: assign-type-mismatch
 shuttleBoiler.graphics_set = convertBoilerGraphics(baseBoiler.pictures)
+shuttleBoiler.icon = baseHeatExchanger.icon
+shuttleBoiler.icons = baseHeatExchanger.icons
 shuttleBoiler.placeable_by = {item = "shuttle-boiler", count = 1}
 shuttleBoiler.minable.result = "shuttle-boiler"
 shuttleBoiler.surface_conditions = nil
@@ -98,6 +101,9 @@ shuttleBoilerItem.name = "shuttle-boiler"
 shuttleBoilerItem.localised_name = nil
 shuttleBoilerItem.localised_description = nil
 shuttleBoilerItem.place_result = "shuttle-boiler"
+local baseHeatExchangerItem = copy(ITEM["heat-exchanger"])
+shuttleBoilerItem.icon = baseHeatExchangerItem.icon
+shuttleBoilerItem.icons = baseHeatExchangerItem.icons
 extend{shuttleBoilerItem}
 -- Create recipe for shuttle boiler.
 Recipe.make{
