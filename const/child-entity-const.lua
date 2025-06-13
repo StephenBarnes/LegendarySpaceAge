@@ -231,6 +231,21 @@ for regulatorName, regulatorVals in pairs(RegulatorConst) do
 	}
 end
 
+-- Add hidden beacon for heating tower.
+Export["heating-tower"] = {
+	["heating-tower-beacon"] = {{
+		pos = {0, 0},
+		adjustForOrientation = false,
+		preCreatedHandler = function(parent, info)
+			game.print("Pre-created heating tower beacon at "..serpent.line(info.position))
+		end,
+		createdHandler = function(parent, child)
+			child.destructible = false
+			game.print("Created heating tower beacon at "..serpent.line(child.position))
+		end,
+	}},
+}
+
 -- Add quality variants.
 local QualityScaling = require("const.quality-scaling-power-consumption")
 for entName, originalName in pairs(QualityScaling.qualityToOriginal) do
