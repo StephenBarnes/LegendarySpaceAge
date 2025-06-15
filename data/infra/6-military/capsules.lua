@@ -88,7 +88,7 @@ for _, vals in pairs{
 	local proto = RAW[vals[1]][vals[2]]
 	proto.icons = {
 		{icon = proto.icon, icon_size = 64, scale = .4, shift = {4, -4}},
-		{icon = "__LegendarySpaceAge__/graphics/temp-delete/signal-" .. vals[3] .. ".png", icon_size = 64, scale = .25, shift = {-8, 7}},
+		{icon = "__base__/graphics/icons/signal/signal-" .. vals[3] .. ".png", icon_size = 64, scale = .25, shift = {-8, 7}},
 	}
 	proto.icon = nil
 end
