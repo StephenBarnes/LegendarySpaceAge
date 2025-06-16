@@ -14,12 +14,14 @@ local function makeGasTankIcons(fluid, straight)
 			icon_size = 64,
 			scale = 0.5,
 			tint = util.get_color_with_alpha(fluid.base_color, 0.75, true),
+				-- TODO use data.barrelColors here.
 		},
 		{
 			icon = "__LegendarySpaceAge__/graphics/gas-tanks/"..kind.."/overlay-top.png",
 			icon_size = 64,
 			scale = 0.5,
 			tint = util.get_color_with_alpha(fluid.flow_color, 0.75, true),
+				-- TODO use data.barrelColors here.
 		},
 	}
 end
@@ -87,6 +89,20 @@ end
 for name, data in pairs(BarrelConst) do
 	if data.tankType == "gas-tank" then
 		changeToGasTank(name)
+	end
+end
+
+-- Set colors for barrels.
+for name, data in pairs(BarrelConst) do
+	local colors = data.barrelColors
+	if colors ~= nil then
+		local barrelItem = ITEM[name .. "-barrel"]
+		assert(barrelItem ~= nil, "No barrel for "..name)
+		if #colors == 2 then
+			Icon.set3ColorBarrel(barrelItem, colors[1], colors[2], colors[1], nil, nil, nil, FLUID[name])
+		else
+			assert(false) -- TODO implement
+		end
 	end
 end
 

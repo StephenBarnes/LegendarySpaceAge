@@ -8,7 +8,7 @@ Namely:
 --TODO: Maybe add more different tankType options: barrels, gas tanks, glass tanks (for fluoric acid), tungsten canisters (for lava), maybe a special tank for heat shuttles like molten salt and steam/water?
 -- TODO add options for barrel colors, including multi-color barrels.
 
-return {
+local Export = {
 	["steam"] = {
 		autoBarrel = true, -- In the real world, seems it's hard to do without constant heating and some amount of condensation.
 			-- TODO actually rather allow placing in gas tanks, but unbarrelling gives back some water and some steam.
@@ -100,20 +100,15 @@ return {
 	["phosphine-gas"] = {
 		tankType = "gas-tank",
 	},
-	["raw-seawater"] = {
-		autoBarrel = true,
-	},
-	["clean-seawater"] = {
-		autoBarrel = true,
-	},
-	["rich-brine"] = {
-		autoBarrel = true,
-	},
-	["bitterns"] = {
-		autoBarrel = true,
-	},
-	["mudwater"] = {
-		autoBarrel = true,
-	},
 }
 
+-- Import values from waters-const.lua.
+for name, data in pairs(require("const.waters-const")) do
+	assert(Export[name] == nil)
+	Export[name] = {
+		autoBarrel = true,
+		barrelColors = data.barrelColors,
+	}
+end
+
+return Export

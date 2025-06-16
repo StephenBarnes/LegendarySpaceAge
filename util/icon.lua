@@ -355,45 +355,180 @@ Icon.clear = function(proto)
 	proto.icon = nil
 end
 
-local barrel_side_alpha = 0.75 -- Same as in __base__/data-updates.lua.
+------------------------------------------------------------------------
+--- Barrelling stuff copied from vanilla __base__'s data-updates.lua, and modified.
+
+local barrel_side_alpha = 0.75
 local barrel_top_hoop_alpha = 0.75
+local fluid_icon_shift_barrelling = {-8, -8}
+local fluid_icon_shift_emptying = {7, 8}
+
+-- Item icon masks
+local empty_barrel_icon = ITEM.barrel.icon
+local barrel_side_mask = "__base__/graphics/icons/fluid/barreling/barrel-side-mask.png"
+local barrel_hoop_top_mask = "__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png"
+local barrel_side_mask_bottom = "__LegendarySpaceAge__/graphics/barreling/barrel-side-mask-bottom.png"
+local barrel_side_mask_top = "__LegendarySpaceAge__/graphics/barreling/barrel-side-mask-top.png"
+
+-- Recipe icon masks
+local barrel_fill_icon = "__base__/graphics/icons/fluid/barreling/barrel-fill.png"
+local barrel_fill_side_mask = "__base__/graphics/icons/fluid/barreling/barrel-fill-side-mask.png"
+local barrel_fill_top_mask = "__base__/graphics/icons/fluid/barreling/barrel-fill-top-mask.png"
+local barrel_empty_icon = "__base__/graphics/icons/fluid/barreling/barrel-empty.png"
+local barrel_empty_side_mask = "__base__/graphics/icons/fluid/barreling/barrel-empty-side-mask.png"
+local barrel_empty_top_mask = "__base__/graphics/icons/fluid/barreling/barrel-empty-top-mask.png"
+local barrel_empty_side_mask_bottom = "__LegendarySpaceAge__/graphics/barreling/barrel-empty-side-mask-bottom.png"
+local barrel_empty_side_mask_top = "__LegendarySpaceAge__/graphics/barreling/barrel-empty-side-mask-top.png"
+
+local function generate_barrel_icons(base_icon, masksAndColors)
+	local icons = {
+		{
+			icon = base_icon.icon or base_icon,
+			icon_size = base_icon.icon_size or defines.default_icon_size,
+		},
+	}
+	for _, maskAndColor in pairs(masksAndColors) do
+		table.insert(icons, {
+			icon = maskAndColor[1],
+			icon_size = 64,
+			tint = maskAndColor[2],
+		})
+	end
+	return icons
+end
+
+local function generate_barrel_recipe_icons(fluid, base_icon, masksAndColors, fluid_icon_shift)
+	local icons = generate_barrel_icons(base_icon, masksAndColors)
+	if fluid.icon then
+		table.insert(icons,
+			{
+				icon = fluid.icon,
+				icon_size = (fluid.icon_size or defines.default_icon_size),
+				scale = 16.0 / (fluid.icon_size or defines.default_icon_size), -- scale = 0.5 * 32 / icon_size simplified
+				shift = fluid_icon_shift
+			}
+		)
+	elseif fluid.icons then
+		icons = util.combine_icons(icons, fluid.icons, { scale = 0.5, shift = fluid_icon_shift }, fluid.icon_size)
+	end
+	return icons
+end
+
+------------------------------------------------------------------------
+--- Functions to set barrel icons
+
+---@param proto data.ItemPrototype
+---@param sideColor data.Color
+---@param topColor data.Color?
+---@param sideAlpha double?
+---@param topAlpha double?
+---@param setRecipesForFluid data.FluidPrototype?
 -- Creates barrel icon similar to vanilla - one color on side (fluid.base_color for vanilla) and optionally one on top (fluid.flow_color for vanilla).
-Icon.set2ColorBarrel = function(proto, sideColor, topColor, sideAlpha, topAlpha)
+Icon.set2ColorBarrel = function(proto, sideColor, topColor, sideAlpha, topAlpha, setRecipesForFluid)
 	local sideColorA = util.get_color_with_alpha(sideColor, sideAlpha or barrel_side_alpha)
 	local topColorA = nil
 	if topColor ~= nil then
 		topColorA = util.get_color_with_alpha(topColor, topAlpha or barrel_top_hoop_alpha)
 	end
-	local icons = {
-		"base/fluid/barreling/empty-barrel",
-		{"base/fluid/barreling/barrel-side-mask", tint = sideColorA},
+	local masksAndColors = {
+		{barrel_side_mask, sideColorA}
 	}
-	if topColor ~= nil then
-		table.insert(icons, {"base/fluid/barreling/barrel-hoop-top-mask", tint = topColorA})
+	if topColorA ~= nil then
+		table.insert(masksAndColors, {barrel_hoop_top_mask, topColorA})
 	end
-	Icon.set(proto, icons, "overlay")
+	proto.icons = generate_barrel_icons(empty_barrel_icon, masksAndColors)
+	proto.icon = nil
+
+	if setRecipesForFluid ~= nil then
+		assert(setRecipesForFluid ~= nil, serpent.block(setRecipesForFluid))
+
+		-- Edit icons for barrel-filling recipe.
+		local fillRecipe = RECIPE[proto.name]
+		assert(fillRecipe ~= nil, proto.name)
+		local fillMasksAndColors = {
+			{barrel_fill_side_mask, sideColorA}
+		}
+		if topColorA ~= nil then
+			table.insert(fillMasksAndColors, {barrel_fill_top_mask, topColorA})
+		end
+		fillRecipe.icon = nil
+		fillRecipe.icons = generate_barrel_recipe_icons(setRecipesForFluid, barrel_fill_icon, fillMasksAndColors, fluid_icon_shift_barrelling)
+
+		-- Edit icons for barrel-emptying recipe.
+		local emptyRecipe = RECIPE["empty-"..proto.name]
+		assert(emptyRecipe ~= nil, proto.name)
+		local emptyMasksAndColors = {
+			{barrel_empty_side_mask, sideColorA}
+		}
+		if topColorA ~= nil then
+			table.insert(emptyMasksAndColors, {barrel_empty_top_mask, topColorA})
+		end
+		emptyRecipe.icon = nil
+		emptyRecipe.icons = generate_barrel_recipe_icons(setRecipesForFluid, barrel_empty_icon, emptyMasksAndColors, fluid_icon_shift_barrelling)
+	end
 end
+
+---@param proto data.ItemPrototype
+---@param sideColor1 data.Color Color of top band.
+---@param sideColor2 data.Color Color of bottom band.
+---@param topColor data.Color?
+---@param sideAlpha1 double?
+---@param sideAlpha2 double?
+---@param topAlpha double?
+---@param setRecipesForFluid data.FluidPrototype?
 -- Creates barrel icon but with 2 colors on the sides, and optionally one on top.
-Icon.set3ColorBarrel = function(proto, sideColor1, sideColor2, topColor, sideAlpha1, sideAlpha2, topAlpha)
+Icon.set3ColorBarrel = function(proto, sideColor1, sideColor2, topColor, sideAlpha1, sideAlpha2, topAlpha, setRecipesForFluid)
 	local sideColor1A = util.get_color_with_alpha(sideColor1, sideAlpha1 or barrel_side_alpha)
 	local sideColor2A = util.get_color_with_alpha(sideColor2, sideAlpha2 or barrel_side_alpha)
 	local topColorA = topColor
 	if topColor ~= nil then
 		topColorA = util.get_color_with_alpha(topColor, topAlpha or barrel_top_hoop_alpha)
 	end
-	local icons = {
-		"base/fluid/barreling/empty-barrel",
-		{"LSA/barreling/barrel-side-mask-bottom", tint = sideColor1A},
-		{"LSA/barreling/barrel-side-mask-top", tint = sideColor2A}
+
+	local masksAndColors = {
+		{barrel_side_mask_top, sideColor1A},
+		{barrel_side_mask_bottom, sideColor2A},
 	}
-	if topColor ~= nil then
-		table.insert(icons, {"base/fluid/barreling/barrel-hoop-top-mask", tint = topColorA})
+	if topColorA ~= nil then
+		table.insert(masksAndColors, {barrel_hoop_top_mask, topColorA})
 	end
-	Icon.set(proto, icons, "overlay")
+	proto.icons = generate_barrel_icons(empty_barrel_icon, masksAndColors)
+	proto.icon = nil
+
+	if setRecipesForFluid ~= nil then
+		assert(setRecipesForFluid ~= nil, serpent.block(setRecipesForFluid))
+
+		-- Edit icons for barrel-filling recipe.
+		local fillRecipe = RECIPE[proto.name]
+		assert(fillRecipe ~= nil, proto.name)
+		local fillMasksAndColors = {
+			{barrel_side_mask_top, sideColor1A},
+			{barrel_side_mask_bottom, sideColor2A},
+		}
+		if topColorA ~= nil then
+			table.insert(fillMasksAndColors, {barrel_fill_top_mask, topColorA})
+		end
+		fillRecipe.icon = nil
+		fillRecipe.icons = generate_barrel_recipe_icons(setRecipesForFluid, barrel_fill_icon, fillMasksAndColors, fluid_icon_shift_barrelling)
+
+		-- Edit icons for barrel-emptying recipe.
+		local emptyRecipe = RECIPE["empty-"..proto.name]
+		assert(emptyRecipe ~= nil, proto.name)
+		local emptyMasksAndColors = {
+			{barrel_empty_side_mask_top, sideColor1A},
+			{barrel_empty_side_mask_bottom, sideColor2A},
+		}
+		if topColorA ~= nil then
+			table.insert(emptyMasksAndColors, {barrel_empty_top_mask, topColorA})
+		end
+		emptyRecipe.icon = nil
+		emptyRecipe.icons = generate_barrel_recipe_icons(setRecipesForFluid, barrel_empty_icon, emptyMasksAndColors, fluid_icon_shift_emptying)
+	end
 end
+
 -- Creates barrel icon with 1 color on side (fluid.base_color for vanilla) and no top color.
-Icon.set1ColorBarrel = function(proto, sideColor, sideAlpha)
-	Icon.set2ColorBarrel(proto, sideColor, nil, sideAlpha)
+Icon.set1ColorBarrel = function(proto, sideColor, sideAlpha, setRecipeForFluid)
+	Icon.set2ColorBarrel(proto, sideColor, nil, sideAlpha, setRecipeForFluid)
 end
 
 return Icon
