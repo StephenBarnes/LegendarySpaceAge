@@ -6,6 +6,7 @@ Namely:
 
 -- TODO look through fluids, maybe make more of them auto_barrel.
 --TODO: Maybe add more different tankType options: barrels, gas tanks, glass tanks (for fluoric acid), tungsten canisters (for lava), maybe a special tank for heat shuttles like molten salt and steam/water?
+-- TODO add options for barrel colors, including multi-color barrels.
 
 return {
 	["steam"] = {
