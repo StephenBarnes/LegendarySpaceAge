@@ -1,5 +1,7 @@
 --[[ This file creates a new techs for barrelling and gas tanks, moves barrelling recipes to the new tech, and creates gas tanks and their recipes, etc. Also adds fuel values to barrels and tanks. ]]
 
+local BarrelConst = require "const.barrel-const"
+
 -- Create the new tech.
 local gasTankTech = copy(TECH["oil-processing"])
 gasTankTech.name = "fluid-containers"
@@ -49,18 +51,15 @@ RECIPE["barrel"].ingredients = {
 	{type = "item", name = "frame", amount = 1},
 }
 
--- TODO look through fluids, maybe add more barrelling recipes. Eg for Gleban slime.
--- Allow more fluids in barrels and tanks.
-FLUID["steam"].auto_barrel = false -- In the real world, seems it's hard to do without constant heating and some amount of condensation.
-FLUID["holmium-solution"].auto_barrel = true
-FLUID["electrolyte"].auto_barrel = true
-FLUID["thruster-oxidizer"].auto_barrel = true
-FLUID["thruster-fuel"].auto_barrel = true
-FLUID["ammonia"].auto_barrel = true
-FLUID["fluorine"].auto_barrel = true -- It's not that hard to barrel and transport IRL, so I'll allow it.
-FLUID["lithium-brine"].auto_barrel = true
-FLUID["fulgoran-sludge"].auto_barrel = true -- Could be interesting to ship it around and filter it elsewhere.
-
 -- Fluid wagon stores 50k fluid. Cargo wagon stores 40 stacks of 10 barrels, each having 100 fluid, so 40k total.
--- So, I'll nerf fluid wagons to 10k, so there's reason to use barrels.
-RAW["fluid-wagon"]["fluid-wagon"].capacity = 10000
+-- So, I'll nerf fluid wagons to 20k, so there's reason to use barrels.
+RAW["fluid-wagon"]["fluid-wagon"].capacity = 20000
+
+-- Set auto-barrel field using const file.
+for name, data in pairs(BarrelConst) do
+	local fluid = FLUID[name]
+	assert(fluid ~= nil, "Fluid "..name.." not found")
+	if data.autoBarrel ~= nil then
+		fluid.auto_barrel = data.autoBarrel
+	end
+end

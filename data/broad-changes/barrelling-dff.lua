@@ -1,40 +1,10 @@
 -- This file changes some barrelling recipes to use pressurized tanks instead of barrels.
 -- Note that I renamed the tank to just "pressurized tank" so it's not necessarily for gases, more just for anything that doesn't seem right in an ordinary barrel.
 
-local Const = require "const.fuel-const"
+local FuelConst = require "const.fuel-const"
+local BarrelConst = require "const.barrel-const"
 
 -- Edit some of the barrelling recipes to instead have the icon for the pressurized tank, and use pressurized tank ingredient and result.
--- TODO factor this out into a const file.
-local pressurizedFluids = Table.listToSet{
-	--"steam", -- Not barrellable.
-	"petroleum-gas",
-	"dry-gas",
-	"natural-gas",
-	"syngas",
-	"ammonia",
-	"spore-gas",
-
-	"liquid-nitrogen",
-	"thruster-oxidizer",
-	"thruster-fuel",
-
-	"nitrogen-gas",
-	"compressed-nitrogen-gas",
-	"oxygen-gas",
-	"hydrogen-gas",
-
-	"fluorine",
-	"hydrofluoric-acid",
-
-	-- Acid gases.
-	"chlorine-gas", "sulfur-dioxide", "nox-gas", "fluorine-gas", "phosphine-gas",
-	-- Fluoric acid? Maybe require special glass canisters, TODO.
-	"fluoric-acid",
-
-	--[[TODO: Make this more systematic with like 4 different types: barrels, gas tanks, glass tanks (for fluoric acid), tungsten canisters (for lava), maybe a special tank for heat shuttles like molten salt and steam/water?
-		Specify them in a const file.
-	]]
-}
 local function makeGasTankIcons(fluid, straight)
 	local kind = straight and "straight" or "angled"
 	return {
@@ -68,15 +38,15 @@ local function makeGasTankFillingIcons(fluid, straight, shift)
 	end
 	return icons
 end
-for gasName, _ in pairs(pressurizedFluids) do
-	local barrelRecipe = RECIPE[gasName.."-barrel"]
-	assert(barrelRecipe ~= nil, "barrel recipe for "..gasName.." not found")
-	local emptyRecipe = RECIPE["empty-"..gasName.."-barrel"]
-	assert(emptyRecipe ~= nil, "empty recipe for "..gasName.." not found")
-	local item = ITEM[gasName.."-barrel"]
-	assert(item ~= nil, "item for "..gasName.." not found")
-	local fluid = FLUID[gasName]
-	assert(fluid ~= nil, "fluid for "..gasName.." not found")
+local function changeToGasTank(fluidName)
+	local barrelRecipe = RECIPE[fluidName.."-barrel"]
+	assert(barrelRecipe ~= nil, "barrel recipe for "..fluidName.." not found")
+	local emptyRecipe = RECIPE["empty-"..fluidName.."-barrel"]
+	assert(emptyRecipe ~= nil, "empty recipe for "..fluidName.." not found")
+	local item = ITEM[fluidName.."-barrel"]
+	assert(item ~= nil, "item for "..fluidName.." not found")
+	local fluid = FLUID[fluidName]
+	assert(fluid ~= nil, "fluid for "..fluidName.." not found")
 
 	-- Edit filling recipe's ingredients
 	for _, ingredient in pairs(barrelRecipe.ingredients) do
@@ -102,9 +72,9 @@ for gasName, _ in pairs(pressurizedFluids) do
 	emptyRecipe.icons = makeGasTankFillingIcons(fluid, false, {7,8})
 
 	-- Edit localised names
-	item.localised_name = {"item-name.filled-gas-tank", {"fluid-name."..gasName}}
-	barrelRecipe.localised_name = {"recipe-name.fill-gas-tank", {"fluid-name."..gasName}}
-	emptyRecipe.localised_name = {"recipe-name.empty-filled-gas-tank", {"fluid-name."..gasName}}
+	item.localised_name = {"item-name.filled-gas-tank", {"fluid-name."..fluidName}}
+	barrelRecipe.localised_name = {"recipe-name.fill-gas-tank", {"fluid-name."..fluidName}}
+	emptyRecipe.localised_name = {"recipe-name.empty-filled-gas-tank", {"fluid-name."..fluidName}}
 
 	-- Edit subgroups.
 	barrelRecipe.subgroup = "fill-gas-tank"
@@ -113,6 +83,11 @@ for gasName, _ in pairs(pressurizedFluids) do
 	-- Increase stack size for the gas tank. Barrels are 10, tanks at 20 seems reasonable.
 	--item.stack_size = 20
 	-- Actually rather not, since it increases energy density by a lot.
+end
+for name, data in pairs(BarrelConst) do
+	if data.tankType == "gas-tank" then
+		changeToGasTank(name)
+	end
 end
 
 -- Go through fluid handling tech, remove all barrelling recipes, add to new tech.
@@ -180,17 +155,18 @@ for _, recipeGroup in pairs{unbarrellingRecipes, gasEmptyingRecipes} do
 end
 
 -- Add fuel values for barrels and gas tanks.
-for fluidName, fuelValues in pairs(Const.fluidFuelValues) do
+for fluidName, fuelValues in pairs(FuelConst.fluidFuelValues) do
 	if ITEM[fluidName.."-barrel"] then
 		if fuelValues[1] ~= nil and fuelValues[5] ~= "no-barrel-fuel" then
-			local isGas = pressurizedFluids[fluidName]
+			local barrelData = BarrelConst[fluidName]
+			local useGasTank = (barrelData ~= nil) and (barrelData.tankType == "gas-tank")
 			--local fluidNumMult = Gen.ifThenElse(isGas, GAS_TANK_FLUID_AMOUNT, BARREL_FLUID_AMOUNT)
 			ITEM[fluidName.."-barrel"].fuel_value = Gen.multWithUnits(fuelValues[1], FLUID_PER_BARREL)
 			ITEM[fluidName.."-barrel"].fuel_emissions_multiplier = fuelValues[2]
 			ITEM[fluidName.."-barrel"].fuel_acceleration_multiplier = fuelValues[3]
 			ITEM[fluidName.."-barrel"].fuel_top_speed_multiplier = fuelValues[4]
 			ITEM[fluidName.."-barrel"].fuel_category = fuelValues[5]
-			local remainingItem = Gen.ifThenElse(isGas, "gas-tank", "barrel")
+			local remainingItem = Gen.ifThenElse(useGasTank, "gas-tank", "barrel")
 			ITEM[fluidName.."-barrel"].burnt_result = remainingItem
 			ITEM[fluidName.."-barrel"].fuel_glow_color = ITEM["coal"].fuel_glow_color
 		end

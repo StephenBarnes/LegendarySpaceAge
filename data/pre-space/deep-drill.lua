@@ -176,7 +176,7 @@ extend{{
 -- Create drilling recipe for each planet.
 for i, planetData in pairs{
 	{"nauvis", {
-		{"raw-seawater", 10, type = "fluid"}, -- TODO change this to rich brine.
+		{"rich-brine", 10, type = "fluid"},
 		{"stone", 10},
 	}},
 	{"apollo", {
