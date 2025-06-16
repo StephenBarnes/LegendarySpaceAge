@@ -134,7 +134,7 @@ local waterContent = {
 	["scrap"] = 2.4,
 	["fulgoran-sludge"] = 0.1,
 	["ammoniacal-solution"] = 100,
-	["lake-water"] = 4,
+	["raw-seawater"] = 4,
 	["volcanic-gas"] = 1,
 
 	["chitin-fragments"] = 20,
@@ -191,7 +191,7 @@ local carbonContent = {
 	["petrophage"] = 1,
 	["agricultural-science-pack"] = .25,
 	["slime"] = 2,
-	["lake-water"] = 1,
+	["raw-seawater"] = 1,
 
 	["diesel"] = 0.3,
 	["tar"] = .32,

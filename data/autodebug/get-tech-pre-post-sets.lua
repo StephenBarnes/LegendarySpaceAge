@@ -44,7 +44,7 @@ local implicitUnlocks = {
 	{{"space:item:asteroid-collector"}, {"space:item:metallic-asteroid-chunk", "space:item:carbonic-asteroid-chunk", "space:item:oxide-asteroid-chunk"}},
 
 	-- Fluids from offshore pumps.
-	{{"nauvis:item:offshore-pump"}, {"nauvis:fluid:lake-water"}},
+	{{"nauvis:item:offshore-pump"}, {"nauvis:fluid:raw-seawater"}},
 	{{"gleba:item:offshore-pump"}, {"gleba:fluid:slime"}},
 	{{"fulgora:item:offshore-pump"}, {"fulgora:fluid:sludge"}},
 	{{"vulcanus:item:offshore-pump"}, {"vulcanus:fluid:lava"}},

@@ -3,11 +3,11 @@
 -- Early techs: basic electricity, then electronics, then personal burner generator, then red science, then automation, then filtration, then steam power.
 Tech.setPrereqs("electronics", {"basic-electricity", "char", "glass"})
 Tech.setPrereqs("automation", {"electronics", "lamp"})
-Tech.addTechDependency("filtration-lake-water", "steam-power")
+Tech.addTechDependency("filtration-raw-seawater", "steam-power")
 TECH["steam-power"].unit = nil
 TECH["steam-power"].research_trigger = {
 	type = "craft-fluid",
-	fluid = "lake-water",
+	fluid = "raw-seawater",
 	amount = 1000,
 }
 TECH["automation"].unit = nil
@@ -82,7 +82,7 @@ Tech.setPrereqs("plastics", {"coal-liquefaction"})
 -- Sulfur tech unlocks sulfuric acid. So it needs fluid handling. But also we need sulfuric acid -> rubber-1 -> fluid-handling.
 -- Could solve this by moving sulfuric acid recipe to rubber tech, removing sulfur tech.
 -- But we also need sulfuric acid for eg fertilizer. So rather keep it as a separate tech.
-Tech.setPrereqs("sulfur-processing", {"filtration-lake-water", "automation-science-pack"})
+Tech.setPrereqs("sulfur-processing", {"filtration-raw-seawater", "automation-science-pack"})
 TECH["sulfur-processing"].unit = TECH["ammonia-1"].unit
 
 Tech.setPrereqs("explosives", {"coal-liquefaction", "ammonia-1"}) -- Previously sulfur-processing

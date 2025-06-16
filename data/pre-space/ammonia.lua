@@ -12,7 +12,7 @@ local ammonia1Tech = copy(TECH["logistics"])
 ammonia1Tech.name = "ammonia-1"
 ammonia1Tech.localised_name = {"technology-name.ammonia-1"}
 ammonia1Tech.localised_description = {"technology-description.ammonia-1"}
-ammonia1Tech.prerequisites = {"filtration-lake-water"}
+ammonia1Tech.prerequisites = {"filtration-raw-seawater"}
 Icon.set(ammonia1Tech, "LSA/ammonia/tech")
 ammonia1Tech.effects = {
 	{type = "unlock-recipe", recipe = "spoilage-from-wood"},
@@ -50,7 +50,7 @@ Recipe.make{
 	-- Could divide all ingredients and results by 5, and reduce time. But this is a composting recipe, so it seems more appropriate to make it longer.
 	ingredients = {
 		{"wood", 5},
-		{"water", 100}, -- Considered making this lake-water, but then you can't do it on Gleba.
+		{"water", 100},
 	},
 	results = {
 		{"spoilage", 5},

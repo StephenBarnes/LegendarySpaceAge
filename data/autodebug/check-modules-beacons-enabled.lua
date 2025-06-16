@@ -40,7 +40,7 @@ local expectedRecipes = {
 	["activated-pentapod-egg"] = {3, true}, -- This is the recipe for activating dormant eggs with mash. Allowing prod and quality.
 
 	-- Filtration recipes should allow prod and quality, since you can't get the input back.
-	["filter-lake-water"] = {3, true},
+	["filter-raw-seawater"] = {3, true},
 	["filter-slime"] = {3, true},
 	["filter-fulgoran-sludge"] = {3, true},
 

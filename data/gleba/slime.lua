@@ -1,7 +1,7 @@
 -- Create slime fluid.
 local slimeFluid = copy(FLUID["water"])
 slimeFluid.name = "slime"
-Icon.set(slimeFluid, "LSA/filtration/slime")
+Icon.set(slimeFluid, "LSA/water-types/slime")
 slimeFluid.auto_barrel = true
 slimeFluid.base_color = {.176, .255, .200}
 slimeFluid.flow_color = {.393, .453, .333}
@@ -29,7 +29,7 @@ Recipe.make{
 	time = 1,
 	specialIcons = {
 		{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
-		{icon = "__LegendarySpaceAge__/graphics/filtration/slime.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
+		{icon = "__LegendarySpaceAge__/graphics/water-types/slime.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
 	},
 	crafting_machine_tint = {
 		primary = {.482, .745, .215},
@@ -60,7 +60,7 @@ filtrationGlebanSlimeTech.name = "filtration-gleban-slime"
 filtrationGlebanSlimeTech.icon = nil
 filtrationGlebanSlimeTech.icons = {
 	{icon = "__LegendarySpaceAge__/graphics/filtration/tech.png", icon_size = 256, scale = 0.5, shift = {-25, 0}},
-	{icon = "__LegendarySpaceAge__/graphics/filtration/slime-tech.png", icon_size = 256, scale = 0.4, shift = {25, 0}},
+	{icon = "__LegendarySpaceAge__/graphics/water-types/slime-tech.png", icon_size = 256, scale = 0.4, shift = {25, 0}},
 }
 filtrationGlebanSlimeTech.prerequisites = {"planet-discovery-gleba"}
 filtrationGlebanSlimeTech.effects = {

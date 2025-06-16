@@ -50,7 +50,7 @@ tech.effects = {
 		recipe = "make-cement",
 	},
 }
-tech.prerequisites = {"filtration-lake-water"}
+tech.prerequisites = {"filtration-raw-seawater"}
 tech.research_trigger = nil
 tech.unit = {
 	count = 15,

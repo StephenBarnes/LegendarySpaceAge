@@ -53,7 +53,7 @@ return {
 		["aquilo-processes"] = {"ammoniacal-solution", "fluorine", "lithium-brine", "fusion-plasma"},
 
 		["filter-meta"] = {"filter", "spent-filter", "clean-filter"},
-		["planet-filtration"] = {"filter-lake-water", "volcanic-gas-separation", "filter-slime", "fulgoran-sludge-filtration", "ammoniacal-solution-separation"},
+		["planet-filtration"] = {"filter-raw-seawater", "volcanic-gas-separation", "filter-slime", "fulgoran-sludge-filtration", "ammoniacal-solution-separation"},
 		["air-separation"] = {"air-separation-nauvis", "air-separation-vulcanus", "air-separation-gleba", "air-separation-fulgora", "air-separation-aquilo"},
 		["deep-drilling"] = {"deep-drill-nauvis", "deep-drill-apollo", "recipe-drill-node-ice", "recipe-drill-node-carbon", "deep-drill-vulcanus", "deep-drill-gleba", "recipe-drill-node-geoplasm", "deep-drill-fulgora"},
 	},
@@ -180,7 +180,8 @@ return {
 	},
 	fluids = {
 		-- TODO basically all of this should be moved to other groups. Fluid item-group should be mostly just un/barrelling and venting.
-		["nauvis-fluids"] = {"lake-water", "water", "steam", "latex", "cement", "lubricant"},
+		["nauvis-waters"] = {"raw-seawater", "clean-seawater", "rich-brine", "bitterns", "water", "steam", "mudwater"},
+		["nauvis-fluids"] = {"latex", "cement", "lubricant"},
 		["mixed-gases"] = {"air", "flue-gas", "sulfurous-gas"},
 		["petrochem-fluids"] = {"crude-oil", "natural-gas", "tar", "heavy-oil", "light-oil", "petroleum-gas", "dry-gas", "syngas", "diesel"},
 		["cryo-fluids"] = {"carbon-dioxide", "nitrogen-gas", "compressed-nitrogen-gas", "oxygen-gas", "hydrogen-gas", "liquid-nitrogen", "thruster-oxidizer", "thruster-fuel"},

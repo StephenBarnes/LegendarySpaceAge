@@ -32,20 +32,28 @@ return {
 	["thruster-fuel"] = {0, true}, -- hydrogen
 	["thruster-oxidizer"] = {0, true}, -- oxygen
 	["liquid-nitrogen"] = {0, true},
+
 	["water"] = {0, true},
-	["lake-water"] = {0, true},
+	["raw-seawater"] = {0, true},
+	["clean-seawater"] = {0, true},
+	["rich-brine"] = {0, true},
+	["mudwater"] = {0, true},
+	["bitterns"] = {0, true},
+	["slime"] = {0, true},
+
 	["lava"] = {0, true},
 	["sulfuric-acid"] = {20, true},
+
 	["crude-oil"] = {20, true},
 	["tar"] = {30, true},
 	["heavy-oil"] = {25, true},
 	["light-oil"] = {15, true},
 	["diesel"] = {20, true},
+
 	["cement"] = {2, true},
 	["latex"] = {2, true},
 	["lubricant"] = {20, true},
 	["fulgoran-sludge"] = {0, true},
-	["slime"] = {0, true},
 	["geoplasm"] = {5, true},
 	["chitin-broth"] = {1, true},
 	["molten-iron"] = {20, true},
