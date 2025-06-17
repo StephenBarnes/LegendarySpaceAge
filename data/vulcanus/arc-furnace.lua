@@ -15,9 +15,9 @@ ent.crafting_speed = 1
 ent.effect_receiver.base_effect = nil -- Remove base productivity bonus.
 	-- Considered giving it a starting -50% prod. But negative productivity doesn't actually work, gets coerced to 0.
 ent.energy_source.emissions_per_minute = { pollution = 20 }
-ent.energy_source.drain = "1MW"
-ent.energy_usage = "4MW"
-ent.heating_energy = "1MW"
+ent.energy_source.drain = "0W"
+ent.energy_usage = "1MW"
+ent.heating_energy = "500kW"
 ent.perceived_performance = {maximum = 4}
 ent.drawing_box_vertical_extension = 0
 local animationSpeed = 0.15
@@ -184,5 +184,16 @@ Recipe.make{
 }
 Tech.addRecipeToTech("arc-furnace", "foundry", 1)
 
-
 -- TODO add better fluidboxes to the arc furnace. Preferably passthrough, so you can run multiple arc furnaces from lava.
+
+-- Create hidden surface for the apprentice foundry's inserters.
+extend{{
+	type = "planet",
+	name = "apprentice-arc-furnace",
+	icon = ITEM["arc-furnace"].icon,
+
+	distance = 0,
+	orientation = 0,
+
+	hidden = true,
+}}

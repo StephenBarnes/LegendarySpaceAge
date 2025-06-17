@@ -9,20 +9,20 @@ Explanation of how it works:
 ]]
 
 -- ADDED
-local mod_name = "apprentice-arc-furnace"
-local mod_prefix = "apprentice-arc-furnace-"
+local INTERFACE_BEACON_NAME = "beacon-interface--beacon-tile"
+local SURFACE_NAME = "apprentice-arc-furnace"
 local APPLIES_TO_ENT = "arc-furnace"
 local function get_bonuses(products) -- Percent bonuses given number of products finished.
 	return {
-		speed = math.min(products * 10, 900),
-		productivity = products * 1,
+		speed = products,
+		productivity = products,
 		consumption = 0,
 		pollution = 0,
 		quality = 0,
 	}
 end
-local LOSSES_PER_TICK = (10/60)
-	-- Number of consecutive-products lost for each tick of inactivity. Setting this to 20/60 means you lose 20 per second. Setting to 100/60 loses 100 per second.
+local LOSSES_PER_SECOND = 10
+	-- Number of consecutive-products lost for each second of inactivity.
 	-- Note that when arc furnace is inactive it looks like all bonuses were lost instantly. It gets shown accurately when arc furnace starts working again.
 local MAX_PRODUCTS = 100 -- Maximum number of products finished in a row before we stop counting.
 ------------------------------------------------------------------------
@@ -124,7 +124,7 @@ end
 local Handler = {}
 
 Handler.on_init = function()
-	storage.surface = game.planets[mod_name].create_surface()
+	storage.surface = game.planets[SURFACE_NAME].create_surface()
 	storage.surface.generate_with_lab_tiles = true
 
 	storage.surface.create_global_electric_network()
@@ -180,7 +180,7 @@ function Handler.on_created_entity(event)
 	storage.deathrattles[script.register_on_object_destroyed(entity)] = { "crafter", struct.id }
 
 	struct.beacon_interface = entity.surface.create_entity {
-		name = mod_prefix .. "beacon-interface",
+		name = INTERFACE_BEACON_NAME,
 		force = entity.force,
 		position = entity.position,
 		raise_built = true,
@@ -192,31 +192,53 @@ function Handler.on_created_entity(event)
 	reset_offering_2(struct)
 end
 
+---@return number
+local function get_recipe_ticks(struct)
+	---@type LuaEntity
+	local ent = struct.entity
+	if ent == nil or not ent.valid then
+		log("Error: ent is nil or invalid")
+		return 0
+	end
+	---@type LuaRecipe?
+	local last_recipe = ent.get_recipe()
+	if last_recipe == nil then
+		log("Error: last recipe is nil")
+		return 0
+	end
+	return 60 * last_recipe.energy / ent.crafting_speed
+end
+
 local function finished_crafting(struct)
+	local updateBeacon = false
+
 	if struct.working == false then
 		struct.working = true
 		reset_offering_2(struct)
-		local idle_for = game.tick - struct.last_idle_at
-		struct.products_finished = math.max(0, struct.products_finished - idle_for * LOSSES_PER_TICK)
+		-- struct.last_idle_at is when it stopped working, and game.tick is when latest craft finished. So latest craft STARTED some time before game.tick.
+		-- To get how long it was idle, we need last_idle_at minus the tick it started this craft.
+		-- To get the time it started this craft, we need to subtract recipe time from game.tick.
+		local recipe_ticks = get_recipe_ticks(struct)
+		local idle_ticks = math.max(0, (game.tick - recipe_ticks) - struct.last_idle_at)
+		local idle_seconds = math.ceil(idle_ticks / 60)
+		struct.products_finished = math.max(0, struct.products_finished - idle_seconds * LOSSES_PER_SECOND)
+		updateBeacon = true
 	end
 
-	if MAX_PRODUCTS > struct.products_finished then
+	if struct.products_finished < MAX_PRODUCTS then
 		struct.products_finished = struct.products_finished + 1
-		remote.call("beacon-interface", "set_effects", struct.beacon_interface.unit_number, get_bonuses(struct.products_finished))
 		reset_offering_1(struct)
+		updateBeacon = true
+	end
+
+	if updateBeacon then
+		remote.call("beacon-interface", "set_effects", struct.beacon_interface.unit_number, get_bonuses(struct.products_finished))
 	end
 end
 
 local function stopped_working(struct)
 	struct.working = false
 	struct.last_idle_at = game.tick
-	remote.call("beacon-interface", "set_effects", struct.beacon_interface.unit_number, {
-		speed = 0,
-		productivity = 0,
-		consumption = 0,
-		pollution = 0,
-		quality = 0,
-	})
 	reset_offering_1(struct)
 end
 

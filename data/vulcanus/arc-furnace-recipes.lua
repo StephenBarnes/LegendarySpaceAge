@@ -1,12 +1,12 @@
 --[[ This file creates the recipes for the arc furnace. Arc furnaces are used for making molten metals from lava or ore, or turning one molten metal into another. They're NOT used for casting molten metals into solid items, which is done in the foundry.
 
-As a general rule, all recipes produce 100 molten metal per 10 seconds, so 10/s molten metal. Then the apprentice bonus gives 10x speed and 2x prod, so it's 200/s molten metal from 10x inputs.
+As a general rule, all recipes produce 100 molten metal per 10 seconds, so 10/s molten metal. Then the apprentice bonus gives 2x speed and 2x prod, so it's 40/s molten metal from 2x inputs.
 
 Recipes:
 	Molten metals from lava: 200 lava + 1 calcite + 1 carbon + 10 oxygen --10s--> 50 molten iron + 50 molten copper + 5 stone
-		Produces 50 of each molten metal in 10s, so 5/s, which becomes 100/s with apprentice bonuses.
+		Produces 50 of each molten metal in 10s, so 5/s, which becomes 20/s with apprentice bonuses.
 		(It might be more realistic and easy to have separate iron and copper recipes. But tying them together like this means the player will get too many of one, and have to set up a system to balance them by dumping excess into the lava.)
-		This consumes 200 lava per 10s, so 20/s, which increases to 400/s with the apprentice bonus. One pump supplies 1000/s. So it's fine, unless you have a ton of speed modules on the arc furnace. There's no way to make offshore pumps (including the lava pump) benefit from beacons.
+		This consumes 200 lava per 10s, so 20/s, which increases to 80/s with the apprentice bonus. One pump supplies 1000/s. So it's fine, unless you have a ton of speed modules on the arc furnace. There's no way to make offshore pumps (including the lava pump) benefit from beacons.
 		Old recipes were:
 			1 calcite + 500 lava --4s--> 10 stone + 250 molten iron
 			1 calcite + 500 lava --4s--> 15 stone + 250 molten copper

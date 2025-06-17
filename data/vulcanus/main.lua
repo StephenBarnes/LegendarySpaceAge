@@ -15,7 +15,6 @@ require("data.vulcanus.arc-furnace")
 require("data.vulcanus.arc-furnace-recipes")
 require("data.vulcanus.foundry")
 require("data.vulcanus.foundry-recipes")
-require("data.vulcanus.apprentice-arc-furnace")
 require("data.vulcanus.tungsten-axe")
 require("data.vulcanus.env-minables")
 
