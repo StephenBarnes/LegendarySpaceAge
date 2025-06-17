@@ -196,7 +196,7 @@ Recipe.make{
 	recipe = "crush-boomnut",
 	ingredients = {"boomnut"},
 	results = {"niter", "sugar"},
-	category = "crafting",
+	category = "crushing",
 	crafting_machine_tint = boompuffTint,
 	icons = {"boomnut", "niter", "LSA/gleba/sugar/1"},
 	iconArrangement = "decomposition",

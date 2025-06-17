@@ -4,8 +4,9 @@ TODO add gypsum, gravel, many others.
 
 local gypsum = copy(ITEM.stone)
 gypsum.name = "gypsum"
+Icon.set(gypsum, {"stone", tint = {.7, .8, 1}})
 extend{gypsum}
--- TODO this is a placeholder for now.
+-- TODO this is a placeholder for now. Get better icon.
 
 -- Create recipe for stone crushing. TODO this is a placeholder for now, to test icons.
 Recipe.make{

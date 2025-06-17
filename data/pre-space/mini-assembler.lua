@@ -24,6 +24,7 @@ local tiers = {
 	[1] = {
 		tint = {.961, .745, .205},
 		speed = 10,
+		animationSpeedCoefficient = 30, -- Originally 32.
 		splitter = "splitter",
 		techName = "logistics",
 		simulation = "0eNqllNtuwyAMht/F16QKWdI2eZWpimjidkgEEDjVqirvPkh26HrQEu0S/Pv7sTFcYK96tE5qguoCsjHaQ/V6AS+PWqi4p0WHUAE5ob01jpI9KoKBgdQtvkPFB/ZAroxo0V3JsmHHADVJkjhZjItzrftuH5QVZ1+5Uh+kDqGkeUNPwMAaH9KMjvyAWq8KBmeoknxVjAaTvPZIJPXRR5nDzpyw7kNMETpsa0nYhdBBKI8Mpu3pIJ+2jbEWXWKVIAymjeljU3iaMuhMGxWCEoViPNJ38bsh1n9TS8Zu+nBXw/a6glY6bKZgzoDONmaanmwfG31Hf2FPLuXOpfzdqWufB9x8NpfzReBiPjhdBF7PBxeLwJv54HwReDsfvF4ELv8cOf73zEn9ZOR4Ovt18vI/z5Ncj0P8KuI6uP18TwxO4cGOPsU6K/OyLDZpVmzKbBg+AMnoliQ=",
@@ -31,6 +32,7 @@ local tiers = {
 	[2] = {
 		tint = {.97, .22, .16},
 		speed = 20,
+		animationSpeedCoefficient = 30, -- Originally 32.
 		splitter = "fast-splitter",
 		techName = "logistics-2",
 		simulation = "0eNqllFtugzAQRfcy3ybCFEhgK1WEHJiklsC27CFqFLH32tBH2iRtrH4yj3M9l7HPsOtHNFYqgvoMstXKQf18BicPSvQhpsSAUMNeOErICuWMtpTssCeYGEjV4SvUfGL3enotOrQXtdm0ZYCKJElcxOaPU6PGYecra84+AFLtpfKppH1BR8DAaOfbtAoiHlWuCgYnqJN0VcwCS3njkEiqgwtlFgd9xGb0uZ7QYtdIwsGn9qJ3yGAJLwd5l221MWgT0wtCL9rqMdjD05TBoLtQIfxcKOYjfTqwnYIJP2bJ2C0zrgbZXI7RSYvtkswZ0MmEdj2SGYPlVxJP7Ld/dCVVfffsUuwGPI+Dcx5FLyLpaRS9jKQXUfR1JD2Pom8i6WUUvXpsK/nfaynVna3k6cO3mFf/vsZTeFNCwMt9vWgMjv5mz0JFmVV5VRXrNCvWVTZNb8AoqNU=",
@@ -38,6 +40,7 @@ local tiers = {
 	[3] = {
 		tint = {.17, .77, .93},
 		speed = 50,
+		animationSpeedCoefficient = 31, -- Originally 32.
 		splitter = "express-splitter",
 		techName = "logistics-3",
 		simulation = "0eNqllN2OwiAQhd9lrqkptVXbV9mYprajS0KBwNRoTN99od0fd11XyV7CDN9hDjNcYCcHNFYoguoCotXKQfVyAScOqpFhTzU9QgV4MhadS8g2yhltKdmhJBgZCNXhCSo+sj+OSd10aK/Ss3HLABUJEjhLTotzrYZ+5zMrzj4YQu2F8qGkfUVHwMBo549pFXQ8arUoGJyhWi6KiT9n1w6JhDq4kGWx10esBx+ThBa7WhD2PrRvpEMG8/Z8j3fVVhuDNjGyIfSarR6CRzxNGfS6CxkNJRKb6UafHmzHYMOPUjJ2x46bUjZXhXTCYjvHcgZ0NgGgBzJDsP1GZMkePNWNWPnNt2u5X/B5NJ6nMfwins9j+Kt4fh7DX8fzixj+Jp6/iuGXT/cof9ikQt3pUZ4+PdS8/MdUkx1wDB9MWHuxr0+OwdHP+SRTrLIyL8tinWbFuszG8Q1MZrR+",
@@ -45,6 +48,7 @@ local tiers = {
 	[4] = {
 		tint = {.675, .81, .325},
 		speed = 100,
+		animationSpeedCoefficient = 32, -- Originally 32.
 		splitter = "turbo-splitter",
 		techName = "turbo-transport-belt",
 		simulation = "0eNqllNtuwyAMht/F16QKWQ5NXmWqIpK4HVICiDjVqirvPkh26NZ2K9ol2P5+/GM4Q9NPaKxUBNUZZKvVCNXzGUZ5UKL3e0oMCBXQZBsdkRVqNNpS1GBPMDOQqsNXqPjM7hb1WnRoL5KTeccAFUmSuMoti1OtpqFxmRVnHwSp9lK5UNS+4EjAwOjRlWnlVRwq32QMTlAVm2zhr9n1iERSHUafZXHQR6wnF+sJLXa1JBxcaC/6ERms2+s53lVbbQzayPSC0Gm2evL+8DhmMOjOZwiKehTLiT4d2M3ehB+tJOymGVeNbC/a6KTFdo2lDOhkfLmeyEze8iuJJ/brJV1Jld88uxS7AU8D4ZyH0LNQehxCz0PpWQi9CKWnIfRtKD0PoZcPTiX/cyylujOVPH74EfPyH6+Y7ISz/1D82ol9fWgMju5dLzJZnpRpWWZFnGRFmczzG2Y3q/o=",
@@ -307,6 +311,7 @@ for tier, tierVals in pairs(tiers) do
 		"not-on-map",
 	}
 	hiddenLoader.selectable_in_game = false
+	hiddenLoader.animation_speed_coefficient = tierVals.animationSpeedCoefficient
 	hiddenLoader.collision_mask = {layers={transport_belt=true}}
 	hiddenLoader.speed = tierVals.speed / 480 -- This speed property holds 1/480 of items per second according to docs.
 	hiddenLoader.belt_animation_set = data.raw.splitter[tierVals.splitter].belt_animation_set
