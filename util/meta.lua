@@ -34,3 +34,11 @@ defines.direction = {
 --- LSP doesn't recognize FurnacePrototype.circuit_connector.
 ---@class data.FurnacePrototype
 ---@field circuit_connector? data.CircuitConnectorDefinition
+
+-- New quality fields
+---@class data.QualityPrototype
+---@field crafting_machine_energy_usage_multiplier? number
+---@field crafting_machine_speed_multiplier? number
+---@field default_multiplier? number
+---@class data.CraftingMachinePrototype
+---@field quality_affects_energy_usage? boolean
