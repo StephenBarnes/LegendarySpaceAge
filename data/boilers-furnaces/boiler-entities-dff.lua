@@ -17,5 +17,3 @@ burnerBoilerAir.fluid_boxes = {
 	fluidBoxes.x5x3.output.brine,
 }
 extend{burnerBoilerAir}
-
--- TODO remove heat exchanger.

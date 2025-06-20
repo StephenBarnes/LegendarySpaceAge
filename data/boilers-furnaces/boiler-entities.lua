@@ -73,11 +73,12 @@ shuttleBoiler.energy_source = {
 	burnt_inventory_size = 2,
 	smoke = nil,
 	fuel_categories = {"heat-provider"},
-	light_flicker = baseBoiler.energy_source.light_flicker,
+	light_flicker = FURNACE["stone-furnace"].energy_source.light_flicker, -- No flicker.
 	initial_fuel = nil,
 	initial_fuel_percent = 0.1, -- Must be greater than 0.
 }
 shuttleBoiler.energy_usage = "2MW"
+shuttleBoiler.heating_energy = nil
 ---@diagnostic disable-next-line: assign-type-mismatch
 shuttleBoiler.graphics_set = convertBoilerGraphics(baseBoiler.pictures)
 shuttleBoiler.icon = baseHeatExchanger.icon
@@ -91,9 +92,19 @@ shuttleBoiler.fluid_boxes = {
 	fluidBoxes.x3x2.output.steam,
 	fluidBoxes.x3x2.output.brine,
 }
+shuttleBoiler.fluid_boxes_off_when_no_fluid_recipe = false
 shuttleBoiler.allowed_effects = {"speed", "pollution"}
 shuttleBoiler.module_slots = 0
 shuttleBoiler.allowed_module_categories = {"speed"}
+-- Could allow circuit connections only for electric boiler, but not for the other 2 boilers since they're more analogue?
+-- Or just allow it for all of them, since they're allowed for stone furnaces and I don't see a need to buff electric boilers.
+shuttleBoiler.circuit_wire_max_distance = 9
+shuttleBoiler.circuit_connector = circuit_connector_definitions.create_vector(universal_connector_template, {
+	{ variation =  0, main_offset = util.by_pixel(-10.875,  0.5), shadow_offset = util.by_pixel(-10.875,  0.5), show_shadow = true },
+	{ variation =  0, main_offset = util.by_pixel( 2.25,  7.625), shadow_offset = util.by_pixel( 2.25,  7.625), show_shadow = true },
+	{ variation =  0, main_offset = util.by_pixel(-19.5, -4.75), shadow_offset = util.by_pixel(-19.5, -4.75), show_shadow = true },
+	{ variation =  0, main_offset = util.by_pixel( 11.75,  16.5), shadow_offset = util.by_pixel( 11.75,  16.5), show_shadow = true }, 
+})
 Entity.unhide(shuttleBoiler)
 extend{shuttleBoiler}
 -- Create item for shuttle boiler.
@@ -240,6 +251,8 @@ electricBoiler.graphics_set = {
 						height = 220,
 						shift = util.by_pixel(-1.25, 5.25),
 						blend_mode = "additive",
+						--draw_as_light = true, -- This makes it vanish when player flashlight is on it, so don't do this.
+						draw_as_glow = true,
 						scale = 0.5,
 					},
 				},
@@ -253,6 +266,7 @@ electricBoiler.graphics_set = {
 						height = 200,
 						shift = util.by_pixel(4, 10.75),
 						blend_mode = "additive",
+						draw_as_glow = true,
 						scale = 0.5,
 					},
 				},
@@ -266,6 +280,7 @@ electricBoiler.graphics_set = {
 						height = 300,
 						shift = util.by_pixel(-1.75, 1.25),
 						blend_mode = "additive",
+						draw_as_glow = true,
 						scale = 0.5,
 					},
 				},
@@ -279,15 +294,13 @@ electricBoiler.graphics_set = {
 						height = 272,
 						shift = util.by_pixel(1.5, 7.75),
 						blend_mode = "additive",
+						draw_as_glow = true,
 						scale = 0.5,
 					},
 				},
 			},
 		},
-		{
-			effect = "uranium-glow",
-			light = {intensity = 0.5, size = 4, shift = {0, 0}, color = {r = 1, g = 0.9, b = 0.5}}
-		},
+		-- Rather no uranium-glow effect, since we already have the light layer above.
 	},
 }
 extend{electricBoiler}
@@ -324,6 +337,7 @@ burnerBoiler.energy_source = {
 	burnt_inventory_size = 2,
 	smoke = nil,
 	fuel_categories = {"chemical"},
+	light_flicker = FURNACE["stone-furnace"].energy_source.light_flicker,
 }
 burnerBoiler.minable.result = "burner-boiler"
 burnerBoiler.placeable_by = {item = "burner-boiler", count = 1}
@@ -344,28 +358,26 @@ burnerBoiler.module_slots = 0
 burnerBoiler.allowed_module_categories = {"speed"}
 burnerBoiler.collision_box = {{-1.35, -2.35}, {1.35, 2.35}}
 burnerBoiler.selection_box = {{-1.5, -2.5}, {1.5, 2.5}}
--- Sounds - copying from SE, TODO check if this is suitable.
+-- Sounds - copying from SE
 burnerBoiler.working_sound = {
 	sound = {
 		filename = "__base__/sound/steam-engine-90bpm.ogg",
 		volume = 0.6,
+		audible_distance_modifier = 0.5,
 	},
-	match_speed_to_activity = true,
+	match_speed_to_activity = false,
+	fade_in_ticks = 15,
+	fade_out_ticks = 30,
 }
-burnerBoiler.perceived_performance = {
-	minimum = 0.25,
-	performance_to_activity_rate = 0.5,
-}
--- Set graphics of burner boiler - using Space Exploration's graphics.
-local verticalAnimation = {layers = {
+-- Set graphics of burner boiler - using Space Exploration's graphics. Except I'm using only 1 frame for when it's inactive, and 1 different frame for when it's inactive, with fadeout.
+local verticalOff = {layers = {
 	{
 		filename = "__space-exploration-graphics-3__/graphics/entity/fluid-burner-generator/fluid-burner-generator-v.png",
-		width = 864/4,
-		height = 692/2,
-		frame_count = 8,
-		line_length = 4,
+		width = 216,
+		height = 346,
+		frame_count = 1,
 		shift = util.by_pixel(5, 6.5),
-		animation_speed = 0.5,
+		animation_speed = 1,
 		scale = 0.5,
 	},
 	{
@@ -373,23 +385,20 @@ local verticalAnimation = {layers = {
 		width = 256,
 		height = 260,
 		frame_count = 1,
-		repeat_count = 8,
-		line_length = 1,
 		draw_as_shadow = true,
 		shift = util.by_pixel(9.5, 14.5),
-		animation_speed = 0.5,
+		animation_speed = 1,
 		scale = 0.5,
 	},
 }}
-local horizontalAnimation = {layers = {
+local horizontalOff = {layers = {
 	{
 		filename = "__space-exploration-graphics-3__/graphics/entity/fluid-burner-generator/fluid-burner-generator-h.png",
 		width = 320,
 		height = 244,
-		frame_count = 8,
-		line_length = 4,
+		frame_count = 1,
 		shift = util.by_pixel(0, -2.75),
-		animation_speed = 0.5,
+		animation_speed = 1,
 		scale = 0.5,
 	},
 	{
@@ -397,23 +406,67 @@ local horizontalAnimation = {layers = {
 		width = 434,
 		height = 150,
 		frame_count = 1,
-		repeat_count = 8,
-		line_length = 1,
 		draw_as_shadow = true,
 		shift = util.by_pixel(28.5, 18),
-		animation_speed = 0.5,
+		animation_speed = 1,
 		scale = 0.5,
+	},
+}}
+local verticalLit = {layers = {
+	{
+		filename = "__space-exploration-graphics-3__/graphics/entity/fluid-burner-generator/fluid-burner-generator-v.png",
+		width = 216,
+		height = 346,
+		frame_count = 1,
+		shift = util.by_pixel(5, 6.5),
+		animation_speed = 1,
+		scale = 0.5,
+		y = 346,
+		x = 0,
+	},
+}}
+local horizontalLit = {layers = {
+	{
+		filename = "__space-exploration-graphics-3__/graphics/entity/fluid-burner-generator/fluid-burner-generator-h.png",
+		width = 320,
+		height = 244,
+		frame_count = 1,
+		shift = util.by_pixel(0, -2.75),
+		animation_speed = 1,
+		scale = 0.5,
+		y = 244,
+		x = 0,
 	},
 }}
 burnerBoiler.graphics_set = {
 	animation = {
-		north = verticalAnimation,
-		south = verticalAnimation,
-		east = horizontalAnimation,
-		west = horizontalAnimation,
+		north = verticalOff,
+		south = verticalOff,
+		east = horizontalOff,
+		west = horizontalOff,
 	},
-	-- TODO check
+	working_visualisations = {
+		{
+			fadeout = true,
+			north_animation = verticalLit,
+			south_animation = verticalLit,
+			east_animation = horizontalLit,
+			west_animation = horizontalLit,
+		},
+		{
+			effect = "flicker",
+			light = {intensity = 0.7, size = 8, shift = {0, -0.55}, color = {r = 1, g = 0.9, b = 0.5}, flicker_min_modifier = 2},
+			fadeout = true,
+		},
+	},
 }
+burnerBoiler.circuit_wire_max_distance = 9
+burnerBoiler.circuit_connector = circuit_connector_definitions.create_vector(universal_connector_template, {
+	{ variation = 12, main_offset = util.by_pixel( 29.375, 0), shadow_offset = util.by_pixel( 29.375, 0), show_shadow = true },
+	{ variation =  0, main_offset = util.by_pixel( 24.75,  2.25), shadow_offset = util.by_pixel( 24.75,  2.25), show_shadow = true },
+	{ variation = 12, main_offset = util.by_pixel( 29.375, 0), shadow_offset = util.by_pixel( 29.375, 0), show_shadow = true },
+	{ variation =  0, main_offset = util.by_pixel( 24.75,  2.25), shadow_offset = util.by_pixel( 24.75,  2.25), show_shadow = true },
+})
 extend{burnerBoiler}
 -- Create item for burner boiler.
 local burnerBoilerItem = copy(shuttleBoilerItem)
