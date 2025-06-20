@@ -1,24 +1,19 @@
---[[ For some entities, we want their energy consumption to scale with the amount they produce.
-For example, battery chargers charge up (say) 1MJ worth of batteries per second, and have energy consumption 1MW. If you could make it charge 2MJ per second instead, this creates an exploit where you could make infinite energy by just making a whole bunch of battery chargers.
-Similar issues apply to furnaces (doing char recipe) and gasifiers.
-
-Higher-quality entities have higher speed, but don't have higher energy consumption. There's no simple way to make quality also scale energy consumption, or to make quality not scale speed, or to disable quality for these entities/items.
-
-So instead, this file makes a variant of these entities for each quality, with the same properties except different energy consumption. Then in control stage, we run a script to replace built entities with the appropriate quality variant.
+--[[ For some entities, we want to substitute them with variants by quality, to give different quality levels different values.
+Note that QualityPrototype supports many changes - for those, just adjust that, don't use quality-variant prototypes.
 
 This runs in data-final-fixes stage, so that it takes place after other changes to the entities.
 ]]
 
-local SPEED_PER_QUALITY = 0.3 -- Doesn't seem to be configurable.
+local QualityVariants = require("const.quality-variants")
 
-local QualityScalingPowerConsumption = require("const.quality-scaling-power-consumption")
-
-for entType, entNamesToQualityToName in pairs(QualityScalingPowerConsumption.qualityVersions) do
+for entType, entNamesToQualityToName in pairs(QualityVariants.qualityVersions) do
 	for entName, qualityToName in pairs(entNamesToQualityToName) do
+		---@diagnostic disable-next-line: assign-type-mismatch
 		local normalEnt = RAW[entType][entName]
 		assert(normalEnt ~= nil, "Entity not found: "..entType.." "..entName)
-		for qualityLevel, qualityName in pairs(qualityToName) do
+		for qualityLevel, qualityName in pairs(qualityToName.qualityNames) do
 			if qualityName ~= entName then -- Don't need to hide normal ent.
+				---@diagnostic disable-next-line: assign-type-mismatch
 				local newEnt = copy(normalEnt)
 				newEnt.name = qualityName
 				newEnt.localised_name = normalEnt.localised_name or {"entity-name."..normalEnt.name}
@@ -32,10 +27,11 @@ for entType, entNamesToQualityToName in pairs(QualityScalingPowerConsumption.qua
 					]]
 				newEnt.hidden_in_factoriopedia = true
 				newEnt.hidden = true -- This actually makes it unselectable in upgrade planner, so I think it closes the loophole explained above.
-				local energyUsage = Gen.multWithUnits(normalEnt.energy_usage, 1 + SPEED_PER_QUALITY * qualityLevel)
-				assert(energyUsage ~= nil, "energy_usage is nil for "..normalEnt.name) -- Returns nil if the number is 0, in which case the ent shouldn't be on the list above.
+
+				-- Apply the quality-specific changes.
+				QualityVariants.qualityVersions[entType][entName].change(newEnt, qualityLevel)
+
 				---@diagnostic disable-next-line: assign-type-mismatch
-				newEnt.energy_usage = energyUsage
 				data:extend{newEnt}
 			end
 		end

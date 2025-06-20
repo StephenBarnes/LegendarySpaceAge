@@ -231,7 +231,7 @@ advancedEnt.profile = copy(basicEnt.profile)
 advancedEnt.module_slots = 2
 advancedEnt.distribution_effectivity = 1
 advancedEnt.distribution_effectivity_bonus_per_quality_level = 0.25
-advancedEnt.collision_box = {{-1.45, -1.45}, {1.45, 1.45}} -- Make collision box closer to boundaries, since supply area must be whole-number.
+advancedEnt.collision_box = {{-1.45, -1.45}, {1.45, 1.45}} -- Make collision box closer to boundaries, since supply area must be whole-number. (And quality prototype's beacon supply area distance bonus is a float, but the result is still rounded to whole number distance from collision box.)
 advancedEnt.supply_area_distance = 2
 --[[advancedEnt.icons_positioning = {{ -- Adjusting beacon icon positioning - for back when I gave them 8 module slots, now no longer needed.
 	---@diagnostic disable-next-line: assign-type-mismatch

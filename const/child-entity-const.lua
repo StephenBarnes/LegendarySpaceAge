@@ -247,7 +247,7 @@ Export["heating-tower"] = {
 }
 
 -- Add quality variants.
-local QualityScaling = require("const.quality-scaling-power-consumption")
+local QualityScaling = require("const.quality-variants")
 for entName, originalName in pairs(QualityScaling.qualityToOriginal) do
 	if Export[originalName] ~= nil then
 		Export[entName] = Export[originalName]

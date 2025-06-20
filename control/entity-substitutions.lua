@@ -5,15 +5,17 @@ This file swaps buildings on build, for 2 cases:
 		For example: to make furnaces on Nauvis and Gleba not need external air input.
 	* We can swap depending on quality.
 		For example: to make entities scale their power consumption in line with their speed.
-			This is necessary to prevent free-energy exploits using e.g. quality battery chargers that produce more energy than they consume. And similar for char recipe, and gasifier.
-			See data/final-fixes/quality-power-scaling.lua for the data-side of this and more explanation.
+			This was originally necessary to prevent free-energy exploits using e.g. quality battery chargers that produce more energy than they consume. And similar for char recipe, and gasifier.
+			But they added an easier way to do that without registering new protos in 2.0.56 so that's no longer necessary.
+			Leaving this code here because we could use it for different quality-specific changes in the future. (TODO)
+			See data/broad-changes/quality-variants-dff.lua for the data-side of this.
 ]]
 
 local EntitySubstitutions = require("const.entity-substitutions-const")
-local QualitySubstitutions = require("const.quality-scaling-power-consumption")
+local QualitySubstitutions = require("const.quality-variants")
 
--- Given entity base name (quality suffix removed), returns true if it's subject to quality scaling.
-local function entityQualityScales(entType, entName)
+-- Given entity base name (quality suffix removed), returns true if it has quality variants.
+local function entityHasQualityVariants(entType, entName)
 	return (QualitySubstitutions.qualityVersions[entType] ~= nil) and (QualitySubstitutions.qualityVersions[entType][entName] ~= nil)
 end
 
@@ -30,7 +32,7 @@ end
 ---@param quality LuaQualityPrototype
 ---@return string
 local function addQualitySuffx(entType, entName, quality)
-	return QualitySubstitutions.qualityVersions[entType][entName][quality.level]
+	return QualitySubstitutions.qualityVersions[entType][entName].qualityNames[quality.level]
 end
 
 -- Perform surface substitutions.
@@ -65,7 +67,7 @@ local function onBuilt(event)
 	1. Get name of entity, or if it's a ghost, get name of what it's ghosting.
 	2. From ent's name, remove quality suffix, if any.
 	3. If the entity is subject to surface substitutions, then substitute it with the correct name for that surface.
-	4. If the new, surface-substituted entity is subject to quality scaling, then add quality suffix.
+	4. If the new, surface-substituted entity has quality variants, then add quality suffix.
 	5. If the final "correct name" differs from the entity's name, then destroy the entity and create a new one with the correct name.
 	]]
 
@@ -80,7 +82,7 @@ local function onBuilt(event)
 	local nameAfterSurfaceSubst = performSurfaceSubstitutions(entType, nameWithoutQuality, surface, isGhost)
 
 	local correctName = nameAfterSurfaceSubst
-	if entityQualityScales(entType, nameAfterSurfaceSubst) then
+	if entityHasQualityVariants(entType, nameAfterSurfaceSubst) then
 		correctName = addQualitySuffx(entType, nameAfterSurfaceSubst, ent.quality)
 	end
 

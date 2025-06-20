@@ -1,9 +1,12 @@
+require("util.globals")
+require("util.globals-data")
+
 require("data.boilers-furnaces.main-dff")
 require("data.broad-changes.barrelling-dff")
 require("data.broad-changes.recycling-dff")
 require("data.broad-changes.recipe-dff")
 require("data.circuits-modules.modules-dff")
-require("data.broad-changes.quality-power-scaling-dff")
+require("data.broad-changes.quality-variants-dff")
 require("data.misc-dff")
 require("data.pre-space.power-overload-dff")
 require("data.space.main-dff")

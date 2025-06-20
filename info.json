@@ -12,7 +12,7 @@
 	"expansion_shaders_required": true,
 	"rail_bridges_required": true,
 	"dependencies":
-		[ "base >= 2.0"
+		[ "base >= 2.0.57"
 		, "space-age"
 
 		, "space-exploration-graphics"
