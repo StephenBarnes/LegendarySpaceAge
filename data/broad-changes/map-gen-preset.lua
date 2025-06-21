@@ -19,12 +19,14 @@ custom.basic_settings.autoplace_controls = {
 	["apollo_cliffs"] = {frequency = 1, size = 3}, -- Continuity 3, TODO check.
 }
 
--- Less asteroids -- mostly makes it harder since there's less materials.
-custom.advanced_settings.asteroids.spawning_rate = 0.75
+-- Could reduce asteroids -- mostly makes it harder since there's less materials.
+-- TODO playtest and decide whether to put anything here.
+--custom.advanced_settings.asteroids.spawning_rate = 0.75
 
 -- Enemy evolution: no time-based evolution, reduced pollution-based (bc science mult).
-custom.advanced_settings.enemy_evolution.time_factor = 0
-custom.advanced_settings.enemy_evolution.pollution_factor = 0.0000002 -- There's an extra factor of 0.0000001 for some reason. Default is 0.0000009 displayed as "9".
+-- TODO playtest and decide what to put here. If you decide to change it, note it disables achievements if any of them are easier than default.
+--custom.advanced_settings.enemy_evolution.time_factor = 0
+--custom.advanced_settings.enemy_evolution.pollution_factor = 0.0000002 -- There's an extra factor of 0.0000001 for some reason. Default is 0.0000009 displayed as "9".
 
 -- Fulgora: increase amount of water, make islands further apart but not much bigger.
 custom.basic_settings.autoplace_controls["fulgora_islands"] = {
@@ -33,7 +35,32 @@ custom.basic_settings.autoplace_controls["fulgora_islands"] = {
 }
 
 -- Increase size of starting area, to reduce chance of having to fight in very early game.
-custom.basic_settings.starting_area = 2
+-- If we just reduce the setting here, then it warns you achievements are disabled. So instead I'm altering the noise expression directly.
+-- Not changing it for Vulcanus.
+custom.basic_settings.starting_area = 1
+for _, noiseTypeAndName in pairs{
+	{ "noise-expression", "enemy_base_probability" },
+	{ "noise-function",   "enemy_autoplace_base" },
+	{ "noise-expression", "tier_from_start" },
+} do
+	local noiseExprProto = RAW[noiseTypeAndName[1]][noiseTypeAndName[2]]
+	if noiseExprProto == nil then
+		log("ERROR: No noise expression found for " .. serpent.line(noiseTypeAndName))
+		goto continue
+	end
+	local expr = noiseExprProto.expression
+	if type(expr) ~= "string" then
+		log("ERROR: Expected string for expression, got " .. type(expr) .. " for " .. serpent.line(noiseTypeAndName))
+		goto continue
+	end
+	local substituted = string.gsub(expr, "starting_area_radius", "(starting_area_radius*2)")
+	if #substituted == #expr then
+		log("ERROR: Starting area radius not involved in expression " .. serpent.line(noiseTypeAndName))
+		goto continue
+	end
+	noiseExprProto.expression = substituted
+	::continue::
+end
 
 -- Add custom elevation. TODO currently this is the same as the default, but still adding here so I can check they used the main LSA mapgen preset.
 custom.basic_settings.property_expression_names.elevation = "LSA-elevation"

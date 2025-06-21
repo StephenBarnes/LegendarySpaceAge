@@ -10,6 +10,7 @@ if settings.startup["LSA-remove-mapgen-presets"] then
 	end
 
 	-- We can't completely remove the default map preset.
-	-- So instead, adjust the default map preset to make it generate almost only water, so people don't accidentally play on it.
-	RAW["noise-expression"].elevation.expression = "if(distance < 50, 10, -10)"
+	-- So instead, could adjust the default map preset to make it generate almost only water, so people don't accidentally play on it.
+	--RAW["noise-expression"].elevation.expression = "if(distance < 50, 10, -10)"
+	-- Rather turning this off, so people can choose to play on it if they want. We have the warning message.
 end
