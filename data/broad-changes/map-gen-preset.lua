@@ -20,7 +20,7 @@ custom.basic_settings.autoplace_controls = {
 }
 
 -- Could reduce asteroids -- mostly makes it harder since there's less materials.
--- TODO playtest and decide whether to put anything here.
+-- TODO playtest and decide whether to put anything here. Could also maybe just change the distributions on space connections and space locations, though that might be normalized to this?
 --custom.advanced_settings.asteroids.spawning_rate = 0.75
 
 -- Enemy evolution: no time-based evolution, reduced pollution-based (bc science mult).
@@ -38,29 +38,11 @@ custom.basic_settings.autoplace_controls["fulgora_islands"] = {
 -- If we just reduce the setting here, then it warns you achievements are disabled. So instead I'm altering the noise expression directly.
 -- Not changing it for Vulcanus.
 custom.basic_settings.starting_area = 1
-for _, noiseTypeAndName in pairs{
+Noise.substituteAll("starting_area_radius", "(starting_area_radius*2)", {
 	{ "noise-expression", "enemy_base_probability" },
 	{ "noise-function",   "enemy_autoplace_base" },
 	{ "noise-expression", "tier_from_start" },
-} do
-	local noiseExprProto = RAW[noiseTypeAndName[1]][noiseTypeAndName[2]]
-	if noiseExprProto == nil then
-		log("ERROR: No noise expression found for " .. serpent.line(noiseTypeAndName))
-		goto continue
-	end
-	local expr = noiseExprProto.expression
-	if type(expr) ~= "string" then
-		log("ERROR: Expected string for expression, got " .. type(expr) .. " for " .. serpent.line(noiseTypeAndName))
-		goto continue
-	end
-	local substituted = string.gsub(expr, "starting_area_radius", "(starting_area_radius*2)")
-	if #substituted == #expr then
-		log("ERROR: Starting area radius not involved in expression " .. serpent.line(noiseTypeAndName))
-		goto continue
-	end
-	noiseExprProto.expression = substituted
-	::continue::
-end
+})
 
 -- Add custom elevation. TODO currently this is the same as the default, but still adding here so I can check they used the main LSA mapgen preset.
 custom.basic_settings.property_expression_names.elevation = "LSA-elevation"
