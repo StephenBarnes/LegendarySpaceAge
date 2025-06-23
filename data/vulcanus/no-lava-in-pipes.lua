@@ -31,6 +31,7 @@ lavaPumpEntity.icons = {
 }
 lavaPumpEntity.hidden_in_factoriopedia = true
 lavaPumpEntity.factoriopedia_alternative = "offshore-pump"
+lavaPumpEntity.deconstruction_alternative = "offshore-pump"
 extend{lavaPumpEntity}
 
 -- Adjust some buildings to allow lava connections.

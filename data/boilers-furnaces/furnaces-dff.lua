@@ -33,8 +33,9 @@ for _, furnaceName in pairs{"stone-furnace", "steel-furnace"} do
 	newFurnace.hidden_in_factoriopedia = true
 	newFurnace.hidden = true
 	newFurnace.factoriopedia_alternative = furnace.name
-	newFurnace.minable.result = furnace.name
+	--newFurnace.minable.result = furnace.name
 	newFurnace.fluid_boxes_off_when_no_fluid_recipe = true
+	newFurnace.deconstruction_alternative = furnace.name
 	extend{newFurnace}
 end
 

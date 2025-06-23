@@ -14,4 +14,7 @@ rocketSilo10.localised_name = {"entity-name.rocket-silo"}
 rocketSilo10.localised_description = {"entity-description.rocket-silo"}
 rocketSilo10.placeable_by = {item="rocket-silo", count=1}
 rocketSilo10.hidden_in_factoriopedia = true
+Entity.hide(rocketSilo10, nil, "rocket-silo")
+rocketSilo10.deconstruction_alternative = "rocket-silo"
+--rocketSilo10.minable.result = "rocket-silo"
 extend{rocketSilo10}
