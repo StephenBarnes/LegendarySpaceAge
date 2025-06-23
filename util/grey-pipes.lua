@@ -83,6 +83,16 @@ local function pipeBlocksEmptyNS()
 	return r
 end
 
+-- Function to get grey blocks of pipes, but only added for south.
+---@return data.Sprite4Way
+local function pipeBlocksSouth()
+	local r = pipeBlocks()
+	r.north = util.empty_sprite()
+	r.east = util.empty_sprite()
+	r.west = util.empty_sprite()
+	return r
+end
+
 -- Function to get EM-plant-like pipes but longer (manually edited).
 ---@return data.Sprite4Way
 local function pipeBlocksEMPlantLong()
@@ -125,6 +135,7 @@ return {
 	pipeBlocksShortNorthWest = pipeBlocksShortNorthWest,
 	pipeBlocksShortWest = pipeBlocksShortWest,
 	pipeBlocksEmptyNS = pipeBlocksEmptyNS,
+	pipeBlocksSouth = pipeBlocksSouth,
 	pipeBlocksEMPlantLong = pipeBlocksEMPlantLong,
 	pipeBlocksEMPlantLongGraySouth = pipeBlocksEMPlantLongGraySouth,
 }

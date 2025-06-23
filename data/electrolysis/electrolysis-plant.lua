@@ -47,7 +47,7 @@ end
 
 local workingVisualisations = {
 	makeWorkingVis("base"),
-	makeWorkingVis("mask", {apply_recipe_tint = "primary", always_draw = true}),
+	makeWorkingVis("mask", {apply_recipe_tint = "primary", always_draw = true}), -- Always-draw so that the mask is visible when recipe is set, even when machine isn't active.
 	makeWorkingVis("highlights"),
 	makeWorkingVis("shadow"),
 }

@@ -22,6 +22,10 @@ Recipe.make{
 	enabled = false, -- Enabled by coal coking tech.
 	categories = {"chemistry", "handcrafting"},
 	auto_recycle = false,
+	crafting_machine_tint = {
+		primary = {0.5, 0.5, 0.5},
+		secondary = {0.2, 0.2, 0.2},
+	},
 }
 
 -- Create tech.

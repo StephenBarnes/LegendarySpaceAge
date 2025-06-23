@@ -1,6 +1,6 @@
 This file is to keep track of other people's stuff that I've used.
 
-* Factorio building graphics by Hurricane046 - shorturl.at/AFcDm - Used graphics for the borehole mining drill, circuit primer, superclocker, filtration plant, exothermic plant, maybe others later.
+* Factorio building graphics by Hurricane046 - shorturl.at/AFcDm - Used graphics for the borehole mining drill, circuit primer, superclocker, filtration plant, exothermic plant, crystallizer.
 * Malcolm Riley for graphics - github.com/malcolmriley/unused-renders - Using graphics for many new items and techs.
 * Space Exploration by Earendel and others - mods.factorio.com/mod/space-exploration - LSA includes the Space Exploration graphics mods as dependencies, and uses their sprites for telescopes, burner boilers, electric boilers.
 * CrushingIndustry by SafTheLamb - mods.factorio.com/mod/crushing-industry - Using graphics, code, sound, and ideas for the crushers.
