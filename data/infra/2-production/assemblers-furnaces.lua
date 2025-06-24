@@ -227,6 +227,8 @@ local CRAFTER_VALS = {
 	["chemical-plant"] = {
 		machine = {
 			kind = "assembling-machine",
+			activeKW = 100,
+			drainKW = 0,
 		},
 		recipe = {
 			time = 5,

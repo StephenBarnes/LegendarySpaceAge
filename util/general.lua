@@ -84,4 +84,11 @@ Export.toJoules = function(jouleString)
 	return num * unitMult
 end
 
+---@param color Color
+---@param alpha number
+---@return Color
+Export.addAlpha = function(color, alpha)
+	return {color[1] * alpha, color[2] * alpha, color[3] * alpha, alpha}
+end
+
 return Export

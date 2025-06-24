@@ -91,6 +91,8 @@ return {
 
 		["wastewaters"] = {"chloric-wastewater", "sulfuric-wastewater", "nitric-wastewater", "fluoric-wastewater", "phosphoric-wastewater", "lime-wastewater", "alkali-wastewater"},
 
+		["crystallization"] = {"crystallize-salt"},
+
 		["quicklime-neutralization"] = {"neutralize-chloric-acid-quicklime", "neutralize-chloric-wastewater-quicklime", "neutralize-sulfuric-acid-quicklime", "neutralize-sulfuric-wastewater-quicklime", "neutralize-nitric-acid-quicklime", "neutralize-nitric-wastewater-quicklime", "neutralize-fluoric-acid-quicklime", "neutralize-fluoric-wastewater-quicklime", "neutralize-phosphoric-acid-quicklime", "neutralize-phosphoric-wastewater-quicklime"},
 		["slaked-lime-neutralization"] = {"neutralize-chloric-acid-slaked-lime", "neutralize-chloric-wastewater-slaked-lime", "neutralize-sulfuric-acid-slaked-lime", "neutralize-sulfuric-wastewater-slaked-lime", "neutralize-nitric-acid-slaked-lime", "neutralize-nitric-wastewater-slaked-lime", "neutralize-fluoric-acid-slaked-lime", "neutralize-fluoric-wastewater-slaked-lime", "neutralize-phosphoric-acid-slaked-lime", "neutralize-phosphoric-wastewater-slaked-lime"},
 		["lime-wastewater-neutralization"] = {"neutralize-chloric-acid-lime-wastewater", "neutralize-chloric-wastewater-lime-wastewater", "neutralize-sulfuric-acid-lime-wastewater", "neutralize-sulfuric-wastewater-lime-wastewater", "neutralize-nitric-acid-lime-wastewater", "neutralize-nitric-wastewater-lime-wastewater", "neutralize-fluoric-acid-lime-wastewater", "neutralize-fluoric-wastewater-lime-wastewater", "neutralize-phosphoric-acid-lime-wastewater", "neutralize-phosphoric-wastewater-lime-wastewater"},
