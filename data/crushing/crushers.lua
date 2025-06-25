@@ -325,3 +325,7 @@ Recipe.make{
 	icon = "LSA/crushers/big-crusher/icon",
 	enabled = true, -- TODO tech
 }
+
+-- Edit the "space crusher".
+local spaceCrusher = ASSEMBLER.crusher
+spaceCrusher.energy_source = copy(basicCrusherEnt.energy_source)

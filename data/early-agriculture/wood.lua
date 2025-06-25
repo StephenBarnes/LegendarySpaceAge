@@ -5,8 +5,8 @@ Eg wood chips item, and recipe for crushing wood.
 -- Create item for wood chips.
 local woodChipsItem = copy(ITEM.wood)
 woodChipsItem.name = "wood-chips"
-Icon.set(woodChipsItem, "LSA/wood-chips/1")
-Icon.variants(woodChipsItem, "LSA/wood-chips/%", 3)
+Icon.set(woodChipsItem, "LSA/crushed/wood-chips/1")
+Icon.variants(woodChipsItem, "LSA/crushed/wood-chips/%", 3)
 extend{woodChipsItem}
 
 -- Create recipe for wood chips.

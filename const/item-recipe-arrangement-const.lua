@@ -59,6 +59,7 @@ return {
 	},
 	metallurgy = {
 		ores = {"iron-ore", "copper-ore", "tungsten-ore"},
+		["crushed-ores"] = {"crushed-iron-ore", "crushed-copper-ore", "crushed-tungsten-ore"},
 		["ore-intermediates"] = {"copper-matte"},
 		ingots = {"ingot-iron-hot", "ingot-copper-hot", "ingot-steel-hot", "ingot-iron-cold", "ingot-copper-cold", "ingot-steel-cold"},
 		["basic-metal-intermediates"] = {"test-exothermic", "iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate", "advanced-parts"},

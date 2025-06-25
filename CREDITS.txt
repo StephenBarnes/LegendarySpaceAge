@@ -3,7 +3,7 @@ This file is to keep track of other people's stuff that I've used.
 * Factorio building graphics by Hurricane046 - shorturl.at/AFcDm - Used graphics for the borehole mining drill, circuit primer, superclocker, filtration plant, exothermic plant, crystallizer.
 * Malcolm Riley for graphics - github.com/malcolmriley/unused-renders - Using graphics for many new items and techs.
 * Space Exploration by Earendel and others - mods.factorio.com/mod/space-exploration - LSA includes the Space Exploration graphics mods as dependencies, and uses their sprites for telescopes, burner boilers, electric boilers.
-* CrushingIndustry by SafTheLamb - mods.factorio.com/mod/crushing-industry - Using graphics, code, sound, and ideas for the crushers.
+* Crushing Industry by SafTheLamb - mods.factorio.com/mod/crushing-industry - Using graphics, code, sound, and ideas for the crushers and the crushed ore items.
 * Snouz - Graphics for flare stack, silicon wafers.
 * Cannon Turret mod (mods.factorio.com/mod/vtk-cannon-turret) by VortiK, from original mod by AmbulatoryCortex, original graphics by YuokiTani, graphics improvements by JavitoVk and snouz. I'm using the graphics for LSA's shotgun turrets, and also adapted some code.
 * Flare Stack by GotLag, snouz, and others - mods.factorio.com/mod/Flare%20Stack - Used graphics and code.
