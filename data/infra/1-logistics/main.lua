@@ -18,3 +18,10 @@ RECIPE["stone-brick"].energy_required = 1 -- Originally 3.2. Making low since yo
 for _, recipeName in pairs{"hazard-concrete", "refined-hazard-concrete"} do
 	RECIPE[recipeName].energy_required = 10 -- Originally 0.25.
 end
+
+-- Landfill from coarse filler.
+Recipe.edit{
+	recipe = "landfill",
+	ingredients = {{"coarse-filler", 50}},
+	time = 1,
+}

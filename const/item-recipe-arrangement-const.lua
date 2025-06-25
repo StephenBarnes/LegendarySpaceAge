@@ -107,6 +107,8 @@ return {
 		["internal-process"] = {},
 	},
 	["intermediate-factors"] = {
+		["coarse-filler"] = {"coarse-filler", "coarse-filler-from-fine-filler", "coarse-filler-from-stone", "coarse-filler-from-gypsum", "coarse-filler-from-wood-chips", "coarse-filler-from-crushed-iron-ore", "coarse-filler-from-crushed-copper-ore", "coarse-filler-from-crushed-tungsten-ore", "coarse-filler-from-iron-slag", "coarse-filler-from-copper-slag"},
+		["fine-filler"] = {"fine-filler", "fine-filler-from-coarse-filler", "fine-filler-from-sand", "fine-filler-from-ash", "fine-filler-from-silica"},
 		resin = {"resin", "wood-resin", "pitch-resin", "rich-gas-resin", "smelt-slipstack-pearl"},
 		["circuit-board"] = {"circuit-board", "makeshift-circuit-board", "wood-circuit-board", "plastic-circuit-board", "calcite-circuit-board"},
 		["wiring"] = {"wiring", "makeshift-wiring", "wiring-from-resin", "wiring-from-rubber", "wiring-from-plastic", "wiring-from-neurofibril"},
@@ -120,8 +122,6 @@ return {
 		sensor = {"sensor", "sensor-from-green-circuit", "sensor-from-red-circuit", "sensor-from-blue-circuit", "sensor-from-sencytium"},
 		actuator = {"electric-engine-unit", "actuator-standard", "actuator-from-blue-circuit", "actuator-augmented", "actuator-from-appendage"},
 		["low-density-structure"] = {"low-density-structure", "low-density-structure-standard", "casting-low-density-structure", "lds-from-chitin-and-carbon-fiber"},
-		filler = {"filler", "filler-from-sand", "filler-from-ash", "filler-from-silica", "filler-from-wood-chips", "filler-from-crushed-iron-ore", "filler-from-crushed-copper-ore", "filler-from-crushed-tungsten-ore"},
-		filler_crushing = {"filler-from-gypsum", "filler-from-iron-slag", "filler-from-copper-slag"},
 	},
 	["intermediate-products"] = { -- Renamed to "manufacturing" via localized strings, but reusing the existing item-group internal name in case other mods want to put stuff in there.
 		["material-processing-tools"] = {"iron-crusher-wheel", "steel-crusher-wheel", "tungsten-crusher-wheel"},

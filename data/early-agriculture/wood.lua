@@ -21,15 +21,4 @@ Recipe.make{
 	-- TODO recipe tint
 }
 
--- Recipe for classifying wood chips to filler.
-Recipe.make{
-	recipe = "filler-from-wood-chips",
-	copy = "stone-brick",
-	categories = {"crafting", "mini-assembling"},
-	ingredients = {"wood-chips"},
-	results = {"filler"},
-	time = 0.1,
-	icons = {"filler", "wood-chips"},
-}
-
 -- TODO recipe for making spoilage from wood, etc.

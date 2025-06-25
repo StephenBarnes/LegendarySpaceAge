@@ -29,8 +29,8 @@ Recipe.make{
 	recipe = "make-cement", -- Must be different from cement so it appears in factoriopedia correctly.
 	localised_name = {"fluid-name.cement"},
 	ingredients = {
-		{"stone", 2},
-		{"sand", 2},
+		{"coarse-filler", 2},
+		{"fine-filler", 2},
 		{"water", 50},
 	},
 	results = {
@@ -67,7 +67,7 @@ Recipe.edit{
 	recipe = "concrete",
 	ingredients = {
 		{"cement", 100},
-		{"stone", 10},
+		{"fine-filler", 10},
 		{"iron-stick", 5},
 	},
 	time = 10,

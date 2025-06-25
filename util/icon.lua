@@ -28,7 +28,6 @@ local specialPathCodes = {
 	crush = "__LegendarySpaceAge__/graphics/crushers/recipe-overlay.png",
 	blank = "__LegendarySpaceAge__/graphics/misc/almost-blank.png",
 		-- It's an image with very faint color, used to create recipe shadows. (Otherwise the shadow only gets created over the first icon in .icons.)
-	filler = "__LegendarySpaceAge__/graphics/intermediate-factors/filler/1.png", -- Specifying here so we can use it in recipes defined in files before filler.lua creates filler icon.
 }
 
 ---@param pathCode string | table

@@ -23,7 +23,7 @@ This file is to keep track of other people's stuff that I've used.
 * PlanetsLib - mods.factorio.com/mod/PlanetsLib - using for cargo-drop techs and orbit graphics.
 * Alatar's Rocketry - mods.factorio.com/mod/alatar-rocketry - Using graphics for asteroid belt icons.
 * Starmap: Solar-System by Tserup - mods.factorio.com/mod/Starmap_Solar_System - Using graphics for asteroid belts on space map.
-* Periodic Madness by Mr.SmoothieHuman - mods.factorio.com/mod/periodic-madness - Using graphics for polysilicon.
+* Periodic Madness by Mr.SmoothieHuman - mods.factorio.com/mod/periodic-madness - Using graphics for polysilicon, gypsum, coarse filler.
 * Brevven's mods - mods.factorio.com/user/brevven - Using graphics for silica and smelting slags.
 * Factorio Plus by fishbus - mods.factorio.com/mod/factorioplus - Graphics for clean assembler.
 * Sociencity by tiriscef - mods.factorio.com/mod/sosciencity - Graphics for acid drops.

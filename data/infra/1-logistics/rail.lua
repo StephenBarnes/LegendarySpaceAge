@@ -1,9 +1,9 @@
 Recipe.edit{
 	recipe = "rail",
 	ingredients = {
-		{"sand", 1},
+		{"coarse-filler", 1},
+			-- Stone in rail recipe represents the track ballast; using coarse filler to represent that.
 		{"frame", 1},
-		-- Stone in rail recipe represents the track ballast; makes sense to crush/process stone before using as ballast. So I'm putting sand as an ingredient here.
 	},
 	resultCount = 2,
 	time = 0.5,

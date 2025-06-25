@@ -29,7 +29,7 @@ for oreName, data in pairs(crushedOreData) do
 	Icon.variants(item, data.iconPath .. "%", 2)
 	extend{item}
 
-	-- Recipe for making crushed ore.
+	-- Recipe for crushing ore.
 	Recipe.make{
 		recipe = "crushed-" .. oreName,
 		copy = "stone-brick",
@@ -44,17 +44,6 @@ for oreName, data in pairs(crushedOreData) do
 		enabled = true, -- TODO make techs.
 		-- TODO recipe tint
 	}
-
-	-- Recipe for classifying crushed ore to filler.
-	Recipe.make{
-		recipe = "filler-from-crushed-" .. oreName,
-		copy = "stone-brick",
-		categories = {"crafting", "mini-assembling"},
-		ingredients = {item.name},
-		results = {"filler"},
-		time = 0.1,
-		icons = {"filler", item.name},
-	}
 end
 
 -- Slag
@@ -66,17 +55,4 @@ for metal, data in pairs(slagData) do
 	Icon.set(item, data.iconPath .. "1")
 	Icon.variants(item, data.iconPath .. "%", 4)
 	extend{item}
-
-	-- Recipe for crushing slag to filler.
-	Recipe.make{
-		recipe = "filler-from-" .. item.name,
-		copy = "stone-brick",
-		category = "crushing",
-		ingredients = {item.name},
-		results = {"filler"},
-		time = 1,
-		icons = {"filler", item.name},
-		iconArrangement = "crushing",
-	}
-	-- TODO instead of this, add coarse filler factor, then crush that to fine filler.
 end
