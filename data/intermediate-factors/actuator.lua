@@ -1,5 +1,7 @@
 -- This file will add recipes for actuators. We hijack the base-game "electric engine unit", renaming it to "actuator". Actuators are like mechanisms, but they require advanced parts and lubricant, so basically they require oil products converted to red circuits, lubricant, plastic, rubber.
 
+-- TODO use a different icon for the actuator? If I can find a good one.
+
 -- Create recipe: 8 advanced parts + 1 frame + 1 red circuit + 20 lubricant -> 1 actuator
 local standardRecipe = copy(RECIPE["electric-engine-unit"])
 standardRecipe.name = "actuator-standard"

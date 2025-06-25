@@ -143,6 +143,8 @@ Recipe.make{
 
 
 
+-- TODO disable productivity for all of these recipes.
+
 -- TODO create more recipes, once items exist.
 -- TODO add recipe for crushed coal -> filler.
 -- TODO add recipe for resin powder -> filler.

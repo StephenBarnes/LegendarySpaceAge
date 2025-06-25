@@ -168,8 +168,8 @@ extend{copperMatteRecipe}
 -- Make copper-matte item.
 local copperMatte = copy(ITEM["copper-ore"])
 copperMatte.name = "copper-matte"
-Icon.set(copperMatte, "LSA/metallurgy/matte/matte1")
-Icon.variants(copperMatte, "LSA/metallurgy/matte/matte%", 12)
+Icon.set(copperMatte, "LSA/metallurgy/matte/1")
+Icon.variants(copperMatte, "LSA/metallurgy/matte/%", 7)
 --copperMatte.factoriopedia_description = {"factoriopedia-description.copper-matte"}
 extend{copperMatte}
 
