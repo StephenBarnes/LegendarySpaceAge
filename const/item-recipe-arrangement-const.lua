@@ -60,7 +60,7 @@ return {
 	metallurgy = {
 		ores = {"iron-ore", "copper-ore", "tungsten-ore"},
 		["crushed-ores"] = {"crushed-iron-ore", "crushed-copper-ore", "crushed-tungsten-ore"},
-		["ore-intermediates"] = {"copper-matte"},
+		["ore-intermediates"] = {"iron-slag", "copper-slag", "copper-matte"},
 		ingots = {"ingot-iron-hot", "ingot-copper-hot", "ingot-steel-hot", "ingot-iron-cold", "ingot-copper-cold", "ingot-steel-cold"},
 		["basic-metal-intermediates"] = {"test-exothermic", "iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate", "advanced-parts"},
 		rust = {"rusty-ingot-iron-cold", "rusty-iron-plate", "rusty-iron-gear-wheel", "rusty-iron-stick"},
@@ -120,7 +120,8 @@ return {
 		sensor = {"sensor", "sensor-from-green-circuit", "sensor-from-red-circuit", "sensor-from-blue-circuit", "sensor-from-sencytium"},
 		actuator = {"electric-engine-unit", "actuator-standard", "actuator-from-blue-circuit", "actuator-augmented", "actuator-from-appendage"},
 		["low-density-structure"] = {"low-density-structure", "low-density-structure-standard", "casting-low-density-structure", "lds-from-chitin-and-carbon-fiber"},
-		filler = {"filler", "filler-from-sand", "filler-from-ash", "filler-from-silica", "filler-from-gypsum"},
+		filler = {"filler", "filler-from-sand", "filler-from-ash", "filler-from-silica", "filler-from-wood-chips", "filler-from-crushed-iron-ore", "filler-from-crushed-copper-ore", "filler-from-crushed-tungsten-ore"},
+		filler_crushing = {"filler-from-gypsum", "filler-from-iron-slag", "filler-from-copper-slag"},
 	},
 	["intermediate-products"] = { -- Renamed to "manufacturing" via localized strings, but reusing the existing item-group internal name in case other mods want to put stuff in there.
 		["material-processing-tools"] = {"iron-crusher-wheel", "steel-crusher-wheel", "tungsten-crusher-wheel"},

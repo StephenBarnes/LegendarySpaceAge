@@ -51,6 +51,7 @@ Recipe.make{
 	iconArrangement = "crushing",
 	category = "crushing",
 	additional_categories = {},
+	time = 1,
 }
 
 

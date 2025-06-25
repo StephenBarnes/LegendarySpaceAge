@@ -15,7 +15,7 @@ Ratios:
 	We could simplify all of these ratios by just making ingots 1:1 with plates etc. But:
 		* The 5-to-1 ratio (plus rusting of plates) makes it much more efficient to ship ingots, but with some time pressure since they spoil to cold ingots.
 		* The 5-to-1 ratio makes it easier to reheat compared to having 5x as many ingots.
-		* The 5-to-1 ratio lets us have smaller amounts of stone/sulfur byproducts without probability results or bulk recipes.
+		* The 5-to-1 ratio lets us have smaller amounts of slag byproducts without probability results or bulk recipes.
 
 Re stack sizes:
 	Give ingots the same stack size as plates etc, so they're 5x more compact to transport.
@@ -118,7 +118,7 @@ ironIngotRecipe.ingredients = {
 }
 ironIngotRecipe.results = {
 	{type="item", name="ingot-iron-hot", amount=1},
-	{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
+	{type="item", name="iron-slag", amount=1, show_details_in_recipe_tooltip=false},
 	{type="fluid", name="flue-gas", amount=10, show_details_in_recipe_tooltip=false, fluidbox_index=FurnaceConst.outputGasFluidBoxIdx},
 }
 ironIngotRecipe.main_product = "ingot-iron-hot"
@@ -137,6 +137,7 @@ ironIngotRecipeOxygen.ingredients = {
 }
 ironIngotRecipeOxygen.results = {
 	{type="item", name="ingot-iron-hot", amount=1},
+	{type="item", name="iron-slag", amount=1, show_details_in_recipe_tooltip=false},
 	{type="fluid", name="flue-gas", amount=10, show_details_in_recipe_tooltip=false, fluidbox_index=FurnaceConst.outputGasFluidBoxIdx},
 }
 ironIngotRecipeOxygen.main_product = "ingot-iron-hot"
@@ -155,7 +156,7 @@ copperMatteRecipe.ingredients = {
 }
 copperMatteRecipe.results = {
 	{type="item", name="copper-matte", amount=1},
-	{type="item", name="stone", amount=1, show_details_in_recipe_tooltip=false},
+	{type="item", name="copper-slag", amount=1, show_details_in_recipe_tooltip=false},
 	{type="fluid", name="sulfurous-gas", amount=10, show_details_in_recipe_tooltip=false, fluidbox_index=FurnaceConst.outputGasFluidBoxIdx},
 }
 copperMatteRecipe.main_product = "copper-matte"
@@ -175,10 +176,14 @@ extend{copperMatte}
 -- Make recipe for copper matte -> copper ingot.
 local copperIngotRecipe = copy(steelIngotRecipe)
 copperIngotRecipe.name = "ingot-copper-hot"
-copperIngotRecipe.ingredients = {{type="item", name="copper-matte", amount=1}}
+copperIngotRecipe.ingredients = {
+	{type="item", name="copper-matte", amount=1},
+	{type="fluid", name="air", amount=10, show_details_in_recipe_tooltip=false, fluidbox_index=FurnaceConst.airFluidBoxIdx},
+}
 copperIngotRecipe.results = {
 	{type="item", name="ingot-copper-hot", amount=1},
-	{type="item", name="sulfur", amount=1, show_details_in_recipe_tooltip=false},
+	{type="item", name="copper-slag", amount=1, show_details_in_recipe_tooltip=false},
+	{type="fluid", name="sulfurous-gas", amount=10, show_details_in_recipe_tooltip=false, fluidbox_index=FurnaceConst.outputGasFluidBoxIdx},
 }
 copperIngotRecipe.category = "smelting"
 copperIngotRecipe.main_product = "ingot-copper-hot"
