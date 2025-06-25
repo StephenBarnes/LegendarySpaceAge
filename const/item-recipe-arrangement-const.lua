@@ -107,7 +107,7 @@ return {
 		["internal-process"] = {},
 	},
 	["intermediate-factors"] = {
-		["coarse-filler"] = {"coarse-filler", "coarse-filler-from-fine-filler", "coarse-filler-from-stone", "coarse-filler-from-gypsum", "coarse-filler-from-wood-chips", "coarse-filler-from-crushed-iron-ore", "coarse-filler-from-crushed-copper-ore", "coarse-filler-from-crushed-tungsten-ore", "coarse-filler-from-iron-slag", "coarse-filler-from-copper-slag"},
+		["coarse-filler"] = {"coarse-filler", "coarse-filler-from-fine-filler", "coarse-filler-from-stone", "coarse-filler-from-gypsum", "coarse-filler-from-wood-chips", "coarse-filler-from-crushed-iron-ore", "coarse-filler-from-crushed-copper-ore", "coarse-filler-from-crushed-tungsten-ore", "coarse-filler-from-iron-slag", "coarse-filler-from-copper-slag", "coarse-filler-from-chitin-fragments", "coarse-filler-from-marrow"},
 		["fine-filler"] = {"fine-filler", "fine-filler-from-coarse-filler", "fine-filler-from-sand", "fine-filler-from-ash", "fine-filler-from-silica"},
 		resin = {"resin", "wood-resin", "pitch-resin", "rich-gas-resin", "smelt-slipstack-pearl"},
 		["circuit-board"] = {"circuit-board", "makeshift-circuit-board", "wood-circuit-board", "plastic-circuit-board", "calcite-circuit-board"},
@@ -140,7 +140,7 @@ return {
 		["spoilage-and-nutrients"] = {"spoilage", "nutrients-from-spoilage", "sugar", "nutrients", "nutrients-from-yumako-mash", "nutrients-from-bioflux", "nutrients-from-marrow"},
 		["yumako-and-jellynut"] = {"yumako-seed", "jellynut-seed", "fertilized-yumako-seed", "fertilized-jellynut-seed", "yumako", "jellynut", "yumako-mash", "jelly", "yumako-processing", "jellynut-processing"},
 		["agriculture-processes"] = {"pentapod-egg", "activated-pentapod-egg"},
-		["gleba-non-agriculture"] = {"marrow", "chitin-fragments", "chitin-block", "tubule", "appendage", "sencytium", "making-chitin-broth", "landfill-from-chitin"},
+		["gleba-non-agriculture"] = {"marrow", "chitin-fragments", "chitin-block", "tubule", "appendage", "sencytium", "making-chitin-broth"},
 		["agriculture-products"] = {"bioflux", "bioflux-from-eggs", "biolubricant", "bioplastic", "slipstack-nest", "sprouted-boomnut", "pentapod-egg", "activated-pentapod-egg"},
 		["slipstacks-and-boompuffs"] = {"slipstack-pearl", "slipstack-nest", "boomnut", "sprouted-boomnut", "boomsac", "crush-boomnut", "boomsac-deflation", "petrophage", "petrophage-cultivation", "refresh-petrophages"},
 		["stingfrond-products"] = {"stingfrond-sprout", "neurofibril", "cyclosome-resynchronization", "carbon-fiber", "explosive-desynchronization", "cyclosome-1", "cyclosome-2", "cyclosome-3", "cyclosome-4", "cyclosome-5"},

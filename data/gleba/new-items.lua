@@ -185,16 +185,6 @@ Icon.set(RECIPE["nutrients-from-spoilage"], {"nutrients", "spoilage"})
 Icon.set(RECIPE["nutrients-from-bioflux"], {"nutrients", "bioflux"})
 Icon.set(RECIPE["nutrients-from-yumako-mash"], {"nutrients", "yumako-mash"})
 
--- Create recipe for landfill from chitin fragments.
-local landfillFromChitinRecipe = copy(RECIPE["landfill"])
-landfillFromChitinRecipe.name = "landfill-from-chitin"
-landfillFromChitinRecipe.ingredients = {
-	{type = "item", name = "marrow", amount = 20},
-	{type = "item", name = "chitin-fragments", amount = 20},
-}
-Icon.set(landfillFromChitinRecipe, {"landfill", "marrow", "chitin-fragments"})
-extend{landfillFromChitinRecipe}
-
 ------------------------------------------------------------------------
 
 -- Create 2 techs for chitin processing.
@@ -235,7 +225,7 @@ local marrowTech = copy(chitinTech1)
 marrowTech.name = "marrow"
 marrowTech.effects = {
 	{type = "unlock-recipe", recipe = "nutrients-from-marrow"},
-	{type = "unlock-recipe", recipe = "landfill-from-chitin"},
+	{type = "unlock-recipe", recipe = "coarse-filler-from-marrow"},
 }
 marrowTech.prerequisites = {"planet-discovery-gleba"}
 marrowTech.research_trigger = {

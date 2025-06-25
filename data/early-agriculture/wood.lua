@@ -14,6 +14,7 @@ Recipe.make{
 	recipe = "wood-chips",
 	copy = "stone-brick",
 	category = "crushing",
+	additional_categories = {"handcrafting"},
 	ingredients = {"wood"},
 	main_product = "wood-chips",
 	resultCount = 2,

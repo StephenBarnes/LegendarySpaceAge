@@ -124,7 +124,22 @@ Recipe.make{
 	icons = {"coarse-filler", "stone"},
 }
 
+-- Create recipe: chitin-fragments -> coarse filler
+Recipe.make{
+	copy = coarseFillerFromGypsum,
+	recipe = "coarse-filler-from-chitin-fragments",
+	ingredients = {"chitin-fragments"},
+	icons = {"coarse-filler", "chitin-fragments"},
+}
 
+-- Create recipe: marrow -> coarse filler
+Recipe.make{
+	copy = coarseFillerFromGypsum,
+	recipe = "coarse-filler-from-marrow",
+	ingredients = {"marrow"},
+	icons = {"coarse-filler", "marrow"},
+	enabled = false, -- Added to marrow tech.
+}
 
 
 
