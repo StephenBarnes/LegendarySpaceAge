@@ -27,10 +27,8 @@ Recipe.make{
 	category = "filtration",
 	enabled = false,
 	time = 1,
-	specialIcons = {
-		{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
-		{icon = "__LegendarySpaceAge__/graphics/water-types/slime.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
-	},
+	icons = {"slime"},
+	iconArrangement = "filtration",
 	crafting_machine_tint = {
 		primary = {.482, .745, .215},
 		secondary = {.176, .255, .200},

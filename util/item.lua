@@ -165,4 +165,19 @@ Item.renameAndHide = function(oldName, newName)
 	oldItem.factoriopedia_alternative = newName
 end
 
+---@param itemOrName data.ItemPrototype|string
+Item.clearSpoilage = function(itemOrName)
+	local item
+	if type(itemOrName) == "string" then
+		item = ITEM[itemOrName]
+	else
+		item = itemOrName
+	end
+	assert(item ~= nil, "Item "..serpent.line(itemOrName).." not found.")
+	item.spoil_ticks = nil
+	item.spoil_result = nil
+	item.spoil_level = nil
+	item.spoil_to_trigger_result = nil
+end
+
 return Item

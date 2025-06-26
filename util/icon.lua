@@ -202,6 +202,12 @@ local multiIconVals = {
 			{scale = 0.4, shift = {9, 0}},
 		},
 	},
+	sideBySide = { -- Recipes for side-by-side icons - 2 ingredients.
+		[2] = {
+			{scale = 0.4, shift = {-9, 0}},
+			{scale = 0.4, shift = {9, 0}},
+		},
+	},
 	crushing = { -- Recipes for crushing - last icon is crusher overlay, other icons are as in default.
 		[1] = {
 			{scale = 0.36, shift = {0, -7}, draw_background = true},
@@ -212,6 +218,26 @@ local multiIconVals = {
 			{scale = 0.3, shift = {0, 7}, draw_background = true}, -- Product, at the bottom.
 			{scale = 0.3, shift = {0, -8}, draw_background = true}, -- Ingredient, at the top.
 			extraSuffix = {{"crush", scale = 0.8, shift = {0, -6.5}}}, -- Crush wheels overlay on top.
+		},
+	},
+	filtration = { -- Recipes for filtration - 1 ingredient, over filter.
+		[1] = {
+			extraPrefix = {"blank", {"LSA/filtration/filter", scale = 0.8, shift = {0, 8}}},
+			{scale = 0.4, shift = {0, -4}},
+		},
+	},
+	vertical = { -- Recipes for vertical icons - 2 ingredients.
+		[2] = {
+			extraPrefix = {"blank"},
+			{scale = 0.4, shift = {0, 8}},
+			{scale = 0.4, shift = {0, -6}},
+		},
+	},
+	verticalExo = { -- Recipes for vertical icons - 2 ingredients, with exo backdrop.
+		[2] = {
+			extraPrefix = {"exo"},
+			{scale = 0.4, shift = {0, 8}},
+			{scale = 0.4, shift = {0, -6}},
 		},
 	},
 }

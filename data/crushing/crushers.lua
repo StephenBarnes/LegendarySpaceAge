@@ -41,7 +41,7 @@ local basicCrusherEnt = {
 	},
 	energy_usage = "100kW",
 	source_inventory_size = 1,
-	result_inventory_size = 3,
+	result_inventory_size = 6, -- For stone crushing and screening.
 	open_sound = sounds.machine_open,
 	close_sound = sounds.machine_close,
 	allowed_effects = allowed_effects,

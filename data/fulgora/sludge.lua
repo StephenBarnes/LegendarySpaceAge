@@ -53,11 +53,9 @@ local recipe = Recipe.make{
 	crafting_machine_tint = {
 		primary = mainColor,
 		secondary = secondColor,
-	}
-}
-recipe.icons = {
-	{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
-	{icon = "__LegendarySpaceAge__/graphics/fulgora/sludge.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
+	},
+	iconArrangement = "filtration",
+	icons = {"fulgoran-sludge"},
 }
 -- Recipe gets added to tech created in filtration.lua.
 

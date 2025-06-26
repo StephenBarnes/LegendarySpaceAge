@@ -76,10 +76,8 @@ Recipe.edit{
 	category = "filtration",
 
 	-- Change icons to match other filtration recipes.
-	iconsLiteral = {
-		{icon = "__LegendarySpaceAge__/graphics/filtration/filter.png", icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, 8}},
-		{icon = FLUID["ammoniacal-solution"].icon, icon_size = 64, scale = 0.4, mipmap_count = 4, shift = {0, -4}},
-	},
+	iconArrangement = "filtration",
+	icons = {"ammoniacal-solution"},
 
 	-- Set recipe colors for filtration plant. Recipe already has tints but they're too light-colored I think, prefer deeper blue.
 	crafting_machine_tint = {

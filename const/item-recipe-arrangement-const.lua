@@ -41,9 +41,10 @@ return {
 		["module-3"] = {"electronic-circuit-superclocked", "advanced-circuit-superclocked", "processing-unit-superclocked", "white-circuit-superclocked", "superclocker"},
 	},
 	["material-processing"] = {
-		["raw-resource"] = {"stone", "calcite", "uranium-ore", "fluorite", "ice"},
-		["stone-processing"] = {"stone-crushing"},
-		["raw-material"] = {"stone-brick", "ash", "sand", "glass", "sulfur", "niter", "gunpowder", "ash-reprocessing"},
+		["stone-items"] = {"stone", "sand", "clay", "gravel", "calcite", "gypsum"},
+		["stone-processing"] = {"basic-stone-crushing", "stone-crushing-screening", "sand-washing", "gravel-acid-leach", "clay-leaching"},
+		["raw-resource"] = {"uranium-ore", "fluorite", "ice"}, -- Vanilla subgroup, so mods might add stuff here.
+		["raw-material"] = {"stone-brick", "ash", "glass", "sulfur", "niter", "gunpowder", "ash-reprocessing"}, -- Vanilla subgroup, so mods might add stuff here.
 		rubber = {"rubber", "rubber-from-latex", "rubber-from-oil"},
 		["silicon-processing"] = {"silica", "crude-silicon", "polysilicon", "silicon-gas", "silicon-waste-gas"},
 		["uranium-processing"] = {"uranium-processing", "plutonium", "uranium-235", "uranium-238", "yellowcake", "fuel-rod", "uranium-fuel-cell", "depleted-uranium-fuel-cell", "depleted-fuel-rod", "nuclear-fuel-reprocessing", "kovarex-enrichment-process"},
@@ -53,20 +54,21 @@ return {
 		["aquilo-processes"] = {"ammoniacal-solution", "fluorine", "lithium-brine", "fusion-plasma"},
 
 		["filter-meta"] = {"filter", "spent-filter", "clean-filter"},
-		["planet-filtration"] = {"filter-raw-seawater", "volcanic-gas-separation", "filter-slime", "fulgoran-sludge-filtration", "ammoniacal-solution-separation"},
+		["filtration"] = {"filter-raw-seawater", "mudwater-filtering", "volcanic-gas-separation", "filter-slime", "fulgoran-sludge-filtration", "ammoniacal-solution-separation"},
 		["air-separation"] = {"air-separation-nauvis", "air-separation-vulcanus", "air-separation-gleba", "air-separation-fulgora", "air-separation-aquilo"},
 		["deep-drilling"] = {"deep-drill-nauvis", "deep-drill-apollo", "recipe-drill-node-ice", "recipe-drill-node-carbon", "deep-drill-vulcanus", "deep-drill-gleba", "recipe-drill-node-geoplasm", "deep-drill-fulgora"},
 	},
 	metallurgy = {
-		ores = {"iron-ore", "copper-ore", "tungsten-ore"},
-		["crushed-ores"] = {"crushed-iron-ore", "crushed-copper-ore", "crushed-tungsten-ore"},
-		["ore-intermediates"] = {"iron-slag", "copper-slag", "copper-matte"},
-		ingots = {"ingot-iron-hot", "ingot-copper-hot", "ingot-steel-hot", "ingot-iron-cold", "ingot-copper-cold", "ingot-steel-cold"},
+		iron = {"ingot-iron-hot", "ingot-iron-cold", "iron-ore", "crushed-iron-ore", "iron-slag"},
+		copper = {"ingot-copper-hot", "ingot-copper-cold", "copper-ore", "crushed-copper-ore", "copper-matte", "copper-slag"},
+		steel = {"ingot-steel-hot", "ingot-steel-cold"},
+		tungsten = {"tungsten-ore", "crushed-tungsten-ore", "tungsten-matte"},
+		["stone-ores"] = {"chromite-dust", "magnesium-ore", "alumina"},
 		["basic-metal-intermediates"] = {"test-exothermic", "iron-plate", "iron-gear-wheel", "iron-stick", "copper-plate", "copper-cable", "steel-plate", "advanced-parts"},
 		rust = {"rusty-ingot-iron-cold", "rusty-iron-plate", "rusty-iron-gear-wheel", "rusty-iron-stick"},
 		derusting = {"sand-derust-ingot-iron-cold", "sand-derust-iron-plate", "sand-derust-iron-gear-wheel", "sand-derust-iron-stick", "acid-derust-ingot-iron-cold", "acid-derust-iron-plate", "acid-derust-iron-gear-wheel", "acid-derust-iron-stick"},
 
-		["rare-earths"] = {"holmium-ore", "holmium-plate"},
+		["rare-earths"] = {"rare-earth-ore", "holmium-ore", "holmium-plate"},
 
 		["tungsten-metallurgy"] = {"tungsten-carbide", "tungsten-plate", "tungsten-steel"},
 

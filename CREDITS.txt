@@ -1,44 +1,47 @@
-This file is to keep track of other people's stuff that I've used.
+This file lists things I've used from other mods - graphics, code, ideas, etc. This list doesn't include content mods that are dependencies of LSA.
 
-* Factorio building graphics by Hurricane046 - shorturl.at/AFcDm - Used graphics for the borehole mining drill, circuit primer, superclocker, filtration plant, exothermic plant, crystallizer.
-* Malcolm Riley for graphics - github.com/malcolmriley/unused-renders - Using graphics for many new items and techs.
-* Space Exploration by Earendel and others - mods.factorio.com/mod/space-exploration - LSA includes the Space Exploration graphics mods as dependencies, and uses their sprites for telescopes, burner boilers, electric boilers.
-* Crushing Industry by SafTheLamb - mods.factorio.com/mod/crushing-industry - Using graphics, code, sound, and ideas for the crushers and the crushed ore items.
+Using graphics and code from:
+
+* [Factorio building graphics](https://shorturl.at/AFcDm) by Hurricane046 - Used graphics for the borehole mining drill, circuit primer, superclocker, filtration plant, exothermic plant, crystallizer.
+* [Unused Renders](https://github.com/malcolmriley/unused-renders) by Malcolm Riley - Using graphics for many new items and techs.
+* [Space Exploration](https://mods.factorio.com/mod/space-exploration) by Earendel and others - LSA includes the Space Exploration graphics mods as dependencies, and uses their sprites for telescopes, burner boilers, electric boilers.
+* [Crushing Industry](https://mods.factorio.com/mod/crushing-industry) by SafTheLamb - Using graphics, code, sound, and ideas for the crushers and the crushed ore items.
 * Snouz - Graphics for flare stack, silicon wafers.
-* Cannon Turret mod (mods.factorio.com/mod/vtk-cannon-turret) by VortiK, from original mod by AmbulatoryCortex, original graphics by YuokiTani, graphics improvements by JavitoVk and snouz. I'm using the graphics for LSA's shotgun turrets, and also adapted some code.
-* Flare Stack by GotLag, snouz, and others - mods.factorio.com/mod/Flare%20Stack - Used graphics and code.
-* Battery Powered by harag - mods.factorio.com/mod/battery-powered - Charger/discharger graphics, code, ideas.
-* Apprentice Assembler by Quezler - mods.factorio.com/mod/apprentice-assembler - Copied the code from this and modified slightly to apply the effect to arc furnaces. Relies on Beacon Interface mod also by Quezler - mods.factorio.com/mod/beacon-interface
-* Krastorio 2 by raiguard and others - mods.factorio.com/mod/Krastorio2 - Using graphics for imersite deposits, regulators, crude silicon, classifier, filler.
-* Beacon Rebalance by wretlaw120 with some spritework by Sir-Lags-A-Lot - mods.factorio.com/mod/wret-beacon-rebalance-mod - Using high-res old-beacon graphics and code.
+* [Cannon Turret mod](https://mods.factorio.com/mod/vtk-cannon-turret) by VortiK, from original mod by AmbulatoryCortex, original graphics by YuokiTani, graphics improvements by JavitoVk and snouz. I'm using the graphics for LSA's shotgun turrets, and also adapted some code.
+* [Flare Stack](https://mods.factorio.com/mod/Flare%20Stack) by GotLag, snouz, and others - Used graphics and code.
+* [Battery Powered](https://mods.factorio.com/mod/battery-powered) by harag - Charger/discharger graphics, code, ideas.
+* [Apprentice Assembler](https://mods.factorio.com/mod/apprentice-assembler) by Quezler - Copied the code from this and modified slightly to apply the effect to arc furnaces. Relies on [Beacon Interface](https://mods.factorio.com/mod/beacon-interface) mod also by Quezler.
+* [Krastorio 2](https://mods.factorio.com/mod/Krastorio2) by raiguard and others - Using graphics for imersite deposits, regulators, crude silicon, classifier, filler.
+* [Beacon Rebalance](https://mods.factorio.com/mod/wret-beacon-rebalance-mod) by wretlaw120 with some spritework by Sir-Lags-A-Lot - Using high-res old-beacon graphics and code.
 * Gleba crop mods by LordMiguel (slipstacks, boompuffs, stingfronds) - Took ideas and bits of code for the Gleba crops.
 * Multiple excellent mods by ElAdamo:
-	* Carbon - mods.factorio.com/mod/carbon - Stole several ideas for the petrochem system, plus some code and graphics.
-	* Gas Furnace - mods.factorio.com/mod/gas-furnace - Using code and graphics for the gas furnace, repurposed as normal steel furnace with extra fluid I/O (because I need air/oxygen input and flue/CO2 output).
-	* Gas Boiler - mods.factorio.com/mod/gas-boiler - Originally a dependency, but removed because I couldn't fit in the extra fluid I/O.
-* Artisanal Reskins: Bob's Mods by Kirazy, snouz, Vigil, YuokiTani - mods.factorio.com/mod/reskins-bobs - Graphics for electrolysis plant.
-* Biochemistry by Tenebrais - mods.factorio.com/mod/biochemistry - Electrophage graphics, and ideas.
-* Finely Crafted Machine by plexpt - mods.factorio.com/mod/finely-crafted - This is code for using Hurricane's graphics above. Copied deep drill, maybe more later.
-* Lunar Landings by Xorimuth - mods.factorio.com/mod/LunarLandings - Apollo icon. Also using some ideas, such as ice nodes and telescopes on lunar mountains.
-* PlanetsLib - mods.factorio.com/mod/PlanetsLib - using for cargo-drop techs and orbit graphics.
-* Alatar's Rocketry - mods.factorio.com/mod/alatar-rocketry - Using graphics for asteroid belt icons.
-* Starmap: Solar-System by Tserup - mods.factorio.com/mod/Starmap_Solar_System - Using graphics for asteroid belts on space map.
-* Periodic Madness by Mr.SmoothieHuman - mods.factorio.com/mod/periodic-madness - Using graphics for polysilicon, gypsum, coarse filler.
-* Brevven's mods - mods.factorio.com/user/brevven - Using graphics for silica and smelting slags.
-* Factorio Plus by fishbus - mods.factorio.com/mod/factorioplus - Graphics for clean assembler.
-* Sociencity by tiriscef - mods.factorio.com/mod/sosciencity - Graphics for acid drops.
-* Exotic Space Industries by PreLeyZero, eliont - mods.factorio.com/mod/exotic-space-industries - Graphics for alkali ash.
-* Quality Glassware by Hornwitser - mods.factorio.com/mod/quality_glassware - Graphics for acid-base tab.
+	* [Carbon](https://mods.factorio.com/mod/carbon) - Stole several ideas for the petrochem system, plus some code and graphics.
+	* [Gas Furnace](https://mods.factorio.com/mod/gas-furnace) - Using code and graphics for the gas furnace, repurposed as normal steel furnace with extra fluid I/O (because I need air/oxygen input and flue/CO2 output).
+	* [Gas Boiler](https://mods.factorio.com/mod/gas-boiler) - Originally a dependency, but removed because I couldn't fit in the extra fluid I/O.
+* [Artisanal Reskins: Bob's Mods](https://mods.factorio.com/mod/reskins-bobs) by Kirazy, snouz, Vigil, YuokiTani - Graphics for electrolysis plant.
+* [Biochemistry](https://mods.factorio.com/mod/biochemistry) by Tenebrais - Electrophage graphics, and ideas.
+* [Finely Crafted Machine](https://mods.factorio.com/mod/finely-crafted) by plexpt - This is code for using Hurricane's graphics above. Copied deep drill, maybe more later.
+* [Lunar Landings](https://mods.factorio.com/mod/LunarLandings) by Xorimuth - Apollo icon. Also using some ideas, such as ice nodes and telescopes on lunar mountains.
+* [PlanetsLib](https://mods.factorio.com/mod/PlanetsLib) - using for cargo-drop techs and orbit graphics.
+* [Alatar's Rocketry](https://mods.factorio.com/mod/alatar-rocketry) - Using graphics for asteroid belt icons.
+* [Starmap: Solar-System](https://mods.factorio.com/mod/Starmap_Solar_System) by Tserup - Using graphics for asteroid belts on space map.
+* [Periodic Madness](https://mods.factorio.com/mod/periodic-madness) by Mr.SmoothieHuman - Using graphics for polysilicon, gypsum, coarse filler.
+* [Brevven's mods](https://mods.factorio.com/user/brevven) - Using graphics for silica and smelting slags.
+* [Factorio Plus](https://mods.factorio.com/mod/factorioplus) by fishbus - Graphics for clean assembler.
+* [Sosciencity](https://mods.factorio.com/mod/sosciencity) by tiriscef - Icons for acid drops.
+* [Exotic Space Industries](https://mods.factorio.com/mod/exotic-space-industries) by PreLeyZero, eliont - Icons for alkali ash.
+* [Quality Glassware](https://mods.factorio.com/mod/quality_glassware) by Hornwitser - Icon for acid-base tab.
+* [Bio Industries](https://mods.factorio.com/mod/Bio_Industries_NE_graphics) by snouz and others - Icons for gravel.
 * Some images generated by Midjourney or edited by Google Gemini.
 
 Only ideas taken:
 
-* Galdoc's Manufacturing - mods.factorio.com/mod/galdocs-manufacturing - Stole the idea of having intermediate factors with multiple recipes, though I'm simplifying it. Planning to also copy some graphics.
-* Angel's mods by Arch666Angel - mods.factorio.com/mod/angelsrefining - Idea of having multiple flavors of acidic wastewater.
-* Roc's Rusting Iron by thesixthroc - mods.factorio.com/mod/Rocs-Rusting-Iron - for rusting iron idea, and idea for acid derusting from NOiZE.
-* Meifray's condenser turbine proof of concept - mods.factorio.com/mod/condenser_turbine_proof_of_concept - for the idea.
-* Fulgoran Sludge by Tatticky - mods.factorio.com/mod/fulgoran-sludge - Sludge idea.
-* RateBasedResearch by tomlee - mods.factorio.com/mod/RateBasedResearch - Idea of gating techs with production rates rather than amounts.
-* Industrial Revolution 3 by Deadlock989 - mods.factorio.com/mod/IndustrialRevolution3 - Some general ideas used, like rubber, glass, cryogenics, battery charging, starting with shotguns and shotgun turrets, etc.
+* [Galdoc's Manufacturing](https://mods.factorio.com/mod/galdocs-manufacturing) - Stole the idea of having intermediate factors with multiple recipes, though I'm simplifying it. Planning to also copy some graphics.
+* [Angel's mods](https://mods.factorio.com/mod/angelsrefining) by Arch666Angel - Idea of having multiple flavors of acidic wastewater.
+* [Roc's Rusting Iron](https://mods.factorio.com/mod/Rocs-Rusting-Iron) by thesixthroc - for rusting iron idea, and idea for acid derusting from NOiZE.
+* [Meifray's condenser turbine proof of concept](https://mods.factorio.com/mod/condenser_turbine_proof_of_concept) - for the idea.
+* [Fulgoran Sludge](https://mods.factorio.com/mod/fulgoran-sludge) by Tatticky - Sludge idea.
+* [RateBasedResearch](https://mods.factorio.com/mod/RateBasedResearch) by tomlee - Idea of gating techs with production rates rather than amounts.
+* [Industrial Revolution 3](https://mods.factorio.com/mod/IndustrialRevolution3) by Deadlock989 - Some general ideas used, like rubber, glass, cryogenics, battery charging, starting with shotguns and shotgun turrets, etc.
 
 This mod as a whole is under GNU GPLv3 because it uses some graphics from other mods that are GPL. Code or graphics produced entirely by me can be used under MIT license.
